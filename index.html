@@ -4,79 +4,123 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>Swiss Hidden Gems 🇨🇭</title>
+<title>Swiss Hidden Gems</title>
 <style>
   *,*::before,*::after { box-sizing: border-box; }
   html,body { margin: 0; padding: 0; }
   :root {
     --bg: #ffffff;
-    --fg: #0a0a0a;
-    --muted: #6b7280;
-    --subtle: #f4f4f5;
-    --border: #e5e7eb;
-    --accent: #2563eb;
-    --success: #16a34a;
-    --danger: #9ca3af;
-    --radius: 14px;
+    --surface: #f5f5f7;
+    --fg: #1d1d1f;
+    --muted: #6e6e73;
+    --hairline: rgba(0,0,0,0.08);
+    --accent: #0071e3;
+    --success: #34c759;
+    --radius-card: 18px;
+    --radius-btn: 980px;
   }
   html { -webkit-text-size-adjust: 100%; }
   body {
     min-height: 100dvh;
     background: var(--bg);
     color: var(--fg);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
     font-size: 16px;
-    line-height: 1.45;
+    line-height: 1.47;
+    letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
   }
   main {
     max-width: 440px;
     margin: 0 auto;
-    padding: 16px 0 32px;
+    padding: 10px 0 48px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 28px;
   }
-  .px { padding-left: 18px; padding-right: 18px; }
+  .px { padding-left: 22px; padding-right: 22px; }
 
-  /* Creator row */
-  .creator {
+  /* Header */
+  .header {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    padding: 8px 22px 0;
     font-size: 13px;
     color: var(--muted);
   }
-  .creator .avatar {
-    width: 28px; height: 28px;
-    border-radius: 999px;
-    background: linear-gradient(135deg,#0ea5e9,#6366f1);
-    color: #fff;
-    font-weight: 700;
-    font-size: 12px;
-    display: grid; place-items: center;
+  .header .creator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  .creator b { color: var(--fg); font-weight: 600; }
+  .header .avatar {
+    width: 24px; height: 24px;
+    border-radius: 999px;
+    background: linear-gradient(135deg,#a1a1a6,#1d1d1f);
+    color: #fff;
+    font-weight: 600;
+    font-size: 11px;
+    display: grid; place-items: center;
+    letter-spacing: 0;
+  }
+
+  /* Hero text */
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0;
+    margin: 0;
+  }
+  h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: clamp(34px, 9vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    margin: 0;
+    font-weight: 600;
+  }
+  p.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+  }
 
   /* Carousel */
+  .carousel-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
   .carousel {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding: 0 18px;
+    padding: 0 22px;
     scrollbar-width: none;
   }
   .carousel::-webkit-scrollbar { display: none; }
   .carousel .slide {
-    flex: 0 0 86%;
-    aspect-ratio: 4 / 3;
-    border-radius: var(--radius);
-    background-color: var(--subtle);
+    flex: 0 0 88%;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-card);
+    background-color: var(--surface);
     scroll-snap-align: center;
     overflow: hidden;
+    position: relative;
   }
   .carousel .slide img {
     width: 100%;
@@ -84,125 +128,84 @@
     object-fit: cover;
     display: block;
   }
-
-  /* Title block */
-  h1 {
-    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: clamp(24px, 7vw, 28px);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin: 0;
-    font-weight: 700;
-  }
-  p.tagline {
-    margin: 4px 0 0;
-    color: var(--muted);
-    font-size: 15px;
-  }
-  .rating {
+  .dots {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--muted);
+    justify-content: center;
+    gap: 6px;
   }
-  .rating .stars { color: #f5b301; letter-spacing: 1px; }
+  .dots span {
+    width: 6px; height: 6px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.15);
+    transition: background 150ms ease, transform 150ms ease;
+  }
+  .dots span.active {
+    background: var(--fg);
+    transform: scale(1.15);
+  }
+
+  /* Meta row */
+  .meta {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    font-size: 14px;
+    color: var(--muted);
+    align-items: center;
+  }
+  .meta .stars { color: #ff9500; letter-spacing: 1px; font-size: 13px; }
+  .meta .sep {
+    width: 1px; height: 12px;
+    background: var(--hairline);
+  }
 
   /* Description */
   p.desc {
     margin: 0;
-    font-size: 15px;
-    color: #1f2937;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--fg);
+    letter-spacing: -0.015em;
   }
 
-  /* What's included card */
-  .card {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    background: #fff;
-  }
-  .card h3 {
-    margin: 0 0 10px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  ul.feat {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 8px;
-    font-size: 15px;
-  }
-  ul.feat li {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  ul.feat li .ico {
-    flex-shrink: 0;
-    width: 18px; height: 18px;
-    border-radius: 999px;
-    display: grid; place-items: center;
-    font-size: 11px;
-    font-weight: 700;
-    margin-top: 2px;
-  }
-  ul.feat li.yes .ico { background: #dcfce7; color: var(--success); }
-  ul.feat li.no  .ico { background: #f3f4f6; color: var(--danger); }
-  ul.feat li.no { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; text-decoration-color: #d1d5db; }
-
+  /* Audience chips */
   .audiences {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
     font-size: 13px;
+    justify-content: center;
   }
   .audiences span {
-    padding: 6px 10px;
-    border: 1px solid var(--border);
+    padding: 7px 13px;
     border-radius: 999px;
-    color: #374151;
-    background: #fff;
+    background: var(--surface);
+    color: var(--fg);
+    font-weight: 500;
   }
 
   /* Plan cards */
   .plans {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
   .plan {
     position: relative;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px;
-    background: #fff;
+    border-radius: var(--radius-card);
+    padding: 22px;
+    background: var(--surface);
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 18px;
   }
   .plan-featured {
-    border-color: var(--fg);
-    box-shadow: 0 0 0 1px var(--fg);
-    background: #fafafa;
+    background: #1d1d1f;
+    color: #f5f5f7;
   }
-  .plan-badge {
-    position: absolute;
-    top: -10px;
-    left: 14px;
-    background: var(--fg);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 4px 10px;
-    border-radius: 999px;
-  }
+  .plan-featured .plan-tag { color: #a1a1a6; }
+  .plan-featured ul.feat li { color: #f5f5f7; }
+  .plan-featured ul.feat li .ico { background: rgba(52,199,89,0.18); color: #30d158; }
   .plan-head {
     display: flex;
     justify-content: space-between;
@@ -210,97 +213,95 @@
     gap: 12px;
   }
   .plan-name {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
   .plan-tag {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--muted);
     margin-top: 2px;
+    font-weight: 400;
   }
   .plan-price {
     text-align: right;
-    line-height: 1.1;
+    line-height: 1;
   }
   .plan-price b {
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
     display: block;
   }
   .plan-price span {
     font-size: 11px;
     color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    margin-top: 4px;
+    display: inline-block;
+    letter-spacing: 0;
+  }
+  .plan-featured .plan-price span { color: #a1a1a6; }
+
+  ul.feat {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+    font-size: 15px;
+  }
+  ul.feat li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    letter-spacing: -0.01em;
+  }
+  ul.feat li .ico {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    border-radius: 999px;
+    display: grid; place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(52,199,89,0.14);
+    color: var(--success);
   }
 
-  .cta-primary, .cta-secondary {
+  /* Buttons */
+  .cta-primary, .cta-secondary, button.cta-secondary {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 52px;
-    padding: 0 18px;
-    border-radius: 12px;
+    height: 50px;
+    padding: 0 22px;
+    border-radius: var(--radius-btn);
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
+    letter-spacing: -0.01em;
     text-decoration: none;
-    border: 1px solid transparent;
-    transition: transform 80ms ease, background 150ms ease;
+    border: none;
+    transition: transform 100ms ease, opacity 150ms ease, background 150ms ease;
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
     font-family: inherit;
   }
   .cta-primary {
-    background: #0a0a0a;
+    background: var(--accent);
     color: #fff;
   }
-  .cta-primary:active { transform: scale(0.99); }
+  .plan-featured .cta-primary {
+    background: #f5f5f7;
+    color: #1d1d1f;
+  }
+  .cta-primary:active { transform: scale(0.98); opacity: 0.9; }
   .cta-secondary {
-    background: #fff;
-    color: var(--fg);
-    border-color: var(--border);
+    background: #1d1d1f;
+    color: #fff;
   }
+  .cta-secondary:active { transform: scale(0.98); opacity: 0.9; }
 
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .divider::before, .divider::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* Free block */
-  .free-block {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background: #fff;
-  }
-  .free-block h2 {
-    margin: 0;
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-  .free-block p {
-    margin: 0;
-    font-size: 14px;
-    color: var(--muted);
-  }
+  /* Free form */
   form.free {
     display: flex;
     flex-direction: column;
@@ -309,37 +310,42 @@
   form.free[hidden] { display: none; }
   form.free input[type="email"] {
     height: 50px;
-    padding: 0 14px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
+    padding: 0 18px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--hairline);
     background: #fff;
     color: var(--fg);
     font-size: 16px;
     font-family: inherit;
     outline: none;
+    letter-spacing: -0.01em;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
   }
   form.free input[type="email"]:focus {
-    border-color: var(--fg);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(0,113,227,0.15);
   }
   .success {
     display: none;
     padding: 14px;
-    border-radius: 12px;
-    background: #dcfce7;
-    color: #065f46;
+    border-radius: var(--radius-card);
+    background: rgba(52,199,89,0.12);
+    color: #0a8a3a;
     font-size: 14px;
     text-align: center;
-    border: 1px solid #a7f3d0;
+    font-weight: 500;
   }
   .success.show { display: block; }
+
   .fineprint {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--muted);
     text-align: center;
     margin: 0;
+    letter-spacing: 0;
   }
   footer {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--muted);
     text-align: center;
     margin-top: 4px;
@@ -348,39 +354,49 @@
 </head>
 <body>
 <main>
-  <div class="px creator">
-    <div class="avatar">H</div>
-    <div>by <b>Leon Helg</b> · Hikebeast</div>
+  <div class="header">
+    <div class="creator">
+      <div class="avatar">H</div>
+      <span>Hikebeast</span>
+    </div>
+    <span>Leon Helg</span>
   </div>
 
-  <div class="carousel" aria-label="Product preview">
-    <div class="slide"><img src="images/1.jpg" alt="" loading="lazy" /></div>
-    <div class="slide"><img src="images/2.jpg" alt="" loading="lazy" /></div>
-    <div class="slide"><img src="images/3.jpg" alt="" loading="lazy" /></div>
-    <div class="slide"><img src="images/4.jpg" alt="" loading="lazy" /></div>
-    <div class="slide"><img src="images/5.jpg" alt="" loading="lazy" /></div>
-    <div class="slide"><img src="images/6.jpg" alt="" loading="lazy" /></div>
-  </div>
-
-  <div class="px" style="display:flex; flex-direction:column; gap:8px;">
-    <h1>Swiss Hidden Gems 🇨🇭</h1>
+  <div class="px hero-text">
+    <h1>Swiss Hidden Gems.</h1>
     <p class="tagline">Switzerland beyond the tourist map.</p>
-    <div class="rating">
-      <span class="stars">★★★★★</span>
-      <span>5.0 · 4 reviews</span>
+  </div>
+
+  <div class="carousel-wrap">
+    <div class="carousel" id="carousel" aria-label="Product preview">
+      <div class="slide"><img src="images/1.jpg" alt="" loading="lazy" /></div>
+      <div class="slide"><img src="images/2.jpg" alt="" loading="lazy" /></div>
+      <div class="slide"><img src="images/3.jpg" alt="" loading="lazy" /></div>
+      <div class="slide"><img src="images/4.jpg" alt="" loading="lazy" /></div>
+      <div class="slide"><img src="images/5.jpg" alt="" loading="lazy" /></div>
+      <div class="slide"><img src="images/6.jpg" alt="" loading="lazy" /></div>
+    </div>
+    <div class="dots" id="dots" aria-hidden="true">
+      <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
     </div>
   </div>
 
-  <div class="px">
-    <p class="desc">
-      Most of the best places in Switzerland aren't on the tourist map. They're in local WhatsApp groups, in photographers' heads and on trails that never make the internet. 100+ of them are in here.
-    </p>
+  <div class="meta">
+    <span class="stars">★★★★★</span>
+    <span class="sep"></span>
+    <span>5.0 · 4 reviews</span>
   </div>
 
   <div class="px audiences">
     <span>📸 Photographers</span>
     <span>🥾 Hikers</span>
     <span>⛺️ Wildcampers</span>
+  </div>
+
+  <div class="px">
+    <p class="desc">
+      Most of the best places in Switzerland aren't on the tourist map. They're in local WhatsApp groups, in photographers' heads and on trails that never make the internet.
+    </p>
   </div>
 
   <div class="px plans">
@@ -391,12 +407,12 @@
           <div class="plan-name">Free sample</div>
           <div class="plan-tag">No account needed</div>
         </div>
-        <div class="plan-price"><b>$0</b></div>
+        <div class="plan-price"><b>Free</b></div>
       </div>
       <ul class="feat">
-        <li class="yes"><span class="ico">✓</span>15 of my favorite spots</li>
-        <li class="yes"><span class="ico">✓</span>Best time of day & year for photos</li>
-        <li class="yes"><span class="ico">✓</span>Same format as the full edition</li>
+        <li><span class="ico">✓</span>15 of my favorite spots</li>
+        <li><span class="ico">✓</span>Best time of day & year for photos</li>
+        <li><span class="ico">✓</span>Same format as the full edition</li>
       </ul>
 
       <button class="cta-secondary" id="revealEmail" type="button">Get the free sample</button>
@@ -409,7 +425,7 @@
           required
           autocomplete="email"
           inputmode="email"
-          placeholder="you@example.com"
+          placeholder="Email address"
         />
         <input type="hidden" name="_subject" value="Free sample request — Swiss Hidden Gems" />
         <button class="cta-primary" type="submit">Send it to me</button>
@@ -422,7 +438,6 @@
 
     <!-- Full plan -->
     <div class="plan plan-featured">
-      <div class="plan-badge">Most popular</div>
       <div class="plan-head">
         <div>
           <div class="plan-name">Full guide</div>
@@ -431,11 +446,11 @@
         <div class="plan-price"><b>$49</b><span>once</span></div>
       </div>
       <ul class="feat">
-        <li class="yes"><span class="ico">✓</span><b>100+</b> secret locations</li>
-        <li class="yes"><span class="ico">✓</span>Exact GPS coordinates for every spot</li>
-        <li class="yes"><span class="ico">✓</span>Best time of day & year for photos</li>
-        <li class="yes"><span class="ico">✓</span>Wildcamp-legal info</li>
-        <li class="yes"><span class="ico">✓</span>Lifetime updates</li>
+        <li><span class="ico">✓</span><b>100+</b>&nbsp;secret locations</li>
+        <li><span class="ico">✓</span>Exact GPS coordinates for every spot</li>
+        <li><span class="ico">✓</span>Best time of day & year for photos</li>
+        <li><span class="ico">✓</span>Wildcamp-legal info</li>
+        <li><span class="ico">✓</span>Lifetime updates</li>
       </ul>
       <a class="cta-primary" href="https://whop.com/gorped/hidden-gems-switzerland-e8/" target="_blank" rel="noopener">
         Get the full guide
@@ -443,7 +458,7 @@
     </div>
   </div>
 
-  <p class="px fineprint">Unsubscribe anytime.</p>
+  <p class="px fineprint">Unsubscribe anytime. No spam.</p>
   <footer class="px">© Hikebeast</footer>
 </main>
 
@@ -458,7 +473,7 @@
   });
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const btn = form.querySelector("button");
+    const btn = form.querySelector("button[type=submit]");
     btn.disabled = true;
     btn.textContent = "Sending…";
     try {
@@ -473,9 +488,22 @@
     } catch {
       btn.disabled = false;
       btn.textContent = "Try again";
-      alert("Something went wrong. Please try again.");
     }
   });
+
+  // Carousel dots
+  const carousel = document.getElementById("carousel");
+  const dots = document.getElementById("dots").children;
+  const slides = carousel.children;
+  carousel.addEventListener("scroll", () => {
+    const x = carousel.scrollLeft + carousel.clientWidth / 2;
+    let idx = 0;
+    for (let i = 0; i < slides.length; i++) {
+      const s = slides[i];
+      if (x >= s.offsetLeft && x < s.offsetLeft + s.offsetWidth) { idx = i; break; }
+    }
+    for (let i = 0; i < dots.length; i++) dots[i].classList.toggle("active", i === idx);
+  }, { passive: true });
 </script>
 </body>
 </html>
