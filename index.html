@@ -65,6 +65,7 @@
   .header .avatar img {
     width: 100%; height: 100%;
     object-fit: cover;
+    object-position: 70% 45%;
     display: block;
   }
 
@@ -162,22 +163,6 @@
     line-height: 1.55;
     color: var(--muted);
     letter-spacing: -0.005em;
-  }
-
-  /* Audience chips */
-  .audiences {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    font-size: 13px;
-    justify-content: center;
-  }
-  .audiences span {
-    padding: 7px 13px;
-    border-radius: 999px;
-    background: var(--surface);
-    color: var(--fg);
-    font-weight: 500;
   }
 
   /* Plan cards */
@@ -293,10 +278,11 @@
   }
   .cta-primary:active { transform: scale(0.98); opacity: 0.9; }
   .cta-secondary {
-    background: #1d1d1f;
-    color: #fff;
+    background: #fff;
+    color: #1d1d1f;
+    border: 1px solid rgba(0,0,0,0.12);
   }
-  .cta-secondary:active { transform: scale(0.98); opacity: 0.9; }
+  .cta-secondary:active { transform: scale(0.98); opacity: 0.8; }
 
   /* Free form */
   form.free {
@@ -443,12 +429,6 @@
     </p>
   </div>
 
-  <div class="px audiences">
-    <span>📸 Photographers</span>
-    <span>🥾 Hikers</span>
-    <span>⛺️ Wildcampers</span>
-  </div>
-
   <div class="px plans">
     <!-- Free plan -->
     <div class="plan">
@@ -462,7 +442,7 @@
       <ul class="feat">
         <li><span class="ico">✓</span>15 of my favorite spots</li>
         <li><span class="ico">✓</span>Best time of day & year for photos</li>
-        <li><span class="ico">✓</span>Same format as the full edition</li>
+        <li><span class="ico">✓</span>Delivered instantly by email</li>
       </ul>
 
       <button class="cta-secondary" id="revealEmail" type="button">Get the free sample</button>
@@ -493,7 +473,7 @@
           <div class="plan-name">Full guide</div>
           <div class="plan-tag">Lifetime access</div>
         </div>
-        <div class="plan-price"><b>$49</b><span>once</span></div>
+        <div class="plan-price"><b>$49</b></div>
       </div>
       <ul class="feat">
         <li><span class="ico">✓</span><b>100+</b>&nbsp;secret locations</li>
