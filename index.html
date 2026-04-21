@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Swiss Hidden Gems 🇨🇭</title>
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html,body { margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff;
+    --fg: #0a0a0a;
+    --muted: #6b7280;
+    --subtle: #f4f4f5;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+    --success: #16a34a;
+    --danger: #9ca3af;
+    --radius: 14px;
+  }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
+  }
+  main {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 16px 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .px { padding-left: 18px; padding-right: 18px; }
+
+  /* Creator row */
+  .creator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .creator .avatar {
+    width: 28px; height: 28px;
+    border-radius: 999px;
+    background: linear-gradient(135deg,#0ea5e9,#6366f1);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    display: grid; place-items: center;
+  }
+  .creator b { color: var(--fg); font-weight: 600; }
+
+  /* Carousel */
+  .carousel {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 18px;
+    scrollbar-width: none;
+  }
+  .carousel::-webkit-scrollbar { display: none; }
+  .carousel .slide {
+    flex: 0 0 86%;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius);
+    background-color: var(--subtle);
+    scroll-snap-align: center;
+    overflow: hidden;
+  }
+  .carousel .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Title block */
+  h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: clamp(24px, 7vw, 28px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0;
+    font-weight: 700;
+  }
+  p.tagline {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .rating .stars { color: #f5b301; letter-spacing: 1px; }
+
+  /* Description */
+  p.desc {
+    margin: 0;
+    font-size: 15px;
+    color: #1f2937;
+  }
+
+  /* What's included card */
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    background: #fff;
+  }
+  .card h3 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  ul.feat {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+    font-size: 15px;
+  }
+  ul.feat li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  ul.feat li .ico {
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    border-radius: 999px;
+    display: grid; place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  ul.feat li.yes .ico { background: #dcfce7; color: var(--success); }
+  ul.feat li.no  .ico { background: #f3f4f6; color: var(--danger); }
+  ul.feat li.no { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; text-decoration-color: #d1d5db; }
+
+  .audiences {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .audiences span {
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: #374151;
+    background: #fff;
+  }
+
+  /* Plan cards */
+  .plans {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .plan {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .plan-featured {
+    border-color: var(--fg);
+    box-shadow: 0 0 0 1px var(--fg);
+    background: #fafafa;
+  }
+  .plan-badge {
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    background: var(--fg);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .plan-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .plan-name {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .plan-tag {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .plan-price {
+    text-align: right;
+    line-height: 1.1;
+  }
+  .plan-price b {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    display: block;
+  }
+  .plan-price span {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .cta-primary, .cta-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 52px;
+    padding: 0 18px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: transform 80ms ease, background 150ms ease;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .cta-primary {
+    background: #0a0a0a;
+    color: #fff;
+  }
+  .cta-primary:active { transform: scale(0.99); }
+  .cta-secondary {
+    background: #fff;
+    color: var(--fg);
+    border-color: var(--border);
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Free block */
+  .free-block {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #fff;
+  }
+  .free-block h2 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .free-block p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  form.free {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  form.free[hidden] { display: none; }
+  form.free input[type="email"] {
+    height: 50px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--fg);
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+  }
+  form.free input[type="email"]:focus {
+    border-color: var(--fg);
+  }
+  .success {
+    display: none;
+    padding: 14px;
+    border-radius: 12px;
+    background: #dcfce7;
+    color: #065f46;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #a7f3d0;
+  }
+  .success.show { display: block; }
+  .fineprint {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    margin: 0;
+  }
+  footer {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="px creator">
+    <div class="avatar">H</div>
+    <div>by <b>Leon Helg</b> · Hikebeast</div>
+  </div>
+
+  <div class="carousel" aria-label="Product preview">
+    <div class="slide"><img src="images/1.jpg" alt="" loading="lazy" /></div>
+    <div class="slide"><img src="images/2.jpg" alt="" loading="lazy" /></div>
+    <div class="slide"><img src="images/3.jpg" alt="" loading="lazy" /></div>
+    <div class="slide"><img src="images/4.jpg" alt="" loading="lazy" /></div>
+    <div class="slide"><img src="images/5.jpg" alt="" loading="lazy" /></div>
+    <div class="slide"><img src="images/6.jpg" alt="" loading="lazy" /></div>
+  </div>
+
+  <div class="px" style="display:flex; flex-direction:column; gap:8px;">
+    <h1>Swiss Hidden Gems 🇨🇭</h1>
+    <p class="tagline">Switzerland beyond the tourist map.</p>
+    <div class="rating">
+      <span class="stars">★★★★★</span>
+      <span>5.0 · 4 reviews</span>
+    </div>
+  </div>
+
+  <div class="px">
+    <p class="desc">
+      Most of the best places in Switzerland aren't on the tourist map. They're in local WhatsApp groups, in photographers' heads and on trails that never make the internet. 100+ of them are in here.
+    </p>
+  </div>
+
+  <div class="px audiences">
+    <span>📸 Photographers</span>
+    <span>🥾 Hikers</span>
+    <span>⛺️ Wildcampers</span>
+  </div>
+
+  <div class="px plans">
+    <!-- Free plan -->
+    <div class="plan">
+      <div class="plan-head">
+        <div>
+          <div class="plan-name">Free sample</div>
+          <div class="plan-tag">No account needed</div>
+        </div>
+        <div class="plan-price"><b>$0</b></div>
+      </div>
+      <ul class="feat">
+        <li class="yes"><span class="ico">✓</span>15 of my favorite spots</li>
+        <li class="yes"><span class="ico">✓</span>Best time of day & year for photos</li>
+        <li class="yes"><span class="ico">✓</span>Same format as the full edition</li>
+      </ul>
+
+      <button class="cta-secondary" id="revealEmail" type="button">Get the free sample</button>
+
+      <form class="free" id="freeForm" action="https://formspree.io/f/REPLACE_ME" method="POST" novalidate hidden>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          required
+          autocomplete="email"
+          inputmode="email"
+          placeholder="you@example.com"
+        />
+        <input type="hidden" name="_subject" value="Free sample request — Swiss Hidden Gems" />
+        <button class="cta-primary" type="submit">Send it to me</button>
+      </form>
+
+      <div class="success" id="success">
+        Check your inbox — your free sample is on the way.
+      </div>
+    </div>
+
+    <!-- Full plan -->
+    <div class="plan plan-featured">
+      <div class="plan-badge">Most popular</div>
+      <div class="plan-head">
+        <div>
+          <div class="plan-name">Full guide</div>
+          <div class="plan-tag">Lifetime access</div>
+        </div>
+        <div class="plan-price"><b>$49</b><span>once</span></div>
+      </div>
+      <ul class="feat">
+        <li class="yes"><span class="ico">✓</span><b>100+</b> secret locations</li>
+        <li class="yes"><span class="ico">✓</span>Exact GPS coordinates for every spot</li>
+        <li class="yes"><span class="ico">✓</span>Best time of day & year for photos</li>
+        <li class="yes"><span class="ico">✓</span>Wildcamp-legal info</li>
+        <li class="yes"><span class="ico">✓</span>Lifetime updates</li>
+      </ul>
+      <a class="cta-primary" href="https://whop.com/gorped/hidden-gems-switzerland-e8/" target="_blank" rel="noopener">
+        Get the full guide
+      </a>
+    </div>
+  </div>
+
+  <p class="px fineprint">Unsubscribe anytime.</p>
+  <footer class="px">© Hikebeast</footer>
+</main>
+
+<script>
+  const form = document.getElementById("freeForm");
+  const success = document.getElementById("success");
+  const reveal = document.getElementById("revealEmail");
+  reveal.addEventListener("click", () => {
+    reveal.hidden = true;
+    form.hidden = false;
+    form.querySelector("input[type=email]").focus();
+  });
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector("button");
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      });
+      if (!res.ok) throw new Error("bad response");
+      form.style.display = "none";
+      success.classList.add("show");
+    } catch {
+      btn.disabled = false;
+      btn.textContent = "Try again";
+      alert("Something went wrong. Please try again.");
+    }
+  });
+</script>
+</body>
+</html>
