@@ -30,6 +30,41 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 <style>
   *,*::before,*::after { box-sizing: border-box; }
   html,body { margin: 0; padding: 0; }
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.72);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  }
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1d1d1f;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .navbar-brand img {
+    width: 26px; height: 26px;
+    border-radius: 999px;
+    object-fit: cover;
+    object-position: 70% 45%;
+    display: block;
+  }
+  @media (min-width: 900px) {
+    .navbar { padding-left: 40px; padding-right: 40px; }
+  }
   :root {
     --bg: #ffffff;
     --fg: #1d1d1f;
@@ -46,12 +81,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.55;
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
-    padding: env(safe-area-inset-top) 22px env(safe-area-inset-bottom) 22px;
+    padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
   }
   main {
     max-width: 640px;
     margin: 0 auto;
-    padding: 48px 0;
+    padding: 48px 22px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -100,9 +135,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 </style>
 </head>
 <body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">
+    <img src="/images/avatar.jpg" alt="" />
+    <span>Hikebeast</span>
+  </a>
+</nav>
 <main>
-  <a class="back" href="./">← Back to Hikebeast</a>
-
   <h1>Imprint</h1>
 
   <div class="block">

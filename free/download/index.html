@@ -32,6 +32,41 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 <style>
   *,*::before,*::after { box-sizing: border-box; }
   html,body { margin: 0; padding: 0; background: #ffffff; }
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.72);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 10px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  }
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1d1d1f;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .navbar-brand img {
+    width: 26px; height: 26px;
+    border-radius: 999px;
+    object-fit: cover;
+    object-position: 70% 45%;
+    display: block;
+  }
+  @media (min-width: 900px) {
+    .navbar { padding-left: 40px; padding-right: 40px; }
+  }
   :root {
     color-scheme: light;
     --bg: #ffffff;
@@ -170,15 +205,114 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     background: #f5f5f7;
     color: #1d1d1f;
   }
-  .cta-secondary {
-    background: var(--surface);
-    color: var(--fg);
-  }
 
   .download-group {
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+  .how-to-link {
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(0,0,0,0.25);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 6px 0 0;
+    align-self: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .how-to-link:hover { color: var(--fg); }
+
+  dialog.how-to {
+    border: 0;
+    padding: 0;
+    border-radius: var(--radius-card);
+    background: #fff;
+    max-width: 340px;
+    width: calc(100vw - 40px);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+  }
+  dialog.how-to::backdrop {
+    background: rgba(0,0,0,0.4);
+  }
+  .how-to-inner {
+    padding: 22px;
+    font-family: inherit;
+    color: var(--fg);
+    position: relative;
+  }
+  .how-to-x {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--muted);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .how-to-x:hover { color: var(--fg); }
+  .how-to-title {
+    margin: 0 36px 14px 0;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .how-to-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+  }
+  .how-to-steps li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .how-to-steps .step-num {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--fg);
+    font-size: 12px;
+    font-weight: 600;
+    display: grid; place-items: center;
+    margin-top: 1px;
+  }
+  .how-to-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 44px;
+    margin-top: 20px;
+    border-radius: var(--radius-btn);
+    background: var(--surface);
+    color: var(--fg);
+    border: 0;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: -0.005em;
   }
 
   .divider {
@@ -266,6 +400,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 </style>
 </head>
 <body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">
+    <img src="/images/avatar.jpg" alt="" />
+    <span>Hikebeast</span>
+  </a>
+</nav>
 <main>
   <div class="check">✓</div>
   <div>
@@ -275,8 +415,21 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
   <div class="download-group">
     <a class="cta cta-primary" id="downloadBtn" href="/sample.pdf" download="Swiss-Hidden-Gems-Sample.pdf">Download the guide (PDF)</a>
-    <a class="cta cta-secondary" id="previewBtn" href="/preview.pdf" target="_blank" rel="noopener">Open preview instead</a>
+    <button type="button" class="how-to-link" id="howToBtn" hidden>How to download?</button>
   </div>
+
+  <dialog id="howToDialog" class="how-to">
+    <div class="how-to-inner">
+      <button type="button" class="how-to-x" id="howToX" aria-label="Close">✕</button>
+      <h3 class="how-to-title">Save the guide on iPhone</h3>
+      <ol class="how-to-steps">
+        <li><span class="step-num">1</span>Open this page in Safari</li>
+        <li><span class="step-num">2</span>Tap the Share icon</li>
+        <li><span class="step-num">3</span>Choose "Save to Files"</li>
+      </ol>
+      <button type="button" class="how-to-close" id="howToClose">Got it</button>
+    </div>
+  </dialog>
 
   <div class="divider">Ready for the full map?</div>
 
@@ -332,6 +485,28 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       body: JSON.stringify({ token, subscriber_id: subscriberId }),
       keepalive: true,
     }).catch(() => {});
+  }
+
+  const isPhone = /iPhone|iPad|iPod|Android|Mobile/i.test(navigator.userAgent);
+  if (isPhone) {
+    document.getElementById("downloadBtn").textContent = "Open the guide";
+    const howToBtn = document.getElementById("howToBtn");
+    const howToDialog = document.getElementById("howToDialog");
+    const howToClose = document.getElementById("howToClose");
+    const howToX = document.getElementById("howToX");
+    howToBtn.hidden = false;
+    howToBtn.addEventListener("click", () => {
+      if (typeof howToDialog.showModal === "function") {
+        howToDialog.showModal();
+      } else {
+        howToDialog.setAttribute("open", "");
+      }
+    });
+    howToClose.addEventListener("click", () => howToDialog.close());
+    howToX.addEventListener("click", () => howToDialog.close());
+    howToDialog.addEventListener("click", (e) => {
+      if (e.target === howToDialog) howToDialog.close();
+    });
   }
 
   document.getElementById("downloadBtn").addEventListener("click", () => {
