@@ -2,7 +2,11 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM = "Leon Helg <hello@hikebeast.ch>";
+// Using Resend's default sandbox sender until hikebeast.ch is verified
+// in Resend. In sandbox mode you can only send to the email you signed
+// up to Resend with. Once the domain is verified, swap FROM back to
+// "Leon Helg <hello@hikebeast.ch>".
+const FROM = "Leon Helg <onboarding@resend.dev>";
 const REPLY_TO = "office@gorped.com";
 const SAMPLE_URL = "https://hikebeast.ch/sample.pdf";
 

@@ -25,6 +25,23 @@
 <!-- Manychat -->
 <script src="//widget.manychat.com/4765148_5fa68.js" defer="defer"></script>
 <script src="https://mccdn.me/assets/js/widget.js" defer="defer"></script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1658000685240569');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <style>
   *,*::before,*::after { box-sizing: border-box; }
   html,body { margin: 0; padding: 0; }
@@ -309,7 +326,9 @@
     <h2 class="products-title">Products</h2>
     <div class="grid">
 
-      <a class="product" href="free/" data-tint="blue">
+      <a class="product" href="free/" data-tint="blue"
+         data-fbq-event="ViewContent"
+         data-fbq-params='{"content_name":"Swiss Hidden Gems Free Sample","content_category":"Guide"}'>
         <div class="product-visual" style="background-image:url('images/thumb-free.jpg')"></div>
         <div class="product-body">
           <span class="product-badge free">Free sample</span>
@@ -319,7 +338,9 @@
         </div>
       </a>
 
-      <a class="product" href="https://whop.com/gorped/hidden-gems-switzerland-e8/" target="_blank" rel="noopener" data-tint="amber">
+      <a class="product" href="https://whop.com/gorped/hidden-gems-switzerland-e8/" target="_blank" rel="noopener" data-tint="amber"
+         data-fbq-event="InitiateCheckout"
+         data-fbq-params='{"content_name":"Swiss Hidden Gems","content_category":"Guide","value":49.00,"currency":"USD"}'>
         <div class="product-visual" style="background-image:url('images/thumb-full.jpg')"></div>
         <div class="product-body">
           <span class="product-badge paid">$49 · Lifetime</span>
@@ -365,5 +386,18 @@
     <div class="copyright">© Hikebeast</div>
   </footer>
 </main>
+
+<script>
+  // Meta Pixel event tracking for product card clicks
+  document.querySelectorAll('[data-fbq-event]').forEach((el) => {
+    el.addEventListener('click', () => {
+      if (!window.fbq) return;
+      const event = el.dataset.fbqEvent;
+      let params = {};
+      try { params = JSON.parse(el.dataset.fbqParams || '{}'); } catch {}
+      fbq('track', event, params);
+    });
+  });
+</script>
 </body>
 </html>

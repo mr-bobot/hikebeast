@@ -25,6 +25,27 @@
 <!-- Manychat -->
 <script src="//widget.manychat.com/4765148_5fa68.js" defer="defer"></script>
 <script src="https://mccdn.me/assets/js/widget.js" defer="defer"></script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1658000685240569');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {
+  content_name: 'Swiss Hidden Gems Free Sample',
+  content_category: 'Guide'
+});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <style>
   *,*::before,*::after { box-sizing: border-box; }
   html,body { margin: 0; padding: 0; }
@@ -386,8 +407,7 @@
     transition: border-color 150ms ease, box-shadow 150ms ease;
   }
   form.free input[type="email"]:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(0,113,227,0.15);
+    border-color: var(--fg);
   }
   .success {
     display: none;
@@ -640,7 +660,7 @@
         <li><span class="ico">✓</span>Wildcamping legal info</li>
         <li><span class="ico">✓</span>Lifetime updates</li>
       </ul>
-      <a class="cta-primary" href="https://whop.com/gorped/hidden-gems-switzerland-e8/" target="_blank" rel="noopener">
+      <a class="cta-primary" id="buyFullGuide" href="https://whop.com/gorped/hidden-gems-switzerland-e8/" target="_blank" rel="noopener">
         Get the full guide
       </a>
     </div>
@@ -692,6 +712,10 @@
     form.classList.add("expanded");
     const input = form.querySelector("input[type=email]");
     setTimeout(() => input.focus({ preventScroll: true }), 320);
+    if (window.fbq) fbq('track', 'AddToCart', {
+      content_name: 'Swiss Hidden Gems Free Sample',
+      content_category: 'Guide'
+    });
   });
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -708,10 +732,25 @@
       if (!res.ok) throw new Error("bad response");
       form.classList.remove("expanded");
       success.classList.add("show");
+      if (window.fbq) fbq('track', 'Lead', {
+        content_name: 'Swiss Hidden Gems Free Sample',
+        content_category: 'Guide'
+      });
     } catch {
       btn.disabled = false;
       btn.textContent = "Try again";
     }
+  });
+
+  // Meta Pixel: track click on full guide CTA
+  const buyBtn = document.getElementById("buyFullGuide");
+  if (buyBtn) buyBtn.addEventListener("click", () => {
+    if (window.fbq) fbq('track', 'InitiateCheckout', {
+      content_name: 'Swiss Hidden Gems',
+      content_category: 'Guide',
+      value: 49.00,
+      currency: 'USD'
+    });
   });
 
   // Carousel dots via IntersectionObserver (reliable on mobile + desktop)
