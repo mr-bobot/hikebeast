@@ -229,25 +229,22 @@
     gap: 18px;
     padding: 0 22px;
   }
-  .imprint {
+  .legal {
     display: flex;
-    flex-direction: column;
-    gap: 3px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     padding-top: 18px;
     border-top: 1px solid var(--hairline);
-    line-height: 1.5;
+    font-size: 13px;
   }
-  .imprint-title {
-    font-weight: 600;
-    color: var(--fg);
-    margin-bottom: 2px;
-    letter-spacing: -0.005em;
-  }
-  .imprint a {
-    color: var(--accent);
+  .legal a {
+    color: var(--muted);
     text-decoration: none;
   }
-  .copyright { padding-top: 4px; }
+  .legal a:hover { color: var(--fg); }
+  .legal-sep { color: var(--muted); }
+  .copyright { padding-top: 0; }
 
   /* Desktop */
   @media (min-width: 900px) {
@@ -298,9 +295,7 @@
     <div class="grid">
 
       <a class="product" href="free/" data-tint="blue">
-        <div class="product-visual" style="background-image:linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%), url('images/6.jpg')">
-          <span class="product-mark">Free Edition</span>
-        </div>
+        <div class="product-visual" style="background-image:url('images/thumb-free.jpg')"></div>
         <div class="product-body">
           <span class="product-badge free">Free sample</span>
           <h3>Swiss Hidden Gems — Sample</h3>
@@ -310,9 +305,7 @@
       </a>
 
       <a class="product" href="https://whop.com/gorped/hidden-gems-switzerland-e8/" target="_blank" rel="noopener" data-tint="amber">
-        <div class="product-visual" style="background-image:linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%), url('images/1.jpg')">
-          <span class="product-mark">Full Guide</span>
-        </div>
+        <div class="product-visual" style="background-image:url('images/thumb-full.jpg')"></div>
         <div class="product-body">
           <span class="product-badge paid">$49 · Lifetime</span>
           <h3>Swiss Hidden Gems</h3>
@@ -349,12 +342,11 @@
   </section>
 
   <footer>
-    <div class="imprint">
-      <div class="imprint-title">Imprint</div>
-      <div>Saftladen GmbH</div>
-      <div>Birkenstrasse 47, 6343 Rotkreuz, Switzerland</div>
-      <div><a href="mailto:office@gorped.com">office@gorped.com</a></div>
-    </div>
+    <nav class="legal">
+      <a href="imprint.html">Imprint</a>
+      <span class="legal-sep">·</span>
+      <a href="privacy.html">Privacy</a>
+    </nav>
     <div class="copyright">© Hikebeast</div>
   </footer>
 </main>
