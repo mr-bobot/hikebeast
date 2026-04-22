@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>Swiss Hidden Gems</title>
+<title>Hikebeast — Leon Helg</title>
 <link rel="icon" type="image/jpeg" href="images/favicon.jpg" />
 <link rel="apple-touch-icon" href="images/favicon.jpg" />
 <!-- Manychat -->
@@ -21,7 +21,7 @@
     --hairline: rgba(0,0,0,0.08);
     --accent: #0071e3;
     --success: #34c759;
-    --radius-card: 18px;
+    --radius-card: 20px;
     --radius-btn: 980px;
   }
   html { -webkit-text-size-adjust: 100%; }
@@ -39,414 +39,185 @@
   main {
     max-width: 440px;
     margin: 0 auto;
-    padding: 10px 0 48px;
+    padding: 24px 0 48px;
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 32px;
   }
   .px { padding-left: 22px; padding-right: 22px; }
 
-  /* Layout wrappers — stack on mobile, grid on desktop */
-  .top-layout,
-  .hero-col {
+  /* Hero */
+  .hero {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 18px;
+    padding: 0 22px;
   }
-
-  /* Info bar (below carousel) — Whop-style rounded rectangle with two equal halves */
-  .info-bar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-    border-radius: 12px;
-    background: var(--surface);
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--fg);
-    letter-spacing: -0.005em;
-  }
-  .info-bar .info-left,
-  .info-bar .info-right {
+  .hero-top {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 14px 16px;
+    gap: 12px;
   }
-  .info-bar .info-right {
-    border-left: 1px solid rgba(0,0,0,0.08);
-  }
-  .info-bar .icon-tag {
-    color: var(--muted);
-  }
-  .info-bar .info-avatar {
-    width: 22px; height: 22px;
+  .hero-avatar {
+    width: 48px; height: 48px;
     border-radius: 999px;
     overflow: hidden;
-    display: inline-block;
+    flex-shrink: 0;
     transform: translateZ(0);
   }
-  .info-bar .info-avatar img {
+  .hero-avatar img {
     width: 100%; height: 100%;
     object-fit: cover;
     object-position: 70% 45%;
     display: block;
   }
-
-  /* Hero text */
-  .hero-text {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    text-align: left;
+  .hero-name {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
-  .hero-text .meta { justify-content: flex-start; margin-top: 4px; }
+  .hero-handle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 1px;
+  }
   h1 {
     font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 26px;
-    line-height: 1.15;
-    letter-spacing: -0.025em;
-    margin: 0;
+    font-size: clamp(30px, 8vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 4px 0 0;
     font-weight: 600;
   }
-  p.tagline {
+  p.hero-sub {
     margin: 0;
     color: var(--muted);
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.4;
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 420px;
   }
 
-  /* Carousel */
-  .carousel-wrap {
+  /* Products */
+  .products {
     display: flex;
     flex-direction: column;
+    gap: 16px;
+    padding: 0 22px;
+  }
+  .products-title {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 14px;
   }
-  .carousel {
+
+  .product {
     display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 14px;
-    scrollbar-width: none;
-  }
-  .carousel::-webkit-scrollbar { display: none; }
-  .carousel .slide {
-    flex: 0 0 calc(100% - 28px);
-    aspect-ratio: 16 / 9;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
     border-radius: var(--radius-card);
-    background-color: var(--surface);
-    scroll-snap-align: center;
     overflow: hidden;
+    background: var(--surface);
+    transition: transform 180ms ease, box-shadow 220ms ease;
+    border: 1px solid transparent;
+    -webkit-tap-highlight-color: transparent;
     position: relative;
   }
-  .carousel .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
+  .product:active { transform: scale(0.99); }
+  .product-visual {
+    aspect-ratio: 16 / 9;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--surface);
+    position: relative;
   }
-  .dots {
+  .product[data-tint="blue"] .product-visual {
+    background: linear-gradient(135deg, #dae8f5 0%, #8fb4d9 100%);
+  }
+  .product[data-tint="amber"] .product-visual {
+    background: linear-gradient(135deg, #f3e5c7 0%, #c79a5a 100%);
+  }
+  .product[data-tint="purple"] .product-visual {
+    background: linear-gradient(135deg, #e5dcf2 0%, #9d7fc0 100%);
+  }
+  .product[data-tint="red"] .product-visual {
+    background: linear-gradient(135deg, #f0d4d4 0%, #b85656 100%);
+  }
+  .product[data-image] .product-visual {
+    background-image: var(--img);
+  }
+  .product-visual .product-mark {
+    position: absolute;
+    inset: auto 16px 14px auto;
+    color: rgba(255,255,255,0.9);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.18);
+  }
+
+  .product-body {
+    padding: 16px 18px 18px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     gap: 6px;
   }
-  .dots span {
-    width: 6px; height: 6px;
-    border-radius: 999px;
-    background: rgba(0,0,0,0.15);
-    transition: background 150ms ease, transform 150ms ease;
-  }
-  .dots span.active {
-    background: var(--fg);
-    transform: scale(1.15);
-  }
-
-  /* Meta row */
-  .meta {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    font-size: 14px;
+  .product-badge {
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     color: var(--muted);
-    align-items: center;
   }
-  .meta .stars { color: #ff9500; letter-spacing: 1px; font-size: 13px; }
-  .meta .sep {
-    width: 1px; height: 12px;
-    background: var(--hairline);
-  }
+  .product-badge.free { color: var(--success); }
+  .product-badge.paid { color: var(--fg); }
+  .product-badge.soon { color: var(--accent); }
 
-  /* Description */
-  p.desc {
+  .product h3 {
+    margin: 2px 0 0;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .product p {
     margin: 0;
     font-size: 14px;
-    line-height: 1.55;
+    line-height: 1.45;
     color: var(--muted);
+  }
+  .product-cta {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
     letter-spacing: -0.005em;
   }
-
-  /* Audience chips */
-  .audiences {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    font-size: 13px;
-    justify-content: flex-start;
-  }
-  .audiences span {
-    padding: 7px 13px;
-    border-radius: 999px;
-    background: var(--surface);
-    color: var(--fg);
-    font-weight: 500;
-    letter-spacing: -0.005em;
-  }
-
-  /* Plan cards */
-  .plans {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .plan {
-    position: relative;
-    border-radius: var(--radius-card);
-    padding: 22px;
-    background: var(--surface);
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-  .plan-featured {
-    background: #1d1d1f;
-    color: #f5f5f7;
-  }
-  .plan-featured .plan-tag { color: #a1a1a6; }
-  .plan-featured ul.feat li { color: #f5f5f7; }
-  .plan-featured ul.feat li .ico { background: rgba(52,199,89,0.18); color: #30d158; }
-  .plan-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .plan-name {
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
-  .plan-tag {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 2px;
-    font-weight: 400;
-  }
-  .plan-price {
-    text-align: right;
-    line-height: 1;
-  }
-  .plan-price b {
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: -0.025em;
-    display: block;
-  }
-  .plan-price span {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 4px;
-    display: inline-block;
-    letter-spacing: 0;
-  }
-  .plan-featured .plan-price span { color: #a1a1a6; }
-
-  ul.feat {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 10px;
-    font-size: 15px;
-  }
-  ul.feat li {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    letter-spacing: -0.01em;
-  }
-  ul.feat li .ico {
-    flex-shrink: 0;
-    width: 20px; height: 20px;
-    border-radius: 999px;
-    display: grid; place-items: center;
-    font-size: 11px;
-    font-weight: 700;
-    background: rgba(52,199,89,0.14);
-    color: var(--success);
-  }
-
-  /* Buttons */
-  .cta-primary, .cta-secondary, button.cta-secondary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 50px;
-    padding: 0 22px;
-    border-radius: var(--radius-btn);
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    text-decoration: none;
-    border: none;
-    transition: transform 100ms ease, opacity 150ms ease, background 150ms ease;
-    -webkit-tap-highlight-color: transparent;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .cta-primary[hidden], .cta-secondary[hidden] { display: none; }
-  .cta-primary {
-    background: var(--accent);
-    color: #fff;
-  }
-  .plan-featured .cta-primary {
-    background: #f5f5f7;
-    color: #1d1d1f;
-  }
-  .cta-primary:active { transform: scale(0.98); opacity: 0.9; }
-  .cta-secondary {
-    background: #fff;
-    color: #1d1d1f;
-    border: 1px solid rgba(0,0,0,0.12);
-  }
-  .cta-secondary:active { transform: scale(0.98); opacity: 0.8; }
-
-  /* Free form — animated reveal */
-  .cta-secondary#revealEmail,
-  form.free {
-    overflow: hidden;
-    transition: max-height 320ms cubic-bezier(0.2, 0, 0, 1), opacity 220ms ease, margin 320ms ease;
-  }
-  .cta-secondary#revealEmail {
-    max-height: 50px;
-  }
-  .cta-secondary#revealEmail.collapsed {
-    max-height: 0;
-    opacity: 0;
-    pointer-events: none;
-    padding-top: 0;
-    padding-bottom: 0;
-    border-width: 0;
-  }
-  form.free {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-height: 0;
-    opacity: 0;
+  .product[aria-disabled="true"] {
+    cursor: default;
     pointer-events: none;
   }
-  form.free.expanded {
-    max-height: 220px;
-    opacity: 1;
-    pointer-events: auto;
-  }
-  form.free input[type="email"] {
-    height: 50px;
-    padding: 0 18px;
-    border-radius: var(--radius-btn);
-    border: 1px solid var(--hairline);
-    background: #fff;
-    color: var(--fg);
-    font-size: 16px;
-    font-family: inherit;
-    outline: none;
-    letter-spacing: -0.01em;
-    transition: border-color 150ms ease, box-shadow 150ms ease;
-  }
-  form.free input[type="email"]:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(0,113,227,0.15);
-  }
-  .success {
-    display: none;
-    padding: 14px;
-    border-radius: var(--radius-card);
-    background: rgba(52,199,89,0.12);
-    color: #0a8a3a;
-    font-size: 14px;
-    text-align: center;
-    font-weight: 500;
-  }
-  .success.show { display: block; }
-
-  /* FAQ */
-  .faq {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin-top: 8px;
-  }
-  .faq h2 {
-    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin: 0 0 10px;
-  }
-  .faq details {
-    border-top: 1px solid var(--hairline);
-    padding: 14px 0;
-  }
-  .faq details:last-of-type { border-bottom: 1px solid var(--hairline); }
-  .faq summary {
-    list-style: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--fg);
-    letter-spacing: -0.01em;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .faq summary::-webkit-details-marker { display: none; }
-  .faq .chev {
-    width: 10px; height: 10px;
-    border-right: 1.5px solid var(--muted);
-    border-bottom: 1.5px solid var(--muted);
-    transform: rotate(45deg);
-    transition: transform 200ms ease;
-    margin-right: 4px;
-    margin-top: -4px;
-    flex-shrink: 0;
-  }
-  .faq details[open] .chev {
-    transform: rotate(-135deg);
-    margin-top: 2px;
-  }
-  .faq details p {
-    margin: 10px 0 0;
-    font-size: 14px;
-    line-height: 1.55;
+  .product[aria-disabled="true"] .product-cta {
     color: var(--muted);
-    letter-spacing: -0.005em;
   }
 
+  /* Footer */
   .fineprint {
     font-size: 12px;
     color: var(--muted);
     text-align: center;
-    margin: 0;
-    letter-spacing: 0;
+    margin: 8px 0 0;
   }
   footer {
     font-size: 12px;
@@ -456,46 +227,7 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
-  }
-
-  /* Desktop layout */
-  @media (min-width: 900px) {
-    body {
-      background:
-        radial-gradient(900px 500px at 20% 0%, #eef1f5 0%, transparent 60%),
-        radial-gradient(700px 500px at 85% 10%, #f0ece6 0%, transparent 55%),
-        var(--bg);
-    }
-    main {
-      max-width: 880px;
-      padding: 40px 0 72px;
-      gap: 40px;
-    }
-    .px { padding-left: 40px; padding-right: 40px; }
-
-    .top-layout { gap: 32px; }
-    .hero-col { gap: 28px; }
-
-    .carousel { padding: 0 40px; }
-    .carousel .slide { flex-basis: calc(100% - 80px); }
-    .carousel-wrap { gap: 18px; }
-
-    h1 { font-size: 36px; letter-spacing: -0.03em; }
-    .tagline { font-size: 18px; }
-    .desc { font-size: 15px; max-width: 640px; }
-
-    .plans {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .faq h2 { font-size: 20px; }
-    .faq { margin-top: 8px; }
-
-    .plan { padding: 22px; }
-    .plan-name { font-size: 20px; }
-    .plan-price b { font-size: 26px; }
+    padding: 0 22px;
   }
   .imprint {
     display: flex;
@@ -515,155 +247,108 @@
     color: var(--accent);
     text-decoration: none;
   }
-  .copyright {
-    padding-top: 4px;
+  .copyright { padding-top: 4px; }
+
+  /* Desktop */
+  @media (min-width: 900px) {
+    body {
+      background:
+        radial-gradient(900px 500px at 20% 0%, #eef1f5 0%, transparent 60%),
+        radial-gradient(700px 500px at 85% 10%, #f0ece6 0%, transparent 55%),
+        var(--bg);
+    }
+    main {
+      max-width: 960px;
+      padding: 48px 0 80px;
+      gap: 48px;
+    }
+    .px, .hero, .products, footer { padding-left: 40px; padding-right: 40px; }
+
+    h1 { font-size: 42px; letter-spacing: -0.035em; }
+    p.hero-sub { font-size: 18px; }
+
+    .grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .product-body { padding: 18px 22px 22px; }
+    .product h3 { font-size: 19px; }
+
+    footer { max-width: 720px; margin: 0 auto; }
   }
 </style>
 </head>
 <body>
 <main>
-  <div class="top-layout">
-    <div class="hero-col">
-      <div class="carousel-wrap">
-        <div class="carousel" id="carousel" aria-label="Product preview">
-          <div class="slide"><img src="images/6.jpg" alt="" loading="lazy" /></div>
-          <div class="slide"><img src="images/5.jpg" alt="" loading="lazy" /></div>
-          <div class="slide"><img src="images/4.jpg" alt="" loading="lazy" /></div>
-          <div class="slide"><img src="images/3.jpg" alt="" loading="lazy" /></div>
-          <div class="slide"><img src="images/2.jpg" alt="" loading="lazy" /></div>
-          <div class="slide"><img src="images/1.jpg" alt="" loading="lazy" /></div>
-        </div>
-        <div class="dots" id="dots" aria-hidden="true">
-          <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
-        </div>
-      </div>
-
-      <div class="px">
-        <div class="info-bar">
-          <span class="info-left">
-            <svg class="icon-tag" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
-              <line x1="7" y1="7" x2="7.01" y2="7"/>
-            </svg>
-            Free sample
-          </span>
-          <span class="info-right">
-            <span class="info-avatar"><img src="images/avatar.jpg" alt="" /></span>
-            By Leon Helg
-          </span>
-        </div>
-      </div>
-
-      <div class="px hero-text">
-        <h1>Swiss Hidden Gems 🇨🇭</h1>
-        <p class="tagline">Switzerland beyond the tourist map.</p>
-        <div class="meta">
-          <span class="stars">★★★★★</span>
-          <span class="sep"></span>
-          <span>5.0 · 4 reviews</span>
-        </div>
-      </div>
-
-      <div class="px">
-        <p class="desc">
-          Most of the best places in Switzerland aren't on the tourist map. They're in local WhatsApp groups, in photographers' heads and on trails that never make the internet. 100+ of them are in here.
-        </p>
-      </div>
-
-      <div class="px audiences">
-        <span>📸 Photographers</span>
-        <span>🥾 Hikers</span>
-        <span>⛺️ Wildcampers</span>
+  <section class="hero">
+    <div class="hero-top">
+      <div class="hero-avatar"><img src="images/avatar.jpg" alt="Leon Helg" /></div>
+      <div>
+        <div class="hero-name">Leon Helg</div>
+        <div class="hero-handle">Hikebeast</div>
       </div>
     </div>
+    <h1>Field-tested tools for alpine creators.</h1>
+    <p class="hero-sub">Swiss-made guides, filters and grades for photographers and filmmakers who care about the details.</p>
+  </section>
 
-    <div class="px plans">
-    <!-- Free plan -->
-    <div class="plan">
-      <div class="plan-head">
-        <div>
-          <div class="plan-name">Free sample</div>
-          <div class="plan-tag">No account needed</div>
+  <section class="products">
+    <h2 class="products-title">Products</h2>
+    <div class="grid">
+
+      <a class="product" href="free/" data-tint="blue">
+        <div class="product-visual" style="background-image:linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%), url('images/6.jpg')">
+          <span class="product-mark">Free Edition</span>
         </div>
-        <div class="plan-price"><b>Free</b></div>
-      </div>
-      <ul class="feat">
-        <li><span class="ico">✓</span>15 of my favorite spots</li>
-        <li><span class="ico">✓</span>Best time of day & year for photos</li>
-        <li><span class="ico">✓</span>Delivered instantly by email</li>
-      </ul>
-
-      <button class="cta-secondary" id="revealEmail" type="button">Get the free sample</button>
-
-      <form class="free" id="freeForm" action="https://formspree.io/f/REPLACE_ME" method="POST" novalidate>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          required
-          autocomplete="email"
-          inputmode="email"
-          placeholder="Email address"
-        />
-        <input type="hidden" name="_subject" value="Free sample request for Swiss Hidden Gems" />
-        <button class="cta-primary" type="submit">Send it to me</button>
-      </form>
-
-      <div class="success" id="success">
-        Check your inbox. Your free sample is on the way.
-      </div>
-    </div>
-
-    <!-- Full plan -->
-    <div class="plan plan-featured">
-      <div class="plan-head">
-        <div>
-          <div class="plan-name">Full guide</div>
-          <div class="plan-tag">Lifetime access</div>
+        <div class="product-body">
+          <span class="product-badge free">Free sample</span>
+          <h3>Swiss Hidden Gems — Sample</h3>
+          <p>15 hand-picked spots from the full guide, sent to your inbox.</p>
+          <span class="product-cta">Try it free →</span>
         </div>
-        <div class="plan-price"><b>$49</b></div>
-      </div>
-      <ul class="feat">
-        <li><span class="ico">✓</span><b>100+</b>&nbsp;secret locations</li>
-        <li><span class="ico">✓</span>Exact GPS coordinates for every spot</li>
-        <li><span class="ico">✓</span>Best time of day & year for photos</li>
-        <li><span class="ico">✓</span>Wildcamping legal info</li>
-        <li><span class="ico">✓</span>Lifetime updates</li>
-      </ul>
-      <a class="cta-primary" href="https://whop.com/gorped/hidden-gems-switzerland-e8/" target="_blank" rel="noopener">
-        Get the full guide
       </a>
+
+      <a class="product" href="https://whop.com/gorped/hidden-gems-switzerland-e8/" target="_blank" rel="noopener" data-tint="amber">
+        <div class="product-visual" style="background-image:linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%), url('images/1.jpg')">
+          <span class="product-mark">Full Guide</span>
+        </div>
+        <div class="product-body">
+          <span class="product-badge paid">$49 · Lifetime</span>
+          <h3>Swiss Hidden Gems</h3>
+          <p>100+ secret locations with exact GPS coordinates, photo timing and wildcamp rules.</p>
+          <span class="product-cta">Get the guide →</span>
+        </div>
+      </a>
+
+      <a class="product" data-tint="purple" aria-disabled="true">
+        <div class="product-visual">
+          <span class="product-mark">Filters</span>
+        </div>
+        <div class="product-body">
+          <span class="product-badge soon">Coming soon</span>
+          <h3>iPhone Filters</h3>
+          <p>A preset pack for the iPhone camera, calibrated for alpine light.</p>
+          <span class="product-cta">Notify me →</span>
+        </div>
+      </a>
+
+      <a class="product" data-tint="red" aria-disabled="true">
+        <div class="product-visual">
+          <span class="product-mark">DaVinci</span>
+        </div>
+        <div class="product-body">
+          <span class="product-badge soon">Coming soon</span>
+          <h3>DaVinci Powergrade</h3>
+          <p>A node tree for DaVinci Resolve. Cinematic looks out of the box.</p>
+          <span class="product-cta">Notify me →</span>
+        </div>
+      </a>
+
     </div>
-    </div><!-- /.plans -->
+  </section>
 
-    <section class="px faq">
-      <h2>Frequently asked</h2>
-      <details>
-        <summary>Will you update the guide?<span class="chev"></span></summary>
-        <p>Yes. Lifetime updates are included. Whenever I add a new spot or refine an entry, it lands in your guide automatically. No rebuying, ever.</p>
-      </details>
-      <details>
-        <summary>How do I get the guide after buying?<span class="chev"></span></summary>
-        <p>Instant access. After checkout you get a link that works on iPhone, Android, or desktop. No downloads or account setup beyond the purchase.</p>
-      </details>
-      <details>
-        <summary>Do I need to be a serious hiker?<span class="chev"></span></summary>
-        <p>No. Every spot lists difficulty, duration and what to bring, so you can pick ones that match your level, from short walks to full alpine days.</p>
-      </details>
-      <details>
-        <summary>Can I camp at these spots?<span class="chev"></span></summary>
-        <p>The full guide shows where wildcamping is allowed, where it's tolerated, and where it's forbidden. So you don't end up with a fine at 5am.</p>
-      </details>
-      <details>
-        <summary>What's the community access?<span class="chev"></span></summary>
-        <p>A private space where readers share their own finds, seasonal tips and recent photos. Included with the full guide.</p>
-      </details>
-    </section>
-  </div><!-- /.top-layout -->
-
-  <p class="px fineprint">Unsubscribe anytime. No spam.</p>
-
-  <footer class="px">
+  <footer>
     <div class="imprint">
       <div class="imprint-title">Imprint</div>
       <div>Saftladen GmbH</div>
@@ -673,53 +358,5 @@
     <div class="copyright">© Hikebeast</div>
   </footer>
 </main>
-
-<script>
-  const form = document.getElementById("freeForm");
-  const success = document.getElementById("success");
-  const reveal = document.getElementById("revealEmail");
-  reveal.addEventListener("click", () => {
-    reveal.classList.add("collapsed");
-    form.classList.add("expanded");
-    const input = form.querySelector("input[type=email]");
-    setTimeout(() => input.focus({ preventScroll: true }), 320);
-  });
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const btn = form.querySelector("button[type=submit]");
-    btn.disabled = true;
-    btn.textContent = "Sending…";
-    try {
-      const res = await fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" }
-      });
-      if (!res.ok) throw new Error("bad response");
-      form.classList.remove("expanded");
-      success.classList.add("show");
-    } catch {
-      btn.disabled = false;
-      btn.textContent = "Try again";
-    }
-  });
-
-  // Carousel dots via IntersectionObserver (reliable on mobile + desktop)
-  const carousel = document.getElementById("carousel");
-  const dots = Array.from(document.getElementById("dots").children);
-  const slides = Array.from(carousel.children);
-  const setActive = (idx) => {
-    dots.forEach((d, i) => d.classList.toggle("active", i === idx));
-  };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
-        const idx = slides.indexOf(entry.target);
-        if (idx >= 0) setActive(idx);
-      }
-    });
-  }, { root: carousel, threshold: [0.55, 0.75] });
-  slides.forEach((slide) => observer.observe(slide));
-</script>
 </body>
 </html>
