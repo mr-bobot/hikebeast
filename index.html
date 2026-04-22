@@ -5,12 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
 <title>Hikebeast · Leon Helg</title>
-<meta name="description" content="Field-tested tools for alpine creators. Swiss-made guides, filters and grades for photographers and filmmakers." />
+<meta name="description" content="Field-tested tools for alpine creators by Swiss photographer Leon Helg. Guides, filters and color grades for photographers and filmmakers working in the Alps. Home of the Swiss Hidden Gems guide: 100+ secret Swiss locations with GPS coordinates." />
 <link rel="canonical" href="https://hikebeast.ch/" />
+<link rel="alternate" hreflang="en" href="https://hikebeast.ch/" />
+<link rel="alternate" hreflang="de" href="https://hikebeast.ch/de/" />
+<link rel="alternate" hreflang="x-default" href="https://hikebeast.ch/" />
 <link rel="icon" type="image/jpeg" href="images/favicon.jpg" />
 <link rel="apple-touch-icon" href="images/favicon.jpg" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Hikebeast" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="de_DE" />
 <meta property="og:title" content="Hikebeast · Field-tested tools for alpine creators" />
 <meta property="og:description" content="Swiss-made guides, filters and grades for photographers and filmmakers." />
 <meta property="og:url" content="https://hikebeast.ch/" />
@@ -22,6 +27,48 @@
 <meta name="twitter:title" content="Hikebeast · Field-tested tools for alpine creators" />
 <meta name="twitter:description" content="Swiss-made guides, filters and grades for photographers and filmmakers." />
 <meta name="twitter:image" content="https://hikebeast.ch/images/og-home.jpg" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://hikebeast.ch/#organization",
+      "name": "Hikebeast",
+      "url": "https://hikebeast.ch/",
+      "logo": "https://hikebeast.ch/images/favicon.jpg",
+      "description": "Field-tested tools for alpine creators. Swiss-made guides, filters and grades for photographers and filmmakers.",
+      "founder": { "@id": "https://hikebeast.ch/#leon" },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Birkenstrasse 47",
+        "postalCode": "6343",
+        "addressLocality": "Rotkreuz",
+        "addressCountry": "CH"
+      },
+      "email": "office@gorped.com"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://hikebeast.ch/#leon",
+      "name": "Leon Helg",
+      "jobTitle": "Photographer and filmmaker",
+      "worksFor": { "@id": "https://hikebeast.ch/#organization" },
+      "nationality": "CH",
+      "image": "https://hikebeast.ch/images/avatar.jpg"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://hikebeast.ch/#website",
+      "url": "https://hikebeast.ch/",
+      "name": "Hikebeast",
+      "description": "Field-tested tools for alpine creators",
+      "publisher": { "@id": "https://hikebeast.ch/#organization" },
+      "inLanguage": ["en", "de"]
+    }
+  ]
+}
+</script>
 <!-- Manychat -->
 <script src="//widget.manychat.com/4765148_5fa68.js" defer="defer"></script>
 <script src="https://mccdn.me/assets/js/widget.js" defer="defer"></script>
@@ -80,6 +127,20 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     object-position: 70% 45%;
     display: block;
   }
+  .navbar-lang {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6e6e73;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.08);
+    -webkit-tap-highlight-color: transparent;
+    transition: color 150ms ease, border-color 150ms ease;
+    letter-spacing: 0.04em;
+  }
+  .navbar-lang:hover { color: #1d1d1f; border-color: rgba(0,0,0,0.2); }
   @media (min-width: 900px) {
     .navbar { padding-left: 40px; padding-right: 40px; }
   }
@@ -352,6 +413,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <img src="/images/avatar.jpg" alt="" />
     <span>Hikebeast</span>
   </a>
+  <a class="navbar-lang" href="/de/" hreflang="de" aria-label="Deutsche Version">DE</a>
 </nav>
 <main>
   <section class="hero">

@@ -5,12 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
 <title>Swiss Hidden Gems · Free Sample</title>
-<meta name="description" content="Switzerland beyond the tourist map. 100+ hidden spots locals keep quiet. Try a free sample of 15 hand-picked favorites." />
+<meta name="description" content="Switzerland beyond the tourist map: 100+ hidden spots with exact GPS coordinates, best photo timing and wildcamping rules. Try a free sample of 15 hand-picked locations, delivered instantly by email." />
 <link rel="canonical" href="https://hikebeast.ch/free/" />
+<link rel="alternate" hreflang="en" href="https://hikebeast.ch/free/" />
+<link rel="alternate" hreflang="de" href="https://hikebeast.ch/de/free/" />
+<link rel="alternate" hreflang="x-default" href="https://hikebeast.ch/free/" />
 <link rel="icon" type="image/jpeg" href="../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../images/favicon.jpg" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Hikebeast" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="de_DE" />
 <meta property="og:title" content="Swiss Hidden Gems · Free Sample" />
 <meta property="og:description" content="Switzerland beyond the tourist map. 15 hand-picked spots, free, straight to your inbox." />
 <meta property="og:url" content="https://hikebeast.ch/free/" />
@@ -22,6 +27,106 @@
 <meta name="twitter:title" content="Swiss Hidden Gems · Free Sample" />
 <meta name="twitter:description" content="15 hand-picked Swiss spots, free, straight to your inbox." />
 <meta name="twitter:image" content="https://hikebeast.ch/images/thumb-free.jpg" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "@id": "https://hikebeast.ch/free/#product",
+      "name": "Swiss Hidden Gems",
+      "description": "A field guide to 100+ secret Swiss locations that don't appear on tourist maps. Exact GPS coordinates, best time of day and year for photography, and wildcamping legal info for every spot.",
+      "brand": { "@type": "Brand", "name": "Hikebeast" },
+      "image": "https://hikebeast.ch/images/thumb-full.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Leon Helg",
+        "url": "https://hikebeast.ch/"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "4",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free Sample",
+          "description": "15 hand-picked Swiss spots delivered by email",
+          "price": "0.00",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://hikebeast.ch/free/"
+        },
+        {
+          "@type": "Offer",
+          "name": "Full Guide (Lifetime)",
+          "description": "100+ secret locations with GPS coordinates, photo timing, wildcamp rules, lifetime updates",
+          "price": "49.00",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://whop.com/gorped/hidden-gems-switzerland-e8/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://hikebeast.ch/free/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Will you update the guide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Lifetime updates are included. Whenever a new spot is added or an entry is refined, it lands in your guide automatically. No rebuying, ever."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get the guide after buying?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Instant access. After checkout you get a link that works on iPhone, Android, or desktop. No downloads or account setup beyond the purchase."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to be a serious hiker?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Every spot lists difficulty, duration and what to bring, so you can pick ones that match your level, from short walks to full alpine days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I camp at these spots?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The full guide shows where wildcamping is allowed, where it's tolerated, and where it's forbidden. So you don't end up with a fine at 5am."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the community access?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A private space where readers share their own finds, seasonal tips and recent photos. Included with the full guide."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hikebeast.ch/" },
+        { "@type": "ListItem", "position": 2, "name": "Swiss Hidden Gems", "item": "https://hikebeast.ch/free/" }
+      ]
+    }
+  ]
+}
+</script>
 <!-- Manychat -->
 <script src="//widget.manychat.com/4765148_5fa68.js" defer="defer"></script>
 <script src="https://mccdn.me/assets/js/widget.js" defer="defer"></script>
@@ -84,6 +189,20 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     object-position: 70% 45%;
     display: block;
   }
+  .navbar-lang {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6e6e73;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.08);
+    -webkit-tap-highlight-color: transparent;
+    transition: color 150ms ease, border-color 150ms ease;
+    letter-spacing: 0.04em;
+  }
+  .navbar-lang:hover { color: #1d1d1f; border-color: rgba(0,0,0,0.2); }
   @media (min-width: 900px) {
     .navbar { padding-left: 40px; padding-right: 40px; }
   }
@@ -597,6 +716,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <img src="/images/avatar.jpg" alt="" />
     <span>Hikebeast</span>
   </a>
+  <a class="navbar-lang" href="/de/free/" hreflang="de" aria-label="Deutsche Version">DE</a>
 </nav>
 <main>
   <div class="top-layout">

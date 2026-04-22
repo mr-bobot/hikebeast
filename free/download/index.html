@@ -7,6 +7,9 @@
 <meta name="color-scheme" content="light only" />
 <title>Your Swiss Hidden Gems sample · Hikebeast</title>
 <meta name="robots" content="noindex" />
+<link rel="alternate" hreflang="en" href="https://hikebeast.ch/free/download/" />
+<link rel="alternate" hreflang="de" href="https://hikebeast.ch/de/free/download/" />
+<link rel="alternate" hreflang="x-default" href="https://hikebeast.ch/free/download/" />
 <link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../../images/favicon.jpg" />
 <!-- Vercel Analytics -->
@@ -64,6 +67,20 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     object-position: 70% 45%;
     display: block;
   }
+  .navbar-lang {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6e6e73;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.08);
+    -webkit-tap-highlight-color: transparent;
+    transition: color 150ms ease, border-color 150ms ease;
+    letter-spacing: 0.04em;
+  }
+  .navbar-lang:hover { color: #1d1d1f; border-color: rgba(0,0,0,0.2); }
   @media (min-width: 900px) {
     .navbar { padding-left: 40px; padding-right: 40px; }
   }
@@ -405,6 +422,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <img src="/images/avatar.jpg" alt="" />
     <span>Hikebeast</span>
   </a>
+  <a class="navbar-lang" href="/de/free/download/" hreflang="de" aria-label="Deutsche Version">DE</a>
 </nav>
 <main>
   <div class="check">✓</div>

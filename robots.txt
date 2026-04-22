@@ -1,0 +1,50 @@
+# Hikebeast — Swiss-made guides, filters and grades for alpine creators
+# https://hikebeast.ch
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /free/download/
+
+# AI search crawlers — explicitly allowed for citation in generative answers
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /free/download/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /free/download/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /api/
+Disallow: /free/download/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /free/download/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /free/download/
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+Disallow: /free/download/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+Disallow: /free/download/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /free/download/
+
+Sitemap: https://hikebeast.ch/sitemap.xml
