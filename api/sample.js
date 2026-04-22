@@ -17,8 +17,6 @@ const html = (name = "there") => `
 `;
 
 export default async function handler(req, res) {
-  return res.status(503).json({ error: "Temporarily disabled" });
-
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
