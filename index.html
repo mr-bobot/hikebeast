@@ -322,13 +322,36 @@
   }
   .cta-secondary:active { transform: scale(0.98); opacity: 0.8; }
 
-  /* Free form */
+  /* Free form — animated reveal */
+  .cta-secondary#revealEmail,
+  form.free {
+    overflow: hidden;
+    transition: max-height 320ms cubic-bezier(0.2, 0, 0, 1), opacity 220ms ease, margin 320ms ease;
+  }
+  .cta-secondary#revealEmail {
+    max-height: 50px;
+  }
+  .cta-secondary#revealEmail.collapsed {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+  }
   form.free {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
   }
-  form.free[hidden] { display: none; }
+  form.free.expanded {
+    max-height: 220px;
+    opacity: 1;
+    pointer-events: auto;
+  }
   form.free input[type="email"] {
     height: 50px;
     padding: 0 18px;
@@ -567,7 +590,7 @@
 
       <button class="cta-secondary" id="revealEmail" type="button">Get the free sample</button>
 
-      <form class="free" id="freeForm" action="https://formspree.io/f/REPLACE_ME" method="POST" novalidate hidden>
+      <form class="free" id="freeForm" action="https://formspree.io/f/REPLACE_ME" method="POST" novalidate>
         <input
           id="email"
           type="email"
@@ -651,9 +674,10 @@
   const success = document.getElementById("success");
   const reveal = document.getElementById("revealEmail");
   reveal.addEventListener("click", () => {
-    reveal.hidden = true;
-    form.hidden = false;
-    form.querySelector("input[type=email]").focus();
+    reveal.classList.add("collapsed");
+    form.classList.add("expanded");
+    const input = form.querySelector("input[type=email]");
+    setTimeout(() => input.focus({ preventScroll: true }), 320);
   });
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -667,7 +691,7 @@
         headers: { Accept: "application/json" }
       });
       if (!res.ok) throw new Error("bad response");
-      form.style.display = "none";
+      form.classList.remove("expanded");
       success.classList.add("show");
     } catch {
       btn.disabled = false;
@@ -675,19 +699,22 @@
     }
   });
 
-  // Carousel dots
+  // Carousel dots via IntersectionObserver (reliable on mobile + desktop)
   const carousel = document.getElementById("carousel");
-  const dots = document.getElementById("dots").children;
-  const slides = carousel.children;
-  carousel.addEventListener("scroll", () => {
-    const x = carousel.scrollLeft + carousel.clientWidth / 2;
-    let idx = 0;
-    for (let i = 0; i < slides.length; i++) {
-      const s = slides[i];
-      if (x >= s.offsetLeft && x < s.offsetLeft + s.offsetWidth) { idx = i; break; }
-    }
-    for (let i = 0; i < dots.length; i++) dots[i].classList.toggle("active", i === idx);
-  }, { passive: true });
+  const dots = Array.from(document.getElementById("dots").children);
+  const slides = Array.from(carousel.children);
+  const setActive = (idx) => {
+    dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
+        const idx = slides.indexOf(entry.target);
+        if (idx >= 0) setActive(idx);
+      }
+    });
+  }, { root: carousel, threshold: [0.55, 0.75] });
+  slides.forEach((slide) => observer.observe(slide));
 </script>
 </body>
 </html>
