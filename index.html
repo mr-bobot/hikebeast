@@ -41,10 +41,9 @@
   }
   .px { padding-left: 22px; padding-right: 22px; }
 
-  /* Layout wrappers — stack on mobile, two-column on desktop */
+  /* Layout wrappers — stack on mobile, grid on desktop */
   .top-layout,
-  .hero-col,
-  .purchase-col {
+  .hero-col {
     display: flex;
     flex-direction: column;
     gap: 28px;
@@ -427,34 +426,48 @@
         var(--bg);
     }
     main {
-      max-width: 880px;
+      max-width: 1080px;
       padding: 40px 0 72px;
       gap: 40px;
     }
     .px { padding-left: 40px; padding-right: 40px; }
 
-    /* Top section stays stacked */
-    .top-layout { gap: 40px; }
-    .hero-col { gap: 28px; }
-    .purchase-col { gap: 28px; }
+    .top-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      grid-template-areas:
+        "hero faq"
+        "plans plans";
+      column-gap: 56px;
+      row-gap: 40px;
+      align-items: start;
+      padding: 0 40px;
+    }
+    .hero-col { grid-area: hero; gap: 28px; }
+    .hero-col .px { padding-left: 0; padding-right: 0; }
 
-    .carousel { padding: 0 40px; }
-    .carousel .slide { flex-basis: calc(100% - 80px); }
+    .top-layout > .plans { grid-area: plans; padding: 0; }
+    .top-layout > .faq { grid-area: faq; padding: 0; margin-top: 0; }
+
+    .carousel { padding: 0; }
+    .carousel .slide { flex-basis: 100%; }
     .carousel-wrap { gap: 18px; }
 
     h1 { font-size: 36px; letter-spacing: -0.03em; }
     .tagline { font-size: 18px; }
     .desc { font-size: 15px; max-width: 640px; }
 
-    /* Plan cards side by side */
     .plans {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
 
-    .faq { margin-top: 8px; }
-    .faq h2 { font-size: 20px; }
+    .faq h2 {
+      font-size: 20px;
+      margin-top: 0;
+    }
+    .faq details:first-of-type { border-top: none; padding-top: 0; }
 
     .plan { padding: 22px; }
     .plan-name { font-size: 20px; }
@@ -531,7 +544,6 @@
       </div>
     </div>
 
-    <div class="purchase-col">
     <div class="px plans">
     <!-- Free plan -->
     <div class="plan">
@@ -614,7 +626,6 @@
         <p>A private space where readers share their own finds, seasonal tips and recent photos. Included with the full guide.</p>
       </details>
     </section>
-    </div><!-- /.purchase-col -->
   </div><!-- /.top-layout -->
 
   <p class="px fineprint">Unsubscribe anytime. No spam.</p>
