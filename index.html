@@ -442,14 +442,13 @@
       align-items: start;
       padding: 0 40px;
     }
-    .hero-col { gap: 32px; }
+    .hero-col { gap: 32px; position: sticky; top: 40px; }
     .hero-col .px { padding-left: 0; padding-right: 0; }
 
     .purchase-col {
-      position: sticky;
-      top: 40px;
-      padding: 0;
+      gap: 32px;
     }
+    .purchase-col .px { padding-left: 0; padding-right: 0; }
 
     .carousel { padding: 0; }
     .carousel .slide { flex-basis: 100%; }
@@ -459,11 +458,13 @@
     .tagline { font-size: 18px; }
     .desc { font-size: 15px; max-width: 560px; }
 
-    .faq { max-width: 720px; margin: 16px auto 0; }
-    .fineprint { max-width: 720px; margin: 0 auto; }
-    footer {
+    .faq { margin-top: 4px; }
+    .faq h2 { font-size: 18px; }
+
+    .fineprint, footer {
       max-width: 720px;
-      margin: 8px auto 0;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .plan { padding: 24px; }
@@ -541,7 +542,8 @@
       </div>
     </div>
 
-    <div class="purchase-col px plans">
+    <div class="purchase-col">
+    <div class="px plans">
     <!-- Free plan -->
     <div class="plan">
       <div class="plan-head">
@@ -598,32 +600,33 @@
         Get the full guide
       </a>
     </div>
-    </div>
-  </div>
+    </div><!-- /.plans -->
 
-  <section class="px faq">
-    <h2>Frequently asked</h2>
-    <details>
-      <summary>Will you update the guide?<span class="chev"></span></summary>
-      <p>Yes. Lifetime updates are included. Whenever I add a new spot or refine an entry, it lands in your guide automatically. No rebuying, ever.</p>
-    </details>
-    <details>
-      <summary>How do I get the guide after buying?<span class="chev"></span></summary>
-      <p>Instant access. After checkout you get a link that works on iPhone, Android, or desktop. No downloads or account setup beyond the purchase.</p>
-    </details>
-    <details>
-      <summary>Do I need to be a serious hiker?<span class="chev"></span></summary>
-      <p>No. Every spot lists difficulty, duration and what to bring, so you can pick ones that match your level, from short walks to full alpine days.</p>
-    </details>
-    <details>
-      <summary>Can I camp at these spots?<span class="chev"></span></summary>
-      <p>The full guide shows where wildcamping is allowed, where it's tolerated, and where it's forbidden. So you don't end up with a fine at 5am.</p>
-    </details>
-    <details>
-      <summary>What's the community access?<span class="chev"></span></summary>
-      <p>A private space where readers share their own finds, seasonal tips and recent photos. Included with the full guide.</p>
-    </details>
-  </section>
+    <section class="px faq">
+      <h2>Frequently asked</h2>
+      <details>
+        <summary>Will you update the guide?<span class="chev"></span></summary>
+        <p>Yes. Lifetime updates are included. Whenever I add a new spot or refine an entry, it lands in your guide automatically. No rebuying, ever.</p>
+      </details>
+      <details>
+        <summary>How do I get the guide after buying?<span class="chev"></span></summary>
+        <p>Instant access. After checkout you get a link that works on iPhone, Android, or desktop. No downloads or account setup beyond the purchase.</p>
+      </details>
+      <details>
+        <summary>Do I need to be a serious hiker?<span class="chev"></span></summary>
+        <p>No. Every spot lists difficulty, duration and what to bring, so you can pick ones that match your level, from short walks to full alpine days.</p>
+      </details>
+      <details>
+        <summary>Can I camp at these spots?<span class="chev"></span></summary>
+        <p>The full guide shows where wildcamping is allowed, where it's tolerated, and where it's forbidden. So you don't end up with a fine at 5am.</p>
+      </details>
+      <details>
+        <summary>What's the community access?<span class="chev"></span></summary>
+        <p>A private space where readers share their own finds, seasonal tips and recent photos. Included with the full guide.</p>
+      </details>
+    </section>
+    </div><!-- /.purchase-col -->
+  </div><!-- /.top-layout -->
 
   <p class="px fineprint">Unsubscribe anytime. No spam.</p>
 
