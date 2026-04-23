@@ -791,7 +791,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </form>
 
       <div class="success" id="success">
-        Sent. Check your inbox.
+        Sent → check your inbox
       </div>
     </div>
 
@@ -886,7 +886,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     btn.disabled = true;
-    btn.textContent = "Sending…";
+    let dots = 1;
+    btn.textContent = "Sending.";
+    const dotsTimer = setInterval(() => {
+      dots = (dots % 3) + 1;
+      btn.textContent = "Sending" + ".".repeat(dots);
+    }, 350);
     try {
       const email = form.querySelector("input[name=email]").value;
       const subscriber_id = subscriberInput.value || null;
@@ -896,6 +901,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         body: JSON.stringify({ email, subscriber_id })
       });
       if (!res.ok) throw new Error("bad response");
+      clearInterval(dotsTimer);
       form.style.display = "none";
       success.classList.add("show");
       if (window.fbq) fbq('track', 'Lead', {
@@ -903,6 +909,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         content_category: 'Guide'
       });
     } catch {
+      clearInterval(dotsTimer);
       btn.disabled = false;
       btn.textContent = "Try again";
     }

@@ -261,7 +261,7 @@ fbq('track', 'ViewContent', { content_name: 'Swiss Hidden Gems Free Sample', con
       <ul class="feat">
         <li><span class="ico">✓</span>15 meiner Lieblingsspots</li>
         <li><span class="ico">✓</span>Beste Tages- & Jahreszeit für Fotos</li>
-        <li><span class="ico">✓</span>Sofort per E-Mail</li>
+        <li><span class="ico">✓</span>Sofort auf deine Mail</li>
       </ul>
 
       <form class="free" id="freeForm" action="/api/sample" method="POST" novalidate>
@@ -269,11 +269,11 @@ fbq('track', 'ViewContent', { content_name: 'Swiss Hidden Gems Free Sample', con
           <input id="email" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="E-Mail-Adresse" />
         </div>
         <input type="hidden" id="subscriberId" name="subscriber_id" value="" />
-        <button class="cta-primary" id="freeBtn" type="submit">Free Sample holen</button>
+        <button class="cta-primary" id="freeBtn" type="submit">Free Sample sichern</button>
       </form>
 
       <div class="success" id="success">
-        Abgeschickt. Schau in dein Postfach.
+        Abgeschickt → schau in dein Postfach
       </div>
     </div>
 
@@ -362,7 +362,12 @@ fbq('track', 'ViewContent', { content_name: 'Swiss Hidden Gems Free Sample', con
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     btn.disabled = true;
-    btn.textContent = "Wird gesendet…";
+    let dots = 1;
+    btn.textContent = "Wird gesendet.";
+    const dotsTimer = setInterval(() => {
+      dots = (dots % 3) + 1;
+      btn.textContent = "Wird gesendet" + ".".repeat(dots);
+    }, 350);
     try {
       const email = form.querySelector("input[name=email]").value;
       const subscriber_id = subscriberInput.value || null;
@@ -372,10 +377,12 @@ fbq('track', 'ViewContent', { content_name: 'Swiss Hidden Gems Free Sample', con
         body: JSON.stringify({ email, subscriber_id })
       });
       if (!res.ok) throw new Error("bad response");
+      clearInterval(dotsTimer);
       form.style.display = "none";
       success.classList.add("show");
       if (window.fbq) fbq('track', 'Lead', { content_name: 'Swiss Hidden Gems Free Sample', content_category: 'Guide' });
     } catch {
+      clearInterval(dotsTimer);
       btn.disabled = false;
       btn.textContent = "Nochmal versuchen";
     }
