@@ -113,6 +113,25 @@ async function logSignup({ email, subscriberId, token, sentAt }) {
   }
 }
 
+async function createResendContact(email) {
+  try {
+    const payload = { email, unsubscribed: false };
+    const segmentId = process.env.RESEND_SEGMENT_ID;
+    if (segmentId) payload.segments = [segmentId];
+    await fetch("https://api.resend.com/contacts", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(5000),
+    });
+  } catch (err) {
+    console.error("Resend contact create failed:", err);
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -143,13 +162,17 @@ export default async function handler(req, res) {
       console.error("Resend error:", error);
       return res.status(500).json({ error: "Email failed to send" });
     }
-    await logSignup({ email, subscriberId: subscriber_id, token, sentAt });
+    const sideEffects = [
+      logSignup({ email, subscriberId: subscriber_id, token, sentAt }),
+      createResendContact(email),
+    ];
     if (subscriber_id) {
-      await Promise.all([
+      sideEffects.push(
         setEmail(subscriber_id, email),
         addTag(subscriber_id, "email_submitted"),
-      ]);
+      );
     }
+    await Promise.all(sideEffects);
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error("Handler error:", err);
