@@ -333,7 +333,12 @@ fbq('track', 'ViewContent', { content_name: 'Swiss Hidden Gems Free Sample', con
   const btn = document.getElementById("freeBtn");
   const subscriberInput = document.getElementById("subscriberId");
 
-  const subscriberId = new URLSearchParams(window.location.search).get("s");
+  const params = new URLSearchParams(window.location.search);
+  const utmSource = params.get("utm_source") || "";
+  const utmMedium = params.get("utm_medium") || "";
+  const utmCampaign = params.get("utm_campaign") || "";
+
+  const subscriberId = params.get("s");
   if (subscriberId) {
     subscriberInput.value = subscriberId;
     fetch("/api/visit", {
@@ -374,7 +379,13 @@ fbq('track', 'ViewContent', { content_name: 'Swiss Hidden Gems Free Sample', con
       const res = await fetch(form.action, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ email, subscriber_id })
+        body: JSON.stringify({
+          email,
+          subscriber_id,
+          utm_source: utmSource,
+          utm_medium: utmMedium,
+          utm_campaign: utmCampaign,
+        })
       });
       if (!res.ok) throw new Error("bad response");
       clearInterval(dotsTimer);

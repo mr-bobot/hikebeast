@@ -22,7 +22,11 @@ function timingSafeEqualBase64(a, b) {
 }
 
 function verifySignature({ id, timestamp, body, signatureHeader, secret }) {
-  const cleaned = secret.startsWith("whsec_") ? secret.slice(6) : secret;
+  const cleaned = secret.startsWith("whsec_")
+    ? secret.slice(6)
+    : secret.startsWith("ws_")
+    ? secret.slice(3)
+    : secret;
   const key = Buffer.from(cleaned, "base64");
   const signed = `${id}.${timestamp}.${body}`;
   const expected = crypto.createHmac("sha256", key).update(signed).digest("base64");
@@ -129,6 +133,8 @@ export default async function handler(req, res) {
     pick(data, "final_amount", "subtotal", "amount", "total") ?? "";
   const currency = pick(data, "currency", "currency_code") || "";
   const productId = pick(data, "product_id", "product.id") || "";
+  const productName =
+    pick(data, "product.title", "product.name", "plan.product.title", "plan.product.name") || "";
   const planId = pick(data, "plan_id", "plan.id") || "";
   const membershipId = pick(data, "membership_id", "membership.id") || "";
   const paymentId = pick(data, "id", "payment_id") || "";
@@ -137,6 +143,7 @@ export default async function handler(req, res) {
     email,
     amount,
     currency,
+    product: productName || productId,
     product_id: productId,
     plan_id: planId,
     membership_id: membershipId,

@@ -852,8 +852,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   const btn = document.getElementById("freeBtn");
   const subscriberInput = document.getElementById("subscriberId");
 
+  const params = new URLSearchParams(window.location.search);
+  const utmSource = params.get("utm_source") || "";
+  const utmMedium = params.get("utm_medium") || "";
+  const utmCampaign = params.get("utm_campaign") || "";
+
   // Capture ?s=<subscriber_id> from URL (ManyChat link context)
-  const subscriberId = new URLSearchParams(window.location.search).get("s");
+  const subscriberId = params.get("s");
   if (subscriberId) {
     subscriberInput.value = subscriberId;
     // Log landing (ManyChat → site visit) — fire and forget
@@ -898,7 +903,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       const res = await fetch(form.action, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ email, subscriber_id })
+        body: JSON.stringify({
+          email,
+          subscriber_id,
+          utm_source: utmSource,
+          utm_medium: utmMedium,
+          utm_campaign: utmCampaign,
+        })
       });
       if (!res.ok) throw new Error("bad response");
       clearInterval(dotsTimer);

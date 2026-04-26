@@ -91,7 +91,7 @@ Get the full guide for $49: ${upsell}
 ${SITE}/imprint.html · ${SITE}/privacy.html
 `;
 
-async function logSignup({ email, subscriberId, token, sentAt }) {
+async function logSignup({ email, subscriberId, token, sentAt, utm }) {
   const url = process.env.SHEETS_WEBHOOK_URL;
   if (!url) return;
   try {
@@ -105,6 +105,9 @@ async function logSignup({ email, subscriberId, token, sentAt }) {
         email,
         subscriber_id: subscriberId || "",
         token,
+        utm_source: utm.source,
+        utm_medium: utm.medium,
+        utm_campaign: utm.campaign,
       }),
       signal: AbortSignal.timeout(5000),
     });
@@ -136,10 +139,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { email, subscriber_id } = req.body ?? {};
+  const { email, subscriber_id, utm_source, utm_medium, utm_campaign } = req.body ?? {};
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: "Invalid email" });
   }
+
+  const hasUtm = utm_source || utm_medium || utm_campaign;
+  const utm = hasUtm
+    ? { source: utm_source || "", medium: utm_medium || "", campaign: utm_campaign || "" }
+    : subscriber_id
+    ? { source: "manychat", medium: "dm", campaign: "" }
+    : { source: "", medium: "", campaign: "" };
 
   const token = crypto.randomBytes(12).toString("base64url");
   const link = subscriber_id
@@ -162,7 +172,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Email failed to send" });
     }
     const sideEffects = [
-      logSignup({ email, subscriberId: subscriber_id, token, sentAt }),
+      logSignup({ email, subscriberId: subscriber_id, token, sentAt, utm }),
       createResendContact(email),
     ];
     if (subscriber_id) {
