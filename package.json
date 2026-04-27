@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build:llms": "node scripts/build-llms.mjs"
+  },
   "dependencies": {
     "resend": "^4.0.0"
   }
