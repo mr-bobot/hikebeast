@@ -1,7 +1,4 @@
 {
-  "rewrites": [
-    { "source": "/sample/guide.pdf", "destination": "/sample.pdf" }
-  ],
   "headers": [
     {
       "source": "/sample.pdf",
@@ -9,23 +6,6 @@
         {
           "key": "Content-Disposition",
           "value": "attachment; filename=\"Swiss-Hidden-Gems-Sample.pdf\""
-        }
-      ]
-    },
-    {
-      "source": "/sample/guide.pdf",
-      "headers": [
-        {
-          "key": "Content-Disposition",
-          "value": "inline; filename=\"Swiss-Hidden-Gems-Sample.pdf\""
-        },
-        {
-          "key": "Content-Type",
-          "value": "application/pdf"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=300, s-maxage=86400"
         }
       ]
     },

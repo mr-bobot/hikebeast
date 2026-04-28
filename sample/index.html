@@ -199,28 +199,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     display: block;
   }
 
-  .preview-iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    background: #fff;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 420ms ease;
-  }
-  /* Unlocked: track fades out, iframe fades in inside the same wrapper. */
+  /* Unlocked state: carousel stays visible, only the call-to-action chrome
+     (scrim, pill) fades out. The Drive PDF auto-opens in a new tab on submit;
+     no iframe swap (iOS WKWebView mis-sizes embedded PDFs). */
   .preview.unlocked {
     box-shadow: 0 24px 56px rgba(0,0,0,0.10);
-  }
-  .preview.unlocked .preview-track {
-    opacity: 0;
-    pointer-events: none;
-  }
-  .preview.unlocked .preview-iframe {
-    opacity: 1;
-    pointer-events: auto;
   }
 
   /* Sticky pill — stays centered as user swipes between slides */
@@ -254,10 +237,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   .preview-dots span.active {
     background: var(--fg);
     transform: scale(1.15);
-  }
-  .preview.unlocked ~ .preview-dots {
-    opacity: 0;
-    pointer-events: none;
   }
 
   .unlock-pill {
@@ -601,12 +580,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
       </article>
     </div>
-    <iframe
-      class="preview-iframe"
-      id="previewIframe"
-      title="Swiss Hidden Gems sample"
-      loading="lazy"
-      referrerpolicy="no-referrer"></iframe>
     <div class="preview-scrim" aria-hidden="true"></div>
     <button class="unlock-pill" id="unlockPill" type="button" aria-label="Tap to unlock">
       <svg class="lock-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -672,7 +645,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <span id="successText">Unlocked. Also sent to your inbox.</span>
         </div>
         <a class="cta-primary" id="driveLink"
-           href="https://drive.google.com/drive/folders/1wyLi9JCSV7siG-7_DAm0QFOu7HSp3bKF?usp=share_link"
+           href="https://drive.google.com/file/d/1tJsyRtTeOPaQ3-fwoFD34lkqICnxlZz9/view?usp=share_link"
            target="_blank" rel="noopener">Open in Google Drive</a>
       </div>
     </div>
@@ -712,8 +685,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 <script>
   const preview = document.getElementById("preview");
   const previewTrack = document.getElementById("previewTrack");
-  const previewIframe = document.getElementById("previewIframe");
   const unlockPill = document.getElementById("unlockPill");
+  const driveHref = document.getElementById("driveLink").getAttribute("href");
   const freeCard = document.getElementById("freeCard");
   const planPre = document.getElementById("planPre");
   const unlockForm = document.getElementById("unlockForm");
@@ -735,12 +708,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   // network call so the success state stays testable in those contexts.
   const isProd = window.location.hostname.endsWith("hikebeast.ch");
 
-  // PDF source: prod relies on the vercel.json rewrite from /sample/guide.pdf
-  // to /sample.pdf (with inline disposition). On file:// the rewrite doesn't
-  // exist, so use the relative path to the actual PDF at the repo root.
-  const pdfSrc = (isProd ? "/sample/guide.pdf" : "../sample.pdf")
-    + "#toolbar=0&navpanes=0&view=FitH";
-
   // Capture ?s=<subscriber_id>, fire visit ping (mirrors /free/)
   const subscriberId = params.get("s");
   if (subscriberId) {
@@ -761,17 +728,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     }
   };
 
-  // Preload the PDF the moment the user shows real intent (pill tap or
-  // form focus) so it's already buffered by the time they submit.
-  const preloadPdf = () => {
-    if (!previewIframe.src) previewIframe.src = pdfSrc;
-  };
-
   // Tap-to-unlock: scroll the form into view and focus first input.
   let revealed = false;
   unlockPill.addEventListener("click", () => {
     haptic(8);
-    preloadPdf();
     freeCard.scrollIntoView({ behavior: "smooth", block: "center" });
     setTimeout(() => firstNameInput.focus({ preventScroll: true }), 280);
     if (!revealed) {
@@ -782,8 +742,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       });
     }
   });
-  firstNameInput.addEventListener("focus", preloadPdf, { once: true });
-  emailInput.addEventListener("focus", preloadPdf, { once: true });
 
   const markValidity = (el) => {
     el.classList.toggle("invalid", el.value.length > 0 && !el.checkValidity());
@@ -797,19 +755,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   const setBtnLoading = (loading) => {
     unlockBtn.disabled = loading;
     unlockBtn.textContent = loading ? "Unlocking…" : "Unlock the sample";
-  };
-
-  const swapPreviewToIframe = () => {
-    // Pre-unlock height: mobile carousel ≈ 470px (good for reading),
-    // desktop strip ≈ 200px (way too short for a PDF). Pin a comfortable
-    // reading height per breakpoint instead of just freezing whatever's there.
-    const isDesktop = window.matchMedia("(min-width: 700px)").matches;
-    const target = isDesktop
-      ? Math.min(window.innerHeight * 0.78, 820)
-      : preview.getBoundingClientRect().height;
-    if (target > 0) preview.style.height = target + "px";
-    preloadPdf();
-    requestAnimationFrame(() => preview.classList.add("unlocked"));
   };
 
   const showSuccess = () => {
@@ -832,6 +777,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       haptic([20, 60, 20]);
       return;
     }
+
+    // Open Drive synchronously while the click gesture is still live.
+    // If we wait for the await fetch below, iOS Safari and IG's WKWebView
+    // block the popup. The fallback "Open in Google Drive" CTA in the
+    // success block covers users where the popup was blocked anyway.
+    window.open(driveHref, "_blank", "noopener,noreferrer");
 
     setBtnLoading(true);
     const firstName = firstNameInput.value.trim();
@@ -859,9 +810,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       }
 
       haptic([10, 40, 10]);
-      swapPreviewToIframe();
+      preview.classList.add("unlocked");
       showSuccess();
-      setTimeout(() => preview.scrollIntoView({ behavior: "smooth", block: "start" }), 360);
 
       if (window.fbq) fbq("track", "Lead", {
         content_name: "Swiss Hidden Gems Free Sample",
