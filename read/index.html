@@ -148,9 +148,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     letter-spacing: -0.005em;
   }
 
-  /* Stacked sample pages. Avoids iOS WKWebView's broken PDF-iframe rendering
-     (mega-zoom, ignores #view=FitH). Each page is a 16:9 JPG; aspect-ratio
-     reserves height before load to prevent layout shift. */
+  /* Stacked sample pages. Clamp-height + scroll keeps the email form
+     visible above the fold; user scrolls inside to peek further pages.
+     Avoids iOS WKWebView's broken PDF-iframe rendering (ignores #view=FitH). */
   .reader {
     position: relative;
     margin: 0 14px;
@@ -158,7 +158,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     background: #fff;
     border: 1px solid var(--hairline);
     box-shadow: 0 24px 56px rgba(0,0,0,0.10);
-    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    height: clamp(380px, 60dvh, 540px);
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -377,7 +380,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       gap: 28px;
     }
     .px { padding-left: 40px; padding-right: 40px; }
-    .reader { margin-left: 0; margin-right: 0; }
+    .reader { margin-left: 0; margin-right: 0; height: clamp(460px, 64dvh, 660px); }
     h1 { font-size: 32px; letter-spacing: -0.035em; }
     p.lead { font-size: 16px; }
   }
@@ -395,32 +398,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   <header class="px hero">
     <p class="kicker">Swiss Hidden Gems · Free sample</p>
     <h1>Read it right here.</h1>
-    <p class="lead">Scroll through the full sample below. Drop your email further down to save a copy.</p>
+    <p class="lead">Sneak peek below. Drop your email to get the full PDF.</p>
   </header>
 
   <div class="reader" id="reader" aria-label="Swiss Hidden Gems sample · read">
     <img src="/read/pages/p-01.jpg" alt="Sample page 1" decoding="async" fetchpriority="high" />
     <img src="/read/pages/p-02.jpg" alt="Sample page 2" decoding="async" />
-    <img src="/read/pages/p-03.jpg" alt="Sample page 3" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-04.jpg" alt="Sample page 4" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-05.jpg" alt="Sample page 5" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-06.jpg" alt="Sample page 6" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-07.jpg" alt="Sample page 7" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-08.jpg" alt="Sample page 8" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-09.jpg" alt="Sample page 9" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-10.jpg" alt="Sample page 10" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-11.jpg" alt="Sample page 11" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-12.jpg" alt="Sample page 12" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-13.jpg" alt="Sample page 13" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-14.jpg" alt="Sample page 14" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-15.jpg" alt="Sample page 15" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-16.jpg" alt="Sample page 16" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-17.jpg" alt="Sample page 17" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-18.jpg" alt="Sample page 18" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-19.jpg" alt="Sample page 19" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-20.jpg" alt="Sample page 20" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-21.jpg" alt="Sample page 21" loading="lazy" decoding="async" />
-    <img src="/read/pages/p-22.jpg" alt="Sample page 22" loading="lazy" decoding="async" />
+    <img src="/read/pages/p-03.jpg" alt="Sample page 3" decoding="async" />
   </div>
 
   <div class="px plans">
@@ -428,13 +412,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <div class="plan" id="saveCard">
       <div class="plan-head">
         <div>
-          <div class="plan-name">Save the sample</div>
+          <div class="plan-name">Save as PDF</div>
           <div class="plan-tag">For offline use on the trail</div>
         </div>
-        <div class="plan-price"><b>Free</b></div>
+        <div class="plan-price"><b>PDF</b></div>
       </div>
       <ul class="feat">
-        <li><span class="ico">✓</span>Sent straight to your inbox</li>
+        <li><span class="ico">✓</span>High resolution file</li>
         <li><span class="ico">✓</span>Download link works on phone &amp; desktop</li>
         <li><span class="ico">✓</span>Save to Files for offline access</li>
       </ul>
@@ -460,7 +444,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           required
           placeholder="Email address" />
         <input type="hidden" id="subscriberId" name="subscriber_id" value="" />
-        <button class="cta-primary" id="saveBtn" type="submit">Send me the download</button>
+        <button class="cta-primary" id="saveBtn" type="submit">Send me the PDF</button>
         <p class="fineprint">No spam. Unsubscribe anytime.</p>
       </form>
 
@@ -471,7 +455,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
               <polyline points="5 12 10 17 19 8"/>
             </svg>
           </span>
-          <span id="successText">Sent. Check your inbox for the download link.</span>
+          <span id="successText">Sent. Check your inbox for the PDF.</span>
         </div>
         <a class="cta-primary" id="driveLink"
            href="https://drive.google.com/drive/folders/1wyLi9JCSV7siG-7_DAm0QFOu7HSp3bKF?usp=share_link"
@@ -557,12 +541,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
   const setBtnLoading = (loading) => {
     saveBtn.disabled = loading;
-    saveBtn.textContent = loading ? "Sending…" : "Send me the download";
+    saveBtn.textContent = loading ? "Sending…" : "Send me the PDF";
   };
 
   const showSuccess = (firstName) => {
     if (firstName) {
-      successText.textContent = "Sent, " + firstName + ". Check your inbox for the download link.";
+      successText.textContent = "Sent, " + firstName + ". Check your inbox for the PDF.";
     }
     // Stage 1: fade the form area out
     saveForm.classList.add("fading");
