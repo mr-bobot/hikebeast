@@ -269,13 +269,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     color: #ffffff;
     opacity: 0.9;
   }
-  .preview.unlocked .unlock-pill { opacity: 0; pointer-events: none; }
+  /* Post-unlock: pill stays visible, swaps copy + role to "Open in Drive" */
+  .preview.unlocked .unlock-pill { background: var(--accent); }
+  .preview.unlocked .unlock-pill { animation: none; }
 
   @keyframes pillPulse {
     0%, 100% { box-shadow: 0 10px 28px rgba(0,0,0,0.22), 0 0 0 0 rgba(0,113,227,0); }
     50%      { box-shadow: 0 10px 28px rgba(0,0,0,0.22), 0 0 0 12px rgba(0,113,227,0.12); }
   }
-  .preview .unlock-pill { animation: pillPulse 2.4s ease-in-out infinite; }
+  .preview:not(.unlocked) .unlock-pill { animation: pillPulse 2.4s ease-in-out infinite; }
   @media (prefers-reduced-motion: reduce) {
     .preview .unlock-pill { animation: none; }
   }
@@ -582,11 +584,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     </div>
     <div class="preview-scrim" aria-hidden="true"></div>
     <button class="unlock-pill" id="unlockPill" type="button" aria-label="Tap to unlock">
-      <svg class="lock-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="lock-ico pill-ico-locked" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="4" y="11" width="16" height="10" rx="2"/>
         <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
       </svg>
-      Tap to unlock
+      <svg class="lock-ico pill-ico-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <path d="M7 17L17 7"/>
+        <path d="M9 7h8v8"/>
+      </svg>
+      <span id="unlockPillLabel">Tap to unlock</span>
     </button>
   </div>
   <div class="preview-dots" id="previewDots" aria-hidden="true">
@@ -642,7 +648,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
               <polyline points="5 12 10 17 19 8"/>
             </svg>
           </span>
-          <span id="successText">Unlocked. Also sent to your inbox.</span>
+          <span id="successText">Sent to your inbox. Open in Drive when you're ready.</span>
         </div>
         <a class="cta-primary" id="driveLink"
            href="https://drive.google.com/file/d/1tJsyRtTeOPaQ3-fwoFD34lkqICnxlZz9/view?usp=share_link"
@@ -728,10 +734,17 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     }
   };
 
-  // Tap-to-unlock: scroll the form into view and focus first input.
+  // The pill has two roles. Pre-unlock: scroll-to-form + AddToCart pixel.
+  // Post-unlock: open Drive in a new tab (state flipped in showSuccess()).
+  const unlockPillLabel = document.getElementById("unlockPillLabel");
   let revealed = false;
+  let unlocked = false;
   unlockPill.addEventListener("click", () => {
     haptic(8);
+    if (unlocked) {
+      window.open(driveHref, "_blank", "noopener,noreferrer");
+      return;
+    }
     freeCard.scrollIntoView({ behavior: "smooth", block: "center" });
     setTimeout(() => firstNameInput.focus({ preventScroll: true }), 280);
     if (!revealed) {
@@ -758,7 +771,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   };
 
   const showSuccess = () => {
-    // successText keeps its default "Unlocked. Also sent to your inbox."
+    // Flip the pill into "Open in Drive" mode (icon swap + label + click role).
+    unlocked = true;
+    unlockPill.setAttribute("aria-label", "Open in Google Drive");
+    unlockPillLabel.textContent = "Open in Drive";
+    unlockPill.querySelector(".pill-ico-locked").style.display = "none";
+    unlockPill.querySelector(".pill-ico-open").style.display = "";
     // Stage 1: fade the form area out (240ms via .fading class)
     planPre.classList.add("fading");
     // Stage 2: after fade, swap to the success block and animate it in
@@ -777,12 +795,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       haptic([20, 60, 20]);
       return;
     }
-
-    // Open Drive synchronously while the click gesture is still live.
-    // If we wait for the await fetch below, iOS Safari and IG's WKWebView
-    // block the popup. The fallback "Open in Google Drive" CTA in the
-    // success block covers users where the popup was blocked anyway.
-    window.open(driveHref, "_blank", "noopener,noreferrer");
 
     setBtnLoading(true);
     const firstName = firstNameInput.value.trim();
