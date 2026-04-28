@@ -148,8 +148,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     letter-spacing: -0.005em;
   }
 
-  /* Stacked sample pages. Clamp-height + scroll keeps the email form
-     visible above the fold; user scrolls inside to peek further pages.
+  /* Stacked sample pages. Aspect-ratio sized to ~2.3 pages so the third
+     page peeks below the bottom edge — telegraphs that the reader is
+     scrollable. Email form stays visible above the fold.
      Avoids iOS WKWebView's broken PDF-iframe rendering (ignores #view=FitH). */
   .reader {
     position: relative;
@@ -161,7 +162,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
-    height: clamp(380px, 60dvh, 540px);
+    aspect-ratio: 1 / 1.56;
+    max-height: 80dvh;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -380,7 +382,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       gap: 28px;
     }
     .px { padding-left: 40px; padding-right: 40px; }
-    .reader { margin-left: 0; margin-right: 0; height: clamp(460px, 64dvh, 660px); }
+    .reader { margin-left: 0; margin-right: 0; }
     h1 { font-size: 32px; letter-spacing: -0.035em; }
     p.lead { font-size: 16px; }
   }
@@ -434,11 +436,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <div class="plan-name">Save as PDF</div>
           <div class="plan-tag">For offline use on the trail</div>
         </div>
-        <div class="plan-price"><b>PDF</b></div>
+        <div class="plan-price"><b>Free</b></div>
       </div>
       <ul class="feat">
         <li><span class="ico">✓</span>High resolution file</li>
-        <li><span class="ico">✓</span>15/100+ spots</li>
+        <li><span class="ico">✓</span>15 of 100+ Swiss spots</li>
         <li><span class="ico">✓</span>Save to Files for offline Access</li>
       </ul>
 
@@ -583,6 +585,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
   saveForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    haptic(8);
     if (!saveForm.checkValidity()) {
       markValidity(firstNameInput);
       markValidity(emailInput);
@@ -625,6 +628,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   });
 
   const fireBuy = () => {
+    haptic(8);
     if (window.fbq) fbq("track", "InitiateCheckout", {
       content_name: "Swiss Hidden Gems",
       content_category: "Guide",
@@ -633,6 +637,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     });
   };
   document.getElementById("buyFullGuide").addEventListener("click", fireBuy);
+  document.getElementById("driveLink").addEventListener("click", () => haptic(8));
 </script>
 </body>
 </html>

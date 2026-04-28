@@ -631,7 +631,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <div class="plan-price"><b>Free</b></div>
         </div>
         <ul class="feat" id="featList">
-          <li><span class="ico">✓</span>15/100+ spots</li>
+          <li><span class="ico">✓</span>15 of 100+ Swiss spots</li>
           <li><span class="ico">✓</span>Unlocked instantly, also sent by email</li>
         </ul>
         <div class="success-row" id="sentRow" aria-live="polite" hidden>
@@ -836,6 +836,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
   unlockForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    haptic(8);
     // Post-success: button has been re-labeled "Open in Google Drive".
     // Hijack the submit and open Drive in a new tab instead.
     if (unlocked) {
@@ -891,6 +892,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
   // Pixel: track full-guide CTA clicks (always-visible upsell card)
   document.getElementById("buyFullGuide").addEventListener("click", () => {
+    haptic(8);
     if (window.fbq) fbq("track", "InitiateCheckout", {
       content_name: "Swiss Hidden Gems",
       content_category: "Guide",
