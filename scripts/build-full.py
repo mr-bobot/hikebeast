@@ -404,7 +404,12 @@ def render_home():
     <span>Hikebeast · Hidden Gems</span>
   </a>
   <span class="crumb">Full edition</span>
-  <div class="topbar-right"></div>
+  <div class="topbar-right">
+    <a class="pill" href="map/index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+      <span class="label-sm">Map view</span>
+    </a>
+  </div>
 </div>
 
 <main class="home-main">
@@ -440,6 +445,335 @@ def render_home():
 '''
     (DEST / 'index.html').write_text(page)
 
+# ───────────────────────── map data + page ─────────────────────────
+import re, json
+
+def render_map_page():
+    coord_re = re.compile(r'query=([\-0-9.]+),([\-0-9.]+)')
+    region_color = {}
+    for p in preface['preface_pages']:
+        if p['kind'] == 'map_summary':
+            for r in p['regions']:
+                rgb = ','.join(str(int(c * 255)) for c in r['color'])
+                region_color[r['number']] = rgb
+
+    parent_coords = {}
+    for ch_num, spots in chapter_spots.items():
+        for s in spots:
+            m = coord_re.search(s.get('maps_url', '') or '')
+            if m:
+                parent_coords[s['title']] = (float(m.group(1)), float(m.group(2)))
+
+    items = []
+    for ch_num, spots in chapter_spots.items():
+        slug = CHAPTER_SLUG[ch_num]
+        for s in spots:
+            m = coord_re.search(s.get('maps_url', '') or '')
+            if m:
+                lat, lon = float(m.group(1)), float(m.group(2))
+            elif s['title'].startswith('Rosenlaui ') and 'Rosenlaui' in parent_coords:
+                lat, lon = parent_coords['Rosenlaui']
+            else:
+                continue
+            spot_slug = ''.join(c if c.isalnum() else '-' for c in s['title'].lower()).strip('-')
+            while '--' in spot_slug:
+                spot_slug = spot_slug.replace('--', '-')
+            items.append({
+                'title': s['title'],
+                'kicker': s.get('kicker', ''),
+                'chapter': ch_num,
+                'chapter_slug': slug,
+                'lat': lat,
+                'lon': lon,
+                'image': img_name.get(s['image'], '') if 'image' in s else '',
+                'href': f'../{slug}/index.html#{spot_slug}',
+                'color': region_color.get(ch_num, '128,128,128'),
+            })
+
+    legend = [
+        {'number': ch['number'], 'name': ch['region'], 'color': region_color.get(ch['number'], '128,128,128')}
+        for ch in chapters
+    ]
+
+    map_dir = DEST / 'map'
+    map_dir.mkdir(parents=True, exist_ok=True)
+    (map_dir / 'spots-data.js').write_text(
+        f'window.SPOTS = {json.dumps(items, ensure_ascii=False)};\n'
+        f'window.LEGEND = {json.dumps(legend, ensure_ascii=False)};\n'
+    )
+
+    page = '''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Map · Hidden Gems · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="stylesheet" href="../preview.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<style>
+  body { background: #f5f5f7; }
+  .map-shell {
+    height: calc(100dvh - var(--topbar-h));
+    position: relative;
+  }
+  #map { height: 100%; width: 100%; background: #e7e7ea; }
+  .leaflet-container { font-family: inherit; }
+
+  .spot-marker { background: transparent; border: 0; }
+  .spot-marker .dot {
+    display: block;
+    width: 14px; height: 14px;
+    border-radius: 999px;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.30), 0 0 0 1px rgba(0,0,0,0.05);
+    transition: transform 150ms ease;
+  }
+  .spot-marker:hover .dot { transform: scale(1.5); }
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 18px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.20), 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .leaflet-popup-content { margin: 0; width: 240px !important; }
+  .leaflet-popup-tip { background: #fff; }
+
+  .spot-popup img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+  .spot-popup .body {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .spot-popup .kicker {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .spot-popup h3 {
+    margin: 2px 0 0;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    font-weight: 600;
+    color: var(--fg);
+  }
+  .spot-popup .meta {
+    font-size: 11px;
+    color: var(--muted);
+    margin: 4px 0 0;
+  }
+  .spot-popup a.read {
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    border-radius: 999px;
+    background: var(--fg);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .spot-tip {
+    background: rgba(255,255,255,0.96) !important;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--hairline) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.14) !important;
+    padding: 8px 12px !important;
+    color: var(--fg) !important;
+    font-size: 12.5px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.005em !important;
+    white-space: nowrap;
+  }
+  .leaflet-tooltip-top.spot-tip:before { display: none; }
+
+  .legend {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
+    z-index: 500;
+    background: rgba(255,255,255,0.94);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    backdrop-filter: saturate(180%) blur(14px);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    padding: 10px 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 220px;
+  }
+  .legend h4 {
+    margin: 0 0 4px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+    color: var(--fg);
+    line-height: 1.2;
+    padding: 4px 0;
+    background: transparent;
+    border: 0;
+    text-align: left;
+    font-family: inherit;
+  }
+  .legend-item.is-off { opacity: 0.35; }
+  .legend-item .swatch {
+    flex-shrink: 0;
+    width: 12px; height: 12px;
+    border-radius: 999px;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+  }
+
+  .counter {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 500;
+    background: rgba(255,255,255,0.94);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    backdrop-filter: saturate(180%) blur(14px);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  }
+  .counter b { color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../../images/avatar.jpg" alt="" />
+    <span>Hidden Gems · Map</span>
+  </a>
+  <span class="crumb">Map view</span>
+  <div class="topbar-right">
+    <a class="pill" href="../index.html">All chapters</a>
+  </div>
+</div>
+
+<div class="map-shell">
+  <div id="map"></div>
+  <div class="counter"><b id="visible">0</b>&nbsp;visible spots</div>
+  <aside class="legend" id="legend"><h4>Chapters · click to toggle</h4></aside>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="spots-data.js"></script>
+<script>
+  const map = L.map('map', { zoomControl: true, attributionControl: false })
+    .setView([46.82, 8.22], 8);
+  L.control.attribution({ position: 'bottomright', prefix: false })
+    .addAttribution('© OSM · CartoDB').addTo(map);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    subdomains: 'abcd', maxZoom: 19,
+  }).addTo(map);
+
+  const SPOTS = window.SPOTS || [];
+  const LEGEND = window.LEGEND || [];
+  const layers = new Map();
+  LEGEND.forEach(c => layers.set(c.number, L.layerGroup().addTo(map)));
+
+  function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  SPOTS.forEach(s => {
+    const icon = L.divIcon({
+      className: 'spot-marker',
+      html: '<span class="dot" style="background: rgb(' + s.color + ');"></span>',
+      iconSize: [14, 14],
+      iconAnchor: [7, 7],
+    });
+    const m = L.marker([s.lat, s.lon], { icon })
+      .bindTooltip(esc(s.title), { className: 'spot-tip', direction: 'top', offset: [0, -8], opacity: 1 })
+      .bindPopup(`
+        <div class="spot-popup">
+          ${s.image ? '<img src="../img/' + s.image + '" alt="" />' : ''}
+          <div class="body">
+            <p class="kicker">${esc(s.kicker || ('Chapter ' + s.chapter))}</p>
+            <h3>${esc(s.title)}</h3>
+            <p class="meta">${esc(s.chapter_slug.charAt(0).toUpperCase() + s.chapter_slug.slice(1))} Switzerland</p>
+            <a class="read" href="${s.href}">Read</a>
+          </div>
+        </div>
+      `, { maxWidth: 240, minWidth: 240 });
+    const grp = layers.get(s.chapter);
+    if (grp) grp.addLayer(m);
+  });
+
+  const visEl = document.getElementById('visible');
+  function updateCount() {
+    let n = 0;
+    layers.forEach(g => { if (map.hasLayer(g)) n += g.getLayers().length; });
+    visEl.textContent = n;
+  }
+  updateCount();
+
+  const legend = document.getElementById('legend');
+  LEGEND.forEach(c => {
+    const item = document.createElement('button');
+    item.className = 'legend-item';
+    item.innerHTML = '<span class="swatch" style="background: rgb(' + c.color + ');"></span>'
+      + '<span>' + c.number + ' · ' + esc(c.name) + '</span>';
+    item.addEventListener('click', () => {
+      const grp = layers.get(c.number);
+      if (!grp) return;
+      if (map.hasLayer(grp)) {
+        map.removeLayer(grp);
+        item.classList.add('is-off');
+      } else {
+        grp.addTo(map);
+        item.classList.remove('is-off');
+      }
+      updateCount();
+    });
+    legend.appendChild(item);
+  });
+</script>
+</body>
+</html>
+'''
+    (map_dir / 'index.html').write_text(page)
+    print(f'Map page generated with {len(items)} mapped spots')
+
 # ───────────────────────── go ─────────────────────────
 print('Generating home...')
 render_home()
@@ -459,3 +793,7 @@ for ch in chapters:
     slug = CHAPTER_SLUG[ch['number']]
     n = len(chapter_spots[ch['number']])
     print(f'  {slug}/index.html ({n + 1} cards including chapter cover)')
+
+print()
+print('Generating map page...')
+render_map_page()
