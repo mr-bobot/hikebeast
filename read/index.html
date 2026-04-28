@@ -398,9 +398,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
 <main>
   <header class="px hero">
-    <p class="kicker">Swiss Hidden Gems · Free sample</p>
-    <h1>Read it right here.</h1>
-    <p class="lead">Scroll through the full sample below. Drop your email to save a copy.</p>
+    <p class="kicker">Free sample · Swiss Hidden Gems</p>
+    <h1>Switzerland beyond the tourist map.</h1>
+    <p class="lead">15/100+ spots from my private guide. Scroll through the sample below or drop your email if I should send you a copy.</p>
   </header>
 
   <div class="reader" id="reader" aria-label="Swiss Hidden Gems sample · read">
@@ -560,15 +560,32 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     if (e.key === "Enter") { e.preventDefault(); emailInput.focus(); }
   });
 
+  // Animated dots cycle "." → ".." → "..." → "" → repeat while the request
+  // is in flight. Same pattern as /sample/.
+  let loadingTimer = null;
+  const stopLoadingTimer = () => {
+    if (loadingTimer) { clearInterval(loadingTimer); loadingTimer = null; }
+  };
   const setBtnLoading = (loading) => {
-    saveBtn.disabled = loading;
-    saveBtn.textContent = loading ? "Sending…" : "Send me the PDF";
+    if (loading) {
+      saveBtn.disabled = true;
+      const frames = ["Sending.", "Sending..", "Sending...", "Sending"];
+      let i = 0;
+      saveBtn.textContent = frames[0];
+      stopLoadingTimer();
+      loadingTimer = setInterval(() => {
+        i = (i + 1) % frames.length;
+        saveBtn.textContent = frames[i];
+      }, 350);
+    } else {
+      stopLoadingTimer();
+      saveBtn.disabled = false;
+      saveBtn.textContent = "Send me the PDF";
+    }
   };
 
-  const showSuccess = (firstName) => {
-    if (firstName) {
-      successText.textContent = "Sent, " + firstName + ". Check your inbox for the PDF.";
-    }
+  const showSuccess = () => {
+    stopLoadingTimer();
     // Stage 1: fade the form area out
     saveForm.classList.add("fading");
     // Stage 2: swap to the success block and animate it in
@@ -619,7 +636,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       }
 
       haptic([10, 40, 10]);
-      showSuccess(firstName);
+      showSuccess();
     } catch {
       setBtnLoading(false);
       saveBtn.textContent = "Try again";
