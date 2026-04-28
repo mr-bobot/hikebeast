@@ -139,6 +139,13 @@ export default async function handler(req, res) {
   const membershipId = pick(data, "membership_id", "membership.id") || "";
   const paymentId = pick(data, "id", "payment_id") || "";
 
+  // Cohort attribution: forwarded by /api/buy as ?metadata[t]= and ?metadata[s]=
+  // Surfaced by Whop on the membership (and sometimes on the order/checkout).
+  const metaToken =
+    pick(data, "metadata.t", "membership.metadata.t", "order.metadata.t", "checkout.metadata.t") || "";
+  const metaSubscriber =
+    pick(data, "metadata.s", "membership.metadata.s", "order.metadata.s", "checkout.metadata.s") || "";
+
   await logPurchase({
     email,
     amount,
@@ -150,5 +157,7 @@ export default async function handler(req, res) {
     payment_id: paymentId,
     event_id: id,
     paid_at: new Date(Number(timestamp) * 1000).toISOString(),
+    metadata_t: metaToken,
+    metadata_s: metaSubscriber,
   });
 }

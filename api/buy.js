@@ -1,10 +1,18 @@
-const WHOP = "https://whop.com/gorped/hidden-gems-switzerland-e8/";
+const WHOP_CHECKOUT = "https://whop.com/checkout/plan_OZLoghRHZpIcZ";
+
+function buildCheckoutUrl({ token, subscriberId }) {
+  const params = new URLSearchParams();
+  if (token) params.set("metadata[t]", token);
+  if (subscriberId) params.set("metadata[s]", subscriberId);
+  const qs = params.toString();
+  return qs ? `${WHOP_CHECKOUT}?${qs}` : WHOP_CHECKOUT;
+}
 
 export default async function handler(req, res) {
   const { t: token, s: subscriberId } = req.query;
 
   res.setHeader("Cache-Control", "no-store");
-  res.redirect(302, WHOP);
+  res.redirect(302, buildCheckoutUrl({ token, subscriberId }));
 
   const url = process.env.SHEETS_WEBHOOK_URL;
   if (!url) return;
