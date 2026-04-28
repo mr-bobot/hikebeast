@@ -370,12 +370,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     display: flex;
     flex-direction: column;
     gap: 18px;
-    transition: opacity 240ms ease, transform 240ms ease;
-  }
-  .plan-pre.fading {
-    opacity: 0;
-    transform: translateY(-4px);
-    pointer-events: none;
   }
 
   /* Buttons */
@@ -445,20 +439,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     letter-spacing: 0;
   }
 
-  /* Success state — replaces the form, lives inside the same plan card.
-     Animated cross-fade with the plan-pre block for a smooth state swap. */
-  .success {
-    display: none;
-    flex-direction: column;
-    gap: 14px;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 320ms ease, transform 320ms ease;
-  }
-  .success.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* Inline "Sent" message — slots into the form between bullets and CTA
+     after submit; the form's inputs hide and the button text swaps to
+     "Open in Google Drive". No full-card swap. */
   .success-row {
     display: flex;
     align-items: center;
@@ -615,7 +598,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <li><span class="ico">✓</span>Unlocked instantly, also sent by email</li>
         </ul>
 
-      <form class="unlock-form" id="unlockForm" action="/api/sample" method="POST" novalidate>
+      <form class="unlock-form" id="unlockForm" action="/api/sample" method="POST" novalidate
+            data-drive-href="https://drive.google.com/file/d/1tJsyRtTeOPaQ3-fwoFD34lkqICnxlZz9/view?usp=share_link">
         <input
           id="firstName"
           name="given-name"
@@ -636,24 +620,18 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           required
           placeholder="Email address" />
         <input type="hidden" id="subscriberId" name="subscriber_id" value="" />
-        <button class="cta-primary" id="unlockBtn" type="submit">Unlock the sample</button>
-        <p class="fineprint">No spam. Unsubscribe anytime.</p>
-      </form>
-      </div><!-- /.plan-pre -->
-
-      <div class="success" id="success" aria-live="polite">
-        <div class="success-row">
+        <div class="success-row" id="sentRow" aria-live="polite" hidden>
           <span class="success-check" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="5 12 10 17 19 8"/>
             </svg>
           </span>
-          <span id="successText">Sent to your inbox. Open in Drive when you're ready.</span>
+          <span>Sent to your inbox.</span>
         </div>
-        <a class="cta-primary" id="driveLink"
-           href="https://drive.google.com/file/d/1tJsyRtTeOPaQ3-fwoFD34lkqICnxlZz9/view?usp=share_link"
-           target="_blank" rel="noopener">Open in Google Drive</a>
-      </div>
+        <button class="cta-primary" id="unlockBtn" type="submit">Unlock the sample</button>
+        <p class="fineprint" id="fineprint">No spam. Unsubscribe anytime.</p>
+      </form>
+      </div><!-- /.plan-pre -->
     </div>
 
     <!-- Full plan · always visible, same component as /free/ -->
@@ -692,16 +670,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   const preview = document.getElementById("preview");
   const previewTrack = document.getElementById("previewTrack");
   const unlockPill = document.getElementById("unlockPill");
-  const driveHref = document.getElementById("driveLink").getAttribute("href");
   const freeCard = document.getElementById("freeCard");
   const planPre = document.getElementById("planPre");
   const unlockForm = document.getElementById("unlockForm");
+  const driveHref = unlockForm.dataset.driveHref;
   const unlockBtn = document.getElementById("unlockBtn");
   const firstNameInput = document.getElementById("firstName");
   const emailInput = document.getElementById("email");
   const subscriberInput = document.getElementById("subscriberId");
-  const successEl = document.getElementById("success");
-  const successText = document.getElementById("successText");
+  const sentRow = document.getElementById("sentRow");
+  const fineprint = document.getElementById("fineprint");
 
   const params = new URLSearchParams(window.location.search);
   const utmSource = params.get("utm_source") || "";
@@ -765,30 +743,58 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     if (e.key === "Enter") { e.preventDefault(); emailInput.focus(); }
   });
 
+  // Animated dots cycle "Unlocking..." → ".." → "." while the request is in
+  // flight, so the user sees the button is doing something. Cleared by
+  // showSuccess() or the catch branch below.
+  let loadingTimer = null;
+  const stopLoadingTimer = () => {
+    if (loadingTimer) { clearInterval(loadingTimer); loadingTimer = null; }
+  };
   const setBtnLoading = (loading) => {
-    unlockBtn.disabled = loading;
-    unlockBtn.textContent = loading ? "Unlocking…" : "Unlock the sample";
+    if (loading) {
+      unlockBtn.disabled = true;
+      const frames = ["Unlocking...", "Unlocking..", "Unlocking."];
+      let i = 0;
+      unlockBtn.textContent = frames[0];
+      stopLoadingTimer();
+      loadingTimer = setInterval(() => {
+        i = (i + 1) % frames.length;
+        unlockBtn.textContent = frames[i];
+      }, 350);
+    } else {
+      stopLoadingTimer();
+      unlockBtn.disabled = false;
+      unlockBtn.textContent = "Unlock the sample";
+    }
   };
 
   const showSuccess = () => {
+    stopLoadingTimer();
     // Flip the pill into "Open in Drive" mode (icon swap + label + click role).
     unlocked = true;
     unlockPill.setAttribute("aria-label", "Open in Google Drive");
     unlockPillLabel.textContent = "Open in Drive";
     unlockPill.querySelector(".pill-ico-locked").style.display = "none";
     unlockPill.querySelector(".pill-ico-open").style.display = "";
-    // Stage 1: fade the form area out (240ms via .fading class)
-    planPre.classList.add("fading");
-    // Stage 2: after fade, swap to the success block and animate it in
-    setTimeout(() => {
-      planPre.style.display = "none";
-      successEl.style.display = "flex";
-      requestAnimationFrame(() => successEl.classList.add("show"));
-    }, 240);
+    // In-place form transformation: hide the inputs + fineprint, reveal the
+    // sent-row, swap button copy to "Open in Google Drive". Bullet points
+    // and card head stay exactly as they were.
+    firstNameInput.style.display = "none";
+    emailInput.style.display = "none";
+    fineprint.style.display = "none";
+    sentRow.hidden = false;
+    unlockBtn.disabled = false;
+    unlockBtn.textContent = "Open in Google Drive";
   };
 
   unlockForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    // Post-success: button has been re-labeled "Open in Google Drive".
+    // Hijack the submit and open Drive in a new tab instead.
+    if (unlocked) {
+      window.open(driveHref, "_blank", "noopener,noreferrer");
+      return;
+    }
     if (!unlockForm.checkValidity()) {
       markValidity(firstNameInput);
       markValidity(emailInput);
