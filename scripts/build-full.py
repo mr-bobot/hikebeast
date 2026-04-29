@@ -1,110 +1,142 @@
 #!/usr/bin/env python3
-"""Generate the /full/ webapp from spots.yaml + preface.yaml.
+"""Generate the /full/ webapp from the Hidden Gems rebuild content.yaml.
 
-Reads source content from the Hiking Influencer Claude project, copies +
-resizes images, and writes home + intro + 7 chapter pages under
-/preview/'s style. Re-uses preview.css + preview.js verbatim.
+Reads:
+  ~/Documents/Claude/Projects/Hiking Influencer/rebuild/content.yaml
+  ~/Documents/Claude/Projects/Hiking Influencer/rebuild/credits.yaml
+  ~/Documents/Claude/Projects/Hiking Influencer/rebuild/images/...
+
+Writes the home, intro, 7 chapter pages, and the map under /full/.
+Images are copied + resized to /full/img/. Re-uses preview.css/.js verbatim.
 """
-import yaml, shutil, subprocess, html
+import yaml, shutil, subprocess, html, json, re
 from pathlib import Path
 
-SRC = Path('/Users/lost/Documents/Claude/Projects/Hiking Influencer/output')
+REBUILD = Path('/Users/lost/Documents/Claude/Projects/Hiking Influencer/rebuild')
+IMAGES_SRC = REBUILD / 'images'
 DEST = Path('/Users/lost/Documents/Development/Hikebeast/full')
 PREVIEW = Path('/Users/lost/Documents/Development/Hikebeast/preview')
 DEST_IMG = DEST / 'img'
 
-CHAPTER_SLUG = {
-    '01': 'central',
-    '02': 'valais',
-    '03': 'fribourg',
-    '04': 'western',
-    '05': 'eastern',
-    '06': 'ticino',
-    '07': 'beyond',
+content = yaml.safe_load((REBUILD / 'content.yaml').read_text())
+credits = yaml.safe_load((REBUILD / 'credits.yaml').read_text())
+
+CHAPTERS = content['chapters']
+SPOTS_ALL = content['spots']
+FRONT_MATTER = content['front_matter']
+COVER = content['cover']
+AUTHOR = content['author']
+
+# Slug → human label for sidebar
+SLUG_LABEL = {
+    'intro':    'Intro',
+    'central':  'Central',
+    'valais':   'Valais',
+    'fribourg': 'Fribourg',
+    'western':  'Western',
+    'eastern':  'Eastern',
+    'ticino':   'Ticino',
+    'beyond':   'Beyond',
 }
-SLUG_NAMES = {  # short labels for sidebar
-    'intro':   'Intro',
-    'central': 'Central',
-    'valais':  'Valais',
-    'fribourg':'Fribourg',
-    'western': 'Western',
-    'eastern': 'Eastern',
-    'ticino':  'Ticino',
-    'beyond':  'Beyond',
+
+# Override which photo each chapter uses on the home page card.
+# Value is a content.yaml-relative image path; '__custom__' keeps a file
+# already present at /full/img/<slug>-thumb.jpg.
+CHAPTER_THUMB = {
+    'central':  'spots/central/tannhorn.jpg',
+    'valais':   'spots/valais/ig_zermatt_matterhorn.jpg',
+    'fribourg': None,
+    'western':  'spots/leman/cap_au_moine.jpg',
+    'eastern':  '__custom__',
+    'ticino':   None,
+    'beyond':   'spots/beyond/les_cheserys.jpg',
 }
+
 WHOP = 'https://whop.com/gorped/hidden-gems-switzerland-e8/'
 
-# ───────────────────────── load source ─────────────────────────
-data = yaml.safe_load((SRC / 'content/spots.yaml').read_text())
-preface = yaml.safe_load((SRC / 'content/preface.yaml').read_text())
-chapters = data['chapters']
-spots_all = data['spots']
+# ───────────────────────── group spots by chapter ─────────────────────────
+# YAML order is canonical now -- spots: is one flat list in order. Just
+# split by chapter and keep order.
+chapter_spots = {ch['id']: [] for ch in CHAPTERS}
+for s in SPOTS_ALL:
+    if s.get('chapter') in chapter_spots:
+        chapter_spots[s['chapter']].append(s)
 
-# Group spots by chapter, in canonical order from spots_grid; drop dupes.
-chapter_spots = {}
-for ch in chapters:
-    by_title = {}
-    for s in spots_all:
-        if s.get('chapter') == ch['number'] and s['title'] not in by_title:
-            by_title[s['title']] = s
-    ordered = []
-    for t in ch['spots_grid']:
-        if t in by_title:
-            ordered.append(by_title[t])
-    chapter_spots[ch['number']] = ordered
+# ───────────────────────── credits resolver ─────────────────────────
+PHOTOGRAPHERS = credits.get('photographers', {})
+EXTERNAL = credits.get('external', {})
 
-# ───────────────────────── images ─────────────────────────
+def credit_text(key):
+    """Returns the rendered credit string or '' to suppress the pill."""
+    if not key or key in ('xxx', 'placeholder'):
+        return ''
+    if key in PHOTOGRAPHERS:
+        return f'@{key}'
+    if key in EXTERNAL:
+        e = EXTERNAL[key]
+        src = e.get('source', '')
+        name = e.get('name', '')
+        return f'{src} / {name}' if src and name else (src or name)
+    return ''
+
+# ───────────────────────── image queueing ─────────────────────────
 DEST_IMG.mkdir(parents=True, exist_ok=True)
-img_refs = []
-img_name = {}  # source rel path → dest filename
-basename_seen = {}  # detect collisions
+img_refs = []         # list of (src_abs, dest_abs)
+img_name = {}         # rel path under images/ → dest filename
+basename_seen = {}
 
-def queue(src_rel):
-    src = SRC / 'assets' / src_rel
+def queue(rel_path):
+    if not rel_path:
+        return None
+    src = IMAGES_SRC / rel_path
     if not src.exists():
         return None
-    base = Path(src_rel).name
-    if base in basename_seen and basename_seen[base] != src_rel:
-        base = src_rel.replace('/', '-')
-    basename_seen[base] = src_rel
-    img_name[src_rel] = base
+    base = Path(rel_path).name
+    if base in basename_seen and basename_seen[base] != rel_path:
+        # collision -- prefix with parent folder name
+        base = rel_path.replace('/', '-')
+    basename_seen[base] = rel_path
+    img_name[rel_path] = base
     img_refs.append((src, DEST_IMG / base))
     return base
 
+# Cover
+queue(COVER.get('image'))
 # Chapter covers
-for ch in chapters:
-    queue(ch['cover_image'])
+for ch in CHAPTERS:
+    queue(ch.get('cover_image'))
 # Spot images
-for ch_num, spots in chapter_spots.items():
-    for s in spots:
-        if 'image' in s: queue(s['image'])
-# Preface images
-for p in preface['preface_pages']:
-    if 'image' in p: queue(p['image'])
-# Top-six tile images (referenced inside top_six_grid spots field)
-for p in preface['preface_pages']:
-    if p['kind'] == 'top_six_grid':
-        for s in p.get('spots', []):
-            if 'image' in s: queue(s['image'])
+for s in SPOTS_ALL:
+    if s.get('image'):
+        queue(s['image'])
+    if s.get('kind') == 'spread':
+        for p in s.get('images', []):
+            queue(p.get('src'))
+# Front matter images
+for fm in FRONT_MATTER:
+    if fm.get('image'):
+        queue(fm['image'])
+    if fm['kind'] == 'top_six':
+        for t in fm.get('tiles', []):
+            queue(t.get('image'))
 
-print(f'Queueing {len(img_refs)} images')
+print(f'Queued {len(img_refs)} images')
 copied = 0
-for src, dest in img_refs:
-    if not dest.exists():
-        shutil.copy(src, dest)
+for src, dst in img_refs:
+    if not dst.exists():
+        shutil.copy(src, dst)
         copied += 1
 print(f'Copied {copied} new images, {len(img_refs)-copied} already present')
 
-# Resize all (idempotent — sips is no-op when already small)
-print('Resizing...')
+# Resize all (idempotent)
 for img in DEST_IMG.glob('*.jpg'):
     subprocess.run(
         ['sips', '-Z', '1800', '-s', 'format', 'jpeg',
          '-s', 'formatOptions', '78', str(img), '--out', str(img)],
         capture_output=True)
-print(f'Done. {len(list(DEST_IMG.glob("*.jpg")))} images in {DEST_IMG}')
+print(f'{len(list(DEST_IMG.glob("*.jpg")))} JPEGs in {DEST_IMG}')
 
-# ───────────────────────── shared CSS/JS ─────────────────────────
+# Copy shared CSS / JS
 shutil.copy(PREVIEW / 'preview.css', DEST / 'preview.css')
 shutil.copy(PREVIEW / 'preview.js', DEST / 'preview.js')
 
@@ -113,31 +145,32 @@ def esc(s):
     if s is None: return ''
     return html.escape(str(s), quote=True)
 
-def img_src_for(src_rel, depth=2):
-    """Resolve to e.g. ../img/foo.jpg from a chapter subpage."""
-    name = img_name.get(src_rel)
-    if not name: return ''
-    return ('../' * (depth-1)) + 'img/' + name
+def img_url(rel_path, depth=2):
+    if not rel_path or rel_path not in img_name:
+        return ''
+    return ('../' * (depth - 1)) + 'img/' + img_name[rel_path]
+
+def slugify(s):
+    out = re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-')
+    return out
 
 LOCK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
 HOME_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg>'
-PIN_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>'
+PIN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>'
 
 def render_sidebar(current_slug):
     items = []
     items.append(f'  <a class="sb-home" href="../index.html" title="Home">{HOME_SVG}</a>')
     # Intro thumb
-    intro_img = img_src_for('cover_pages/hidden_gems_cover.jpg', 2)
+    intro_src = 'front_matter/page_05.jpg' if 'front_matter/page_05.jpg' in img_name else 'cover/hidden_gems_cover.jpg'
     cur = ' is-current' if current_slug == 'intro' else ''
     items.append(f'  <a class="sb-thumb{cur}" href="../intro/index.html" title="Front matter">'
-                 f'<img src="{intro_img}" alt="" /><span class="lbl">Intro</span></a>')
-    # 7 chapters
-    for ch in chapters:
-        slug = CHAPTER_SLUG[ch['number']]
-        cur = ' is-current' if current_slug == slug else ''
-        thumb = img_src_for(ch['cover_image'], 2)
-        items.append(f'  <a class="sb-thumb{cur}" href="../{slug}/index.html" title="{esc(ch["region"])}">'
-                     f'<img src="{thumb}" alt="" /><span class="lbl">{esc(SLUG_NAMES[slug])}</span></a>')
+                 f'<img src="{img_url(intro_src, 2)}" alt="" /><span class="lbl">Intro</span></a>')
+    for ch in CHAPTERS:
+        cur = ' is-current' if current_slug == ch['id'] else ''
+        thumb = img_url(ch['cover_image'], 2)
+        items.append(f'  <a class="sb-thumb{cur}" href="../{ch["id"]}/index.html" title="{esc(ch["name"])}">'
+                     f'<img src="{thumb}" alt="" /><span class="lbl">{esc(SLUG_LABEL[ch["id"]])}</span></a>')
     return '<aside class="sidebar" aria-label="Chapters">\n' + '\n'.join(items) + '\n</aside>'
 
 def render_topbar(label, total):
@@ -148,7 +181,7 @@ def render_topbar(label, total):
   </a>
   <span class="crumb"><b id="crumbCur">1</b> / <span id="crumbTotal">{total}</span></span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">All chapters</a>
+    <a class="pill" href="../index.html">Overview</a>
   </div>
 </div>'''
 
@@ -171,36 +204,41 @@ def page_head(title):
 '''
 
 # ───────────────────────── slide renderers ─────────────────────────
-def render_chapter_cover(ch, depth=2):
-    img = img_src_for(ch['cover_image'], depth)
+def render_chapter_cover(ch):
+    img = img_url(ch['cover_image'], 2)
     return f'''<section class="slide slide-cover" id="cover">
   <img class="cv-img" src="{img}" alt="" />
   <div class="cv-content">
     <p class="cv-kicker">Chapter {esc(ch["number"])} · Region</p>
-    <h1>{esc(ch["region"])}</h1>
+    <h1>{esc(ch["name"])}</h1>
     <p class="cv-deck">{esc(ch["intro"])}</p>
   </div>
 </section>'''
 
-def render_spot(s, depth=2):
-    img = img_src_for(s['image'], depth) if 'image' in s else ''
+def render_spot(s):
+    img = img_url(s.get('image', ''), 2)
     body_html = '\n          '.join(f'<p>{esc(p)}</p>' for p in s.get('body', []))
+    specs = []
+    if s.get('region'):     specs.append(('Region',     s['region']))
+    if s.get('access'):     specs.append(('Access',     s['access']))
+    if s.get('effort'):     specs.append(('Effort',     s['effort']))
+    if s.get('best_light'): specs.append(('Best light', s['best_light']))
     specs_html = '\n          '.join(
-        f'<div class="spec"><span class="lbl">{esc(spec["label"])}</span><span class="val">{esc(spec["value"])}</span></div>'
-        for spec in s.get('specs', []))
+        f'<div class="spec"><span class="lbl">{esc(lbl)}</span><span class="val">{esc(val)}</span></div>'
+        for lbl, val in specs)
     maps_url = s.get('maps_url', '')
-    credit = s.get('photo_credit', '')
+    cred = credit_text(s.get('image_credit', ''))
     foot_left = (
-        f'<a class="locked" href="{esc(maps_url)}" target="_blank" rel="noopener" style="color:var(--accent);font-weight:500;">'
-        f'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
-        f'<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>'
-        f'Open in Maps</a>'
+        f'<a class="locked" href="{esc(maps_url)}" target="_blank" rel="noopener" '
+        f'style="color:var(--accent);font-weight:500;">{PIN_SVG}Open in Maps</a>'
     ) if maps_url else ''
-    foot_right = f'<span class="credit">Photo · {esc(credit)}</span>' if credit else ''
-    slug = ''.join(c if c.isalnum() else '-' for c in s['title'].lower()).strip('-')
-    while '--' in slug: slug = slug.replace('--', '-')
-    return f'''<section class="slide slide-spot" id="{slug}">
-  <div class="sp-photo"><img src="{img}" alt="{esc(s["title"])}" /></div>
+    credit_pill = f'<span class="credit-pill">Photo · {esc(cred)}</span>' if cred else ''
+    spot_id = s.get('id') or slugify(s['title'])
+    return f'''<section class="slide slide-spot" id="{spot_id}">
+  <div class="sp-photo">
+    <img src="{img}" alt="{esc(s["title"])}" />
+    {credit_pill}
+  </div>
   <div class="sp-body">
     <p class="sp-kicker">{esc(s.get("kicker", ""))}</p>
     <h2 class="sp-title">{esc(s["title"])}</h2>
@@ -213,31 +251,69 @@ def render_spot(s, depth=2):
     </div>
     <div class="sp-foot">
       {foot_left}
-      {foot_right}
     </div>
   </div>
 </section>'''
 
-def render_preface_page(p, depth=2):
-    """Dispatches by `kind`."""
-    kind = p['kind']
-    if kind == 'cover':
-        img = img_src_for(p['image'], depth) if 'image' in p else ''
-        return f'''<section class="slide slide-cover" id="cover">
+def render_spread(s):
+    spot_id = s.get('id') or (slugify(s['title']) + '-spread')
+    cells = []
+    for p in s.get('images', []):
+        url = img_url(p.get('src', ''), 2)
+        cred = credit_text(p.get('credit', ''))
+        pill = f'<span class="credit-pill">Photo · {esc(cred)}</span>' if cred else ''
+        cells.append(f'<div class="sp-photo"><img src="{url}" alt="" />{pill}</div>')
+    return f'<section class="slide slide-spread" id="{spot_id}">\n  ' + '\n  '.join(cells) + '\n</section>'
+
+def render_extras(s):
+    cells = '\n        '.join(
+        f'<div class="plan-cell"><span class="num">·</span>'
+        f'<div><h3>{esc(c["heading"])}</h3><p>{esc(c.get("text",""))}</p></div></div>'
+        for c in s.get('entries', []))
+    spot_id = s.get('id') or slugify(s['title'])
+    return f'''<section class="slide slide-preface no-photo" id="{spot_id}">
+  <div class="pf-body">
+    <p class="sp-kicker">{esc(s.get("kicker", ""))}</p>
+    <h2 class="sp-title">{esc(s["title"])}</h2>
+    <p class="sp-deck">{esc(s.get("deck", ""))}</p>
+  </div>
+  <div class="pf-extras">
+    <div class="plan-grid">
+        {cells}
+    </div>
+  </div>
+</section>'''
+
+def render_card(s):
+    kind = s.get('kind', 'spot')
+    if kind == 'spread': return render_spread(s)
+    if kind == 'extras': return render_extras(s)
+    return render_spot(s)
+
+# ───────────────────────── front matter renderers ─────────────────────────
+def render_intro_cover():
+    img = img_url(COVER.get('image', ''), 2)
+    avatar = '../../images/avatar.jpg'
+    return f'''<section class="slide slide-cover" id="cover">
   <img class="cv-img" src="{img}" alt="" />
   <div class="cv-content">
     <p class="cv-kicker">A Switzerland Field Guide</p>
-    <h1>{esc(p["title"])}</h1>
-    <p class="cv-deck">{esc(p.get("subtitle", ""))}</p>
-    <div class="cv-author"><img src="../../images/avatar.jpg" alt="" /><span>By Leon Helg · Hikebeast</span></div>
+    <h1>{esc(COVER.get("title", "Hidden Gems"))}</h1>
+    <p class="cv-deck">{esc(COVER.get("subtitle", ""))}</p>
+    <div class="cv-author">
+      <img src="{avatar}" alt="" /><span>By {esc(AUTHOR.get("name", "Leon Helg"))} · Hikebeast</span>
+    </div>
   </div>
 </section>'''
-    if kind == 'ethos':
-        img = img_src_for(p['image'], depth) if 'image' in p else ''
-        body_html = '\n          '.join(f'<p>{esc(b)}</p>' for b in p.get('body', []))
-        photo_block = f'<div class="pf-photo"><img src="{img}" alt="" /></div>' if img else ''
-        no_photo = '' if img else ' no-photo'
-        return f'''<section class="slide slide-preface{no_photo}">
+
+def render_ethos(p):
+    img = img_url(p.get('image', ''), 2)
+    cred = credit_text(p.get('image_credit', ''))
+    pill = f'<span class="credit-pill">Photo · {esc(cred)}</span>' if cred else ''
+    body_html = '\n          '.join(f'<p>{esc(b)}</p>' for b in p.get('body', []))
+    photo_block = f'<div class="pf-photo"><img src="{img}" alt="" />{pill}</div>' if img else ''
+    no_photo = '' if img else ' no-photo'
+    return f'''<section class="slide slide-preface{no_photo}" id="{p.get("id","")}">
   {photo_block}
   <div class="pf-body">
     <p class="sp-kicker">{esc(p.get("kicker", ""))}</p>
@@ -248,12 +324,13 @@ def render_preface_page(p, depth=2):
     </div>
   </div>
 </section>'''
-    if kind == 'four_col':
-        cells = '\n        '.join(
-            f'<div class="plan-cell"><span class="num">{esc(c["number"])}</span>'
-            f'<div><h3>{esc(c["heading"])}</h3><p>{esc(c["text"])}</p></div></div>'
-            for c in p.get('columns', []))
-        return f'''<section class="slide slide-preface no-photo">
+
+def render_four_col(p):
+    cells = '\n        '.join(
+        f'<div class="plan-cell"><span class="num">{esc(c["number"])}</span>'
+        f'<div><h3>{esc(c["heading"])}</h3><p>{esc(c.get("text",""))}</p></div></div>'
+        for c in p.get('columns', []))
+    return f'''<section class="slide slide-preface no-photo" id="{p.get("id","")}">
   <div class="pf-body">
     <p class="sp-kicker">{esc(p.get("kicker", ""))}</p>
     <h2 class="sp-title">{esc(p["title"])}</h2>
@@ -265,22 +342,22 @@ def render_preface_page(p, depth=2):
     </div>
   </div>
 </section>'''
-    if kind == 'top_six_grid':
-        is_hidden = 'hidden' in p['title'].lower()
-        cls = 'grid-six blurred' if is_hidden else 'grid-six'
-        tiles = '\n          '.join(
-            f'<div class="gem"><img src="{img_src_for(s["image"], depth)}" alt="" />'
-            f'<div class="gem-name">{esc("█" * len(s["name"]) if is_hidden else s["name"])}</div></div>'
-            for s in p.get('spots', []))
-        overlay = ''
-        if is_hidden:
-            overlay = f'''<div class="blurred-overlay">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+
+def render_top_six(p):
+    is_hidden = 'hidden' in p['title'].lower()
+    cls = 'grid-six blurred' if is_hidden else 'grid-six'
+    tiles = '\n          '.join(
+        f'<div class="gem"><img src="{img_url(t["image"], 2)}" alt="" />'
+        f'<div class="gem-name">{esc("█" * len(t["name"]) if is_hidden else t["name"])}</div></div>'
+        for t in p.get('tiles', []))
+    overlay = ''
+    if is_hidden:
+        overlay = f'''<div class="blurred-overlay">
+            {LOCK_SVG}
             <p>The full guide reveals all six.</p>
             <a href="{WHOP}" target="_blank" rel="noopener">Unlock</a>
           </div>'''
-        return f'''<section class="slide slide-preface no-photo">
+    return f'''<section class="slide slide-preface no-photo" id="{p.get("id","")}">
   <div class="pf-body">
     <p class="sp-kicker">{esc(p.get("kicker", ""))}</p>
     <h2 class="sp-title">{esc(p["title"])}</h2>
@@ -293,18 +370,21 @@ def render_preface_page(p, depth=2):
         {overlay}
   </div>
 </section>'''
-    if kind == 'map_summary':
-        items = []
-        for r in p.get('regions', []):
-            color_arr = r.get('color', [0.5, 0.5, 0.5])
-            r_rgb = ','.join(str(int(c * 255)) for c in color_arr)
-            items.append(
-                f'<div class="ms-item">'
-                f'<span class="ms-bar" style="background:rgb({r_rgb});"></span>'
-                f'<div class="ms-text"><b>{esc(r["number"])} · {esc(r["name"])}</b>'
-                f'<span>{esc(r.get("description",""))}</span></div></div>')
-        items_html = '\n          '.join(items)
-        return f'''<section class="slide slide-preface no-photo">
+
+def render_map_summary(p):
+    chapters_by_id = {c['id']: c for c in CHAPTERS}
+    items = []
+    for ch_id in p.get('region_order', []):
+        ch = chapters_by_id.get(ch_id)
+        if not ch: continue
+        rgb = ','.join(str(int(c * 255)) for c in ch['color'])
+        items.append(
+            f'<div class="ms-item">'
+            f'<span class="ms-bar" style="background:rgb({rgb});"></span>'
+            f'<div class="ms-text"><b>{esc(ch["number"])} · {esc(ch["name"])}</b>'
+            f'<span>{esc(ch.get("description",""))}</span></div></div>')
+    items_html = '\n          '.join(items)
+    return f'''<section class="slide slide-preface no-photo" id="{p.get("id","")}">
   <div class="pf-body">
     <p class="sp-kicker">{esc(p.get("kicker", ""))}</p>
     <h2 class="sp-title">{esc(p["title"])}</h2>
@@ -316,35 +396,34 @@ def render_preface_page(p, depth=2):
     </div>
   </div>
 </section>'''
-    return f'<!-- unsupported kind: {kind} -->'
+
+def render_front_matter(p):
+    k = p['kind']
+    if k == 'ethos':       return render_ethos(p)
+    if k == 'four_col':    return render_four_col(p)
+    if k == 'top_six':     return render_top_six(p)
+    if k == 'map_summary': return render_map_summary(p)
+    return f'<!-- unsupported front matter: {k} -->'
 
 # ───────────────────────── page renderers ─────────────────────────
 def render_chapter_page(ch):
-    slug = CHAPTER_SLUG[ch['number']]
-    spots = chapter_spots[ch['number']]
-    slides = [render_chapter_cover(ch, 2)]
-    for s in spots:
-        slides.append(render_spot(s, 2))
-    slide_count = len(slides)
-    label = ch['region']
-    page = page_head(label)
-    page += render_topbar(label, slide_count)
+    spots = chapter_spots[ch['id']]
+    slides = [render_chapter_cover(ch)] + [render_card(s) for s in spots]
+    page = page_head(ch['name'])
+    page += render_topbar(ch['name'], len(slides))
     page += '\n\n<div class="app">\n\n  '
-    page += render_sidebar(slug)
+    page += render_sidebar(ch['id'])
     page += '\n\n  <div class="viewer" id="viewer">\n\n    '
     page += '\n\n    '.join(slides)
     page += '\n\n  </div>\n</div>\n\n<script src="../preview.js"></script>\n</body>\n</html>\n'
-    out = DEST / slug / 'index.html'
+    out = DEST / ch['id'] / 'index.html'
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(page)
 
 def render_intro_page():
-    pages = preface['preface_pages']
-    slides = [render_preface_page(p, 2) for p in pages]
-    slide_count = len(slides)
-    label = 'Front matter'
-    page = page_head(label)
-    page += render_topbar(label, slide_count)
+    slides = [render_intro_cover()] + [render_front_matter(p) for p in FRONT_MATTER]
+    page = page_head('Front matter')
+    page += render_topbar('Front matter', len(slides))
     page += '\n\n<div class="app">\n\n  '
     page += render_sidebar('intro')
     page += '\n\n  <div class="viewer" id="viewer">\n\n    '
@@ -356,32 +435,39 @@ def render_intro_page():
 
 def render_home():
     cards = []
-    # Front matter card
+    intro_thumb = img_url('front_matter/page_05.jpg', 1) or img_url('cover/hidden_gems_cover.jpg', 1)
     cards.append(f'''<a class="cc" href="intro/index.html">
         <div class="cc-photo">
           <span class="cc-num">Front matter</span>
-          <img src="img/{img_name.get("preface_pages/page_05.jpg", "page_05.jpg")}" alt="Front matter" />
+          <img src="{intro_thumb}" alt="Front matter" />
         </div>
         <div class="cc-body">
           <div class="cc-name">Before you go</div>
           <div class="cc-meta">Cover · Camping · Map · Top 6</div>
         </div>
       </a>''')
-    for ch in chapters:
-        slug = CHAPTER_SLUG[ch['number']]
-        spots = chapter_spots[ch['number']]
-        thumb = 'img/' + img_name.get(ch['cover_image'], '')
-        cards.append(f'''<a class="cc" href="{slug}/index.html">
+    for ch in CHAPTERS:
+        spots = chapter_spots[ch['id']]
+        thumb_override = CHAPTER_THUMB.get(ch['id'])
+        if thumb_override == '__custom__':
+            thumb = f'img/{ch["id"]}-thumb.jpg'
+        elif thumb_override and thumb_override in img_name:
+            thumb = 'img/' + img_name[thumb_override]
+        else:
+            thumb = 'img/' + img_name.get(ch['cover_image'], '')
+        n_spots = sum(1 for s in spots if s.get('kind', 'spot') == 'spot')
+        cards.append(f'''<a class="cc" href="{ch["id"]}/index.html">
         <div class="cc-photo">
           <span class="cc-num">Chapter {esc(ch["number"])}</span>
-          <img src="{thumb}" alt="{esc(ch["region"])}" />
+          <img src="{thumb}" alt="{esc(ch["name"])}" />
         </div>
         <div class="cc-body">
-          <div class="cc-name">{esc(ch["region"])}</div>
-          <div class="cc-meta">{len(spots)} spots</div>
+          <div class="cc-name">{esc(ch["name"])}</div>
+          <div class="cc-meta">{n_spots} spots</div>
         </div>
       </a>''')
     cards_html = '\n\n      '.join(cards)
+    total_spots = sum(1 for s in SPOTS_ALL if s.get('kind', 'spot') == 'spot')
     page = f'''<!doctype html>
 <html lang="en">
 <head>
@@ -417,13 +503,13 @@ def render_home():
   <header class="home-hero">
     <p class="kicker">Swiss Hidden Gems</p>
     <h1>Read it page by page.</h1>
-    <p class="lead">{sum(len(chapter_spots[c["number"]]) for c in chapters)} spots across {len(chapters)} regions. Pick a chapter.</p>
+    <p class="lead">{total_spots} spots across {len(CHAPTERS)} regions. Pick a chapter.</p>
   </header>
 
   <section>
     <div class="section-head">
       <h2>Chapters</h2>
-      <span class="meta">{len(chapters) + 1} sections · all open</span>
+      <span class="meta">{len(CHAPTERS) + 1} sections · all open</span>
     </div>
     <div class="chapter-cards">
 
@@ -445,61 +531,71 @@ def render_home():
 '''
     (DEST / 'index.html').write_text(page)
 
-# ───────────────────────── map data + page ─────────────────────────
-import re, json
-
+# ───────────────────────── map page ─────────────────────────
 def render_map_page():
-    coord_re = re.compile(r'query=([\-0-9.]+),([\-0-9.]+)')
-    region_color = {}
-    for p in preface['preface_pages']:
-        if p['kind'] == 'map_summary':
-            for r in p['regions']:
-                rgb = ','.join(str(int(c * 255)) for c in r['color'])
-                region_color[r['number']] = rgb
-
-    parent_coords = {}
-    for ch_num, spots in chapter_spots.items():
-        for s in spots:
-            m = coord_re.search(s.get('maps_url', '') or '')
-            if m:
-                parent_coords[s['title']] = (float(m.group(1)), float(m.group(2)))
+    region_color = {ch['id']: ','.join(str(int(c * 255)) for c in ch['color']) for ch in CHAPTERS}
+    region_color_by_num = {ch['number']: region_color[ch['id']] for ch in CHAPTERS}
 
     items = []
-    for ch_num, spots in chapter_spots.items():
-        slug = CHAPTER_SLUG[ch_num]
-        for s in spots:
-            m = coord_re.search(s.get('maps_url', '') or '')
-            if m:
-                lat, lon = float(m.group(1)), float(m.group(2))
-            elif s['title'].startswith('Rosenlaui ') and 'Rosenlaui' in parent_coords:
-                lat, lon = parent_coords['Rosenlaui']
-            else:
-                continue
-            spot_slug = ''.join(c if c.isalnum() else '-' for c in s['title'].lower()).strip('-')
-            while '--' in spot_slug:
-                spot_slug = spot_slug.replace('--', '-')
+    for s in SPOTS_ALL:
+        kind = s.get('kind', 'spot')
+        gps = s.get('gps') or {}
+        lat = gps.get('lat')
+        lng = gps.get('lng')
+        if kind == 'spot' and lat is not None and lng is not None:
+            ch_id = s.get('chapter')
+            ch = next((c for c in CHAPTERS if c['id'] == ch_id), None)
+            if not ch: continue
+            spot_id = s.get('id') or slugify(s['title'])
             items.append({
                 'title': s['title'],
                 'kicker': s.get('kicker', ''),
-                'chapter': ch_num,
-                'chapter_slug': slug,
+                'chapter': ch['number'],
+                'chapter_id': ch['id'],
                 'lat': lat,
-                'lon': lon,
-                'image': img_name.get(s['image'], '') if 'image' in s else '',
-                'href': f'../{slug}/index.html#{spot_slug}',
-                'color': region_color.get(ch_num, '128,128,128'),
+                'lon': lng,
+                'image': img_name.get(s.get('image', ''), '') if s.get('image') else '',
+                'href': f'../{ch["id"]}/index.html#{spot_id}',
+                'color': region_color[ch['id']],
+                'maps_url': s.get('maps_url', ''),
             })
+        elif kind == 'extras':
+            # Each entry inside has its own gps — render as individual markers
+            ch_id = s.get('chapter')
+            ch = next((c for c in CHAPTERS if c['id'] == ch_id), None)
+            if not ch: continue
+            for e in s.get('entries', []):
+                eg = e.get('gps') or {}
+                if eg.get('lat') is None or eg.get('lng') is None: continue
+                items.append({
+                    'title': e['heading'],
+                    'kicker': 'EXTRAS',
+                    'chapter': ch['number'],
+                    'chapter_id': ch['id'],
+                    'lat': eg['lat'],
+                    'lon': eg['lng'],
+                    'image': '',
+                    'href': f'../{ch["id"]}/index.html#{s.get("id","")}',
+                    'color': region_color[ch['id']],
+                    'maps_url': e.get('maps_url', ''),
+                })
 
     legend = [
-        {'number': ch['number'], 'name': ch['region'], 'color': region_color.get(ch['number'], '128,128,128')}
-        for ch in chapters
+        {'number': ch['number'], 'name': ch['name'], 'color': region_color[ch['id']]}
+        for ch in CHAPTERS
     ]
 
     map_dir = DEST / 'map'
     map_dir.mkdir(parents=True, exist_ok=True)
+    geojson_path = map_dir / 'switzerland.geojson'
+    if geojson_path.exists():
+        geojson_data = json.loads(geojson_path.read_text())
+    else:
+        geojson_data = {'type': 'FeatureCollection', 'features': []}
     (map_dir / 'spots-data.js').write_text(
         f'window.SPOTS = {json.dumps(items, ensure_ascii=False)};\n'
         f'window.LEGEND = {json.dumps(legend, ensure_ascii=False)};\n'
+        f'window.SWITZERLAND_GEOJSON = {json.dumps(geojson_data, ensure_ascii=False)};\n'
     )
 
     page = '''<!doctype html>
@@ -517,24 +613,30 @@ def render_map_page():
 <link rel="stylesheet" href="../preview.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <style>
-  body { background: #f5f5f7; }
-  .map-shell {
-    height: calc(100dvh - var(--topbar-h));
-    position: relative;
-  }
-  #map { height: 100%; width: 100%; background: #e7e7ea; }
-  .leaflet-container { font-family: inherit; }
+  body { background: #ffffff; }
+  .map-shell { height: calc(100dvh - var(--topbar-h)); position: relative; }
+  #map { height: 100%; width: 100%; background: #ffffff; }
+  .leaflet-container { font-family: inherit; background: #ffffff; outline: 0; }
+  .leaflet-interactive { outline: 0 !important; }
 
   .spot-marker { background: transparent; border: 0; }
-  .spot-marker .dot {
+  .spot-marker .thumb {
     display: block;
-    width: 14px; height: 14px;
-    border-radius: 999px;
+    width: 42px; height: 52px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    background-color: #888;
     border: 2px solid #fff;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.30), 0 0 0 1px rgba(0,0,0,0.05);
-    transition: transform 150ms ease;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.10), 0 3px 8px rgba(0,0,0,0.20);
+    transition: transform 200ms ease, box-shadow 200ms ease;
+    cursor: pointer;
   }
-  .spot-marker:hover .dot { transform: scale(1.5); }
+  .spot-marker:hover { z-index: 1000 !important; }
+  .spot-marker:hover .thumb {
+    transform: scale(1.4);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.10), 0 10px 24px rgba(0,0,0,0.30);
+  }
 
   .leaflet-popup-content-wrapper {
     border-radius: 18px;
@@ -544,138 +646,59 @@ def render_map_page():
   }
   .leaflet-popup-content { margin: 0; width: 240px !important; }
   .leaflet-popup-tip { background: #fff; }
-
-  .spot-popup img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
-  }
-  .spot-popup .body {
-    padding: 14px 16px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .spot-popup .kicker {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0;
-  }
-  .spot-popup h3 {
-    margin: 2px 0 0;
-    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 18px;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    font-weight: 600;
-    color: var(--fg);
-  }
-  .spot-popup .meta {
-    font-size: 11px;
-    color: var(--muted);
-    margin: 4px 0 0;
-  }
-  .spot-popup a.read {
-    margin-top: 10px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px;
-    border-radius: 999px;
-    background: var(--fg);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 500;
-    text-decoration: none;
-  }
+  .spot-popup img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+  .spot-popup .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 4px; }
+  .spot-popup .kicker { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 0; }
+  .spot-popup h3 { margin: 2px 0 0; font-family: "SF Pro Display", -apple-system, system-ui, sans-serif; font-size: 18px; letter-spacing: -0.02em; line-height: 1.15; font-weight: 600; color: var(--fg); }
+  .spot-popup .meta { font-size: 11px; color: var(--muted); margin: 4px 0 0; }
+  .spot-popup a.read { margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; height: 36px; border-radius: 999px; background: var(--fg); color: #fff; font-size: 13px; font-weight: 500; text-decoration: none; }
 
   .spot-tip {
     background: rgba(255,255,255,0.96) !important;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     border: 1px solid var(--hairline) !important;
     border-radius: 12px !important;
     box-shadow: 0 8px 24px rgba(0,0,0,0.14) !important;
     padding: 8px 12px !important;
     color: var(--fg) !important;
-    font-size: 12.5px !important;
-    font-weight: 500 !important;
-    letter-spacing: -0.005em !important;
+    font-size: 12.5px !important; font-weight: 500 !important; letter-spacing: -0.005em !important;
     white-space: nowrap;
   }
   .leaflet-tooltip-top.spot-tip:before { display: none; }
 
   .legend {
-    position: absolute;
-    bottom: 18px;
-    left: 18px;
-    z-index: 500;
+    position: absolute; bottom: 18px; left: 18px; z-index: 500;
     background: rgba(255,255,255,0.94);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
-    backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid var(--hairline);
-    border-radius: 14px;
-    padding: 10px 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    max-width: 220px;
+    -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
+    border: 1px solid var(--hairline); border-radius: 14px;
+    padding: 10px 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+    display: flex; flex-direction: column; gap: 4px; max-width: 220px;
   }
-  .legend h4 {
-    margin: 0 0 4px;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 600;
-  }
+  .legend h4 { margin: 0 0 4px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
   .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    cursor: pointer;
-    user-select: none;
-    color: var(--fg);
-    line-height: 1.2;
-    padding: 4px 0;
-    background: transparent;
-    border: 0;
-    text-align: left;
-    font-family: inherit;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; cursor: pointer; user-select: none; color: var(--fg); line-height: 1.2;
+    padding: 4px 0; background: transparent; border: 0; text-align: left; font-family: inherit;
   }
   .legend-item.is-off { opacity: 0.35; }
-  .legend-item .swatch {
-    flex-shrink: 0;
-    width: 12px; height: 12px;
-    border-radius: 999px;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
-  }
+  .legend-item .swatch { flex-shrink: 0; width: 12px; height: 12px; border-radius: 999px; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.08); }
 
   .counter {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    z-index: 500;
+    position: absolute; top: 18px; right: 18px; z-index: 500;
     background: rgba(255,255,255,0.94);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
-    backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid var(--hairline);
-    border-radius: 999px;
-    padding: 8px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: -0.005em;
-    color: var(--fg);
+    -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
+    border: 1px solid var(--hairline); border-radius: 999px;
+    padding: 8px 14px; font-size: 12px; font-weight: 600; letter-spacing: -0.005em; color: var(--fg);
     box-shadow: 0 4px 14px rgba(0,0,0,0.06);
   }
   .counter b { color: var(--accent); font-weight: 700; }
+
+  /* Mobile: shrink legend / counter so they don't dominate */
+  @media (max-width: 700px) {
+    .legend { font-size: 11px; padding: 8px 10px; }
+    .counter { padding: 6px 10px; font-size: 11px; }
+    .spot-marker .thumb { width: 36px; height: 45px; }
+  }
 </style>
 </head>
 <body>
@@ -687,7 +710,7 @@ def render_map_page():
   </a>
   <span class="crumb">Map view</span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">All chapters</a>
+    <a class="pill" href="../index.html">Overview</a>
   </div>
 </div>
 
@@ -700,37 +723,69 @@ def render_map_page():
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="spots-data.js"></script>
 <script>
-  const map = L.map('map', { zoomControl: true, attributionControl: false })
-    .setView([46.82, 8.22], 8);
-  L.control.attribution({ position: 'bottomright', prefix: false })
-    .addAttribution('© OSM · CartoDB').addTo(map);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    subdomains: 'abcd', maxZoom: 19,
-  }).addTo(map);
+  const map = L.map('map', {
+    zoomControl: true, attributionControl: false,
+    minZoom: 7, maxZoom: 13,
+  }).setView([46.82, 8.22], 8);
 
   const SPOTS = window.SPOTS || [];
   const LEGEND = window.LEGEND || [];
+  const GEOJSON = window.SWITZERLAND_GEOJSON;
+
+  const CANTON_CHAPTER = {
+    'Bern': '01', 'Luzern': '01', 'Uri': '01', 'Schwyz': '01',
+    'Obwalden': '01', 'Nidwalden': '01', 'Zug': '01', 'Aargau': '01',
+    'Valais': '02',
+    'Fribourg': '03',
+    'Vaud': '04', 'Genève': '04', 'Neuchâtel': '04', 'Jura': '04',
+    'Solothurn': '04', 'Basel-Landschaft': '04', 'Basel-Stadt': '04',
+    'Glarus': '05', 'Graubünden': '05', 'St. Gallen': '05',
+    'Appenzell Ausserrhoden': '05', 'Appenzell Innerrhoden': '05',
+    'Schaffhausen': '05', 'Thurgau': '05', 'Zürich': '05',
+    'Ticino': '06',
+  };
+  const REGION_COLOR_BY_CH = {};
+  LEGEND.forEach(c => { REGION_COLOR_BY_CH[c.number] = c.color; });
+
+  if (GEOJSON && GEOJSON.features && GEOJSON.features.length) {
+    L.geoJSON(GEOJSON, {
+      style: function (feature) {
+        const ch = CANTON_CHAPTER[feature.properties.name];
+        const rgb = ch ? REGION_COLOR_BY_CH[ch] : '224,224,228';
+        return {
+          color: '#ffffff', weight: 1.2,
+          fillColor: 'rgb(' + rgb + ')',
+          fillOpacity: 0.55, lineJoin: 'round',
+        };
+      },
+      interactive: false,
+    }).addTo(map);
+  }
+
   const layers = new Map();
   LEGEND.forEach(c => layers.set(c.number, L.layerGroup().addTo(map)));
 
   function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
   SPOTS.forEach(s => {
+    const imgUrl = s.image ? '../img/' + s.image : '';
+    const styleAttr = imgUrl
+      ? "background-image: url('" + imgUrl + "'); background-color: rgb(" + s.color + ");"
+      : "background-color: rgb(" + s.color + ");";
     const icon = L.divIcon({
       className: 'spot-marker',
-      html: '<span class="dot" style="background: rgb(' + s.color + ');"></span>',
-      iconSize: [14, 14],
-      iconAnchor: [7, 7],
+      html: '<span class="thumb" style="' + styleAttr + '"></span>',
+      iconSize: [46, 56], iconAnchor: [23, 28],
     });
     const m = L.marker([s.lat, s.lon], { icon })
-      .bindTooltip(esc(s.title), { className: 'spot-tip', direction: 'top', offset: [0, -8], opacity: 1 })
+      .bindTooltip(esc(s.title), { className: 'spot-tip', direction: 'top', offset: [0, -22], opacity: 1 })
       .bindPopup(`
         <div class="spot-popup">
           ${s.image ? '<img src="../img/' + s.image + '" alt="" />' : ''}
           <div class="body">
             <p class="kicker">${esc(s.kicker || ('Chapter ' + s.chapter))}</p>
             <h3>${esc(s.title)}</h3>
-            <p class="meta">${esc(s.chapter_slug.charAt(0).toUpperCase() + s.chapter_slug.slice(1))} Switzerland</p>
+            <p class="meta">${esc(s.chapter_id.charAt(0).toUpperCase() + s.chapter_id.slice(1))} Switzerland</p>
             <a class="read" href="${s.href}">Read</a>
           </div>
         </div>
@@ -779,21 +834,10 @@ print('Generating home...')
 render_home()
 print('Generating intro...')
 render_intro_page()
-for ch in chapters:
-    slug = CHAPTER_SLUG[ch['number']]
-    n = len(chapter_spots[ch['number']])
-    print(f'Generating {slug} ({n} spots)...')
+for ch in CHAPTERS:
+    n = len(chapter_spots[ch['id']])
+    print(f'Generating {ch["id"]} ({n} cards)...')
     render_chapter_page(ch)
-
-print()
-print(f'Done. /full/ has:')
-print(f'  index.html')
-print(f'  intro/index.html ({len(preface["preface_pages"])} cards)')
-for ch in chapters:
-    slug = CHAPTER_SLUG[ch['number']]
-    n = len(chapter_spots[ch['number']])
-    print(f'  {slug}/index.html ({n + 1} cards including chapter cover)')
-
 print()
 print('Generating map page...')
 render_map_page()
