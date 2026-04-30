@@ -29,16 +29,31 @@
     display: grid;
     place-items: center;
     padding: 24px;
-    background:
-      radial-gradient(900px 500px at 20% 0%, #eef1f5 0%, transparent 60%),
-      radial-gradient(700px 500px at 85% 8%, #f0ece6 0%, transparent 55%),
-      var(--bg);
-    background-attachment: fixed;
+    background: #fbfbfc;
     color: var(--fg);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     letter-spacing: -0.01em;
+    overflow: hidden;
+    position: relative;
   }
+  /* Three soft blurred color blobs in chapter palette colours -- adds
+     a tiny bit of warmth without making the card hard to read. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -120px;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(420px 380px at 18% 22%, rgba(125, 181, 168, 0.42) 0%, transparent 70%),
+      radial-gradient(460px 420px at 82% 28%, rgba(234, 184, 191, 0.40) 0%, transparent 70%),
+      radial-gradient(520px 480px at 50% 92%, rgba(204, 224, 158, 0.38) 0%, transparent 70%),
+      radial-gradient(380px 360px at 92% 78%, rgba(148, 132, 186, 0.30) 0%, transparent 75%);
+    filter: blur(60px) saturate(1.05);
+    opacity: 0.85;
+  }
+  .card { position: relative; z-index: 1; }
   .card {
     width: 100%;
     max-width: 380px;
