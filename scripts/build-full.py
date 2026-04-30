@@ -694,13 +694,34 @@ def render_map_page():
   }
   .counter b { color: var(--accent); font-weight: 700; }
 
-  /* Mobile: shrink legend / counter so they don't dominate */
+  /* Toggle button -- only shown on mobile */
+  .legend-toggle { display: none; }
+
+  /* Mobile: collapse legend behind a toggle, shrink counter */
   @media (max-width: 700px) {
-    .legend { font-size: 11px; padding: 8px 10px; gap: 4px; max-width: 200px; }
-    .legend-item { font-size: 12px; padding: 3px 0; gap: 8px; }
-    .legend-item .swatch { width: 12px; height: 12px; }
+    .legend { padding: 4px 6px; gap: 0; max-width: none; }
+    .legend > h4 { display: none; }
+    .legend > .legend-item { display: none; }
+    .legend-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: transparent;
+      border: 0;
+      color: var(--fg);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: -0.005em;
+    }
+    .legend-toggle svg { width: 14px; height: 14px; color: var(--muted); }
+    .legend.is-open { padding: 8px 10px; gap: 4px; max-width: 200px; }
+    .legend.is-open > h4 { display: block; padding-top: 4px; font-size: 9px; }
+    .legend.is-open > .legend-item { display: flex; font-size: 12px; padding: 3px 0; gap: 8px; }
+    .legend.is-open > .legend-item .swatch { width: 12px; height: 12px; }
     .counter { padding: 6px 10px; font-size: 11px; }
-    .spot-marker .thumb { width: 36px; height: 45px; }
   }
 </style>
 </head>
@@ -720,15 +741,26 @@ def render_map_page():
 <div class="map-shell">
   <div id="map"></div>
   <div class="counter"><b id="visible">0</b>&nbsp;visible spots</div>
-  <aside class="legend" id="legend"><h4>Chapters · click to toggle</h4></aside>
+  <aside class="legend" id="legend">
+    <button class="legend-toggle" id="legendToggle" aria-expanded="false" aria-label="Show chapter filter">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+      <span>Filter</span>
+    </button>
+    <h4>Chapters · click to isolate</h4>
+  </aside>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="spots-data.js"></script>
 <script>
+  // preferCanvas + smaller-touch-handler: Canvas vector renderer is
+  // dramatically faster than SVG/DOM for many markers, esp. on mobile.
+  const isMobile = window.matchMedia('(max-width: 700px)').matches;
   const map = L.map('map', {
     zoomControl: true, attributionControl: false,
     minZoom: 7, maxZoom: 13,
+    preferCanvas: true,
+    tap: false,           // skip Leaflet's tap-delay on touch devices
   }).setView([46.82, 8.22], 8);
 
   const SPOTS = window.SPOTS || [];
@@ -771,18 +803,8 @@ def render_map_page():
   function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
   SPOTS.forEach(s => {
-    const imgUrl = s.image ? '../img/' + s.image : '';
-    const styleAttr = imgUrl
-      ? "background-image: url('" + imgUrl + "'); background-color: rgb(" + s.color + ");"
-      : "background-color: rgb(" + s.color + ");";
-    const icon = L.divIcon({
-      className: 'spot-marker',
-      html: '<span class="thumb" style="' + styleAttr + '"></span>',
-      iconSize: [46, 56], iconAnchor: [23, 28],
-    });
-    const m = L.marker([s.lat, s.lon], { icon })
-      .bindTooltip(esc(s.title), { className: 'spot-tip', direction: 'top', offset: [0, -22], opacity: 1 })
-      .bindPopup(`
+    let m;
+    const popupHtml = `
         <div class="spot-popup">
           ${s.image ? '<img src="../img/' + s.image + '" alt="" />' : ''}
           <div class="body">
@@ -792,7 +814,32 @@ def render_map_page():
             <a class="read" href="${s.href}">Read</a>
           </div>
         </div>
-      `, { maxWidth: 240, minWidth: 240 });
+    `;
+    if (isMobile) {
+      // Vector circle on mobile -- canvas-rendered, way smoother during pan/zoom
+      m = L.circleMarker([s.lat, s.lon], {
+        radius: 7,
+        fillColor: 'rgb(' + s.color + ')',
+        fillOpacity: 0.95,
+        color: '#ffffff',
+        weight: 2,
+        opacity: 1,
+      });
+    } else {
+      // Photo thumbnail divIcon on desktop
+      const imgUrl = s.image ? '../img/' + s.image : '';
+      const styleAttr = imgUrl
+        ? "background-image: url('" + imgUrl + "'); background-color: rgb(" + s.color + ");"
+        : "background-color: rgb(" + s.color + ");";
+      const icon = L.divIcon({
+        className: 'spot-marker',
+        html: '<span class="thumb" style="' + styleAttr + '"></span>',
+        iconSize: [46, 56], iconAnchor: [23, 28],
+      });
+      m = L.marker([s.lat, s.lon], { icon });
+      m.bindTooltip(esc(s.title), { className: 'spot-tip', direction: 'top', offset: [0, -22], opacity: 1 });
+    }
+    m.bindPopup(popupHtml, { maxWidth: 240, minWidth: 240 });
     const grp = layers.get(s.chapter);
     if (grp) grp.addLayer(m);
   });
@@ -807,8 +854,16 @@ def render_map_page():
 
   // Legend behavior: clicking a chapter isolates it (deselects all others).
   // Clicking the same chapter again -- when it is the only one active --
-  // toggles back to all-selected.
+  // toggles back to all-selected. On mobile, the whole legend is collapsed
+  // until the user taps the Filter toggle.
   const legend = document.getElementById('legend');
+  const legendToggle = document.getElementById('legendToggle');
+  if (legendToggle) {
+    legendToggle.addEventListener('click', () => {
+      const isOpen = legend.classList.toggle('is-open');
+      legendToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
   const items = [];
   function applyState() {
     items.forEach(({ num, el, grp }) => {
