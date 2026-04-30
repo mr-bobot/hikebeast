@@ -136,6 +136,23 @@ for img in DEST_IMG.glob('*.jpg'):
         capture_output=True)
 print(f'{len(list(DEST_IMG.glob("*.jpg")))} JPEGs in {DEST_IMG}')
 
+# Tiny thumbnails for the map markers -- 160px @ q60 keeps each ~5-7 KB
+# so 127 markers won't trash mobile decode performance.
+THUMBS_DIR = DEST_IMG / 'thumbs'
+THUMBS_DIR.mkdir(exist_ok=True)
+made = 0
+for img in DEST_IMG.glob('*.jpg'):
+    if img.parent != DEST_IMG: continue
+    thumb = THUMBS_DIR / img.name
+    if not thumb.exists() or thumb.stat().st_mtime < img.stat().st_mtime:
+        shutil.copy(img, thumb)
+        subprocess.run(
+            ['sips', '-Z', '160', '-s', 'format', 'jpeg',
+             '-s', 'formatOptions', '60', str(thumb), '--out', str(thumb)],
+            capture_output=True)
+        made += 1
+print(f'{made} new map thumbnails written to {THUMBS_DIR}')
+
 # Copy shared CSS / JS
 shutil.copy(PREVIEW / 'preview.css', DEST / 'preview.css')
 shutil.copy(PREVIEW / 'preview.js', DEST / 'preview.js')
@@ -631,11 +648,18 @@ def render_map_page():
     box-shadow: 0 0 0 1px rgba(0,0,0,0.10), 0 3px 8px rgba(0,0,0,0.20);
     transition: transform 200ms ease, box-shadow 200ms ease;
     cursor: pointer;
+    transform: translateZ(0);
+    will-change: transform;
   }
   .spot-marker:hover { z-index: 1000 !important; }
   .spot-marker:hover .thumb {
-    transform: scale(1.4);
+    transform: scale(1.4) translateZ(0);
     box-shadow: 0 0 0 1px rgba(0,0,0,0.10), 0 10px 24px rgba(0,0,0,0.30);
+  }
+  /* Touch devices: no hover-scale, no transition (causes jitter on tap). */
+  @media (hover: none) {
+    .spot-marker .thumb { transition: none; }
+    .spot-marker:hover .thumb { transform: translateZ(0); }
   }
 
   .leaflet-popup-content-wrapper {
@@ -722,6 +746,7 @@ def render_map_page():
     .legend.is-open > .legend-item { display: flex; font-size: 12px; padding: 3px 0; gap: 8px; }
     .legend.is-open > .legend-item .swatch { width: 12px; height: 12px; }
     .counter { padding: 6px 10px; font-size: 11px; }
+    .spot-marker .thumb { width: 32px; height: 40px; border-width: 1.5px; }
   }
 </style>
 </head>
@@ -803,8 +828,23 @@ def render_map_page():
   function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
   SPOTS.forEach(s => {
-    let m;
-    const popupHtml = `
+    // Markers use the tiny thumbnails (160px @ q60, ~5-7 KB each); the
+    // popup keeps the full-size image from /full/img/.
+    const thumbUrl = s.image ? '../img/thumbs/' + s.image : '';
+    const styleAttr = thumbUrl
+      ? "background-image: url('" + thumbUrl + "'); background-color: rgb(" + s.color + ");"
+      : "background-color: rgb(" + s.color + ");";
+    const iconSize = isMobile ? [36, 44] : [46, 56];
+    const icon = L.divIcon({
+      className: 'spot-marker',
+      html: '<span class="thumb" style="' + styleAttr + '"></span>',
+      iconSize, iconAnchor: [iconSize[0] / 2, iconSize[1] / 2],
+    });
+    const m = L.marker([s.lat, s.lon], { icon });
+    if (!isMobile) {
+      m.bindTooltip(esc(s.title), { className: 'spot-tip', direction: 'top', offset: [0, -22], opacity: 1 });
+    }
+    m.bindPopup(`
         <div class="spot-popup">
           ${s.image ? '<img src="../img/' + s.image + '" alt="" />' : ''}
           <div class="body">
@@ -814,32 +854,7 @@ def render_map_page():
             <a class="read" href="${s.href}">Read</a>
           </div>
         </div>
-    `;
-    if (isMobile) {
-      // Vector circle on mobile -- canvas-rendered, way smoother during pan/zoom
-      m = L.circleMarker([s.lat, s.lon], {
-        radius: 7,
-        fillColor: 'rgb(' + s.color + ')',
-        fillOpacity: 0.95,
-        color: '#ffffff',
-        weight: 2,
-        opacity: 1,
-      });
-    } else {
-      // Photo thumbnail divIcon on desktop
-      const imgUrl = s.image ? '../img/' + s.image : '';
-      const styleAttr = imgUrl
-        ? "background-image: url('" + imgUrl + "'); background-color: rgb(" + s.color + ");"
-        : "background-color: rgb(" + s.color + ");";
-      const icon = L.divIcon({
-        className: 'spot-marker',
-        html: '<span class="thumb" style="' + styleAttr + '"></span>',
-        iconSize: [46, 56], iconAnchor: [23, 28],
-      });
-      m = L.marker([s.lat, s.lon], { icon });
-      m.bindTooltip(esc(s.title), { className: 'spot-tip', direction: 'top', offset: [0, -22], opacity: 1 });
-    }
-    m.bindPopup(popupHtml, { maxWidth: 240, minWidth: 240 });
+    `, { maxWidth: 240, minWidth: 240 });
     const grp = layers.get(s.chapter);
     if (grp) grp.addLayer(m);
   });
