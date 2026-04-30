@@ -416,7 +416,11 @@ def render_front_matter(p):
 # ───────────────────────── page renderers ─────────────────────────
 def render_chapter_page(ch):
     spots = chapter_spots[ch['id']]
-    slides = [render_chapter_cover(ch)] + [render_card(s) for s in spots]
+    region_card = render_region_card(ch)
+    slides = [render_chapter_cover(ch)]
+    if region_card:
+        slides.append(region_card)
+    slides += [render_card(s) for s in spots]
     page = page_head(ch['name'])
     page += render_topbar(ch['name'], len(slides))
     page += '\n\n<div class="app">\n\n  '
@@ -537,6 +541,116 @@ def render_home():
 </html>
 '''
     (DEST / 'index.html').write_text(page)
+
+# ───────────────────────── per-chapter mini-map SVGs ─────────────────────────
+# Pre-render a small Switzerland silhouette per chapter, with the chapter's
+# cantons tinted and spot dots at real GPS coords. Static, no Leaflet on
+# chapter pages, loads instantly.
+
+CANTON_CHAPTER = {
+    'Bern': 'central', 'Luzern': 'central', 'Uri': 'central', 'Schwyz': 'central',
+    'Obwalden': 'central', 'Nidwalden': 'central', 'Zug': 'central', 'Aargau': 'central',
+    'Valais': 'valais',
+    'Fribourg': 'fribourg',
+    'Vaud': 'western', 'Genève': 'western', 'Neuchâtel': 'western', 'Jura': 'western',
+    'Solothurn': 'western', 'Basel-Landschaft': 'western', 'Basel-Stadt': 'western',
+    'Glarus': 'eastern', 'Graubünden': 'eastern', 'St. Gallen': 'eastern',
+    'Appenzell Ausserrhoden': 'eastern', 'Appenzell Innerrhoden': 'eastern',
+    'Schaffhausen': 'eastern', 'Thurgau': 'eastern', 'Zürich': 'eastern',
+    'Ticino': 'ticino',
+}
+
+LAT_MIN, LAT_MAX = 45.82, 47.81
+LNG_MIN, LNG_MAX = 5.95, 10.50
+SVG_W, SVG_H = 1000, 620
+
+def _project(lng, lat):
+    x = (lng - LNG_MIN) / (LNG_MAX - LNG_MIN) * SVG_W
+    y = (LAT_MAX - lat) / (LAT_MAX - LAT_MIN) * SVG_H
+    return f'{x:.1f},{y:.1f}'
+
+def _ring_to_path(ring):
+    pts = ' '.join(_project(lng, lat) for lng, lat in ring)
+    return f'M{pts}Z'
+
+def _feature_paths(feature):
+    g = feature['geometry']
+    out = []
+    if g['type'] == 'Polygon':
+        for ring in g['coordinates']:
+            out.append(_ring_to_path(ring))
+    elif g['type'] == 'MultiPolygon':
+        for poly in g['coordinates']:
+            for ring in poly:
+                out.append(_ring_to_path(ring))
+    return out
+
+def render_region_svg(chapter):
+    """Write /full/img/region-<id>.svg with Switzerland + chapter tinted."""
+    geojson_path = DEST / 'map' / 'switzerland.geojson'
+    if not geojson_path.exists(): return False
+    geojson = json.loads(geojson_path.read_text())
+    chapter_id = chapter['id']
+    rgb = ','.join(str(int(c * 255)) for c in chapter['color'])
+
+    if not any(ch == chapter_id for ch in CANTON_CHAPTER.values()):
+        return False  # skip Beyond etc.
+
+    paths_other, paths_chapter = [], []
+    for f in geojson['features']:
+        which = CANTON_CHAPTER.get(f['properties']['name'])
+        for p in _feature_paths(f):
+            (paths_chapter if which == chapter_id else paths_other).append(p)
+
+    dots = []
+    for s in chapter_spots[chapter_id]:
+        if s.get('kind', 'spot') != 'spot': continue
+        gps = s.get('gps') or {}
+        lat, lng = gps.get('lat'), gps.get('lng')
+        if lat is None or lng is None: continue
+        if not (LAT_MIN <= lat <= LAT_MAX and LNG_MIN <= lng <= LNG_MAX): continue
+        x, y = _project(lng, lat).split(',')
+        dots.append(
+            f'<circle cx="{x}" cy="{y}" r="7" fill="rgb({rgb})" '
+            f'stroke="#fff" stroke-width="2.5"/>'
+        )
+
+    other = ''.join(f'<path d="{p}"/>' for p in paths_other)
+    mine  = ''.join(f'<path d="{p}"/>' for p in paths_chapter)
+    svg = (
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SVG_W} {SVG_H}" '
+        f'preserveAspectRatio="xMidYMid meet">'
+        f'<g fill="#eef0f3" stroke="#fff" stroke-width="1.2" stroke-linejoin="round">{other}</g>'
+        f'<g fill="rgba({rgb},0.65)" stroke="#fff" stroke-width="1.2" stroke-linejoin="round">{mine}</g>'
+        f'<g>{"".join(dots)}</g>'
+        f'</svg>'
+    )
+    (DEST_IMG / f'region-{chapter_id}.svg').write_text(svg)
+    return True
+
+def render_region_card(ch):
+    svg_path = DEST_IMG / f'region-{ch["id"]}.svg'
+    if not svg_path.exists():
+        return None
+    n_spots = sum(1 for s in chapter_spots[ch['id']]
+                  if s.get('kind', 'spot') == 'spot' and s.get('gps'))
+    rgb = ','.join(str(int(c * 255)) for c in ch['color'])
+    return f'''<section class="slide slide-region" style="--region-color: {rgb};">
+  <a class="rg-link" href="../map/index.html">
+    <div class="rg-text">
+      <p class="rg-kicker">On the map</p>
+      <h2 class="rg-title">{esc(ch["name"])}</h2>
+      <p class="rg-meta">{n_spots} spots in this region</p>
+      <span class="rg-cta">
+        Open the full map
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </span>
+    </div>
+    <div class="rg-svg">
+      <img src="../img/region-{ch["id"]}.svg" alt="{esc(ch["name"])} on the Swiss map" />
+    </div>
+  </a>
+</section>'''
 
 # ───────────────────────── map page ─────────────────────────
 def render_map_page():
@@ -908,6 +1022,12 @@ def render_map_page():
     print(f'Map page generated with {len(items)} mapped spots')
 
 # ───────────────────────── go ─────────────────────────
+print('Generating per-chapter region SVGs...')
+made = 0
+for ch in CHAPTERS:
+    if render_region_svg(ch): made += 1
+print(f'  {made} region SVGs in {DEST_IMG}')
+print()
 print('Generating home...')
 render_home()
 print('Generating intro...')
