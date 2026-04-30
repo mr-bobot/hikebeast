@@ -37,8 +37,8 @@
     overflow: hidden;
     position: relative;
   }
-  /* Three soft blurred color blobs in chapter palette colours -- adds
-     a tiny bit of warmth without making the card hard to read. */
+  /* Soft blurred blobs in shades of the accent blue (#0071e3) -- on-brand
+     warm wash without making the card hard to read. */
   body::before {
     content: '';
     position: fixed;
@@ -46,12 +46,12 @@
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(420px 380px at 18% 22%, rgba(125, 181, 168, 0.42) 0%, transparent 70%),
-      radial-gradient(460px 420px at 82% 28%, rgba(234, 184, 191, 0.40) 0%, transparent 70%),
-      radial-gradient(520px 480px at 50% 92%, rgba(204, 224, 158, 0.38) 0%, transparent 70%),
-      radial-gradient(380px 360px at 92% 78%, rgba(148, 132, 186, 0.30) 0%, transparent 75%);
-    filter: blur(60px) saturate(1.05);
-    opacity: 0.85;
+      radial-gradient(460px 420px at 18% 22%, rgba(0, 113, 227, 0.45) 0%, transparent 70%),
+      radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.38) 0%, transparent 72%),
+      radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.40) 0%, transparent 70%),
+      radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.55) 0%, transparent 75%);
+    filter: blur(70px) saturate(1.1);
+    opacity: 0.9;
   }
   .card { position: relative; z-index: 1; }
   .card {
