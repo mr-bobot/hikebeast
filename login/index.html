@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Hikebeast · Sign in</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+<link rel="apple-touch-icon" href="/images/favicon.jpg" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff;
+    --fg: #1d1d1f;
+    --muted: #6e6e73;
+    --hairline: rgba(0,0,0,0.08);
+    --hairline-strong: rgba(0,0,0,0.14);
+    --accent: #0071e3;
+    --error: #ff3b30;
+    --radius-card: 22px;
+    --radius-btn: 980px;
+  }
+  body {
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background:
+      radial-gradient(900px 500px at 20% 0%, #eef1f5 0%, transparent 60%),
+      radial-gradient(700px 500px at 85% 8%, #f0ece6 0%, transparent 55%),
+      var(--bg);
+    background-attachment: fixed;
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+  }
+  .card {
+    width: 100%;
+    max-width: 380px;
+    padding: 36px 32px 32px;
+    border-radius: var(--radius-card);
+    background: rgba(255,255,255,0.86);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    backdrop-filter: saturate(180%) blur(18px);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.10), 0 4px 14px rgba(0,0,0,0.04);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .brand img {
+    width: 32px; height: 32px;
+    border-radius: 999px;
+    object-fit: cover;
+    object-position: 70% 45%;
+  }
+  .brand b {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 26px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  p.lead {
+    margin: 0 0 22px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  input {
+    width: 100%;
+    height: 50px;
+    padding: 0 18px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--hairline);
+    background: #fff;
+    color: var(--fg);
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+    letter-spacing: -0.01em;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(0,113,227,0.15);
+  }
+  input.shake {
+    animation: shake 320ms cubic-bezier(.36,.07,.19,.97) both;
+    border-color: var(--error);
+  }
+  @keyframes shake {
+    10%, 90%   { transform: translateX(-1px); }
+    20%, 80%   { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-4px); }
+    40%, 60%   { transform: translateX(4px); }
+  }
+  button.submit {
+    margin-top: 4px;
+    height: 50px;
+    border-radius: var(--radius-btn);
+    border: 0;
+    background: var(--fg);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 120ms ease, transform 100ms ease;
+  }
+  button.submit:hover { opacity: 0.92; }
+  button.submit:active { transform: scale(0.98); }
+  button.submit:disabled { opacity: 0.5; cursor: progress; }
+  .error {
+    margin: 12px 0 0;
+    color: var(--error);
+    font-size: 13px;
+    text-align: center;
+    height: 18px;
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+  .error.show { opacity: 1; }
+  .footnote {
+    margin: 24px 0 0;
+    color: var(--muted);
+    font-size: 11px;
+    text-align: center;
+    letter-spacing: 0;
+  }
+  .footnote a { color: var(--muted); text-decoration: underline; }
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">
+      <img src="/images/avatar.jpg" alt="" />
+      <b>Hikebeast · Hidden Gems</b>
+    </div>
+    <h1>Sign in</h1>
+    <p class="lead">Hidden Gems is a private edition. Enter the credentials Leon shared with you.</p>
+    <form id="loginForm" novalidate>
+      <input
+        id="user"
+        name="username"
+        type="text"
+        placeholder="Username"
+        autocomplete="username"
+        autocapitalize="off"
+        autocorrect="off"
+        required
+      />
+      <input
+        id="pass"
+        name="password"
+        type="password"
+        placeholder="Password"
+        autocomplete="current-password"
+        required
+      />
+      <button type="submit" class="submit" id="submitBtn">Sign in</button>
+    </form>
+    <p class="error" id="error" role="alert" aria-live="polite">Wrong username or password.</p>
+    <p class="footnote">Stay signed in for 30 days on this device.</p>
+  </main>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const btn  = document.getElementById('submitBtn');
+    const err  = document.getElementById('error');
+    const u    = document.getElementById('user');
+    const p    = document.getElementById('pass');
+
+    const params = new URLSearchParams(window.location.search);
+    const next = params.get('next') || '/full/';
+
+    function showError(msg) {
+      err.textContent = msg || 'Wrong username or password.';
+      err.classList.add('show');
+      u.classList.add('shake'); p.classList.add('shake');
+      setTimeout(() => { u.classList.remove('shake'); p.classList.remove('shake'); }, 360);
+    }
+    function clearError() { err.classList.remove('show'); }
+
+    [u, p].forEach(el => el.addEventListener('input', clearError));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearError();
+      btn.disabled = true;
+      btn.textContent = 'Signing in…';
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user: u.value.trim(),
+            pass: p.value,
+            next,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          window.location.replace(data.next || '/full/');
+          return;
+        }
+        if (res.status === 503) {
+          showError('Auth not configured yet. Try again in a minute.');
+        } else {
+          showError('Wrong username or password.');
+        }
+      } catch {
+        showError('Network error. Try again.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Sign in';
+      }
+    });
+  </script>
+</body>
+</html>

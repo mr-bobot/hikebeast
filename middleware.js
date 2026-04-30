@@ -1,49 +1,96 @@
-// Vercel Edge Middleware -- gates /full/* behind HTTP Basic Auth.
+// Vercel Edge Middleware -- gates /full/* behind a signed session cookie.
 //
-// Set PREVIEW_USER and PREVIEW_PASS in Vercel: Project Settings →
-// Environment Variables. Until they are set this middleware returns 503
-// for /full/*, so content cannot leak even on a fresh deploy.
+// Flow:
+//   1. User hits /full/anything
+//   2. Middleware looks for a valid `hb_full_auth` cookie
+//   3. If valid -> pass through
+//   4. If missing or invalid -> 302 redirect to /login?next=<original-path>
+//   5. Trailing-slash fixer: /full -> /full/ (so relative asset URLs work)
 //
-// Defense in depth (so a single failure doesn't expose anything):
-//   1. middleware (this file) -- 401 challenge on every /full/* request
-//   2. vercel.json headers    -- X-Robots-Tag noindex on every /full/* response
-//   3. robots.txt              -- Disallow: /full/
-//   4. per-page <meta robots>  -- already on every generated HTML
+// The cookie value is HMAC-SHA256(PREVIEW_PASS, "hb_full_auth_v1") -- the
+// same string that /api/login sets after a successful sign-in. It rotates
+// automatically when PREVIEW_PASS rotates.
+//
+// Defense in depth (none of these are sole-line-of-defense):
+//   - this middleware (auth + redirect)
+//   - vercel.json /full/(.*) -> X-Robots-Tag noindex, Cache-Control private, Referrer-Policy no-referrer
+//   - robots.txt: Disallow /full/ for every UA
+//   - per-page <meta robots> noindex on every generated HTML
 
 export const config = {
-  matcher: '/full/:path*',
+  matcher: ['/full', '/full/:path*'],
 };
 
-export default function middleware(request) {
+const COOKIE_NAME = 'hb_full_auth';
+const COOKIE_LABEL = 'hb_full_auth_v1';
+
+const NOINDEX_HEADERS = {
+  'X-Robots-Tag': 'noindex, nofollow, noarchive, nosnippet',
+  'Cache-Control': 'no-store',
+  'Referrer-Policy': 'no-referrer',
+};
+
+async function hmacSha256Hex(secret, data) {
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    'raw', enc.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false, ['sign'],
+  );
+  const sig = await crypto.subtle.sign('HMAC', key, enc.encode(data));
+  return Array.from(new Uint8Array(sig)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+function parseCookies(header) {
+  const out = {};
+  if (!header) return out;
+  for (const part of header.split(';')) {
+    const idx = part.indexOf('=');
+    if (idx === -1) continue;
+    out[part.slice(0, idx).trim()] = decodeURIComponent(part.slice(idx + 1).trim());
+  }
+  return out;
+}
+
+function timingSafeEqualHex(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string') return false;
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
+export default async function middleware(request) {
+  const url = new URL(request.url);
+
+  // Trailing-slash fix: /full -> /full/  (otherwise relative asset URLs
+  // resolve against / instead of /full/, breaking CSS and images.)
+  if (url.pathname === '/full') {
+    return Response.redirect(`${url.origin}/full/`, 308);
+  }
+
   const user = process.env.PREVIEW_USER;
   const pass = process.env.PREVIEW_PASS;
-
-  // Fail closed -- if env vars aren't set, return 503 with no content.
   if (!user || !pass) {
     return new Response('Auth not configured', {
       status: 503,
-      headers: {
-        'X-Robots-Tag': 'noindex, nofollow, noarchive, nosnippet',
-        'Cache-Control': 'no-store',
-        'Content-Type': 'text/plain',
-      },
+      headers: { ...NOINDEX_HEADERS, 'Content-Type': 'text/plain' },
     });
   }
 
-  const auth = request.headers.get('authorization') || '';
-  const expected = 'Basic ' + btoa(`${user}:${pass}`);
-
-  if (auth !== expected) {
-    return new Response('Authentication required', {
-      status: 401,
-      headers: {
-        'WWW-Authenticate': 'Basic realm="Hidden Gems", charset="UTF-8"',
-        'X-Robots-Tag': 'noindex, nofollow, noarchive, nosnippet',
-        'Cache-Control': 'no-store',
-        'Content-Type': 'text/plain',
-      },
-    });
+  // Cookie-based session check
+  const cookies = parseCookies(request.headers.get('cookie'));
+  const provided = cookies[COOKIE_NAME];
+  if (provided) {
+    const expected = await hmacSha256Hex(pass, COOKIE_LABEL);
+    if (timingSafeEqualHex(provided, expected)) {
+      // Authorized -- fall through. Response headers come from vercel.json.
+      return;
+    }
   }
-  // Auth OK -- fall through to the static file handler. Response
-  // headers are added at the platform level via vercel.json.
+
+  // Not signed in -- send to /login with the original target preserved.
+  const next = url.pathname + url.search;
+  const loginUrl = `${url.origin}/login/?next=${encodeURIComponent(next)}`;
+  return Response.redirect(loginUrl, 302);
 }
