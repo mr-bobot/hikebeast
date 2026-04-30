@@ -71,17 +71,18 @@
     background: rgba(255,255,255,0.94);
     -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
     border: 1px solid var(--hairline); border-radius: 14px;
-    padding: 10px 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.10);
-    display: flex; flex-direction: column; gap: 4px; max-width: 220px;
+    padding: 14px 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+    display: flex; flex-direction: column; gap: 8px; max-width: 240px;
   }
-  .legend h4 { margin: 0 0 4px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .legend h4 { margin: 0 0 6px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
   .legend-item {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 12px; cursor: pointer; user-select: none; color: var(--fg); line-height: 1.2;
-    padding: 4px 0; background: transparent; border: 0; text-align: left; font-family: inherit;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; cursor: pointer; user-select: none; color: var(--fg); line-height: 1.2;
+    padding: 6px 0; background: transparent; border: 0; text-align: left; font-family: inherit;
+    transition: opacity 120ms ease;
   }
-  .legend-item.is-off { opacity: 0.35; }
-  .legend-item .swatch { flex-shrink: 0; width: 12px; height: 12px; border-radius: 999px; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.08); }
+  .legend-item.is-off { opacity: 0.30; }
+  .legend-item .swatch { flex-shrink: 0; width: 14px; height: 14px; border-radius: 999px; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.08); }
 
   .counter {
     position: absolute; top: 18px; right: 18px; z-index: 500;
@@ -95,7 +96,9 @@
 
   /* Mobile: shrink legend / counter so they don't dominate */
   @media (max-width: 700px) {
-    .legend { font-size: 11px; padding: 8px 10px; }
+    .legend { font-size: 11px; padding: 8px 10px; gap: 4px; max-width: 200px; }
+    .legend-item { font-size: 12px; padding: 3px 0; gap: 8px; }
+    .legend-item .swatch { width: 12px; height: 12px; }
     .counter { padding: 6px 10px; font-size: 11px; }
     .spot-marker .thumb { width: 36px; height: 45px; }
   }
@@ -202,23 +205,38 @@
   }
   updateCount();
 
+  // Legend behavior: clicking a chapter isolates it (deselects all others).
+  // Clicking the same chapter again -- when it is the only one active --
+  // toggles back to all-selected.
   const legend = document.getElementById('legend');
+  const items = [];
+  function applyState() {
+    items.forEach(({ num, el, grp }) => {
+      const on = activeChapters.has(num);
+      if (on && !map.hasLayer(grp)) grp.addTo(map);
+      if (!on && map.hasLayer(grp)) map.removeLayer(grp);
+      el.classList.toggle('is-off', !on);
+    });
+    updateCount();
+  }
+  const allChapters = new Set(LEGEND.map(c => c.number));
+  let activeChapters = new Set(allChapters);  // start with all on
+
   LEGEND.forEach(c => {
     const item = document.createElement('button');
     item.className = 'legend-item';
     item.innerHTML = '<span class="swatch" style="background: rgb(' + c.color + ');"></span>'
       + '<span>' + c.number + ' · ' + esc(c.name) + '</span>';
+    const grp = layers.get(c.number);
+    items.push({ num: c.number, el: item, grp });
     item.addEventListener('click', () => {
-      const grp = layers.get(c.number);
-      if (!grp) return;
-      if (map.hasLayer(grp)) {
-        map.removeLayer(grp);
-        item.classList.add('is-off');
+      const isSolo = activeChapters.size === 1 && activeChapters.has(c.number);
+      if (isSolo) {
+        activeChapters = new Set(allChapters);   // restore all
       } else {
-        grp.addTo(map);
-        item.classList.remove('is-off');
+        activeChapters = new Set([c.number]);    // isolate this chapter
       }
-      updateCount();
+      applyState();
     });
     legend.appendChild(item);
   });
