@@ -361,19 +361,11 @@ def render_four_col(p):
 </section>'''
 
 def render_top_six(p):
-    is_hidden = 'hidden' in p['title'].lower()
-    cls = 'grid-six blurred' if is_hidden else 'grid-six'
+    # /full/ is the paid edition -- the Hidden Gems are revealed, not blurred.
     tiles = '\n          '.join(
         f'<div class="gem"><img src="{img_url(t["image"], 2)}" alt="" />'
-        f'<div class="gem-name">{esc("█" * len(t["name"]) if is_hidden else t["name"])}</div></div>'
+        f'<div class="gem-name">{esc(t["name"])}</div></div>'
         for t in p.get('tiles', []))
-    overlay = ''
-    if is_hidden:
-        overlay = f'''<div class="blurred-overlay">
-            {LOCK_SVG}
-            <p>The full guide reveals all six.</p>
-            <a href="{WHOP}" target="_blank" rel="noopener">Unlock</a>
-          </div>'''
     return f'''<section class="slide slide-preface no-photo" id="{p.get("id","")}">
   <div class="pf-body">
     <p class="sp-kicker">{esc(p.get("kicker", ""))}</p>
@@ -381,10 +373,9 @@ def render_top_six(p):
     <p class="sp-deck">{esc(p.get("deck", ""))}</p>
   </div>
   <div class="pf-extras" style="flex-direction: column; gap: 10px;">
-    <div class="{cls}">
+    <div class="grid-six">
           {tiles}
-        </div>
-        {overlay}
+    </div>
   </div>
 </section>'''
 
