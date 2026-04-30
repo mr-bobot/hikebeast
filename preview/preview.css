@@ -536,7 +536,11 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 .slide-grid { display: none; }
 
 /* === Chapter cover (image left, dark text panel right) === */
-.slide-cover { background: #1d1d1f; color: #fff; }
+.slide-cover {
+  background: #1d1d1f;
+  color: #fff;
+  border: none;  /* drop the hairline border so the dark panel reads clean */
+}
 .slide-cover .cv-img {
   position: static;
   inset: auto;
@@ -626,35 +630,26 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   transform-origin: bottom right;
 }
 
-/* === Spread card (two photos side-by-side, no text) ===
- * Photos use object-fit: contain so the full image is visible; cells get a
- * dark frame so the letterboxing reads as intentional (gallery feel). */
+/* === Spread card (multi-photo, no text) ===
+ * Photos stack vertically and each one fills the full card width at its
+ * own native aspect ratio. No cropping, no letterboxing, no black bars. */
 .slide-spread {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: #1d1d1f;
-  gap: 1px;  /* hairline divider between the two photos */
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: none;  /* photos own the edges */
 }
 .slide-spread .sp-photo {
   position: relative;
-  background: #1d1d1f;
+  width: 100%;
+  background: var(--surface);
   overflow: hidden;
-  aspect-ratio: 1 / 1;
 }
 .slide-spread .sp-photo img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  height: auto;
+  object-fit: cover;
   display: block;
-}
-@media (min-width: 760px) {
-  .slide-spread .sp-photo { aspect-ratio: auto; height: 100%; }
-}
-/* On very narrow screens, stack the two photos vertically so each gets
-   the full card width — better than two cramped half-width photos. */
-@media (max-width: 540px) {
-  .slide-spread { grid-template-columns: 1fr; }
-  .slide-spread .sp-photo { aspect-ratio: 4 / 3; }
 }
 .slide-spread .credit-pill {
   background: rgba(0,0,0,0.65);
