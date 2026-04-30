@@ -231,7 +231,7 @@
         <div class="spot-popup">
           ${s.image ? '<img src="../img/' + s.image + '" alt="" />' : ''}
           <div class="body">
-            <p class="kicker">${esc(s.kicker || ('Chapter ' + s.chapter))}</p>
+            <p class="kicker">${esc(s.kicker || '')}</p>
             <h3>${esc(s.title)}</h3>
             <p class="meta">${esc(s.chapter_id.charAt(0).toUpperCase() + s.chapter_id.slice(1))} Switzerland</p>
             <a class="read" href="${s.href}">Read</a>
@@ -279,7 +279,7 @@
     const item = document.createElement('button');
     item.className = 'legend-item';
     item.innerHTML = '<span class="swatch" style="background: rgb(' + c.color + ');"></span>'
-      + '<span>' + c.number + ' · ' + esc(c.name) + '</span>';
+      + '<span>' + esc(c.name) + '</span>';
     const grp = layers.get(c.number);
     items.push({ num: c.number, el: item, grp });
     item.addEventListener('click', () => {

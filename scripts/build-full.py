@@ -226,7 +226,7 @@ def render_chapter_cover(ch):
     return f'''<section class="slide slide-cover" id="cover">
   <img class="cv-img" src="{img}" alt="" />
   <div class="cv-content">
-    <p class="cv-kicker">Chapter {esc(ch["number"])} · Region</p>
+    <p class="cv-kicker">Region</p>
     <h1>{esc(ch["name"])}</h1>
     <p class="cv-deck">{esc(ch["intro"])}</p>
   </div>
@@ -398,7 +398,7 @@ def render_map_summary(p):
         items.append(
             f'<div class="ms-item">'
             f'<span class="ms-bar" style="background:rgb({rgb});"></span>'
-            f'<div class="ms-text"><b>{esc(ch["number"])} · {esc(ch["name"])}</b>'
+            f'<div class="ms-text"><b>{esc(ch["name"])}</b>'
             f'<span>{esc(ch.get("description",""))}</span></div></div>')
     items_html = '\n          '.join(items)
     return f'''<section class="slide slide-preface no-photo" id="{p.get("id","")}">
@@ -475,7 +475,6 @@ def render_home():
         n_spots = sum(1 for s in spots if s.get('kind', 'spot') == 'spot')
         cards.append(f'''<a class="cc" href="{ch["id"]}/index.html">
         <div class="cc-photo">
-          <span class="cc-num">Chapter {esc(ch["number"])}</span>
           <img src="{thumb}" alt="{esc(ch["name"])}" />
         </div>
         <div class="cc-body">
@@ -848,7 +847,7 @@ def render_map_page():
         <div class="spot-popup">
           ${s.image ? '<img src="../img/' + s.image + '" alt="" />' : ''}
           <div class="body">
-            <p class="kicker">${esc(s.kicker || ('Chapter ' + s.chapter))}</p>
+            <p class="kicker">${esc(s.kicker || '')}</p>
             <h3>${esc(s.title)}</h3>
             <p class="meta">${esc(s.chapter_id.charAt(0).toUpperCase() + s.chapter_id.slice(1))} Switzerland</p>
             <a class="read" href="${s.href}">Read</a>
@@ -896,7 +895,7 @@ def render_map_page():
     const item = document.createElement('button');
     item.className = 'legend-item';
     item.innerHTML = '<span class="swatch" style="background: rgb(' + c.color + ');"></span>'
-      + '<span>' + c.number + ' · ' + esc(c.name) + '</span>';
+      + '<span>' + esc(c.name) + '</span>';
     const grp = layers.get(c.number);
     items.push({ num: c.number, el: item, grp });
     item.addEventListener('click', () => {
