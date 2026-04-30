@@ -1,4 +1,4 @@
-@/Users/lost/Library/Mobile Documents/iCloud~md~obsidian/Documents/thevault/00 Projects/Hikebeast/README.md
+@/Users/lost/Documents/Brain/00 Projects/Hikebeast/README.md
 
 This repo is part of the Hikebeast brand. Before any non-trivial task, read the brain README imported above and pull whatever's relevant.
 

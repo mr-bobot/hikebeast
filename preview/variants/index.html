@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Variants · Hidden Gems preview · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="stylesheet" href="../preview.css" />
+<style>
+  /* Layout for the variants showcase */
+  .vmain {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 36px 32px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .vsection { display: flex; flex-direction: column; gap: 12px; }
+  .vsection > h2 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px;
+    letter-spacing: -0.025em;
+    margin: 8px 0 0;
+    font-weight: 600;
+  }
+  .vsection > p.lead {
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 700px;
+  }
+  .vlabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
+    padding: 6px 12px;
+    background: var(--surface);
+    border-radius: 999px;
+    margin: 24px 0 4px;
+    align-self: flex-start;
+  }
+  .vlabel b { color: var(--fg); }
+
+  /* === Chapter title slide variants === */
+  /* Variant A is the existing .slide-cover. No new CSS needed. */
+
+  /* Variant B: full-bleed photo with bottom overlay */
+  .var-cover-b {
+    position: relative;
+    aspect-ratio: 2 / 1;
+    background: #1d1d1f;
+    color: #fff;
+    overflow: hidden;
+    display: block;
+  }
+  .var-cover-b > img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .var-cover-b::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.78) 100%);
+  }
+  .var-cover-b .cv-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 32px 40px 36px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .var-cover-b .cv-kicker {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin: 0;
+  }
+  .var-cover-b h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 52px;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    margin: 6px 0 0;
+    font-weight: 700;
+  }
+  .var-cover-b .cv-deck {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.88;
+    max-width: 60%;
+  }
+  @media (min-width: 1100px) {
+    .var-cover-b h1 { font-size: 72px; }
+    .var-cover-b .cv-deck { font-size: 16px; }
+  }
+
+  /* Variant C: title left + photo right (title-led) */
+  .var-cover-c {
+    aspect-ratio: 2 / 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    background: #f5f5f7;
+    color: var(--fg);
+  }
+  .var-cover-c .cv-content {
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+  .var-cover-c .cv-kicker {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .var-cover-c h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 56px;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    margin: 14px 0 0;
+    font-weight: 700;
+  }
+  .var-cover-c .cv-deck {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .var-cover-c img {
+    width: 100%; height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+  @media (min-width: 1100px) {
+    .var-cover-c h1 { font-size: 76px; }
+    .var-cover-c .cv-deck { font-size: 16px; }
+  }
+
+  /* === Single bonus photo card variants === */
+  .slide-photo {
+    aspect-ratio: 2 / 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .slide-photo .ph-img { background: var(--surface); overflow: hidden; }
+  .slide-photo .ph-img img {
+    width: 100%; height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+  .slide-photo .ph-body {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .slide-photo .ph-kicker {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .slide-photo .ph-cap {
+    margin: 0;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .slide-photo .ph-credit {
+    margin: 0;
+    font-size: 12px;
+    color: var(--soft);
+    font-style: italic;
+  }
+  @media (min-width: 1100px) {
+    .slide-photo .ph-body { padding: 40px 48px; gap: 10px; }
+    .slide-photo .ph-cap { font-size: 28px; }
+  }
+
+  /* α photo-left (default) — no extra rules */
+
+  /* β photo-right (mirror direction) */
+  .slide-photo.var-b .ph-img { order: 2; }
+  .slide-photo.var-b .ph-body { order: 1; align-items: flex-end; text-align: right; }
+
+  /* γ full-bleed photo with caption overlay */
+  .slide-photo-bleed {
+    aspect-ratio: 2 / 1;
+    position: relative;
+    overflow: hidden;
+    background: #1d1d1f;
+    display: block;
+  }
+  .slide-photo-bleed > img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .slide-photo-bleed::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.55) 100%);
+  }
+  .slide-photo-bleed .ph-body {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px 32px 28px;
+    z-index: 1;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .slide-photo-bleed .ph-kicker {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin: 0;
+  }
+  .slide-photo-bleed .ph-cap {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0;
+    font-weight: 600;
+  }
+  .slide-photo-bleed .ph-credit {
+    margin: 0;
+    font-size: 11px;
+    opacity: 0.75;
+    font-style: italic;
+  }
+
+  /* === Dual photo card variants === */
+  .slide-photos {
+    aspect-ratio: 2 / 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    background: #1d1d1f;
+  }
+  .slide-photos .ph-cell {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+  }
+  .slide-photos .ph-cell img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* δ: pure side-by-side, no chrome (default) */
+
+  /* ε: with overlay credit pills on each photo */
+  .slide-photos.var-b .ph-cell .credit {
+    position: absolute;
+    bottom: 12px; left: 12px;
+    background: rgba(0,0,0,0.6);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-style: italic;
+  }
+
+  /* ζ: thin frame with caption strip below the two photos */
+  .slide-photos-strip {
+    aspect-ratio: 2 / 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    background: var(--paper);
+    padding: 0;
+  }
+  .slide-photos-strip .ph-cell {
+    overflow: hidden;
+    background: var(--surface);
+    position: relative;
+  }
+  .slide-photos-strip .ph-cell img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .slide-photos-strip .ph-strip {
+    grid-column: 1 / -1;
+    padding: 12px 22px;
+    background: var(--surface);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    border-top: 1px solid var(--hairline);
+  }
+  .slide-photos-strip .ph-strip b { color: var(--fg); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../../images/avatar.jpg" alt="" />
+    <span>Hidden Gems · Variants</span>
+  </a>
+  <span class="crumb">Design picker</span>
+  <div class="topbar-right">
+    <a class="pill" href="../index.html">Back to home</a>
+  </div>
+</div>
+
+<main class="vmain">
+
+  <!-- ========================== -->
+  <!-- Chapter title slide variants -->
+  <!-- ========================== -->
+  <section class="vsection">
+    <h2>Chapter title slide · variants</h2>
+    <p class="lead">Three options for the first card on a chapter page. All cards stay 2:1 to keep "every page same size".</p>
+
+    <div class="vlabel"><span>Variant</span><b>A · current</b><span>· photo left, dark text panel right</span></div>
+    <section class="slide slide-cover">
+      <img class="cv-img" src="../img/chapter-central.jpg" alt="" />
+      <div class="cv-content">
+        <p class="cv-kicker">Chapter 01 · Region</p>
+        <h1>Central Switzerland</h1>
+        <p class="cv-deck">Waterfalls, glacier lakes and iron bridges strung across gorges so deep they hum. The heart of this guide.</p>
+      </div>
+    </section>
+
+    <div class="vlabel"><span>Variant</span><b>B</b><span>· full-bleed photo with title overlay</span></div>
+    <section class="slide var-cover-b">
+      <img src="../img/chapter-central.jpg" alt="" />
+      <div class="cv-content">
+        <p class="cv-kicker">Chapter 01 · Region</p>
+        <h1>Central Switzerland</h1>
+        <p class="cv-deck">Waterfalls, glacier lakes and iron bridges. The heart of this guide.</p>
+      </div>
+    </section>
+
+    <div class="vlabel"><span>Variant</span><b>C</b><span>· title left, photo right (title-led)</span></div>
+    <section class="slide var-cover-c">
+      <div class="cv-content">
+        <p class="cv-kicker">Chapter 01 · Region</p>
+        <h1>Central<br/>Switzerland</h1>
+        <p class="cv-deck">Waterfalls, glacier lakes and iron bridges strung across gorges so deep they hum.</p>
+      </div>
+      <img src="../img/chapter-central.jpg" alt="" />
+    </section>
+  </section>
+
+  <!-- ========================== -->
+  <!-- Bonus photo · single image -->
+  <!-- ========================== -->
+  <section class="vsection">
+    <h2>Bonus photo · single image card</h2>
+    <p class="lead">Used when a spot has 2 photos: photo 1 lives on the spot card, photo 2 gets its own card right after. Three layout options.</p>
+
+    <div class="vlabel"><span>Variant</span><b>α</b><span>· photo left, label and credit right</span></div>
+    <section class="slide slide-photo">
+      <div class="ph-img"><img src="../img/triftsee.jpg" alt="" /></div>
+      <div class="ph-body">
+        <p class="ph-kicker">Triftbrücke · Photo 2 of 2</p>
+        <h3 class="ph-cap">The lake behind the bridge.</h3>
+        <p class="ph-credit">Photo · @steffi_inswiss</p>
+      </div>
+    </section>
+
+    <div class="vlabel"><span>Variant</span><b>β</b><span>· mirror — photo right, label left (good for alternating)</span></div>
+    <section class="slide slide-photo var-b">
+      <div class="ph-img"><img src="../img/triftsee.jpg" alt="" /></div>
+      <div class="ph-body">
+        <p class="ph-kicker">Triftbrücke · Photo 2 of 2</p>
+        <h3 class="ph-cap">The lake behind the bridge.</h3>
+        <p class="ph-credit">Photo · @steffi_inswiss</p>
+      </div>
+    </section>
+
+    <div class="vlabel"><span>Variant</span><b>γ</b><span>· full-bleed photo with caption overlay</span></div>
+    <section class="slide slide-photo-bleed">
+      <img src="../img/triftsee.jpg" alt="" />
+      <div class="ph-body">
+        <p class="ph-kicker">Triftbrücke · Photo 2 of 2</p>
+        <h3 class="ph-cap">The lake behind the bridge.</h3>
+        <p class="ph-credit">Photo · @steffi_inswiss</p>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========================== -->
+  <!-- Bonus photos · two images -->
+  <!-- ========================== -->
+  <section class="vsection">
+    <h2>Bonus photos · two-image card</h2>
+    <p class="lead">Used when a spot has 3 photos: photo 1 stays on the spot card, photos 2 and 3 share a card right after. Three layout options.</p>
+
+    <div class="vlabel"><span>Variant</span><b>δ</b><span>· pure side-by-side, no chrome</span></div>
+    <section class="slide slide-photos">
+      <div class="ph-cell"><img src="../img/triftsee.jpg" alt="" /></div>
+      <div class="ph-cell"><img src="../img/limmernsee.jpg" alt="" /></div>
+    </section>
+
+    <div class="vlabel"><span>Variant</span><b>ε</b><span>· side-by-side with overlay credit pill on each photo</span></div>
+    <section class="slide slide-photos var-b">
+      <div class="ph-cell">
+        <img src="../img/triftsee.jpg" alt="" />
+        <span class="credit">@steffi_inswiss</span>
+      </div>
+      <div class="ph-cell">
+        <img src="../img/limmernsee.jpg" alt="" />
+        <span class="credit">@leon.helg</span>
+      </div>
+    </section>
+
+    <div class="vlabel"><span>Variant</span><b>ζ</b><span>· side-by-side with caption strip below</span></div>
+    <section class="slide slide-photos-strip">
+      <div class="ph-cell"><img src="../img/triftsee.jpg" alt="" /></div>
+      <div class="ph-cell"><img src="../img/limmernsee.jpg" alt="" /></div>
+      <div class="ph-strip">
+        <span><b>Triftbrücke · 3 of 3 photos</b></span>
+        <span>Photos · @steffi_inswiss, @leon.helg</span>
+      </div>
+    </section>
+  </section>
+
+</main>
+
+</body>
+</html>

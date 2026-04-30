@@ -5,38 +5,56 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /preview/
+Disallow: /full/
 
-# AI search crawlers — explicitly allowed for citation in generative answers
+# AI search crawlers — explicitly disallowed from /full/ and /preview/
+# (those are paid-customer / pre-launch areas, not for ingestion)
 User-agent: GPTBot
 Allow: /
 Disallow: /api/
+Disallow: /preview/
+Disallow: /full/
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /api/
+Disallow: /preview/
+Disallow: /full/
 
 User-agent: Claude-Web
 Allow: /
 Disallow: /api/
+Disallow: /preview/
+Disallow: /full/
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /api/
+Disallow: /preview/
+Disallow: /full/
 
 User-agent: Google-Extended
 Allow: /
 Disallow: /api/
+Disallow: /preview/
+Disallow: /full/
 
 User-agent: CCBot
 Allow: /
 Disallow: /api/
+Disallow: /preview/
+Disallow: /full/
 
 User-agent: Applebot-Extended
 Allow: /
 Disallow: /api/
+Disallow: /preview/
+Disallow: /full/
 
 User-agent: Bingbot
 Allow: /
 Disallow: /api/
+Disallow: /preview/
+Disallow: /full/
 
 Sitemap: https://hikebeast.ch/sitemap.xml
