@@ -1,0 +1,1233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Switzerland Map · 100+ Hidden Swiss Spots with GPS</title>
+<meta name="description" content="The Switzerland map of 100+ secret spots that aren't on the tourist map. Exact GPS, hike difficulty, wild-camp legality. Lifetime updates." />
+<link rel="canonical" href="https://hikebeast.ch/map/" />
+<link rel="alternate" hreflang="en" href="https://hikebeast.ch/map/" />
+<link rel="alternate" hreflang="x-default" href="https://hikebeast.ch/map/" />
+<link rel="icon" type="image/jpeg" href="../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../images/favicon.jpg" />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta property="og:type" content="product" />
+<meta property="og:site_name" content="Hikebeast" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Switzerland Map · 100+ Hidden Spots" />
+<meta property="og:description" content="100+ secret Swiss spots, exact GPS, lifetime updates." />
+<meta property="og:url" content="https://hikebeast.ch/map/" />
+<meta property="og:image" content="https://hikebeast.ch/map/img/hero-1-cover.jpg" />
+<meta property="og:image:width" content="1280" />
+<meta property="og:image:height" content="720" />
+<meta property="og:image:alt" content="Switzerland Map · 100+ Hidden Spots" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Switzerland Map · 100+ Hidden Spots" />
+<meta name="twitter:description" content="100+ secret Swiss spots, exact GPS, lifetime updates." />
+<meta name="twitter:image" content="https://hikebeast.ch/map/img/hero-1-cover.jpg" />
+
+<!-- Vercel Analytics -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1658000685240569');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {
+  content_name: 'Swiss Hidden Gems Map',
+  content_category: 'Map',
+  value: 27.00,
+  currency: 'CHF'
+});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
+/></noscript>
+
+<!-- Stripe.js -->
+<script src="https://js.stripe.com/v3/" defer></script>
+
+<!-- Schema.org Product -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Switzerland Map · Swiss Hidden Gems",
+  "description": "The Switzerland map of 100+ secret spots with exact GPS, hike difficulty, and wild-camp legality. Lifetime updates.",
+  "image": "https://hikebeast.ch/map/img/hero-1-cover.jpg",
+  "brand": { "@type": "Brand", "name": "Hikebeast" },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://hikebeast.ch/map/",
+    "priceCurrency": "CHF",
+    "price": "27.00",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html,body { margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f5f7;
+    --fg: #1d1d1f;
+    --muted: #6e6e73;
+    --hairline: rgba(0,0,0,0.08);
+    --accent: #0071e3;
+    --success: #34c759;
+    --warn: #ff9500;
+    --radius-card: 18px;
+    --radius-btn: 980px;
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.47;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    padding: env(safe-area-inset-top) 0 calc(env(safe-area-inset-bottom) + 72px) 0;
+  }
+
+  /* === Navbar === */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.78);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--hairline);
+    padding: 10px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  }
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--fg);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .navbar-brand img {
+    width: 26px; height: 26px;
+    border-radius: 999px;
+    object-fit: cover;
+    object-position: 70% 45%;
+    display: block;
+  }
+  .currency-toggle {
+    appearance: none;
+    border: 1px solid var(--hairline);
+    background: rgba(255,255,255,0.9);
+    color: var(--fg);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: -0.005em;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 150ms ease, transform 100ms ease;
+  }
+  .currency-toggle:active { transform: scale(0.97); }
+
+  /* === Layout === */
+  main {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 14px 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .px { padding-left: 22px; padding-right: 22px; }
+
+  /* === Hero === */
+  .info-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    border-radius: 12px;
+    background: var(--surface);
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg);
+    letter-spacing: -0.005em;
+  }
+  .info-bar .info-left,
+  .info-bar .info-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 16px;
+  }
+  .info-bar .info-right {
+    border-left: 1px solid var(--hairline);
+  }
+  .info-bar .info-avatar {
+    width: 22px; height: 22px;
+    border-radius: 999px;
+    overflow: hidden;
+    display: inline-block;
+  }
+  .info-bar .info-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: 70% 45%;
+    display: block;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+  }
+  h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 28px;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    margin: 0;
+    font-weight: 600;
+  }
+  ul.hero-bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+  }
+  ul.hero-bullets li {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  ul.hero-bullets li::before {
+    content: "";
+    display: block;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background-color: rgba(52, 199, 89, 0.15);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334c759' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
+    background-size: 13px 13px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .meta {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    align-items: center;
+    margin-top: 4px;
+  }
+  .meta .stars { color: var(--warn); letter-spacing: 1px; font-size: 13px; }
+  .meta .sep {
+    width: 1px; height: 12px;
+    background: var(--hairline);
+    display: inline-block;
+  }
+
+  .audiences {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    justify-content: flex-start;
+  }
+  .audiences span {
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--fg);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
+  /* === Carousel === */
+  .carousel-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  /* Full-bleed slides on mobile. Rounded top/bottom corners stay visible;
+     left/right corners clip into the viewport edge, which is fine. */
+  .carousel {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+    scrollbar-width: none;
+  }
+  .carousel::-webkit-scrollbar { display: none; }
+  /* Slides are raw photos — no frame, no bg, no rounded corners, no shadow.
+     Anything else creates a visible "card-on-page" feel that reads as a
+     border. The image is the slide. */
+  .carousel .slide {
+    flex: 0 0 100%;
+    aspect-ratio: 16 / 9;
+    scroll-snap-align: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .carousel .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding-top: 6px;
+  }
+  .dots span {
+    width: 6px; height: 6px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.15);
+    transition: background 150ms ease, transform 150ms ease;
+  }
+  .dots span.active {
+    background: var(--fg);
+    transform: scale(1.15);
+  }
+
+  /* === Section heads === */
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .section-head h2 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin: 0;
+    font-weight: 600;
+  }
+  .section-head p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* === Collection grid · full-bleed photo grid above the 6 cards === */
+  .collection-grid {
+    width: 100%;
+    display: block;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    aspect-ratio: 1600 / 1080;
+    background-color: #ffffff;
+  }
+  .collection-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* === What's inside (signature bullets) ·
+     Horizontal scroll-snap, 2 cards visible at once with a peek of the
+     third on the right. Mirrors the testimonials/hero carousel pattern. */
+  .inside {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 22px;
+    scrollbar-width: none;
+  }
+  .inside::-webkit-scrollbar { display: none; }
+  .inside-card {
+    flex: 0 0 calc(50% - 24px);
+    scroll-snap-align: start;
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .inside-card .ico-box {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 113, 227, 0.08);
+    font-size: 22px;
+    line-height: 1;
+    /* Emojis carry their own color, so no `color` rule needed here. */
+    margin-bottom: 6px;
+  }
+  .inside-card h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .inside-card p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
+  /* === Embedded checkout === */
+  .checkout-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  #checkout {
+    min-height: 480px;
+    border-radius: var(--radius-card);
+    background: var(--surface);
+    overflow: hidden;
+  }
+  /* Stripe injects its own iframe; clear our placeholder bg once mounted */
+  #checkout.is-mounted { background: transparent; }
+  .checkout-skeleton {
+    height: 480px;
+    background: linear-gradient(90deg, var(--surface) 0%, #ececef 50%, var(--surface) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+    border-radius: var(--radius-card);
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  .checkout-error {
+    padding: 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .checkout-error a { color: var(--accent); }
+
+  /* === Stripe-style mockup ·
+     Visual stand-in shown when STRIPE_SECRET_KEY isn't configured yet.
+     Looks like the real embedded Stripe Checkout iframe (express buttons +
+     email + card fields + pay button + powered-by-stripe footer) so the
+     page can be QA'd end-to-end without keys. The form is non-interactive;
+     a small "Preview" badge in the corner makes that visible. */
+  .checkout-mock {
+    background: #ffffff;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--hairline);
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+  }
+  .checkout-mock .mock-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 3px 8px;
+  }
+  .checkout-mock .mock-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .checkout-mock .mock-wallets {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .checkout-mock .mock-btn {
+    height: 44px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    user-select: none;
+  }
+  .checkout-mock .mock-btn.apple {
+    background: #000000;
+    color: #ffffff;
+  }
+  .checkout-mock .mock-btn.gpay {
+    background: #ffffff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    font-family: "Roboto", -apple-system, sans-serif;
+  }
+  .checkout-mock .mock-btn.twint {
+    background: #000000;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .checkout-mock .mock-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 12px;
+    margin: 4px 0 2px;
+  }
+  .checkout-mock .mock-divider::before,
+  .checkout-mock .mock-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hairline);
+  }
+  .checkout-mock .mock-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: -6px;
+    letter-spacing: -0.01em;
+  }
+  .checkout-mock .mock-input {
+    height: 42px;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 14px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+  }
+  .checkout-mock .mock-input.with-icons {
+    justify-content: space-between;
+  }
+  .checkout-mock .mock-card-icons {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .checkout-mock .mock-card-icons span {
+    width: 26px;
+    height: 16px;
+    border-radius: 3px;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    font-size: 8px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .checkout-mock .mock-pay {
+    height: 46px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #ffffff;
+    display: grid;
+    place-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 4px;
+    user-select: none;
+  }
+  .checkout-mock .mock-foot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    padding-top: 4px;
+  }
+  .checkout-mock .mock-foot strong {
+    color: #635bff;
+    font-weight: 700;
+  }
+
+  /* === Reviews · swipeable carousel === */
+  .reviews-carousel {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 22px;
+    scrollbar-width: none;
+  }
+  .reviews-carousel::-webkit-scrollbar { display: none; }
+  /* White card with hairline so reviews read as distinct from the
+     surface-grey "What's inside" cards above. */
+  .review-card {
+    flex: 0 0 calc(100% - 60px);
+    scroll-snap-align: center;
+    background: #ffffff;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-card);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .review-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .review-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    overflow: hidden;
+  }
+  .review-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* All review avatars now use real or placeholder photos via <img> · the
+     `.is-placeholder` colour fallbacks were removed. */
+  .review-id {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .review-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .review-handle {
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+  }
+  .review-handle:hover { text-decoration: underline; }
+  .review-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+  .review-meta .stars { color: var(--warn); letter-spacing: 1px; font-size: 13px; }
+  .review-quote {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--fg);
+    letter-spacing: -0.005em;
+  }
+
+  /* === FAQ === */
+  .faq details {
+    border-bottom: 1px solid var(--hairline);
+    padding: 14px 0;
+  }
+  .faq details:first-of-type { border-top: 1px solid var(--hairline); }
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+";
+    font-size: 20px;
+    line-height: 1;
+    color: var(--muted);
+    font-weight: 400;
+    transition: transform 150ms ease;
+  }
+  .faq details[open] summary::after {
+    content: "−";
+  }
+  .faq details p {
+    margin: 8px 0 0;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* === Trust + footer === */
+  .trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 4px;
+  }
+  .trust-row .sep {
+    width: 1px; height: 12px;
+    background: var(--hairline);
+  }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+    padding-top: 8px;
+  }
+  .footer a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  /* === Sticky bottom buy bar (mobile) === */
+  .sticky-buy {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,0.86);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-top: 1px solid var(--hairline);
+    transform: translateY(100%);
+    transition: transform 220ms ease;
+  }
+  .sticky-buy.is-visible { transform: translateY(0); }
+  .sticky-buy .buy-btn {
+    display: block;
+    width: 100%;
+    max-width: 412px;
+    margin: 0 auto;
+    padding: 14px 22px;
+    border-radius: var(--radius-btn);
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .sticky-buy .buy-btn:active { transform: scale(0.98); }
+
+  @media (min-width: 720px) {
+    .sticky-buy { display: none; }
+    body { padding-bottom: env(safe-area-inset-bottom); }
+  }
+</style>
+</head>
+<body>
+  <header class="navbar">
+    <a class="navbar-brand" href="/">
+      <img src="../images/avatar.jpg" alt="" />
+      Hikebeast
+    </a>
+    <button type="button" class="currency-toggle" aria-label="Change currency">
+      <span class="currency-label">CHF</span> ▾
+    </button>
+  </header>
+
+  <main>
+    <!-- Hero · carousel first, then text. The cover slide already shows the
+         product name "Hidden Gems" so the visual leads, the text confirms. -->
+    <section class="hero" style="display:flex;flex-direction:column;gap:12px;">
+      <!-- Carousel -->
+      <div class="carousel-wrap">
+        <div class="carousel" id="hero-carousel">
+          <div class="slide"><img src="img/hero-1-cover.jpg" alt="Hidden Gems · cover" loading="eager" fetchpriority="high" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-3-polished.jpg" alt="A polished guide, in your pocket" loading="eager" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-2-mapped.jpg" alt="122 spots, one map" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-4-spot.jpg" alt="Batöni Wasserfallarena · spot detail" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-5-wildcamp.jpg" alt="Where you can wildcamp" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-6-features.jpg" alt="Everything you need, nothing you don't" loading="lazy" decoding="async" /></div>
+        </div>
+        <div class="dots" id="hero-dots">
+          <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="px">
+        <div class="info-bar">
+          <span class="info-left">
+            <span class="price-display">CHF 27</span> · lifetime
+          </span>
+          <span class="info-right">
+            <span class="stars" style="color: var(--warn); letter-spacing: 1px; font-size: 13px;">★★★★★</span>
+            5.0
+          </span>
+        </div>
+      </div>
+
+      <div class="px hero-text">
+        <h1>Switzerland Map 🇨🇭</h1>
+        <ul class="hero-bullets">
+          <li>122 Hidden Gems + How to Get There</li>
+          <li>Exact Location for every spot</li>
+          <li>Hiking &amp; Camping Information</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- What's inside · signature bullet cards · horizontally scrollable -->
+    <section>
+      <!-- Photo collection grid · visual proof of what 122 spots looks like.
+           Sits inside .px so it has side padding (the carousel above is
+           full-bleed by design; this one breathes). -->
+      <div class="px">
+        <div class="collection-grid">
+          <img src="img/collection.jpg" alt="A grid of fifteen hidden Swiss spots from the guide" loading="lazy" decoding="async" />
+        </div>
+      </div>
+      <div class="px section-head" style="margin-top: 36px;">
+        <h2>What's inside</h2>
+        <p>Five years of exploring went into this list.</p>
+      </div>
+      <div class="inside">
+        <div class="inside-card">
+          <div class="ico-box" aria-hidden="true">📷</div>
+          <h3>Photo info</h3>
+          <p>Best hour and best season per spot, learned the hard way.</p>
+        </div>
+        <div class="inside-card">
+          <div class="ico-box" aria-hidden="true">📲</div>
+          <h3>Offline use</h3>
+          <p>A downloadable PDF works even without signal on the trail.</p>
+        </div>
+        <div class="inside-card">
+          <div class="ico-box" aria-hidden="true">⛺</div>
+          <h3>Wildcamp info</h3>
+          <p>Spots where you can wildcamp without any cortisol spikes.</p>
+        </div>
+        <div class="inside-card">
+          <div class="ico-box" aria-hidden="true">📍</div>
+          <h3>Exact Location</h3>
+          <p>Coordinates that drop you on the exact spot.</p>
+        </div>
+        <div class="inside-card">
+          <div class="ico-box" aria-hidden="true">💎</div>
+          <h3>122 Spots</h3>
+          <p>The best gems of Switzerland. Some famous, most aren't.</p>
+        </div>
+        <div class="inside-card">
+          <div class="ico-box" aria-hidden="true">🥾</div>
+          <h3>Hike info</h3>
+          <p>Trail and difficulty. So you know what you're walking into.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews · swipeable carousel · real testimonials collected from buyers
+         (avatars pulled from public IG og:image where available). -->
+    <section class="reviews">
+      <div class="px section-head">
+        <h2>What people say</h2>
+      </div>
+      <div class="reviews-carousel">
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="img/avatars/dimi_tt7.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Dimi</span>
+              <a class="review-handle" href="https://www.instagram.com/dimi_tt7" target="_blank" rel="noopener">@dimi_tt7</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"I saved so many locations for this summer."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="img/avatars/emirhansyz.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Emirhan</span>
+              <a class="review-handle" href="https://www.instagram.com/emirhansyz" target="_blank" rel="noopener">@emirhansyz</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"Überblick mit der Minimap usw so gut."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="img/avatars/jules.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Jules</span>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"I was in Switzerland for 14 days and went to 20 places from the list. Best holiday I EVER had."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="img/avatars/martin.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Martin</span>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"Had the best wildcamping trip ever to the first spot I tried!"</p>
+        </div>
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="img/avatars/andres.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Andrés</span>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"I bought 2 other Switzerland guides before that and this is by far the best."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="img/avatars/oliwear_j.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Oli</span>
+              <a class="review-handle" href="https://www.instagram.com/oliwear.j/" target="_blank" rel="noopener">@oliwear.j</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"I taught Leon half of this list but hey, it's a good one 😄"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Embedded Stripe Checkout -->
+    <section class="px">
+      <div class="section-head">
+        <h2>Get the map</h2>
+        <p>Apple Pay, TWINT, card. Delivered to your inbox in seconds.</p>
+      </div>
+      <div class="checkout-wrap">
+        <div id="checkout">
+          <div class="checkout-skeleton"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust row -->
+    <div class="px trust-row">
+      <span>🔒 Secured by Stripe</span>
+      <span class="sep"></span>
+      <span>↩ 30-day refund</span>
+      <span class="sep"></span>
+      <span>🇨🇭 Saftladen GmbH</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer px">
+      <div>© Hikebeast · Saftladen GmbH</div>
+      <div><a href="/imprint.html">Imprint</a> · <a href="/privacy.html">Privacy</a></div>
+    </footer>
+  </main>
+
+  <!-- Sticky bottom buy bar (mobile) -->
+  <div class="sticky-buy" id="sticky-buy">
+    <a class="buy-btn" href="#checkout">Buy · <span class="price-display">CHF 27</span></a>
+  </div>
+
+<script>
+(function () {
+  // ---------- Currency state ----------
+  // For v1 default to CHF; user can cycle via the topbar toggle.
+  // IP-based default could be wired later via a small edge endpoint.
+  const CURRENCIES = ["chf", "eur", "usd"];
+  const CURRENCY_LABELS = { chf: "CHF", eur: "EUR", usd: "USD" };
+  let currentCurrency = (localStorage.getItem("hb_currency") || "chf").toLowerCase();
+  if (!CURRENCIES.includes(currentCurrency)) currentCurrency = "chf";
+
+  // Cohort tracking forwarded into Stripe session metadata
+  const params = new URLSearchParams(location.search);
+  const cohortToken = params.get("t") || "";
+  const cohortSubscriber = params.get("s") || "";
+  const utmSource = params.get("utm_source") || "";
+  const utmMedium = params.get("utm_medium") || "";
+  const utmCampaign = params.get("utm_campaign") || "";
+
+  function renderPrice() {
+    const label = CURRENCY_LABELS[currentCurrency] || "CHF";
+    document.querySelectorAll(".price-display").forEach((el) => {
+      el.textContent = `${label} 27`;
+    });
+    document.querySelectorAll(".currency-label").forEach((el) => {
+      el.textContent = label;
+    });
+  }
+  renderPrice();
+
+  // ---------- Carousel: dot indicators (swipe-only, no arrows) ----------
+  const carousel = document.getElementById("hero-carousel");
+  const dotEls = document.querySelectorAll("#hero-dots span");
+
+  if (carousel && dotEls.length && "IntersectionObserver" in window) {
+    const slides = carousel.querySelectorAll(".slide");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && e.intersectionRatio > 0.6) {
+            const idx = Array.prototype.indexOf.call(slides, e.target);
+            dotEls.forEach((d, i) => d.classList.toggle("active", i === idx));
+          }
+        });
+      },
+      { root: carousel, threshold: [0, 0.6, 1] }
+    );
+    slides.forEach((s) => io.observe(s));
+  }
+
+  // ---------- Sticky buy bar visibility ----------
+  const stickyBuy = document.getElementById("sticky-buy");
+  const heroEl = document.querySelector(".hero");
+  if (stickyBuy && heroEl && "IntersectionObserver" in window) {
+    const heroIo = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          // Show the sticky bar once the hero scrolls out of view.
+          stickyBuy.classList.toggle("is-visible", !e.isIntersecting);
+        });
+      },
+      { rootMargin: "-40% 0px 0px 0px" }
+    );
+    heroIo.observe(heroEl);
+  }
+
+  // ---------- Stripe embedded checkout ----------
+  let stripe = null;
+  let checkout = null;
+  let mountInFlight = false;
+
+  // Visual stand-in shown when STRIPE_SECRET_KEY isn't configured yet.
+  // Mirrors the layout of Stripe's real embedded iframe so the page can be
+  // QA'd without keys. Form fields are non-interactive.
+  function renderCheckoutMock(container) {
+    const label = CURRENCY_LABELS[currentCurrency] || "CHF";
+    container.classList.remove("is-mounted");
+    container.innerHTML = `
+      <div class="checkout-mock" aria-hidden="true">
+        <span class="mock-badge">Preview</span>
+        <div class="mock-wallets">
+          <div class="mock-btn apple">Apple Pay</div>
+          <div class="mock-btn twint">TWINT</div>
+          <div class="mock-btn gpay">G Pay</div>
+        </div>
+        <div class="mock-divider">Or pay with card</div>
+        <div class="mock-label">Email</div>
+        <div class="mock-input">you@example.com</div>
+        <div class="mock-label">Card information</div>
+        <div class="mock-input with-icons">
+          <span>1234 1234 1234 1234</span>
+          <span class="mock-card-icons">
+            <span>VISA</span><span>MC</span><span>AMEX</span>
+          </span>
+        </div>
+        <div class="mock-row">
+          <div class="mock-input">MM / YY</div>
+          <div class="mock-input">CVC</div>
+        </div>
+        <div class="mock-label">Country</div>
+        <div class="mock-input">Switzerland</div>
+        <div class="mock-pay">Pay ${label} 27</div>
+        <div class="mock-foot">Powered by <strong>stripe</strong> · Terms · Privacy</div>
+      </div>
+    `;
+  }
+
+  async function mountCheckout() {
+    if (mountInFlight) return;
+    mountInFlight = true;
+    const container = document.getElementById("checkout");
+    container.classList.remove("is-mounted");
+    container.innerHTML = '<div class="checkout-skeleton"></div>';
+
+    try {
+      const res = await fetch("/api/checkout/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currency: currentCurrency,
+          t: cohortToken,
+          s: cohortSubscriber,
+          utm_source: utmSource,
+          utm_medium: utmMedium,
+          utm_campaign: utmCampaign,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        // Stripe keys missing or no Price for the chosen currency: fall back
+        // to the visual mockup so the page still looks complete during setup.
+        if (data.error === "stripe_not_configured" || data.error === "price_not_configured") {
+          renderCheckoutMock(container);
+          return;
+        }
+        container.innerHTML =
+          `<div class="checkout-error">Something went wrong on our side. Email <a href="mailto:leon@hikebeast.ch">leon@hikebeast.ch</a> and we'll sort it.</div>`;
+        return;
+      }
+
+      const data = await res.json();
+      const { client_secret: clientSecret, publishable_key: publishableKey } = data;
+      if (!clientSecret || !publishableKey) {
+        renderCheckoutMock(container);
+        return;
+      }
+
+      // Wait for Stripe.js to load if it hasn't yet (script tag is `defer`).
+      if (typeof Stripe === "undefined") {
+        await new Promise((r) => {
+          const i = setInterval(() => {
+            if (typeof Stripe !== "undefined") { clearInterval(i); r(); }
+          }, 50);
+        });
+      }
+
+      if (!stripe) stripe = Stripe(publishableKey);
+      if (checkout) {
+        try { await checkout.destroy(); } catch (e) { /* noop */ }
+        checkout = null;
+      }
+
+      checkout = await stripe.initEmbeddedCheckout({ clientSecret });
+      container.innerHTML = "";
+      container.classList.add("is-mounted");
+      checkout.mount("#checkout");
+
+      // InitiateCheckout signal for Meta
+      if (typeof fbq === "function") {
+        fbq("track", "InitiateCheckout", {
+          value: 27.0,
+          currency: currentCurrency.toUpperCase(),
+        });
+      }
+    } catch (err) {
+      console.error("Checkout mount failed:", err);
+      container.innerHTML =
+        '<div class="checkout-error">Network error. Try again or email <a href="mailto:leon@hikebeast.ch">leon@hikebeast.ch</a>.</div>';
+    } finally {
+      mountInFlight = false;
+    }
+  }
+
+  // Auto-mount checkout when the page is interactive
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", mountCheckout);
+  } else {
+    mountCheckout();
+  }
+
+  // ---------- Currency toggle ----------
+  document.querySelector(".currency-toggle")?.addEventListener("click", () => {
+    const idx = CURRENCIES.indexOf(currentCurrency);
+    currentCurrency = CURRENCIES[(idx + 1) % CURRENCIES.length];
+    localStorage.setItem("hb_currency", currentCurrency);
+    renderPrice();
+    mountCheckout();
+  });
+
+  // ---------- Page-visit ping for the funnel sheet ----------
+  // Reuses the existing /api/visit endpoint that the other landings use.
+  try {
+    fetch("/api/visit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        page: "map",
+        token: cohortToken,
+        subscriber_id: cohortSubscriber,
+        utm_source: utmSource,
+        utm_medium: utmMedium,
+        utm_campaign: utmCampaign,
+      }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch (e) { /* noop */ }
+})();
+</script>
+</body>
+</html>

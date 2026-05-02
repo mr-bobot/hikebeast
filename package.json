@@ -7,6 +7,8 @@
     "build:llms": "node scripts/build-llms.mjs"
   },
   "dependencies": {
-    "resend": "^4.0.0"
+    "@vercel/blob": "^0.27.0",
+    "resend": "^4.0.0",
+    "stripe": "^17.5.0"
   }
 }

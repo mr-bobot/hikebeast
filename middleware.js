@@ -1,11 +1,17 @@
-// Vercel Edge Middleware -- gates /full/* behind a signed session cookie.
+// Vercel Edge Middleware -- gates /full/* and /map/* behind a signed
+// session cookie.
 //
 // Flow:
-//   1. User hits /full/anything
+//   1. User hits /full/anything (or /map/anything while in pre-launch lockdown)
 //   2. Middleware looks for a valid `hb_full_auth` cookie
 //   3. If valid -> pass through
 //   4. If missing or invalid -> 302 redirect to /login?next=<original-path>
-//   5. Trailing-slash fixer: /full -> /full/ (so relative asset URLs work)
+//   5. Trailing-slash fixer: /full -> /full/, /map -> /map/ (so relative
+//      asset URLs work)
+//
+// /map is gated only while the embedded Stripe checkout is being wired up.
+// To open it to the public, drop `/map` and `/map/:path*` from `matcher`
+// below and remove the corresponding noindex header in vercel.json.
 //
 // The cookie value is HMAC-SHA256(PREVIEW_PASS, "hb_full_auth_v1") -- the
 // same string that /api/login sets after a successful sign-in. It rotates
@@ -13,12 +19,13 @@
 //
 // Defense in depth (none of these are sole-line-of-defense):
 //   - this middleware (auth + redirect)
-//   - vercel.json /full/(.*) -> X-Robots-Tag noindex, Cache-Control private, Referrer-Policy no-referrer
-//   - robots.txt: Disallow /full/ for every UA
+//   - vercel.json /full/(.*) and /map/(.*) -> X-Robots-Tag noindex,
+//     Cache-Control private, Referrer-Policy no-referrer
+//   - robots.txt: Disallow /full/ and /map/ for every UA
 //   - per-page <meta robots> noindex on every generated HTML
 
 export const config = {
-  matcher: ['/full', '/full/:path*'],
+  matcher: ['/full', '/full/:path*', '/map', '/map/:path*'],
 };
 
 const COOKIE_NAME = 'hb_full_auth';
@@ -63,10 +70,14 @@ function timingSafeEqualHex(a, b) {
 export default async function middleware(request) {
   const url = new URL(request.url);
 
-  // Trailing-slash fix: /full -> /full/  (otherwise relative asset URLs
-  // resolve against / instead of /full/, breaking CSS and images.)
+  // Trailing-slash fix: /full -> /full/, /map -> /map/ (otherwise relative
+  // asset URLs resolve against / instead of the section root, breaking CSS
+  // and images.)
   if (url.pathname === '/full') {
     return Response.redirect(`${url.origin}/full/`, 308);
+  }
+  if (url.pathname === '/map') {
+    return Response.redirect(`${url.origin}/map/`, 308);
   }
 
   const user = process.env.PREVIEW_USER;

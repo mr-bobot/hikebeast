@@ -6,6 +6,7 @@ Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
+Disallow: /map/
 
 # AI search crawlers — explicitly disallowed from /full/ and /preview/
 # (those are paid-customer / pre-launch areas, not for ingestion)
@@ -14,47 +15,55 @@ Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
+Disallow: /map/
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
+Disallow: /map/
 
 User-agent: Claude-Web
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
+Disallow: /map/
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
+Disallow: /map/
 
 User-agent: Google-Extended
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
+Disallow: /map/
 
 User-agent: CCBot
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
+Disallow: /map/
 
 User-agent: Applebot-Extended
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
+Disallow: /map/
 
 User-agent: Bingbot
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
+Disallow: /map/
 
 Sitemap: https://hikebeast.ch/sitemap.xml
