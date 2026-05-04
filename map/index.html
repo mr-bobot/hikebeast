@@ -1447,44 +1447,35 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
 
   // ---------- Sticky buy bar visibility ----------
-  // Two signals decide whether the bar is visible:
-  //   - hero must be scrolled out of view (heroOut)
-  //   - the checkout iframe must NOT be in view (checkoutOut)
-  // Showing the bar over the embedded Stripe widget covers the Pay
-  // button on small screens, so we suppress it once the user reaches
-  // the checkout section.
+  // Plain scroll math, no IntersectionObserver. We were seeing the
+  // bar fail to appear in Instagram's in-app browser, which has
+  // quirks around IO rootMargin percentages on some builds. Two
+  // signals:
+  //   - scrolled past the hero's bottom (heroPast)
+  //   - the checkout iframe is NOT yet within ~250px of the viewport
+  //     bottom (so the bar fades before covering the Pay button).
   const stickyBuy = document.getElementById("sticky-buy");
   const heroEl = document.querySelector(".hero");
   const checkoutEl = document.getElementById("checkout");
-  if (stickyBuy && "IntersectionObserver" in window) {
-    let heroOut = false;
-    let checkoutIn = false;
+  if (stickyBuy && heroEl) {
+    let lastVisible = false;
     const update = () => {
-      stickyBuy.classList.toggle("is-visible", heroOut && !checkoutIn);
+      const heroBottom = heroEl.offsetTop + heroEl.offsetHeight;
+      const heroPast = window.scrollY > heroBottom - 100;
+      let nearCheckout = false;
+      if (checkoutEl) {
+        const rect = checkoutEl.getBoundingClientRect();
+        nearCheckout = rect.top < window.innerHeight - 250;
+      }
+      const visible = heroPast && !nearCheckout;
+      if (visible !== lastVisible) {
+        stickyBuy.classList.toggle("is-visible", visible);
+        lastVisible = visible;
+      }
     };
-    if (heroEl) {
-      const heroIo = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => { heroOut = !e.isIntersecting; });
-          update();
-        },
-        { rootMargin: "-40% 0px 0px 0px" }
-      );
-      heroIo.observe(heroEl);
-    }
-    if (checkoutEl) {
-      // Trip slightly before the checkout's top edge enters the
-      // viewport so the bar fades out before it would cover the Pay
-      // button. 200px lead-in feels right on iPhone-class screens.
-      const checkoutIo = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => { checkoutIn = e.isIntersecting; });
-          update();
-        },
-        { rootMargin: "0px 0px -200px 0px" }
-      );
-      checkoutIo.observe(checkoutEl);
-    }
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    update();
   }
 
   // ---------- Stripe embedded checkout ----------
