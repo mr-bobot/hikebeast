@@ -66,4 +66,30 @@ Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
 
+# Social-media link-preview crawlers · explicit allow blocks with NO
+# Disallow rules. Facebook's debugger literal-parses for a per-UA block
+# and falls back to a misleading "robots.txt block · please allowlist"
+# error when one is missing. Doing exactly what their error message
+# says to do.
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: facebookcatalog
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
 Sitemap: https://hikebeast.ch/sitemap.xml
