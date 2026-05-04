@@ -40,6 +40,10 @@ const FONT = "-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Ar
 // Same hero image as the /map/success page, so the receipt feels like a
 // continuation of the post-purchase moment.
 const HERO_IMG = `${SITE}/map/img/email-hero.jpg`;
+// Customer-view Drive folder. Latest version of the guide always lives
+// here so the URL stays stable across releases. Linked here as the
+// "view in browser" alternative to the direct download.
+const DRIVE_URL = "https://drive.google.com/drive/folders/182_BdFNwF9jptpp9ax7G8sHNYb01nCa0?usp=share_link";
 
 async function readRawBody(req) {
   const chunks = [];
@@ -83,11 +87,10 @@ function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId })
             </td>
           </tr></table>
 
-          <!-- Plain-text fallback. Some email clients (older Outlook, strict
-               corporate filters) strip styled buttons. The plain link works
-               everywhere. -->
-          <p style="margin:0 0 24px;font-size:13px;color:#6e6e73;line-height:1.5;word-break:break-all;">
-            Or paste this into your browser: <a href="${downloadUrl}" style="color:#0071e3;text-decoration:none;">${downloadUrl}</a>
+          <!-- Secondary link: open the customer-view Drive folder. Same
+               PDF, but viewable in browser without downloading first. -->
+          <p style="margin:0 0 24px;font-size:14px;color:#6e6e73;line-height:1.5;">
+            Or <a href="${DRIVE_URL}" style="color:#0071e3;text-decoration:none;">open in Google Drive</a>.
           </p>
 
           <p style="margin:0 0 16px;font-size:15px;color:#6e6e73;">Save the PDF to your phone for offline use on the trail. On iPhone: tap the button, then the share icon, then "Save to Files".</p>
@@ -120,6 +123,9 @@ You're all set to discover the best spots Switzerland has to offer.
 
 Download the guide:
 ${downloadUrl}
+
+Or open in Google Drive:
+${DRIVE_URL}
 
 Save the PDF to your phone for offline use. On iPhone: tap the link, share, "Save to Files".
 

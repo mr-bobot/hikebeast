@@ -53,82 +53,74 @@ fbq('track', 'PageView');
     padding: 0 0 48px;
   }
 
-  /* === Hero · full-bleed photo with overlay text ·
-     Same crop as the email hero so the buyer feels continuity. */
+  /* === Hero · light-cream photo of three polaroids (no overlay text).
+     The image already has plenty of negative space and reads warmly --
+     putting copy on top would fight the photo. Tick + heading move into
+     the action card below where they sit on a clean white surface. */
   .hero {
     position: relative;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: #000;
+    /* Match the cream tone of the photo so any sub-pixel rounding edge
+       doesn't show as a hard line. */
+    background: #f3efe9;
   }
   .hero img {
     width: 100%; height: 100%;
     object-fit: cover;
     display: block;
   }
-  .hero-overlay {
-    position: absolute; inset: 0;
-    /* Subtle bottom-up dark gradient so the tick + heading read on any
-       part of the photo without dimming the whole image. */
-    background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.55) 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 24px;
-    color: #ffffff;
-    text-align: center;
-  }
-  .hero-tick {
-    width: 56px; height: 56px;
-    border-radius: 999px;
-    background: var(--success);
-    display: grid;
-    place-items: center;
-    margin-bottom: 14px;
-    /* Pop on load -- the celebration moment. */
-    animation: pop 380ms cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-  }
-  .hero-tick svg {
-    width: 28px; height: 28px;
-    display: block;
-  }
-  @keyframes pop {
-    0%   { transform: scale(0.4); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-  .hero h1 {
-    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 30px;
-    font-weight: 600;
-    letter-spacing: -0.025em;
-    line-height: 1.1;
-    margin: 0 0 6px;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-  }
-  .hero p {
-    margin: 0;
-    font-size: 14px;
-    opacity: 0.9;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
-  }
 
-  /* === Action card · the most important block on the page.
-     White, soft, sits just below the hero. Big primary download
-     button + secondary access link. Above-the-fold on phones. */
+  /* === Action card · the celebration + the action.
+     Tick on top, heading + subhead, two buttons. Floats up over the
+     hero so it reads as the main content, not a footer. */
   .action {
-    margin: -28px 16px 0;
+    margin: -36px 16px 0;
     background: #ffffff;
     border-radius: var(--radius-card);
-    padding: 22px;
+    padding: 28px 22px 22px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04);
     position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
   }
+  .action-tick {
+    width: 56px; height: 56px;
+    border-radius: 999px;
+    background: var(--success);
+    display: grid;
+    place-items: center;
+    /* Pop on load -- the celebration moment. */
+    animation: pop 380ms cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3);
+    margin-bottom: 4px;
+  }
+  .action-tick svg { width: 28px; height: 28px; display: block; }
+  @keyframes pop {
+    0%   { transform: scale(0.4); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .action h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--fg);
+  }
+  .action-sub {
+    margin: -6px 0 8px;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  /* Buttons go full-width inside the card on mobile. */
+  .action .btn { width: 100%; }
   .btn {
     display: flex;
     align-items: center;
@@ -288,27 +280,25 @@ fbq('track', 'PageView');
 </head>
 <body>
 <main>
-  <!-- Hero photo + green tick + heading. The celebration moment. -->
+  <!-- Hero · cream photo of three polaroids. No text overlay; copy lives
+       in the action card below. -->
   <section class="hero">
-    <img src="../img/success-hero.jpg" alt="Swiss ridge at sunset" />
-    <div class="hero-overlay">
-      <div class="hero-tick" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="5,12 10,17 19,7" />
-        </svg>
-      </div>
-      <h1 id="headline">You're in.</h1>
-      <p id="subheadline">Your guide is ready right now.</p>
-    </div>
+    <img src="../img/success-hero.jpg" alt="" />
   </section>
 
-  <!-- Primary action card · two ways to get the same PDF.
-       1. Direct download (Vercel Blob, gated by HMAC access token fetched
-          on page load). The fast path for buyers who want it on disk.
-       2. Open in Google Drive (folder maintained by Leon, current PDF
-          lives there forever; no Google login required to view).
-       Both are valid; the buyer picks whatever fits their device. -->
+  <!-- Action card · celebration (tick + heading) and the two ways to get
+       the PDF. Floats up over the hero, so the buyer reads it first.
+       1. Direct download (Vercel Blob, HMAC-token gated, fetched on load).
+       2. Open in Google Drive (Leon-maintained customer-view folder). -->
   <section class="action">
+    <div class="action-tick" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="5,12 10,17 19,7" />
+      </svg>
+    </div>
+    <h1 id="headline">You're in.</h1>
+    <p class="action-sub" id="subheadline">Your guide is ready right now.</p>
+
     <a id="downloadBtn" class="btn btn-primary" href="#" aria-disabled="true" download>
       <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M12 3v12" />
@@ -319,9 +309,9 @@ fbq('track', 'PageView');
     </a>
     <a class="btn btn-secondary" href="https://drive.google.com/drive/folders/182_BdFNwF9jptpp9ax7G8sHNYb01nCa0?usp=share_link" target="_blank" rel="noopener">
       <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <!-- Simplified Google Drive triangle mark, one-color so it inherits
-             the button text colour. Not the full multi-colour brand mark
-             (Google's brand guidelines forbid recolouring it anyway). -->
+        <!-- Single-colour Drive triangle so it inherits the button text
+             colour. Google's guidelines forbid recolouring the full
+             multi-colour brand mark, so we use a simplified outline. -->
         <path fill="currentColor" d="M7.71 3.5 1.15 14.86l3.28 5.64h13.14l3.28-5.64L14.29 3.5H7.71zM12 15.85 8.43 9.57h7.14L12 15.85z" />
       </svg>
       <span>Open in Google Drive</span>
