@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Thanks for buying · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+
+<!-- Meta Pixel: client-side Purchase event for browsers that aren't blocking
+     (server-side CAPI in api/checkout/webhook.js dedupes by event_id). -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1658000685240569');
+fbq('track', 'PageView');
+</script>
+
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html,body { margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f5f7;
+    --fg: #1d1d1f;
+    --muted: #6e6e73;
+    --hairline: rgba(0,0,0,0.08);
+    --accent: #0071e3;
+    --success: #34c759;
+  }
+  body {
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  main {
+    max-width: 440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  /* Big tick circle. SVG is inline below; CSS sizes the wrapper. */
+  .tick {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
+    border-radius: 999px;
+    background: var(--success);
+    display: grid;
+    place-items: center;
+    /* Subtle pop on load */
+    animation: pop 360ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes pop {
+    0%   { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .tick svg { width: 36px; height: 36px; display: block; }
+  h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  p {
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  p strong { color: var(--fg); font-weight: 600; }
+  /* Email-it-again CTA. Static for now; the link in the email is the
+     real entry point. */
+  .next-steps {
+    margin-top: 28px;
+    padding: 18px;
+    background: var(--surface);
+    border-radius: 14px;
+    text-align: left;
+  }
+  .next-steps h3 {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .next-steps ol {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 14px;
+    color: var(--fg);
+    line-height: 1.6;
+  }
+  .next-steps li { margin-bottom: 6px; }
+  .next-steps li:last-child { margin-bottom: 0; }
+  .order-id {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    letter-spacing: 0;
+    word-break: break-all;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<main>
+  <!-- Green check circle, mirrors the green-check bullets on /map/. -->
+  <div class="tick" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="5,12 10,17 19,7" />
+    </svg>
+  </div>
+
+  <h1>You're in.</h1>
+
+  <p>Payment received. The guide is on its way to your inbox right now, with a link to read it in your browser and a button to download the PDF.</p>
+
+  <div class="next-steps">
+    <h3>What happens next</h3>
+    <ol>
+      <li>Check your email (subject: <em>Swiss Hidden Gems · Your guide is ready</em>).</li>
+      <li>If it's not in the main inbox, check Promotions / Spam.</li>
+      <li>Save the PDF to your phone for offline use on the trail.</li>
+    </ol>
+  </div>
+
+  <p class="order-id" id="order-id"></p>
+</main>
+
+<script>
+  // Stripe puts ?session_id=cs_test_... in the return URL. We don't fetch
+  // session details here; the webhook already runs the fulfillment server
+  // side. Just show the order id for the buyer's records.
+  (function () {
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get("session_id");
+    if (sessionId) {
+      const el = document.getElementById("order-id");
+      if (el) el.textContent = "Order: " + sessionId;
+    }
+    // Client-side Purchase pixel (best-effort; CAPI in the webhook is the
+    // source of truth, this is to catch buyers who don't open the email).
+    if (window.fbq) {
+      try { fbq("track", "Purchase", { value: 27.00, currency: "CHF" }); } catch (e) {}
+    }
+  })();
+</script>
+</body>
+</html>

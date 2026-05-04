@@ -346,9 +346,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "bad_signature" });
   }
 
-  // Acknowledge fast; do work after the response.
-  res.status(200).json({ ok: true });
-
+  // Do the work BEFORE responding. Vercel serverless functions terminate
+  // execution as soon as the response is sent, so any "ack first, work
+  // after" pattern silently drops the side effects (email, Sheet log, Meta
+  // CAPI). Stripe's webhook timeout is 30s, comfortable for our 2-3s of
+  // outbound HTTP calls.
   try {
     if (event.type === "checkout.session.completed") {
       await handleSessionCompleted({ stripe, event });
@@ -357,5 +359,9 @@ export default async function handler(req, res) {
     }
   } catch (err) {
     console.error(`Stripe webhook handler error (${event.type}):`, err);
+    // Still ack 200 so Stripe doesn't retry forever -- the Sheet log and
+    // any partial state already happened, and a retry would just duplicate.
   }
+
+  return res.status(200).json({ ok: true });
 }
