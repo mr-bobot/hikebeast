@@ -410,7 +410,7 @@ fbq('track', 'PageView');
       </svg>
       <span id="downloadLabel">Preparing download...</span>
     </a>
-    <a id="driveBtn" class="btn btn-secondary" href="https://drive.google.com/drive/folders/182_BdFNwF9jptpp9ax7G8sHNYb01nCa0?usp=share_link" target="_blank" rel="noopener" hidden>
+    <a id="driveBtn" class="btn btn-secondary" href="#" target="_blank" rel="noopener" hidden>
       <svg class="btn-icon" viewBox="0 0 87.3 78" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
         <!-- Official Google Drive multi-colour mark. -->
         <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3L27.5 53H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
@@ -511,13 +511,17 @@ fbq('track', 'PageView');
           headline.textContent = "You're in, " + data.first_name + ".";
         }
 
-        // Unlock the download + reveal the Drive folder link. Both are
-        // hidden by default so people landing on /map/success without a
-        // paid session can't grab the Drive URL or the download stub.
+        // Unlock the download + reveal the Drive folder link. Both
+        // start hidden, and the Drive URL itself only arrives in this
+        // API response (not baked into the static HTML), so view-source
+        // without a paid session never exposes the customer-view folder.
         downloadBtn.href = data.download_url;
         downloadBtn.removeAttribute("aria-disabled");
         downloadLabel.textContent = "Download the guide (PDF)";
-        if (driveBtn) driveBtn.hidden = false;
+        if (driveBtn && data.drive_url) {
+          driveBtn.href = data.drive_url;
+          driveBtn.hidden = false;
+        }
 
         const amount = (typeof data.amount_total === "number")
           ? (data.amount_total / 100).toFixed(2) + " " + (data.currency || "")

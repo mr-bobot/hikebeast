@@ -28,6 +28,12 @@
 import Stripe from "stripe";
 import { issueToken } from "../../lib/access-token.js";
 
+// Customer-view Drive folder. Returned to the success page only when
+// the session is verified paid, so view-source on /map/success without
+// a paid session_id never exposes the URL. Same value as DRIVE_URL in
+// webhook.js -- if this ever changes, update both.
+const DRIVE_URL = "https://drive.google.com/drive/folders/182_BdFNwF9jptpp9ax7G8sHNYb01nCa0?usp=share_link";
+
 const EU_COUNTRIES = new Set([
   // EU 27 (use EUR by default)
   "AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE",
@@ -122,6 +128,7 @@ async function handleGetSession(req, res, stripe) {
     currency: (session.currency || "").toUpperCase(),
     download_url: `${origin}/api/checkout/download?t=${encodeURIComponent(token)}`,
     access_url: `${origin}/api/checkout/access?t=${encodeURIComponent(token)}`,
+    drive_url: DRIVE_URL,
     order_id: session.id,
   });
 }
