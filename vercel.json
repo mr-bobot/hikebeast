@@ -75,7 +75,7 @@
       ]
     },
     {
-      "source": "/map/(.*)",
+      "source": "/map/success/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -90,6 +90,13 @@
           "value": "no-referrer"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/map",
+      "destination": "/map/",
+      "permanent": true
     }
   ]
 }
