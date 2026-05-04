@@ -799,45 +799,115 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
   .sticky-buy .buy-btn:active { transform: scale(0.98); }
 
+  /* === Desktop · ≥ 720px ============================================
+     Mobile-first column expands into a real desktop layout. The big
+     wins versus the previous 560px column:
+     - Inside-cards stop being a peek-scroll carousel and become a
+       proper 3-column grid (no more half-cards bleeding off the left
+       edge on wide screens).
+     - Reviews do the same: 3 columns × 2 rows, no scroll.
+     - Hero carousel slide takes the full column width with rounded
+       corners, dots underneath. Same swipe affordance as mobile, just
+       framed instead of full-bleed.
+     - Stripe checkout stays in a narrower sub-column inside the wider
+       page so the iframe doesn't stretch into a banking-app feel.
+     - Trust-row and footer stay centered. */
   @media (min-width: 720px) {
     .sticky-buy { display: none; }
     body { padding-bottom: env(safe-area-inset-bottom); }
 
-    /* === Desktop polish ·
-       Mobile-first column stays the layout, but on wider viewports we
-       widen the column slightly so the page doesn't feel lost in the
-       middle of a 1440px screen, add top breathing room, and let the
-       carousel + hero pictures round all four corners (instead of
-       clipping into the viewport edge as they do on mobile). */
     main {
-      max-width: 560px;
-      padding: 28px 0 48px;
-      gap: 28px;
+      max-width: 920px;
+      padding: 32px 0 56px;
+      gap: 48px;
     }
     .px {
-      padding-left: 28px;
-      padding-right: 28px;
+      padding-left: 32px;
+      padding-right: 32px;
     }
-    /* Round the carousel slides on desktop so they read as a proper
-       framed image rather than a full-bleed photo. */
+
+    /* Hero carousel: round the slides, add side padding so they read
+       as framed photos rather than viewport-edge bleed. */
     .carousel {
-      padding: 0 28px;
-      gap: 12px;
+      padding: 0 32px;
+      gap: 16px;
     }
     .carousel .slide {
       border-radius: var(--radius-card);
     }
+    .dots { padding-top: 12px; }
+
+    /* Hero text + bullets get a touch more presence on desktop. */
+    h1 { font-size: 34px; }
+    ul.hero-bullets { font-size: 16px; gap: 12px; }
+    .info-bar { font-size: 15px; }
+
+    /* Section heads. */
+    .section-head h2 { font-size: 26px; }
+    .section-head p { font-size: 15px; }
+
+    /* === Inside cards · grid, not peek-scroll ===
+       Override the horizontal scroll-snap entirely. Display becomes a
+       3-column grid; cards stretch to fill their column, lose the
+       flex-basis hack and the snap-align. */
     .inside {
-      padding-left: 28px;
-      padding-right: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      overflow: visible;
+      padding: 4px 32px;
+      scroll-snap-type: none;
     }
-    h1 { font-size: 32px; }
-    .section-head h2 { font-size: 24px; }
+    .inside-card {
+      flex: initial;
+      scroll-snap-align: none;
+      padding: 22px;
+      gap: 8px;
+    }
+    .inside-card h3 { font-size: 16px; }
+    .inside-card p { font-size: 14px; }
+
+    /* === Reviews · grid, not peek-scroll ===
+       Same treatment. 6 reviews fit cleanly in 3 × 2. */
+    .reviews-carousel {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      overflow: visible;
+      padding: 4px 32px;
+      scroll-snap-type: none;
+    }
+    .review-card {
+      flex: initial;
+      scroll-snap-align: none;
+    }
+
+    /* === Checkout sub-column ===
+       Stripe's embedded iframe expands to its container. Without a
+       cap it stretches across the whole 920px page, which makes the
+       Pay button feel like a checkout app rather than a one-product
+       page. Cap it at the original mobile-friendly width and center. */
+    .checkout-wrap {
+      max-width: 460px;
+      margin: 0 auto;
+    }
+    .section-head {
+      max-width: 640px;
+    }
+
+    /* Collection grid keeps the same aspect ratio but rounds in the
+       wider container. Looks correct at 920 - 64px padding = 856px. */
+    .collection-grid { border-radius: var(--radius-card); }
+
+    /* Trust row + footer breathe a bit more. */
+    .trust-row { gap: 12px 22px; padding-top: 12px; }
+    .footer { padding-top: 12px; }
   }
 
-  /* For very wide screens, cap padding from the navbar but don't
-     widen the column further -- a stan.store-style page reads best
-     in a single mobile-shaped column even on desktop. */
+  /* Larger desktops. Pad the navbar from the viewport edges so the
+     brand logo isn't pinned to the corner, but don't widen the page
+     column further -- 920px is already the sweet spot for a single
+     product page (any wider and the cards start feeling oversized). */
   @media (min-width: 1100px) {
     .navbar { padding-left: 40px; padding-right: 40px; }
   }
