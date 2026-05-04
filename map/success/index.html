@@ -84,11 +84,6 @@ fbq('track', 'PageView');
     display: block;
     z-index: 3;
     pointer-events: none;
-    /* Shift the photos downward so their bottom edges extend over
-       the action card's top edge. 14% of the hero height feels
-       right · enough overlap to read as layered, not enough to
-       cover the action heading. */
-    transform: translateY(14%);
   }
 
   /* === Action card · the celebration + the action.
@@ -232,36 +227,6 @@ fbq('track', 'PageView');
     text-decoration: none;
   }
   .note-body a:hover { text-decoration: underline; }
-
-  /* === In-app browser warning · only rendered when navigator UA
-     matches Instagram/TikTok/Facebook/etc. In-app browsers block
-     downloads and Drive sign-ins, so we tell users to bail out into
-     Safari/Chrome. Hidden by default · JS sets [hidden]=false on
-     match. */
-  .ext-warn {
-    margin: 18px 22px 0;
-    padding: 14px 16px;
-    background: #fff8e1;
-    border: 1px solid #f6c557;
-    border-radius: var(--radius-card);
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--fg);
-  }
-  .ext-warn-icon {
-    flex-shrink: 0;
-    width: 22px; height: 22px;
-    display: grid;
-    place-items: center;
-    color: #c97f00;
-    margin-top: 1px;
-  }
-  .ext-warn strong { font-weight: 600; }
-  .ext-warn p { margin: 0; }
-  .ext-warn p + p { margin-top: 4px; }
 
   /* === Next steps · concrete, tactical. Reduces overwhelm + gives
      a sense of momentum right after purchase. */
@@ -460,23 +425,6 @@ fbq('track', 'PageView');
     <p class="status" id="status">A copy is also on its way to your email.</p>
   </section>
 
-  <!-- In-app browser warning · shown only if userAgent indicates
-       Instagram/TikTok/FB. These browsers block downloads + Drive
-       auth, so the buyer needs to bail out to Safari/Chrome. -->
-  <aside class="ext-warn" id="extWarn" hidden>
-    <div class="ext-warn-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 9v4" />
-        <path d="M12 17h.01" />
-        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-      </svg>
-    </div>
-    <div>
-      <p><strong>Open this page in your real browser.</strong></p>
-      <p>You're in the Instagram in-app browser, which blocks downloads. Tap the <span aria-hidden="true">•••</span> menu (top right) and pick <strong>Open in Safari</strong> or <strong>Open in Chrome</strong>, then come back here.</p>
-    </div>
-  </aside>
-
   <!-- Personal note: face + signature. The connection moment. -->
   <section class="note">
     <div class="note-avatar"><img src="../../images/avatar.jpg" alt="" /></div>
@@ -511,10 +459,10 @@ fbq('track', 'PageView');
   <section class="next">
     <h2>What's next</h2>
     <ol>
-      <li>If you opened this page from Instagram, TikTok or Facebook: tap the <span aria-hidden="true">•••</span> menu at the top right and pick <strong>Open in Safari</strong> (iPhone) or <strong>Open in Chrome</strong> (Android). In-app browsers block the download.</li>
       <li>Save the PDF to your phone for offline use on the trail. On iPhone: download → share → "Save to Files".</li>
       <li>Save the Google Maps list above so all 122 pins live in your existing Maps app.</li>
       <li>Pick a region you haven't been to yet. Start there.</li>
+      <li>Enjoy!</li>
     </ol>
   </section>
 
@@ -530,19 +478,6 @@ fbq('track', 'PageView');
 </main>
 
 <script>
-  // ---------- In-app browser detection ----------
-  // Instagram/Facebook/TikTok in-app browsers block the download
-  // attribute and Google Drive auth. Show a banner telling the buyer
-  // to open the page in Safari/Chrome before they hit the button.
-  (function () {
-    const ua = navigator.userAgent || "";
-    const isInApp = /Instagram|FBAN|FBAV|FB_IAB|FB4A|TikTok|Snapchat|Line\//i.test(ua);
-    if (isInApp) {
-      const warn = document.getElementById("extWarn");
-      if (warn) warn.hidden = false;
-    }
-  })();
-
   // Fetch the access token + order details for this Stripe session, then
   // unlock the download button. Falls back to "check your email" if the
   // session is unknown or not yet paid (race conditions on the redirect).

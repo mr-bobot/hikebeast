@@ -1093,10 +1093,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
        right (which inherits .page-grid's align-items: start). */
     .page-main { gap: 48px; }
 
-    /* Reviews · drop to 2 columns at this breakpoint. The sidebar
-       eats 320px + 40px gap from the page width, so 3-col reviews
-       crash against the sticky buy-card. 2-col gives each review
-       room to breathe and creates a visual gutter to the sidebar. */
+    /* Reviews · 2 columns across the entire desktop range with the
+       sticky sidebar. 3-col looked cramped at every width we tested
+       because the sidebar always eats 360px from the page, leaving
+       the rightmost review pinned right against the buy-card. */
     .reviews-carousel {
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
@@ -1104,16 +1104,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     /* Inside cards · keep 3-col but tighten gap so cards don't crash
        into the sidebar at narrower 1024-1199 viewports. */
     .inside { gap: 12px; }
-  }
-
-  /* Wide desktops · once we have headroom, return reviews to 3 columns
-     and give the inside cards a touch more gap. */
-  @media (min-width: 1280px) {
-    .reviews-carousel {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .inside { gap: 14px; }
   }
 </style>
 </head>
