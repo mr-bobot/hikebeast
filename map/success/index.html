@@ -302,7 +302,12 @@ fbq('track', 'PageView');
     </div>
   </section>
 
-  <!-- Primary action card · download (live token, fetched on load). -->
+  <!-- Primary action card · two ways to get the same PDF.
+       1. Direct download (Vercel Blob, gated by HMAC access token fetched
+          on page load). The fast path for buyers who want it on disk.
+       2. Open in Google Drive (folder maintained by Leon, current PDF
+          lives there forever; no Google login required to view).
+       Both are valid; the buyer picks whatever fits their device. -->
   <section class="action">
     <a id="downloadBtn" class="btn btn-primary" href="#" aria-disabled="true" download>
       <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -311,6 +316,15 @@ fbq('track', 'PageView');
         <path d="M5 21h14" />
       </svg>
       <span id="downloadLabel">Preparing download...</span>
+    </a>
+    <a class="btn btn-secondary" href="https://drive.google.com/drive/folders/182_BdFNwF9jptpp9ax7G8sHNYb01nCa0?usp=share_link" target="_blank" rel="noopener">
+      <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <!-- Simplified Google Drive triangle mark, one-color so it inherits
+             the button text colour. Not the full multi-colour brand mark
+             (Google's brand guidelines forbid recolouring it anyway). -->
+        <path fill="currentColor" d="M7.71 3.5 1.15 14.86l3.28 5.64h13.14l3.28-5.64L14.29 3.5H7.71zM12 15.85 8.43 9.57h7.14L12 15.85z" />
+      </svg>
+      <span>Open in Google Drive</span>
     </a>
     <p class="status" id="status">A copy is also on its way to your email.</p>
   </section>
