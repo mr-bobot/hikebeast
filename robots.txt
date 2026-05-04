@@ -66,4 +66,30 @@ Disallow: /preview/
 Disallow: /full/
 Disallow: /map/success/
 
+# Social-media link-preview crawlers · explicit allow blocks. These are
+# functionally redundant (User-agent: * already allows /map/), but
+# Facebook's debugger sometimes returns a misleading "robots.txt block"
+# error when a UA-specific block is missing. Explicit allow keeps it
+# happy and removes one variable from social-card debugging.
+User-agent: facebookexternalhit
+Allow: /
+Disallow: /api/
+Disallow: /preview/
+Disallow: /full/
+Disallow: /map/success/
+
+User-agent: Twitterbot
+Allow: /
+Disallow: /api/
+Disallow: /preview/
+Disallow: /full/
+Disallow: /map/success/
+
+User-agent: LinkedInBot
+Allow: /
+Disallow: /api/
+Disallow: /preview/
+Disallow: /full/
+Disallow: /map/success/
+
 Sitemap: https://hikebeast.ch/sitemap.xml
