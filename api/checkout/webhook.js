@@ -37,7 +37,9 @@ const FROM = "Leon · Hikebeast <leon@hikebeast.ch>";
 const REPLY_TO = "leon@hikebeast.ch";
 const SITE = "https://hikebeast.ch";
 const FONT = "-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Arial,sans-serif";
-const HERO_IMG = `${SITE}/images/thumb-full.jpg`;
+// Same hero image as the /map/success page, so the receipt feels like a
+// continuation of the post-purchase moment.
+const HERO_IMG = `${SITE}/map/img/email-hero.jpg`;
 
 async function readRawBody(req) {
   const chunks = [];
@@ -55,7 +57,7 @@ function downloadLink(token) {
   return `${SITE}/api/checkout/download?t=${encodeURIComponent(token)}`;
 }
 
-function purchaseEmailHtml({ firstName, accessUrl, downloadUrl, amountFormatted, orderId }) {
+function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId }) {
   const greeting = firstName ? `Hey ${firstName},` : "Hey,";
   return `<!doctype html>
 <html lang="en">
@@ -73,28 +75,22 @@ function purchaseEmailHtml({ firstName, accessUrl, downloadUrl, amountFormatted,
         </td></tr>
         <tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
           <p style="margin:0 0 16px;font-size:16px;">${greeting}</p>
-          <p style="margin:0 0 24px;font-size:16px;">Welcome aboard. Two ways to read the guide:</p>
-
-          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 16px;"><tr>
-            <td style="border-radius:999px;background:#0071e3;">
-              <a href="${accessUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Open in your browser</a>
-            </td>
-          </tr></table>
+          <p style="margin:0 0 24px;font-size:16px;">Welcome aboard. Your guide is ready right now:</p>
 
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px;"><tr>
             <td style="border-radius:999px;background:#1d1d1f;">
-              <a href="${downloadUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Download the PDF</a>
+              <a href="${downloadUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Download the guide</a>
             </td>
           </tr></table>
 
-          <p style="margin:0 0 16px;font-size:15px;color:#6e6e73;">Save the PDF to your phone for offline use on the trail. On iPhone: tap the download button, then the share icon, then "Save to Files".</p>
+          <p style="margin:0 0 16px;font-size:15px;color:#6e6e73;">Save the PDF to your phone for offline use on the trail. On iPhone: tap the button, then the share icon, then "Save to Files".</p>
 
           <p style="margin:0 0 4px;font-size:16px;">Have fun out there,</p>
           <p style="margin:0 0 32px;font-size:16px;">Leon</p>
 
           <hr style="border:0;border-top:1px solid rgba(0,0,0,0.08);margin:0 0 20px;" />
           <p style="margin:0 0 4px;font-size:12px;color:#6e6e73;">Receipt: ${amountFormatted} · Order ${orderId}</p>
-          <p style="margin:0;font-size:12px;color:#6e6e73;">Questions? Reply to this email and Leon will get back to you.</p>
+          <p style="margin:0;font-size:12px;color:#6e6e73;">Questions? Reply to this email.</p>
         </td></tr>
       </table>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560" style="max-width:560px;margin-top:24px;"><tr>
@@ -109,19 +105,15 @@ function purchaseEmailHtml({ firstName, accessUrl, downloadUrl, amountFormatted,
 </html>`;
 }
 
-function purchaseEmailText({ firstName, accessUrl, downloadUrl, amountFormatted, orderId }) {
+function purchaseEmailText({ firstName, downloadUrl, amountFormatted, orderId }) {
   const greeting = firstName ? `Hey ${firstName},` : "Hey,";
   return `${greeting}
 
-Welcome aboard. Two ways to read the guide:
+Welcome aboard. Your guide is ready right now:
 
-Open in your browser:
-${accessUrl}
-
-Download the PDF:
 ${downloadUrl}
 
-Save the PDF to your phone for offline use. On iPhone: tap download, share, "Save to Files".
+Save the PDF to your phone for offline use. On iPhone: tap the link, share, "Save to Files".
 
 Have fun out there,
 Leon
@@ -229,11 +221,13 @@ async function handleSessionCompleted({ stripe, event }) {
   }
 
   const accessToken = issueToken({ email, paymentIntentId: paymentIntent });
-  const accessUrl = accessLink(accessToken);
   const downloadUrl = downloadLink(accessToken);
   const amountFormatted = formatAmount(full.amount_total, full.currency);
 
-  // 1. Send purchase email (Resend).
+  // 1. Send purchase email (Resend). One CTA: Download the guide.
+  // (The access-token cookie flow for /full/ webapp is still wired, but
+  // not surfaced in the email until the webapp is opened to paid customers.
+  // /api/checkout/access?t=<token> still works if needed manually.)
   let emailOk = false;
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -242,8 +236,8 @@ async function handleSessionCompleted({ stripe, event }) {
       to: email,
       replyTo: REPLY_TO,
       subject: "Swiss Hidden Gems · Your guide is ready",
-      html: purchaseEmailHtml({ firstName, accessUrl, downloadUrl, amountFormatted, orderId: full.id }),
-      text: purchaseEmailText({ firstName, accessUrl, downloadUrl, amountFormatted, orderId: full.id }),
+      html: purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId: full.id }),
+      text: purchaseEmailText({ firstName, downloadUrl, amountFormatted, orderId: full.id }),
     });
     if (error) console.error("Resend purchase email error:", error);
     else emailOk = true;

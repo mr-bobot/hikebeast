@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#ffffff" />
-<title>Thanks for buying · Hikebeast</title>
+<meta name="theme-color" content="#000000" />
+<title>You're in · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
 
-<!-- Meta Pixel: client-side Purchase event for browsers that aren't blocking
-     (server-side CAPI in api/checkout/webhook.js dedupes by event_id). -->
+<!-- Meta Pixel: client-side Purchase. Webhook fires the same event with
+     event_id = payment_intent_id for dedup. -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -34,6 +34,8 @@ fbq('track', 'PageView');
     --hairline: rgba(0,0,0,0.08);
     --accent: #0071e3;
     --success: #34c759;
+    --radius-card: 18px;
+    --radius-btn: 999px;
   }
   body {
     min-height: 100dvh;
@@ -44,129 +46,367 @@ fbq('track', 'PageView');
     line-height: 1.5;
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
-    padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   main {
-    max-width: 440px;
-    width: 100%;
+    max-width: 520px;
     margin: 0 auto;
-    padding: 48px 24px;
+    padding: 0 0 48px;
+  }
+
+  /* === Hero · full-bleed photo with overlay text ·
+     Same crop as the email hero so the buyer feels continuity. */
+  .hero {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+  }
+  .hero img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    /* Subtle bottom-up dark gradient so the tick + heading read on any
+       part of the photo without dimming the whole image. */
+    background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.55) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 24px;
+    color: #ffffff;
     text-align: center;
   }
-  /* Big tick circle. SVG is inline below; CSS sizes the wrapper. */
-  .tick {
-    width: 72px;
-    height: 72px;
-    margin: 0 auto 24px;
+  .hero-tick {
+    width: 56px; height: 56px;
     border-radius: 999px;
     background: var(--success);
     display: grid;
     place-items: center;
-    /* Subtle pop on load */
-    animation: pop 360ms cubic-bezier(0.16, 1, 0.3, 1);
+    margin-bottom: 14px;
+    /* Pop on load -- the celebration moment. */
+    animation: pop 380ms cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  }
+  .hero-tick svg {
+    width: 28px; height: 28px;
+    display: block;
   }
   @keyframes pop {
-    0%   { transform: scale(0.5); opacity: 0; }
+    0%   { transform: scale(0.4); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
   }
-  .tick svg { width: 36px; height: 36px; display: block; }
-  h1 {
+  .hero h1 {
     font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 26px;
-    line-height: 1.15;
+    font-size: 30px;
+    font-weight: 600;
     letter-spacing: -0.025em;
-    margin: 0 0 12px;
-    font-weight: 600;
+    line-height: 1.1;
+    margin: 0 0 6px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
   }
-  p {
-    margin: 0 0 16px;
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.55;
-  }
-  p strong { color: var(--fg); font-weight: 600; }
-  /* Email-it-again CTA. Static for now; the link in the email is the
-     real entry point. */
-  .next-steps {
-    margin-top: 28px;
-    padding: 18px;
-    background: var(--surface);
-    border-radius: 14px;
-    text-align: left;
-  }
-  .next-steps h3 {
-    margin: 0 0 8px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .next-steps ol {
+  .hero p {
     margin: 0;
-    padding-left: 20px;
     font-size: 14px;
-    color: var(--fg);
-    line-height: 1.6;
+    opacity: 0.9;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
   }
-  .next-steps li { margin-bottom: 6px; }
-  .next-steps li:last-child { margin-bottom: 0; }
-  .order-id {
-    margin-top: 24px;
+
+  /* === Action card · the most important block on the page.
+     White, soft, sits just below the hero. Big primary download
+     button + secondary access link. Above-the-fold on phones. */
+  .action {
+    margin: -28px 16px 0;
+    background: #ffffff;
+    border-radius: var(--radius-card);
+    padding: 22px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 52px;
+    border-radius: var(--radius-btn);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition: transform 100ms ease, opacity 150ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary {
+    background: var(--fg);
+    color: #ffffff;
+  }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--fg);
+  }
+  .btn[aria-disabled="true"] {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .btn-icon {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+  }
+
+  /* Tiny status row below the buttons. Holds the loading state while we
+     fetch the token, and the order id once we have it. */
+  .status {
+    margin: 4px 0 0;
     font-size: 12px;
     color: var(--muted);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .status code {
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    letter-spacing: 0;
+    font-size: 11px;
+    word-break: break-all;
+    color: var(--muted);
+  }
+
+  /* === Personal note from Leon · the connection moment. */
+  .note {
+    margin: 28px 22px 0;
+    padding: 20px;
+    background: var(--surface);
+    border-radius: var(--radius-card);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .note-avatar {
+    width: 44px; height: 44px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #ddd;
+  }
+  .note-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: 70% 45%;
+    display: block;
+  }
+  .note-body {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--fg);
+  }
+  .note-body strong {
+    font-weight: 600;
+    color: var(--fg);
+  }
+  .note-body p {
+    margin: 0 0 6px;
+  }
+  .note-body p:last-child { margin-bottom: 0; }
+  .note-body a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .note-body a:hover { text-decoration: underline; }
+
+  /* === Next steps · concrete, tactical. Reduces overwhelm + gives
+     a sense of momentum right after purchase. */
+  .next {
+    margin: 22px 22px 0;
+  }
+  .next h2 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+  }
+  .next ol {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+  .next ol li {
+    counter-increment: step;
+    padding: 14px 0 14px 40px;
+    border-top: 1px solid var(--hairline);
+    position: relative;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .next ol li:last-child { border-bottom: 1px solid var(--hairline); }
+  .next ol li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0; top: 14px;
+    width: 26px; height: 26px;
+    border-radius: 999px;
+    background: var(--surface);
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  /* === Footer · receipt details, IG follow, imprint. */
+  .foot {
+    margin: 32px 22px 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--hairline);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.7;
+  }
+  .foot a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .foot a:hover { color: var(--fg); }
+  .foot-sep::before { content: " · "; }
+  .foot-order {
+    margin-top: 8px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
     word-break: break-all;
   }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
 <main>
-  <!-- Green check circle, mirrors the green-check bullets on /map/. -->
-  <div class="tick" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="5,12 10,17 19,7" />
-    </svg>
-  </div>
+  <!-- Hero photo + green tick + heading. The celebration moment. -->
+  <section class="hero">
+    <img src="../img/success-hero.jpg" alt="Swiss ridge at sunset" />
+    <div class="hero-overlay">
+      <div class="hero-tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="5,12 10,17 19,7" />
+        </svg>
+      </div>
+      <h1 id="headline">You're in.</h1>
+      <p id="subheadline">Your guide is ready right now.</p>
+    </div>
+  </section>
 
-  <h1>You're in.</h1>
+  <!-- Primary action card · download (live token, fetched on load). -->
+  <section class="action">
+    <a id="downloadBtn" class="btn btn-primary" href="#" aria-disabled="true" download>
+      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3v12" />
+        <path d="m7 10 5 5 5-5" />
+        <path d="M5 21h14" />
+      </svg>
+      <span id="downloadLabel">Preparing download...</span>
+    </a>
+    <p class="status" id="status">A copy is also on its way to your email.</p>
+  </section>
 
-  <p>Payment received. The guide is on its way to your inbox right now, with a link to read it in your browser and a button to download the PDF.</p>
+  <!-- Personal note: face + signature. The connection moment. -->
+  <section class="note">
+    <div class="note-avatar"><img src="../../images/avatar.jpg" alt="" /></div>
+    <div class="note-body">
+      <p><strong>Hey, Leon here.</strong></p>
+      <p>Thanks for trusting me with your trip planning. The 122 spots in this guide took me 5 years to find, photograph, and verify. Now they're yours.</p>
+      <p>If you have a question or want to send me a photo from your trip: just hit reply on the receipt email. <a href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener">@leon.helg on Instagram</a> works too.</p>
+    </div>
+  </section>
 
-  <div class="next-steps">
-    <h3>What happens next</h3>
+  <!-- Tactical next steps. Tells them what to do, kills overwhelm. -->
+  <section class="next">
+    <h2>What's next</h2>
     <ol>
-      <li>Check your email (subject: <em>Swiss Hidden Gems · Your guide is ready</em>).</li>
-      <li>If it's not in the main inbox, check Promotions / Spam.</li>
-      <li>Save the PDF to your phone for offline use on the trail.</li>
+      <li>Save the PDF to your phone for offline use on the trail. On iPhone: download → share → "Save to Files".</li>
+      <li>Open the Google Maps list inside the guide so all 122 pins live in your existing Maps app.</li>
+      <li>Pick a region you haven't been to yet. Start there.</li>
     </ol>
-  </div>
+  </section>
 
-  <p class="order-id" id="order-id"></p>
+  <!-- Footer with receipt info. -->
+  <footer class="foot">
+    <div>© Hikebeast · Saftladen GmbH</div>
+    <div>
+      <a href="../../imprint.html">Imprint</a><span class="foot-sep"></span><a href="../../privacy.html">Privacy</a>
+    </div>
+    <div class="foot-order" id="receipt"></div>
+  </footer>
 </main>
 
 <script>
-  // Stripe puts ?session_id=cs_test_... in the return URL. We don't fetch
-  // session details here; the webhook already runs the fulfillment server
-  // side. Just show the order id for the buyer's records.
+  // Fetch the access token + order details for this Stripe session, then
+  // unlock the download button. Falls back to "check your email" if the
+  // session is unknown or not yet paid (race conditions on the redirect).
   (function () {
     const params = new URLSearchParams(location.search);
     const sessionId = params.get("session_id");
-    if (sessionId) {
-      const el = document.getElementById("order-id");
-      if (el) el.textContent = "Order: " + sessionId;
+    const downloadBtn = document.getElementById("downloadBtn");
+    const downloadLabel = document.getElementById("downloadLabel");
+    const status = document.getElementById("status");
+    const receipt = document.getElementById("receipt");
+    const headline = document.getElementById("headline");
+
+    if (!sessionId) {
+      downloadLabel.textContent = "Check your email";
+      status.textContent = "Open the receipt email we just sent for your download link.";
+      return;
     }
-    // Client-side Purchase pixel (best-effort; CAPI in the webhook is the
-    // source of truth, this is to catch buyers who don't open the email).
-    if (window.fbq) {
-      try { fbq("track", "Purchase", { value: 27.00, currency: "CHF" }); } catch (e) {}
-    }
+
+    fetch("/api/checkout/session?session_id=" + encodeURIComponent(sessionId))
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data || data.paid !== true) {
+          downloadLabel.textContent = "Check your email";
+          status.textContent = "Almost there. Open the receipt email we just sent for your download link.";
+          return;
+        }
+
+        // Personalise the headline if Stripe captured a first name.
+        if (data.first_name) {
+          headline.textContent = "You're in, " + data.first_name + ".";
+        }
+
+        // Unlock the download.
+        downloadBtn.href = data.download_url;
+        downloadBtn.removeAttribute("aria-disabled");
+        downloadLabel.textContent = "Download the guide (PDF)";
+
+        const amount = (typeof data.amount_total === "number")
+          ? (data.amount_total / 100).toFixed(2) + " " + (data.currency || "")
+          : "";
+        if (amount) status.textContent = "Receipt: " + amount + " · also sent to your email.";
+
+        if (data.order_id) {
+          receipt.textContent = "Order " + data.order_id;
+        }
+
+        // Client-side Purchase pixel (CAPI in webhook is the source of
+        // truth, this catches buyers who don't open the email).
+        if (window.fbq && typeof data.amount_total === "number") {
+          try {
+            fbq("track", "Purchase", {
+              value: Number((data.amount_total / 100).toFixed(2)),
+              currency: data.currency || "CHF",
+            });
+          } catch (e) {}
+        }
+      })
+      .catch(() => {
+        downloadLabel.textContent = "Check your email";
+        status.textContent = "Couldn't load your download right now. Open the receipt email instead.";
+      });
   })();
 </script>
 </body>
