@@ -33,7 +33,7 @@ Bald verfügbar. Ein Node-Baum für DaVinci Resolve, kinoreife Looks sofort eins
 
 ## Rechtliches
 
-Saftladen GmbH, Birkenstrasse 47, 6343 Rotkreuz, Schweiz. Kontakt: office@gorped.com.
+Saftladen GmbH, Birkenstrasse 47, 6343 Rotkreuz, Schweiz. Kontakt: leon@hikebeast.ch.
 
 - Impressum: https://hikebeast.ch/de/imprint.md
 - Datenschutz: https://hikebeast.ch/de/privacy.md

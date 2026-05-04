@@ -8,6 +8,7 @@ German version: https://hikebeast.ch/de/imprint.md
 ## Company
 
 Saftladen GmbH
+UID: CHE-296.654.267
 
 ## Address
 
@@ -15,6 +16,10 @@ Birkenstrasse 47
 6343 Rotkreuz
 Switzerland
 
+## Contact person
+
+Leon Helg
+
 ## Contact
 
-office@gorped.com
+leon@hikebeast.ch

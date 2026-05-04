@@ -6,11 +6,11 @@ Last updated: 22 April 2026
 Source page: https://hikebeast.ch/privacy.html
 German version: https://hikebeast.ch/de/privacy.md
 
-This page explains what data we collect when you visit Hikebeast and how we use it. We keep it short on purpose. Questions: office@gorped.com.
+This page explains what data we collect when you visit Hikebeast and how we use it. We keep it short on purpose. Questions: leon@hikebeast.ch.
 
 ## Who we are
 
-Saftladen GmbH, Birkenstrasse 47, 6343 Rotkreuz, Switzerland. Contact: office@gorped.com. See https://hikebeast.ch/imprint.md for full company details.
+Saftladen GmbH, Birkenstrasse 47, 6343 Rotkreuz, Switzerland. Contact: leon@hikebeast.ch. See https://hikebeast.ch/imprint.md for full company details.
 
 ## Email sign-ups
 
@@ -30,7 +30,7 @@ We use the Meta Pixel (operated by Meta Platforms Ireland Ltd.) to measure how v
 
 ## Your rights
 
-You have the right to request access to, correction of, or deletion of the personal data we hold about you. Send an email to office@gorped.com and we will handle it within a reasonable time.
+You have the right to request access to, correction of, or deletion of the personal data we hold about you. Send an email to leon@hikebeast.ch and we will handle it within a reasonable time.
 
 ## Cookies
 
