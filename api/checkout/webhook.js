@@ -38,8 +38,11 @@ const REPLY_TO = "leon@hikebeast.ch";
 const SITE = "https://hikebeast.ch";
 const FONT = "-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Arial,sans-serif";
 // Same hero image as the /map/success page, so the receipt feels like a
-// continuation of the post-purchase moment.
-const HERO_IMG = `${SITE}/map/img/thanks-email.jpg`;
+// continuation of the post-purchase moment. Hosted under /images/ (not
+// /map/) so the gating middleware leaves it alone -- email clients never
+// send the auth cookie, so any /map/* asset would 302 to /login and
+// render a broken image in the email body.
+const HERO_IMG = `${SITE}/images/thanks-email.jpg`;
 // Customer-view Drive folder. Latest version of the guide always lives
 // here so the URL stays stable across releases. Linked here as the
 // "view in browser" alternative to the direct download.
