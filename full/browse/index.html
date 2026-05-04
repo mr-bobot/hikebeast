@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Browse · Hidden Gems · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="stylesheet" href="../preview.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../../images/avatar.jpg" alt="" />
+    <span>Hidden Gems · Browse</span>
+  </a>
+  <span class="crumb"><b id="visibleCount">0</b> spots</span>
+  <div class="topbar-right">
+    <a class="pill" href="../index.html">Overview</a>
+  </div>
+</div>
+
+<main class="hb-page">
+
+  <header class="hb-hero">
+    <p class="kicker">Browse</p>
+    <h1>All <span id="totalSpots">…</span> spots, one wall.</h1>
+    <p>Search, filter by region, save what you like.</p>
+  </header>
+
+  <div class="hb-filters">
+    <label class="hb-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+      <input id="q" type="search" placeholder="Search spots, regions, themes…" autocomplete="off" />
+      <button type="button" class="clear" id="clearQ" aria-label="Clear search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </label>
+    <div class="hb-chips" id="chips" data-axis="region"></div>
+    <div class="hb-chips" id="propChips" data-axis="property"></div>
+  </div>
+
+  <div id="grid" class="hb-grid"></div>
+  <div id="empty" class="hb-empty" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+    <h2>No spots match.</h2>
+    <p>Try a shorter search or pick a different region.</p>
+  </div>
+
+</main>
+
+<footer class="legal">
+  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
+  © Hikebeast
+</footer>
+
+<script src="../map/spots-data.js"></script>
+<script src="../img/thumbs/dimensions.js"></script>
+<script src="../social.js"></script>
+<script>
+  // Drop any spot without an image: the photo wall has nothing to show for it.
+  const SPOTS = (window.SPOTS || []).filter(s => !!s.image);
+  const LEGEND = window.LEGEND || [];
+
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const visibleCount = document.getElementById('visibleCount');
+  const chipsEl = document.getElementById('chips');
+  const propChipsEl = document.getElementById('propChips');
+  const q = document.getElementById('q');
+  const clearQ = document.getElementById('clearQ');
+  const search = document.querySelector('.hb-search');
+
+  const state = {
+    q: '',
+    chapters: new Set(),    // empty = all regions
+    properties: new Set(),  // empty = all types; multi-select OR
+  };
+
+  // Pre-index every spot's properties so filtering is O(1).
+  const propIndex = window.HB.buildPropertyIndex(SPOTS);
+  const spotProps = new Map(SPOTS.map(s => [s, new Set(window.HB.propertiesOf(s))]));
+
+  function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  // --- Region chips
+  function renderChips() {
+    const all = document.createElement('button');
+    all.type = 'button';
+    all.className = 'hb-chip' + (state.chapters.size === 0 ? ' is-on' : '');
+    all.textContent = 'All regions';
+    all.addEventListener('click', () => { state.chapters.clear(); update(); });
+    chipsEl.appendChild(all);
+
+    LEGEND.forEach(c => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hb-chip';
+      b.innerHTML = `<span class="swatch" style="background: rgb(${c.color});"></span><span>${esc(c.name)}</span>`;
+      b.addEventListener('click', () => {
+        // Toggle solo: if this is the only one selected, clear all (= show all).
+        // Otherwise, isolate to this one.
+        if (state.chapters.size === 1 && state.chapters.has(c.number)) {
+          state.chapters.clear();
+        } else {
+          state.chapters = new Set([c.number]);
+        }
+        update();
+      });
+      chipsEl.appendChild(b);
+    });
+  }
+
+  // --- Property chips (multi-select OR; "All types" clears) ---
+  function renderPropChips() {
+    propChipsEl.innerHTML = '';
+    const all = document.createElement('button');
+    all.type = 'button';
+    all.className = 'hb-chip' + (state.properties.size === 0 ? ' is-on' : '');
+    all.textContent = 'All types';
+    all.addEventListener('click', () => { state.properties.clear(); update(); });
+    propChipsEl.appendChild(all);
+    propIndex.forEach(p => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hb-chip';
+      b.dataset.prop = p.id;
+      b.innerHTML = `<span>${esc(p.label)}</span><span class="chip-count">${p.count}</span>`;
+      b.addEventListener('click', () => {
+        // Multi-select: tap to add/remove. Region chips stay solo-isolate.
+        if (state.properties.has(p.id)) state.properties.delete(p.id);
+        else state.properties.add(p.id);
+        update();
+      });
+      propChipsEl.appendChild(b);
+    });
+  }
+
+  function paintChips() {
+    const all = chipsEl.children[0];
+    if (all) all.classList.toggle('is-on', state.chapters.size === 0);
+    LEGEND.forEach((c, i) => {
+      const b = chipsEl.children[i + 1];
+      if (b) b.classList.toggle('is-on', state.chapters.has(c.number));
+    });
+    // Property chips
+    const allProp = propChipsEl.children[0];
+    if (allProp) allProp.classList.toggle('is-on', state.properties.size === 0);
+    propIndex.forEach((p, i) => {
+      const b = propChipsEl.children[i + 1];
+      if (b) b.classList.toggle('is-on', state.properties.has(p.id));
+    });
+  }
+
+  // --- Tile rendering · image-only Pinterest-style; alt carries the title for a11y + ctrl-F.
+  // Stores intrinsic dims as data-w / data-h so applySpans() can compute row spans
+  // and decide which tiles get the 2-column landscape treatment.
+  function tile(spot) {
+    const a = document.createElement('a');
+    a.className = 'hb-tile';
+    a.href = spot.href.replace(/^\.\.\//, '../');  // already correct for /full/browse/
+    a.title = spot.title;
+    const dims = (window.HB_THUMB_DIMS || {})[spot.image] || [4, 3];
+    a.dataset.w = dims[0];
+    a.dataset.h = dims[1];
+    const img = `<img src="../img/m/${esc(spot.image)}" alt="${esc(spot.title)}" width="${dims[0]}" height="${dims[1]}" loading="lazy" decoding="async" />`;
+    a.innerHTML = img + `<span class="hb-tile-name">${esc(spot.title)}</span>`;
+    // Heart button
+    const k = window.HB.spotKey(spot);
+    if (k) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hb-fav';
+      btn.setAttribute('data-hb-fav', k);
+      btn.setAttribute('aria-label', 'Save to favorites');
+      function paint() {
+        const on = window.HB.favorites.has(k);
+        btn.classList.toggle('is-on', on);
+        btn.innerHTML = on ? window.HB.icons.heartFill : window.HB.icons.heartOut;
+      }
+      paint();
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.HB.favorites.toggle(k);
+        paint();
+      });
+      a.appendChild(btn);
+    }
+    return a;
+  }
+
+  function filtered() {
+    const term = state.q.trim().toLowerCase();
+    const propsOn = state.properties.size > 0;
+    return SPOTS.filter(s => {
+      if (state.chapters.size > 0 && !state.chapters.has(s.chapter)) return false;
+      if (propsOn) {
+        const set = spotProps.get(s) || new Set();
+        let any = false;
+        for (const p of state.properties) { if (set.has(p)) { any = true; break; } }
+        if (!any) return false;
+      }
+      if (!term) return true;
+      const hay = `${s.title} ${s.kicker} ${s.chapter_id}`.toLowerCase();
+      return hay.includes(term);
+    });
+  }
+
+  // Compute grid-row span (and grid-column span for landscapes) from intrinsic
+  // image dims. Wide images (aspect > 1.4) get .span-wide so they take 2 cols,
+  // but only when the grid is at least 3 cols wide -- a 2-col-span on mobile
+  // would mean every wide spot blows up to full width and the layout feels
+  // like a single column.
+  function applySpans() {
+    if (!grid.children.length) return;
+    const cs = getComputedStyle(grid);
+    const tmpl = cs.gridTemplateColumns.split(' ').filter(Boolean);
+    const cols = tmpl.length;
+    const colW = parseFloat(tmpl[0]);
+    const gap = parseFloat(cs.rowGap || cs.gap || '0');
+    const rowH = parseFloat(cs.gridAutoRows);
+    if (!colW || !rowH) return;
+    // Stable per-tile "feature" flag drawn from the image filename so the
+    // same tiles get hero treatment between renders (no random reshuffles
+    // on filter / fav toggle). Roughly every 7th tall portrait is promoted.
+    function hash(s) {
+      let h = 0; for (let i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) >>> 0; }
+      return h;
+    }
+    Array.from(grid.children).forEach(t => {
+      const w = +t.dataset.w;
+      const h = +t.dataset.h;
+      if (!w || !h) return;
+      const aspect = w / h;
+      const isLandscape = aspect > 1.4;
+      const isTallPortrait = aspect < 0.8;
+      const featureKey = t.querySelector('img')?.src || '';
+      const featurePortrait = isTallPortrait && (hash(featureKey) % 7 === 0);
+      const spanCol = (cols >= 3 && (isLandscape || featurePortrait)) ? 2 : 1;
+      const tileW = colW * spanCol + gap * (spanCol - 1);
+      const tileH = tileW * (h / w);
+      const spanRow = Math.max(1, Math.round((tileH + gap) / (rowH + gap)));
+      t.classList.toggle('span-wide', spanCol === 2 && isLandscape);
+      t.classList.toggle('span-tall', spanCol === 2 && featurePortrait);
+      t.style.gridRowEnd = 'span ' + spanRow;
+    });
+    grid.classList.add('is-ready');
+  }
+
+  function update() {
+    const list = filtered();
+    grid.classList.remove('is-ready');
+    grid.innerHTML = '';
+    list.forEach(s => grid.appendChild(tile(s)));
+    visibleCount.textContent = list.length;
+    empty.hidden = list.length > 0;
+    grid.hidden = list.length === 0;
+    paintChips();
+    requestAnimationFrame(applySpans);
+  }
+
+  // Recompute spans when the viewport crosses a column-count breakpoint.
+  let resizeT = 0;
+  new ResizeObserver(() => { clearTimeout(resizeT); resizeT = setTimeout(applySpans, 80); }).observe(grid);
+
+  // --- Search wiring
+  q.addEventListener('input', () => {
+    state.q = q.value;
+    search.classList.toggle('has-value', !!q.value);
+    update();
+  });
+  clearQ.addEventListener('click', () => {
+    q.value = '';
+    state.q = '';
+    search.classList.remove('has-value');
+    q.focus();
+    update();
+  });
+
+  // Re-paint hearts when fav state changes (e.g. cross-tab or from another tile)
+  window.HB.favorites.subscribe(() => {
+    document.querySelectorAll('[data-hb-fav]').forEach(btn => {
+      const k = btn.getAttribute('data-hb-fav');
+      const on = window.HB.favorites.has(k);
+      btn.classList.toggle('is-on', on);
+      btn.innerHTML = on ? window.HB.icons.heartFill : window.HB.icons.heartOut;
+    });
+  });
+
+  document.getElementById('totalSpots').textContent = SPOTS.length;
+  renderChips();
+  renderPropChips();
+  update();
+</script>
+
+</body>
+</html>

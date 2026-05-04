@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Swipe · Hidden Gems · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="stylesheet" href="../preview.css" />
+<style>
+  /* Swipe UI lives only on this page so it stays out of preview.css. */
+  body {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  .swipe-shell {
+    position: relative;
+    height: calc(100dvh - var(--topbar-h));
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 16px 24px;
+    gap: 14px;
+    overflow: hidden;
+  }
+  .swipe-progress {
+    align-self: center;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: -0.005em;
+    background: rgba(255,255,255,0.92);
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--hairline);
+    box-shadow: var(--shadow-soft);
+  }
+  .swipe-progress b { color: var(--fg); font-weight: 700; }
+
+  .deck {
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 440px;
+    align-self: center;
+    perspective: 1200px;
+  }
+  .card {
+    position: absolute;
+    inset: 0;
+    background: var(--paper);
+    border-radius: 22px;
+    border: 1px solid var(--hairline);
+    box-shadow: 0 24px 50px rgba(0,0,0,0.16), 0 6px 18px rgba(0,0,0,0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    will-change: transform, opacity;
+    touch-action: none;  /* we drive the gesture manually */
+  }
+  .card.is-back-1 {
+    transform: scale(0.94) translateY(14px);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .card.is-back-2 {
+    transform: scale(0.88) translateY(28px);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .card.is-top {
+    z-index: 2;
+    cursor: grab;
+  }
+  .card.is-top.dragging { cursor: grabbing; }
+  .card.snap-back { transition: transform 220ms cubic-bezier(.2,.7,.3,1); }
+  .card.fly-out { transition: transform 280ms cubic-bezier(.4,.1,.6,1), opacity 280ms ease; }
+
+  .card .photo {
+    flex: 1 1 auto;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+  .card .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+  .card .photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.55) 100%);
+    pointer-events: none;
+  }
+  .card .body {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 18px 22px 22px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .card .body .kicker {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .card .body h2 {
+    margin: 2px 0 0;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+  .card .body .meta {
+    margin-top: 6px;
+    font-size: 13px;
+    opacity: 0.85;
+    letter-spacing: -0.005em;
+  }
+  .card .open-link {
+    position: absolute;
+    top: 12px; left: 12px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.92);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    border: 1px solid var(--hairline);
+  }
+  .card .open-link svg { width: 12px; height: 12px; }
+
+  /* Decision stamps that appear as the user drags */
+  .stamp {
+    position: absolute;
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 4px solid currentColor;
+    opacity: 0;
+    transition: opacity 120ms ease;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .stamp.yes { top: 28px; right: 24px; transform: rotate(12deg); color: #34c759; }
+  .stamp.no { top: 28px; left: 24px; transform: rotate(-12deg); color: #ff3b30; }
+  .stamp.super { top: 28px; left: 50%; transform: translateX(-50%) rotate(-4deg); color: #0a84ff; }
+
+  .actions {
+    flex-shrink: 0;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4px;
+  }
+  .act-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    border: 1px solid var(--hairline);
+    background: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.05);
+    transition: transform 120ms ease, color 120ms ease, border-color 120ms ease, background 120ms ease;
+    color: var(--fg);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .act-btn svg { width: 24px; height: 24px; }
+  .act-btn:hover { transform: translateY(-2px); }
+  .act-btn:active { transform: scale(0.94); }
+  .act-btn.no { color: #ff3b30; }
+  .act-btn.yes { color: #34c759; }
+  /* Super sits in the middle, slightly larger -- the standout action */
+  .act-btn.super {
+    width: 68px;
+    height: 68px;
+    color: #0a84ff;
+    border-color: rgba(10,132,255,0.3);
+    box-shadow: 0 8px 24px rgba(10,132,255,0.18), 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .act-btn.super svg { width: 30px; height: 30px; }
+  .act-btn.tertiary { width: 44px; height: 44px; color: var(--muted); }
+  .act-btn.tertiary svg { width: 18px; height: 18px; }
+
+  .empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+  }
+  .empty svg { width: 40px; height: 40px; color: var(--soft); }
+  .empty h2 {
+    margin: 0;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 24px;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .empty p { margin: 0; max-width: 360px; line-height: 1.5; font-size: 14px; }
+  .empty .actions-row {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 6px;
+  }
+  .empty a, .empty button {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 44px; padding: 0 22px; border-radius: 999px;
+    background: var(--fg); color: #fff; text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    border: 0; font-family: inherit; cursor: pointer;
+  }
+  .empty .ghost { background: #fff; color: var(--fg); border: 1px solid var(--hairline); }
+
+  @media (min-width: 700px) {
+    .swipe-shell { padding: 24px 24px 32px; gap: 18px; }
+    .deck { max-width: 460px; }
+    .card .body h2 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../../images/avatar.jpg" alt="" />
+    <span>Hidden Gems · Swipe</span>
+  </a>
+  <span class="crumb"><b id="leftCount">0</b> left</span>
+  <div class="topbar-right">
+    <a class="pill" href="../index.html">Overview</a>
+  </div>
+</div>
+
+<main class="swipe-shell">
+  <div class="swipe-progress">
+    <b id="seenCount">0</b>&nbsp;of&nbsp;<b id="totalCount">0</b>&nbsp;·&nbsp;<b id="savedCount">0</b>&nbsp;saved
+  </div>
+
+  <div class="deck" id="deck"></div>
+
+  <div class="actions">
+    <button type="button" class="act-btn tertiary" id="resetBtn" title="Start over (clears your no/yes piles)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+    </button>
+    <button type="button" class="act-btn no" id="noBtn" title="No (drag left)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button type="button" class="act-btn super" id="superBtn" title="Super like — save (swipe up)">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </button>
+    <button type="button" class="act-btn yes" id="yesBtn" title="Yes (drag right)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </button>
+    <a class="act-btn tertiary" id="openLink" href="#" title="Open the full entry">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+  </div>
+</main>
+
+<script src="../map/spots-data.js"></script>
+<script src="../img/thumbs/dimensions.js"></script>
+<script src="../social.js"></script>
+<script>
+(() => {
+  // Three decision piles:
+  //   - favorites (window.HB.favorites)  -- "super" / save
+  //   - hb:yes:v1                         -- "yes" (interested, not saved)
+  //   - hb:skipped:v1                     -- "no" (not interested)
+  // Anything in any pile drops out of the swipe queue.
+  const NO_KEY = 'hb:skipped:v1';
+  const YES_KEY = 'hb:yes:v1';
+  const SPOTS = (window.SPOTS || []).filter(s => !!s.image);
+  const LEGEND = window.LEGEND || [];
+  const REGIONS = Object.fromEntries(LEGEND.map(c => [c.number, c.name]));
+
+  const deck = document.getElementById('deck');
+  const seenCountEl = document.getElementById('seenCount');
+  const totalCountEl = document.getElementById('totalCount');
+  const savedCountEl = document.getElementById('savedCount');
+  const leftCountEl = document.getElementById('leftCount');
+  const noBtn = document.getElementById('noBtn');
+  const yesBtn = document.getElementById('yesBtn');
+  const superBtn = document.getElementById('superBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const openLink = document.getElementById('openLink');
+
+  totalCountEl.textContent = SPOTS.length;
+
+  function readSet(key) {
+    try { return new Set(JSON.parse(localStorage.getItem(key) || '[]')); }
+    catch { return new Set(); }
+  }
+  function writeSet(key, set) {
+    try { localStorage.setItem(key, JSON.stringify([...set])); } catch {}
+  }
+  const readNo = () => readSet(NO_KEY);
+  const readYes = () => readSet(YES_KEY);
+
+  function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  // Build the queue: anything not yet decided. Fav / yes / no all remove a
+  // spot so reopening the page doesn't re-show the same cards.
+  function buildQueue() {
+    const no = readNo();
+    const yes = readYes();
+    const remaining = SPOTS.filter(s => {
+      const k = window.HB.spotKey(s);
+      return k && !window.HB.favorites.has(k) && !no.has(k) && !yes.has(k);
+    });
+    // Stable shuffle keyed off pile sizes so refreshes don't reorder
+    // mid-session, but a clean reset re-shuffles.
+    return shuffle(remaining, 1 + no.size + yes.size + window.HB.favorites.count());
+  }
+
+  // Mulberry32 deterministic shuffle
+  function shuffle(arr, seed) {
+    let s = (seed >>> 0) || 1;
+    const rng = () => {
+      s |= 0; s = (s + 0x6D2B79F5) | 0;
+      let t = Math.imul(s ^ (s >>> 15), 1 | s);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+    const out = arr.slice();
+    for (let i = out.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      [out[i], out[j]] = [out[j], out[i]];
+    }
+    return out;
+  }
+
+  let queue = buildQueue();
+  const TOTAL = SPOTS.length;
+
+  function makeCard(spot, depth) {
+    const c = document.createElement('div');
+    c.className = 'card ' + (depth === 0 ? 'is-top' : depth === 1 ? 'is-back-1' : 'is-back-2');
+    const region = REGIONS[spot.chapter] || spot.chapter_id;
+    const dims = (window.HB_THUMB_DIMS || {})[spot.image] || [4, 5];
+    const href = '../' + (spot.href || '').replace(/^\.\.\//, '');  // map href is relative to /full/map/, we're at /full/swipe/
+    c.innerHTML = `
+      <div class="stamp yes">Yes</div>
+      <div class="stamp no">Nope</div>
+      <div class="stamp super">Super</div>
+      <a class="open-link" href="${esc(href)}" title="Open full entry">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Read
+      </a>
+      <div class="photo">
+        <img src="../img/m/${esc(spot.image)}" alt="${esc(spot.title)}" width="${dims[0]}" height="${dims[1]}" decoding="async" />
+      </div>
+      <div class="body">
+        <span class="kicker">${esc(window.HB.singularKicker(spot.kicker) || region)}</span>
+        <h2>${esc(spot.title)}</h2>
+        <span class="meta">${esc(region)}</span>
+      </div>
+    `;
+    c.dataset.spotKey = window.HB.spotKey(spot) || '';
+    c.dataset.href = href;
+    return c;
+  }
+
+  function renderDeck() {
+    deck.innerHTML = '';
+    if (!queue.length) {
+      renderEmpty();
+      updateCounts();
+      return;
+    }
+    // Build up to 3 stacked cards
+    const upcoming = queue.slice(0, 3);
+    upcoming.forEach((s, i) => deck.appendChild(makeCard(s, i)));
+    bindTop();
+    updateCounts();
+  }
+
+  function renderEmpty() {
+    const seenAll = TOTAL > 0;
+    const savedNow = window.HB.favorites.count();
+    deck.innerHTML = `
+      <div class="empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <h2>${seenAll ? "You've been through them all." : 'No spots to swipe.'}</h2>
+        <p>${savedNow ? `${savedNow} saved on this device.` : 'Your saves will show up here once you start hearting cards.'}</p>
+        <div class="actions-row">
+          <a href="../saved/">View saves</a>
+          <a class="ghost" href="../browse/">Browse all</a>
+          <button class="ghost" id="emptyReset">Reset and start over</button>
+        </div>
+      </div>
+    `;
+    document.getElementById('emptyReset')?.addEventListener('click', resetSkipped);
+  }
+
+  function updateCounts() {
+    const no = readNo();
+    const yes = readYes();
+    const saved = window.HB.favorites.count();
+    const seen = saved + no.size + yes.size;
+    seenCountEl.textContent = Math.min(seen, TOTAL);
+    savedCountEl.textContent = saved;
+    leftCountEl.textContent = queue.length;
+    openLink.href = (deck.querySelector('.card.is-top')?.dataset.href) || '#';
+  }
+
+  function resetPiles() {
+    writeSet(NO_KEY, new Set());
+    writeSet(YES_KEY, new Set());
+    queue = buildQueue();
+    renderDeck();
+  }
+
+  // === Drag handling on the top card ===
+  let drag = null;
+
+  function bindTop() {
+    const top = deck.querySelector('.card.is-top');
+    if (!top) return;
+    top.addEventListener('pointerdown', onDown);
+  }
+
+  function onDown(e) {
+    if (e.button !== undefined && e.button !== 0) return;
+    const card = e.currentTarget;
+    if (drag) return;
+    card.setPointerCapture(e.pointerId);
+    card.classList.add('dragging');
+    card.classList.remove('snap-back');
+    drag = {
+      pointerId: e.pointerId,
+      card,
+      startX: e.clientX,
+      startY: e.clientY,
+      dx: 0,
+      dy: 0,
+      width: card.getBoundingClientRect().width,
+    };
+    card.addEventListener('pointermove', onMove);
+    card.addEventListener('pointerup', onUp);
+    card.addEventListener('pointercancel', onUp);
+  }
+
+  function onMove(e) {
+    if (!drag || e.pointerId !== drag.pointerId) return;
+    drag.dx = e.clientX - drag.startX;
+    drag.dy = e.clientY - drag.startY;
+    paintDrag();
+  }
+
+  // The user's drag direction maps to a verdict:
+  //   - mostly horizontal & dx > 0  -> "yes"  (interested but not saved)
+  //   - mostly horizontal & dx < 0  -> "no"   (skip)
+  //   - mostly vertical   & dy < 0  -> "super" (save / favorite)
+  // We pick whichever axis has the larger absolute travel (with a small bias
+  // toward vertical so quick up-flicks register as super even with a bit of
+  // drift).
+  function dragVerdict(dx, dy) {
+    const ax = Math.abs(dx);
+    const ay = Math.abs(dy);
+    if (ay > ax * 0.85 && dy < 0) return 'super';
+    if (dx > 0) return 'yes';
+    return 'no';
+  }
+
+  function paintDrag() {
+    const { card, dx, dy, width } = drag;
+    // Rotation tied to horizontal travel, clamped so the card doesn't spin.
+    const rot = Math.max(-14, Math.min(14, dx / 14));
+    card.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
+    const verdict = dragVerdict(dx, dy);
+    const ax = Math.abs(dx);
+    const ay = Math.abs(dy);
+    let strength = 0;
+    if (verdict === 'super') strength = Math.min(1, ay / (width * 0.5));
+    else strength = Math.min(1, ax / (width * 0.5));
+    const yesS = card.querySelector('.stamp.yes');
+    const noS = card.querySelector('.stamp.no');
+    const superS = card.querySelector('.stamp.super');
+    if (yesS) yesS.style.opacity = (verdict === 'yes' ? Math.min(1, strength * 1.4) : 0).toFixed(2);
+    if (noS) noS.style.opacity = (verdict === 'no' ? Math.min(1, strength * 1.4) : 0).toFixed(2);
+    if (superS) superS.style.opacity = (verdict === 'super' ? Math.min(1, strength * 1.4) : 0).toFixed(2);
+  }
+
+  function onUp(e) {
+    if (!drag || e.pointerId !== drag.pointerId) return;
+    const { card, dx, dy, width } = drag;
+    card.removeEventListener('pointermove', onMove);
+    card.removeEventListener('pointerup', onUp);
+    card.removeEventListener('pointercancel', onUp);
+    card.classList.remove('dragging');
+    const horizThreshold = width * 0.32;
+    const vertThreshold = width * 0.32;
+    const verdict = dragVerdict(dx, dy);
+    const past = verdict === 'super' ? Math.abs(dy) > vertThreshold : Math.abs(dx) > horizThreshold;
+    if (past) {
+      finishDecision(verdict);
+    } else {
+      card.classList.add('snap-back');
+      card.style.transform = '';
+      ['yes', 'no', 'super'].forEach(v => {
+        const s = card.querySelector('.stamp.' + v);
+        if (s) s.style.opacity = '0';
+      });
+      setTimeout(() => card.classList.remove('snap-back'), 240);
+      drag = null;
+    }
+  }
+
+  function finishDecision(verdict) {
+    if (!drag) return;
+    const { card } = drag;
+    drag = null;
+    const k = card.dataset.spotKey;
+    if (k) {
+      if (verdict === 'super') {
+        window.HB.favorites.set(k, true);
+      } else if (verdict === 'yes') {
+        const s = readYes(); s.add(k); writeSet(YES_KEY, s);
+      } else if (verdict === 'no') {
+        const s = readNo(); s.add(k); writeSet(NO_KEY, s);
+      }
+    }
+    card.classList.add('fly-out');
+    // Trajectory: super flies up, yes flies right, no flies left.
+    const tx = verdict === 'no' ? '-140vw' : verdict === 'yes' ? '140vw' : '0';
+    const ty = verdict === 'super' ? '-120vh' : '40px';
+    const rot = verdict === 'no' ? -24 : verdict === 'yes' ? 24 : 0;
+    const stamp = card.querySelector('.stamp.' + verdict);
+    if (stamp) stamp.style.opacity = '1';
+    requestAnimationFrame(() => {
+      card.style.transform = `translate(${tx}, ${ty}) rotate(${rot}deg)`;
+      card.style.opacity = '0';
+    });
+    setTimeout(() => {
+      queue.shift();
+      renderDeck();
+    }, 290);
+  }
+
+  function programmaticSwipe(verdict) {
+    const top = deck.querySelector('.card.is-top');
+    if (!top || drag) return;
+    drag = { pointerId: -1, card: top, startX: 0, startY: 0, dx: 0, dy: 0, width: top.getBoundingClientRect().width };
+    finishDecision(verdict);
+  }
+
+  noBtn.addEventListener('click', () => programmaticSwipe('no'));
+  yesBtn.addEventListener('click', () => programmaticSwipe('yes'));
+  superBtn.addEventListener('click', () => programmaticSwipe('super'));
+  resetBtn.addEventListener('click', () => {
+    if (confirm('Start over? Clears your No and Yes piles and re-shuffles. Saves stay.')) resetPiles();
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') programmaticSwipe('no');
+    else if (e.key === 'ArrowRight') programmaticSwipe('yes');
+    else if (e.key === 'ArrowUp') programmaticSwipe('super');
+  });
+
+  // Cross-tab sync
+  window.HB.favorites.subscribe(() => updateCounts());
+  window.addEventListener('storage', (e) => {
+    if (e.key === NO_KEY || e.key === YES_KEY) { queue = buildQueue(); renderDeck(); }
+  });
+
+  renderDeck();
+})();
+</script>
+
+</body>
+</html>

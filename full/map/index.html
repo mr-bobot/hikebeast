@@ -31,18 +31,21 @@
     box-shadow: 0 0 0 1px rgba(0,0,0,0.10), 0 3px 8px rgba(0,0,0,0.20);
     transition: transform 200ms ease, box-shadow 200ms ease;
     cursor: pointer;
-    transform: translateZ(0);
+    /* --marker-scale grows as the user zooms in so spot photos read at higher
+       zooms without overcrowding the country view at low zoom. Set on
+       <html> by zoomend below. */
+    transform: scale(var(--marker-scale, 1)) translateZ(0);
     will-change: transform;
   }
   .spot-marker:hover { z-index: 1000 !important; }
   .spot-marker:hover .thumb {
-    transform: scale(1.4) translateZ(0);
+    transform: scale(calc(var(--marker-scale, 1) * 1.4)) translateZ(0);
     box-shadow: 0 0 0 1px rgba(0,0,0,0.10), 0 10px 24px rgba(0,0,0,0.30);
   }
   /* Touch devices: no hover-scale, no transition (causes jitter on tap). */
   @media (hover: none) {
     .spot-marker .thumb { transition: none; }
-    .spot-marker:hover .thumb { transform: translateZ(0); }
+    .spot-marker:hover .thumb { transform: scale(var(--marker-scale, 1)) translateZ(0); }
   }
 
   .leaflet-popup-content-wrapper {
@@ -91,8 +94,11 @@
   .legend-item.is-off { opacity: 0.30; }
   .legend-item .swatch { flex-shrink: 0; width: 14px; height: 14px; border-radius: 999px; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.08); }
 
-  .counter {
+  .map-controls {
     position: absolute; top: 18px; right: 18px; z-index: 500;
+    display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
+  }
+  .counter {
     background: rgba(255,255,255,0.94);
     -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
     border: 1px solid var(--hairline); border-radius: 999px;
@@ -100,6 +106,35 @@
     box-shadow: 0 4px 14px rgba(0,0,0,0.06);
   }
   .counter b { color: var(--accent); font-weight: 700; }
+
+  .fav-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 12px; height: 32px;
+    background: rgba(255,255,255,0.94);
+    -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
+    border: 1px solid var(--hairline); border-radius: 999px;
+    font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: -0.005em; color: var(--fg);
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    transition: background 120ms ease, color 120ms ease, border-color 120ms ease, transform 100ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .fav-toggle svg { width: 14px; height: 14px; color: rgba(0,0,0,0.55); transition: color 120ms ease; }
+  .fav-toggle:hover { border-color: var(--hairline-strong); }
+  .fav-toggle:active { transform: scale(0.97); }
+  .fav-toggle .fav-count {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 16px; height: 16px; padding: 0 5px;
+    border-radius: 999px; background: var(--accent); color: #fff;
+    font-size: 10px; font-weight: 700; line-height: 1; letter-spacing: 0;
+  }
+  .fav-toggle.is-on {
+    background: #ff375f; color: #fff; border-color: #ff375f;
+  }
+  .fav-toggle.is-on svg { color: #fff; }
+  .fav-toggle.is-on .fav-count { background: #fff; color: #ff375f; }
+  .fav-toggle.is-empty { opacity: 0.55; cursor: default; }
+  .fav-toggle.is-empty:hover { border-color: var(--hairline); }
 
   /* Toggle button -- only shown on mobile */
   .legend-toggle { display: none; }
@@ -129,6 +164,9 @@
     .legend.is-open > .legend-item { display: flex; font-size: 12px; padding: 3px 0; gap: 8px; }
     .legend.is-open > .legend-item .swatch { width: 12px; height: 12px; }
     .counter { padding: 6px 10px; font-size: 11px; }
+    .map-controls { top: 12px; right: 12px; gap: 6px; }
+    .fav-toggle { height: 28px; padding: 6px 10px; font-size: 11px; }
+    .fav-toggle svg { width: 12px; height: 12px; }
     .spot-marker .thumb { width: 32px; height: 40px; border-width: 1.5px; }
   }
 </style>
@@ -148,7 +186,14 @@
 
 <div class="map-shell">
   <div id="map"></div>
-  <div class="counter"><b id="visible">0</b>&nbsp;visible spots</div>
+  <div class="map-controls">
+    <button type="button" class="fav-toggle" id="favToggle" aria-pressed="false" title="Show only favorites">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span>Saved</span>
+      <span class="fav-count" id="favToggleCount" hidden>0</span>
+    </button>
+    <div class="counter"><b id="visible">0</b>&nbsp;visible spots</div>
+  </div>
   <aside class="legend" id="legend">
     <button class="legend-toggle" id="legendToggle" aria-expanded="false" aria-label="Show chapter filter">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
@@ -160,6 +205,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="spots-data.js"></script>
+<script src="../social.js"></script>
 <script>
   // preferCanvas + smaller-touch-handler: Canvas vector renderer is
   // dramatically faster than SVG/DOM for many markers, esp. on mobile.
@@ -210,6 +256,11 @@
 
   function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+  // Track every marker so we can toggle individual ones on/off when the
+  // "Saved only" filter changes (favorites can come and go without a reload).
+  const markersByChapter = new Map();
+  LEGEND.forEach(c => markersByChapter.set(c.number, []));
+
   SPOTS.forEach(s => {
     // Markers use the tiny thumbnails (160px @ q60, ~5-7 KB each); the
     // popup keeps the full-size image from /full/img/.
@@ -238,8 +289,15 @@
           </div>
         </div>
     `, { maxWidth: 240, minWidth: 240 });
+    // Tag the marker with its favorite-key so the "Saved only" filter can
+    // include/exclude it without rebuilding any DOM.
+    m._spotKey = (window.HB && window.HB.spotKey) ? window.HB.spotKey(s) : null;
     const grp = layers.get(s.chapter);
-    if (grp) grp.addLayer(m);
+    if (grp) {
+      const list = markersByChapter.get(s.chapter) || [];
+      list.push(m);
+      grp.addLayer(m);
+    }
   });
 
   const visEl = document.getElementById('visible');
@@ -249,6 +307,73 @@
     visEl.textContent = n;
   }
   updateCount();
+
+  // === Marker scale grows with zoom so spot thumbnails are legible up close
+  // without crowding the low-zoom country view. Computed once per zoom and
+  // pushed into a CSS variable -- single transform, no per-marker DOM work. ===
+  function applyMarkerScale() {
+    const z = map.getZoom();
+    // zoom 7 -> 0.85 (tight country view), zoom 13 -> 1.55 (regional zoom)
+    const scale = Math.min(1.55, Math.max(0.85, 1 + (z - 8) * 0.13));
+    document.documentElement.style.setProperty('--marker-scale', scale.toFixed(2));
+  }
+  map.on('zoomend', applyMarkerScale);
+  applyMarkerScale();
+
+  // === "Saved only" filter ===
+  // Per-marker visibility = chapter is active AND (favOnly is off OR spot is favorited).
+  // We toggle individual markers in/out of their chapter's layer group rather than
+  // touching the layer membership wholesale, so chapter-isolate and fav-only compose.
+  let favOnly = false;
+  const favToggle = document.getElementById('favToggle');
+  const favCountEl = document.getElementById('favToggleCount');
+
+  function applyFavFilter() {
+    const favs = (window.HB && window.HB.favorites) ? window.HB.favorites : null;
+    markersByChapter.forEach((list, chapterNum) => {
+      const grp = layers.get(chapterNum);
+      if (!grp) return;
+      list.forEach(m => {
+        const shouldShow = !favOnly || (m._spotKey && favs && favs.has(m._spotKey));
+        const isInGroup = grp.hasLayer(m);
+        if (shouldShow && !isInGroup) grp.addLayer(m);
+        if (!shouldShow && isInGroup) grp.removeLayer(m);
+      });
+    });
+    updateCount();
+  }
+
+  function refreshFavBadge() {
+    const n = (window.HB && window.HB.favorites) ? window.HB.favorites.count() : 0;
+    if (n > 0) {
+      favCountEl.textContent = String(n);
+      favCountEl.removeAttribute('hidden');
+      favToggle.classList.remove('is-empty');
+    } else {
+      favCountEl.textContent = '';
+      favCountEl.setAttribute('hidden', '');
+      // No favorites yet — soften the toggle so it doesn't look broken when clicked.
+      favToggle.classList.toggle('is-empty', !favOnly);
+    }
+  }
+
+  favToggle.addEventListener('click', () => {
+    favOnly = !favOnly;
+    favToggle.classList.toggle('is-on', favOnly);
+    favToggle.setAttribute('aria-pressed', String(favOnly));
+    favToggle.title = favOnly ? 'Show all spots' : 'Show only favorites';
+    applyFavFilter();
+    refreshFavBadge();
+  });
+
+  // Repaint when favorites change in another tab or via the social.js heart.
+  if (window.HB && window.HB.favorites) {
+    window.HB.favorites.subscribe(() => {
+      refreshFavBadge();
+      if (favOnly) applyFavFilter();
+    });
+  }
+  refreshFavBadge();
 
   // Legend behavior: clicking a chapter isolates it (deselects all others).
   // Clicking the same chapter again -- when it is the only one active --

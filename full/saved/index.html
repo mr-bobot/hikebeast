@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Saved · Hidden Gems · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="stylesheet" href="../preview.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../../images/avatar.jpg" alt="" />
+    <span>Hidden Gems · Saved</span>
+  </a>
+  <span class="crumb"><b id="savedCount">0</b> saved</span>
+  <div class="topbar-right">
+    <a class="pill" href="../index.html">Overview</a>
+  </div>
+</div>
+
+<main class="hb-page">
+
+  <header class="hb-hero">
+    <p class="kicker">Your favorites</p>
+    <h1 id="title">Nothing saved yet.</h1>
+    <p id="subtitle">Tap the heart on any spot to bookmark it. Saved on this device.</p>
+  </header>
+
+  <div id="content"></div>
+
+  <div id="empty" class="hb-empty">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <h2>No favorites yet.</h2>
+    <p>Browse the guide and tap the heart on any spot to save it here.</p>
+    <a href="../browse/">Browse spots</a>
+  </div>
+
+</main>
+
+<footer class="legal">
+  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
+  © Hikebeast
+</footer>
+
+<script src="../map/spots-data.js"></script>
+<script src="../img/thumbs/dimensions.js"></script>
+<script src="../social.js"></script>
+<script>
+  // Drop any spot without an image: photo wall has nothing to show for it.
+  const SPOTS = (window.SPOTS || []).filter(s => !!s.image);
+  const LEGEND = window.LEGEND || [];
+
+  const content = document.getElementById('content');
+  const empty = document.getElementById('empty');
+  const title = document.getElementById('title');
+  const subtitle = document.getElementById('subtitle');
+  const counter = document.getElementById('savedCount');
+
+  function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function tile(spot) {
+    const a = document.createElement('a');
+    a.className = 'hb-saved-tile';
+    a.href = spot.href;  // already '../<chapter>/index.html#anchor', correct from /full/saved/
+    a.title = spot.title;
+    const region = LEGEND.find(c => c.number === spot.chapter);
+    const regionName = region ? region.name : spot.chapter_id;
+    const kicker = window.HB.singularKicker(spot.kicker || '');
+    const sub = kicker ? `${esc(kicker)} · ${esc(regionName)}` : esc(regionName);
+    a.innerHTML = `
+      <div class="photo">
+        <img src="../img/m/${esc(spot.image)}" alt="${esc(spot.title)}" loading="lazy" decoding="async" />
+      </div>
+      <div class="body">
+        <div class="name">${esc(spot.title)}</div>
+        <div class="meta">${sub}</div>
+      </div>
+    `;
+    const k = window.HB.spotKey(spot);
+    if (k) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hb-fav is-on';
+      btn.setAttribute('data-hb-fav', k);
+      btn.setAttribute('aria-label', 'Remove from favorites');
+      btn.innerHTML = window.HB.icons.heartFill;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.HB.favorites.toggle(k);
+        // Saved page: removing a fav should drop the tile.
+        a.style.transition = 'opacity 180ms ease, transform 180ms ease';
+        a.style.opacity = '0';
+        a.style.transform = 'scale(0.92)';
+        setTimeout(render, 180);
+      });
+      a.appendChild(btn);
+    }
+    return a;
+  }
+
+  function render() {
+    const keys = window.HB.favorites.list();
+    const set = new Set(keys);
+    const saved = SPOTS.filter(s => set.has(window.HB.spotKey(s)));
+    counter.textContent = saved.length;
+
+    if (!saved.length) {
+      content.innerHTML = '';
+      content.hidden = true;
+      empty.hidden = false;
+      title.textContent = 'Nothing saved yet.';
+      subtitle.textContent = 'Tap the heart on any spot to bookmark it. Saved on this device.';
+      return;
+    }
+
+    empty.hidden = true;
+    content.hidden = false;
+    title.textContent = saved.length === 1 ? '1 spot saved.' : `${saved.length} spots saved.`;
+    subtitle.textContent = 'Grouped by region. Tap a card to open the full entry. Saved on this device.';
+
+    // Group by chapter, in LEGEND order.
+    const byChapter = new Map();
+    LEGEND.forEach(c => byChapter.set(c.number, []));
+    saved.forEach(s => {
+      if (!byChapter.has(s.chapter)) byChapter.set(s.chapter, []);
+      byChapter.get(s.chapter).push(s);
+    });
+
+    content.innerHTML = '';
+    LEGEND.forEach(c => {
+      const list = byChapter.get(c.number) || [];
+      if (!list.length) return;
+      const wrap = document.createElement('section');
+      wrap.className = 'hb-group';
+      const head = document.createElement('div');
+      head.className = 'hb-group-head';
+      head.innerHTML = `<h2>${esc(c.name)}</h2><span class="meta">${list.length} spot${list.length === 1 ? '' : 's'}</span>`;
+      wrap.appendChild(head);
+      const grid = document.createElement('div');
+      grid.className = 'hb-saved-grid';
+      list.forEach(s => grid.appendChild(tile(s)));
+      wrap.appendChild(grid);
+      content.appendChild(wrap);
+    });
+  }
+
+  window.HB.favorites.subscribe(render);
+  render();
+</script>
+
+</body>
+</html>
