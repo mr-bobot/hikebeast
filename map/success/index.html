@@ -254,6 +254,64 @@ fbq('track', 'PageView');
     color: var(--fg);
   }
 
+  /* === Maps callout · the unsung product feature. The buyer also
+     paid for "all 122 pins on Google Maps as one shared list", so we
+     make it a visible action between the personal note and the
+     tactical next-steps. Card is full-width, soft surface bg, with
+     the multi-colour Drive-style maps mark to read distinct. */
+  .maps {
+    margin: 22px 22px 0;
+    padding: 18px 18px 18px 18px;
+    background: var(--surface);
+    border-radius: var(--radius-card);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--fg);
+    transition: transform 100ms ease, background 150ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .maps:active { transform: scale(0.99); }
+  .maps:hover { background: #ececef; }
+  .maps-icon {
+    width: 44px; height: 44px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #ffffff;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+  /* Standard Google-Maps style pin in the brand red. */
+  .maps-icon svg {
+    width: 26px; height: 26px;
+    display: block;
+  }
+  .maps-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .maps-body strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--fg);
+    line-height: 1.25;
+  }
+  .maps-body span {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+  .maps-arrow {
+    flex-shrink: 0;
+    color: var(--muted);
+  }
+
   /* === Footer · receipt details, IG follow, imprint. */
   .foot {
     margin: 32px 22px 0;
@@ -283,7 +341,7 @@ fbq('track', 'PageView');
   <!-- Hero · cream photo of three polaroids. No text overlay; copy lives
        in the action card below. -->
   <section class="hero">
-    <img src="../img/success-hero.jpg" alt="" />
+    <img src="../img/thanks-hero.jpg" alt="" />
   </section>
 
   <!-- Action card · celebration (tick + heading) and the two ways to get
@@ -329,12 +387,32 @@ fbq('track', 'PageView');
     </div>
   </section>
 
+  <!-- Maps callout · highlights the "all 122 pins on Google Maps"
+       feature as a tappable card. Sits between the personal note and
+       the tactical next-steps so it doesn't get buried in a list. -->
+  <a class="maps" href="https://www.google.com/maps/placelists/list/4A_3J2iHSzu6zl1rtFMQPQ" target="_blank" rel="noopener">
+    <div class="maps-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Google Maps pin: red drop with white inner circle. -->
+        <path d="M12 2C7.58 2 4 5.58 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.42-3.58-8-8-8z" fill="#EA4335" />
+        <circle cx="12" cy="10" r="3" fill="#ffffff" />
+      </svg>
+    </div>
+    <div class="maps-body">
+      <strong>Open the list on Google Maps</strong>
+      <span>All 122 pins live in your Maps app, ready for offline.</span>
+    </div>
+    <svg class="maps-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="9,18 15,12 9,6" />
+    </svg>
+  </a>
+
   <!-- Tactical next steps. Tells them what to do, kills overwhelm. -->
   <section class="next">
     <h2>What's next</h2>
     <ol>
       <li>Save the PDF to your phone for offline use on the trail. On iPhone: download → share → "Save to Files".</li>
-      <li>Open the Google Maps list inside the guide so all 122 pins live in your existing Maps app.</li>
+      <li>Save the Google Maps list above so all 122 pins live in your existing Maps app.</li>
       <li>Pick a region you haven't been to yet. Start there.</li>
     </ol>
   </section>

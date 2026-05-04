@@ -39,7 +39,7 @@ const SITE = "https://hikebeast.ch";
 const FONT = "-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Arial,sans-serif";
 // Same hero image as the /map/success page, so the receipt feels like a
 // continuation of the post-purchase moment.
-const HERO_IMG = `${SITE}/map/img/email-hero.jpg`;
+const HERO_IMG = `${SITE}/map/img/thanks-email.jpg`;
 // Customer-view Drive folder. Latest version of the guide always lives
 // here so the URL stays stable across releases. Linked here as the
 // "view in browser" alternative to the direct download.
