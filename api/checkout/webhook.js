@@ -42,7 +42,10 @@ const FONT = "-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Ar
 // /map/) so the gating middleware leaves it alone -- email clients never
 // send the auth cookie, so any /map/* asset would 302 to /login and
 // render a broken image in the email body.
-const HERO_IMG = `${SITE}/images/thanks-email.jpg`;
+// Cache-bust query string bumped when the file changes. Some email clients
+// aggressively cache previously-fetched URLs (Gmail proxy, Outlook image
+// cache); a new ?v= guarantees subscribers see the current artwork.
+const HERO_IMG = `${SITE}/images/thanks-email.jpg?v=2`;
 // Customer-view Drive folder. Latest version of the guide always lives
 // here so the URL stays stable across releases. Linked here as the
 // "view in browser" alternative to the direct download.
@@ -112,8 +115,8 @@ function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId })
       </table>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560" style="max-width:560px;margin-top:24px;"><tr>
         <td align="center" style="font-family:${FONT};font-size:12px;color:#6e6e73;line-height:1.6;">
-          <div>© Hikebeast · Saftladen GmbH</div>
-          <div><a href="${SITE}/imprint.html" style="color:#6e6e73;text-decoration:none;">Imprint</a> · <a href="${SITE}/privacy.html" style="color:#6e6e73;text-decoration:none;">Privacy</a></div>
+          <div>© Hikebeast</div>
+          <div><a href="${SITE}/terms.html" style="color:#6e6e73;text-decoration:none;">Terms</a> · <a href="${SITE}/imprint.html" style="color:#6e6e73;text-decoration:none;">Imprint</a> · <a href="${SITE}/privacy.html" style="color:#6e6e73;text-decoration:none;">Privacy</a></div>
         </td>
       </tr></table>
     </td></tr>
@@ -143,8 +146,8 @@ Leon
 Receipt: ${amountFormatted} · Order ${orderId}
 Questions? Reply to this email.
 
-© Hikebeast · Saftladen GmbH
-${SITE}/imprint.html · ${SITE}/privacy.html
+© Hikebeast
+${SITE}/terms.html · ${SITE}/imprint.html · ${SITE}/privacy.html
 `;
 }
 

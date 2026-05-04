@@ -64,6 +64,10 @@ fbq('track', 'PageView');
     /* Match the cream tone of the photo so any sub-pixel rounding edge
        doesn't show as a hard line. */
     background: #f3efe9;
+    margin: 16px 16px 0;
+    /* Round all four corners. The action card overlaps the bottom but
+       its own rounded corners line up cleanly with the hero's. */
+    border-radius: 18px;
   }
   .hero img {
     width: 100%; height: 100%;
@@ -239,7 +243,8 @@ fbq('track', 'PageView');
     font-size: 15px;
     line-height: 1.5;
   }
-  .next ol li:last-child { border-bottom: 1px solid var(--hairline); }
+  /* No bottom border on the last item -- the footer's top border picks
+     up the visual cap. Otherwise we'd render two parallel lines. */
   .next ol li::before {
     content: counter(step);
     position: absolute;
@@ -334,6 +339,35 @@ fbq('track', 'PageView');
     font-size: 11px;
     word-break: break-all;
   }
+
+  /* === Desktop polish ·
+     Mobile-first column stays the same, but on wider viewports we add
+     top breathing room so the page isn't pinned to the navbar, and
+     widen the column slightly so it doesn't feel lost in the middle of
+     a 1440px screen. The action card is intentionally kept narrow --
+     more width would make the buttons feel oversized. */
+  @media (min-width: 720px) {
+    main {
+      max-width: 580px;
+      padding: 32px 0 64px;
+    }
+    .hero {
+      margin: 0 0 0;
+      border-radius: 22px;
+    }
+    .action {
+      margin: -44px 28px 0;
+      padding: 32px 28px 26px;
+    }
+    .note, .maps, .next {
+      margin-left: 28px;
+      margin-right: 28px;
+    }
+    .foot {
+      margin-left: 28px;
+      margin-right: 28px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -357,7 +391,7 @@ fbq('track', 'PageView');
     <h1 id="headline">You're in.</h1>
     <p class="action-sub" id="subheadline">Your guide is ready right now.</p>
 
-    <a id="downloadBtn" class="btn btn-primary" href="#" aria-disabled="true" download>
+    <a id="downloadBtn" class="btn btn-primary" href="#" aria-disabled="true" target="_blank" rel="noopener" download>
       <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M12 3v12" />
         <path d="m7 10 5 5 5-5" />
@@ -382,8 +416,8 @@ fbq('track', 'PageView');
     <div class="note-avatar"><img src="../../images/avatar.jpg" alt="" /></div>
     <div class="note-body">
       <p><strong>Hey, Leon here.</strong></p>
-      <p>Thanks for trusting me with your trip planning. The 122 spots in this guide took me 5 years to find, photograph, and verify. Now they're yours.</p>
-      <p>If you have a question or want to send me a photo from your trip: just hit reply on the receipt email. <a href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener">@leon.helg on Instagram</a> works too.</p>
+      <p>The 100+ spots in this guide took me 5 years to put together. Now they're yours.</p>
+      <p>If you have a question or want to send me a photo from your trip: just hit reply on the receipt email or hit me up on Instagram at <a href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener">@leon.helg</a>.</p>
     </div>
   </section>
 
@@ -417,11 +451,12 @@ fbq('track', 'PageView');
     </ol>
   </section>
 
-  <!-- Footer with receipt info. -->
+  <!-- Footer with receipt info. Saftladen GmbH lives in the imprint;
+       no need to repeat it on every page. -->
   <footer class="foot">
-    <div>© Hikebeast · Saftladen GmbH</div>
+    <div>© Hikebeast</div>
     <div>
-      <a href="../../imprint.html">Imprint</a><span class="foot-sep"></span><a href="../../privacy.html">Privacy</a>
+      <a href="../../terms.html">Terms</a><span class="foot-sep"></span><a href="../../imprint.html">Imprint</a><span class="foot-sep"></span><a href="../../privacy.html">Privacy</a>
     </div>
     <div class="foot-order" id="receipt"></div>
   </footer>
