@@ -1,12 +1,20 @@
 # Hikebeast — Swiss-made guides, filters and grades for alpine creators
 # https://hikebeast.ch
+#
+# Note: do NOT add Disallow rules for paths that need to be scraped by
+# social-media link-preview bots (facebookexternalhit, Twitterbot, etc).
+# Vercel's edge WAF treats Disallow as actual access control for known
+# crawler UAs, so any Disallow line on a path the scraper hits returns
+# 403 and breaks the rich link preview. SEO-side, the noindex <meta>
+# tag on each page is what keeps it out of search results · robots.txt
+# is purely for crawl-budget hints. Pattern set by commit 720c103
+# (2026-04-27) when /free/download/ had the same 403 issue.
 
 User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
-Disallow: /map/success/
 
 # AI search crawlers — explicitly disallowed from /full/ and /preview/
 # (those are paid-customer / pre-launch areas, not for ingestion)
@@ -15,81 +23,47 @@ Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
-Disallow: /map/success/
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
-Disallow: /map/success/
 
 User-agent: Claude-Web
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
-Disallow: /map/success/
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
-Disallow: /map/success/
 
 User-agent: Google-Extended
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
-Disallow: /map/success/
 
 User-agent: CCBot
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
-Disallow: /map/success/
 
 User-agent: Applebot-Extended
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
-Disallow: /map/success/
 
 User-agent: Bingbot
 Allow: /
 Disallow: /api/
 Disallow: /preview/
 Disallow: /full/
-Disallow: /map/success/
-
-# Social-media link-preview crawlers · explicit allow blocks. These are
-# functionally redundant (User-agent: * already allows /map/), but
-# Facebook's debugger sometimes returns a misleading "robots.txt block"
-# error when a UA-specific block is missing. Explicit allow keeps it
-# happy and removes one variable from social-card debugging.
-User-agent: facebookexternalhit
-Allow: /
-Disallow: /api/
-Disallow: /preview/
-Disallow: /full/
-Disallow: /map/success/
-
-User-agent: Twitterbot
-Allow: /
-Disallow: /api/
-Disallow: /preview/
-Disallow: /full/
-Disallow: /map/success/
-
-User-agent: LinkedInBot
-Allow: /
-Disallow: /api/
-Disallow: /preview/
-Disallow: /full/
-Disallow: /map/success/
 
 Sitemap: https://hikebeast.ch/sitemap.xml

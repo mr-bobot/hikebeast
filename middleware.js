@@ -1,22 +1,16 @@
-// Vercel Edge Middleware -- gates /full/* behind a signed session cookie,
-// and pass-through for /map/* to keep social-media scrapers happy.
+// Vercel Edge Middleware -- gates /full/* behind a signed session cookie.
 //
-// Flow for /full/:
+// Flow:
 //   1. User hits /full/anything
 //   2. Middleware looks for a valid `hb_full_auth` cookie
 //   3. If valid -> pass through
 //   4. If missing or invalid -> 302 redirect to /login?next=<original-path>
 //   5. Trailing-slash fixer: /full -> /full/ (so relative asset URLs work)
 //
-// Flow for /map/:
-//   /map/ is the public Stripe-checkout landing page. We claim the path
-//   in the matcher and immediately pass through (no auth, no redirect)
-//   so that Vercel's edge treats the URL as an edge-function route
-//   rather than a static asset. Some platform bot-protection rules only
-//   apply to static paths, and Facebook's debugger was returning 403 on
-//   facebookexternalhit before this middleware claimed the path. The
-//   trailing-slash redirect /map -> /map/ also lives here for that
-//   reason (vercel.json `redirects` ran into the same edge issue).
+// /map/ used to be gated here while the embedded Stripe checkout was
+// being wired up. Once Stripe Live launched (2026-05-04) we removed it
+// from the matcher so the landing page is public. The trailing-slash
+// redirect for /map -> /map/ now lives in vercel.json `redirects`.
 //
 // The cookie value is HMAC-SHA256(PREVIEW_PASS, "hb_full_auth_v1") -- the
 // same string that /api/login sets after a successful sign-in. It rotates
@@ -30,7 +24,7 @@
 //   - per-page <meta robots> noindex on every generated HTML
 
 export const config = {
-  matcher: ['/full', '/full/:path*', '/map', '/map/:path*'],
+  matcher: ['/full', '/full/:path*'],
 };
 
 const COOKIE_NAME = 'hb_full_auth';
@@ -75,23 +69,11 @@ function timingSafeEqualHex(a, b) {
 export default async function middleware(request) {
   const url = new URL(request.url);
 
-  // Trailing-slash fix: /full -> /full/, /map -> /map/ (otherwise
-  // relative asset URLs resolve against / instead of the section root,
-  // breaking CSS and images).
+  // Trailing-slash fix: /full -> /full/ (otherwise relative asset URLs
+  // resolve against / instead of the section root, breaking CSS and
+  // images). /map -> /map/ is handled in vercel.json `redirects`.
   if (url.pathname === '/full') {
     return Response.redirect(`${url.origin}/full/`, 308);
-  }
-  if (url.pathname === '/map') {
-    return Response.redirect(`${url.origin}/map/`, 308);
-  }
-
-  // /map/* is public · pass through with no auth, no cookie check.
-  // This branch exists so Vercel routes the request through middleware
-  // (edge-function path) rather than treating it as a plain static
-  // file, which appears to bypass an aggressive bot-protection rule
-  // that was 403ing facebookexternalhit on the static path.
-  if (url.pathname.startsWith('/map/')) {
-    return; // fall through to the static handler
   }
 
   const user = process.env.PREVIEW_USER;
