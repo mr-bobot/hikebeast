@@ -7,3 +7,7 @@ node_modules/
 .env
 .env.local
 .env.*.local
+
+# local-only thumbnail concept gallery
+/thumbnails/
+.env*.local

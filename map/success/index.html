@@ -53,26 +53,42 @@ fbq('track', 'PageView');
     padding: 0 0 48px;
   }
 
-  /* === Hero · light-cream photo of three polaroids (no overlay text).
-     The image already has plenty of negative space and reads warmly --
-     putting copy on top would fight the photo. Tick + heading move into
-     the action card below where they sit on a clean white surface. */
+  /* === Hero · cream gradient + transparent polaroid PNG.
+     Background is a CSS gradient (matches the Figma cream stops), the
+     PNG is just the photos with alpha. We let the PNG break out of
+     the hero box (overflow:visible) and bump its z-index above the
+     action card so the polaroids visually overlap the white card
+     below. Subtle but adds depth to the celebration moment. */
   .hero {
     position: relative;
     aspect-ratio: 16 / 9;
-    overflow: hidden;
-    /* Match the cream tone of the photo so any sub-pixel rounding edge
-       doesn't show as a hard line. */
-    background: #f3efe9;
+    /* Linear cream gradient, top-left to bottom-right, matching the
+       Figma stops F4F1EC -> ECE6DC. */
+    background: linear-gradient(135deg, #F4F1EC 0%, #ECE6DC 100%);
     margin: 16px 16px 0;
-    /* Round all four corners. The action card overlaps the bottom but
-       its own rounded corners line up cleanly with the hero's. */
     border-radius: 18px;
+    /* DO NOT clip · the polaroid PNG intentionally extends past the
+       hero's bottom edge to land on top of the action card. */
+    overflow: visible;
   }
   .hero img {
-    width: 100%; height: 100%;
-    object-fit: cover;
+    /* Absolute + z-index:3 puts the photos ABOVE the action card
+       (z-index:2). The PNG has plenty of transparent margin around
+       the polaroids, so contain-fit keeps proportions intact. */
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
     display: block;
+    z-index: 3;
+    pointer-events: none;
+    /* Shift the photos downward so their bottom edges extend over
+       the action card's top edge. 14% of the hero height feels
+       right · enough overlap to read as layered, not enough to
+       cover the action heading. */
+    transform: translateY(14%);
   }
 
   /* === Action card · the celebration + the action.
@@ -216,6 +232,36 @@ fbq('track', 'PageView');
     text-decoration: none;
   }
   .note-body a:hover { text-decoration: underline; }
+
+  /* === In-app browser warning · only rendered when navigator UA
+     matches Instagram/TikTok/Facebook/etc. In-app browsers block
+     downloads and Drive sign-ins, so we tell users to bail out into
+     Safari/Chrome. Hidden by default · JS sets [hidden]=false on
+     match. */
+  .ext-warn {
+    margin: 18px 22px 0;
+    padding: 14px 16px;
+    background: #fff8e1;
+    border: 1px solid #f6c557;
+    border-radius: var(--radius-card);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--fg);
+  }
+  .ext-warn-icon {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    display: grid;
+    place-items: center;
+    color: #c97f00;
+    margin-top: 1px;
+  }
+  .ext-warn strong { font-weight: 600; }
+  .ext-warn p { margin: 0; }
+  .ext-warn p + p { margin-top: 4px; }
 
   /* === Next steps · concrete, tactical. Reduces overwhelm + gives
      a sense of momentum right after purchase. */
@@ -375,7 +421,7 @@ fbq('track', 'PageView');
   <!-- Hero · cream photo of three polaroids. No text overlay; copy lives
        in the action card below. -->
   <section class="hero">
-    <img src="../../images/thanks-hero.jpg" alt="" />
+    <img src="../../images/thanks-hero-transparent.png" alt="" />
   </section>
 
   <!-- Action card · celebration (tick + heading) and the two ways to get
@@ -400,16 +446,36 @@ fbq('track', 'PageView');
       <span id="downloadLabel">Preparing download...</span>
     </a>
     <a class="btn btn-secondary" href="https://drive.google.com/drive/folders/182_BdFNwF9jptpp9ax7G8sHNYb01nCa0?usp=share_link" target="_blank" rel="noopener">
-      <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <!-- Single-colour Drive triangle so it inherits the button text
-             colour. Google's guidelines forbid recolouring the full
-             multi-colour brand mark, so we use a simplified outline. -->
-        <path fill="currentColor" d="M7.71 3.5 1.15 14.86l3.28 5.64h13.14l3.28-5.64L14.29 3.5H7.71zM12 15.85 8.43 9.57h7.14L12 15.85z" />
+      <svg class="btn-icon" viewBox="0 0 87.3 78" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <!-- Official Google Drive multi-colour mark. -->
+        <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3L27.5 53H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+        <path d="M43.65 25 29.9 1.2c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44C.4 49.9 0 51.45 0 53h27.5z" fill="#00ac47"/>
+        <path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5H59.8L65.65 65.3z" fill="#ea4335"/>
+        <path d="M43.65 25 57.4 1.2C56.05.4 54.5 0 52.9 0H34.4c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+        <path d="M59.8 53H27.5L13.75 76.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+        <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3L43.65 25l16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
       </svg>
       <span>Open in Google Drive</span>
     </a>
     <p class="status" id="status">A copy is also on its way to your email.</p>
   </section>
+
+  <!-- In-app browser warning · shown only if userAgent indicates
+       Instagram/TikTok/FB. These browsers block downloads + Drive
+       auth, so the buyer needs to bail out to Safari/Chrome. -->
+  <aside class="ext-warn" id="extWarn" hidden>
+    <div class="ext-warn-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 9v4" />
+        <path d="M12 17h.01" />
+        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+      </svg>
+    </div>
+    <div>
+      <p><strong>Open this page in your real browser.</strong></p>
+      <p>You're in the Instagram in-app browser, which blocks downloads. Tap the <span aria-hidden="true">•••</span> menu (top right) and pick <strong>Open in Safari</strong> or <strong>Open in Chrome</strong>, then come back here.</p>
+    </div>
+  </aside>
 
   <!-- Personal note: face + signature. The connection moment. -->
   <section class="note">
@@ -445,6 +511,7 @@ fbq('track', 'PageView');
   <section class="next">
     <h2>What's next</h2>
     <ol>
+      <li>If you opened this page from Instagram, TikTok or Facebook: tap the <span aria-hidden="true">•••</span> menu at the top right and pick <strong>Open in Safari</strong> (iPhone) or <strong>Open in Chrome</strong> (Android). In-app browsers block the download.</li>
       <li>Save the PDF to your phone for offline use on the trail. On iPhone: download → share → "Save to Files".</li>
       <li>Save the Google Maps list above so all 122 pins live in your existing Maps app.</li>
       <li>Pick a region you haven't been to yet. Start there.</li>
@@ -463,6 +530,19 @@ fbq('track', 'PageView');
 </main>
 
 <script>
+  // ---------- In-app browser detection ----------
+  // Instagram/Facebook/TikTok in-app browsers block the download
+  // attribute and Google Drive auth. Show a banner telling the buyer
+  // to open the page in Safari/Chrome before they hit the button.
+  (function () {
+    const ua = navigator.userAgent || "";
+    const isInApp = /Instagram|FBAN|FBAV|FB_IAB|FB4A|TikTok|Snapchat|Line\//i.test(ua);
+    if (isInApp) {
+      const warn = document.getElementById("extWarn");
+      if (warn) warn.hidden = false;
+    }
+  })();
+
   // Fetch the access token + order details for this Stripe session, then
   // unlock the download button. Falls back to "check your email" if the
   // session is unknown or not yet paid (race conditions on the redirect).

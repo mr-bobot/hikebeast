@@ -158,15 +158,24 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
   .currency-toggle:active { transform: scale(0.97); }
 
-  /* === Layout === */
+  /* === Layout ===
+     Mobile-first: main is just a max-width container, .page-main is the
+     flex column that holds the actual section stack. Sidebar is hidden
+     below the desktop breakpoint and replaced by the sticky bottom buy
+     bar. .page-grid does nothing on mobile (display: contents lets its
+     children flow as if the wrapper weren't there). */
   main {
     max-width: 440px;
     margin: 0 auto;
     padding: 14px 0 32px;
+  }
+  .page-grid { display: contents; }
+  .page-main {
     display: flex;
     flex-direction: column;
     gap: 22px;
   }
+  .page-side { display: none; }
   .px { padding-left: 22px; padding-right: 22px; }
 
   /* === Hero === */
@@ -293,6 +302,45 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     display: flex;
     flex-direction: column;
     gap: 4px;
+    position: relative;
+  }
+  /* Hover-only nav arrows · desktop pointers see them on hover, touch
+     devices never render them because the carousel snap-scrolls. */
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px; height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.92);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    color: var(--fg);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease, background 150ms ease;
+    z-index: 5;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .carousel-arrow svg { width: 18px; height: 18px; display: block; }
+  .carousel-arrow--prev { left: 12px; }
+  .carousel-arrow--next { right: 12px; }
+  .carousel-wrap:hover .carousel-arrow {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .carousel-arrow:hover { background: #ffffff; }
+  .carousel-arrow:active { background: #f5f5f7; }
+  /* Touch devices don't have hover · arrows would just sit there
+     half-implemented. Hide them entirely. */
+  @media (hover: none) {
+    .carousel-arrow { display: none; }
   }
   /* Full-bleed slides on mobile. Rounded top/bottom corners stay visible;
      left/right corners clip into the viewport edge, which is fine. */
@@ -360,16 +408,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     color: var(--muted);
     font-size: 14px;
     line-height: 1.5;
-  }
-
-  /* Hero row default (mobile) · stacks the H1+bullets and the photo
-     grid as a flex column with the same gap the parent section uses,
-     so they don't end up flush against each other when both children
-     are inside .hero-row. Overridden to a 2-col grid on desktop. */
-  .hero-row {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
   }
 
   /* === Collection grid · full-bleed photo grid above the 6 cards === */
@@ -829,8 +867,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     main {
       max-width: 920px;
       padding: 32px 0 56px;
-      gap: 48px;
     }
+    .page-main { gap: 48px; }
     .px {
       padding-left: 32px;
       padding-right: 32px;
@@ -905,22 +943,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       max-width: 640px;
     }
 
-    /* === Hero row · text + photo grid side-by-side ===
-       On mobile the H1+bullets and the photo grid stack with their
-       own .px padding. On desktop they sit at the same height in two
-       columns; the grid becomes about half its previous footprint and
-       the H1+bullets get a visual partner instead of a slab below. */
-    .hero-row {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      column-gap: 32px;
-      align-items: center;
-      padding: 0 32px;
-    }
-    .hero-row > .px {
-      padding: 0;
-    }
-
     .collection-grid { border-radius: var(--radius-card); }
 
     /* "Get the map" heading · sits above a centered checkout
@@ -938,12 +960,160 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     .footer { padding-top: 12px; }
   }
 
+  /* === Buy card · Whop-style sticky sidebar ===
+     Defined unconditionally so devs can preview it via inspector even
+     on mobile, but the parent .page-side is display:none below 1024px
+     so it doesn't render. Card has zero padding + overflow:hidden so
+     the thumbnail sits edge-to-edge; .buy-content holds the rest. */
+  .buy-card {
+    background: #ffffff;
+    border: 1px solid var(--hairline);
+    border-radius: 18px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+  }
+  .buy-thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1600 / 1080;
+    background: #fafafa;
+  }
+  .buy-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .buy-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+  .buy-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .buy-rating .stars {
+    color: var(--warn);
+    letter-spacing: 1px;
+    font-size: 13px;
+  }
+  .buy-rating-num { color: var(--fg); font-weight: 600; }
+  .buy-name {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--fg);
+  }
+  .buy-price {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+    line-height: 1;
+  }
+  .buy-cta {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #ffffff;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: filter 150ms ease, transform 100ms ease;
+  }
+  .buy-cta:hover { filter: brightness(1.05); }
+  .buy-cta:active { transform: scale(0.98); }
+  .buy-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    padding: 12px 0 0;
+    border-top: 1px solid var(--hairline);
+    margin-top: 4px;
+  }
+  .buy-foot a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .buy-foot a:hover { color: var(--fg); text-decoration: underline; }
+
   /* Larger desktops. Pad the navbar from the viewport edges so the
-     brand logo isn't pinned to the corner, but don't widen the page
-     column further -- 920px is already the sweet spot for a single
-     product page (any wider and the cards start feeling oversized). */
+     brand logo isn't pinned to the corner. */
   @media (min-width: 1100px) {
     .navbar { padding-left: 40px; padding-right: 40px; }
+  }
+
+  /* === Full-desktop · Whop-style 2-col with sticky buy sidebar ===
+     At >= 1024px the page becomes a 2-col grid: main content on the
+     left (sections still flow as a stack), sticky buy card on the
+     right that follows the buyer down the page. Below 1024 the
+     sidebar stays hidden and the in-flow Stripe iframe + the mobile
+     bottom sticky bar take over. */
+  @media (min-width: 1024px) {
+    main {
+      max-width: 1200px;
+      padding: 32px 32px 56px;
+    }
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      column-gap: 40px;
+      align-items: start;
+    }
+    .page-side {
+      display: block;
+      position: sticky;
+      top: 84px;
+    }
+    /* The collection grid is now the buy-card thumbnail · hide the
+       in-flow copy at this breakpoint so we don't show the same image
+       twice. The "What's inside" heading + 6 cards still anchor the
+       feature section. */
+    .collection-wrap { display: none; }
+    /* Slight top spacing fix · the carousel inside .page-main has 0
+       top margin so it lines up with the top of the buy-card to the
+       right (which inherits .page-grid's align-items: start). */
+    .page-main { gap: 48px; }
+
+    /* Reviews · drop to 2 columns at this breakpoint. The sidebar
+       eats 320px + 40px gap from the page width, so 3-col reviews
+       crash against the sticky buy-card. 2-col gives each review
+       room to breathe and creates a visual gutter to the sidebar. */
+    .reviews-carousel {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    /* Inside cards · keep 3-col but tighten gap so cards don't crash
+       into the sidebar at narrower 1024-1199 viewports. */
+    .inside { gap: 12px; }
+  }
+
+  /* Wide desktops · once we have headroom, return reviews to 3 columns
+     and give the inside cards a touch more gap. */
+  @media (min-width: 1280px) {
+    .reviews-carousel {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .inside { gap: 14px; }
   }
 </style>
 </head>
@@ -959,6 +1129,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   </header>
 
   <main>
+   <div class="page-grid">
+    <div class="page-main">
     <!-- Hero · carousel first, then text. The cover slide already shows the
          product name "Hidden Gems" so the visual leads, the text confirms. -->
     <section class="hero" style="display:flex;flex-direction:column;gap:12px;">
@@ -971,6 +1143,19 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <div class="slide"><img src="img/hero-4-photos.jpg" alt="Secret spots, viral photos" loading="lazy" decoding="async" /></div>
           <div class="slide"><img src="img/hero-5-wildcamp.jpg" alt="Where you can wildcamp" loading="lazy" decoding="async" /></div>
         </div>
+        <!-- Hover-only nav arrows (desktop only · hidden on touch devices
+             where the carousel relies on swipe). Click handlers wired in
+             the carousel JS block scroll the carousel by one slide. -->
+        <button type="button" class="carousel-arrow carousel-arrow--prev" id="hero-prev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15,6 9,12 15,18" />
+          </svg>
+        </button>
+        <button type="button" class="carousel-arrow carousel-arrow--next" id="hero-next" aria-label="Next slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9,6 15,12 9,18" />
+          </svg>
+        </button>
         <div class="dots" id="hero-dots">
           <span class="active"></span><span></span><span></span><span></span><span></span>
         </div>
@@ -988,35 +1173,33 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
       </div>
 
-      <!-- Hero "row": on mobile, the H1+bullets stack above the photo grid
-           with their natural .px padding. On desktop the wrapper turns into
-           a 2-col grid (text on the left, photo grid on the right) so both
-           live at the same height instead of the grid being a giant slab
-           below the hero. CSS at @media (min-width: 720px) > .hero-row. -->
-      <div class="hero-row">
-        <div class="px hero-text">
-          <h1>Switzerland Map 🇨🇭</h1>
-          <ul class="hero-bullets">
-            <li>122 Hidden Gems + How to Get There</li>
-            <li>Exact Location for every spot</li>
-            <li>Hiking &amp; Camping Information</li>
-          </ul>
-        </div>
-        <!-- Photo collection grid · visual proof of what 122 spots looks
-             like. On mobile takes its natural place after the bullets; on
-             desktop snaps into the right column of .hero-row. -->
-        <div class="px collection-wrap">
-          <div class="collection-grid">
-            <img src="img/collection.jpg" alt="A grid of fifteen hidden Swiss spots from the guide" loading="lazy" decoding="async" />
-          </div>
+      <div class="px hero-text">
+        <h1>Switzerland Map 🇨🇭</h1>
+        <ul class="hero-bullets">
+          <li>122 Hidden Gems + How to Get There</li>
+          <li>Exact Location for every spot</li>
+          <li>Hiking &amp; Camping Information</li>
+        </ul>
+      </div>
+      <!-- Photo collection grid · visual proof of what 122 spots looks
+           like. Stays in the main column flow on every breakpoint --
+           Whop-style, no internal 2-col split. -->
+      <div class="px collection-wrap">
+        <div class="collection-grid">
+          <img src="img/collection.jpg" alt="A grid of fifteen hidden Swiss spots from the guide" loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
 
-    <!-- Feature cards · 6 cards summarising what's in the guide. No section
-         heading: the cards have their own titles and on mobile they follow
-         straight after the photo grid which already sets visual context. -->
+    <!-- Feature cards · 6 cards summarising what's in the guide. The
+         "What's inside" heading sits above; on desktop with sidebar
+         the photo grid above is hidden, so the heading anchors the
+         section visually. -->
     <section class="inside-section">
+      <div class="px section-head">
+        <h2>What's inside</h2>
+        <p>Five years of exploring went into this list.</p>
+      </div>
       <div class="inside">
         <div class="inside-card">
           <div class="ico-box" aria-hidden="true">📷</div>
@@ -1132,7 +1315,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
               <span class="stars">★★★★★</span>
             </div>
           </div>
-          <p class="review-quote">"I taught Leon half of this list but hey, it's a good one 😄"</p>
+          <p class="review-quote">"I showed Leon half the spots on this list but hey, it's a really good one 😄"</p>
         </div>
       </div>
     </section>
@@ -1166,6 +1349,39 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <div>© Hikebeast</div>
       <div><a href="/terms.html">Terms</a> · <a href="/imprint.html">Imprint</a> · <a href="/privacy.html">Privacy</a></div>
     </footer>
+    </div><!-- /.page-main -->
+
+    <!-- Sticky buy sidebar · Whop-style. Hidden below 1024px (mobile uses
+         the bottom sticky bar, tablet uses the in-flow Stripe iframe).
+         At >= 1024px this card stays parked on the right while the
+         buyer scrolls through the main content. The CTA scrolls smoothly
+         to the in-flow checkout iframe further down the page. -->
+    <aside class="page-side">
+      <div class="buy-card">
+        <!-- Thumbnail · the collection grid (5x3 photo collage) used to
+             live in the main column flow on desktop; now it's the
+             buy-card's hero image instead. Goes edge-to-edge inside
+             the card thanks to overflow:hidden + zero card padding. -->
+        <a href="#checkout" class="buy-thumb" aria-hidden="true">
+          <img src="img/collection.jpg" alt="" loading="lazy" decoding="async" />
+        </a>
+        <div class="buy-content">
+          <div class="buy-rating">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <span class="buy-rating-num">5.0</span>
+            <span class="buy-rating-count">(6)</span>
+          </div>
+          <div class="buy-name">Swiss Hidden Gems 🇨🇭</div>
+          <div class="buy-price">CHF 27</div>
+          <a href="#checkout" class="buy-cta">Get the map</a>
+          <div class="buy-foot">
+            <span>Apple Pay · TWINT · Card</span>
+            <a href="/terms.html#refunds">↩ 30-day refund</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+   </div><!-- /.page-grid -->
   </main>
 
   <!-- Sticky bottom buy bar (mobile) -->
@@ -1202,9 +1418,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
   renderPrice();
 
-  // ---------- Carousel: dot indicators (swipe-only, no arrows) ----------
+  // ---------- Carousel: dots + hover arrows ----------
   const carousel = document.getElementById("hero-carousel");
   const dotEls = document.querySelectorAll("#hero-dots span");
+  const prevBtn = document.getElementById("hero-prev");
+  const nextBtn = document.getElementById("hero-next");
 
   if (carousel && dotEls.length && "IntersectionObserver" in window) {
     const slides = carousel.querySelectorAll(".slide");
@@ -1222,20 +1440,61 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     slides.forEach((s) => io.observe(s));
   }
 
+  /* Hover arrows · scroll the carousel one slide-width per click.
+     scrollBy with `behavior: smooth` plays well with scroll-snap so
+     the carousel naturally locks onto the next slide. */
+  if (carousel && prevBtn && nextBtn) {
+    const slideWidth = () => {
+      const slide = carousel.querySelector(".slide");
+      return slide ? slide.getBoundingClientRect().width + parseFloat(getComputedStyle(carousel).columnGap || 0) : 0;
+    };
+    prevBtn.addEventListener("click", () => {
+      carousel.scrollBy({ left: -slideWidth(), behavior: "smooth" });
+    });
+    nextBtn.addEventListener("click", () => {
+      carousel.scrollBy({ left: slideWidth(), behavior: "smooth" });
+    });
+  }
+
   // ---------- Sticky buy bar visibility ----------
+  // Two signals decide whether the bar is visible:
+  //   - hero must be scrolled out of view (heroOut)
+  //   - the checkout iframe must NOT be in view (checkoutOut)
+  // Showing the bar over the embedded Stripe widget covers the Pay
+  // button on small screens, so we suppress it once the user reaches
+  // the checkout section.
   const stickyBuy = document.getElementById("sticky-buy");
   const heroEl = document.querySelector(".hero");
-  if (stickyBuy && heroEl && "IntersectionObserver" in window) {
-    const heroIo = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          // Show the sticky bar once the hero scrolls out of view.
-          stickyBuy.classList.toggle("is-visible", !e.isIntersecting);
-        });
-      },
-      { rootMargin: "-40% 0px 0px 0px" }
-    );
-    heroIo.observe(heroEl);
+  const checkoutEl = document.getElementById("checkout");
+  if (stickyBuy && "IntersectionObserver" in window) {
+    let heroOut = false;
+    let checkoutIn = false;
+    const update = () => {
+      stickyBuy.classList.toggle("is-visible", heroOut && !checkoutIn);
+    };
+    if (heroEl) {
+      const heroIo = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => { heroOut = !e.isIntersecting; });
+          update();
+        },
+        { rootMargin: "-40% 0px 0px 0px" }
+      );
+      heroIo.observe(heroEl);
+    }
+    if (checkoutEl) {
+      // Trip slightly before the checkout's top edge enters the
+      // viewport so the bar fades out before it would cover the Pay
+      // button. 200px lead-in feels right on iPhone-class screens.
+      const checkoutIo = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => { checkoutIn = e.isIntersecting; });
+          update();
+        },
+        { rootMargin: "0px 0px -200px 0px" }
+      );
+      checkoutIo.observe(checkoutEl);
+    }
   }
 
   // ---------- Stripe embedded checkout ----------
