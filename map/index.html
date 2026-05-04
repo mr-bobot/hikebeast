@@ -362,6 +362,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.5;
   }
 
+  /* Hero row default (mobile) · stacks the H1+bullets and the photo
+     grid as a flex column with the same gap the parent section uses,
+     so they don't end up flush against each other when both children
+     are inside .hero-row. Overridden to a 2-col grid on desktop. */
+  .hero-row {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
   /* === Collection grid · full-bleed photo grid above the 6 cards === */
   .collection-grid {
     width: 100%;
@@ -895,42 +905,33 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       max-width: 640px;
     }
 
-    /* === "What's inside" 2-col layout ===
-       On desktop the 5×3 photo grid was way too dominant at full
-       width and competed with the hero mockup. Pin it to half-width
-       next to the section heading, vertically centered. The 6 feature
-       cards still span the full row below. */
-    .inside-section {
+    /* === Hero row · text + photo grid side-by-side ===
+       On mobile the H1+bullets and the photo grid stack with their
+       own .px padding. On desktop they sit at the same height in two
+       columns; the grid becomes about half its previous footprint and
+       the H1+bullets get a visual partner instead of a slab below. */
+    .hero-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas:
-        "head image"
-        "cards cards";
-      column-gap: 36px;
-      row-gap: 32px;
+      grid-template-columns: 1.05fr 1fr;
+      column-gap: 32px;
       align-items: center;
       padding: 0 32px;
     }
-    .inside-section > .collection-wrap {
-      grid-area: image;
+    .hero-row > .px {
       padding: 0;
     }
-    .inside-section > .section-head {
-      grid-area: head;
-      margin-top: 0 !important;
-      padding: 0;
-    }
-    .inside-section > .inside {
-      grid-area: cards;
-      padding: 0;
-    }
-    /* Heading gets a bit more weight in the 2-col layout · it's now
-       a side-by-side equal partner to the image rather than a small
-       label above. */
-    .inside-section .section-head h2 { font-size: 30px; }
-    .inside-section .section-head p { font-size: 16px; }
 
     .collection-grid { border-radius: var(--radius-card); }
+
+    /* "Get the map" heading · sits above a centered checkout
+       sub-column (max-width 460px). Left-aligned heading + centered
+       widget reads disjointed, so we center the heading on desktop.
+       (Marked with .section-head--centered in the HTML so we don't
+       have to thread :has() selectors through the cascade.) */
+    .section-head--centered {
+      text-align: center;
+      align-items: center;
+    }
 
     /* Trust row + footer breathe a bit more. */
     .trust-row { gap: 12px 22px; padding-top: 12px; }
@@ -987,34 +988,35 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
       </div>
 
-      <div class="px hero-text">
-        <h1>Switzerland Map 🇨🇭</h1>
-        <ul class="hero-bullets">
-          <li>122 Hidden Gems + How to Get There</li>
-          <li>Exact Location for every spot</li>
-          <li>Hiking &amp; Camping Information</li>
-        </ul>
+      <!-- Hero "row": on mobile, the H1+bullets stack above the photo grid
+           with their natural .px padding. On desktop the wrapper turns into
+           a 2-col grid (text on the left, photo grid on the right) so both
+           live at the same height instead of the grid being a giant slab
+           below the hero. CSS at @media (min-width: 720px) > .hero-row. -->
+      <div class="hero-row">
+        <div class="px hero-text">
+          <h1>Switzerland Map 🇨🇭</h1>
+          <ul class="hero-bullets">
+            <li>122 Hidden Gems + How to Get There</li>
+            <li>Exact Location for every spot</li>
+            <li>Hiking &amp; Camping Information</li>
+          </ul>
+        </div>
+        <!-- Photo collection grid · visual proof of what 122 spots looks
+             like. On mobile takes its natural place after the bullets; on
+             desktop snaps into the right column of .hero-row. -->
+        <div class="px collection-wrap">
+          <div class="collection-grid">
+            <img src="img/collection.jpg" alt="A grid of fifteen hidden Swiss spots from the guide" loading="lazy" decoding="async" />
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- What's inside · signature bullet cards.
-         Mobile: photo-grid full-bleed on top, heading + scroll-snap cards below.
-         Desktop: photo-grid moves into a 2-col layout next to the heading
-         so it stops competing with the hero mockup, then 6 feature cards
-         span full width below. CSS at @media (min-width: 720px). -->
+    <!-- Feature cards · 6 cards summarising what's in the guide. No section
+         heading: the cards have their own titles and on mobile they follow
+         straight after the photo grid which already sets visual context. -->
     <section class="inside-section">
-      <!-- Photo collection grid · visual proof of what 122 spots looks like.
-           Sits inside .px so it has side padding (the carousel above is
-           full-bleed by design; this one breathes). -->
-      <div class="px collection-wrap">
-        <div class="collection-grid">
-          <img src="img/collection.jpg" alt="A grid of fifteen hidden Swiss spots from the guide" loading="lazy" decoding="async" />
-        </div>
-      </div>
-      <div class="px section-head" style="margin-top: 36px;">
-        <h2>What's inside</h2>
-        <p>Five years of exploring went into this list.</p>
-      </div>
       <div class="inside">
         <div class="inside-card">
           <div class="ico-box" aria-hidden="true">📷</div>
@@ -1137,7 +1139,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
     <!-- Embedded Stripe Checkout -->
     <section class="px">
-      <div class="section-head">
+      <div class="section-head section-head--centered">
         <h2>Get the map</h2>
         <p>Apple Pay, TWINT, card. Delivered to your inbox in seconds.</p>
       </div>
