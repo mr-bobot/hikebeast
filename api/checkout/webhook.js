@@ -99,7 +99,11 @@ function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId })
           <p style="margin:0 0 32px;font-size:16px;">Leon</p>
 
           <hr style="border:0;border-top:1px solid rgba(0,0,0,0.08);margin:0 0 20px;" />
-          <p style="margin:0 0 4px;font-size:12px;color:#6e6e73;">Receipt: ${amountFormatted} · Order ${orderId}</p>
+          <p style="margin:0 0 8px;font-size:12px;color:#6e6e73;">Receipt: ${amountFormatted} · Order ${orderId}</p>
+          <!-- Mirror the /map/ landing-page guarantee so the receipt
+               doubles as proof of the promise the buyer just bought
+               into. Same conditional wording. -->
+          <p style="margin:0 0 4px;font-size:12px;color:#6e6e73;">30-day money-back guarantee. If the guide doesn't help you find a single new spot, just reply to this email within 30 days.</p>
           <p style="margin:0;font-size:12px;color:#6e6e73;">Questions? Reply to this email.</p>
         </td></tr>
       </table>

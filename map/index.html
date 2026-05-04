@@ -730,6 +730,49 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.55;
   }
 
+  /* === Money-back guarantee callout · sits just below the checkout
+     to make the refund promise impossible to miss while the buyer is
+     still on the page (and most ready to act). Soft surface card with
+     a green badge so it reads as a positive trust signal, not a
+     defensive disclaimer. */
+  .guarantee {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: var(--surface);
+    border-radius: var(--radius-card);
+    margin-top: 14px;
+  }
+  .guarantee-icon {
+    width: 36px; height: 36px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: rgba(52, 199, 89, 0.12);
+    display: grid;
+    place-items: center;
+    color: var(--success);
+  }
+  .guarantee-icon svg { width: 20px; height: 20px; display: block; }
+  .guarantee-text {
+    flex: 1;
+    min-width: 0;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--fg);
+  }
+  .guarantee-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+  .guarantee-text span {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
   /* === Trust + footer === */
   .trust-row {
     display: flex;
@@ -741,6 +784,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     color: var(--muted);
     padding-top: 4px;
   }
+  .trust-row a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .trust-row a:hover { color: var(--fg); }
   .trust-row .sep {
     width: 1px; height: 12px;
     background: var(--hairline);
@@ -992,13 +1040,31 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <div class="checkout-skeleton"></div>
         </div>
       </div>
+      <!-- Money-back guarantee · the conditional framing is intentional.
+           "If the guide doesn't help you find a single new spot" makes
+           the abuse path socially uncomfortable (you'd have to claim
+           none of 122 spots was new) without making the promise feel
+           weaselly. Reads as confidence, not defensiveness. -->
+      <div class="guarantee">
+        <div class="guarantee-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 4 5v7c0 5 3.5 8 8 10 4.5-2 8-5 8-10V5l-8-3z" />
+            <polyline points="9,12 11,14 15,10" />
+          </svg>
+        </div>
+        <div class="guarantee-text">
+          <strong>30-day money-back guarantee</strong>
+          <span>If the guide doesn't help you find a single new spot, email <a href="mailto:leon@hikebeast.ch" style="color:var(--accent);text-decoration:none;">leon@hikebeast.ch</a> within 30 days for a full refund.</span>
+        </div>
+      </div>
     </section>
 
-    <!-- Trust row -->
+    <!-- Trust row · "30-day refund" is a small footer-pill repeat of
+         the guarantee above; links to /terms.html for the full text. -->
     <div class="px trust-row">
       <span>🔒 Secured by Stripe</span>
       <span class="sep"></span>
-      <span>↩ 30-day refund</span>
+      <a href="/terms.html"><span>↩ 30-day refund</span></a>
       <span class="sep"></span>
       <span>🇨🇭 Saftladen GmbH</span>
     </div>
