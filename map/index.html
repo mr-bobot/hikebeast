@@ -895,8 +895,41 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       max-width: 640px;
     }
 
-    /* Collection grid keeps the same aspect ratio but rounds in the
-       wider container. Looks correct at 920 - 64px padding = 856px. */
+    /* === "What's inside" 2-col layout ===
+       On desktop the 5×3 photo grid was way too dominant at full
+       width and competed with the hero mockup. Pin it to half-width
+       next to the section heading, vertically centered. The 6 feature
+       cards still span the full row below. */
+    .inside-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "head image"
+        "cards cards";
+      column-gap: 36px;
+      row-gap: 32px;
+      align-items: center;
+      padding: 0 32px;
+    }
+    .inside-section > .collection-wrap {
+      grid-area: image;
+      padding: 0;
+    }
+    .inside-section > .section-head {
+      grid-area: head;
+      margin-top: 0 !important;
+      padding: 0;
+    }
+    .inside-section > .inside {
+      grid-area: cards;
+      padding: 0;
+    }
+    /* Heading gets a bit more weight in the 2-col layout · it's now
+       a side-by-side equal partner to the image rather than a small
+       label above. */
+    .inside-section .section-head h2 { font-size: 30px; }
+    .inside-section .section-head p { font-size: 16px; }
+
     .collection-grid { border-radius: var(--radius-card); }
 
     /* Trust row + footer breathe a bit more. */
@@ -964,12 +997,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
     </section>
 
-    <!-- What's inside · signature bullet cards · horizontally scrollable -->
-    <section>
+    <!-- What's inside · signature bullet cards.
+         Mobile: photo-grid full-bleed on top, heading + scroll-snap cards below.
+         Desktop: photo-grid moves into a 2-col layout next to the heading
+         so it stops competing with the hero mockup, then 6 feature cards
+         span full width below. CSS at @media (min-width: 720px). -->
+    <section class="inside-section">
       <!-- Photo collection grid · visual proof of what 122 spots looks like.
            Sits inside .px so it has side padding (the carousel above is
            full-bleed by design; this one breathes). -->
-      <div class="px">
+      <div class="px collection-wrap">
         <div class="collection-grid">
           <img src="img/collection.jpg" alt="A grid of fifteen hidden Swiss spots from the guide" loading="lazy" decoding="async" />
         </div>
