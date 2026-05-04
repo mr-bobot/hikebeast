@@ -176,7 +176,11 @@ export default async function handler(req, res) {
       ui_mode: "embedded",
       mode: "payment",
       line_items: [{ price: priceId, quantity: 1 }],
-      automatic_tax: { enabled: true },
+      // Saftladen GmbH is under the Swiss VAT threshold and not
+      // voluntarily registered, so we don't compute tax. The Price
+      // objects are tax-inclusive but with no registration there's
+      // nothing to allocate. Re-enable when we register for VAT.
+      automatic_tax: { enabled: false },
       // The Stripe Price is tax-inclusive (configured on the Price object in
       // dashboard); buyer always sees the same round 27 in their currency.
       payment_method_types: undefined, // let Stripe show all enabled in dashboard
