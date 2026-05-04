@@ -75,13 +75,20 @@ function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId })
         </td></tr>
         <tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
           <p style="margin:0 0 16px;font-size:16px;">${greeting}</p>
-          <p style="margin:0 0 24px;font-size:16px;">Welcome aboard. Your guide is ready right now:</p>
+          <p style="margin:0 0 24px;font-size:16px;">You're all set to discover the best spots Switzerland has to offer.</p>
 
-          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px;"><tr>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
             <td style="border-radius:999px;background:#1d1d1f;">
               <a href="${downloadUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Download the guide</a>
             </td>
           </tr></table>
+
+          <!-- Plain-text fallback. Some email clients (older Outlook, strict
+               corporate filters) strip styled buttons. The plain link works
+               everywhere. -->
+          <p style="margin:0 0 24px;font-size:13px;color:#6e6e73;line-height:1.5;word-break:break-all;">
+            Or paste this into your browser: <a href="${downloadUrl}" style="color:#0071e3;text-decoration:none;">${downloadUrl}</a>
+          </p>
 
           <p style="margin:0 0 16px;font-size:15px;color:#6e6e73;">Save the PDF to your phone for offline use on the trail. On iPhone: tap the button, then the share icon, then "Save to Files".</p>
 
@@ -109,8 +116,9 @@ function purchaseEmailText({ firstName, downloadUrl, amountFormatted, orderId })
   const greeting = firstName ? `Hey ${firstName},` : "Hey,";
   return `${greeting}
 
-Welcome aboard. Your guide is ready right now:
+You're all set to discover the best spots Switzerland has to offer.
 
+Download the guide:
 ${downloadUrl}
 
 Save the PDF to your phone for offline use. On iPhone: tap the link, share, "Save to Files".
