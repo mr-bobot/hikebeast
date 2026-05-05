@@ -287,19 +287,27 @@ button { font-family: inherit; }
 .feature-card {
   position: relative;
   display: grid;
+  /* Mobile: photo on top (fixed height) + text section below sized to its
+   * own content. Avoids the old single-column/locked-height layout where
+   * the photo collapsed to ~60 px under the text. */
   grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 220px auto;
+  grid-template-areas: "photo" "text";
   background: var(--paper);
   border: 1px solid var(--hairline);
   border-radius: var(--radius-card);
   overflow: hidden;
   box-shadow: var(--shadow-soft);
-  /* Lock height so swapping the featured photo (different aspect ratios)
-   * doesn't reflow the whole hero. */
-  height: 380px;
 }
+.feature-card .feature-photo { grid-area: photo; }
+.feature-card .feature-text  { grid-area: text;  }
 @media (min-width: 700px) {
   .feature-card {
     grid-template-columns: minmax(280px, 1.05fr) minmax(0, 1.4fr);
+    grid-template-rows: auto;
+    grid-template-areas: "text photo";
+    /* Lock height on tablet+ so swapping featured photos (different aspect
+     * ratios) doesn't reflow the hero. */
     height: 420px;
   }
 }
@@ -1173,45 +1181,6 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   object-position: 70% 45%;
 }
 
-/* === Cover variant: region map silhouette + gradient (instead of a photo) ===
- * Dark editorial backdrop with the region color as an off-axis glow, the
- * light SVG map reads like a relief / topo print on top. Same .slide-cover
- * frame, swap cv-img for cv-map. */
-.slide-cover .cv-map {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background:
-    radial-gradient(70% 60% at 22% 18%, rgba(var(--region-color, 200, 200, 200), 0.55) 0%, rgba(var(--region-color, 200, 200, 200), 0) 65%),
-    radial-gradient(60% 55% at 92% 95%, rgba(var(--region-color, 200, 200, 200), 0.32) 0%, rgba(var(--region-color, 200, 200, 200), 0) 70%),
-    linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
-  display: grid;
-  place-items: center;
-}
-.slide-cover .cv-map::after {
-  /* Fine grain to keep the gradient from looking flat-banded. */
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 3px 3px;
-  pointer-events: none;
-}
-.slide-cover .cv-map img {
-  position: relative;
-  width: 86%;
-  height: auto;
-  max-height: 86%;
-  object-fit: contain;
-  /* Map paths are #eef0f3 / #fff strokes — they read at full opacity on
-   * the dark backdrop. Soft glow so the silhouette feels lit, not pasted. */
-  filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.08)) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
-}
-@media (min-width: 760px) {
-  .slide-cover .cv-map { aspect-ratio: auto; height: 100%; }
-}
 @media (min-width: 760px) { .slide-cover h1 { font-size: 42px; } }
 @media (min-width: 1100px) {
   .slide-cover h1 { font-size: 56px; }
@@ -2267,7 +2236,7 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   left: 0;
   bottom: 0;
   width: 64px;
-  z-index: 200;
+  z-index: 1100;
   background: rgba(250,250,250,0.86);
   -webkit-backdrop-filter: saturate(180%) blur(22px);
   backdrop-filter: saturate(180%) blur(22px);
@@ -2528,8 +2497,8 @@ body.has-rail .topbar .hb-nav { display: none; }
 .rail-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.32);
-  z-index: 199;
+  background: rgba(0,0,0,0.45);
+  z-index: 1099;
   opacity: 0;
   pointer-events: none;
   transition: opacity 220ms ease;
@@ -2559,7 +2528,13 @@ body.has-rail .topbar .hb-nav { display: none; }
     transform: translateX(-100%);
     transition: transform 240ms cubic-bezier(.2,.7,.3,1);
     width: 240px;
-    padding: 14px 14px;
+    padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
+    /* Solid surface on mobile -- the translucent desktop look bleeds page
+     * content through the drawer (Safari's backdrop-filter is unreliable
+     * over fast-paint pages and over Leaflet maps). */
+    background: #fafafa;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
   .app-rail.is-open { transform: translateX(0); }
   .app-rail .rail-brand .label,

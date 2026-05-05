@@ -392,15 +392,17 @@
   // the URL segment under /full/<id>/. Introduction sits at the top of the
   // section as a special "front matter" entry, visually separated from the
   // seven regional chapters by a divider.
-  const RAIL_INTRO_CHAPTER = { id: 'intro', label: 'Introduction', cover: 'page_05.jpg' };
+  // Cover paths point at the build-image-derivatives output. Intro thumb
+  // is a JPG copied by build-static-assets from assets/front_matter/.
+  const RAIL_INTRO_CHAPTER = { id: 'intro', label: 'Introduction', cover: 'front_matter/page_05.jpg' };
   const RAIL_CHAPTERS = [
-    { id: 'central',  label: 'Central',             cover: 'central_cover.jpg' },
-    { id: 'valais',   label: 'Valais',              cover: 'valais_cover.jpg' },
-    { id: 'fribourg', label: 'Fribourg',            cover: 'fribourg_cover.jpg' },
-    { id: 'western',  label: 'Western',             cover: 'leman_cover.jpg' },
-    { id: 'eastern',  label: 'Eastern',             cover: 'east_cover.jpg' },
-    { id: 'ticino',   label: 'Ticino',              cover: 'ticino_cover.jpg' },
-    { id: 'beyond',   label: 'Outside Switzerland', cover: 'beyond_cover.jpg' },
+    { id: 'central',  label: 'Central',             cover: 'chapters/central/w400.webp' },
+    { id: 'valais',   label: 'Valais',              cover: 'chapters/valais/w400.webp' },
+    { id: 'fribourg', label: 'Fribourg',            cover: 'chapters/fribourg/w400.webp' },
+    { id: 'western',  label: 'Western',             cover: 'chapters/western/w400.webp' },
+    { id: 'eastern',  label: 'Eastern',             cover: 'chapters/eastern/w400.webp' },
+    { id: 'ticino',   label: 'Ticino',              cover: 'chapters/ticino/w400.webp' },
+    { id: 'beyond',   label: 'Outside Switzerland', cover: 'chapters/beyond/w400.webp' },
   ];
 
   function injectRail() {
@@ -1283,10 +1285,25 @@
   // Callers pass `prefix` because each page mounts /full/ at a different
   // depth (e.g. browse/ uses '../', root index uses '').
   const DERIV_WIDTHS = [160, 400, 1000, 1800, 2800];
+  // The derivative folder names changed from `<chapter>_<spotId>_p<N>` to
+  // just `<spotId>_p<N>` in the restructure. To keep working both before
+  // and after the Convex re-seed (whichever order push lands in), strip
+  // any leading chapter token so the URL still resolves to a real folder.
+  const CHAPTER_PREFIXES = ['central_','valais_','fribourg_','western_','eastern_','ticino_','beyond_'];
+  function stripChapterPrefix(photoId) {
+    if (!photoId) return photoId;
+    for (const p of CHAPTER_PREFIXES) {
+      if (photoId.startsWith(p)) return photoId.slice(p.length);
+    }
+    return photoId;
+  }
   W.HB.photoUrl = function(opts) {
     if (!opts) return null;
     const { photoId, image, width = 1000, prefix = '' } = opts;
-    if (photoId) return `${prefix}img/derivatives/${photoId}/w${width}.webp`;
+    if (photoId) {
+      const id = stripChapterPrefix(photoId);
+      return `${prefix}img/derivatives/${id}/w${width}.webp`;
+    }
     if (image) {
       if (width <= 200)  return `${prefix}img/thumbs/${image}`;
       if (width <= 1200) return `${prefix}img/m/${image}`;
@@ -1296,9 +1313,10 @@
   };
   W.HB.photoSrcset = function(opts) {
     if (!opts || !opts.photoId) return null;
-    const { photoId, prefix = '' } = opts;
+    const { prefix = '' } = opts;
+    const id = stripChapterPrefix(opts.photoId);
     return DERIV_WIDTHS
-      .map(w => `${prefix}img/derivatives/${photoId}/w${w}.webp ${w}w`)
+      .map(w => `${prefix}img/derivatives/${id}/w${w}.webp ${w}w`)
       .join(', ');
   };
   // Convenience: emit the full set of attributes a renderer needs to drop into
