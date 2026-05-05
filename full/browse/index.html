@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Browse · Hidden Gems · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="stylesheet" href="../preview.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../../images/avatar.jpg" alt="" />
+    <span>Hidden Gems · Browse</span>
+  </a>
+  <span class="crumb"><b id="visibleCount">0</b> photos</span>
+  <div class="topbar-right">
+    <a class="pill" href="../index.html">Overview</a>
+  </div>
+</div>
+
+<main class="hb-page">
+
+  <header class="hb-hero">
+    <p class="kicker">Browse</p>
+    <h1>All <span id="totalSpots">…</span> spots, one wall.</h1>
+    <p>Search, filter by region, save what you like.</p>
+  </header>
+
+  <div class="hb-filters">
+    <label class="hb-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+      <input id="q" type="search" placeholder="Search spots, regions, themes…" autocomplete="off" />
+      <button type="button" class="clear" id="clearQ" aria-label="Clear search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </label>
+    <div class="hb-chips" id="chips" data-axis="region"></div>
+    <div class="hb-chips" id="propChips" data-axis="property"></div>
+  </div>
+
+  <div id="grid" class="hb-grid"></div>
+  <div id="empty" class="hb-empty" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+    <h2>No spots match.</h2>
+    <p>Try a shorter search or pick a different region.</p>
+  </div>
+
+</main>
+
+<footer class="legal">
+  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
+  © Hikebeast
+</footer>
+
+<script src="../map/spots-data.js"></script>
+<script src="../img/thumbs/dimensions.js"></script>
+<script src="../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
+<script src="../social.js"></script>
+<script>
+  // Read the catalog through the unified spots store so the page stays in
+  // sync with Convex. window.HB.spots seeds synchronously from the static
+  // sidecar (spots-data.js) and replaces with Convex data once the
+  // websocket connects -- subscribe + re-render handles live edits.
+  let SPOTS = [];
+  let propIndex = [];
+  let spotProps = new Map();
+  // Stable random order: shuffle once on first load, cache the position per
+  // spot. Subsequent refreshes (Convex updates) reuse the cached position so
+  // the wall doesn't jump around when a spot's photo updates. New spots
+  // discovered later get appended at the end (still in random order via the
+  // fractional position).
+  let randomOrder = null;  // spotKey -> position
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  function refreshSpots() {
+    // Include extras_entry rows (TODO markers) so Leon can see what's still
+    // missing a photo. They render as a distinct placeholder tile.
+    let list = window.HB.spots.all().filter(s =>
+      window.HB.hasRealImage(s) || s.kind === 'extras_entry'
+    );
+    if (!randomOrder) {
+      list = shuffle(list);
+      randomOrder = new Map(list.map((s, i) => [s.spotKey || s.title, i]));
+    } else {
+      list.sort((a, b) => {
+        const pa = randomOrder.get(a.spotKey || a.title);
+        const pb = randomOrder.get(b.spotKey || b.title);
+        if (pa == null && pb == null) return 0;
+        if (pa == null) return 1;
+        if (pb == null) return -1;
+        return pa - pb;
+      });
+      // Newly-arrived spots: drop them at the tail, randomly ordered amongst themselves.
+      let nextPos = randomOrder.size;
+      list.forEach(s => {
+        const k = s.spotKey || s.title;
+        if (!randomOrder.has(k)) randomOrder.set(k, nextPos++ + Math.random());
+      });
+    }
+    SPOTS = list;
+    propIndex = window.HB.buildPropertyIndex(SPOTS);
+    spotProps = new Map(SPOTS.map(s => [s, new Set(window.HB.propertiesOf(s))]));
+  }
+  refreshSpots();
+  const LEGEND = window.LEGEND || [];
+
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const visibleCount = document.getElementById('visibleCount');
+  const chipsEl = document.getElementById('chips');
+  const propChipsEl = document.getElementById('propChips');
+  const q = document.getElementById('q');
+  const clearQ = document.getElementById('clearQ');
+  const search = document.querySelector('.hb-search');
+
+  const state = {
+    q: '',
+    chapters: new Set(),    // empty = all regions
+    properties: new Set(),  // empty = all types; multi-select OR
+  };
+
+  function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  // --- Region chips
+  function renderChips() {
+    const all = document.createElement('button');
+    all.type = 'button';
+    all.className = 'hb-chip' + (state.chapters.size === 0 ? ' is-on' : '');
+    all.textContent = 'All regions';
+    all.addEventListener('click', () => { state.chapters.clear(); update(); });
+    chipsEl.appendChild(all);
+
+    LEGEND.forEach(c => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hb-chip';
+      b.innerHTML = `<span class="swatch" style="background: rgb(${c.color});"></span><span>${esc(c.name)}</span>`;
+      b.addEventListener('click', () => {
+        // Toggle solo: if this is the only one selected, clear all (= show all).
+        // Otherwise, isolate to this one.
+        if (state.chapters.size === 1 && state.chapters.has(c.number)) {
+          state.chapters.clear();
+        } else {
+          state.chapters = new Set([c.number]);
+        }
+        update();
+      });
+      chipsEl.appendChild(b);
+    });
+  }
+
+  // --- Property chips (multi-select OR; "All types" clears) ---
+  function renderPropChips() {
+    propChipsEl.innerHTML = '';
+    const all = document.createElement('button');
+    all.type = 'button';
+    all.className = 'hb-chip' + (state.properties.size === 0 ? ' is-on' : '');
+    all.textContent = 'All types';
+    all.addEventListener('click', () => { state.properties.clear(); update(); });
+    propChipsEl.appendChild(all);
+    propIndex.forEach(p => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hb-chip';
+      b.dataset.prop = p.id;
+      b.innerHTML = `<span>${esc(p.label)}</span><span class="chip-count">${p.count}</span>`;
+      b.addEventListener('click', () => {
+        // Multi-select: tap to add/remove. Region chips stay solo-isolate.
+        if (state.properties.has(p.id)) state.properties.delete(p.id);
+        else state.properties.add(p.id);
+        update();
+      });
+      propChipsEl.appendChild(b);
+    });
+  }
+
+  function paintChips() {
+    const all = chipsEl.children[0];
+    if (all) all.classList.toggle('is-on', state.chapters.size === 0);
+    LEGEND.forEach((c, i) => {
+      const b = chipsEl.children[i + 1];
+      if (b) b.classList.toggle('is-on', state.chapters.has(c.number));
+    });
+    // Property chips
+    const allProp = propChipsEl.children[0];
+    if (allProp) allProp.classList.toggle('is-on', state.properties.size === 0);
+    propIndex.forEach((p, i) => {
+      const b = propChipsEl.children[i + 1];
+      if (b) b.classList.toggle('is-on', state.properties.has(p.id));
+    });
+  }
+
+  // --- Tile rendering · image-only Pinterest-style; alt carries the title for a11y + ctrl-F.
+  // Stores intrinsic dims as data-w / data-h so applySpans() can compute row spans
+  // and decide which tiles get the 2-column landscape treatment.
+  // Tile renderer takes a (spot, photo) tuple. A multi-photo spot produces
+  // one tile per photo; an extras_entry produces a single TODO placeholder.
+  function tile(item) {
+    const spot = item.spot;
+    const photo = item.photo;  // null for TODO tiles
+
+    const a = document.createElement('a');
+    a.className = 'hb-tile';
+    a.href = spot.href.replace(/^\.\.\//, '../');  // already correct for /full/browse/
+    a.title = spot.title;
+
+    // TODO marker for spots with no photo yet (kind=extras_entry, or any
+    // kind=spot row that lacks an image). Renders as a flat 4:3 placeholder
+    // so Leon can spot what's still missing.
+    if (!photo) {
+      a.classList.add('hb-tile-todo');
+      a.dataset.w = 4;
+      a.dataset.h = 3;
+      a.innerHTML = `
+        <span class="hb-tile-todo-fill" style="background-color: rgb(${spot.color || '120,120,120'});"></span>
+        <span class="hb-tile-name">${esc(spot.title)}</span>
+        <span class="hb-tile-todo-tag">Needs photo</span>
+      `;
+      return a;
+    }
+
+    // Intrinsic dims drive row-span layout. Convex carries the original dims
+    // per photo; legacy spots fall back to the static thumb-dims sidecar.
+    const dimsArr = (photo.width && photo.height)
+      ? [photo.width, photo.height]
+      : ((window.HB_THUMB_DIMS || {})[photo.src] || (window.HB_THUMB_DIMS || {})[spot.image] || [4, 3]);
+    a.dataset.w = dimsArr[0];
+    a.dataset.h = dimsArr[1];
+    const attrs = window.HB.photoAttrs({
+      photoId: photo.photoId, image: photo.src || spot.image,
+      width: 1000, prefix: '../',
+      sizes: '(min-width: 1200px) 25vw, (min-width: 600px) 33vw, 50vw',
+      intrinsicWidth: dimsArr[0], intrinsicHeight: dimsArr[1],
+    });
+    const srcsetAttr = attrs.srcset ? ` srcset="${esc(attrs.srcset)}" sizes="${esc(attrs.sizes)}"` : '';
+    const img = `<img src="${esc(attrs.src)}"${srcsetAttr} alt="${esc(spot.title)}" width="${dimsArr[0]}" height="${dimsArr[1]}" loading="lazy" decoding="async" />`;
+    a.innerHTML = img + `<span class="hb-tile-name">${esc(spot.title)}</span>`;
+    // Heart button
+    const k = window.HB.spotKey(spot);
+    if (k) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hb-fav';
+      btn.setAttribute('data-hb-fav', k);
+      btn.setAttribute('aria-label', 'Save to favorites');
+      function paint() {
+        const on = window.HB.favorites.has(k);
+        btn.classList.toggle('is-on', on);
+        btn.innerHTML = on ? window.HB.icons.heartFill : window.HB.icons.heartOut;
+      }
+      paint();
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.HB.favorites.toggle(k);
+        paint();
+      });
+      a.appendChild(btn);
+    }
+    return a;
+  }
+
+  function filtered() {
+    const term = state.q.trim().toLowerCase();
+    const propsOn = state.properties.size > 0;
+    return SPOTS.filter(s => {
+      if (state.chapters.size > 0 && !state.chapters.has(s.chapter)) return false;
+      if (propsOn) {
+        const set = spotProps.get(s) || new Set();
+        let any = false;
+        for (const p of state.properties) { if (set.has(p)) { any = true; break; } }
+        if (!any) return false;
+      }
+      if (!term) return true;
+      const hay = `${s.title} ${s.kicker} ${s.chapter_id}`.toLowerCase();
+      return hay.includes(term);
+    });
+  }
+
+  // Compute grid-row span (and grid-column span for landscapes) from intrinsic
+  // image dims. Wide images (aspect > 1.4) get .span-wide so they take 2 cols,
+  // but only when the grid is at least 3 cols wide -- a 2-col-span on mobile
+  // would mean every wide spot blows up to full width and the layout feels
+  // like a single column.
+  function applySpans() {
+    if (!grid.children.length) return;
+    const cs = getComputedStyle(grid);
+    const tmpl = cs.gridTemplateColumns.split(' ').filter(Boolean);
+    const cols = tmpl.length;
+    const colW = parseFloat(tmpl[0]);
+    const gap = parseFloat(cs.rowGap || cs.gap || '0');
+    const rowH = parseFloat(cs.gridAutoRows);
+    if (!colW || !rowH) return;
+    // Stable per-tile "feature" flag drawn from the image filename so the
+    // same tiles get hero treatment between renders (no random reshuffles
+    // on filter / fav toggle). Roughly every 7th tall portrait is promoted.
+    function hash(s) {
+      let h = 0; for (let i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) >>> 0; }
+      return h;
+    }
+    Array.from(grid.children).forEach(t => {
+      const w = +t.dataset.w;
+      const h = +t.dataset.h;
+      if (!w || !h) return;
+      const aspect = w / h;
+      const isLandscape = aspect > 1.4;
+      const isTallPortrait = aspect < 0.8;
+      const featureKey = t.querySelector('img')?.src || '';
+      const featurePortrait = isTallPortrait && (hash(featureKey) % 7 === 0);
+      const spanCol = (cols >= 3 && (isLandscape || featurePortrait)) ? 2 : 1;
+      const tileW = colW * spanCol + gap * (spanCol - 1);
+      const tileH = tileW * (h / w);
+      const spanRow = Math.max(1, Math.round((tileH + gap) / (rowH + gap)));
+      t.classList.toggle('span-wide', spanCol === 2 && isLandscape);
+      t.classList.toggle('span-tall', spanCol === 2 && featurePortrait);
+      t.style.gridRowEnd = 'span ' + spanRow;
+    });
+    grid.classList.add('is-ready');
+  }
+
+  // Round-robin every spot's photos into a flat tile list so the same spot's
+  // multiple photos get spread across the wall instead of clumping. Single-
+  // photo spots and TODO markers contribute exactly one tile each.
+  function expandToPhotoTiles(spots) {
+    const queues = spots.map(s => {
+      if (s.kind === 'extras_entry' || !s.photos || s.photos.length === 0) {
+        return [{ spot: s, photo: null }];
+      }
+      return s.photos.map(p => ({ spot: s, photo: p }));
+    });
+    const out = [];
+    let active = queues.filter(q => q.length > 0);
+    while (active.length) {
+      for (const q of active) out.push(q.shift());
+      active = active.filter(q => q.length > 0);
+    }
+    return out;
+  }
+
+  function update() {
+    const list = filtered();
+    const tileItems = expandToPhotoTiles(list);
+    grid.classList.remove('is-ready');
+    grid.innerHTML = '';
+    tileItems.forEach(it => grid.appendChild(tile(it)));
+    visibleCount.textContent = tileItems.length;
+    empty.hidden = tileItems.length > 0;
+    grid.hidden = list.length === 0;
+    paintChips();
+    requestAnimationFrame(applySpans);
+  }
+
+  // Recompute spans when the viewport crosses a column-count breakpoint.
+  let resizeT = 0;
+  new ResizeObserver(() => { clearTimeout(resizeT); resizeT = setTimeout(applySpans, 80); }).observe(grid);
+
+  // --- Search wiring
+  q.addEventListener('input', () => {
+    state.q = q.value;
+    search.classList.toggle('has-value', !!q.value);
+    update();
+  });
+  clearQ.addEventListener('click', () => {
+    q.value = '';
+    state.q = '';
+    search.classList.remove('has-value');
+    q.focus();
+    update();
+  });
+
+  // Re-paint hearts when fav state changes (e.g. cross-tab or from another tile)
+  window.HB.favorites.subscribe(() => {
+    document.querySelectorAll('[data-hb-fav]').forEach(btn => {
+      const k = btn.getAttribute('data-hb-fav');
+      const on = window.HB.favorites.has(k);
+      btn.classList.toggle('is-on', on);
+      btn.innerHTML = on ? window.HB.icons.heartFill : window.HB.icons.heartOut;
+    });
+  });
+
+  document.getElementById('totalSpots').textContent = SPOTS.length;
+  renderChips();
+  renderPropChips();
+
+  // When Convex pushes an update (admin published a photo, edited a spot,
+  // etc.), refresh the in-memory catalog and re-render. Property chips
+  // rebuild too in case new categories appeared.
+  window.HB.spots.subscribe(() => {
+    refreshSpots();
+    document.getElementById('totalSpots').textContent = SPOTS.length;
+    propChipsEl.innerHTML = '';
+    renderPropChips();
+    update();
+  });
+  // Pre-fill the search field from ?q= so the home page search lands on
+  // filtered results rather than an unfiltered grid.
+  try {
+    const q0 = new URLSearchParams(location.search).get('q');
+    if (q0) {
+      q.value = q0;
+      state.q = q0;
+      search.classList.add('has-value');
+    }
+  } catch {}
+  update();
+</script>
+
+</body>
+</html>

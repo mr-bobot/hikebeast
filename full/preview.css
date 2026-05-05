@@ -23,7 +23,7 @@ html, body { margin: 0; padding: 0; }
   --shadow-soft: 0 4px 14px rgba(0,0,0,0.06);
   --topbar-h: 52px;
   --sidebar-w: 120px;
-  --content-max: 1400px;
+  --content-max: 1500px;
 }
 
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -137,7 +137,9 @@ button { font-family: inherit; }
   .pill .label-sm { display: inline; }
 }
 
-/* === HOME page === */
+/* === HOME page (legacy "Read it page by page" layout) ===
+ * Kept for any code path that still uses it; the new YouTube-style layout
+ * lives below under === HOME v2 ===. */
 .home-main {
   max-width: 1280px;
   margin: 0 auto;
@@ -148,6 +150,466 @@ button { font-family: inherit; }
 }
 @media (min-width: 700px) {
   .home-main { padding: 56px 40px 96px; gap: 48px; }
+}
+
+/* === HOME v2 (YouTube-style) === */
+
+/* Topbar inside the home page · search field + avatar circle */
+.home-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  background: rgba(255,255,255,0.86);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--hairline);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 22px;
+  height: 64px;
+}
+@media (min-width: 700px) { .home-topbar { padding: 12px 32px; gap: 24px; } }
+
+.home-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  grid-column: 1;
+  justify-self: center;
+}
+.home-search svg.icon-search {
+  position: absolute;
+  right: 16px; top: 50%;
+  transform: translateY(-50%);
+  width: 18px; height: 18px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.home-search input {
+  width: 100%;
+  height: 40px;
+  padding: 0 44px 0 18px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+  color: var(--fg);
+  outline: none;
+  transition: border-color 120ms ease, background 120ms ease, box-shadow 120ms ease;
+}
+.home-search input::placeholder { color: var(--muted); }
+.home-search input:focus {
+  background: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.home-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  grid-column: 2;
+}
+.home-topbar-actions .icon-btn {
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 120ms ease, color 120ms ease;
+  font-family: inherit;
+}
+.home-topbar-actions .icon-btn:hover { background: rgba(0,0,0,0.05); color: var(--fg); }
+.home-topbar-actions .icon-btn svg { width: 18px; height: 18px; }
+.home-avatar {
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  flex-shrink: 0;
+}
+.home-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 70% 45%;
+  display: block;
+}
+
+/* Page body */
+.home-v2 {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 22px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+@media (min-width: 700px) { .home-v2 { padding: 28px 32px 96px; gap: 44px; } }
+.home-v2 > h1.page-title {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+@media (min-width: 700px) { .home-v2 > h1.page-title { font-size: 26px; } }
+
+/* Featured hero · split text (left) + photo (right) + up-next column */
+.home-feature {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+@media (min-width: 900px) {
+  .home-feature {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 22px;
+  }
+}
+@media (min-width: 1200px) {
+  .home-feature {
+    grid-template-columns: minmax(0, 1fr) 360px;
+  }
+}
+
+.feature-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  /* Lock height so swapping the featured photo (different aspect ratios)
+   * doesn't reflow the whole hero. */
+  height: 380px;
+}
+@media (min-width: 700px) {
+  .feature-card {
+    grid-template-columns: minmax(280px, 1.05fr) minmax(0, 1.4fr);
+    height: 420px;
+  }
+}
+@media (min-width: 1100px) { .feature-card { height: 440px; } }
+.feature-card .feature-text {
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  background: var(--surface-2);
+  min-width: 0;
+}
+@media (min-width: 700px) { .feature-card .feature-text { padding: 36px 36px; } }
+@media (min-width: 1100px) { .feature-card .feature-text { padding: 48px 56px; } }
+.feature-card .feature-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,0.04);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  align-self: flex-start;
+}
+.feature-card .feature-kicker svg { width: 12px; height: 12px; color: var(--fg); }
+.feature-card .feature-title {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 32px;
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  margin: 4px 0 0;
+  color: var(--fg);
+}
+@media (min-width: 700px) { .feature-card .feature-title { font-size: 40px; } }
+@media (min-width: 1100px) { .feature-card .feature-title { font-size: 48px; } }
+.feature-card .feature-deck {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  letter-spacing: -0.005em;
+  max-width: 36ch;
+}
+@media (min-width: 700px) { .feature-card .feature-deck { font-size: 15px; } }
+.feature-card .feature-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  border: 1px solid var(--hairline);
+  align-self: flex-start;
+  margin-top: 14px;
+  transition: transform 120ms ease, background 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.feature-card .feature-cta:hover { background: var(--surface); }
+.feature-card .feature-cta:active { transform: scale(0.97); }
+.feature-card .feature-cta .play-icon {
+  width: 28px; height: 28px;
+  border-radius: 999px;
+  background: var(--fg);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.feature-card .feature-cta .play-icon svg { width: 12px; height: 12px; }
+.feature-card .feature-photo {
+  position: relative;
+  background: #1d1d1f;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+.feature-card .feature-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 320ms ease;
+}
+/* Crossfade between rotating featured spots so swaps feel intentional
+ * rather than a hard cut. */
+.feature-card .feature-photo img.is-fading { opacity: 0; }
+.feature-card .feature-dots {
+  position: absolute;
+  bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+.feature-card .feature-dots span {
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.6);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.feature-card .feature-dots span.is-on { background: #fff; width: 18px; }
+
+/* "Next up" 4-card stack to the right of the feature on desktop */
+.home-up-next {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.up-next-card {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 6px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  transition: background 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.up-next-card:hover { background: rgba(0,0,0,0.045); }
+.up-next-card .photo {
+  width: 96px; height: 64px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  flex-shrink: 0;
+}
+.up-next-card .photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.up-next-card .body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.up-next-card .name {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.up-next-card .meta {
+  font-size: 12px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.up-next-card .duration {
+  font-size: 11px;
+  color: var(--soft);
+}
+
+/* Card row · For You / Famous / Hidden Gems */
+.home-row {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.home-row .row-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 2px;
+}
+.home-row .row-head h2 {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+@media (min-width: 700px) { .home-row .row-head h2 { font-size: 22px; } }
+.home-row .row-head .see-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: #fff;
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.home-row .row-head .see-all:hover { background: var(--surface); border-color: var(--hairline-strong); }
+.home-row .row-head .see-all svg { width: 12px; height: 12px; color: var(--muted); }
+
+.home-row .row-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+@media (min-width: 700px) {
+  .home-row .row-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+}
+@media (min-width: 1000px) {
+  .home-row .row-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.home-row .row-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 14px;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 200ms ease;
+}
+.home-row .row-card:hover { transform: translateY(-2px); }
+.home-row .row-card .photo {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.home-row .row-card .photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms ease;
+}
+.home-row .row-card:hover .photo img { transform: scale(1.04); }
+.home-row .row-card .badge {
+  position: absolute;
+  bottom: 8px; right: 8px;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: -0.005em;
+}
+.home-row .row-card .body {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 0 4px;
+}
+.home-row .row-card .channel {
+  flex-shrink: 0;
+  width: 30px; height: 30px;
+  border-radius: 999px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.home-row .row-card .channel img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.home-row .row-card .text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.home-row .row-card .name {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--fg);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.home-row .row-card .channel-name {
+  font-size: 12.5px;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.home-row .row-card .channel-name svg { width: 12px; height: 12px; color: var(--accent); flex-shrink: 0; }
+.home-row .row-card .meta {
+  font-size: 12px;
+  color: var(--muted);
 }
 .home-hero { display: flex; flex-direction: column; gap: 12px; }
 .home-hero .kicker {
@@ -270,6 +732,108 @@ button { font-family: inherit; }
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+/* === Featured "Start here" hero card on the home page ===
+ * Sits above the region grid. Photo on the left, prose + CTA on the right
+ * at desktop; stacked on mobile. Distinguishes the front-matter chapter
+ * from the seven region chapters that share the uniform .cc tile design. */
+.cc-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  text-decoration: none;
+  color: var(--fg);
+  background: var(--paper);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--hairline);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.cc-hero:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); }
+.cc-hero-photo {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--surface);
+  overflow: hidden;
+}
+.cc-hero-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms ease;
+}
+.cc-hero:hover .cc-hero-photo img { transform: scale(1.03); }
+.cc-hero-photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.06) 0%, transparent 35%, transparent 65%, rgba(0,0,0,0.18) 100%);
+  pointer-events: none;
+}
+.cc-hero-body {
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+.cc-hero-kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.cc-hero-title {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0;
+  font-weight: 600;
+}
+.cc-hero-deck {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+.cc-hero-meta {
+  font-size: 12px;
+  color: var(--soft);
+  letter-spacing: -0.005em;
+}
+.cc-hero-cta {
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--fg);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  transition: opacity 120ms ease, transform 100ms ease;
+}
+.cc-hero-cta svg { width: 14px; height: 14px; }
+.cc-hero:hover .cc-hero-cta { opacity: 0.92; }
+.cc-hero:active .cc-hero-cta { transform: scale(0.97); }
+
+@media (min-width: 760px) {
+  .cc-hero { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+  .cc-hero-photo { aspect-ratio: auto; height: 100%; min-height: 320px; }
+  .cc-hero-body { padding: 36px 40px; gap: 12px; }
+  .cc-hero-title { font-size: 36px; letter-spacing: -0.035em; }
+  .cc-hero-deck { font-size: 16px; }
+}
+@media (min-width: 1100px) {
+  .cc-hero-body { padding: 48px 56px; gap: 14px; }
+  .cc-hero-title { font-size: 44px; }
+  .cc-hero-deck { font-size: 17px; }
 }
 .cc .cc-name {
   font-size: 16px;
@@ -395,27 +959,20 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 }
 .sidebar::-webkit-scrollbar { width: 4px; }
 .sidebar::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 2px; }
-@media (max-width: 700px) {
-  .sidebar {
-    grid-column: 1;
-    position: sticky;
-    top: var(--topbar-h);
-    height: auto;
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-right: 0;
-    border-bottom: 1px solid var(--hairline);
-    padding: 10px 12px;
-    align-items: center;
-    /* Drop backdrop blur and use a near-solid bg on mobile -- the blur
-       caused stacking-context glitches on iOS where cards appeared to
-       sit in front of the sticky strip. */
-    background: rgba(250,250,250,0.97);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-}
+/* The chapter strip duplicated the left rail's Chapters list (same 8
+ * destinations, side by side). Dropped entirely — rail is the chapter
+ * switcher; saves ~120 px of horizontal real estate at every viewport.
+ *
+ * !important on grid-template-columns because the original rule at
+ * line 933 won't budge to same-specificity overrides on chapter pages. */
+.sidebar { display: none !important; }
+.app { grid-template-columns: minmax(0, 1fr) !important; }
+.viewer { grid-column: 1 !important; }
+
+/* Rail is position:fixed and overlays the leftmost slice; body has no
+ * padding for it. Viewer's base `margin: 0 auto` centers on the full
+ * viewport — the rail floats over the left edge of that centered content
+ * at narrow widths, which is fine (translucent + bounded by content-max). */
 
 .sb-home {
   display: grid;
@@ -527,9 +1084,21 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   grid-template-columns: 1fr;
 }
 
-/* Uniform 2:1 aspect ratio for every card on desktop */
+/* Card aspect ratio scales with viewport.
+ *   ≥ 1500px viewport: 2:1   (card width ~1456 → height 728, fits 684 body)
+ *   1100..1499:        16:10 (card height stays generous on small laptops)
+ *   < 1100:            stacked (handled by Option-1 rule below)
+ * Tablet/mobile (< 760) lets the card auto-size to its content.
+ *
+ * Cover and region cards have lighter content; they got 2:1 originally,
+ * keep them there at every desktop size. */
 @media (min-width: 760px) {
-  .slide { aspect-ratio: 2 / 1; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .slide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .slide-spot { aspect-ratio: 16 / 10; }
+  .slide-cover, .slide-region { aspect-ratio: 2 / 1; }
+}
+@media (min-width: 1500px) {
+  .slide-spot { aspect-ratio: 2 / 1; }
 }
 
 /* Hide the redundant mini "spots in this chapter" overview card */
@@ -603,6 +1172,46 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   object-fit: cover;
   object-position: 70% 45%;
 }
+
+/* === Cover variant: region map silhouette + gradient (instead of a photo) ===
+ * Dark editorial backdrop with the region color as an off-axis glow, the
+ * light SVG map reads like a relief / topo print on top. Same .slide-cover
+ * frame, swap cv-img for cv-map. */
+.slide-cover .cv-map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background:
+    radial-gradient(70% 60% at 22% 18%, rgba(var(--region-color, 200, 200, 200), 0.55) 0%, rgba(var(--region-color, 200, 200, 200), 0) 65%),
+    radial-gradient(60% 55% at 92% 95%, rgba(var(--region-color, 200, 200, 200), 0.32) 0%, rgba(var(--region-color, 200, 200, 200), 0) 70%),
+    linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
+  display: grid;
+  place-items: center;
+}
+.slide-cover .cv-map::after {
+  /* Fine grain to keep the gradient from looking flat-banded. */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+}
+.slide-cover .cv-map img {
+  position: relative;
+  width: 86%;
+  height: auto;
+  max-height: 86%;
+  object-fit: contain;
+  /* Map paths are #eef0f3 / #fff strokes — they read at full opacity on
+   * the dark backdrop. Soft glow so the silhouette feels lit, not pasted. */
+  filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.08)) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+}
+@media (min-width: 760px) {
+  .slide-cover .cv-map { aspect-ratio: auto; height: 100%; }
+}
 @media (min-width: 760px) { .slide-cover h1 { font-size: 42px; } }
 @media (min-width: 1100px) {
   .slide-cover h1 { font-size: 56px; }
@@ -610,10 +1219,14 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 }
 
 /* === Photo credit overlay pill (used on spot + spread photos) === */
+/* Credit pills temporarily hidden — Leon will reintroduce per-photo
+ * attribution later. The credit data still lives on each photo record in
+ * Convex (sourceUrl + credit string), so unhiding is a one-line change. */
+.credit-pill, .hb-credit { display: none !important; }
 .credit-pill {
   position: absolute;
   bottom: 14px;
-  right: 14px;
+  left: 14px;
   background: rgba(0,0,0,0.55);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
   backdrop-filter: saturate(180%) blur(10px);
@@ -627,17 +1240,21 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   pointer-events: none;
   white-space: nowrap;
   transform: scale(0.75);
-  transform-origin: bottom right;
+  transform-origin: bottom left;
 }
 
 /* === Spread card (multi-photo, no text) ===
  * Photos stack vertically and each one fills the full card width at its
- * own native aspect ratio. No cropping, no letterboxing, no black bars. */
+ * own native aspect ratio. No cropping, no letterboxing, no black bars.
+ * Must override the .slide aspect-ratio: 2/1 set at min-width 760px or
+ * the photos get squashed into a half-height card. */
 .slide-spread {
   display: flex;
   flex-direction: column;
   background: var(--paper);
   border: none;  /* photos own the edges */
+  aspect-ratio: auto !important;
+  grid-template-columns: 1fr !important;
 }
 .slide-spread .sp-photo {
   position: relative;
@@ -664,11 +1281,11 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 .slide-spot .sp-photo img {
   width: 100%;
   height: 100%;
-  aspect-ratio: 1 / 1;
   object-fit: cover;
   display: block;
 }
 @media (max-width: 759px) {
+  /* Mobile: stack — photo is square at full card width, text below. */
   .slide-spot .sp-photo img { aspect-ratio: 1 / 1; height: auto; }
 }
 .slide-spot .sp-body {
@@ -690,7 +1307,38 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   .slide-spot .sp-body { padding: 40px 48px; gap: 14px; }
 }
 
-.sp-kicker {
+/* Option 1 · narrow desktop / small laptop: stack photo on top, text below.
+ * The 2-col layout starts at min-width 760px (.slide rule above) and gives
+ * each side only ~250-400 px on a 1024-1199 viewport once the rail + chapter
+ * strip eat their share. Stacking below 1100 px frees the photo to its
+ * natural width and the body text to a readable column. */
+@media (min-width: 760px) and (max-width: 1099px) {
+  .slide-spot {
+    grid-template-columns: minmax(0, 1fr);
+    aspect-ratio: auto;
+  }
+  .slide-spot .sp-photo {
+    width: 100%;
+  }
+  .slide-spot .sp-photo img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;  /* tame ultra-portrait / ultra-landscape originals */
+    object-fit: cover;
+  }
+  .slide-spot .sp-photo.hb-multi {
+    aspect-ratio: 16 / 10;
+  }
+  .slide-spot .sp-body {
+    padding: 24px 28px 28px;
+    justify-content: flex-start;
+  }
+}
+
+/* `.sp-body p { color: #2c2c2e }` later in the file beats this rule on
+ * specificity — qualify the selector with .sp-body so the accent blue wins
+ * for kickers without resorting to !important. */
+.sp-body .sp-kicker, .sp-kicker {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -718,11 +1366,10 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 
 .specs {
   margin-top: auto;
-  padding-top: 12px;
+  padding-top: 4px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  border-top: 1px solid var(--hairline);
 }
 .spec { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .spec .lbl {
@@ -1117,6 +1764,1347 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 @media (min-width: 760px) { .slide-region .rg-title { font-size: 32px; } }
 @media (min-width: 1100px) { .slide-region .rg-title { font-size: 38px; } }
 
+/* === Multi-image carousel on spot cards === */
+/* When a spot has 2+ photos in HB_SPOT_IMAGES, social.js rebuilds .sp-photo
+ * as a stack of <img class="hb-slide"> with one .is-current at a time, plus
+ * dot pagination + chevron arrows. Single-photo spots stay on the static
+ * <img> and never receive the .hb-multi class. */
+.sp-photo.hb-multi {
+  position: relative;
+}
+/* Mobile: the original static <img> is what gave .sp-photo its height
+ * (via aspect-ratio: 1/1). With the image removed for multi-spots, set
+ * the same ratio on .sp-photo itself so the column doesn't collapse. */
+@media (max-width: 759px) {
+  .sp-photo.hb-multi { aspect-ratio: 1 / 1; }
+}
+.sp-photo.hb-multi .hb-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 280ms ease;
+  pointer-events: none;
+}
+.sp-photo.hb-multi .hb-slide.is-current { opacity: 1; }
+.sp-photo.hb-multi .hb-credit {
+  /* Sits on the current slide; we update its text per-slide so credits
+   * stay accurate as the user navigates. */
+  position: absolute;
+  z-index: 4;
+}
+.sp-photo.hb-multi .hb-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 200ms ease, transform 100ms ease, background 120ms ease;
+  z-index: 5;
+  -webkit-tap-highlight-color: transparent;
+}
+.sp-photo.hb-multi:hover .hb-arrow,
+.sp-photo.hb-multi:focus-within .hb-arrow { opacity: 1; }
+.sp-photo.hb-multi .hb-arrow:hover { background: rgba(0,0,0,0.7); }
+.sp-photo.hb-multi .hb-arrow:active { transform: translateY(-50%) scale(0.92); }
+.sp-photo.hb-multi .hb-arrow.hb-arrow-prev { left: 12px; }
+.sp-photo.hb-multi .hb-arrow.hb-arrow-next { right: 12px; }
+.sp-photo.hb-multi .hb-arrow svg { width: 18px; height: 18px; }
+/* Touch devices: arrows always visible (no hover state) */
+@media (hover: none) {
+  .sp-photo.hb-multi .hb-arrow { opacity: 0.85; }
+}
+.sp-photo.hb-multi .hb-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 4;
+  pointer-events: none;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.32);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.sp-photo.hb-multi .hb-dots span {
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.55);
+  transition: width 220ms ease, background 220ms ease;
+}
+.sp-photo.hb-multi .hb-dots span.is-on {
+  background: #fff;
+  width: 16px;
+}
+/* Photo counter badge (top-left), tells you "1 / 3" so users see at a
+ * glance that there's more than one photo without having to count dots. */
+.sp-photo.hb-multi .hb-counter {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 4;
+  background: rgba(0,0,0,0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+/* === Per-spot more menu (3 dots) + Submit Photo modal === */
+/* Spot body needs to be a positioning context for the floating buttons */
+.slide-spot .sp-body { position: relative; }
+
+.hb-spot-menu-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;  /* far right corner — heart sits to its left */
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.04);
+  border: 0;
+  color: var(--muted);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 120ms ease, color 120ms ease, transform 100ms ease;
+  font-family: inherit;
+  z-index: 3;
+}
+.hb-spot-menu-btn:hover { background: rgba(0,0,0,0.08); color: var(--fg); }
+.hb-spot-menu-btn:active { transform: scale(0.93); }
+.hb-spot-menu-btn svg { width: 18px; height: 18px; }
+
+/* Apple-style popover. Floats with fixed positioning so it escapes any
+ * card overflow clipping. */
+.hb-spot-menu {
+  position: fixed;
+  z-index: 800;
+  min-width: 200px;
+  background: rgba(255,255,255,0.96);
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
+  backdrop-filter: saturate(180%) blur(22px);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.14), 0 4px 12px rgba(0,0,0,0.08);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  transform: translateY(-4px) scale(0.98);
+  transition: opacity 140ms ease, transform 140ms cubic-bezier(.2,.7,.3,1);
+}
+.hb-spot-menu.is-show { opacity: 1; transform: translateY(0) scale(1); }
+.hb-spot-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+}
+.hb-spot-menu-item:hover { background: rgba(0,0,0,0.05); }
+.hb-spot-menu-item svg { width: 16px; height: 16px; color: var(--muted); }
+
+/* Modal (Apple HIG): translucent backdrop, rounded white card. */
+.hb-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  background: rgba(8,10,14,0.42);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.hb-modal-backdrop.is-show { opacity: 1; }
+.hb-modal {
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px 22px 18px;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.25), 0 6px 16px rgba(0,0,0,0.08);
+  position: relative;
+  transform: translateY(8px) scale(0.98);
+  transition: transform 220ms cubic-bezier(.2,.7,.3,1);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+.hb-modal-backdrop.is-show .hb-modal { transform: translateY(0) scale(1); }
+
+.hb-modal h2 {
+  margin: 0;
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+.hb-modal .sub { margin: 0; font-size: 13px; color: var(--muted); }
+.hb-modal .disclaimer {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--hairline);
+}
+.hb-modal .field { display: flex; flex-direction: column; gap: 6px; }
+.hb-modal .field span {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hb-modal .field input[type="text"],
+.hb-modal .field textarea {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--hairline);
+  background: #fff;
+  padding: 0 12px;
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+  color: var(--fg);
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.hb-modal .field textarea { height: auto; padding: 10px 12px; resize: vertical; min-height: 60px; }
+.hb-modal .field input:focus,
+.hb-modal .field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+
+.hb-modal .file-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 18px;
+  border: 1.5px dashed var(--hairline-strong);
+  border-radius: 12px;
+  background: var(--surface);
+  cursor: pointer;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.hb-modal .file-drop:hover { background: var(--surface-2); border-color: var(--accent); }
+.hb-modal .file-drop svg { width: 22px; height: 22px; color: var(--muted); }
+.hb-modal .file-drop b { color: var(--fg); font-weight: 600; }
+.hb-modal .file-drop input[type="file"] { display: none; }
+.hb-modal .file-drop.has-file { padding: 0; border-style: solid; border-color: var(--hairline); border-radius: 12px; overflow: hidden; }
+.hb-modal .file-drop.has-file .file-prompt { display: none; }
+.hb-modal .file-drop.has-file .file-preview { display: block; }
+.hb-modal .file-preview { display: none; position: relative; width: 100%; }
+.hb-modal .file-preview img { width: 100%; height: 100%; max-height: 220px; object-fit: cover; display: block; }
+.hb-modal .file-preview .replace {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: -0.005em;
+}
+
+.hb-modal .actions { display: flex; gap: 10px; justify-content: flex-end; padding-top: 4px; }
+.hb-modal .btn-ghost,
+.hb-modal .btn-primary {
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: -0.005em;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 120ms ease, transform 100ms ease;
+}
+.hb-modal .btn-ghost { background: transparent; color: var(--fg); border: 1px solid var(--hairline); }
+.hb-modal .btn-primary { background: var(--fg); color: #fff; }
+.hb-modal .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.hb-modal .btn-primary:active:not(:disabled) { transform: scale(0.97); }
+
+.hb-modal .status {
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+.hb-modal .status.ok { background: rgba(52,199,89,0.10); color: #1d7d2f; border: 1px solid rgba(52,199,89,0.25); }
+.hb-modal .status.err { background: rgba(255,59,48,0.10); color: #b3271e; border: 1px solid rgba(255,59,48,0.25); }
+.hb-modal .status.busy { background: var(--surface); color: var(--muted); border: 1px solid var(--hairline); }
+
+/* === Random pick · fullscreen card-fly animation === */
+.hb-random-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(8,10,14,0.72);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  backdrop-filter: saturate(160%) blur(14px);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.hb-random-overlay.is-show { opacity: 1; }
+
+/* Stage takes the whole viewport but is positioned absolutely so it doesn't
+ * occupy a grid track -- the winner panel below is the only grid item, so
+ * place-items: center genuinely centres it. (Stacking via grid-area would
+ * also work; absolute is simpler for an overlay.) */
+.hb-random-stage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hb-random-card {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 140px;
+  height: 196px;
+  margin-left: -70px;
+  margin-top: -98px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #1d1d1f;
+  box-shadow: 0 14px 38px rgba(0,0,0,0.48), 0 4px 12px rgba(0,0,0,0.25);
+  border: 3px solid #fff;
+  transform: translate(0,0) rotate(0deg) scale(0.6);
+  opacity: 0;
+  transition: transform 1100ms cubic-bezier(.2,.7,.3,1), opacity 400ms ease;
+  will-change: transform, opacity;
+}
+.hb-random-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hb-random-card .rc-name {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 24px 10px 8px;
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fff;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.65));
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Winner panel · sits at center after the swirl, slightly larger, includes
+ * call-to-action buttons rendered alongside the card. */
+.hb-random-winner {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+  transition: opacity 320ms ease, transform 320ms cubic-bezier(.18,.89,.32,1.28);
+}
+.hb-random-winner.is-show { opacity: 1; transform: translateY(0) scale(1); }
+.hb-random-winner .rw-card {
+  width: 240px;
+  height: 320px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #1d1d1f;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.3);
+  border: 4px solid #fff;
+  position: relative;
+}
+@media (min-width: 700px) {
+  .hb-random-winner .rw-card { width: 280px; height: 380px; }
+}
+.hb-random-winner .rw-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hb-random-winner .rw-meta {
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 320px;
+  padding: 0 16px;
+}
+.hb-random-winner .rw-kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+}
+.hb-random-winner .rw-title {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 26px;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.1;
+}
+.hb-random-winner .rw-region { font-size: 13px; color: rgba(255,255,255,0.65); }
+.hb-random-winner .rw-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hb-random-winner .rw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 100ms ease, opacity 120ms ease;
+}
+.hb-random-winner .rw-btn:active { transform: scale(0.96); }
+.hb-random-winner .rw-btn.primary { background: #fff; color: var(--fg); }
+.hb-random-winner .rw-btn.primary:hover { opacity: 0.95; }
+.hb-random-winner .rw-btn.ghost {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.22);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.hb-random-winner .rw-btn.ghost:hover { background: rgba(255,255,255,0.18); }
+
+.hb-random-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 10;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  -webkit-tap-highlight-color: transparent;
+  transition: background 120ms ease;
+}
+.hb-random-close:hover { background: rgba(255,255,255,0.22); }
+.hb-random-close svg { width: 18px; height: 18px; }
+
+/* === App rail (left-side nav, collapsible) === */
+.app-rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 64px;
+  z-index: 200;
+  background: rgba(250,250,250,0.86);
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
+  backdrop-filter: saturate(180%) blur(22px);
+  border-right: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  padding: 14px 10px;
+  gap: 2px;
+  transition: width 200ms cubic-bezier(.2,.7,.3,1);
+  isolation: isolate;
+}
+.app-rail.is-expanded { width: 240px; padding: 14px 12px; }
+
+/* Middle section scrolls; brand stays pinned at top, toggle pinned at bottom. */
+.app-rail .rail-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.08) transparent;
+  /* a touch of breathing room from the brand and the bottom toggle */
+  padding: 4px 2px;
+  margin: 0 -2px;
+}
+.app-rail .rail-scroll::-webkit-scrollbar { width: 4px; }
+.app-rail .rail-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 2px; }
+.app-rail .rail-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.18); }
+
+/* Section heading inside the rail (e.g. "Chapters") */
+.rail-section-head {
+  padding: 14px 12px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--soft);
+  white-space: nowrap;
+  overflow: hidden;
+  height: 32px;
+  display: flex;
+  align-items: flex-end;
+}
+.rail-section-head .label {
+  opacity: 0;
+  transition: opacity 120ms ease 30ms;
+}
+.app-rail.is-expanded .rail-section-head .label { opacity: 1; }
+
+/* Chapter row: small thumbnail avatar + label, used inside the Chapters
+ * section. Active chapter gets a tinted background. */
+.rail-chapter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 8px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 120ms ease, color 120ms ease;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.rail-chapter:hover { background: rgba(0,0,0,0.045); color: var(--fg); }
+.rail-chapter.is-current { background: var(--accent-soft); color: var(--accent); }
+.rail-chapter .rail-chapter-thumb {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--surface);
+  position: relative;
+}
+.rail-chapter .rail-chapter-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.rail-chapter .label {
+  opacity: 0;
+  transition: opacity 120ms ease 30ms;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-rail.is-expanded .rail-chapter .label { opacity: 1; }
+
+.app-rail .rail-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 8px;
+  margin-bottom: 6px;
+  text-decoration: none;
+  color: var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.app-rail .rail-brand img {
+  width: 28px; height: 28px;
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: 70% 45%;
+  flex-shrink: 0;
+}
+.app-rail .rail-brand .label {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transition: opacity 120ms ease 30ms;
+}
+.app-rail.is-expanded .rail-brand .label { opacity: 1; }
+
+.rail-divider {
+  height: 1px;
+  background: var(--hairline);
+  margin: 8px 4px;
+}
+/* Tight divider sits between Introduction and the regional chapters --
+ * just enough whitespace to set them apart without breaking the column. */
+.rail-divider-tight { margin: 4px 14px; opacity: 0.55; }
+
+.rail-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 120ms ease, color 120ms ease;
+  width: 100%;
+}
+.rail-item:hover { background: rgba(0,0,0,0.045); color: var(--fg); }
+.rail-item.is-current { background: var(--accent-soft); color: var(--accent); }
+.rail-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* Button user-agent styles add inline padding and centre text -- neutralise
+ * so the Random button lines up with the anchor-based items. */
+button.rail-item {
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: left;
+  font-size: 14px;
+}
+.rail-item svg {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  pointer-events: none;
+}
+.rail-item .label {
+  opacity: 0;
+  transition: opacity 120ms ease 30ms;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-rail.is-expanded .rail-item .label { opacity: 1; }
+.rail-item .rail-badge {
+  flex-shrink: 0;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  padding: 2px 7px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.4;
+  opacity: 0;
+  transition: opacity 120ms ease 30ms;
+}
+.app-rail.is-expanded .rail-item .rail-badge[data-on="1"] { opacity: 1; }
+/* Compact dot when collapsed and badge has a value */
+.rail-item .rail-dot {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  display: none;
+  margin-left: 22px;
+  margin-top: -10px;
+}
+.rail-item.has-count .rail-dot { display: block; }
+.app-rail.is-expanded .rail-item .rail-dot { display: none; }
+.rail-item-wrap { position: relative; }
+
+.rail-toggle {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.rail-toggle:hover { background: rgba(0,0,0,0.045); color: var(--fg); }
+.rail-toggle svg {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  transition: transform 220ms ease;
+}
+.app-rail.is-expanded .rail-toggle svg { transform: rotate(180deg); }
+.rail-toggle .label {
+  opacity: 0;
+  transition: opacity 120ms ease 30ms;
+}
+.app-rail.is-expanded .rail-toggle .label { opacity: 1; }
+
+/* The rail is position:fixed and overlays content. Body padding pushes
+ * everything (topbar brand, viewer, etc.) past the rail's right edge so
+ * nothing slides under it. The viewer's existing `margin: 0 auto` then
+ * centers within the remaining area between rail and right edge. */
+body.has-rail {
+  padding-left: 64px;
+  transition: padding-left 200ms cubic-bezier(.2,.7,.3,1);
+}
+body.has-rail.rail-expanded { padding-left: 240px; }
+
+/* Once the rail is the canonical nav, the page-specific topbar pills are
+ * redundant (Overview / Map view links are duplicated in the rail). */
+body.has-rail .topbar .pill,
+body.has-rail .topbar .hb-nav { display: none; }
+
+/* Mobile: rail becomes a slide-in drawer */
+.rail-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.32);
+  z-index: 199;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+.rail-backdrop.is-show { opacity: 1; pointer-events: auto; }
+
+.rail-burger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--hairline);
+  align-items: center;
+  justify-content: center;
+  color: var(--fg);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  font-family: inherit;
+}
+.rail-burger svg { width: 18px; height: 18px; }
+
+@media (max-width: 700px) {
+  body.has-rail { padding-left: 0; }
+  body.has-rail.rail-expanded { padding-left: 0; }
+  .app-rail {
+    transform: translateX(-100%);
+    transition: transform 240ms cubic-bezier(.2,.7,.3,1);
+    width: 240px;
+    padding: 14px 14px;
+  }
+  .app-rail.is-open { transform: translateX(0); }
+  .app-rail .rail-brand .label,
+  .app-rail .rail-item .label,
+  .app-rail .rail-toggle .label,
+  .app-rail .rail-chapter .label,
+  .app-rail .rail-section-head .label,
+  .app-rail .rail-item .rail-badge[data-on="1"] { opacity: 1; }
+  .rail-toggle { display: none; }  /* drawer always shows labels */
+  .rail-burger { display: inline-flex; }
+  .topbar { padding-left: 12px; }
+}
+
+/* === Social layer (favorites, extended nav, browse grid, saved page) === */
+
+/* Extended nav block injected into .topbar-right by social.js */
+.hb-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+@media (min-width: 700px) { .hb-nav { gap: 8px; } }
+
+/* Smaller pills than the existing .pill so 3-4 fit on mobile */
+.topbar .hb-pill {
+  position: relative;
+  padding: 0 10px;
+  height: 32px;
+  font-size: 12.5px;
+  -webkit-tap-highlight-color: transparent;
+}
+.topbar .hb-pill svg { width: 14px; height: 14px; }
+@media (min-width: 700px) {
+  .topbar .hb-pill { padding: 0 12px; height: 34px; font-size: 13px; }
+}
+.topbar .hb-pill.is-current {
+  background: var(--fg);
+  color: #fff;
+  border-color: var(--fg);
+}
+.topbar .hb-pill .hb-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+}
+.topbar .hb-pill[data-hb-link="saved"].is-current .hb-badge {
+  background: #fff;
+  color: var(--fg);
+}
+
+/* Heart button anchored to top-right of the spot card's white text panel */
+.slide-spot .sp-body { position: relative; }
+.hb-fav {
+  position: absolute;
+  top: 16px;
+  right: 60px;  /* sits to the left of the 3-dots menu in the top-right corner */
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface);
+  color: rgba(0,0,0,0.45);
+  cursor: pointer;
+  transition: transform 120ms ease, color 120ms ease, background 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (min-width: 760px) { .hb-fav { top: 20px; right: 64px; } }
+@media (min-width: 1100px) { .hb-fav { top: 24px; right: 68px; } }
+/* Match the menu button position so they line up at every breakpoint. */
+@media (min-width: 760px)  { .hb-spot-menu-btn { top: 18px; right: 20px; } }
+@media (min-width: 1100px) { .hb-spot-menu-btn { top: 22px; right: 24px; } }
+
+/* Reserve a clear lane on the kicker/title row so the absolute heart never
+ * sits on top of the type. The deck and body text flow full-width below. */
+.slide-spot .sp-kicker,
+.slide-spot .sp-title { padding-right: 48px; }
+.hb-fav svg { width: 20px; height: 20px; }
+.hb-fav:hover { transform: scale(1.06); color: #ff375f; }
+.hb-fav:active { transform: scale(0.92); }
+.hb-fav.is-on { color: #ff375f; }
+.hb-fav.is-on:hover { color: #ff375f; background: #fff; }
+@keyframes hb-pop { 0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
+.hb-fav.is-on { animation: hb-pop 220ms ease; }
+
+/* === Browse page (photo grid + filter strip) === */
+.hb-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 22px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+@media (min-width: 700px) { .hb-page { padding: 44px 40px 96px; gap: 28px; } }
+
+.hb-hero { display: flex; flex-direction: column; gap: 8px; }
+.hb-hero .kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+.hb-hero h1 {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0;
+  font-weight: 600;
+}
+.hb-hero p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+@media (min-width: 700px) {
+  .hb-hero h1 { font-size: 48px; letter-spacing: -0.035em; }
+  .hb-hero p { font-size: 17px; }
+}
+
+/* Filter strip · search field + chapter chips + count */
+.hb-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+@media (min-width: 700px) { .hb-filters { gap: 14px; } }
+
+.hb-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.hb-search svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.hb-search input {
+  width: 100%;
+  height: 44px;
+  padding: 0 44px 0 40px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.hb-search input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.hb-search .clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  display: none;
+  border-radius: 999px;
+}
+.hb-search .clear svg {
+  position: static;
+  transform: none;
+  width: 14px;
+  height: 14px;
+  color: inherit;
+}
+.hb-search.has-value .clear { display: grid; place-items: center; }
+.hb-search .clear:hover { background: var(--surface); color: var(--fg); }
+
+.hb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.hb-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: #fff;
+  color: var(--fg);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.hb-chip:hover { border-color: var(--hairline-strong); }
+.hb-chip .swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.hb-chip.is-on {
+  background: var(--fg);
+  color: #fff;
+  border-color: var(--fg);
+}
+.hb-chip.is-on .swatch { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.4); }
+.hb-chip .chip-count {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--soft);
+  margin-left: 2px;
+}
+.hb-chip.is-on .chip-count { color: rgba(255,255,255,0.65); }
+
+.hb-count {
+  font-size: 12.5px;
+  color: var(--muted);
+  letter-spacing: -0.005em;
+}
+.hb-count b { color: var(--fg); font-weight: 600; }
+
+/* Photo wall · CSS-Grid masonry with row spans driven from intrinsic image
+ * dimensions. Wide landscapes get .span-wide (2-column span) for a Pinterest
+ * mix of shapes. Spans are computed in JS once per layout pass; tiles remain
+ * hidden until then to avoid the unsized initial flash. */
+.hb-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 6px;
+  grid-auto-flow: dense;
+  gap: 8px;
+  visibility: hidden;
+}
+.hb-grid.is-ready { visibility: visible; }
+@media (min-width: 600px) { .hb-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; } }
+@media (min-width: 900px) { .hb-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; } }
+
+.hb-tile {
+  position: relative;
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--surface);
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--hairline);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.hb-tile.span-wide { grid-column: span 2; }
+.hb-tile.span-tall { grid-column: span 2; }
+.hb-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+.hb-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 500ms ease;
+}
+.hb-tile:hover img { transform: scale(1.03); }
+
+/* Hover-reveal title: bottom gradient + name fade in on pointer hover.
+ * Touch devices have no hover, so the overlay shows on focus-within and
+ * (briefly) on tap via the :active state. */
+.hb-tile .hb-tile-name {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  padding: 28px 12px 10px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.78) 100%);
+  color: #fff;
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
+}
+.hb-tile:hover .hb-tile-name,
+.hb-tile:focus-within .hb-tile-name { opacity: 1; transform: translateY(0); }
+@media (hover: none) {
+  /* Touch: keep the name subtle but always present so users know what they're tapping */
+  .hb-tile .hb-tile-name { opacity: 1; transform: translateY(0); padding: 36px 12px 10px; }
+}
+
+/* TODO placeholder tile · spots without a photo yet (extras_entry rows or
+   future spots whose source image is still missing). Distinct from real
+   tiles so the user can pick them out at a glance. */
+.hb-tile.hb-tile-todo {
+  background: #1d1d1f;
+  position: relative;
+  overflow: hidden;
+}
+.hb-tile.hb-tile-todo .hb-tile-todo-fill {
+  position: absolute; inset: 0;
+  opacity: 0.32;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255,255,255,0.07) 0,
+    rgba(255,255,255,0.07) 6px,
+    transparent 6px,
+    transparent 14px
+  );
+}
+.hb-tile.hb-tile-todo .hb-tile-name {
+  opacity: 1;
+  transform: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.55) 100%);
+  color: #f7f7fa;
+  padding-top: 60px;
+}
+.hb-tile.hb-tile-todo .hb-tile-todo-tag {
+  position: absolute;
+  top: 8px; left: 8px;
+  background: rgba(255,255,255,0.92);
+  color: #1d1d1f;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* Heart on the photo wall · light pill so it reads on any image */
+.hb-tile .hb-fav {
+  width: 30px;
+  height: 30px;
+  top: 8px;
+  right: 8px;
+  background: rgba(255,255,255,0.88);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+  color: rgba(0,0,0,0.55);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 150ms ease, transform 150ms ease, color 120ms ease;
+}
+.hb-tile .hb-fav svg { width: 15px; height: 15px; }
+.hb-tile:hover .hb-fav,
+.hb-tile:focus-within .hb-fav,
+.hb-tile .hb-fav.is-on { opacity: 1; transform: scale(1); }
+.hb-tile .hb-fav:hover { color: #ff375f; background: #fff; }
+.hb-tile .hb-fav.is-on { color: #ff375f; background: #fff; }
+/* Touch devices have no hover · always show the heart so it's tappable */
+@media (hover: none) {
+  .hb-tile .hb-fav { opacity: 1; transform: scale(1); }
+}
+
+.hb-empty {
+  text-align: center;
+  padding: 56px 20px 64px;
+  color: var(--muted);
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+/* `display: flex` above wins specificity-wise over the default
+ * `[hidden] { display: none }`, so the empty-state used to render even
+ * when JS set hidden=true. Restore the expected behavior. */
+.hb-empty[hidden] { display: none; }
+.hb-empty svg { width: 36px; height: 36px; color: var(--soft); }
+.hb-empty h2 {
+  margin: 0;
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 22px;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+  font-weight: 600;
+}
+.hb-empty p { margin: 0; max-width: 380px; line-height: 1.5; font-size: 14px; }
+.hb-empty a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: var(--fg);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Saved page · group heading per chapter */
+.hb-group { display: flex; flex-direction: column; gap: 14px; }
+/* Breathing room between consecutive region groups (e.g. between Central
+ * Switzerland's grid and the Eastern Switzerland header below it).
+ * Without this the next header sat tight on top of the previous group's
+ * card edges. */
+.hb-group + .hb-group { margin-top: 28px; }
+.hb-group-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 4px 6px;
+  border-bottom: 1px solid var(--hairline);
+}
+.hb-group-head h2 {
+  margin: 0;
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+/* Spot-count chip on the right side of the section header. The plain
+ * grey text was floating disconnected; a small pill anchors it. */
+.hb-group-head .meta {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+/* Saved-page card grid: fixed-aspect tiles with a white info panel below
+ * (mirrors the home-page chapter cards rather than the masonry photo wall).
+ * Names are always visible here -- saves should never be unlabeled. */
+.hb-saved-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 600px) { .hb-saved-grid { grid-template-columns: 1fr 1fr; gap: 16px; } }
+@media (min-width: 900px) { .hb-saved-grid { grid-template-columns: 1fr 1fr 1fr; } }
+@media (min-width: 1200px) { .hb-saved-grid { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+
+.hb-saved-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--fg);
+  background: var(--paper);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--hairline);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.hb-saved-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+}
+.hb-saved-tile .photo {
+  aspect-ratio: 1 / 1;
+  background: var(--surface);
+  overflow: hidden;
+  position: relative;
+}
+.hb-saved-tile .photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms ease;
+}
+.hb-saved-tile:hover .photo img { transform: scale(1.04); }
+.hb-saved-tile .body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.hb-saved-tile .name {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hb-saved-tile .meta {
+  font-size: 12px;
+  color: var(--muted);
+}
+.hb-saved-tile .hb-fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.95);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #ff375f;
+  border: 0;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 2;
+  transition: transform 120ms ease;
+}
+.hb-saved-tile .hb-fav:hover { transform: scale(1.06); }
+.hb-saved-tile .hb-fav:active { transform: scale(0.92); }
+.hb-saved-tile .hb-fav svg { width: 16px; height: 16px; }
+
 /* === Print / PDF export === */
 @media print {
   body { background: #fff; }
@@ -1134,4 +3122,5 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
     grid-template-columns: 1fr !important;
   }
   .slide:last-child { page-break-after: auto; }
+  .hb-fav { display: none !important; }
 }

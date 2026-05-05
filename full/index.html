@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>Swiss Hidden Gems · Hikebeast</title>
+<title>Hidden Gems · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="referrer" content="no-referrer" />
@@ -14,117 +14,78 @@
 </head>
 <body>
 
-<div class="topbar">
-  <a class="brand" href="../">
-    <img src="../images/avatar.jpg" alt="" />
-    <span>Hikebeast · Hidden Gems</span>
-  </a>
-  <span class="crumb">Full edition</span>
-  <div class="topbar-right">
-    <a class="pill" href="map/index.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-      <span class="label-sm">Map view</span>
+<header class="home-topbar">
+  <label class="home-search">
+    <input id="homeSearch" type="search" placeholder="Search spots, regions, themes…" autocomplete="off" />
+    <svg class="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+  </label>
+  <div class="home-topbar-actions">
+    <a class="icon-btn" href="saved/" aria-label="Liked spots" title="Liked">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
     </a>
+    <span class="home-avatar"><img src="../images/avatar.jpg" alt="" /></span>
   </div>
-</div>
+</header>
 
-<main class="home-main">
+<main class="home-v2">
 
-  <header class="home-hero">
-    <p class="kicker">Swiss Hidden Gems</p>
-    <h1>Read it page by page.</h1>
-    <p class="lead">129 spots across 7 regions. Pick a chapter.</p>
-  </header>
+  <h1 class="page-title">Home</h1>
 
-  <section>
-    <div class="section-head">
-      <h2>Chapters</h2>
-      <span class="meta">8 sections · all open</span>
+  <section class="home-feature">
+    <article class="feature-card" id="featureCard">
+      <div class="feature-text">
+        <span class="feature-kicker">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L14 8 L20 9 L15.5 13 L17 19 L12 16 L7 19 L8.5 13 L4 9 L10 8 Z"/></svg>
+          <span>Featured</span>
+        </span>
+        <h2 class="feature-title" id="featureTitle">…</h2>
+        <p class="feature-deck" id="featureDeck">…</p>
+        <a class="feature-cta" id="featureCta" href="#">
+          <span class="play-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+          </span>
+          <span>Open spot</span>
+        </a>
+      </div>
+      <div class="feature-photo">
+        <img id="featureImg" src="" alt="" />
+        <div class="feature-dots" id="featureDots"></div>
+      </div>
+    </article>
+    <aside class="home-up-next" id="upNext"></aside>
+  </section>
+
+  <section class="home-row">
+    <div class="row-head">
+      <h2>For you</h2>
+      <a class="see-all" href="swipe/">
+        <span>See all</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
     </div>
-    <div class="chapter-cards">
+    <div class="row-cards" id="rowForYou"></div>
+  </section>
 
-      <a class="cc" href="intro/index.html">
-        <div class="cc-photo">
-          <span class="cc-num">Front matter</span>
-          <img src="img/page_05.jpg" alt="Front matter" />
-        </div>
-        <div class="cc-body">
-          <div class="cc-name">Before you go</div>
-          <div class="cc-meta">Cover · Camping · Map · Top 6</div>
-        </div>
+  <section class="home-row">
+    <div class="row-head">
+      <h2>Famous spots that deliver</h2>
+      <a class="see-all" href="intro/index.html#top-six">
+        <span>See all</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
-
-      <a class="cc" href="central/index.html">
-        <div class="cc-photo">
-          <img src="img/tannhorn.jpg" alt="Central Switzerland" />
-        </div>
-        <div class="cc-body">
-          <div class="cc-name">Central Switzerland</div>
-          <div class="cc-meta">27 spots</div>
-        </div>
-      </a>
-
-      <a class="cc" href="valais/index.html">
-        <div class="cc-photo">
-          <img src="img/ig_zermatt_matterhorn.jpg" alt="Valais" />
-        </div>
-        <div class="cc-body">
-          <div class="cc-name">Valais</div>
-          <div class="cc-meta">31 spots</div>
-        </div>
-      </a>
-
-      <a class="cc" href="fribourg/index.html">
-        <div class="cc-photo">
-          <img src="img/fribourg_cover.jpg" alt="Fribourg" />
-        </div>
-        <div class="cc-body">
-          <div class="cc-name">Fribourg</div>
-          <div class="cc-meta">9 spots</div>
-        </div>
-      </a>
-
-      <a class="cc" href="western/index.html">
-        <div class="cc-photo">
-          <img src="img/cap_au_moine.jpg" alt="Western Switzerland" />
-        </div>
-        <div class="cc-body">
-          <div class="cc-name">Western Switzerland</div>
-          <div class="cc-meta">17 spots</div>
-        </div>
-      </a>
-
-      <a class="cc" href="eastern/index.html">
-        <div class="cc-photo">
-          <img src="img/eastern-thumb.jpg" alt="Eastern Switzerland" />
-        </div>
-        <div class="cc-body">
-          <div class="cc-name">Eastern Switzerland</div>
-          <div class="cc-meta">24 spots</div>
-        </div>
-      </a>
-
-      <a class="cc" href="ticino/index.html">
-        <div class="cc-photo">
-          <img src="img/ticino_cover.jpg" alt="Ticino" />
-        </div>
-        <div class="cc-body">
-          <div class="cc-name">Ticino</div>
-          <div class="cc-meta">7 spots</div>
-        </div>
-      </a>
-
-      <a class="cc" href="beyond/index.html">
-        <div class="cc-photo">
-          <img src="img/les_cheserys.jpg" alt="Beyond the Border" />
-        </div>
-        <div class="cc-body">
-          <div class="cc-name">Beyond the Border</div>
-          <div class="cc-meta">14 spots</div>
-        </div>
-      </a>
-
     </div>
+    <div class="row-cards" id="rowFamous"></div>
+  </section>
+
+  <section class="home-row">
+    <div class="row-head">
+      <h2>Hidden gems · Leon's picks</h2>
+      <a class="see-all" href="browse/">
+        <span>See all</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
+    <div class="row-cards" id="rowGems"></div>
   </section>
 
 </main>
@@ -134,6 +95,267 @@
   <a href="../privacy.html">Privacy</a><span class="sep">·</span>
   © Hikebeast
 </footer>
+
+<script src="map/spots-data.js"></script>
+<script src="img/thumbs/dimensions.js"></script>
+<script src="lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
+<script src="social.js"></script>
+<script>
+(() => {
+  // Read the catalog through the unified HB.spots store. Sidecar-seeded
+  // synchronously, replaced reactively when Convex's spots:list arrives.
+  // Placeholder spots (zdk_placeholder.jpg) are filtered out everywhere
+  // they'd render as near-black tiles -- featured, up-next, row cards.
+  let SPOTS = [];
+  function refreshSpots() {
+    SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
+  }
+  refreshSpots();
+  const LEGEND = window.LEGEND || [];
+  const REGION_NAME = Object.fromEntries(LEGEND.map(c => [c.number, c.name]));
+
+  function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  // Curated lists pulled from the editorial Top 6 sections in /full/intro/.
+  // Names must match window.SPOTS entry titles; if not, the card is silently
+  // skipped so a typo here can't crash the page.
+  const CURATED_FAMOUS = [
+    'Schäfler', 'Oeschinensee', 'Seealpsee', 'Fälensee', 'Saxer Lücke', 'Riffelsee',
+  ];
+  const CURATED_GEMS = [
+    'Batöni Wasserfallarena', 'Tannhorn', 'Jöriseen', 'Pic de Jallouvre', 'Lac de Cheserys', 'Fulberg',
+  ];
+  const findByTitle = (t) => SPOTS.find(s => s.title === t);
+  let famous = [];
+  let gems = [];
+  function refreshCuratedPools() {
+    famous = CURATED_FAMOUS.map(findByTitle).filter(Boolean);
+    gems   = CURATED_GEMS.map(findByTitle).filter(Boolean);
+  }
+  refreshCuratedPools();
+
+  // === Featured hero (rotates through curated pool) ===
+  // The Introduction card is always first so a fresh visitor's eye lands on
+  // "read this before the rest of the guide". After it cycles past, we
+  // alternate between the famous and hidden-gems pools.
+  const introCard = {
+    title: 'Introduction',
+    kicker: 'Before you go',
+    image: 'page_05.jpg',
+    href: 'intro/index.html',
+    chapter_id: 'intro',
+    isIntro: true,
+  };
+  let featurePool = [introCard, ...famous, ...gems];
+  let featureIdx = 0;  // start with Introduction every visit
+
+  const featureTitle = document.getElementById('featureTitle');
+  const featureDeck  = document.getElementById('featureDeck');
+  const featureImg   = document.getElementById('featureImg');
+  const featureCta   = document.getElementById('featureCta');
+  const featureDots  = document.getElementById('featureDots');
+  const featureCard  = document.getElementById('featureCard');
+
+  // The featured photo crossfades between spots: we fade the current image
+  // out, swap the src once it's transparent, then fade back in. This keeps
+  // the box height locked and avoids a flicker when the new image hasn't
+  // decoded yet.
+  let featureSwapping = false;
+  function paintFeature(spot, idx) {
+    if (!spot) return;
+    featureTitle.textContent = spot.title;
+    if (spot.isIntro) {
+      featureDeck.textContent = 'Cover, camping rules, top picks · the front matter of the guide.';
+      featureCta.href = 'intro/index.html';
+      featureCta.querySelector('span:last-child').textContent = 'Read the intro';
+    } else {
+      const kicker = window.HB.singularKicker(spot.kicker || '');
+      const region = REGION_NAME[spot.chapter] || spot.chapter_id;
+      featureDeck.textContent = kicker ? `${kicker} · ${region}` : region;
+      featureCta.href = spot.href.replace(/^\.\.\//, '');
+      featureCta.querySelector('span:last-child').textContent = 'Open spot';
+    }
+    featureDots.innerHTML = featurePool.map((_, i) =>
+      `<span class="${i === idx ? 'is-on' : ''}"></span>`
+    ).join('');
+    featureCard.dataset.spotKey = spot.isIntro ? '' : (window.HB.spotKey(spot) || '');
+
+    // Hero uses the full-resolution source (1800w) so it stays sharp on
+    // desktop fullscreen where the photo column reaches ~1100px CSS / 2200px
+    // device pixels. The row cards and up-next thumbs stay on the 1000w
+    // mid-tier since they're rendered much smaller.
+    const heroAttrs = window.HB.photoAttrs({
+      photoId: spot.imagePhotoId, image: spot.image,
+      width: 2800, prefix: '', sizes: '100vw',
+    });
+    if (!featureImg.src) {
+      featureImg.src = heroAttrs.src;
+      if (heroAttrs.srcset) { featureImg.srcset = heroAttrs.srcset; featureImg.sizes = heroAttrs.sizes; }
+      featureImg.alt = spot.title;
+      return;
+    }
+    if (featureSwapping) return;
+    featureSwapping = true;
+    featureImg.classList.add('is-fading');
+    setTimeout(() => {
+      const next = new Image();
+      next.onload = () => {
+        featureImg.src = heroAttrs.src;
+        if (heroAttrs.srcset) { featureImg.srcset = heroAttrs.srcset; featureImg.sizes = heroAttrs.sizes; }
+        else { featureImg.removeAttribute('srcset'); featureImg.removeAttribute('sizes'); }
+        featureImg.alt = spot.title;
+        // Tiny delay so the new src has a paint frame before we fade in.
+        requestAnimationFrame(() => {
+          featureImg.classList.remove('is-fading');
+          featureSwapping = false;
+        });
+      };
+      next.onerror = () => { featureImg.classList.remove('is-fading'); featureSwapping = false; };
+      next.src = heroAttrs.src;
+    }, 220);
+  }
+  if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
+
+  // Slower cadence than YouTube's typical 5s -- 9s gives readers time to
+  // actually parse the title before the next photo lands. Paused on
+  // hidden tabs to save battery.
+  const FEATURE_INTERVAL = 9000;
+  let featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
+  document.addEventListener('visibilitychange', () => {
+    clearInterval(featureTimer);
+    if (!document.hidden) featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
+  });
+  function advanceFeature() {
+    if (!featurePool.length) return;
+    featureIdx = (featureIdx + 1) % featurePool.length;
+    paintFeature(featurePool[featureIdx], featureIdx);
+  }
+  // Tap the photo to advance manually
+  document.querySelector('.feature-photo')?.addEventListener('click', advanceFeature);
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // === "Up next" stack to the right of the hero (4 cards) ===
+  const upNextEl = document.getElementById('upNext');
+  function buildUpNext() {
+    const decided = new Set([
+      ...window.HB.favorites.list(),
+      ...JSON.parse(localStorage.getItem('hb:skipped:v1') || '[]'),
+    ]);
+    const undecided = SPOTS.filter(s => !decided.has(window.HB.spotKey(s)));
+    const pool = undecided.length >= 4 ? undecided : SPOTS;
+    const picks = shuffle(pool).slice(0, 4);
+    upNextEl.innerHTML = picks.map(spot => {
+      const region = REGION_NAME[spot.chapter] || spot.chapter_id;
+      const kicker = window.HB.singularKicker(spot.kicker || '');
+      const a = window.HB.photoAttrs({
+        photoId: spot.imagePhotoId, image: spot.image,
+        width: 400, prefix: '', sizes: '160px',
+      });
+      const ss = a.srcset ? ` srcset="${esc(a.srcset)}" sizes="${esc(a.sizes)}"` : '';
+      return `
+        <a class="up-next-card" href="${esc(spot.href.replace(/^\.\.\//, ''))}">
+          <span class="photo"><img src="${esc(a.src)}"${ss} alt="" loading="lazy" /></span>
+          <span class="body">
+            <span class="name">${esc(spot.title)}</span>
+            <span class="meta">${esc(region)}</span>
+            ${kicker ? `<span class="duration">${esc(kicker)}</span>` : ''}
+          </span>
+        </a>
+      `;
+    }).join('');
+  }
+  buildUpNext();
+
+  // === Card row builder (For You / Famous / Gems) ===
+  function rowCard(spot) {
+    const region = REGION_NAME[spot.chapter] || spot.chapter_id;
+    const kicker = window.HB.singularKicker(spot.kicker || '');
+    const href = spot.href.replace(/^\.\.\//, '');
+    const a = window.HB.photoAttrs({
+      photoId: spot.imagePhotoId, image: spot.image,
+      width: 1000, prefix: '',
+      sizes: '(min-width: 1000px) 280px, 45vw',
+    });
+    const ss = a.srcset ? ` srcset="${esc(a.srcset)}" sizes="${esc(a.sizes)}"` : '';
+    return `
+      <a class="row-card" href="${esc(href)}">
+        <div class="photo">
+          <img src="${esc(a.src)}"${ss} alt="${esc(spot.title)}" loading="lazy" />
+          ${kicker ? `<span class="badge">${esc(kicker)}</span>` : ''}
+        </div>
+        <div class="body">
+          <span class="channel"><img src="../images/avatar.jpg" alt="" /></span>
+          <div class="text">
+            <div class="name">${esc(spot.title)}</div>
+            <div class="channel-name">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L14 8 L20 9 L15.5 13 L17 19 L12 16 L7 19 L8.5 13 L4 9 L10 8 Z"/></svg>
+              <span>Hikebeast</span>
+            </div>
+            <div class="meta">${esc(region)}</div>
+          </div>
+        </div>
+      </a>
+    `;
+  }
+
+  function buildForYou() {
+    const decided = new Set([
+      ...window.HB.favorites.list(),
+      ...JSON.parse(localStorage.getItem('hb:skipped:v1') || '[]'),
+    ]);
+    const undecided = SPOTS.filter(s => !decided.has(window.HB.spotKey(s)));
+    const pool = undecided.length >= 4 ? undecided : SPOTS;
+    document.getElementById('rowForYou').innerHTML = shuffle(pool).slice(0, 4).map(rowCard).join('');
+  }
+  function buildCurated(id, list) {
+    const el = document.getElementById(id);
+    if (!list.length) { el.innerHTML = ''; return; }
+    el.innerHTML = list.slice(0, 4).map(rowCard).join('');
+  }
+
+  buildForYou();
+  buildCurated('rowFamous', famous);
+  buildCurated('rowGems', gems);
+
+  // === Search · Enter jumps to /full/browse/?q=... ===
+  const searchInput = document.getElementById('homeSearch');
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    const q = searchInput.value.trim();
+    location.href = q ? `browse/?q=${encodeURIComponent(q)}` : 'browse/';
+  });
+
+  // Re-render rows if favorites/yes/no change in another tab
+  window.HB.favorites.subscribe(() => { buildForYou(); buildUpNext(); });
+  window.addEventListener('storage', (e) => {
+    if (e.key && (e.key.startsWith('hb:'))) { buildForYou(); buildUpNext(); }
+  });
+
+  // When Convex pushes an update (admin edits a spot, photo published,
+  // etc.), refresh every surface so the page reflects new data without
+  // a reload. Featured rotation index is preserved.
+  window.HB.spots.subscribe(() => {
+    refreshSpots();
+    refreshCuratedPools();
+    featurePool = [introCard, ...famous, ...gems];
+    if (featureIdx >= featurePool.length) featureIdx = 0;
+    if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
+    buildUpNext();
+    buildForYou();
+    buildCurated('rowFamous', famous);
+    buildCurated('rowGems', gems);
+  });
+})();
+</script>
 
 </body>
 </html>

@@ -11,3 +11,7 @@ node_modules/
 # local-only thumbnail concept gallery
 /thumbnails/
 .env*.local
+
+# Convex auto-generates types in this dir on every dev push -- regenerated
+# from convex/schema.ts and convex/*.ts, not worth tracking.
+convex/_generated/

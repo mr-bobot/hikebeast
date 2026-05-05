@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Hikebeast — Hidden Gems of Switzerland</name>
+  <description>All catalogued spots, grouped by chapter.</description>
+  <Style id="chapter-central">
+    <IconStyle>
+      <color>ff7aa6b0</color>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="chapter-valais">
+    <IconStyle>
+      <color>ffbfb8eb</color>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="chapter-fribourg">
+    <IconStyle>
+      <color>ffd1d9d9</color>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="chapter-western">
+    <IconStyle>
+      <color>ff9ee0cc</color>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="chapter-eastern">
+    <IconStyle>
+      <color>ffa8b57d</color>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="chapter-ticino">
+    <IconStyle>
+      <color>ffba8594</color>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="chapter-beyond">
+    <IconStyle>
+      <color>ff595959</color>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Folder>
+    <name>01 · Central</name>
+    <Placemark>
+      <name>Aare Gorge</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>GORGES</i><br/>Aareschlucht. One of the most impressive canyons in Switzerland. A narrow bridge runs right along the gorge wall.<br/><b>Region:</b> Meiringen, Central Switzerland<br/><b>Access:</b> Paid entry<br/><b>Effort:</b> Easy<br/><b>Best light:</b> When cloudy<br/><b>Tags:</b> Gorge<br/><b>Wild camping:</b> forbidden — Aareschlucht is a paid commercial gorge with closing hours; wild camping not possible.<br/><a href="https://www.google.com/maps/place/Aareschlucht/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f8f018625b21f:0x6bc0f90b56e9ba0e!8m2!3d46.7192366!4d8.2122009!16s%2Fm%2F0h3xs_f">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.2122009,46.7192366,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>ÄLLGÄU LÜCKE</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[Saddle on the Hardergrat ridge between Brienzer Rothorn and Tannhorn. Less obvious than the named summits, same view.<br/><a href="https://www.google.com/maps/place/%C3%84llg%C3%A4u+L%C3%BCcke/@46.7659,7.97027,17z/data=!3m1!4b1!4m6!3m5!1s0x478fbdf20727d9a1:0x97ca704ad364a27d!8m2!3d46.7659!4d7.97027">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.97027,46.7659,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Augstmatthorn</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>RIDGES</i><br/>Ridge view over Brienzersee. Same trail as the Hardergrat, but you can sneak in from the back.<br/><b>Region:</b> Habkern, Central Switzerland<br/><b>Access:</b> 2h hike from Lombachalp<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Anytime<br/><b>Tags:</b> Ridge<br/><b>Wild camping:</b> restricted — BLN, above tree line; tolerated single-night.<br/><a href="https://www.google.com/maps/place/Augstmatthorn/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd01d3aab78b:0x80ca6ccdfe2dbfad!8m2!3d46.7422263!4d7.9286089!16s%2Fm%2F04mym9q">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.9286089,46.7422263,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Bachalpsee</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>LAKES</i><br/>Mountain lake above Grindelwald with a clean reflection of the Schreckhorn. Cable car plus a 45 minute walk.<br/><b>Region:</b> Grindelwald, Central Switzerland<br/><b>Access:</b> Firstbahn cable car + 45 min hike<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Anytime, mornings for reflection<br/><b>Tags:</b> Lake<br/><b>Wild camping:</b> restricted — UNESCO Jungfrau-Aletsch buffer + heavily touristed. Tolerated only above tree line, well away from the lake and the First infrastructure.<br/><a href="https://www.google.com/maps/place/Bachalpsee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f99a2dab57f55:0x2fe44c469bb38461!8m2!3d46.669444!4d8.023333!16s%2Fm%2F027xf5b">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.023333,46.669444,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Brienzer Rothorn</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>SUMMITS</i><br/>The peak above Brienz. Cable car to the top, and a camp lake below the summit that almost nobody photographs right.<br/><b>Region:</b> Brienz, Central Switzerland<br/><b>Access:</b> Cog railway or cable car<br/><b>Effort:</b> Easy to summit<br/><b>Best light:</b> Evening, still wind<br/><b>Tags:</b> Summit<br/><b>Wild camping:</b> restricted — BLN; tolerated above tree line on the ridge, away from the steam-train summit station.<br/><a href="https://www.google.com/maps/place/Brienzer+Rothorn/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9430780b2d07:0x617f3f41f172a596!8m2!3d46.7871!4d8.04701!16zL20vMDJfZGhs">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.04701,46.7871,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Engstligen Falls</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>WATERFALLS</i><br/>Two-tier falls off the Engstligenalp plateau above Adelboden. Overcast weather is actually the flex here.<br/><b>Region:</b> Adelboden, Central Switzerland<br/><b>Access:</b> Cable car + short walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> When cloudy<br/><b>Tags:</b> Waterfall<br/><b>Wild camping:</b> discouraged — Falls themselves are at 1,400 m in the BLN landscape &quot;Engstligenalp und Entschligefäll&quot;; wild camping at the falls is not allowed. Above on Engstligenalp (1,950 m): tolerated single-night.<br/><a href="https://www.google.com/maps/place/Engstligenf%C3%A4lle+Adelboden/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f0223cdd45025:0x8dd2572eba113b9e!8m2!3d46.4539395!4d7.5607365!16zL20vMGZfZDM5">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.5607365,46.4539395,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Fronalpstock</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>VIEWPOINTS</i><br/>Lake Lucerne laid out below, sunset turning the whole basin pink. Cable car up from Morschach, a short walk to the bench.<br/><b>Region:</b> Morschach, Central Switzerland<br/><b>Access:</b> Cable car + 10 min walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunset<br/><b>Tags:</b> Viewpoint<br/><b>Wild camping:</b> restricted — Mythenregion (SZ): tolerated single-night above tree line, away from the summit restaurant.<br/><a href="https://www.google.com/maps/place/Fronalpstock/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47854ff532352c5f:0xc8fa9f26d0331387!8m2!3d46.9682209!4d8.6372684!16s%2Fm%2F04ldsrd">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.6372684,46.9682209,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Fulberg</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>HIDDEN GEMS</i><br/>A ridge hike above the Grimsel region that almost nobody does. Wide open, quiet, and the photo pays for the climb.<br/><b>Region:</b> Grimsel, Central Switzerland<br/><b>Access:</b> Drive + ridge hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Late afternoon or sunset<br/><b>Wild camping:</b> restricted — Klewenalp area (NW): tolerated single-night above tree line.<br/><a href="https://www.google.com/maps/place/Fulberg/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47855a4cd1cac605:0x503f5c18f857fe20!8m2!3d46.9352224!4d8.5397221!16s%2Fg%2F11cjgjd5nh">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.5397221,46.9352224,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Gelmerbahn</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>CABLE CARS</i><br/>The ride up. Cinematic enough to go viral on its own. 106% gradient at the steepest section.<br/><b>Region:</b> Haslital, Central Switzerland<br/><b>Access:</b> Funicular from base<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Any time<br/><b>Tags:</b> Cable car<br/><b>Wild camping:</b> discouraged — Funicular base station at ~1,400 m, below tree line, near road and parking. Not a wild-camping spot; use the paid car park rules or the campsite in Innertkirchen.<br/><a href="https://www.google.com/maps/place/Gelmerbahn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f875bae1b82fb:0xece15aab211b8f11!8m2!3d46.6136385!4d8.3085363!16s%2Fm%2F0nbtnrh">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.3085363,46.6136385,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Gelmersee</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>GLACIER LAKES</i><br/>Easy to reach, and the funicular that gets you there is one of the steepest in the world. A photo spot in itself.<br/><b>Region:</b> Haslital, Central Switzerland<br/><b>Access:</b> Funicular (summer only)<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Morning<br/><b>Tags:</b> Glacier lake<br/><b>Wild camping:</b> restricted — Reservoir with tolerated single-night bivouac above tree line on the surrounding ridges. Avoid the dam infrastructure.<br/><a href="https://www.google.com/maps/place/Gelmersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47857df2744e7e09:0xeb6bf0e43466b46f!8m2!3d46.615792!4d8.3302012!16s%2Fm%2F02qw9z3">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.3302012,46.615792,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Grindelwald</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>VILLAGES</i><br/>The village at the foot of the Eiger. Easy by car, and the spring meadows under the north face do most of the work.<br/><b>Region:</b> Grindelwald, Central Switzerland<br/><b>Access:</b> Drive or train<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Spring, sunset<br/><b>Tags:</b> Village<br/><b>Wild camping:</b> discouraged — Village + private agricultural land; wild camping not allowed in the basin. Use a campsite (Eigernordwand, Gletscherdorf).<br/><a href="https://www.google.com/maps/place/Grindelwald/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9eab18c79217:0xbfaa5c0f42972f65!8m2!3d46.624164!4d8.0413962!16zL20vMDJ3bHA3">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.0413962,46.624164,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Guttannen Valley</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>CAMPER SPOTS</i><br/>Quiet, scenic, easy to park in for the night. A sleeper base camp for the Grimsel and Gelmer runs.<br/><b>Region:</b> Innertkirchen, Central Switzerland<br/><b>Access:</b> By car<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Any time<br/><b>Tags:</b> Camping<br/><b>Wild camping:</b> restricted — Grimsel region, BE: tolerated above tree line; valley floor has fed. game-reserve fragments to avoid.<br/><a href="https://www.google.com/maps/place/3864+Guttannen/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f866862eefd51:0x6187a636359a2900!8m2!3d46.6552082!4d8.2892297!16zL20vMGRqY2wx">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.2892297,46.6552082,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Hardergrat Trail</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>RIDGES</i><br/>The big one. Twelve hours along a knife-edge ridge from Brienzer Rothorn to Harder Kulm, no water the whole way.<br/><b>Region:</b> Brienz, Central Switzerland<br/><b>Access:</b> Cable car + full day hike<br/><b>Effort:</b> Hard. No water<br/><b>Best light:</b> All day<br/><b>Tags:</b> Ridge<br/><b>Wild camping:</b> restricted — Long ridge trail above tree line; bivouac tolerated single-night. Note: water is scarce, the ridge is exposed in storms.<br/><a href="https://www.google.com/maps/place/Hardergrat/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd87929ceb03:0x23146e2f469c639f!8m2!3d46.7239488!4d7.9028922!16s%2Fg%2F11j_vg0hyr">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.9028922,46.7239488,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Iffigfalle</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>WATERFALLS</i><br/>Above Lenk, best in May and June when snowmelt pushes the falls into their fullest.<br/><b>Region:</b> Lenk, Central Switzerland<br/><b>Access:</b> Drive + short walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> May to June<br/><b>Tags:</b> Waterfall<br/><b>Wild camping:</b> restricted — Lenk/Iffigsee area, BLN landscape. Tolerated above tree line near Iffigsee (~2,065 m); not at the falls themselves.<br/><a href="https://www.google.com/maps/place/Iffigf%C3%A4lle/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee33f74c09235:0xaedf674a739c34dd!8m2!3d46.4118!4d7.44306!16s%2Fg%2F121_hshp">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.44306,46.4118,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Iseltwald</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>VILLAGES</i><br/>The Bridgerton chapel pier on the south shore of Brienzersee. Famous, crowded, but the village around it is the real reason to come.<br/><b>Region:</b> Brienzersee, Central Switzerland<br/><b>Access:</b> Drive or boat from Interlaken<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Anytime<br/><b>Tags:</b> Village<br/><b>Wild camping:</b> discouraged — Lake Brienz shoreline village (Bonfire-Bridgerton fame): private property, dense tourism, wild camping not allowed.<br/><a href="https://www.google.com/maps/place/3807+Iseltwald/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd541724c75b:0xdafefc9fa4a5f96a!8m2!3d46.7115858!4d7.9642999!16zL20vMDMwaDZz">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.9642999,46.7115858,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Lake Lucerne</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>LAKES</i><br/>Vierwaldstättersee. The lake that runs through half of Central Switzerland, with fingers that disappear between the cliffs.<br/><b>Region:</b> Central Switzerland<br/><b>Access:</b> Train, boat, or cable car<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Winter sunrise<br/><b>Tags:</b> Lake<br/><b>Wild camping:</b> discouraged — Lake-shore (Bürgenstock area) is private/touristed; wild camping not allowed. Use a campsite.<br/><a href="https://www.google.com/maps/place/Vierwaldst%C3%A4ttersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47855823936105cf:0xa60b34b5c10b1570!8m2!3d47.0136401!4d8.4371598!16zL20vMDFka2M1">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.4371598,47.0136401,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Lake Thun Road</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>ROADS</i><br/>A short stretch of lakeside road where the cliffs come down to the water. Wait for the right car to drive by.<br/><b>Region:</b> Lake Thun, Central Switzerland<br/><b>Access:</b> Drive<br/><b>Effort:</b> Easy<br/><b>Best light:</b> When rainy or cloudy<br/><b>Tags:</b> Road<br/><b>Wild camping:</b> discouraged — Lake Thun north shore: private property and roadside; wild camping not allowed in usable spots.<br/><a href="https://www.google.com/maps/place/Thunersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fae3554ddf6eb:0xc692ca79d2500aea!8m2!3d46.6958354!4d7.7212158!16zL20vMDJoX2t3">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.7212158,46.6958354,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Lauterbrunnen</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>VALLEYS</i><br/>The valley everyone knows. Cliffs, waterfalls, the Staubbach falling 300 metres straight off the wall. Yes, it is still worth the visit.<br/><b>Region:</b> Lauterbrunnen Valley, Central Switzerland<br/><b>Access:</b> Train or drive<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Anytime, golden hour for the falls<br/><b>Tags:</b> Valley<br/><b>Wild camping:</b> discouraged — Valley floor is private agricultural land + villages; wild camping forbidden. The Hinteres Lauterbrunnental upstream is partly a Wildruhezone (winter ban). Use one of the two campsites in the valley.<br/><a href="https://www.google.com/maps/place/Lauterbrunnen/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fa0073b1165c7:0x5392dbb55902c31!8m2!3d46.5935058!4d7.9090981!16zL20vMDFxamwz">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.9090981,46.5935058,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>MOUNT PILATUS</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[360 view above Lake Lucerne. Cable car or cog railway to the top. Crowded but the view earns it.<br/><a href="https://www.google.com/maps/place/Mount+Pilatus/@46.9795,8.2548,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.9795!4d8.2548">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.2548,46.9795,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Oeschinensee</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>LAKES</i><br/>The famous turquoise lake above Kandersteg. Not a hidden gem anymore, but if you walk past the platform it gets quiet fast.<br/><b>Region:</b> Kandersteg, Central Switzerland<br/><b>Access:</b> Gondola + 20 min walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Anytime, clear sky for the colour<br/><b>Tags:</b> Lake<br/><b>Wild camping:</b> discouraged — Lake is a UNESCO Jungfrau-Aletsch buffer zone and a touristed nature reserve; wild camping at the lake is not allowed. Tolerated only well above the lake on the Hohtürli side, above tree line.<br/><a href="https://www.google.com/maps/place/Oeschinensee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f08a670704edd:0x30815e0b3a5ce4ee!8m2!3d46.4989089!4d7.7291063!16s%2Fm%2F02q4rtm">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.7291063,46.4989089,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Oltschibachfall</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>WATERFALLS</i><br/>One of the tallest single-drop falls in the canton. Best admired from the viewpoint trail, not the base.<br/><b>Region:</b> Brienz, Central Switzerland<br/><b>Access:</b> Hike from Brienzersee<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Late afternoon<br/><b>Tags:</b> Waterfall<br/><b>Wild camping:</b> discouraged — Below tree line at ~950 m; private/forest land, no wild camping. Day visit only.<br/><a href="https://www.google.com/maps/place/Oltschibachfall/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9055579d6091:0xb55ba99851925c8f!8m2!3d46.7312!4d8.11416!16s%2Fg%2F1thvrltt">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.11416,46.7312,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Rosenlaui</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>VALLEYS</i><br/>Tucked into the Reichenbach valley, where the Wetterhorn feels unreal in the late afternoon light.<br/><b>Region:</b> Meiringen, Central Switzerland<br/><b>Access:</b> Postbus + walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Afternoon<br/><b>Tags:</b> Valley<br/><b>Wild camping:</b> forbidden — Inside federal game reserve &quot;Schwarzhorn&quot; (Eidg. Jagdbanngebiet) — wild camping banned by federal law (JSG/VEJ).<br/><a href="https://www.google.com/maps/place/Rosenlaui,+3860+Schattenhalb/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f854e2f14adf3:0x75e02d334586fdf8!8m2!3d46.6795746!4d8.1548593!16s%2Fg%2F1tmqq876">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.1548593,46.6795746,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Rosenlaui Public Waterfall</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>WATERFALLS</i><br/>A gorge carved into the mountain next to the hotel. Paid entry, but the light is worth it.<br/><b>Region:</b> Rosenlaui, Central Switzerland<br/><b>Access:</b> Walk from Rosenlaui hotel<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Morning<br/><b>Tags:</b> Waterfall<br/><b>Wild camping:</b> forbidden — Inside federal game reserve &quot;Schwarzhorn&quot; — wild camping banned. Paid gorge entry, no overnight.<br/><a href="https://www.google.com/maps/place/Rosenlaui,+3860+Schattenhalb/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f854e2f14adf3:0x75e02d334586fdf8!8m2!3d46.6795746!4d8.1548593!16s%2Fg%2F1tmqq876">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.1548593,46.6795746,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Rosenlaui Secret Waterfall</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>WATERFALLS</i><br/>The one most visitors never find. Hidden behind the hotel, almost empty most mornings.<br/><b>Region:</b> Rosenlaui, Central Switzerland<br/><b>Access:</b> Walk behind the hotel<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Any time<br/><b>Tags:</b> Waterfall<br/><b>Wild camping:</b> forbidden — Inside federal game reserve &quot;Schwarzhorn&quot; — wild camping banned. Day visit only.<br/><a href="https://www.google.com/maps/place/Rosenlaui,+3860+Schattenhalb/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f854e2f14adf3:0x75e02d334586fdf8!8m2!3d46.6795746!4d8.1548593!16s%2Fg%2F1tmqq876">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.1548593,46.6795746,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Schilthorn</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>SUMMITS</i><br/>Piz Gloria. Cable car straight to a 360 degree view of the Bernese Alps. The Eiger, Mönch and Jungfrau line up across the valley.<br/><b>Region:</b> Mürren, Central Switzerland<br/><b>Access:</b> Cable car from Stechelberg via Mürren<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunset<br/><b>Tags:</b> Summit<br/><b>Wild camping:</b> restricted — Above tree line in BLN landscape; tolerated single-night, no fire, away from the cable-car summit station.<br/><a href="https://www.google.com/maps/place/Schilthorn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fa0aa046345b1:0xe0ac87e82a107f2!8m2!3d46.5574809!4d7.8352793!16zL20vMDMxMnk2">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.8352793,46.5574809,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Schrattenfluh</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>RIDGES</i><br/>A dramatic ridge hike from Marbachegg cable car, overnight at Heftihütte.<br/><b>Region:</b> Emmental, Central Switzerland<br/><b>Access:</b> Cable car + 3 hour hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunrise<br/><b>Tags:</b> Ridge<br/><b>Wild camping:</b> restricted — UNESCO Biosphäre Entlebuch: park rules — tolerated above tree line, single night, no fire.<br/><a href="https://www.google.com/maps/place/Schrattenfluh/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbfec06cad435:0x110b561e70bae1e2!8m2!3d46.8433333!4d7.9855556!16s%2Fm%2F04n29_0">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.9855556,46.8433333,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Tannhorn</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>RIDGES</i><br/>The highlight of the Hardergrat. A perfect grass ridge that peaks at sunset.<br/><b>Region:</b> Brienz, Central Switzerland<br/><b>Access:</b> Cable car to Rothorn + 3.5h hike<br/><b>Effort:</b> Challenging<br/><b>Best light:</b> Sunset<br/><b>Tags:</b> Ridge<br/><b>Wild camping:</b> restricted — BLN, above tree line; tolerated single-night. Stay off the alp meadows in use.<br/><a href="https://www.google.com/maps/place/Tannhorn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9602003ceea9:0x1f8630dd4a63d1d5!8m2!3d46.7749358!4d7.984555!16s%2Fm%2F04n0h0d">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.984555,46.7749358,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Triftbrücke</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>SUSPENSION BRIDGES</i><br/>One of the most dramatic suspension bridges in the Alps. 170 m long, strung across a glacier lake.<br/><b>Region:</b> Gadmen, Central Switzerland<br/><b>Access:</b> Cable car + 2 hour hike<br/><b>Effort:</b> Moderate. Steep<br/><b>Best light:</b> After sunset<br/><b>Tags:</b> Suspension bridge<br/><b>Wild camping:</b> restricted — Trift glacier basin: tolerated above tree line near the SAC Trifthütte; pay the small contribution at the hut.<br/><a href="https://www.google.com/maps/place/Triftbr%C3%BCcke/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478562bdf0ac9de3:0xf78db3a090c436b4!8m2!3d46.6941706!4d8.357416!16s%2Fm%2F0660mz0">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.357416,46.6941706,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Triftsee</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[<i>GLACIER LAKES</i><br/>The turquoise lake behind the bridge. Same hike, different light, the place where I would actually spend the night.<br/><b>Region:</b> Gadmen, Central Switzerland<br/><b>Access:</b> Cable car + 2 hour hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunset or sunrise<br/><b>Tags:</b> Glacier lake<br/><b>Wild camping:</b> restricted — Same as triftbrucke. Single night, above tree line, well away from the bridge approach.<br/><a href="https://www.google.com/maps/place/Triftsee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478562bec5770e75:0x5d5bfb0e9684139!8m2!3d46.6904!4d8.3591!16s%2Fm%2F04yd9sm">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.3591,46.6904,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>WASSERFALL FINSTERSEE</name>
+      <styleUrl>#chapter-central</styleUrl>
+      <description><![CDATA[Hidden waterfall in the Zug hinterland. Short walk in. Best after rain when it actually runs.<br/><a href="https://www.google.com/maps/place/Wasserfall+Finstersee/@47.1641014,8.6355808,17z/data=!3m1!4b1!4m6!3m5!1s0x479aad0c46e30ca3:0xdbf376ce0d1d5094!8m2!3d47.1641014!4d8.6355808">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.6355808,47.1641014,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>05 · Valais</name>
+    <Placemark>
+      <name>Aletsch Glacier</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>SWITZERLAND&apos;S LARGEST, FOR NOW</i><br/>The biggest glacier in the Alps, a 23-kilometre river of ice you can walk beside. Visibly shrinking year over year.<br/><b>Region:</b> Upper Valais<br/><b>Access:</b> Cable car + lift<br/><b>Effort:</b> Easy to moderate<br/><b>Best light:</b> Clear day<br/><b>Wild camping:</b> restricted — UNESCO Jungfrau-Aletsch &amp; BLN. Wild camping banned in Aletschwald nature reserve and Aletsch Arena valley floor; emergency bivouac only above tree line on the glacier moraines. Aletsch rangers issue fines.<br/><a href="https://www.google.com/maps/place/Aletschgletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f706358ba0c6b:0x814ab15289527d53!8m2!3d46.4887031!4d8.0530777!16zL20vMDFwcnZ6">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.0530777,46.4887031,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Arolla Ice Cave</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>GLACIERS</i><br/>A hike to a cave carved into the ice - remarkable in person.<br/><b>Region:</b> Arolla, Valais<br/><b>Access:</b> Drive + 2 hour hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Any time<br/><b>Tags:</b> Glacier<br/><b>Wild camping:</b> restricted — Above tree line in BLN. Tolerated single-night on rocky terrain; never camp on or beside the glacier ice cave (collapse hazard).<br/><a href="https://www.google.com/maps/place/Arollagletscher/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f2c9d2e749315:0x5e7e1902527240c2!8m2!3d45.991944!4d7.494722!16s%2Fm%2F04n15qd">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.494722,45.991944,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Barrhorn</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>SUMMITS</i><br/>Switzerland highest walk-up summit over 3,600 metres - no climbing gear needed.<br/><b>Region:</b> Saas Valley, Valais<br/><b>Access:</b> Drive to trailhead<br/><b>Effort:</b> Hard - full day<br/><b>Best light:</b> Clear weather<br/><b>Tags:</b> Summit<br/><b>Wild camping:</b> restricted — Highest &quot;walking&quot; 4000m in the Alps. Above tree line throughout; tolerated single-night well away from Turtmannhütte.<br/><a href="https://www.google.com/maps/place/Barrhorn/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f3911ab831787:0xf4027acd7df4c95f!8m2!3d46.1497222!4d7.7369444!16s%2Fm%2F0421pgz">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.7369444,46.1497222,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Cabane Becs de Bosson</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>SLEEP HIGH, EAT WELL</i><br/>A mountain hut above Grimentz with views in every direction. Book ahead. It fills up fast, especially around sunset.<br/><b>Region:</b> Val d&amp;#x27;Anniviers<br/><b>Access:</b> Cable car + 2 hr hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunset or sunrise<br/><b>Wild camping:</b> restricted — Above tree line near the SAC hut. Pay the hut for facilities; otherwise tolerated single-night well away.<br/><a href="https://www.google.com/maps/place/Cabane+Becs+de+Bosson/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f2692bd39a7e3:0xa9abb1b8cca79dfb!8m2!3d46.1641605!4d7.5162911!16s%2Fg%2F1tdnk0gc">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.5162911,46.1641605,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Crans-Montana</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>THE SKI STATION IN SUMMER</i><br/>Off-season, the empty slopes look like someone drained a golf course and left it. In the best possible way.<br/><b>Region:</b> Crans-Montana<br/><b>Access:</b> Lifts / drive<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Morning fog<br/><b>Wild camping:</b> discouraged — Resort town; private property throughout. Use a campsite.<br/><a href="https://www.google.com/maps/place/Crans-Montana/@42.9672329,-5.3731519,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee033b13cf443:0x7775de3b89e62096!8m2!3d46.3126581!4d7.4805924!16s%2Fg%2F11bc598bvt">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.4805924,46.3126581,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Ferpècle Glacier</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>A GLACIER YOU CAN STILL REACH ON FOOT</i><br/>Tucked at the head of the Val d&amp;#x27;Hérens, quieter than its neighbours and wild in a way Zermatt no longer is.<br/><b>Region:</b> Val d&amp;#x27;Hérens<br/><b>Access:</b> Drive + 2 hr walk<br/><b>Effort:</b> Easy to moderate<br/><b>Best light:</b> Anytime clear<br/><b>Wild camping:</b> restricted — Val d&apos;Hérens, above tree line; BLN. Tolerated single-night; avoid the glacier moraine collapse zones.<br/><a href="https://www.google.com/maps/place/Ferp%C3%A8cle-Gletscher/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f2dec2ea48dcd:0x319daddf7734464b!8m2!3d46.0200098!4d7.5767685!16s%2Fm%2F04mxxcd">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.5767685,46.0200098,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Goms Bridge</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>BRIDGES</i><br/>A smaller hanging bridge in the upper Goms valley - less famous than Randa.<br/><b>Region:</b> Goms, Valais<br/><b>Access:</b> Drive + walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Any time<br/><b>Tags:</b> Bridge<br/><b>Wild camping:</b> discouraged — Goms valley floor (Fürgangen-Bellwald); developed valley. Day visit only.<br/><a href="https://www.google.com/maps/place/H%C3%A4ngebr%C3%BCcke+F%C3%BCrgangen+-+M%C3%BChlebach/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f7b707288dca1:0xe90a07a384bb80ee!8m2!3d46.410532!4d8.1509586!16s%2Fg%2F11c1tr0sc1">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.1509586,46.410532,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Gorges du Dailley</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>NARROWER, OLDER, LESS KNOWN</i><br/>Durnand&amp;#x27;s smaller cousin near Salvan. Same walkway trick, half the tourists, and arguably more atmospheric.<br/><b>Region:</b> Salvan<br/><b>Access:</b> Drive + walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Mid-morning<br/><b>Wild camping:</b> forbidden — Paid commercial gorge; wild camping not possible.<br/><a href="https://www.google.com/maps/place/Gorges+du+Dailley/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478eb7caa3e0d4dd:0xc63621c20a4a71d3!8m2!3d46.1392092!4d7.0185055!16s%2Fg%2F11bwpydx4l">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.0185055,46.1392092,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Gorges du Durnand</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>A CANYON HUNG WITH IRON WALKWAYS</i><br/>A narrow gorge outside Martigny with bolted walkways clinging to the wall. Walk through it and the water is three metres beneath your boots.<br/><b>Region:</b> Martigny<br/><b>Access:</b> Drive, paid entry<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Overcast midday<br/><b>Wild camping:</b> forbidden — Paid commercial gorge with closing hours; wild camping not possible.<br/><a href="https://www.google.com/maps/place/Gorges+du+Durnand/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ec9f23d4dd66b:0x629e8be22ad8eb5e!8m2!3d46.069739!4d7.071399!16s%2Fg%2F1txc5yx5">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.071399,46.069739,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Gorner Glacier</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>GLACIERS</i><br/>Scale is the whole story here. You want the biggest frame you can get your hands on.<br/><b>Region:</b> Zermatt, Valais<br/><b>Access:</b> Gornergrat Bahn · drone<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Clear afternoon<br/><b>Tags:</b> Glacier<br/><b>Wild camping:</b> restricted — High-altitude glacier terrain; bivouac is alpinism. Above tree line, BLN, tolerated single-night.<br/><a href="https://www.google.com/maps/place/Gornergletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f4aedf5eed477:0xdc91cbcef20adfe!8m2!3d45.9668437!4d7.7969322!16zL20vMGRsNWNz">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.7969322,45.9668437,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>HÄNGEBRÜCKE FÜRGANGEN - MÜHLEBACH</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[Hanging bridge in the upper Goms valley. Quick to visit, and a good frame on a moody day.<br/><a href="https://www.google.com/maps/place/H%C3%A4ngebr%C3%BCcke+F%C3%BCrgangen+-+M%C3%BChlebach/@46.4105,8.151,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.4105!4d8.151">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.151,46.4105,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>La Fouly</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>A VILLAGE AT THE MOUTH OF A GLACIER</i><br/>A quiet hamlet at the head of Val Ferret, facing a wall of peaks that look borrowed from Patagonia.<br/><b>Region:</b> Val Ferret<br/><b>Access:</b> Drive<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunset, just before alpenglow<br/><b>Wild camping:</b> discouraged — La Fouly hamlet: campsite available; valley floor is private property and federal floodplain in places.<br/><a href="https://www.google.com/maps/place/La+Fouly,+1944+Orsi%C3%A8res/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4789346ce514895d:0x507e2e9599bb7d3c!8m2!3d45.933198!4d7.0986502!16s%2Fm%2F06zl36r">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.0986502,45.933198,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>La Tzoumaz</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>FROZEN PINES, A TWENTY-MINUTE WINDOW</i><br/>A high-alpine forest above Verbier where, on cold spring mornings, the line between frozen and green pines cuts through the slope.<br/><b>Region:</b> Verbier area, Valais<br/><b>Access:</b> Drive + short walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Cold spring mornings<br/><b>Wild camping:</b> discouraged — Resort village (Verbier 4 Vallées); below tree line, private property. Use a campsite.<br/><a href="https://www.google.com/maps/place/La+Tzoumaz,+1918+Riddes/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ec568cef83837:0x5960e7fe8f54afb0!8m2!3d46.1451509!4d7.2330688!16s%2Fm%2F02pp5wy">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.2330688,46.1451509,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>LAC BLEU</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[Tiny turquoise pool near Arolla. Short hike, big colour. The lake is small so the frame works close.<br/><a href="https://www.google.com/maps/place/Lac+Bleu/@46.050484,7.4800854,17z/data=!3m1!4b1!4m6!3m5!1s0x478f29661d9d8675:0x83e0a41c8432263a!8m2!3d46.050484!4d7.4800854">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.4800854,46.050484,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Moiry from Above</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>FROM THE AIR</i><br/>A drone perspective turns the moraine into abstract geometry. Blue ice, grey rubble, and the hut as a tiny orange dot.<br/><b>Region:</b> Val d&amp;#x27;Anniviers<br/><b>Access:</b> Same as Moiry hut<br/><b>Effort:</b> Moderate to hard<br/><b>Best light:</b> Mid-morning<br/><b>Wild camping:</b> restricted — Above tree line; tolerated single-night.<br/><a href="https://www.google.com/maps/place/Moirygletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f2fd3a4fa494f:0x28c87f4a36745a58!8m2!3d46.0745303!4d7.5983645!16s%2Fm%2F04n6dtz">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.5983645,46.0745303,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Moiry Glacier</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>A HUT ABOVE THE ICE</i><br/>A small lake at the foot of the glacier, a hut perched above, and light that hits the ice face at sunset.<br/><b>Region:</b> Val d&amp;#x27;Anniviers<br/><b>Access:</b> Bus + uphill hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunset<br/><b>Wild camping:</b> restricted — Above tree line near the Cabane de Moiry. Tolerated single-night.<br/><a href="https://www.google.com/maps/place/Moirygletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f2fd3a4fa494f:0x28c87f4a36745a58!8m2!3d46.0745303!4d7.5983645!16s%2Fm%2F04n6dtz">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.5983645,46.0745303,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Nax Via Ferrata</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>A SHORT VERTICAL WITH BIG CONSEQUENCE</i><br/>A bolted climbing route above Nax village. Not long, not super technical. But genuinely exposed.<br/><b>Region:</b> Nax<br/><b>Access:</b> Drive to parking<br/><b>Effort:</b> Hard / technical<br/><b>Best light:</b> Morning<br/><b>Wild camping:</b> discouraged — Below tree line near Nax village; not a wild-camping spot. Use the campsite at Vex/Sion.<br/><a href="https://www.google.com/maps/place/Nax,+Via+Ferrata/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478edf1e98c5595d:0x918d4324e8652544!8m2!3d46.222247!4d7.419528!16s%2Fg%2F1tdrw6xw">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.419528,46.222247,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Pointe du Tsaté</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>SUMMITS</i><br/>A long hike to a quiet summit overlooking the Moiry Glacier. The kind of view you earn.<br/><b>Region:</b> Val d&amp;#x27;Anniviers, Valais<br/><b>Access:</b> Long hike from Grimentz or Becs de Bosson<br/><b>Effort:</b> Hard<br/><b>Best light:</b> Sunrise from the ridge<br/><b>Tags:</b> Summit<br/><b>Wild camping:</b> restricted — Val d&apos;Anniviers / Hérémence ridge, above tree line; BLN. Tolerated single-night.<br/><a href="https://www.google.com/maps/place/Pointe+du+Tsat%C3%A9/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f2f60dbe88dcd:0xda318e579dad731!8m2!3d46.109369!4d7.5488781!16s%2Fm%2F047prqz">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.5488781,46.109369,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Randa Bridge</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>BRIDGES</i><br/>Switzerland longest hanging bridge - a wobbling half-hour crossing.<br/><b>Region:</b> Randa, Valais<br/><b>Access:</b> Drive + walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Any time<br/><b>Tags:</b> Bridge<br/><b>Wild camping:</b> discouraged — Charles Kuonen suspension bridge approach: forest, near village. Day visit only.<br/><a href="https://www.google.com/maps/place/Randa/@46.3126581,2.6026627,7z/data=!4m9!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m4!1s0x478f37f6875d6053:0x400ff8840196ea0!8m2!3d46.1011132!4d7.7840062">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.7840062,46.1011132,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Riffelalp</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>VIEWPOINTS</i><br/>One stop before everyone else gets off. The Matterhorn layered with larches. Fog if you are lucky.<br/><b>Region:</b> Zermatt, Valais<br/><b>Access:</b> Gornergrat Bahn + walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunrise or cloudy<br/><b>Tags:</b> Viewpoint<br/><b>Wild camping:</b> restricted — Above tree line on the Gornergrat side; tolerated single-night, away from the Riffelalp Resort.<br/><a href="https://www.google.com/maps/place/Riffelalp,+3920+Zermatt/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f35945b81adcb:0x4273cbd81622c1db!8m2!3d46.0010288!4d7.7503289!16s%2Fm%2F0r8l1xx">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.7503289,46.0010288,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Riffelsee</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>LAKES</i><br/>The Matterhorn, doubled. At first light the tip turns red before the rest of the mountain catches up.<br/><b>Region:</b> Zermatt, Valais<br/><b>Access:</b> Gornergrat Bahn<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunrise<br/><b>Tags:</b> Lake<br/><b>Wild camping:</b> restricted — Above tree line in BLN &quot;Dent Blanche – Matterhorn – Monte Rosa&quot;. Tolerated single-night; avoid the Gornergrat railway station and Riffelsee photo spot at sunrise.<br/><a href="https://www.google.com/maps/place/Riffelsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f357f775bfeb9:0x978f19ea07f178a8!8m2!3d45.983269!4d7.7620615!16s%2Fm%2F04jdjqc">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.7620615,45.983269,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Saas Fee Glacier</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>13,000 YEARS OF ICE, RETREATING FAST</i><br/>A ski glacier that doubles as a summer photo location. Especially from the rotating restaurant at 3,500m.<br/><b>Region:</b> Saas Fee<br/><b>Access:</b> Cable car + funicular<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Clear morning<br/><b>Wild camping:</b> restricted — Above tree line on the Längfluh / Mittelallalin side; tolerated single-night, no fire.<br/><a href="https://www.google.com/maps/place/Feegletscher/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f48b22fff0bbd:0x8122bd2e0fc14d22!8m2!3d46.0796!4d7.8788!16s%2Fm%2F04n00rz">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.8788,46.0796,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Salanfe Lake</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>A HIDDEN LAKE IN A HANGING VALLEY</i><br/>A reservoir that sits in a bowl between the Dents du Midi. Harder to reach than it looks on the map. That is the point.<br/><b>Region:</b> Val d&amp;#x27;Illiez<br/><b>Access:</b> 2 hr uphill hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunrise<br/><b>Wild camping:</b> restricted — Salanfe reservoir: inside the Parc Naturel Régional Dents-du-Midi (Salanfe). Park rules — tolerated above tree line, single night, no fire.<br/><a href="https://www.google.com/maps/place/Lac+de+Salanfe/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478eb09715e870fb:0x95c0e82cbe14e900!8m2!3d46.1410515!4d6.9567844!16s%2Fm%2F02rf7k_">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.9567844,46.1410515,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>SANETSCH PASS</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[Mountain pass accessible by car. Beginning of winter is the window — snowy arctic vibes before the road closes for the season.<br/><a href="https://www.google.com/maps/place/Sanetsch+Pass/@46.3316,7.28621,17z/data=!3m1!4b1!4m6!3m5!1s0x478ee88d90bcaa87:0x1f0221b4b53a6a20!8m2!3d46.3316!4d7.28621">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.28621,46.3316,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Sanetschpass</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>A PASS WITH A LAKE ON TOP</i><br/>A high mountain pass on the border of Valais and Bern, with a dam, a lake, and a cable car that drops into nothing.<br/><b>Region:</b> Valais/Bern border<br/><b>Access:</b> Drive<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Summer mornings<br/><b>Wild camping:</b> restricted — Above tree line at the pass; BE/VS border. Tolerated single-night, no fire.<br/><a href="https://www.google.com/maps/place/Sanetschpass/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee88d90bcaa87:0x1f0221b4b53a6a20!8m2!3d46.3316!4d7.28621!16s%2Fm%2F04y7ghf">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.28621,46.3316,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Spielboden</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>THE EASIEST MARMOTS IN SWITZERLAND</i><br/>A station above Saas Fee where the alpine marmots come within arm&amp;#x27;s reach. If you have ever wanted the shot, this is where.<br/><b>Region:</b> Saas Fee<br/><b>Access:</b> Cable car<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Morning or late afternoon<br/><b>Wild camping:</b> restricted — Above tree line above Saas Fee; tolerated single-night, away from the cable-car infrastructure.<br/><a href="https://www.google.com/maps/place/3920+Zermatt/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f35a2292ee5cd:0x400ff8840196f70!8m2!3d46.0207133!4d7.749117!16zL20vMDI1Z3Rj">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.749117,46.0207133,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>The Ghost Town</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>ABANDONED HOUSES, SURREAL LIGHT</i><br/>A cluster of empty wooden huts above Zermatt that looks lifted out of a film set. Especially eerie in winter.<br/><b>Region:</b> Zermatt, Valais<br/><b>Access:</b> 15 min walk up<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Cloudy late afternoon<br/><b>Wild camping:</b> discouraged — Trift hamlet above Zermatt: derelict private buildings; bivouac the meadow above tree line, not in/around the structures.<br/><a href="https://www.google.com/maps/place/46%C2%B000&apos;23.3%22N+7%C2%B043&apos;55.4%22E/@46.006481,7.732045,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.006481!4d7.732045">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.732045,46.006481,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Tseuzier Lake</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>A LAKE THAT REFLECTS LIKE GLASS</i><br/>A reservoir behind Crans-Montana. When the wind drops, the water goes still enough to mirror the peaks on the far shore.<br/><b>Region:</b> Crans-Montana<br/><b>Access:</b> Drive up Rawyl<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunrise, calm wind<br/><b>Wild camping:</b> restricted — Tseuzier reservoir on the BE/VS border above tree line. Tolerated single-night on the surrounding ridges; avoid the dam zone.<br/><a href="https://www.google.com/maps/place/Lac+de+Tseuzier/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee161ec5fc7b1:0x2bde8895194d52a8!8m2!3d46.3508905!4d7.4301043!16s%2Fm%2F02x6gzq">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.4301043,46.3508905,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>VAN D&apos;EN BAS</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[Hamlet above Salvan with a clean line of sight on the Mont Blanc range. Drive up, walk a few minutes, frame the peaks.<br/><a href="https://www.google.com/maps/place/Van+d&apos;en+Bas,+1922+Salvan/@46.1401033,7.0137511,17z/data=!3m1!4b1!4m6!3m5!1s0x478eb765adbe7e53:0x8fe4ff0da4811a66!8m2!3d46.1401033!4d7.0137511">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.0137511,46.1401033,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Zermatt Village</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>VILLAGES</i><br/>You do not need to leave town for the shot. The village itself is half the frame.<br/><b>Region:</b> Zermatt, Valais<br/><b>Access:</b> Train to Zermatt<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunrise or night<br/><b>Tags:</b> Village<br/><b>Wild camping:</b> discouraged — Village; private property and intensive tourism. Use a campsite (Camping Matterhornblick).<br/><a href="https://www.google.com/maps/place/3920+Zermatt/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f35a2292ee5cd:0x400ff8840196f70!8m2!3d46.0207133!4d7.749117!16zL20vMDI1Z3Rj">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.749117,46.0207133,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Zinal Glacier</name>
+      <styleUrl>#chapter-valais</styleUrl>
+      <description><![CDATA[<i>GLACIERS</i><br/>An ice cave at the head of the Zinal valley. Open in winter, dangerous in spring.<br/><b>Region:</b> Zinal, Valais<br/><b>Access:</b> About 2h hike from Zinal village<br/><b>Effort:</b> Moderate, technical in winter<br/><b>Best light:</b> Midday in deep winter<br/><b>Tags:</b> Glacier<br/><a href="https://www.google.com/maps/search/?api=1&amp;query=46.071559,7.632709">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.632709,46.071559,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>06 · Fribourg</name>
+    <Placemark>
+      <name>Dent de Broc</name>
+      <styleUrl>#chapter-fribourg</styleUrl>
+      <description><![CDATA[<i>A DISTANT PEAK, A LONG LENS</i><br/>Seen from the Moléson road, the Dent lines up just above a meadow. A compressed, minimalist frame if you have the reach.<br/><b>Region:</b> Gruyère, Fribourg<br/><b>Access:</b> Drive. Roadside stop<br/><b>Effort:</b> None<br/><b>Best light:</b> Sunrise or sunset<br/><b>Wild camping:</b> restricted — Parc Gruyère Pays-d&apos;Enhaut. Bivouac tolerated above tree line, but the summit sits in steep terrain — practical sites are scarce.<br/><a href="https://www.google.com/maps/place/Dent+de+Broc/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8a68b17bfb5f:0x54cb7fef51106fb8!8m2!3d46.5885728!4d7.1277314!16s%2Fm%2F0kmv4z5">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.1277314,46.5885728,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Dent de Lys</name>
+      <styleUrl>#chapter-fribourg</styleUrl>
+      <description><![CDATA[<i>A SHARP TRIANGLE ABOVE LES PACCOTS</i><br/>A near-perfect pyramid peak you can hike up from Les Paccots. The ridge is steeper than it looks from the valley.<br/><b>Region:</b> Veveyse, Fribourg<br/><b>Access:</b> Hike from Les Paccots<br/><b>Effort:</b> Moderate. Exposed finish<br/><b>Best light:</b> Sunrise or sunset<br/><b>Wild camping:</b> restricted — Inside Vanil Noir federal game reserve perimeter — wild camping banned within reserve. Tolerated in adjacent regional park zones above tree line.<br/><a href="https://www.google.com/maps/place/Dent+de+Lys/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8f6ce5f3ca9f:0x4c821141beee248f!8m2!3d46.5076557!4d7.0029886!16s%2Fm%2F04gnbgc">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.0029886,46.5076557,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Gastlosen</name>
+      <styleUrl>#chapter-fribourg</styleUrl>
+      <description><![CDATA[<i>A SEA OF CLOUDS OVER THE PRE-ALPS</i><br/>A jagged limestone ridge on the Fribourg-Bern border. Best when an inversion rolls in and the peaks float above the fog.<br/><b>Region:</b> Gruyère, Fribourg<br/><b>Access:</b> Drive + short hike<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunrise with inversion<br/><b>Wild camping:</b> restricted — Parc naturel régional Gruyère Pays-d&apos;Enhaut: tolerated above tree line, single night, no fire. Stay clear of the climbing approaches.<br/><a href="https://www.google.com/maps/place/Gastlosen/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ef608c34c253f:0xd3cebdc12fa45b76!8m2!3d46.5822!4d7.28208!16s%2Fm%2F0rpg9m7">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.28208,46.5822,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Moléson</name>
+      <styleUrl>#chapter-fribourg</styleUrl>
+      <description><![CDATA[<i>HIGH RIDGES NEAR THE CABLE CAR</i><br/>Take the cable car up and you&amp;#x27;re a few minutes from ridge walks that feel far more remote than they actually are.<br/><b>Region:</b> Gruyère, Fribourg<br/><b>Access:</b> Cable car + short walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunrise, sunset, or cloudy<br/><b>Wild camping:</b> restricted — Parc Gruyère Pays-d&apos;Enhaut. Tolerated above tree line; the summit station and gondola line should be avoided.<br/><a href="https://www.google.com/maps/place/Mol%C3%A9son/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e88c0e8a4ac17:0x5d0474d4b36c0767!8m2!3d46.5487879!4d7.0171018!16s%2Fm%2F04cykhw">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.0171018,46.5487879,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Ritzli-Alp</name>
+      <styleUrl>#chapter-fribourg</styleUrl>
+      <description><![CDATA[<i>DINNER WITH A VIEW</i><br/>A mountain restaurant on the way back from Gastlosen, with a direct line of sight on the ridge at blue hour.<br/><b>Region:</b> Gruyère, Fribourg<br/><b>Access:</b> Hike or drive<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunset into blue hour<br/><b>Wild camping:</b> restricted — Naturpark Gantrisch: tolerated above tree line outside reserves. Below tree line in alp meadows: ask the alp farmer.<br/><a href="https://www.google.com/maps/place/Ritzli+Alp/@45.1662212,2.7371613,7z/data=!3m1!5s0x478e5f297051167b:0xcf8dc4fee4431c02!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5f297044c507:0xc94cdffdd5313e7a!8m2!3d46.6295236!4d7.2828498!16s%2Fg%2F1td2yck1">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.2828498,46.6295236,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Schwarzsee</name>
+      <styleUrl>#chapter-fribourg</styleUrl>
+      <description><![CDATA[<i>THE CLASSIC FRIBOURG LAKE</i><br/>A small alpine lake ringed by limestone peaks. Looks like a calendar cover when the sun catches it right.<br/><b>Region:</b> Sense district<br/><b>Access:</b> Drive to lake<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunrise or sunset<br/><b>Wild camping:</b> discouraged — Lake-shore is a developed tourist area in FR; wild camping not allowed at the lake. Above tree line on the Kaiseregg ridge it is tolerated.<br/><a href="https://www.google.com/maps/place/Schwarzsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5ea475c88195:0xbbdcb38663da2f0a!8m2!3d46.6659091!4d7.2807275!16s%2Fm%2F02831lc">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.2807275,46.6659091,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Teysachaux</name>
+      <styleUrl>#chapter-fribourg</styleUrl>
+      <description><![CDATA[<i>RIDGE WALK FROM MOLÉSON</i><br/>Another Fribourg pyramid. Link it to Moléson along the ridge for a full-day traverse, or park near the base and hike up.<br/><b>Region:</b> Gruyère, Fribourg<br/><b>Access:</b> Ridge traverse or direct hike<br/><b>Effort:</b> Moderate to hard<br/><b>Best light:</b> Sunrise or sunset<br/><b>Wild camping:</b> restricted — Parc Gruyère Pays-d&apos;Enhaut. Tolerated above tree line, single night, no fire.<br/><a href="https://www.google.com/maps/place/Teysachaux/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8f532d477db9:0x408922a3b47b674f!8m2!3d46.5340397!4d6.9963444!16s%2Fm%2F0kfxz5y">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.9963444,46.5340397,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Winter Schwarzsee</name>
+      <styleUrl>#chapter-fribourg</styleUrl>
+      <description><![CDATA[<i>ICE HOCKEY, MOUNTAINS, GO</i><br/>Same lake, different season. When the ice is thick enough, you can skate. And play hockey under the peaks.<br/><b>Region:</b> Sense district<br/><b>Access:</b> Drive to lake<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Deep winter<br/><b>Wild camping:</b> discouraged — Below tree line (1045 m); also park of national importance — follow park rules (Naturpark Gantrisch).<br/><a href="https://www.google.com/maps/place/Schwarzsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5ea475c88195:0xbbdcb38663da2f0a!8m2!3d46.6659091!4d7.2807275!16s%2Fm%2F02831lc">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.2807275,46.6659091,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>02 · Western</name>
+    <Placemark>
+      <name>Cap au Moine</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>A NARROW RIDGE ABOVE COL DE JAMAN</i><br/>A knife-edge ridge you reach from Col de Jaman. The view down to Lac Léman is one of the most dramatic in the whole country.<br/><b>Region:</b> Riviera vaudoise<br/><b>Access:</b> Drive + 1 hr hike<br/><b>Effort:</b> Moderate. Exposed<br/><b>Best light:</b> Sunrise or sunset<br/><b>Wild camping:</b> restricted — Parc naturel régional Gruyère Pays-d&apos;Enhaut: park rules tolerate single-night bivouac above tree line outside reserves; below ~1700 m discouraged.<br/><a href="https://www.google.com/maps/place/Col+de+Pierra-Perchia/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8ff955d5366f:0x6655f219c803eba7!8m2!3d46.4723534!4d6.9779693!16s%2Fg%2F11gjp70sz0">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.9779693,46.4723534,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Creux du Van</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>HUGE CLIFFS IN THE JURA</i><br/>A natural amphitheatre of vertical cliffs 150m tall. Feels nothing like the rest of Switzerland.<br/><b>Region:</b> Jura, Neuchâtel<br/><b>Access:</b> Drive to Le Soliat + walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunrise or cloudy<br/><b>Wild camping:</b> forbidden — Inside Creux du Van nature reserve (cantonal protection in NE/VD); wild camping prohibited inside the cirque. Tolerated only well outside the reserve.<br/><a href="https://www.google.com/maps/place/Creux+du+Van/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478de7f8240bcb23:0xc04d997cfd4ad4a8!8m2!3d46.9309929!4d6.7234511!16s%2Fm%2F08097wh">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.7234511,46.9309929,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Creux du Van Ibex</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>WILD IBEX, UP CLOSE</i><br/>The same cliffs are home to a resident herd of ibex. If you come at the right time, you can photograph them at eye level.<br/><b>Region:</b> Jura, Neuchâtel<br/><b>Access:</b> Same as Creux du Van<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Early morning<br/><b>Wild camping:</b> discouraged — Below tree line (1451 m); also BLN landscape of national importance — listed, single-night bivouac only, no fire (Creux du Van et Gorges de l’Areuse).<br/><a href="https://www.google.com/maps/place/Creux+du+Van/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478de7f8240bcb23:0xc04d997cfd4ad4a8!8m2!3d46.9309929!4d6.7234511!16s%2Fm%2F08097wh">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.7234511,46.9309929,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Dent de Jaman</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>THE MOST PHOTOGRAPHED PEAK ABOVE MONTREUX</i><br/>A small, sharp summit above Col de Jaman with an outsize view of Léman and the French Alps.<br/><b>Region:</b> Riviera vaudoise<br/><b>Access:</b> Drive + hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunset<br/><b>Wild camping:</b> restricted — Pre-alps just above Montreux; in regional park. Bivouac tolerated above tree line only, far from the cable-car infrastructure.<br/><a href="https://www.google.com/maps/place/Dent+de+Jaman/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e900ef472dc75:0xa9ea15a1ea677bef!8m2!3d46.445!4d6.9748!16s%2Fm%2F04q2b_b">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.9748,46.445,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Etang de la Gruere</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>REFLECTIONS</i><br/>A reflective bog lake in the Jura, stunning at both sunrise and sunset.<br/><b>Region:</b> Saignelegier, Western Switzerland<br/><b>Access:</b> Drive + 10 min walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunrise and sunset<br/><b>Tags:</b> Reflection<br/><b>Wild camping:</b> forbidden — Federally protected raised bog (Hochmoor) and Pro Natura nature reserve — wild camping strictly forbidden.<br/><a href="https://www.google.com/maps/place/%C3%89tang+de+la+Gru%C3%A8re/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4791fe18a3a8ca21:0x9c6b383c82b9fe9b!8m2!3d47.2385175!4d7.0463746!16s%2Fm%2F028871f">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.0463746,47.2385175,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Geltenschuss</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>A LONG HIKE TO A BIG WATERFALL</i><br/>A tall waterfall near Gstaad. The hike in is long, but the water in early summer makes it worth it.<br/><b>Region:</b> Saanenland, Bern<br/><b>Access:</b> Long day hike<br/><b>Effort:</b> Hard<br/><b>Best light:</b> Early summer<br/><b>Wild camping:</b> restricted — BLN &quot;Berner Hochalpen&quot;. Tolerated above tree line; the falls themselves drop into the valley — pitch on the plateau above, not at the basin.<br/><a href="https://www.google.com/maps/place/Geltenschuss/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee5ea4096575f:0xa97284d4668fea6!8m2!3d46.3738!4d7.33776!16s%2Fg%2F1w454jjh">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.33776,46.3738,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Gorges du Chauderon</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>GORGES</i><br/>Steep limestone canyon above Montreux. Tropical green when it rains.<br/><b>Region:</b> Montreux, Vaud<br/><b>Access:</b> Hike in from above Montreux<br/><b>Effort:</b> Moderate, slippery when wet<br/><b>Best light:</b> Overcast or after rain<br/><b>Tags:</b> Gorge, Waterfall<br/><a href="https://www.google.com/maps/place/Gorges+du+Chauderon/@46.4368563,6.9250077,17z">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.9250077,46.4368563,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Grammont</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>ABOVE THE LAKE, MAYBE WITH IBEX</i><br/>Keep hiking past Lac de Taney and you reach Le Grammont. A summit with a direct view down onto Léman.<br/><b>Region:</b> Chablais vaudois<br/><b>Access:</b> Hike from Lac de Taney<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunrise<br/><b>Wild camping:</b> restricted — BLN, above tree line on the summit ridge. Tolerated single-night well above the Taney lake reserve below.<br/><a href="https://www.google.com/maps/place/Grammont/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e9efc6b1bf905:0x45d95daebdda9493!8m2!3d46.357488!4d6.8211393!16s%2Fm%2F04cywpb">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.8211393,46.357488,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Lac de Taney</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>AN ALPINE LAKE ABOVE LÉMAN</i><br/>A small lake tucked into a bowl above the eastern end of Lake Geneva. Classic Swiss postcard if the light plays along.<br/><b>Region:</b> Chablais vaudois<br/><b>Access:</b> Drive + hike<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunrise or cloudy<br/><b>Wild camping:</b> forbidden — Lac de Taney is a federally protected amphibian reproduction site and BLN landscape; wild camping forbidden. The hamlet has a paid hut/auberge.<br/><a href="https://www.google.com/maps/place/Lac+de+Taney/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e9f2f53a97df1:0xfc94563b4beb1b95!8m2!3d46.3460125!4d6.8432074!16s%2Fm%2F03ch2nm">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.8432074,46.3460125,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Lavaux Vineyards</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>LANDSCAPES</i><br/>UNESCO terraced vineyards cascading down to Lake Leman.<br/><b>Region:</b> Lavaux, Western Switzerland<br/><b>Access:</b> Drive or train<br/><b>Effort:</b> Easy to moderate<br/><b>Best light:</b> Golden hour, autumn best<br/><b>Tags:</b> Landscape<br/><b>Wild camping:</b> forbidden — UNESCO World Heritage cultural landscape, intensive private vineyards and villages — wild camping not legal anywhere usable.<br/><a href="https://www.google.com/maps/place/Lavaux-Oron/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478c33d447645687:0x96990902d3a94b53!8m2!3d46.5100372!4d6.7531955!16s%2Fm%2F04f4h85">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.7531955,46.5100372,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Pisse-Chèvre</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>A REMOTE VALAIS WATERFALL</i><br/>A tall waterfall above the Rhône valley. Great when the snowmelt is running hard or after spring rain.<br/><b>Region:</b> Martigny area<br/><b>Access:</b> Drive + drone<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Cloudy with high water<br/><b>Wild camping:</b> restricted — Vaud Pre-alps, above tree line at the falls&apos; top. Tolerated single-night, no fire.<br/><a href="https://www.google.com/maps/place/Pissechevre/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478eb91116b7f2b1:0xaf936736e1645bd7!8m2!3d46.198!4d7.02769!16s%2Fg%2F1tdw2cpw">Open in Google Maps</a>]]></description>
+      <Point><coordinates>7.02769,46.198,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Tine de Conflens</name>
+      <styleUrl>#chapter-western</styleUrl>
+      <description><![CDATA[<i>A QUIET WATERFALL IN THE VAUD</i><br/>A short hike to a rarely photographed waterfall. Perfect for a quick morning when you don&amp;#x27;t want crowds.<br/><b>Region:</b> Vaud. La Sarraz area<br/><b>Access:</b> Drive + short hike<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Cloudy<br/><b>Wild camping:</b> discouraged — Vaud Jura foothills, ~600 m, below tree line on private/forest land. Day visit only.<br/><a href="https://www.google.com/maps/place/La+Tine+de+Conflens/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478dcb0a9141171b:0xcf6c1e11b5285bf5!8m2!3d46.6557956!4d6.4939321!16s%2Fg%2F11jp59nc8b">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.4939321,46.6557956,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>03 · Eastern</name>
+    <Placemark>
+      <name>Äscher</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>THE CHALET IN THE CLIFF</i><br/>The famous Swiss chalet built into a cliff face. Busy for a reason. The scene is as good as the postcards claim.<br/><b>Region:</b> Alpstein, Appenzell<br/><b>Access:</b> Hike from Ebenalp<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Early, before crowds<br/><b>Wild camping:</b> forbidden — Alpstein/Wildkirchli area: AI bans wild camping. Berggasthaus Aescher is the legal alternative.<br/><a href="https://www.google.com/maps/place/Aescher+-+Gasthaus+am+Berg/@46.3126581,2.6026627,7z/data=!4m9!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m4!1s0x479b24115605fa13:0xd55fdbc28cf47289!8m2!3d47.2833786!4d9.414359">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.414359,47.2833786,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Bärglistüber</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>A SHORT WALK, LOTS OF WATER IN SPRING</i><br/>An easy-access waterfall in Glarus canton. Visit in May or June for maximum flow.<br/><b>Region:</b> Glarus<br/><b>Access:</b> Short walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Cloudy days in late spring<br/><b>Wild camping:</b> forbidden — Bärglistüber waterfall: in Klausen/Urnerboden valley; Glarus side enforces ban, Uri side tolerates only above tree line.<br/><a href="https://www.google.com/maps/place/B%C3%A4rglist%C3%BCber/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47853ad3d5047c43:0x18fbfa769f1bfd4d!8m2!3d46.9084999!4d8.9753!16s%2Fg%2F1tl1m9pp">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.9753,46.9084999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Batöni Wasserfallarena</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>WATERFALLS</i><br/>A whole arena of waterfalls raining down a cirque at the head of Weisstannental. Proper scale without the crowds.<br/><b>Region:</b> Weisstannental, Eastern Switzerland<br/><b>Access:</b> Hike from Schwendi<br/><b>Effort:</b> Long, 3h+ in<br/><b>Best light:</b> May to July for flow<br/><b>Tags:</b> Waterfall<br/><b>Wild camping:</b> forbidden — Inside federal game reserve at Pizol/Weisstannen — wild camping banned.<br/><a href="https://www.google.com/maps/place/Wasserfall-Arena+Bat%C3%B6ni/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784d1b08469a651:0xb1e0da46c4e20d0d!8m2!3d46.9585591!4d9.3534428!16s%2Fg%2F11gblf0p51">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.3534428,46.9585591,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Berschnerfall</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>SOFT LIGHT, LONG EXPOSURES</i><br/>A tall waterfall near Walenstadt. Cloudy days flatter it; bring a tripod and a blurred foreground.<br/><b>Region:</b> St. Gallen<br/><b>Access:</b> Short drive + walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Cloudy<br/><b>Wild camping:</b> discouraged — BLN Walensee, below tree line; private forest. Day visit only.<br/><a href="https://www.google.com/maps/place/Berschnerfall/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x479b2c8a9c122ab3:0x1c0fc2523164cd01!8m2!3d47.1053!4d9.35966!16s%2Fg%2F1tkc5nnw">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.35966,47.1053,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Bovalhütte</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>HUT ABOVE THE GLACIER</i><br/>A SAC hut perched above Morteratsch Glacier. Classic view, great base if you want to go higher.<br/><b>Region:</b> Engadin, Graubünden<br/><b>Access:</b> Train + hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Overnight<br/><b>Wild camping:</b> forbidden — Inside federal game reserve adjacent to Swiss National Park; wild camping banned. SAC Bovalhütte is the legal overnight option.<br/><a href="https://www.google.com/maps/place/Bovalh%C3%BCtte+SAC/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47837c0bdb0dfeeb:0x9d47282c7d42a291!8m2!3d46.4150043!4d9.9251889!16s%2Fm%2F0cc80rp">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.9251889,46.4150043,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Caumasee</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>PHOTOGENIC. BUT A BIT SOULLESS</i><br/>Famous, teal-coloured, and honestly disappointing in person. I&amp;#x27;ll tell you what I actually think of it.<br/><b>Region:</b> Graubünden<br/><b>Access:</b> Short walk from Flims<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Early morning<br/><b>Wild camping:</b> forbidden — Caumasee is a paid bathing lake with closing hours and inside Flims tourism zone; wild camping not allowed.<br/><a href="https://www.google.com/maps/place/Caumasee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784dc8a4cda502d:0xc173a8c95685f33d!8m2!3d46.8199879!4d9.2959134!16s%2Fm%2F02r8d7d">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.2959134,46.8199879,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Crestasee</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>QUIETER THAN CAUMASEE, WAY BETTER</i><br/>A small pine-fringed lake nearby. No fences, no crowds, just pines and glass-still water on a calm day.<br/><b>Region:</b> Graubünden<br/><b>Access:</b> Short walk from Flims<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Calm wind<br/><b>Wild camping:</b> discouraged — Below tree line in the Flims tourism zone; private forest. Day visit only.<br/><a href="https://www.google.com/maps/place/Crestasee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784dca1c5bb3897:0xe974b259040ce2f0!8m2!3d46.8316413!4d9.3213848!16s%2Fm%2F03cp4l6">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.3213848,46.8316413,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Fälensee</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>LAKES</i><br/>Saxer Lücke gets the crowds. Drop below the ridge and you find this narrow lake wedged between walls, almost nobody around.<br/><b>Region:</b> Appenzell, Eastern Switzerland<br/><b>Access:</b> Extension from Saxer Lücke<br/><b>Effort:</b> Long day hike<br/><b>Best light:</b> Moody weather<br/><b>Tags:</b> Lake<br/><b>Wild camping:</b> forbidden — Alpstein/Fälensee: AI bans wild camping at lake. Bollenwees / Sämtisersee huts are alternatives.<br/><a href="https://www.google.com/maps/place/F%C3%A4lensee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x479b25b13698a10f:0x45c9ba1c8a046627!8m2!3d47.2511404!4d9.4173218!16s%2Fm%2F02ptb4_">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.4173218,47.2511404,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Gigerwaldsee</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>A CROSS ON THE HILL, THE BEST VIEW</i><br/>A turquoise reservoir near Vättis. From the village, look for the cross on the hillside. There&amp;#x27;s a path up to it.<br/><b>Region:</b> St. Gallen<br/><b>Access:</b> Drive + uphill walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Any time<br/><b>Wild camping:</b> restricted — Calfeisental, BLN + UNESCO Tectonic Arena Sardona. Tolerated above tree line beyond the reservoir; valley floor is a hunting reserve buffer.<br/><a href="https://www.google.com/maps/place/Gigerwaldsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784cffda003869d:0x455bdb0c4710be00!8m2!3d46.9145345!4d9.374917!16s%2Fm%2F02x6g66">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.374917,46.9145345,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>HOHER KASTEN</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[Appenzell ridge with a cable car to the top. Nice hikes radiate out from the summit station; pick your moment for the light.<br/><a href="https://www.google.com/maps/place/Hoher+Kasten/@47.2834865,9.4851199,17z/data=!3m1!4b1!4m6!3m5!1s0x479b24afb641d585:0x6da317254da55368!8m2!3d47.2834865!4d9.4851199">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.4851199,47.2834865,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Ice Lake (Griesslisee)</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>FLOATING ICE IN SUMMER</i><br/>A small high lake that holds ice in its water into the middle of summer. Hike-in, moderate effort, surreal result.<br/><b>Region:</b> Glarus / Uri<br/><b>Access:</b> Hike from Klausenpass<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Mid-summer<br/><b>Wild camping:</b> restricted — Klausenpass UR side: tolerated above tree line near the lake; remote and exposed.<br/><a href="https://www.google.com/maps/place/Griessseeli+%2F+Im+Griess/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47853c1c391e9b51:0x21bdce7687b53df9!8m2!3d46.8566743!4d8.8722641!16s%2Fg%2F11g9r2bp7c">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.8722641,46.8566743,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Jöriseen</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>ALPINE LAKES</i><br/>A string of impossibly turquoise lakes in a grey cirque above Davos. Worth every metre of elevation.<br/><b>Region:</b> Davos, Eastern Switzerland<br/><b>Access:</b> Hike from Flüelapass<br/><b>Effort:</b> Long, 4h up<br/><b>Best light:</b> Overcast or sunrise<br/><b>Tags:</b> Alpine lake<br/><b>Wild camping:</b> restricted — Above tree line in the Silvretta; BLN landscape. Tolerated single-night, no fire, well away from the lakes&apos; shores (sensitive alpine flora).<br/><a href="https://www.google.com/maps/place/J%C3%B6riseen/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47835ed266f2cb2f:0x41955dbc43165373!8m2!3d46.7763!4d9.97241!16s%2Fm%2F0w7q3yw">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.97241,46.7763,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>JULIER PASS</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[Famous mountain road for photos. Drone work in winter is the move. Snow, silhouettes, big sky.<br/><a href="https://www.google.com/maps/place/Julier+Pass/@46.4701639,9.7177092,17z/data=!3m1!4b1!4m6!3m5!1s0x47848149d54cdb2f:0x796a0f271166c816!8m2!3d46.4701639!4d9.7177092">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.7177092,46.4701639,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Klausenpass</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>A HIGH PASS WITH ROOM TO CAMP</i><br/>The pass road itself, plus a short hike to 46.866729, 8.859118 to find a spot close to where we&amp;#x27;ve camped.<br/><b>Region:</b> Glarus / Uri<br/><b>Access:</b> Pass road + hike<br/><b>Effort:</b> Easy to moderate<br/><b>Best light:</b> Sunrise<br/><b>Wild camping:</b> restricted — Pass on UR/GL border: UR side tolerates single-night above tree line; GL side tightening enforcement (2024+). Pitch on UR side.<br/><a href="https://www.google.com/maps/place/Klausenpass/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47853eb3eda525dd:0x843273b067c9c5d8!8m2!3d46.8682419!4d8.8553908!16s%2Fg%2F1yg57xhq8">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.8553908,46.8682419,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Klöntalersee</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>SUP, CAMPER VAN, LAKE</i><br/>A long, narrow mountain lake in Glarus canton. Beautiful to paddle and one of the best van-life spots in the region.<br/><b>Region:</b> Glarus<br/><b>Access:</b> Drive to lakeshore<br/><b>Effort:</b> None<br/><b>Best light:</b> Sunset<br/><b>Wild camping:</b> forbidden — Glarus canton: wild camping prohibited around lake; designated campsite Vorauen is the legal option.<br/><a href="https://www.google.com/maps/place/Kl%C3%B6ntalersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785322defece941:0xbd18b8fa9cca9c41!8m2!3d47.0224341!4d8.9596699!16s%2Fm%2F027jp8q">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.9596699,47.0224341,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Limmernsee</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>RESERVOIR, TUNNEL, THEN MOUNTAINS</i><br/>A turquoise reservoir above Linthal, reached via a funicular and a long tunnel. Strange approach, stunning arrival.<br/><b>Region:</b> Glarus<br/><b>Access:</b> Cable car + tunnel + hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunrise, sunset, or cloudy<br/><b>Wild camping:</b> forbidden — Glarus Süd actively enforces a wild-camping ban around the Muttsee/Limmernsee/Muttenchopf since 2024 — fines issued, designated tent sites only.<br/><a href="https://www.google.com/maps/place/Limmerensee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478523a408a1c0e1:0x2b0087d7f3d6b38c!8m2!3d46.8353795!4d9.0135015!16s%2Fm%2F02qgzlw">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.0135015,46.8353795,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Morteratsch Glacier</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>AN ICE RIVER IN ENGADIN</i><br/>A big, walkable glacier near Pontresina. And one of the clearest examples of retreat in the country.<br/><b>Region:</b> Engadin, Graubünden<br/><b>Access:</b> Train + walk / guide<br/><b>Effort:</b> Easy to moderate<br/><b>Best light:</b> Overcast<br/><b>Wild camping:</b> restricted — Adjacent to Swiss National Park (no camping inside). Around the glacier tongue: above tree line tolerated, but the BLN/park buffer recommends huts (Bovalhütte/Boval).<br/><a href="https://www.google.com/maps/place/Morteratschgletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4783787d4d1dde9d:0x47de9c833d269654!8m2!3d46.400919!4d9.9272488!16s%2Fm%2F027rmn1">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.9272488,46.400919,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>MUTTENCHOPF</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[Mountain peak above the Klausen Pass. Quick scramble for the panorama, drone-friendly.<br/><a href="https://www.google.com/maps/place/Muttenchopf/@46.8514436,9.0150836,17z/data=!3m1!4b1!4m6!3m5!1s0x47852383067be3d9:0x6accac70da2887ed!8m2!3d46.8514436!4d9.0150836">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.0150836,46.8514436,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Muttseehütte</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>SLEEP ABOVE THE TURQUOISE</i><br/>A mountain hut just above Limmernsee. Overnight here and you get both sunset and sunrise from the ridge.<br/><b>Region:</b> Glarus<br/><b>Access:</b> Same as Limmernsee<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunrise, sunset, or cloudy<br/><b>Wild camping:</b> forbidden — Same enforcement zone as Limmernsee/Muttsee. Use the SAC Muttseehütte for paid overnight.<br/><a href="https://www.google.com/maps/place/Muttseeh%C3%BCtte+SAC/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785231363e63ac9:0x887c3f53cba1a160!8m2!3d46.8573949!4d9.0187737!16s%2Fg%2F11nxshpt21">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.0187737,46.8573949,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Pizol</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>ALPINE LAKES</i><br/>The famous five-lake walk, but the detail most people miss is the cairn field on the upper ridge at sunset.<br/><b>Region:</b> Sargans, Eastern Switzerland<br/><b>Access:</b> Cable car + full-day loop<br/><b>Effort:</b> Long, 5-6h<br/><b>Best light:</b> Sunset<br/><b>Tags:</b> Alpine lake<br/><b>Wild camping:</b> restricted — Inside the Pizol federal game reserve: wild camping banned. Tolerated only outside the reserve boundary; check the BAFU map (jagdbanngebiete) before pitching.<br/><a href="https://www.google.com/maps/place/Pizol/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784ce277d754655:0x2be22078083784a5!8m2!3d46.9591!4d9.38679!16s%2Fm%2F043jxxy">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.38679,46.9591,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Saxer Lücke</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>A NOTCH IN THE RIDGE</i><br/>A dramatic cleft between two peaks in the Churfirsten. Short hike, huge payoff.<br/><b>Region:</b> Churfirsten<br/><b>Access:</b> Cable car + easy hike<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunset<br/><b>Wild camping:</b> forbidden — Alpstein/Saxer Lücke: AI canton bans wild camping. Bollenwees is the legal hut nearby.<br/><a href="https://www.google.com/maps/place/Saxer+L%C3%BCcke/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x479b25a5859f7d13:0xa362480e1a42c0f5!8m2!3d47.2473!4d9.42481!16s%2Fg%2F12290zfc">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.42481,47.2473,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Schäfler</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>EASY CABLE CAR, BIG RIDGE</i><br/>A 2-hour walk from Ebenalp to the Schäfler ridge in Appenzell. One of the best classic hikes in Eastern Switzerland.<br/><b>Region:</b> Alpstein, Appenzell<br/><b>Access:</b> Cable car + 2 hr hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunset or sunrise<br/><b>Wild camping:</b> forbidden — Alpstein: AI canton bans wild camping; bivouac only with farmer/landowner permission. Schäfler ridge is explicitly named in current enforcement.<br/><a href="https://www.google.com/maps/place/Sch%C3%A4fler/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x479b269e68a9a74b:0x606457ce43e2f946!8m2!3d47.2761!4d9.39133!16s%2Fg%2F120sd7zq">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.39133,47.2761,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Seealpsee</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>SWISS POSTCARD, ACTUAL VERSION</i><br/>A glassy alpine lake below Säntis. You can rent a little boat for five francs and row out into the reflection.<br/><b>Region:</b> Alpstein, Appenzell<br/><b>Access:</b> From Schäfler or Wasserauen<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Just before sunset<br/><b>Wild camping:</b> forbidden — Alpstein: wild camping banned at Seealpsee (AI canton enforcement, fines issued). Berggasthaus Seealpsee provides paid lodging.<br/><a href="https://www.google.com/maps/place/Seealpsee+8,+9057+Wasserauen/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x479b24255c8f347b:0xae49aad57b28ba51!8m2!3d47.2697778!4d9.4026451!16s%2Fg%2F11shcxxb0y">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.4026451,47.2697778,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Spitzmeilenhütte</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[TODO<br/><b>Region:</b> Flumserberg<br/><b>Best light:</b> Anytime<br/><b>Wild camping:</b> restricted — Above tree line near the SAC hut; pay the hut for use of facilities, otherwise tolerated single-night well away.<br/><a href="https://www.google.com/maps/place/Spitzmeilenh%C3%BCtte+SAC/@45.1662212,2.7371613,7z/data=!4m9!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m4!1s0x479b2c9fa9ee66d1:0xff30cf6672e1aa61!8m2!3d47.034213!4d9.2505843">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.2505843,47.034213,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Stoss Kirche</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>CHAPELS</i><br/>A small wooden chapel on a green knoll with craggy Appenzell peaks behind. The shot composes itself.<br/><b>Region:</b> Appenzell, Eastern Switzerland<br/><b>Access:</b> Drive to Stoss, 5 min walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Afternoon clouds<br/><b>Tags:</b> Chapel<br/><b>Wild camping:</b> discouraged — Stoos village is a developed ski resort area; wild camping not in usable spots. Use the campsite at Morschach.<br/><a href="https://www.google.com/maps/place/6433+Stoos/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47854f75c3a3a779:0xe3a15d4f8070c905!8m2!3d46.9797573!4d8.6669493!16s%2Fm%2F065_c3n">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.6669493,46.9797573,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Swiss Grand Canyon</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[<i>A DEEP CANYON IN THE EAST</i><br/>The Ruinaulta. A white limestone canyon carved by the Rhine. From the viewpoint, it really does look like the States.<br/><b>Region:</b> Graubünden<br/><b>Access:</b> Walk from Caumasee<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Sunrise<br/><b>Wild camping:</b> forbidden — Ruinaulta is a federally protected floodplain (Auengebiet) — wild camping forbidden. Use campsites in Flims/Trin or the riverside picnic areas during the day only.<br/><a href="https://www.google.com/maps/place/Rheinschlucht/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784dc635ed9a4eb:0xe9df845b022d9136!8m2!3d46.8057143!4d9.3163204!16zL20vMDYyXzVk">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.3163204,46.8057143,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>WILDSEE</name>
+      <styleUrl>#chapter-eastern</styleUrl>
+      <description><![CDATA[One of the five lakes on the Pizol trail. Linked to Wildsee by the rest of the loop. Worth a day if you have not been.<br/><a href="https://www.google.com/maps/place/Wildsee/@46.9705369,9.3946907,17z/data=!3m1!4b1!4m6!3m5!1s0x4784ce1c2192eb89:0x3eb211fd6596844b!8m2!3d46.9705369!4d9.3946907">Open in Google Maps</a>]]></description>
+      <Point><coordinates>9.3946907,46.9705369,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>04 · Ticino</name>
+    <Placemark>
+      <name>Cascata di Foroglio</name>
+      <styleUrl>#chapter-ticino</styleUrl>
+      <description><![CDATA[<i>WATERFALLS</i><br/>At the end of Valle Maggia, a waterfall dropping into the valley.<br/><b>Region:</b> Valle Maggia, Ticino<br/><b>Access:</b> Drive + 1.5 hour hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> May to June<br/><b>Tags:</b> Waterfall<br/><b>Wild camping:</b> forbidden — Bavona valley: TI cantonal ban + protected landscape. The valley is famously off-limits to wild camping; use the Foroglio osteria for lodging info.<br/><a href="https://www.google.com/maps/place/Foroglio+Wasserfall/@46.3126581,2.6026627,7z/data=!4m9!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m4!1s0x4785999344465ff1:0x1557b60aa4c642b!8m2!3d46.371303!4d8.5453161">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.5453161,46.371303,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Cascata La Froda</name>
+      <styleUrl>#chapter-ticino</styleUrl>
+      <description><![CDATA[<i>A FREEZING DIP UNDER A WATERFALL</i><br/>A tall waterfall above Sonogno with a plunge pool cold enough to wake the dead. Jumping in is half the experience.<br/><b>Region:</b> Valle Verzasca<br/><b>Access:</b> Drive + short hike<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Cloudy<br/><b>Wild camping:</b> forbidden — Ticino canton: wild camping outside campsites prohibited. Foroglio/Verzasca-style valley floors are intensively patrolled.<br/><a href="https://www.google.com/maps/place/La+Froda/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785a53b3c4e5d95:0xde6fa4bc75c89a0f!8m2!3d46.3469!4d8.77085!16s%2Fg%2F1tfvrtq7">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.77085,46.3469,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Lavertezzo</name>
+      <styleUrl>#chapter-ticino</styleUrl>
+      <description><![CDATA[<i>THE VILLAGE AT THE HEART OF IT</i><br/>The stone village by the bridge. Narrow lanes, old slate roofs, and the river running through the whole scene.<br/><b>Region:</b> Valle Verzasca<br/><b>Access:</b> Park and walk<br/><b>Effort:</b> None<br/><b>Best light:</b> Late afternoon<br/><b>Wild camping:</b> discouraged — Below tree line (531 m); also BLN landscape of national importance — listed, single-night bivouac only, no fire (Val Verzasca).<br/><a href="https://www.google.com/maps/place/Ponte+dei+Salti+(17.+Jahrhundert)/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b131b37ac893:0xb8b55f11feae7d93!8m2!3d46.2600705!4d8.8359918!16s%2Fg%2F121_43f8">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.8359918,46.2600705,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Ponte Brolla</name>
+      <styleUrl>#chapter-ticino</styleUrl>
+      <description><![CDATA[<i>RIVERS</i><br/>A cliff jumping spot on the Brolla river - crystal water and pure adrenaline.<br/><b>Region:</b> Brolla River, Ticino<br/><b>Access:</b> Drive + walk<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Daytime<br/><b>Tags:</b> River<br/><b>Wild camping:</b> forbidden — Maggia floodplain (federally protected Auengebiet) plus TI cantonal ban. Wild camping forbidden.<br/><a href="https://www.google.com/maps/place/Ponte+Brolla,+6652+Locarno/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b80184d77ff9:0x8085ee1850e504a9!8m2!3d46.1853!4d8.75278!16s%2Fg%2F120jqlmp">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.75278,46.1853,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Ponte dei Salti</name>
+      <styleUrl>#chapter-ticino</styleUrl>
+      <description><![CDATA[<i>THE ARCH, THE JUMP, THE ICON</i><br/>The double-arched stone bridge in Lavertezzo. Twelve metres up, cold river underneath. Send it if you&amp;#x27;re up for it.<br/><b>Region:</b> Valle Verzasca<br/><b>Access:</b> Park in Lavertezzo<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Any time<br/><b>Wild camping:</b> forbidden — Verzasca valley: wild camping explicitly prohibited and enforced (200 CHF fines). Use the campsites in Lavertezzo/Brione.<br/><a href="https://www.google.com/maps/place/Ponte+dei+Salti+(17.+Jahrhundert)/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b131b37ac893:0xb8b55f11feae7d93!8m2!3d46.2600705!4d8.8359918!16s%2Fg%2F121_43f8">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.8359918,46.2600705,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Valle Verzasca</name>
+      <styleUrl>#chapter-ticino</styleUrl>
+      <description><![CDATA[<i>THE WHOLE VALLEY IS THE SPOT</i><br/>Turquoise river, bleached-white boulders, all the way up the valley. Pick any pull-off and you&amp;#x27;ll find something.<br/><b>Region:</b> Valle Verzasca<br/><b>Access:</b> Drive the valley<br/><b>Effort:</b> Variable<br/><b>Best light:</b> Any time<br/><b>Wild camping:</b> forbidden — Verzasca valley: cantonal ban on wild camping; the entire river corridor is a federal floodplain (Auengebiet).<br/><a href="https://www.google.com/maps/place/Verzaska+Valley/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b6d28e572447:0x60f583d58bb40b36!8m2!3d46.25!4d8.8333333!16s%2Fm%2F03c3mrg">Open in Google Maps</a>]]></description>
+      <Point><coordinates>8.8333333,46.25,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>07 · Beyond</name>
+    <Placemark>
+      <name>Aiguille du Grépon</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[<i>A POINTED NEEDLE IN THE RANGE</i><br/>A sharp granite needle near the Mer de Glace. A classic alpine silhouette when the light catches the ridge.<br/><b>Region:</b> Chamonix, France<br/><b>Access:</b> From Mer de Glace trail<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunset, sunrise, or moody<br/><b>Wild camping:</b> restricted — France, Mont Blanc: bivouac only as part of alpine ascent; commit/decommit at Refuge Plan de l&apos;Aiguille or Envers des Aiguilles.<br/><a href="https://www.google.com/maps/place/Aiguille+du+Gr%C3%A9pon/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894ec98e061181:0x7753a53db26fea54!8m2!3d45.902811!4d6.918926!16s%2Fm%2F0czdw5h">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.918926,45.902811,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Aiguille Rouge Reserve</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[<i>PROTECTED TERRAIN, WILDLIFE EVERYWHERE</i><br/>The Chéserys area sits inside a protected nature reserve. Ibex, chamois, marmot. Real chances if you stay quiet and patient.<br/><b>Region:</b> Chamonix, France<br/><b>Access:</b> Same as Les Chéserys<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Early morning<br/><b>Wild camping:</b> restricted — Réserve Naturelle Nationale des Aiguilles Rouges: bivouac forbidden except in five regulated zones requiring online booking; tents must be down 09:00-19:00.<br/><a href="https://www.google.com/maps/place/Aiguilles+Rouges+National+Nature+Reserve/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894ccad064d1bd:0x3bfbb3704f53fd8b!8m2!3d45.9843879!4d6.9283192!16s%2Fm%2F0czbfz4">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.9283192,45.9843879,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Camping in Chéserys</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[<i>BIVY UP HIGH, ABOVE THE CROWDS</i><br/>Wild camping at Les Chéserys is allowed. You just need to register online first. Find a quiet spot off the main drag.<br/><b>Region:</b> Chamonix, France<br/><b>Access:</b> Same as Les Chéserys<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Overnight (sunset + sunrise)<br/><b>Wild camping:</b> restricted — Same as les_cheserys. The &quot;camping&quot; framing in the title refers to the booked bivouac zones around Lac Blanc/Lac des Chéserys — a tent for the night, taken down by 09:00, no fire.<br/><a href="https://www.google.com/maps/place/Lacs+des+Ch%C3%A9serys/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894cdf11eee317:0x3205ec87a48b021e!8m2!3d45.984858!4d6.90184!16s%2Fg%2F11fy_109py">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.90184,45.984858,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Dent d&apos;Oche</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[<i>THE PEAK YOU SEE FROM LAVAUX</i><br/>Across the lake from Lavaux, on the French side. A long hike to a steep summit. The view back across Léman is everything.<br/><b>Region:</b> Haute-Savoie, France<br/><b>Access:</b> Drive + long hike<br/><b>Effort:</b> Hard<br/><b>Best light:</b> Sunset, sunrise, or moody<br/><b>Wild camping:</b> restricted — Chablais (Haute-Savoie), France: bivouac (no tent, sundown to sunrise) tolerated above tree line outside the Réserve Naturelle de la Dent d&apos;Oche/Cornettes de Bise. The summit refuge offers paid lodging.<br/><a href="https://www.google.com/maps/place/Dent+d&apos;Oche/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478c20596c41be3f:0x8fa3019f16f7527c!8m2!3d46.353057!4d6.731264!16s%2Fm%2F0crfz_4">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.731264,46.353057,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Glacier des Bossons</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[<i>MY FAVOURITE GLACIER OF THE RANGE</i><br/>The Bossons drops farther into the Chamonix valley than any other glacier in the range. Which means you can see it from almost everywhere in town.<br/><b>Region:</b> Chamonix, France<br/><b>Access:</b> From Chamonix valley<br/><b>Effort:</b> Easy<br/><b>Best light:</b> Any time<br/><b>Wild camping:</b> forbidden — France, Mont Blanc: bivouac strictly forbidden on Bossons glacier and approach (préfectoral order, glacier hazards).<br/><a href="https://www.google.com/maps/place/Glacier+des+Bossons/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894f9f0b9376df:0xdf8616570a1ff80f!8m2!3d45.8671151!4d6.8631349!16zL20vMGRuM3Jn">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.8631349,45.8671151,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Les Chéserys</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[<i>THE BEST VIEW OF MONT BLANC</i><br/>A cluster of small lakes above La Flégère with the cleanest view of Mont Blanc and the whole surrounding range.<br/><b>Region:</b> Chamonix, France<br/><b>Access:</b> Cable car + hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunset<br/><b>Wild camping:</b> restricted — Réserve Naturelle des Aiguilles Rouges: bivouac forbidden by default; since 2024 a few designated zones (around lakes) require online booking via the Chamonix app, 19:00-09:00 only.<br/><a href="https://www.google.com/maps/place/Lacs+des+Ch%C3%A9serys/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894cdf11eee317:0x3205ec87a48b021e!8m2!3d45.984858!4d6.90184!16s%2Fg%2F11fy_109py">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.90184,45.984858,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Les Drus</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[<i>TWIN SPIRES OVER THE GLACIER</i><br/>Two near-vertical granite spires above the Mer de Glace. From the Montenvers viewpoint, they line up clean against the sky.<br/><b>Region:</b> Chamonix, France<br/><b>Access:</b> From Mer de Glace viewpoint<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Sunset, sunrise, or moody<br/><b>Wild camping:</b> restricted — France, Mont Blanc: bivouac only as part of an alpine ascent; no leisure camping. ENSA/Chamoniarde rules apply.<br/><a href="https://www.google.com/maps/place/Aiguille+du+Dru/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894bc255dfbe21:0xc70ae60e6164cffe!8m2!3d45.932945!4d6.9558754!16s%2Fm%2F02855l2">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.9558754,45.932945,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Les Drus. Winter</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[<i>THE SPIRES IN WINTER</i><br/>Same twin spires, dressed in ice and snow. The contrast against dark granite is what makes the winter shot sing.<br/><b>Region:</b> Chamonix, France<br/><b>Access:</b> Train + snowshoe<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Clear winter light<br/><b>Wild camping:</b> restricted — Same as les_drus.<br/><a href="https://www.google.com/maps/place/Aiguille+du+Dru/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894bc255dfbe21:0xc70ae60e6164cffe!8m2!3d45.932945!4d6.9558754!16s%2Fm%2F02855l2">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.9558754,45.932945,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Mer de Glace</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[<i>A RIVER OF ICE ABOVE CHAMONIX</i><br/>The largest glacier in the French Alps. Take the red Montenvers train from Chamonix, then hike up and into the white.<br/><b>Region:</b> Chamonix, France<br/><b>Access:</b> Train + 45-60min hike<br/><b>Effort:</b> Moderate<br/><b>Best light:</b> Anytime (sunset / sunrise best)<br/><b>Wild camping:</b> restricted — France, Mont Blanc range: wild camping forbidden; bivouac (sundown to sunrise, no tent) tolerated above 2500 m or &gt;1 h walk from a road. Mer de Glace area is intensively patrolled and contains glaciated terrain.<br/><a href="https://www.google.com/maps/place/Mer+de+Glace/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894eab1fba5965:0x41ece26799b55955!8m2!3d45.9203829!4d6.9279647!16zL20vMDFyd2tj">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.9279647,45.9203829,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Mer de Glace. Winter</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[<i>THE SAME GLACIER, UNDER SNOW</i><br/>Same spot, deep winter. Snowshoes on, footprints few, the whole scene turned silent and white.<br/><b>Region:</b> Chamonix, France<br/><b>Access:</b> Train + snowshoe hike<br/><b>Effort:</b> Moderate. Winter gear<br/><b>Best light:</b> Morning after fresh snow<br/><b>Wild camping:</b> restricted — Same as mer_de_glace. Winter: avalanche terrain, bivouac is alpinism territory, not leisure camping.<br/><a href="https://www.google.com/maps/place/Mer+de+Glace/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894eab1fba5965:0x41ece26799b55955!8m2!3d45.9203829!4d6.9279647!16zL20vMDFyd2tj">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.9279647,45.9203829,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Pic de Jallouvre</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[<i>PEAKS</i><br/>An off-radar Aravis summit above a tiny crescent lake. France, not Switzerland, but one ride away.<br/><b>Region:</b> Aravis, Haute-Savoie, France<br/><b>Access:</b> Col de la Colombière + ridge<br/><b>Effort:</b> Long, 5h round<br/><b>Best light:</b> Sunset<br/><b>Tags:</b> Summit<br/><b>Wild camping:</b> restricted — Aravis range, France: outside any nature reserve at the summit ridge — bivouac (no tent, sundown to sunrise) tolerated above the alpages. Below the alpages: private pasture, ask farmer.<br/><a href="https://www.google.com/maps/place/Pic+de+Jallouvre/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478bf65328e39ee7:0xc6c8697aa884f7bb!8m2!3d45.9964141!4d6.453518!16s%2Fm%2F0czf6zz">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.453518,45.9964141,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>REFUGE DU LAC BLANC</name>
+      <styleUrl>#chapter-beyond</styleUrl>
+      <description><![CDATA[Hut above Chamonix with a direct view on the Aiguille du Dru and the Mont Blanc range. Sunset hits the wall hard. Stay overnight if you can.<br/><a href="https://www.google.com/maps/place/Refuge+du+Lac+Blanc/@45.9816543,6.8921261,17z/data=!3m1!4b1!4m6!3m5!1s0x47894cbebe43de85:0x7d21421e0fdd8e7b!8m2!3d45.9816543!4d6.8921261">Open in Google Maps</a>]]></description>
+      <Point><coordinates>6.8921261,45.9816543,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+</Document>
+</kml>
