@@ -152,13 +152,13 @@ export default async function handler(req, res) {
 
   const body = await readJsonBody(req);
 
-  // Currency: client-provided wins over IP default. Validate against allow-list.
+  // Currency: ALWAYS derived from the buyer's IP country. We deliberately
+  // ignore any `currency` field in the request body so a buyer can't pick
+  // a cheaper region's price by editing the POST. The server is the only
+  // authority on which Stripe Price applies. Falls back to USD for
+  // unknown countries (rest-of-world default).
   const ipCountry = req.headers["x-vercel-ip-country"] || "";
-  const requestedCurrency = typeof body.currency === "string" ? body.currency.toLowerCase() : "";
-  const allowed = new Set(["chf", "eur", "usd"]);
-  const currency = allowed.has(requestedCurrency)
-    ? requestedCurrency
-    : defaultCurrencyForCountry(ipCountry);
+  const currency = defaultCurrencyForCountry(ipCountry);
 
   const priceId = priceIdForCurrency(currency);
   if (!priceId) {
@@ -222,6 +222,10 @@ export default async function handler(req, res) {
       client_secret: session.client_secret,
       session_id: session.id,
       currency,
+      // Major-unit amount (e.g. 27 for CHF, 28 for EUR, 31 for USD).
+      // The page uses this to replace the static "CHF 27" labels with
+      // the actual region-specific amount once the session resolves.
+      amount: typeof session.amount_total === "number" ? session.amount_total / 100 : null,
       // Client needs the publishable key to call Stripe(...) before mounting
       // the embedded iframe. Returning it here means the page never has to
       // hardcode it or expose it via a separate endpoint.

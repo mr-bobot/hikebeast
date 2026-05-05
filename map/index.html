@@ -1370,12 +1370,25 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   // ---------- Currency state ----------
   // For v1 default to CHF; user can cycle via the topbar toggle.
   // IP-based default could be wired later via a small edge endpoint.
-  // Currency is locked to CHF on the client. The server still has
-  // STRIPE_PRICE_ID_EUR / _USD wired up if we ever bring back a
-  // currency selector, but for now everyone pays in CHF · simpler
-  // mental model and matches the brand's Swiss home market.
+  // Currency is decided server-side from the buyer's IP country. The
+  // page renders "CHF 27" as the static fallback (correct for Swiss
+  // visitors, which is most of our traffic), then once the checkout
+  // session is created the real currency + amount comes back in the
+  // response and we update the labels in place. The client never
+  // sends a currency · the user can't pick a cheaper region.
   const CURRENCY_LABELS = { chf: "CHF", eur: "EUR", usd: "USD" };
-  const currentCurrency = "chf";
+  let currentCurrency = "chf";
+  let currentAmount = 27;
+
+  function updatePriceLabels() {
+    const label = CURRENCY_LABELS[currentCurrency] || currentCurrency.toUpperCase();
+    document.querySelectorAll(".price-display").forEach((el) => {
+      el.textContent = `${label} ${currentAmount}`;
+    });
+    document.querySelectorAll(".buy-price").forEach((el) => {
+      el.textContent = `${label} ${currentAmount}`;
+    });
+  }
 
   // Cohort tracking forwarded into Stripe session metadata
   const params = new URLSearchParams(location.search);
@@ -1547,8 +1560,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       const res = await fetch("/api/checkout/session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        // No `currency` field · server picks it from the buyer's IP so
+        // they can't downgrade to a cheaper region by editing this POST.
         body: JSON.stringify({
-          currency: currentCurrency,
           t: cohortToken,
           s: cohortSubscriber,
           utm_source: utmSource,
@@ -1576,6 +1590,17 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         renderCheckoutMock(container);
         return;
       }
+
+      // Server told us which currency + amount to display (IP-based).
+      // Update the labels so the info-bar, buy-card, and sticky-buy
+      // bar all match what the Stripe iframe will charge.
+      if (typeof data.currency === "string") {
+        currentCurrency = data.currency.toLowerCase();
+      }
+      if (typeof data.amount === "number") {
+        currentAmount = data.amount;
+      }
+      updatePriceLabels();
 
       // Wait for Stripe.js to load if it hasn't yet (script tag is `defer`).
       if (typeof Stripe === "undefined") {
