@@ -160,6 +160,13 @@ export default async function handler(req, res) {
   const ipCountry = req.headers["x-vercel-ip-country"] || "";
   const currency = defaultCurrencyForCountry(ipCountry);
 
+  // Locale for the embedded Stripe iframe (form labels, "Pay" button,
+  // error messages). Allow-listed; falls back to "auto" so Stripe
+  // matches the buyer's Accept-Language header on its own.
+  const allowedLocales = new Set(["de", "en", "auto"]);
+  const requestedLocale = typeof body.locale === "string" ? body.locale.toLowerCase() : "";
+  const locale = allowedLocales.has(requestedLocale) ? requestedLocale : "auto";
+
   const priceId = priceIdForCurrency(currency);
   if (!priceId) {
     return res.status(503).json({ error: "price_not_configured", currency });
@@ -182,6 +189,7 @@ export default async function handler(req, res) {
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded",
       mode: "payment",
+      locale,
       line_items: [{ price: priceId, quantity: 1 }],
       // Saftladen GmbH is under the Swiss VAT threshold and not
       // voluntarily registered, so we don't compute tax. The Price
