@@ -224,8 +224,12 @@ export default async function handler(req, res) {
       },
       // After payment, Stripe loads the return URL inside the embedded
       // iframe; we read ?session_id= there to fetch the completed session
-      // and render the success state.
-      return_url: `${origin}/map/success?session_id={CHECKOUT_SESSION_ID}`,
+      // and render the success state. German buyers (locale === "de")
+      // get redirected to /de/map/success/ so the post-purchase page
+      // matches the language they checked out in.
+      return_url: locale === "de"
+        ? `${origin}/de/map/success?session_id={CHECKOUT_SESSION_ID}`
+        : `${origin}/map/success?session_id={CHECKOUT_SESSION_ID}`,
     });
 
     res.setHeader("Cache-Control", "no-store");
