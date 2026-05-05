@@ -209,6 +209,9 @@ export default async function handler(req, res) {
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
         ip_country: typeof ipCountry === "string" ? ipCountry : "",
+        // Locale of the page the buyer paid from. The webhook reads
+        // this back to pick the EN or DE purchase email body.
+        locale: locale === "auto" ? "" : locale,
       },
       // Forwarded into the underlying PaymentIntent so the webhook can join
       // the same identifiers without re-hydrating the session object.

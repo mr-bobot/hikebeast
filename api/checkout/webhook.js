@@ -151,6 +151,108 @@ ${SITE}/terms.html · ${SITE}/imprint.html · ${SITE}/privacy.html
 `;
 }
 
+// German variants. Triggered by session.metadata.locale === "de", which
+// is set when the buyer paid from /de/map/. Strings come from the
+// brand-voice draft in _drafts/mail-translations.md · keep them in sync
+// if you tweak this.
+function purchaseEmailDeHtml({ firstName, downloadUrl, amountFormatted, orderId }) {
+  const greeting = firstName ? `Hey ${firstName},` : "Hey,";
+  return `<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Swiss Hidden Gems · Dein Guide ist bereit</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f5f7;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f5f5f7;padding:32px 16px;">
+    <tr><td align="center">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560" style="max-width:560px;background:#ffffff;border-radius:20px;overflow:hidden;">
+        <tr><td>
+          <img src="${HERO_IMG}" alt="Swiss Hidden Gems" width="560" style="display:block;width:100%;max-width:560px;height:auto;border:0;" />
+        </td></tr>
+        <tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
+          <p style="margin:0 0 16px;font-size:16px;">${greeting}</p>
+          <p style="margin:0 0 24px;font-size:16px;">Bist du bereit, die schönsten Spots in der Schweiz zu entdecken?</p>
+
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
+            <td style="border-radius:999px;background:#1d1d1f;">
+              <a href="${downloadUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Guide herunterladen</a>
+            </td>
+          </tr></table>
+
+          <p style="margin:0 0 24px;font-size:14px;color:#6e6e73;line-height:1.5;">
+            Oder <a href="${DRIVE_URL}" style="color:#0071e3;text-decoration:none;">in Google Drive öffnen</a>.
+          </p>
+
+          <p style="margin:0 0 16px;font-size:15px;color:#6e6e73;">Speichere das PDF auf deinem Handy, um es unterwegs offline zu nutzen. Auf dem iPhone: "Teilen" Knopf drücken, dann "In Dateien speichern".</p>
+
+          <p style="margin:0 0 4px;font-size:16px;">Viel Spass</p>
+          <p style="margin:0 0 32px;font-size:16px;">Leon</p>
+
+          <hr style="border:0;border-top:1px solid rgba(0,0,0,0.08);margin:0 0 20px;" />
+          <p style="margin:0 0 8px;font-size:12px;color:#6e6e73;">Rechnung: ${amountFormatted} · Bestellung ${orderId}</p>
+          <p style="margin:0 0 4px;font-size:12px;color:#6e6e73;">30 Tage Geld-Zurück-Garantie. Wenn dir der Guide nicht geholfen hat, einen einzigen neuen Spot zu finden, antworte innert 30 Tagen einfach auf diese Mail.</p>
+          <p style="margin:0;font-size:12px;color:#6e6e73;">Fragen? Antworte auf diese Mail.</p>
+        </td></tr>
+      </table>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560" style="max-width:560px;margin-top:24px;"><tr>
+        <td align="center" style="font-family:${FONT};font-size:12px;color:#6e6e73;line-height:1.6;">
+          <div>© Hikebeast</div>
+          <div><a href="${SITE}/de/terms.html" style="color:#6e6e73;text-decoration:none;">AGB</a> · <a href="${SITE}/de/imprint.html" style="color:#6e6e73;text-decoration:none;">Impressum</a> · <a href="${SITE}/de/privacy.html" style="color:#6e6e73;text-decoration:none;">Privacy</a></div>
+        </td>
+      </tr></table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+function purchaseEmailDeText({ firstName, downloadUrl, amountFormatted, orderId }) {
+  const greeting = firstName ? `Hey ${firstName},` : "Hey,";
+  return `${greeting}
+
+Bist du bereit, die schönsten Spots in der Schweiz zu entdecken?
+
+Lade den Guide runter:
+${downloadUrl}
+
+Oder öffne in Google Drive:
+${DRIVE_URL}
+
+Speichere das PDF auf deinem Handy, um es unterwegs offline zu nutzen. Auf dem iPhone: "Teilen" Knopf drücken, dann "In Dateien speichern".
+
+Viel Spass
+Leon
+
+---
+Rechnung: ${amountFormatted} · Bestellung ${orderId}
+Fragen? Antworte auf diese Mail.
+
+© Hikebeast
+${SITE}/de/terms.html · ${SITE}/de/imprint.html · ${SITE}/de/privacy.html
+`;
+}
+
+// Subject line + body picker keyed off the locale stamped in session
+// metadata. Falls back to EN if locale is missing or unknown.
+const EMAIL_COPY = {
+  en: {
+    subject: "Swiss Hidden Gems · Your guide is ready",
+    html: purchaseEmailHtml,
+    text: purchaseEmailText,
+  },
+  de: {
+    subject: "Swiss Hidden Gems · Dein Guide ist bereit",
+    html: purchaseEmailDeHtml,
+    text: purchaseEmailDeText,
+  },
+};
+
+function pickEmailCopy(locale) {
+  return EMAIL_COPY[String(locale || "").toLowerCase()] || EMAIL_COPY.en;
+}
+
 async function logPurchase(fields) {
   const url = process.env.SHEETS_WEBHOOK_URL;
   if (!url) return;
@@ -230,6 +332,9 @@ async function handleSessionCompleted({ stripe, event }) {
   const subscriberId = full.metadata?.s || "";
   const cohortToken = full.metadata?.t || "";
   const ipCountry = full.metadata?.ip_country || "";
+  // Locale of the page the buyer paid from. Set by /api/checkout/session
+  // when creating the checkout. Drives the EN vs DE purchase email.
+  const localeHint = full.metadata?.locale || "";
 
   if (!email) {
     console.error("Session completed without email:", full.id);
@@ -255,13 +360,15 @@ async function handleSessionCompleted({ stripe, event }) {
   let emailOk = false;
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
+    const copy = pickEmailCopy(localeHint);
+    const tplArgs = { firstName, downloadUrl, amountFormatted, orderId: full.id };
     const { error } = await resend.emails.send({
       from: FROM,
       to: email,
       replyTo: REPLY_TO,
-      subject: "Swiss Hidden Gems · Your guide is ready",
-      html: purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId: full.id }),
-      text: purchaseEmailText({ firstName, downloadUrl, amountFormatted, orderId: full.id }),
+      subject: copy.subject,
+      html: copy.html(tplArgs),
+      text: copy.text(tplArgs),
     });
     if (error) console.error("Resend purchase email error:", error);
     else emailOk = true;
