@@ -140,23 +140,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     object-position: 70% 45%;
     display: block;
   }
-  .currency-toggle {
-    appearance: none;
-    border: 1px solid var(--hairline);
-    background: rgba(255,255,255,0.9);
-    color: var(--fg);
-    font: inherit;
-    font-size: 13px;
-    font-weight: 500;
-    padding: 6px 12px;
-    border-radius: 999px;
-    cursor: pointer;
-    letter-spacing: -0.005em;
-    -webkit-tap-highlight-color: transparent;
-    transition: opacity 150ms ease, transform 100ms ease;
-  }
-  .currency-toggle:active { transform: scale(0.97); }
-
   /* === Layout ===
      Mobile-first: main is just a max-width container, .page-main is the
      flex column that holds the actual section stack. Sidebar is hidden
@@ -1120,9 +1103,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <img src="../images/avatar.jpg" alt="" />
       Hikebeast
     </a>
-    <button type="button" class="currency-toggle" aria-label="Change currency">
-      <span class="currency-label">CHF</span> ▾
-    </button>
   </header>
 
   <main>
@@ -1390,10 +1370,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   // ---------- Currency state ----------
   // For v1 default to CHF; user can cycle via the topbar toggle.
   // IP-based default could be wired later via a small edge endpoint.
-  const CURRENCIES = ["chf", "eur", "usd"];
+  // Currency is locked to CHF on the client. The server still has
+  // STRIPE_PRICE_ID_EUR / _USD wired up if we ever bring back a
+  // currency selector, but for now everyone pays in CHF · simpler
+  // mental model and matches the brand's Swiss home market.
   const CURRENCY_LABELS = { chf: "CHF", eur: "EUR", usd: "USD" };
-  let currentCurrency = (localStorage.getItem("hb_currency") || "chf").toLowerCase();
-  if (!CURRENCIES.includes(currentCurrency)) currentCurrency = "chf";
+  const currentCurrency = "chf";
 
   // Cohort tracking forwarded into Stripe session metadata
   const params = new URLSearchParams(location.search);
@@ -1402,17 +1384,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   const utmSource = params.get("utm_source") || "";
   const utmMedium = params.get("utm_medium") || "";
   const utmCampaign = params.get("utm_campaign") || "";
-
-  function renderPrice() {
-    const label = CURRENCY_LABELS[currentCurrency] || "CHF";
-    document.querySelectorAll(".price-display").forEach((el) => {
-      el.textContent = `${label} 27`;
-    });
-    document.querySelectorAll(".currency-label").forEach((el) => {
-      el.textContent = label;
-    });
-  }
-  renderPrice();
 
   // ---------- Carousel: dots + hover arrows ----------
   const carousel = document.getElementById("hero-carousel");
@@ -1648,15 +1619,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   } else {
     mountCheckout();
   }
-
-  // ---------- Currency toggle ----------
-  document.querySelector(".currency-toggle")?.addEventListener("click", () => {
-    const idx = CURRENCIES.indexOf(currentCurrency);
-    currentCurrency = CURRENCIES[(idx + 1) % CURRENCIES.length];
-    localStorage.setItem("hb_currency", currentCurrency);
-    renderPrice();
-    mountCheckout();
-  });
 
   // ---------- Page-visit ping for the funnel sheet ----------
   // Reuses the existing /api/visit endpoint that the other landings use.
