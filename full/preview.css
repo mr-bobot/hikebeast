@@ -969,23 +969,10 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 .app { grid-template-columns: minmax(0, 1fr) !important; }
 .viewer { grid-column: 1 !important; }
 
-/* Centering. The rail is position:fixed, so it overlays content rather
- * than taking layout space — the body uses the full viewport. To keep the
- * viewer (max-width 1500) visually centered on the FULL screen at wide
- * viewports while never letting it slide behind the rail at narrow ones,
- * left margin = max(rail-width, natural-centered-margin).
- * --rail-w toggles via body class so the formula adapts to the rail's
- * collapsed/expanded state without any JS. */
-body.has-rail { --rail-w: 64px; }
-body.has-rail.rail-expanded { --rail-w: 240px; }
-.viewer {
-  margin-left: max(var(--rail-w, 0px), calc((100vw - var(--content-max)) / 2)) !important;
-  margin-right: auto !important;
-}
-@media (max-width: 700px) {
-  /* Mobile: rail becomes a slide-in drawer; viewer takes the full width. */
-  .viewer { margin-left: 0 !important; }
-}
+/* Rail is position:fixed and overlays the leftmost slice; body has no
+ * padding for it. Viewer's base `margin: 0 auto` centers on the full
+ * viewport — the rail floats over the left edge of that centered content
+ * at narrow widths, which is fine (translucent + bounded by content-max). */
 
 .sb-home {
   display: grid;
@@ -1184,6 +1171,46 @@ body.has-rail.rail-expanded { --rail-w: 240px; }
   border-radius: 999px;
   object-fit: cover;
   object-position: 70% 45%;
+}
+
+/* === Cover variant: region map silhouette + gradient (instead of a photo) ===
+ * Dark editorial backdrop with the region color as an off-axis glow, the
+ * light SVG map reads like a relief / topo print on top. Same .slide-cover
+ * frame, swap cv-img for cv-map. */
+.slide-cover .cv-map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background:
+    radial-gradient(70% 60% at 22% 18%, rgba(var(--region-color, 200, 200, 200), 0.55) 0%, rgba(var(--region-color, 200, 200, 200), 0) 65%),
+    radial-gradient(60% 55% at 92% 95%, rgba(var(--region-color, 200, 200, 200), 0.32) 0%, rgba(var(--region-color, 200, 200, 200), 0) 70%),
+    linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
+  display: grid;
+  place-items: center;
+}
+.slide-cover .cv-map::after {
+  /* Fine grain to keep the gradient from looking flat-banded. */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+}
+.slide-cover .cv-map img {
+  position: relative;
+  width: 86%;
+  height: auto;
+  max-height: 86%;
+  object-fit: contain;
+  /* Map paths are #eef0f3 / #fff strokes — they read at full opacity on
+   * the dark backdrop. Soft glow so the silhouette feels lit, not pasted. */
+  filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.08)) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+}
+@media (min-width: 760px) {
+  .slide-cover .cv-map { aspect-ratio: auto; height: 100%; }
 }
 @media (min-width: 760px) { .slide-cover h1 { font-size: 42px; } }
 @media (min-width: 1100px) {
@@ -2482,8 +2509,14 @@ button.rail-item {
 }
 .app-rail.is-expanded .rail-toggle .label { opacity: 1; }
 
-/* Body offset for the rail (desktop) */
-body.has-rail { padding-left: 64px; transition: padding-left 200ms cubic-bezier(.2,.7,.3,1); }
+/* The rail is position:fixed and overlays content. Body padding pushes
+ * everything (topbar brand, viewer, etc.) past the rail's right edge so
+ * nothing slides under it. The viewer's existing `margin: 0 auto` then
+ * centers within the remaining area between rail and right edge. */
+body.has-rail {
+  padding-left: 64px;
+  transition: padding-left 200ms cubic-bezier(.2,.7,.3,1);
+}
 body.has-rail.rail-expanded { padding-left: 240px; }
 
 /* Once the rail is the canonical nav, the page-specific topbar pills are
