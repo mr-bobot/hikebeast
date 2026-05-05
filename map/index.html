@@ -195,6 +195,14 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   .price-display {
     font-weight: 700;
   }
+  /* Slightly larger in the info-bar badge so the price reads as the
+     headline of the row rather than a small inline label. The sticky
+     buy button keeps the smaller size since it's already inside a
+     16px button. */
+  .info-bar .price-display {
+    font-size: 17px;
+    letter-spacing: -0.02em;
+  }
   .info-bar .info-left,
   .info-bar .info-right {
     display: flex;
@@ -1128,9 +1136,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         <div class="carousel" id="hero-carousel">
           <div class="slide"><img src="img/hero-1-mockup.jpg" alt="The ultimate Swiss Map · spot detail in your pocket" loading="eager" fetchpriority="high" decoding="async" /></div>
           <div class="slide"><img src="img/hero-2-map.jpg" alt="122 spots, one map" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-3-info.jpg" alt="Everything you need, nothing you don't" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-4-photos.jpg" alt="Secret spots, viral photos" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-5-wildcamp.jpg" alt="Where you can wildcamp" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-3-example.jpg" alt="A spot, fully detailed" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-4-wildcamp.jpg" alt="Where you can wildcamp" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-5-photos.jpg" alt="Secret spots, viral photos" loading="lazy" decoding="async" /></div>
         </div>
         <!-- Hover-only nav arrows (desktop only · hidden on touch devices
              where the carousel relies on swipe). Click handlers wired in
@@ -1428,20 +1436,60 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     slides.forEach((s) => io.observe(s));
   }
 
+  /* Helper · width of one slide including the column-gap. Used by the
+     hover arrows and the autoplay loop below. */
+  const slideWidth = () => {
+    if (!carousel) return 0;
+    const slide = carousel.querySelector(".slide");
+    return slide ? slide.getBoundingClientRect().width + parseFloat(getComputedStyle(carousel).columnGap || 0) : 0;
+  };
+
   /* Hover arrows · scroll the carousel one slide-width per click.
      scrollBy with `behavior: smooth` plays well with scroll-snap so
      the carousel naturally locks onto the next slide. */
   if (carousel && prevBtn && nextBtn) {
-    const slideWidth = () => {
-      const slide = carousel.querySelector(".slide");
-      return slide ? slide.getBoundingClientRect().width + parseFloat(getComputedStyle(carousel).columnGap || 0) : 0;
-    };
     prevBtn.addEventListener("click", () => {
       carousel.scrollBy({ left: -slideWidth(), behavior: "smooth" });
     });
     nextBtn.addEventListener("click", () => {
       carousel.scrollBy({ left: slideWidth(), behavior: "smooth" });
     });
+  }
+
+  /* Autoplay · advance every 3s, loop back to the start at the end.
+     Stops permanently the moment the user touches the carousel
+     (swipe, tap on an arrow, mouse wheel scroll · whatever signals
+     they're driving). Their pace beats ours · this is purely a hint
+     for users who haven't noticed the carousel is interactive yet.
+     Respects prefers-reduced-motion. */
+  if (carousel && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let autoplayTimer = setInterval(() => {
+      const sw = slideWidth();
+      if (sw <= 0) return;
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      const next = carousel.scrollLeft + sw;
+      if (next > maxScroll - 4) {
+        carousel.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        carousel.scrollTo({ left: next, behavior: "smooth" });
+      }
+    }, 3000);
+
+    const stopAutoplay = () => {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    };
+
+    /* Pointer + touch events on the carousel itself catch real user
+       intent. We can't use 'scroll' as the trigger because our own
+       scrollTo above fires it. */
+    ["pointerdown", "touchstart", "wheel"].forEach((ev) => {
+      carousel.addEventListener(ev, stopAutoplay, { passive: true, once: true });
+    });
+    if (prevBtn) prevBtn.addEventListener("click", stopAutoplay, { once: true });
+    if (nextBtn) nextBtn.addEventListener("click", stopAutoplay, { once: true });
   }
 
   // ---------- Sticky buy bar visibility ----------
