@@ -15,3 +15,16 @@ node_modules/
 # Convex auto-generates types in this dir on every dev push -- regenerated
 # from convex/schema.ts and convex/*.ts, not worth tracking.
 convex/_generated/
+
+# Local-only working folders for content drafts and prototypes.
+/_drafts/
+/_proto/
+
+# Per-worktree artifacts
+.claude/*.lock
+.claude/*.bak
+.claude/*.main-bak
+
+# myphotos is a personal stash (typically a symlink), never tracked.
+# No trailing slash so the rule catches both directories and symlinks.
+/myphotos

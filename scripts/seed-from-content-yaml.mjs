@@ -21,12 +21,10 @@ import { api } from "../convex/_generated/api.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(__dirname, "..");
-const SRC  = "/Users/lost/Documents/Claude/Projects/Hiking Influencer";
 
-const CONTENT      = join(SRC,  "rebuild/content.yaml");
-const CREDITS_YAML = join(SRC,  "rebuild/credits.yaml");
-const NEW_PHOTOS   = join(SRC,  "rebuild/new_photos.yaml");
-const WILDCAMPING  = join(SRC,  "rebuild/wild_camping.yaml");
+const CONTENT      = join(REPO, "content.yaml");
+const CREDITS_YAML = join(REPO, "credits.yaml");
+const WILDCAMPING  = join(REPO, "wild_camping.yaml");
 const MANIFEST     = join(REPO, "scripts/photo-manifest.json");
 
 const CHAPTERS = ["intro", "central", "valais", "fribourg", "western", "eastern", "ticino", "beyond"];
@@ -194,53 +192,36 @@ function propertiesFromKicker(kicker) {
 }
 
 // ── manifest -> photoEntry[] grouped by spotKey -----------------------
-function buildPhotosBySpot(manifest, creditFor, npSpots, content) {
+// The new build-image-derivatives writes the credit (already resolved upstream
+// from content.yaml's image_credit at idx 0, or spot.photos[i-1].credit at
+// idx >= 1) directly into the manifest. We just format it for the chip.
+function buildPhotosBySpot(manifest, creditFor) {
   const out = new Map();  // spotKey -> [{ photoEntry, ... }]
-
-  // Build a quick map from content.yaml: spotId -> {chapter, image_credit}
-  const contentBySpotId = {};
-  for (const s of content.spots) {
-    contentBySpotId[s.id] = s;
-  }
-
   for (const p of manifest.photos) {
+    if (!p.spotId || !p.chapter) continue;  // chapter cover derivatives have no chapter assigned
     const spotKey = `${p.chapter}#${p.spotId}`;
     if (!out.has(spotKey)) out.set(spotKey, []);
 
+    // p.credit may be a credit-key registered in credits.yaml, an IG handle,
+    // or a free-form name (unsplash photographer). Try the registry first;
+    // fall back to source-type-aware formatting.
     let creditStr = null;
-    let sourceUrl = p.sourceUrl ?? null;
-
-    if (p.order === 0) {
-      // Primary: credit comes from content.yaml's image_credit key resolved
-      // against credits.yaml.
-      const cs = contentBySpotId[p.spotId];
-      if (cs?.image_credit) creditStr = creditFor(cs.image_credit);
-    } else if (p.fromSpread) {
-      // Spread image: the inner credit field on the spread's images entry.
-      // The build script already passed it in p.credit (raw key).
-      creditStr = p.credit ? creditFor(p.credit) : null;
-    } else {
-      // new_photos.yaml extra: index >= 1.
-      // p.credit is `instagram_handle` or `author`. p.sourceType tells us how
-      // to format. For instagram, prepend @. For unsplash, just the name.
-      if (p.sourceType === "instagram" && p.credit) {
-        creditStr = `@${p.credit}`;
-      } else if (p.sourceType === "unsplash" && p.credit) {
-        // Brain rule: no "Unsplash" in chip text.
-        creditStr = p.credit;
-      }
+    if (p.credit) {
+      const resolved = creditFor(p.credit);
+      if (resolved) creditStr = resolved;
+      else if (p.sourceType === "instagram") creditStr = `@${p.credit}`;
+      else creditStr = p.credit;
     }
 
     out.get(spotKey).push(clean({
       photoId:   p.photoId,
       credit:    creditStr,
-      sourceUrl: sourceUrl,
+      sourceUrl: p.sourceUrl ?? null,
       width:     p.width,
       height:    p.height,
       order:     p.order,
     }));
   }
-  // Sort each spot's photos by order.
   for (const arr of out.values()) arr.sort((a, b) => a.order - b.order);
   return out;
 }
@@ -287,7 +268,6 @@ async function main() {
   const env = loadEnv();
   const content   = yaml.load(readFileSync(CONTENT, "utf8"));
   const credits   = yaml.load(readFileSync(CREDITS_YAML, "utf8"));
-  const newPhotos = yaml.load(readFileSync(NEW_PHOTOS, "utf8"));
   const wildY     = yaml.load(readFileSync(WILDCAMPING, "utf8"));
   const manifest  = JSON.parse(readFileSync(MANIFEST, "utf8"));
 
@@ -296,7 +276,7 @@ async function main() {
   const wildBySpotId = Object.fromEntries((wildY?.spots ?? []).map(w => [w.id, w]));
   const chaptersById = Object.fromEntries(content.chapters.map(c => [c.id, c]));
 
-  const photosBySpot = buildPhotosBySpot(manifest, creditFor, newPhotos.spots ?? {}, content);
+  const photosBySpot = buildPhotosBySpot(manifest, creditFor);
 
   console.log(`CONVEX_URL=${env.CONVEX_URL}`);
   console.log(`Spots in content.yaml: ${content.spots.length}`);

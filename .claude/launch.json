@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "social-static",
+      "name": "static",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8124"],
-      "port": 8124
+      "runtimeArgs": ["-m", "http.server", "8125"],
+      "port": 8125
     }
   ]
 }

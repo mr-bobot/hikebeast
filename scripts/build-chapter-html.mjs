@@ -36,24 +36,8 @@ import yaml from "js-yaml";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const FULL = join(ROOT, "full");
-const HI_ROOT = "/Users/lost/Documents/Claude/Projects/Hiking Influencer";
-const CONTENT = join(HI_ROOT, "rebuild/content.yaml");
-const CREDITS = join(HI_ROOT, "rebuild/credits.yaml");
-
-// chapter id -> filename in /full/img/ for the chapter cover thumbnail.
-// (content.yaml's `cover_image` field points at the source under
-// images-full/chapters/, which is *_cover_v2.jpg today; the static HTML
-// has always used the flat *_cover.jpg in /full/img/, and changing that
-// is out of scope for this generator.)
-const CHAPTER_COVER = {
-  central: "central_cover.jpg",
-  valais: "valais_cover.jpg",
-  fribourg: "fribourg_cover.jpg",
-  western: "leman_cover.jpg",
-  eastern: "east_cover.jpg",
-  ticino: "ticino_cover.jpg",
-  beyond: "beyond_cover.jpg",
-};
+const CONTENT = join(ROOT, "content.yaml");
+const CREDITS = join(ROOT, "credits.yaml");
 
 // short label used in the sidebar (the full chapter name is in title= attrs)
 const SIDEBAR_LABEL = {
@@ -87,27 +71,50 @@ function renderCredit(key) {
 }
 
 // Returns the `<img src>` path the chapter HTML should use for a spot's
-// primary photo. Prefer the derivative ladder (definitely exists after
-// build-image-derivatives runs, matches what social.js sets after Convex
-// hydration → no flash). Falls back to /full/img/<basename> for spots
-// that don't have a derivative yet (placeholders, brand-new spots).
+// primary photo. Always points at the derivative ladder (build-image-
+// derivatives is a prerequisite of this script). PhotoId convention is
+// <spotId>_p<N>; idx 0 is the primary, idx 1+ are extras from spot.photos[].
 const DERIVATIVES = join(FULL, "img", "derivatives");
-function slugify(s) {
-  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+const CHAPTER_DERIVATIVES = join(FULL, "img", "chapters");
+function primarySrc(spotId) {
+  const photoId = `${spotId}_p0`;
+  return `../img/derivatives/${photoId}/w1800.webp`;
 }
-function primarySrc(chapterId, spotId, yamlImagePath) {
-  const photoId = `${slugify(chapterId)}_${slugify(spotId)}_p0`;
-  const derivative = join(DERIVATIVES, photoId, "w1800.webp");
-  if (existsSync(derivative)) return `../img/derivatives/${photoId}/w1800.webp`;
-  return `../img/${yamlImagePath ? basename(yamlImagePath) : "zdk_placeholder.jpg"}`;
+// Spread images live alongside the parent spot's photos. yamlSrc looks
+// like "spots/<parentSpotId>/<file>"; resolve to the matching derivative.
+function spreadImgSrc(yamlSrc) {
+  if (!yamlSrc) return `../img/derivatives/_missing/w1800.webp`;
+  const m = yamlSrc.match(/^spots\/([^/]+)\/(.+)$/);
+  if (!m) return yamlSrc;
+  const [, parentSpotId, fileName] = m;
+  const idx = spotPhotoIndex(parentSpotId, fileName);
+  if (idx < 0) return `../img/derivatives/${parentSpotId}_p0/w1800.webp`;
+  return `../img/derivatives/${parentSpotId}_p${idx}/w1800.webp`;
 }
-// Spread images don't have a stable photoId (their order depends on extras
-// counts), so we keep the basename approach for them. The build-image-
-// derivatives pipeline does generate webps for spread photos, but social.js
-// rewrites the carousel anyway — first paint just needs to not 404.
-function spreadImgSrc(yamlPath) {
-  if (!yamlPath) return "../img/zdk_placeholder.jpg";
-  return `../img/${basename(yamlPath)}`;
+function chapterCoverSrc(chapterId) {
+  return `../img/chapters/${chapterId}/w1800.webp`;
+}
+function chapterCoverThumbSrc(chapterId) {
+  return `../img/chapters/${chapterId}/w400.webp`;
+}
+// Build a {spotId → [filenames in sorted order]} cache by reading the
+// content.yaml spot's photos[] alongside the implicit main.<ext>. This
+// avoids a filesystem walk while keeping spread photoIds stable.
+const _photoListCache = new Map();
+function spotPhotoFiles(spotId) {
+  if (_photoListCache.has(spotId)) return _photoListCache.get(spotId);
+  const spot = (content.spots ?? []).find(s => s.id === spotId);
+  if (!spot) { _photoListCache.set(spotId, []); return []; }
+  // Primary's filename: pull the basename out of spot.image (could be
+  // main.jpg, main.jpeg, main.png).
+  const list = [];
+  if (spot.image) list.push(basename(spot.image));
+  for (const p of (spot.photos ?? [])) if (p.file) list.push(p.file);
+  _photoListCache.set(spotId, list);
+  return list;
+}
+function spotPhotoIndex(spotId, fileName) {
+  return spotPhotoFiles(spotId).indexOf(fileName);
 }
 
 function escapeHtml(s) {
@@ -134,23 +141,36 @@ function renderSidebar(currentChapter) {
     `  <a class="sb-home" href="../index.html" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>`,
   );
   items.push(
-    `  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/page_05.jpg" alt="" /><span class="lbl">Intro</span></a>`,
+    `  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05.jpg" alt="" /><span class="lbl">Intro</span></a>`,
   );
   for (const chap of content.chapters) {
     const isCur = chap.id === currentChapter ? " is-current" : "";
-    const cover = CHAPTER_COVER[chap.id];
     const label = SIDEBAR_LABEL[chap.id];
     items.push(
-      `  <a class="sb-thumb${isCur}" href="../${chap.id}/index.html" title="${escapeHtml(chap.name)}"><img src="../img/${cover}" alt="" /><span class="lbl">${escapeHtml(label)}</span></a>`,
+      `  <a class="sb-thumb${isCur}" href="../${chap.id}/index.html" title="${escapeHtml(chap.name)}"><img src="${chapterCoverThumbSrc(chap.id)}" alt="" /><span class="lbl">${escapeHtml(label)}</span></a>`,
     );
   }
   return `  <aside class="sidebar" aria-label="Chapters">\n${items.join("\n")}\n</aside>`;
 }
 
 function renderCover(chapter) {
-  const cover = CHAPTER_COVER[chapter.id];
-  return `    <section class="slide slide-cover" id="cover">
-  <img class="cv-img" src="../img/${cover}" alt="" />
+  // "Beyond the Border" sits outside Switzerland — no Swiss-map silhouette.
+  // It keeps the photo cover. All other chapters use the cv-map variant
+  // with the region SVG on a region-color tinted gradient.
+  if (chapter.id === "beyond") {
+    return `    <section class="slide slide-cover" id="cover">
+  <img class="cv-img" src="${chapterCoverSrc(chapter.id)}" alt="" />
+  <div class="cv-content">
+    <p class="cv-kicker">Region</p>
+    <h1>${escapeHtml(chapter.name)}</h1>
+    <p class="cv-deck">${escapeHtml(chapter.intro)}</p>
+  </div>
+</section>`;
+  }
+  return `    <section class="slide slide-cover" id="cover" style="--region-color: ${colorTriple(chapter.color)};">
+  <div class="cv-map">
+    <img src="../img/region-${chapter.id}.svg" alt="${escapeHtml(chapter.name)} on the Swiss map" />
+  </div>
   <div class="cv-content">
     <p class="cv-kicker">Region</p>
     <h1>${escapeHtml(chapter.name)}</h1>
@@ -202,7 +222,7 @@ function renderSpot(spot) {
 
   return `    <section class="slide slide-spot" id="${spot.id}">
   <div class="sp-photo">
-    <img src="${primarySrc(spot.chapter, spot.id, spot.image)}" alt="${escapeHtml(spot.title)}" />
+    <img src="${primarySrc(spot.id)}" alt="${escapeHtml(spot.title)}" />
     ${creditPill}
   </div>
   <div class="sp-body">

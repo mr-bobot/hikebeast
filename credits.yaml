@@ -1,0 +1,434 @@
+# Photographer registry. Every image_credit in content.yaml points to a key
+# in this file. Update names and links here once and they propagate to the
+# webapp and all PDF builds.
+#
+# The "@" prefix is omitted from keys so YAML stays clean. Builders should
+# render "@<key>" wherever a handle is shown to readers.
+
+photographers:
+  leon.helg:
+    name: Leon Helg
+    role: author
+    instagram: https://instagram.com/leon.helg
+    tiktok: https://tiktok.com/@leon.helg
+
+  oliwear.j:
+    name: Oliwear
+    role: contributor
+    instagram: https://instagram.com/oliwear.j
+
+  _fabiozingg:
+    name: Fabio Zingg
+    role: contributor
+    instagram: https://instagram.com/_fabiozingg
+
+  mattydread_photography:
+    name: Matt Dread
+    role: contributor
+    instagram: https://instagram.com/mattydread_photography
+
+  yannick_sutter:
+    name: Yannick Sutter
+    role: contributor
+    instagram: https://instagram.com/yannick_sutter
+
+  katerina.trapp:
+    name: Katerina Trapp
+    role: contributor
+    instagram: https://instagram.com/katerina.trapp
+
+  petartravel:
+    name: Petar
+    role: contributor
+    instagram: https://instagram.com/petartravel
+
+  steffi_inswiss:
+    name: Steffi
+    role: contributor
+    instagram: https://instagram.com/steffi_inswiss
+
+# Non-Instagram credits. Keys are referenced from content.yaml the same way
+# but rendered without the "@" prefix.
+  himalalts:
+    name: himalalts
+    role: contributor
+    instagram: https://instagram.com/himalalts
+  taufiqsaidi_:
+    name: taufiqsaidi_
+    role: contributor
+    instagram: https://instagram.com/taufiqsaidi_
+  glacionaut:
+    name: glacionaut
+    role: contributor
+    instagram: https://instagram.com/glacionaut
+  sabrina.binkert:
+    name: sabrina.binkert
+    role: contributor
+    instagram: https://instagram.com/sabrina.binkert
+  dario_monn:
+    name: dario_monn
+    role: contributor
+    instagram: https://instagram.com/dario_monn
+  damien.bozzini:
+    name: damien.bozzini
+    role: contributor
+    instagram: https://instagram.com/damien.bozzini
+  damien_paysages_et_sport:
+    name: damien_paysages_et_sport
+    role: contributor
+    instagram: https://instagram.com/damien_paysages_et_sport
+  danslafosse.medias:
+    name: danslafosse.medias
+    role: contributor
+    instagram: https://instagram.com/danslafosse.medias
+  kalapascal:
+    name: kalapascal
+    role: contributor
+    instagram: https://instagram.com/kalapascal
+  mattiaantonelliofficial:
+    name: mattiaantonelliofficial
+    role: contributor
+    instagram: https://instagram.com/mattiaantonelliofficial
+  signaphoto:
+    name: signaphoto
+    role: contributor
+    instagram: https://instagram.com/signaphoto
+  jura3lacs:
+    name: jura3lacs
+    role: contributor
+    instagram: https://instagram.com/jura3lacs
+  danielborloz:
+    name: danielborloz
+    role: contributor
+    instagram: https://instagram.com/danielborloz
+  patrick.janser:
+    name: patrick.janser
+    role: contributor
+    instagram: https://instagram.com/patrick.janser
+  syma_photography:
+    name: syma_photography
+    role: contributor
+    instagram: https://instagram.com/syma_photography
+  claude_gurzeler:
+    name: claude_gurzeler
+    role: contributor
+    instagram: https://instagram.com/claude_gurzeler
+  mofitrando:
+    name: mofitrando
+    role: contributor
+    instagram: https://instagram.com/mofitrando
+  oliwvair:
+    name: oliwvair
+    role: contributor
+    instagram: https://instagram.com/oliwvair
+  davidbirri:
+    name: davidbirri
+    role: contributor
+    instagram: https://instagram.com/davidbirri
+  aventouro:
+    name: aventouro
+    role: contributor
+    instagram: https://instagram.com/aventouro
+  jules_s_photography:
+    name: jules_s_photography
+    role: contributor
+    instagram: https://instagram.com/jules_s_photography
+  hebergements_les_rochers:
+    name: hebergements_les_rochers
+    role: contributor
+    instagram: https://instagram.com/hebergements_les_rochers
+  travelwithmaria_:
+    name: travelwithmaria_
+    role: contributor
+    instagram: https://instagram.com/travelwithmaria_
+  andresduranco:
+    name: andresduranco
+    role: contributor
+    instagram: https://instagram.com/andresduranco
+  shaunaxbst:
+    name: shaunaxbst
+    role: contributor
+    instagram: https://instagram.com/shaunaxbst
+  fototaeschli:
+    name: fototaeschli
+    role: contributor
+    instagram: https://instagram.com/fototaeschli
+  explore_a_perte_de_vue:
+    name: explore_a_perte_de_vue
+    role: contributor
+    instagram: https://instagram.com/explore_a_perte_de_vue
+  alpenliebe_official:
+    name: alpenliebe_official
+    role: contributor
+    instagram: https://instagram.com/alpenliebe_official
+  olivieredme:
+    name: olivieredme
+    role: contributor
+    instagram: https://instagram.com/olivieredme
+  robingaillotdrevon:
+    name: robingaillotdrevon
+    role: contributor
+    instagram: https://instagram.com/robingaillotdrevon
+  hoteldeshorlogers:
+    name: hoteldeshorlogers
+    role: contributor
+    instagram: https://instagram.com/hoteldeshorlogers
+  steffi.outbound:
+    name: steffi.outbound
+    role: contributor
+    instagram: https://instagram.com/steffi.outbound
+  markhebertphoto:
+    name: markhebertphoto
+    role: contributor
+    instagram: https://instagram.com/markhebertphoto
+  samir.sparks:
+    name: samir.sparks
+    role: contributor
+    instagram: https://instagram.com/samir.sparks
+  jvm_photography:
+    name: jvm_photography
+    role: contributor
+    instagram: https://instagram.com/jvm_photography
+  tanguy.espejo:
+    name: tanguy.espejo
+    role: contributor
+    instagram: https://instagram.com/tanguy.espejo
+  samsurinwelch:
+    name: samsurinwelch
+    role: contributor
+    instagram: https://instagram.com/samsurinwelch
+  sherpa__tenzin:
+    name: sherpa__tenzin
+    role: contributor
+    instagram: https://instagram.com/sherpa__tenzin
+  locarnesetv:
+    name: locarnesetv
+    role: contributor
+    instagram: https://instagram.com/locarnesetv
+  tricking.adventures:
+    name: tricking.adventures
+    role: contributor
+    instagram: https://instagram.com/tricking.adventures
+  ritzli:
+    name: ritzli
+    role: contributor
+    instagram: https://instagram.com/ritzli
+  guidos.tours:
+    name: guidos.tours
+    role: contributor
+    instagram: https://instagram.com/guidos.tours
+  berniejustlooksaround:
+    name: berniejustlooksaround
+    role: contributor
+    instagram: https://instagram.com/berniejustlooksaround
+  noberson:
+    name: noberson
+    role: contributor
+    instagram: https://instagram.com/noberson
+  babooshka_pl:
+    name: babooshka_pl
+    role: contributor
+    instagram: https://instagram.com/babooshka_pl
+  kurtschwendener:
+    name: kurtschwendener
+    role: contributor
+    instagram: https://instagram.com/kurtschwendener
+  oliwvair1:
+    name: oliwvair1
+    role: contributor
+    instagram: https://instagram.com/oliwvair1
+  o_fargnoli:
+    name: o_fargnoli
+    role: contributor
+    instagram: https://instagram.com/o_fargnoli
+  1000schweizerorte:
+    name: 1000schweizerorte
+    role: contributor
+    instagram: https://instagram.com/1000schweizerorte
+  christofs70:
+    name: christofs70
+    role: contributor
+    instagram: https://instagram.com/christofs70
+  benwe_:
+    name: benwe_
+    role: contributor
+    instagram: https://instagram.com/benwe_
+  noelbell8:
+    name: noelbell8
+    role: contributor
+    instagram: https://instagram.com/noelbell8
+  spornitho:
+    name: spornitho
+    role: contributor
+    instagram: https://instagram.com/spornitho
+  isleifureli:
+    name: isleifureli
+    role: contributor
+    instagram: https://instagram.com/isleifureli
+  tcheucestbeau:
+    name: tcheucestbeau
+    role: contributor
+    instagram: https://instagram.com/tcheucestbeau
+  jenniferesseiva:
+    name: jenniferesseiva
+    role: contributor
+    instagram: https://instagram.com/jenniferesseiva
+external:
+  anthony_gomez_unsplash:
+    name: Anthony Gomez
+    source: Unsplash
+    url: https://unsplash.com/@anthonygomez
+
+  unsplash_juAAi4HB0ds:
+    name: Simon Spring
+    source: Unsplash
+    url: https://unsplash.com/photos/a-mountain-with-a-river-running-through-it-juAAi4HB0ds
+  placeholder:
+    name: Placeholder
+    note: |
+      Used for spots that don't have a real photo yet. Render as a stand-in
+      grey card or hide entirely; do not show a fake credit line.
+
+  xxx:
+    name: XXX
+    note: |
+      Sentinel for "credit unknown — please review". Generators default to
+      this when no signal is available; builders should render it literally
+      as "XXX" so missing credits stand out instead of silently being
+      attributed to Leon.
+  thiva_unsplash:
+    name: Thiva
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-schmaler-fluss-mitten-in-einer-schlucht-jyzohp3Ezjs
+  louise_pipet_unsplash:
+    name: Louise Pipet
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-gewasser-mit-bergen-im-hintergrund-ssS_SLIPzMM
+  ilia_bronskyi_unsplash:
+    name: Ilia Bronskyi
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-haus-das-in-die-seite-einer-klippe-gebaut-wurde-KcOYp3LVbMw
+  cedric_streit_unsplash:
+    name: Cédric Streit
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/brauner-berg-mit-weissen-wolken-bedeckt-T-6WzysiWPA
+  rowell_heria_unsplash:
+    name: Rowell Heria
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-berg-mit-schnee-z-6iKHpgP0U
+  szocs_zoltan_unsplash:
+    name: Szocs Zoltan
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/eine-person-die-auf-dem-gipfel-eines-berges-steht-yCsT0i8iE4I
+  kuno_schweizer_unsplash:
+    name: Kuno Schweizer
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-steinhaus-mit-einem-wasserfall-im-hintergrund-03lqp8e-2hI
+  artiom_vallat_unsplash:
+    name: Artiom Vallat
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/berggipfellandschaft-UEqUfddF-cg
+  daniel_r_unsplash:
+    name: Daniel R.
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-grosser-wasserfall-in-einem-tal-LgaCKW7VS2A
+  xavier_von_erlach_unsplash:
+    name: Xavier von Erlach
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/luftaufnahme-des-berges-bei-tag-DWuxIIkAAEE
+  anthony_gomez_unsplash_2:
+    name: Anthony Gomez
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-wasserfall-in-einer-felsigen-gegend-XsqOtmC5OJc
+  frdm_unsplash:
+    name: frdm
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/blick-auf-eine-bergkette-bei-sonnenuntergang-BKnMBHNnG6k
+  simon_infanger_unsplash:
+    name: Simon Infanger
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/mann-tragt-blaues-poloshirt-RWTsKIWdVDo
+  dario_bronnimann_unsplash:
+    name: Dario Brönnimann
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/grune-und-braune-berge-neben-dem-gewasser-tagsuber-E3xxzh5gOcA
+  adrien_olichon_unsplash:
+    name: Adrien Olichon
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/eine-holzerne-hangebrucke-uber-einen-fluss-umgeben-von-bergen-qG8niw7e2co
+  thomas_lipke_unsplash:
+    name: Thomas Lipke
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/schneebedeckter-berg-unter-blauem-himmel-tagsuber-eWNBB1L8z80
+  anna_hu_unsplash:
+    name: Anna Hu
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/luftaufnahmen-von-hausern-die-von-grunen-baumen-umgeben-sind-temWItTcfi4
+  yasintha_perera_unsplash:
+    name: Yasintha Perera
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/eine-inselgruppe-die-von-wasser-umgeben-ist-TvqueFRNPzQ
+  daniel_cox_unsplash:
+    name: Daniel Cox
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/gruner-wald-und-ein-see-v-rf_qS9CPg
+  jairph_unsplash:
+    name: Jairph
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/yacht-segelt-tagsuber-in-der-nahe-der-insel-1XLyzi17Z2M
+  omid_visuals_unsplash:
+    name: Omid Visuals
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/menschen-die-tagsuber-auf-einer-brucke-in-der-nahe-von-wasserfallen-spazieren-gehen-vLnBjZWK7Bg
+  razvan_sassu_unsplash:
+    name: Razvan Sassu
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-malerischer-blick-auf-einen-weinberg-mit-einem-haus-auf-dem-hugel-vbrmbRib4uo
+  simon_fitall_unsplash:
+    name: Simon Fitall
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/luftaufnahmen-von-bergen-unter-bewolktem-himmel-tvleqH3p1os
+  martin_masson_unsplash:
+    name: Martin Masson
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/die-sonne-scheint-durch-die-wolken-uber-einem-verschneiten-berg-Eeo1OkcRRWc
+  andrea_caramello_unsplash:
+    name: Andrea Caramello
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/schneebedeckter-berg-tagsuber-jBxee1u2RAU
+  claudio_schwarz_unsplash:
+    name: Claudio Schwarz
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/bogenbrucke-aus-grauem-beton-eFqBWkmNUj0
+  anthony_gomez_unsplash_3:
+    name: Anthony Gomez
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-schneebedeckter-berggipfel-ist-durch-die-wolken-zu-sehen-ahCiE-OIu6M
+  cyprien_da_silva_unsplash:
+    name: Cyprien Da Silva
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-schneebedeckter-berg-mit-strahlend-blauem-himmel-w1O60CQbBv8
+  jan_huber_unsplash:
+    name: Jan Huber
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/luftaufnahmen-von-gewassern-die-von-baumen-und-bergen-umgeben-sind-9Hv1Od-e8VE
+  artiom_vallat_unsplash_2:
+    name: Artiom Vallat
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/gewasser-zwischen-bergen-tagsuber-7za7ZgKsC9A
+  dimitri_karastelev_unsplash:
+    name: Dimitri Karastelev
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/grune-und-weisse-berge-unter-weissen-wolken-und-blauem-himmel-tagsuber-BGGZcQ0NBcw
+  ernst_burki_unsplash:
+    name: Ernst Bürki
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-gletscher-der-durch-ein-von-bergen-umgebenes-tal-fliesst-cxjA69PbKNk
+  xavier_von_erlach_unsplash_2:
+    name: Xavier von Erlach
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/gruner-kiefernwald-s4Xh2sZX4W4
+  nadine_marfurt_unsplash:
+    name: Nadine Marfurt
+    source: Unsplash
+    url: https://unsplash.com/de/fotos/ein-fluss-mit-felsen-und-baumen-8EWBU0bqiFQ

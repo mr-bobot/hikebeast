@@ -52,7 +52,7 @@ function clean(obj) {
 const ORPHANS = [
   {
     spotKey:    "valais#zinal_glacier",
-    photoIdPrefix: "valais_zinal_glacier",
+    photoIdPrefix: "zinal_glacier",
     photoCount: 2,
     title:      "Zinal Glacier",
     kicker:     "GLACIERS",
@@ -82,7 +82,7 @@ const ORPHANS = [
     // for "LAC DE DERBORENCE", so this UPSERT promotes the placeholder
     // into a real spot rather than creating a duplicate row.
     spotKey:    "valais#lac_de_derborence",
-    photoIdPrefix: "valais_lac_de_derborence",
+    photoIdPrefix: "lac_de_derborence",
     photoCount: 2,
     title:      "Derborence Lake",
     kicker:     "ALPINE LAKES",
@@ -113,7 +113,7 @@ const ORPHANS = [
   },
   {
     spotKey:    "western#gorges_du_chauderon",
-    photoIdPrefix: "western_gorges_du_chauderon",
+    photoIdPrefix: "gorges_du_chauderon",
     photoCount: 3,
     title:      "Gorges du Chauderon",
     kicker:     "GORGES",
@@ -144,7 +144,7 @@ const ORPHANS = [
   // (Brain TODO.md tracks the open work.)
   {
     spotKey:    "central#brisen",
-    photoIdPrefix: "central_brisen",
+    photoIdPrefix: "brisen",
     photoCount: 1,
     title:      "Brisen",
     kicker:     "RIDGES",
@@ -160,7 +160,7 @@ const ORPHANS = [
   },
   {
     spotKey:    "central#engstlensee",
-    photoIdPrefix: "central_engstlensee",
+    photoIdPrefix: "engstlensee",
     photoCount: 1,
     title:      "Engstlensee",
     kicker:     "ALPINE LAKES",
@@ -176,7 +176,7 @@ const ORPHANS = [
   },
   {
     spotKey:    "eastern#maloja_pass",
-    photoIdPrefix: "eastern_maloja_pass",
+    photoIdPrefix: "maloja_pass",
     photoCount: 1,
     title:      "Maloja Pass",
     kicker:     "ROADS",
@@ -192,7 +192,7 @@ const ORPHANS = [
   },
   {
     spotKey:    "ticino#ponte_tibetano",
-    photoIdPrefix: "ticino_ponte_tibetano",
+    photoIdPrefix: "ponte_tibetano",
     photoCount: 1,
     title:      "Ponte Tibetano Carasc",
     kicker:     "SUSPENSION BRIDGES",

@@ -4,7 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:llms": "node scripts/build-llms.mjs"
+    "build": "node scripts/build-all.mjs",
+    "build:images": "node scripts/build-image-derivatives.mjs",
+    "build:assets": "node scripts/build-static-assets.mjs",
+    "build:html": "node scripts/build-chapter-html.mjs",
+    "build:sidecar": "node scripts/build-spot-images.mjs",
+    "build:llms": "node scripts/build-llms.mjs",
+    "seed": "node scripts/seed-from-content-yaml.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^0.27.0",
