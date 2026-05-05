@@ -1,0 +1,163 @@
+// Hikebeast webapp data model.
+//
+// Phase 1 (live tomorrow / today): galleries — multi-image-per-spot data
+// migrated from full/img/spot-images.js. The frontend reads these
+// reactively so admin edits show up in the carousel without a reload.
+//
+// Phases 2-4 are scaffolded so we don't have to reshape the schema later:
+//   2. users + authTokens  → magic-link login via Resend
+//   3. photoSubmissions    → Submit Photo flow lands rows here for review
+//   4. favorites + swipeDecisions → per-user state, syncs across devices
+//
+// The frontend doesn't query any of those phase-2-4 tables today, but the
+// indexes and shapes are final so that wiring them up later is purely
+// additive.
+
+import { defineSchema, defineTable } from "convex/server";
+import { v } from "convex/values";
+
+// One photo inside a spot's gallery. Exactly one of `photoId` /
+// `staticPath` / `storageId` is set:
+//   photoId    -> derivative ladder under /full/img/derivatives/<photoId>/wXXX.webp
+//                 (current source of truth; built by scripts/build-image-derivatives.mjs)
+//   staticPath -> legacy single-tier file at /full/img/<file>.jpg (pre-derivative spots)
+//   storageId  -> Convex Storage blob (Submit-Photo flow, not yet wired)
+// The frontend renderer prefers photoId, then staticPath, then storageId.
+const photoEntry = v.object({
+  photoId:    v.optional(v.string()),  // e.g. "central_fulberg_p0" — slug under derivatives/
+  staticPath: v.optional(v.string()),
+  storageId:  v.optional(v.id("_storage")),
+  credit:     v.optional(v.string()),  // e.g. "@leon.helg"
+  caption:    v.optional(v.string()),
+  sourceUrl:  v.optional(v.string()),  // Unsplash photo URL or IG post URL
+  width:      v.optional(v.number()),  // intrinsic dims of the original
+  height:     v.optional(v.number()),
+  order:      v.number(),              // primary photo = 0, then 1, 2, ...
+  addedAt:    v.number(),              // ms epoch
+});
+
+export default defineSchema({
+  // ── Spots (catalog + photos in one row) ────────────────────────────────
+  // One row per spot in the guide. Photos array always has >=1 entry (the
+  // primary, from the chapter HTML / spots-data.js); extras get appended
+  // when admin publishes a submission. The chapter pages stay as the
+  // editorial layer (deck, body, specs); everything queryable lives here.
+  spots: defineTable({
+    spotKey:    v.string(),     // "<chapter_id>#<anchor>", e.g. "central#fulberg"
+    title:      v.string(),
+    kicker:     v.optional(v.string()),  // raw, singularised at render time
+    chapter:    v.string(),     // legend number "01".."07"
+    chapterId:  v.string(),     // url segment "central".."beyond"
+    // GPS optional: 17 spots from content.yaml have no coords yet (Ice Cave,
+    // Mont Blanc, etc). Map view filters out spots without lat/lon.
+    lat:        v.optional(v.number()),
+    lon:        v.optional(v.number()),
+    color:      v.string(),     // RGB triplet "175,165,122" used by map tinting
+    mapsUrl:    v.optional(v.string()),
+    href:       v.string(),     // chapter-page anchor (relative to /full/map/)
+    photos:     v.array(photoEntry),
+    // Editorial content. Optional so spots without text (e.g. brand-new
+    // submissions) can still exist as rows. Body is paragraph-by-paragraph
+    // so the renderer can inject <p> tags + the migration round-trips
+    // cleanly. Specs are an ordered list of label/value pairs (Region,
+    // Access, Effort, Best light) -- order matters for the rendered grid.
+    deck:       v.optional(v.string()),
+    body:       v.optional(v.array(v.string())),
+    specs:      v.optional(v.array(v.object({
+      label: v.string(),
+      value: v.string(),
+    }))),
+    // Origin marker. "spot" is the default and matches everything currently
+    // in the DB (left undefined for those rows). "extras_entry" tags rows
+    // exploded out of content.yaml's `kind: extras` wrappers so the future
+    // PDF builder can re-group them. `origin` then points at the parent
+    // wrapper id (e.g. "central_extras") for round-tripping.
+    kind:       v.optional(v.union(
+                  v.literal("spot"),
+                  v.literal("extras_entry"),
+                )),
+    origin:     v.optional(v.string()),
+    // Multi-select tags (e.g. ["Waterfall","Lake"]) for the future
+    // browse-page filter chips. Empty / missing == not yet categorised.
+    properties: v.optional(v.array(v.string())),
+    // Wild-camping verdict from rebuild/wild_camping.yaml. Verdict legend:
+    //   tolerated   - SAC bivouac OK above tree line, outside protected
+    //   restricted  - above tree line but in BLN/park/UNESCO/biosphere
+    //   discouraged - below tree line / private / not a SAC site
+    //   forbidden   - hard ban (federal reserve, fen, named cantonal ban)
+    //   unknown     - data lookup failed or outside Switzerland
+    wildCamping: v.optional(v.object({
+      verdict: v.union(
+        v.literal("tolerated"),
+        v.literal("restricted"),
+        v.literal("discouraged"),
+        v.literal("forbidden"),
+        v.literal("unknown"),
+      ),
+      reason: v.optional(v.string()),
+    })),
+    updatedAt:  v.number(),
+  }).index("by_spotKey",   ["spotKey"])
+    .index("by_chapterId", ["chapterId"]),
+
+  // ── Phase 2: identity (designed; no frontend reads yet) ─────────────────
+  users: defineTable({
+    email:           v.string(),
+    handle:          v.optional(v.string()),
+    avatarStorageId: v.optional(v.id("_storage")),
+    whopLicenseKey:  v.optional(v.string()),
+    isAdmin:         v.optional(v.boolean()),
+    createdAt:       v.number(),
+    lastSeenAt:      v.number(),
+  }).index("by_email", ["email"]),
+
+  // Magic-link tokens. We store SHA-256 of the raw token, never the raw
+  // value, so DB compromise can't replay outstanding links.
+  authTokens: defineTable({
+    email:      v.string(),
+    tokenHash:  v.string(),
+    expiresAt:  v.number(),
+    consumedAt: v.optional(v.number()),
+  }).index("by_tokenHash", ["tokenHash"])
+    .index("by_email",     ["email"]),
+
+  // ── Phase 3: photo submissions queue ───────────────────────────────────
+  photoSubmissions: defineTable({
+    spotKey:             v.string(),
+    submitterUserId:     v.optional(v.id("users")),
+    submitterEmail:      v.optional(v.string()),
+    photographerHandle:  v.optional(v.string()),
+    storageId:           v.id("_storage"),
+    note:                v.optional(v.string()),
+    status:              v.union(
+                           v.literal("pending"),
+                           v.literal("approved"),
+                           v.literal("rejected"),
+                         ),
+    submittedAt:         v.number(),
+    reviewedAt:          v.optional(v.number()),
+    reviewedByUserId:    v.optional(v.id("users")),
+    rejectionReason:     v.optional(v.string()),
+    publishedPhotoIndex: v.optional(v.number()),  // index in galleries.photos[]
+  }).index("by_status",    ["status"])
+    .index("by_spot",      ["spotKey"])
+    .index("by_submitter", ["submitterUserId"]),
+
+  // ── Phase 4: per-user state ────────────────────────────────────────────
+  favorites: defineTable({
+    userId:  v.id("users"),
+    spotKey: v.string(),
+    addedAt: v.number(),
+  }).index("by_user",      ["userId"])
+    .index("by_user_spot", ["userId", "spotKey"]),
+
+  // Tracks both "save" and "no" so we can reconstruct the swipe queue
+  // server-side instead of round-tripping through localStorage.
+  swipeDecisions: defineTable({
+    userId:    v.id("users"),
+    spotKey:   v.string(),
+    decision:  v.union(v.literal("save"), v.literal("no")),
+    decidedAt: v.number(),
+  }).index("by_user",      ["userId"])
+    .index("by_user_spot", ["userId", "spotKey"]),
+});

@@ -8,7 +8,12 @@
   },
   "dependencies": {
     "@vercel/blob": "^0.27.0",
+    "convex": "^1.37.0",
     "resend": "^4.0.0",
     "stripe": "^17.5.0"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.1",
+    "sharp": "^0.34.5"
   }
 }

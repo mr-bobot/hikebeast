@@ -19,7 +19,7 @@
     <img src="../../images/avatar.jpg" alt="" />
     <span>Hidden Gems · Browse</span>
   </a>
-  <span class="crumb"><b id="visibleCount">0</b> spots</span>
+  <span class="crumb"><b id="visibleCount">0</b> photos</span>
   <div class="topbar-right">
     <a class="pill" href="../index.html">Overview</a>
   </div>
@@ -62,10 +62,61 @@
 
 <script src="../map/spots-data.js"></script>
 <script src="../img/thumbs/dimensions.js"></script>
+<script src="../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script src="../social.js"></script>
 <script>
-  // Drop any spot without an image: the photo wall has nothing to show for it.
-  const SPOTS = (window.SPOTS || []).filter(s => !!s.image);
+  // Read the catalog through the unified spots store so the page stays in
+  // sync with Convex. window.HB.spots seeds synchronously from the static
+  // sidecar (spots-data.js) and replaces with Convex data once the
+  // websocket connects -- subscribe + re-render handles live edits.
+  let SPOTS = [];
+  let propIndex = [];
+  let spotProps = new Map();
+  // Stable random order: shuffle once on first load, cache the position per
+  // spot. Subsequent refreshes (Convex updates) reuse the cached position so
+  // the wall doesn't jump around when a spot's photo updates. New spots
+  // discovered later get appended at the end (still in random order via the
+  // fractional position).
+  let randomOrder = null;  // spotKey -> position
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  function refreshSpots() {
+    // Include extras_entry rows (TODO markers) so Leon can see what's still
+    // missing a photo. They render as a distinct placeholder tile.
+    let list = window.HB.spots.all().filter(s =>
+      window.HB.hasRealImage(s) || s.kind === 'extras_entry'
+    );
+    if (!randomOrder) {
+      list = shuffle(list);
+      randomOrder = new Map(list.map((s, i) => [s.spotKey || s.title, i]));
+    } else {
+      list.sort((a, b) => {
+        const pa = randomOrder.get(a.spotKey || a.title);
+        const pb = randomOrder.get(b.spotKey || b.title);
+        if (pa == null && pb == null) return 0;
+        if (pa == null) return 1;
+        if (pb == null) return -1;
+        return pa - pb;
+      });
+      // Newly-arrived spots: drop them at the tail, randomly ordered amongst themselves.
+      let nextPos = randomOrder.size;
+      list.forEach(s => {
+        const k = s.spotKey || s.title;
+        if (!randomOrder.has(k)) randomOrder.set(k, nextPos++ + Math.random());
+      });
+    }
+    SPOTS = list;
+    propIndex = window.HB.buildPropertyIndex(SPOTS);
+    spotProps = new Map(SPOTS.map(s => [s, new Set(window.HB.propertiesOf(s))]));
+  }
+  refreshSpots();
   const LEGEND = window.LEGEND || [];
 
   const grid = document.getElementById('grid');
@@ -82,10 +133,6 @@
     chapters: new Set(),    // empty = all regions
     properties: new Set(),  // empty = all types; multi-select OR
   };
-
-  // Pre-index every spot's properties so filtering is O(1).
-  const propIndex = window.HB.buildPropertyIndex(SPOTS);
-  const spotProps = new Map(SPOTS.map(s => [s, new Set(window.HB.propertiesOf(s))]));
 
   function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
@@ -161,15 +208,47 @@
   // --- Tile rendering · image-only Pinterest-style; alt carries the title for a11y + ctrl-F.
   // Stores intrinsic dims as data-w / data-h so applySpans() can compute row spans
   // and decide which tiles get the 2-column landscape treatment.
-  function tile(spot) {
+  // Tile renderer takes a (spot, photo) tuple. A multi-photo spot produces
+  // one tile per photo; an extras_entry produces a single TODO placeholder.
+  function tile(item) {
+    const spot = item.spot;
+    const photo = item.photo;  // null for TODO tiles
+
     const a = document.createElement('a');
     a.className = 'hb-tile';
     a.href = spot.href.replace(/^\.\.\//, '../');  // already correct for /full/browse/
     a.title = spot.title;
-    const dims = (window.HB_THUMB_DIMS || {})[spot.image] || [4, 3];
-    a.dataset.w = dims[0];
-    a.dataset.h = dims[1];
-    const img = `<img src="../img/m/${esc(spot.image)}" alt="${esc(spot.title)}" width="${dims[0]}" height="${dims[1]}" loading="lazy" decoding="async" />`;
+
+    // TODO marker for spots with no photo yet (kind=extras_entry, or any
+    // kind=spot row that lacks an image). Renders as a flat 4:3 placeholder
+    // so Leon can spot what's still missing.
+    if (!photo) {
+      a.classList.add('hb-tile-todo');
+      a.dataset.w = 4;
+      a.dataset.h = 3;
+      a.innerHTML = `
+        <span class="hb-tile-todo-fill" style="background-color: rgb(${spot.color || '120,120,120'});"></span>
+        <span class="hb-tile-name">${esc(spot.title)}</span>
+        <span class="hb-tile-todo-tag">Needs photo</span>
+      `;
+      return a;
+    }
+
+    // Intrinsic dims drive row-span layout. Convex carries the original dims
+    // per photo; legacy spots fall back to the static thumb-dims sidecar.
+    const dimsArr = (photo.width && photo.height)
+      ? [photo.width, photo.height]
+      : ((window.HB_THUMB_DIMS || {})[photo.src] || (window.HB_THUMB_DIMS || {})[spot.image] || [4, 3]);
+    a.dataset.w = dimsArr[0];
+    a.dataset.h = dimsArr[1];
+    const attrs = window.HB.photoAttrs({
+      photoId: photo.photoId, image: photo.src || spot.image,
+      width: 1000, prefix: '../',
+      sizes: '(min-width: 1200px) 25vw, (min-width: 600px) 33vw, 50vw',
+      intrinsicWidth: dimsArr[0], intrinsicHeight: dimsArr[1],
+    });
+    const srcsetAttr = attrs.srcset ? ` srcset="${esc(attrs.srcset)}" sizes="${esc(attrs.sizes)}"` : '';
+    const img = `<img src="${esc(attrs.src)}"${srcsetAttr} alt="${esc(spot.title)}" width="${dimsArr[0]}" height="${dimsArr[1]}" loading="lazy" decoding="async" />`;
     a.innerHTML = img + `<span class="hb-tile-name">${esc(spot.title)}</span>`;
     // Heart button
     const k = window.HB.spotKey(spot);
@@ -254,13 +333,33 @@
     grid.classList.add('is-ready');
   }
 
+  // Round-robin every spot's photos into a flat tile list so the same spot's
+  // multiple photos get spread across the wall instead of clumping. Single-
+  // photo spots and TODO markers contribute exactly one tile each.
+  function expandToPhotoTiles(spots) {
+    const queues = spots.map(s => {
+      if (s.kind === 'extras_entry' || !s.photos || s.photos.length === 0) {
+        return [{ spot: s, photo: null }];
+      }
+      return s.photos.map(p => ({ spot: s, photo: p }));
+    });
+    const out = [];
+    let active = queues.filter(q => q.length > 0);
+    while (active.length) {
+      for (const q of active) out.push(q.shift());
+      active = active.filter(q => q.length > 0);
+    }
+    return out;
+  }
+
   function update() {
     const list = filtered();
+    const tileItems = expandToPhotoTiles(list);
     grid.classList.remove('is-ready');
     grid.innerHTML = '';
-    list.forEach(s => grid.appendChild(tile(s)));
-    visibleCount.textContent = list.length;
-    empty.hidden = list.length > 0;
+    tileItems.forEach(it => grid.appendChild(tile(it)));
+    visibleCount.textContent = tileItems.length;
+    empty.hidden = tileItems.length > 0;
     grid.hidden = list.length === 0;
     paintChips();
     requestAnimationFrame(applySpans);
@@ -297,6 +396,27 @@
   document.getElementById('totalSpots').textContent = SPOTS.length;
   renderChips();
   renderPropChips();
+
+  // When Convex pushes an update (admin published a photo, edited a spot,
+  // etc.), refresh the in-memory catalog and re-render. Property chips
+  // rebuild too in case new categories appeared.
+  window.HB.spots.subscribe(() => {
+    refreshSpots();
+    document.getElementById('totalSpots').textContent = SPOTS.length;
+    propChipsEl.innerHTML = '';
+    renderPropChips();
+    update();
+  });
+  // Pre-fill the search field from ?q= so the home page search lands on
+  // filtered results rather than an unfiltered grid.
+  try {
+    const q0 = new URLSearchParams(location.search).get('q');
+    if (q0) {
+      q.value = q0;
+      state.q = q0;
+      search.classList.add('has-value');
+    }
+  } catch {}
   update();
 </script>
 

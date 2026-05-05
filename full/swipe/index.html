@@ -42,10 +42,16 @@
 
   .deck {
     position: relative;
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     width: 100%;
     max-width: 440px;
+    /* Lock to a portrait card and centre vertically. Without this the deck
+     * stretched to fill the viewport on desktop fullscreen, producing a
+     * very tall sliver of a card. */
+    aspect-ratio: 3 / 4;
+    max-height: calc(100dvh - var(--topbar-h) - 180px);
     align-self: center;
+    margin: auto 0;
     perspective: 1200px;
   }
   .card {
@@ -160,6 +166,7 @@
   /* Decision stamps that appear as the user drags */
   .stamp {
     position: absolute;
+    top: 28px;
     padding: 8px 18px;
     border-radius: 12px;
     font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
@@ -173,14 +180,13 @@
     z-index: 3;
     pointer-events: none;
   }
-  .stamp.yes { top: 28px; right: 24px; transform: rotate(12deg); color: #34c759; }
-  .stamp.no { top: 28px; left: 24px; transform: rotate(-12deg); color: #ff3b30; }
-  .stamp.super { top: 28px; left: 50%; transform: translateX(-50%) rotate(-4deg); color: #0a84ff; }
+  .stamp.save { right: 24px; transform: rotate(12deg); color: #ff375f; }
+  .stamp.no { left: 24px; transform: rotate(-12deg); color: #ff3b30; }
 
   .actions {
     flex-shrink: 0;
     display: flex;
-    gap: 14px;
+    gap: 16px;
     align-items: center;
     justify-content: center;
     padding-top: 4px;
@@ -203,16 +209,16 @@
   .act-btn:hover { transform: translateY(-2px); }
   .act-btn:active { transform: scale(0.94); }
   .act-btn.no { color: #ff3b30; }
-  .act-btn.yes { color: #34c759; }
-  /* Super sits in the middle, slightly larger -- the standout action */
-  .act-btn.super {
+  /* Save (formerly "super") · the heart that adds to favorites. Slightly
+   * larger to mark it as the primary positive action. */
+  .act-btn.save {
     width: 68px;
     height: 68px;
-    color: #0a84ff;
-    border-color: rgba(10,132,255,0.3);
-    box-shadow: 0 8px 24px rgba(10,132,255,0.18), 0 2px 6px rgba(0,0,0,0.05);
+    color: #ff375f;
+    border-color: rgba(255,55,95,0.3);
+    box-shadow: 0 8px 24px rgba(255,55,95,0.18), 0 2px 6px rgba(0,0,0,0.05);
   }
-  .act-btn.super svg { width: 30px; height: 30px; }
+  .act-btn.save svg { width: 30px; height: 30px; }
   .act-btn.tertiary { width: 44px; height: 44px; color: var(--muted); }
   .act-btn.tertiary svg { width: 18px; height: 18px; }
 
@@ -278,17 +284,14 @@
   <div class="deck" id="deck"></div>
 
   <div class="actions">
-    <button type="button" class="act-btn tertiary" id="resetBtn" title="Start over (clears your no/yes piles)">
+    <button type="button" class="act-btn tertiary" id="resetBtn" title="Start over (clears your no pile)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
     </button>
-    <button type="button" class="act-btn no" id="noBtn" title="No (drag left)">
+    <button type="button" class="act-btn no" id="noBtn" title="No · skip (drag left)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <button type="button" class="act-btn super" id="superBtn" title="Super like — save (swipe up)">
-      <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-    </button>
-    <button type="button" class="act-btn yes" id="yesBtn" title="Yes (drag right)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    <button type="button" class="act-btn save" id="saveBtn" title="Save · add to liked (drag right)">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
     </button>
     <a class="act-btn tertiary" id="openLink" href="#" title="Open the full entry">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -298,17 +301,19 @@
 
 <script src="../map/spots-data.js"></script>
 <script src="../img/thumbs/dimensions.js"></script>
+<script src="../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script src="../social.js"></script>
 <script>
 (() => {
-  // Three decision piles:
-  //   - favorites (window.HB.favorites)  -- "super" / save
-  //   - hb:yes:v1                         -- "yes" (interested, not saved)
-  //   - hb:skipped:v1                     -- "no" (not interested)
-  // Anything in any pile drops out of the swipe queue.
+  // Two decision piles only -- the earlier yes/super/no setup felt redundant
+  // (yes did nothing; super did the save). Now: drag right or tap heart =
+  // save, drag left or tap X = skip. Both pull the spot out of the queue.
   const NO_KEY = 'hb:skipped:v1';
-  const YES_KEY = 'hb:yes:v1';
-  const SPOTS = (window.SPOTS || []).filter(s => !!s.image);
+  // Snapshot from HB.spots once at load. We deliberately don't subscribe
+  // to live updates here -- mid-swipe queue mutations would lose the
+  // user's place. A page reload after admin edits picks up fresh data.
+  const SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
   const LEGEND = window.LEGEND || [];
   const REGIONS = Object.fromEntries(LEGEND.map(c => [c.number, c.name]));
 
@@ -318,8 +323,7 @@
   const savedCountEl = document.getElementById('savedCount');
   const leftCountEl = document.getElementById('leftCount');
   const noBtn = document.getElementById('noBtn');
-  const yesBtn = document.getElementById('yesBtn');
-  const superBtn = document.getElementById('superBtn');
+  const saveBtn = document.getElementById('saveBtn');
   const resetBtn = document.getElementById('resetBtn');
   const openLink = document.getElementById('openLink');
 
@@ -333,22 +337,37 @@
     try { localStorage.setItem(key, JSON.stringify([...set])); } catch {}
   }
   const readNo = () => readSet(NO_KEY);
-  const readYes = () => readSet(YES_KEY);
+
+  // Migrate from the previous three-pile model: anything in the old yes
+  // pile gets folded into "no" (it had no functional difference) so users
+  // who already swiped a few cards don't see them again.
+  (function migrateYesPile() {
+    try {
+      const yes = JSON.parse(localStorage.getItem('hb:yes:v1') || '[]');
+      if (Array.isArray(yes) && yes.length) {
+        const no = readNo();
+        yes.forEach(k => no.add(k));
+        writeSet(NO_KEY, no);
+        localStorage.removeItem('hb:yes:v1');
+      } else {
+        localStorage.removeItem('hb:yes:v1');
+      }
+    } catch {}
+  })();
 
   function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-  // Build the queue: anything not yet decided. Fav / yes / no all remove a
-  // spot so reopening the page doesn't re-show the same cards.
+  // Build the queue: anything not yet decided. Fav and "no" both pull a
+  // spot out so reopening doesn't re-show the same cards.
   function buildQueue() {
     const no = readNo();
-    const yes = readYes();
     const remaining = SPOTS.filter(s => {
       const k = window.HB.spotKey(s);
-      return k && !window.HB.favorites.has(k) && !no.has(k) && !yes.has(k);
+      return k && !window.HB.favorites.has(k) && !no.has(k);
     });
     // Stable shuffle keyed off pile sizes so refreshes don't reorder
-    // mid-session, but a clean reset re-shuffles.
-    return shuffle(remaining, 1 + no.size + yes.size + window.HB.favorites.count());
+    // mid-session, but a reset re-shuffles.
+    return shuffle(remaining, 1 + no.size + window.HB.favorites.count());
   }
 
   // Mulberry32 deterministic shuffle
@@ -375,18 +394,28 @@
     const c = document.createElement('div');
     c.className = 'card ' + (depth === 0 ? 'is-top' : depth === 1 ? 'is-back-1' : 'is-back-2');
     const region = REGIONS[spot.chapter] || spot.chapter_id;
-    const dims = (window.HB_THUMB_DIMS || {})[spot.image] || [4, 5];
+    const dims = (spot.imageWidth && spot.imageHeight)
+      ? [spot.imageWidth, spot.imageHeight]
+      : ((window.HB_THUMB_DIMS || {})[spot.image] || [4, 5]);
     const href = '../' + (spot.href || '').replace(/^\.\.\//, '');  // map href is relative to /full/map/, we're at /full/swipe/
+    const attrs = window.HB.photoAttrs({
+      photoId: spot.imagePhotoId, image: spot.image,
+      width: 1800, prefix: '../',
+      sizes: '(min-width: 768px) 600px, 90vw',
+      intrinsicWidth: dims[0], intrinsicHeight: dims[1],
+    });
+    const srcsetAttr = attrs.srcset ? ` srcset="${esc(attrs.srcset)}" sizes="${esc(attrs.sizes)}"` : '';
     c.innerHTML = `
-      <div class="stamp yes">Yes</div>
+      <div class="stamp save">Save</div>
       <div class="stamp no">Nope</div>
-      <div class="stamp super">Super</div>
       <a class="open-link" href="${esc(href)}" title="Open full entry">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         Read
       </a>
       <div class="photo">
-        <img src="../img/m/${esc(spot.image)}" alt="${esc(spot.title)}" width="${dims[0]}" height="${dims[1]}" decoding="async" />
+        <!-- Sharp photo (w1800 default; browser swaps via srcset on bigger
+             screens). Deck holds 3 cards so bandwidth is negligible. -->
+        <img src="${esc(attrs.src)}"${srcsetAttr} alt="${esc(spot.title)}" width="${dims[0]}" height="${dims[1]}" decoding="async" />
       </div>
       <div class="body">
         <span class="kicker">${esc(window.HB.singularKicker(spot.kicker) || region)}</span>
@@ -433,9 +462,8 @@
 
   function updateCounts() {
     const no = readNo();
-    const yes = readYes();
     const saved = window.HB.favorites.count();
-    const seen = saved + no.size + yes.size;
+    const seen = saved + no.size;
     seenCountEl.textContent = Math.min(seen, TOTAL);
     savedCountEl.textContent = saved;
     leftCountEl.textContent = queue.length;
@@ -444,7 +472,6 @@
 
   function resetPiles() {
     writeSet(NO_KEY, new Set());
-    writeSet(YES_KEY, new Set());
     queue = buildQueue();
     renderDeck();
   }
@@ -486,57 +513,39 @@
     paintDrag();
   }
 
-  // The user's drag direction maps to a verdict:
-  //   - mostly horizontal & dx > 0  -> "yes"  (interested but not saved)
-  //   - mostly horizontal & dx < 0  -> "no"   (skip)
-  //   - mostly vertical   & dy < 0  -> "super" (save / favorite)
-  // We pick whichever axis has the larger absolute travel (with a small bias
-  // toward vertical so quick up-flicks register as super even with a bit of
-  // drift).
-  function dragVerdict(dx, dy) {
-    const ax = Math.abs(dx);
-    const ay = Math.abs(dy);
-    if (ay > ax * 0.85 && dy < 0) return 'super';
-    if (dx > 0) return 'yes';
-    return 'no';
+  // Two-direction drag now: right = save, left = skip. Horizontal-only --
+  // vertical drag was needed when "super" was a separate verdict; without
+  // it, vertical input just gets ignored so the card stays on rails.
+  function dragVerdict(dx) {
+    return dx >= 0 ? 'save' : 'no';
   }
 
   function paintDrag() {
     const { card, dx, dy, width } = drag;
-    // Rotation tied to horizontal travel, clamped so the card doesn't spin.
     const rot = Math.max(-14, Math.min(14, dx / 14));
-    card.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
-    const verdict = dragVerdict(dx, dy);
-    const ax = Math.abs(dx);
-    const ay = Math.abs(dy);
-    let strength = 0;
-    if (verdict === 'super') strength = Math.min(1, ay / (width * 0.5));
-    else strength = Math.min(1, ax / (width * 0.5));
-    const yesS = card.querySelector('.stamp.yes');
+    card.style.transform = `translate(${dx}px, ${dy * 0.4}px) rotate(${rot}deg)`;
+    const verdict = dragVerdict(dx);
+    const strength = Math.min(1, Math.abs(dx) / (width * 0.5));
+    const saveS = card.querySelector('.stamp.save');
     const noS = card.querySelector('.stamp.no');
-    const superS = card.querySelector('.stamp.super');
-    if (yesS) yesS.style.opacity = (verdict === 'yes' ? Math.min(1, strength * 1.4) : 0).toFixed(2);
+    if (saveS) saveS.style.opacity = (verdict === 'save' ? Math.min(1, strength * 1.4) : 0).toFixed(2);
     if (noS) noS.style.opacity = (verdict === 'no' ? Math.min(1, strength * 1.4) : 0).toFixed(2);
-    if (superS) superS.style.opacity = (verdict === 'super' ? Math.min(1, strength * 1.4) : 0).toFixed(2);
   }
 
   function onUp(e) {
     if (!drag || e.pointerId !== drag.pointerId) return;
-    const { card, dx, dy, width } = drag;
+    const { card, dx, width } = drag;
     card.removeEventListener('pointermove', onMove);
     card.removeEventListener('pointerup', onUp);
     card.removeEventListener('pointercancel', onUp);
     card.classList.remove('dragging');
-    const horizThreshold = width * 0.32;
-    const vertThreshold = width * 0.32;
-    const verdict = dragVerdict(dx, dy);
-    const past = verdict === 'super' ? Math.abs(dy) > vertThreshold : Math.abs(dx) > horizThreshold;
-    if (past) {
-      finishDecision(verdict);
+    const threshold = width * 0.32;
+    if (Math.abs(dx) > threshold) {
+      finishDecision(dragVerdict(dx));
     } else {
       card.classList.add('snap-back');
       card.style.transform = '';
-      ['yes', 'no', 'super'].forEach(v => {
+      ['save', 'no'].forEach(v => {
         const s = card.querySelector('.stamp.' + v);
         if (s) s.style.opacity = '0';
       });
@@ -551,23 +560,18 @@
     drag = null;
     const k = card.dataset.spotKey;
     if (k) {
-      if (verdict === 'super') {
+      if (verdict === 'save') {
         window.HB.favorites.set(k, true);
-      } else if (verdict === 'yes') {
-        const s = readYes(); s.add(k); writeSet(YES_KEY, s);
       } else if (verdict === 'no') {
         const s = readNo(); s.add(k); writeSet(NO_KEY, s);
       }
     }
     card.classList.add('fly-out');
-    // Trajectory: super flies up, yes flies right, no flies left.
-    const tx = verdict === 'no' ? '-140vw' : verdict === 'yes' ? '140vw' : '0';
-    const ty = verdict === 'super' ? '-120vh' : '40px';
-    const rot = verdict === 'no' ? -24 : verdict === 'yes' ? 24 : 0;
+    const dir = verdict === 'save' ? 1 : -1;
     const stamp = card.querySelector('.stamp.' + verdict);
     if (stamp) stamp.style.opacity = '1';
     requestAnimationFrame(() => {
-      card.style.transform = `translate(${tx}, ${ty}) rotate(${rot}deg)`;
+      card.style.transform = `translate(${dir * 140}vw, 30px) rotate(${dir * 24}deg)`;
       card.style.opacity = '0';
     });
     setTimeout(() => {
@@ -584,23 +588,21 @@
   }
 
   noBtn.addEventListener('click', () => programmaticSwipe('no'));
-  yesBtn.addEventListener('click', () => programmaticSwipe('yes'));
-  superBtn.addEventListener('click', () => programmaticSwipe('super'));
+  saveBtn.addEventListener('click', () => programmaticSwipe('save'));
   resetBtn.addEventListener('click', () => {
-    if (confirm('Start over? Clears your No and Yes piles and re-shuffles. Saves stay.')) resetPiles();
+    if (confirm('Start over? Clears your No pile and re-shuffles. Saves stay.')) resetPiles();
   });
 
   // Keyboard
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') programmaticSwipe('no');
-    else if (e.key === 'ArrowRight') programmaticSwipe('yes');
-    else if (e.key === 'ArrowUp') programmaticSwipe('super');
+    else if (e.key === 'ArrowRight') programmaticSwipe('save');
   });
 
   // Cross-tab sync
   window.HB.favorites.subscribe(() => updateCounts());
   window.addEventListener('storage', (e) => {
-    if (e.key === NO_KEY || e.key === YES_KEY) { queue = buildQueue(); renderDeck(); }
+    if (e.key === NO_KEY) { queue = buildQueue(); renderDeck(); }
   });
 
   renderDeck();

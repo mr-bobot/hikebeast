@@ -7,3 +7,7 @@ node_modules/
 .env
 .env.local
 .env.*.local
+
+# Convex auto-generates types in this dir on every dev push -- regenerated
+# from convex/schema.ts and convex/*.ts, not worth tracking.
+convex/_generated/

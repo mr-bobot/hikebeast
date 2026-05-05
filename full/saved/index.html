@@ -52,10 +52,18 @@
 
 <script src="../map/spots-data.js"></script>
 <script src="../img/thumbs/dimensions.js"></script>
+<script src="../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script src="../social.js"></script>
 <script>
-  // Drop any spot without an image: photo wall has nothing to show for it.
-  const SPOTS = (window.SPOTS || []).filter(s => !!s.image);
+  // Read through the unified spots store: sidecar-seeded synchronously,
+  // Convex-fed reactively. SPOTS is reassigned (not const) so re-renders
+  // after a Convex update see fresh metadata + photos.
+  let SPOTS = [];
+  function refreshSpots() {
+    SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
+  }
+  refreshSpots();
   const LEGEND = window.LEGEND || [];
 
   const content = document.getElementById('content');
@@ -75,9 +83,15 @@
     const regionName = region ? region.name : spot.chapter_id;
     const kicker = window.HB.singularKicker(spot.kicker || '');
     const sub = kicker ? `${esc(kicker)} · ${esc(regionName)}` : esc(regionName);
+    const attrs = window.HB.photoAttrs({
+      photoId: spot.imagePhotoId, image: spot.image,
+      width: 1000, prefix: '../',
+      sizes: '(min-width: 1200px) 25vw, (min-width: 600px) 33vw, 50vw',
+    });
+    const srcsetAttr = attrs.srcset ? ` srcset="${esc(attrs.srcset)}" sizes="${esc(attrs.sizes)}"` : '';
     a.innerHTML = `
       <div class="photo">
-        <img src="../img/m/${esc(spot.image)}" alt="${esc(spot.title)}" loading="lazy" decoding="async" />
+        <img src="${esc(attrs.src)}"${srcsetAttr} alt="${esc(spot.title)}" loading="lazy" decoding="async" />
       </div>
       <div class="body">
         <div class="name">${esc(spot.title)}</div>
@@ -154,6 +168,9 @@
   }
 
   window.HB.favorites.subscribe(render);
+  // When Convex pushes a spot update (e.g. a saved spot's primary photo
+  // changed), repaint the saved cards too.
+  window.HB.spots.subscribe(() => { refreshSpots(); render(); });
   render();
 </script>
 

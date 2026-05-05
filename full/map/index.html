@@ -205,6 +205,8 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="spots-data.js"></script>
+<script src="../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script src="../social.js"></script>
 <script>
   // preferCanvas + smaller-touch-handler: Canvas vector renderer is
@@ -217,7 +219,18 @@
     tap: false,           // skip Leaflet's tap-delay on touch devices
   }).setView([46.82, 8.22], 8);
 
-  const SPOTS = window.SPOTS || [];
+  // Sourced through HB.spots. Sidecar-seeded synchronously so the initial
+  // forEach has data even before Convex's WebSocket connects. The first
+  // Convex push then triggers a one-shot rebuild so the new spots (and
+  // derivative thumbnails) appear without a reload. Subsequent updates are
+  // ignored to honor the "don't rebuild Leaflet overlays on every change"
+  // rule (see SESSION-CONTEXT).
+  // Include extras_entry rows (no photo yet) as plain colored markers so
+  // the user sees the still-TODO entries on the map. Real spots without GPS
+  // are skipped at marker-build time below.
+  let SPOTS = window.HB.spots.all().filter(s =>
+    window.HB.hasRealImage(s) || s.kind === 'extras_entry'
+  );
   const LEGEND = window.LEGEND || [];
   const GEOJSON = window.SWITZERLAND_GEOJSON;
 
@@ -261,43 +274,75 @@
   const markersByChapter = new Map();
   LEGEND.forEach(c => markersByChapter.set(c.number, []));
 
-  SPOTS.forEach(s => {
-    // Markers use the tiny thumbnails (160px @ q60, ~5-7 KB each); the
-    // popup keeps the full-size image from /full/img/.
-    const thumbUrl = s.image ? '../img/thumbs/' + s.image : '';
-    const styleAttr = thumbUrl
-      ? "background-image: url('" + thumbUrl + "'); background-color: rgb(" + s.color + ");"
-      : "background-color: rgb(" + s.color + ");";
-    const iconSize = isMobile ? [36, 44] : [46, 56];
-    const icon = L.divIcon({
-      className: 'spot-marker',
-      html: '<span class="thumb" style="' + styleAttr + '"></span>',
-      iconSize, iconAnchor: [iconSize[0] / 2, iconSize[1] / 2],
+  function buildMarkers() {
+    // Tear down whatever's currently on the map (sidecar-seeded markers on
+    // first run; nothing on subsequent re-runs after Convex catches up).
+    markersByChapter.forEach((list, ch) => {
+      const grp = layers.get(ch);
+      list.forEach(m => grp?.removeLayer(m));
+      list.length = 0;
     });
-    const m = L.marker([s.lat, s.lon], { icon });
-    if (!isMobile) {
-      m.bindTooltip(esc(s.title), { className: 'spot-tip', direction: 'top', offset: [0, -22], opacity: 1 });
-    }
-    m.bindPopup(`
-        <div class="spot-popup">
-          ${s.image ? '<img src="../img/' + s.image + '" alt="" />' : ''}
-          <div class="body">
-            <p class="kicker">${esc(s.kicker || '')}</p>
-            <h3>${esc(s.title)}</h3>
-            <p class="meta">${esc(s.chapter_id.charAt(0).toUpperCase() + s.chapter_id.slice(1))} Switzerland</p>
-            <a class="read" href="${s.href}">Read</a>
+
+    SPOTS.forEach(s => {
+      // Markers use the smallest derivative tier (w160 webp, ~2-5 KB each);
+      // the popup uses the mid tier (w1000) which is plenty for the 240 px
+      // popup width.
+      if (s.lat == null || s.lon == null) return;  // skip spots with no GPS
+      const thumbUrl = window.HB.photoUrl({
+        photoId: s.imagePhotoId, image: s.image, width: 160, prefix: '../',
+      });
+      const popupUrl = window.HB.photoUrl({
+        photoId: s.imagePhotoId, image: s.image, width: 1000, prefix: '../',
+      });
+      const styleAttr = thumbUrl
+        ? "background-image: url('" + thumbUrl + "'); background-color: rgb(" + s.color + ");"
+        : "background-color: rgb(" + s.color + ");";
+      const iconSize = isMobile ? [36, 44] : [46, 56];
+      const icon = L.divIcon({
+        className: 'spot-marker',
+        html: '<span class="thumb" style="' + styleAttr + '"></span>',
+        iconSize, iconAnchor: [iconSize[0] / 2, iconSize[1] / 2],
+      });
+      const m = L.marker([s.lat, s.lon], { icon });
+      if (!isMobile) {
+        m.bindTooltip(esc(s.title), { className: 'spot-tip', direction: 'top', offset: [0, -22], opacity: 1 });
+      }
+      m.bindPopup(`
+          <div class="spot-popup">
+            ${popupUrl ? '<img src="' + esc(popupUrl) + '" alt="" />' : ''}
+            <div class="body">
+              <p class="kicker">${esc(s.kicker || '')}</p>
+              <h3>${esc(s.title)}</h3>
+              <p class="meta">${esc(s.chapter_id.charAt(0).toUpperCase() + s.chapter_id.slice(1))} Switzerland</p>
+              <a class="read" href="${s.href}">Read</a>
+            </div>
           </div>
-        </div>
-    `, { maxWidth: 240, minWidth: 240 });
-    // Tag the marker with its favorite-key so the "Saved only" filter can
-    // include/exclude it without rebuilding any DOM.
-    m._spotKey = (window.HB && window.HB.spotKey) ? window.HB.spotKey(s) : null;
-    const grp = layers.get(s.chapter);
-    if (grp) {
-      const list = markersByChapter.get(s.chapter) || [];
-      list.push(m);
-      grp.addLayer(m);
-    }
+      `, { maxWidth: 240, minWidth: 240 });
+      // Tag the marker with its favorite-key so the "Saved only" filter can
+      // include/exclude it without rebuilding any DOM.
+      m._spotKey = (window.HB && window.HB.spotKey) ? window.HB.spotKey(s) : null;
+      const grp = layers.get(s.chapter);
+      if (grp) {
+        const list = markersByChapter.get(s.chapter) || [];
+        list.push(m);
+        grp.addLayer(m);
+      }
+    });
+  }
+  buildMarkers();
+
+  // One-shot rebuild on the first Convex push so the missing spots (no
+  // GPS or recently added) and derivative thumbnails appear without a
+  // page reload. Further updates are ignored — the map is snapshot-only
+  // by design; rebuilding on every favorite toggle would thrash overlays.
+  let convexCaughtUp = false;
+  const unsubFromSpots = window.HB.spots.subscribe(() => {
+    if (convexCaughtUp) return;
+    convexCaughtUp = true;
+    SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
+    buildMarkers();
+    if (typeof applyFavFilter === 'function') applyFavFilter();
+    if (typeof updateCount === 'function') updateCount();
   });
 
   const visEl = document.getElementById('visible');
