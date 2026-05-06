@@ -1654,10 +1654,10 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   .slide-spot .sp-photo img { aspect-ratio: 1 / 1; height: auto; }
 }
 .slide-spot .sp-body {
-  padding: 22px 24px 24px;
+  padding: 28px 22px 28px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
   min-width: 0;
   overflow: hidden;
 }
@@ -1717,39 +1717,46 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 }
 .sp-title {
   font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 1.05;
   letter-spacing: -0.025em;
   margin: 0;
   font-weight: 600;
 }
+/* Deck (lede paragraph) — visually distinct from the body so the
+ * editorial summary doesn't blur into the prose. SF Pro Display +
+ * italic + slightly darker than the muted body text reads as a
+ * "this is the gist" paragraph, in the magazine sense. */
 .sp-deck {
   margin: 0;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.45;
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-style: italic;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.4;
   letter-spacing: -0.01em;
+  color: #3a3a3c;
 }
-.sp-body p { margin: 0; font-size: 13.5px; line-height: 1.55; color: #2c2c2e; }
-.sp-body .body { display: flex; flex-direction: column; gap: 8px; }
+.sp-body p { margin: 0; font-size: 16px; line-height: 1.6; color: #1c1c1e; }
+.sp-body .body { display: flex; flex-direction: column; gap: 14px; }
 
 .specs {
   margin-top: auto;
-  padding-top: 4px;
+  padding-top: 6px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 14px;
 }
-.spec { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.spec { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .spec .lbl {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
 }
 .spec .val {
-  font-size: 12.5px;
+  font-size: 15px;
   color: var(--fg);
   line-height: 1.35;
   letter-spacing: -0.005em;
@@ -1769,16 +1776,16 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 .sp-foot .locked svg { width: 12px; height: 12px; }
 .sp-foot .locked a { color: var(--accent); text-decoration: none; font-weight: 500; }
 @media (min-width: 760px) {
-  .sp-title { font-size: 28px; }
-  .sp-deck { font-size: 16px; }
-  .sp-body p { font-size: 14px; line-height: 1.6; }
-  .spec .val { font-size: 13px; }
+  .sp-title { font-size: 32px; }
+  .sp-deck { font-size: 18px; }
+  .sp-body p { font-size: 16px; }
+  .spec .val { font-size: 15px; }
 }
 @media (min-width: 1100px) {
-  .sp-title { font-size: 36px; letter-spacing: -0.03em; }
-  .sp-deck { font-size: 17px; }
-  .sp-body p { font-size: 15px; }
-  .spec .val { font-size: 14px; }
+  .sp-title { font-size: 38px; letter-spacing: -0.03em; }
+  .sp-deck { font-size: 19px; }
+  .sp-body p { font-size: 17px; }
+  .spec .val { font-size: 15px; }
 }
 
 /* === Preface (with photo) — same image-left + text-right === */
