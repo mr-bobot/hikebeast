@@ -961,6 +961,35 @@
     accountFab.dataset.hbAccount = '';
     document.body.appendChild(accountFab);
 
+    // Mobile bottom tab bar. Hidden above 700px via CSS. Replaces the
+    // burger drawer as the primary mobile nav so people actually
+    // discover Swipe / Map / Liked instead of leaving them buried in a
+    // hamburger. Five slots, picked for thumb-reach and discovery
+    // weight: Home · Explore · Swipe · Map · Liked. The fav-count badge
+    // re-uses the same [data-hb-fav-count] painter as the rail's badge.
+    const tabbar = document.createElement('nav');
+    tabbar.className = 'app-tabbar';
+    tabbar.setAttribute('aria-label', 'Primary navigation');
+    tabbar.innerHTML = `
+      <a class="tab${cur('/full/') || cur('/full/index.html')}" href="${REL}index.html">
+        ${SVG_HOME}<span>Home</span>
+      </a>
+      <a class="tab${cur('/browse/')}" href="${REL}browse/">
+        ${SVG_GRID}<span>Explore</span>
+      </a>
+      <a class="tab${cur('/swipe/')}" href="${REL}swipe/">
+        ${SVG_SWIPE}<span>Swipe</span>
+      </a>
+      <a class="tab${cur('/map/')}" href="${REL}map/">
+        ${SVG_MAP}<span>Map</span>
+      </a>
+      <a class="tab${cur('/saved/')}" href="${REL}saved/" data-hb-saved-link>
+        ${SVG_HEART_OUT}<span>Liked</span>
+        <span class="tab-badge" data-hb-fav-count></span>
+      </a>
+    `;
+    document.body.appendChild(tabbar);
+
     // Backdrop for mobile drawer
     const backdrop = document.createElement('div');
     backdrop.className = 'rail-backdrop';
@@ -995,8 +1024,12 @@
       try { localStorage.setItem(RAIL_KEY, next ? '1' : '0'); } catch {}
     });
 
-    // Random
-    rail.querySelector('[data-hb-random]').addEventListener('click', () => {
+    // Random — delegated globally so any `[data-hb-random]` button works
+    // (rail item, the home-page "Surprise me" button, etc).
+    document.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-hb-random]');
+      if (!t) return;
+      e.preventDefault();
       closeMobileDrawer();
       randomJump();
     });

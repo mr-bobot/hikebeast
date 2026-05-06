@@ -261,6 +261,21 @@
     .deck { max-width: 460px; }
     .card .body h2 { font-size: 32px; }
   }
+
+  /* Mobile: shell must also subtract the bottom tab bar (56px + safe
+   * area), otherwise the action buttons sit behind it. iPhone SE
+   * (375x667) is the tightest target — keep the deck shorter so the
+   * card and action row both fit without scroll. */
+  @media (max-width: 700px) {
+    .swipe-shell {
+      height: calc(100dvh - var(--topbar-h) - 56px - env(safe-area-inset-bottom));
+      padding: 12px 16px 16px;
+      gap: 10px;
+    }
+    .deck {
+      max-height: calc(100dvh - var(--topbar-h) - 56px - env(safe-area-inset-bottom) - 130px);
+    }
+  }
 </style>
 </head>
 <body>

@@ -168,6 +168,12 @@
     .fav-toggle { height: 28px; padding: 6px 10px; font-size: 11px; }
     .fav-toggle svg { width: 12px; height: 12px; }
     .spot-marker .thumb { width: 32px; height: 40px; border-width: 1.5px; }
+
+    /* Shrink map shell on mobile so the bottom tab bar (56px + safe
+     * area) doesn't overlap the legend / Leaflet attribution. */
+    .map-shell {
+      height: calc(100dvh - var(--topbar-h) - 56px - env(safe-area-inset-bottom));
+    }
   }
 </style>
 </head>
