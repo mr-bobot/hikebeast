@@ -1256,10 +1256,18 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   body[data-chapter-view="grid"] .chapter-grid-inner { grid-template-columns: 1fr 1fr 1fr 1fr; }
 }
 
-/* Reader card — square photo on the left, body on the right (desktop).
- * Stacks vertically on mobile. The whole card is a click target via JS
- * (data-href). Photo column uses a 1:1 aspect ratio so every card has
- * the same height. */
+/* Reader card — image on the left, body on the right (desktop).
+ * Stacks vertically on mobile.
+ *
+ * Desktop layout follows Leon's Figma reference (1264 × 711):
+ *   - Card aspect-ratio 1264 / 711 (≈ 1.777)
+ *   - Columns 612fr 652fr (image slightly narrower than text side)
+ *   - Body padding ratios: top 166/1264, bottom 154/1264, left 59/1264
+ *   - Kicker→top 166, subhead→specs 88, Maps→bottom 154 (per Figma)
+ *
+ * Container-query units (cqi = 1% of card inline-size) keep all spacing
+ * and typography proportional to the actual card width at any viewport.
+ * clamp() floors prevent collapse on narrower screens. */
 .cl-card {
   display: grid;
   grid-template-columns: 1fr;
@@ -1275,18 +1283,26 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   outline-offset: 2px;
 }
 @media (min-width: 760px) {
-  .cl-card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .cl-card {
+    grid-template-columns: 612fr 652fr;
+    container-type: inline-size;
+  }
 }
 
-/* Photo column — fixed 1:1 aspect ratio. Internal carousel reuses the
- * .hb-multi pattern from spot detail pages so chapter and detail share
- * the same arrows + dots + counter visual (see the .sp-photo.hb-multi, .cl-photos.hb-multi
- * rules below — they're widened to also match .cl-photos.hb-multi). */
+/* Photo column. Mobile: 1:1 (stacked). Desktop: 612:711 — the photo half
+ * of the Figma reference. The body row stretches to whatever this height
+ * is, which gives the overall card the 1264:711 (~1.78) aspect ratio
+ * when text fits. If content runs longer (e.g. very long titles), the
+ * row grows and the photo grows with it (object-fit: cover absorbs it),
+ * so nothing clips. Internal carousel uses .hb-multi (rules below). */
 .cl-photos {
   position: relative;
   aspect-ratio: 1 / 1;
   background: var(--surface);
   overflow: hidden;
+}
+@media (min-width: 760px) {
+  .cl-photos { aspect-ratio: 612 / 711; height: 100%; }
 }
 .cl-photos > img {
   /* Single-photo cards: a plain <img> rather than an .hb-slide stack. */
@@ -1303,7 +1319,14 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   gap: 10px;
 }
 @media (min-width: 760px) {
-  .cl-body { padding: 48px 56px; justify-content: center; }
+  .cl-body {
+    /* Padding: top 13.13cqi (166/1264), bottom 12.18cqi (154/1264),
+     * left 4.67cqi (59/1264). No right padding — text wraps within
+     * the column's max-width. */
+    padding: 13.13cqi 0 12.18cqi 4.67cqi;
+    justify-content: flex-start;
+    gap: 0;
+  }
 }
 .cl-kicker {
   margin: 0;
@@ -1312,6 +1335,10 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+@media (min-width: 760px) {
+  /* 12.64 / 1264 = 1.0cqi */
+  .cl-kicker { font-size: clamp(11px, 1cqi, 14px); }
 }
 .cl-title {
   margin: 4px 0 0;
@@ -1322,8 +1349,13 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   line-height: 1.02;
   color: var(--fg);
 }
-@media (min-width: 760px) { .cl-title { font-size: 44px; } }
-@media (min-width: 1100px) { .cl-title { font-size: 56px; } }
+@media (min-width: 760px) {
+  /* 60 / 1264 = 4.747cqi. Small gap below kicker (~24px @ 1264 wide). */
+  .cl-title {
+    font-size: clamp(40px, 4.75cqi, 64px);
+    margin: clamp(12px, 1.9cqi, 28px) 0 0;
+  }
+}
 .cl-subhead {
   margin: 12px 0 0;
   color: var(--muted);
@@ -1332,15 +1364,23 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   letter-spacing: -0.005em;
   max-width: 38ch;
 }
-@media (min-width: 760px) { .cl-subhead { font-size: 18px; margin-top: 14px; } }
+@media (min-width: 760px) {
+  /* 20 / 1264 = 1.582cqi. Small gap below title (~16px @ 1264). */
+  .cl-subhead {
+    font-size: clamp(15px, 1.58cqi, 22px);
+    margin-top: clamp(10px, 1.27cqi, 18px);
+  }
+}
 .cl-specs {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px 24px;
   margin-top: 28px;
 }
-@media (min-width: 1100px) { .cl-specs { margin-top: 44px; } }
-@media (min-width: 1400px) { .cl-specs { margin-top: 56px; } }
+@media (min-width: 760px) {
+  /* 88 / 1264 = 6.96cqi (the explicit subhead → specs gap from Figma). */
+  .cl-specs { margin-top: clamp(36px, 6.96cqi, 110px); }
+}
 .cl-spec { display: flex; flex-direction: column; gap: 3px; }
 .cl-lbl {
   font-size: 10.5px;
@@ -1349,10 +1389,18 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   text-transform: uppercase;
   color: var(--soft);
 }
+@media (min-width: 760px) {
+  /* 13.69 / 1264 = 1.083cqi */
+  .cl-lbl { font-size: clamp(11px, 1.08cqi, 15px); }
+}
 .cl-val {
   font-size: 15px;
   color: var(--fg);
   letter-spacing: -0.005em;
+}
+@media (min-width: 760px) {
+  /* 15.27 / 1264 = 1.208cqi */
+  .cl-val { font-size: clamp(13px, 1.21cqi, 17px); }
 }
 .cl-maps {
   display: inline-flex;
@@ -1364,6 +1412,14 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   font-weight: 500;
   font-size: 14px;
   letter-spacing: -0.005em;
+}
+@media (min-width: 760px) {
+  /* 12.65 / 1264 = 1.0cqi. Gap from specs is the natural flow remainder
+   * before the bottom padding (154/1264) takes over. */
+  .cl-maps {
+    font-size: clamp(11px, 1cqi, 14px);
+    margin-top: clamp(20px, 2.5cqi, 48px);
+  }
 }
 .cl-maps:hover { text-decoration: underline; }
 .cl-maps svg { width: 16px; height: 16px; }
