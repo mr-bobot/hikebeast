@@ -1241,6 +1241,12 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 .chapter-list,
 .chapter-grid-inner { display: none; }
 body[data-chapter-view="reader"] .chapter-list { display: flex; flex-direction: column; gap: 36px; }
+@media (min-width: 760px) {
+  /* Reader-view cards run at 90% of the available content width so they
+   * sit comfortably inside the column without bleeding to the edges.
+   * Mobile keeps full-width because cards stack and need every pixel. */
+  body[data-chapter-view="reader"] .chapter-list { max-width: 90%; margin: 0 auto; }
+}
 @media (min-width: 1100px) {
   body[data-chapter-view="reader"] .chapter-list { gap: 48px; }
 }
