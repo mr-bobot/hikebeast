@@ -11,6 +11,8 @@
  */
 (function () {
   const KEY = 'hb:fav:v1';
+  const NO_KEY = 'hb:skipped:v1';
+  const SESSION_KEY = 'hb:session:v1';
   const W = window;
 
   // --- Compute relative path back to /full/ from the current URL.
@@ -46,42 +48,463 @@
     return null;
   }
 
-  // --- Storage layer
-  function read() {
+  // ── Shared Convex client ──────────────────────────────────────────────
+  // One ConvexClient (= one websocket) shared by spots, session, favorites,
+  // and swipes. Returns null if Convex isn't configured on the page.
+  let convexClient = null;
+  function getConvex() {
+    if (convexClient) return convexClient;
+    if (!W.convex || !W.HB_CONVEX_URL) return null;
+    try { convexClient = new W.convex.ConvexClient(W.HB_CONVEX_URL); }
+    catch (e) { console.warn("Convex client init failed:", e); convexClient = null; }
+    return convexClient;
+  }
+
+  // ── Session ───────────────────────────────────────────────────────────
+  // Token lives in localStorage so it survives reloads. The reactive
+  // `auth:currentUser` query keeps `user` in sync with the server (e.g.
+  // server-side session revocation flips this tab's UI to signed-out).
+  const session = (() => {
+    let token = null;
+    let user  = null;
+    let unsubCurrentUser = null;
+    const subs = new Set();
+    function notify() { subs.forEach(fn => { try { fn(user); } catch {} }); }
+
+    function readToken() {
+      try { return localStorage.getItem(SESSION_KEY) || null; } catch { return null; }
+    }
+    function writeToken(t) {
+      try {
+        if (t) localStorage.setItem(SESSION_KEY, t);
+        else   localStorage.removeItem(SESSION_KEY);
+      } catch {}
+    }
+
+    function setupReactive() {
+      if (unsubCurrentUser) { try { unsubCurrentUser(); } catch {} unsubCurrentUser = null; }
+      const c = getConvex();
+      if (!c || !token) return;
+      const sub = c.onUpdate(
+        "auth:currentUser",
+        { sessionToken: token },
+        (u) => {
+          const before = user ? user._id : null;
+          const after  = u    ? u._id    : null;
+          user = u || null;
+          // Server says this token is invalid (revoked or expired) — drop it
+          // locally so favorites/swipes flip back to anonymous mode.
+          if (!user && token) {
+            token = null;
+            writeToken(null);
+            favorites._reattach();
+            swipes._reattach();
+          }
+          if (before !== after) notify();
+        },
+        (err) => { console.warn("currentUser subscription error:", err); },
+      );
+      unsubCurrentUser = sub.unsubscribe;
+    }
+
+    async function signIn(usernameOrEmail, password) {
+      const c = getConvex();
+      if (!c) throw new Error("Convex client unavailable");
+      const result = await c.mutation("auth:signIn", { usernameOrEmail, password });
+      token = result.sessionToken;
+      user  = result.user;
+      writeToken(token);
+      // Migrate anything saved while anonymous BEFORE we flip the favorites
+      // store over to Convex — bulkAdd is idempotent so re-entry is safe.
+      try { await migrateLocalToServer(token); } catch (e) { console.warn("migration:", e); }
+      setupReactive();
+      favorites._reattach();
+      swipes._reattach();
+      notify();
+      return user;
+    }
+
+    async function signOut() {
+      const tok = token;
+      // Local clear first so the UI reacts even if the network call hangs.
+      token = null;
+      user  = null;
+      writeToken(null);
+      if (unsubCurrentUser) { try { unsubCurrentUser(); } catch {} unsubCurrentUser = null; }
+      favorites._reattach();
+      swipes._reattach();
+      notify();
+      // Server-side logout: revoke the Convex session AND clear the
+      // hb_full_auth cookie that the middleware checks on /full/*. We hit
+      // /api/account-logout for both side effects in one round-trip.
+      try {
+        await fetch('/api/account-logout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionToken: tok || null }),
+          credentials: 'same-origin',
+        });
+      } catch {}
+      // Cookie is gone — the next /full/* request would bounce to /login
+      // anyway, so navigate explicitly for a clean transition.
+      try { location.assign('/login/'); } catch {}
+    }
+
+    function init() {
+      token = readToken();
+      setupReactive();
+    }
+
+    return {
+      init,
+      signIn,
+      signOut,
+      token: () => token,
+      user:  () => user,
+      isSignedIn: () => !!token,
+      subscribe(fn) { subs.add(fn); return () => subs.delete(fn); },
+    };
+  })();
+
+  // ── localStorage → Convex migration on first sign-in ─────────────────
+  // Anonymous favorites + skipped-swipes get copied into the user's Convex
+  // rows the first time they sign in. Idempotent: bulkAdd skips duplicates.
+  // localStorage is cleared on success so the next anonymous session
+  // doesn't see ghost state.
+  async function migrateLocalToServer(token) {
+    const c = getConvex();
+    if (!c || !token) return;
+
+    let favKeys = [];
     try {
       const raw = localStorage.getItem(KEY);
-      if (!raw) return new Set();
-      const arr = JSON.parse(raw);
-      return new Set(Array.isArray(arr) ? arr : []);
-    } catch { return new Set(); }
-  }
-  function write(set) {
-    try { localStorage.setItem(KEY, JSON.stringify([...set])); } catch {}
+      if (raw) {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr)) favKeys = arr.filter(k => typeof k === "string");
+      }
+    } catch {}
+    if (favKeys.length) {
+      try {
+        await c.mutation("userFavorites:bulkAdd", { sessionToken: token, spotKeys: favKeys });
+        try { localStorage.removeItem(KEY); } catch {}
+      } catch (e) { console.warn("favorites migration failed:", e); }
+    }
+
+    let noKeys = [];
+    try {
+      const raw = localStorage.getItem(NO_KEY);
+      if (raw) {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr)) noKeys = arr.filter(k => typeof k === "string");
+      }
+    } catch {}
+    if (noKeys.length) {
+      try {
+        await c.mutation("userSwipes:bulkAdd", {
+          sessionToken: token,
+          decisions: noKeys.map(spotKey => ({ spotKey, decision: "no" })),
+        });
+        try { localStorage.removeItem(NO_KEY); } catch {}
+      } catch (e) { console.warn("swipes migration failed:", e); }
+    }
   }
 
-  const subs = new Set();
-  function notify() { subs.forEach(fn => { try { fn(); } catch {} }); }
+  // ── Favorites store ───────────────────────────────────────────────────
+  // Public API (has/list/count/toggle/set/clear/subscribe) is unchanged
+  // from the original localStorage-only version, so every page that calls
+  // HB.favorites continues to work without edits. Internally:
+  //   - signed out  → mirror reads/writes localStorage (`hb:fav:v1`)
+  //   - signed in   → mirror is fed by a reactive Convex query, mutations
+  //                   call userFavorites:* (with optimistic local update)
+  // The mirror is a Set kept in memory so .has/.list/.count remain sync.
+  const favorites = (() => {
+    let mirror = new Set();
+    let serverActive = false;
+    let unsub = null;
+    const subs = new Set();
+    function notify() { subs.forEach(fn => { try { fn(); } catch {} }); }
 
-  const favorites = {
-    has(key) { return read().has(key); },
-    list() { return [...read()]; },
-    count() { return read().size; },
-    toggle(key) {
-      const s = read();
-      if (s.has(key)) s.delete(key); else s.add(key);
-      write(s);
+    function readLocal() {
+      try {
+        const raw = localStorage.getItem(KEY);
+        if (!raw) return new Set();
+        const arr = JSON.parse(raw);
+        return new Set(Array.isArray(arr) ? arr : []);
+      } catch { return new Set(); }
+    }
+    function writeLocal(set) {
+      try { localStorage.setItem(KEY, JSON.stringify([...set])); } catch {}
+    }
+
+    function setEqual(a, b) {
+      if (a.size !== b.size) return false;
+      for (const k of a) if (!b.has(k)) return false;
+      return true;
+    }
+
+    function applyServer(spotKeys) {
+      const next = new Set(Array.isArray(spotKeys) ? spotKeys : []);
+      if (setEqual(mirror, next)) return;
+      mirror = next;
       notify();
-      return s.has(key);
-    },
-    set(key, on) {
-      const s = read();
-      if (on) s.add(key); else s.delete(key);
-      write(s);
+    }
+
+    function attach() {
+      if (unsub) { try { unsub(); } catch {} unsub = null; }
+      const c = getConvex();
+      const tok = session.token();
+      if (c && tok) {
+        serverActive = true;
+        // Don't keep stale local state visible; subscription will populate.
+        if (mirror.size) { mirror = new Set(); notify(); }
+        const sub = c.onUpdate(
+          "userFavorites:list",
+          { sessionToken: tok },
+          (res) => {
+            if (res && res.signedIn) applyServer(res.spotKeys);
+          },
+          (err) => { console.warn("favorites subscription error:", err); },
+        );
+        unsub = sub.unsubscribe;
+      } else {
+        serverActive = false;
+        applyServer([...readLocal()]);
+      }
+    }
+
+    return {
+      has(key)   { return mirror.has(key); },
+      list()     { return [...mirror]; },
+      count()    { return mirror.size; },
+      toggle(key) {
+        if (!key) return false;
+        const wasOn = mirror.has(key);
+        // Optimistic mirror update so consumers repaint immediately.
+        if (wasOn) mirror.delete(key); else mirror.add(key);
+        notify();
+        if (serverActive) {
+          const c = getConvex(); const tok = session.token();
+          if (c && tok) {
+            c.mutation("userFavorites:toggle", { sessionToken: tok, spotKey: key })
+              .catch(err => {
+                console.warn("favorites:toggle failed, reverting:", err);
+                if (wasOn) mirror.add(key); else mirror.delete(key);
+                notify();
+              });
+          }
+        } else {
+          writeLocal(mirror);
+        }
+        return mirror.has(key);
+      },
+      set(key, on) {
+        if (!key) return;
+        const wasOn = mirror.has(key);
+        if (wasOn === on) return;
+        if (on) mirror.add(key); else mirror.delete(key);
+        notify();
+        if (serverActive) {
+          const c = getConvex(); const tok = session.token();
+          if (c && tok) {
+            c.mutation("userFavorites:setFavorite", { sessionToken: tok, spotKey: key, on })
+              .catch(err => {
+                console.warn("favorites:set failed, reverting:", err);
+                if (on) mirror.delete(key); else mirror.add(key);
+                notify();
+              });
+          }
+        } else {
+          writeLocal(mirror);
+        }
+      },
+      clear() {
+        if (mirror.size === 0) return;
+        const before = mirror;
+        mirror = new Set();
+        notify();
+        if (serverActive) {
+          const c = getConvex(); const tok = session.token();
+          if (c && tok) {
+            c.mutation("userFavorites:clearAll", { sessionToken: tok })
+              .catch(err => {
+                console.warn("favorites:clear failed, reverting:", err);
+                mirror = before;
+                notify();
+              });
+          }
+        } else {
+          writeLocal(mirror);
+        }
+      },
+      subscribe(fn) { subs.add(fn); return () => subs.delete(fn); },
+      // Internal: re-attach to server or fall back to local — called by
+      // session on sign-in / sign-out and by the cross-tab storage handler.
+      _reattach: attach,
+      _onLocalStorageChanged() {
+        if (!serverActive) applyServer([...readLocal()]);
+      },
+    };
+  })();
+
+  // ── Swipe history store ──────────────────────────────────────────────
+  // Mirrors the same shape as favorites but tracks "save" + "no" decisions.
+  // Anonymous users keep "no" decisions in `hb:skipped:v1` (existing key)
+  // and "save" decisions implicitly via the favorites localStorage. Signed-in
+  // users get the unified server view (`userSwipes:list`).
+  //
+  // Frontend convenience: HB.swipes.has(k) returns true if the spot was
+  // swiped either way, so the swipe deck filter becomes a single check
+  // instead of "not favorited AND not skipped".
+  const swipes = (() => {
+    let serverMirror = new Map();   // spotKey → "save" | "no"
+    let serverActive = false;
+    let unsub = null;
+    const subs = new Set();
+    function notify() { subs.forEach(fn => { try { fn(); } catch {} }); }
+
+    function readLocalNo() {
+      try {
+        const raw = localStorage.getItem(NO_KEY);
+        if (!raw) return new Set();
+        const arr = JSON.parse(raw);
+        return new Set(Array.isArray(arr) ? arr : []);
+      } catch { return new Set(); }
+    }
+    function writeLocalNo(set) {
+      try { localStorage.setItem(NO_KEY, JSON.stringify([...set])); } catch {}
+    }
+
+    function applyServer(decisions) {
+      const next = new Map();
+      for (const d of decisions || []) if (d && d.spotKey) next.set(d.spotKey, d.decision);
+      // Cheap equality check
+      let same = next.size === serverMirror.size;
+      if (same) for (const [k, v] of next) if (serverMirror.get(k) !== v) { same = false; break; }
+      if (same) return;
+      serverMirror = next;
       notify();
-    },
-    clear() { write(new Set()); notify(); },
-    subscribe(fn) { subs.add(fn); return () => subs.delete(fn); },
-  };
+    }
+
+    function attach() {
+      if (unsub) { try { unsub(); } catch {} unsub = null; }
+      const c = getConvex();
+      const tok = session.token();
+      if (c && tok) {
+        serverActive = true;
+        if (serverMirror.size) { serverMirror = new Map(); notify(); }
+        const sub = c.onUpdate(
+          "userSwipes:list",
+          { sessionToken: tok },
+          (res) => {
+            if (res && res.signedIn) applyServer(res.decisions);
+          },
+          (err) => { console.warn("swipes subscription error:", err); },
+        );
+        unsub = sub.unsubscribe;
+      } else {
+        serverActive = false;
+        serverMirror = new Map();
+        notify();
+      }
+    }
+
+    function get(key) {
+      if (!key) return null;
+      if (serverActive) return serverMirror.get(key) || null;
+      if (favorites.has(key)) return "save";
+      if (readLocalNo().has(key)) return "no";
+      return null;
+    }
+
+    function record(key, decision) {
+      if (!key) return;
+      if (decision !== "save" && decision !== "no") return;
+
+      if (serverActive) {
+        const before = serverMirror.get(key) || null;
+        if (before !== decision) {
+          serverMirror.set(key, decision);
+          notify();
+        }
+        const c = getConvex(); const tok = session.token();
+        if (c && tok) {
+          c.mutation("userSwipes:record", { sessionToken: tok, spotKey: key, decision })
+            .catch(err => {
+              console.warn("swipes:record failed, reverting:", err);
+              if (before) serverMirror.set(key, before); else serverMirror.delete(key);
+              notify();
+            });
+        }
+        // A "save" swipe also flips the heart on every other surface.
+        if (decision === "save") favorites.set(key, true);
+      } else {
+        if (decision === "save") {
+          favorites.set(key, true);
+          const noSet = readLocalNo();
+          if (noSet.has(key)) { noSet.delete(key); writeLocalNo(noSet); }
+        } else {
+          // "no" is mutually exclusive with favorite.
+          if (favorites.has(key)) favorites.set(key, false);
+          const noSet = readLocalNo();
+          noSet.add(key);
+          writeLocalNo(noSet);
+        }
+        notify();
+      }
+    }
+
+    function undo(key) {
+      if (!key) return;
+      if (serverActive) {
+        const before = serverMirror.get(key) || null;
+        if (!before) return;
+        serverMirror.delete(key);
+        notify();
+        const c = getConvex(); const tok = session.token();
+        if (c && tok) {
+          c.mutation("userSwipes:undo", { sessionToken: tok, spotKey: key })
+            .catch(err => {
+              console.warn("swipes:undo failed, reverting:", err);
+              serverMirror.set(key, before);
+              notify();
+            });
+        }
+        if (before === "save") favorites.set(key, false);
+      } else {
+        const noSet = readLocalNo();
+        let changed = false;
+        if (noSet.has(key))     { noSet.delete(key); writeLocalNo(noSet); changed = true; }
+        if (favorites.has(key)) { favorites.set(key, false);              changed = true; }
+        if (changed) notify();
+      }
+    }
+
+    function list() {
+      if (serverActive) {
+        return [...serverMirror.entries()].map(([spotKey, decision]) => ({ spotKey, decision }));
+      }
+      const out = [];
+      for (const k of favorites.list()) out.push({ spotKey: k, decision: "save" });
+      for (const k of readLocalNo())    out.push({ spotKey: k, decision: "no" });
+      return out;
+    }
+
+    // In local mode, swipes virtual-merges favorites — repaint when favorites changes.
+    favorites.subscribe(() => { if (!serverActive) notify(); });
+
+    return {
+      has(key) { return get(key) !== null; },
+      get,
+      record,
+      undo,
+      list,
+      subscribe(fn) { subs.add(fn); return () => subs.delete(fn); },
+      _reattach: attach,
+      _onLocalStorageChanged() {
+        if (!serverActive) notify();
+      },
+    };
+  })();
 
   // --- Build a key from raw inputs.
   function keyFor(chapterId, anchor) {
@@ -200,7 +623,7 @@
   const spots = (() => {
     let byKey = new Map();        // spotKey -> normalised spot
     let arr   = [];               // ordered list (matches sidecar order)
-    let convexClient = null;
+    let attached = false;
     const subs = new Set();
 
     function notify() { subs.forEach(fn => { try { fn(); } catch {} }); }
@@ -336,15 +759,16 @@
     }
 
     function init() {
-      if (convexClient) return;
-      if (!W.convex || !W.HB_CONVEX_URL) return;
+      if (attached) return;
+      const c = getConvex();
+      if (!c) return;
       try {
-        convexClient = new W.convex.ConvexClient(W.HB_CONVEX_URL);
-        convexClient.onUpdate("spots:list", {}, applyConvexRows, (err) => {
+        c.onUpdate("spots:list", {}, applyConvexRows, (err) => {
           console.warn("Convex spots subscription error:", err);
         });
+        attached = true;
       } catch (e) {
-        console.warn("Convex client init failed; using sidecar fallback.", e);
+        console.warn("Convex spots subscription failed; using sidecar fallback.", e);
       }
     }
 
@@ -432,6 +856,8 @@
 
   function injectRail() {
     if (document.querySelector('.app-rail')) return;
+    // Pages that opt out (e.g. /full/login/) just want the modal + helpers.
+    if (document.body.dataset.norail !== undefined) return;
     document.body.classList.add('has-rail');
 
     // Default = expanded so first-time visitors see labels (it's the
@@ -494,6 +920,7 @@
         <div class="rail-divider rail-divider-tight"></div>
         ${chapterItems}
       </div>
+      <div class="rail-account" data-hb-account><!-- painted by paintAccount() --></div>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="Toggle navigation labels">
         ${SVG_CHEVRONS}<span class="label">Collapse</span>
       </button>
@@ -545,8 +972,149 @@
       backdrop.classList.remove('is-show');
     }
 
+    // Account block: "Log in" pill when anonymous, username + log-out when
+    // authed. Re-paints on session change (signIn/signOut, cross-tab, server
+    // revocation flipping currentUser to null).
+    const accountSlot = rail.querySelector('[data-hb-account]');
+    function paintAccount() {
+      if (!accountSlot) return;
+      const u = session.user();
+      if (u) {
+        const display = u.handle || u.username;
+        const initials = (display || '?').slice(0, 1).toUpperCase();
+        accountSlot.innerHTML = `
+          <div class="rail-user">
+            <span class="rail-user-avatar" aria-hidden="true">${escapeText(initials)}</span>
+            <span class="rail-user-name label">${escapeText(display)}</span>
+            <button type="button" class="rail-user-out" data-hb-signout aria-label="Log out" title="Log out">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </button>
+          </div>
+        `;
+        accountSlot.querySelector('[data-hb-signout]').addEventListener('click', () => {
+          session.signOut();
+        });
+      } else {
+        accountSlot.innerHTML = `
+          <button type="button" class="rail-signin" data-hb-open-signin>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            <span class="label">Log in</span>
+          </button>
+        `;
+        accountSlot.querySelector('[data-hb-open-signin]').addEventListener('click', () => {
+          closeMobileDrawer();
+          openSignIn();
+        });
+      }
+    }
+    paintAccount();
+    session.subscribe(paintAccount);
+
     refreshFavCount();
   }
+
+  // Tiny HTML escape helper used in a couple of dynamic injection sites.
+  function escapeText(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // ── Sign-in modal (lazy-mounted, single instance) ─────────────────────
+  let signInOverlay = null;
+  function ensureSignInOverlay() {
+    if (signInOverlay) return signInOverlay;
+    const o = document.createElement('div');
+    o.className = 'hb-signin-overlay';
+    o.setAttribute('role', 'dialog');
+    o.setAttribute('aria-modal', 'true');
+    o.setAttribute('aria-label', 'Log in');
+    o.innerHTML = `
+      <div class="hb-signin-card" data-card>
+        <button type="button" class="hb-signin-close" data-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <h2 class="hb-signin-title">Log in</h2>
+        <p class="hb-signin-sub">Saved spots and swipe history follow your account across devices.</p>
+        <form class="hb-signin-form" data-form>
+          <label class="hb-signin-field">
+            <span>Username or email</span>
+            <input type="text" name="login" autocomplete="username" required spellcheck="false" autocapitalize="none" />
+          </label>
+          <label class="hb-signin-field">
+            <span>Password</span>
+            <input type="password" name="password" autocomplete="current-password" required />
+          </label>
+          <div class="hb-signin-error" data-error hidden></div>
+          <button type="submit" class="hb-signin-submit" data-submit>Log in</button>
+        </form>
+      </div>
+    `;
+    document.body.appendChild(o);
+    const card     = o.querySelector('[data-card]');
+    const closeBtn = o.querySelector('[data-close]');
+    const form     = o.querySelector('[data-form]');
+    const errorEl  = o.querySelector('[data-error]');
+    const submit   = o.querySelector('[data-submit]');
+
+    function setError(msg) {
+      if (msg) { errorEl.textContent = msg; errorEl.hidden = false; }
+      else { errorEl.textContent = ''; errorEl.hidden = true; }
+    }
+    function close() {
+      o.classList.remove('is-show');
+      setError(null);
+      form.reset();
+      submit.disabled = false;
+      submit.textContent = 'Log in';
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+    closeBtn.addEventListener('click', close);
+    o.addEventListener('click', (e) => { if (!card.contains(e.target)) close(); });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const login    = String(fd.get('login') || '').trim();
+      const password = String(fd.get('password') || '');
+      if (!login || !password) return;
+      setError(null);
+      submit.disabled = true;
+      submit.textContent = 'Logging in…';
+      try {
+        await session.signIn(login, password);
+        close();
+      } catch (err) {
+        setError(err && err.message ? String(err.message).replace(/^Error: /, '') : 'Log in failed');
+        submit.disabled = false;
+        submit.textContent = 'Log in';
+      }
+    });
+
+    signInOverlay = {
+      el: o,
+      open() {
+        o.classList.add('is-show');
+        document.addEventListener('keydown', onKey);
+        // Focus the login field on next frame so the show transition runs.
+        requestAnimationFrame(() => {
+          const inp = form.querySelector('input[name="login"]');
+          if (inp) inp.focus();
+        });
+      },
+      close,
+    };
+    return signInOverlay;
+  }
+  function openSignIn() {
+    if (session.isSignedIn()) return;  // Already authed — nothing to do.
+    ensureSignInOverlay().open();
+  }
+  // Any element with data-hb-open-signin opens the modal (e.g. the
+  // standalone /full/login/ page just renders one button with this attr).
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-hb-open-signin]');
+    if (t) { e.preventDefault(); openSignIn(); }
+  });
 
   function refreshFavCount() {
     const n = favorites.count();
@@ -1343,23 +1911,30 @@
     });
   }
 
-  // Cross-tab sync: another tab toggled a favorite -> repaint.
+  // Cross-tab sync. Three keys we care about:
+  //   - hb:fav:v1     : another tab toggled a favorite (anonymous mode)
+  //   - hb:skipped:v1 : another tab swiped (anonymous mode)
+  //   - hb:session:v1 : another tab signed in/out — we re-attach the stores
   W.addEventListener('storage', (e) => {
     if (e.key === KEY) {
-      // Repaint heart buttons + nav badge.
-      document.querySelectorAll('[data-hb-fav]').forEach(btn => {
-        const k = btn.getAttribute('data-hb-fav');
-        const on = favorites.has(k);
-        btn.classList.toggle('is-on', on);
-        btn.innerHTML = on ? SVG_HEART_FILL : SVG_HEART_OUT;
-      });
-      refreshFavCount();
+      favorites._onLocalStorageChanged();
+      // Heart buttons + badge repaint via the favorites subscription chain.
+    } else if (e.key === NO_KEY) {
+      swipes._onLocalStorageChanged();
+    } else if (e.key === SESSION_KEY) {
+      // Token added or removed in another tab. Re-init session and the stores.
+      session.init();
+      favorites._reattach();
+      swipes._reattach();
     }
   });
 
   // --- Public API
   W.HB = W.HB || {};
   W.HB.favorites = favorites;
+  W.HB.swipes    = swipes;
+  W.HB.session   = session;
+  W.HB.openSignIn = openSignIn;
   W.HB.keyFor = keyFor;
   W.HB.spotKey = (spot) => {
     if (!spot || !spot.chapter_id) return null;
@@ -1508,6 +2083,11 @@
       v.style.removeProperty('margin-left');
       v.style.removeProperty('margin-right');
     }
+    // Order matters: session.init() reads the saved token (if any) so that
+    // when favorites/swipes attach below they pick the right backend.
+    session.init();
+    favorites._reattach();
+    swipes._reattach();
     injectRail();
     wireBakedCarousels();
     wireCardLinks();

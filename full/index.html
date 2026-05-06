@@ -246,10 +246,9 @@
   // === "Up next" stack to the right of the hero (4 cards) ===
   const upNextEl = document.getElementById('upNext');
   function buildUpNext() {
-    const decided = new Set([
-      ...window.HB.favorites.list(),
-      ...JSON.parse(localStorage.getItem('hb:skipped:v1') || '[]'),
-    ]);
+    // HB.swipes.list() is auth-aware: server-synced when signed in,
+    // localStorage-backed (skipped + favorites) otherwise.
+    const decided = new Set(window.HB.swipes.list().map(d => d.spotKey));
     const undecided = SPOTS.filter(s => !decided.has(window.HB.spotKey(s)));
     const pool = undecided.length >= 4 ? undecided : SPOTS;
     const picks = shuffle(pool).slice(0, 4);
@@ -303,10 +302,9 @@
   }
 
   function buildForYou() {
-    const decided = new Set([
-      ...window.HB.favorites.list(),
-      ...JSON.parse(localStorage.getItem('hb:skipped:v1') || '[]'),
-    ]);
+    // HB.swipes.list() is auth-aware: server-synced when signed in,
+    // localStorage-backed (skipped + favorites) otherwise.
+    const decided = new Set(window.HB.swipes.list().map(d => d.spotKey));
     const undecided = SPOTS.filter(s => !decided.has(window.HB.spotKey(s)));
     const pool = undecided.length >= 4 ? undecided : SPOTS;
     document.getElementById('rowForYou').innerHTML = shuffle(pool).slice(0, 4).map(rowCard).join('');
@@ -329,11 +327,11 @@
     location.href = q ? `browse/?q=${encodeURIComponent(q)}` : 'browse/';
   });
 
-  // Re-render rows if favorites/yes/no change in another tab
+  // Re-render when favorites or swipes change (cross-tab, server push,
+  // or sign-in/out).
   window.HB.favorites.subscribe(() => { buildForYou(); buildUpNext(); });
-  window.addEventListener('storage', (e) => {
-    if (e.key && (e.key.startsWith('hb:'))) { buildForYou(); buildUpNext(); }
-  });
+  window.HB.swipes.subscribe(()    => { buildForYou(); buildUpNext(); });
+  window.HB.session.subscribe(()   => { buildForYou(); buildUpNext(); });
 
   // When Convex pushes an update (admin edits a spot, photo published,
   // etc.), refresh every surface so the page reflects new data without

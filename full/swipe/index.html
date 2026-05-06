@@ -309,7 +309,9 @@
   // Two decision piles only -- the earlier yes/super/no setup felt redundant
   // (yes did nothing; super did the save). Now: drag right or tap heart =
   // save, drag left or tap X = skip. Both pull the spot out of the queue.
-  const NO_KEY = 'hb:skipped:v1';
+  //
+  // State source: HB.swipes (signed-in: Convex; signed-out: localStorage).
+  // The page never touches `hb:skipped:v1` directly; the façade owns it.
   // Snapshot from HB.spots once at load. We deliberately don't subscribe
   // to live updates here -- mid-swipe queue mutations would lose the
   // user's place. A page reload after admin edits picks up fresh data.
@@ -329,45 +331,32 @@
 
   totalCountEl.textContent = SPOTS.length;
 
-  function readSet(key) {
-    try { return new Set(JSON.parse(localStorage.getItem(key) || '[]')); }
-    catch { return new Set(); }
-  }
-  function writeSet(key, set) {
-    try { localStorage.setItem(key, JSON.stringify([...set])); } catch {}
-  }
-  const readNo = () => readSet(NO_KEY);
-
   // Migrate from the previous three-pile model: anything in the old yes
-  // pile gets folded into "no" (it had no functional difference) so users
-  // who already swiped a few cards don't see them again.
+  // pile becomes a "no" decision via the façade. Idempotent: runs once on
+  // first load after this rewrite, then the key is gone for good.
   (function migrateYesPile() {
     try {
       const yes = JSON.parse(localStorage.getItem('hb:yes:v1') || '[]');
       if (Array.isArray(yes) && yes.length) {
-        const no = readNo();
-        yes.forEach(k => no.add(k));
-        writeSet(NO_KEY, no);
-        localStorage.removeItem('hb:yes:v1');
-      } else {
-        localStorage.removeItem('hb:yes:v1');
+        for (const k of yes) window.HB.swipes.record(k, 'no');
       }
+      localStorage.removeItem('hb:yes:v1');
     } catch {}
   })();
 
   function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-  // Build the queue: anything not yet decided. Fav and "no" both pull a
-  // spot out so reopening doesn't re-show the same cards.
+  // Build the queue: anything the user hasn't decided on. HB.swipes.has()
+  // covers both verdicts (save and no), so one check is enough.
   function buildQueue() {
-    const no = readNo();
     const remaining = SPOTS.filter(s => {
       const k = window.HB.spotKey(s);
-      return k && !window.HB.favorites.has(k) && !no.has(k);
+      return k && !window.HB.swipes.has(k);
     });
     // Stable shuffle keyed off pile sizes so refreshes don't reorder
     // mid-session, but a reset re-shuffles.
-    return shuffle(remaining, 1 + no.size + window.HB.favorites.count());
+    const decisionsCount = window.HB.swipes.list().length;
+    return shuffle(remaining, 1 + decisionsCount);
   }
 
   // Mulberry32 deterministic shuffle
@@ -461,17 +450,23 @@
   }
 
   function updateCounts() {
-    const no = readNo();
     const saved = window.HB.favorites.count();
-    const seen = saved + no.size;
+    const decisions = window.HB.swipes.list();
+    const seen = decisions.length;
     seenCountEl.textContent = Math.min(seen, TOTAL);
     savedCountEl.textContent = saved;
     leftCountEl.textContent = queue.length;
     openLink.href = (deck.querySelector('.card.is-top')?.dataset.href) || '#';
   }
 
+  // Reset clears the "no" decisions only (saves stay). For signed-in users
+  // we walk the decisions list and call swipes.undo() for each "no" so the
+  // server-side state matches; the façade handles the localStorage path.
   function resetPiles() {
-    writeSet(NO_KEY, new Set());
+    const noKeys = window.HB.swipes.list()
+      .filter(d => d.decision === 'no')
+      .map(d => d.spotKey);
+    for (const k of noKeys) window.HB.swipes.undo(k);
     queue = buildQueue();
     renderDeck();
   }
@@ -563,11 +558,9 @@
     drag = null;
     const k = card.dataset.spotKey;
     if (k) {
-      if (verdict === 'save') {
-        window.HB.favorites.set(k, true);
-      } else if (verdict === 'no') {
-        const s = readNo(); s.add(k); writeSet(NO_KEY, s);
-      }
+      // record() routes to either Convex or localStorage based on auth
+      // state; "save" also flips the favorite via the favorites façade.
+      window.HB.swipes.record(k, verdict);
     }
     card.classList.add('fly-out');
     const dir = verdict === 'save' ? 1 : -1;
@@ -602,11 +595,13 @@
     else if (e.key === 'ArrowRight') programmaticSwipe('save');
   });
 
-  // Cross-tab sync
+  // Cross-tab + sign-in/out sync. Subscribing to swipes covers both:
+  //   - localStorage 'hb:skipped:v1' changed in another tab
+  //   - server pushed an updated decisions list (signed in)
+  //   - user signed in / out (façade re-attached, mirror flipped)
   window.HB.favorites.subscribe(() => updateCounts());
-  window.addEventListener('storage', (e) => {
-    if (e.key === NO_KEY) { queue = buildQueue(); renderDeck(); }
-  });
+  window.HB.swipes.subscribe(() => { queue = buildQueue(); renderDeck(); });
+  window.HB.session.subscribe(() => { queue = buildQueue(); renderDeck(); });
 
   renderDeck();
 })();

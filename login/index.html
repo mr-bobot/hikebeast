@@ -4,10 +4,29 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>Hikebeast · Sign in</title>
-<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
-<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
-<meta name="referrer" content="no-referrer" />
+<title>Log in · Hidden Gems · Hikebeast</title>
+
+<!-- Public, indexable on purpose: /full/ is noindex'd, so social scrapers
+     (Instagram, Facebook, X, Threads) can't fetch its OG card. /login/ is
+     the share-friendly landing instead. -->
+<meta name="description" content="Log in to Hidden Gems · Hikebeast." />
+<link rel="canonical" href="https://hikebeast.ch/login/" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Hikebeast" />
+<meta property="og:title" content="Hidden Gems · Hikebeast" />
+<meta property="og:description" content="Log in to Hidden Gems · Hikebeast." />
+<meta property="og:url" content="https://hikebeast.ch/login/" />
+<meta property="og:image" content="https://hikebeast.ch/images/og-home.jpg" />
+<meta property="og:image:width" content="2464" />
+<meta property="og:image:height" content="1386" />
+<meta property="og:image:alt" content="Switzerland alpine ridge at sunrise" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Hidden Gems · Hikebeast" />
+<meta name="twitter:description" content="Log in to Hidden Gems · Hikebeast." />
+<meta name="twitter:image" content="https://hikebeast.ch/images/og-home.jpg" />
+
 <link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
 <link rel="apple-touch-icon" href="/images/favicon.jpg" />
 <style>
@@ -174,8 +193,8 @@
       <img src="/images/avatar.jpg" alt="" />
       <b>Hikebeast · Hidden Gems</b>
     </div>
-    <h1>Sign in</h1>
-    <p class="lead">Hidden Gems is a private edition. Enter the credentials Leon shared with you.</p>
+    <h1>Log in</h1>
+    <p class="lead">Hidden Gems is in early access. Log in with the username and password Leon shared with you.</p>
     <form id="loginForm" novalidate>
       <input
         id="user"
@@ -185,6 +204,7 @@
         autocomplete="username"
         autocapitalize="off"
         autocorrect="off"
+        spellcheck="false"
         required
       />
       <input
@@ -195,10 +215,10 @@
         autocomplete="current-password"
         required
       />
-      <button type="submit" class="submit" id="submitBtn">Sign in</button>
+      <button type="submit" class="submit" id="submitBtn">Log in</button>
     </form>
     <p class="error" id="error" role="alert" aria-live="polite">Wrong username or password.</p>
-    <p class="footnote">Stay signed in for 30 days on this device.</p>
+    <p class="footnote">Stay logged in for 30 days on this device.</p>
   </main>
 
   <script>
@@ -208,6 +228,8 @@
     const u    = document.getElementById('user');
     const p    = document.getElementById('pass');
 
+    // The middleware redirects unauth'd /full/ visits here with ?next=,
+    // so a successful login restores the originally requested URL.
     const params = new URLSearchParams(window.location.search);
     const next = params.get('next') || '/full/';
 
@@ -225,24 +247,31 @@
       e.preventDefault();
       clearError();
       btn.disabled = true;
-      btn.textContent = 'Signing in…';
+      btn.textContent = 'Logging in…';
       try {
-        const res = await fetch('/api/login', {
+        // /api/account-login validates against per-user Convex accounts,
+        // sets the hb_full_auth cookie that middleware.js checks on /full/*,
+        // and returns a Convex session token we persist for HB.session to
+        // pick up on the /full/ paint.
+        const res = await fetch('/api/account-login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            user: u.value.trim(),
-            pass: p.value,
+            username: u.value.trim(),
+            password: p.value,
             next,
           }),
         });
         const data = await res.json().catch(() => ({}));
         if (res.ok && data.ok) {
+          if (data.sessionToken) {
+            try { localStorage.setItem('hb:session:v1', data.sessionToken); } catch {}
+          }
           window.location.replace(data.next || '/full/');
           return;
         }
         if (res.status === 503) {
-          showError('Auth not configured yet. Try again in a minute.');
+          showError('Login is not configured yet. Try again in a minute.');
         } else {
           showError('Wrong username or password.');
         }
@@ -250,7 +279,7 @@
         showError('Network error. Try again.');
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Sign in';
+        btn.textContent = 'Log in';
       }
     });
   </script>

@@ -100,26 +100,36 @@ export default defineSchema({
   }).index("by_spotKey",   ["spotKey"])
     .index("by_chapterId", ["chapterId"]),
 
-  // ── Phase 2: identity (designed; no frontend reads yet) ─────────────────
+  // ── Identity ───────────────────────────────────────────────────────────
+  // Username is the canonical login (required, lowercase, unique). Email
+  // is optional today and will become the recovery / magic-link channel
+  // later, so the index stays in place. Password is stored as a single
+  // PHC-style string `pbkdf2$<iters>$<saltB64>$<hashB64>` so iteration
+  // count can be bumped without a schema change.
   users: defineTable({
-    email:           v.string(),
-    handle:          v.optional(v.string()),
+    username:        v.string(),                    // lowercased, unique
+    email:           v.optional(v.string()),        // optional, kept for later magic-link / Stripe match
+    passwordPhc:     v.string(),                    // pbkdf2$iters$salt$hash
+    handle:          v.optional(v.string()),        // display name, separate from username
     avatarStorageId: v.optional(v.id("_storage")),
-    whopLicenseKey:  v.optional(v.string()),
+    whopLicenseKey:  v.optional(v.string()),        // future: Stripe / Whop license linkage
     isAdmin:         v.optional(v.boolean()),
     createdAt:       v.number(),
     lastSeenAt:      v.number(),
-  }).index("by_email", ["email"]),
+  }).index("by_username", ["username"])
+    .index("by_email",    ["email"]),
 
-  // Magic-link tokens. We store SHA-256 of the raw token, never the raw
-  // value, so DB compromise can't replay outstanding links.
-  authTokens: defineTable({
-    email:      v.string(),
+  // Long-lived auth sessions. Raw token lives in the client's
+  // localStorage; we store SHA-256 of it so a DB leak can't impersonate.
+  // TTL = 90 days, refreshed on every successful currentUser read.
+  sessions: defineTable({
+    userId:     v.id("users"),
     tokenHash:  v.string(),
+    createdAt:  v.number(),
     expiresAt:  v.number(),
-    consumedAt: v.optional(v.number()),
+    lastSeenAt: v.number(),
   }).index("by_tokenHash", ["tokenHash"])
-    .index("by_email",     ["email"]),
+    .index("by_user",      ["userId"]),
 
   // ── Phase 3: photo submissions queue ───────────────────────────────────
   photoSubmissions: defineTable({
