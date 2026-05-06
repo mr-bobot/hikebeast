@@ -242,8 +242,54 @@
     featureIdx = (featureIdx + 1) % featurePool.length;
     paintFeature(featurePool[featureIdx], featureIdx);
   }
-  // Tap the photo to advance manually
-  document.querySelector('.feature-photo')?.addEventListener('click', advanceFeature);
+  function retreatFeature() {
+    if (!featurePool.length) return;
+    featureIdx = (featureIdx - 1 + featurePool.length) % featurePool.length;
+    paintFeature(featurePool[featureIdx], featureIdx);
+  }
+  // Tap the photo to advance manually + swipe horizontally on touch.
+  // Swipe wins over tap: if the user moves more than SWIPE_THRESHOLD
+  // pixels horizontally between touchstart and touchend, we treat it as
+  // a swipe and swallow the synthesised click. Vertical drags fall
+  // through (they're scrolling the page).
+  const featurePhotoEl = document.querySelector('.feature-photo');
+  if (featurePhotoEl) {
+    const SWIPE_THRESHOLD = 40;  // px
+    let touchStartX = 0, touchStartY = 0;
+    let swipeFired = false;
+    featurePhotoEl.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      swipeFired = false;
+    }, { passive: true });
+    featurePhotoEl.addEventListener('touchend', (e) => {
+      const t = e.changedTouches[0];
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      // Treat as swipe only when horizontal motion clearly dominates and
+      // crosses the threshold — a vertical scroll-y drag shouldn't flip
+      // cards. Reset the auto-advance timer so the user gets a full
+      // cycle on the spot they swiped to.
+      if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) advanceFeature(); else retreatFeature();
+        clearInterval(featureTimer);
+        featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
+        swipeFired = true;
+      }
+    }, { passive: true });
+    // Capture-phase listener catches the click before the advance handler
+    // below would fire it.
+    featurePhotoEl.addEventListener('click', (e) => {
+      if (swipeFired) {
+        e.stopPropagation();
+        e.preventDefault();
+        swipeFired = false;
+        return;
+      }
+      advanceFeature();
+    }, true);
+  }
 
   function shuffle(arr) {
     const a = arr.slice();
