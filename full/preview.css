@@ -1181,6 +1181,103 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   object-position: 70% 45%;
 }
 
+/* === Chapter TOC grid (cover + tile grid → click → /spot/<id>/) ===
+ * Replaces the old multi-slide scroll-through. Sits inside the .viewer
+ * column right after the cover. Tiles are simple photo + kicker + title;
+ * each is an <a> to the spot's detail page. */
+.chapter-grid {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  display: block;
+}
+.chapter-grid-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 4px 4px 14px;
+}
+.chapter-grid-kicker {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.chapter-grid-meta {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--muted);
+  letter-spacing: -0.005em;
+}
+.chapter-grid-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 600px) {
+  .chapter-grid-inner { grid-template-columns: 1fr 1fr; gap: 14px; }
+}
+@media (min-width: 1000px) {
+  .chapter-grid-inner { grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+}
+@media (min-width: 1400px) {
+  .chapter-grid-inner { grid-template-columns: 1fr 1fr 1fr 1fr; }
+}
+.ch-tile {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform 200ms cubic-bezier(.2,.7,.3,1), box-shadow 200ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.ch-tile:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.10); }
+.ch-tile:active { transform: translateY(0); }
+.ch-tile-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--surface);
+  overflow: hidden;
+}
+.ch-tile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 400ms ease;
+}
+.ch-tile:hover .ch-tile-photo img { transform: scale(1.03); }
+.ch-tile-meta {
+  padding: 14px 16px 16px;
+}
+.ch-tile-kicker {
+  margin: 0;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  min-height: 1em;
+}
+.ch-tile-title {
+  margin: 4px 0 0;
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+  line-height: 1.2;
+}
+
 /* === Cover variant: region map silhouette + gradient (instead of a photo) ===
  * Dark editorial backdrop with the region color as an off-axis glow, the
  * light SVG map reads like a relief / topo print on top. Same .slide-cover

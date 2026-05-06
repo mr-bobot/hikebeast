@@ -271,27 +271,56 @@ ${cells}
 </section>`;
 }
 
-function renderChapter(chapter) {
-  // Keep the order the yaml gives — preserves spread/extras placement.
-  const items = (content.spots || []).filter(s => s.chapter === chapter.id);
-  const spotCount = items.filter(s => (s.kind || "spot") === "spot").length;
+function renderSpotTile(spot) {
+  // Compact tile that links to the spot's detail page. Used inside the
+  // chapter TOC grid (replaces the old per-spot scroll-through cards).
+  return `    <a class="ch-tile" href="../spot/${escapeHtml(spot.id)}/" title="${escapeHtml(spot.title)}">
+      <div class="ch-tile-photo">
+        <img src="${primarySrc(spot.id)}" alt="${escapeHtml(spot.title)}" loading="lazy" />
+      </div>
+      <div class="ch-tile-meta">
+        <p class="ch-tile-kicker">${escapeHtml(spot.kicker || "")}</p>
+        <h3 class="ch-tile-title">${escapeHtml(spot.title)}</h3>
+      </div>
+    </a>`;
+}
 
+function renderChapter(chapter) {
+  // Keep the order the yaml gives — preserves the editorial run-order of
+  // the spots in this chapter.
+  const items = (content.spots || []).filter(s => s.chapter === chapter.id);
+  const spotItems = items.filter(s => (s.kind || "spot") === "spot");
+  const extrasItems = items.filter(s => s.kind === "extras");
+  const spotCount = spotItems.length;
+
+  // Chapter is now a table of contents:
+  //   1. Cover (with region map silhouette).
+  //   2. Grid of clickable spot tiles — each opens /full/spot/<spotId>/.
+  //   3. Any kind=extras "more spots coming" rollups, kept inline as a
+  //      simple list since they have no detail pages.
+  // Spreads are skipped here: their photos live on the parent spot's
+  // detail page via the photoset, so they don't need their own card on
+  // the chapter TOC.
   const slides = [];
   slides.push(renderCover(chapter));
-  // The standalone "On the map" slide that used to sit between the cover
-  // and the spots was dropped once the cover itself carries the region map
-  // silhouette. The renderRegion helper is kept for now but no longer
-  // wired into the chapter assembly.
-  for (const it of items) {
-    const kind = it.kind || "spot";
-    if (kind === "spot") slides.push(renderSpot(it));
-    else if (kind === "spread") slides.push(renderSpread(it));
-    else if (kind === "extras") slides.push(renderExtras(it));
-  }
 
-  // crumbTotal counts the visible cards in the viewer (cover + optional
-  // region + every slide rendered above). Matches what social.js uses for
-  // the breadcrumb.
+  const tiles = spotItems.map(renderSpotTile).join("\n");
+  slides.push(`    <section class="chapter-grid" aria-label="${escapeHtml(chapter.name)} spots">
+      <div class="chapter-grid-head">
+        <p class="chapter-grid-kicker">Spots in this chapter</p>
+        <p class="chapter-grid-meta">${spotCount} ${spotCount === 1 ? "spot" : "spots"}</p>
+      </div>
+      <div class="chapter-grid-inner">
+${tiles}
+      </div>
+    </section>`);
+
+  for (const it of extrasItems) slides.push(renderExtras(it));
+
+  // The crumb counter (X / Y) was meaningful when the chapter was a
+  // multi-slide scroll. With the TOC layout it always reads 1 / 1, so
+  // social.js's IntersectionObserver keeps working but the indicator
+  // collapses to "1 / 1".
   const crumbTotal = slides.length;
 
   return `<!doctype html>
