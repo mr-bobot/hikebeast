@@ -98,6 +98,7 @@
             token = null;
             writeToken(null);
             favorites._reattach();
+            visited._reattach();
             swipes._reattach();
           }
           if (before !== after) notify();
@@ -119,6 +120,7 @@
       try { await migrateLocalToServer(token); } catch (e) { console.warn("migration:", e); }
       setupReactive();
       favorites._reattach();
+      visited._reattach();
       swipes._reattach();
       notify();
       return user;
@@ -132,6 +134,7 @@
       writeToken(null);
       if (unsubCurrentUser) { try { unsubCurrentUser(); } catch {} unsubCurrentUser = null; }
       favorites._reattach();
+      visited._reattach();
       swipes._reattach();
       notify();
       // Server-side logout: revoke the Convex session AND clear the
@@ -355,6 +358,124 @@
       _onLocalStorageChanged() {
         if (!serverActive) applyServer([...readLocal()]);
       },
+    };
+  })();
+
+  // ── "Been there" pile (paid users only) ──────────────────────────────
+  // Same shape as `favorites` but server-only — there is no
+  // localStorage fallback and the API simply reports an empty list +
+  // signedIn:false to anonymous visitors. Pages and the kebab menu
+  // hide the feature in that case so non-paying customers never see
+  // the affordance. On sign-in/out the façade re-attaches via
+  // session.subscribe().
+  const visited = (() => {
+    let mirror = new Set();
+    let serverActive = false;
+    let unsub = null;
+    let ready = false;          // first definitive response received
+    let signedIn = false;       // mirror of session state for fast callers
+    const subs = new Set();
+    function notify() { subs.forEach(fn => { try { fn(); } catch {} }); }
+
+    function setEqual(a, b) {
+      if (a.size !== b.size) return false;
+      for (const k of a) if (!b.has(k)) return false;
+      return true;
+    }
+
+    function applyServer(spotKeys) {
+      const next = new Set(Array.isArray(spotKeys) ? spotKeys : []);
+      const wasReady = ready;
+      ready = true;
+      if (setEqual(mirror, next) && wasReady) return;
+      mirror = next;
+      notify();
+    }
+
+    function attach() {
+      if (unsub) { try { unsub(); } catch {} unsub = null; }
+      const c = getConvex();
+      const tok = session.token();
+      mirror = new Set();
+      if (c && tok) {
+        serverActive = true;
+        signedIn = true;
+        ready = false;
+        const sub = c.onUpdate(
+          "userVisited:list",
+          { sessionToken: tok },
+          (res) => {
+            if (res && res.signedIn) applyServer(res.spotKeys);
+          },
+          (err) => { console.warn("visited subscription error:", err); },
+        );
+        unsub = sub.unsubscribe;
+      } else {
+        // Anonymous: feature disabled. Mark ready so consumers don't
+        // wait, but signedIn stays false so the UI hides the entry
+        // points (kebab item, menu sheet row).
+        serverActive = false;
+        signedIn = false;
+        ready = true;
+        notify();
+      }
+    }
+
+    return {
+      has(key)   { return mirror.has(key); },
+      list()     { return [...mirror]; },
+      count()    { return mirror.size; },
+      ready()    { return ready; },
+      signedIn() { return signedIn; },
+      toggle(key) {
+        if (!key || !signedIn) return false;
+        const wasOn = mirror.has(key);
+        if (wasOn) mirror.delete(key); else mirror.add(key);
+        notify();
+        const c = getConvex(); const tok = session.token();
+        if (c && tok) {
+          c.mutation("userVisited:toggle", { sessionToken: tok, spotKey: key })
+            .catch(err => {
+              console.warn("visited:toggle failed, reverting:", err);
+              if (wasOn) mirror.add(key); else mirror.delete(key);
+              notify();
+            });
+        }
+        return mirror.has(key);
+      },
+      set(key, on) {
+        if (!key || !signedIn) return;
+        const wasOn = mirror.has(key);
+        if (wasOn === on) return;
+        if (on) mirror.add(key); else mirror.delete(key);
+        notify();
+        const c = getConvex(); const tok = session.token();
+        if (c && tok) {
+          c.mutation("userVisited:setVisited", { sessionToken: tok, spotKey: key, on })
+            .catch(err => {
+              console.warn("visited:set failed, reverting:", err);
+              if (on) mirror.delete(key); else mirror.add(key);
+              notify();
+            });
+        }
+      },
+      clear() {
+        if (!signedIn || mirror.size === 0) return;
+        const before = mirror;
+        mirror = new Set();
+        notify();
+        const c = getConvex(); const tok = session.token();
+        if (c && tok) {
+          c.mutation("userVisited:clearAll", { sessionToken: tok })
+            .catch(err => {
+              console.warn("visited:clear failed, reverting:", err);
+              mirror = before;
+              notify();
+            });
+        }
+      },
+      subscribe(fn) { subs.add(fn); return () => subs.delete(fn); },
+      _reattach: attach,
     };
   })();
 
@@ -1012,6 +1133,11 @@
           <span class="menu-row-label">Liked</span>
           <span class="menu-row-badge" data-hb-fav-count></span>
         </a>
+        <a class="menu-row${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link data-close hidden>
+          <span class="menu-row-icon">${SVG_CHECK_CIRCLE}</span>
+          <span class="menu-row-label">Been there</span>
+          <span class="menu-row-badge" data-hb-visited-count></span>
+        </a>
         <div class="menu-section-head">Collections</div>
         <a class="menu-row${cur('/hidden-gems/')}" href="${REL}hidden-gems/" data-close>
           <span class="menu-row-icon">${SVG_GEM}</span>
@@ -1151,7 +1277,21 @@
     paintAccount();
     session.subscribe(paintAccount);
 
+    // Visited row visibility: hide when signed out (paid feature),
+    // show when signed in. Re-runs on sign-in/sign-out via the
+    // visited façade's subscribe (signedIn flips during _reattach).
+    function paintVisitedRow() {
+      document.querySelectorAll('[data-hb-visited-link]').forEach(el => {
+        if (visited.signedIn()) el.hidden = false;
+        else                    el.hidden = true;
+      });
+    }
+    paintVisitedRow();
+    visited.subscribe(paintVisitedRow);
+    session.subscribe(paintVisitedRow);
+
     refreshFavCount();
+    refreshVisitedCount();
   }
 
   // Tiny HTML escape helper used in a couple of dynamic injection sites.
@@ -1271,6 +1411,22 @@
     // Compact dot indicator on the Liked rail item when collapsed
     const likedItem = document.querySelector('.rail-item[data-hb-saved-link]');
     if (likedItem) likedItem.classList.toggle('has-count', n > 0);
+  }
+
+  // Mirror of refreshFavCount for the "Been there" pile. Targets every
+  // [data-hb-visited-count] painter (the menu sheet row's badge today;
+  // future surfaces wire up automatically).
+  function refreshVisitedCount() {
+    const n = visited.count();
+    document.querySelectorAll('[data-hb-visited-count]').forEach(el => {
+      if (n > 0) {
+        el.textContent = String(n);
+        el.setAttribute('data-on', '1');
+      } else {
+        el.textContent = '';
+        el.removeAttribute('data-on');
+      }
+    });
   }
 
   // --- Random spot
@@ -1523,11 +1679,14 @@
 
   // --- Submit Photo flow: 3-dots menu next to the heart on every spot card.
   // The menu is an Apple-style popover that floats via fixed positioning so
-  // it can spill outside the card. Currently has one item: "Submit photo",
-  // which opens a modal and POSTs the image (resized client-side) to the
-  // /api/submit-photo endpoint. Photos are reviewed manually before going live.
+  // it can spill outside the card. Items: Submit photo · Wildcamping
+  // status (when applicable) · Been there (signed-in only). The
+  // Wildcamping modal opens a 3-state UI; Been there toggles visited
+  // state and surfaces the spot in /full/visited/.
   const SVG_DOTS = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>';
   const SVG_UPLOAD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>';
+  // Tick mark in a circle for the "Been there" / "Visited" toggle.
+  const SVG_CHECK_CIRCLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 10"/></svg>';
 
   function escapeText(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
@@ -1555,6 +1714,7 @@
     const spot = spotKey ? spots.get(spotKey) : null;
     const hasWild = !!(spot && spot.wildCamping);
     openMenuPanel(anchor, {
+      spotKey,
       hasWild,
       onSubmit: () => openSubmitModal(slide),
       onWild:   () => hasWild && openWildCampingModal(spot),
@@ -1564,14 +1724,27 @@
   // Shared menu renderer used by both the detail-page (.slide-spot) and
   // chapter-card (.cl-card) kebabs. Centralises the open/close machinery
   // so adding new items happens in one place.
-  function openMenuPanel(anchor, { hasWild, onSubmit, onWild }) {
+  //
+  // The "Been there" item is signed-in-only by design: anonymous
+  // visitors aren't paying customers and don't get the affordance.
+  // visited.signedIn() drives the gate; the kebab silently omits the
+  // item when it returns false.
+  function openMenuPanel(anchor, { spotKey, hasWild, onSubmit, onWild }) {
     document.querySelectorAll('.hb-spot-menu').forEach(m => m.remove());
+
+    const visitedSignedIn = visited.signedIn();
+    const isVisited = !!(spotKey && visitedSignedIn && visited.has(spotKey));
 
     const items = [
       `<button type="button" class="hb-spot-menu-item" data-action="submit">${SVG_UPLOAD}<span>Submit photo</span></button>`,
     ];
     if (hasWild) {
       items.push(`<button type="button" class="hb-spot-menu-item" data-action="wild">${SVG_TENT}<span>Wildcamping status</span></button>`);
+    }
+    if (spotKey && visitedSignedIn) {
+      const label = isVisited ? 'Visited ✓ · undo' : 'Been there';
+      const cls = isVisited ? 'hb-spot-menu-item is-on' : 'hb-spot-menu-item';
+      items.push(`<button type="button" class="${cls}" data-action="visited">${SVG_CHECK_CIRCLE}<span>${label}</span></button>`);
     }
     const menu = document.createElement('div');
     menu.className = 'hb-spot-menu';
@@ -1600,6 +1773,10 @@
 
     menu.querySelector('[data-action="submit"]')?.addEventListener('click', () => { close(); onSubmit?.(); });
     menu.querySelector('[data-action="wild"]')?.addEventListener('click',   () => { close(); onWild?.();   });
+    menu.querySelector('[data-action="visited"]')?.addEventListener('click', () => {
+      close();
+      if (spotKey) visited.toggle(spotKey);
+    });
   }
 
   function openSubmitModal(spotInfoOrSlide) {
@@ -2286,6 +2463,7 @@
     const spot = info?.spotKey ? spots.get(info.spotKey) : null;
     const hasWild = !!(spot && spot.wildCamping);
     openMenuPanel(anchor, {
+      spotKey: info?.spotKey || null,
       hasWild,
       onSubmit: () => openSubmitModal(info),
       onWild:   () => hasWild && openWildCampingModal(spot),
@@ -2375,6 +2553,7 @@
       // Token added or removed in another tab. Re-init session and the stores.
       session.init();
       favorites._reattach();
+      visited._reattach();
       swipes._reattach();
     }
   });
@@ -2382,6 +2561,7 @@
   // --- Public API
   W.HB = W.HB || {};
   W.HB.favorites = favorites;
+  W.HB.visited   = visited;
   W.HB.swipes    = swipes;
   W.HB.session   = session;
   W.HB.openSignIn = openSignIn;
@@ -2541,6 +2721,7 @@
     // when favorites/swipes attach below they pick the right backend.
     session.init();
     favorites._reattach();
+    visited._reattach();
     swipes._reattach();
     injectRail();
     wireBakedCarousels();
@@ -2566,4 +2747,5 @@
   // In-page anchor changes (back/forward) also re-center.
   W.addEventListener('hashchange', centerOnHash);
   favorites.subscribe(refreshFavCount);
+  visited.subscribe(refreshVisitedCount);
 })();

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Been there · Gems of Switzerland · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="stylesheet" href="../preview.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="../index.html">
+    <span>Been there</span>
+  </a>
+  <span class="crumb"><b id="visitedCount">0</b> visited</span>
+  <div class="topbar-right">
+    <a class="pill" href="../index.html">Overview</a>
+  </div>
+</div>
+
+<main class="hb-page">
+
+  <header class="hb-hero">
+    <p class="kicker">Your travel log</p>
+    <h1 id="title">Mark spots you've been to.</h1>
+    <p id="subtitle">Tap the kebab on any spot, then "Been there". This pile is private to your account.</p>
+  </header>
+
+  <div id="content"></div>
+
+  <!-- Empty state when signed in but nothing visited yet -->
+  <div id="empty" class="hb-empty" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 10"/></svg>
+    <h2>No spots checked off yet.</h2>
+    <p>Open any spot's kebab menu and tap "Been there" to add it here.</p>
+    <a href="../browse/">Browse spots</a>
+  </div>
+
+  <!-- Sign-in gate: shown when no session is attached. The "Been there"
+       collection is paid-only, so we never render an anonymous fallback. -->
+  <div id="signInGate" class="hb-empty" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v.01"/><path d="M12 14a4 4 0 1 0-3.5-6"/><circle cx="12" cy="12" r="9"/></svg>
+    <h2>Sign in to track visits.</h2>
+    <p>The "Been there" pile follows your Hikebeast account so it works across phones and browsers.</p>
+    <button type="button" data-hb-open-signin>Log in</button>
+  </div>
+
+</main>
+
+<footer class="legal">
+  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
+  © Hikebeast
+</footer>
+
+<script src="../map/spots-data.js"></script>
+<script src="../img/thumbs/dimensions.js"></script>
+<script src="../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
+<script src="../social.js"></script>
+<script>
+  // Mirrors /full/saved/index.html but reads from window.HB.visited
+  // instead of HB.favorites. The two collections are independent: a
+  // spot can be in either, both, or neither.
+  let SPOTS = [];
+  function refreshSpots() {
+    SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
+  }
+  refreshSpots();
+  const LEGEND = window.LEGEND || [];
+
+  const content   = document.getElementById('content');
+  const empty     = document.getElementById('empty');
+  const gate      = document.getElementById('signInGate');
+  const title     = document.getElementById('title');
+  const subtitle  = document.getElementById('subtitle');
+  const counter   = document.getElementById('visitedCount');
+
+  function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function tile(spot) {
+    const a = document.createElement('a');
+    a.className = 'hb-saved-tile';
+    a.href = window.HB.spotDetailHref(spot, '../');
+    a.title = spot.title;
+    const region = LEGEND.find(c => c.number === spot.chapter);
+    const regionName = region ? region.name : spot.chapter_id;
+    const kicker = window.HB.singularKicker(spot.kicker || '');
+    const sub = kicker ? `${esc(kicker)} · ${esc(regionName)}` : esc(regionName);
+    const attrs = window.HB.photoAttrs({
+      photoId: spot.imagePhotoId, image: spot.image,
+      width: 1000, prefix: '../',
+      sizes: '(min-width: 1200px) 25vw, (min-width: 600px) 33vw, 50vw',
+    });
+    const srcsetAttr = attrs.srcset ? ` srcset="${esc(attrs.srcset)}" sizes="${esc(attrs.sizes)}"` : '';
+    a.innerHTML = `
+      <div class="photo">
+        <img src="${esc(attrs.src)}"${srcsetAttr} alt="${esc(spot.title)}" loading="lazy" decoding="async" />
+      </div>
+      <div class="body">
+        <div class="name">${esc(spot.title)}</div>
+        <div class="meta">${sub}</div>
+      </div>
+    `;
+    // Quick-undo: a tick badge in the top-right of the tile that toggles
+    // the visited state (mirroring the heart on the saved page).
+    const k = window.HB.spotKey(spot);
+    if (k) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hb-visited-badge is-on';
+      btn.setAttribute('aria-label', 'Remove from Been there');
+      btn.title = 'Remove from Been there';
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 10"/></svg>';
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.HB.visited.toggle(k);
+        a.style.transition = 'opacity 180ms ease, transform 180ms ease';
+        a.style.opacity = '0';
+        a.style.transform = 'scale(0.92)';
+        setTimeout(render, 180);
+      });
+      a.appendChild(btn);
+    }
+    return a;
+  }
+
+  function render() {
+    // Wait until the visited façade has its first definitive state.
+    if (!window.HB.visited.ready()) return;
+
+    // Sign-in gate — rendered before anything else so anonymous visitors
+    // never see the empty pile or the call to action that implies they
+    // already have an account.
+    if (!window.HB.visited.signedIn()) {
+      content.innerHTML = '';
+      content.hidden = true;
+      empty.hidden = true;
+      gate.hidden = false;
+      counter.textContent = '0';
+      title.textContent  = 'Sign in to track visits.';
+      subtitle.textContent = 'The "Been there" pile is private to your account and syncs across devices.';
+      return;
+    }
+
+    const keys = window.HB.visited.list();
+    const set  = new Set(keys);
+    const visited = SPOTS.filter(s => set.has(window.HB.spotKey(s)));
+    counter.textContent = visited.length;
+
+    gate.hidden = true;
+
+    if (!visited.length) {
+      content.innerHTML = '';
+      content.hidden = true;
+      empty.hidden = false;
+      title.textContent = 'Mark spots you’ve been to.';
+      subtitle.textContent = 'Tap the kebab on any spot, then "Been there". This pile is private to your account.';
+      return;
+    }
+
+    empty.hidden = true;
+    content.hidden = false;
+    title.textContent = visited.length === 1 ? '1 spot visited.' : `${visited.length} spots visited.`;
+    subtitle.textContent = 'Grouped by region. Tap a card to revisit the entry. Synced to your account.';
+
+    // Group by chapter, in LEGEND order.
+    const byChapter = new Map();
+    LEGEND.forEach(c => byChapter.set(c.number, []));
+    visited.forEach(s => {
+      if (!byChapter.has(s.chapter)) byChapter.set(s.chapter, []);
+      byChapter.get(s.chapter).push(s);
+    });
+
+    content.innerHTML = '';
+    LEGEND.forEach(c => {
+      const list = byChapter.get(c.number) || [];
+      if (!list.length) return;
+      const wrap = document.createElement('section');
+      wrap.className = 'hb-group';
+      const head = document.createElement('div');
+      head.className = 'hb-group-head';
+      head.innerHTML = `<h2>${esc(c.name)}</h2><span class="meta">${list.length} spot${list.length === 1 ? '' : 's'}</span>`;
+      wrap.appendChild(head);
+      const grid = document.createElement('div');
+      grid.className = 'hb-saved-grid';
+      list.forEach(s => grid.appendChild(tile(s)));
+      wrap.appendChild(grid);
+      content.appendChild(wrap);
+    });
+  }
+
+  window.HB.visited.subscribe(render);
+  // Also re-render on session changes (sign-in or sign-out flips the gate).
+  window.HB.session.subscribe(render);
+  // When Convex pushes a spot update (admin edited a photo, etc.), repaint.
+  window.HB.spots.subscribe(() => { refreshSpots(); render(); });
+  render();
+</script>
+
+</body>
+</html>

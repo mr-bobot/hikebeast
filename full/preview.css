@@ -3405,6 +3405,10 @@ body.has-rail .topbar .hb-nav { display: none; }
     transition: background 120ms ease;
     position: relative;
   }
+  /* The Been-there row is `hidden` for anonymous users — paid feature
+   * gate. CSS `display: flex` above would otherwise override the
+   * hidden attribute. */
+  .app-menu-sheet .menu-row[hidden] { display: none !important; }
   .app-menu-sheet .menu-row:active { background: rgba(0, 0, 0, 0.05); }
   .app-menu-sheet .menu-row.is-current { color: var(--accent); }
   .app-menu-sheet .menu-row.is-current::before {
@@ -4241,6 +4245,38 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-saved-tile .hb-fav:hover { transform: scale(1.06); }
 .hb-saved-tile .hb-fav:active { transform: scale(0.92); }
 .hb-saved-tile .hb-fav svg { width: 16px; height: 16px; }
+
+/* Visited tick badge — sits in the same top-right corner as the heart
+ * on saved-tiles. Different colour (Apple-style green) so the two
+ * piles are visually distinct when a spot lives in both. */
+.hb-saved-tile .hb-visited-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #34c759;
+  border: 0;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  transition: transform 120ms ease;
+}
+.hb-saved-tile .hb-visited-badge:hover { transform: scale(1.06); }
+.hb-saved-tile .hb-visited-badge:active { transform: scale(0.92); }
+.hb-saved-tile .hb-visited-badge svg { width: 16px; height: 16px; }
+.hb-saved-tile .hb-visited-badge.is-on { color: #34c759; }
+
+/* Kebab menu "Been there" item: green tick when on, neutral icon
+ * when off. Matches the badge colour on the visited page. */
+.hb-spot-menu-item.is-on { color: #34c759; }
+.hb-spot-menu-item.is-on svg { color: #34c759; }
 
 /* === Print / PDF export === */
 @media print {

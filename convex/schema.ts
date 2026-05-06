@@ -167,6 +167,18 @@ export default defineSchema({
   }).index("by_user",      ["userId"])
     .index("by_user_spot", ["userId", "spotKey"]),
 
+  // "Been there" pile — independent of favorites (a spot can be loved AND
+  // visited, or one without the other). Sign-in gated: there's no
+  // localStorage fallback because anonymous visitors aren't paying
+  // customers and shouldn't get the feature. The kebab "Mark as visited"
+  // item is hidden when no session is attached.
+  visited: defineTable({
+    userId:    v.id("users"),
+    spotKey:   v.string(),
+    visitedAt: v.number(),
+  }).index("by_user",      ["userId"])
+    .index("by_user_spot", ["userId", "spotKey"]),
+
   // Tracks both "save" and "no" so we can reconstruct the swipe queue
   // server-side instead of round-tripping through localStorage.
   swipeDecisions: defineTable({
