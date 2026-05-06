@@ -1181,11 +1181,11 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   object-position: 70% 45%;
 }
 
-/* === Chapter TOC grid (cover + tile grid → click → /spot/<id>/) ===
- * Replaces the old multi-slide scroll-through. Sits inside the .viewer
- * column right after the cover. Tiles are simple photo + kicker + title;
- * each is an <a> to the spot's detail page. */
-.chapter-grid {
+/* === Chapter views — Reader (ebook scroll) + Grid (compact tiles) ====
+ * The chapter renders both layouts. body[data-chapter-view] toggles
+ * which one is visible; the user's choice persists in localStorage.
+ * Default view is reader (the curated scroll). */
+.chapter-views {
   width: 100%;
   background: transparent;
   border: 0;
@@ -1193,31 +1193,229 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   box-shadow: none;
   display: block;
 }
-.chapter-grid-head {
+.chapter-views-head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  padding: 4px 4px 14px;
+  padding: 4px 4px 18px;
+  gap: 12px;
 }
-.chapter-grid-kicker {
-  margin: 0;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--soft);
-}
-.chapter-grid-meta {
+.chapter-views-meta {
   margin: 0;
   font-size: 12.5px;
   color: var(--muted);
   letter-spacing: -0.005em;
 }
-.chapter-grid-inner {
+
+/* The toggle pill. Two flat buttons inside a hairline shell. */
+.chapter-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+  -webkit-tap-highlight-color: transparent;
+}
+.ch-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+.ch-view-btn svg { width: 13px; height: 13px; }
+.ch-view-btn:hover { color: var(--fg); }
+.ch-view-btn.is-active {
+  background: #fff;
+  color: var(--fg);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+
+/* View switching. Hide the inactive view entirely; show the active one. */
+.chapter-list,
+.chapter-grid-inner { display: none; }
+body[data-chapter-view="reader"] .chapter-list { display: flex; flex-direction: column; gap: 24px; }
+body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-template-columns: 1fr; gap: 12px; }
+
+@media (min-width: 600px) {
+  body[data-chapter-view="grid"] .chapter-grid-inner { grid-template-columns: 1fr 1fr; gap: 14px; }
+}
+@media (min-width: 1000px) {
+  body[data-chapter-view="grid"] .chapter-grid-inner { grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+}
+@media (min-width: 1400px) {
+  body[data-chapter-view="grid"] .chapter-grid-inner { grid-template-columns: 1fr 1fr 1fr 1fr; }
+}
+
+/* Reader card — square photo on the left, body on the right (desktop).
+ * Stacks vertically on mobile. The whole card is a click target via JS
+ * (data-href). Photo column uses a 1:1 aspect ratio so every card has
+ * the same height. */
+.cl-card {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
 }
+.cl-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+@media (min-width: 760px) {
+  .cl-card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+/* Photo column — 1:1 aspect ratio + horizontal scroll-snap carousel. */
+.cl-photos {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--surface);
+  overflow: hidden;
+}
+.cl-photos-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+.cl-photos-track::-webkit-scrollbar { display: none; }
+.cl-photo-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.cl-photo-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+.cl-photos-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.32);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.cl-dot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 160ms ease, transform 160ms ease;
+}
+.cl-dot:hover { background: rgba(255, 255, 255, 0.8); }
+.cl-dot.is-active { background: rgba(255, 255, 255, 0.95); transform: scale(1.15); }
+
+.cl-body {
+  padding: 24px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (min-width: 760px) {
+  .cl-body { padding: 48px 56px; justify-content: center; }
+}
+.cl-kicker {
+  margin: 0;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.cl-title {
+  margin: 4px 0 0;
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  color: var(--fg);
+}
+@media (min-width: 760px) { .cl-title { font-size: 44px; } }
+@media (min-width: 1100px) { .cl-title { font-size: 56px; } }
+.cl-subhead {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  max-width: 38ch;
+}
+@media (min-width: 760px) { .cl-subhead { font-size: 18px; margin-top: 14px; } }
+.cl-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 24px;
+  margin-top: 28px;
+}
+.cl-spec { display: flex; flex-direction: column; gap: 3px; }
+.cl-lbl {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.cl-val {
+  font-size: 15px;
+  color: var(--fg);
+  letter-spacing: -0.005em;
+}
+.cl-maps {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+}
+.cl-maps:hover { text-decoration: underline; }
+.cl-maps svg { width: 16px; height: 16px; }
+
+/* Legacy chapter-grid wrapper kept only as a no-op so any external
+ * references don't 404. The actual layout is driven by .chapter-views
+ * and the body[data-chapter-view] rules above. */
 @media (min-width: 600px) {
   .chapter-grid-inner { grid-template-columns: 1fr 1fr; gap: 14px; }
 }

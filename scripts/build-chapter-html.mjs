@@ -285,6 +285,63 @@ function renderSpotTile(spot) {
     </a>`;
 }
 
+function renderSpotEbookCard(spot) {
+  // Large reader-view card for the chapter scroll (ebook mode). Photo
+  // on the left, content on the right (stacks on mobile). Uses the new
+  // `subheadline` field when set; falls back to `deck`. Body paragraphs
+  // are intentionally skipped — the long-form copy lives on the spot
+  // detail page; the scroll is meant as a fast curated browse.
+  // The whole card is clickable (data-href + JS); the photo column is
+  // a horizontal swipe carousel showing every photo on the spot.
+  const subhead = spot.subheadline || spot.deck || "";
+  const kicker = spot.kicker || "HIDDEN GEMS";
+  const href = `../spot/${spot.id}/`;
+
+  // All photos for this spot: primary (_p0) + spot.photos[] (_p1..N).
+  // Falls back to a single missing slot if the spot has no photos at all.
+  const files = spotPhotoFiles(spot.id);
+  const count = Math.max(1, files.length);
+  const slides = Array.from({ length: count }, (_, i) =>
+    `          <div class="cl-photo-slide"><img src="../img/derivatives/${spot.id}_p${i}/w1800.webp" alt="${escapeHtml(spot.title)}" loading="lazy" draggable="false" /></div>`,
+  ).join("\n");
+
+  const dots = count > 1
+    ? `        <div class="cl-photos-dots" aria-hidden="true">${
+        Array.from({ length: count }, (_, i) =>
+          `<button type="button" class="cl-dot${i === 0 ? " is-active" : ""}" data-idx="${i}" tabindex="-1"></button>`,
+        ).join("")
+      }</div>`
+    : "";
+
+  const specs = [];
+  if (spot.region) specs.push(`        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">${escapeHtml(spot.region)}</span></div>`);
+  if (spot.access) specs.push(`        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">${escapeHtml(spot.access)}</span></div>`);
+  if (spot.effort) specs.push(`        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">${escapeHtml(spot.effort)}</span></div>`);
+  if (spot.best_light) specs.push(`        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">${escapeHtml(spot.best_light)}</span></div>`);
+
+  const mapsCta = spot.maps_url
+    ? `      <a class="cl-maps" href="${escapeHtml(spot.maps_url)}" target="_blank" rel="noopener">${MAPS_PIN_SVG}<span>Open in Maps</span></a>`
+    : "";
+
+  return `    <article class="cl-card" id="${escapeHtml(spot.id)}" data-href="${escapeHtml(href)}" tabindex="0" role="link" aria-label="${escapeHtml(spot.title)}">
+      <div class="cl-photos">
+        <div class="cl-photos-track">
+${slides}
+        </div>
+${dots}
+      </div>
+      <div class="cl-body">
+        <p class="cl-kicker">${escapeHtml(kicker)}</p>
+        <h2 class="cl-title">${escapeHtml(spot.title)}</h2>
+        <p class="cl-subhead">${escapeHtml(subhead)}</p>
+        <div class="cl-specs">
+${specs.join("\n")}
+        </div>
+${mapsCta}
+      </div>
+    </article>`;
+}
+
 function renderChapter(chapter) {
   // Keep the order the yaml gives — preserves the editorial run-order of
   // the spots in this chapter.
@@ -304,11 +361,24 @@ function renderChapter(chapter) {
   const slides = [];
   slides.push(renderCover(chapter));
 
+  // The chapter renders BOTH layouts; CSS toggles which one is visible
+  // based on body[data-chapter-view]. Default is "reader" (the ebook
+  // scroll), with a toggle pill to switch to "grid" (compact tiles).
+  // The user's preference is persisted in localStorage by the inline
+  // toggle script at the bottom of the page.
   const tiles = spotItems.map(renderSpotTile).join("\n");
-  slides.push(`    <section class="chapter-grid" aria-label="${escapeHtml(chapter.name)} spots">
-      <div class="chapter-grid-head">
-        <p class="chapter-grid-kicker">Spots in this chapter</p>
-        <p class="chapter-grid-meta">${spotCount} ${spotCount === 1 ? "spot" : "spots"}</p>
+  const cards = spotItems.map(renderSpotEbookCard).join("\n");
+
+  slides.push(`    <section class="chapter-views" aria-label="${escapeHtml(chapter.name)} spots">
+      <div class="chapter-views-head">
+        <p class="chapter-views-meta">${spotCount} ${spotCount === 1 ? "spot" : "spots"}</p>
+        <div class="chapter-view-toggle" role="tablist" aria-label="Chapter view">
+          <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span>Reader</span></button>
+          <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Grid</span></button>
+        </div>
+      </div>
+      <div class="chapter-list">
+${cards}
       </div>
       <div class="chapter-grid-inner">
 ${tiles}
@@ -366,6 +436,77 @@ ${slides.join("\n\n")}
   © Hikebeast
 </footer>
 
+<script>
+  // Chapter view toggle: reader (ebook scroll) vs grid (compact tiles).
+  // Persists in localStorage so a visitor's preference survives navigation.
+  // Default is "reader" — the chapter is meant to read like a curated guide.
+  (function () {
+    var KEY = 'hb:chapter-view';
+    var view = localStorage.getItem(KEY) || 'reader';
+    document.body.dataset.chapterView = view;
+    function applyActive() {
+      document.querySelectorAll('.ch-view-btn').forEach(function (b) {
+        b.classList.toggle('is-active', b.dataset.view === view);
+        b.setAttribute('aria-selected', b.dataset.view === view ? 'true' : 'false');
+      });
+    }
+    applyActive();
+    document.querySelectorAll('.ch-view-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        view = b.dataset.view;
+        localStorage.setItem(KEY, view);
+        document.body.dataset.chapterView = view;
+        applyActive();
+      });
+    });
+  })();
+
+  // Reader cards: whole-card navigation + photo carousel.
+  // Click anywhere on the card → open the spot detail page, except when
+  // the click lands on the Maps CTA or on a carousel dot. Browsers
+  // suppress the click event when the user has dragged more than a few
+  // pixels, so swiping the carousel does not navigate.
+  (function () {
+    document.querySelectorAll('.cl-card[data-href]').forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('.cl-maps')) return;
+        if (e.target.closest('.cl-dot')) return;
+        var href = card.dataset.href;
+        if (href) window.location.href = href;
+      });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          var href = card.dataset.href;
+          if (href) window.location.href = href;
+        }
+      });
+    });
+
+    // Carousel: keep dot indicator in sync with horizontal scroll;
+    // clicking a dot scrolls to that slide. Smooth animation comes from
+    // CSS scroll-behavior on the track, so a direct scrollLeft assignment
+    // animates without depending on the scrollTo smooth option.
+    document.querySelectorAll('.cl-photos').forEach(function (wrap) {
+      var track = wrap.querySelector('.cl-photos-track');
+      var dots = Array.prototype.slice.call(wrap.querySelectorAll('.cl-dot'));
+      if (!track || !dots.length) return;
+      function update() {
+        var idx = Math.round(track.scrollLeft / track.clientWidth);
+        for (var i = 0; i < dots.length; i++) {
+          dots[i].classList.toggle('is-active', i === idx);
+        }
+      }
+      track.addEventListener('scroll', update, { passive: true });
+      dots.forEach(function (d, i) {
+        d.addEventListener('click', function (e) {
+          e.stopPropagation();
+          track.scrollLeft = i * track.clientWidth;
+        });
+      });
+    });
+  })();
+</script>
 <script src="../preview.js"></script>
 <script src="../img/spot-images.js"></script>
 <script src="../lib/convex.js"></script>
