@@ -4,7 +4,11 @@
 //   1. webp derivative ladder (assets/spots/* → full/img/derivatives)
 //   2. static asset copy (assets/ui, assets/front_matter → full/img)
 //   3. chapter HTML (content.yaml → full/<chapter>/index.html)
-//   4. spot-images sidecar (content.yaml → full/img/spot-images.js)
+//   4. spot detail pages (one per spot, pre-rendered)
+//   5. spot-images sidecar (content.yaml → full/img/spot-images.js)
+//   6. inject-convex-url — swap the prod Convex URL with $CONVEX_URL when
+//      it differs (staging / preview deploys); no-op for prod builds and
+//      for any local build without CONVEX_URL set.
 //
 // Convex seeding is intentionally NOT part of this — `npm run seed` runs it
 // separately, since it pushes to a live deployment.
@@ -23,6 +27,7 @@ const STEPS = [
   "build-chapter-html.mjs",
   "build-spot-pages.mjs",
   "build-spot-images.mjs",
+  "inject-convex-url.mjs",
 ];
 
 for (const step of STEPS) {
