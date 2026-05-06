@@ -1340,9 +1340,11 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 @media (min-width: 760px) {
   .cl-body {
     /* Padding: top 13.13cqi (166/1264), bottom 12.18cqi (154/1264),
-     * left 4.67cqi (59/1264). No right padding — text wraps within
-     * the column's max-width. */
-    padding: 13.13cqi 0 12.18cqi 4.67cqi;
+     * left 4.67cqi (59/1264). Right padding mirrors the left so long
+     * titles don't run up against the card edge — Figma had right=0
+     * but visually the body looked unbalanced when generous top/bottom
+     * padding sat next to text touching the right border. */
+    padding: 13.13cqi 4.67cqi 12.18cqi 4.67cqi;
     justify-content: flex-start;
     gap: 0;
   }
@@ -1659,8 +1661,11 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
     aspect-ratio: 16 / 10;  /* tame ultra-portrait / ultra-landscape originals */
     object-fit: cover;
   }
-  .slide-spot .sp-photo.hb-multi,
-  .cl-photos.hb-multi {
+  .slide-spot .sp-photo.hb-multi {
+    /* .cl-photos.hb-multi (chapter list cards) deliberately excluded —
+     * it has its own min-height: 56.25cqi sizing in the chapter rules
+     * above, and forcing 16:10 aspect here would inflate the photo's
+     * width past its grid track when the row stretches. */
     aspect-ratio: 16 / 10;
   }
   .slide-spot .sp-body {
