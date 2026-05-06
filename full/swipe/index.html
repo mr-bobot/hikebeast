@@ -487,6 +487,9 @@
 
   function onDown(e) {
     if (e.button !== undefined && e.button !== 0) return;
+    // Tap on the in-card "Read" pill or any other interactive child
+    // should pass through to the link/button, not start a card drag.
+    if (e.target.closest('.open-link')) return;
     const card = e.currentTarget;
     if (drag) return;
     card.setPointerCapture(e.pointerId);

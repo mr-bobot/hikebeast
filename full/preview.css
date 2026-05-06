@@ -2364,6 +2364,14 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   transition: opacity 220ms ease;
   -webkit-tap-highlight-color: transparent;
 }
+/* Account for the desktop rail: it sits above this overlay (z-index 1100)
+ * and covers the leftmost 240px of the viewport. Without a matching left
+ * pad, place-items: center anchors the winner card to the absolute viewport
+ * midpoint — which the visible area sees as left-of-center. */
+body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
+@media (max-width: 759px) {
+  body.has-rail.rail-expanded .hb-random-overlay { left: 0; }
+}
 .hb-random-overlay.is-show { opacity: 1; }
 
 /* Stage takes the whole viewport but is positioned absolutely so it doesn't
@@ -2476,9 +2484,9 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  height: 42px;
-  padding: 0 18px;
+  gap: 8px;
+  height: 44px;
+  padding: 0 22px;
   border-radius: 999px;
   font-size: 14px;
   font-weight: 500;
@@ -2486,9 +2494,11 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   border: 0;
   cursor: pointer;
   font-family: inherit;
+  white-space: nowrap;
   -webkit-tap-highlight-color: transparent;
   transition: transform 100ms ease, opacity 120ms ease;
 }
+.hb-random-winner .rw-btn svg { width: 14px; height: 14px; flex: 0 0 auto; }
 .hb-random-winner .rw-btn:active { transform: scale(0.96); }
 .hb-random-winner .rw-btn.primary { background: #fff; color: var(--fg); }
 .hb-random-winner .rw-btn.primary:hover { opacity: 0.95; }

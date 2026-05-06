@@ -205,11 +205,27 @@
       const list = sidecarSpots.map(s => {
         const anchor = (s.href || '').split('#')[1];
         const spotKey = anchor ? `${s.chapter_id}#${anchor}` : null;
+        // Restructure: every spot now has a derivative photoId of
+        // <spotId>_p0 (and _p1, _p2, ... for extras). The legacy sidecar
+        // doesn't carry photoIds, but the spotId IS the anchor — so we
+        // synthesise photoIds from the anchor here. That way every
+        // page that calls HB.photoAttrs (swipe, browse, saved, map,
+        // home) gets a valid derivative URL even before Convex hydrates.
         let photos = [];
         if (spotKey && sidecarPhotos[spotKey]) {
-          photos = sidecarPhotos[spotKey].map(p => ({ src: p.src, photoId: null, credit: p.credit || null, width: null, height: null }));
+          photos = sidecarPhotos[spotKey].map((p, i) => ({
+            src: p.src,
+            photoId: anchor ? `${anchor}_p${i}` : null,
+            credit: p.credit || null,
+            width: null, height: null,
+          }));
         } else if (s.image) {
-          photos = [{ src: s.image, photoId: null, credit: null, width: null, height: null }];
+          photos = [{
+            src: s.image,
+            photoId: anchor ? `${anchor}_p0` : null,
+            credit: null,
+            width: null, height: null,
+          }];
         }
         return {
           spotKey,
