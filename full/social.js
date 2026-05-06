@@ -2514,13 +2514,22 @@
       const body = slide.querySelector('.sp-body');
       if (!body) return;
 
+      // Three-action row on the bottom-right of the text panel (visible
+      // top-right on desktop, full-width below the body on mobile via
+      // CSS): heart, "Been there" tick, kebab. The kebab is already
+      // injected by injectSpotMenu(); the heart + visited buttons get
+      // grouped into a `.sp-actions` row so they line up neatly.
+      const actions = document.createElement('div');
+      actions.className = 'sp-actions';
+      body.appendChild(actions);
+
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'hb-fav';
       btn.setAttribute('data-hb-fav', k);
       btn.setAttribute('aria-label', 'Save to favorites');
       btn.innerHTML = SVG_HEART_OUT;
-      body.appendChild(btn);
+      actions.appendChild(btn);
 
       function paint() {
         const on = favorites.has(k);
@@ -2536,6 +2545,46 @@
         favorites.toggle(k);
         paint();
       });
+
+      // "Been there" button — same affordance as the heart but for the
+      // visited pile. Always rendered so the layout stays stable; the
+      // signed-in gate hides it via [hidden] when no session attached
+      // and flips back on sign-in. Tick filled when on.
+      const tick = document.createElement('button');
+      tick.type = 'button';
+      tick.className = 'hb-visited';
+      tick.setAttribute('data-hb-visited', k);
+      tick.setAttribute('aria-label', 'Mark as visited');
+      tick.innerHTML = SVG_CHECK_CIRCLE;
+      tick.hidden = !visited.signedIn();
+      actions.appendChild(tick);
+
+      function paintVisited() {
+        tick.hidden = !visited.signedIn();
+        const on = visited.has(k);
+        tick.classList.toggle('is-on', on);
+        tick.setAttribute('aria-pressed', String(on));
+        tick.setAttribute('aria-label', on ? 'Remove from Been there' : 'Mark as visited');
+      }
+      paintVisited();
+      visited.subscribe(paintVisited);
+      session.subscribe(paintVisited);
+      tick.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!visited.signedIn()) return;
+        visited.toggle(k);
+        paintVisited();
+      });
+
+      // Move the kebab into the same actions row so the three buttons
+      // line up. The kebab was appended directly to `body` earlier by
+      // injectSpotMenu() — relocate it once here so the order is
+      // heart → visited → kebab. Idempotent on subsequent runs.
+      const kebab = body.querySelector('.hb-spot-menu-btn');
+      if (kebab && kebab.parentNode !== actions) {
+        actions.appendChild(kebab);
+      }
     });
   }
 

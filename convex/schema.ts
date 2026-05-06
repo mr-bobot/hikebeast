@@ -101,6 +101,12 @@ export default defineSchema({
       // park, UNESCO, etc.) that intersect this spot.
       canton:      v.optional(v.string()),
       protections: v.optional(v.array(v.string())),
+      // Editorial pin for the /full/wildcamping/ collection. The page
+      // filters by `verdict === "tolerated" || featured === true`, so
+      // setting this surfaces a spot that has stricter legal status
+      // (restricted / forbidden) but is still worth showing in the
+      // curated wildcamping list — Leon's discretion.
+      featured:    v.optional(v.boolean()),
     })),
     updatedAt:  v.number(),
   }).index("by_spotKey",   ["spotKey"])

@@ -3524,13 +3524,29 @@ body.has-rail .topbar .hb-nav { display: none; }
   color: var(--fg);
 }
 
-/* Heart button anchored to top-right of the spot card's white text panel */
+/* Three-action row on the spot card text panel: heart · "Been there"
+ * tick · 3-dots kebab. Group lives in a `.sp-actions` flex container
+ * so the buttons line up cleanly at every breakpoint.
+ *
+ * Desktop: row floats top-right of the white text panel (the
+ * historical heart/kebab spot — no visual change for existing users).
+ * Mobile: row drops to a full-width flex strip below the body content
+ * and the "Open in Maps" foot, easier to thumb-reach than the upper
+ * corner. */
 .slide-spot .sp-body { position: relative; }
-.hb-fav {
+.sp-actions {
   position: absolute;
-  top: 16px;
-  right: 60px;  /* sits to the left of the 3-dots menu in the top-right corner */
+  top: 14px;
+  right: 14px;
   z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+@media (min-width: 760px)  { .sp-actions { top: 18px; right: 20px; } }
+@media (min-width: 1100px) { .sp-actions { top: 22px; right: 24px; } }
+
+.hb-fav {
   width: 36px;
   height: 36px;
   display: grid;
@@ -3543,16 +3559,11 @@ body.has-rail .topbar .hb-nav { display: none; }
   transition: transform 120ms ease, color 120ms ease, background 120ms ease;
   -webkit-tap-highlight-color: transparent;
 }
-@media (min-width: 760px) { .hb-fav { top: 20px; right: 64px; } }
-@media (min-width: 1100px) { .hb-fav { top: 24px; right: 68px; } }
-/* Match the menu button position so they line up at every breakpoint. */
-@media (min-width: 760px)  { .hb-spot-menu-btn { top: 18px; right: 20px; } }
-@media (min-width: 1100px) { .hb-spot-menu-btn { top: 22px; right: 24px; } }
-
-/* Reserve a clear lane on the kicker/title row so the absolute heart never
- * sits on top of the type. The deck and body text flow full-width below. */
+/* Reserve a clear lane on the kicker/title row so the desktop action row
+ * never sits on top of the type. The deck and body text flow full-width
+ * below. (Cleared on mobile by the rules further down.) */
 .slide-spot .sp-kicker,
-.slide-spot .sp-title { padding-right: 48px; }
+.slide-spot .sp-title { padding-right: 132px; }
 .hb-fav svg { width: 20px; height: 20px; }
 .hb-fav:hover { transform: scale(1.06); color: #ff375f; }
 .hb-fav:active { transform: scale(0.92); }
@@ -3560,6 +3571,67 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-fav.is-on:hover { color: #ff375f; background: #fff; }
 @keyframes hb-pop { 0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
 .hb-fav.is-on { animation: hb-pop 220ms ease; }
+
+/* "Been there" tick — same chip shape as .hb-fav but Apple green when on. */
+.hb-visited {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface);
+  color: rgba(0,0,0,0.45);
+  cursor: pointer;
+  transition: transform 120ms ease, color 120ms ease, background 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.hb-visited svg { width: 20px; height: 20px; }
+.hb-visited:hover { transform: scale(1.06); color: #34c759; }
+.hb-visited:active { transform: scale(0.92); }
+.hb-visited.is-on { color: #34c759; }
+.hb-visited.is-on:hover { color: #34c759; background: #fff; }
+.hb-visited.is-on { animation: hb-pop 220ms ease; }
+.hb-visited[hidden] { display: none !important; }
+
+/* Reset the kebab's absolute positioning when it lives inside the
+ * action row (which is the new home for it). The base .hb-spot-menu-btn
+ * rule still applies on chapter cards / row cards where the kebab
+ * floats over the photo — those overlays use `.hb-kebab-overlay`,
+ * not `.hb-spot-menu-btn`, so they're untouched. */
+.sp-actions .hb-spot-menu-btn {
+  position: static;
+  width: 36px;
+  height: 36px;
+}
+
+/* Mobile: the action row drops below the body so the buttons are
+ * thumb-reachable. The kicker+title no longer need the right padding
+ * since nothing floats over them. */
+@media (max-width: 759px) {
+  .sp-actions {
+    position: static;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  .slide-spot .sp-kicker,
+  .slide-spot .sp-title { padding-right: 0; }
+  /* Keep the kebab chip flush with the heart + tick instead of floating
+   * top-right of the body. Override the absolute positioning from the
+   * base .hb-spot-menu-btn rule. */
+  .sp-actions .hb-spot-menu-btn {
+    position: static;
+    width: 36px;
+    height: 36px;
+  }
+  /* "Open in Maps" sits above the action row — give it some breathing
+   * room so the row isn't crammed against the link. */
+  .slide-spot .sp-foot { margin-bottom: 4px; }
+}
 
 /* ─── Card-action overlays (heart + kebab) ────────────────────────────────
  * Distinct from .hb-fav (which sits on the white sp-body of detail pages).

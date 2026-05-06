@@ -276,6 +276,7 @@ function buildSpotRow({ s, chapter, photos, editorial, kind = "spot", origin = u
       protections: (s.wildCamping.protections && s.wildCamping.protections.length)
                     ? s.wildCamping.protections
                     : undefined,
+      featured:    s.wildCamping.featured === true ? true : undefined,
     }) : undefined,
   });
 }

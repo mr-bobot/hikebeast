@@ -54,15 +54,20 @@
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script src="../social.js"></script>
 <script>
-  // Filter HB.spots by wildCamping.verdict === 'tolerated'. Reuses the
-  // same .hb-saved-tile / .hb-saved-grid components as /full/saved/ so
-  // the visual stays consistent with other "list of spots" pages.
+  // Spots in the wildcamping collection: anything with verdict ===
+  // 'tolerated' (legally OK above tree line under Swiss rules), plus
+  // anything Leon manually pinned via wildCamping.featured = true in
+  // content.yaml. The pinned spots may have stricter legal verdicts
+  // (restricted / forbidden) but appear here because Leon has stayed
+  // there or knows the workaround (booking, UR side, etc.).
   let SPOTS = [];
   function refreshSpots() {
     SPOTS = window.HB.spots.all().filter(s =>
       window.HB.hasRealImage(s) &&
-      s.wildCamping &&
-      s.wildCamping.verdict === 'tolerated'
+      s.wildCamping && (
+        s.wildCamping.verdict === 'tolerated' ||
+        s.wildCamping.featured === true
+      )
     );
   }
   refreshSpots();

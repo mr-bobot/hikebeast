@@ -85,6 +85,8 @@ const spotArg = v.object({
     reason:      v.optional(v.string()),
     canton:      v.optional(v.string()),
     protections: v.optional(v.array(v.string())),
+    // Editorial pin for the /full/wildcamping/ collection — see schema.ts
+    featured:    v.optional(v.boolean()),
   })),
 });
 
