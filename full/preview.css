@@ -83,6 +83,11 @@ button { font-family: inherit; }
   object-position: 70% 45%;
 }
 .brand span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Mobile: drop "Hidden Gems · " prefix; the page section name (Central
+ * Switzerland, Swipe, Map, etc.) carries enough context on its own. */
+@media (max-width: 759px) {
+  .brand-prefix { display: none; }
+}
 @media (max-width: 480px) {
   .brand span { font-size: 13px; }
   .crumb { font-size: 12px; padding: 5px 10px; }
@@ -1281,67 +1286,23 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   .cl-card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 
-/* Photo column — 1:1 aspect ratio + horizontal scroll-snap carousel. */
+/* Photo column — fixed 1:1 aspect ratio. Internal carousel reuses the
+ * .hb-multi pattern from spot detail pages so chapter and detail share
+ * the same arrows + dots + counter visual (see the .sp-photo.hb-multi, .cl-photos.hb-multi
+ * rules below — they're widened to also match .cl-photos.hb-multi). */
 .cl-photos {
   position: relative;
   aspect-ratio: 1 / 1;
   background: var(--surface);
   overflow: hidden;
 }
-.cl-photos-track {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  -webkit-overflow-scrolling: touch;
-}
-.cl-photos-track::-webkit-scrollbar { display: none; }
-.cl-photo-slide {
-  flex: 0 0 100%;
-  width: 100%;
-  height: 100%;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-.cl-photo-slide img {
+.cl-photos > img {
+  /* Single-photo cards: a plain <img> rather than an .hb-slide stack. */
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
 }
-.cl-photos-dots {
-  position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 6px;
-  padding: 6px 10px;
-  background: rgba(0, 0, 0, 0.32);
-  border-radius: 999px;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-}
-.cl-dot {
-  width: 6px;
-  height: 6px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: background 160ms ease, transform 160ms ease;
-}
-.cl-dot:hover { background: rgba(255, 255, 255, 0.8); }
-.cl-dot.is-active { background: rgba(255, 255, 255, 0.95); transform: scale(1.15); }
 
 .cl-body {
   padding: 24px 24px 22px;
@@ -1629,7 +1590,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
     aspect-ratio: 16 / 10;  /* tame ultra-portrait / ultra-landscape originals */
     object-fit: cover;
   }
-  .slide-spot .sp-photo.hb-multi {
+  .slide-spot .sp-photo.hb-multi, .cl-photos.hb-multi {
     aspect-ratio: 16 / 10;
   }
   .slide-spot .sp-body {
@@ -2072,16 +2033,16 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
  * as a stack of <img class="hb-slide"> with one .is-current at a time, plus
  * dot pagination + chevron arrows. Single-photo spots stay on the static
  * <img> and never receive the .hb-multi class. */
-.sp-photo.hb-multi {
+.sp-photo.hb-multi, .cl-photos.hb-multi {
   position: relative;
 }
 /* Mobile: the original static <img> is what gave .sp-photo its height
  * (via aspect-ratio: 1/1). With the image removed for multi-spots, set
  * the same ratio on .sp-photo itself so the column doesn't collapse. */
 @media (max-width: 759px) {
-  .sp-photo.hb-multi { aspect-ratio: 1 / 1; }
+  .sp-photo.hb-multi, .cl-photos.hb-multi { aspect-ratio: 1 / 1; }
 }
-.sp-photo.hb-multi .hb-slide {
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-slide {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2092,14 +2053,14 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   transition: opacity 280ms ease;
   pointer-events: none;
 }
-.sp-photo.hb-multi .hb-slide.is-current { opacity: 1; }
-.sp-photo.hb-multi .hb-credit {
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-slide.is-current { opacity: 1; }
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-credit {
   /* Sits on the current slide; we update its text per-slide so credits
    * stay accurate as the user navigates. */
   position: absolute;
   z-index: 4;
 }
-.sp-photo.hb-multi .hb-arrow {
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -2119,18 +2080,18 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   z-index: 5;
   -webkit-tap-highlight-color: transparent;
 }
-.sp-photo.hb-multi:hover .hb-arrow,
-.sp-photo.hb-multi:focus-within .hb-arrow { opacity: 1; }
-.sp-photo.hb-multi .hb-arrow:hover { background: rgba(0,0,0,0.7); }
-.sp-photo.hb-multi .hb-arrow:active { transform: translateY(-50%) scale(0.92); }
-.sp-photo.hb-multi .hb-arrow.hb-arrow-prev { left: 12px; }
-.sp-photo.hb-multi .hb-arrow.hb-arrow-next { right: 12px; }
-.sp-photo.hb-multi .hb-arrow svg { width: 18px; height: 18px; }
+.sp-photo.hb-multi, .cl-photos.hb-multi:hover .hb-arrow,
+.sp-photo.hb-multi, .cl-photos.hb-multi:focus-within .hb-arrow { opacity: 1; }
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow:hover { background: rgba(0,0,0,0.7); }
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow:active { transform: translateY(-50%) scale(0.92); }
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow.hb-arrow-prev { left: 12px; }
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow.hb-arrow-next { right: 12px; }
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow svg { width: 18px; height: 18px; }
 /* Touch devices: arrows always visible (no hover state) */
 @media (hover: none) {
-  .sp-photo.hb-multi .hb-arrow { opacity: 0.85; }
+  .sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow { opacity: 0.85; }
 }
-.sp-photo.hb-multi .hb-dots {
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-dots {
   position: absolute;
   bottom: 12px;
   left: 50%;
@@ -2145,19 +2106,19 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
-.sp-photo.hb-multi .hb-dots span {
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-dots span {
   width: 6px; height: 6px;
   border-radius: 999px;
   background: rgba(255,255,255,0.55);
   transition: width 220ms ease, background 220ms ease;
 }
-.sp-photo.hb-multi .hb-dots span.is-on {
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-dots span.is-on {
   background: #fff;
   width: 16px;
 }
 /* Photo counter badge (top-left), tells you "1 / 3" so users see at a
  * glance that there's more than one photo without having to count dots. */
-.sp-photo.hb-multi .hb-counter {
+.sp-photo.hb-multi, .cl-photos.hb-multi .hb-counter {
   position: absolute;
   top: 12px;
   left: 12px;
@@ -2822,9 +2783,11 @@ body.has-rail {
 }
 body.has-rail.rail-expanded { padding-left: 240px; }
 
-/* Once the rail is the canonical nav, the page-specific topbar pills are
- * redundant (Overview / Map view links are duplicated in the rail). */
-body.has-rail .topbar .pill,
+/* Once the rail is the canonical nav, most page-specific topbar pills are
+ * redundant (Overview / Map view links are duplicated in the rail). The
+ * spot-detail Back pill (.hb-back) is the exception — it carries unique
+ * scroll-restore context that the rail can't replace. */
+body.has-rail .topbar .pill:not(.hb-back),
 body.has-rail .topbar .hb-nav { display: none; }
 
 /* Mobile: rail becomes a slide-in drawer */

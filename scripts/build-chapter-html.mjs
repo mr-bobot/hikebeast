@@ -202,6 +202,12 @@ function renderRegion(chapter, spotCount) {
 
 const MAPS_PIN_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
+// Chevron icons — match the SVG_CHEV_* used by social.js injectMultiImage so
+// the chapter Reader carousel and the spot-detail carousel share identical
+// arrow visuals.
+const CHEV_LEFT_SVG  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+const CHEV_RIGHT_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+
 function renderSpot(spot) {
   const credit = renderCredit(spot.image_credit);
   const creditPill = credit
@@ -287,31 +293,48 @@ function renderSpotTile(spot) {
 
 function renderSpotEbookCard(spot) {
   // Large reader-view card for the chapter scroll (ebook mode). Photo
-  // on the left, content on the right (stacks on mobile). Uses the new
+  // on the left, content on the right (stacks on mobile). Uses the
   // `subheadline` field when set; falls back to `deck`. Body paragraphs
   // are intentionally skipped — the long-form copy lives on the spot
   // detail page; the scroll is meant as a fast curated browse.
-  // The whole card is clickable (data-href + JS); the photo column is
-  // a horizontal swipe carousel showing every photo on the spot.
+  //
+  // The whole card is clickable (data-href + JS). When the spot has
+  // multiple photos we pre-render the same .hb-multi structure that
+  // social.js injectMultiImage produces (slides + counter + dots +
+  // chevron arrows + credit pill), so chapter and spot-detail share
+  // identical carousel visuals.
   const subhead = spot.subheadline || spot.deck || "";
   const kicker = spot.kicker || "HIDDEN GEMS";
   const href = `../spot/${spot.id}/`;
 
-  // All photos for this spot: primary (_p0) + spot.photos[] (_p1..N).
-  // Falls back to a single missing slot if the spot has no photos at all.
   const files = spotPhotoFiles(spot.id);
   const count = Math.max(1, files.length);
-  const slides = Array.from({ length: count }, (_, i) =>
-    `          <div class="cl-photo-slide"><img src="../img/derivatives/${spot.id}_p${i}/w1800.webp" alt="${escapeHtml(spot.title)}" loading="lazy" draggable="false" /></div>`,
-  ).join("\n");
+  const credit = renderCredit(spot.image_credit);
+  const creditText = credit ? `Photo · ${escapeHtml(credit)}` : "";
 
-  const dots = count > 1
-    ? `        <div class="cl-photos-dots" aria-hidden="true">${
-        Array.from({ length: count }, (_, i) =>
-          `<button type="button" class="cl-dot${i === 0 ? " is-active" : ""}" data-idx="${i}" tabindex="-1"></button>`,
-        ).join("")
-      }</div>`
-    : "";
+  let photosBlock;
+  if (count <= 1) {
+    // Plain image — no carousel, no dots, no counter.
+    photosBlock = `      <div class="cl-photos">
+        <img src="${primarySrc(spot.id)}" alt="${escapeHtml(spot.title)}" loading="lazy" />
+        ${creditText ? `<span class="credit-pill">${creditText}</span>` : ""}
+      </div>`;
+  } else {
+    const slides = Array.from({ length: count }, (_, i) =>
+      `        <img class="hb-slide${i === 0 ? " is-current" : ""}" src="../img/derivatives/${spot.id}_p${i}/w1800.webp" alt="${i === 0 ? escapeHtml(spot.title) : ""}" loading="${i === 0 ? "eager" : "lazy"}" draggable="false" />`,
+    ).join("\n");
+    const dotSpans = Array.from({ length: count }, (_, i) =>
+      `<span class="${i === 0 ? "is-on" : ""}"></span>`,
+    ).join("");
+    photosBlock = `      <div class="cl-photos hb-multi">
+${slides}
+        <span class="hb-counter">1 / ${count}</span>
+        ${creditText ? `<span class="credit-pill hb-credit">${creditText}</span>` : ""}
+        <div class="hb-dots" aria-hidden="true">${dotSpans}</div>
+        <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo">${CHEV_LEFT_SVG}</button>
+        <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo">${CHEV_RIGHT_SVG}</button>
+      </div>`;
+  }
 
   const specs = [];
   if (spot.region) specs.push(`        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">${escapeHtml(spot.region)}</span></div>`);
@@ -324,12 +347,7 @@ function renderSpotEbookCard(spot) {
     : "";
 
   return `    <article class="cl-card" id="${escapeHtml(spot.id)}" data-href="${escapeHtml(href)}" tabindex="0" role="link" aria-label="${escapeHtml(spot.title)}">
-      <div class="cl-photos">
-        <div class="cl-photos-track">
-${slides}
-        </div>
-${dots}
-      </div>
+${photosBlock}
       <div class="cl-body">
         <p class="cl-kicker">${escapeHtml(kicker)}</p>
         <h2 class="cl-title">${escapeHtml(spot.title)}</h2>
@@ -387,11 +405,11 @@ ${tiles}
 
   for (const it of extrasItems) slides.push(renderExtras(it));
 
-  // The crumb counter (X / Y) was meaningful when the chapter was a
-  // multi-slide scroll. With the TOC layout it always reads 1 / 1, so
-  // social.js's IntersectionObserver keeps working but the indicator
-  // collapses to "1 / 1".
-  const crumbTotal = slides.length;
+  // The legacy crumb counter (X / Y, driven by an IntersectionObserver in
+  // preview.js) was meaningful when chapters were a multi-slide scroll.
+  // Now that the chapter is just cover + Reader/Grid views, we replace it
+  // with a static "N spots" pill — the spot count is the only thing worth
+  // surfacing in that slot.
 
   return `<!doctype html>
 <html lang="en">
@@ -411,9 +429,9 @@ ${tiles}
 <div class="topbar">
   <a class="brand" href="../index.html">
     <img src="../../images/avatar.jpg" alt="" />
-    <span>Hidden Gems · ${escapeHtml(chapter.name)}</span>
+    <span><span class="brand-prefix">Hidden Gems · </span>${escapeHtml(chapter.name)}</span>
   </a>
-  <span class="crumb"><b id="crumbCur">1</b> / <span id="crumbTotal">${crumbTotal}</span></span>
+  <span class="crumb"><b>${spotCount}</b> ${spotCount === 1 ? "spot" : "spots"}</span>
   <div class="topbar-right">
     <a class="pill" href="../index.html">Overview</a>
   </div>
@@ -437,6 +455,38 @@ ${slides.join("\n\n")}
 </footer>
 
 <script>
+  var HB_CHAPTER_ID = ${JSON.stringify(chapter.id)};
+
+  // Restore scroll position when arriving back from a spot detail page.
+  // The chapter card click handler below saves window.scrollY into
+  // sessionStorage just before navigating; on return the saved Y wins.
+  // Time-bounded to 10 min so an old session can't randomly snap an
+  // unrelated visit. We also disable the browser's automatic scroll
+  // restoration for this navigation so it doesn't fight our manual one.
+  (function () {
+    try {
+      var KEY = 'hb:chapterScroll:' + HB_CHAPTER_ID;
+      var raw = sessionStorage.getItem(KEY);
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      sessionStorage.removeItem(KEY);
+      if (!data || typeof data.y !== 'number') return;
+      if (Date.now() - (data.ts || 0) > 10 * 60 * 1000) return;
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      function setY(y) {
+        try { window.scrollTo(0, y); } catch (_) {}
+        try { document.documentElement.scrollTop = y; } catch (_) {}
+        try { document.body.scrollTop = y; } catch (_) {}
+      }
+      // Apply now (script at end of body — DOM laid out), then again on
+      // next frame and after the load event so lazy-loaded images and
+      // Convex hydration can not bounce us back to the top.
+      setY(data.y);
+      requestAnimationFrame(function () { setY(data.y); });
+      window.addEventListener('load', function () { setY(data.y); });
+    } catch (_) {}
+  })();
+
   // Chapter view toggle: reader (ebook scroll) vs grid (compact tiles).
   // Persists in localStorage so a visitor's preference survives navigation.
   // Default is "reader" — the chapter is meant to read like a curated guide.
@@ -463,46 +513,88 @@ ${slides.join("\n\n")}
 
   // Reader cards: whole-card navigation + photo carousel.
   // Click anywhere on the card → open the spot detail page, except when
-  // the click lands on the Maps CTA or on a carousel dot. Browsers
-  // suppress the click event when the user has dragged more than a few
-  // pixels, so swiping the carousel does not navigate.
+  // the click lands on the Maps CTA or on a carousel control (arrow /
+  // dot). The .hb-multi carousel uses opacity-based slide transitions
+  // matching the spot-detail carousel from social.js — so the chapter
+  // and detail views share one visual.
   (function () {
+    function rememberScroll(card) {
+      try {
+        sessionStorage.setItem('hb:chapterScroll:' + HB_CHAPTER_ID, JSON.stringify({
+          y: window.scrollY || document.documentElement.scrollTop || 0,
+          spotId: card.id || '',
+          ts: Date.now(),
+        }));
+      } catch (_) {}
+    }
     document.querySelectorAll('.cl-card[data-href]').forEach(function (card) {
       card.addEventListener('click', function (e) {
         if (e.target.closest('.cl-maps')) return;
-        if (e.target.closest('.cl-dot')) return;
+        if (e.target.closest('.hb-arrow')) return;
+        if (e.target.closest('.hb-dots')) return;
         var href = card.dataset.href;
-        if (href) window.location.href = href;
+        if (!href) return;
+        rememberScroll(card);
+        window.location.href = href;
       });
       card.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           var href = card.dataset.href;
-          if (href) window.location.href = href;
+          if (!href) return;
+          rememberScroll(card);
+          window.location.href = href;
         }
       });
     });
 
-    // Carousel: keep dot indicator in sync with horizontal scroll;
-    // clicking a dot scrolls to that slide. Smooth animation comes from
-    // CSS scroll-behavior on the track, so a direct scrollLeft assignment
-    // animates without depending on the scrollTo smooth option.
-    document.querySelectorAll('.cl-photos').forEach(function (wrap) {
-      var track = wrap.querySelector('.cl-photos-track');
-      var dots = Array.prototype.slice.call(wrap.querySelectorAll('.cl-dot'));
-      if (!track || !dots.length) return;
-      function update() {
-        var idx = Math.round(track.scrollLeft / track.clientWidth);
-        for (var i = 0; i < dots.length; i++) {
-          dots[i].classList.toggle('is-active', i === idx);
-        }
+    // Carousel wiring on every .cl-photos.hb-multi block. Single-photo
+    // cards have no .hb-multi class so they are skipped automatically.
+    document.querySelectorAll('.cl-photos.hb-multi').forEach(function (wrap) {
+      var slides = Array.prototype.slice.call(wrap.querySelectorAll('.hb-slide'));
+      var dots   = Array.prototype.slice.call(wrap.querySelectorAll('.hb-dots > span'));
+      var prev   = wrap.querySelector('.hb-arrow-prev');
+      var next   = wrap.querySelector('.hb-arrow-next');
+      var counter = wrap.querySelector('.hb-counter');
+      if (slides.length < 2) return;
+
+      var idx = 0;
+      function show(target) {
+        var n = ((target % slides.length) + slides.length) % slides.length;
+        if (n === idx) return;
+        slides[idx].classList.remove('is-current');
+        slides[n].classList.add('is-current');
+        if (dots[idx]) dots[idx].classList.remove('is-on');
+        if (dots[n])   dots[n].classList.add('is-on');
+        if (counter) counter.textContent = (n + 1) + ' / ' + slides.length;
+        idx = n;
       }
-      track.addEventListener('scroll', update, { passive: true });
-      dots.forEach(function (d, i) {
-        d.addEventListener('click', function (e) {
-          e.stopPropagation();
-          track.scrollLeft = i * track.clientWidth;
-        });
+
+      if (prev) prev.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        show(idx - 1);
+      });
+      if (next) next.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        show(idx + 1);
+      });
+      // Touch swipe on the photo: > 40 px horizontal travel + clearly
+      // horizontal direction (not a scroll gesture).
+      var tx = null, ty = null;
+      wrap.addEventListener('touchstart', function (e) {
+        if (e.touches.length !== 1) return;
+        tx = e.touches[0].clientX;
+        ty = e.touches[0].clientY;
+      }, { passive: true });
+      wrap.addEventListener('touchend', function (e) {
+        if (tx === null) return;
+        var t = e.changedTouches[0];
+        var dx = t.clientX - tx;
+        var dy = t.clientY - ty;
+        tx = ty = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          show(idx + (dx < 0 ? 1 : -1));
+        }
       });
     });
   })();

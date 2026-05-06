@@ -100,6 +100,12 @@ ${mapsLink}
 function renderSpotPage(spot) {
   const chapter = content.chapters.find(c => c.id === spot.chapter);
   const chapterName = chapter?.name || spot.chapter;
+  // Count of sibling spots in the same chapter — surfaced in the crumb
+  // slot so the spot detail page shows context ("28 spots") instead of
+  // the meaningless 1/N counter.
+  const chapterSpotCount = (content.spots || []).filter(
+    s => s.chapter === spot.chapter && (s.kind || "spot") === "spot",
+  ).length;
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -118,10 +124,11 @@ function renderSpotPage(spot) {
 <div class="topbar">
   <a class="brand" href="../../index.html">
     <img src="../../../images/avatar.jpg" alt="" />
-    <span>Hidden Gems · ${escapeHtml(chapterName)}</span>
+    <span><span class="brand-prefix">Hidden Gems · </span>${escapeHtml(chapterName)}</span>
   </a>
+  <span class="crumb"><b>${chapterSpotCount}</b> ${chapterSpotCount === 1 ? "spot" : "spots"}</span>
   <div class="topbar-right">
-    <a class="pill" href="../../${escapeHtml(spot.chapter)}/index.html#${escapeHtml(spot.id)}" title="Open in chapter walkthrough">${ARROW_LEFT_SVG}<span>Chapter</span></a>
+    <a class="pill hb-back" data-chapter="${escapeHtml(spot.chapter)}" data-spot="${escapeHtml(spot.id)}" href="../../${escapeHtml(spot.chapter)}/" title="Back to chapter">${ARROW_LEFT_SVG}<span>Back</span></a>
   </div>
 </div>
 
