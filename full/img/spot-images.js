@@ -17,6 +17,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/engstligen_falls_p2/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/engstligen_falls_p3/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "central#oltschibachfall": [
@@ -44,6 +48,16 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/rosenlaui_p2/w1800.webp",
+      "credit": "zimydakid"
+    }
+  ],
+  "central#rosenlaui_secret_waterfall": [
+    {
+      "src": "derivatives/rosenlaui_secret_waterfall_p0/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/rosenlaui_secret_waterfall_p1/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -83,6 +97,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/guttannen_valley_p1/w1800.webp",
       "credit": "@shaunaxbst"
+    },
+    {
+      "src": "derivatives/guttannen_valley_p2/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "central#aare_gorge": [
@@ -107,6 +125,20 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
+  "central#brienzer_rothorn": [
+    {
+      "src": "derivatives/brienzer_rothorn_p0/w1800.webp",
+      "credit": "@oliwear.j"
+    },
+    {
+      "src": "derivatives/brienzer_rothorn_p1/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/brienzer_rothorn_p2/w1800.webp",
+      "credit": "zimydakid"
+    }
+  ],
   "central#hardergrat_trail": [
     {
       "src": "derivatives/hardergrat_trail_p0/w1800.webp",
@@ -114,6 +146,10 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/hardergrat_trail_p1/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/hardergrat_trail_p2/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -173,6 +209,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/iffigfalle_p1/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/iffigfalle_p2/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "central#schrattenfluh": [
@@ -190,6 +230,40 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/schrattenfluh_p3/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/schrattenfluh_p4/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/schrattenfluh_p5/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/schrattenfluh_p6/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/schrattenfluh_p7/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/schrattenfluh_p8/w1800.webp",
+      "credit": "zimydakid"
+    }
+  ],
+  "central#heftihutte": [
+    {
+      "src": "derivatives/heftihutte_p0/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/heftihutte_p1/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/heftihutte_p2/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -271,6 +345,14 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/schilthorn_p1/w1800.webp",
       "credit": "Dimitri Karastelev"
+    },
+    {
+      "src": "derivatives/schilthorn_p2/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/schilthorn_p3/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "central#lauterbrunnen": [
@@ -285,6 +367,14 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/lauterbrunnen_p2/w1800.webp",
       "credit": "Omid Visuals"
+    },
+    {
+      "src": "derivatives/lauterbrunnen_p3/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/lauterbrunnen_p4/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "valais#riffelsee": [
@@ -389,6 +479,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/cabane_becs_de_bosson_p1/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/cabane_becs_de_bosson_p2/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "valais#moiry_glacier": [
@@ -407,6 +501,14 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/moiry_glacier_p3/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/moiry_glacier_p4/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/moiry_glacier_p5/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "valais#the_ice_cave": [
@@ -424,6 +526,18 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/the_ice_cave_p3/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/the_ice_cave_p4/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/the_ice_cave_p5/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/the_ice_cave_p6/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -527,6 +641,18 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/la_fouly_p3/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/la_fouly_p4/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/la_fouly_p5/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/la_fouly_p6/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "valais#sanetschpass": [
@@ -555,6 +681,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/gorges_du_durnand_p2/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/gorges_du_durnand_p3/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "valais#gorges_du_dailley": [
@@ -582,6 +712,10 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/nax_via_ferrata_p1/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/nax_via_ferrata_p2/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -623,6 +757,16 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
+  "valais#la_tzoumaz": [
+    {
+      "src": "derivatives/la_tzoumaz_p0/w1800.webp",
+      "credit": null
+    },
+    {
+      "src": "derivatives/la_tzoumaz_p1/w1800.webp",
+      "credit": "zimydakid"
+    }
+  ],
   "fribourg#gastlosen": [
     {
       "src": "derivatives/gastlosen_p0/w1800.webp",
@@ -659,6 +803,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/dent_de_broc_p2/w1800.webp",
       "credit": "@sherpa__tenzin"
+    },
+    {
+      "src": "derivatives/dent_de_broc_p3/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "fribourg#schwarzsee": [
@@ -735,6 +883,28 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
+  "western#cap_au_moine": [
+    {
+      "src": "derivatives/cap_au_moine_p0/w1800.webp",
+      "credit": "@danslafosse.medias"
+    },
+    {
+      "src": "derivatives/cap_au_moine_p1/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/cap_au_moine_p2/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/cap_au_moine_p3/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/cap_au_moine_p4/w1800.webp",
+      "credit": "zimydakid"
+    }
+  ],
   "western#dent_de_jaman": [
     {
       "src": "derivatives/dent_de_jaman_p0/w1800.webp",
@@ -761,6 +931,20 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/the_jungle_waterfall_p1/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/the_jungle_waterfall_p2/w1800.webp",
+      "credit": "zimydakid"
+    }
+  ],
+  "western#pisse_chevre": [
+    {
+      "src": "derivatives/pisse_chevre_p0/w1800.webp",
+      "credit": "@samsurinwelch"
+    },
+    {
+      "src": "derivatives/pisse_chevre_p1/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "western#morcles_road": [
@@ -784,6 +968,14 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/creux_du_van_p2/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/creux_du_van_p3/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/creux_du_van_p4/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -827,6 +1019,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/lac_de_taney_p2/w1800.webp",
       "credit": "@tcheucestbeau"
+    },
+    {
+      "src": "derivatives/lac_de_taney_p3/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "western#grammont": [
@@ -851,6 +1047,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/st_prex_p1/w1800.webp",
       "credit": "@oliwvair"
+    },
+    {
+      "src": "derivatives/st_prex_p2/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "western#vevey_docks": [
@@ -937,6 +1137,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/schafler_p1/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/schafler_p2/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "eastern#seealpsee": [
@@ -978,6 +1182,10 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/saxer_lucke_p3/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/saxer_lucke_p4/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -1045,6 +1253,16 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
+  "eastern#barglistuber": [
+    {
+      "src": "derivatives/barglistuber_p0/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/barglistuber_p1/w1800.webp",
+      "credit": "zimydakid"
+    }
+  ],
   "eastern#the_swiss_dolomites": [
     {
       "src": "derivatives/the_swiss_dolomites_p0/w1800.webp",
@@ -1067,6 +1285,14 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/ice_lake_griesslisee_p1/w1800.webp",
       "credit": "glarnerland.ch"
+    },
+    {
+      "src": "derivatives/ice_lake_griesslisee_p2/w1800.webp",
+      "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/ice_lake_griesslisee_p3/w1800.webp",
+      "credit": "zimydakid"
     }
   ],
   "eastern#gigerwaldsee": [
