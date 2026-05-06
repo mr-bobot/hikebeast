@@ -29,12 +29,21 @@
   const REL = computeRel();
 
   // --- Identify which chapter dir we're in (or null on home / map / browse / saved).
+  // For per-spot detail pages at /full/spot/<spotId>/ the path segment is
+  // 'spot', not a chapter — fall back to the data-chapter attribute baked
+  // onto the Back pill so the multi-image carousel + favorites still wire.
   function currentChapterId() {
     const m = location.pathname.match(/\/full\/([^/]+)\/?/);
     if (!m) return null;
     const seg = m[1];
     const known = new Set(['intro', 'central', 'valais', 'fribourg', 'western', 'eastern', 'ticino', 'beyond']);
-    return known.has(seg) ? seg : null;
+    if (known.has(seg)) return seg;
+    if (seg === 'spot') {
+      const back = document.querySelector('.hb-back[data-chapter]');
+      const ch = back?.getAttribute('data-chapter');
+      if (ch && known.has(ch)) return ch;
+    }
+    return null;
   }
 
   // --- Storage layer
@@ -1209,6 +1218,85 @@
     });
   }
 
+  // --- Wire pre-baked chapter Reader card carousels (.cl-card .cl-photos).
+  // The chapter HTML ships every photo as a stacked <img class="hb-slide">
+  // plus dots + counter + chevron arrows. We just attach the click / swipe /
+  // keyboard handlers — no DOM rebuild, so this works without HB_SPOT_IMAGES.
+  function wireBakedCarousels(root) {
+    const photos = (root || document).querySelectorAll('.cl-photos.hb-multi');
+    photos.forEach((photoEl) => {
+      if (photoEl.dataset.hbWired === '1') return;
+      const slides  = Array.from(photoEl.querySelectorAll('.hb-slide'));
+      if (slides.length < 2) return;
+      photoEl.dataset.hbWired = '1';
+      const dots    = photoEl.querySelector('.hb-dots');
+      const dotEls  = dots ? Array.from(dots.children) : [];
+      const counter = photoEl.querySelector('.hb-counter');
+      const prev    = photoEl.querySelector('.hb-arrow-prev');
+      const next    = photoEl.querySelector('.hb-arrow-next');
+      if (dots) dots.style.pointerEvents = 'auto';
+      let idx = slides.findIndex(s => s.classList.contains('is-current'));
+      if (idx < 0) { idx = 0; slides[0].classList.add('is-current'); }
+      function show(target) {
+        const n = ((target % slides.length) + slides.length) % slides.length;
+        if (n === idx) return;
+        slides[idx].classList.remove('is-current');
+        slides[n].classList.add('is-current');
+        if (dotEls[idx]) dotEls[idx].classList.remove('is-on');
+        if (dotEls[n])   dotEls[n].classList.add('is-on');
+        if (counter) counter.textContent = `${n + 1} / ${slides.length}`;
+        idx = n;
+      }
+      // Arrow / dot clicks shouldn't bubble up to the card-level click that
+      // navigates to the spot detail page.
+      const stop = (e) => { e.preventDefault(); e.stopPropagation(); };
+      if (prev) prev.addEventListener('click', (e) => { stop(e); show(idx - 1); });
+      if (next) next.addEventListener('click', (e) => { stop(e); show(idx + 1); });
+      dotEls.forEach((d, i) => d.addEventListener('click', (e) => { stop(e); show(i); }));
+
+      let touchX = null, touchY = null;
+      photoEl.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        touchX = e.touches[0].clientX;
+        touchY = e.touches[0].clientY;
+      }, { passive: true });
+      photoEl.addEventListener('touchend', (e) => {
+        if (touchX === null) return;
+        const t = e.changedTouches[0];
+        const dx = t.clientX - touchX;
+        const dy = t.clientY - touchY;
+        touchX = touchY = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          show(idx + (dx < 0 ? 1 : -1));
+        }
+      });
+    });
+  }
+
+  // Whole .cl-card is clickable (data-href). Skip clicks that originated on
+  // the carousel arrows / dots / counter or on the Maps CTA so those keep
+  // working without dragging the user away from the chapter page.
+  function wireCardLinks(root) {
+    const cards = (root || document).querySelectorAll('.cl-card[data-href]');
+    cards.forEach((card) => {
+      if (card.dataset.hbCardWired === '1') return;
+      card.dataset.hbCardWired = '1';
+      const href = card.getAttribute('data-href');
+      card.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!(t instanceof Element)) return;
+        if (t.closest('.hb-arrow, .hb-dots, .hb-counter, .cl-maps, a, button')) return;
+        location.href = href;
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          location.href = href;
+        }
+      });
+    });
+  }
+
   // --- Heart toggle on every .slide-spot in chapter pages.
   function injectHearts() {
     const ch = currentChapterId();
@@ -1421,6 +1509,8 @@
       v.style.removeProperty('margin-right');
     }
     injectRail();
+    wireBakedCarousels();
+    wireCardLinks();
     injectHearts();
     rewriteKickersInPage();
     centerOnHash();

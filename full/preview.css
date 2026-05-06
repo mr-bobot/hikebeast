@@ -542,87 +542,61 @@ button { font-family: inherit; }
   .home-row .row-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
+/* Row card == chapter Grid tile (.ch-tile). Square photo, padded meta block
+ * with kicker + title. Keeps the Home rows visually aligned with chapter
+ * Grid view, instead of the old YouTube-style avatar + channel-name layout. */
 .home-row .row-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: block;
   text-decoration: none;
   color: inherit;
-  border-radius: 14px;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform 200ms cubic-bezier(.2,.7,.3,1), box-shadow 200ms ease;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 200ms ease;
 }
-.home-row .row-card:hover { transform: translateY(-2px); }
+.home-row .row-card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.10); }
+.home-row .row-card:active { transform: translateY(0); }
 .home-row .row-card .photo {
   position: relative;
+  width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 14px;
-  overflow: hidden;
   background: var(--surface);
+  overflow: hidden;
 }
 .home-row .row-card .photo img {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 600ms ease;
+  transition: transform 400ms ease;
 }
-.home-row .row-card:hover .photo img { transform: scale(1.04); }
-.home-row .row-card .badge {
-  position: absolute;
-  bottom: 8px; right: 8px;
-  background: rgba(0,0,0,0.8);
-  color: #fff;
-  font-size: 11px;
+.home-row .row-card:hover .photo img { transform: scale(1.03); }
+.home-row .row-card .meta {
+  padding: 14px 16px 16px;
+}
+.home-row .row-card .kicker {
+  margin: 0;
+  font-size: 10.5px;
   font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 6px;
-  letter-spacing: -0.005em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  min-height: 1em;
 }
-.home-row .row-card .body {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  padding: 0 4px;
-}
-.home-row .row-card .channel {
-  flex-shrink: 0;
-  width: 30px; height: 30px;
-  border-radius: 999px;
-  background: var(--surface);
-  overflow: hidden;
-}
-.home-row .row-card .channel img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.home-row .row-card .text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.home-row .row-card .name {
+.home-row .row-card .title {
+  margin: 4px 0 0;
   font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-  font-size: 14.5px;
+  font-size: 17px;
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
+  letter-spacing: -0.015em;
   color: var(--fg);
+  line-height: 1.2;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-.home-row .row-card .channel-name {
-  font-size: 12.5px;
-  color: var(--muted);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.home-row .row-card .channel-name svg { width: 12px; height: 12px; color: var(--accent); flex-shrink: 0; }
-.home-row .row-card .meta {
-  font-size: 12px;
-  color: var(--muted);
 }
 .home-hero { display: flex; flex-direction: column; gap: 12px; }
 .home-hero .kicker {
@@ -1251,7 +1225,10 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 /* View switching. Hide the inactive view entirely; show the active one. */
 .chapter-list,
 .chapter-grid-inner { display: none; }
-body[data-chapter-view="reader"] .chapter-list { display: flex; flex-direction: column; gap: 24px; }
+body[data-chapter-view="reader"] .chapter-list { display: flex; flex-direction: column; gap: 36px; }
+@media (min-width: 1100px) {
+  body[data-chapter-view="reader"] .chapter-list { gap: 48px; }
+}
 body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-template-columns: 1fr; gap: 12px; }
 
 @media (min-width: 600px) {
@@ -1347,6 +1324,8 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   gap: 14px 24px;
   margin-top: 28px;
 }
+@media (min-width: 1100px) { .cl-specs { margin-top: 44px; } }
+@media (min-width: 1400px) { .cl-specs { margin-top: 56px; } }
 .cl-spec { display: flex; flex-direction: column; gap: 3px; }
 .cl-lbl {
   font-size: 10.5px;
@@ -1403,7 +1382,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 .ch-tile-photo {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   background: var(--surface);
   overflow: hidden;
 }
@@ -1590,7 +1569,8 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
     aspect-ratio: 16 / 10;  /* tame ultra-portrait / ultra-landscape originals */
     object-fit: cover;
   }
-  .slide-spot .sp-photo.hb-multi, .cl-photos.hb-multi {
+  .slide-spot .sp-photo.hb-multi,
+  .cl-photos.hb-multi {
     aspect-ratio: 16 / 10;
   }
   .slide-spot .sp-body {
@@ -2033,16 +2013,19 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
  * as a stack of <img class="hb-slide"> with one .is-current at a time, plus
  * dot pagination + chevron arrows. Single-photo spots stay on the static
  * <img> and never receive the .hb-multi class. */
-.sp-photo.hb-multi, .cl-photos.hb-multi {
+.sp-photo.hb-multi,
+.cl-photos.hb-multi {
   position: relative;
 }
 /* Mobile: the original static <img> is what gave .sp-photo its height
  * (via aspect-ratio: 1/1). With the image removed for multi-spots, set
  * the same ratio on .sp-photo itself so the column doesn't collapse. */
 @media (max-width: 759px) {
-  .sp-photo.hb-multi, .cl-photos.hb-multi { aspect-ratio: 1 / 1; }
+  .sp-photo.hb-multi,
+  .cl-photos.hb-multi { aspect-ratio: 1 / 1; }
 }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-slide {
+.sp-photo.hb-multi .hb-slide,
+.cl-photos.hb-multi .hb-slide {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2053,14 +2036,17 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   transition: opacity 280ms ease;
   pointer-events: none;
 }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-slide.is-current { opacity: 1; }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-credit {
+.sp-photo.hb-multi .hb-slide.is-current,
+.cl-photos.hb-multi .hb-slide.is-current { opacity: 1; }
+.sp-photo.hb-multi .hb-credit,
+.cl-photos.hb-multi .hb-credit {
   /* Sits on the current slide; we update its text per-slide so credits
    * stay accurate as the user navigates. */
   position: absolute;
   z-index: 4;
 }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow {
+.sp-photo.hb-multi .hb-arrow,
+.cl-photos.hb-multi .hb-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -2080,18 +2066,27 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   z-index: 5;
   -webkit-tap-highlight-color: transparent;
 }
-.sp-photo.hb-multi, .cl-photos.hb-multi:hover .hb-arrow,
-.sp-photo.hb-multi, .cl-photos.hb-multi:focus-within .hb-arrow { opacity: 1; }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow:hover { background: rgba(0,0,0,0.7); }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow:active { transform: translateY(-50%) scale(0.92); }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow.hb-arrow-prev { left: 12px; }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow.hb-arrow-next { right: 12px; }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow svg { width: 18px; height: 18px; }
+.sp-photo.hb-multi:hover .hb-arrow,
+.sp-photo.hb-multi:focus-within .hb-arrow,
+.cl-photos.hb-multi:hover .hb-arrow,
+.cl-photos.hb-multi:focus-within .hb-arrow { opacity: 1; }
+.sp-photo.hb-multi .hb-arrow:hover,
+.cl-photos.hb-multi .hb-arrow:hover { background: rgba(0,0,0,0.7); }
+.sp-photo.hb-multi .hb-arrow:active,
+.cl-photos.hb-multi .hb-arrow:active { transform: translateY(-50%) scale(0.92); }
+.sp-photo.hb-multi .hb-arrow.hb-arrow-prev,
+.cl-photos.hb-multi .hb-arrow.hb-arrow-prev { left: 12px; }
+.sp-photo.hb-multi .hb-arrow.hb-arrow-next,
+.cl-photos.hb-multi .hb-arrow.hb-arrow-next { right: 12px; }
+.sp-photo.hb-multi .hb-arrow svg,
+.cl-photos.hb-multi .hb-arrow svg { width: 18px; height: 18px; }
 /* Touch devices: arrows always visible (no hover state) */
 @media (hover: none) {
-  .sp-photo.hb-multi, .cl-photos.hb-multi .hb-arrow { opacity: 0.85; }
+  .sp-photo.hb-multi .hb-arrow,
+  .cl-photos.hb-multi .hb-arrow { opacity: 0.85; }
 }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-dots {
+.sp-photo.hb-multi .hb-dots,
+.cl-photos.hb-multi .hb-dots {
   position: absolute;
   bottom: 12px;
   left: 50%;
@@ -2099,26 +2094,29 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   display: flex;
   gap: 6px;
   z-index: 4;
-  pointer-events: none;
   padding: 5px 9px;
   border-radius: 999px;
   background: rgba(0,0,0,0.32);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-dots span {
+.sp-photo.hb-multi .hb-dots span,
+.cl-photos.hb-multi .hb-dots span {
   width: 6px; height: 6px;
   border-radius: 999px;
   background: rgba(255,255,255,0.55);
   transition: width 220ms ease, background 220ms ease;
+  cursor: pointer;
 }
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-dots span.is-on {
+.sp-photo.hb-multi .hb-dots span.is-on,
+.cl-photos.hb-multi .hb-dots span.is-on {
   background: #fff;
   width: 16px;
 }
 /* Photo counter badge (top-left), tells you "1 / 3" so users see at a
  * glance that there's more than one photo without having to count dots. */
-.sp-photo.hb-multi, .cl-photos.hb-multi .hb-counter {
+.sp-photo.hb-multi .hb-counter,
+.cl-photos.hb-multi .hb-counter {
   position: absolute;
   top: 12px;
   left: 12px;
