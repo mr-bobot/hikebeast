@@ -10,10 +10,21 @@
 // Body: { sessionToken? }. Missing token is fine -- we still want to clear
 // the cookie so the user is signed out at the gate level.
 
-import { ConvexHttpClient } from 'convex/browser';
+// We talk to Convex via plain HTTP (see account-login.js for why we don't
+// import the convex/browser SDK in lambdas).
 
-// Convex function names are passed as strings rather than imported from
-// convex/_generated/api -- that directory is gitignored.
+async function convexMutation(convexUrl, path, args) {
+  const url = `${convexUrl.replace(/\/$/, '')}/api/mutation`;
+  const res = await fetch(url, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify({ path, args, format: 'json' }),
+  });
+  const json = await res.json().catch(() => null);
+  if (!res.ok)                  throw new Error(`convex http ${res.status}`);
+  if (json?.status === 'error') throw new Error(json.errorMessage || 'convex error');
+  return json?.value;
+}
 
 const COOKIE_NAME = 'hb_full_auth';
 
@@ -38,8 +49,7 @@ export default async function handler(req, res) {
   // is the load-bearing part of "logged out".
   if (sessionToken && process.env.CONVEX_URL) {
     try {
-      const client = new ConvexHttpClient(process.env.CONVEX_URL);
-      await client.mutation('auth:signOut', { sessionToken });
+      await convexMutation(process.env.CONVEX_URL, 'auth:signOut', { sessionToken });
     } catch {}
   }
 
