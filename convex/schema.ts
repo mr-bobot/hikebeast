@@ -80,7 +80,7 @@ export default defineSchema({
     // Multi-select tags (e.g. ["Waterfall","Lake"]) for the future
     // browse-page filter chips. Empty / missing == not yet categorised.
     properties: v.optional(v.array(v.string())),
-    // Wild-camping verdict from rebuild/wild_camping.yaml. Verdict legend:
+    // Wild-camping verdict, inlined per spot in content.yaml. Verdict legend:
     //   tolerated   - SAC bivouac OK above tree line, outside protected
     //   restricted  - above tree line but in BLN/park/UNESCO/biosphere
     //   discouraged - below tree line / private / not a SAC site
@@ -95,6 +95,12 @@ export default defineSchema({
         v.literal("unknown"),
       ),
       reason: v.optional(v.string()),
+      // Per-spot source attribution. canton drives which cantonal
+      // authority is named in the modal's source list; protections is
+      // a human-readable list of federal layers (BLN, hunting reserve,
+      // park, UNESCO, etc.) that intersect this spot.
+      canton:      v.optional(v.string()),
+      protections: v.optional(v.array(v.string())),
     })),
     updatedAt:  v.number(),
   }).index("by_spotKey",   ["spotKey"])

@@ -82,7 +82,9 @@ const spotArg = v.object({
       v.literal("forbidden"),
       v.literal("unknown"),
     ),
-    reason: v.optional(v.string()),
+    reason:      v.optional(v.string()),
+    canton:      v.optional(v.string()),
+    protections: v.optional(v.array(v.string())),
   })),
 });
 

@@ -24,8 +24,11 @@ const REPO = resolve(__dirname, "..");
 
 const CONTENT      = join(REPO, "content.yaml");
 const CREDITS_YAML = join(REPO, "credits.yaml");
-const WILDCAMPING  = join(REPO, "wild_camping.yaml");
 const MANIFEST     = join(REPO, "scripts/photo-manifest.json");
+// Wild-camping verdicts used to live in wild_camping.yaml as a sidecar
+// keyed by spot id. They've been inlined into content.yaml under each
+// spot's `wildCamping: { verdict, reason }` block, so the sidecar file
+// is gone and we read the field straight off `s.wildCamping`.
 
 const CHAPTERS = ["intro", "central", "valais", "fribourg", "western", "eastern", "ticino", "beyond"];
 
@@ -234,7 +237,7 @@ function buildPhotosBySpot(manifest, creditFor) {
 }
 
 // ── build the spot row payload (kind=spot or kind=extras_entry) -------
-function buildSpotRow({ s, chapter, photos, editorial, wildVerdict, kind = "spot", origin = undefined }) {
+function buildSpotRow({ s, chapter, photos, editorial, kind = "spot", origin = undefined }) {
   const chapterId = s.chapter;
   const spotKey = `${chapterId}#${s.id}`;
   return clean({
@@ -263,9 +266,16 @@ function buildSpotRow({ s, chapter, photos, editorial, wildVerdict, kind = "spot
     kind,
     origin,
     properties: propertiesFromKicker(s.kicker),
-    wildCamping: wildVerdict ? clean({
-      verdict: wildVerdict.wild_camping,
-      reason:  wildVerdict.reason,
+    // Wild-camping verdict + reason inlined in content.yaml as
+    // `wildCamping: { verdict, reason }`. Convex schema accepts
+    // exactly that shape, so just pass it through (cleaned).
+    wildCamping: s.wildCamping ? clean({
+      verdict:     s.wildCamping.verdict,
+      reason:      s.wildCamping.reason,
+      canton:      s.wildCamping.canton,
+      protections: (s.wildCamping.protections && s.wildCamping.protections.length)
+                    ? s.wildCamping.protections
+                    : undefined,
     }) : undefined,
   });
 }
@@ -275,20 +285,19 @@ async function main() {
   const env = loadEnv();
   const content   = yaml.load(readFileSync(CONTENT, "utf8"));
   const credits   = yaml.load(readFileSync(CREDITS_YAML, "utf8"));
-  const wildY     = yaml.load(readFileSync(WILDCAMPING, "utf8"));
   const manifest  = JSON.parse(readFileSync(MANIFEST, "utf8"));
 
   const creditFor = buildCreditResolver(credits);
   const editorial = buildEditorialIndex();
-  const wildBySpotId = Object.fromEntries((wildY?.spots ?? []).map(w => [w.id, w]));
   const chaptersById = Object.fromEntries(content.chapters.map(c => [c.id, c]));
 
   const photosBySpot = buildPhotosBySpot(manifest, creditFor);
 
+  const wildCount = content.spots.filter(s => s.wildCamping).length;
   console.log(`CONVEX_URL=${env.CONVEX_URL}`);
   console.log(`Spots in content.yaml: ${content.spots.length}`);
   console.log(`Photos in manifest:    ${manifest.photos.length}`);
-  console.log(`Wild-camping verdicts: ${Object.keys(wildBySpotId).length}\n`);
+  console.log(`Wild-camping verdicts: ${wildCount}\n`);
 
   const client = new ConvexHttpClient(env.CONVEX_URL);
   const stats = { created: 0, updated: 0, skipped: 0, extras: 0, withPhotos: 0, withoutPhotos: 0 };
@@ -311,7 +320,6 @@ async function main() {
       chapter,
       photos,
       editorial: editorial[spotKey],
-      wildVerdict: wildBySpotId[s.id],
       kind: "spot",
     });
     const r = await client.mutation(api.spots.upsertSpot, { adminToken: env.ADMIN_TOKEN, spot: row });

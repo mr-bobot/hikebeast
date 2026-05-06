@@ -2329,6 +2329,242 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 }
 .hb-modal-backdrop.is-show .hb-modal { transform: translateY(0) scale(1); }
 
+/* ─── Wildcamping status modal ────────────────────────────────────────────
+ * Opened from the kebab menu on a spot card. Three states managed by
+ * .is-pre / .is-loading / .is-result:
+ *   - pre: spot title + "Generate AI review" CTA + heads-up disclaimer.
+ *   - loading: spinner + cycling status text (4s total).
+ *   - result: verdict chip + reason + protections + sources + disclaimer.
+ * The pretend-loading sequence makes the AI provenance unmissable; the
+ * disclaimer up front (pre-state) and again at the bottom (result) is
+ * deliberate so the user sees the caveat both before AND after reading
+ * the verdict. */
+.hb-wild-modal { padding: 22px 22px 18px; }
+/* Use [hidden] override so hidden attribute beats `display: flex` below.
+ * Without this each section's display rule wins and all three layers
+ * stack on top of each other. */
+.hb-wild-modal [hidden] { display: none !important; }
+.hb-wild-pre {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  padding: 8px 0 4px;
+}
+.hb-wild-pre-blurb {
+  margin: 4px 0 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 38ch;
+}
+.hb-wild-cta {
+  align-self: stretch;
+  margin: 4px 0;
+  height: 46px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--fg);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 120ms ease, background 120ms ease, opacity 120ms ease;
+}
+.hb-wild-cta:hover { transform: translateY(-1px); }
+.hb-wild-cta:active { transform: translateY(0); opacity: 0.9; }
+.hb-wild-cta svg { width: 16px; height: 16px; flex: 0 0 auto; }
+.hb-wild-pre-disclaimer {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--hairline);
+}
+.hb-wild-pre-disclaimer strong { color: var(--fg); font-weight: 600; }
+
+/* Loading state — spinner + cycling status text. Locks min-height so
+ * the modal doesn't jump when the result lands. */
+.hb-wild-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 36px 12px;
+  min-height: 180px;
+}
+.hb-wild-spinner {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 3px solid var(--hairline);
+  border-top-color: var(--accent);
+  animation: hb-wild-spin 800ms linear infinite;
+}
+@keyframes hb-wild-spin { to { transform: rotate(360deg); } }
+.hb-wild-loading-text {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: -0.005em;
+  text-align: center;
+  min-height: 1.4em;  /* prevent jump as text changes length */
+  transition: opacity 200ms ease;
+  animation: hb-wild-pulse 1000ms ease-in-out infinite;
+}
+@keyframes hb-wild-pulse {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+
+/* Result fade-in. The result HTML is injected after the loading window;
+ * we fade it in so it doesn't pop. */
+.hb-wild-result {
+  animation: hb-wild-fade-in 280ms ease both;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+@keyframes hb-wild-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hb-wild-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 120ms ease, color 120ms ease;
+}
+.hb-wild-close:hover { background: rgba(0,0,0,0.05); color: var(--fg); }
+.hb-wild-close svg { width: 18px; height: 18px; }
+.hb-wild-head { display: flex; flex-direction: column; gap: 6px; padding-right: 36px; }
+.hb-wild-kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.hb-wild-title {
+  margin: 0;
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  line-height: 1.15;
+}
+.hb-wild-chip {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+}
+.hb-wild-chip.is-danger { background: rgba(255, 55, 95, 0.10); color: #c8163b; border-color: rgba(255, 55, 95, 0.20); }
+.hb-wild-chip.is-warn   { background: rgba(255, 149, 0, 0.10); color: #b25c00; border-color: rgba(255, 149, 0, 0.20); }
+.hb-wild-chip.is-note   { background: rgba(255, 204, 0, 0.14); color: #8a6300; border-color: rgba(255, 204, 0, 0.30); }
+.hb-wild-chip.is-ok     { background: rgba(40, 180, 99, 0.10); color: #1f7a3d; border-color: rgba(40, 180, 99, 0.22); }
+.hb-wild-chip.is-mute   { background: rgba(0, 0, 0, 0.05); color: var(--muted); border-color: var(--hairline); }
+.hb-wild-reason {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--fg);
+}
+.hb-wild-protections {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hb-wild-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.hb-wild-protections ul {
+  margin: 0;
+  padding: 0 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--fg);
+}
+.hb-wild-disclaimer {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--hairline);
+}
+.hb-wild-disclaimer strong { color: var(--fg); font-weight: 600; }
+.hb-wild-sources {
+  font-size: 13px;
+  color: var(--muted);
+  border-top: 1px solid var(--hairline);
+  padding-top: 12px;
+  margin-top: 2px;
+}
+.hb-wild-sources summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--fg);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+.hb-wild-sources summary::-webkit-details-marker { display: none; }
+.hb-wild-sources summary::before {
+  content: '';
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 4px 0 4px 6px;
+  border-color: transparent transparent transparent currentColor;
+  transition: transform 160ms ease;
+}
+.hb-wild-sources[open] summary::before { transform: rotate(90deg); }
+.hb-wild-sources ul {
+  margin: 8px 0 0;
+  padding: 0 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
 .hb-modal h2 {
   margin: 0;
   font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
@@ -2951,6 +3187,18 @@ body.has-rail .topbar .hb-nav { display: none; }
   .rail-toggle { display: none; }  /* drawer always shows labels */
   .rail-burger { display: inline-flex; }
   .topbar { padding-left: 12px; }
+  /* The home page's topbar is a 2-col grid (search · actions). When we
+   * inject the burger as a third item on mobile, give it its own track
+   * up front so the grid still resolves cleanly. Desktop keeps 2 cols
+   * since .rail-burger is display:none there. */
+  .home-topbar {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .home-topbar > .rail-burger { grid-column: 1; justify-self: start; }
+  .home-topbar > .home-search { grid-column: 2; }
+  .home-topbar > .home-topbar-actions { grid-column: 3; }
 }
 
 /* === Social layer (favorites, extended nav, browse grid, saved page) === */

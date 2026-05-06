@@ -27,6 +27,7 @@ const STEPS = [
   "build-chapter-html.mjs",
   "build-spot-pages.mjs",
   "build-spot-images.mjs",
+  "inject-wildcamping-to-sidecar.mjs",
   "inject-convex-url.mjs",
 ];
 

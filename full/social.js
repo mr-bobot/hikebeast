@@ -688,7 +688,11 @@
           imageHeight:  photos[0]?.height || null,
           kind:       'spot',
           properties: [],
-          wildCamping: null,
+          // Sidecar carries inline wildCamping when scripts/inject-wildcamping-
+          // to-sidecar.mjs has run; otherwise it's just absent. We pass it
+          // through so localhost (and any pre-Convex paint) can show the
+          // Wildcamping-status modal without a server round-trip.
+          wildCamping: s.wildCamping || null,
           photos,
         };
       });
@@ -963,8 +967,13 @@
     document.body.insertBefore(backdrop, document.body.firstChild);
     backdrop.addEventListener('click', closeMobileDrawer);
 
-    // Burger button into the topbar (mobile only via CSS)
-    const topbar = document.querySelector('.topbar');
+    // Burger button into the topbar (mobile only via CSS).
+    // Two variants exist: chapter/saved/swipe/etc use .topbar; the
+    // home page uses .home-topbar (search bar + heart icon row).
+    // Insert the burger as the first child of whichever exists so the
+    // mobile drawer is reachable everywhere — without it the rail is
+    // entirely unreachable on phones.
+    const topbar = document.querySelector('.topbar, .home-topbar');
     if (topbar) {
       const burger = document.createElement('button');
       burger.type = 'button';
@@ -1437,22 +1446,39 @@
   }
 
   function openSpotMenu(slide, anchor) {
-    // Only one menu open at a time
+    // Resolve the slide's wildCamping payload (if any) so we can decide
+    // whether to add the Wildcamping-status item to the menu.
+    const ch = currentChapterId();
+    const spotKey = ch && slide.id ? `${ch}#${slide.id}` : null;
+    const spot = spotKey ? spots.get(spotKey) : null;
+    const hasWild = !!(spot && spot.wildCamping);
+    openMenuPanel(anchor, {
+      hasWild,
+      onSubmit: () => openSubmitModal(slide),
+      onWild:   () => hasWild && openWildCampingModal(spot),
+    });
+  }
+
+  // Shared menu renderer used by both the detail-page (.slide-spot) and
+  // chapter-card (.cl-card) kebabs. Centralises the open/close machinery
+  // so adding new items happens in one place.
+  function openMenuPanel(anchor, { hasWild, onSubmit, onWild }) {
     document.querySelectorAll('.hb-spot-menu').forEach(m => m.remove());
 
+    const items = [
+      `<button type="button" class="hb-spot-menu-item" data-action="submit">${SVG_UPLOAD}<span>Submit photo</span></button>`,
+    ];
+    if (hasWild) {
+      items.push(`<button type="button" class="hb-spot-menu-item" data-action="wild">${SVG_TENT}<span>Wildcamping status</span></button>`);
+    }
     const menu = document.createElement('div');
     menu.className = 'hb-spot-menu';
-    menu.innerHTML = `
-      <button type="button" class="hb-spot-menu-item" data-action="submit">${SVG_UPLOAD}<span>Submit photo</span></button>
-    `;
+    menu.innerHTML = items.join('');
     document.body.appendChild(menu);
 
-    // Position below the anchor, right-aligned to it.
     const rect = anchor.getBoundingClientRect();
-    const desiredTop = rect.bottom + 8;
-    const desiredRight = window.innerWidth - rect.right;
-    menu.style.top = `${desiredTop}px`;
-    menu.style.right = `${desiredRight}px`;
+    menu.style.top = `${rect.bottom + 8}px`;
+    menu.style.right = `${window.innerWidth - rect.right}px`;
     requestAnimationFrame(() => menu.classList.add('is-show'));
 
     function close() {
@@ -1462,9 +1488,7 @@
       document.removeEventListener('keydown', onKey);
       window.removeEventListener('scroll', close, true);
     }
-    function onOutside(e) {
-      if (!menu.contains(e.target) && e.target !== anchor) close();
-    }
+    function onOutside(e) { if (!menu.contains(e.target) && e.target !== anchor) close(); }
     function onKey(e) { if (e.key === 'Escape') close(); }
     setTimeout(() => {
       document.addEventListener('click', onOutside, true);
@@ -1472,10 +1496,8 @@
       window.addEventListener('scroll', close, true);
     }, 0);
 
-    menu.querySelector('[data-action="submit"]').addEventListener('click', () => {
-      close();
-      openSubmitModal(slide);
-    });
+    menu.querySelector('[data-action="submit"]')?.addEventListener('click', () => { close(); onSubmit?.(); });
+    menu.querySelector('[data-action="wild"]')?.addEventListener('click',   () => { close(); onWild?.();   });
   }
 
   function openSubmitModal(spotInfoOrSlide) {
@@ -1683,6 +1705,178 @@
         mapsLink.setAttribute('href', spot.maps_url);
       }
     }
+  }
+
+  // Verdict → display label + colour. Wording is deliberately advisory,
+  // not authoritative — the AI verdict can be wrong about cantonal /
+  // local enforcement that doesn't show up in federal layers. The
+  // disclaimer in the modal reinforces this.
+  const WILD_LABELS = {
+    forbidden:   { label: 'Forbidden',          tone: 'danger' },
+    discouraged: { label: 'Not allowed',        tone: 'warn'   },
+    restricted:  { label: 'Local rules apply',  tone: 'note'   },
+    tolerated:   { label: 'Likely tolerated',   tone: 'ok'     },
+    unknown:     { label: 'Unknown',            tone: 'mute'   },
+  };
+  // The "rulebook" sources — true for every spot. Per-spot sources
+  // (canton, federal protection layers) are added on top in the modal.
+  const WILD_RULEBOOK = [
+    'SAC — "Camping and bivouacking in the Swiss mountains" (Swiss Alpine Club, 2014)',
+    'Swisstopo geo.admin.ch — federal protection inventories (BLN, hunting reserves, fens, floodplains, parks)',
+  ];
+  // Per-canton source attribution. Only the canton that owns a spot
+  // shows up in the modal — keeps the list relevant.
+  const WILD_CANTON_SOURCES = {
+    'Appenzell Innerrhoden (AI)': 'Appenzell Innerrhoden Standeskommission — Alpstein wild-camping ban (2024–2025)',
+    'Glarus (GL)':                'Glarus Süd municipality — Muttsee/Limmernsee/Klöntal ban (2024)',
+    'Valais (VS)':                'Canton Valais hiking + tourism portals',
+    'Vaud (VD)':                  'Canton Vaud + regional park (Gruyère Pays-d\'Enhaut, Jura vaudois)',
+    'Ticino (TI)':                'Cantone Ticino — wild-camping cantonal ban + Maggia/Verzasca floodplain protection',
+    'Bern (BE)':                  'Canton Bern hiking portals + BAFU game-reserve maps',
+    'Fribourg (FR)':              'Naturpark Gantrisch + Parc Gruyère Pays-d\'Enhaut',
+    'St. Gallen (SG)':            'Canton St. Gallen + UNESCO Tectonic Arena Sardona rules',
+    'Grisons (GR)':               'Canton Grisons + Swiss National Park buffer zones',
+    'Lucerne (LU)':               'UNESCO Biosphäre Entlebuch park rules',
+    'Schwyz (SZ)':                'Canton Schwyz tourism portals',
+    'Nidwalden (NW)':             'Canton Nidwalden tourism portals',
+    'Uri (UR)':                   'Canton Uri tourism portals',
+    'Jura (JU)':                  'Pro Natura — Etang de la Gruère raised-bog reserve',
+    'France':                     'Préfecture Haute-Savoie / La Chamoniarde — Aiguilles Rouges + Mont-Blanc bivouac rules',
+  };
+
+  function openWildCampingModal(spot) {
+    if (!spot || !spot.wildCamping) return;
+    const wc = spot.wildCamping;
+    const v = wc.verdict || 'unknown';
+    const meta = WILD_LABELS[v] || WILD_LABELS.unknown;
+    const reason = wc.reason || '';
+    const title = spot.title || '';
+
+    // Per-spot sources: federal protection layers from the original
+    // research + the canton-specific authority. Layered on top of the
+    // global rulebook so each modal only shows sources actually
+    // relevant to this spot.
+    const protections = Array.isArray(wc.protections) ? wc.protections : [];
+    const cantonSrc = wc.canton && WILD_CANTON_SOURCES[wc.canton];
+    const sources = [
+      ...WILD_RULEBOOK,
+      ...(cantonSrc ? [cantonSrc] : []),
+    ];
+
+    // Result HTML — built once, swapped into place after the loading
+    // animation completes. Hidden initially so the user starts with the
+    // "Generate AI review" call-to-action and the AI disclaimer up
+    // front. The 4-second pretend-loading sequence makes the AI nature
+    // explicit (and gives the disclaimer time to register).
+    const resultHtml = `
+      <div class="hb-wild-head">
+        <span class="hb-wild-kicker">Wildcamping</span>
+        <h2 class="hb-wild-title">${escapeText(title)}</h2>
+        <span class="hb-wild-chip is-${meta.tone}">${escapeText(meta.label)}</span>
+      </div>
+      ${reason ? `<p class="hb-wild-reason">${escapeText(reason)}</p>` : ''}
+      ${protections.length ? `
+        <div class="hb-wild-protections">
+          <span class="hb-wild-section-label">Protected zones at this spot</span>
+          <ul>
+            ${protections.map(p => `<li>${escapeText(p)}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
+      <div class="hb-wild-disclaimer">
+        <strong>AI-researched. Can be wrong.</strong> This verdict was assembled by automated lookup against the federal protection layers and known cantonal bans. Local enforcement varies, rules change, and tourist hotspots may be policed even when the federal map says "tolerated". Always verify locally before relying on this for an overnight.
+      </div>
+      <details class="hb-wild-sources">
+        <summary>Sources</summary>
+        <ul>
+          ${sources.map(s => `<li>${escapeText(s)}</li>`).join('')}
+        </ul>
+      </details>
+    `;
+
+    const backdrop = document.createElement('div');
+    backdrop.className = 'hb-modal-backdrop hb-wild-modal-backdrop';
+    backdrop.innerHTML = `
+      <div class="hb-modal hb-wild-modal is-pre" role="dialog" aria-label="Wildcamping status">
+        <button type="button" class="hb-wild-close" data-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div class="hb-wild-pre">
+          <span class="hb-wild-kicker">Wildcamping</span>
+          <h2 class="hb-wild-title">${escapeText(title)}</h2>
+          <p class="hb-wild-pre-blurb">An AI verdict on whether wild camping is allowed at this spot, drawing on federal protection inventories and known cantonal bans. Generation takes a few seconds.</p>
+          <button type="button" class="hb-wild-cta" data-generate>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L13.5 8.5 L20 10 L13.5 11.5 L12 18 L10.5 11.5 L4 10 L10.5 8.5 Z"/></svg>
+            <span>Generate AI review</span>
+          </button>
+          <p class="hb-wild-pre-disclaimer"><strong>Heads up:</strong> AI-researched. Can be wrong. Always verify locally before relying on this for an overnight.</p>
+        </div>
+        <div class="hb-wild-loading" hidden>
+          <div class="hb-wild-spinner" aria-hidden="true"></div>
+          <p class="hb-wild-loading-text" data-loading-text>Checking federal protection layers…</p>
+        </div>
+        <div class="hb-wild-result" hidden></div>
+      </div>
+    `;
+    document.body.appendChild(backdrop);
+    requestAnimationFrame(() => backdrop.classList.add('is-show'));
+
+    const modal = backdrop.querySelector('.hb-wild-modal');
+    const preEl = backdrop.querySelector('.hb-wild-pre');
+    const loadingEl = backdrop.querySelector('.hb-wild-loading');
+    const loadingTextEl = backdrop.querySelector('[data-loading-text]');
+    const resultEl = backdrop.querySelector('.hb-wild-result');
+
+    // Loading-step copy. Each runs ~1s, totals 4s. Last step lingers
+    // briefly before the reveal so the user reads "Compiling verdict"
+    // rather than "Compiling verdict" → flash → result.
+    const LOADING_STEPS = [
+      'Checking federal protection layers…',
+      'Cross-referencing cantonal bans…',
+      'Reading recent enforcement reports…',
+      'Compiling verdict…',
+    ];
+
+    let loadingTimers = [];
+    function clearLoadingTimers() {
+      loadingTimers.forEach(t => clearTimeout(t));
+      loadingTimers = [];
+    }
+
+    function startGenerate() {
+      modal.classList.remove('is-pre');
+      modal.classList.add('is-loading');
+      preEl.hidden = true;
+      loadingEl.hidden = false;
+
+      LOADING_STEPS.forEach((step, i) => {
+        loadingTimers.push(setTimeout(() => {
+          loadingTextEl.textContent = step;
+        }, i * 1000));
+      });
+      loadingTimers.push(setTimeout(reveal, 4000));
+    }
+
+    function reveal() {
+      modal.classList.remove('is-loading');
+      modal.classList.add('is-result');
+      loadingEl.hidden = true;
+      resultEl.innerHTML = resultHtml;
+      resultEl.hidden = false;
+    }
+
+    backdrop.querySelector('[data-generate]').addEventListener('click', startGenerate);
+
+    function close() {
+      clearLoadingTimers();
+      backdrop.classList.remove('is-show');
+      setTimeout(() => backdrop.remove(), 180);
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+    document.addEventListener('keydown', onKey);
+    backdrop.addEventListener('click', (e) => { if (e.target === backdrop) close(); });
+    backdrop.querySelector('[data-close]').addEventListener('click', close);
   }
 
   function injectMultiImage(slide, chapterId) {
@@ -1982,39 +2176,17 @@
     }
   }
 
-  // Lightweight kebab menu for chapter cards. Mirrors the .slide-spot menu
-  // (single "Submit photo" item today) but driven by a {id, title, spotKey}
-  // info bag instead of a slide DOM element, so it can hang off any card.
+  // Lightweight kebab menu for chapter cards. Same items as the .slide-spot
+  // menu (Submit photo + Wildcamping status when applicable), driven by a
+  // {id, title, spotKey} info bag instead of a slide DOM element so it can
+  // hang off any card.
   function openCardMenu(card, anchor, info) {
-    document.querySelectorAll('.hb-spot-menu').forEach(m => m.remove());
-    const menu = document.createElement('div');
-    menu.className = 'hb-spot-menu';
-    menu.innerHTML = `
-      <button type="button" class="hb-spot-menu-item" data-action="submit">${SVG_UPLOAD}<span>Submit photo</span></button>
-    `;
-    document.body.appendChild(menu);
-    const rect = anchor.getBoundingClientRect();
-    menu.style.top = `${rect.bottom + 8}px`;
-    menu.style.right = `${window.innerWidth - rect.right}px`;
-    requestAnimationFrame(() => menu.classList.add('is-show'));
-
-    function close() {
-      menu.classList.remove('is-show');
-      setTimeout(() => menu.remove(), 160);
-      document.removeEventListener('click', onOutside, true);
-      document.removeEventListener('keydown', onKey);
-      window.removeEventListener('scroll', close, true);
-    }
-    function onOutside(e) { if (!menu.contains(e.target) && e.target !== anchor) close(); }
-    function onKey(e) { if (e.key === 'Escape') close(); }
-    setTimeout(() => {
-      document.addEventListener('click', onOutside, true);
-      document.addEventListener('keydown', onKey);
-      window.addEventListener('scroll', close, true);
-    }, 0);
-    menu.querySelector('[data-action="submit"]').addEventListener('click', () => {
-      close();
-      openSubmitModal(info);
+    const spot = info?.spotKey ? spots.get(info.spotKey) : null;
+    const hasWild = !!(spot && spot.wildCamping);
+    openMenuPanel(anchor, {
+      hasWild,
+      onSubmit: () => openSubmitModal(info),
+      onWild:   () => hasWild && openWildCampingModal(spot),
     });
   }
 
