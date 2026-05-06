@@ -1206,7 +1206,7 @@ window.HB_SPOT_IMAGES = {
   "eastern#muttseehutte": [
     {
       "src": "derivatives/muttseehutte_p0/w1800.webp",
-      "credit": "@jvm_photography"
+      "credit": "zimydakid"
     },
     {
       "src": "derivatives/muttseehutte_p1/w1800.webp",
@@ -1214,11 +1214,7 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/muttseehutte_p2/w1800.webp",
-      "credit": "zimydakid"
-    },
-    {
-      "src": "derivatives/muttseehutte_p3/w1800.webp",
-      "credit": "zimydakid"
+      "credit": "@jvm_photography"
     }
   ],
   "eastern#berschnerfall": [

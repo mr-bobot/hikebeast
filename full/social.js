@@ -825,6 +825,8 @@
   // Two-card stack: signals "swipe through one at a time"
   const SVG_SWIPE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="13" height="16" rx="2" transform="rotate(8 12 12)"/><rect x="3" y="5" width="13" height="16" rx="2" transform="rotate(-8 12 12)"/></svg>';
   const SVG_MAP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>';
+  // Simple tent silhouette · two sloped lines + a base line + center pole.
+  const SVG_TENT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21 12 4 21 21"/><path d="M9 21 12 14 15 21"/><line x1="3" y1="21" x2="21" y2="21"/></svg>';
 
   // --- Inject the left-side app rail. Replaces the older topbar pills.
   // Items: Home (brand site) · Overview · Browse · Map · Swipe · Random · Liked.
@@ -914,6 +916,9 @@
         <a class="rail-item${cur('/saved/')}" href="${REL}saved/" data-hb-saved-link>
           ${SVG_HEART_OUT}<span class="label">Liked</span>
           <span class="rail-badge" data-hb-fav-count></span>
+        </a>
+        <a class="rail-item${cur('/wildcamping/')}" href="${REL}wildcamping/">
+          ${SVG_TENT}<span class="label">Wildcamping</span>
         </a>
         <div class="rail-divider"></div>
         <div class="rail-section-head"><span class="label">Chapters</span></div>
@@ -1184,6 +1189,23 @@
       function pickWinner() { return eligible[Math.floor(Math.random() * eligible.length)]; }
       let winner = pickWinner();
 
+      // Preload the winner's hero photo as soon as we've picked.  The shuffle
+      // animation gives us ~1.75s of cover time, more than enough for the
+      // 1800w derivative to land in the browser cache before showWinner()
+      // builds the <img>. Without this, the winner reveal flashes through a
+      // blank box while the image loads.
+      function preloadWinnerImage(spot) {
+        const a = W.HB.photoAttrs({
+          photoId: spot.imagePhotoId, image: spot.image,
+          width: 1800, prefix: REL,
+        });
+        if (!a.src) return;
+        const img = new Image();
+        if (a.srcset) img.srcset = a.srcset;
+        img.src = a.src;
+      }
+      preloadWinnerImage(winner);
+
       const overlay = document.createElement('div');
       overlay.className = 'hb-random-overlay';
       overlay.setAttribute('role', 'dialog');
@@ -1322,12 +1344,16 @@
           width: 1800, prefix: REL, sizes: '(min-width: 768px) 480px, 80vw',
         });
         const wSs = wAttrs.srcset ? ` srcset="${wAttrs.srcset}" sizes="${wAttrs.sizes}"` : '';
+        // Layout: photo → title → region → buttons → kicker. Kicker moved
+        // below the action buttons so it doesn't compete with the title for
+        // attention; users get the title fast, decide to open or reroll, and
+        // then read the kicker if they're curious. Extra padding above the
+        // title keeps it from kissing the photo.
         winnerEl.innerHTML = `
           <div class="rw-card">
             <img src="${wAttrs.src}"${wSs} alt=""${dimsAttr} />
           </div>
           <div class="rw-meta">
-            ${kicker ? `<p class="rw-kicker">${escapeText(kicker)}</p>` : ''}
             <h2 class="rw-title">${escapeText(winner.title)}</h2>
             <span class="rw-region">${escapeText(regionName)}</span>
           </div>
@@ -1338,10 +1364,12 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </div>
+          ${kicker ? `<p class="rw-kicker">${escapeText(kicker)}</p>` : ''}
         `;
         winnerEl.querySelector('[data-open]').setAttribute('href', spotHrefFromHere(winner));
         winnerEl.querySelector('[data-reroll]').addEventListener('click', () => {
           winner = pickWinner();
+          preloadWinnerImage(winner);
           runRound();
         });
         winnerEl.hidden = false;

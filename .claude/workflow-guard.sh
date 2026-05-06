@@ -74,14 +74,23 @@ EOF
   exit 2
 fi
 
-# ── Rule 2 · migrate-spots-to-convex.mjs requires an explicit --env ─────────
-# Default behavior of the script is to read .env.local, which targets PROD
-# Convex. Forcing --env makes intent explicit and keeps me from blowing
-# away production data with a stale yaml.
-if printf '%s' "$command" | grep -qE 'migrate-spots-to-convex\.mjs' ; then
+# ── Rule 2 · scripts that write to Convex require an explicit --env ─────────
+# Default behavior of these scripts is to read .env.local, which targets
+# PROD Convex. Forcing --env makes intent explicit and keeps a stale yaml
+# from blowing away production data.
+#
+# Covers:
+#   - migrate-spots-to-convex.mjs   (legacy seeder, staticPath-based)
+#   - seed-from-content-yaml.mjs    (modern seeder, photoId-based)
+#   - seed-orphan-spots.mjs         (one-shot orphan import)
+#
+# Only match real invocations (node ... <script>.mjs) — not grep / cat /
+# sed of the filename, which are read-only and harmless.
+DANGEROUS_SCRIPTS='(migrate-spots-to-convex|seed-from-content-yaml|seed-orphan-spots)\.mjs'
+if printf '%s' "$command" | grep -qE "(node|nodejs|npm[[:space:]]+run)[^|;&]*${DANGEROUS_SCRIPTS}" ; then
   if ! printf '%s' "$command" | grep -qE '\-\-env[[:space:]]+[a-zA-Z]' ; then
     cat >&2 <<'EOF'
-✋ workflow-guard: migrate-spots-to-convex.mjs needs an explicit --env flag.
+✋ workflow-guard: this Convex-seeding script needs an explicit --env flag.
 
 Without --env, the script reads .env.local which is PRODUCTION Convex
 (`whimsical-sparrow-336`). To prevent accidental writes, the flag is

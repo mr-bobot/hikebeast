@@ -30,15 +30,22 @@ const MANIFEST     = join(REPO, "scripts/photo-manifest.json");
 const CHAPTERS = ["intro", "central", "valais", "fribourg", "western", "eastern", "ticino", "beyond"];
 
 // ── env ----------------------------------------------------------------
+// Default reads .env.local (= prod). Pass `--env <name>` to read .env.<name>
+// instead — used to seed the staging Convex deployment without juggling files.
 function loadEnv() {
-  const path = join(REPO, ".env.local");
-  if (!existsSync(path)) throw new Error(".env.local not found -- run convex dev first");
+  const argv = process.argv.slice(2);
+  let envName = "local";
+  for (let i = 0; i < argv.length; i++) {
+    if (argv[i] === "--env" && argv[i + 1]) { envName = argv[i + 1]; i++; }
+  }
+  const path = join(REPO, `.env.${envName}`);
+  if (!existsSync(path)) throw new Error(`.env.${envName} not found at ${path}`);
   const env = {};
   for (const line of readFileSync(path, "utf8").split("\n")) {
     const m = line.match(/^([A-Z_][A-Z0-9_]*)\s*=\s*(.*?)\s*(?:#.*)?$/);
     if (m) env[m[1]] = m[2].replace(/^["']|["']$/g, "");
   }
-  if (!env.CONVEX_URL || !env.ADMIN_TOKEN) throw new Error("CONVEX_URL / ADMIN_TOKEN missing");
+  if (!env.CONVEX_URL || !env.ADMIN_TOKEN) throw new Error(`CONVEX_URL / ADMIN_TOKEN missing in .env.${envName}`);
   return env;
 }
 
