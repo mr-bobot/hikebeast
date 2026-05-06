@@ -77,7 +77,7 @@
   function tile(spot) {
     const a = document.createElement('a');
     a.className = 'hb-saved-tile';
-    a.href = spot.href;  // already '../<chapter>/index.html#anchor', correct from /full/saved/
+    a.href = window.HB.spotDetailHref(spot, '../');
     a.title = spot.title;
     const region = LEGEND.find(c => c.number === spot.chapter);
     const regionName = region ? region.name : spot.chapter_id;

@@ -21,6 +21,7 @@ const STEPS = [
   "build-image-derivatives.mjs",
   "build-static-assets.mjs",
   "build-chapter-html.mjs",
+  "build-spot-pages.mjs",
   "build-spot-images.mjs",
 ];
 

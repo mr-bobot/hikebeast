@@ -555,8 +555,13 @@
   }
 
   // Translate a spot.href (which is rooted at /full/map/) into something
-  // relative to the page that called us.
+  // relative to the page that called us. Routes through spotDetailHref so
+  // every click on a spot lands on the standalone detail page rather than
+  // the chapter scroll.
   function spotHrefFromHere(spot) {
+    if (W.HB && typeof W.HB.spotDetailHref === 'function') {
+      return W.HB.spotDetailHref(spot, REL);
+    }
     let href = (spot && spot.href) || '';
     href = href.replace(/^\.\.\//, '');
     return `${REL}${href}`;
@@ -1257,6 +1262,24 @@
     const anchor = (spot.href || '').split('#')[1] || '';
     if (!anchor) return null;
     return `${spot.chapter_id}#${anchor}`;
+  };
+  // URL of a spot's standalone detail page (full/spot/<spotId>/). Every
+  // click site that lands on a single spot — Explore, Map popup, Browse,
+  // Saved, Random, Swipe, Home featured/up-next/row cards — routes here
+  // instead of the chapter scroll. Falls back to the legacy chapter#anchor
+  // URL when the spot has no extractable id (shouldn't happen, defensive).
+  W.HB.spotDetailHref = (spot, prefix) => {
+    if (!spot) return '#';
+    const pre = prefix == null ? REL : prefix;
+    // extras_entry rows have no standalone page (they're TODO markers
+    // without copy or photos), so keep them pointing at the chapter
+    // scroll where they render as a small "extras" grid item.
+    if (spot.kind === 'extras_entry') {
+      return `${pre}${(spot.href || '').replace(/^\.\.\//, '')}`;
+    }
+    const anchor = (spot.href || '').split('#')[1] || '';
+    if (anchor) return `${pre}spot/${anchor}/`;
+    return `${pre}${(spot.href || '').replace(/^\.\.\//, '')}`;
   };
   W.HB.singularKicker = singularKicker;
   W.HB.propertiesOf = propertiesOf;

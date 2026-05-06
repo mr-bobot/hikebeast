@@ -216,7 +216,7 @@
 
     const a = document.createElement('a');
     a.className = 'hb-tile';
-    a.href = spot.href.replace(/^\.\.\//, '../');  // already correct for /full/browse/
+    a.href = window.HB.spotDetailHref(spot, '../');
     a.title = spot.title;
 
     // TODO marker for spots with no photo yet (kind=extras_entry, or any

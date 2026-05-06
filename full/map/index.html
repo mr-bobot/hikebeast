@@ -314,7 +314,7 @@
               <p class="kicker">${esc(s.kicker || '')}</p>
               <h3>${esc(s.title)}</h3>
               <p class="meta">${esc(s.chapter_id.charAt(0).toUpperCase() + s.chapter_id.slice(1))} Switzerland</p>
-              <a class="read" href="${s.href}">Read</a>
+              <a class="read" href="${esc(window.HB.spotDetailHref(s, '../'))}">Read</a>
             </div>
           </div>
       `, { maxWidth: 240, minWidth: 240 });

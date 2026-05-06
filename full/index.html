@@ -173,7 +173,7 @@
       const kicker = window.HB.singularKicker(spot.kicker || '');
       const region = REGION_NAME[spot.chapter] || spot.chapter_id;
       featureDeck.textContent = kicker ? `${kicker} · ${region}` : region;
-      featureCta.href = spot.href.replace(/^\.\.\//, '');
+      featureCta.href = window.HB.spotDetailHref(spot, '');
       featureCta.querySelector('span:last-child').textContent = 'Open spot';
     }
     featureDots.innerHTML = featurePool.map((_, i) =>
@@ -262,7 +262,7 @@
       });
       const ss = a.srcset ? ` srcset="${esc(a.srcset)}" sizes="${esc(a.sizes)}"` : '';
       return `
-        <a class="up-next-card" href="${esc(spot.href.replace(/^\.\.\//, ''))}">
+        <a class="up-next-card" href="${esc(window.HB.spotDetailHref(spot, ''))}">
           <span class="photo"><img src="${esc(a.src)}"${ss} alt="" loading="lazy" /></span>
           <span class="body">
             <span class="name">${esc(spot.title)}</span>
@@ -279,7 +279,7 @@
   function rowCard(spot) {
     const region = REGION_NAME[spot.chapter] || spot.chapter_id;
     const kicker = window.HB.singularKicker(spot.kicker || '');
-    const href = spot.href.replace(/^\.\.\//, '');
+    const href = window.HB.spotDetailHref(spot, '');
     const a = window.HB.photoAttrs({
       photoId: spot.imagePhotoId, image: spot.image,
       width: 1000, prefix: '',

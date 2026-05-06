@@ -397,7 +397,7 @@
     const dims = (spot.imageWidth && spot.imageHeight)
       ? [spot.imageWidth, spot.imageHeight]
       : ((window.HB_THUMB_DIMS || {})[spot.image] || [4, 5]);
-    const href = '../' + (spot.href || '').replace(/^\.\.\//, '');  // map href is relative to /full/map/, we're at /full/swipe/
+    const href = window.HB.spotDetailHref(spot, '../');
     const attrs = window.HB.photoAttrs({
       photoId: spot.imagePhotoId, image: spot.image,
       width: 1800, prefix: '../',
