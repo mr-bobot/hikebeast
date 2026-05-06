@@ -135,13 +135,14 @@
       swipes._reattach();
       notify();
       // Server-side logout: revoke the Convex session AND clear the
-      // hb_full_auth cookie that the middleware checks on /full/*. We hit
-      // /api/account-logout for both side effects in one round-trip.
+      // hb_full_auth cookie that middleware.js checks on /full/*. We hit
+      // /api/login with action=logout (the same endpoint also handles
+      // login flows -- consolidated to fit the function-count budget).
       try {
-        await fetch('/api/account-logout', {
+        await fetch('/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sessionToken: tok || null }),
+          body: JSON.stringify({ action: 'logout', sessionToken: tok || null }),
           credentials: 'same-origin',
         });
       } catch {}

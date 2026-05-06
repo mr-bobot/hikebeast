@@ -249,11 +249,13 @@
       btn.disabled = true;
       btn.textContent = 'Logging in…';
       try {
-        // /api/account-login validates against per-user Convex accounts,
-        // sets the hb_full_auth cookie that middleware.js checks on /full/*,
-        // and returns a Convex session token we persist for HB.session to
-        // pick up on the /full/ paint.
-        const res = await fetch('/api/account-login', {
+        // /api/login validates against per-user Convex accounts (when the
+        // body carries `username`+`password`), sets the hb_full_auth cookie
+        // middleware.js checks on /full/*, and returns a Convex session
+        // token we persist for HB.session to pick up on the /full/ paint.
+        // The same endpoint also handles the legacy shared-password flow
+        // and the logout action; we just hit the right shape for our case.
+        const res = await fetch('/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
