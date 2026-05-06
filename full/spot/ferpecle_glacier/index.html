@@ -12,14 +12,15 @@
 <link rel="apple-touch-icon" href="../../../images/favicon.jpg" />
 <link rel="stylesheet" href="../../preview.css" />
 </head>
-<body>
-<div class="topbar">
-  <a class="brand" href="../../index.html">
-    <span>Valais</span>
-  </a>
-  <span class="crumb"><b>31</b> spots</span>
-  <div class="topbar-right">
-  </div>
+<body data-page="spot-detail">
+<!-- Spot detail pages render a single slide full-bleed. The chapter
+     name + spot count crumb that other topbars show is intentionally
+     omitted: the user already knows which chapter they came from
+     (back-button label) and the count is information they don't need
+     while reading one spot. The topbar exists only to host the
+     mobile burger (injected by social.js) and the account FAB. -->
+<div class="topbar topbar-detail">
+  <div class="topbar-right"></div>
 </div>
 
 <div class="app">
