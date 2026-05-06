@@ -963,10 +963,12 @@
 
     // Mobile bottom tab bar. Hidden above 700px via CSS. Replaces the
     // burger drawer as the primary mobile nav so people actually
-    // discover Swipe / Map / Liked instead of leaving them buried in a
-    // hamburger. Five slots, picked for thumb-reach and discovery
-    // weight: Home · Explore · Swipe · Map · Liked. The fav-count badge
-    // re-uses the same [data-hb-fav-count] painter as the rail's badge.
+    // discover Swipe / Map / Menu instead of leaving them buried in a
+    // hamburger. Five slots: Home · Explore · Swipe · Map · Menu.
+    // Menu is a hamburger that opens a slide-up sheet with Liked,
+    // Collections, Chapters, and Account — everything that didn't earn
+    // a primary slot. The fav-count badge sits on the Menu icon so
+    // users see they have saved spots without opening the sheet.
     const tabbar = document.createElement('nav');
     tabbar.className = 'app-tabbar';
     tabbar.setAttribute('aria-label', 'Primary navigation');
@@ -983,12 +985,74 @@
       <a class="tab${cur('/map/')}" href="${REL}map/">
         ${SVG_MAP}<span>Map</span>
       </a>
-      <a class="tab${cur('/saved/')}" href="${REL}saved/" data-hb-saved-link>
-        ${SVG_HEART_OUT}<span>Liked</span>
+      <button type="button" class="tab" data-hb-menu-toggle aria-label="Menu" aria-haspopup="dialog">
+        ${SVG_BURGER}<span>Menu</span>
         <span class="tab-badge" data-hb-fav-count></span>
-      </a>
+      </button>
     `;
     document.body.appendChild(tabbar);
+
+    // Mobile Menu sheet. Slides up from the bottom when the Menu tab
+    // is tapped. Houses everything the tab bar couldn't fit: Liked,
+    // Collections (Hidden Gems / Wildcamping), Chapters (Introduction
+    // + the seven regional chapters), and the Account block (sign in
+    // / username + sign-out). Re-uses the rail's icons + structure so
+    // it stays in step with the desktop nav. */
+    const menuSheet = document.createElement('div');
+    menuSheet.className = 'app-menu-sheet';
+    menuSheet.setAttribute('role', 'dialog');
+    menuSheet.setAttribute('aria-modal', 'true');
+    menuSheet.setAttribute('aria-label', 'Menu');
+    menuSheet.innerHTML = `
+      <div class="menu-sheet-backdrop" data-close></div>
+      <div class="menu-sheet-card">
+        <div class="menu-sheet-grabber" aria-hidden="true"></div>
+        <a class="menu-row${cur('/saved/')}" href="${REL}saved/" data-hb-saved-link data-close>
+          <span class="menu-row-icon">${SVG_HEART_OUT}</span>
+          <span class="menu-row-label">Liked</span>
+          <span class="menu-row-badge" data-hb-fav-count></span>
+        </a>
+        <div class="menu-section-head">Collections</div>
+        <a class="menu-row${cur('/hidden-gems/')}" href="${REL}hidden-gems/" data-close>
+          <span class="menu-row-icon">${SVG_GEM}</span>
+          <span class="menu-row-label">Hidden Gems</span>
+        </a>
+        <a class="menu-row${cur('/wildcamping/')}" href="${REL}wildcamping/" data-close>
+          <span class="menu-row-icon">${SVG_TENT}</span>
+          <span class="menu-row-label">Wildcamping</span>
+        </a>
+        <div class="menu-section-head">Chapters</div>
+        <a class="menu-row${curCh === 'intro' ? ' is-current' : ''}" href="${REL}intro/" data-close>
+          <span class="menu-row-thumb"><img src="${REL}img/${RAIL_INTRO_CHAPTER.cover}" alt="" /></span>
+          <span class="menu-row-label">${RAIL_INTRO_CHAPTER.label}</span>
+        </a>
+        ${RAIL_CHAPTERS.map(ch => `
+          <a class="menu-row${curCh === ch.id ? ' is-current' : ''}" href="${REL}${ch.id}/" data-close>
+            <span class="menu-row-thumb"><img src="${REL}img/${ch.cover}" alt="" /></span>
+            <span class="menu-row-label">${ch.label}</span>
+          </a>
+        `).join('')}
+        <div class="menu-sheet-account" data-hb-account></div>
+      </div>
+    `;
+    document.body.appendChild(menuSheet);
+
+    function openMenuSheet() {
+      menuSheet.classList.add('is-open');
+      document.documentElement.classList.add('hb-menu-open');
+    }
+    function closeMenuSheet() {
+      menuSheet.classList.remove('is-open');
+      document.documentElement.classList.remove('hb-menu-open');
+    }
+    tabbar.querySelector('[data-hb-menu-toggle]').addEventListener('click', openMenuSheet);
+    menuSheet.addEventListener('click', (e) => {
+      if (e.target.closest('[data-close]')) closeMenuSheet();
+    });
+    // Close on Escape so keyboard users + iPad-with-keyboard can dismiss
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuSheet.classList.contains('is-open')) closeMenuSheet();
+    });
 
     // Backdrop for mobile drawer
     const backdrop = document.createElement('div');
@@ -1046,38 +1110,43 @@
 
     // Account block: "Log in" pill when anonymous, username + log-out when
     // authed. Re-paints on session change (signIn/signOut, cross-tab, server
-    // revocation flipping currentUser to null).
-    const accountSlot = accountFab;  // top-right FAB; was the rail bottom slot
+    // revocation flipping currentUser to null). Two slots: the top-right
+    // FAB (desktop) and the menu sheet's bottom block (mobile). Both
+    // get the same markup so behaviour is identical at every viewport.
+    const accountSlots = document.querySelectorAll('[data-hb-account]');
     function paintAccount() {
-      if (!accountSlot) return;
       const u = session.user();
-      if (u) {
-        const display = u.handle || u.username;
-        const initials = (display || '?').slice(0, 1).toUpperCase();
-        accountSlot.innerHTML = `
-          <div class="rail-user">
-            <span class="rail-user-avatar" aria-hidden="true">${escapeText(initials)}</span>
-            <span class="rail-user-name label">${escapeText(display)}</span>
-            <button type="button" class="rail-user-out" data-hb-signout aria-label="Log out" title="Log out">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      accountSlots.forEach(slot => {
+        if (u) {
+          const display = u.handle || u.username;
+          const initials = (display || '?').slice(0, 1).toUpperCase();
+          slot.innerHTML = `
+            <div class="rail-user">
+              <span class="rail-user-avatar" aria-hidden="true">${escapeText(initials)}</span>
+              <span class="rail-user-name label">${escapeText(display)}</span>
+              <button type="button" class="rail-user-out" data-hb-signout aria-label="Log out" title="Log out">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              </button>
+            </div>
+          `;
+          slot.querySelector('[data-hb-signout]').addEventListener('click', () => {
+            closeMenuSheet();
+            session.signOut();
+          });
+        } else {
+          slot.innerHTML = `
+            <button type="button" class="rail-signin" data-hb-open-signin>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              <span class="label">Log in</span>
             </button>
-          </div>
-        `;
-        accountSlot.querySelector('[data-hb-signout]').addEventListener('click', () => {
-          session.signOut();
-        });
-      } else {
-        accountSlot.innerHTML = `
-          <button type="button" class="rail-signin" data-hb-open-signin>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-            <span class="label">Log in</span>
-          </button>
-        `;
-        accountSlot.querySelector('[data-hb-open-signin]').addEventListener('click', () => {
-          closeMobileDrawer();
-          openSignIn();
-        });
-      }
+          `;
+          slot.querySelector('[data-hb-open-signin]').addEventListener('click', () => {
+            closeMobileDrawer();
+            closeMenuSheet();
+            openSignIn();
+          });
+        }
+      });
     }
     paintAccount();
     session.subscribe(paintAccount);

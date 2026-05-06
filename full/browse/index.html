@@ -417,6 +417,115 @@
     }
   } catch {}
   update();
+
+  // ──────────────────────────────────────────────────────────────────────
+  // Mobile filter sheet
+  //
+  // The two pill rows (regions, then property types) take up a lot of
+  // vertical real-estate before the user has even seen the grid. On
+  // mobile we collapse them behind a single "Filter" button. Tapping
+  // the button slides a sheet up from the bottom that contains the
+  // existing chip rows verbatim (we MOVE them — same DOM nodes, no
+  // duplicate render path). When the sheet closes the nodes stay put
+  // there; the page chooses what to show by class on `.hb-filters`.
+  // Desktop never enters this branch — the chips render inline as
+  // before.
+  (function setupMobileFilterSheet() {
+    if (!matchMedia('(max-width: 700px)').matches) return;
+    const filtersBlock = document.querySelector('.hb-filters');
+    const search = filtersBlock.querySelector('.hb-search');
+    const chipsRegion = document.getElementById('chips');
+    const chipsProp = document.getElementById('propChips');
+    if (!filtersBlock || !chipsRegion || !chipsProp) return;
+
+    // Filter trigger button (rendered next to the search bar via CSS)
+    const trigger = document.createElement('button');
+    trigger.type = 'button';
+    trigger.className = 'hb-filter-trigger';
+    trigger.setAttribute('aria-haspopup', 'dialog');
+    trigger.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+      <span>Filter</span>
+      <span class="hb-filter-badge" data-filter-badge hidden>0</span>
+    `;
+    filtersBlock.insertBefore(trigger, chipsRegion);
+
+    // Sheet shell
+    const sheet = document.createElement('div');
+    sheet.className = 'hb-filter-sheet';
+    sheet.setAttribute('role', 'dialog');
+    sheet.setAttribute('aria-modal', 'true');
+    sheet.setAttribute('aria-label', 'Filter spots');
+    sheet.innerHTML = `
+      <div class="hb-filter-sheet-backdrop" data-close></div>
+      <div class="hb-filter-sheet-card">
+        <div class="hb-filter-sheet-grabber" aria-hidden="true"></div>
+        <div class="hb-filter-sheet-head">
+          <h3>Filter</h3>
+          <button type="button" class="hb-filter-clear" data-clear>Clear</button>
+        </div>
+        <div class="hb-filter-sheet-body">
+          <p class="hb-filter-section-label">Region</p>
+          <div class="hb-filter-sheet-row" data-slot="region"></div>
+          <p class="hb-filter-section-label">Type</p>
+          <div class="hb-filter-sheet-row" data-slot="property"></div>
+        </div>
+        <div class="hb-filter-sheet-foot">
+          <button type="button" class="hb-filter-apply" data-close>Show results</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(sheet);
+    sheet.querySelector('[data-slot="region"]').appendChild(chipsRegion);
+    sheet.querySelector('[data-slot="property"]').appendChild(chipsProp);
+
+    function open()  { sheet.classList.add('is-open'); document.documentElement.classList.add('hb-menu-open'); }
+    function close() { sheet.classList.remove('is-open'); document.documentElement.classList.remove('hb-menu-open'); }
+
+    trigger.addEventListener('click', open);
+    sheet.addEventListener('click', (e) => {
+      if (e.target.closest('[data-close]')) close();
+      if (e.target.closest('[data-clear]')) {
+        // Reset to "all" by clicking the first chip in each row (which is
+        // the "All ..." pill). The existing chip handlers do the rest.
+        chipsRegion.querySelector('.hb-chip')?.click();
+        chipsProp.querySelector('.hb-chip')?.click();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sheet.classList.contains('is-open')) close();
+    });
+
+    // Active-filter count → badge on the trigger pill. Watches both chip
+    // rows for the `is-on` class on chips that aren't the leading "All"
+    // pill. We re-count on every chip click via a delegated listener
+    // attached at the body level (chip handlers live in browse code).
+    const badge = trigger.querySelector('[data-filter-badge]');
+    function updateBadge() {
+      let count = 0;
+      [chipsRegion, chipsProp].forEach(group => {
+        const onChips = group.querySelectorAll('.hb-chip.is-on');
+        // Subtract 1 for the leading "All <axis>" chip if it's the
+        // active one — that means no specific filter is set.
+        const first = group.querySelector('.hb-chip');
+        const allActive = first && first.classList.contains('is-on') && onChips.length === 1;
+        if (allActive) return;
+        count += onChips.length;
+      });
+      if (count > 0) {
+        badge.textContent = String(count);
+        badge.hidden = false;
+      } else {
+        badge.hidden = true;
+      }
+    }
+    // Repaint after every chip click (chip handlers paint state then we
+    // recount). Use a microtask defer so we read the post-click DOM.
+    sheet.addEventListener('click', (e) => {
+      if (e.target.closest('.hb-chip')) queueMicrotask(updateBadge);
+    });
+    updateBadge();
+  })();
 </script>
 
 </body>
