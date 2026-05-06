@@ -1259,8 +1259,8 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 /* Reader card — image on the left, body on the right (desktop).
  * Stacks vertically on mobile.
  *
- * Desktop layout follows Leon's Figma reference (1264 × 711):
- *   - Card aspect-ratio 1264 / 711 (≈ 1.777)
+ * Desktop layout follows Leon's Figma reference (1264 × 731):
+ *   - Card aspect-ratio 1264 / 731 (≈ 1.729)
  *   - Columns 612fr 652fr (image slightly narrower than text side)
  *   - Body padding ratios: top 166/1264, bottom 154/1264, left 59/1264
  *   - Kicker→top 166, subhead→specs 88, Maps→bottom 154 (per Figma)
@@ -1285,16 +1285,20 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 @media (min-width: 760px) {
   .cl-card {
     grid-template-columns: 612fr 652fr;
+    aspect-ratio: 1264 / 731;
     container-type: inline-size;
   }
 }
 
-/* Photo column. Mobile: 1:1 (stacked). Desktop: 612:711 — the photo half
- * of the Figma reference. The body row stretches to whatever this height
- * is, which gives the overall card the 1264:711 (~1.78) aspect ratio
- * when text fits. If content runs longer (e.g. very long titles), the
- * row grows and the photo grows with it (object-fit: cover absorbs it),
- * so nothing clips. Internal carousel uses .hb-multi (rules below). */
+/* Photo column. Mobile: 1:1 (stacked). Desktop: no intrinsic aspect —
+ * the card owns the 1264:731 ratio (above) and the photo simply
+ * stretches to fill its grid track. We deliberately do NOT put an
+ * aspect on .cl-photos at desktop, because aspect + row-stretch
+ * inflates the photo's width past its column when body content runs
+ * taller than the aspect-derived photo height (image overlaps the
+ * text column). With overflow:hidden on .cl-card, content that
+ * exceeds aspect-derived height grows the card — intrinsic min-block
+ * wins over aspect-ratio (CSS Sizing 4). */
 .cl-photos {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -1302,7 +1306,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   overflow: hidden;
 }
 @media (min-width: 760px) {
-  .cl-photos { aspect-ratio: 612 / 711; height: 100%; }
+  .cl-photos { aspect-ratio: auto; }
 }
 .cl-photos > img {
   /* Single-photo cards: a plain <img> rather than an .hb-slide stack. */
