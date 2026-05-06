@@ -21,16 +21,20 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 
 // ── Env loading ────────────────────────────────────────────────────────────
-function loadEnv() {
-  // Try the worktree's .env.local first; fall back to the parent repo's
-  // (worktrees often share env with their main checkout).
-  const candidates = [
-    join(ROOT, ".env.local"),
-    resolve(ROOT, "..", "Hikebeast", ".env.local"),
-  ];
+// Default reads .env.local from this worktree, falling back to the parent
+// repo (worktrees often share env with their main checkout). Pass
+// `--env <name>` to read .env.<name> instead — used to target the staging
+// Convex deployment without juggling .env.local files.
+function loadEnv(envName) {
+  const candidates = envName
+    ? [join(ROOT, `.env.${envName}`)]
+    : [
+        join(ROOT, ".env.local"),
+        resolve(ROOT, "..", "Hikebeast", ".env.local"),
+      ];
   let path = candidates.find(p => existsSync(p));
   if (!path) {
-    throw new Error(`No .env.local found at any of:\n  ${candidates.join("\n  ")}`);
+    throw new Error(`No env file found at any of:\n  ${candidates.join("\n  ")}`);
   }
   const env = {};
   for (const line of readFileSync(path, "utf8").split("\n")) {
@@ -44,14 +48,15 @@ function loadEnv() {
 
 // ── Args ───────────────────────────────────────────────────────────────────
 function parseArgs(argv) {
-  const args = { username: null, email: null, admin: false, handle: null };
+  const args = { username: null, email: null, admin: false, handle: null, env: null };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--email") args.email = argv[++i];
     else if (a === "--admin") args.admin = true;
     else if (a === "--handle") args.handle = argv[++i];
+    else if (a === "--env") args.env = argv[++i];
     else if (a === "--help" || a === "-h") {
-      console.log(`Usage: node scripts/create-user.mjs <username> [--email <email>] [--handle <name>] [--admin]`);
+      console.log(`Usage: node scripts/create-user.mjs <username> [--email <addr>] [--handle <name>] [--admin] [--env staging|local]`);
       process.exit(0);
     } else if (!a.startsWith("--") && args.username === null) {
       args.username = a;
@@ -112,7 +117,7 @@ function promptHidden(label) {
 // ── Main ───────────────────────────────────────────────────────────────────
 async function main() {
   const args  = parseArgs(process.argv.slice(2));
-  const { env, path: envPath } = loadEnv();
+  const { env, path: envPath } = loadEnv(args.env);
 
   console.log(`CONVEX_URL = ${env.CONVEX_URL}`);
   console.log(`Env source = ${envPath}`);

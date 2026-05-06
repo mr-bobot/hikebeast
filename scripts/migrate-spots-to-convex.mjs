@@ -18,17 +18,34 @@ import { api } from "../convex/_generated/api.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 
-// --- Load .env.local ----------------------------------------------------
+// --- Load env from .env.local (default) or .env.<name> when --env <name>
+//     is passed. Lets the same script seed prod or any sandbox deployment
+//     without temporarily juggling .env.local files. process.env always wins
+//     if both CONVEX_URL and ADMIN_TOKEN are already set on the caller.
 function loadEnv() {
-  const path = join(ROOT, ".env.local");
-  if (!existsSync(path)) throw new Error(".env.local not found -- run `convex dev` first");
+  const argv = process.argv.slice(2);
+  let envName = "local";  // default → .env.local
+  for (let i = 0; i < argv.length; i++) {
+    if (argv[i] === "--env" && argv[i + 1]) { envName = argv[i + 1]; i++; }
+  }
+  // process.env override path: caller already exported the values.
+  if (process.env.CONVEX_URL && process.env.ADMIN_TOKEN) {
+    return {
+      CONVEX_URL:  process.env.CONVEX_URL,
+      ADMIN_TOKEN: process.env.ADMIN_TOKEN,
+    };
+  }
+  const path = join(ROOT, `.env.${envName}`);
+  if (!existsSync(path)) {
+    throw new Error(`.env.${envName} not found at ${path} — pass --env <name> or set CONVEX_URL + ADMIN_TOKEN in process.env`);
+  }
   const env = {};
   for (const line of readFileSync(path, "utf8").split("\n")) {
     const m = line.match(/^([A-Z_][A-Z0-9_]*)\s*=\s*(.*?)\s*(?:#.*)?$/);
     if (m) env[m[1]] = m[2].replace(/^["']|["']$/g, "");
   }
-  if (!env.CONVEX_URL)  throw new Error("CONVEX_URL missing from .env.local");
-  if (!env.ADMIN_TOKEN) throw new Error("ADMIN_TOKEN missing from .env.local");
+  if (!env.CONVEX_URL)  throw new Error(`CONVEX_URL missing from .env.${envName}`);
+  if (!env.ADMIN_TOKEN) throw new Error(`ADMIN_TOKEN missing from .env.${envName}`);
   return env;
 }
 

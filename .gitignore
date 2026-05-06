@@ -28,3 +28,4 @@ convex/_generated/
 # myphotos is a personal stash (typically a symlink), never tracked.
 # No trailing slash so the rule catches both directories and symlinks.
 /myphotos
+.env.staging
