@@ -34,7 +34,7 @@
 
   <div id="content"></div>
 
-  <div id="empty" class="hb-empty">
+  <div id="empty" class="hb-empty" hidden>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
     <h2>No favorites yet.</h2>
     <p>Browse the guide and tap the heart on any spot to save it here.</p>
@@ -121,6 +121,13 @@
   }
 
   function render() {
+    // Hold off until favorites store has its first definitive state. For
+    // signed-in users this means waiting for the first Convex response;
+    // anonymous users get localStorage synchronously so ready() is true
+    // immediately. Prevents the "No favorites yet" flash that used to
+    // appear for one tick before server-side favorites arrived.
+    if (!window.HB.favorites.ready()) return;
+
     const keys = window.HB.favorites.list();
     const set = new Set(keys);
     const saved = SPOTS.filter(s => set.has(window.HB.spotKey(s)));

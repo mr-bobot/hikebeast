@@ -3037,6 +3037,89 @@ body.has-rail .topbar .hb-nav { display: none; }
 @keyframes hb-pop { 0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
 .hb-fav.is-on { animation: hb-pop 220ms ease; }
 
+/* ─── Card-action overlays (heart + kebab) ────────────────────────────────
+ * Distinct from .hb-fav (which sits on the white sp-body of detail pages).
+ * .hb-fav-overlay floats over the photo at top-right and is shared by:
+ *   - home rows / up-next thumbs (hover-to-show)
+ *   - chapter grid tiles (.ch-tile, hover-to-show)
+ *   - chapter scroll cards (.cl-card, always-on)
+ * .hb-kebab-overlay sits to its left and is reserved for .cl-card. */
+.row-card,
+.up-next-card,
+.ch-tile,
+.cl-card { position: relative; }
+
+.hb-fav-overlay,
+.hb-kebab-overlay {
+  position: absolute;
+  top: 8px;
+  z-index: 4;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+  color: rgba(0, 0, 0, 0.55);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 150ms ease, transform 150ms ease, color 120ms ease, background 120ms ease;
+}
+.hb-fav-overlay { right: 8px; }
+.hb-kebab-overlay { right: 48px; }
+.hb-fav-overlay svg,
+.hb-kebab-overlay svg { width: 16px; height: 16px; }
+.hb-fav-overlay:hover { color: #ff375f; background: #fff; transform: scale(1.05); }
+.hb-fav-overlay.is-on { color: #ff375f; background: #fff; }
+.hb-kebab-overlay:hover { color: var(--fg); background: #fff; transform: scale(1.05); }
+.hb-fav-overlay:active,
+.hb-kebab-overlay:active { transform: scale(0.92); }
+
+/* Hover-to-show on home cards + chapter grid tiles. */
+.row-card .hb-fav-overlay,
+.up-next-card .hb-fav-overlay,
+.ch-tile .hb-fav-overlay {
+  opacity: 0;
+  transform: scale(0.92);
+}
+.row-card:hover .hb-fav-overlay,
+.row-card:focus-within .hb-fav-overlay,
+.row-card .hb-fav-overlay.is-on,
+.up-next-card:hover .hb-fav-overlay,
+.up-next-card:focus-within .hb-fav-overlay,
+.up-next-card .hb-fav-overlay.is-on,
+.ch-tile:hover .hb-fav-overlay,
+.ch-tile:focus-within .hb-fav-overlay,
+.ch-tile .hb-fav-overlay.is-on {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Always-on for chapter scroll cards (heart + kebab). */
+.cl-card .hb-fav-overlay,
+.cl-card .hb-kebab-overlay {
+  opacity: 1;
+  transform: scale(1);
+  /* Slightly more breathing room from the card's rounded corners. */
+  top: 14px;
+}
+.cl-card .hb-fav-overlay { right: 14px; }
+.cl-card .hb-kebab-overlay { right: 54px; }
+
+/* Touch devices have no hover — surface the heart on every card. */
+@media (hover: none) {
+  .row-card .hb-fav-overlay,
+  .up-next-card .hb-fav-overlay,
+  .ch-tile .hb-fav-overlay {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* === Browse page (photo grid + filter strip) === */
 .hb-page {
   max-width: 1280px;
@@ -3505,7 +3588,74 @@ body.has-rail .topbar .hb-nav { display: none; }
   .hb-fav { display: none !important; }
 }
 
-/* ─── Account block at the bottom of the rail ─────────────────────────── */
+/* ─── Account FAB (top-right of viewport) ─────────────────────────────────
+ * The account widget moved out of the rail bottom into a fixed top-right
+ * corner so it's reachable on every page without scrolling the rail and
+ * doesn't compete with the chapters list for attention. Sits above the
+ * topbar (z above .topbar) but below modals. */
+.hb-account-fab {
+  position: fixed;
+  top: 8px;
+  right: 12px;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  pointer-events: none;
+}
+.hb-account-fab > * { pointer-events: auto; }
+/* Compact pill style for both the signed-in user and the signed-out
+ * "Log in" button. The original rail-user / rail-signin classes still
+ * style the inner DOM, but inside .hb-account-fab we tighten things to
+ * fit the top-right corner. */
+.hb-account-fab .rail-user {
+  height: 36px;
+  padding: 0 6px 0 6px;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  gap: 8px;
+  width: auto;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.hb-account-fab .rail-user-avatar { width: 24px; height: 24px; font-size: 12px; }
+.hb-account-fab .rail-user-name {
+  font-size: 13px;
+  opacity: 1;
+  max-width: 120px;
+}
+.hb-account-fab .rail-user-out {
+  width: 28px; height: 28px;
+  opacity: 1;
+  pointer-events: auto;
+}
+.hb-account-fab .rail-user-out svg { width: 16px; height: 16px; }
+.hb-account-fab .rail-signin {
+  height: 36px;
+  width: auto;
+  padding: 0 14px;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--fg);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.hb-account-fab .rail-signin svg { width: 16px; height: 16px; }
+.hb-account-fab .rail-signin .label { opacity: 1; }
+@media (max-width: 700px) {
+  /* Drop the name on mobile to keep the fab a tight circle next to any
+   * topbar pills or burger menu. */
+  .hb-account-fab .rail-user-name { display: none; }
+}
+
+/* ─── Account block at the bottom of the rail (legacy, no longer rendered
+ * but kept so any third-party page injecting its own slot still styles
+ * sensibly). ─────────────────────────────────────────────────────────────── */
 .rail-account {
   flex-shrink: 0;
   margin-top: 6px;

@@ -161,8 +161,20 @@
   // the box height locked and avoids a flicker when the new image hasn't
   // decoded yet.
   let featureSwapping = false;
+  let lastFeatureKey = null;  // dedupe re-paints when nothing visible changed
   function paintFeature(spot, idx) {
     if (!spot) return;
+    // The feature pool is rebuilt on every Convex spots:list update. With
+    // the introCard pinned at index 0, the post-Convex re-paint would call
+    // paintFeature(introCard, 0) again — which triggers the crossfade and
+    // looks like a "reload" even though the content is identical. Bail
+    // early when nothing the user can see changed (same spot, same idx,
+    // same image source). Note: lastFeatureKey is paired with idx so the
+    // 9-second auto-advance timer still works.
+    const key = `${spot.isIntro ? 'intro' : (window.HB.spotKey(spot) || spot.title)}|${idx}|${spot.image || spot.imagePhotoId || ''}`;
+    if (lastFeatureKey === key) return;
+    lastFeatureKey = key;
+
     featureTitle.textContent = spot.title;
     if (spot.isIntro) {
       featureDeck.textContent = 'Cover, camping rules, top picks · the front matter of the guide.';
@@ -242,15 +254,33 @@
     return a;
   }
 
+  // Stable random selection. Re-shuffling on every subscription tick made
+  // the home page show different cards within the first second of load
+  // (sidecar paint → Convex spots arrive → swipes/session events fire).
+  // Instead, pick spotKeys once, keep them across re-renders, and only
+  // swap a slot when its spot becomes "decided" (skipped or saved). This
+  // way the page's first paint stays put.
+  function pickStable(prevKeys, count) {
+    const decided = new Set(window.HB.swipes.list().map(d => d.spotKey));
+    const kept = prevKeys.filter(k => !decided.has(k) && SPOTS.some(s => window.HB.spotKey(s) === k));
+    if (kept.length >= count) return kept.slice(0, count);
+    const taken = new Set(kept);
+    const undecided = SPOTS.filter(s => {
+      const k = window.HB.spotKey(s);
+      return k && !decided.has(k) && !taken.has(k);
+    });
+    const pool = undecided.length ? undecided : SPOTS.filter(s => !taken.has(window.HB.spotKey(s)));
+    const fill = shuffle(pool).slice(0, count - kept.length).map(s => window.HB.spotKey(s));
+    return [...kept, ...fill];
+  }
+
   // === "Up next" stack to the right of the hero (4 cards) ===
   const upNextEl = document.getElementById('upNext');
+  let upNextKeys = [];
   function buildUpNext() {
-    // HB.swipes.list() is auth-aware: server-synced when signed in,
-    // localStorage-backed (skipped + favorites) otherwise.
-    const decided = new Set(window.HB.swipes.list().map(d => d.spotKey));
-    const undecided = SPOTS.filter(s => !decided.has(window.HB.spotKey(s)));
-    const pool = undecided.length >= 4 ? undecided : SPOTS;
-    const picks = shuffle(pool).slice(0, 4);
+    upNextKeys = pickStable(upNextKeys, 4);
+    const byKey = new Map(SPOTS.map(s => [window.HB.spotKey(s), s]));
+    const picks = upNextKeys.map(k => byKey.get(k)).filter(Boolean);
     upNextEl.innerHTML = picks.map(spot => {
       const region = REGION_NAME[spot.chapter] || spot.chapter_id;
       const kicker = window.HB.singularKicker(spot.kicker || '');
@@ -259,8 +289,9 @@
         width: 400, prefix: '', sizes: '160px',
       });
       const ss = a.srcset ? ` srcset="${esc(a.srcset)}" sizes="${esc(a.sizes)}"` : '';
+      const k = window.HB.spotKey(spot) || '';
       return `
-        <a class="up-next-card" href="${esc(window.HB.spotDetailHref(spot, ''))}">
+        <a class="up-next-card" href="${esc(window.HB.spotDetailHref(spot, ''))}" data-hb-spotkey="${esc(k)}">
           <span class="photo"><img src="${esc(a.src)}"${ss} alt="" loading="lazy" /></span>
           <span class="body">
             <span class="name">${esc(spot.title)}</span>
@@ -270,6 +301,12 @@
         </a>
       `;
     }).join('');
+    // Attach heart overlays after the markup lands. Idempotent — safe to
+    // call on every rebuild.
+    upNextEl.querySelectorAll('.up-next-card[data-hb-spotkey]').forEach(card => {
+      const k = card.getAttribute('data-hb-spotkey');
+      if (k) window.HB.attachCardActions(card, k);
+    });
   }
   buildUpNext();
 
@@ -287,8 +324,9 @@
       sizes: '(min-width: 1000px) 280px, 45vw',
     });
     const ss = a.srcset ? ` srcset="${esc(a.srcset)}" sizes="${esc(a.sizes)}"` : '';
+    const k = window.HB.spotKey(spot) || '';
     return `
-      <a class="row-card" href="${esc(href)}" title="${esc(spot.title)}">
+      <a class="row-card" href="${esc(href)}" title="${esc(spot.title)}" data-hb-spotkey="${esc(k)}">
         <div class="photo">
           <img src="${esc(a.src)}"${ss} alt="${esc(spot.title)}" loading="lazy" />
         </div>
@@ -299,19 +337,30 @@
       </a>
     `;
   }
+  // Wire heart overlays into every .row-card produced by rowCard. Called
+  // after each row's innerHTML lands.
+  function wireRowCardActions(rowEl) {
+    if (!rowEl) return;
+    rowEl.querySelectorAll('.row-card[data-hb-spotkey]').forEach(card => {
+      const k = card.getAttribute('data-hb-spotkey');
+      if (k) window.HB.attachCardActions(card, k);
+    });
+  }
 
+  let forYouKeys = [];
   function buildForYou() {
-    // HB.swipes.list() is auth-aware: server-synced when signed in,
-    // localStorage-backed (skipped + favorites) otherwise.
-    const decided = new Set(window.HB.swipes.list().map(d => d.spotKey));
-    const undecided = SPOTS.filter(s => !decided.has(window.HB.spotKey(s)));
-    const pool = undecided.length >= 4 ? undecided : SPOTS;
-    document.getElementById('rowForYou').innerHTML = shuffle(pool).slice(0, 4).map(rowCard).join('');
+    forYouKeys = pickStable(forYouKeys, 4);
+    const byKey = new Map(SPOTS.map(s => [window.HB.spotKey(s), s]));
+    const picks = forYouKeys.map(k => byKey.get(k)).filter(Boolean);
+    const el = document.getElementById('rowForYou');
+    el.innerHTML = picks.map(rowCard).join('');
+    wireRowCardActions(el);
   }
   function buildCurated(id, list) {
     const el = document.getElementById(id);
     if (!list.length) { el.innerHTML = ''; return; }
     el.innerHTML = list.slice(0, 4).map(rowCard).join('');
+    wireRowCardActions(el);
   }
 
   buildForYou();

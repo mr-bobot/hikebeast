@@ -222,6 +222,7 @@
     let mirror = new Set();
     let serverActive = false;
     let unsub = null;
+    let ready = false;  // false until first definitive state (local or server)
     const subs = new Set();
     function notify() { subs.forEach(fn => { try { fn(); } catch {} }); }
 
@@ -245,7 +246,9 @@
 
     function applyServer(spotKeys) {
       const next = new Set(Array.isArray(spotKeys) ? spotKeys : []);
-      if (setEqual(mirror, next)) return;
+      const wasReady = ready;
+      ready = true;
+      if (setEqual(mirror, next) && wasReady) return;
       mirror = next;
       notify();
     }
@@ -256,8 +259,12 @@
       const tok = session.token();
       if (c && tok) {
         serverActive = true;
-        // Don't keep stale local state visible; subscription will populate.
-        if (mirror.size) { mirror = new Set(); notify(); }
+        // Wipe stale local state silently and mark not-ready so consumer
+        // pages can hold off rendering empty state until the subscription's
+        // first response arrives. (Was: clear + notify, which caused a
+        // visible "no favorites yet" flash before server data arrived.)
+        mirror = new Set();
+        ready = false;
         const sub = c.onUpdate(
           "userFavorites:list",
           { sessionToken: tok },
@@ -338,6 +345,10 @@
         }
       },
       subscribe(fn) { subs.add(fn); return () => subs.delete(fn); },
+      // Pages hold off rendering "no favorites yet" empty state until this
+      // returns true. It flips to true after the first definitive response
+      // (localStorage or first Convex push for signed-in users).
+      ready() { return ready; },
       // Internal: re-attach to server or fall back to local — called by
       // session on sign-in / sign-out and by the cross-tab storage handler.
       _reattach: attach,
@@ -837,6 +848,7 @@
   // Icons separate from the topbar set so we can size them independently.
   const SVG_HOME = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg>';
   const SVG_OVERVIEW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+  const SVG_GEM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9l4-6z"/><path d="M2 9h20"/><path d="M10 3 8 9l4 12 4-12-2-6"/></svg>';
   const SVG_CHEVRONS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>';
   const SVG_BURGER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
 
@@ -898,7 +910,7 @@
       </a>
       <div class="rail-scroll">
         <a class="rail-item${cur('/full/') || cur('/full/index.html')}" href="${REL}index.html">
-          ${SVG_OVERVIEW}<span class="label">Home</span>
+          ${SVG_HOME}<span class="label">Home</span>
         </a>
         <a class="rail-item${cur('/browse/')}" href="${REL}browse/">
           ${SVG_GRID}<span class="label">Explore</span>
@@ -917,6 +929,11 @@
           ${SVG_HEART_OUT}<span class="label">Liked</span>
           <span class="rail-badge" data-hb-fav-count></span>
         </a>
+        <div class="rail-divider"></div>
+        <div class="rail-section-head"><span class="label">Collections</span></div>
+        <a class="rail-item${cur('/hidden-gems/')}" href="${REL}hidden-gems/">
+          ${SVG_GEM}<span class="label">Hidden Gems</span>
+        </a>
         <a class="rail-item${cur('/wildcamping/')}" href="${REL}wildcamping/">
           ${SVG_TENT}<span class="label">Wildcamping</span>
         </a>
@@ -926,12 +943,19 @@
         <div class="rail-divider rail-divider-tight"></div>
         ${chapterItems}
       </div>
-      <div class="rail-account" data-hb-account><!-- painted by paintAccount() --></div>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="Toggle navigation labels">
         ${SVG_CHEVRONS}<span class="label">Collapse</span>
       </button>
     `;
     document.body.insertBefore(rail, document.body.firstChild);
+
+    // Account FAB lives top-right of the viewport, regardless of page,
+    // so it's reachable without scrolling the rail. paintAccount() below
+    // targets the [data-hb-account] slot on this fab.
+    const accountFab = document.createElement('div');
+    accountFab.className = 'hb-account-fab';
+    accountFab.dataset.hbAccount = '';
+    document.body.appendChild(accountFab);
 
     // Backdrop for mobile drawer
     const backdrop = document.createElement('div');
@@ -981,7 +1005,7 @@
     // Account block: "Log in" pill when anonymous, username + log-out when
     // authed. Re-paints on session change (signIn/signOut, cross-tab, server
     // revocation flipping currentUser to null).
-    const accountSlot = rail.querySelector('[data-hb-account]');
+    const accountSlot = accountFab;  // top-right FAB; was the rail bottom slot
     function paintAccount() {
       if (!accountSlot) return;
       const u = session.user();
@@ -1454,11 +1478,22 @@
     });
   }
 
-  function openSubmitModal(slide) {
-    const id = slide.id || '';
-    const title = slide.querySelector('.sp-title')?.textContent?.trim() || id;
-    const ch = currentChapterId();
-    const spotKey = ch ? `${ch}#${id}` : id;
+  function openSubmitModal(spotInfoOrSlide) {
+    // Accept either a .slide-spot DOM element (legacy detail-page caller)
+    // or a plain {id, title, spotKey} bag (chapter card kebab caller).
+    let id, title, spotKey;
+    if (spotInfoOrSlide && spotInfoOrSlide.nodeType === 1) {
+      const slide = spotInfoOrSlide;
+      id = slide.id || '';
+      title = slide.querySelector('.sp-title')?.textContent?.trim() || id;
+      const ch = currentChapterId();
+      spotKey = ch ? `${ch}#${id}` : id;
+    } else {
+      const info = spotInfoOrSlide || {};
+      id = info.id || '';
+      title = info.title || id;
+      spotKey = info.spotKey || id;
+    }
 
     const backdrop = document.createElement('div');
     backdrop.className = 'hb-modal-backdrop';
@@ -1895,6 +1930,118 @@
   }
 
   // --- Heart toggle on every .slide-spot in chapter pages.
+  // Generic card-action overlay (heart, optional kebab) for any spot card
+  // outside the .slide-spot detail page. Used by:
+  //   - chapter scroll cards (.cl-card, always-visible per CSS)
+  //   - chapter grid tiles (.ch-tile, hover-to-show)
+  //   - home rows (.row-card, .up-next-card, hover-to-show)
+  // The heart's visibility is governed by CSS, not JS — this just makes
+  // sure the buttons exist + are wired to the favorites store.
+  function attachCardActions(card, spotKey, opts) {
+    opts = opts || {};
+    if (!card || !spotKey) return;
+    if (!card.querySelector('[data-hb-fav]')) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hb-fav-overlay';
+      btn.setAttribute('data-hb-fav', spotKey);
+      btn.setAttribute('aria-label', 'Save to favorites');
+      btn.innerHTML = SVG_HEART_OUT;
+      card.appendChild(btn);
+
+      function paint() {
+        const on = favorites.has(spotKey);
+        btn.classList.toggle('is-on', on);
+        btn.innerHTML = on ? SVG_HEART_FILL : SVG_HEART_OUT;
+        btn.setAttribute('aria-pressed', String(on));
+        btn.setAttribute('aria-label', on ? 'Remove from favorites' : 'Save to favorites');
+      }
+      paint();
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        favorites.toggle(spotKey);
+        paint();
+      });
+      // Repaint on cross-tab / server pushes.
+      favorites.subscribe(paint);
+    }
+    if (opts.kebab && !card.querySelector('[data-hb-kebab]')) {
+      const kebab = document.createElement('button');
+      kebab.type = 'button';
+      kebab.className = 'hb-kebab-overlay';
+      kebab.setAttribute('data-hb-kebab', spotKey);
+      kebab.setAttribute('aria-label', 'More actions');
+      kebab.innerHTML = SVG_DOTS;
+      card.appendChild(kebab);
+      kebab.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        openCardMenu(card, kebab, { id: opts.spotId || card.id || '', title: opts.title || '', spotKey });
+      });
+    }
+  }
+
+  // Lightweight kebab menu for chapter cards. Mirrors the .slide-spot menu
+  // (single "Submit photo" item today) but driven by a {id, title, spotKey}
+  // info bag instead of a slide DOM element, so it can hang off any card.
+  function openCardMenu(card, anchor, info) {
+    document.querySelectorAll('.hb-spot-menu').forEach(m => m.remove());
+    const menu = document.createElement('div');
+    menu.className = 'hb-spot-menu';
+    menu.innerHTML = `
+      <button type="button" class="hb-spot-menu-item" data-action="submit">${SVG_UPLOAD}<span>Submit photo</span></button>
+    `;
+    document.body.appendChild(menu);
+    const rect = anchor.getBoundingClientRect();
+    menu.style.top = `${rect.bottom + 8}px`;
+    menu.style.right = `${window.innerWidth - rect.right}px`;
+    requestAnimationFrame(() => menu.classList.add('is-show'));
+
+    function close() {
+      menu.classList.remove('is-show');
+      setTimeout(() => menu.remove(), 160);
+      document.removeEventListener('click', onOutside, true);
+      document.removeEventListener('keydown', onKey);
+      window.removeEventListener('scroll', close, true);
+    }
+    function onOutside(e) { if (!menu.contains(e.target) && e.target !== anchor) close(); }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+    setTimeout(() => {
+      document.addEventListener('click', onOutside, true);
+      document.addEventListener('keydown', onKey);
+      window.addEventListener('scroll', close, true);
+    }, 0);
+    menu.querySelector('[data-action="submit"]').addEventListener('click', () => {
+      close();
+      openSubmitModal(info);
+    });
+  }
+
+  // Sweep chapter pages for cards rendered by build-chapter-html.mjs and
+  // attach favorites-aware overlays. Idempotent — safe to run multiple
+  // times; existing buttons are reused. .cl-card uses kebab + heart
+  // (always-visible via CSS); .ch-tile uses heart only (hover-to-show).
+  function wireChapterCards() {
+    const ch = currentChapterId();
+    if (!ch) return;
+    document.querySelectorAll('.cl-card[id]').forEach(card => {
+      const id = card.id;
+      const title = card.querySelector('.cl-title')?.textContent?.trim() || id;
+      attachCardActions(card, `${ch}#${id}`, { kebab: true, spotId: id, title });
+    });
+    document.querySelectorAll('.ch-tile[href]').forEach(card => {
+      // .ch-tile doesn't carry its spotId in an attribute — derive from
+      // href ("../spot/<spotId>/").
+      const href = card.getAttribute('href') || '';
+      const m = href.match(/\/spot\/([^/]+)\//);
+      if (!m) return;
+      const id = m[1];
+      const title = card.getAttribute('title') || id;
+      attachCardActions(card, `${ch}#${id}`, { spotId: id, title });
+    });
+  }
+
   function injectHearts() {
     const ch = currentChapterId();
     if (!ch) return;
@@ -1965,6 +2112,10 @@
   W.HB.session   = session;
   W.HB.openSignIn = openSignIn;
   W.HB.keyFor = keyFor;
+  // Pages with dynamically-rendered card lists (home, browse, etc.) call
+  // this after each render to give every card its heart overlay (and
+  // optionally a kebab). Idempotent.
+  W.HB.attachCardActions = attachCardActions;
   W.HB.spotKey = (spot) => {
     if (!spot || !spot.chapter_id) return null;
     const anchor = (spot.href || '').split('#')[1] || '';
@@ -2121,6 +2272,7 @@
     wireBakedCarousels();
     wireCardLinks();
     injectHearts();
+    wireChapterCards();
     rewriteKickersInPage();
     centerOnHash();
     // Open the Convex subscription only after the static page is wired up
