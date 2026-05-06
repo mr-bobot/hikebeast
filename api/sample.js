@@ -28,7 +28,7 @@ const html = (link, upsell, firstName) => `<!doctype html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Your Swiss Hidden Gems free sample</title>
+<title>Your Swiss Gems of Switzerland free sample</title>
 </head>
 <body style="margin:0;padding:0;background:#f5f5f7;">
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f5f5f7;padding:32px 16px;">
@@ -37,7 +37,7 @@ const html = (link, upsell, firstName) => `<!doctype html>
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560" style="max-width:560px;background:#ffffff;border-radius:20px;overflow:hidden;">
           <tr>
             <td>
-              <img src="${HERO_IMG}" alt="Swiss Hidden Gems" width="560" style="display:block;width:100%;max-width:560px;height:auto;border:0;" />
+              <img src="${HERO_IMG}" alt="Swiss Gems of Switzerland" width="560" style="display:block;width:100%;max-width:560px;height:auto;border:0;" />
             </td>
           </tr>
           <tr>
@@ -170,7 +170,7 @@ export default async function handler(req, res) {
       from: FROM,
       to: email,
       replyTo: REPLY_TO,
-      subject: "Hidden Gems · Your download link is ready.",
+      subject: "Gems of Switzerland · Your download link is ready.",
       html: html(link, upsell, firstName),
       text: text(link, upsell, firstName),
     });

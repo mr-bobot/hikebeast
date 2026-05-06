@@ -417,7 +417,7 @@ ${tiles}
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>${escapeHtml(chapter.name)} · Hidden Gems · Hikebeast</title>
+<title>${escapeHtml(chapter.name)} · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="referrer" content="no-referrer" />
@@ -428,8 +428,7 @@ ${tiles}
 <body>
 <div class="topbar">
   <a class="brand" href="../index.html">
-    <img src="../../images/avatar.jpg" alt="" />
-    <span><span class="brand-prefix">Hidden Gems · </span>${escapeHtml(chapter.name)}</span>
+    <span>${escapeHtml(chapter.name)}</span>
   </a>
   <span class="crumb"><b>${spotCount}</b> ${spotCount === 1 ? "spot" : "spots"}</span>
   <div class="topbar-right">

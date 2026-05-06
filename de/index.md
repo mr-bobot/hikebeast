@@ -11,13 +11,13 @@ Praxiserprobte Werkzeuge für Alpin-Kreative. Schweizer Guides, Filter und Grade
 
 ## Produkte
 
-### Swiss Hidden Gems, Gratis-Probe
+### Swiss Gems of Switzerland, Gratis-Probe
 
 15 handverlesene Spots aus dem vollständigen Guide, direkt in dein Postfach.
 
 Seite: https://hikebeast.ch/de/free.md
 
-### Swiss Hidden Gems, vollständiger Guide
+### Swiss Gems of Switzerland, vollständiger Guide
 
 49 USD, Lifetime-Zugang. 100+ geheime Orte mit exakten GPS-Koordinaten, Foto-Timing und Wildcamp-Regeln.
 

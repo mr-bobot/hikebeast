@@ -1,6 +1,6 @@
-# Swiss Hidden Gems — Landing Page
+# Swiss Gems of Switzerland — Landing Page
 
-Single-page mobile landing page for the Swiss Hidden Gems guide by Hikebeast.
+Single-page mobile landing page for the Swiss Gems of Switzerland guide by Hikebeast.
 
 Two CTAs:
 - **Full guide** ($49) — links to [Whop product page](https://whop.com/gorped/hidden-gems-switzerland-e8/)

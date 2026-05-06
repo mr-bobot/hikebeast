@@ -14,7 +14,7 @@ Saftladen GmbH, Birkenstrasse 47, 6343 Rotkreuz, Switzerland. Contact: leon@hike
 
 ## Email sign-ups
 
-If you request the free sample of the Swiss Hidden Gems guide, we store your email address so we can send you the guide and occasional follow-up messages about new editions or related products. You can unsubscribe from any of those emails at any time, which removes your address from the list.
+If you request the free sample of the Swiss Gems of Switzerland guide, we store your email address so we can send you the guide and occasional follow-up messages about new editions or related products. You can unsubscribe from any of those emails at any time, which removes your address from the list.
 
 ## Third-party tools
 

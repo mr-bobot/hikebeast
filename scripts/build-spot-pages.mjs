@@ -112,7 +112,7 @@ function renderSpotPage(spot) {
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>${escapeHtml(spot.title)} · Hidden Gems · Hikebeast</title>
+<title>${escapeHtml(spot.title)} · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="referrer" content="no-referrer" />
@@ -123,16 +123,15 @@ function renderSpotPage(spot) {
 <body>
 <div class="topbar">
   <a class="brand" href="../../index.html">
-    <img src="../../../images/avatar.jpg" alt="" />
-    <span><span class="brand-prefix">Hidden Gems · </span>${escapeHtml(chapterName)}</span>
+    <span>${escapeHtml(chapterName)}</span>
   </a>
   <span class="crumb"><b>${chapterSpotCount}</b> ${chapterSpotCount === 1 ? "spot" : "spots"}</span>
   <div class="topbar-right">
-    <a class="pill hb-back" data-chapter="${escapeHtml(spot.chapter)}" data-spot="${escapeHtml(spot.id)}" href="../../${escapeHtml(spot.chapter)}/" title="Back to chapter">${ARROW_LEFT_SVG}<span>Back</span></a>
   </div>
 </div>
 
 <div class="app">
+  <a class="pill hb-back app-back" data-chapter="${escapeHtml(spot.chapter)}" data-spot="${escapeHtml(spot.id)}" href="../../${escapeHtml(spot.chapter)}/" title="Back to chapter">${ARROW_LEFT_SVG}<span>Back</span></a>
 
   <div class="viewer" id="viewer">
 

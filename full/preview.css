@@ -83,7 +83,7 @@ button { font-family: inherit; }
   object-position: 70% 45%;
 }
 .brand span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-/* Mobile: drop "Hidden Gems · " prefix; the page section name (Central
+/* Mobile: drop "Gems of Switzerland · " prefix; the page section name (Central
  * Switzerland, Swipe, Map, etc.) carries enough context on its own. */
 @media (max-width: 759px) {
   .brand-prefix { display: none; }
@@ -489,7 +489,7 @@ button { font-family: inherit; }
   color: var(--soft);
 }
 
-/* Card row · For You / Famous / Hidden Gems */
+/* Card row · For You / Famous / Gems of Switzerland */
 .home-row {
   display: flex;
   flex-direction: column;
@@ -919,9 +919,24 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   display: grid;
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   min-height: calc(100dvh - var(--topbar-h));
+  position: relative;  /* anchor for the back-pill on spot detail pages */
 }
 @media (max-width: 700px) {
   .app { grid-template-columns: 1fr; }
+}
+
+/* Back pill on spot detail pages — pinned top-left of the app container
+   (was previously inside the topbar; moved out so the topbar shows only
+   the chapter name without competing affordances). z-index sits above
+   the photo card but below any modals. */
+.app .pill.hb-back.app-back {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 5;
+}
+@media (max-width: 700px) {
+  .app .pill.hb-back.app-back { top: 12px; left: 12px; }
 }
 
 /* Sidebar — sticky inside grid column 1 */

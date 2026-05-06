@@ -1,4 +1,4 @@
-# Swiss Hidden Gems
+# Swiss Gems of Switzerland
 
 > Guide zu 100+ geheimen Schweizer Orten abseits der Touristenkarte. Gratis 15-Spot-PDF-Probe per E-Mail, vollständiger Guide auf Whop für 49 USD mit Lifetime-Zugang und Updates.
 

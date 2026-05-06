@@ -11,13 +11,13 @@ Field-tested tools for alpine creators. Swiss-made guides, filters and grades fo
 
 ## Products
 
-### Swiss Hidden Gems, free sample
+### Swiss Gems of Switzerland, free sample
 
 15 hand-picked spots from the full guide, sent to your inbox.
 
 Page: https://hikebeast.ch/free.md
 
-### Swiss Hidden Gems, full guide
+### Swiss Gems of Switzerland, full guide
 
 49 USD, lifetime access. 100+ secret locations with exact GPS coordinates, photo timing and wildcamp rules.
 

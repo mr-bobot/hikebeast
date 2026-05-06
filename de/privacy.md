@@ -14,7 +14,7 @@ Saftladen GmbH, Birkenstrasse 47, 6343 Rotkreuz, Schweiz. Kontakt: leon@hikebeas
 
 ## E-Mail-Anmeldungen
 
-Wenn du die Gratis-Probe des Swiss Hidden Gems Guides anforderst, speichern wir deine E-Mail-Adresse, damit wir dir den Guide und gelegentliche Follow-up-Nachrichten zu neuen Ausgaben oder verwandten Produkten zusenden können. Du kannst dich jederzeit über einen Link in jeder E-Mail abmelden. Das entfernt deine Adresse von der Liste.
+Wenn du die Gratis-Probe des Swiss Gems of Switzerland Guides anforderst, speichern wir deine E-Mail-Adresse, damit wir dir den Guide und gelegentliche Follow-up-Nachrichten zu neuen Ausgaben oder verwandten Produkten zusenden können. Du kannst dich jederzeit über einen Link in jeder E-Mail abmelden. Das entfernt deine Adresse von der Liste.
 
 ## Eingesetzte Drittanbieter-Tools
 

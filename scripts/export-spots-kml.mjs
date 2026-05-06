@@ -142,8 +142,8 @@ ${placemarks}
   }).join("\n");
 
   const docName = anonymize
-    ? "Hikebeast — Hidden Gems (anonymized)"
-    : "Hikebeast — Hidden Gems of Switzerland";
+    ? "Hikebeast — Gems of Switzerland (anonymized)"
+    : "Hikebeast — Gems of Switzerland of Switzerland";
   const docDesc = anonymize
     ? "All catalogued spots, names redacted as #1..#N."
     : "All catalogued spots, grouped by chapter.";

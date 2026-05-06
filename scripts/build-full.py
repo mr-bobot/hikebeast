@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the /full/ webapp from the Hidden Gems rebuild content.yaml.
+"""Generate the /full/ webapp from the Gems of Switzerland rebuild content.yaml.
 
 Reads:
   ~/Documents/Claude/Projects/Hiking Influencer/rebuild/content.yaml
@@ -194,7 +194,7 @@ def render_topbar(label, total):
     return f'''<div class="topbar">
   <a class="brand" href="../index.html">
     <img src="../../images/avatar.jpg" alt="" />
-    <span>Hidden Gems · {esc(label)}</span>
+    <span>Gems of Switzerland · {esc(label)}</span>
   </a>
   <span class="crumb"><b id="crumbCur">1</b> / <span id="crumbTotal">{total}</span></span>
   <div class="topbar-right">
@@ -209,7 +209,7 @@ def page_head(title):
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>{esc(title)} · Hidden Gems · Hikebeast</title>
+<title>{esc(title)} · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="referrer" content="no-referrer" />
@@ -315,7 +315,7 @@ def render_intro_cover():
   <img class="cv-img" src="{img}" alt="" />
   <div class="cv-content">
     <p class="cv-kicker">A Switzerland Field Guide</p>
-    <h1>{esc(COVER.get("title", "Hidden Gems"))}</h1>
+    <h1>{esc(COVER.get("title", "Gems of Switzerland"))}</h1>
     <p class="cv-deck">{esc(COVER.get("subtitle", ""))}</p>
     <div class="cv-author">
       <img src="{avatar}" alt="" /><span>By {esc(AUTHOR.get("name", "Leon Helg"))} · Hikebeast</span>
@@ -361,7 +361,7 @@ def render_four_col(p):
 </section>'''
 
 def render_top_six(p):
-    # /full/ is the paid edition -- the Hidden Gems are revealed, not blurred.
+    # /full/ is the paid edition -- the Gems of Switzerland are revealed, not blurred.
     tiles = '\n          '.join(
         f'<div class="gem"><img src="{img_url(t["image"], 2)}" alt="" />'
         f'<div class="gem-name">{esc(t["name"])}</div></div>'
@@ -485,7 +485,7 @@ def render_home():
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>Swiss Hidden Gems · Hikebeast</title>
+<title>Swiss Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="referrer" content="no-referrer" />
@@ -498,7 +498,7 @@ def render_home():
 <div class="topbar">
   <a class="brand" href="../">
     <img src="../images/avatar.jpg" alt="" />
-    <span>Hikebeast · Hidden Gems</span>
+    <span>Hikebeast · Gems of Switzerland</span>
   </a>
   <span class="crumb">Full edition</span>
   <div class="topbar-right">
@@ -512,7 +512,7 @@ def render_home():
 <main class="home-main">
 
   <header class="home-hero">
-    <p class="kicker">Swiss Hidden Gems</p>
+    <p class="kicker">Swiss Gems of Switzerland</p>
     <h1>Read it page by page.</h1>
     <p class="lead">{total_spots} spots across {len(CHAPTERS)} regions. Pick a chapter.</p>
   </header>
@@ -725,7 +725,7 @@ def render_map_page():
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>Map · Hidden Gems · Hikebeast</title>
+<title>Map · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="referrer" content="no-referrer" />
@@ -859,7 +859,7 @@ def render_map_page():
 <div class="topbar">
   <a class="brand" href="../index.html">
     <img src="../../images/avatar.jpg" alt="" />
-    <span>Hidden Gems · Map</span>
+    <span>Gems of Switzerland · Map</span>
   </a>
   <span class="crumb">Map view</span>
   <div class="topbar-right">

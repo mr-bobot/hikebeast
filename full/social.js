@@ -890,9 +890,9 @@
     const chapterItems = RAIL_CHAPTERS.map(renderChapter).join('');
 
     rail.innerHTML = `
-      <a class="rail-brand" href="${REL}index.html" title="Hidden Gems home">
+      <a class="rail-brand" href="${REL}index.html" title="Gems of Switzerland home">
         <img src="${REL}../images/avatar.jpg" alt="" />
-        <span class="label">Hidden Gems</span>
+        <span class="label">Gems of Switzerland</span>
       </a>
       <div class="rail-scroll">
         <a class="rail-item${cur('/full/') || cur('/full/index.html')}" href="${REL}index.html">
