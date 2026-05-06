@@ -733,14 +733,16 @@ spots:
 - id: heftihutte
   chapter: central
   title: Heftihütte
-  kicker: ''
-  deck: TODO
+  kicker: SLEEP ON THE RIDGE
+  deck: Mountain hut high on the Schrattenfluh ridgeline. Sunrise from the door is the reason to book a bunk.
   body:
-  - TODO
-  region: Schrattenfluh, Central Switzerland
-  access: ''
-  effort: ''
-  best_light: Anytime
+  - Start from the Marbachegg cable car. Hike via Imbrig and along the ridge with the mountains on your right, then up to the hut. Long day, demanding pace.
+  - Book a bunk in advance. Without a reservation you can't sleep inside, and the hut fills fast in season.
+  region: Schrattenfluh
+  access: Cable car + long hike
+  effort: Hard
+  best_light: Sunrise
+  maps_url: https://www.google.com/maps/place/Heftih%C3%BCtte/@46.8509453,7.9789854,17z/data=!4m14!1m7!3m6!1s0x478fbf8cd722398b:0x640a45c07373fa0c!2sHeftih%C3%BCtte!8m2!3d46.8509417!4d7.9815603!16s%2Fg%2F1tx1s30b!3m5!1s0x478fbf8cd722398b:0x640a45c07373fa0c!8m2!3d46.8509417!4d7.9815603!16s%2Fg%2F1tx1s30b
   image: spots/heftihutte/main.jpg
   image_credit: zimydakid
   photos:
@@ -750,6 +752,9 @@ spots:
   - file: 03.jpg
     credit: zimydakid
     source_type: book
+  gps:
+    lat: 46.8509417
+    lng: 7.9815603
 
 - id: bachalpsee
   chapter: central
