@@ -615,16 +615,6 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "valais#the_flooded_forest": [
-    {
-      "src": "derivatives/the_flooded_forest_p0/w1800.webp",
-      "credit": null
-    },
-    {
-      "src": "derivatives/the_flooded_forest_p1/w1800.webp",
-      "credit": "zimydakid"
-    }
-  ],
   "valais#la_fouly": [
     {
       "src": "derivatives/la_fouly_p0/w1800.webp",
