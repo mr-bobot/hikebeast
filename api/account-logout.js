@@ -11,7 +11,9 @@
 // the cookie so the user is signed out at the gate level.
 
 import { ConvexHttpClient } from 'convex/browser';
-import { api } from '../convex/_generated/api.js';
+
+// Convex function names are passed as strings rather than imported from
+// convex/_generated/api -- that directory is gitignored.
 
 const COOKIE_NAME = 'hb_full_auth';
 
@@ -37,7 +39,7 @@ export default async function handler(req, res) {
   if (sessionToken && process.env.CONVEX_URL) {
     try {
       const client = new ConvexHttpClient(process.env.CONVEX_URL);
-      await client.mutation(api.auth.signOut, { sessionToken });
+      await client.mutation('auth:signOut', { sessionToken });
     } catch {}
   }
 
