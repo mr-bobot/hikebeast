@@ -117,30 +117,16 @@
     empty.hidden = true;
     content.hidden = false;
 
-    // Group by chapter, in LEGEND order.
-    const byChapter = new Map();
-    LEGEND.forEach(c => byChapter.set(c.number, []));
-    SPOTS.forEach(s => {
-      if (!byChapter.has(s.chapter)) byChapter.set(s.chapter, []);
-      byChapter.get(s.chapter).push(s);
-    });
-
+    // Flat 2-col grid — the wildcamping collection is intentionally
+    // small (a curated handful), so chapter separators add visual
+    // noise without aiding navigation. Sort by chapter so spots from
+    // the same region stay together visually, then render edge-to-edge.
+    SPOTS.sort((a, b) => (a.chapter || '').localeCompare(b.chapter || ''));
     content.innerHTML = '';
-    LEGEND.forEach(c => {
-      const list = byChapter.get(c.number) || [];
-      if (!list.length) return;
-      const wrap = document.createElement('section');
-      wrap.className = 'hb-group';
-      const head = document.createElement('div');
-      head.className = 'hb-group-head';
-      head.innerHTML = `<h2>${esc(c.name)}</h2><span class="meta">${list.length} spot${list.length === 1 ? '' : 's'}</span>`;
-      wrap.appendChild(head);
-      const grid = document.createElement('div');
-      grid.className = 'hb-saved-grid';
-      list.forEach(s => grid.appendChild(tile(s)));
-      wrap.appendChild(grid);
-      content.appendChild(wrap);
-    });
+    const grid = document.createElement('div');
+    grid.className = 'hb-saved-grid';
+    SPOTS.forEach(s => grid.appendChild(tile(s)));
+    content.appendChild(grid);
   }
 
   // Re-render on Convex push (wildCamping verdicts may flip as Leon edits)

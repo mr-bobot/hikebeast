@@ -1138,6 +1138,10 @@
           <span class="menu-row-label">Been there</span>
           <span class="menu-row-badge" data-hb-visited-count></span>
         </a>
+        <button type="button" class="menu-row" data-hb-random data-close>
+          <span class="menu-row-icon">${SVG_DICE}</span>
+          <span class="menu-row-label">Surprise me</span>
+        </button>
         <div class="menu-section-head">Collections</div>
         <a class="menu-row${cur('/hidden-gems/')}" href="${REL}hidden-gems/" data-close>
           <span class="menu-row-icon">${SVG_GEM}</span>
@@ -1752,9 +1756,27 @@
     document.body.appendChild(menu);
 
     const rect = anchor.getBoundingClientRect();
-    menu.style.top = `${rect.bottom + 8}px`;
     menu.style.right = `${window.innerWidth - rect.right}px`;
-    requestAnimationFrame(() => menu.classList.add('is-show'));
+    // Decide whether the menu opens DOWN (default) or UP. On mobile
+    // Safari the bottom of the viewport is eaten by the URL bar +
+    // search field; a downward-opening menu near the bottom of the
+    // page disappears behind that chrome. Measure once after the
+    // menu is in the DOM (so we know its height), then flip if there
+    // isn't enough room below.
+    requestAnimationFrame(() => {
+      const menuH = menu.offsetHeight;
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
+      const GAP = 8;
+      if (spaceBelow < menuH + 24 && spaceAbove > spaceBelow) {
+        // Open upward
+        menu.style.top = `${Math.max(8, rect.top - menuH - GAP)}px`;
+        menu.classList.add('is-flip');
+      } else {
+        menu.style.top = `${rect.bottom + GAP}px`;
+      }
+      menu.classList.add('is-show');
+    });
 
     function close() {
       menu.classList.remove('is-show');

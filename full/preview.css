@@ -292,11 +292,11 @@ button { font-family: inherit; }
 .feature-card {
   position: relative;
   display: grid;
-  /* Mobile: photo on top (fixed height) + text section below sized to its
-   * own content. Avoids the old single-column/locked-height layout where
-   * the photo collapsed to ~60 px under the text. */
+  /* Mobile: photo on top (taller aspect for impact) + text section below.
+   * Most spot photos are vertical, so a 4:5 photo block lets them breathe
+   * — 1:1 is the floor (per Leon's tester pass), 4:5 is preferred. */
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: 220px auto;
+  grid-template-rows: auto auto;
   grid-template-areas: "photo" "text";
   background: var(--paper);
   border: 1px solid var(--hairline);
@@ -304,6 +304,8 @@ button { font-family: inherit; }
   overflow: hidden;
   box-shadow: var(--shadow-soft);
 }
+.feature-card .feature-photo { aspect-ratio: 4 / 5; }
+@media (min-width: 700px) { .feature-card .feature-photo { aspect-ratio: auto; } }
 .feature-card .feature-photo { grid-area: photo; }
 .feature-card .feature-text  { grid-area: text;  }
 @media (min-width: 700px) {
@@ -344,6 +346,15 @@ button { font-family: inherit; }
   align-self: flex-start;
 }
 .feature-card .feature-kicker svg { width: 12px; height: 12px; color: var(--fg); }
+/* "Read this first" state: accent-filled pill so the introduction
+ * stands out from the rotating regular spots. The icon (currently a
+ * star) flips to white-on-accent for contrast. */
+.feature-card .feature-kicker.is-pinned {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.feature-card .feature-kicker.is-pinned svg { color: #fff; }
 .feature-card .feature-title {
   font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
   font-size: 32px;
@@ -936,7 +947,35 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   z-index: 5;
 }
 @media (max-width: 700px) {
-  .app .pill.hb-back.app-back { top: 12px; left: 12px; }
+  /* Push the back pill below the iPhone notch / Dynamic Island so it
+   * sits over the photo, not under the device chrome. The photo
+   * itself extends into that area (rule below) — the back button
+   * just needs the safe inset added. */
+  .app .pill.hb-back.app-back {
+    top: calc(12px + env(safe-area-inset-top));
+    left: 12px;
+  }
+}
+
+/* Mobile spot-detail: extend the photo into the safe-area-top so the
+ * iPhone notch frames the image instead of leaving a white strip
+ * above it. The page background goes dark so anything that DOES
+ * peek through (Dynamic Island gap, status bar) reads as part of
+ * the photo's frame instead of a foreign white panel. */
+@media (max-width: 759px) {
+  body[data-page="spot-detail"] {
+    padding-top: 0;
+    background: #000;
+  }
+  body[data-page="spot-detail"] .viewer { padding-top: 0; }
+  /* The photo container fills the viewport edge-to-edge AND extends
+   * up behind the notch — the actual photographic content fills the
+   * safe-area-top, the notch overlays it (Instagram-style). */
+  body[data-page="spot-detail"] .slide-spot .sp-photo {
+    margin-top: 0;
+    padding-top: 0;
+    background: #000;
+  }
 }
 
 /* Sidebar — sticky inside grid column 1 */
@@ -1116,6 +1155,23 @@ body[data-page="spot-detail"] .slide-spot {
   grid-template-columns: 1fr;
 }
 
+/* Mobile: the chapter intro card (.slide-cover) spans edge-to-edge.
+ * The .viewer has 22px horizontal padding to give chapter spot cards
+ * breathing room, but the hero card looks better full-width — negative
+ * margin escapes the viewer's gutter. Border + shadow off too so the
+ * card reads as a hero band instead of a contained panel. */
+@media (max-width: 759px) {
+  .slide-cover {
+    margin-left: -22px;
+    margin-right: -22px;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    box-shadow: none;
+  }
+}
+
 /* Card aspect ratio scales with viewport.
  *   ≥ 1500px viewport: 2:1   (card width ~1456 → height 728, fits 684 body)
  *   1100..1499:        16:10 (card height stays generous on small laptops)
@@ -1280,10 +1336,12 @@ body[data-chapter-view="reader"] .chapter-list { display: flex; flex-direction: 
 @media (min-width: 1100px) {
   body[data-chapter-view="reader"] .chapter-list { gap: 48px; }
 }
-body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-template-columns: 1fr; gap: 12px; }
+/* Chapter grid view: 2 columns from the smallest viewport up — single
+ * column on mobile felt under-packed. */
+body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
 @media (min-width: 600px) {
-  body[data-chapter-view="grid"] .chapter-grid-inner { grid-template-columns: 1fr 1fr; gap: 14px; }
+  body[data-chapter-view="grid"] .chapter-grid-inner { gap: 14px; }
 }
 @media (min-width: 1000px) {
   body[data-chapter-view="grid"] .chapter-grid-inner { grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
@@ -2375,7 +2433,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
     max-width: none;
     width: 100%;
     border-radius: 18px 18px 0 0;
-    max-height: calc(100dvh - 40px - 56px - env(safe-area-inset-bottom));
+    max-height: calc(100dvh - 40px - 64px - env(safe-area-inset-bottom));
     padding-bottom: calc(18px + env(safe-area-inset-bottom));
     transform: translateY(100%);
     transition: transform 260ms cubic-bezier(.2,.7,.3,1);
@@ -3284,12 +3342,11 @@ body.has-rail .topbar .hb-nav { display: none; }
     left: 0;
     right: 0;
     z-index: 70;
-    background: rgba(255, 255, 255, 0.96);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    background: #fff;
     border-top: 1px solid var(--hairline);
+    padding-top: 6px;
     padding-bottom: env(safe-area-inset-bottom);
-    height: calc(56px + env(safe-area-inset-bottom));
+    height: calc(64px + env(safe-area-inset-bottom));
   }
   .app-tabbar .tab {
     display: flex;
@@ -3339,7 +3396,7 @@ body.has-rail .topbar .hb-nav { display: none; }
    * behind it. .has-rail is set on every page social.js wires (i.e.
    * everywhere that renders the tab bar), so it's a safe hook. */
   body.has-rail {
-    padding-bottom: calc(56px + env(safe-area-inset-bottom));
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
   }
 
   /* === Menu sheet (Liked, Collections, Chapters, Account) ============
@@ -3411,6 +3468,14 @@ body.has-rail .topbar .hb-nav { display: none; }
     -webkit-tap-highlight-color: transparent;
     transition: background 120ms ease;
     position: relative;
+    /* Buttons inside the menu row (Surprise me) reset native chrome so
+     * they look identical to the anchor variants. */
+    background: transparent;
+    border: 0;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    cursor: pointer;
   }
   /* The Been-there row is `hidden` for anonymous users — paid feature
    * gate. CSS `display: flex` above would otherwise override the
@@ -3613,8 +3678,9 @@ body.has-rail .topbar .hb-nav { display: none; }
 }
 
 /* Mobile: the action row drops below the body so the buttons are
- * thumb-reachable. The kicker+title no longer need the right padding
- * since nothing floats over them. */
+ * thumb-reachable. Aligned LEFT so the heart sits under the body's
+ * left margin (matches "Open in Maps" alignment). The kicker+title
+ * no longer need the right padding since nothing floats over them. */
 @media (max-width: 759px) {
   .sp-actions {
     position: static;
@@ -3622,7 +3688,7 @@ body.has-rail .topbar .hb-nav { display: none; }
     padding-top: 12px;
     border-top: 1px solid var(--hairline);
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     gap: 10px;
   }
   .slide-spot .sp-kicker,
@@ -4244,10 +4310,13 @@ body.has-rail .topbar .hb-nav { display: none; }
  * Names are always visible here -- saves should never be unlabeled. */
 .hb-saved-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
+  /* 2 columns from the smallest viewport up — single-column wastes
+   * space on phones and tester feedback was that the wildcamping +
+   * saved pages should pack tiles tighter. */
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
-@media (min-width: 600px) { .hb-saved-grid { grid-template-columns: 1fr 1fr; gap: 16px; } }
+@media (min-width: 600px) { .hb-saved-grid { gap: 16px; } }
 @media (min-width: 900px) { .hb-saved-grid { grid-template-columns: 1fr 1fr 1fr; } }
 @media (min-width: 1200px) { .hb-saved-grid { grid-template-columns: 1fr 1fr 1fr 1fr; } }
 

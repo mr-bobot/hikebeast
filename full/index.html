@@ -36,9 +36,9 @@
   <section class="home-feature">
     <article class="feature-card" id="featureCard">
       <div class="feature-text">
-        <span class="feature-kicker">
+        <span class="feature-kicker" id="featureKicker">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L14 8 L20 9 L15.5 13 L17 19 L12 16 L7 19 L8.5 13 L4 9 L10 8 Z"/></svg>
-          <span>Featured</span>
+          <span data-kicker-label>Featured</span>
         </span>
         <h2 class="feature-title" id="featureTitle">…</h2>
         <p class="feature-deck" id="featureDeck">…</p>
@@ -179,16 +179,22 @@
     lastFeatureKey = key;
 
     featureTitle.textContent = spot.title;
+    const featureKicker = document.getElementById('featureKicker');
+    const kickerLabel = featureKicker?.querySelector('[data-kicker-label]');
     if (spot.isIntro) {
       featureDeck.textContent = 'Cover, camping rules, top picks · the front matter of the guide.';
       featureCta.href = 'intro/index.html';
       featureCta.querySelector('span:last-child').textContent = 'Read the intro';
+      if (kickerLabel) kickerLabel.textContent = 'Read this first';
+      featureKicker?.classList.add('is-pinned');
     } else {
       const kicker = window.HB.singularKicker(spot.kicker || '');
       const region = REGION_NAME[spot.chapter] || spot.chapter_id;
       featureDeck.textContent = kicker ? `${kicker} · ${region}` : region;
       featureCta.href = window.HB.spotDetailHref(spot, '');
       featureCta.querySelector('span:last-child').textContent = 'Open spot';
+      if (kickerLabel) kickerLabel.textContent = 'Featured';
+      featureKicker?.classList.remove('is-pinned');
     }
     featureDots.innerHTML = featurePool.map((_, i) =>
       `<span class="${i === idx ? 'is-on' : ''}"></span>`
