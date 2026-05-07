@@ -961,15 +961,31 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   }
 }
 
-/* Mobile spot-detail: extend the photo into the safe-area-top so the
- * iPhone notch frames the image instead of leaving a white strip
- * above it. The page background goes dark so anything that DOES
- * peek through (Dynamic Island gap, status bar) reads as part of
- * the photo's frame instead of a foreign white panel. */
+/* Mobile spot-detail: extend the photo into the safe-area-top so
+ * the iPhone notch frames the image instead of leaving a white
+ * strip above it. The page itself stays on the default light bg —
+ * black only fills the notch area (via a fixed pseudo-element) so
+ * the rest of the page (below the card, around the legal footer)
+ * doesn't read as a black void. */
 @media (max-width: 759px) {
   body[data-page="spot-detail"] {
     padding-top: 0;
+  }
+  /* Notch-area fill: a fixed strip across the top, behind everything
+   * else, that paints the safe-area-top black. The photo (which is
+   * also at the top of the page with bg #000) covers the same area
+   * for as long as it scrolls with content — once the user scrolls
+   * past, this fixed strip keeps the iOS chrome zone matching. */
+  body[data-page="spot-detail"]::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: env(safe-area-inset-top);
     background: #000;
+    z-index: 200;
+    pointer-events: none;
   }
   body[data-page="spot-detail"] .viewer { padding-top: 0; }
   /* The photo container fills the viewport edge-to-edge AND extends
@@ -1168,6 +1184,15 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
     aspect-ratio: auto;
   }
   body[data-page="spot-detail"] .sp-body { overflow: visible; }
+  /* Photo column locked to 4:5 for ALL detail-page spots so the
+   * card height is consistent across the catalogue (instead of
+   * letting each photo's natural aspect drive a different card
+   * shape). !important needed to override the inline aspect-ratio
+   * that injectMultiImage sets on .sp-photo to prevent the
+   * carousel-init layout flash. */
+  body[data-page="spot-detail"] .slide-spot .sp-photo {
+    aspect-ratio: 4 / 5 !important;
+  }
 }
 body[data-page="spot-detail"] .specs {
   /* Specs flow right after the body — no auto-margin pushing them

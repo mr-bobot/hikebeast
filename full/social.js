@@ -1770,24 +1770,36 @@
     document.body.appendChild(menu);
 
     const rect = anchor.getBoundingClientRect();
-    menu.style.right = `${window.innerWidth - rect.right}px`;
-    // Decide whether the menu opens DOWN (default) or UP. On mobile
-    // Safari the bottom of the viewport is eaten by the URL bar +
-    // search field; a downward-opening menu near the bottom of the
-    // page disappears behind that chrome. Measure once after the
-    // menu is in the DOM (so we know its height), then flip if there
-    // isn't enough room below.
+    // Position the menu in two passes:
+    //   1. tentative right-anchored so the kebab is its right edge
+    //   2. after layout, measure menu width — if its left would spill
+    //      off the viewport left edge, switch to left-anchored at a
+    //      safe offset. Same idea vertically: open up vs down based
+    //      on which side has room (covers iOS Safari's URL bar
+    //      eating the bottom).
+    menu.style.right = `${Math.max(8, window.innerWidth - rect.right)}px`;
     requestAnimationFrame(() => {
+      const menuW = menu.offsetWidth;
       const menuH = menu.offsetHeight;
+      const PAD = 8;
+
+      // Horizontal: if the menu would extend past the LEFT edge,
+      // anchor by `left` instead so it opens to the right of the
+      // kebab and stays inside the viewport.
+      const wouldOverflowLeft = (rect.right - menuW) < PAD;
+      if (wouldOverflowLeft) {
+        menu.style.right = 'auto';
+        menu.style.left = `${Math.min(rect.left, window.innerWidth - menuW - PAD)}px`;
+      }
+
+      // Vertical: open upward when there's not enough room below.
       const spaceBelow = window.innerHeight - rect.bottom;
       const spaceAbove = rect.top;
-      const GAP = 8;
       if (spaceBelow < menuH + 24 && spaceAbove > spaceBelow) {
-        // Open upward
-        menu.style.top = `${Math.max(8, rect.top - menuH - GAP)}px`;
+        menu.style.top = `${Math.max(PAD, rect.top - menuH - PAD)}px`;
         menu.classList.add('is-flip');
       } else {
-        menu.style.top = `${rect.bottom + GAP}px`;
+        menu.style.top = `${rect.bottom + PAD}px`;
       }
       menu.classList.add('is-show');
     });
