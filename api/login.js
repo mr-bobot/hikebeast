@@ -186,7 +186,17 @@ export default async function handler(req, res) {
     }
 
     if (result?.sent && result?.token) {
-      const resetUrl = `${SITE}/reset/?token=${encodeURIComponent(result.token)}`;
+      // Derive the site URL from request headers so a reset triggered
+      // from the Vercel preview deploy emails a link pointing at THAT
+      // preview (the lambda there talks to staging Convex, where the
+      // token was minted). On prod, host = hikebeast.ch and the link
+      // points at the production page. Origin > host > hardcoded SITE.
+      const reqOrigin = typeof req.headers.origin === 'string' && /^https?:\/\//.test(req.headers.origin)
+        ? req.headers.origin
+        : '';
+      const reqHost = typeof req.headers.host === 'string' ? req.headers.host : '';
+      const baseUrl = reqOrigin || (reqHost ? `https://${reqHost}` : SITE);
+      const resetUrl = `${baseUrl}/reset/?token=${encodeURIComponent(result.token)}`;
       const displayName = (result.handle || result.username || '').toString().trim();
       try {
         const resend = new Resend(process.env.RESEND_API_KEY);
