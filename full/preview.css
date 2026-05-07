@@ -1184,15 +1184,25 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
     aspect-ratio: auto;
   }
   body[data-page="spot-detail"] .sp-body { overflow: visible; }
-  /* Photo column locked to 4:5 for ALL detail-page spots so the
-   * card height is consistent across the catalogue (instead of
-   * letting each photo's natural aspect drive a different card
-   * shape). !important needed to override the inline aspect-ratio
-   * that injectMultiImage sets on .sp-photo to prevent the
-   * carousel-init layout flash. */
-  body[data-page="spot-detail"] .slide-spot .sp-photo {
-    aspect-ratio: 4 / 5 !important;
-  }
+}
+
+/* Photo column locked to 4:5 for ALL detail-page spots (mobile +
+ * desktop) so card heights are consistent across the catalogue
+ * AND the photo doesn't resize after the image decodes (otherwise
+ * the page reflows when the image loads in). !important is needed
+ * to override the inline aspect-ratio that injectMultiImage sets
+ * to avoid carousel-init flash on chapter cards (which want
+ * natural aspect). The img inside also gets aspect-ratio: auto so
+ * it fills the container without imposing its own intrinsic size. */
+body[data-page="spot-detail"] .slide-spot .sp-photo {
+  aspect-ratio: 4 / 5 !important;
+}
+body[data-page="spot-detail"] .slide-spot .sp-photo img,
+body[data-page="spot-detail"] .slide-spot .sp-photo .hb-slide {
+  aspect-ratio: auto !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 body[data-page="spot-detail"] .specs {
   /* Specs flow right after the body — no auto-margin pushing them

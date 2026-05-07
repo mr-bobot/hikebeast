@@ -1770,13 +1770,9 @@
     document.body.appendChild(menu);
 
     const rect = anchor.getBoundingClientRect();
-    // Position the menu in two passes:
-    //   1. tentative right-anchored so the kebab is its right edge
-    //   2. after layout, measure menu width — if its left would spill
-    //      off the viewport left edge, switch to left-anchored at a
-    //      safe offset. Same idea vertically: open up vs down based
-    //      on which side has room (covers iOS Safari's URL bar
-    //      eating the bottom).
+    // Tentative right-anchored so the kebab's right edge is the
+    // menu's right edge. After layout we re-measure and clamp
+    // horizontally if the menu would spill off-screen.
     menu.style.right = `${Math.max(8, window.innerWidth - rect.right)}px`;
     requestAnimationFrame(() => {
       const menuW = menu.offsetWidth;
@@ -1792,15 +1788,14 @@
         menu.style.left = `${Math.min(rect.left, window.innerWidth - menuW - PAD)}px`;
       }
 
-      // Vertical: open upward when there's not enough room below.
-      const spaceBelow = window.innerHeight - rect.bottom;
-      const spaceAbove = rect.top;
-      if (spaceBelow < menuH + 24 && spaceAbove > spaceBelow) {
-        menu.style.top = `${Math.max(PAD, rect.top - menuH - PAD)}px`;
-        menu.classList.add('is-flip');
-      } else {
-        menu.style.top = `${rect.bottom + PAD}px`;
-      }
+      // Vertical: ALWAYS open upward — the kebab in the spot
+      // detail action row sits low enough that opening downward
+      // disappears under iOS Safari's URL bar / the page bottom
+      // chrome, and forcing up keeps the affordance predictable.
+      // If there isn't enough room above (rare), clamp to the
+      // viewport top instead of flipping down.
+      menu.style.top = `${Math.max(PAD, rect.top - menuH - PAD)}px`;
+      menu.classList.add('is-flip');
       menu.classList.add('is-show');
     });
 
