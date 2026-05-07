@@ -1542,13 +1542,15 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   margin-top: 28px;
 }
 @media (min-width: 1000px) {
-  /* No fixed margin: the parent's `margin-top: auto` rule pushes
-   * specs to the bottom of the flex column, and the gap between
-   * subhead and specs becomes whatever remains. Lands at ~88 in
-   * Figma's case (Fulberg-length copy) and compresses naturally
-   * when titles wrap or decks run long — the card's 16:9 lock
-   * stays intact. */
-  .cl-specs { margin-top: auto; }
+  /* margin-top: auto pushes specs to the bottom of the flex column
+   * (so the auto-fill whitespace lands between subhead and specs).
+   * padding-top adds a guaranteed minimum gap so the REGION label
+   * never butts up against the subhead — when the auto-fill collapses
+   * (long title + 3-line deck), this is the visible separator. */
+  .cl-specs {
+    margin-top: auto;
+    padding-top: clamp(20px, 2.5cqi, 40px);
+  }
 }
 .cl-spec { display: flex; flex-direction: column; gap: 3px; }
 .cl-lbl {
@@ -2511,6 +2513,51 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
  * disclaimer up front (pre-state) and again at the bottom (result) is
  * deliberate so the user sees the caveat both before AND after reading
  * the verdict. */
+/* Photo-credits modal — same outer chrome as the wildcamping modal,
+ * just a flat list of photographers (one per photo). Opens from the
+ * kebab "Photo credits" item. */
+.hb-credits-modal { padding: 22px 22px 20px; gap: 14px; }
+.hb-credits-head { display: flex; flex-direction: column; gap: 6px; padding-right: 36px; }
+.hb-credits-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hb-credits-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--surface);
+  font-size: 14px;
+  color: var(--fg);
+}
+.hb-credits-num {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  display: grid;
+  place-items: center;
+  letter-spacing: 0;
+}
+.hb-credits-name { flex: 1 1 auto; min-width: 0; word-break: break-word; }
+.hb-credits-name em { color: var(--muted); font-style: italic; }
+.hb-credits-foot {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
 .hb-wild-modal { padding: 22px 22px 18px; }
 /* Use [hidden] override so hidden attribute beats `display: flex` below.
  * Without this each section's display rule wins and all three layers

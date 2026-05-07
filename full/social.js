@@ -1717,20 +1717,18 @@
     const spotKey = ch && slide.id ? `${ch}#${slide.id}` : null;
     const spot = spotKey ? spots.get(spotKey) : null;
     const hasWild = !!(spot && spot.wildCamping);
-    // Photo credit is taken from the currently-displayed photo (in case
-    // the carousel has advanced) or the spot's primary photo as a
-    // fallback. We pass it through so the kebab can show "Photo by …".
-    const carousel = slide.querySelector('.sp-photo .hb-slide.is-current img');
-    const photoIdx = parseInt(carousel?.dataset?.idx || '0', 10) || 0;
-    const credit = (spot && spot.photos && spot.photos[photoIdx]?.credit)
-      || (spot && spot.photos && spot.photos[0]?.credit)
-      || null;
+    // hasCredits decides whether to add the "Photo credits" menu item.
+    // Multi-photo cards each carry their own credit; clicking the item
+    // opens a modal listing all of them so navigating the carousel
+    // doesn't desync the displayed credit.
+    const hasCredits = !!(spot && spot.photos && spot.photos.some(p => p.credit));
     openMenuPanel(anchor, {
       spotKey,
       hasWild,
-      credit,
+      hasCredits,
       onSubmit: () => openSubmitModal(slide),
       onWild:   () => hasWild && openWildCampingModal(spot),
+      onCredits: () => hasCredits && openPhotoCreditsModal(spot),
     });
   }
 
@@ -1742,7 +1740,7 @@
   // visitors aren't paying customers and don't get the affordance.
   // visited.signedIn() drives the gate; the kebab silently omits the
   // item when it returns false.
-  function openMenuPanel(anchor, { spotKey, hasWild, credit, onSubmit, onWild }) {
+  function openMenuPanel(anchor, { spotKey, hasWild, hasCredits, onSubmit, onWild, onCredits }) {
     document.querySelectorAll('.hb-spot-menu').forEach(m => m.remove());
 
     const visitedSignedIn = visited.signedIn();
@@ -1759,12 +1757,12 @@
       const cls = isVisited ? 'hb-spot-menu-item is-on' : 'hb-spot-menu-item';
       items.push(`<button type="button" class="${cls}" data-action="visited">${SVG_CHECK_CIRCLE}<span>${label}</span></button>`);
     }
-    if (credit) {
-      // Photo credit is informational — non-clickable item with the
-      // photographer's handle / name. We resolve known handles to
-      // "@handle" via the same renderCredit logic the build script
-      // uses, but the menu item just displays whatever the data has.
-      items.push(`<button type="button" class="hb-spot-menu-item is-info" data-action="credit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="8.5" r="0.6" fill="currentColor"/></svg><span>Photo · ${escapeText(credit)}</span></button>`);
+    if (hasCredits) {
+      // Clickable item — opens a small modal listing each photo's
+      // credit. Earlier I'd inlined the credit text here, but multi-
+      // photo cards have one credit per photo and the kebab can't
+      // know which photo the user is asking about. Modal sidesteps it.
+      items.push(`<button type="button" class="hb-spot-menu-item" data-action="credits"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="8.5" r="0.6" fill="currentColor"/></svg><span>Photo credits</span></button>`);
     }
     const menu = document.createElement('div');
     menu.className = 'hb-spot-menu';
@@ -1809,8 +1807,9 @@
       window.addEventListener('scroll', close, true);
     }, 0);
 
-    menu.querySelector('[data-action="submit"]')?.addEventListener('click', () => { close(); onSubmit?.(); });
-    menu.querySelector('[data-action="wild"]')?.addEventListener('click',   () => { close(); onWild?.();   });
+    menu.querySelector('[data-action="submit"]')?.addEventListener('click',  () => { close(); onSubmit?.();  });
+    menu.querySelector('[data-action="wild"]')?.addEventListener('click',    () => { close(); onWild?.();    });
+    menu.querySelector('[data-action="credits"]')?.addEventListener('click', () => { close(); onCredits?.(); });
     menu.querySelector('[data-action="visited"]')?.addEventListener('click', () => {
       close();
       if (spotKey) visited.toggle(spotKey);
@@ -2196,6 +2195,57 @@
     backdrop.querySelector('[data-close]').addEventListener('click', close);
   }
 
+  // ─── Photo credits modal ────────────────────────────────────────────────
+  // Lists every photo on the spot with its credit. Cards with multiple
+  // photos used to inline the first photo's credit in the kebab itself,
+  // but that desync'd as soon as the user advanced the carousel — the
+  // menu still showed photo 1's photographer while the user was looking
+  // at photo 2. Pulling the credits into a dedicated modal sidesteps the
+  // race entirely and matches the Wildcamping-modal pattern (one place
+  // to read attribution, no per-frame coupling).
+  function openPhotoCreditsModal(spot) {
+    if (!spot || !spot.photos || !spot.photos.length) return;
+    const photos = spot.photos;
+    const title = spot.title || '';
+    const itemsHtml = photos.map((p, i) => {
+      const credit = p.credit ? escapeText(p.credit) : '<em>No attribution</em>';
+      return `
+        <li class="hb-credits-item">
+          <span class="hb-credits-num">${i + 1}</span>
+          <span class="hb-credits-name">${credit}</span>
+        </li>
+      `;
+    }).join('');
+
+    const backdrop = document.createElement('div');
+    backdrop.className = 'hb-modal-backdrop hb-credits-modal-backdrop';
+    backdrop.innerHTML = `
+      <div class="hb-modal hb-credits-modal" role="dialog" aria-label="Photo credits">
+        <button type="button" class="hb-wild-close" data-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div class="hb-credits-head">
+          <span class="hb-wild-kicker">Photo credits</span>
+          <h2 class="hb-wild-title">${escapeText(title)}</h2>
+        </div>
+        <ul class="hb-credits-list">${itemsHtml}</ul>
+        <p class="hb-credits-foot">${photos.length} photo${photos.length === 1 ? '' : 's'} on this spot</p>
+      </div>
+    `;
+    document.body.appendChild(backdrop);
+    requestAnimationFrame(() => backdrop.classList.add('is-show'));
+
+    function close() {
+      backdrop.classList.remove('is-show');
+      setTimeout(() => backdrop.remove(), 180);
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+    document.addEventListener('keydown', onKey);
+    backdrop.addEventListener('click', (e) => { if (e.target === backdrop) close(); });
+    backdrop.querySelector('[data-close]').addEventListener('click', close);
+  }
+
   function injectMultiImage(slide, chapterId) {
     const anchor = slide.id;
     if (!anchor) return;
@@ -2518,19 +2568,14 @@
   function openCardMenu(card, anchor, info) {
     const spot = info?.spotKey ? spots.get(info.spotKey) : null;
     const hasWild = !!(spot && spot.wildCamping);
-    // Pull the credit off the currently-displayed carousel slide if
-    // any, otherwise fall back to the primary photo's credit.
-    const carouselImg = card.querySelector('.cl-photos .hb-slide.is-current img, .cl-photos > img');
-    const photoIdx = parseInt(carouselImg?.dataset?.idx || '0', 10) || 0;
-    const credit = (spot && spot.photos && spot.photos[photoIdx]?.credit)
-      || (spot && spot.photos && spot.photos[0]?.credit)
-      || null;
+    const hasCredits = !!(spot && spot.photos && spot.photos.some(p => p.credit));
     openMenuPanel(anchor, {
       spotKey: info?.spotKey || null,
       hasWild,
-      credit,
-      onSubmit: () => openSubmitModal(info),
-      onWild:   () => hasWild && openWildCampingModal(spot),
+      hasCredits,
+      onSubmit:  () => openSubmitModal(info),
+      onWild:    () => hasWild && openWildCampingModal(spot),
+      onCredits: () => hasCredits && openPhotoCreditsModal(spot),
     });
   }
 
