@@ -1455,20 +1455,24 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 }
 @media (min-width: 760px) {
   .cl-body {
-    /* Padding ratios scale with card width via cqi. Vertical values
-     * are the *upper bound* — `min(...)` caps them in pixels so
-     * long-content cards (2-line title + 3-line deck) don't blow
-     * past the 16:9 box. Left/right keep the Figma 4.67cqi rhythm. */
-    padding-top:    min(13.13cqi, 56px);
-    padding-right:  4.67cqi;
-    padding-bottom: min(12.18cqi, 48px);
-    padding-left:   4.67cqi;
-    /* Distribute children with even space — kicker+title at the top,
-     * deck flexes to fill, "Open in Maps" anchored at the bottom.
-     * Eliminates the absolute "166/154 px gap" and lets the card
-     * adapt when a title wraps. */
-    justify-content: space-between;
-    gap: clamp(8px, 1.5cqi, 22px);
+    /* Figma reference (1264 × 711 card):
+     *   left/right padding = 59 → 4.67cqi
+     *   top    padding     = 166 → 13.13cqi
+     *   bottom padding     = 154 → 12.18cqi
+     * cqi units scale all four with card width so the rhythm holds
+     * at every viewport. The Figma "88 gap between subhead and
+     * specs" emerges naturally — we anchor .cl-specs to the bottom
+     * via margin-top:auto, so the whitespace between subhead and
+     * specs is whatever remains after content, padding, and the
+     * specs+maps tail. With Fulberg-length copy it lands at ~88
+     * (the Figma case); with a long title or 3-line deck it
+     * compresses. */
+    padding: 13.13cqi 4.67cqi 12.18cqi 4.67cqi;
+    /* No global gap — element-to-element spacing is set per-element
+     * (margin-top: auto on .cl-specs further down creates the
+     * central whitespace; kicker/title/subhead use their own small
+     * margins). */
+    gap: 0;
   }
 }
 .cl-kicker {
@@ -1521,8 +1525,13 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   margin-top: 28px;
 }
 @media (min-width: 760px) {
-  /* 88 / 1264 = 6.96cqi (the explicit subhead → specs gap from Figma). */
-  .cl-specs { margin-top: clamp(36px, 6.96cqi, 110px); }
+  /* No fixed margin: the parent's `margin-top: auto` rule pushes
+   * specs to the bottom of the flex column, and the gap between
+   * subhead and specs becomes whatever remains. Lands at ~88 in
+   * Figma's case (Fulberg-length copy) and compresses naturally
+   * when titles wrap or decks run long — the card's 16:9 lock
+   * stays intact. */
+  .cl-specs { margin-top: auto; }
 }
 .cl-spec { display: flex; flex-direction: column; gap: 3px; }
 .cl-lbl {
