@@ -237,6 +237,15 @@ button { font-family: inherit; }
 }
 .home-topbar-actions .icon-btn:hover { background: rgba(0,0,0,0.05); color: var(--fg); }
 .home-topbar-actions .icon-btn svg { width: 18px; height: 18px; }
+/* Random + Liked are also rail items on desktop, so hide them in the
+   topbar there. Settings cog is the inverse: only useful on desktop
+   (mobile users reach /full/account/ via the hamburger sheet). The
+   700px breakpoint matches `.home-topbar`'s own desktop kick-in. */
+.home-topbar-actions .icon-btn-desktop-only { display: none; }
+@media (min-width: 700px) {
+  .home-topbar-actions .icon-btn-mobile-only  { display: none; }
+  .home-topbar-actions .icon-btn-desktop-only { display: grid; }
+}
 .home-avatar {
   width: 36px; height: 36px;
   border-radius: 999px;
