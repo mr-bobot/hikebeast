@@ -143,6 +143,24 @@ export default defineSchema({
   }).index("by_tokenHash", ["tokenHash"])
     .index("by_user",      ["userId"]),
 
+  // ── Magic-link recovery (password reset) ───────────────────────────────
+  // Sparse storage for short-lived password-reset tokens. The plaintext
+  // token lives only in the email link; we store SHA-256 of it so a DB
+  // leak can't reset anyone's password. Single-use: we mark `usedAt` on
+  // redemption and the redeem mutation rejects already-used links.
+  // No index on the user side is needed -- the redeem path looks up by
+  // tokenHash; the request path scans by user only to invalidate
+  // outstanding tokens before issuing a new one.
+  magicLinks: defineTable({
+    userId:    v.id("users"),
+    purpose:   v.union(v.literal("password_reset")),
+    tokenHash: v.string(),
+    createdAt: v.number(),
+    expiresAt: v.number(),
+    usedAt:    v.optional(v.number()),
+  }).index("by_tokenHash", ["tokenHash"])
+    .index("by_user",      ["userId"]),
+
   // ── Phase 3: photo submissions queue ───────────────────────────────────
   photoSubmissions: defineTable({
     spotKey:             v.string(),

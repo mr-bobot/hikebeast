@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Account · Gems of Switzerland · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="stylesheet" href="../preview.css" />
+<style>
+  /* Account page · scoped to .acc-* so the rest of the webapp's preview.css
+     is unaffected. Three sections (Username / Email / Password), each with
+     its own form so they submit independently and one section's error
+     doesn't blow up the others. */
+  .acc-page { max-width: 560px; margin: 0 auto; padding: 8px 18px 64px; }
+  .acc-header { padding: 28px 0 8px; }
+  .acc-header h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 28px; font-weight: 600; letter-spacing: -0.025em;
+    margin: 0 0 4px; color: var(--fg);
+  }
+  .acc-header p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+  .acc-section {
+    margin-top: 18px;
+    padding: 18px 18px 16px;
+    background: var(--surface);
+    border-radius: 16px;
+  }
+  .acc-section h2 {
+    font-size: 14px; font-weight: 600; letter-spacing: -0.005em;
+    margin: 0 0 10px; color: var(--fg);
+  }
+  .acc-section h2 .acc-current {
+    margin-left: 8px; font-size: 12px; font-weight: 500; color: var(--muted);
+    letter-spacing: 0;
+  }
+  .acc-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+  .acc-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+  .acc-input {
+    height: 44px; padding: 0 14px;
+    border: 1px solid var(--hairline); background: #ffffff;
+    border-radius: 12px; font: inherit; font-size: 16px;
+    letter-spacing: -0.01em; color: var(--fg); width: 100%;
+    -webkit-appearance: none;
+  }
+  .acc-input:focus {
+    outline: 2px solid var(--accent); outline-offset: -1px;
+    border-color: transparent;
+  }
+  .acc-row { display: flex; gap: 10px; align-items: stretch; }
+  .acc-row .acc-input { flex: 1; }
+  .acc-save {
+    height: 44px; padding: 0 18px;
+    border-radius: 999px;
+    background: var(--fg); color: #ffffff;
+    border: 0; cursor: pointer;
+    font: inherit; font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 150ms ease, transform 100ms ease;
+    white-space: nowrap;
+  }
+  .acc-save:active { transform: scale(0.98); }
+  .acc-save[disabled] { opacity: 0.55; cursor: not-allowed; }
+  .acc-msg {
+    margin: 8px 0 0; padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 13px; line-height: 1.4;
+  }
+  .acc-msg[hidden] { display: none; }
+  .acc-msg.is-error {
+    background: rgba(255, 59, 48, 0.08);
+    color: #c4302b;
+  }
+  .acc-msg.is-success {
+    background: rgba(52, 199, 89, 0.10);
+    color: #1f7a36;
+  }
+  .acc-helper { margin: 4px 0 0; font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .acc-loading {
+    text-align: center; padding: 40px 0;
+    font-size: 14px; color: var(--muted);
+  }
+  .acc-signed-out { text-align: center; padding: 40px 0; }
+  .acc-signed-out a { color: var(--accent); text-decoration: none; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="../index.html">
+    <span>Account</span>
+  </a>
+  <div class="topbar-right">
+    <a class="pill" href="../index.html">Back</a>
+  </div>
+</div>
+
+<main class="acc-page">
+  <div id="accLoading" class="acc-loading">Loading…</div>
+
+  <div id="accSignedOut" class="acc-signed-out" hidden>
+    <p>You're not signed in.</p>
+    <p><a href="/login/">Sign in →</a></p>
+  </div>
+
+  <div id="accContent" hidden>
+    <header class="acc-header">
+      <h1>Account</h1>
+      <p>Change your username, email, or password. All fields are independent — saving one doesn't touch the others.</p>
+    </header>
+
+    <!-- Username ─────────────────────────────────────────────────────── -->
+    <section class="acc-section">
+      <h2>Username <span class="acc-current" id="curUsername"></span></h2>
+      <form id="usernameForm" novalidate>
+        <div class="acc-row">
+          <input id="usernameInput" class="acc-input" type="text"
+                 autocomplete="off" autocapitalize="off" spellcheck="false"
+                 pattern="[a-z0-9._\-]{2,32}" required />
+          <button type="submit" class="acc-save">Save</button>
+        </div>
+        <p class="acc-helper">Lowercase letters, numbers, dots. 2–32 chars.</p>
+        <p class="acc-msg" id="usernameMsg" hidden></p>
+      </form>
+    </section>
+
+    <!-- Email ────────────────────────────────────────────────────────── -->
+    <section class="acc-section">
+      <h2>Email <span class="acc-current" id="curEmail"></span></h2>
+      <form id="emailForm" novalidate>
+        <div class="acc-row">
+          <input id="emailInput" class="acc-input" type="email"
+                 autocomplete="email" autocapitalize="off" spellcheck="false" required />
+          <button type="submit" class="acc-save">Save</button>
+        </div>
+        <p class="acc-helper">Used for password recovery and the receipt email.</p>
+        <p class="acc-msg" id="emailMsg" hidden></p>
+      </form>
+    </section>
+
+    <!-- Password ─────────────────────────────────────────────────────── -->
+    <section class="acc-section">
+      <h2>Password</h2>
+      <form id="passwordForm" novalidate>
+        <div class="acc-field">
+          <span class="acc-label">Current password</span>
+          <input id="oldPasswordInput" class="acc-input" type="password"
+                 autocomplete="current-password" required />
+        </div>
+        <div class="acc-field">
+          <span class="acc-label">New password</span>
+          <input id="newPasswordInput" class="acc-input" type="password"
+                 autocomplete="new-password" minlength="8" required />
+        </div>
+        <button type="submit" class="acc-save" style="width:100%;">Change password</button>
+        <p class="acc-helper">At least 8 characters. Other devices get signed out.</p>
+        <p class="acc-msg" id="passwordMsg" hidden></p>
+      </form>
+    </section>
+  </div>
+</main>
+
+<footer class="legal">
+  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
+  © Hikebeast
+</footer>
+
+<script src="../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
+<script>
+  // We don't need the full social.js layer here (no spots, no favorites,
+  // no kebabs). We just need the Convex client + the same sessionToken the
+  // rest of /full/ persists in localStorage:hb:session:v1. Read it
+  // directly, talk to Convex via the global `convex.ConvexClient`.
+  (function () {
+    const SESSION_KEY = 'hb:session:v1';
+    const accLoading    = document.getElementById('accLoading');
+    const accSignedOut  = document.getElementById('accSignedOut');
+    const accContent    = document.getElementById('accContent');
+    const curUsername   = document.getElementById('curUsername');
+    const curEmail      = document.getElementById('curEmail');
+    const usernameInput = document.getElementById('usernameInput');
+    const emailInput    = document.getElementById('emailInput');
+
+    const token = (() => {
+      try { return localStorage.getItem(SESSION_KEY) || ''; } catch { return ''; }
+    })();
+
+    let client = null;
+    if (window.convex && window.HB_CONVEX_URL) {
+      try { client = new window.convex.ConvexClient(window.HB_CONVEX_URL); }
+      catch (e) { console.warn('Convex init failed:', e); }
+    }
+    if (!client || !token) {
+      accLoading.hidden = true;
+      accSignedOut.hidden = false;
+      return;
+    }
+
+    // Initial paint: read currentUser to populate the form. We do a one-shot
+    // query (not a reactive subscription) because nothing on this page
+    // benefits from server-pushed updates -- the user IS the only writer.
+    client.query('auth:currentUser', { sessionToken: token })
+      .then((u) => {
+        if (!u) {
+          accLoading.hidden = true;
+          accSignedOut.hidden = false;
+          return;
+        }
+        curUsername.textContent = '· currently ' + u.username;
+        usernameInput.value = u.username;
+        curEmail.textContent = u.email ? ('· currently ' + u.email) : '';
+        emailInput.value = u.email || '';
+        accLoading.hidden = true;
+        accContent.hidden = false;
+      })
+      .catch((err) => {
+        console.warn('currentUser failed:', err);
+        accLoading.hidden = true;
+        accSignedOut.hidden = false;
+      });
+
+    // Section helper: drives one form's submit/save state + flash messages.
+    // Takes a mutation name + an args-builder + a "what to do on success".
+    function wireSection(formId, msgId, mutation, buildArgs, onOk) {
+      const form = document.getElementById(formId);
+      const msg  = document.getElementById(msgId);
+      const btn  = form.querySelector('.acc-save');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        msg.hidden = true; msg.className = 'acc-msg';
+        const orig = btn.textContent;
+        btn.disabled = true; btn.textContent = 'Saving…';
+        try {
+          const args = buildArgs();
+          if (!args) { btn.disabled = false; btn.textContent = orig; return; }
+          const result = await client.mutation(mutation, { sessionToken: token, ...args });
+          msg.hidden = false; msg.className = 'acc-msg is-success';
+          msg.textContent = 'Saved.';
+          if (onOk) onOk(result);
+        } catch (err) {
+          const text = (err && err.message) ? String(err.message) : 'Save failed.';
+          msg.hidden = false; msg.className = 'acc-msg is-error';
+          // Convex throws as "Uncaught Error: <message> at handler" on the
+          // wire. Strip the prefix for readability.
+          msg.textContent = text.replace(/^.*?Error:\s*/, '').replace(/\s+at\s+handler.*$/, '');
+        } finally {
+          btn.disabled = false; btn.textContent = orig;
+        }
+      });
+    }
+
+    wireSection('usernameForm', 'usernameMsg', 'auth:updateUsername',
+      () => ({ newUsername: usernameInput.value.trim().toLowerCase() }),
+      (r) => { if (r?.username) { curUsername.textContent = '· currently ' + r.username; } },
+    );
+
+    wireSection('emailForm', 'emailMsg', 'auth:updateEmail',
+      () => ({ newEmail: emailInput.value.trim().toLowerCase() }),
+      (r) => { if (r?.email) { curEmail.textContent = '· currently ' + r.email; } },
+    );
+
+    wireSection('passwordForm', 'passwordMsg', 'auth:updatePassword',
+      () => {
+        const oldP = document.getElementById('oldPasswordInput').value;
+        const newP = document.getElementById('newPasswordInput').value;
+        if (newP.length < 8) {
+          const m = document.getElementById('passwordMsg');
+          m.hidden = false; m.className = 'acc-msg is-error';
+          m.textContent = 'New password must be at least 8 characters.';
+          return null;
+        }
+        return { oldPassword: oldP, newPassword: newP };
+      },
+      () => {
+        document.getElementById('oldPasswordInput').value = '';
+        document.getElementById('newPasswordInput').value = '';
+      },
+    );
+  })();
+</script>
+</body>
+</html>
