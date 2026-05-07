@@ -3465,6 +3465,23 @@ body.has-rail .topbar .hb-nav { display: none; }
 }
 .rail-burger svg { width: 18px; height: 18px; }
 
+/* Settings cog injected into every /full/* topbar's right slot by
+   social.js. Re-uses .rail-burger's pill chrome (border, white bg,
+   round shape) but inverts visibility: shown only on desktop, hidden
+   on mobile. Mobile users reach /full/account/ via the menu sheet's
+   "Account settings" row instead. */
+.rail-cog {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--muted);
+}
+.rail-cog:hover { color: var(--fg); }
+@media (max-width: 700px) {
+  .rail-cog { display: none !important; }
+}
+
 /* Mobile bottom tab bar — replaces the burger drawer as the primary
  * navigation on phones. Hidden above 700px (rail takes over on
  * desktop / tablet). The active tab uses --accent. The Menu tab

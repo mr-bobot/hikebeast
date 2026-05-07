@@ -974,6 +974,13 @@
   const SVG_HOME = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg>';
   const SVG_OVERVIEW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
   const SVG_GEM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9l4-6z"/><path d="M2 9h20"/><path d="M10 3 8 9l4 12 4-12-2-6"/></svg>';
+  // Star · used by the Famous Gems collection nav item. 5-point star
+  // outline so it visually pairs with .rail-item siblings.
+  const SVG_STAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+  // Check-in-circle · "Been there" rail + menu-sheet item. Was previously
+  // declared deeper in the file (kebab-menu builder); promoted here so the
+  // rail markup that references it doesn't TDZ-fault.
+  const SVG_CHECK_CIRCLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 10"/></svg>';
   const SVG_CHEVRONS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>';
   const SVG_BURGER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
 
@@ -1043,21 +1050,28 @@
         <a class="rail-item${cur('/map/')}" href="${REL}map/">
           ${SVG_MAP}<span class="label">Map</span>
         </a>
-        <div class="rail-divider"></div>
         <a class="rail-item${cur('/swipe/')}" href="${REL}swipe/">
           ${SVG_SWIPE}<span class="label">Swipe</span>
         </a>
         <button type="button" class="rail-item" data-hb-random>
           ${SVG_DICE}<span class="label">Random</span>
         </button>
+        <div class="rail-divider"></div>
         <a class="rail-item${cur('/saved/')}" href="${REL}saved/" data-hb-saved-link>
           ${SVG_HEART_OUT}<span class="label">Liked</span>
           <span class="rail-badge" data-hb-fav-count></span>
+        </a>
+        <a class="rail-item${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link hidden>
+          ${SVG_CHECK_CIRCLE}<span class="label">Been there</span>
+          <span class="rail-badge" data-hb-visited-count></span>
         </a>
         <div class="rail-divider"></div>
         <div class="rail-section-head"><span class="label">Collections</span></div>
         <a class="rail-item${cur('/hidden-gems/')}" href="${REL}hidden-gems/">
           ${SVG_GEM}<span class="label">Hidden Gems</span>
+        </a>
+        <a class="rail-item${cur('/famous-gems/')}" href="${REL}famous-gems/">
+          ${SVG_STAR}<span class="label">Famous Gems</span>
         </a>
         <a class="rail-item${cur('/wildcamping/')}" href="${REL}wildcamping/">
           ${SVG_TENT}<span class="label">Wildcamping</span>
@@ -1128,6 +1142,10 @@
       <div class="menu-sheet-backdrop" data-close></div>
       <div class="menu-sheet-card">
         <div class="menu-sheet-grabber" aria-hidden="true"></div>
+        <button type="button" class="menu-row" data-hb-random data-close>
+          <span class="menu-row-icon">${SVG_DICE}</span>
+          <span class="menu-row-label">Surprise me</span>
+        </button>
         <a class="menu-row${cur('/saved/')}" href="${REL}saved/" data-hb-saved-link data-close>
           <span class="menu-row-icon">${SVG_HEART_OUT}</span>
           <span class="menu-row-label">Liked</span>
@@ -1138,14 +1156,14 @@
           <span class="menu-row-label">Been there</span>
           <span class="menu-row-badge" data-hb-visited-count></span>
         </a>
-        <button type="button" class="menu-row" data-hb-random data-close>
-          <span class="menu-row-icon">${SVG_DICE}</span>
-          <span class="menu-row-label">Surprise me</span>
-        </button>
         <div class="menu-section-head">Collections</div>
         <a class="menu-row${cur('/hidden-gems/')}" href="${REL}hidden-gems/" data-close>
           <span class="menu-row-icon">${SVG_GEM}</span>
           <span class="menu-row-label">Hidden Gems</span>
+        </a>
+        <a class="menu-row${cur('/famous-gems/')}" href="${REL}famous-gems/" data-close>
+          <span class="menu-row-icon">${SVG_STAR}</span>
+          <span class="menu-row-label">Famous Gems</span>
         </a>
         <a class="menu-row${cur('/wildcamping/')}" href="${REL}wildcamping/" data-close>
           <span class="menu-row-icon">${SVG_TENT}</span>
@@ -1215,6 +1233,27 @@
         backdrop.classList.add('is-show');
       });
       topbar.insertBefore(burger, topbar.firstChild);
+
+      // Universal Settings cog. Goes into the topbar's right-side cluster
+      // so every /full/* page has a consistent entry to /full/account/.
+      // Most pages have a `.topbar-right` slot; the home page uses
+      // `.home-topbar-actions`. We append to whichever we find. (The
+      // inline copy on the home page is hidden via CSS so we don't
+      // double up — the inline copy was added before this universal
+      // injection existed.)
+      // Hidden on mobile (the menu sheet has its own "Account settings"
+      // row); shown only on desktop where there's no menu sheet to host it.
+      const rightSlot = topbar.querySelector('.topbar-right, .home-topbar-actions');
+      if (rightSlot && !rightSlot.querySelector('[data-hb-cog]')) {
+        const cog = document.createElement('a');
+        cog.className = 'rail-burger rail-cog';   // reuse burger button styling
+        cog.setAttribute('href', `${REL}account/`);
+        cog.setAttribute('aria-label', 'Account settings');
+        cog.setAttribute('title', 'Account settings');
+        cog.dataset.hbCog = '';
+        cog.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
+        rightSlot.appendChild(cog);
+      }
     }
 
     // Toggle expand/collapse (desktop)
@@ -1704,8 +1743,8 @@
   // state and surfaces the spot in /full/visited/.
   const SVG_DOTS = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>';
   const SVG_UPLOAD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>';
-  // Tick mark in a circle for the "Been there" / "Visited" toggle.
-  const SVG_CHECK_CIRCLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 10"/></svg>';
+  // SVG_CHECK_CIRCLE is declared earlier (next to the rail icon set) so
+  // both the rail and this kebab menu can reference the same constant.
 
   function escapeText(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
