@@ -253,13 +253,17 @@ async function handleOnboardingPost(req, res, stripe, body) {
 
   // Returning customer (idempotent re-submit). Don't set the auth cookie --
   // the buyer should sign in with their own password rather than us
-  // silently picking up the existing session.
+  // silently picking up the existing session. Surface the existing
+  // username so the success page can render "Sign in as <name>" instead
+  // of leaving the buyer guessing whether their second-attempt credentials
+  // worked (they didn't -- this branch never created anything).
   if (result?.existing) {
     res.setHeader("Cache-Control", "no-store");
     return res.status(200).json({
-      ok: false,
+      ok:       false,
       existing: true,
       email,
+      username: result.username || "",
       redirect: `/login/?email=${encodeURIComponent(email)}`,
     });
   }

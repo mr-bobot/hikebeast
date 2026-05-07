@@ -743,8 +743,20 @@ fbq('track', 'PageView');
           });
           var json = await res.json().catch(function () { return {}; });
 
+          // Idempotent Resubmit: das Konto wurde beim ersten Versuch
+          // angelegt, der zweite Submit wurde abgewiesen (Email belegt).
+          // Statt stumm zu /login zu redirecten zeigen wir das inline.
           if (json && json.existing) {
-            window.location.href = json.redirect || ("/login/?email=" + encodeURIComponent(onboardEmail.value));
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Konto erstellen & App öffnen";
+            onboardError.hidden = false;
+            var existingUsername = (json.username || "").trim();
+            var loginHref = "/login/?email=" + encodeURIComponent(onboardEmail.value);
+            onboardError.innerHTML = "Für diese Email existiert bereits ein Konto"
+              + (existingUsername ? " (Benutzername <strong>" + existingUsername + "</strong>)" : "")
+              + ". Melde dich mit dem Passwort an, das du beim ersten Mal gesetzt hast, oder antworte auf die Bestätigungsmail wenn du es vergessen hast. "
+              + "<a href=\"" + loginHref + "\" style=\"color:#0071e3;text-decoration:none;font-weight:500;\">Anmelden &rarr;</a>";
+            onboardLogin.href = loginHref;
             return;
           }
 

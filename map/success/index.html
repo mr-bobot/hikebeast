@@ -747,11 +747,28 @@ fbq('track', 'PageView');
           });
           var json = await res.json().catch(function () { return {}; });
 
-          // Returning customer: route to /login with email pre-filled (when
-          // /login picks up the ?email= follow-up TODO; right now it just
-          // shows the username field, but the link still won't break).
+          // Returning customer: idempotent re-submit, the second-attempt
+          // credentials were NOT applied (the original account still owns
+          // the email). Show that inline -- silently redirecting to /login
+          // makes buyers think "the new password I just typed should work"
+          // and then login fails for reasons they can't see.
           if (json && json.existing) {
-            window.location.href = json.redirect || ("/login/?email=" + encodeURIComponent(onboardEmail.value));
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Create account & open app";
+            onboardError.hidden = false;
+            var existingUsername = (json.username || "").trim();
+            var loginHref = "/login/?email=" + encodeURIComponent(onboardEmail.value);
+            // innerHTML over textContent because we want a clickable link;
+            // both inputs are server-controlled / known-safe (username comes
+            // from Convex, email from the email-typed input).
+            onboardError.innerHTML = "An account already exists for this email"
+              + (existingUsername ? " (username <strong>" + existingUsername + "</strong>)" : "")
+              + ". Sign in with the password you set the first time, or reply to the receipt email if you've forgotten it. "
+              + "<a href=\"" + loginHref + "\" style=\"color:#0071e3;text-decoration:none;font-weight:500;\">Sign in &rarr;</a>";
+            // Also point the existing "Sign in →" footer link at /login
+            // with the email pre-filled, in case the buyer scrolls past
+            // the error to use that link instead.
+            onboardLogin.href = loginHref;
             return;
           }
 
