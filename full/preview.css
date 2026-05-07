@@ -1186,23 +1186,28 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   body[data-page="spot-detail"] .sp-body { overflow: visible; }
 }
 
-/* Photo column locked to 4:5 for ALL detail-page spots (mobile +
- * desktop) so card heights are consistent across the catalogue
- * AND the photo doesn't resize after the image decodes (otherwise
- * the page reflows when the image loads in). !important is needed
- * to override the inline aspect-ratio that injectMultiImage sets
- * to avoid carousel-init flash on chapter cards (which want
- * natural aspect). The img inside also gets aspect-ratio: auto so
- * it fills the container without imposing its own intrinsic size. */
-body[data-page="spot-detail"] .slide-spot .sp-photo {
-  aspect-ratio: 4 / 5 !important;
-}
-body[data-page="spot-detail"] .slide-spot .sp-photo img,
-body[data-page="spot-detail"] .slide-spot .sp-photo .hb-slide {
-  aspect-ratio: auto !important;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* Mobile only: photo locked to 4:5 so card heights stay consistent
+ * across the catalogue AND the photo doesn't resize after the
+ * image decodes. !important is needed to override the inline
+ * aspect-ratio that injectMultiImage sets to avoid carousel-init
+ * flash. The img + .hb-slide inside reset to aspect: auto so they
+ * fill the locked container without imposing their own intrinsic
+ * size.
+ *
+ * Desktop is intentionally untouched — there each photo's natural
+ * aspect drives the card height (matched to body via grid stretch),
+ * which Leon prefers for the editorial single-spot view. */
+@media (max-width: 759px) {
+  body[data-page="spot-detail"] .slide-spot .sp-photo {
+    aspect-ratio: 4 / 5 !important;
+  }
+  body[data-page="spot-detail"] .slide-spot .sp-photo img,
+  body[data-page="spot-detail"] .slide-spot .sp-photo .hb-slide {
+    aspect-ratio: auto !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 body[data-page="spot-detail"] .specs {
   /* Specs flow right after the body — no auto-margin pushing them
