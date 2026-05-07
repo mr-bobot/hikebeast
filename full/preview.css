@@ -1183,96 +1183,31 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   body[data-page="spot-detail"] .slide-spot {
     aspect-ratio: auto;
   }
-  body[data-page="spot-detail"] .sp-body {
-    overflow: hidden;
-    /* Mirror the chapter scroll card's body padding so the two
-     * cards have the exact same visual rhythm: 12.65cqi top +
-     * bottom (= 166/154 px Figma at 1264 wide), 4.67cqi sides
-     * (= 59 px Figma).
-     *
-     * .specs gets margin-top: auto further down so the spec grid
-     * + Open-in-Maps tail anchors to the bottom — the same Figma
-     * "88 px gap between subhead and specs emerges naturally"
-     * trick the chapter card uses. */
-    padding: 12.65cqi 4.67cqi 12.65cqi 4.67cqi;
-    gap: 0;
-    justify-content: flex-start;
-  }
-  body[data-page="spot-detail"] .specs {
-    margin-top: auto;
-    padding-top: clamp(20px, 2.5cqi, 40px);
-  }
-  /* The body paragraphs sit between deck and specs; in the chapter
-   * card those don't exist, so the cqi rhythm is built around
-   * kicker → title → subhead → (auto-fill) → specs → maps. On the
-   * detail card we keep the same outer rhythm and let the body
-   * paragraphs flex into the auto-fill region. */
-  body[data-page="spot-detail"] .sp-body > .body {
-    margin-top: clamp(8px, 1cqi, 14px);
-  }
+  body[data-page="spot-detail"] .sp-body { overflow: visible; }
 }
 
-/* Detail card mirrors the chapter scroll card's geometry exactly
- * so the two views share a visual rhythm:
+/* Mobile only: photo locked to 4:5 so card heights stay consistent
+ * across the catalogue AND the photo doesn't resize after the
+ * image decodes. !important is needed to override the inline
+ * aspect-ratio that injectMultiImage sets to avoid carousel-init
+ * flash. The img + .hb-slide inside reset to aspect: auto so they
+ * fill the locked container without imposing their own intrinsic
+ * size.
  *
- *   - 760-999px: stacked (1 column) — photo on top, body below.
- *     Matches .cl-card's behaviour at this range; 2-col cards eat
- *     too much horizontal real estate when the rail's also visible.
- *
- *   - ≥ 1000px: 2-col grid 612fr 652fr (Figma reference 1264 × 711),
- *     card aspect 16:9, container-type: inline-size so the body
- *     padding can scale with cqi like the chapter card does. The
- *     photo column inherits its aspect from the grid — 612/(612+652)
- *     of card width by full card height = 0.86 ratio (matches Figma
- *     612:711). Body column = 0.91. */
-@media (min-width: 760px) and (max-width: 999px) {
-  body[data-page="spot-detail"] .slide-spot {
-    grid-template-columns: minmax(0, 1fr);
-    aspect-ratio: auto;
-  }
-}
-@media (min-width: 1000px) {
-  body[data-page="spot-detail"] .slide-spot {
-    grid-template-columns: 612fr 652fr;
-    aspect-ratio: 16 / 9;
-    container-type: inline-size;
-  }
-}
-
-/* Photo column.
- *   - Mobile (< 760px): 4:5 (vertical) — Leon's pick for the
- *     full-bleed mobile detail view.
- *   - Stacked tablet (760-999): 16:9 photo on top, body below.
- *   - Desktop (≥ 1000px): no aspect-ratio — the parent card's 16:9
- *     drives the row height, photo column stretches to match
- *     (= 0.86 ratio per Figma).
- *
- * !important is needed to override the inline aspect-ratio that
- * injectMultiImage sets to avoid carousel-init flash. The img +
- * .hb-slide inside reset to aspect: auto so they fill the locked
- * container without imposing their own intrinsic size. */
+ * Desktop is intentionally untouched — there each photo's natural
+ * aspect drives the card height (matched to body via grid stretch),
+ * which Leon prefers for the editorial single-spot view. */
 @media (max-width: 759px) {
   body[data-page="spot-detail"] .slide-spot .sp-photo {
     aspect-ratio: 4 / 5 !important;
   }
-}
-@media (min-width: 760px) and (max-width: 999px) {
-  body[data-page="spot-detail"] .slide-spot .sp-photo {
-    aspect-ratio: 16 / 9 !important;
-  }
-}
-@media (min-width: 1000px) {
-  body[data-page="spot-detail"] .slide-spot .sp-photo {
+  body[data-page="spot-detail"] .slide-spot .sp-photo img,
+  body[data-page="spot-detail"] .slide-spot .sp-photo .hb-slide {
     aspect-ratio: auto !important;
+    width: 100%;
     height: 100%;
+    object-fit: cover;
   }
-}
-body[data-page="spot-detail"] .slide-spot .sp-photo img,
-body[data-page="spot-detail"] .slide-spot .sp-photo .hb-slide {
-  aspect-ratio: auto !important;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 body[data-page="spot-detail"] .specs {
   /* Specs flow right after the body — no auto-margin pushing them
