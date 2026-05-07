@@ -1185,13 +1185,30 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   }
   body[data-page="spot-detail"] .sp-body {
     overflow: hidden;
-    /* Anchor body content to the top of the column instead of
-     * centering. With the card locked at 16:9, long-content spots
-     * (Engstligen's 4 paragraphs) now overflow the locked height
-     * — anchoring at the top keeps the kicker + title + first
-     * paragraphs visible, the bottom (last paragraph + maps) is
-     * what gets clipped. Predictable affordance. */
+    /* Mirror the chapter scroll card's body padding so the two
+     * cards have the exact same visual rhythm: 12.65cqi top +
+     * bottom (= 166/154 px Figma at 1264 wide), 4.67cqi sides
+     * (= 59 px Figma).
+     *
+     * .specs gets margin-top: auto further down so the spec grid
+     * + Open-in-Maps tail anchors to the bottom — the same Figma
+     * "88 px gap between subhead and specs emerges naturally"
+     * trick the chapter card uses. */
+    padding: 12.65cqi 4.67cqi 12.65cqi 4.67cqi;
+    gap: 0;
     justify-content: flex-start;
+  }
+  body[data-page="spot-detail"] .specs {
+    margin-top: auto;
+    padding-top: clamp(20px, 2.5cqi, 40px);
+  }
+  /* The body paragraphs sit between deck and specs; in the chapter
+   * card those don't exist, so the cqi rhythm is built around
+   * kicker → title → subhead → (auto-fill) → specs → maps. On the
+   * detail card we keep the same outer rhythm and let the body
+   * paragraphs flex into the auto-fill region. */
+  body[data-page="spot-detail"] .sp-body > .body {
+    margin-top: clamp(8px, 1cqi, 14px);
   }
 }
 
