@@ -2312,25 +2312,31 @@
     // re-render is idempotent. The original static <img> + .credit-pill are
     // also wiped on first run.
     //
-    // Snapshot the original <img>'s natural aspect ratio BEFORE removing
-    // it so we can lock that aspect on the container. Without this, the
-    // photo column loses its intrinsic-size source when the absolute-
-    // positioned slides take over, and grid-stretch collapses the column
-    // to the body's natural height — visible as a "card resizes weirdly
-    // after load" flash. With the aspect locked, the column stays the
-    // same height before and after the carousel inits.
+    // Aspect-ratio lock for chapter scroll cards (NOT detail pages):
+    // chapter cards have their own card-level aspect (16:9) so the photo
+    // column gets its height from the grid, no lock needed. On detail
+    // pages we DON'T set inline aspect-ratio because the body content
+    // (kicker + title + deck + paragraphs + specs + maps) drives the
+    // grid row height, and a fixed photo aspect would leave empty space
+    // below the photo whenever the body wraps to more lines than the
+    // natural-aspect photo height accommodates. Without the inline
+    // lock, grid-stretch + object-fit: cover keeps the photo filling
+    // its column at any body height.
     photoEl.querySelectorAll('.hb-slide, .hb-dots, .hb-arrow, .hb-counter, .hb-credit').forEach(n => n.remove());
     const oldImg = photoEl.querySelector('img');
     const oldCredit = photoEl.querySelector('.credit-pill');
+    const isDetailPage = document.body.dataset.page === 'spot-detail';
     if (oldImg) {
-      const nw = oldImg.naturalWidth, nh = oldImg.naturalHeight;
-      if (nw > 0 && nh > 0) {
-        photoEl.style.aspectRatio = `${nw} / ${nh}`;
-      } else if (photos[0]?.width && photos[0]?.height) {
-        photoEl.style.aspectRatio = `${photos[0].width} / ${photos[0].height}`;
+      if (!isDetailPage) {
+        const nw = oldImg.naturalWidth, nh = oldImg.naturalHeight;
+        if (nw > 0 && nh > 0) {
+          photoEl.style.aspectRatio = `${nw} / ${nh}`;
+        } else if (photos[0]?.width && photos[0]?.height) {
+          photoEl.style.aspectRatio = `${photos[0].width} / ${photos[0].height}`;
+        }
       }
       oldImg.remove();
-    } else if (photos[0]?.width && photos[0]?.height) {
+    } else if (!isDetailPage && photos[0]?.width && photos[0]?.height) {
       photoEl.style.aspectRatio = `${photos[0].width} / ${photos[0].height}`;
     }
     if (oldCredit) oldCredit.remove();
