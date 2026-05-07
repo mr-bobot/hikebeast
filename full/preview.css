@@ -1183,31 +1183,46 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   body[data-page="spot-detail"] .slide-spot {
     aspect-ratio: auto;
   }
-  body[data-page="spot-detail"] .sp-body { overflow: visible; }
+  /* Card aspect-ratio locked at 2:1 on desktop so EVERY spot
+   * detail card is the same height — combined with the 1:1 photo
+   * lock below, photo + body each take half the card width. Body
+   * has overflow:hidden so spots with long copy clip rather than
+   * stretching the card past the locked aspect. */
+  body[data-page="spot-detail"] .slide-spot {
+    aspect-ratio: 2 / 1;
+  }
+  body[data-page="spot-detail"] .sp-body { overflow: hidden; }
 }
 
-/* Mobile only: photo locked to 4:5 so card heights stay consistent
- * across the catalogue AND the photo doesn't resize after the
- * image decodes. !important is needed to override the inline
- * aspect-ratio that injectMultiImage sets to avoid carousel-init
- * flash. The img + .hb-slide inside reset to aspect: auto so they
- * fill the locked container without imposing their own intrinsic
- * size.
+/* Photo column locked to a fixed aspect on EVERY viewport so cards
+ * AND images are the same dimensions across the catalogue.
  *
- * Desktop is intentionally untouched — there each photo's natural
- * aspect drives the card height (matched to body via grid stretch),
- * which Leon prefers for the editorial single-spot view. */
+ *   - Mobile (< 760px): 4:5 (vertical, matches the chapter-card
+ *     primary photo orientation Leon picked).
+ *   - Desktop (≥ 760px): 1:1 (square). 4:5 made the photo column
+ *     too tall on wide viewports — at 1100px card width the photo
+ *     would be 687 px tall, leaving short-body spots (e.g. Rosenlaui)
+ *     with a big empty white panel on the right. 1:1 + the 2:1
+ *     card aspect (above) gives all cards a consistent shape.
+ *
+ * !important is needed to override the inline aspect-ratio that
+ * injectMultiImage sets to avoid carousel-init flash. The img +
+ * .hb-slide inside reset to aspect: auto so they fill the locked
+ * container without imposing their own intrinsic size. */
+body[data-page="spot-detail"] .slide-spot .sp-photo {
+  aspect-ratio: 1 / 1 !important;
+}
 @media (max-width: 759px) {
   body[data-page="spot-detail"] .slide-spot .sp-photo {
     aspect-ratio: 4 / 5 !important;
   }
-  body[data-page="spot-detail"] .slide-spot .sp-photo img,
-  body[data-page="spot-detail"] .slide-spot .sp-photo .hb-slide {
-    aspect-ratio: auto !important;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+}
+body[data-page="spot-detail"] .slide-spot .sp-photo img,
+body[data-page="spot-detail"] .slide-spot .sp-photo .hb-slide {
+  aspect-ratio: auto !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 body[data-page="spot-detail"] .specs {
   /* Specs flow right after the body — no auto-margin pushing them
