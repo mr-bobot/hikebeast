@@ -936,22 +936,26 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   .app { grid-template-columns: 1fr; }
 }
 
-/* Back pill on spot detail pages — pinned top-left of the app container
-   (was previously inside the topbar; moved out so the topbar shows only
-   the chapter name without competing affordances). z-index sits above
-   the photo card but below any modals. */
+/* Back pill on spot detail pages.
+ *
+ * Desktop: rendered as the first child of .viewer, so it sits in the
+ * normal flow ABOVE the card and is automatically left-aligned with
+ * the card (both share the viewer's left padding). The .viewer is
+ * `display: flex; justify-content: center` on detail pages, so the
+ * back pill + card are vertically centred together as a group.
+ *
+ * Mobile: switches to absolute positioning over the photo (full-bleed
+ * card has no top/left padding to align with). z-index sits above
+ * the photo card but below any modals. */
 .app .pill.hb-back.app-back {
-  position: absolute;
-  top: 16px;
-  left: 16px;
+  align-self: flex-start;
   z-index: 5;
 }
-@media (max-width: 700px) {
-  /* Push the back pill below the iPhone notch / Dynamic Island so it
-   * sits over the photo, not under the device chrome. The photo
-   * itself extends into that area (rule below) — the back button
-   * just needs the safe inset added. */
+@media (max-width: 759px) {
+  /* Photo extends into the iPhone safe-area top (notch / Dynamic
+   * Island); the back pill overlays the photo just below the notch. */
   .app .pill.hb-back.app-back {
+    position: absolute;
     top: calc(12px + env(safe-area-inset-top));
     left: 12px;
   }
@@ -1138,8 +1142,9 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 @media (min-width: 760px) {
   /* Centre the card vertically in the available viewport space. The
    * viewer normally renders a stack of cards top-to-bottom; on the
-   * detail page there's only one, so anchor it to the visual centre
-   * of the screen instead of stuck against the topbar.
+   * detail page there's only one (plus the back pill) — anchor the
+   * group to the visual centre of the screen instead of stuck
+   * against the topbar.
    *
    * The legal footer (Imprint · Privacy · ©) is hidden on detail
    * pages — it's redundant with the rail's own legal link and was
@@ -1150,21 +1155,19 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
     justify-content: center;
     padding-top: 24px;
     padding-bottom: 24px;
+    gap: 12px;
   }
   body[data-page="spot-detail"] > footer.legal { display: none; }
-  /* 16:9 like the chapter scroll cards. The auto-aspect from
-   * yesterday left an awkward empty column whenever photo + text
-   * heights didn't match. */
+  /* The detail card mirrors the chapter scroll card's shape (16:9
+   * minimum) but is allowed to grow taller when the spot's body
+   * paragraphs need more room — the detail page is the place where
+   * the long-form copy lives, so it can't be hidden the way it is
+   * in chapter scroll. The aspect-ratio lock from yesterday was
+   * cropping that copy; replaced with a min-aspect approach. */
   body[data-page="spot-detail"] .slide-spot {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: auto;
   }
-  /* Detail card mirrors the chapter scroll card's content: kicker →
-   * title → deck → specs → "Open in Maps". The multi-paragraph
-   * body block doesn't fit the 16:9 box; hide it on desktop. (On
-   * mobile the card flows full-bleed and body paragraphs render
-   * normally below the photo.) */
-  body[data-page="spot-detail"] .sp-body > .body { display: none; }
-  body[data-page="spot-detail"] .sp-body { overflow: hidden; }
+  body[data-page="spot-detail"] .sp-body { overflow: visible; }
 }
 body[data-page="spot-detail"] .specs {
   /* Specs flow right after the body — no auto-margin pushing them

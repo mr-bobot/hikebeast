@@ -1717,9 +1717,18 @@
     const spotKey = ch && slide.id ? `${ch}#${slide.id}` : null;
     const spot = spotKey ? spots.get(spotKey) : null;
     const hasWild = !!(spot && spot.wildCamping);
+    // Photo credit is taken from the currently-displayed photo (in case
+    // the carousel has advanced) or the spot's primary photo as a
+    // fallback. We pass it through so the kebab can show "Photo by …".
+    const carousel = slide.querySelector('.sp-photo .hb-slide.is-current img');
+    const photoIdx = parseInt(carousel?.dataset?.idx || '0', 10) || 0;
+    const credit = (spot && spot.photos && spot.photos[photoIdx]?.credit)
+      || (spot && spot.photos && spot.photos[0]?.credit)
+      || null;
     openMenuPanel(anchor, {
       spotKey,
       hasWild,
+      credit,
       onSubmit: () => openSubmitModal(slide),
       onWild:   () => hasWild && openWildCampingModal(spot),
     });
@@ -1733,7 +1742,7 @@
   // visitors aren't paying customers and don't get the affordance.
   // visited.signedIn() drives the gate; the kebab silently omits the
   // item when it returns false.
-  function openMenuPanel(anchor, { spotKey, hasWild, onSubmit, onWild }) {
+  function openMenuPanel(anchor, { spotKey, hasWild, credit, onSubmit, onWild }) {
     document.querySelectorAll('.hb-spot-menu').forEach(m => m.remove());
 
     const visitedSignedIn = visited.signedIn();
@@ -1749,6 +1758,13 @@
       const label = isVisited ? 'Visited ✓ · undo' : 'Been there';
       const cls = isVisited ? 'hb-spot-menu-item is-on' : 'hb-spot-menu-item';
       items.push(`<button type="button" class="${cls}" data-action="visited">${SVG_CHECK_CIRCLE}<span>${label}</span></button>`);
+    }
+    if (credit) {
+      // Photo credit is informational — non-clickable item with the
+      // photographer's handle / name. We resolve known handles to
+      // "@handle" via the same renderCredit logic the build script
+      // uses, but the menu item just displays whatever the data has.
+      items.push(`<button type="button" class="hb-spot-menu-item is-info" data-action="credit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="8.5" r="0.6" fill="currentColor"/></svg><span>Photo · ${escapeText(credit)}</span></button>`);
     }
     const menu = document.createElement('div');
     menu.className = 'hb-spot-menu';
@@ -2484,9 +2500,17 @@
   function openCardMenu(card, anchor, info) {
     const spot = info?.spotKey ? spots.get(info.spotKey) : null;
     const hasWild = !!(spot && spot.wildCamping);
+    // Pull the credit off the currently-displayed carousel slide if
+    // any, otherwise fall back to the primary photo's credit.
+    const carouselImg = card.querySelector('.cl-photos .hb-slide.is-current img, .cl-photos > img');
+    const photoIdx = parseInt(carouselImg?.dataset?.idx || '0', 10) || 0;
+    const credit = (spot && spot.photos && spot.photos[photoIdx]?.credit)
+      || (spot && spot.photos && spot.photos[0]?.credit)
+      || null;
     openMenuPanel(anchor, {
       spotKey: info?.spotKey || null,
       hasWild,
+      credit,
       onSubmit: () => openSubmitModal(info),
       onWild:   () => hasWild && openWildCampingModal(spot),
     });

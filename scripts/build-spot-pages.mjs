@@ -132,9 +132,9 @@ function renderSpotPage(spot) {
 </div>
 
 <div class="app">
-  <a class="pill hb-back app-back" data-chapter="${escapeHtml(spot.chapter)}" data-spot="${escapeHtml(spot.id)}" href="../../${escapeHtml(spot.chapter)}/" title="Back to chapter">${ARROW_LEFT_SVG}<span>Back</span></a>
-
   <div class="viewer" id="viewer">
+
+    <a class="pill hb-back app-back" data-chapter="${escapeHtml(spot.chapter)}" data-spot="${escapeHtml(spot.id)}" href="../../${escapeHtml(spot.chapter)}/" title="Back to chapter">${ARROW_LEFT_SVG}<span>Back</span></a>
 
 ${renderSpotCard(spot)}
 
