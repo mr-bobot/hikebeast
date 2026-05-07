@@ -351,6 +351,110 @@ fbq('track', 'PageView');
     word-break: break-all;
   }
 
+  /* === Onboarding · primary CTA between celebration and Download.
+     Collapsed-by-default <details> so the success page still feels like
+     a celebration, not a wall of inputs. The summary IS the primary
+     button; tapping it expands the inline form. */
+  .onboard {
+    width: 100%;
+    margin: 0;
+  }
+  .onboard[hidden] { display: none !important; }
+  .onboard-trigger {
+    /* Inherits .btn-primary for visual parity with Download. */
+    list-style: none;
+    cursor: pointer;
+  }
+  .onboard-trigger::-webkit-details-marker { display: none; }
+  .onboard-trigger::marker { display: none; }
+  .onboard-trigger .onboard-icon {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+  }
+  .onboard[open] .onboard-trigger {
+    border-radius: 14px 14px 0 0;
+  }
+  .onboard-form {
+    background: var(--surface);
+    border-radius: 0 0 14px 14px;
+    padding: 18px 18px 16px;
+    margin: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .onboard-pitch {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+    text-align: left;
+  }
+  .onboard-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .onboard-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .onboard-input {
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--hairline);
+    background: #ffffff;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 16px;       /* 16px stops iOS Safari zoom-on-focus */
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .onboard-input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
+    border-color: transparent;
+  }
+  .onboard-input:disabled {
+    color: var(--muted);
+    background: #f0f0f3;
+    cursor: not-allowed;
+  }
+  .onboard-hint {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .onboard-submit {
+    margin-top: 4px;
+  }
+  .onboard-error {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 59, 48, 0.08);
+    color: #c4302b;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .onboard-existing {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .onboard-existing a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .onboard-existing a:hover { text-decoration: underline; }
+
   /* === Desktop polish ·
      Mobile-first column stays the same, but on wider viewports we add
      top breathing room so the page isn't pinned to the navbar, and
@@ -401,6 +505,50 @@ fbq('track', 'PageView');
     </div>
     <h1 id="headline">You're in.</h1>
     <p class="action-sub" id="subheadline">Your guide is ready right now.</p>
+
+    <!-- Primary onboarding CTA: only revealed once the GET /api/checkout/session
+         response confirms the session is paid. Collapsed-by-default so the
+         buyer sees the celebration, then taps once to set up the account.
+         The form is inline so they never leave this page. -->
+    <details class="onboard" id="onboardCard" hidden>
+      <summary class="btn btn-primary onboard-trigger">
+        <svg class="onboard-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="4" />
+          <path d="M9 9h6v6H9z" />
+        </svg>
+        <span>Open the Swiss Gems App</span>
+      </summary>
+      <form id="onboardForm" class="onboard-form" novalidate>
+        <p class="onboard-pitch">
+          Save spots, track where you've been, and pick up where you left off on any device.
+        </p>
+        <label class="onboard-field">
+          <span class="onboard-label">Email</span>
+          <input id="onboardEmail" class="onboard-input" type="email" disabled aria-readonly="true" autocomplete="email" />
+          <span class="onboard-hint">Change later in account settings.</span>
+        </label>
+        <label class="onboard-field">
+          <span class="onboard-label">Username</span>
+          <input id="onboardUsername" class="onboard-input" type="text"
+                 autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false"
+                 pattern="[a-z0-9._\-]{2,32}" required />
+          <span class="onboard-hint">Lowercase letters, numbers, dots. Change later.</span>
+        </label>
+        <label class="onboard-field">
+          <span class="onboard-label">Password</span>
+          <input id="onboardPassword" class="onboard-input" type="password"
+                 minlength="8" autocomplete="new-password" required />
+          <span class="onboard-hint">At least 8 characters.</span>
+        </label>
+        <button type="submit" class="btn btn-primary onboard-submit">
+          Create account &amp; open app
+        </button>
+        <p class="onboard-error" id="onboardError" hidden></p>
+        <p class="onboard-existing">
+          Already set up? <a href="/login/" id="onboardLogin">Sign in &rarr;</a>
+        </p>
+      </form>
+    </details>
 
     <a id="downloadBtn" class="btn btn-primary" href="#" aria-disabled="true" target="_blank" rel="noopener" download>
       <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -497,6 +645,18 @@ fbq('track', 'PageView');
       return;
     }
 
+    // Onboarding form refs (added 2026-05-07: every paying customer should
+    // end up with a Convex account so favorites/visited/swipes sync across
+    // devices, replacing the manual `scripts/create-user.mjs` step). The
+    // card stays hidden until the GET below confirms paid:true.
+    const onboardCard     = document.getElementById("onboardCard");
+    const onboardForm     = document.getElementById("onboardForm");
+    const onboardEmail    = document.getElementById("onboardEmail");
+    const onboardUsername = document.getElementById("onboardUsername");
+    const onboardPassword = document.getElementById("onboardPassword");
+    const onboardError    = document.getElementById("onboardError");
+    const onboardLogin    = document.getElementById("onboardLogin");
+
     fetch("/api/checkout/session?session_id=" + encodeURIComponent(sessionId))
       .then((r) => r.json())
       .then((data) => {
@@ -509,6 +669,20 @@ fbq('track', 'PageView');
         // Personalise the headline if Stripe captured a first name.
         if (data.first_name) {
           headline.textContent = "You're in, " + data.first_name + ".";
+        }
+
+        // Reveal + pre-fill the onboarding form. Username = <stem><3 digits>
+        // where the stem is firstName-lowercased, falling back to the email
+        // local-part. The server re-rolls the suffix on collision -- this
+        // pre-fill is just to give the buyer something nice to keep or edit.
+        if (data.email) {
+          onboardEmail.value = data.email;
+          var seedSrc = (data.first_name || data.email.split("@")[0] || "").toLowerCase();
+          var stem = seedSrc.replace(/[^a-z]/g, "").slice(0, 12) || "hiker";
+          var rand = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
+          onboardUsername.value = stem + rand;
+          onboardLogin.href = "/login/?email=" + encodeURIComponent(data.email);
+          onboardCard.hidden = false;
         }
 
         // Unlock the download + reveal the Drive folder link. Both
@@ -547,6 +721,69 @@ fbq('track', 'PageView');
         downloadLabel.textContent = "Check your email";
         status.textContent = "Couldn't load your download right now. Open the receipt email instead.";
       });
+
+    // Onboarding form submit. POST { sessionId, password, username } back to
+    // /api/checkout/session. The lambda re-verifies the Stripe session is
+    // paid before talking to Convex, so this can't be tricked by editing
+    // the request body. On success: hb_full_auth cookie is set by the
+    // response, sessionToken goes into localStorage, redirect to /full/.
+    if (onboardForm) {
+      onboardForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        onboardError.hidden = true;
+        var submitBtn = onboardForm.querySelector(".onboard-submit");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Creating account...";
+
+        try {
+          var res = await fetch("/api/checkout/session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              sessionId: sessionId,
+              username:  onboardUsername.value.trim().toLowerCase(),
+              password:  onboardPassword.value,
+            }),
+          });
+          var json = await res.json().catch(function () { return {}; });
+
+          // Returning customer: route to /login with email pre-filled (when
+          // /login picks up the ?email= follow-up TODO; right now it just
+          // shows the username field, but the link still won't break).
+          if (json && json.existing) {
+            window.location.href = json.redirect || ("/login/?email=" + encodeURIComponent(onboardEmail.value));
+            return;
+          }
+
+          if (!res.ok || !json.ok) {
+            throw new Error((json && json.error) || "create_failed");
+          }
+
+          // Same key + format /login/ writes (raw token string, NOT JSON).
+          // social.js reads localStorage[hb:session:v1] as the raw token on
+          // /full/ paint and subscribes to auth:currentUser with it.
+          if (json.sessionToken) {
+            try { localStorage.setItem("hb:session:v1", json.sessionToken); } catch (e) {}
+          }
+
+          // hb_full_auth cookie is already set by the response. Off we go.
+          window.location.href = json.redirect || "/full/";
+        } catch (err) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Create account & open app";
+          onboardError.hidden = false;
+          var msg = (err && err.message) || "";
+          onboardError.textContent =
+            (msg.indexOf("password_too_short") >= 0)
+              ? "Password must be at least 8 characters."
+            : (msg.indexOf("Username") >= 0 || msg.indexOf("username") >= 0)
+              ? "That username didn't work. Try a different one (lowercase letters, numbers, dots)."
+            : (msg.indexOf("session_not_paid") >= 0 || msg.indexOf("session_not_found") >= 0)
+              ? "Your purchase session expired. Open the receipt email and click 'Open the Swiss Gems App' to retry."
+              : "Couldn't create the account. Try again or reply to the receipt email.";
+        }
+      });
+    }
   })();
 </script>
 </body>

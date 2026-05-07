@@ -67,8 +67,13 @@ function downloadLink(token) {
   return `${SITE}/api/checkout/download?t=${encodeURIComponent(token)}`;
 }
 
-function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId }) {
+function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId, sessionId }) {
   const greeting = firstName ? `Hey ${firstName},` : "Hey,";
+  // Onboarding return-link points at the same /map/success page. The page
+  // already calls GET /api/checkout/session?session_id=... server-side to
+  // verify the session is paid before showing the form, so handing out
+  // session_id in an email is safe -- it's already in Stripe's redirect URL.
+  const onboardingUrl = `${SITE}/map/success/?session_id=${encodeURIComponent(sessionId || "")}`;
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -86,6 +91,19 @@ function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId })
         <tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
           <p style="margin:0 0 16px;font-size:16px;">${greeting}</p>
           <p style="margin:0 0 24px;font-size:16px;">You're all set to discover the best spots Switzerland has to offer.</p>
+
+          <!-- Primary CTA (added 2026-05-07): the webapp. Links back to the
+               success page so the buyer can finish onboarding (set username
+               + password) any time. The page re-verifies the Stripe session
+               server-side before showing the form. -->
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
+            <td style="border-radius:999px;background:#1d1d1f;">
+              <a href="${onboardingUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Open the Swiss Gems App</a>
+            </td>
+          </tr></table>
+          <p style="margin:0 0 24px;font-size:14px;color:#6e6e73;line-height:1.5;">
+            Save spots and sync them across your devices.
+          </p>
 
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
             <td style="border-radius:999px;background:#1d1d1f;">
@@ -125,11 +143,15 @@ function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId })
 </html>`;
 }
 
-function purchaseEmailText({ firstName, downloadUrl, amountFormatted, orderId }) {
+function purchaseEmailText({ firstName, downloadUrl, amountFormatted, orderId, sessionId }) {
   const greeting = firstName ? `Hey ${firstName},` : "Hey,";
+  const onboardingUrl = `${SITE}/map/success/?session_id=${encodeURIComponent(sessionId || "")}`;
   return `${greeting}
 
 You're all set to discover the best spots Switzerland has to offer.
+
+Open the Swiss Gems App (save spots, sync across devices):
+${onboardingUrl}
 
 Download the guide:
 ${downloadUrl}
@@ -155,8 +177,11 @@ ${SITE}/terms.html · ${SITE}/imprint.html · ${SITE}/privacy.html
 // is set when the buyer paid from /de/map/. Strings come from the
 // brand-voice draft in _drafts/mail-translations.md · keep them in sync
 // if you tweak this.
-function purchaseEmailDeHtml({ firstName, downloadUrl, amountFormatted, orderId }) {
+function purchaseEmailDeHtml({ firstName, downloadUrl, amountFormatted, orderId, sessionId }) {
   const greeting = firstName ? `Hey ${firstName},` : "Hey,";
+  // DE-buyer onboarding link points at /de/map/success so the page is in
+  // German. Same Stripe session id; the page does the re-verify.
+  const onboardingUrl = `${SITE}/de/map/success/?session_id=${encodeURIComponent(sessionId || "")}`;
   return `<!doctype html>
 <html lang="de">
 <head>
@@ -174,6 +199,18 @@ function purchaseEmailDeHtml({ firstName, downloadUrl, amountFormatted, orderId 
         <tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
           <p style="margin:0 0 16px;font-size:16px;">${greeting}</p>
           <p style="margin:0 0 24px;font-size:16px;">Bist du bereit, die schönsten Spots in der Schweiz zu entdecken?</p>
+
+          <!-- Primärer CTA (added 2026-05-07): die Webapp. Linkt zurück zur
+               Success-Page, damit du das Onboarding (Username + Passwort)
+               jederzeit abschliessen kannst. -->
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
+            <td style="border-radius:999px;background:#1d1d1f;">
+              <a href="${onboardingUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Swiss Gems App öffnen</a>
+            </td>
+          </tr></table>
+          <p style="margin:0 0 24px;font-size:14px;color:#6e6e73;line-height:1.5;">
+            Speichere deine Spots und synce sie geräteübergreifend.
+          </p>
 
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
             <td style="border-radius:999px;background:#1d1d1f;">
@@ -208,11 +245,15 @@ function purchaseEmailDeHtml({ firstName, downloadUrl, amountFormatted, orderId 
 </html>`;
 }
 
-function purchaseEmailDeText({ firstName, downloadUrl, amountFormatted, orderId }) {
+function purchaseEmailDeText({ firstName, downloadUrl, amountFormatted, orderId, sessionId }) {
   const greeting = firstName ? `Hey ${firstName},` : "Hey,";
+  const onboardingUrl = `${SITE}/de/map/success/?session_id=${encodeURIComponent(sessionId || "")}`;
   return `${greeting}
 
 Bist du bereit, die schönsten Spots in der Schweiz zu entdecken?
+
+Swiss Gems App öffnen (Spots speichern, geräteübergreifend syncen):
+${onboardingUrl}
 
 Lade den Guide runter:
 ${downloadUrl}
@@ -361,7 +402,12 @@ async function handleSessionCompleted({ stripe, event }) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const copy = pickEmailCopy(localeHint);
-    const tplArgs = { firstName, downloadUrl, amountFormatted, orderId: full.id };
+    // sessionId is passed alongside orderId so email templates can build the
+    // /map/success?session_id=... return-link. They're the same value today
+    // (orderId === Stripe session.id) but we keep them distinct in case
+    // Stripe ever splits them, and so the contract of each template arg is
+    // explicit about what URL parameter it ends up in.
+    const tplArgs = { firstName, downloadUrl, amountFormatted, orderId: full.id, sessionId: full.id };
     const { error } = await resend.emails.send({
       from: FROM,
       to: email,

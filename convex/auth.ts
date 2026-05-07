@@ -363,6 +363,116 @@ export const adminSetPassword = mutation({
   },
 });
 
+// ── Paid-buyer onboarding ─────────────────────────────────────────────────
+// Called by the Stripe success-page form (api/checkout/session.js) after the
+// session has been verified `payment_status === "paid"`. The lambda is the
+// trust boundary -- this mutation does NOT re-verify Stripe, it just creates
+// the Convex user the lambda asked it to.
+//
+// Idempotent: if a user already exists for `email`, returns
+// `{existing: true, email}` so the success page can route the buyer to
+// /login/ instead of erroring out. Otherwise: creates the user, mints a
+// session, returns the raw token so the lambda can hand it back to the
+// page (which writes localStorage:hb:session:v1 the same way /login/ does).
+//
+// Username collision handling: the page-supplied username is the user's
+// edited choice. If it's taken, we re-roll a 3-digit suffix on a stem
+// derived from the firstName (or email-localpart fallback) up to 10 times.
+// We always return the actually-stored username so the success page can
+// show "Account created as <name>" if needed.
+export const createPaidUser = mutation({
+  args: {
+    email:            v.string(),
+    firstName:        v.optional(v.string()),
+    paymentIntentId:  v.string(),     // stored in users.whopLicenseKey for now
+    username:         v.optional(v.string()),
+    password:         v.string(),
+  },
+  handler: async (ctx, { email, firstName, paymentIntentId, username, password }) => {
+    if (password.length < 8) throw new Error("Password must be at least 8 characters");
+
+    const lower = email.trim().toLowerCase();
+    if (!lower || !lower.includes("@")) throw new Error("Invalid email");
+
+    // ── Already exists? Idempotent return so the page can redirect to /login.
+    const existing = await ctx.db
+      .query("users")
+      .withIndex("by_email", q => q.eq("email", lower))
+      .unique();
+    if (existing) {
+      return { existing: true as const, email: lower, username: existing.username };
+    }
+
+    // ── Pick a username, rolling on collision.
+    const seed = (firstName && firstName.trim())
+      ? firstName.trim().toLowerCase().replace(/[^a-z]/g, "").slice(0, 12)
+      : lower.split("@")[0].toLowerCase().replace(/[^a-z]/g, "").slice(0, 12);
+    const stem = seed || "hiker";
+
+    // V8 isolates: getRandomValues is the supported source.
+    function rollSuffix(): string {
+      const bytes = new Uint8Array(2);
+      crypto.getRandomValues(bytes);
+      const n = ((bytes[0] << 8) | bytes[1]) % 1000;
+      return String(n).padStart(3, "0");
+    }
+    function isAcceptableUsername(s: string): boolean {
+      return USERNAME_RE.test(s);
+    }
+
+    let candidate = (username || "").trim().toLowerCase();
+    if (!candidate || !isAcceptableUsername(candidate)) {
+      candidate = `${stem}${rollSuffix()}`;
+    }
+
+    let collisions = 0;
+    while (true) {
+      const dupe = await ctx.db
+        .query("users")
+        .withIndex("by_username", q => q.eq("username", candidate))
+        .unique();
+      if (!dupe) break;
+      collisions++;
+      if (collisions > 10) throw new Error("Could not pick a free username after 10 tries");
+      candidate = `${stem}${rollSuffix()}`;
+      if (!isAcceptableUsername(candidate)) candidate = `hiker${rollSuffix()}`;
+    }
+
+    // ── Create the user + a fresh session.
+    const phc = await hashPassword(password);
+    const now = Date.now();
+    const handle = (firstName && firstName.trim()) ? firstName.trim().slice(0, 60) : candidate;
+
+    const userId = await ctx.db.insert("users", {
+      username:       candidate,
+      email:          lower,
+      passwordPhc:    phc,
+      handle,
+      whopLicenseKey: paymentIntentId,   // re-purpose: stripe payment_intent_id
+      createdAt:      now,
+      lastSeenAt:     now,
+    });
+
+    const rawToken = newSessionToken();
+    const tokenHash = await sha256Base64(rawToken);
+    await ctx.db.insert("sessions", {
+      userId,
+      tokenHash,
+      createdAt:  now,
+      expiresAt:  now + SESSION_TTL_MS,
+      lastSeenAt: now,
+    });
+
+    const created = await ctx.db.get(userId);
+    return {
+      existing:     false as const,
+      sessionToken: rawToken,
+      username:     candidate,
+      user:         created ? toPublic(created) : null,
+    };
+  },
+});
+
 // Background-style cleanup (admin invokes occasionally; not on a cron yet).
 export const adminPurgeExpiredSessions = mutation({
   args: { adminToken: v.string() },

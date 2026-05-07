@@ -26,7 +26,59 @@
 // pattern as the legacy Whop redirect.
 
 import Stripe from "stripe";
+import crypto from "node:crypto";
 import { issueToken } from "../../lib/access-token.js";
+
+// ── /full/ session cookie helpers ──────────────────────────────────────────
+// Mirrors api/login.js so that paid-buyer onboarding sets the same
+// hb_full_auth cookie middleware.js checks on /full/*. Two helpers:
+//  - tokenFor(PREVIEW_PASS) derives the deterministic HMAC token value.
+//  - setSessionCookie(res, ...) emits the Set-Cookie header.
+// PREVIEW_PASS is shared across staging + prod, so the cookie value is
+// portable between the two Convex deployments (which is intentional --
+// localStorage:hb:session:v1 still scopes identity per Convex deployment
+// because the token is per-deployment).
+const FULL_COOKIE_NAME  = "hb_full_auth";
+const FULL_COOKIE_LABEL = "hb_full_auth_v1";
+const FULL_MAX_AGE_DAYS = 30;
+function tokenForPreview(pass) {
+  return crypto.createHmac("sha256", pass).update(FULL_COOKIE_LABEL).digest("hex");
+}
+function setFullSessionCookie(res, value, maxAgeSeconds) {
+  res.setHeader("Set-Cookie", [
+    `${FULL_COOKIE_NAME}=${value}`,
+    "Path=/",
+    "HttpOnly",
+    "Secure",
+    "SameSite=Lax",
+    `Max-Age=${maxAgeSeconds}`,
+  ].join("; "));
+}
+
+// Talk to Convex via the plain HTTP API instead of pulling in the SDK
+// (matches api/login.js -- same reason: keeps the lambda small and
+// dodges convex/_generated, which isn't built during Vercel's build).
+async function convexMutation(convexUrl, path, args) {
+  const url = `${convexUrl.replace(/\/$/, "")}/api/mutation`;
+  const r = await fetch(url, {
+    method:  "POST",
+    headers: { "Content-Type": "application/json" },
+    body:    JSON.stringify({ path, args, format: "json" }),
+  });
+  const json = await r.json().catch(() => null);
+  if (!r.ok) {
+    const msg = json?.errorMessage || r.statusText;
+    const e = new Error(`convex http ${r.status}: ${msg}`);
+    e.status = r.status;
+    throw e;
+  }
+  if (json?.status === "error") {
+    const e = new Error(json.errorMessage || "convex mutation failed");
+    e.convexError = true;
+    throw e;
+  }
+  return json?.value;
+}
 
 // Customer-view Drive folder. Returned to the success page only when
 // the session is verified paid, so view-source on /map/success without
@@ -133,6 +185,103 @@ async function handleGetSession(req, res, stripe) {
   });
 }
 
+// POST handler #2: paid-buyer onboarding from /map/success.
+//
+// Trust boundary: the buyer hands us a Stripe Checkout Session id and a
+// password. Stripe is the source of truth for "did this person actually
+// pay?", so we re-fetch the session and confirm `payment_status === "paid"`
+// before we let Convex create anything. The Convex mutation itself does
+// no Stripe checks -- it trusts that this lambda already gated the call.
+async function handleOnboardingPost(req, res, stripe, body) {
+  const sessionId = String(body.sessionId || "");
+  const password  = String(body.password || "");
+  const username  = typeof body.username === "string" ? body.username.trim().slice(0, 32) : "";
+
+  if (!sessionId || !sessionId.startsWith("cs_")) {
+    return res.status(400).json({ error: "invalid_session_id" });
+  }
+  if (password.length < 8) {
+    return res.status(400).json({ error: "password_too_short" });
+  }
+
+  let session;
+  try {
+    session = await stripe.checkout.sessions.retrieve(sessionId, {
+      expand: ["payment_intent", "customer_details"],
+    });
+  } catch (err) {
+    console.error("Stripe session retrieve failed (onboarding):", err?.message || err);
+    return res.status(404).json({ error: "session_not_found" });
+  }
+
+  const paid = session.status === "complete" && session.payment_status === "paid";
+  if (!paid) return res.status(400).json({ error: "session_not_paid" });
+
+  const email = session.customer_details?.email || session.customer_email || "";
+  const firstName = session.metadata?.first_name || "";
+  const paymentIntent = typeof session.payment_intent === "string"
+    ? session.payment_intent
+    : session.payment_intent?.id;
+  if (!email || !paymentIntent) {
+    return res.status(500).json({ error: "session_missing_fields" });
+  }
+
+  const convexUrl = process.env.CONVEX_URL;
+  if (!convexUrl) {
+    console.error("CONVEX_URL not configured (onboarding)");
+    return res.status(503).json({ error: "convex_not_configured" });
+  }
+  const previewPass = process.env.PREVIEW_PASS;
+  if (!previewPass) {
+    console.error("PREVIEW_PASS not configured (onboarding)");
+    return res.status(503).json({ error: "auth_not_configured" });
+  }
+
+  let result;
+  try {
+    result = await convexMutation(convexUrl, "auth:createPaidUser", {
+      email,
+      firstName,
+      paymentIntentId: paymentIntent,
+      username: username || undefined,
+      password,
+    });
+  } catch (err) {
+    console.error("createPaidUser failed:", err?.message || err);
+    return res.status(500).json({ error: err?.convexError ? err.message : "create_failed" });
+  }
+
+  // Returning customer (idempotent re-submit). Don't set the auth cookie --
+  // the buyer should sign in with their own password rather than us
+  // silently picking up the existing session.
+  if (result?.existing) {
+    res.setHeader("Cache-Control", "no-store");
+    return res.status(200).json({
+      ok: false,
+      existing: true,
+      email,
+      redirect: `/login/?email=${encodeURIComponent(email)}`,
+    });
+  }
+
+  if (!result?.sessionToken) {
+    console.error("createPaidUser returned no sessionToken:", result);
+    return res.status(500).json({ error: "create_failed" });
+  }
+
+  // Set the same cookie /api/login sets so middleware lets us into /full/.
+  setFullSessionCookie(res, tokenForPreview(previewPass), FULL_MAX_AGE_DAYS * 24 * 60 * 60);
+  res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive, nosnippet");
+  res.setHeader("Cache-Control", "no-store");
+  return res.status(200).json({
+    ok:           true,
+    sessionToken: result.sessionToken,
+    user:         result.user || null,
+    username:     result.username,
+    redirect:     "/full/",
+  });
+}
+
 export default async function handler(req, res) {
   const stripeSecret = process.env.STRIPE_SECRET_KEY;
   if (!stripeSecret) {
@@ -151,6 +300,22 @@ export default async function handler(req, res) {
   }
 
   const body = await readJsonBody(req);
+
+  // ── New POST shape: paid-buyer onboarding ─────────────────────────────
+  // The /map/success page calls this with {sessionId, password, username?}
+  // after the buyer has filled the post-purchase form. We:
+  //   1. Re-verify the Stripe session is paid (server is the trust boundary).
+  //   2. Tell Convex to create the user (idempotent: returns existing=true
+  //      if a user already has this email; the page redirects to /login).
+  //   3. Set hb_full_auth cookie so middleware.js lets the redirect into /full.
+  //   4. Return the Convex sessionToken so the page can write it to
+  //      localStorage:hb:session:v1 -- same key social.js reads on /full/.
+  // Discriminated by the presence of `sessionId` AND `password` in the body
+  // so the existing checkout-create POST (first_name/locale/t/s/...) is
+  // unaffected.
+  if (typeof body?.sessionId === "string" && typeof body?.password === "string") {
+    return handleOnboardingPost(req, res, stripe, body);
+  }
 
   // Currency: ALWAYS derived from the buyer's IP country. We deliberately
   // ignore any `currency` field in the request body so a buyer can't pick
