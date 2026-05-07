@@ -370,9 +370,19 @@ fbq('track', 'PageView');
     width: 18px; height: 18px;
     flex-shrink: 0;
   }
+  /* Form expanded: Trigger wird vom "Primär-CTA" zum "Card Header"
+     herabgestuft, damit er nicht mit dem "Konto erstellen"-Submit
+     konkurriert (der einzige Primär-Button im offenen Zustand). */
   .onboard[open] .onboard-trigger {
+    background: var(--surface);
+    color: var(--fg);
+    height: 44px;
+    font-size: 14px;
+    font-weight: 600;
     border-radius: 14px 14px 0 0;
   }
+  .onboard[open] .onboard-trigger:active { transform: none; }
+  .onboard[open] .onboard-icon { opacity: 0.5; }
   .onboard-form {
     background: var(--surface);
     border-radius: 0 0 14px 14px;
@@ -548,7 +558,7 @@ fbq('track', 'PageView');
       </form>
     </details>
 
-    <a id="downloadBtn" class="btn btn-primary" href="#" aria-disabled="true" target="_blank" rel="noopener" download>
+    <a id="downloadBtn" class="btn btn-secondary" href="#" aria-disabled="true" target="_blank" rel="noopener" download>
       <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M12 3v12" />
         <path d="m7 10 5 5 5-5" />
