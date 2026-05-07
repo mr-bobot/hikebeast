@@ -1843,19 +1843,19 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   margin: 0;
   font-weight: 600;
 }
-/* Deck (lede paragraph) — visually distinct from the body so the
- * editorial summary doesn't blur into the prose. SF Pro Display +
- * italic + slightly darker than the muted body text reads as a
- * "this is the gist" paragraph, in the magazine sense. */
+/* Deck (lede paragraph) — matches the chapter scroll card's
+ * .cl-subhead styling per Leon: SF Pro Text, normal weight, muted
+ * grey (#6e6e73), no italic. The detail page is the long-form view,
+ * so the deck reads as "subhead of the card" rather than as an
+ * italicised pull-quote. */
 .sp-deck {
   margin: 0;
-  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-  font-style: italic;
+  font-style: normal;
   font-size: 17px;
   font-weight: 400;
   line-height: 1.4;
-  letter-spacing: -0.01em;
-  color: #3a3a3c;
+  letter-spacing: -0.005em;
+  color: var(--muted);
 }
 .sp-body p { margin: 0; font-size: 16px; line-height: 1.6; color: #1c1c1e; }
 .sp-body .body { display: flex; flex-direction: column; gap: 14px; }
@@ -1897,13 +1897,13 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 .sp-foot .locked a { color: var(--accent); text-decoration: none; font-weight: 500; }
 @media (min-width: 760px) {
   .sp-title { font-size: 32px; }
-  .sp-deck { font-size: 18px; }
+  .sp-deck { font-size: 20px; }
   .sp-body p { font-size: 16px; }
   .spec .val { font-size: 15px; }
 }
 @media (min-width: 1100px) {
   .sp-title { font-size: 38px; letter-spacing: -0.03em; }
-  .sp-deck { font-size: 19px; }
+  .sp-deck { font-size: 22px; }
   .sp-body p { font-size: 17px; }
   .spec .val { font-size: 15px; }
 }
