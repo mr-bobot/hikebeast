@@ -1112,19 +1112,14 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   .viewer { padding: 44px 40px 128px; gap: 32px; }
 }
 
-/* ─── Spot detail page: full-bleed ON MOBILE ONLY ───────────────────────
- * The detail page (/full/spot/<id>/) flattens the card chrome on
- * phones (Instagram-style — photo edge-to-edge, no border, no
- * rounded corners) so the photo dominates and the content reads as
- * one continuous panel. On desktop the card chrome is preserved.
+/* ─── Spot detail page ──────────────────────────────────────────────────
+ * Mobile: card chrome flattened (Instagram-style — photo edge-to-edge,
+ * no border, no rounded corners).
  *
- * Desktop also drops the forced 16:10/2:1 aspect ratio that other
- * .slide-spot cards use — on a SINGLE-spot page the card should hug
- * its content height instead of leaving a big empty bottom-right
- * corner when the body text is short. The auto-margin on .specs is
- * neutralised here for the same reason: with no fixed card height,
- * pushing specs to the bottom would leave an awkward gap between
- * them and the body.
+ * Desktop: card chrome preserved AND the card is pinned to the same
+ * 16:9 aspect ratio as chapter scroll cards, vertically centered in
+ * the viewport. The viewer takes the full available height and
+ * justify-content centres the single card in that space.
  *
  * Activated by body[data-page="spot-detail"] which build-spot-pages.mjs
  * stamps onto the detail HTML. */
@@ -1140,15 +1135,27 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
     box-shadow: none;
   }
 }
-body[data-page="spot-detail"] .slide-spot {
-  /* No forced aspect ratio — the card auto-sizes to whatever the
-   * taller of (photo, text panel) is, which keeps both sides full
-   * without a stretched-empty column. */
-  aspect-ratio: auto;
+@media (min-width: 760px) {
+  /* Centre the card vertically in the available viewport space. The
+   * viewer normally renders a stack of cards top-to-bottom; on the
+   * detail page there's only one, so anchor it to the visual centre
+   * of the screen instead of stuck against the topbar. */
+  body[data-page="spot-detail"] .viewer {
+    min-height: calc(100dvh - var(--topbar-h));
+    justify-content: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  /* 16:9 like the chapter scroll cards. The auto-aspect from
+   * yesterday left an awkward empty column whenever photo + text
+   * heights didn't match. */
+  body[data-page="spot-detail"] .slide-spot {
+    aspect-ratio: 16 / 9;
+  }
 }
 body[data-page="spot-detail"] .specs {
-  /* Keep specs flowing right after the body instead of anchoring to
-   * the bottom of an artificially-tall card. */
+  /* Specs flow right after the body — no auto-margin pushing them
+   * to the bottom of the (now correctly sized) card. */
   margin-top: 0;
 }
 /* The detail-page topbar exists only for the burger + account FAB — it
@@ -1372,21 +1379,23 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 /* Reader card — image on the left, body on the right (desktop).
  * Stacks vertically on mobile.
  *
- * Desktop layout follows Leon's Figma reference (16:9 = 1.7777):
- *   - Card has a 16:9 *minimum* shape via min-height on .cl-photos
- *     (56.25cqi = 9/16 of card width). When body content + padding
- *     fits within that height, the card renders at exactly 16:9.
- *     When body content needs more (subheads that wrap to 3+ lines
- *     at narrow viewports, very long titles), the row grows and
- *     the photo stretches with it. Avoids the alternative of
- *     locking aspect-ratio and clipping the bottom of the card.
- *   - Columns 612fr 652fr (image slightly narrower than text side)
- *   - Body padding ratios: top 166/1264, bottom 154/1264, left 59/1264
- *   - Kicker→top 166, subhead→specs 88, Maps→bottom 154 (per Figma)
+ * Desktop layout follows Leon's Figma reference (16:9 = 1.7777),
+ * STRICTLY enforced. Earlier the card was free to grow taller than
+ * 16:9 when the title wrapped to 2 lines or the deck to 3 — visual
+ * rhythm broke down across the chapter scroll because each card had
+ * its own height. Now the card is locked at 16:9 and the body uses
+ * overflow:hidden so long content shrinks padding gaps rather than
+ * inflating the card.
  *
- * Container-query units (cqi = 1% of card inline-size) keep all spacing
- * and typography proportional to the actual card width at any viewport.
- * clamp() floors prevent collapse on narrower screens. */
+ *   - Aspect ratio: 16/9 hard
+ *   - Columns 612fr 652fr (image slightly narrower than text side)
+ *   - Body padding ratios use cqi (proportional to card width)
+ *   - Padding values shrunk vs Figma to give long-content cards
+ *     more breathing room before they bump into the bottom edge
+ *
+ * Container-query units (cqi = 1% of card inline-size) keep all
+ * spacing and typography proportional to the actual card width at
+ * any viewport. clamp() floors prevent collapse on narrower screens. */
 .cl-card {
   display: grid;
   grid-template-columns: 1fr;
@@ -1405,19 +1414,14 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   .cl-card {
     grid-template-columns: 612fr 652fr;
     container-type: inline-size;
+    aspect-ratio: 16 / 9;
   }
 }
 
 /* Photo column. Mobile: 1:1 (stacked). Desktop: no aspect-ratio on
- * the photo (it would inflate the photo's width past its grid track
- * when row stretches — verified bug). Instead we set a min-height of
- * 56.25cqi (= 9/16 of card width), which is exactly the height the
- * card needs to be a 16:9 rectangle. The grid row picks the larger
- * of (a) photo's min-height = card 16:9 height, (b) body's content
- * height. When body fits, card renders at 16:9. When body content
- * is taller (e.g. wrapped subhead at narrow widths), the row grows
- * past 16:9 and the photo stretches with it via grid's default
- * align-self: stretch. Image inside fills via object-fit: cover. */
+ * the photo column itself — the parent .cl-card's aspect-ratio
+ * drives total card height and the grid stretches both columns to
+ * match. align-self: stretch is the default. */
 .cl-photos {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -1427,7 +1431,8 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 @media (min-width: 760px) {
   .cl-photos {
     aspect-ratio: auto;
-    min-height: 56.25cqi;
+    min-height: 0;
+    height: 100%;
   }
 }
 .cl-photos > img {
@@ -1443,17 +1448,27 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   display: flex;
   flex-direction: column;
   gap: 10px;
+  /* overflow: hidden so long titles/decks don't push past the
+   * card's 16:9 lock — content stays inside the card box. */
+  overflow: hidden;
+  min-height: 0;
 }
 @media (min-width: 760px) {
   .cl-body {
-    /* Padding: top 13.13cqi (166/1264), bottom 12.18cqi (154/1264),
-     * left 4.67cqi (59/1264). Right padding mirrors the left so long
-     * titles don't run up against the card edge — Figma had right=0
-     * but visually the body looked unbalanced when generous top/bottom
-     * padding sat next to text touching the right border. */
-    padding: 13.13cqi 4.67cqi 12.18cqi 4.67cqi;
-    justify-content: flex-start;
-    gap: 0;
+    /* Padding ratios scale with card width via cqi. Vertical values
+     * are the *upper bound* — `min(...)` caps them in pixels so
+     * long-content cards (2-line title + 3-line deck) don't blow
+     * past the 16:9 box. Left/right keep the Figma 4.67cqi rhythm. */
+    padding-top:    min(13.13cqi, 56px);
+    padding-right:  4.67cqi;
+    padding-bottom: min(12.18cqi, 48px);
+    padding-left:   4.67cqi;
+    /* Distribute children with even space — kicker+title at the top,
+     * deck flexes to fill, "Open in Maps" anchored at the bottom.
+     * Eliminates the absolute "166/154 px gap" and lets the card
+     * adapt when a title wraps. */
+    justify-content: space-between;
+    gap: clamp(8px, 1.5cqi, 22px);
   }
 }
 .cl-kicker {
