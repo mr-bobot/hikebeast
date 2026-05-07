@@ -1112,25 +1112,44 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   .viewer { padding: 44px 40px 128px; gap: 32px; }
 }
 
-/* ─── Spot detail page: full-bleed ──────────────────────────────────────
- * The detail page (/full/spot/<id>/) renders a single spot. Card chrome
- * (border, rounded corners, shadow, side padding) makes sense for a
- * stack of spots in a chapter list, but on a one-spot page it just
- * floats a small panel inside a big empty viewport. Span the spot
- * across the full content width with no card frame. The chrome rules
- * still apply on chapter pages (.slide-cover, .slide-region, etc.).
+/* ─── Spot detail page: full-bleed ON MOBILE ONLY ───────────────────────
+ * The detail page (/full/spot/<id>/) flattens the card chrome on
+ * phones (Instagram-style — photo edge-to-edge, no border, no
+ * rounded corners) so the photo dominates and the content reads as
+ * one continuous panel. On desktop the card chrome is preserved.
+ *
+ * Desktop also drops the forced 16:10/2:1 aspect ratio that other
+ * .slide-spot cards use — on a SINGLE-spot page the card should hug
+ * its content height instead of leaving a big empty bottom-right
+ * corner when the body text is short. The auto-margin on .specs is
+ * neutralised here for the same reason: with no fixed card height,
+ * pushing specs to the bottom would leave an awkward gap between
+ * them and the body.
  *
  * Activated by body[data-page="spot-detail"] which build-spot-pages.mjs
  * stamps onto the detail HTML. */
-body[data-page="spot-detail"] .viewer {
-  padding: 0 0 64px;
-  max-width: none;
-  gap: 0;
+@media (max-width: 759px) {
+  body[data-page="spot-detail"] .viewer {
+    padding: 0 0 64px;
+    max-width: none;
+    gap: 0;
+  }
+  body[data-page="spot-detail"] .slide-spot {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 body[data-page="spot-detail"] .slide-spot {
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
+  /* No forced aspect ratio — the card auto-sizes to whatever the
+   * taller of (photo, text panel) is, which keeps both sides full
+   * without a stretched-empty column. */
+  aspect-ratio: auto;
+}
+body[data-page="spot-detail"] .specs {
+  /* Keep specs flowing right after the body instead of anchoring to
+   * the bottom of an artificially-tall card. */
+  margin-top: 0;
 }
 /* The detail-page topbar exists only for the burger + account FAB — it
  * has no brand label or crumb. Drop the bottom border and let it blend
