@@ -1139,19 +1139,32 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   /* Centre the card vertically in the available viewport space. The
    * viewer normally renders a stack of cards top-to-bottom; on the
    * detail page there's only one, so anchor it to the visual centre
-   * of the screen instead of stuck against the topbar. */
+   * of the screen instead of stuck against the topbar.
+   *
+   * The legal footer (Imprint · Privacy · ©) is hidden on detail
+   * pages — it's redundant with the rail's own legal link and was
+   * pushing total page height past 100dvh, creating a phantom
+   * scroll on screens where the card itself easily fit. */
   body[data-page="spot-detail"] .viewer {
     min-height: calc(100dvh - var(--topbar-h));
     justify-content: center;
     padding-top: 24px;
     padding-bottom: 24px;
   }
+  body[data-page="spot-detail"] > footer.legal { display: none; }
   /* 16:9 like the chapter scroll cards. The auto-aspect from
    * yesterday left an awkward empty column whenever photo + text
    * heights didn't match. */
   body[data-page="spot-detail"] .slide-spot {
     aspect-ratio: 16 / 9;
   }
+  /* Detail card mirrors the chapter scroll card's content: kicker →
+   * title → deck → specs → "Open in Maps". The multi-paragraph
+   * body block doesn't fit the 16:9 box; hide it on desktop. (On
+   * mobile the card flows full-bleed and body paragraphs render
+   * normally below the photo.) */
+  body[data-page="spot-detail"] .sp-body > .body { display: none; }
+  body[data-page="spot-detail"] .sp-body { overflow: hidden; }
 }
 body[data-page="spot-detail"] .specs {
   /* Specs flow right after the body — no auto-margin pushing them
@@ -1410,7 +1423,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
-@media (min-width: 760px) {
+@media (min-width: 1000px) {
   .cl-card {
     grid-template-columns: 612fr 652fr;
     container-type: inline-size;
@@ -1418,17 +1431,17 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   }
 }
 
-/* Photo column. Mobile: 1:1 (stacked). Desktop: no aspect-ratio on
- * the photo column itself — the parent .cl-card's aspect-ratio
- * drives total card height and the grid stretches both columns to
- * match. align-self: stretch is the default. */
+/* Photo column. Below 1000px: stacked (1:1 photo on top, body
+ * below). At 1000px+ the card switches to 16:9 with photo on the
+ * left. Was 760px before — at narrower widths the cqi-scaled
+ * padding ate the body too aggressively. */
 .cl-photos {
   position: relative;
   aspect-ratio: 1 / 1;
   background: var(--surface);
   overflow: hidden;
 }
-@media (min-width: 760px) {
+@media (min-width: 1000px) {
   .cl-photos {
     aspect-ratio: auto;
     min-height: 0;
@@ -1453,7 +1466,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   overflow: hidden;
   min-height: 0;
 }
-@media (min-width: 760px) {
+@media (min-width: 1000px) {
   .cl-body {
     /* Figma reference (1264 × 711 card):
      *   left/right padding = 59 → 4.67cqi
@@ -1483,7 +1496,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
-@media (min-width: 760px) {
+@media (min-width: 1000px) {
   /* 12.64 / 1264 = 1.0cqi */
   .cl-kicker { font-size: clamp(11px, 1cqi, 14px); }
 }
@@ -1496,11 +1509,12 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   line-height: 1.02;
   color: var(--fg);
 }
-@media (min-width: 760px) {
-  /* 60 / 1264 = 4.747cqi. Small gap below kicker (~24px @ 1264 wide). */
+@media (min-width: 1000px) {
+  /* Title floor lowered (40→30) so it shrinks gracefully on 1000-1200px
+   * laptop screens without forcing a wrap. Ceiling stays at 64. */
   .cl-title {
-    font-size: clamp(40px, 4.75cqi, 64px);
-    margin: clamp(12px, 1.9cqi, 28px) 0 0;
+    font-size: clamp(30px, 4.75cqi, 64px);
+    margin: clamp(8px, 1.9cqi, 28px) 0 0;
   }
 }
 .cl-subhead {
@@ -1511,11 +1525,12 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   letter-spacing: -0.005em;
   max-width: 38ch;
 }
-@media (min-width: 760px) {
-  /* 20 / 1264 = 1.582cqi. Small gap below title (~16px @ 1264). */
+@media (min-width: 1000px) {
+  /* Subhead floor lowered (15→13) so a 3-line deck fits without
+   * overflowing the 16:9 card on narrower laptops. */
   .cl-subhead {
-    font-size: clamp(15px, 1.58cqi, 22px);
-    margin-top: clamp(10px, 1.27cqi, 18px);
+    font-size: clamp(13px, 1.58cqi, 22px);
+    margin-top: clamp(6px, 1.27cqi, 18px);
   }
 }
 .cl-specs {
@@ -1524,7 +1539,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   gap: 14px 24px;
   margin-top: 28px;
 }
-@media (min-width: 760px) {
+@media (min-width: 1000px) {
   /* No fixed margin: the parent's `margin-top: auto` rule pushes
    * specs to the bottom of the flex column, and the gap between
    * subhead and specs becomes whatever remains. Lands at ~88 in
@@ -1541,18 +1556,18 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   text-transform: uppercase;
   color: var(--soft);
 }
-@media (min-width: 760px) {
+@media (min-width: 1000px) {
   /* 13.69 / 1264 = 1.083cqi */
-  .cl-lbl { font-size: clamp(11px, 1.08cqi, 15px); }
+  .cl-lbl { font-size: clamp(10px, 1.08cqi, 15px); }
 }
 .cl-val {
   font-size: 15px;
   color: var(--fg);
   letter-spacing: -0.005em;
 }
-@media (min-width: 760px) {
+@media (min-width: 1000px) {
   /* 15.27 / 1264 = 1.208cqi */
-  .cl-val { font-size: clamp(13px, 1.21cqi, 17px); }
+  .cl-val { font-size: clamp(12px, 1.21cqi, 17px); }
 }
 .cl-maps {
   display: inline-flex;
@@ -1565,12 +1580,12 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   font-size: 14px;
   letter-spacing: -0.005em;
 }
-@media (min-width: 760px) {
+@media (min-width: 1000px) {
   /* 12.65 / 1264 = 1.0cqi. Gap from specs is the natural flow remainder
    * before the bottom padding (154/1264) takes over. */
   .cl-maps {
     font-size: clamp(11px, 1cqi, 14px);
-    margin-top: clamp(20px, 2.5cqi, 48px);
+    margin-top: clamp(14px, 2.5cqi, 48px);
   }
 }
 .cl-maps:hover { text-decoration: underline; }
