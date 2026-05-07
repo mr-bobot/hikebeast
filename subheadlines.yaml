@@ -47,16 +47,16 @@ central:
     effort: Easy
     best_light: Morning
     maps_url: https://www.google.com/maps/place/Rosenlaui,+3860+Schattenhalb/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f854e2f14adf3:0x75e02d334586fdf8!8m2!3d46.6795746!4d8.1548593!16s%2Fg%2F1tmqq876
-  - id: rosenlaui_secret_waterfall
-    title: Rosenlaui Secret Waterfall
+  - id: rosenlauifall
+    title: Rosenlauifall
     kicker: WATERFALLS
-    subheadline: The one most visitors never find. Hidden behind the hotel, almost empty most mornings.
+    subheadline: A waterfall hidden behind Hotel Rosenlaui, fed by the Rychenbach. Almost empty most mornings.
     subheadline_status: needs
     region: Rosenlaui, Central Switzerland
-    access: Walk behind the hotel
+    access: Walk through hotel grounds
     effort: Easy
     best_light: Any time
-    maps_url: https://www.google.com/maps/place/Rosenlaui,+3860+Schattenhalb/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f854e2f14adf3:0x75e02d334586fdf8!8m2!3d46.6795746!4d8.1548593!16s%2Fg%2F1tmqq876
+    maps_url: https://www.google.com/maps/place/Rosenlauifall/@46.6800759,8.1509677,19z/data=!4m6!3m5!1s0x478f850073872f1b:0xbe35c42d5d9ba951!8m2!3d46.6800759!4d8.1509677!16s%2Fg%2F11w1k78rm3
   - id: triftbrucke
     title: Triftbrücke
     kicker: SUSPENSION BRIDGES
@@ -267,16 +267,16 @@ central:
     effort: Easy
     best_light: Anytime
     maps_url: https://www.google.com/maps/place/3807+Iseltwald/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd541724c75b:0xdafefc9fa4a5f96a!8m2!3d46.7115858!4d7.9642999!16zL20vMDMwaDZz
-  - id: lake_thun_road
-    title: Lake Thun Road
+  - id: viewpoint_beatenberg
+    title: Viewpoint Beatenberg
     kicker: ROADS
-    subheadline: A short stretch of lakeside road where the cliffs come down to the water. Wait for the right car to drive by.
+    subheadline: A viewpoint above Beatenberg looking down on the road that threads the cliffs of Lake Thun. Wait for a boat or the right car to come through.
     subheadline_status: needs
-    region: Lake Thun, Central Switzerland
-    access: Drive
+    region: Beatenberg, Central Switzerland
+    access: Drive to viewpoint
     effort: Easy
-    best_light: When rainy or cloudy
-    maps_url: https://www.google.com/maps/place/Thunersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fae3554ddf6eb:0xc692ca79d2500aea!8m2!3d46.6958354!4d7.7212158!16zL20vMDJoX2t3
+    best_light: Calm, clear, or rainy
+    maps_url: https://www.google.com/maps/place/Aussichtspunkt+Beatenberg/@46.6856162,7.7879934,16z/data=!4m6!3m5!1s0x478fa531263af7f1:0x367113202ab7c1b!8m2!3d46.6856162!4d7.7879934!16s%2Fg%2F11f62f_5v5
   - id: oeschinensee
     title: Oeschinensee
     kicker: LAKES
@@ -287,10 +287,10 @@ central:
     effort: Easy
     best_light: Anytime, clear sky for the colour
     maps_url: https://www.google.com/maps/place/Oeschinensee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f08a670704edd:0x30815e0b3a5ce4ee!8m2!3d46.4989089!4d7.7291063!16s%2Fm%2F02q4rtm
-  - id: schilthorn
-    title: Schilthorn
+  - id: piz_gloria
+    title: Piz Gloria
     kicker: SUMMITS
-    subheadline: Piz Gloria. Cable car straight to a 360 degree view of the Bernese Alps. The Eiger, Mönch and Jungfrau line up across the valley.
+    subheadline: The Schilthorn summit station, cable car straight to a 360 degree view of the Bernese Alps. The Eiger, Mönch and Jungfrau line up across the valley.
     subheadline_status: needs
     region: Mürren, Central Switzerland
     access: Cable car from Stechelberg via Mürren
@@ -358,13 +358,13 @@ valais:
     effort: Moderate
     best_light: Clear afternoon
     maps_url: https://www.google.com/maps/place/Gornergletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f4aedf5eed477:0xdc91cbcef20adfe!8m2!3d45.9668437!4d7.7969322!16zL20vMGRsNWNz
-  - id: the_ghost_town
-    title: The Ghost Town
-    kicker: ABANDONED HOUSES, SURREAL LIGHT
-    subheadline: A cluster of empty wooden huts above Zermatt that looks lifted out of a film set. Especially eerie in winter.
+  - id: zermatt_huts
+    title: Zermatt huts
+    kicker: OLD WOOD, SURREAL LIGHT
+    subheadline: A little hamlet of old wooden houses above Zermatt. A ghost town only in winter.
     subheadline_status: needs
     region: Zermatt, Valais
-    access: 15 min walk up
+    access: Hike up from Zermatt
     effort: Easy
     best_light: Cloudy late afternoon
     maps_url: https://www.google.com/maps/place/46%C2%B000'23.3%22N+7%C2%B043'55.4%22E/@46.006481,7.732045,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.006481!4d7.732045
@@ -408,16 +408,6 @@ valais:
     effort: Moderate
     best_light: Sunset
     maps_url: https://www.google.com/maps/place/Moirygletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f2fd3a4fa494f:0x28c87f4a36745a58!8m2!3d46.0745303!4d7.5983645!16s%2Fm%2F04n6dtz
-  - id: moiry_from_above
-    title: Moiry from Above
-    kicker: FROM THE AIR
-    subheadline: A drone perspective turns the moraine into abstract geometry. Blue ice, grey rubble, and the hut as a tiny orange dot.
-    subheadline_status: needs
-    region: Val d'Anniviers
-    access: Same as Moiry hut
-    effort: Moderate to hard
-    best_light: Mid-morning
-    maps_url: https://www.google.com/maps/place/Moirygletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f2fd3a4fa494f:0x28c87f4a36745a58!8m2!3d46.0745303!4d7.5983645!16s%2Fm%2F04n6dtz
   - id: the_ice_cave
     title: The Ice Cave
     kicker: DEEP WINTER ONLY, AND ONLY IF IT'S COLD
@@ -427,16 +417,6 @@ valais:
     access: Winter hike, cold-dependent
     effort: Hard / technical
     best_light: Midday in deep winter
-    maps_url: null
-  - id: the_ice_cave_by_night
-    title: The Ice Cave by Night
-    kicker: THE SAME PLACE, 12 HOURS LATER
-    subheadline: Headlamp, tripod, and 30 seconds of patience. The tunnel becomes something else entirely.
-    subheadline_status: needs
-    region: Zinal
-    access: Same as day version
-    effort: Hard / technical
-    best_light: Post-blue hour
     maps_url: null
   - id: ferpecle_glacier
     title: Ferpècle Glacier
@@ -467,7 +447,7 @@ valais:
     access: Cable car
     effort: Easy
     best_light: Morning or late afternoon
-    maps_url: https://www.google.com/maps/place/3920+Zermatt/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f35a2292ee5cd:0x400ff8840196f70!8m2!3d46.0207133!4d7.749117!16zL20vMDI1Z3Rj
+    maps_url: https://www.google.com/maps/place/Spielboden,+3906+Saas-Fee/@46.1034607,7.9264445,17z/data=!3m1!4b1!4m6!3m5!1s0x478f4599f1a2d2cb:0xf03fe149d6ccbcea!8m2!3d46.1034607!4d7.9264445!16s%2Fg%2F1tfnxhfr
   - id: goms_bridge
     title: Goms Bridge
     kicker: BRIDGES
@@ -498,16 +478,6 @@ valais:
     effort: Hard - full day
     best_light: Clear weather
     maps_url: https://www.google.com/maps/place/Barrhorn/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f3911ab831787:0xf4027acd7df4c95f!8m2!3d46.1497222!4d7.7369444!16s%2Fm%2F0421pgz
-  - id: stafelwald_wildlife
-    title: Stafelwald Wildlife
-    kicker: WILDLIFE
-    subheadline: Marmots and ground squirrels right next to Saas Fee village - separate from Spielboden.
-    subheadline_status: needs
-    region: Saas Fee, Valais
-    access: Walk from village
-    effort: Easy
-    best_light: Early morning
-    maps_url: null
   - id: saas_fee_glacier
     title: Saas Fee Glacier
     kicker: 13,000 YEARS OF ICE, RETREATING FAST
@@ -518,16 +488,16 @@ valais:
     effort: Easy
     best_light: Clear morning
     maps_url: https://www.google.com/maps/place/Feegletscher/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f48b22fff0bbd:0x8122bd2e0fc14d22!8m2!3d46.0796!4d7.8788!16s%2Fm%2F04n00rz
-  - id: the_flooded_forest
-    title: The Flooded Forest
+  - id: lac_de_derborence
+    title: Derborence Lake
     kicker: DROWNED TREES, STILL STANDING
-    subheadline: A rockslide in 1714 dammed a valley and left the forest underwater. The tree skeletons are still there, frozen mid-sentence.
+    subheadline: Two rockslides (1714 and 1749) dammed a valley and left the forest underwater. The tree skeletons are still there, frozen mid-sentence.
     subheadline_status: needs
-    region: Derborence
+    region: Derborence, Valais
     access: Drive + short walk
     effort: Easy
     best_light: Overcast
-    maps_url: null
+    maps_url: https://www.google.com/maps/place/Lac+de+Derborence/@46.2791132,7.2124191,1263m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478ec20dffda7db3:0x7a9df6822f6e8527!8m2!3d46.2793244!4d7.2172313!16s%2Fm%2F0283s7l
   - id: la_fouly
     title: La Fouly
     kicker: A VILLAGE AT THE MOUTH OF A GLACIER
@@ -659,16 +629,16 @@ fribourg:
     effort: Easy
     best_light: Sunset into blue hour
     maps_url: https://www.google.com/maps/place/Ritzli+Alp/@45.1662212,2.7371613,7z/data=!3m1!5s0x478e5f297051167b:0xcf8dc4fee4431c02!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5f297044c507:0xc94cdffdd5313e7a!8m2!3d46.6295236!4d7.2828498!16s%2Fg%2F1td2yck1
-  - id: latine_canyon
-    title: Latine Canyon
+  - id: la_tine_canyon
+    title: La Tine Canyon
     kicker: GO WITH A GUIDE THE FIRST TIME
-    subheadline: A narrow slot canyon near Château-d'Œx. Beautiful water, real risk. This one needs a local before you come back solo.
+    subheadline: A narrow slot canyon near Montbovon, marketed out of Château-d'Œx. Beautiful water, real risk. This one needs a local before you come back solo.
     subheadline_status: needs
-    region: Pays-d'Enhaut
+    region: Pays-d'Enhaut, Fribourg
     access: Drive + canyon access
     effort: Technical. Use a guide
     best_light: Anytime in shade
-    maps_url: null
+    maps_url: https://www.google.com/maps/place/1669+Montbovon/@46.4880077,7.0028709,10080m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478e8e4fff86dfeb:0x7f1aab823b11e665!8m2!3d46.4879565!4d7.0439846!16s%2Fg%2F120lw7t5
   - id: dent_de_broc
     title: Dent de Broc
     kicker: A DISTANT PEAK, A LONG LENS
@@ -688,16 +658,6 @@ fribourg:
     access: Drive to lake
     effort: Easy
     best_light: Sunrise or sunset
-    maps_url: https://www.google.com/maps/place/Schwarzsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5ea475c88195:0xbbdcb38663da2f0a!8m2!3d46.6659091!4d7.2807275!16s%2Fm%2F02831lc
-  - id: winter_schwarzsee
-    title: Winter Schwarzsee
-    kicker: ICE HOCKEY, MOUNTAINS, GO
-    subheadline: Same lake, different season. When the ice is thick enough, you can skate. And play hockey under the peaks.
-    subheadline_status: needs
-    region: Sense district
-    access: Drive to lake
-    effort: Easy
-    best_light: Deep winter
     maps_url: https://www.google.com/maps/place/Schwarzsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5ea475c88195:0xbbdcb38663da2f0a!8m2!3d46.6659091!4d7.2807275!16s%2Fm%2F02831lc
   - id: dent_de_lys
     title: Dent de Lys
@@ -750,16 +710,16 @@ western:
     effort: Moderate
     best_light: Sunset
     maps_url: https://www.google.com/maps/place/Dent+de+Jaman/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e900ef472dc75:0xa9ea15a1ea677bef!8m2!3d46.445!4d6.9748!16s%2Fm%2F04q2b_b
-  - id: the_jungle_waterfall
-    title: The Jungle Waterfall
+  - id: gorges_du_chauderon
+    title: Gorges du Chauderon
     kicker: WATERFALL HIDDEN IN THE MONTREUX CANYON
-    subheadline: Gorges du Chauderon has a waterfall you can't see from the footpath. You'll need a drone. And patience for the weather.
+    subheadline: A waterfall hidden in the canyon, invisible from the footpath. You'll need a drone. And patience for the weather.
     subheadline_status: needs
-    region: Montreux
+    region: Montreux, Vaud
     access: Canyon trail + drone
     effort: Easy
     best_light: Cloudy spring days
-    maps_url: null
+    maps_url: https://www.google.com/maps/place/Gorges+du+Chauderon/@46.4367906,6.9229226,485m/data=!3m1!1e3!4m6!3m5!1s0x478e9bd02ed88279:0x5a702a06efcffa74!8m2!3d46.4368563!4d6.9250077!16s%2Fg%2F11f652tll2
   - id: pisse_chevre
     title: Pisse-Chèvre
     kicker: A REMOTE VALAIS WATERFALL
@@ -770,16 +730,16 @@ western:
     effort: Easy
     best_light: Cloudy with high water
     maps_url: https://www.google.com/maps/place/Pissechevre/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478eb91116b7f2b1:0xaf936736e1645bd7!8m2!3d46.198!4d7.02769!16s%2Fg%2F1tdw2cpw
-  - id: morcles_road
-    title: Morcles Road
-    kicker: LEADING LINES ABOVE MARTIGNY
+  - id: route_de_morcles
+    title: Route de Morcles
+    kicker: LEADING LINES ABOVE THE RHÔNE
     subheadline: Shot along the same road as Pisse-Chèvre, heading toward the village of Morcles. A quiet mountain road with cinema corners.
     subheadline_status: needs
-    region: Martigny area
+    region: Lavey-Morcles, Vaud
     access: Drive. Roadside
     effort: None
     best_light: Cloudy
-    maps_url: null
+    maps_url: https://www.google.com/maps/place/46%C2%B011'55.8%22N+7%C2%B001'52.3%22E/@46.1985069,7.0222498,2175m/data=!3m1!1e3!4m4!3m3!8m2!3d46.19882!4d7.031182
   - id: creux_du_van
     title: Creux du Van
     kicker: HUGE CLIFFS IN THE JURA
@@ -789,16 +749,6 @@ western:
     access: Drive to Le Soliat + walk
     effort: Easy
     best_light: Sunrise or cloudy
-    maps_url: https://www.google.com/maps/place/Creux+du+Van/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478de7f8240bcb23:0xc04d997cfd4ad4a8!8m2!3d46.9309929!4d6.7234511!16s%2Fm%2F08097wh
-  - id: creux_du_van_ibex
-    title: Creux du Van Ibex
-    kicker: WILD IBEX, UP CLOSE
-    subheadline: The same cliffs are home to a resident herd of ibex. If you come at the right time, you can photograph them at eye level.
-    subheadline_status: needs
-    region: Jura, Neuchâtel
-    access: Same as Creux du Van
-    effort: Easy
-    best_light: Early morning
     maps_url: https://www.google.com/maps/place/Creux+du+Van/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478de7f8240bcb23:0xc04d997cfd4ad4a8!8m2!3d46.9309929!4d6.7234511!16s%2Fm%2F08097wh
   - id: tine_de_conflens
     title: Tine de Conflens
@@ -839,16 +789,6 @@ western:
     access: Train from Lausanne
     effort: Easy
     best_light: Summer afternoon
-    maps_url: null
-  - id: vevey_docks
-    title: Vevey Docks
-    kicker: SCUBA DIVING UNDER THE QUAY
-    subheadline: Certified divers only. Under the Quai Perdonnet, it looks like a shipwreck. With pike prowling through the pillars.
-    subheadline_status: needs
-    region: Riviera vaudoise
-    access: Scuba from Vevey Plage
-    effort: Advanced diving
-    best_light: Clear water season
     maps_url: null
   - id: marchairuz
     title: Marchairuz
@@ -893,13 +833,13 @@ western:
   - id: le_doubs
     title: Le Doubs
     kicker: RIVERS
-    subheadline: A cliff-top view of the Doubs river canyon above La Chaux-de-Fonds.
+    subheadline: A cliff-top view of the Doubs river canyon, above the village of Les Brenets.
     subheadline_status: needs
-    region: La Chaux-de-Fonds, Western Switzerland
+    region: Les Brenets, Western Switzerland
     access: Drive + short walk
     effort: Easy
     best_light: Overcast or sunset
-    maps_url: null
+    maps_url: https://www.google.com/maps/place/47%C2%B005'31.0%22N+6%C2%B045'04.4%22E/@47.091939,6.7486421,17z/data=!3m1!4b1!4m4!3m3!8m2!3d47.091939!4d6.751217
   - id: western_extras
     title: One more from the West
     kicker: WORTH A PIN, NOT YET A PAGE
@@ -1001,16 +941,16 @@ eastern:
     effort: Easy
     best_light: Cloudy days in late spring
     maps_url: https://www.google.com/maps/place/B%C3%A4rglist%C3%BCber/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47853ad3d5047c43:0x18fbfa769f1bfd4d!8m2!3d46.9084999!4d8.9753!16s%2Fg%2F1tl1m9pp
-  - id: the_swiss_dolomites
-    title: The Swiss Dolomites
+  - id: urnerboden
+    title: Urnerboden
     kicker: LIMESTONE THAT LOOKS ITALIAN
-    subheadline: A stretch of peaks around Klausenpass that honestly reminds me of Italy. Worth a stop even without a plan.
+    subheadline: A stretch of peaks above Urnerboden on the Klausenpass road. Jagged, bone-grey limestone that honestly reminds me of Italy.
     subheadline_status: needs
-    region: Uri
+    region: Urnerboden, Uri
     access: Pass road + short hike
     effort: Easy
     best_light: Sunrise or moody
-    maps_url: null
+    maps_url: https://www.google.com/maps/place/46%C2%B054'19.3%22N+8%C2%B056'25.2%22E/@46.9025334,8.9240369,1539m/data=!3m1!1e3!4m4!3m3!8m2!3d46.9053611!4d8.9403333
   - id: ice_lake_griesslisee
     title: Ice Lake (Griesslisee)
     kicker: FLOATING ICE IN SUMMER
@@ -1041,10 +981,10 @@ eastern:
     effort: Easy
     best_light: Early morning
     maps_url: https://www.google.com/maps/place/Caumasee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784dc8a4cda502d:0xc173a8c95685f33d!8m2!3d46.8199879!4d9.2959134!16s%2Fm%2F02r8d7d
-  - id: swiss_grand_canyon
-    title: Swiss Grand Canyon
+  - id: ruinaulta
+    title: Ruinaulta
     kicker: A DEEP CANYON IN THE EAST
-    subheadline: The Ruinaulta. A white limestone canyon carved by the Rhine. From the viewpoint, it really does look like the States.
+    subheadline: The Swiss Grand Canyon. A white limestone gorge carved by the Rhine. From the viewpoint, it really does look like the States.
     subheadline_status: needs
     region: Graubünden
     access: Walk from Caumasee
@@ -1071,16 +1011,16 @@ eastern:
     effort: None
     best_light: Sunset
     maps_url: https://www.google.com/maps/place/Kl%C3%B6ntalersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785322defece941:0xbd18b8fa9cca9c41!8m2!3d47.0224341!4d8.9596699!16s%2Fm%2F027jp8q
-  - id: stoss_kirche
-    title: Stoss Kirche
+  - id: stoos_kapelle
+    title: Stoos Kapelle
     kicker: CHAPELS
-    subheadline: A small wooden chapel on a green knoll with craggy Appenzell peaks behind. The shot composes itself.
+    subheadline: A small wooden chapel on a green knoll above the car-free Stoos village, with the Mythen rising behind.
     subheadline_status: needs
-    region: Appenzell, Eastern Switzerland
-    access: Drive to Stoss, 5 min walk
+    region: Stoos, Schwyz
+    access: Funicular to Stoos + 5 min walk
     effort: Easy
     best_light: Afternoon clouds
-    maps_url: https://www.google.com/maps/place/6433+Stoos/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47854f75c3a3a779:0xe3a15d4f8070c905!8m2!3d46.9797573!4d8.6669493!16s%2Fm%2F065_c3n
+    maps_url: https://www.google.com/maps/place/Stooskapelle+Maria+Hilf/@46.9803409,8.662024,17z/data=!3m1!4b1!4m6!3m5!1s0x47854f9e17f89bef:0x6fb895f734c38639!8m2!3d46.9803409!4d8.6645989!16s%2Fg%2F11fyzf091j
   - id: pizol
     title: Pizol
     kicker: ALPINE LAKES
@@ -1143,13 +1083,13 @@ eastern:
     maps_url: https://www.google.com/maps/place/Bovalh%C3%BCtte+SAC/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47837c0bdb0dfeeb:0x9d47282c7d42a291!8m2!3d46.4150043!4d9.9251889!16s%2Fm%2F0cc80rp
   - id: spitzmeilenhutte
     title: Spitzmeilenhütte
-    kicker: null
-    subheadline: TODO
+    kicker: RIDGE NIGHT AT 2087 M
+    subheadline: An SAC hut above Flumserberg with the Spitzmeilen pyramid right above and the Walensee far below.
     subheadline_status: needs
-    region: Flumserberg
-    access: null
-    effort: null
-    best_light: Anytime
+    region: Flumserberg, St. Gallen
+    access: Cable car + 1.5-2h hike
+    effort: Moderate
+    best_light: Sunset and sunrise
     maps_url: https://www.google.com/maps/place/Spitzmeilenh%C3%BCtte+SAC/@45.1662212,2.7371613,7z/data=!4m9!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m4!1s0x479b2c9fa9ee66d1:0xff30cf6672e1aa61!8m2!3d47.034213!4d9.2505843
   - id: eastern_extras
     title: Four more from the East
@@ -1222,16 +1162,6 @@ ticino:
     effort: Moderate
     best_light: May to June
     maps_url: https://www.google.com/maps/place/Foroglio+Wasserfall/@46.3126581,2.6026627,7z/data=!4m9!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m4!1s0x4785999344465ff1:0x1557b60aa4c642b!8m2!3d46.371303!4d8.5453161
-  - id: valle_verzasca_kayak
-    title: Valle Verzasca Kayak
-    kicker: IF YOU HAVE THE LEVEL. OR A FRIEND WHO DOES
-    subheadline: The Verzasca is famous for whitewater kayaking. Not something you just try. But if you have the skill, or a friend who does, the shots are unreal.
-    subheadline_status: needs
-    region: Valle Verzasca, Ticino
-    access: Along the valley road
-    effort: Expert (paddler)
-    best_light: Anytime from above
-    maps_url: null
 beyond:
   - id: mer_de_glace
     title: Mer de Glace
@@ -1243,16 +1173,6 @@ beyond:
     effort: Moderate
     best_light: Anytime (sunset / sunrise best)
     maps_url: https://www.google.com/maps/place/Mer+de+Glace/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894eab1fba5965:0x41ece26799b55955!8m2!3d45.9203829!4d6.9279647!16zL20vMDFyd2tj
-  - id: mer_de_glace_winter
-    title: Mer de Glace. Winter
-    kicker: THE SAME GLACIER, UNDER SNOW
-    subheadline: Same spot, deep winter. Snowshoes on, footprints few, the whole scene turned silent and white.
-    subheadline_status: needs
-    region: Chamonix, France
-    access: Train + snowshoe hike
-    effort: Moderate. Winter gear
-    best_light: Morning after fresh snow
-    maps_url: https://www.google.com/maps/place/Mer+de+Glace/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894eab1fba5965:0x41ece26799b55955!8m2!3d45.9203829!4d6.9279647!16zL20vMDFyd2tj
   - id: les_drus
     title: Les Drus
     kicker: TWIN SPIRES OVER THE GLACIER
@@ -1263,26 +1183,6 @@ beyond:
     effort: Moderate
     best_light: Sunset, sunrise, or moody
     maps_url: https://www.google.com/maps/place/Aiguille+du+Dru/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894bc255dfbe21:0xc70ae60e6164cffe!8m2!3d45.932945!4d6.9558754!16s%2Fm%2F02855l2
-  - id: les_drus_winter
-    title: Les Drus. Winter
-    kicker: THE SPIRES IN WINTER
-    subheadline: Same twin spires, dressed in ice and snow. The contrast against dark granite is what makes the winter shot sing.
-    subheadline_status: needs
-    region: Chamonix, France
-    access: Train + snowshoe
-    effort: Moderate
-    best_light: Clear winter light
-    maps_url: https://www.google.com/maps/place/Aiguille+du+Dru/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894bc255dfbe21:0xc70ae60e6164cffe!8m2!3d45.932945!4d6.9558754!16s%2Fm%2F02855l2
-  - id: french_sharp_peaks
-    title: French Sharp Peaks
-    kicker: THE SAME RIDGE, NEW ANGLE
-    subheadline: Another frame of Les Drus from the Mer de Glace viewpoint. Same mountain, different compression, different mood.
-    subheadline_status: needs
-    region: Chamonix, France
-    access: From Mer de Glace viewpoint
-    effort: Moderate
-    best_light: Sunset (also sunrise)
-    maps_url: null
   - id: aiguille_du_grepon
     title: Aiguille du Grépon
     kicker: A POINTED NEEDLE IN THE RANGE
@@ -1303,16 +1203,6 @@ beyond:
     effort: Moderate
     best_light: Sunset
     maps_url: https://www.google.com/maps/place/Lacs+des+Ch%C3%A9serys/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894cdf11eee317:0x3205ec87a48b021e!8m2!3d45.984858!4d6.90184!16s%2Fg%2F11fy_109py
-  - id: mighty_range
-    title: Mighty Range
-    kicker: HIKE AROUND THE LAKES TO FIND YOUR FRAME
-    subheadline: Same lakes area, different time of day. Daylight walks around Les Chéserys are how you find the compositions for the golden-hour shots.
-    subheadline_status: needs
-    region: Chamonix, France
-    access: Same as Les Chéserys
-    effort: Easy. Scouting
-    best_light: Sunset or sunrise
-    maps_url: null
   - id: camping_in_cheserys
     title: Camping in Chéserys
     kicker: BIVY UP HIGH, ABOVE THE CROWDS
@@ -1323,16 +1213,6 @@ beyond:
     effort: Moderate
     best_light: Overnight (sunset + sunrise)
     maps_url: https://www.google.com/maps/place/Lacs+des+Ch%C3%A9serys/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894cdf11eee317:0x3205ec87a48b021e!8m2!3d45.984858!4d6.90184!16s%2Fg%2F11fy_109py
-  - id: aiguille_rouge_reserve
-    title: Aiguille Rouge Reserve
-    kicker: PROTECTED TERRAIN, WILDLIFE EVERYWHERE
-    subheadline: The Chéserys area sits inside a protected nature reserve. Ibex, chamois, marmot. Real chances if you stay quiet and patient.
-    subheadline_status: needs
-    region: Chamonix, France
-    access: Same as Les Chéserys
-    effort: Easy
-    best_light: Early morning
-    maps_url: https://www.google.com/maps/place/Aiguilles+Rouges+National+Nature+Reserve/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894ccad064d1bd:0x3bfbb3704f53fd8b!8m2!3d45.9843879!4d6.9283192!16s%2Fm%2F0czbfz4
   - id: mont_blanc
     title: Mont Blanc
     kicker: WESTERN EUROPE'S HIGHEST. WITH A TELE
