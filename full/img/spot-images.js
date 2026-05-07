@@ -51,13 +51,13 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "central#rosenlaui_secret_waterfall": [
+  "central#rosenlauifall": [
     {
-      "src": "derivatives/rosenlaui_secret_waterfall_p0/w1800.webp",
+      "src": "derivatives/rosenlauifall_p0/w1800.webp",
       "credit": "@leon.helg"
     },
     {
-      "src": "derivatives/rosenlaui_secret_waterfall_p1/w1800.webp",
+      "src": "derivatives/rosenlauifall_p1/w1800.webp",
       "credit": "zimydakid"
     }
   ],

@@ -47,16 +47,16 @@ central:
     effort: Easy
     best_light: Morning
     maps_url: https://www.google.com/maps/place/Rosenlaui,+3860+Schattenhalb/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f854e2f14adf3:0x75e02d334586fdf8!8m2!3d46.6795746!4d8.1548593!16s%2Fg%2F1tmqq876
-  - id: rosenlaui_secret_waterfall
-    title: Rosenlaui Secret Waterfall
+  - id: rosenlauifall
+    title: Rosenlauifall
     kicker: WATERFALLS
-    subheadline: The one most visitors never find. Hidden behind the hotel, almost empty most mornings.
+    subheadline: A waterfall hidden behind Hotel Rosenlaui, fed by the Rychenbach. Almost empty most mornings.
     subheadline_status: needs
     region: Rosenlaui, Central Switzerland
-    access: Walk behind the hotel
+    access: Walk through hotel grounds
     effort: Easy
     best_light: Any time
-    maps_url: https://www.google.com/maps/place/Rosenlaui,+3860+Schattenhalb/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f854e2f14adf3:0x75e02d334586fdf8!8m2!3d46.6795746!4d8.1548593!16s%2Fg%2F1tmqq876
+    maps_url: https://www.google.com/maps/place/Rosenlauifall/@46.6800759,8.1509677,19z/data=!4m6!3m5!1s0x478f850073872f1b:0xbe35c42d5d9ba951!8m2!3d46.6800759!4d8.1509677!16s%2Fg%2F11w1k78rm3
   - id: triftbrucke
     title: Triftbrücke
     kicker: SUSPENSION BRIDGES
@@ -361,10 +361,10 @@ valais:
   - id: zermatt_huts
     title: Zermatt huts
     kicker: OLD WOOD, SURREAL LIGHT
-    subheadline: A cluster of dark wooden huts above Zermatt that looks lifted out of a film set. Especially good in winter.
+    subheadline: A little hamlet of old wooden houses above Zermatt. A ghost town only in winter.
     subheadline_status: needs
     region: Zermatt, Valais
-    access: 30-40 min walk up
+    access: Hike up from Zermatt
     effort: Easy
     best_light: Cloudy late afternoon
     maps_url: https://www.google.com/maps/place/46%C2%B000'23.3%22N+7%C2%B043'55.4%22E/@46.006481,7.732045,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.006481!4d7.732045
@@ -447,7 +447,7 @@ valais:
     access: Cable car
     effort: Easy
     best_light: Morning or late afternoon
-    maps_url: https://www.google.com/maps/place/3920+Zermatt/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f35a2292ee5cd:0x400ff8840196f70!8m2!3d46.0207133!4d7.749117!16zL20vMDI1Z3Rj
+    maps_url: https://www.google.com/maps/place/Spielboden,+3906+Saas-Fee/@46.1034607,7.9264445,17z/data=!3m1!4b1!4m6!3m5!1s0x478f4599f1a2d2cb:0xf03fe149d6ccbcea!8m2!3d46.1034607!4d7.9264445!16s%2Fg%2F1tfnxhfr
   - id: goms_bridge
     title: Goms Bridge
     kicker: BRIDGES
@@ -833,13 +833,13 @@ western:
   - id: le_doubs
     title: Le Doubs
     kicker: RIVERS
-    subheadline: A cliff-top view of the Doubs river canyon above La Chaux-de-Fonds.
+    subheadline: A cliff-top view of the Doubs river canyon, above the village of Les Brenets.
     subheadline_status: needs
-    region: La Chaux-de-Fonds, Western Switzerland
+    region: Les Brenets, Western Switzerland
     access: Drive + short walk
     effort: Easy
     best_light: Overcast or sunset
-    maps_url: null
+    maps_url: https://www.google.com/maps/place/47%C2%B005'31.0%22N+6%C2%B045'04.4%22E/@47.091939,6.7486421,17z/data=!3m1!4b1!4m4!3m3!8m2!3d47.091939!4d6.751217
   - id: western_extras
     title: One more from the West
     kicker: WORTH A PIN, NOT YET A PAGE
@@ -1011,16 +1011,16 @@ eastern:
     effort: None
     best_light: Sunset
     maps_url: https://www.google.com/maps/place/Kl%C3%B6ntalersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785322defece941:0xbd18b8fa9cca9c41!8m2!3d47.0224341!4d8.9596699!16s%2Fm%2F027jp8q
-  - id: stoss_kirche
-    title: Stoss Kirche
+  - id: stoos_kapelle
+    title: Stoos Kapelle
     kicker: CHAPELS
-    subheadline: A small wooden chapel on a green knoll with craggy Appenzell peaks behind. The shot composes itself.
+    subheadline: A small wooden chapel on a green knoll above the car-free Stoos village, with the Mythen rising behind.
     subheadline_status: needs
-    region: Appenzell, Eastern Switzerland
-    access: Drive to Stoss, 5 min walk
+    region: Stoos, Schwyz
+    access: Funicular to Stoos + 5 min walk
     effort: Easy
     best_light: Afternoon clouds
-    maps_url: https://www.google.com/maps/place/6433+Stoos/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47854f75c3a3a779:0xe3a15d4f8070c905!8m2!3d46.9797573!4d8.6669493!16s%2Fm%2F065_c3n
+    maps_url: https://www.google.com/maps/place/Stooskapelle+Maria+Hilf/@46.9803409,8.662024,17z/data=!3m1!4b1!4m6!3m5!1s0x47854f9e17f89bef:0x6fb895f734c38639!8m2!3d46.9803409!4d8.6645989!16s%2Fg%2F11fyzf091j
   - id: pizol
     title: Pizol
     kicker: ALPINE LAKES
@@ -1083,13 +1083,13 @@ eastern:
     maps_url: https://www.google.com/maps/place/Bovalh%C3%BCtte+SAC/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47837c0bdb0dfeeb:0x9d47282c7d42a291!8m2!3d46.4150043!4d9.9251889!16s%2Fm%2F0cc80rp
   - id: spitzmeilenhutte
     title: Spitzmeilenhütte
-    kicker: null
-    subheadline: TODO
+    kicker: RIDGE NIGHT AT 2087 M
+    subheadline: An SAC hut above Flumserberg with the Spitzmeilen pyramid right above and the Walensee far below.
     subheadline_status: needs
-    region: Flumserberg
-    access: null
-    effort: null
-    best_light: Anytime
+    region: Flumserberg, St. Gallen
+    access: Cable car + 1.5-2h hike
+    effort: Moderate
+    best_light: Sunset and sunrise
     maps_url: https://www.google.com/maps/place/Spitzmeilenh%C3%BCtte+SAC/@45.1662212,2.7371613,7z/data=!4m9!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m4!1s0x479b2c9fa9ee66d1:0xff30cf6672e1aa61!8m2!3d47.034213!4d9.2505843
   - id: eastern_extras
     title: Four more from the East
