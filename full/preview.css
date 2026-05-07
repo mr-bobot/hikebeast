@@ -1183,38 +1183,71 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   body[data-page="spot-detail"] .slide-spot {
     aspect-ratio: auto;
   }
-  /* Card aspect-ratio locked at 2:1 on desktop so EVERY spot
-   * detail card is the same height — combined with the 1:1 photo
-   * lock below, photo + body each take half the card width. Body
-   * has overflow:hidden so spots with long copy clip rather than
-   * stretching the card past the locked aspect. */
-  body[data-page="spot-detail"] .slide-spot {
-    aspect-ratio: 2 / 1;
+  body[data-page="spot-detail"] .sp-body {
+    overflow: hidden;
+    /* Anchor body content to the top of the column instead of
+     * centering. With the card locked at 16:9, long-content spots
+     * (Engstligen's 4 paragraphs) now overflow the locked height
+     * — anchoring at the top keeps the kicker + title + first
+     * paragraphs visible, the bottom (last paragraph + maps) is
+     * what gets clipped. Predictable affordance. */
+    justify-content: flex-start;
   }
-  body[data-page="spot-detail"] .sp-body { overflow: hidden; }
 }
 
-/* Photo column locked to a fixed aspect on EVERY viewport so cards
- * AND images are the same dimensions across the catalogue.
+/* Detail card mirrors the chapter scroll card's geometry exactly
+ * so the two views share a visual rhythm:
  *
- *   - Mobile (< 760px): 4:5 (vertical, matches the chapter-card
- *     primary photo orientation Leon picked).
- *   - Desktop (≥ 760px): 1:1 (square). 4:5 made the photo column
- *     too tall on wide viewports — at 1100px card width the photo
- *     would be 687 px tall, leaving short-body spots (e.g. Rosenlaui)
- *     with a big empty white panel on the right. 1:1 + the 2:1
- *     card aspect (above) gives all cards a consistent shape.
+ *   - 760-999px: stacked (1 column) — photo on top, body below.
+ *     Matches .cl-card's behaviour at this range; 2-col cards eat
+ *     too much horizontal real estate when the rail's also visible.
+ *
+ *   - ≥ 1000px: 2-col grid 612fr 652fr (Figma reference 1264 × 711),
+ *     card aspect 16:9, container-type: inline-size so the body
+ *     padding can scale with cqi like the chapter card does. The
+ *     photo column inherits its aspect from the grid — 612/(612+652)
+ *     of card width by full card height = 0.86 ratio (matches Figma
+ *     612:711). Body column = 0.91. */
+@media (min-width: 760px) and (max-width: 999px) {
+  body[data-page="spot-detail"] .slide-spot {
+    grid-template-columns: minmax(0, 1fr);
+    aspect-ratio: auto;
+  }
+}
+@media (min-width: 1000px) {
+  body[data-page="spot-detail"] .slide-spot {
+    grid-template-columns: 612fr 652fr;
+    aspect-ratio: 16 / 9;
+    container-type: inline-size;
+  }
+}
+
+/* Photo column.
+ *   - Mobile (< 760px): 4:5 (vertical) — Leon's pick for the
+ *     full-bleed mobile detail view.
+ *   - Stacked tablet (760-999): 16:9 photo on top, body below.
+ *   - Desktop (≥ 1000px): no aspect-ratio — the parent card's 16:9
+ *     drives the row height, photo column stretches to match
+ *     (= 0.86 ratio per Figma).
  *
  * !important is needed to override the inline aspect-ratio that
  * injectMultiImage sets to avoid carousel-init flash. The img +
  * .hb-slide inside reset to aspect: auto so they fill the locked
  * container without imposing their own intrinsic size. */
-body[data-page="spot-detail"] .slide-spot .sp-photo {
-  aspect-ratio: 1 / 1 !important;
-}
 @media (max-width: 759px) {
   body[data-page="spot-detail"] .slide-spot .sp-photo {
     aspect-ratio: 4 / 5 !important;
+  }
+}
+@media (min-width: 760px) and (max-width: 999px) {
+  body[data-page="spot-detail"] .slide-spot .sp-photo {
+    aspect-ratio: 16 / 9 !important;
+  }
+}
+@media (min-width: 1000px) {
+  body[data-page="spot-detail"] .slide-spot .sp-photo {
+    aspect-ratio: auto !important;
+    height: 100%;
   }
 }
 body[data-page="spot-detail"] .slide-spot .sp-photo img,
