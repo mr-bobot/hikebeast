@@ -317,13 +317,13 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "central#lake_thun_road": [
+  "central#viewpoint_beatenberg": [
     {
-      "src": "derivatives/lake_thun_road_p0/w1800.webp",
+      "src": "derivatives/viewpoint_beatenberg_p0/w1800.webp",
       "credit": "Jairph"
     },
     {
-      "src": "derivatives/lake_thun_road_p1/w1800.webp",
+      "src": "derivatives/viewpoint_beatenberg_p1/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -337,21 +337,21 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "central#schilthorn": [
+  "central#piz_gloria": [
     {
-      "src": "derivatives/schilthorn_p0/w1800.webp",
+      "src": "derivatives/piz_gloria_p0/w1800.webp",
       "credit": "Anthony Gomez"
     },
     {
-      "src": "derivatives/schilthorn_p1/w1800.webp",
+      "src": "derivatives/piz_gloria_p1/w1800.webp",
       "credit": "Dimitri Karastelev"
     },
     {
-      "src": "derivatives/schilthorn_p2/w1800.webp",
+      "src": "derivatives/piz_gloria_p2/w1800.webp",
       "credit": "zimydakid"
     },
     {
-      "src": "derivatives/schilthorn_p3/w1800.webp",
+      "src": "derivatives/piz_gloria_p3/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -425,13 +425,13 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "valais#the_ghost_town": [
+  "valais#zermatt_huts": [
     {
-      "src": "derivatives/the_ghost_town_p0/w1800.webp",
+      "src": "derivatives/zermatt_huts_p0/w1800.webp",
       "credit": null
     },
     {
-      "src": "derivatives/the_ghost_town_p1/w1800.webp",
+      "src": "derivatives/zermatt_huts_p1/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -541,16 +541,6 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "valais#the_ice_cave_by_night": [
-    {
-      "src": "derivatives/the_ice_cave_by_night_p0/w1800.webp",
-      "credit": "@oliwear.j"
-    },
-    {
-      "src": "derivatives/the_ice_cave_by_night_p1/w1800.webp",
-      "credit": "zimydakid"
-    }
-  ],
   "valais#ferpecle_glacier": [
     {
       "src": "derivatives/ferpecle_glacier_p0/w1800.webp",
@@ -612,6 +602,16 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/saas_fee_glacier_p1/w1800.webp",
+      "credit": "zimydakid"
+    }
+  ],
+  "valais#lac_de_derborence": [
+    {
+      "src": "derivatives/lac_de_derborence_p0/w1800.webp",
+      "credit": null
+    },
+    {
+      "src": "derivatives/lac_de_derborence_p1/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -809,16 +809,6 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "fribourg#winter_schwarzsee": [
-    {
-      "src": "derivatives/winter_schwarzsee_p0/w1800.webp",
-      "credit": "@spornitho"
-    },
-    {
-      "src": "derivatives/winter_schwarzsee_p1/w1800.webp",
-      "credit": "zimydakid"
-    }
-  ],
   "fribourg#dent_de_lys": [
     {
       "src": "derivatives/dent_de_lys_p0/w1800.webp",
@@ -913,17 +903,17 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "western#the_jungle_waterfall": [
+  "western#gorges_du_chauderon": [
     {
-      "src": "derivatives/the_jungle_waterfall_p0/w1800.webp",
+      "src": "derivatives/gorges_du_chauderon_p0/w1800.webp",
       "credit": null
     },
     {
-      "src": "derivatives/the_jungle_waterfall_p1/w1800.webp",
+      "src": "derivatives/gorges_du_chauderon_p1/w1800.webp",
       "credit": "zimydakid"
     },
     {
-      "src": "derivatives/the_jungle_waterfall_p2/w1800.webp",
+      "src": "derivatives/gorges_du_chauderon_p2/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -937,13 +927,13 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "western#morcles_road": [
+  "western#route_de_morcles": [
     {
-      "src": "derivatives/morcles_road_p0/w1800.webp",
+      "src": "derivatives/route_de_morcles_p0/w1800.webp",
       "credit": null
     },
     {
-      "src": "derivatives/morcles_road_p1/w1800.webp",
+      "src": "derivatives/route_de_morcles_p1/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -966,24 +956,6 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/creux_du_van_p4/w1800.webp",
-      "credit": "zimydakid"
-    }
-  ],
-  "western#creux_du_van_ibex": [
-    {
-      "src": "derivatives/creux_du_van_ibex_p0/w1800.webp",
-      "credit": "@jura3lacs"
-    },
-    {
-      "src": "derivatives/creux_du_van_ibex_p1/w1800.webp",
-      "credit": "@jura3lacs"
-    },
-    {
-      "src": "derivatives/creux_du_van_ibex_p2/w1800.webp",
-      "credit": "@claude_gurzeler"
-    },
-    {
-      "src": "derivatives/creux_du_van_ibex_p3/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -1040,16 +1012,6 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/st_prex_p2/w1800.webp",
-      "credit": "zimydakid"
-    }
-  ],
-  "western#vevey_docks": [
-    {
-      "src": "derivatives/vevey_docks_p0/w1800.webp",
-      "credit": null
-    },
-    {
-      "src": "derivatives/vevey_docks_p1/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -1249,17 +1211,17 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "eastern#the_swiss_dolomites": [
+  "eastern#urnerboden": [
     {
-      "src": "derivatives/the_swiss_dolomites_p0/w1800.webp",
+      "src": "derivatives/urnerboden_p0/w1800.webp",
       "credit": "@1000schweizerorte"
     },
     {
-      "src": "derivatives/the_swiss_dolomites_p1/w1800.webp",
+      "src": "derivatives/urnerboden_p1/w1800.webp",
       "credit": "sandro_bedin_landscapes"
     },
     {
-      "src": "derivatives/the_swiss_dolomites_p2/w1800.webp",
+      "src": "derivatives/urnerboden_p2/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -1317,13 +1279,13 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "eastern#swiss_grand_canyon": [
+  "eastern#ruinaulta": [
     {
-      "src": "derivatives/swiss_grand_canyon_p0/w1800.webp",
+      "src": "derivatives/ruinaulta_p0/w1800.webp",
       "credit": "Jan Huber"
     },
     {
-      "src": "derivatives/swiss_grand_canyon_p1/w1800.webp",
+      "src": "derivatives/ruinaulta_p1/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -1477,20 +1439,6 @@ window.HB_SPOT_IMAGES = {
       "credit": "@locarnesetv"
     }
   ],
-  "ticino#valle_verzasca_kayak": [
-    {
-      "src": "derivatives/valle_verzasca_kayak_p0/w1800.webp",
-      "credit": "@noelbell8"
-    },
-    {
-      "src": "derivatives/valle_verzasca_kayak_p1/w1800.webp",
-      "credit": "bike2boat.eu"
-    },
-    {
-      "src": "derivatives/valle_verzasca_kayak_p2/w1800.webp",
-      "credit": "zimydakid"
-    }
-  ],
   "beyond#mer_de_glace": [
     {
       "src": "derivatives/mer_de_glace_p0/w1800.webp",
@@ -1505,20 +1453,6 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "beyond#mer_de_glace_winter": [
-    {
-      "src": "derivatives/mer_de_glace_winter_p0/w1800.webp",
-      "credit": "Martin Masson"
-    },
-    {
-      "src": "derivatives/mer_de_glace_winter_p1/w1800.webp",
-      "credit": "Ricardo Frantz"
-    },
-    {
-      "src": "derivatives/mer_de_glace_winter_p2/w1800.webp",
-      "credit": "zimydakid"
-    }
-  ],
   "beyond#les_drus": [
     {
       "src": "derivatives/les_drus_p0/w1800.webp",
@@ -1526,20 +1460,6 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/les_drus_p1/w1800.webp",
-      "credit": "zimydakid"
-    }
-  ],
-  "beyond#les_drus_winter": [
-    {
-      "src": "derivatives/les_drus_winter_p0/w1800.webp",
-      "credit": "@robingaillotdrevon"
-    },
-    {
-      "src": "derivatives/les_drus_winter_p1/w1800.webp",
-      "credit": "atmb_vivreenhautesavoie"
-    },
-    {
-      "src": "derivatives/les_drus_winter_p2/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -1560,20 +1480,6 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/les_cheserys_p1/w1800.webp",
-      "credit": "zimydakid"
-    }
-  ],
-  "beyond#aiguille_rouge_reserve": [
-    {
-      "src": "derivatives/aiguille_rouge_reserve_p0/w1800.webp",
-      "credit": "@taufiqsaidi_"
-    },
-    {
-      "src": "derivatives/aiguille_rouge_reserve_p1/w1800.webp",
-      "credit": "@taufiqsaidi_"
-    },
-    {
-      "src": "derivatives/aiguille_rouge_reserve_p2/w1800.webp",
       "credit": "zimydakid"
     }
   ],

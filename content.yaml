@@ -971,32 +971,32 @@ spots:
   gps:
     lat: 46.7115858
     lng: 7.9642999
-- id: lake_thun_road
+- id: viewpoint_beatenberg
   chapter: central
   kicker: ROADS
-  title: Lake Thun Road
-  deck: A short stretch of lakeside road where the cliffs come down to the water. Wait for the right car to drive by.
+  title: Viewpoint Beatenberg
+  deck: A viewpoint above Beatenberg looking down on the road that threads the cliffs of Lake Thun. Wait for a boat or the right car to come through.
   body:
-  - The whole point of this one is composition. Cliff on one side, lake on the other, the road threading the gap. The frame works on its own. It really comes alive when something interesting drives through.
-  - Best on rainy or cloudy days when the asphalt goes wet and reflective. Park safely off the road and shoot from the shoulder. A telephoto compresses everything together.
-  region: Lake Thun, Central Switzerland
-  access: Drive
+  - From Beatenberg village, follow signs up to the Aussichtspunkt. Park there and walk to the railing. The road and lake align below with no power lines or fences in the frame.
+  - Best on calm days when the lake goes glass and a boat or car can carry the eye through. A telephoto compresses everything together.
+  region: Beatenberg, Central Switzerland
+  access: Drive to viewpoint
   effort: Easy
-  best_light: When rainy or cloudy
+  best_light: Calm, clear, or rainy
   wildCamping:
     verdict: discouraged
-    reason: "Lake Thun north shore: private property and roadside; wild camping not allowed in usable spots."
+    reason: "Beatenberg viewpoint: roadside / forest; wild camping not allowed at the lookout itself."
     canton: Bern (BE)
-  maps_url: https://www.google.com/maps/place/Thunersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fae3554ddf6eb:0xc692ca79d2500aea!8m2!3d46.6958354!4d7.7212158!16zL20vMDJoX2t3
-  image: spots/lake_thun_road/main.jpg
+  maps_url: https://www.google.com/maps/place/Aussichtspunkt+Beatenberg/@46.6856162,7.7879934,16z/data=!4m6!3m5!1s0x478fa531263af7f1:0x367113202ab7c1b!8m2!3d46.6856162!4d7.7879934!16s%2Fg%2F11f62f_5v5
+  image: spots/viewpoint_beatenberg/main.jpg
   image_credit: jairph_unsplash
   photos:
   - file: 03.jpg
     credit: zimydakid
     source_type: book
   gps:
-    lat: 46.6958354
-    lng: 7.7212158
+    lat: 46.6856162
+    lng: 7.7879934
 - id: oeschinensee
   chapter: central
   kicker: LAKES
@@ -1027,11 +1027,11 @@ spots:
   gps:
     lat: 46.4989089
     lng: 7.7291063
-- id: schilthorn
+- id: piz_gloria
   chapter: central
   kicker: SUMMITS
-  title: Schilthorn
-  deck: Piz Gloria. Cable car straight to a 360 degree view of the Bernese Alps. The Eiger, Mönch and Jungfrau line up across the valley.
+  title: Piz Gloria
+  deck: The Schilthorn summit station, cable car straight to a 360 degree view of the Bernese Alps. The Eiger, Mönch and Jungfrau line up across the valley.
   body:
   - Take the cable car all the way up to Piz Gloria. The view from the terrace is hard to beat, mountains in every direction, with the Eiger, Mönch and Jungfrau standing in a row across the valley.
   - Drone shots work especially well from the saddle just below the summit station. Sunset is the one to chase. The light catches the snowfields and the whole face turns gold.
@@ -1044,7 +1044,7 @@ spots:
     reason: Schilthorn at 2,970 m is a cable-car summit with the Piz Gloria revolving restaurant — wild camping at the summit area is not feasible or legal. Tolerated bivouac would be far away from the cable-car infrastructure and Mürren village, on the surrounding ridges above tree line in BLN.
     canton: Bern (BE)
   maps_url: https://www.google.com/maps/place/Schilthorn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fa0aa046345b1:0xe0ac87e82a107f2!8m2!3d46.5574809!4d7.8352793!16zL20vMDMxMnk2
-  image: spots/schilthorn/main.jpg
+  image: spots/piz_gloria/main.jpg
   image_credit: anthony_gomez_unsplash_3
   photos:
   - file: 02.jpg
@@ -1245,25 +1245,24 @@ spots:
   gps:
     lat: 45.9668437
     lng: 7.7969322
-- id: the_ghost_town
+- id: zermatt_huts
   chapter: valais
-  kicker: ABANDONED HOUSES, SURREAL LIGHT
-  title: The Ghost Town
-  deck: A cluster of empty wooden huts above Zermatt that looks lifted out of a film set. Especially eerie in winter.
+  kicker: OLD WOOD, SURREAL LIGHT
+  title: Zermatt huts
+  deck: A cluster of dark wooden huts above Zermatt that looks lifted out of a film set. Especially good in winter.
   body:
-  - Walk up from Zermatt village toward Furi station. The old Weiler (hamlet) sits just off the trail, still standing but long since emptied. Dark wood against snow, zero tourists, and a perfect frame of
-    the Matterhorn poking up behind.
-  - Go at late afternoon or on an overcast day. Hard sun blows out the wood texture; soft light makes the timber glow. Fifteen minutes on foot from town, so easy to combine with a coffee after.
+  - Walk up from Zermatt village toward Furi station. The old hamlet sits just off the trail, still standing, dark wood against snow with the Matterhorn poking up behind.
+  - Go at late afternoon or on an overcast day. Hard sun blows out the wood texture; soft light makes the timber glow. Around 30 to 40 minutes on foot from town, so easy to combine with a coffee after.
   region: Zermatt, Valais
-  access: 15 min walk up
+  access: 30-40 min walk up
   effort: Easy
   best_light: Cloudy late afternoon
   wildCamping:
     verdict: discouraged
-    reason: "Trift hamlet above Zermatt: derelict private buildings — bivouac at the structures is not allowed. The meadow above tree line further up is tolerated single-night, well away from the buildings and any Zermatt patrol zones."
+    reason: "Hamlet above Zermatt: private buildings — bivouac at the structures is not allowed. The meadow above tree line further up is tolerated single-night, well away from the buildings and any Zermatt patrol zones."
     canton: Valais (VS)
   maps_url: https://www.google.com/maps/place/46%C2%B000'23.3%22N+7%C2%B043'55.4%22E/@46.006481,7.732045,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.006481!4d7.732045
-  image: spots/the_ghost_town/main.jpg
+  image: spots/zermatt_huts/main.jpg
   image_credit: xxx
   photos:
   - file: 03.jpg
@@ -1422,29 +1421,6 @@ spots:
   gps:
     lat: 46.0745303
     lng: 7.5983645
-- id: moiry_from_above
-  chapter: valais
-  kicker: FROM THE AIR
-  title: Moiry from Above
-  deck: A drone perspective turns the moraine into abstract geometry. Blue ice, grey rubble, and the hut as a tiny orange dot.
-  body:
-  - If you have got a drone and the rules allow it, climb above the hut before launching and you will get a top-down that separates the glacier crevasse field cleanly from the ice lake below. Mid-morning
-    light works best. Enough shadow to read the texture, not so low you lose the detail.
-  - 'Handheld alternative: the trail continues up toward the Sassenaire ridge and gives you almost the same angle without needing any airspace permissions. Takes another hour from the hut.'
-  region: Val d'Anniviers
-  access: Same as Moiry hut
-  effort: Moderate to hard
-  best_light: Mid-morning
-  wildCamping:
-    verdict: restricted
-    reason: Above tree line; tolerated single-night.
-    canton: Valais (VS)
-  maps_url: https://www.google.com/maps/place/Moirygletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f2fd3a4fa494f:0x28c87f4a36745a58!8m2!3d46.0745303!4d7.5983645!16s%2Fm%2F04n6dtz
-  image: spots/moiry_from_above/main.jpg
-  image_credit: steffi.outbound
-  gps:
-    lat: 46.0745303
-    lng: 7.5983645
 - id: the_ice_cave
   chapter: valais
   kicker: DEEP WINTER ONLY, AND ONLY IF IT'S COLD
@@ -1483,30 +1459,6 @@ spots:
     credit: zimydakid
     source_type: book
   - file: 07.jpg
-    credit: zimydakid
-    source_type: book
-- id: the_ice_cave_by_night
-  chapter: valais
-  kicker: THE SAME PLACE, 12 HOURS LATER
-  title: The Ice Cave by Night
-  deck: Headlamp, tripod, and 30 seconds of patience. The tunnel becomes something else entirely.
-  body:
-  - Same location, same winter-only rules. But shot after dark with the light source inside the cave. Set the camera to f/2.8, ISO around 1000, 20 to 30 second exposure. Have a friend stand still at the
-    far end holding a warm-temperature headlamp; the ice walls will glow.
-  - 'Dress warmer than you think. You will be standing in a wind tunnel made of ice. Kit that survives: weather-sealed body, two batteries kept inside your jacket, hand warmers taped to the lens to stop
-    fogging when you exit.'
-  region: Zinal
-  access: Same as day version
-  effort: Hard / technical
-  best_light: Post-blue hour
-  wildCamping:
-    verdict: restricted
-    reason: Same site as the_ice_cave; same rules apply.
-  maps_url:
-  image: spots/the_ice_cave_by_night/main.jpg
-  image_credit: oliwear.j
-  photos:
-  - file: 03.jpg
     credit: zimydakid
     source_type: book
 - id: ferpecle_glacier
@@ -1674,24 +1626,6 @@ spots:
   gps:
     lat: 46.1497222
     lng: 7.7369444
-- id: stafelwald_wildlife
-  chapter: valais
-  kicker: WILDLIFE
-  title: Stafelwald Wildlife
-  deck: Marmots and ground squirrels right next to Saas Fee village - separate from Spielboden.
-  body:
-  - The wildlife here is used to people but still wild. Early morning is best, before the day trippers arrive. Long lens recommended - 200mm at minimum.
-  - This is a quick detour if you are already in Saas Fee, not a full day outing.
-  region: Saas Fee, Valais
-  access: Walk from village
-  effort: Easy
-  best_light: Early morning
-  wildCamping:
-    verdict: discouraged
-    reason: Wildlife area at the edge of Saas Fee village; below tree line, residential approach. Day visit only — keep distance from marmot colonies.
-  maps_url:
-  image: spots/stafelwald_wildlife/main.jpg
-  image_credit: oliwear.j
 - id: saas_fee_glacier
   chapter: valais
   kicker: 13,000 YEARS OF ICE, RETREATING FAST
@@ -1719,28 +1653,34 @@ spots:
   gps:
     lat: 46.0796
     lng: 7.8788
-- id: the_flooded_forest
+- id: lac_de_derborence
   chapter: valais
   kicker: DROWNED TREES, STILL STANDING
-  title: The Flooded Forest
+  title: Derborence Lake
   deck: Two rockslides (1714 and 1749) dammed a valley and left the forest underwater. The tree skeletons are still there, frozen mid-sentence.
   body:
-  - Derborence Lake, east end. Drive up from Aven or hike in from the hamlet of Derborence itself. The flooded trees are visible in low water. Best chances are late summer into early autumn when the lake
+  - East end of the lake. Drive up from Aven or hike in from the hamlet of Derborence itself. The flooded trees are visible in low water. Best chances are late summer into early autumn when the lake
     level drops.
   - Overcast light is your friend here; harsh sun flattens the reflection. Wide lens for the whole scene; a tele picks out individual trunks. This is also the most protected nature reserve in Valais. Stay
     on marked paths.
-  region: Derborence
+  region: Derborence, Valais
   access: Drive + short walk
   effort: Easy
   best_light: Overcast
   wildCamping:
     verdict: forbidden
     reason: Lac de Derborence is a Pro Natura nature reserve and federally protected — one of the most strictly protected zones in Valais. Wild camping forbidden. Stay on marked paths.
-  maps_url:
-  image: spots/the_flooded_forest/main.jpg
+  maps_url: https://www.google.com/maps/place/Lac+de+Derborence/@46.2791132,7.2124191,1263m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478ec20dffda7db3:0x7a9df6822f6e8527!8m2!3d46.2793244!4d7.2172313!16s%2Fm%2F0283s7l
+  image: spots/lac_de_derborence/main.jpg
   image_credit: xxx
   pdf: false
-  photos: []
+  photos:
+  - file: 02.jpg
+    credit: zimydakid
+    source_type: book
+  gps:
+    lat: 46.2793244
+    lng: 7.2172313
 - id: la_fouly
   chapter: valais
   kicker: A VILLAGE AT THE MOUTH OF A GLACIER
@@ -2172,26 +2112,29 @@ spots:
   gps:
     lat: 46.6295236
     lng: 7.2828498
-- id: latine_canyon
+- id: la_tine_canyon
   chapter: fribourg
   kicker: GO WITH A GUIDE THE FIRST TIME
-  title: Latine Canyon
+  title: La Tine Canyon
   deck: A narrow slot canyon near Montbovon, marketed out of Château-d'Œx. Beautiful water, real risk. This one needs a local before you come back solo.
   body:
-  - Also called La Tine. There's a dam in the upper valley, which means flash flood risk if you don't know the signals. Don't walk in blind. Book a trip with Gruyère Escapade (gruyere-escapade.ch/canyoning.html),
+  - Also called La Tine de Montbovon. There's a dam in the upper valley, which means flash flood risk if you don't know the signals. Don't walk in blind. Book a trip with Gruyère Escapade (gruyere-escapade.ch/canyoning.html),
     learn the terrain, then come back on your own.
   - Once you know where to stand, the canyon is anytime. Shade means soft light almost all day. Bring a tripod and protect your camera from spray.
-  region: Pays-d'Enhaut
+  region: Pays-d'Enhaut, Fribourg
   access: Drive + canyon access
   effort: Technical. Use a guide
   best_light: Anytime in shade
   wildCamping:
     verdict: restricted
     reason: "Inside Parc naturel régional Gruyère Pays-d'Enhaut. Bivouac in the slot canyon itself impossible/dangerous; park rules tolerate single-night above tree line outside reserves."
-  maps_url:
-  image: spots/latine_canyon/main.jpg
+  maps_url: https://www.google.com/maps/place/1669+Montbovon/@46.4880077,7.0028709,10080m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478e8e4fff86dfeb:0x7f1aab823b11e665!8m2!3d46.4879565!4d7.0439846!16s%2Fg%2F120lw7t5
+  image: spots/la_tine_canyon/main.jpg
   image_credit: xxx
   pdf: false
+  gps:
+    lat: 46.4879565
+    lng: 7.0439846
 - id: dent_de_broc
   chapter: fribourg
   kicker: A DISTANT PEAK, A LONG LENS
@@ -2236,6 +2179,7 @@ spots:
   body:
   - Arrive at sunrise, before the road fills up. The lake is quiet for maybe 45 minutes after first light. After that, the day trippers start showing up.
   - Don't shoot when the sun is high. You'll lose all contrast. Keep the sun low in your frame, or wait for cloud cover to soften the scene.
+  - Different season, same lake. When the ice is thick enough you can skate or play hockey under the limestone walls. Call the tourism office before you drive up to check the ice.
   region: Sense district
   access: Drive to lake
   effort: Easy
@@ -2249,34 +2193,6 @@ spots:
   maps_url: https://www.google.com/maps/place/Schwarzsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5ea475c88195:0xbbdcb38663da2f0a!8m2!3d46.6659091!4d7.2807275!16s%2Fm%2F02831lc
   image: spots/schwarzsee/main.jpg
   image_credit: noberson
-  photos:
-  - file: 03.jpg
-    credit: zimydakid
-    source_type: book
-  gps:
-    lat: 46.6659091
-    lng: 7.2807275
-- id: winter_schwarzsee
-  chapter: fribourg
-  kicker: ICE HOCKEY, MOUNTAINS, GO
-  title: Winter Schwarzsee
-  deck: Same lake, different season. When the ice is thick enough, you can skate. And play hockey under the peaks.
-  body:
-  - Call the tourism office before you drive up. The ice needs to be checked every year; they'll tell you if it's safe. Some winters it's perfect, some it never fully freezes.
-  - Great with friends. Bring skates, a couple of sticks, a puck. There's no more Swiss scene than hockey on a natural rink with big walls of limestone around you.
-  region: Sense district
-  access: Drive to lake
-  effort: Easy
-  best_light: Deep winter
-  wildCamping:
-    verdict: discouraged
-    reason: Below tree line (1045 m); also park of national importance — follow park rules (Naturpark Gantrisch).
-    canton: Fribourg (FR)
-    protections:
-    - National / regional park — Naturpark Gantrisch
-  maps_url: https://www.google.com/maps/place/Schwarzsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5ea475c88195:0xbbdcb38663da2f0a!8m2!3d46.6659091!4d7.2807275!16s%2Fm%2F02831lc
-  image: spots/winter_schwarzsee/main.jpg
-  image_credit: spornitho
   photos:
   - file: 03.jpg
     credit: zimydakid
@@ -2465,25 +2381,28 @@ spots:
   gps:
     lat: 46.445
     lng: 6.9748
-- id: the_jungle_waterfall
+- id: gorges_du_chauderon
   chapter: western
   kicker: WATERFALL HIDDEN IN THE MONTREUX CANYON
-  title: The Jungle Waterfall
-  deck: Gorges du Chauderon has a waterfall you can't see from the footpath. You'll need a drone. And patience for the weather.
+  title: Gorges du Chauderon
+  deck: A waterfall hidden in the canyon, invisible from the footpath. You'll need a drone. And patience for the weather.
   body:
   - The waterfall sits on the lower part of the canyon, closer to Montreux. From the path above, it's completely hidden. Launch the drone from a clearing and fly down into the gorge.
   - Best on cloudy or rainy days in late spring and summer. The ferns and moss go neon green, and the diffused light means no blown highlights on the water.
-  region: Montreux
+  region: Montreux, Vaud
   access: Canyon trail + drone
   effort: Easy
   best_light: Cloudy spring days
   wildCamping:
     verdict: discouraged
     reason: Gorges du Chauderon above Montreux; below tree line in private/canyon land, drone-only viewpoint. Day visit only.
-  maps_url:
-  image: spots/the_jungle_waterfall/main.jpg
+  maps_url: https://www.google.com/maps/place/Gorges+du+Chauderon/@46.4367906,6.9229226,485m/data=!3m1!1e3!4m6!3m5!1s0x478e9bd02ed88279:0x5a702a06efcffa74!8m2!3d46.4368563!4d6.9250077!16s%2Fg%2F11f652tll2
+  image: spots/gorges_du_chauderon/main.jpg
   image_credit: xxx
   pdf: false
+  gps:
+    lat: 46.4368563
+    lng: 6.9250077
   photos:
   - file: 03.jpg
     credit: zimydakid
@@ -2517,10 +2436,10 @@ spots:
   gps:
     lat: 46.198
     lng: 7.02769
-- id: morcles_road
+- id: route_de_morcles
   chapter: western
   kicker: LEADING LINES ABOVE THE RHÔNE
-  title: Morcles Road
+  title: Route de Morcles
   deck: Shot along the same road as Pisse-Chèvre, heading toward the village of Morcles. A quiet mountain road with cinema corners.
   body:
   - Stop around 46.198820, 7.031182. The road curves past an opening that frames the valley below. Perfect for a car against a big landscape, or just a moody empty road shot.
@@ -2531,11 +2450,14 @@ spots:
   best_light: Cloudy
   wildCamping:
     verdict: discouraged
-    reason: Roadside above Martigny; private agricultural land, low elevation. Day visit only.
-  maps_url:
-  image: spots/morcles_road/main.jpg
+    reason: Roadside above Lavey-Morcles; private agricultural land, low elevation. Day visit only.
+  maps_url: https://www.google.com/maps/place/46%C2%B011'55.8%22N+7%C2%B001'52.3%22E/@46.1985069,7.0222498,2175m/data=!3m1!1e3!4m4!3m3!8m2!3d46.19882!4d7.031182
+  image: spots/route_de_morcles/main.jpg
   image_credit: xxx
   pdf: false
+  gps:
+    lat: 46.19882
+    lng: 7.031182
   photos:
   - file: 03.jpg
     credit: zimydakid
@@ -2548,6 +2470,7 @@ spots:
   body:
   - Drive to Restaurant Le Soliat, park there, and walk to the rim. Don't run to the edge. The drop is severe and there's no railing in most places.
   - Sunrise is the best light, or any overcast morning when the mist pools inside the bowl. It can be booked-solid busy on sunny weekends; weekday mornings you might have it alone.
+  - A resident herd of ibex lives on these cliffs. Mornings are the best window, 200 to 400mm lens, no baiting, keep distance.
   region: Jura, Neuchâtel
   access: Drive to Le Soliat + walk
   effort: Easy
@@ -2572,42 +2495,6 @@ spots:
   - file: 03.jpg
     credit: zimydakid
     source_type: book
-  - file: 05.jpg
-    credit: zimydakid
-    source_type: book
-  gps:
-    lat: 46.9309929
-    lng: 6.7234511
-- id: creux_du_van_ibex
-  chapter: western
-  kicker: WILD IBEX, UP CLOSE
-  title: Creux du Van Ibex
-  deck: The same cliffs are home to a resident herd of ibex. If you come at the right time, you can photograph them at eye level.
-  body:
-  - Morning is your best window. They're used to hikers, so they don't spook easily, but they're still wild. No baiting, no loud voices, and keep real distance when you can.
-  - A 200 to 400mm lens is ideal. You'll often get them silhouetted on the ridge with Mont Blanc in the background on clear days. Nothing guaranteed, but the odds are good.
-  region: Jura, Neuchâtel
-  access: Same as Creux du Van
-  effort: Easy
-  best_light: Early morning
-  wildCamping:
-    verdict: discouraged
-    reason: Below tree line (1451 m); also BLN landscape of national importance — listed, single-night bivouac only, no fire (Creux du Van et Gorges de l’Areuse).
-    canton: Vaud (VD)
-    protections:
-    - BLN landscape — Creux du Van et Gorges de l’Areuse
-  maps_url: https://www.google.com/maps/place/Creux+du+Van/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478de7f8240bcb23:0xc04d997cfd4ad4a8!8m2!3d46.9309929!4d6.7234511!16s%2Fm%2F08097wh
-  image: spots/creux_du_van_ibex/main.jpg
-  image_credit: jura3lacs
-  photos:
-  - file: 02.jpg
-    credit: jura3lacs
-    source_type: instagram
-    source_url: "https://www.instagram.com/p/DTA0vljDXOi/"
-  - file: 03.jpg
-    credit: claude_gurzeler
-    source_type: instagram
-    source_url: "https://www.instagram.com/p/DL7mDZzoySw/"
   - file: 05.jpg
     credit: zimydakid
     source_type: book
@@ -2733,29 +2620,6 @@ spots:
     credit: oliwvair
     source_type: instagram
     source_url: "https://www.instagram.com/p/B-10y7SnvBG/"
-  - file: 03.jpg
-    credit: zimydakid
-    source_type: book
-- id: vevey_docks
-  chapter: western
-  kicker: SCUBA DIVING UNDER THE QUAY
-  title: Vevey Docks
-  deck: Certified divers only. Under the Quai Perdonnet, it looks like a shipwreck. With pike prowling through the pillars.
-  body:
-  - Enter the water at Place du marché (the official PADI access) and head into the docks of Quai Perdonnet. Below the surface, concrete pillars create a labyrinth that feels half like a wreck, half like an underwater cathedral.
-  - Big pike sometimes cruise through. Only experienced divers should attempt this. Visibility changes, currents matter, and being overhead-restricted in fresh water is not a beginner move.
-  region: Riviera vaudoise
-  access: Scuba from Place du marché
-  effort: Advanced diving
-  best_light: Clear water season
-  wildCamping:
-    verdict: forbidden
-    reason: Urban quayside scuba site in Vevey (Quai Perdonnet); municipal property. Day visit only — overnight not legal.
-  maps_url:
-  image: spots/vevey_docks/main.jpg
-  image_credit: xxx
-  pdf: false
-  photos:
   - file: 03.jpg
     credit: zimydakid
     source_type: book
@@ -3202,23 +3066,23 @@ spots:
   gps:
     lat: 46.9084999
     lng: 8.9753
-- id: the_swiss_dolomites
+- id: urnerboden
   chapter: eastern
   kicker: LIMESTONE THAT LOOKS ITALIAN
-  title: The Swiss Dolomites
-  deck: A stretch of peaks around Klausenpass that honestly reminds me of Italy. Worth a stop even without a plan.
+  title: Urnerboden
+  deck: A stretch of peaks above Urnerboden on the Klausenpass road. Jagged, bone-grey limestone that honestly reminds me of Italy.
   body:
-  - 'GPS: 46.905367, 8.940339. Park nearby, walk up a ridge, and you''ll see why I started calling these the Swiss Dolomites. Jagged, bone-grey limestone, zero crowd.'
+  - Park along the pass road and walk up a short ridge. The peaks above the Urnerboden valley have the kind of jagged limestone that looks lifted from the Dolomites, with zero crowd.
   - Sunrise or moody overcast both deliver. Blue-sky blue-hour days are actually the weakest here. The rock lacks contrast against a clean sky.
-  region: Uri
+  region: Urnerboden, Uri
   access: Pass road + short hike
   effort: Easy
   best_light: Sunrise or moody
   wildCamping:
     verdict: restricted
     reason: Klausenpass-area peaks (Uri side); UR side tolerates single-night above tree line, GL side tightening enforcement. Same as klausenpass.
-  maps_url:
-  image: spots/the_swiss_dolomites/main.jpg
+  maps_url: https://www.google.com/maps/place/46%C2%B054'19.3%22N+8%C2%B056'25.2%22E/@46.9025334,8.9240369,1539m/data=!3m1!1e3!4m4!3m3!8m2!3d46.9053611!4d8.9403333
+  image: spots/urnerboden/main.jpg
   image_credit: 1000schweizerorte
   photos:
   - file: 02.jpg
@@ -3228,6 +3092,9 @@ spots:
   - file: 04.jpg
     credit: zimydakid
     source_type: book
+  gps:
+    lat: 46.9053611
+    lng: 8.9403333
 - id: ice_lake_griesslisee
   chapter: eastern
   kicker: FLOATING ICE IN SUMMER
@@ -3333,13 +3200,13 @@ spots:
   gps:
     lat: 46.8199879
     lng: 9.2959134
-- id: swiss_grand_canyon
+- id: ruinaulta
   chapter: eastern
   kicker: A DEEP CANYON IN THE EAST
-  title: Swiss Grand Canyon
-  deck: The Ruinaulta. A white limestone canyon carved by the Rhine. From the viewpoint, it really does look like the States.
+  title: Ruinaulta
+  deck: The Swiss Grand Canyon. A white limestone gorge carved by the Rhine. From the viewpoint, it really does look like the States.
   body:
-  - From Caumasee, follow the hiking signs to the Ruinaulta viewpoint. It's a short walk to the rim; the drop is big enough to be careful near the edge.
+  - From Caumasee, follow the hiking signs to the Il Spir viewpoint. It's a short walk to the rim; the drop is big enough to be careful near the edge.
   - Sunrise is the light. The east face of the canyon catches first light and the mist often sits low in the bottom of the gorge. Twenty minutes later it's gone.
   region: Graubünden
   access: Walk from Caumasee
@@ -3354,7 +3221,7 @@ spots:
     - Floodplain reserve (Auengebiet) — Ruinaulta
     - National / regional park — Naturpark Beverin
   maps_url: https://www.google.com/maps/place/Rheinschlucht/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784dc635ed9a4eb:0xe9df845b022d9136!8m2!3d46.8057143!4d9.3163204!16zL20vMDYyXzVk
-  image: spots/swiss_grand_canyon/main.jpg
+  image: spots/ruinaulta/main.jpg
   image_credit: jan_huber_unsplash
   photos:
   - file: 03.jpg
@@ -3753,6 +3620,7 @@ spots:
   body:
   - The whole Valle Verzasca is worth driving end to end. Rock formations along the river create natural pools, small jumps, swimming holes. Keep your eye out as you drive.
   - CURRENT IS SERIOUS. People drown in this river every summer because they underestimate the flow after rain. Check conditions, don't jump into water you haven't scouted.
+  - The river is also famous for whitewater kayaking, expert-only. From above, a drone shot of a kayak tracking through the curves is worth the wait.
   region: Valle Verzasca
   access: Drive the valley
   effort: Variable
@@ -3863,33 +3731,6 @@ spots:
   gps:
     lat: 46.371303
     lng: 8.5453161
-- id: valle_verzasca_kayak
-  chapter: ticino
-  kicker: IF YOU HAVE THE LEVEL. OR A FRIEND WHO DOES
-  title: Valle Verzasca Kayak
-  deck: The Verzasca is famous for whitewater kayaking. Not something you just try. But if you have the skill, or a friend who does, the shots are unreal.
-  body:
-  - The valley holds serious whitewater. Only experienced kayakers should be on the water here; the rocks and currents don't forgive mistakes. If you're shooting and not paddling, team up with a kayaker
-    who knows the lines.
-  - A drone captures the scale. Turquoise water, bleached boulders, a tiny kayak tracking through the curves. Mid to late summer is when flow eases to navigable levels; spring runoff is expert-only.
-  region: Valle Verzasca, Ticino
-  access: Along the valley road
-  effort: Expert (paddler)
-  best_light: Anytime from above
-  wildCamping:
-    verdict: forbidden
-    reason: "Verzasca valley: TI cantonal ban on wild camping; the entire river corridor is a federal floodplain (Auengebiet). Same as valle_verzasca."
-  maps_url:
-  image: spots/valle_verzasca_kayak/main.jpg
-  image_credit: noelbell8
-  photos:
-  - file: 02.jpg
-    credit: bike2boat.eu
-    source_type: instagram
-    source_url: "https://www.instagram.com/p/CCKzkOjqJhr/"
-  - file: 04.jpg
-    credit: zimydakid
-    source_type: book
 - id: mer_de_glace
   chapter: beyond
   kicker: A RIVER OF ICE ABOVE CHAMONIX
@@ -3898,6 +3739,7 @@ spots:
   body:
   - From Chamonix, catch the Montenvers train to its upper station. The view takes in the whole glacier, with markers along the descent showing where the ice was in 1985, 2000, and 2010. A new telecabine (Feb 2024) drops to ice level; the moraine trail (45 to 60 min) holds the better vantages.
   - Anytime light works. Sunset, sunrise, moody overcast, or a clear night for stars. Bring warm layers; the wind coming off the ice strips the heat fast even in summer.
+  - In winter the trail goes silent and white. Snowshoes are mandatory and the Montenvers schedule is reduced, last train down around 14:30, line closed for engineering in November and May.
   region: Chamonix, France
   access: Train + 45-60min hike
   effort: Moderate
@@ -3920,36 +3762,6 @@ spots:
   gps:
     lat: 45.9203829
     lng: 6.9279647
-- id: mer_de_glace_winter
-  chapter: beyond
-  kicker: THE SAME GLACIER, UNDER SNOW
-  title: Mer de Glace. Winter
-  deck: Same spot, deep winter. Snowshoes on, footprints few, the whole scene turned silent and white.
-  body:
-  - Same access as the summer version. Montenvers train, hike up. Bring snowshoes (the trail gets covered fast) and check the winter timetable, last train down is around 14:30 and the line closes for engineering in November and May.
-  - The icefall textures read differently under fresh snow. Everything looks quieter, cleaner, a bit more alien. Go on a clear morning after a storm if you can time it.
-  region: Chamonix, France
-  access: Train + snowshoe hike
-  effort: Moderate. Winter gear
-  best_light: Morning after fresh snow
-  wildCamping:
-    verdict: restricted
-    reason: Same as mer_de_glace. In winter the area is avalanche terrain — bivouac is alpinism territory, not leisure camping.
-    canton: France
-  maps_url: https://www.google.com/maps/place/Mer+de+Glace/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894eab1fba5965:0x41ece26799b55955!8m2!3d45.9203829!4d6.9279647!16zL20vMDFyd2tj
-  image: spots/mer_de_glace_winter/main.jpg
-  image_credit: martin_masson_unsplash
-  photos:
-  - file: 02.jpg
-    credit: Ricardo Frantz
-    source_type: unsplash
-    source_url: "https://unsplash.com/de/fotos/schneebedeckter-berg-unter-weissen-wolken-KL6x2JjsChc"
-  - file: 04.jpg
-    credit: zimydakid
-    source_type: book
-  gps:
-    lat: 45.9203829
-    lng: 6.9279647
 - id: les_drus
   chapter: beyond
   kicker: TWIN SPIRES OVER THE GLACIER
@@ -3958,6 +3770,7 @@ spots:
   body:
   - Seen from the same Mer de Glace vantages you hiked for the glacier shots. No separate trip needed. Shoot them on the same outing with a longer lens to isolate.
   - Sunset and sunrise both hit the granite at a nice angle. Moody overcast gives the rock real character. Blue-sky blue-hour is the weakest window here.
+  - In winter the spires get coated in ice and the contrast against the granite gets sharper. Same access, snowshoes, and the reduced Montenvers schedule.
   region: Chamonix, France
   access: From Mer de Glace viewpoint
   effort: Moderate
@@ -3976,55 +3789,6 @@ spots:
   gps:
     lat: 45.932945
     lng: 6.9558754
-- id: les_drus_winter
-  chapter: beyond
-  kicker: THE SPIRES IN WINTER
-  title: Les Drus. Winter
-  deck: Same twin spires, dressed in ice and snow. The contrast against dark granite is what makes the winter shot sing.
-  body:
-  - Same access as summer version. Montenvers train, then snowshoes along the ridge vantages above the glacier. Stop and recompose every few minutes as the angles shift. Same winter caveat as Mer de Glace, last train down around 14:30, line closed for engineering in November and May.
-  - Clear conditions help the rock/snow contrast read; heavy cloud softens it too much. A long lens (200mm+) compresses the scene the way you want it.
-  region: Chamonix, France
-  access: Train + snowshoe
-  effort: Moderate
-  best_light: Clear winter light
-  wildCamping:
-    verdict: restricted
-    reason: Same as les_drus.
-    canton: France
-  maps_url: https://www.google.com/maps/place/Aiguille+du+Dru/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894bc255dfbe21:0xc70ae60e6164cffe!8m2!3d45.932945!4d6.9558754!16s%2Fm%2F02855l2
-  image: spots/les_drus_winter/main.jpg
-  image_credit: robingaillotdrevon
-  photos:
-  - file: 02.jpg
-    credit: atmb_vivreenhautesavoie
-    source_type: instagram
-    source_url: "https://www.instagram.com/p/CYQ4hLjoQkt/"
-  - file: 04.jpg
-    credit: zimydakid
-    source_type: book
-  gps:
-    lat: 45.932945
-    lng: 6.9558754
-- id: french_sharp_peaks
-  chapter: beyond
-  kicker: THE SAME RIDGE, NEW ANGLE
-  title: French Sharp Peaks
-  deck: Another frame of Les Drus from the Mer de Glace viewpoint. Same mountain, different compression, different mood.
-  body:
-  - From the same Mer de Glace vantages, swap to a longer focal length and recompose. The ridge lines stack differently when you compress them at 300mm vs. 100mm.
-  - This one was shot at sunset with warm light grazing the spires. Sunrise works too if the wind is calm; moody overcast gives a dramatic grey-scale rendition.
-  region: Chamonix, France
-  access: From Mer de Glace viewpoint
-  effort: Moderate
-  best_light: Sunset (also sunrise)
-  wildCamping:
-    verdict: restricted
-    reason: "Mer de Glace viewpoint, Chamonix. Same rule: bivouac (sundown to sunrise, no tent) tolerated above 2,500 m or >1 h walk from a road; intensively patrolled."
-  maps_url:
-  image: spots/french_sharp_peaks/main.jpg
-  image_credit: xxx
-  pdf: false
 - id: aiguille_du_grepon
   chapter: beyond
   kicker: A POINTED NEEDLE IN THE RANGE
@@ -4060,6 +3824,7 @@ spots:
   - Park in La Flégère, take the cable car up, then hike to the lakes. Lac Blanc is part of the same system and worth the extra walk. Bigger lake, equally good reflections.
   - Sunset is the hit. Mont Blanc and the range behind the lakes light up orange, and if the wind drops, you get the whole thing mirrored in the water. Plan your descent with a head torch if you stay for
     blue hour.
+  - Walk the lake system in daylight to scout the rocks and reflections that will work when the light turns. The reserve is home to ibex, chamois, and marmot, dawn to mid-morning is the active window with a 200mm+ lens.
   region: Chamonix, France
   access: Cable car + hike
   effort: Moderate
@@ -4079,26 +3844,6 @@ spots:
   gps:
     lat: 45.984858
     lng: 6.90184
-- id: mighty_range
-  chapter: beyond
-  kicker: HIKE AROUND THE LAKES TO FIND YOUR FRAME
-  title: Mighty Range
-  deck: Same lakes area, different time of day. Daylight walks around Les Chéserys are how you find the compositions for the golden-hour shots.
-  body:
-  - Walk around the lake system during the day to scout compositions. Find the rocks, the reflections, the foreground frames that will work when the light turns. Then come back at sunset or sunrise fully
-    prepared.
-  - Both sunset and sunrise work here. Sunrise puts first light on the range; sunset is warmer but with haze risk from a full day's heating. Morning is usually the cleaner shot.
-  region: Chamonix, France
-  access: Same as Les Chéserys
-  effort: Easy. Scouting
-  best_light: Sunset or sunrise
-  wildCamping:
-    verdict: restricted
-    reason: Same Aiguilles Rouges reserve as Chéserys. Bivouac forbidden by default; designated zones (Lac Blanc, Lac des Chéserys) require online booking. Lac Blanc is closed June 1 – Aug 31 by 2024 prefectural decree.
-  maps_url:
-  image: spots/mighty_range/main.jpg
-  image_credit: xxx
-  pdf: false
 - id: camping_in_cheserys
   chapter: beyond
   kicker: BIVY UP HIGH, ABOVE THE CROWDS
@@ -4121,36 +3866,6 @@ spots:
   gps:
     lat: 45.984858
     lng: 6.90184
-- id: aiguille_rouge_reserve
-  chapter: beyond
-  kicker: PROTECTED TERRAIN, WILDLIFE EVERYWHERE
-  title: Aiguilles Rouges Reserve
-  deck: The Chéserys area sits inside a protected nature reserve. Ibex, chamois, marmot. Real chances if you stay quiet and patient.
-  body:
-  - Never chase wildlife. A 200mm+ lens is what you want; step back and let them approach your line of sight. Mornings are the most active window. Dawn to maybe 10 a.m.
-  - The reserve status means strict rules around camping, drones, and leaving no trace. Read the signs at the cable car station and stick to the rules. It's the reason the place still works.
-  region: Chamonix, France
-  access: Same as Les Chéserys
-  effort: Easy
-  best_light: Early morning
-  wildCamping:
-    verdict: restricted
-    reason: "Réserve Naturelle Nationale des Aiguilles Rouges. Bivouac around Lac Blanc is FORBIDDEN June 1 – August 31 by prefectural decree; Chéserys is the only tolerated zone, with prior online booking required (Chamonix app or bivouac.nature-haute-savoie.fr). 19:00-09:00, one night."
-    canton: France
-  maps_url: https://www.google.com/maps/place/Aiguilles+Rouges+National+Nature+Reserve/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894ccad064d1bd:0x3bfbb3704f53fd8b!8m2!3d45.9843879!4d6.9283192!16s%2Fm%2F0czbfz4
-  image: spots/aiguille_rouge_reserve/main.jpg
-  image_credit: taufiqsaidi_
-  photos:
-  - file: 02.jpg
-    credit: taufiqsaidi_
-    source_type: instagram
-    source_url: "https://www.instagram.com/p/CuHwUvEtm3I/"
-  - file: 04.jpg
-    credit: zimydakid
-    source_type: book
-  gps:
-    lat: 45.9843879
-    lng: 6.9283192
 - id: mont_blanc
   chapter: beyond
   kicker: WESTERN EUROPE'S HIGHEST. WITH A TELE
