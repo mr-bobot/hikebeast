@@ -276,6 +276,188 @@
       max-height: calc(100dvh - var(--topbar-h) - 64px - env(safe-area-inset-bottom) - 130px);
     }
   }
+
+  /* Heart burst on save. Hearts spawn at the heart button's centre and
+   * fan upward in a cone, fading as they go. Pure CSS keyframes — each
+   * heart's --dx/--dy/--rot/--scale/--dur are randomized per spawn. */
+  .flying-hearts-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
+  .flying-heart {
+    position: fixed;
+    width: 28px;
+    height: 28px;
+    margin-left: -14px;
+    margin-top: -14px;
+    color: #ff375f;
+    filter: drop-shadow(0 2px 6px rgba(255,55,95,0.45));
+    animation: heart-fly var(--dur, 900ms) cubic-bezier(.18,.65,.35,1) forwards;
+    will-change: transform, opacity;
+  }
+  .flying-heart svg { width: 100%; height: 100%; display: block; }
+  @keyframes heart-fly {
+    0%   { transform: translate(0,0) scale(0) rotate(0); opacity: 0; }
+    18%  { transform: translate(calc(var(--dx) * 0.18), calc(var(--dy) * 0.18)) scale(var(--scale, 1)) rotate(calc(var(--rot) * 0.2)); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(calc(var(--scale, 1) * 0.45)) rotate(var(--rot)); opacity: 0; }
+  }
+  .act-btn.save.pulsing { animation: save-pulse 360ms cubic-bezier(.2,.7,.3,1); }
+  @keyframes save-pulse {
+    0%   { transform: scale(1); }
+    35%  { transform: scale(1.16); }
+    100% { transform: scale(1); }
+  }
+
+  /* "It's a match" modal · pops once when ≥3 saves cluster within
+   * MATCH_RADIUS_KM of each other (signature-deduped in localStorage so
+   * the same cluster doesn't keep re-popping on subsequent saves). */
+  .match-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 14, 14, 0.55);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9000;
+    padding: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 240ms ease;
+  }
+  .match-overlay.show { opacity: 1; pointer-events: auto; }
+  .match-modal {
+    position: relative;
+    width: min(440px, 100%);
+    max-height: calc(100dvh - 32px);
+    overflow-y: auto;
+    background: var(--paper, #fff);
+    border-radius: 24px;
+    border: 1px solid var(--hairline, rgba(0,0,0,0.08));
+    box-shadow: 0 30px 80px rgba(0,0,0,0.30), 0 8px 24px rgba(0,0,0,0.10);
+    transform: scale(0.92);
+    transition: transform 280ms cubic-bezier(.2,.7,.3,1);
+    padding: 26px 22px 22px;
+  }
+  .match-overlay.show .match-modal { transform: scale(1); }
+  .match-modal .match-banner {
+    text-align: center;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: #ff375f;
+    margin: 4px 0 6px;
+  }
+  .match-modal .match-sub {
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--muted, #6c6c70);
+    letter-spacing: -0.005em;
+    margin: 0 0 16px;
+    line-height: 1.45;
+  }
+  .match-modal .match-sub b { color: var(--fg, #1c1c1e); font-weight: 600; }
+  .match-pills {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .match-pill {
+    border: 1px solid var(--hairline, rgba(0,0,0,0.10));
+    background: #fff;
+    color: var(--fg, #1c1c1e);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .match-pill.active {
+    background: var(--fg, #1c1c1e);
+    color: #fff;
+    border-color: var(--fg, #1c1c1e);
+  }
+  .match-days { display: flex; flex-direction: column; gap: 12px; }
+  .match-day {
+    border: 1px solid var(--hairline, rgba(0,0,0,0.08));
+    border-radius: 14px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.6);
+  }
+  .match-day-title {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted, #6c6c70);
+    margin: 0 0 8px;
+  }
+  .match-day-list {
+    display: flex; flex-direction: column; gap: 8px;
+    margin: 0; padding: 0; list-style: none;
+  }
+  .match-day-list li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; color: var(--fg, #1c1c1e); letter-spacing: -0.005em;
+  }
+  .match-day-list li .num {
+    flex: 0 0 22px; height: 22px;
+    border-radius: 999px;
+    background: rgba(255,55,95,0.12);
+    color: #ff375f;
+    font-size: 11px; font-weight: 700;
+    display: grid; place-items: center;
+  }
+  .match-day-list li .name {
+    flex: 1 1 auto; min-width: 0;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .match-day-list li .region {
+    font-size: 11px; color: var(--muted, #6c6c70);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .match-actions {
+    display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap;
+  }
+  .match-actions a, .match-actions button {
+    flex: 1 1 0;
+    height: 46px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 999px;
+    font-size: 14px; font-weight: 500;
+    font-family: inherit;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .match-actions .btn-primary {
+    background: var(--fg, #1c1c1e); color: #fff;
+  }
+  .match-actions .btn-ghost {
+    background: #fff; color: var(--fg, #1c1c1e);
+    border: 1px solid var(--hairline, rgba(0,0,0,0.10));
+  }
+  .match-close {
+    position: absolute; top: 12px; right: 12px;
+    width: 36px; height: 36px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.06);
+    display: grid; place-items: center;
+    color: var(--fg, #1c1c1e);
+    border: 0;
+    cursor: pointer;
+  }
+  .match-close svg { width: 16px; height: 16px; }
 </style>
 </head>
 <body>
@@ -388,6 +570,246 @@
       [out[i], out[j]] = [out[j], out[i]];
     }
     return out;
+  }
+
+  // ── Heart burst on save ─────────────────────────────────────────
+  // Each save (drag right, heart-tap, or right-arrow key) spawns a small
+  // cone of hearts flying upward from the heart button. Pure CSS keyframes
+  // driven by per-heart CSS vars; we just append + cleanup in JS.
+  const HEART_SVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+  function ensureHeartLayer() {
+    let layer = document.querySelector('.flying-hearts-layer');
+    if (!layer) {
+      layer = document.createElement('div');
+      layer.className = 'flying-hearts-layer';
+      document.body.appendChild(layer);
+    }
+    return layer;
+  }
+  function emitHearts(n) {
+    const btn = document.getElementById('saveBtn');
+    if (!btn) return;
+    const r = btn.getBoundingClientRect();
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    const layer = ensureHeartLayer();
+    const count = n || 7;
+    for (let i = 0; i < count; i++) {
+      const h = document.createElement('div');
+      h.className = 'flying-heart';
+      h.innerHTML = HEART_SVG;
+      h.style.left = cx + 'px';
+      h.style.top = cy + 'px';
+      // Fan upward: angle ~ -90deg ±~85deg, distance 90-180px.
+      const angle = (-Math.PI / 2) + (Math.random() - 0.5) * (Math.PI * 0.95);
+      const dist  = 90 + Math.random() * 90;
+      const dx = Math.cos(angle) * dist;
+      const dy = Math.sin(angle) * dist;
+      const rot = (Math.random() - 0.5) * 80;
+      const scale = 0.7 + Math.random() * 0.7;
+      const dur = 800 + Math.random() * 500;
+      h.style.setProperty('--dx', dx + 'px');
+      h.style.setProperty('--dy', dy + 'px');
+      h.style.setProperty('--rot', rot + 'deg');
+      h.style.setProperty('--scale', scale);
+      h.style.setProperty('--dur', dur + 'ms');
+      layer.appendChild(h);
+      setTimeout(() => h.remove(), dur + 80);
+    }
+    // Replay the button pulse: remove → reflow → re-add.
+    btn.classList.remove('pulsing');
+    void btn.offsetWidth;
+    btn.classList.add('pulsing');
+    setTimeout(() => btn.classList.remove('pulsing'), 380);
+  }
+
+  // ── "It's a match" journey detector ─────────────────────────────
+  // After every save we look for a cluster of saved spots within
+  // MATCH_RADIUS_KM of each other. If ≥ MATCH_MIN_CLUSTER spots share
+  // a cluster *and* this exact set hasn't been shown before, we pop a
+  // modal with a 1/2/3-day journey suggestion (stops ordered via a
+  // greedy nearest-neighbour walk).
+  const MATCH_SHOWN_KEY = 'hb:matchShown:v1';
+  const MATCH_RADIUS_KM = 60;
+  const MATCH_MIN_CLUSTER = 3;
+
+  function haversineKm(lat1, lon1, lat2, lon2) {
+    const toRad = d => d * Math.PI / 180;
+    const R = 6371;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a = Math.sin(dLat / 2) ** 2 +
+              Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+              Math.sin(dLon / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(a));
+  }
+  function nearestNeighborWalk(spots) {
+    if (spots.length <= 2) return spots.slice();
+    const remaining = spots.slice();
+    const out = [remaining.shift()];
+    while (remaining.length) {
+      const last = out[out.length - 1];
+      let bi = 0, bd = Infinity;
+      for (let i = 0; i < remaining.length; i++) {
+        const d = haversineKm(last.lat, last.lon, remaining[i].lat, remaining[i].lon);
+        if (d < bd) { bd = d; bi = i; }
+      }
+      out.push(remaining.splice(bi, 1)[0]);
+    }
+    return out;
+  }
+  function readMatchShown() {
+    try {
+      const raw = localStorage.getItem(MATCH_SHOWN_KEY);
+      const v = raw ? JSON.parse(raw) : [];
+      return Array.isArray(v) ? v : [];
+    } catch { return []; }
+  }
+  function recordMatchShown(sig) {
+    const list = readMatchShown();
+    if (list.includes(sig)) return false;
+    list.push(sig);
+    while (list.length > 60) list.shift();
+    try { localStorage.setItem(MATCH_SHOWN_KEY, JSON.stringify(list)); } catch {}
+    return true;
+  }
+  function clusterFromSeed(seed, savedSpots) {
+    // Greedy expand: keep adding any saved spot within MATCH_RADIUS_KM
+    // of *any* spot already in the cluster, until stable.
+    const cluster = [seed];
+    const inCluster = new Set([window.HB.spotKey(seed)]);
+    let grew = true;
+    while (grew) {
+      grew = false;
+      for (const s of savedSpots) {
+        const k = window.HB.spotKey(s);
+        if (!k || inCluster.has(k)) continue;
+        for (const c of cluster) {
+          if (haversineKm(s.lat, s.lon, c.lat, c.lon) <= MATCH_RADIUS_KM) {
+            cluster.push(s);
+            inCluster.add(k);
+            grew = true;
+            break;
+          }
+        }
+      }
+    }
+    return cluster;
+  }
+  function checkForMatch(seedKey) {
+    const savedKeys = window.HB.favorites.list();
+    if (savedKeys.length < MATCH_MIN_CLUSTER) return;
+    const savedSpots = savedKeys
+      .map(k => window.HB.spots.get(k))
+      .filter(s => s && typeof s.lat === 'number' && typeof s.lon === 'number');
+    if (savedSpots.length < MATCH_MIN_CLUSTER) return;
+    const seed = window.HB.spots.get(seedKey);
+    if (!seed || typeof seed.lat !== 'number') return;
+    const cluster = clusterFromSeed(seed, savedSpots);
+    if (cluster.length < MATCH_MIN_CLUSTER) return;
+    const sig = cluster.map(s => window.HB.spotKey(s)).filter(Boolean).sort().join('|');
+    if (!sig) return;
+    if (!recordMatchShown(sig)) return;
+    showMatchModal(nearestNeighborWalk(cluster));
+  }
+  function regionLabel(spots) {
+    const counts = {};
+    for (const s of spots) {
+      const r = REGIONS[s.chapter] || s.chapter_id || '?';
+      counts[r] = (counts[r] || 0) + 1;
+    }
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    if (!sorted.length) return 'Switzerland';
+    return sorted.length === 1
+      ? sorted[0][0]
+      : `${sorted[0][0]} & ${sorted[1][0]}`;
+  }
+  function splitIntoDays(arr, days) {
+    const n = arr.length;
+    if (days <= 1) return [arr];
+    const per = Math.ceil(n / days);
+    const out = [];
+    for (let i = 0; i < days; i++) {
+      const slice = arr.slice(i * per, (i + 1) * per);
+      if (slice.length) out.push(slice);
+    }
+    return out;
+  }
+  function showMatchModal(orderedSpots) {
+    const n = orderedSpots.length;
+    const dayOptions = [1];
+    if (n >= 3) dayOptions.push(2);
+    if (n >= 5) dayOptions.push(3);
+    let activeDays = dayOptions[Math.min(1, dayOptions.length - 1)] || 1;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'match-overlay';
+    overlay.innerHTML = `
+      <div class="match-modal" role="dialog" aria-modal="true" aria-label="Perfect journey match">
+        <button class="match-close" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <h2 class="match-banner">It's a match.</h2>
+        <p class="match-sub">${n} of your saves cluster around <b>${esc(regionLabel(orderedSpots))}</b>. Here's a tour shaped from them.</p>
+        <div class="match-pills"></div>
+        <div class="match-days"></div>
+        <div class="match-actions">
+          <a class="btn-primary" href="../saved/">Open saved</a>
+          <button type="button" class="btn-ghost" data-close>Keep swiping</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+
+    const pillsBox = overlay.querySelector('.match-pills');
+    for (const d of dayOptions) {
+      const p = document.createElement('button');
+      p.type = 'button';
+      p.className = 'match-pill' + (d === activeDays ? ' active' : '');
+      p.textContent = d === 1 ? '1 day' : `${d} days`;
+      p.addEventListener('click', () => {
+        activeDays = d;
+        pillsBox.querySelectorAll('.match-pill').forEach(el => el.classList.toggle('active', el === p));
+        paintDays();
+      });
+      pillsBox.appendChild(p);
+    }
+
+    const daysBox = overlay.querySelector('.match-days');
+    function paintDays() {
+      const buckets = splitIntoDays(orderedSpots, activeDays);
+      daysBox.innerHTML = buckets.map((bucket, i) => `
+        <div class="match-day">
+          <h3 class="match-day-title">${activeDays > 1 ? `Day ${i + 1}` : 'Your day'}</h3>
+          <ol class="match-day-list">
+            ${bucket.map((s, j) => `
+              <li>
+                <span class="num">${j + 1}</span>
+                <span class="name">${esc(s.title)}</span>
+                <span class="region">${esc(REGIONS[s.chapter] || s.chapter_id || '')}</span>
+              </li>
+            `).join('')}
+          </ol>
+        </div>
+      `).join('');
+    }
+    paintDays();
+
+    function close() {
+      overlay.classList.remove('show');
+      setTimeout(() => overlay.remove(), 280);
+    }
+    overlay.querySelector('.match-close').addEventListener('click', close);
+    overlay.querySelector('[data-close]').addEventListener('click', close);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', function escClose(e) {
+      if (e.key === 'Escape') {
+        document.removeEventListener('keydown', escClose);
+        close();
+      }
+    });
+
+    requestAnimationFrame(() => overlay.classList.add('show'));
   }
 
   let queue = buildQueue();
@@ -576,6 +998,11 @@
       // state; "save" also flips the favorite via the favorites façade.
       window.HB.swipes.record(k, verdict);
     }
+    if (verdict === 'save') {
+      // Hearts puff out of the heart button as soon as the verdict is
+      // committed (drag, button-tap, or right-arrow all land here).
+      emitHearts();
+    }
     card.classList.add('fly-out');
     const dir = verdict === 'save' ? 1 : -1;
     const stamp = card.querySelector('.stamp.' + verdict);
@@ -587,6 +1014,9 @@
     setTimeout(() => {
       queue.shift();
       renderDeck();
+      // Check after the queue updates so favorites.list() reflects the
+      // just-saved spot (favorites.set fires synchronously inside record).
+      if (verdict === 'save' && k) checkForMatch(k);
     }, 290);
   }
 

@@ -2851,6 +2851,24 @@
   };
   W.HB.rel = REL;
 
+  // ── Haptics ───────────────────────────────────────────────────────────
+  // A short tap-buzz on every click. navigator.vibrate is honoured on
+  // Android Chrome/Firefox; iOS Safari has no web vibrate API today and
+  // silently ignores the call, so iPhone users get no buzz here. Cheap
+  // (10ms or less) and a no-op when unsupported, so safe to fire on
+  // every click site-wide.
+  W.HB.haptic = function (ms = 8) {
+    try {
+      if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
+        navigator.vibrate(ms);
+      }
+    } catch {}
+  };
+  // Capture phase so listeners that stopPropagation later still get the
+  // buzz, and so a buzz fires even when the click target is non-interactive
+  // (matches the "every click" intent without needing tag heuristics).
+  document.addEventListener('click', () => W.HB.haptic(8), true);
+
   // ── Photo URL helpers ─────────────────────────────────────────────────
   // The derivative ladder lives at /full/img/derivatives/<photoId>/wXXX.webp
   // for widths 160/400/1000/1800/2800. Spots seeded from the legacy sidecars
