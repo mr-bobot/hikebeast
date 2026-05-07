@@ -1194,19 +1194,21 @@ body[data-page="spot-detail"] .specs {
   grid-template-columns: 1fr;
 }
 
-/* Mobile: the chapter intro card (.slide-cover) spans edge-to-edge.
- * The .viewer has 22px horizontal padding to give chapter spot cards
- * breathing room, but the hero card looks better full-width — negative
- * margin escapes the viewer's gutter. Border + shadow off too so the
- * card reads as a hero band instead of a contained panel. */
+/* Mobile: the chapter intro card (.slide-cover) spans edge-to-edge
+ * AND flush against the top of the viewport. The .viewer has 22px
+ * horizontal padding (= breathing room for spot cards) and 28px top
+ * padding (= breathing room above the first card on chapter pages
+ * where there's a topbar). The hero card looks better full-bleed —
+ * negative margins on all four sides escape both gutters; explicit
+ * width = 100% + (2 × 22px) gutter so the .slide base rule's
+ * `width: 100%` doesn't constrain the card to the inner column.
+ * Border + shadow off too. */
 @media (max-width: 759px) {
   .slide-cover {
-    margin-left: -22px;
-    margin-right: -22px;
+    margin: -28px -22px 0;
+    width: calc(100% + 44px);
     border-radius: 0;
-    border-left: 0;
-    border-right: 0;
-    border-top: 0;
+    border: 0;
     box-shadow: none;
   }
 }
@@ -1469,18 +1471,15 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 @media (min-width: 1000px) {
   .cl-body {
     /* Figma reference (1264 × 711 card):
-     *   left/right padding = 59 → 4.67cqi
-     *   top    padding     = 166 → 13.13cqi
-     *   bottom padding     = 154 → 12.18cqi
-     * cqi units scale all four with card width so the rhythm holds
-     * at every viewport. The Figma "88 gap between subhead and
-     * specs" emerges naturally — we anchor .cl-specs to the bottom
-     * via margin-top:auto, so the whitespace between subhead and
-     * specs is whatever remains after content, padding, and the
-     * specs+maps tail. With Fulberg-length copy it lands at ~88
-     * (the Figma case); with a long title or 3-line deck it
-     * compresses. */
-    padding: 13.13cqi 4.67cqi 12.18cqi 4.67cqi;
+     *   left/right       = 59  → 4.67cqi
+     *   top (kicker)     = 166 → 13.13cqi
+     *   bottom (maps)    = 154 → 12.18cqi
+     * Top/bottom averaged (= 12.65cqi ≈ 160px) so the kicker and
+     * "Open in Maps" sit equidistant from the card border — the
+     * 0.95cqi mismatch in Figma read as the layout drifting toward
+     * the top. The 88 gap between subhead and specs still emerges
+     * naturally via .cl-specs { margin-top: auto } below. */
+    padding: 12.65cqi 4.67cqi 12.65cqi 4.67cqi;
     /* No global gap — element-to-element spacing is set per-element
      * (margin-top: auto on .cl-specs further down creates the
      * central whitespace; kicker/title/subhead use their own small
