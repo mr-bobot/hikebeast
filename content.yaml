@@ -80,54 +80,10 @@ front_matter:
   - eastern
   - ticino
   - beyond
-- id: my_top_6_famous_spots
-  kind: top_six
-  kicker: THE CLASSICS
-  title: My Top 6 Famous Spots
-  deck: The famous spots that actually deliver. Go early, go off-season, or go after the day-trippers leave.
-  tiles:
-  - name: Schäfler
-    image: spots/schafler/main.jpg
-    credit: leon.helg
-  - name: Oeschinensee
-    image: spots/oeschinensee/main.jpg
-    credit: leon.helg
-  - name: Seealpsee
-    image: spots/seealpsee/main.jpg
-    credit: leon.helg
-  - name: Fälensee
-    image: spots/falensee/main.jpg
-    credit: leon.helg
-  - name: Saxer Lücke
-    image: spots/saxer_lucke/main.jpg
-    credit: leon.helg
-  - name: Riffelsee
-    image: spots/riffelsee/main.jpg
-    credit: leon.helg
-- id: my_top_6_hidden_gems
-  kind: top_six
-  kicker: THE ONES I ACTUALLY WANT TO KEEP SECRET
-  title: My Top 6 Gems of Switzerland
-  deck: Not on your typical tourist map but insanely beautiful.
-  tiles:
-  - name: Batöni
-    image: spots/batoni_wasserfallarena/main.jpg
-    credit: leon.helg
-  - name: Tannhorn
-    image: spots/tannhorn/main.jpg
-    credit: leon.helg
-  - name: Klausenpass
-    image: spots/klausenpass/main.jpg
-    credit: leon.helg
-  - name: Fulberg
-    image: spots/fulberg/main.jpg
-    credit: leon.helg
-  - name: Pic de Jallouvre
-    image: spots/pic_de_jallouvre/main.jpg
-    credit: leon.helg
-  - name: Jöriseen
-    image: spots/joriseen/main.jpg
-    credit: leon.helg
+# `my_top_6_famous_spots` and `my_top_6_hidden_gems` were `kind: top_six`
+# entries that rendered as inline grids on the Introduction chapter.
+# They've moved to dedicated collection pages (/full/famous-gems/ and
+# /full/hidden-gems/) so the chapter view stays intro-only.
 chapters:
 - id: central
   number: '01'

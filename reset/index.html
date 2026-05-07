@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Set new password · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+<link rel="apple-touch-icon" href="/images/favicon.jpg" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --fg: #1d1d1f; --muted: #6e6e73;
+    --hairline: rgba(0,0,0,0.08); --hairline-strong: rgba(0,0,0,0.14);
+    --accent: #0071e3; --error: #ff3b30; --success: #34c759;
+    --radius-card: 22px; --radius-btn: 980px;
+  }
+  body {
+    min-height: 100dvh; display: grid; place-items: center;
+    padding: 24px; background: #fbfbfc; color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased; letter-spacing: -0.01em;
+    overflow: hidden; position: relative;
+  }
+  body::before {
+    content: ''; position: fixed; inset: -120px;
+    z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(460px 420px at 18% 22%, rgba(0, 113, 227, 0.45) 0%, transparent 70%),
+      radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.38) 0%, transparent 72%),
+      radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.40) 0%, transparent 70%),
+      radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.55) 0%, transparent 75%);
+    filter: blur(70px) saturate(1.1); opacity: 0.9;
+  }
+  .card {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 380px;
+    padding: 36px 32px 32px;
+    border-radius: var(--radius-card);
+    background: rgba(255,255,255,0.86);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    backdrop-filter: saturate(180%) blur(18px);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.10), 0 4px 14px rgba(0,0,0,0.04);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .brand img {
+    width: 32px; height: 32px; border-radius: 999px;
+    object-fit: cover; object-position: 70% 45%;
+  }
+  .brand b {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
+  }
+  h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 26px; line-height: 1.1; letter-spacing: -0.025em;
+    margin: 0 0 8px; font-weight: 600;
+  }
+  p.lead { margin: 0 0 22px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+  form { display: flex; flex-direction: column; gap: 10px; }
+  input {
+    width: 100%; height: 50px; padding: 0 18px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--hairline);
+    background: #fff; color: var(--fg);
+    font-size: 16px; font-family: inherit; outline: none;
+    letter-spacing: -0.01em;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(0,113,227,0.15); }
+  button.submit {
+    margin-top: 4px; height: 50px;
+    border-radius: var(--radius-btn);
+    border: 0; background: var(--fg); color: #fff;
+    font-size: 16px; font-weight: 500; letter-spacing: -0.01em;
+    cursor: pointer; font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 120ms ease, transform 100ms ease;
+  }
+  button.submit:hover { opacity: 0.92; }
+  button.submit:active { transform: scale(0.98); }
+  button.submit:disabled { opacity: 0.5; cursor: progress; }
+  .footnote {
+    margin: 24px 0 0; color: var(--muted);
+    font-size: 11px; text-align: center; letter-spacing: 0;
+  }
+  .footnote a { color: var(--muted); text-decoration: underline; }
+  .err-msg {
+    margin: 12px 0 0;
+    padding: 12px 14px; border-radius: 14px;
+    background: rgba(255, 59, 48, 0.08);
+    color: #c4302b; font-size: 13px; line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">
+      <img src="/images/avatar.jpg" alt="" />
+      <b>Hikebeast · Gems of Switzerland</b>
+    </div>
+    <h1 id="title">Set a new password</h1>
+    <p class="lead" id="lead">Pick a password (at least 8 characters). You'll be signed in right after.</p>
+
+    <form id="resetForm" novalidate>
+      <input id="newPassword" type="password" placeholder="New password"
+             autocomplete="new-password" minlength="8" required />
+      <button type="submit" class="submit" id="submitBtn">Set password &amp; sign in</button>
+    </form>
+
+    <p class="err-msg" id="errMsg" hidden></p>
+    <p class="footnote">Need a fresh link? <a href="/forgot/">Request a new one</a></p>
+  </main>
+
+  <script>
+    (function () {
+      const form = document.getElementById('resetForm');
+      const btn  = document.getElementById('submitBtn');
+      const newPw = document.getElementById('newPassword');
+      const errMsg = document.getElementById('errMsg');
+      const title = document.getElementById('title');
+      const lead = document.getElementById('lead');
+
+      const params = new URLSearchParams(location.search);
+      const token = params.get('token') || '';
+
+      if (!token) {
+        // No token in URL: the user typed /reset/ directly. Show a useful
+        // message instead of a broken form.
+        title.textContent = 'Link not found';
+        lead.textContent = 'This link is missing the reset token. Request a fresh one and try again.';
+        form.hidden = true;
+        return;
+      }
+
+      function showError(msg) {
+        errMsg.hidden = false;
+        errMsg.textContent = msg || 'Could not reset the password. Try again.';
+      }
+      newPw.addEventListener('input', () => { errMsg.hidden = true; });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errMsg.hidden = true;
+        const value = newPw.value;
+        if (!value || value.length < 8) {
+          showError('Password must be at least 8 characters.');
+          return;
+        }
+        btn.disabled = true; btn.textContent = 'Setting…';
+
+        try {
+          const res = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action:      'redeem_password_reset',
+              token:       token,
+              newPassword: value,
+            }),
+          });
+          const data = await res.json().catch(() => ({}));
+
+          if (res.ok && data.ok && data.sessionToken) {
+            // Same key + raw-string format /login/ writes (NOT JSON).
+            try { localStorage.setItem('hb:session:v1', data.sessionToken); } catch {}
+            // hb_full_auth cookie was set by the response. Off to /full/.
+            window.location.replace('/full/');
+            return;
+          }
+
+          showError((data && data.message) || 'This reset link is invalid or expired. Request a fresh one.');
+        } catch {
+          showError('Network error. Try again.');
+        } finally {
+          btn.disabled = false; btn.textContent = 'Set password & sign in';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

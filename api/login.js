@@ -25,10 +25,18 @@
 // itself; we just relay them.
 
 import crypto from 'node:crypto';
+import { Resend } from 'resend';
 
 const COOKIE_NAME  = 'hb_full_auth';
 const COOKIE_LABEL = 'hb_full_auth_v1';
 const MAX_AGE_DAYS = 30;
+
+// Same constants used by api/checkout/webhook.js so the reset email
+// inherits the brand voice / sender / styling without duplicating them.
+const RESEND_FROM     = 'Leon · Hikebeast <leon@hikebeast.ch>';
+const RESEND_REPLY_TO = 'leon@hikebeast.ch';
+const SITE            = 'https://hikebeast.ch';
+const FONT            = "-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Arial,sans-serif";
 
 // ── Helpers ───────────────────────────────────────────────────────────────
 
@@ -82,6 +90,109 @@ async function convexMutation(convexUrl, path, args) {
   return json?.value;
 }
 
+// Password-reset email body. Plain enough that an inbox preview reads
+// "Reset your Hikebeast password — open this link" without a fight.
+function resetEmailHtml({ resetUrl, displayName }) {
+  const greeting = displayName ? `Hey ${displayName},` : 'Hey,';
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Reset your Hikebeast password</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f5f7;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f5f5f7;padding:32px 16px;">
+    <tr><td align="center">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560" style="max-width:560px;background:#ffffff;border-radius:20px;overflow:hidden;">
+        <tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
+          <p style="margin:0 0 16px;font-size:16px;">${greeting}</p>
+          <p style="margin:0 0 24px;font-size:16px;">Tap the button below to set a new password for your Swiss Gems account. The link expires in 30 minutes.</p>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;"><tr>
+            <td style="border-radius:999px;background:#1d1d1f;">
+              <a href="${resetUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Set a new password</a>
+            </td>
+          </tr></table>
+          <p style="margin:0 0 24px;font-size:14px;color:#6e6e73;">If the button doesn't work, copy this URL into your browser:<br /><span style="word-break:break-all;">${resetUrl}</span></p>
+          <p style="margin:0;font-size:14px;color:#6e6e73;">Didn't ask for this? You can safely ignore this email — your password stays the same.</p>
+        </td></tr>
+      </table>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560" style="max-width:560px;margin-top:24px;"><tr>
+        <td align="center" style="font-family:${FONT};font-size:12px;color:#6e6e73;line-height:1.6;">
+          <div>© Hikebeast</div>
+          <div><a href="${SITE}/imprint.html" style="color:#6e6e73;text-decoration:none;">Imprint</a> · <a href="${SITE}/privacy.html" style="color:#6e6e73;text-decoration:none;">Privacy</a></div>
+        </td>
+      </tr></table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+// Email-change notifications. Sent on any successful email change so a
+// stolen-session attacker who pivots their address gets caught by the
+// old-inbox owner. Twin templates -- one to each address -- are
+// near-identical but framed differently (security alert vs. confirmation).
+function emailChangeOldHtml({ oldEmail, newE }) {
+  return `<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Your Hikebeast account email was changed</title></head>
+<body style="margin:0;padding:0;background:#f5f5f7;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f5f5f7;padding:32px 16px;"><tr><td align="center">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560" style="max-width:560px;background:#ffffff;border-radius:20px;overflow:hidden;"><tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
+<p style="margin:0 0 16px;font-size:16px;">Hey,</p>
+<p style="margin:0 0 16px;font-size:16px;">The email on your Hikebeast account was changed from <strong>${oldEmail}</strong> to <strong>${newE}</strong>. Future receipts and recovery emails will go to the new address.</p>
+<p style="margin:0 0 24px;font-size:15px;color:#6e6e73;">Wasn't you? Reply to this email and I'll lock the account while we sort it out.</p>
+<p style="margin:0;font-size:14px;color:#6e6e73;">Leon · Hikebeast</p>
+</td></tr></table></td></tr></table></body></html>`;
+}
+function emailChangeOldText({ oldEmail, newE }) {
+  return `Hey,
+
+The email on your Hikebeast account was changed from ${oldEmail} to ${newE}. Future receipts and recovery emails will go to the new address.
+
+Wasn't you? Reply to this email and I'll lock the account.
+
+Leon · Hikebeast
+`;
+}
+function emailChangeNewHtml({ newE }) {
+  return `<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Your Hikebeast account email is now this address</title></head>
+<body style="margin:0;padding:0;background:#f5f5f7;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f5f5f7;padding:32px 16px;"><tr><td align="center">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560" style="max-width:560px;background:#ffffff;border-radius:20px;overflow:hidden;"><tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
+<p style="margin:0 0 16px;font-size:16px;">Hey,</p>
+<p style="margin:0 0 16px;font-size:16px;">This is now the email on your Hikebeast account. Future receipts and password-reset links will land here.</p>
+<p style="margin:0 0 24px;font-size:15px;color:#6e6e73;">If you didn't make this change, reply to this email so I can roll it back.</p>
+<p style="margin:0;font-size:14px;color:#6e6e73;">Leon · Hikebeast</p>
+</td></tr></table></td></tr></table></body></html>`;
+}
+function emailChangeNewText({ newE }) {
+  return `Hey,
+
+This is now the email on your Hikebeast account. Future receipts and password-reset links will land here.
+
+If you didn't make this change, reply to this email so I can roll it back.
+
+Leon · Hikebeast
+`;
+}
+
+function resetEmailText({ resetUrl, displayName }) {
+  const greeting = displayName ? `Hey ${displayName},` : 'Hey,';
+  return `${greeting}
+
+Tap this link to set a new password for your Swiss Gems account. It expires in 30 minutes.
+
+${resetUrl}
+
+Didn't ask for this? You can safely ignore this email -- your password stays the same.
+
+© Hikebeast
+${SITE}/imprint.html · ${SITE}/privacy.html
+`;
+}
+
 // ── Handler ───────────────────────────────────────────────────────────────
 
 export default async function handler(req, res) {
@@ -91,6 +202,190 @@ export default async function handler(req, res) {
   }
 
   const body = await readJsonBody(req);
+
+  // ── Flow 4: password-reset request (email a magic link) ────────────────
+  // Body: { action: "request_password_reset", email }
+  // Response is ALWAYS {ok: true} regardless of whether `email` matches a
+  // user. The mutation already returns {sent: false} for unknown emails;
+  // we drop that bit on the floor and tell the caller "ok" either way so
+  // a probing attacker can't enumerate accounts.
+  if (body?.action === 'request_password_reset') {
+    const convexUrl = process.env.CONVEX_URL;
+    if (!convexUrl) {
+      res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+      return res.status(503).json({ error: 'auth_not_configured' });
+    }
+    const email = typeof body.email === 'string' ? body.email.trim() : '';
+    if (!email || !email.includes('@')) {
+      // Same shape as success so callers can't distinguish bad-input from
+      // unknown-email.
+      res.setHeader('Cache-Control', 'no-store');
+      return res.status(200).json({ ok: true });
+    }
+
+    let result;
+    try {
+      result = await convexMutation(convexUrl, 'auth:requestPasswordReset', { email });
+    } catch (err) {
+      console.error('requestPasswordReset failed:', err?.message || err);
+      // Still return ok to keep the response shape constant. Operator
+      // can read the log if a real failure pattern emerges.
+      res.setHeader('Cache-Control', 'no-store');
+      return res.status(200).json({ ok: true });
+    }
+
+    if (result?.sent && result?.token) {
+      // Derive the site URL from request headers so a reset triggered
+      // from the Vercel preview deploy emails a link pointing at THAT
+      // preview (the lambda there talks to staging Convex, where the
+      // token was minted). On prod, host = hikebeast.ch and the link
+      // points at the production page. Origin > host > hardcoded SITE.
+      const reqOrigin = typeof req.headers.origin === 'string' && /^https?:\/\//.test(req.headers.origin)
+        ? req.headers.origin
+        : '';
+      const reqHost = typeof req.headers.host === 'string' ? req.headers.host : '';
+      const baseUrl = reqOrigin || (reqHost ? `https://${reqHost}` : SITE);
+      const resetUrl = `${baseUrl}/reset/?token=${encodeURIComponent(result.token)}`;
+      const displayName = (result.handle || result.username || '').toString().trim();
+      try {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        const { error } = await resend.emails.send({
+          from:    RESEND_FROM,
+          to:      result.email,
+          replyTo: RESEND_REPLY_TO,
+          subject: 'Reset your Hikebeast password',
+          html:    resetEmailHtml({ resetUrl, displayName }),
+          text:    resetEmailText({ resetUrl, displayName }),
+        });
+        if (error) console.error('Resend reset email error:', error);
+      } catch (err) {
+        console.error('Resend reset email threw:', err?.message || err);
+      }
+    }
+
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json({ ok: true });
+  }
+
+  // ── Flow 5: password-reset redeem (consume the magic link) ─────────────
+  // Body: { action: "redeem_password_reset", token, newPassword }
+  // On success: returns the new sessionToken + sets hb_full_auth so the
+  // /reset/ page can drop the buyer straight into /full/ signed-in.
+  if (body?.action === 'redeem_password_reset') {
+    const convexUrl = process.env.CONVEX_URL;
+    const previewPassRedeem = process.env.PREVIEW_PASS;
+    if (!convexUrl || !previewPassRedeem) {
+      res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+      return res.status(503).json({ error: 'auth_not_configured' });
+    }
+    const token       = typeof body.token === 'string' ? body.token : '';
+    const newPassword = typeof body.newPassword === 'string' ? body.newPassword : '';
+    if (!token || !newPassword) {
+      return res.status(400).json({ error: 'missing_fields' });
+    }
+
+    let result;
+    try {
+      result = await convexMutation(convexUrl, 'auth:redeemPasswordReset', { token, newPassword });
+    } catch (err) {
+      const msg = (err && err.message) ? String(err.message) : '';
+      // Surface the user-friendly Convex error verbatim so the page can
+      // show "expired" / "already used" instead of a generic failure.
+      const cleaned = msg.replace(/^.*?Error:\s*/, '').replace(/\s+at\s+handler.*$/, '');
+      res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+      return res.status(400).json({ error: 'reset_failed', message: cleaned });
+    }
+
+    setSessionCookie(res, tokenFor(previewPassRedeem), MAX_AGE_DAYS * 24 * 60 * 60);
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json({
+      ok:           true,
+      sessionToken: result.sessionToken,
+      user:         result.user,
+    });
+  }
+
+  // ── Flow 6: change email + notify both addresses ───────────────────────
+  // Body: { action: "change_email", sessionToken, newEmail }
+  // Calls auth:updateEmail (sessionToken-gated) and on a real change
+  // fires two notification emails: a security alert to the OLD address
+  // ("your email was changed -- if not you, reply") and a confirmation
+  // to the NEW address. Both fire-and-forget; we don't fail the request
+  // if Resend is down.
+  if (body?.action === 'change_email') {
+    const convexUrl = process.env.CONVEX_URL;
+    if (!convexUrl) {
+      res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+      return res.status(503).json({ error: 'auth_not_configured' });
+    }
+    const sessionToken = typeof body.sessionToken === 'string' ? body.sessionToken : '';
+    const newEmail     = typeof body.newEmail     === 'string' ? body.newEmail     : '';
+    if (!sessionToken || !newEmail) {
+      return res.status(400).json({ error: 'missing_fields' });
+    }
+
+    let result;
+    try {
+      result = await convexMutation(convexUrl, 'auth:updateEmail', {
+        sessionToken, newEmail,
+      });
+    } catch (err) {
+      const msg = (err && err.message) ? String(err.message) : '';
+      const cleaned = msg.replace(/^.*?Error:\s*/, '').replace(/\s+at\s+handler.*$/, '');
+      res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+      return res.status(400).json({ error: 'change_failed', message: cleaned });
+    }
+
+    let notified = false;
+    if (result?.changed && result.email) {
+      const oldEmail = result.oldEmail || '';
+      const newE     = result.email;
+      try {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        // Send to NEW first so even if Resend rate-limits we got the
+        // confirmation in. Old-address security alert is the second
+        // priority but also valuable.
+        const sends = [];
+        sends.push(resend.emails.send({
+          from:    RESEND_FROM,
+          to:      newE,
+          replyTo: RESEND_REPLY_TO,
+          subject: 'Your Hikebeast account email is now this address',
+          html:    emailChangeNewHtml({ newE }),
+          text:    emailChangeNewText({ newE }),
+        }));
+        if (oldEmail && oldEmail !== newE) {
+          sends.push(resend.emails.send({
+            from:    RESEND_FROM,
+            to:      oldEmail,
+            replyTo: RESEND_REPLY_TO,
+            subject: 'Your Hikebeast account email was changed',
+            html:    emailChangeOldHtml({ oldEmail, newE }),
+            text:    emailChangeOldText({ oldEmail, newE }),
+          }));
+        }
+        const results = await Promise.allSettled(sends);
+        notified = results.some(r => r.status === 'fulfilled' && !r.value?.error);
+        results.forEach((r) => {
+          if (r.status === 'rejected') console.error('email-change Resend rejected:', r.reason);
+          else if (r.value?.error)     console.error('email-change Resend error:', r.value.error);
+        });
+      } catch (err) {
+        console.error('email-change Resend threw:', err?.message || err);
+      }
+    }
+
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json({
+      ok:       true,
+      email:    result?.email || newEmail,
+      changed:  !!result?.changed,
+      notified,
+    });
+  }
 
   // ── Flow 3: logout ──────────────────────────────────────────────────────
   if (body?.action === 'logout') {

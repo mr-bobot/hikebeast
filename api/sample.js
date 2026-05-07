@@ -123,6 +123,51 @@ async function logSignup({ email, firstName, subscriberId, token, sentAt, funnel
   }
 }
 
+// Server-side Meta CAPI `Lead` event. Mirrors `fireCapiPurchase` in
+// `api/checkout/webhook.js`. event_id = the per-signup `token` so a
+// client-side fbq("track","Lead",...) on /free/ (if/when added) dedups
+// against this server-side event. Closes the long-open Meta CAPI TODO
+// from 2026-04-23 -- ad-blockers / iOS privacy were eating ~40-50% of
+// Lead pixel fires; this restores them.
+function sha256Hex(s) {
+  return crypto.createHash("sha256").update(String(s).trim().toLowerCase()).digest("hex");
+}
+
+async function fireCapiLead({ eventId, email, firstName, ipCountry, sourceUrl }) {
+  const pixelId = process.env.META_PIXEL_ID;
+  const accessToken = process.env.META_CAPI_TOKEN;
+  if (!pixelId || !accessToken) return;
+
+  const payload = {
+    data: [{
+      event_name:       "Lead",
+      event_time:       Math.floor(Date.now() / 1000),
+      event_id:         eventId,
+      action_source:    "website",
+      event_source_url: sourceUrl || `${SITE}/free/`,
+      user_data: {
+        em:      email ? [sha256Hex(email)] : undefined,
+        fn:      firstName ? [sha256Hex(firstName)] : undefined,
+        country: ipCountry ? [sha256Hex(ipCountry)] : undefined,
+      },
+    }],
+  };
+
+  try {
+    await fetch(
+      `https://graph.facebook.com/v18.0/${encodeURIComponent(pixelId)}/events?access_token=${encodeURIComponent(accessToken)}`,
+      {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify(payload),
+        signal:  AbortSignal.timeout(5000),
+      },
+    );
+  } catch (err) {
+    console.error("Meta CAPI Lead failed:", err);
+  }
+}
+
 async function createResendContact(email) {
   const audienceId = process.env.RESEND_SEGMENT_ID;
   if (!audienceId) return;
@@ -178,9 +223,22 @@ export default async function handler(req, res) {
       console.error("Resend error:", error);
       return res.status(500).json({ error: "Email failed to send" });
     }
+    // Source URL: use the referer if present (covers /free/ and /de/free/
+     // and any future variant) so Meta groups events sensibly. Falls back
+     // to /free/ when the header is stripped.
+    const referer = typeof req.headers?.referer === "string" ? req.headers.referer : "";
+    const ipCountry = req.headers?.["x-vercel-ip-country"] || "";
+
     const sideEffects = [
       logSignup({ email, firstName, subscriberId: subscriber_id, token, sentAt, funnel: funnel || "", utm }),
       createResendContact(email),
+      fireCapiLead({
+        eventId:   token,         // dedupes with client-side fbq("track","Lead") if added later
+        email,
+        firstName,
+        ipCountry,
+        sourceUrl: referer || `${SITE}/free/`,
+      }),
     ];
     if (subscriber_id) {
       sideEffects.push(

@@ -200,7 +200,7 @@
         id="user"
         name="username"
         type="text"
-        placeholder="Username"
+        placeholder="Username or email"
         autocomplete="username"
         autocapitalize="off"
         autocorrect="off"
@@ -218,7 +218,7 @@
       <button type="submit" class="submit" id="submitBtn">Log in</button>
     </form>
     <p class="error" id="error" role="alert" aria-live="polite">Wrong username or password.</p>
-    <p class="footnote">Stay logged in for 30 days on this device.</p>
+    <p class="footnote">Stay logged in for 30 days on this device. <a href="/forgot/" id="forgotLink">Forgot password?</a></p>
   </main>
 
   <script>
@@ -232,6 +232,20 @@
     // so a successful login restores the originally requested URL.
     const params = new URLSearchParams(window.location.search);
     const next = params.get('next') || '/full/';
+
+    // The /map/success onboarding form sends idempotent re-submitters here
+    // with ?email= so the field pre-fills (Convex auth:signIn already
+    // accepts email OR username via usernameOrEmail). Also forwarded to
+    // /forgot/ if the buyer clicks "Forgot password?" so they don't have
+    // to re-type it.
+    const prefillEmail = params.get('email') || '';
+    if (prefillEmail) {
+      try { u.value = prefillEmail; p.focus(); } catch {}
+      try {
+        const link = document.getElementById('forgotLink');
+        if (link) link.href = '/forgot/?email=' + encodeURIComponent(prefillEmail);
+      } catch {}
+    }
 
     function showError(msg) {
       err.textContent = msg || 'Wrong username or password.';

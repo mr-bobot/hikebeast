@@ -135,6 +135,7 @@ type PublicUser = {
   username: string;
   email: string | null;
   handle: string | null;
+  avatarStorageId: Id<"_storage"> | null;
   isAdmin: boolean;
   createdAt: number;
 };
@@ -145,6 +146,7 @@ function toPublic(u: Doc<"users">): PublicUser {
     username: u.username,
     email: u.email ?? null,
     handle: u.handle ?? null,
+    avatarStorageId: u.avatarStorageId ?? null,
     isAdmin: !!u.isAdmin,
     createdAt: u.createdAt,
   };
@@ -242,12 +244,21 @@ export const signOut = mutation({
 });
 
 // Reactive: pages subscribe to this so the sign-in modal closes / the
-// avatar pill appears as soon as a token is set.
+// avatar pill appears as soon as a token is set. Now also resolves
+// avatarStorageId → avatarUrl so /full/account/ and the social.js FAB
+// can render the user's chosen profile picture without an extra query.
 export const currentUser = query({
   args: { sessionToken: v.optional(v.string()) },
   handler: async (ctx, { sessionToken }) => {
     const u = await userFromSession(ctx, sessionToken);
-    return u ? toPublic(u) : null;
+    if (!u) return null;
+    const base = toPublic(u);
+    let avatarUrl: string | null = null;
+    if (u.avatarStorageId) {
+      try { avatarUrl = await ctx.storage.getUrl(u.avatarStorageId); }
+      catch { avatarUrl = null; }
+    }
+    return { ...base, avatarUrl };
   },
 });
 
@@ -360,6 +371,264 @@ export const adminSetPassword = mutation({
       .collect();
     for (const s of sessions) await ctx.db.delete(s._id);
     return { ok: true as const, sessionsRevoked: sessions.length };
+  },
+});
+
+// ── Account settings (sessionToken-gated, user changes own data) ──────────
+// Three thin mutations the /full/account/ page calls. Each takes the raw
+// sessionToken so the existing userFromSession() resolver gates access --
+// no admin token, no extra auth machinery. Username + email collisions
+// throw so the page can show "that's taken". Password change keeps the
+// session valid but invalidates every OTHER session for the user (so a
+// stolen password's other sessions get logged out too).
+
+export const updateUsername = mutation({
+  args: { sessionToken: v.string(), newUsername: v.string() },
+  handler: async (ctx, { sessionToken, newUsername }) => {
+    const user = await requireUser(ctx, sessionToken);
+    const norm = newUsername.trim().toLowerCase();
+    if (!USERNAME_RE.test(norm)) {
+      throw new Error("Username must be 2-32 chars, lowercase letters/digits with . _ - in the middle");
+    }
+    if (norm === user.username) return { ok: true as const, username: user.username };
+
+    const dupe = await ctx.db
+      .query("users")
+      .withIndex("by_username", q => q.eq("username", norm))
+      .unique();
+    if (dupe) throw new Error(`Username already taken: ${norm}`);
+
+    await ctx.db.patch(user._id, { username: norm });
+    return { ok: true as const, username: norm };
+  },
+});
+
+export const updateEmail = mutation({
+  args: { sessionToken: v.string(), newEmail: v.string() },
+  handler: async (ctx, { sessionToken, newEmail }) => {
+    const user = await requireUser(ctx, sessionToken);
+    const oldEmail = user.email ?? null;
+    const norm = newEmail.trim().toLowerCase();
+    if (!norm.includes("@") || norm.length > 200) throw new Error("Invalid email");
+    if (norm === (user.email || "")) {
+      // No-op change. Surface oldEmail anyway so callers can detect it
+      // and skip the notification path.
+      return { ok: true as const, email: norm, oldEmail, changed: false as const };
+    }
+
+    const dupe = await ctx.db
+      .query("users")
+      .withIndex("by_email", q => q.eq("email", norm))
+      .unique();
+    if (dupe) throw new Error(`Email already in use: ${norm}`);
+
+    await ctx.db.patch(user._id, { email: norm });
+    // oldEmail returned so the lambda can fire a "your email changed"
+    // notification to the previous address (security).
+    return { ok: true as const, email: norm, oldEmail, changed: true as const };
+  },
+});
+
+export const updatePassword = mutation({
+  args: {
+    sessionToken: v.string(),
+    oldPassword:  v.string(),
+    newPassword:  v.string(),
+  },
+  handler: async (ctx, { sessionToken, oldPassword, newPassword }) => {
+    const user = await requireUser(ctx, sessionToken);
+    if (newPassword.length < 8) throw new Error("Password must be at least 8 characters");
+
+    const ok = await verifyPassword(oldPassword, user.passwordPhc);
+    if (!ok) throw new Error("Current password is wrong");
+
+    const phc = await hashPassword(newPassword);
+    await ctx.db.patch(user._id, { passwordPhc: phc });
+
+    // Invalidate every OTHER session so any leaked-password attacker is
+    // logged out. The current session (the one that authorised this
+    // call) stays valid -- the user just changed their password and
+    // shouldn't have to log in again.
+    const currentTokenHash = await sha256Base64(sessionToken);
+    const sessions = await ctx.db
+      .query("sessions")
+      .withIndex("by_user", q => q.eq("userId", user._id))
+      .collect();
+    let revoked = 0;
+    for (const s of sessions) {
+      if (s.tokenHash !== currentTokenHash) {
+        await ctx.db.delete(s._id);
+        revoked++;
+      }
+    }
+    return { ok: true as const, sessionsRevoked: revoked };
+  },
+});
+
+// ── Avatar (profile picture) upload ───────────────────────────────────────
+// Two-step pattern (Convex storage convention):
+//   1. Client calls generateAvatarUploadUrl → gets a one-time signed URL
+//   2. Client POSTs the file to that URL → Convex returns { storageId }
+//   3. Client calls setAvatar(storageId) to attach it to the user row
+// We delete the prior avatar's storage object on overwrite so the bucket
+// doesn't bloat with orphaned uploads.
+
+export const generateAvatarUploadUrl = mutation({
+  args: { sessionToken: v.string() },
+  handler: async (ctx, { sessionToken }) => {
+    await requireUser(ctx, sessionToken);   // gate on a valid session
+    return await ctx.storage.generateUploadUrl();
+  },
+});
+
+export const setAvatar = mutation({
+  args: { sessionToken: v.string(), storageId: v.id("_storage") },
+  handler: async (ctx, { sessionToken, storageId }) => {
+    const user = await requireUser(ctx, sessionToken);
+    // Delete the previous avatar to avoid orphaned blobs.
+    if (user.avatarStorageId && user.avatarStorageId !== storageId) {
+      try { await ctx.storage.delete(user.avatarStorageId); }
+      catch { /* tolerable: storage entry may be missing */ }
+    }
+    await ctx.db.patch(user._id, { avatarStorageId: storageId });
+    const url = await ctx.storage.getUrl(storageId);
+    return { ok: true as const, avatarStorageId: storageId, avatarUrl: url };
+  },
+});
+
+export const clearAvatar = mutation({
+  args: { sessionToken: v.string() },
+  handler: async (ctx, { sessionToken }) => {
+    const user = await requireUser(ctx, sessionToken);
+    if (user.avatarStorageId) {
+      try { await ctx.storage.delete(user.avatarStorageId); }
+      catch {}
+      await ctx.db.patch(user._id, { avatarStorageId: undefined });
+    }
+    return { ok: true as const };
+  },
+});
+
+// ── Magic-link password recovery ──────────────────────────────────────────
+// Two mutations + an internal helper. The lambda layer is the policy
+// boundary (rate-limiting, sending the email). These mutations just do
+// the database side: mint or redeem a token.
+//
+// Threat model:
+//   - Plaintext token lives ONLY in the email body. We store the SHA-256
+//     hash so a DB leak doesn't yield reset-anyone's-password ammunition.
+//   - Single-use: redemption marks `usedAt` and the next redeem rejects.
+//   - Time-bound: 30-minute expiry (short enough to limit abuse, long
+//     enough that a buyer can read the email and click without panic).
+//   - Existence enumeration: `requestPasswordReset` ALWAYS returns
+//     {ok: true} regardless of whether the email maps to a user. The
+//     lambda only sends the email when one exists -- but the response
+//     shape never reveals it.
+
+const RESET_TTL_MS = 30 * 60 * 1000;
+
+export const requestPasswordReset = mutation({
+  args: { email: v.string() },
+  handler: async (ctx, { email }) => {
+    const lower = email.trim().toLowerCase();
+    if (!lower || !lower.includes("@")) {
+      // Same shape as the success path -- callers can't distinguish.
+      return { ok: true as const, sent: false as const };
+    }
+
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_email", q => q.eq("email", lower))
+      .unique();
+    if (!user) return { ok: true as const, sent: false as const };
+
+    // Invalidate every outstanding reset link for this user before
+    // issuing a new one. Stops a stack of stale links from accumulating
+    // in inboxes (and rate-limits via the requesting cadence).
+    const stale = await ctx.db
+      .query("magicLinks")
+      .withIndex("by_user", q => q.eq("userId", user._id))
+      .collect();
+    for (const m of stale) {
+      if (m.purpose === "password_reset" && !m.usedAt) {
+        await ctx.db.delete(m._id);
+      }
+    }
+
+    const rawToken = newSessionToken();           // 32 random bytes, base64url
+    const tokenHash = await sha256Base64(rawToken);
+    const now = Date.now();
+    await ctx.db.insert("magicLinks", {
+      userId:    user._id,
+      purpose:   "password_reset",
+      tokenHash,
+      createdAt: now,
+      expiresAt: now + RESET_TTL_MS,
+    });
+
+    // Plaintext token returned ONLY here so the lambda can put it in the
+    // email URL. It is never stored or returned again.
+    return {
+      ok:        true as const,
+      sent:      true as const,
+      token:     rawToken,
+      email:     lower,
+      username:  user.username,
+      handle:    user.handle ?? null,
+    };
+  },
+});
+
+export const redeemPasswordReset = mutation({
+  args: { token: v.string(), newPassword: v.string() },
+  handler: async (ctx, { token, newPassword }) => {
+    if (newPassword.length < 8) throw new Error("Password must be at least 8 characters");
+    const tokenHash = await sha256Base64(token);
+
+    const link = await ctx.db
+      .query("magicLinks")
+      .withIndex("by_tokenHash", q => q.eq("tokenHash", tokenHash))
+      .unique();
+    if (!link) throw new Error("This reset link is invalid or has already been used");
+    if (link.usedAt) throw new Error("This reset link has already been used");
+    if (link.expiresAt < Date.now()) throw new Error("This reset link has expired -- request a new one");
+    if (link.purpose !== "password_reset") throw new Error("Wrong link type");
+
+    const user = await ctx.db.get(link.userId);
+    if (!user) throw new Error("Account not found");
+
+    const phc = await hashPassword(newPassword);
+    const now = Date.now();
+    await ctx.db.patch(link.userId, { passwordPhc: phc });
+    await ctx.db.patch(link._id, { usedAt: now });
+
+    // Invalidate every outstanding session: a forgotten-password redeem
+    // is exactly the moment when a stolen-session attacker should be
+    // booted. We do this AFTER patching the password to avoid a window
+    // where the old password works but old sessions are gone.
+    const sessions = await ctx.db
+      .query("sessions")
+      .withIndex("by_user", q => q.eq("userId", link.userId))
+      .collect();
+    for (const s of sessions) await ctx.db.delete(s._id);
+
+    // Mint a fresh session so the redeem page can drop the user straight
+    // into /full/ signed-in (same UX as the post-purchase flow).
+    const rawToken = newSessionToken();
+    const newTokenHash = await sha256Base64(rawToken);
+    await ctx.db.insert("sessions", {
+      userId:     link.userId,
+      tokenHash:  newTokenHash,
+      createdAt:  now,
+      expiresAt:  now + SESSION_TTL_MS,
+      lastSeenAt: now,
+    });
+
+    return {
+      ok:           true as const,
+      sessionToken: rawToken,
+      user:         toPublic(user),
+    };
   },
 });
 

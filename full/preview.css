@@ -237,6 +237,15 @@ button { font-family: inherit; }
 }
 .home-topbar-actions .icon-btn:hover { background: rgba(0,0,0,0.05); color: var(--fg); }
 .home-topbar-actions .icon-btn svg { width: 18px; height: 18px; }
+/* Random + Liked are also rail items on desktop, so hide them in the
+   topbar there. Settings cog is the inverse: only useful on desktop
+   (mobile users reach /full/account/ via the hamburger sheet). The
+   700px breakpoint matches `.home-topbar`'s own desktop kick-in. */
+.home-topbar-actions .icon-btn-desktop-only { display: none; }
+@media (min-width: 700px) {
+  .home-topbar-actions .icon-btn-mobile-only  { display: none; }
+  .home-topbar-actions .icon-btn-desktop-only { display: grid; }
+}
 .home-avatar {
   width: 36px; height: 36px;
   border-radius: 999px;
@@ -3456,6 +3465,23 @@ body.has-rail .topbar .hb-nav { display: none; }
 }
 .rail-burger svg { width: 18px; height: 18px; }
 
+/* Settings cog injected into every /full/* topbar's right slot by
+   social.js. Re-uses .rail-burger's pill chrome (border, white bg,
+   round shape) but inverts visibility: shown only on desktop, hidden
+   on mobile. Mobile users reach /full/account/ via the menu sheet's
+   "Account settings" row instead. */
+.rail-cog {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--muted);
+}
+.rail-cog:hover { color: var(--fg); }
+@media (max-width: 700px) {
+  .rail-cog { display: none !important; }
+}
+
 /* Mobile bottom tab bar — replaces the burger drawer as the primary
  * navigation on phones. Hidden above 700px (rail takes over on
  * desktop / tablet). The active tab uses --accent. The Menu tab
@@ -4755,6 +4781,19 @@ body.has-rail .topbar .hb-nav { display: none; }
   font-weight: 600;
   letter-spacing: 0;
   text-transform: uppercase;
+}
+/* When the user has uploaded a profile picture, the chip becomes a
+   bordered image circle. Initials chip styles still apply (background,
+   shape) but the <img> covers them with object-fit:cover. */
+.rail-user-avatar-img {
+  background: #fff;
+  overflow: hidden;
+  padding: 0;
+}
+.rail-user-avatar-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .rail-user-name {
   flex: 1 1 auto;

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Famous Gems · Gems of Switzerland · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="stylesheet" href="../preview.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="../index.html">
+    <span>Famous Gems</span>
+  </a>
+  <span class="crumb"><b id="famousCount">0</b> spots</span>
+  <div class="topbar-right">
+    <a class="pill" href="../index.html">Overview</a>
+  </div>
+</div>
+
+<main class="hb-page">
+
+  <header class="hb-hero">
+    <p class="kicker">The classics</p>
+    <h1>Famous Gems</h1>
+    <p>The famous spots that actually deliver. Go early, go off-season, or go after the day-trippers leave.</p>
+  </header>
+
+  <div id="content"></div>
+
+  <div id="empty" class="hb-empty" hidden>
+    <h2>No famous gems yet.</h2>
+    <p>Curated picks are still being added. Check back later.</p>
+    <a href="../browse/">Browse all spots</a>
+  </div>
+
+</main>
+
+<footer class="legal">
+  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
+  © Hikebeast
+</footer>
+
+<script src="../map/spots-data.js"></script>
+<script src="../img/thumbs/dimensions.js"></script>
+<script src="../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
+<script src="../social.js"></script>
+<script>
+  // The "famous-but-they-still-deliver" curated set. Pulled out of the
+  // Introduction chapter (where it used to live as an inline grid) so
+  // the chapter stays intro-only and the curated lists all live under
+  // their own /full/<collection>/ routes.
+  // Editorial order matters; mirror the order shown on the intro card
+  // pre-extraction (Schäfler, Oeschinensee, Seealpsee, Fälensee,
+  // Saxer Lücke, Riffelsee).
+  const CURATED_FAMOUS = [
+    'Schäfler', 'Oeschinensee', 'Seealpsee', 'Fälensee', 'Saxer Lücke', 'Riffelsee',
+  ];
+
+  let SPOTS = [];
+  function refreshSpots() {
+    const all = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
+    const byTitle = new Map(all.map(s => [s.title, s]));
+    SPOTS = CURATED_FAMOUS.map(t => byTitle.get(t)).filter(Boolean);
+  }
+  refreshSpots();
+  const LEGEND = window.LEGEND || [];
+
+  const content = document.getElementById('content');
+  const empty = document.getElementById('empty');
+  const counter = document.getElementById('famousCount');
+
+  function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function tile(spot) {
+    const a = document.createElement('a');
+    a.className = 'hb-saved-tile';
+    a.href = window.HB.spotDetailHref(spot, '../');
+    a.title = spot.title;
+    const region = LEGEND.find(c => c.number === spot.chapter);
+    const regionName = region ? region.name : spot.chapter_id;
+    const kicker = window.HB.singularKicker(spot.kicker || '');
+    const sub = kicker ? `${esc(kicker)} · ${esc(regionName)}` : esc(regionName);
+    const attrs = window.HB.photoAttrs({
+      photoId: spot.imagePhotoId, image: spot.image,
+      width: 1000, prefix: '../',
+      sizes: '(min-width: 1200px) 25vw, (min-width: 600px) 33vw, 50vw',
+    });
+    const srcsetAttr = attrs.srcset ? ` srcset="${esc(attrs.srcset)}" sizes="${esc(attrs.sizes)}"` : '';
+    a.innerHTML = `
+      <div class="photo">
+        <img src="${esc(attrs.src)}"${srcsetAttr} alt="${esc(spot.title)}" loading="lazy" decoding="async" />
+      </div>
+      <div class="body">
+        <div class="name">${esc(spot.title)}</div>
+        <div class="meta">${sub}</div>
+      </div>
+    `;
+    return a;
+  }
+
+  function render() {
+    counter.textContent = SPOTS.length;
+    if (!SPOTS.length) {
+      content.innerHTML = '';
+      content.hidden = true;
+      empty.hidden = false;
+      return;
+    }
+    empty.hidden = true;
+    content.hidden = false;
+
+    content.innerHTML = '';
+    const grid = document.createElement('div');
+    grid.className = 'hb-saved-grid';
+    SPOTS.forEach(s => grid.appendChild(tile(s)));
+    content.appendChild(grid);
+  }
+
+  window.HB.spots.subscribe(() => { refreshSpots(); render(); });
+  render();
+</script>
+
+</body>
+</html>

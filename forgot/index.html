@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Reset password · Gems of Switzerland · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+<link rel="apple-touch-icon" href="/images/favicon.jpg" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --fg: #1d1d1f; --muted: #6e6e73;
+    --hairline: rgba(0,0,0,0.08); --hairline-strong: rgba(0,0,0,0.14);
+    --accent: #0071e3; --error: #ff3b30; --success: #34c759;
+    --radius-card: 22px; --radius-btn: 980px;
+  }
+  body {
+    min-height: 100dvh; display: grid; place-items: center;
+    padding: 24px; background: #fbfbfc; color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased; letter-spacing: -0.01em;
+    overflow: hidden; position: relative;
+  }
+  body::before {
+    content: ''; position: fixed; inset: -120px;
+    z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(460px 420px at 18% 22%, rgba(0, 113, 227, 0.45) 0%, transparent 70%),
+      radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.38) 0%, transparent 72%),
+      radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.40) 0%, transparent 70%),
+      radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.55) 0%, transparent 75%);
+    filter: blur(70px) saturate(1.1); opacity: 0.9;
+  }
+  .card {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 380px;
+    padding: 36px 32px 32px;
+    border-radius: var(--radius-card);
+    background: rgba(255,255,255,0.86);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    backdrop-filter: saturate(180%) blur(18px);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.10), 0 4px 14px rgba(0,0,0,0.04);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .brand img {
+    width: 32px; height: 32px; border-radius: 999px;
+    object-fit: cover; object-position: 70% 45%;
+  }
+  .brand b {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
+  }
+  h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 26px; line-height: 1.1; letter-spacing: -0.025em;
+    margin: 0 0 8px; font-weight: 600;
+  }
+  p.lead { margin: 0 0 22px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+  form { display: flex; flex-direction: column; gap: 10px; }
+  input {
+    width: 100%; height: 50px; padding: 0 18px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--hairline);
+    background: #fff; color: var(--fg);
+    font-size: 16px; font-family: inherit; outline: none;
+    letter-spacing: -0.01em;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(0,113,227,0.15);
+  }
+  button.submit {
+    margin-top: 4px; height: 50px;
+    border-radius: var(--radius-btn);
+    border: 0; background: var(--fg); color: #fff;
+    font-size: 16px; font-weight: 500; letter-spacing: -0.01em;
+    cursor: pointer; font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 120ms ease, transform 100ms ease;
+  }
+  button.submit:hover { opacity: 0.92; }
+  button.submit:active { transform: scale(0.98); }
+  button.submit:disabled { opacity: 0.5; cursor: progress; }
+  .footnote {
+    margin: 24px 0 0; color: var(--muted);
+    font-size: 11px; text-align: center; letter-spacing: 0;
+  }
+  .footnote a { color: var(--muted); text-decoration: underline; }
+  .sent-msg {
+    padding: 14px 16px; border-radius: 14px;
+    background: rgba(52, 199, 89, 0.10);
+    color: #1f7a36; font-size: 14px; line-height: 1.5;
+  }
+  .sent-msg b { font-weight: 600; }
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">
+      <img src="/images/avatar.jpg" alt="" />
+      <b>Hikebeast · Gems of Switzerland</b>
+    </div>
+    <h1>Reset password</h1>
+    <p class="lead">Type the email tied to your account and we'll send a link to set a new password.</p>
+
+    <form id="forgotForm" novalidate>
+      <input id="email" name="email" type="email"
+             placeholder="Email" autocomplete="email"
+             autocapitalize="off" autocorrect="off" spellcheck="false" required />
+      <button type="submit" class="submit" id="submitBtn">Send reset link</button>
+    </form>
+
+    <p class="sent-msg" id="sentMsg" hidden>
+      <b>Check your inbox.</b> If we have an account for that email, a reset link is on its way. The link expires in 30 minutes.
+    </p>
+
+    <p class="footnote">Remembered it? <a href="/login/" id="loginLink">Back to log in</a></p>
+  </main>
+
+  <script>
+    (function () {
+      const form = document.getElementById('forgotForm');
+      const btn  = document.getElementById('submitBtn');
+      const emailEl = document.getElementById('email');
+      const sentMsg = document.getElementById('sentMsg');
+      const loginLink = document.getElementById('loginLink');
+
+      // Pre-fill from ?email= so the buyer hopping over from /map/success
+      // (idempotent re-submit error → "Sign in" → "Forgot password?") doesn't
+      // re-type. Same source as /login/'s ?email=.
+      const params = new URLSearchParams(location.search);
+      const prefillEmail = params.get('email') || '';
+      if (prefillEmail) {
+        emailEl.value = prefillEmail;
+        loginLink.href = '/login/?email=' + encodeURIComponent(prefillEmail);
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        btn.disabled = true; btn.textContent = 'Sending…';
+        const email = emailEl.value.trim();
+        try {
+          // The lambda always returns { ok: true } regardless of whether
+          // the email maps to a user (no account-existence enumeration).
+          // We show the same success state in either case.
+          await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'request_password_reset', email }),
+          });
+        } catch {
+          // Soft fail: still show the success message. The operator
+          // sees real failures in the lambda log.
+        }
+        form.hidden = true;
+        sentMsg.hidden = false;
+        btn.disabled = false; btn.textContent = 'Send reset link';
+      });
+    })();
+  </script>
+</body>
+</html>
