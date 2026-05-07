@@ -2254,10 +2254,28 @@
     // Tear down any prior carousel (slides, dots, arrows, counter) so the
     // re-render is idempotent. The original static <img> + .credit-pill are
     // also wiped on first run.
+    //
+    // Snapshot the original <img>'s natural aspect ratio BEFORE removing
+    // it so we can lock that aspect on the container. Without this, the
+    // photo column loses its intrinsic-size source when the absolute-
+    // positioned slides take over, and grid-stretch collapses the column
+    // to the body's natural height — visible as a "card resizes weirdly
+    // after load" flash. With the aspect locked, the column stays the
+    // same height before and after the carousel inits.
     photoEl.querySelectorAll('.hb-slide, .hb-dots, .hb-arrow, .hb-counter, .hb-credit').forEach(n => n.remove());
     const oldImg = photoEl.querySelector('img');
     const oldCredit = photoEl.querySelector('.credit-pill');
-    if (oldImg) oldImg.remove();
+    if (oldImg) {
+      const nw = oldImg.naturalWidth, nh = oldImg.naturalHeight;
+      if (nw > 0 && nh > 0) {
+        photoEl.style.aspectRatio = `${nw} / ${nh}`;
+      } else if (photos[0]?.width && photos[0]?.height) {
+        photoEl.style.aspectRatio = `${photos[0].width} / ${photos[0].height}`;
+      }
+      oldImg.remove();
+    } else if (photos[0]?.width && photos[0]?.height) {
+      photoEl.style.aspectRatio = `${photos[0].width} / ${photos[0].height}`;
+    }
     if (oldCredit) oldCredit.remove();
     photoEl.classList.add('hb-multi');
 
