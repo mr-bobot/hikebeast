@@ -135,6 +135,7 @@ type PublicUser = {
   username: string;
   email: string | null;
   handle: string | null;
+  avatarStorageId: Id<"_storage"> | null;
   isAdmin: boolean;
   createdAt: number;
 };
@@ -145,6 +146,7 @@ function toPublic(u: Doc<"users">): PublicUser {
     username: u.username,
     email: u.email ?? null,
     handle: u.handle ?? null,
+    avatarStorageId: u.avatarStorageId ?? null,
     isAdmin: !!u.isAdmin,
     createdAt: u.createdAt,
   };
@@ -242,12 +244,21 @@ export const signOut = mutation({
 });
 
 // Reactive: pages subscribe to this so the sign-in modal closes / the
-// avatar pill appears as soon as a token is set.
+// avatar pill appears as soon as a token is set. Now also resolves
+// avatarStorageId → avatarUrl so /full/account/ and the social.js FAB
+// can render the user's chosen profile picture without an extra query.
 export const currentUser = query({
   args: { sessionToken: v.optional(v.string()) },
   handler: async (ctx, { sessionToken }) => {
     const u = await userFromSession(ctx, sessionToken);
-    return u ? toPublic(u) : null;
+    if (!u) return null;
+    const base = toPublic(u);
+    let avatarUrl: string | null = null;
+    if (u.avatarStorageId) {
+      try { avatarUrl = await ctx.storage.getUrl(u.avatarStorageId); }
+      catch { avatarUrl = null; }
+    }
+    return { ...base, avatarUrl };
   },
 });
 
@@ -396,9 +407,14 @@ export const updateEmail = mutation({
   args: { sessionToken: v.string(), newEmail: v.string() },
   handler: async (ctx, { sessionToken, newEmail }) => {
     const user = await requireUser(ctx, sessionToken);
+    const oldEmail = user.email ?? null;
     const norm = newEmail.trim().toLowerCase();
     if (!norm.includes("@") || norm.length > 200) throw new Error("Invalid email");
-    if (norm === (user.email || "")) return { ok: true as const, email: norm };
+    if (norm === (user.email || "")) {
+      // No-op change. Surface oldEmail anyway so callers can detect it
+      // and skip the notification path.
+      return { ok: true as const, email: norm, oldEmail, changed: false as const };
+    }
 
     const dupe = await ctx.db
       .query("users")
@@ -407,7 +423,9 @@ export const updateEmail = mutation({
     if (dupe) throw new Error(`Email already in use: ${norm}`);
 
     await ctx.db.patch(user._id, { email: norm });
-    return { ok: true as const, email: norm };
+    // oldEmail returned so the lambda can fire a "your email changed"
+    // notification to the previous address (security).
+    return { ok: true as const, email: norm, oldEmail, changed: true as const };
   },
 });
 
@@ -444,6 +462,50 @@ export const updatePassword = mutation({
       }
     }
     return { ok: true as const, sessionsRevoked: revoked };
+  },
+});
+
+// ── Avatar (profile picture) upload ───────────────────────────────────────
+// Two-step pattern (Convex storage convention):
+//   1. Client calls generateAvatarUploadUrl → gets a one-time signed URL
+//   2. Client POSTs the file to that URL → Convex returns { storageId }
+//   3. Client calls setAvatar(storageId) to attach it to the user row
+// We delete the prior avatar's storage object on overwrite so the bucket
+// doesn't bloat with orphaned uploads.
+
+export const generateAvatarUploadUrl = mutation({
+  args: { sessionToken: v.string() },
+  handler: async (ctx, { sessionToken }) => {
+    await requireUser(ctx, sessionToken);   // gate on a valid session
+    return await ctx.storage.generateUploadUrl();
+  },
+});
+
+export const setAvatar = mutation({
+  args: { sessionToken: v.string(), storageId: v.id("_storage") },
+  handler: async (ctx, { sessionToken, storageId }) => {
+    const user = await requireUser(ctx, sessionToken);
+    // Delete the previous avatar to avoid orphaned blobs.
+    if (user.avatarStorageId && user.avatarStorageId !== storageId) {
+      try { await ctx.storage.delete(user.avatarStorageId); }
+      catch { /* tolerable: storage entry may be missing */ }
+    }
+    await ctx.db.patch(user._id, { avatarStorageId: storageId });
+    const url = await ctx.storage.getUrl(storageId);
+    return { ok: true as const, avatarStorageId: storageId, avatarUrl: url };
+  },
+});
+
+export const clearAvatar = mutation({
+  args: { sessionToken: v.string() },
+  handler: async (ctx, { sessionToken }) => {
+    const user = await requireUser(ctx, sessionToken);
+    if (user.avatarStorageId) {
+      try { await ctx.storage.delete(user.avatarStorageId); }
+      catch {}
+      await ctx.db.patch(user._id, { avatarStorageId: undefined });
+    }
+    return { ok: true as const };
   },
 });
 

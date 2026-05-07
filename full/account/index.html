@@ -86,6 +86,34 @@
   }
   .acc-signed-out { text-align: center; padding: 40px 0; }
   .acc-signed-out a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  /* Avatar section */
+  .acc-avatar-row {
+    display: flex; gap: 14px; align-items: center; margin-bottom: 8px;
+  }
+  .acc-avatar-preview {
+    width: 64px; height: 64px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: #ddd;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    border: 1px solid var(--hairline);
+  }
+  .acc-avatar-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .acc-avatar-preview[data-empty="false"] { background: #fff; }
+  .acc-avatar-initials {
+    font-size: 24px; font-weight: 600;
+    color: var(--muted); letter-spacing: -0.02em;
+    user-select: none;
+  }
+  .acc-avatar-preview[data-empty="false"] .acc-avatar-initials { display: none; }
+  .acc-avatar-controls { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+  .acc-link-btn {
+    background: transparent; border: 0; padding: 0;
+    color: var(--muted); font: inherit; font-size: 13px;
+    cursor: pointer; text-decoration: underline;
+  }
+  .acc-link-btn:hover { color: var(--fg); }
 </style>
 </head>
 <body>
@@ -112,6 +140,23 @@
       <h1>Account</h1>
       <p>Change your username, email, or password. All fields are independent — saving one doesn't touch the others.</p>
     </header>
+
+    <!-- Avatar (profile picture) ─────────────────────────────────────── -->
+    <section class="acc-section">
+      <h2>Profile picture</h2>
+      <div class="acc-avatar-row">
+        <div class="acc-avatar-preview" id="avatarPreview" data-empty="true">
+          <span class="acc-avatar-initials" id="avatarInitials">?</span>
+        </div>
+        <div class="acc-avatar-controls">
+          <input type="file" id="avatarFile" accept="image/jpeg,image/png,image/webp" hidden />
+          <button type="button" class="acc-save" id="avatarUploadBtn">Upload photo</button>
+          <button type="button" id="avatarClearBtn" class="acc-link-btn" hidden>Remove</button>
+        </div>
+      </div>
+      <p class="acc-helper">JPG, PNG, or WebP. Up to 5 MB. A square crop reads best.</p>
+      <p class="acc-msg" id="avatarMsg" hidden></p>
+    </section>
 
     <!-- Username ─────────────────────────────────────────────────────── -->
     <section class="acc-section">
@@ -142,24 +187,20 @@
       </form>
     </section>
 
-    <!-- Password ─────────────────────────────────────────────────────── -->
+    <!-- Sign out ─────────────────────────────────────────────────────── -->
+    <!-- Lives at the bottom of the page so destructive action is below
+         the constructive ones. To change your password: sign out and
+         use "Forgot password?" on the login page. We don't expose the
+         logged-in change-password flow here on purpose -- the recovery
+         flow already covers the only two reasons someone changes a
+         password (forgot it / want it different). -->
     <section class="acc-section">
-      <h2>Password</h2>
-      <form id="passwordForm" novalidate>
-        <div class="acc-field">
-          <span class="acc-label">Current password</span>
-          <input id="oldPasswordInput" class="acc-input" type="password"
-                 autocomplete="current-password" required />
-        </div>
-        <div class="acc-field">
-          <span class="acc-label">New password</span>
-          <input id="newPasswordInput" class="acc-input" type="password"
-                 autocomplete="new-password" minlength="8" required />
-        </div>
-        <button type="submit" class="acc-save" style="width:100%;">Change password</button>
-        <p class="acc-helper">At least 8 characters. Other devices get signed out.</p>
-        <p class="acc-msg" id="passwordMsg" hidden></p>
-      </form>
+      <h2>Session</h2>
+      <p class="acc-helper" style="margin:0 0 10px;">To change your password, sign out and use "Forgot password?" on the login page.</p>
+      <button type="button" id="signoutBtn" class="acc-save" style="width:100%;background:transparent;color:var(--fg);border:1px solid var(--hairline);">
+        Log out
+      </button>
+      <p class="acc-msg" id="signoutMsg" hidden></p>
     </section>
   </div>
 </main>
@@ -186,6 +227,12 @@
     const curEmail      = document.getElementById('curEmail');
     const usernameInput = document.getElementById('usernameInput');
     const emailInput    = document.getElementById('emailInput');
+    const avatarPreview = document.getElementById('avatarPreview');
+    const avatarInitials= document.getElementById('avatarInitials');
+    const avatarFile    = document.getElementById('avatarFile');
+    const avatarUploadBtn = document.getElementById('avatarUploadBtn');
+    const avatarClearBtn  = document.getElementById('avatarClearBtn');
+    const avatarMsg     = document.getElementById('avatarMsg');
 
     const token = (() => {
       try { return localStorage.getItem(SESSION_KEY) || ''; } catch { return ''; }
@@ -205,6 +252,24 @@
     // Initial paint: read currentUser to populate the form. We do a one-shot
     // query (not a reactive subscription) because nothing on this page
     // benefits from server-pushed updates -- the user IS the only writer.
+    function paintAvatar(url, displayName) {
+      // Drop any prior <img> child so re-paints don't stack.
+      const existing = avatarPreview.querySelector('img');
+      if (existing) existing.remove();
+      avatarInitials.textContent = (displayName || '?').slice(0, 1).toUpperCase();
+      if (url) {
+        const img = document.createElement('img');
+        img.alt = '';
+        img.src = url;
+        avatarPreview.appendChild(img);
+        avatarPreview.dataset.empty = 'false';
+        avatarClearBtn.hidden = false;
+      } else {
+        avatarPreview.dataset.empty = 'true';
+        avatarClearBtn.hidden = true;
+      }
+    }
+
     client.query('auth:currentUser', { sessionToken: token })
       .then((u) => {
         if (!u) {
@@ -216,6 +281,7 @@
         usernameInput.value = u.username;
         curEmail.textContent = u.email ? ('· currently ' + u.email) : '';
         emailInput.value = u.email || '';
+        paintAvatar(u.avatarUrl, u.handle || u.username);
         accLoading.hidden = true;
         accContent.hidden = false;
       })
@@ -255,33 +321,135 @@
       });
     }
 
+    // Avatar upload: 3-step Convex storage pattern.
+    //   1. mutation generateAvatarUploadUrl → upload URL
+    //   2. POST file to that URL → { storageId }
+    //   3. mutation setAvatar(storageId) → patches user, returns avatarUrl
+    avatarUploadBtn.addEventListener('click', () => avatarFile.click());
+    avatarFile.addEventListener('change', async () => {
+      avatarMsg.hidden = true; avatarMsg.className = 'acc-msg';
+      const file = avatarFile.files && avatarFile.files[0];
+      if (!file) return;
+      if (file.size > 5 * 1024 * 1024) {
+        avatarMsg.hidden = false; avatarMsg.className = 'acc-msg is-error';
+        avatarMsg.textContent = 'File is over 5 MB. Try a smaller image.';
+        avatarFile.value = '';
+        return;
+      }
+      const orig = avatarUploadBtn.textContent;
+      avatarUploadBtn.disabled = true; avatarUploadBtn.textContent = 'Uploading…';
+      try {
+        const uploadUrl = await client.mutation('auth:generateAvatarUploadUrl', { sessionToken: token });
+        const upRes = await fetch(uploadUrl, {
+          method:  'POST',
+          headers: { 'Content-Type': file.type || 'application/octet-stream' },
+          body:    file,
+        });
+        if (!upRes.ok) throw new Error('Upload failed');
+        const { storageId } = await upRes.json();
+        const result = await client.mutation('auth:setAvatar', { sessionToken: token, storageId });
+        // Bust any cached <img> by appending a query string. The URL
+        // Convex returns is signed and (effectively) immutable per id,
+        // so this cache-bust just covers same-tab re-render only.
+        paintAvatar(result.avatarUrl + (result.avatarUrl.includes('?') ? '&' : '?') + 't=' + Date.now(),
+                    usernameInput.value || 'X');
+        avatarMsg.hidden = false; avatarMsg.className = 'acc-msg is-success';
+        avatarMsg.textContent = 'Profile picture updated.';
+      } catch (err) {
+        avatarMsg.hidden = false; avatarMsg.className = 'acc-msg is-error';
+        avatarMsg.textContent = (err && err.message) ? String(err.message) : 'Upload failed.';
+      } finally {
+        avatarFile.value = '';   // let the same file be reselected
+        avatarUploadBtn.disabled = false; avatarUploadBtn.textContent = orig;
+      }
+    });
+
+    avatarClearBtn.addEventListener('click', async () => {
+      avatarMsg.hidden = true;
+      avatarClearBtn.disabled = true;
+      try {
+        await client.mutation('auth:clearAvatar', { sessionToken: token });
+        paintAvatar(null, usernameInput.value || 'X');
+        avatarMsg.hidden = false; avatarMsg.className = 'acc-msg is-success';
+        avatarMsg.textContent = 'Profile picture removed.';
+      } catch (err) {
+        avatarMsg.hidden = false; avatarMsg.className = 'acc-msg is-error';
+        avatarMsg.textContent = (err && err.message) ? String(err.message) : 'Could not remove picture.';
+      } finally {
+        avatarClearBtn.disabled = false;
+      }
+    });
+
     wireSection('usernameForm', 'usernameMsg', 'auth:updateUsername',
       () => ({ newUsername: usernameInput.value.trim().toLowerCase() }),
       (r) => { if (r?.username) { curUsername.textContent = '· currently ' + r.username; } },
     );
 
-    wireSection('emailForm', 'emailMsg', 'auth:updateEmail',
-      () => ({ newEmail: emailInput.value.trim().toLowerCase() }),
-      (r) => { if (r?.email) { curEmail.textContent = '· currently ' + r.email; } },
-    );
-
-    wireSection('passwordForm', 'passwordMsg', 'auth:updatePassword',
-      () => {
-        const oldP = document.getElementById('oldPasswordInput').value;
-        const newP = document.getElementById('newPasswordInput').value;
-        if (newP.length < 8) {
-          const m = document.getElementById('passwordMsg');
-          m.hidden = false; m.className = 'acc-msg is-error';
-          m.textContent = 'New password must be at least 8 characters.';
-          return null;
+    // Email goes through /api/login (action: change_email) instead of the
+    // Convex mutation directly so the lambda can fire confirmation emails
+    // to BOTH old and new addresses on success. The mutation it calls is
+    // still auth:updateEmail; the lambda is just a thin wrapper that
+    // returns oldEmail+newEmail for the email-template path.
+    const emailForm = document.getElementById('emailForm');
+    const emailMsg  = document.getElementById('emailMsg');
+    emailForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      emailMsg.hidden = true; emailMsg.className = 'acc-msg';
+      const btn = emailForm.querySelector('.acc-save');
+      const orig = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Saving…';
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action:       'change_email',
+            sessionToken: token,
+            newEmail:     emailInput.value.trim().toLowerCase(),
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          emailMsg.hidden = false; emailMsg.className = 'acc-msg is-error';
+          emailMsg.textContent = (data && (data.message || data.error)) || 'Save failed.';
+          return;
         }
-        return { oldPassword: oldP, newPassword: newP };
-      },
-      () => {
-        document.getElementById('oldPasswordInput').value = '';
-        document.getElementById('newPasswordInput').value = '';
-      },
-    );
+        emailMsg.hidden = false; emailMsg.className = 'acc-msg is-success';
+        emailMsg.textContent = data.notified
+          ? 'Saved. We sent confirmation emails to your old and new addresses.'
+          : 'Saved.';
+        if (data.email) curEmail.textContent = '· currently ' + data.email;
+      } catch {
+        emailMsg.hidden = false; emailMsg.className = 'acc-msg is-error';
+        emailMsg.textContent = 'Network error. Try again.';
+      } finally {
+        btn.disabled = false; btn.textContent = orig;
+      }
+    });
+
+    // Log out: clear the local session + hb_full_auth cookie + revoke the
+    // Convex session, then send the user to /login. Same path social.js's
+    // signout takes -- duplicated here because /full/account/ doesn't
+    // load social.js (it's a standalone page).
+    const signoutBtn = document.getElementById('signoutBtn');
+    if (signoutBtn) {
+      signoutBtn.addEventListener('click', async () => {
+        signoutBtn.disabled = true; signoutBtn.textContent = 'Logging out…';
+        try { localStorage.removeItem('hb:session:v1'); } catch {}
+        try {
+          await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ action: 'logout', sessionToken: token || null }),
+          });
+        } catch {}
+        // hb_full_auth cookie gets cleared by the lambda response; we
+        // navigate explicitly so the next /full/* request would 302
+        // anyway and we skip the round-trip.
+        location.assign('/login/');
+      });
+    }
   })();
 </script>
 </body>

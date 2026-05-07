@@ -4765,6 +4765,19 @@ body.has-rail .topbar .hb-nav { display: none; }
   letter-spacing: 0;
   text-transform: uppercase;
 }
+/* When the user has uploaded a profile picture, the chip becomes a
+   bordered image circle. Initials chip styles still apply (background,
+   shape) but the <img> covers them with object-fit:cover. */
+.rail-user-avatar-img {
+  background: #fff;
+  overflow: hidden;
+  padding: 0;
+}
+.rail-user-avatar-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .rail-user-name {
   flex: 1 1 auto;
   font-size: 14px;
