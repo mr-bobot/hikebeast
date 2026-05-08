@@ -1256,8 +1256,10 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 }
 body[data-page="spot-detail"] .specs {
   /* Specs flow right after the body — no auto-margin pushing them
-   * to the bottom of the (now correctly sized) card. */
-  margin-top: 0;
+   * to the bottom of the (now correctly sized) card. A small extra
+   * margin (on top of the flex gap) gives the body text some breathing
+   * room before the REGION/ACCESS/EFFORT/BEST LIGHT grid. */
+  margin-top: 12px;
 }
 /* The detail-page topbar exists only for the burger + account FAB — it
  * has no brand label or crumb. Drop the bottom border and let it blend

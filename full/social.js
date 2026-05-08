@@ -2749,20 +2749,20 @@
       });
 
       // "Been there" button — same affordance as the heart but for the
-      // visited pile. Always rendered so the layout stays stable; the
-      // signed-in gate hides it via [hidden] when no session attached
-      // and flips back on sign-in. Tick filled when on.
+      // visited pile. Always visible so the action row reads consistently
+      // for everyone (Leon: "between the heart and the three dots").
+      // Visited is server-only (no localStorage fallback like favorites
+      // has), so a click while logged-out routes through openSignIn()
+      // instead of being a silent no-op.
       const tick = document.createElement('button');
       tick.type = 'button';
       tick.className = 'hb-visited';
       tick.setAttribute('data-hb-visited', k);
       tick.setAttribute('aria-label', 'Mark as visited');
       tick.innerHTML = SVG_CHECK_CIRCLE;
-      tick.hidden = !visited.signedIn();
       actions.appendChild(tick);
 
       function paintVisited() {
-        tick.hidden = !visited.signedIn();
         const on = visited.has(k);
         tick.classList.toggle('is-on', on);
         tick.setAttribute('aria-pressed', String(on));
@@ -2774,7 +2774,7 @@
       tick.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (!visited.signedIn()) return;
+        if (!visited.signedIn()) { openSignIn(); return; }
         visited.toggle(k);
         paintVisited();
       });
