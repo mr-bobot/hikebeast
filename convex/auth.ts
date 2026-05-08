@@ -137,6 +137,7 @@ type PublicUser = {
   handle: string | null;
   avatarStorageId: Id<"_storage"> | null;
   isAdmin: boolean;
+  isAffiliate: boolean;
   createdAt: number;
 };
 
@@ -148,6 +149,7 @@ function toPublic(u: Doc<"users">): PublicUser {
     handle: u.handle ?? null,
     avatarStorageId: u.avatarStorageId ?? null,
     isAdmin: !!u.isAdmin,
+    isAffiliate: !!u.isAffiliate,
     createdAt: u.createdAt,
   };
 }
@@ -287,14 +289,15 @@ export const touchSession = mutation({
 
 export const adminCreateUser = mutation({
   args: {
-    username:   v.string(),
-    password:   v.string(),
-    email:      v.optional(v.string()),
-    handle:     v.optional(v.string()),
-    isAdmin:    v.optional(v.boolean()),
-    adminToken: v.string(),
+    username:    v.string(),
+    password:    v.string(),
+    email:       v.optional(v.string()),
+    handle:      v.optional(v.string()),
+    isAdmin:     v.optional(v.boolean()),
+    isAffiliate: v.optional(v.boolean()),
+    adminToken:  v.string(),
   },
-  handler: async (ctx, { username, password, email, handle, isAdmin, adminToken }) => {
+  handler: async (ctx, { username, password, email, handle, isAdmin, isAffiliate, adminToken }) => {
     await requireAdmin(adminToken);
 
     const norm = username.trim().toLowerCase();
@@ -327,10 +330,33 @@ export const adminCreateUser = mutation({
       passwordPhc: phc,
       handle:      handle?.trim() || undefined,
       isAdmin:     isAdmin || undefined,
+      isAffiliate: isAffiliate || undefined,
       createdAt:   now,
       lastSeenAt:  now,
     });
     return { id, username: norm };
+  },
+});
+
+// Flip the affiliate flag on an existing user. Useful for promoting
+// someone to influencer / affiliate status after the fact, or revoking
+// it. Admin-token gated, same as adminCreateUser.
+export const adminSetAffiliate = mutation({
+  args: {
+    username:    v.string(),
+    isAffiliate: v.boolean(),
+    adminToken:  v.string(),
+  },
+  handler: async (ctx, { username, isAffiliate, adminToken }) => {
+    await requireAdmin(adminToken);
+    const norm = username.trim().toLowerCase();
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_username", q => q.eq("username", norm))
+      .unique();
+    if (!user) throw new Error(`No user with username: ${norm}`);
+    await ctx.db.patch(user._id, { isAffiliate: isAffiliate || undefined });
+    return { username: norm, isAffiliate };
   },
 });
 

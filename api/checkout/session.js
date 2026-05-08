@@ -350,6 +350,12 @@ export default async function handler(req, res) {
   const utmMedium = typeof body.utm_medium === "string" ? body.utm_medium.slice(0, 100) : "";
   const utmCampaign = typeof body.utm_campaign === "string" ? body.utm_campaign.slice(0, 100) : "";
 
+  // Affiliate ref. Stamped into both session.metadata and
+  // payment_intent.metadata so the webhook can read it from either side.
+  // Same character set as the username regex on the client.
+  const refRaw = typeof body.r === "string" ? body.r.trim().toLowerCase() : "";
+  const ref = /^[a-z0-9._-]{2,32}$/.test(refRaw) ? refRaw : "";
+
   const origin = (req.headers.origin && /^https?:\/\//.test(req.headers.origin))
     ? req.headers.origin
     : "https://hikebeast.ch";
@@ -381,6 +387,9 @@ export default async function handler(req, res) {
         // Locale of the page the buyer paid from. The webhook reads
         // this back to pick the EN or DE purchase email body.
         locale: locale === "auto" ? "" : locale,
+        // Affiliate ref: ?r=<username> from the landing page, persisted
+        // in localStorage on click. Empty string when no affiliate.
+        r: ref,
       },
       // Forwarded into the underlying PaymentIntent so the webhook can join
       // the same identifiers without re-hydrating the session object.
@@ -389,6 +398,7 @@ export default async function handler(req, res) {
           t,
           s,
           first_name: firstName,
+          r: ref,
         },
       },
       // After payment, Stripe loads the return URL inside the embedded

@@ -114,6 +114,37 @@
     cursor: pointer; text-decoration: underline;
   }
   .acc-link-btn:hover { color: var(--fg); }
+
+  /* Affiliate teaser · single tappable card linking to /full/affiliate/. */
+  .acc-aff-card {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 150ms ease, transform 100ms ease;
+  }
+  .acc-aff-card:hover { border-color: var(--hairline-strong); }
+  .acc-aff-card:active { transform: scale(0.99); }
+  .acc-aff-card-icon {
+    width: 36px; height: 36px; flex: 0 0 36px;
+    border-radius: 999px;
+    background: rgba(0,113,227,0.10);
+    color: var(--accent);
+    display: grid; place-items: center;
+  }
+  .acc-aff-card-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .acc-aff-card-title {
+    display: block;
+    font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: var(--fg);
+  }
+  .acc-aff-card-sub {
+    display: block;
+    font-size: 12px; color: var(--muted);
+  }
+  .acc-aff-card-chev { color: var(--muted); }
 </style>
 </head>
 <body>
@@ -186,6 +217,28 @@
         <p class="acc-helper">Used for password recovery and the receipt email.</p>
         <p class="acc-msg" id="emailMsg" hidden></p>
       </form>
+    </section>
+
+    <!-- Affiliate · teaser to the dedicated dashboard ─────────────────── -->
+    <!-- The full referral dashboard (share link, stats, activity) lives
+         at /full/affiliate/. We keep just a one-tap card here, but only
+         render it for users with isAffiliate=true (influencers). The
+         whole <section> is hidden by default and unhidden by JS once
+         currentUser confirms eligibility. -->
+    <section class="acc-section" id="affiliateTeaser" hidden>
+      <h2>Affiliate</h2>
+      <a class="acc-aff-card" href="../affiliate/">
+        <span class="acc-aff-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </span>
+        <span class="acc-aff-card-body">
+          <span class="acc-aff-card-title">Share &amp; earn 50%</span>
+          <span class="acc-aff-card-sub">Open your affiliate dashboard</span>
+        </span>
+        <span class="acc-aff-card-chev">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </a>
     </section>
 
     <!-- Sign out ─────────────────────────────────────────────────────── -->
@@ -284,6 +337,12 @@
         curEmail.textContent = u.email ? ('· currently ' + u.email) : '';
         emailInput.value = u.email || '';
         paintAvatar(u.avatarUrl, u.handle || u.username);
+        // Affiliate teaser only renders for users with isAffiliate=true
+        // (influencers). Default-hidden in HTML; we unhide here.
+        if (u.isAffiliate) {
+          const teaser = document.getElementById('affiliateTeaser');
+          if (teaser) teaser.hidden = false;
+        }
         accLoading.hidden = true;
         accContent.hidden = false;
       })

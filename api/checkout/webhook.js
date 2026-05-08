@@ -26,7 +26,7 @@ import Stripe from "stripe";
 import crypto from "node:crypto";
 import { Resend } from "resend";
 import { issueToken } from "../../lib/access-token.js";
-import { addTag, setEmail } from "../../lib/manychat.js";
+import { addTag, setEmail, getSubscriberIgUsername } from "../../lib/manychat.js";
 
 export const config = {
   api: { bodyParser: false },
@@ -57,6 +57,29 @@ async function readRawBody(req) {
     chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
   }
   return Buffer.concat(chunks);
+}
+
+// Talk to Convex via the plain HTTP API (same approach as
+// api/checkout/session.js — keeps the lambda small and dodges the
+// generated convex/_generated module that isn't built during Vercel's
+// build). Throws on transport / handler errors so the caller can decide
+// whether to swallow.
+async function convexMutation(convexUrl, path, args) {
+  const url = `${convexUrl.replace(/\/$/, "")}/api/mutation`;
+  const r = await fetch(url, {
+    method:  "POST",
+    headers: { "Content-Type": "application/json" },
+    body:    JSON.stringify({ path, args, format: "json" }),
+    signal:  AbortSignal.timeout(5000),
+  });
+  const json = await r.json().catch(() => null);
+  if (!r.ok) {
+    throw new Error(`convex http ${r.status}: ${json?.errorMessage || r.statusText}`);
+  }
+  if (json?.status === "error") {
+    throw new Error(json.errorMessage || "convex mutation failed");
+  }
+  return json?.value;
 }
 
 function accessLink(token) {
@@ -376,6 +399,8 @@ async function handleSessionCompleted({ stripe, event }) {
   // Locale of the page the buyer paid from. Set by /api/checkout/session
   // when creating the checkout. Drives the EN vs DE purchase email.
   const localeHint = full.metadata?.locale || "";
+  // Affiliate ref slug. Empty when the buyer didn't arrive via ?r=.
+  const refSlug = full.metadata?.r || "";
 
   if (!email) {
     console.error("Session completed without email:", full.id);
@@ -393,6 +418,16 @@ async function handleSessionCompleted({ stripe, event }) {
   const accessToken = issueToken({ email, paymentIntentId: paymentIntent });
   const downloadUrl = downloadLink(accessToken);
   const amountFormatted = formatAmount(full.amount_total, full.currency);
+
+  // Buyer's IG handle, if this purchase came in via the ManyChat IG funnel
+  // (subscriberId stamped on the Stripe session). Looked up once here so
+  // both the Sheet log and the affiliate referral row can include it
+  // without duplicating the API call. Direct-web buyers leave this null.
+  let buyerIg = null;
+  if (subscriberId) {
+    try { buyerIg = await getSubscriberIgUsername(subscriberId); }
+    catch (err) { console.error("getSubscriberIgUsername failed:", err?.message || err); }
+  }
 
   // 1. Send purchase email (Resend). One CTA: Download the guide.
   // (The access-token cookie flow for /full/ webapp is still wired, but
@@ -423,6 +458,9 @@ async function handleSessionCompleted({ stripe, event }) {
   }
 
   // 2. Log to Sheet (same shape as Whop webhook for cohort math).
+  // `instagram_handle` is set when the buyer came in via the ManyChat IG
+  // funnel; the Apps Script `handlePurchase` writes it back to the row
+  // matched by metadata_s. Empty string for direct-web buyers.
   const sideEffects = [
     logPurchase({
       email,
@@ -437,6 +475,7 @@ async function handleSessionCompleted({ stripe, event }) {
       paid_at: new Date(event.created * 1000).toISOString(),
       metadata_t: cohortToken,
       metadata_s: subscriberId,
+      instagram_handle: buyerIg || "",
       provider: "stripe",
       session_id: full.id,
       email_sent: emailOk ? "1" : "0",
@@ -458,6 +497,34 @@ async function handleSessionCompleted({ stripe, event }) {
     sideEffects.push(setEmail(subscriberId, email));
   }
 
+  // 4. Affiliate referral row (if this purchase came in with ?r=<slug>).
+  // Idempotent on stripeSessionId, so webhook redeliveries won't
+  // double-credit. We swallow errors deliberately: a Convex blip
+  // shouldn't surface as a 5xx here (Stripe would retry the whole
+  // event, which would re-send the email + log the Sheet row again).
+  // `buyerIg` is hoisted above (looked up once, reused here + in the
+  // Sheet logPurchase payload).
+  if (refSlug) {
+    const convexUrl = process.env.CONVEX_URL;
+    if (convexUrl) {
+      sideEffects.push(
+        convexMutation(convexUrl, "referrals:recordPurchase", {
+          refSlug,
+          stripeSessionId:       full.id,
+          stripePaymentIntentId: paymentIntent,
+          buyerEmail:            email,
+          buyerIg:               buyerIg || undefined,
+          purchaseAmountCents:   typeof full.amount_total === "number" ? full.amount_total : 0,
+          currency:              (full.currency || "").toLowerCase(),
+        }).catch(err => {
+          console.error("referrals:recordPurchase failed:", err?.message || err);
+        }),
+      );
+    } else {
+      console.error("CONVEX_URL not set; skipping affiliate referral record");
+    }
+  }
+
   await Promise.all(sideEffects);
 }
 
@@ -470,26 +537,40 @@ async function handleChargeRefunded({ event }) {
   // the payment_intent id to DENIED_PAYMENT_IDS in Vercel env. This is the
   // intentional half-step before promoting revoke storage to Vercel KV.
   const url = process.env.SHEETS_WEBHOOK_URL;
-  if (!url) return;
-  try {
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: "refund",
-        secret: process.env.SHEETS_SECRET,
-        payment_id: paymentIntent,
-        amount: typeof charge.amount_refunded === "number" ? (charge.amount_refunded / 100).toFixed(2) : "",
-        currency: (charge.currency || "").toUpperCase(),
-        refunded_at: new Date(event.created * 1000).toISOString(),
-        event_id: event.id,
-        provider: "stripe",
-      }),
-      signal: AbortSignal.timeout(5000),
-    });
-  } catch (err) {
-    console.error("Refund log failed:", err);
+  const tasks = [];
+  if (url) {
+    tasks.push(
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "refund",
+          secret: process.env.SHEETS_SECRET,
+          payment_id: paymentIntent,
+          amount: typeof charge.amount_refunded === "number" ? (charge.amount_refunded / 100).toFixed(2) : "",
+          currency: (charge.currency || "").toUpperCase(),
+          refunded_at: new Date(event.created * 1000).toISOString(),
+          event_id: event.id,
+          provider: "stripe",
+        }),
+        signal: AbortSignal.timeout(5000),
+      }).catch(err => console.error("Refund log failed:", err)),
+    );
   }
+
+  // Void any affiliate referral linked to this payment_intent. No-op when
+  // there's no referral row (most refunds), so we don't gate on `refSlug`
+  // — we just look it up by paymentIntent in Convex.
+  const convexUrl = process.env.CONVEX_URL;
+  if (convexUrl) {
+    tasks.push(
+      convexMutation(convexUrl, "referrals:voidByPaymentIntent", {
+        stripePaymentIntentId: paymentIntent,
+      }).catch(err => console.error("referrals:voidByPaymentIntent failed:", err?.message || err)),
+    );
+  }
+
+  await Promise.all(tasks);
 }
 
 export default async function handler(req, res) {
