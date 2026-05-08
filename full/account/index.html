@@ -44,10 +44,31 @@
 
   .acc-page {
     position: relative; z-index: 1;
-    max-width: 460px;
-    margin: 0 auto;
-    padding: 32px 20px 32px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 20px 32px;
   }
+  .card-wrap { margin: auto; width: 100%; max-width: 460px; }
+
+  /* Back link · top-left of the page, sits above the card. */
+  .back {
+    position: fixed;
+    top: 18px; left: 20px;
+    z-index: 3;
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--muted);
+    font-size: 13px;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.7);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    backdrop-filter: saturate(180%) blur(10px);
+    border: 1px solid var(--hairline);
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .back:hover { color: var(--fg); border-color: var(--hairline-strong); }
   .card {
     background: rgba(255,255,255,0.86);
     -webkit-backdrop-filter: saturate(180%) blur(18px);
@@ -194,18 +215,14 @@
   }
   .state a { color: var(--accent); text-decoration: none; }
 
-  .below {
-    text-align: center;
-    margin-top: 16px;
-    font-size: 13px;
-  }
-  .below a { color: var(--muted); text-decoration: none; }
-  .below a:hover { color: var(--fg); }
 </style>
 </head>
 <body>
 
+<a class="back" href="../">← Back</a>
+
 <main class="acc-page">
+ <div class="card-wrap">
   <div class="card">
     <div id="accLoading" class="state">Loading…</div>
 
@@ -284,8 +301,7 @@
       </div>
     </div>
   </div>
-
-  <p class="below"><a href="../">← Back to the app</a></p>
+ </div>
 </main>
 
 <script src="../lib/convex.js"></script>

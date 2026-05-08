@@ -43,14 +43,39 @@
     opacity: 0.9;
   }
 
-  /* Page wrapper · centers the card horizontally; vertical flow grows
-     with content so long activity lists scroll the page naturally. */
+  /* Page wrapper · centers the card both horizontally and vertically
+     (when content fits the viewport). On taller content the wrapper
+     grows past 100dvh so the page scrolls normally — `margin: auto`
+     on the inner card centers when there's room and pins the card to
+     the top once activity overflows. */
   .aff-page {
     position: relative; z-index: 1;
-    max-width: 460px;
-    margin: 0 auto;
-    padding: 32px 20px 32px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 20px 32px;
   }
+  .card-wrap { margin: auto; width: 100%; max-width: 460px; }
+
+  /* Back link · top-left of the page, sits above the card. Floats over
+     the gradient layer (z-index above the body::before blob). */
+  .back {
+    position: fixed;
+    top: 18px; left: 20px;
+    z-index: 3;
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--muted);
+    font-size: 13px;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.7);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    backdrop-filter: saturate(180%) blur(10px);
+    border: 1px solid var(--hairline);
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .back:hover { color: var(--fg); border-color: var(--hairline-strong); }
 
   /* The single card · same translucency / blur recipe as /login/. */
   .card {
@@ -63,7 +88,8 @@
     overflow: hidden;
   }
 
-  /* Brand mark at the top of the card — same as /login/. */
+  /* Brand mark at the top of the card — same as /login/, plus a small
+     subtitle for the only commission mention on the page. */
   .brand {
     display: flex; align-items: center; gap: 10px;
     padding: 28px 28px 18px;
@@ -72,9 +98,13 @@
     width: 32px; height: 32px;
     border-radius: 999px; object-fit: cover; object-position: 70% 45%;
   }
+  .brand-text { display: flex; flex-direction: column; gap: 1px; }
   .brand b {
     font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
     font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
+  }
+  .brand-sub {
+    font-size: 12px; color: var(--muted); letter-spacing: 0;
   }
 
   /* Internal section · padding + a top hairline. First section after
@@ -174,19 +204,14 @@
   }
   .state a { color: var(--accent); text-decoration: none; }
 
-  /* Below-card link back to the app. */
-  .below {
-    text-align: center;
-    margin-top: 16px;
-    font-size: 13px;
-  }
-  .below a { color: var(--muted); text-decoration: none; }
-  .below a:hover { color: var(--fg); }
 </style>
 </head>
 <body>
 
+<a class="back" href="../">← Back</a>
+
 <main class="aff-page">
+ <div class="card-wrap">
   <div class="card">
     <div id="affLoading" class="state">Loading…</div>
 
@@ -203,7 +228,10 @@
     <div id="affContent" hidden>
       <div class="brand">
         <img src="/images/avatar.jpg" alt="" />
-        <b>Hikebeast · Affiliate</b>
+        <span class="brand-text">
+          <b>Hikebeast · Affiliate</b>
+          <span class="brand-sub">50% per sale</span>
+        </span>
       </div>
 
       <div class="sec first">
@@ -242,8 +270,7 @@
       </div>
     </div>
   </div>
-
-  <p class="below"><a href="../">← Back to the app</a></p>
+ </div>
 </main>
 
 <script src="../lib/convex.js"></script>
