@@ -71,7 +71,27 @@ export const recordPurchase = mutation({
       status:                "pending",
       createdAt:             Date.now(),
     });
-    return { ok: true as const, referralId, deduped: false };
+
+    // Match the slug to an actual influencer (isAffiliate=true). The
+    // webhook reads this back to send the "you earned X" email. Returns
+    // null when:
+    //   - the slug doesn't match any user (orphan ref, reconcile later)
+    //   - the matched user isn't an influencer (someone trying to use
+    //     a paying customer's username as a ref slug)
+    //   - the influencer hasn't set an email yet (they need to add one
+    //     in /full/account/ to receive notifications)
+    const affiliateUser = await ctx.db
+      .query("users")
+      .withIndex("by_username", q => q.eq("username", slug))
+      .unique();
+    const notify = (affiliateUser && affiliateUser.isAffiliate && affiliateUser.email)
+      ? {
+          email:     affiliateUser.email,
+          firstName: affiliateUser.handle ?? affiliateUser.username,
+        }
+      : null;
+
+    return { ok: true as const, referralId, deduped: false, notify };
   },
 });
 

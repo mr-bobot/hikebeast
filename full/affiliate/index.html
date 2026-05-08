@@ -12,55 +12,37 @@
 <link rel="apple-touch-icon" href="../../images/favicon.jpg" />
 <link rel="stylesheet" href="../preview.css" />
 <style>
-  /* Affiliate dashboard · scoped to .aff-*. Four moving parts:
-       1. Header — title + short value-prop, blue gradient wash behind.
-       2. Share card — two links (English / Deutsch), Copy per row.
-       3. Stats grid — Total Earned, Referrals, Your Cut.
-       4. Activity list — per-referral rows, IG handle + status pill. */
-  .aff-page { max-width: 720px; margin: 0 auto; padding: 8px 18px 80px; }
+  /* Affiliate dashboard · scoped to .aff-*. Three moving parts:
+       1. Share card — two links (English / Deutsch), Copy per row.
+       2. Stats grid — Total earned + referral count.
+       3. Activity list — per-referral rows, IG handle. */
 
-  /* Page header. Mirrors the soft blurred blue blobs from /login —
-     same accent palette, same blur+saturate filter — clipped to the
-     header card so the rest of the page stays neutral. The blobs sit
-     behind a translucent white card; the title + subtitle sit on top
-     via z-index. */
-  .aff-header {
+  /* Background — same soft blue-blob wash as /login/, so the affiliate
+     dashboard feels like part of the same surface. Overrides the
+     default radial-gradient set in preview.css for /full/ pages. */
+  body {
+    background: #fbfbfc;
     position: relative;
-    margin-top: 18px;
-    padding: 32px 24px 28px;
-    border-radius: var(--radius-card);
-    background: rgba(255, 255, 255, 0.65);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
-    backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid var(--hairline);
-    overflow: hidden;
-    isolation: isolate;
   }
-  .aff-header::before {
+  body::before {
     content: '';
-    position: absolute;
-    inset: -40px;
-    z-index: -1;
+    position: fixed;
+    inset: -120px;
+    z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(280px 240px at 18% 28%, rgba(0, 113, 227, 0.42) 0%, transparent 70%),
-      radial-gradient(260px 220px at 82% 30%, rgba(96, 165, 250, 0.34) 0%, transparent 72%),
-      radial-gradient(320px 280px at 50% 100%, rgba(56, 132, 220, 0.36) 0%, transparent 72%),
-      radial-gradient(220px 200px at 95% 78%, rgba(180, 210, 255, 0.50) 0%, transparent 75%);
-    filter: blur(60px) saturate(1.1);
+      radial-gradient(460px 420px at 18% 22%, rgba(0, 113, 227, 0.32) 0%, transparent 70%),
+      radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.28) 0%, transparent 72%),
+      radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.30) 0%, transparent 70%),
+      radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.40) 0%, transparent 75%);
+    filter: blur(70px) saturate(1.1);
     opacity: 0.85;
   }
-  .aff-title {
-    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 28px; font-weight: 700; letter-spacing: -0.025em;
-    margin: 0 0 6px; color: var(--fg);
-  }
-  .aff-subtitle {
-    margin: 0;
-    font-size: 14px; line-height: 1.5;
-    color: var(--muted);
-    max-width: 44ch;
-  }
+  /* Topbar over the gradient: extra z-index so it stays above the blob layer. */
+  .topbar { position: relative; z-index: 2; }
+  .legal { position: relative; z-index: 2; }
+
+  .aff-page { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; padding: 12px 18px 80px; }
 
   /* Share card — two language rows stacked. Each row pairs a URL
      display with its own Copy button. We deliberately don't use a
@@ -68,10 +50,14 @@
      link into a caption or DM, and the per-language label is the
      thing that needs to be visible (which Share would hide). */
   .aff-share {
-    margin-top: 14px;
+    margin-top: 18px;
     padding: 6px 16px 12px;
-    background: var(--surface);
+    background: rgba(255,255,255,0.72);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    backdrop-filter: saturate(180%) blur(18px);
+    border: 1px solid var(--hairline);
     border-radius: var(--radius-card);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.06);
   }
   .aff-share-row {
     padding: 12px 0;
@@ -103,7 +89,7 @@
   .aff-btn-copy {
     height: 44px; padding: 0 18px;
     border-radius: var(--radius-btn);
-    background: var(--accent); color: #fff;
+    background: var(--fg); color: #fff;
     border: 0; cursor: pointer;
     font: inherit; font-size: 14px; font-weight: 600;
     letter-spacing: -0.01em;
@@ -128,15 +114,19 @@
      and a referral count. Currency-aware: when more than one currency
      is in play the Total stacks each on its own line. */
   .aff-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
     margin-top: 14px;
   }
   .aff-stat {
-    background: var(--surface);
+    background: rgba(255,255,255,0.72);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    backdrop-filter: saturate(180%) blur(18px);
+    border: 1px solid var(--hairline);
     border-radius: 16px;
     padding: 14px 14px 12px;
     display: flex; flex-direction: column; gap: 4px;
     min-height: 84px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.04);
   }
   .aff-stat-label {
     font-size: 11px; font-weight: 600;
@@ -154,17 +144,16 @@
   .aff-stat-value.is-empty { color: var(--muted); font-weight: 500; }
 
   /* Activity list */
-  .aff-section { margin-top: 20px; }
-  .aff-section-h {
-    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 18px; font-weight: 600; letter-spacing: -0.02em;
-    margin: 0 0 8px; color: var(--fg);
-  }
+  .aff-section { margin-top: 14px; }
   .aff-list {
     margin: 0; padding: 0; list-style: none;
-    background: var(--surface);
+    background: rgba(255,255,255,0.72);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    backdrop-filter: saturate(180%) blur(18px);
+    border: 1px solid var(--hairline);
     border-radius: 16px;
     overflow: hidden;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.04);
   }
   .aff-list li {
     display: flex; align-items: center; gap: 12px;
@@ -197,10 +186,14 @@
 
   /* Empty / loading / signed-out states */
   .aff-empty {
-    background: var(--surface);
+    background: rgba(255,255,255,0.72);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    backdrop-filter: saturate(180%) blur(18px);
+    border: 1px solid var(--hairline);
     border-radius: 16px;
     padding: 32px 18px;
     text-align: center;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.04);
   }
   .aff-empty-icon {
     width: 48px; height: 48px; margin: 0 auto 12px;
@@ -263,12 +256,6 @@
   </div>
 
   <div id="affContent" hidden>
-    <!-- Header · title + value-prop on a soft blue gradient ─────────── -->
-    <header class="aff-header">
-      <h1 class="aff-title">Earn 50% commission</h1>
-      <p class="aff-subtitle">On every Gems of Switzerland sale that comes through your link.</p>
-    </header>
-
     <!-- Share card · two language rows, one Copy each ───────────────── -->
     <section class="aff-share">
       <div class="aff-share-row">
@@ -288,32 +275,24 @@
       <p class="aff-share-msg" id="affShareMsg" hidden></p>
     </section>
 
-    <!-- Stats · total earned + count of valid referrals + your cut ─── -->
+    <!-- Stats · total earned + count of valid referrals ────────────── -->
     <div class="aff-stats">
       <div class="aff-stat">
-        <span class="aff-stat-label">Total Earned</span>
-        <span class="aff-stat-value is-empty" id="statTotal">$0</span>
+        <span class="aff-stat-label">Total</span>
+        <span class="aff-stat-value is-empty" id="statTotal">0</span>
       </div>
       <div class="aff-stat">
         <span class="aff-stat-label">Referrals</span>
         <span class="aff-stat-value is-empty" id="statCount">0</span>
       </div>
-      <div class="aff-stat">
-        <span class="aff-stat-label">Your Cut</span>
-        <span class="aff-stat-value">50%</span>
-      </div>
     </div>
 
-    <!-- Activity list ──────────────────────────────────────────────── -->
+    <!-- Activity list — no section header; the list speaks for itself. -->
     <section class="aff-section">
-      <h2 class="aff-section-h">Activity</h2>
       <ul class="aff-list" id="affList" hidden></ul>
       <div class="aff-empty" id="affEmpty">
-        <div class="aff-empty-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        </div>
         <h3>No referrals yet</h3>
-        <p>Share your link and earn 50% commission.</p>
+        <p>Once someone buys through your link, they show up here.</p>
       </div>
     </section>
 
@@ -367,12 +346,9 @@
     // currencies (CHF + USD doesn't reduce to a single number without
     // an FX rate) — we display each currency as its own term, joined
     // by " + ". Same rule as the Convex query's totals shape.
-    function fmtMoney(cents, _currency) {
-      // Per Leon: prefix amounts with `$` (regardless of underlying
-      // currency code on the row). The currency arg is kept for
-      // backward-compat with call sites but ignored at render time.
+    function fmtMoney(cents, currency) {
       const v = (cents / 100).toFixed(2).replace(/\.00$/, '');
-      return '$' + v;
+      return v + ' ' + (currency || '').toUpperCase();
     }
     // Sum of (paid + pending) per currency — voided rows are excluded
     // because they don't count toward what the affiliate has earned.
@@ -439,7 +415,7 @@
 
     function paintStats(totals, count) {
       const totalStr = fmtTotalEarned(totals);
-      elStatTotal.textContent = totalStr || '$0';
+      elStatTotal.textContent = totalStr || '0';
       elStatTotal.classList.toggle('is-empty', !totalStr);
       elStatCount.textContent = String(count);
       elStatCount.classList.toggle('is-empty', count === 0);
