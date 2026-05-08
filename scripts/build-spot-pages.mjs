@@ -144,6 +144,7 @@ ${renderSpotCard(spot)}
 <footer class="legal">
   <a href="../../../imprint.html">Imprint</a><span class="sep">·</span>
   <a href="../../../privacy.html">Privacy</a><span class="sep">·</span>
+  <a href="../../../terms.html">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 
