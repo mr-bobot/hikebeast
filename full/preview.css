@@ -1192,23 +1192,31 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   body[data-page="spot-detail"] .sp-body { overflow: visible; }
 }
 
-/* On wide-enough viewports the detail card uses 612:652 grid columns
- * and floors the photo column at a 612:711 (≈0.86) aspect via
- * min-height: 56.25cqi. cqi = 1% of card inline-size, so 56.25cqi =
- * 711px when card width is 1264 — and the photo column at 612fr is
- * 612px wide, giving 612:711 on the photo itself.
+/* Desktop detail card: 612:652 grid columns, photo column floored at
+ * 612:711 (≈0.86) via min-height: 56.25cqi. cqi = 1% of card width,
+ * 56.25cqi ≈ 711px on a 1264px card; the photo column at 612fr is
+ * 612px wide, giving 612:711 on the photo.
  *
- * It's a *floor*, not a strict aspect:
+ * Floor, not strict aspect:
  *   - Body fits in 711px → photo lands at exactly 612:711.
- *   - Body taller than 711px → grid stretches the row, photo grows
- *     past the floor and object-fit: cover keeps the image filling.
+ *   - Body taller than 711px → grid stretches the row past the floor,
+ *     object-fit: cover keeps the image filling.
  *
- * Earlier the column was getting inflated past the floor by
- * injectMultiImage's pre-init height snapshot of the natural-aspect
- * <img>, which made portrait spots like Klausenpass and Pic de
- * Jallouvre tower over their short body text. The snapshot is gone
- * (see social.js); the floor alone is enough now. */
-@media (min-width: 1000px) {
+ * Two subtle requirements that bit us before:
+ *  1. Breakpoint matches the 2-col layout boundary. The 760-1099 rule
+ *     forces single-col, so this rule has to start at 1100 to avoid a
+ *     range where the photo gets a portrait floor while the layout is
+ *     still vertical.
+ *  2. The static <img> is position:absolute so it doesn't drive the
+ *     container's height. Without absolute positioning, `height:100%`
+ *     on the img resolves to auto (min-height alone doesn't give the
+ *     parent an explicit height), and the natural-aspect portrait image
+ *     ends up sizing the container — the same problem `.hb-slide`
+ *     already solves for multi-photo spots via `position:absolute;
+ *     inset:0`. We mirror that for the static img on single-photo
+ *     spots like Pic de Jallouvre, so single- and multi-photo spots
+ *     behave identically. */
+@media (min-width: 1100px) {
   body[data-page="spot-detail"] .slide-spot {
     grid-template-columns: 612fr 652fr;
     container-type: inline-size;
@@ -1216,6 +1224,10 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   }
   body[data-page="spot-detail"] .slide-spot .sp-photo {
     min-height: 56.25cqi;
+  }
+  body[data-page="spot-detail"] .slide-spot .sp-photo > img {
+    position: absolute;
+    inset: 0;
   }
 }
 
