@@ -137,10 +137,32 @@
   }
   refreshCuratedPools();
 
-  // === Featured hero (rotates through curated pool) ===
+  // Chapter metadata for the home-hero rotation. Mirrors content.yaml's
+  // chapters: block. Hand-maintained because the legacy build-full.py is
+  // the only thing that reads chapters into a sidecar today; we'd duplicate
+  // build-full.py's logic in node otherwise. Seven chapters, seldom change.
+  const CHAPTERS_META = [
+    { id: 'central',  name: 'Central Switzerland', description: 'Waterfalls, glacier lakes, the Hardergrat ridge.' },
+    { id: 'valais',   name: 'Valais',              description: 'Matterhorn country. Glaciers, ice caves, high passes.' },
+    { id: 'fribourg', name: 'Fribourg',            description: 'Hidden lakes and the Gastlosen limestone wall.' },
+    { id: 'western',  name: 'Western Switzerland', description: 'Vineyards, lakeside cliffs, quieter roads.' },
+    { id: 'eastern',  name: 'Eastern Switzerland', description: 'Appenzell, Säntis, lesser-known summits.' },
+    { id: 'ticino',   name: 'Ticino',              description: 'Alpine lakes, turquoise rivers, Italian mountain style.' },
+    { id: 'beyond',   name: 'Beyond the Border',   description: 'Chamonix, Mont Blanc, and one French side of Léman.' },
+  ];
+  const chapterCards = CHAPTERS_META.map(ch => ({
+    isChapter:  true,
+    chapter_id: ch.id,
+    title:      ch.name,
+    kicker:     ch.description,
+    href:       `${ch.id}/index.html`,
+  }));
+
+  // === Featured hero (Introduction + the 7 chapters in order) ===
   // The Introduction card is always first so a fresh visitor's eye lands on
   // "read this before the rest of the guide". After it cycles past, we
-  // alternate between the famous and hidden-gems pools.
+  // walk through the chapters in geographic-ish order. Spot-level discovery
+  // happens further down the page (For You / Famous / Hidden Gems rows).
   const introCard = {
     title: 'Introduction',
     kicker: 'Before you go',
@@ -149,7 +171,7 @@
     chapter_id: 'intro',
     isIntro: true,
   };
-  let featurePool = [introCard, ...famous, ...gems];
+  let featurePool = [introCard, ...chapterCards];
   let featureIdx = 0;  // start with Introduction every visit
 
   const featureTitle = document.getElementById('featureTitle');
@@ -174,7 +196,10 @@
     // early when nothing the user can see changed (same spot, same idx,
     // same image source). Note: lastFeatureKey is paired with idx so the
     // 9-second auto-advance timer still works.
-    const key = `${spot.isIntro ? 'intro' : (window.HB.spotKey(spot) || spot.title)}|${idx}|${spot.image || spot.imagePhotoId || ''}`;
+    const featureKey = spot.isIntro ? 'intro'
+                      : spot.isChapter ? `chapter:${spot.chapter_id}`
+                      : (window.HB.spotKey(spot) || spot.title);
+    const key = `${featureKey}|${idx}|${spot.image || spot.imagePhotoId || spot.chapter_id || ''}`;
     if (lastFeatureKey === key) return;
     lastFeatureKey = key;
 
@@ -186,6 +211,12 @@
       featureCta.href = 'intro/index.html';
       featureCta.querySelector('span:last-child').textContent = 'Read the intro';
       if (kickerLabel) kickerLabel.textContent = 'Read this first';
+      featureKicker?.classList.add('is-pinned');
+    } else if (spot.isChapter) {
+      featureDeck.textContent = spot.kicker || '';
+      featureCta.href = spot.href;
+      featureCta.querySelector('span:last-child').textContent = 'Open chapter';
+      if (kickerLabel) kickerLabel.textContent = 'Chapter';
       featureKicker?.classList.add('is-pinned');
     } else {
       const kicker = window.HB.singularKicker(spot.kicker || '');
@@ -201,14 +232,24 @@
     ).join('');
     featureCard.dataset.spotKey = spot.isIntro ? '' : (window.HB.spotKey(spot) || '');
 
-    // Hero uses the full-resolution source (1800w) so it stays sharp on
-    // desktop fullscreen where the photo column reaches ~1100px CSS / 2200px
-    // device pixels. The row cards and up-next thumbs stay on the 1000w
-    // mid-tier since they're rendered much smaller.
-    const heroAttrs = window.HB.photoAttrs({
-      photoId: spot.imagePhotoId, image: spot.image,
-      width: 2800, prefix: '', sizes: '100vw',
-    });
+    // Hero uses the full-resolution source so it stays sharp on desktop
+    // fullscreen where the photo column reaches ~1100px CSS / 2200px device
+    // pixels. Chapter covers live at /full/img/chapters/<id>/w<W>.webp,
+    // outside the spot-derivative system; build their srcset by hand.
+    let heroAttrs;
+    if (spot.isChapter) {
+      const widths = [400, 1000, 1800, 2800];
+      heroAttrs = {
+        src: `img/chapters/${spot.chapter_id}/w2800.webp`,
+        srcset: widths.map(w => `img/chapters/${spot.chapter_id}/w${w}.webp ${w}w`).join(', '),
+        sizes: '100vw',
+      };
+    } else {
+      heroAttrs = window.HB.photoAttrs({
+        photoId: spot.imagePhotoId, image: spot.image,
+        width: 2800, prefix: '', sizes: '100vw',
+      });
+    }
     if (!featureImg.src) {
       featureImg.src = heroAttrs.src;
       if (heroAttrs.srcset) { featureImg.srcset = heroAttrs.srcset; featureImg.sizes = heroAttrs.sizes; }
@@ -250,11 +291,13 @@
     if (!featurePool.length) return;
     featureIdx = (featureIdx + 1) % featurePool.length;
     paintFeature(featurePool[featureIdx], featureIdx);
+    buildUpNext();
   }
   function retreatFeature() {
     if (!featurePool.length) return;
     featureIdx = (featureIdx - 1 + featurePool.length) % featurePool.length;
     paintFeature(featurePool[featureIdx], featureIdx);
+    buildUpNext();
   }
   // Tap the photo opens the spot (same destination as the "Open spot" /
   // "Read the intro" CTA). Swipe horizontally still cycles the carousel
@@ -326,35 +369,57 @@
     return [...kept, ...fill];
   }
 
-  // === "Up next" stack to the right of the hero (4 cards) ===
+  // === "Up next" stack to the right of the hero (4 chapter cards) ===
+  // Shows the next 4 entries from the featured rotation, skipping the
+  // Introduction (its image isn't a chapter cover and would jar visually
+  // alongside the chapter thumbs). As the carousel advances on the left,
+  // these thumbs cycle accordingly so users see "what's coming up next".
   const upNextEl = document.getElementById('upNext');
-  let upNextKeys = [];
   function buildUpNext() {
-    upNextKeys = pickStable(upNextKeys, 4);
-    const byKey = new Map(SPOTS.map(s => [window.HB.spotKey(s), s]));
-    const picks = upNextKeys.map(k => byKey.get(k)).filter(Boolean);
-    upNextEl.innerHTML = picks.map(spot => {
-      const region = REGION_NAME[spot.chapter] || spot.chapter_id;
-      const kicker = window.HB.singularKicker(spot.kicker || '');
+    const items = [];
+    let offset = 1;
+    while (items.length < 4 && offset <= featurePool.length) {
+      const idx = (featureIdx + offset) % featurePool.length;
+      const item = featurePool[idx];
+      if (item && !item.isIntro) items.push(item);
+      offset++;
+    }
+    upNextEl.innerHTML = items.map(item => {
+      // Both isChapter cards (the new normal) and any stray spot cards (none
+      // currently, but keeping the spot branch keeps the helper future-proof
+      // if Leon ever wants to mix chapters + featured spots in the rotation).
+      if (item.isChapter) {
+        return `
+          <a class="up-next-card" href="${esc(item.href)}" data-hb-chapter="${esc(item.chapter_id)}">
+            <span class="photo"><img src="img/chapters/${esc(item.chapter_id)}/w400.webp" alt="" loading="lazy" /></span>
+            <span class="body">
+              <span class="name">${esc(item.title)}</span>
+              <span class="meta">${esc(item.kicker || '')}</span>
+            </span>
+          </a>
+        `;
+      }
+      const region = REGION_NAME[item.chapter] || item.chapter_id;
+      const kicker = window.HB.singularKicker(item.kicker || '');
       const a = window.HB.photoAttrs({
-        photoId: spot.imagePhotoId, image: spot.image,
+        photoId: item.imagePhotoId, image: item.image,
         width: 400, prefix: '', sizes: '160px',
       });
       const ss = a.srcset ? ` srcset="${esc(a.srcset)}" sizes="${esc(a.sizes)}"` : '';
-      const k = window.HB.spotKey(spot) || '';
+      const k = window.HB.spotKey(item) || '';
       return `
-        <a class="up-next-card" href="${esc(window.HB.spotDetailHref(spot, ''))}" data-hb-spotkey="${esc(k)}">
+        <a class="up-next-card" href="${esc(window.HB.spotDetailHref(item, ''))}" data-hb-spotkey="${esc(k)}">
           <span class="photo"><img src="${esc(a.src)}"${ss} alt="" loading="lazy" /></span>
           <span class="body">
-            <span class="name">${esc(spot.title)}</span>
+            <span class="name">${esc(item.title)}</span>
             <span class="meta">${esc(region)}</span>
             ${kicker ? `<span class="duration">${esc(kicker)}</span>` : ''}
           </span>
         </a>
       `;
     }).join('');
-    // Attach heart overlays after the markup lands. Idempotent — safe to
-    // call on every rebuild.
+    // Heart overlays only make sense for spot cards; no-op for chapter
+    // entries because data-hb-spotkey is absent.
     upNextEl.querySelectorAll('.up-next-card[data-hb-spotkey]').forEach(card => {
       const k = card.getAttribute('data-hb-spotkey');
       if (k) window.HB.attachCardActions(card, k);
@@ -435,11 +500,14 @@
 
   // When Convex pushes an update (admin edits a spot, photo published,
   // etc.), refresh every surface so the page reflects new data without
-  // a reload. Featured rotation index is preserved.
+  // a reload. Featured rotation index is preserved. The hero pool is
+  // [intro + chapters], static metadata that doesn't change with Convex
+  // pushes — but rebuild it anyway so any code path that mutates
+  // featurePool stays consistent.
   window.HB.spots.subscribe(() => {
     refreshSpots();
     refreshCuratedPools();
-    featurePool = [introCard, ...famous, ...gems];
+    featurePool = [introCard, ...chapterCards];
     if (featureIdx >= featurePool.length) featureIdx = 0;
     if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
     buildUpNext();
