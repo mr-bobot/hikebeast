@@ -827,21 +827,28 @@
     // (slug under /full/img/derivatives/) so consumers can pick whichever
     // their renderer supports.
     function normaliseConvexRow(row) {
+      const anchor = (row.spotKey || '').split('#')[1] || null;
       const photos = (row.photos || []).slice()
         .sort((a, b) => (a.order || 0) - (b.order || 0))
-        .map(p => {
-          // Some prod rows carry derivative paths in `staticPath` instead
-          // of populating `photoId` directly (the migration script writes
-          // `staticPath: spot.image` and the gallery sidecar's src is
-          // already a derivative path like "derivatives/<id>/w1800.webp").
-          // Recover the photoId from that path so photoUrl()'s derivative
-          // branch fires; otherwise the renderer falls through to the
-          // legacy `img/m/<file>` path and produces a 404.
+        .map((p, idx) => {
+          // Recover photoId so photoUrl()'s derivative branch fires.
+          // Two failure modes the migration leaves behind:
+          //  1. staticPath holds a derivative path ("derivatives/<id>/...")
+          //     but photoId is empty -- parse <id> out.
+          //  2. staticPath holds a legacy flat filename ("joriseen.jpg") and
+          //     photoId is empty -- synth `<anchor>_p<idx>`. The derivative
+          //     ladder is built from the same anchor, so for every spot whose
+          //     gallery actually shipped to disk this resolves correctly.
+          //     If a spot has no derivatives the URL 404s and the page falls
+          //     back gracefully (Featured keeps the prior frame; row cards
+          //     show empty), which is no worse than the legacy `img/m/<file>`
+          //     route did at width<=1200 when the file wasn't there.
           let photoId = p.photoId || null;
           if (!photoId && p.staticPath) {
             const m = p.staticPath.match(/^derivatives\/([^/]+)\//);
             if (m) photoId = m[1];
           }
+          if (!photoId && anchor) photoId = `${anchor}_p${idx}`;
           return {
             src:     p.staticPath || null,
             photoId,
@@ -2393,16 +2400,12 @@
     const oldImg = photoEl.querySelector('img');
     const oldCredit = photoEl.querySelector('.credit-pill');
     const isDetailPage = document.body.dataset.page === 'spot-detail';
-    // Snapshot the photo column's rendered height BEFORE we remove the
-    // static <img>. Detail pages get this locked as min-height so the
-    // post-init layout matches the pre-init paint — otherwise the
-    // column shrinks from "natural-photo-driven" to "body-driven" the
-    // instant the static <img> leaves the DOM. CSS min-height:
-    // 56.25cqi is still the absolute floor (16:9 of card width); we
-    // pick the LARGER of the two so cards with short bodies + portrait
-    // photos keep the photo's natural height instead of snapping to
-    // 16:9 floor when the carousel inits. */
-    const preInitHeight = isDetailPage ? photoEl.getBoundingClientRect().height : 0;
+    // Detail pages now have a fixed photo aspect-ratio (612:711) in CSS,
+    // so we no longer snapshot the natural-image-driven height as a
+    // min-height — that was inflating portrait spots' photo columns
+    // past the desired crop. Chapter scroll cards still get the
+    // natural-aspect inline lock so each card sizes to its own primary
+    // photo's intrinsic shape.
     if (oldImg) {
       if (!isDetailPage) {
         const nw = oldImg.naturalWidth, nh = oldImg.naturalHeight;
@@ -2418,9 +2421,6 @@
     }
     if (oldCredit) oldCredit.remove();
     photoEl.classList.add('hb-multi');
-    if (isDetailPage && preInitHeight > 0) {
-      photoEl.style.minHeight = `${preInitHeight}px`;
-    }
 
     // Slide stack: first slide eager, the rest lazy so we don't yank
     // bandwidth for spots the user hasn't navigated to yet.
@@ -2749,20 +2749,20 @@
       });
 
       // "Been there" button — same affordance as the heart but for the
-      // visited pile. Always rendered so the layout stays stable; the
-      // signed-in gate hides it via [hidden] when no session attached
-      // and flips back on sign-in. Tick filled when on.
+      // visited pile. Always visible so the action row reads consistently
+      // for everyone (Leon: "between the heart and the three dots").
+      // Visited is server-only (no localStorage fallback like favorites
+      // has), so a click while logged-out routes through openSignIn()
+      // instead of being a silent no-op.
       const tick = document.createElement('button');
       tick.type = 'button';
       tick.className = 'hb-visited';
       tick.setAttribute('data-hb-visited', k);
       tick.setAttribute('aria-label', 'Mark as visited');
       tick.innerHTML = SVG_CHECK_CIRCLE;
-      tick.hidden = !visited.signedIn();
       actions.appendChild(tick);
 
       function paintVisited() {
-        tick.hidden = !visited.signedIn();
         const on = visited.has(k);
         tick.classList.toggle('is-on', on);
         tick.setAttribute('aria-pressed', String(on));
@@ -2774,7 +2774,7 @@
       tick.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (!visited.signedIn()) return;
+        if (!visited.signedIn()) { openSignIn(); return; }
         visited.toggle(k);
         paintVisited();
       });

@@ -256,11 +256,11 @@
     featureIdx = (featureIdx - 1 + featurePool.length) % featurePool.length;
     paintFeature(featurePool[featureIdx], featureIdx);
   }
-  // Tap the photo to advance manually + swipe horizontally on touch.
-  // Swipe wins over tap: if the user moves more than SWIPE_THRESHOLD
-  // pixels horizontally between touchstart and touchend, we treat it as
-  // a swipe and swallow the synthesised click. Vertical drags fall
-  // through (they're scrolling the page).
+  // Tap the photo opens the spot (same destination as the "Open spot" /
+  // "Read the intro" CTA). Swipe horizontally still cycles the carousel
+  // on touch; the dots and the 9-second auto-advance timer also still
+  // cycle through the pool. Tap-to-advance was confusing — users expect
+  // a photo of a thing to be a link to that thing.
   const featurePhotoEl = document.querySelector('.feature-photo');
   if (featurePhotoEl) {
     const SWIPE_THRESHOLD = 40;  // px
@@ -276,10 +276,6 @@
       const t = e.changedTouches[0];
       const dx = t.clientX - touchStartX;
       const dy = t.clientY - touchStartY;
-      // Treat as swipe only when horizontal motion clearly dominates and
-      // crosses the threshold — a vertical scroll-y drag shouldn't flip
-      // cards. Reset the auto-advance timer so the user gets a full
-      // cycle on the spot they swiped to.
       if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
         if (dx < 0) advanceFeature(); else retreatFeature();
         clearInterval(featureTimer);
@@ -287,8 +283,6 @@
         swipeFired = true;
       }
     }, { passive: true });
-    // Capture-phase listener catches the click before the advance handler
-    // below would fire it.
     featurePhotoEl.addEventListener('click', (e) => {
       if (swipeFired) {
         e.stopPropagation();
@@ -296,8 +290,11 @@
         swipeFired = false;
         return;
       }
-      advanceFeature();
+      if (featureCta.href && featureCta.href !== '#') {
+        location.href = featureCta.href;
+      }
     }, true);
+    featurePhotoEl.style.cursor = 'pointer';
   }
 
   function shuffle(arr) {
