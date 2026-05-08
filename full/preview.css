@@ -481,13 +481,18 @@ button { font-family: inherit; }
   object-fit: cover;
   display: block;
 }
-/* Chapter-map variant of the thumb: shrink the silhouette so it has
- * breathing room inside the dark gradient box. The cover-card uses 86%
- * (large frame, plenty of room); the up-next thumb is only 96x64 so a
- * tighter ratio keeps the map from kissing the edges. */
+/* Chapter-map variant of the thumb: pad the gradient box so the
+ * silhouette has breathing room. 86% (the cover-card default) makes
+ * the map kiss the edges in this 96x64 frame; using padding + a
+ * 100%-of-padded-area image gives a clean inset look without
+ * shrinking the silhouette into a tiny dot. */
+.up-next-card .photo .cv-map {
+  padding: 8px;
+}
 .up-next-card .photo .cv-map img {
-  width: 60%;
-  max-height: 60%;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
 }
 .up-next-card .body {
   display: flex;
