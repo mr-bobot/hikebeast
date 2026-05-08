@@ -827,21 +827,28 @@
     // (slug under /full/img/derivatives/) so consumers can pick whichever
     // their renderer supports.
     function normaliseConvexRow(row) {
+      const anchor = (row.spotKey || '').split('#')[1] || null;
       const photos = (row.photos || []).slice()
         .sort((a, b) => (a.order || 0) - (b.order || 0))
-        .map(p => {
-          // Some prod rows carry derivative paths in `staticPath` instead
-          // of populating `photoId` directly (the migration script writes
-          // `staticPath: spot.image` and the gallery sidecar's src is
-          // already a derivative path like "derivatives/<id>/w1800.webp").
-          // Recover the photoId from that path so photoUrl()'s derivative
-          // branch fires; otherwise the renderer falls through to the
-          // legacy `img/m/<file>` path and produces a 404.
+        .map((p, idx) => {
+          // Recover photoId so photoUrl()'s derivative branch fires.
+          // Two failure modes the migration leaves behind:
+          //  1. staticPath holds a derivative path ("derivatives/<id>/...")
+          //     but photoId is empty -- parse <id> out.
+          //  2. staticPath holds a legacy flat filename ("joriseen.jpg") and
+          //     photoId is empty -- synth `<anchor>_p<idx>`. The derivative
+          //     ladder is built from the same anchor, so for every spot whose
+          //     gallery actually shipped to disk this resolves correctly.
+          //     If a spot has no derivatives the URL 404s and the page falls
+          //     back gracefully (Featured keeps the prior frame; row cards
+          //     show empty), which is no worse than the legacy `img/m/<file>`
+          //     route did at width<=1200 when the file wasn't there.
           let photoId = p.photoId || null;
           if (!photoId && p.staticPath) {
             const m = p.staticPath.match(/^derivatives\/([^/]+)\//);
             if (m) photoId = m[1];
           }
+          if (!photoId && anchor) photoId = `${anchor}_p${idx}`;
           return {
             src:     p.staticPath || null,
             photoId,
