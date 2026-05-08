@@ -243,6 +243,7 @@ async function main() {
         deck:      ed.deck,
         body:      ed.body,
         specs:     ed.specs,
+        wildCamping: s.wildCamping,
       }),
     });
     if (result.action === "created") created++; else updated++;
