@@ -1192,41 +1192,28 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   body[data-page="spot-detail"] .sp-body { overflow: visible; }
 }
 
-/* On wide-enough viewports the detail card uses the same geometry
- * as chapter scroll cards: 16:9 with 612:652 columns. Implemented
- * as a *minimum* aspect (via min-height: 56.25cqi = 9/16 of card
- * width) instead of strict aspect-ratio:
+/* On wide-enough viewports the detail card uses 612:652 grid columns
+ * and locks the photo column to a fixed 612:711 (≈0.86) aspect.
+ * Originally we used min-height: 56.25cqi (16:9 floor) so portrait
+ * images would inflate the column past 16:9 to their natural aspect.
+ * In practice the column ended up driven by injectMultiImage's
+ * pre-init height snapshot of the natural-aspect <img>, which made
+ * portrait spots like Klausenpass / Pic de Jallouvre tower over their
+ * (short) body text.
  *
- *   - Body content fits in 16:9 → card lands at exactly 16:9
- *     (short-body spots like Rosenlaui — empty body fills to the
- *     min-height floor).
- *   - Body content too tall → card grows past 16:9 to accommodate
- *     (long-body spots like Engstligen at narrow viewports — the
- *     min-height is a floor, not a ceiling). No clipping.
- *
- * container-type: inline-size makes cqi resolve to card-width
- * percent. Photo column stretches to the grid row height (= max of
- * min-height vs body intrinsic) and .hb-slide images fill via
- * height:100% + object-fit:cover. */
+ * Fixed crop instead: the photo column is always 612:711, every image
+ * gets object-fit: cover'd into that frame, and body content floats
+ * at its natural height in the right column. If body is taller than
+ * 711px the grid stretches the row and aspect-ratio loses to the
+ * explicit grid height (object-fit: cover keeps the photo filling). */
 @media (min-width: 1000px) {
   body[data-page="spot-detail"] .slide-spot {
     grid-template-columns: 612fr 652fr;
     container-type: inline-size;
-    /* Override .slide-spot's global aspect-ratio (16:10 at 760+,
-     * 2:1 at 1500+ — both rigid). On the detail page we want the
-     * card to GROW past 16:9 when body content needs it, not get
-     * clipped to a fixed aspect. The min-height: 56.25cqi on the
-     * photo column gives the 16:9 floor. */
     aspect-ratio: auto;
   }
-  /* min-height set on the PHOTO column (not the card itself —
-   * cqi can't resolve against its own container, only an ancestor
-   * with container-type). 56.25cqi = 9/16 of card width, so when
-   * body content fits in that height, the photo stays at the 16:9
-   * floor. When body needs more, grid-stretch grows the photo
-   * column past the floor — body never clips. */
   body[data-page="spot-detail"] .slide-spot .sp-photo {
-    min-height: 56.25cqi;
+    aspect-ratio: 612 / 711;
   }
 }
 
