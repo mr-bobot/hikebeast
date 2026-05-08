@@ -1102,8 +1102,8 @@
     // hamburger. Five slots: Home · Explore · Swipe · Map · Menu.
     // Menu is a hamburger that opens a slide-up sheet with Liked,
     // Collections, Chapters, and Account — everything that didn't earn
-    // a primary slot. The fav-count badge sits on the Menu icon so
-    // users see they have saved spots without opening the sheet.
+    // a primary slot. No count badge on the Menu icon — having saved
+    // or visited spots shouldn't read as a notification to clear.
     const tabbar = document.createElement('nav');
     tabbar.className = 'app-tabbar';
     tabbar.setAttribute('aria-label', 'Primary navigation');
@@ -1122,7 +1122,6 @@
       </a>
       <button type="button" class="tab" data-hb-menu-toggle aria-label="Menu" aria-haspopup="dialog">
         ${SVG_BURGER}<span>Menu</span>
-        <span class="tab-badge" data-hb-fav-count></span>
       </button>
     `;
     document.body.appendChild(tabbar);
