@@ -366,15 +366,20 @@ button { font-family: inherit; }
 .feature-card .feature-kicker.is-pinned svg { color: #fff; }
 .feature-card .feature-title {
   font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-  font-size: 32px;
+  /* Fluid sizing so single-word titles ("Introduction") never overflow
+   * the text column into the photo. The text column is roughly half the
+   * card width on tablet+, so we clamp against 4vw. */
+  font-size: clamp(28px, 4vw, 44px);
   line-height: 1.0;
   letter-spacing: -0.035em;
   font-weight: 600;
   margin: 4px 0 0;
   color: var(--fg);
+  /* Long single words (e.g. "Introduction") wrap rather than getting
+   * clipped by the card's overflow:hidden. */
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
-@media (min-width: 700px) { .feature-card .feature-title { font-size: 40px; } }
-@media (min-width: 1100px) { .feature-card .feature-title { font-size: 48px; } }
 .feature-card .feature-deck {
   margin: 0;
   font-size: 14px;
@@ -480,6 +485,32 @@ button { font-family: inherit; }
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
+}
+/* Chapter variant of the up-next card — the photo block becomes the same
+ * dark-gradient frame used on /full/<chapter>/ slide covers, with the
+ * region SVG silhouette glowing on top. Reuses the .cv-map look so the
+ * home page reads as a continuation of the chapter pages. Drives the
+ * region tint via the inline `--region-color` CSS variable set per chapter. */
+.up-next-card.is-chapter .photo.cv-map {
+  position: relative;
+  background:
+    radial-gradient(70% 60% at 22% 18%, rgba(var(--region-color, 200, 200, 200), 0.55) 0%, rgba(var(--region-color, 200, 200, 200), 0) 65%),
+    radial-gradient(60% 55% at 92% 95%, rgba(var(--region-color, 200, 200, 200), 0.32) 0%, rgba(var(--region-color, 200, 200, 200), 0) 70%),
+    linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
+  display: grid;
+  place-items: center;
+}
+.up-next-card.is-chapter .photo.cv-map::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+}
+.up-next-card.is-chapter .photo.cv-map img {
+  width: 78%; height: auto; max-height: 78%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.10)) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.30));
 }
 .up-next-card .body {
   display: flex;

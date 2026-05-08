@@ -326,39 +326,47 @@
     return [...kept, ...fill];
   }
 
-  // === "Up next" stack to the right of the hero (4 cards) ===
+  // === "Up next" stack to the right of the hero — one card per chapter ===
+  // Replaces the old curated-spot list. Each card uses the same dark
+  // gradient + region SVG silhouette as the chapter cover (.cv-map),
+  // so the home page reads as a doorway into the chapter pages.
+  // Beyond has no SVG silhouette (it's outside Switzerland); we fall
+  // back to its cover photo.
+  const CHAPTERS_META = [
+    { id: 'central',  name: 'Central Switzerland', color: '175,165,122', mapSvg: 'img/region-central.svg'  },
+    { id: 'valais',   name: 'Valais',              color: '234,183,191', mapSvg: 'img/region-valais.svg'   },
+    { id: 'fribourg', name: 'Fribourg',            color: '216,216,209', mapSvg: 'img/region-fribourg.svg' },
+    { id: 'western',  name: 'Western Switzerland', color: '204,224,158', mapSvg: 'img/region-western.svg'  },
+    { id: 'eastern',  name: 'Eastern Switzerland', color: '124,181,168', mapSvg: 'img/region-eastern.svg'  },
+    { id: 'ticino',   name: 'Ticino',              color: '147,132,186', mapSvg: 'img/region-ticino.svg'   },
+    { id: 'beyond',   name: 'Beyond the Border',   color: '89,89,89',    mapSvg: null /* uses cover photo */ },
+  ];
   const upNextEl = document.getElementById('upNext');
-  let upNextKeys = [];
   function buildUpNext() {
-    upNextKeys = pickStable(upNextKeys, 4);
-    const byKey = new Map(SPOTS.map(s => [window.HB.spotKey(s), s]));
-    const picks = upNextKeys.map(k => byKey.get(k)).filter(Boolean);
-    upNextEl.innerHTML = picks.map(spot => {
-      const region = REGION_NAME[spot.chapter] || spot.chapter_id;
-      const kicker = window.HB.singularKicker(spot.kicker || '');
-      const a = window.HB.photoAttrs({
-        photoId: spot.imagePhotoId, image: spot.image,
-        width: 400, prefix: '', sizes: '160px',
-      });
-      const ss = a.srcset ? ` srcset="${esc(a.srcset)}" sizes="${esc(a.sizes)}"` : '';
-      const k = window.HB.spotKey(spot) || '';
+    // Count spots per chapter so each card can show "N spots". Source of
+    // truth is SPOTS, which is rebuilt from the unified store on every
+    // Convex push, so this stays accurate across reactive updates.
+    const counts = SPOTS.reduce((acc, s) => {
+      const id = s.chapter_id;
+      if (id) acc[id] = (acc[id] || 0) + 1;
+      return acc;
+    }, {});
+    upNextEl.innerHTML = CHAPTERS_META.map(ch => {
+      const count = counts[ch.id] || 0;
+      const meta  = count + ' spot' + (count === 1 ? '' : 's');
+      const photo = ch.mapSvg
+        ? `<span class="photo cv-map" style="--region-color: ${ch.color}"><img src="${esc(ch.mapSvg)}" alt="" loading="lazy" /></span>`
+        : `<span class="photo"><img src="img/thumbs/${ch.id}_cover.jpg" alt="" loading="lazy" /></span>`;
       return `
-        <a class="up-next-card" href="${esc(window.HB.spotDetailHref(spot, ''))}" data-hb-spotkey="${esc(k)}">
-          <span class="photo"><img src="${esc(a.src)}"${ss} alt="" loading="lazy" /></span>
+        <a class="up-next-card is-chapter" href="${esc(ch.id)}/">
+          ${photo}
           <span class="body">
-            <span class="name">${esc(spot.title)}</span>
-            <span class="meta">${esc(region)}</span>
-            ${kicker ? `<span class="duration">${esc(kicker)}</span>` : ''}
+            <span class="name">${esc(ch.name)}</span>
+            <span class="meta">${esc(meta)}</span>
           </span>
         </a>
       `;
     }).join('');
-    // Attach heart overlays after the markup lands. Idempotent — safe to
-    // call on every rebuild.
-    upNextEl.querySelectorAll('.up-next-card[data-hb-spotkey]').forEach(card => {
-      const k = card.getAttribute('data-hb-spotkey');
-      if (k) window.HB.attachCardActions(card, k);
-    });
   }
   buildUpNext();
 
