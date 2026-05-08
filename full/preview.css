@@ -1193,19 +1193,21 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 }
 
 /* On wide-enough viewports the detail card uses 612:652 grid columns
- * and locks the photo column to a fixed 612:711 (≈0.86) aspect.
- * Originally we used min-height: 56.25cqi (16:9 floor) so portrait
- * images would inflate the column past 16:9 to their natural aspect.
- * In practice the column ended up driven by injectMultiImage's
- * pre-init height snapshot of the natural-aspect <img>, which made
- * portrait spots like Klausenpass / Pic de Jallouvre tower over their
- * (short) body text.
+ * and floors the photo column at a 612:711 (≈0.86) aspect via
+ * min-height: 56.25cqi. cqi = 1% of card inline-size, so 56.25cqi =
+ * 711px when card width is 1264 — and the photo column at 612fr is
+ * 612px wide, giving 612:711 on the photo itself.
  *
- * Fixed crop instead: the photo column is always 612:711, every image
- * gets object-fit: cover'd into that frame, and body content floats
- * at its natural height in the right column. If body is taller than
- * 711px the grid stretches the row and aspect-ratio loses to the
- * explicit grid height (object-fit: cover keeps the photo filling). */
+ * It's a *floor*, not a strict aspect:
+ *   - Body fits in 711px → photo lands at exactly 612:711.
+ *   - Body taller than 711px → grid stretches the row, photo grows
+ *     past the floor and object-fit: cover keeps the image filling.
+ *
+ * Earlier the column was getting inflated past the floor by
+ * injectMultiImage's pre-init height snapshot of the natural-aspect
+ * <img>, which made portrait spots like Klausenpass and Pic de
+ * Jallouvre tower over their short body text. The snapshot is gone
+ * (see social.js); the floor alone is enough now. */
 @media (min-width: 1000px) {
   body[data-page="spot-detail"] .slide-spot {
     grid-template-columns: 612fr 652fr;
@@ -1213,7 +1215,7 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
     aspect-ratio: auto;
   }
   body[data-page="spot-detail"] .slide-spot .sp-photo {
-    aspect-ratio: 612 / 711;
+    min-height: 56.25cqi;
   }
 }
 
