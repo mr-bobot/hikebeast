@@ -222,6 +222,40 @@
   .act-btn.tertiary { width: 44px; height: 44px; color: var(--muted); }
   .act-btn.tertiary svg { width: 18px; height: 18px; }
 
+  /* Heart burst on save. Hearts spawn at the heart button's centre and
+   * fan upward in a cone, fading as they go. Pure CSS keyframes — each
+   * heart's --dx/--dy/--rot/--scale/--dur are randomized per spawn. */
+  .flying-hearts-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
+  .flying-heart {
+    position: fixed;
+    width: 28px;
+    height: 28px;
+    margin-left: -14px;
+    margin-top: -14px;
+    color: #ff375f;
+    filter: drop-shadow(0 2px 6px rgba(255,55,95,0.45));
+    animation: heart-fly var(--dur, 900ms) cubic-bezier(.18,.65,.35,1) forwards;
+    will-change: transform, opacity;
+  }
+  .flying-heart svg { width: 100%; height: 100%; display: block; }
+  @keyframes heart-fly {
+    0%   { transform: translate(0,0) scale(0) rotate(0); opacity: 0; }
+    18%  { transform: translate(calc(var(--dx) * 0.18), calc(var(--dy) * 0.18)) scale(var(--scale, 1)) rotate(calc(var(--rot) * 0.2)); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(calc(var(--scale, 1) * 0.45)) rotate(var(--rot)); opacity: 0; }
+  }
+  .act-btn.save.pulsing { animation: save-pulse 360ms cubic-bezier(.2,.7,.3,1); }
+  @keyframes save-pulse {
+    0%   { transform: scale(1); }
+    35%  { transform: scale(1.16); }
+    100% { transform: scale(1); }
+  }
+
   .empty {
     position: absolute;
     inset: 0;
@@ -566,6 +600,57 @@
     }
   }
 
+  // ── Heart burst on save ─────────────────────────────────────────
+  // Each save (drag right, heart-tap, or right-arrow key) spawns a small
+  // cone of hearts flying upward from the heart button. Pure CSS keyframes
+  // driven by per-heart CSS vars; we just append + cleanup in JS.
+  const HEART_SVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+  function ensureHeartLayer() {
+    let layer = document.querySelector('.flying-hearts-layer');
+    if (!layer) {
+      layer = document.createElement('div');
+      layer.className = 'flying-hearts-layer';
+      document.body.appendChild(layer);
+    }
+    return layer;
+  }
+  function emitHearts(n) {
+    const btn = document.getElementById('saveBtn');
+    if (!btn) return;
+    const r = btn.getBoundingClientRect();
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    const layer = ensureHeartLayer();
+    const count = n || 7;
+    for (let i = 0; i < count; i++) {
+      const h = document.createElement('div');
+      h.className = 'flying-heart';
+      h.innerHTML = HEART_SVG;
+      h.style.left = cx + 'px';
+      h.style.top = cy + 'px';
+      // Fan upward: angle ~ -90deg ±~85deg, distance 90-180px.
+      const angle = (-Math.PI / 2) + (Math.random() - 0.5) * (Math.PI * 0.95);
+      const dist  = 90 + Math.random() * 90;
+      const dx = Math.cos(angle) * dist;
+      const dy = Math.sin(angle) * dist;
+      const rot = (Math.random() - 0.5) * 80;
+      const scale = 0.7 + Math.random() * 0.7;
+      const dur = 800 + Math.random() * 500;
+      h.style.setProperty('--dx', dx + 'px');
+      h.style.setProperty('--dy', dy + 'px');
+      h.style.setProperty('--rot', rot + 'deg');
+      h.style.setProperty('--scale', scale);
+      h.style.setProperty('--dur', dur + 'ms');
+      layer.appendChild(h);
+      setTimeout(() => h.remove(), dur + 80);
+    }
+    // Replay the button pulse: remove → reflow → re-add.
+    btn.classList.remove('pulsing');
+    void btn.offsetWidth;
+    btn.classList.add('pulsing');
+    setTimeout(() => btn.classList.remove('pulsing'), 380);
+  }
+
   function finishDecision(verdict) {
     if (!drag) return;
     const { card } = drag;
@@ -575,6 +660,7 @@
       // record() routes to either Convex or localStorage based on auth
       // state; "save" also flips the favorite via the favorites façade.
       window.HB.swipes.record(k, verdict);
+      if (verdict === 'save') emitHearts();
     }
     card.classList.add('fly-out');
     const dir = verdict === 'save' ? 1 : -1;

@@ -829,13 +829,27 @@
     function normaliseConvexRow(row) {
       const photos = (row.photos || []).slice()
         .sort((a, b) => (a.order || 0) - (b.order || 0))
-        .map(p => ({
-          src:     p.staticPath || null,
-          photoId: p.photoId    || null,
-          credit:  p.credit     || null,
-          width:   p.width      || null,
-          height:  p.height     || null,
-        }))
+        .map(p => {
+          // Some prod rows carry derivative paths in `staticPath` instead
+          // of populating `photoId` directly (the migration script writes
+          // `staticPath: spot.image` and the gallery sidecar's src is
+          // already a derivative path like "derivatives/<id>/w1800.webp").
+          // Recover the photoId from that path so photoUrl()'s derivative
+          // branch fires; otherwise the renderer falls through to the
+          // legacy `img/m/<file>` path and produces a 404.
+          let photoId = p.photoId || null;
+          if (!photoId && p.staticPath) {
+            const m = p.staticPath.match(/^derivatives\/([^/]+)\//);
+            if (m) photoId = m[1];
+          }
+          return {
+            src:     p.staticPath || null,
+            photoId,
+            credit:  p.credit     || null,
+            width:   p.width      || null,
+            height:  p.height     || null,
+          };
+        })
         .filter(p => p.src || p.photoId);
       return {
         spotKey:    row.spotKey,
@@ -1102,8 +1116,8 @@
     // hamburger. Five slots: Home · Explore · Swipe · Map · Menu.
     // Menu is a hamburger that opens a slide-up sheet with Liked,
     // Collections, Chapters, and Account — everything that didn't earn
-    // a primary slot. The fav-count badge sits on the Menu icon so
-    // users see they have saved spots without opening the sheet.
+    // a primary slot. No count badge on the Menu icon — having saved
+    // or visited spots shouldn't read as a notification to clear.
     const tabbar = document.createElement('nav');
     tabbar.className = 'app-tabbar';
     tabbar.setAttribute('aria-label', 'Primary navigation');
@@ -1122,7 +1136,6 @@
       </a>
       <button type="button" class="tab" data-hb-menu-toggle aria-label="Menu" aria-haspopup="dialog">
         ${SVG_BURGER}<span>Menu</span>
-        <span class="tab-badge" data-hb-fav-count></span>
       </button>
     `;
     document.body.appendChild(tabbar);
