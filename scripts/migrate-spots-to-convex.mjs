@@ -176,22 +176,29 @@ function clean(obj) {
 function buildPhotos(spot, gallery, primaryCredit, now) {
   const out = [];
   const seen = new Set();
-  if (spot.image) {
+  // If the gallery (spot-images.js, regenerated from content.yaml) has
+  // entries, it already covers the primary derivative as `_p0`. Skip
+  // spot.image — it comes from spots-data.js which is built from a
+  // different content.yaml (legacy build-full.py path) and can drift,
+  // leaving stale chapter-flat filenames like `ig_chamonix.jpg` that no
+  // longer exist on disk. Only fall back to spot.image when the gallery
+  // is empty (single-photo spots that don't appear in spot-images.js).
+  if ((gallery || []).length > 0) {
+    for (const extra of gallery) {
+      if (!extra.src || seen.has(extra.src)) continue;
+      seen.add(extra.src);
+      out.push(clean({
+        staticPath: extra.src,
+        credit:     extra.credit ?? primaryCredit,
+        order:      out.length,
+        addedAt:    now,
+      }));
+    }
+  } else if (spot.image) {
     out.push(clean({
       staticPath: spot.image,
       credit:     primaryCredit,
       order:      0,
-      addedAt:    now,
-    }));
-    seen.add(spot.image);
-  }
-  for (const extra of (gallery || [])) {
-    if (!extra.src || seen.has(extra.src)) continue;
-    seen.add(extra.src);
-    out.push(clean({
-      staticPath: extra.src,
-      credit:     extra.credit ?? primaryCredit,
-      order:      out.length,
       addedAt:    now,
     }));
   }
