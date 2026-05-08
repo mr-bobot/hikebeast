@@ -829,13 +829,27 @@
     function normaliseConvexRow(row) {
       const photos = (row.photos || []).slice()
         .sort((a, b) => (a.order || 0) - (b.order || 0))
-        .map(p => ({
-          src:     p.staticPath || null,
-          photoId: p.photoId    || null,
-          credit:  p.credit     || null,
-          width:   p.width      || null,
-          height:  p.height     || null,
-        }))
+        .map(p => {
+          // Some prod rows carry derivative paths in `staticPath` instead
+          // of populating `photoId` directly (the migration script writes
+          // `staticPath: spot.image` and the gallery sidecar's src is
+          // already a derivative path like "derivatives/<id>/w1800.webp").
+          // Recover the photoId from that path so photoUrl()'s derivative
+          // branch fires; otherwise the renderer falls through to the
+          // legacy `img/m/<file>` path and produces a 404.
+          let photoId = p.photoId || null;
+          if (!photoId && p.staticPath) {
+            const m = p.staticPath.match(/^derivatives\/([^/]+)\//);
+            if (m) photoId = m[1];
+          }
+          return {
+            src:     p.staticPath || null,
+            photoId,
+            credit:  p.credit     || null,
+            width:   p.width      || null,
+            height:  p.height     || null,
+          };
+        })
         .filter(p => p.src || p.photoId);
       return {
         spotKey:    row.spotKey,
