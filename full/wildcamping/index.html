@@ -107,22 +107,51 @@
     return a;
   }
 
+  // Fingerprint of what's currently rendered. We compare against the next
+  // refresh and skip the rebuild when nothing the user can see changed.
+  // Without this, every Convex push (which fires when ANY spot row in the
+  // database updates, not just the wildcamping ones) tore down the grid
+  // and re-created the <img> elements — forcing browsers to flicker the
+  // photos even when the URL was identical. The flash was visible as
+  // "Klausenpass changing image" (sidecar's legacy chapter-flat path
+  // briefly served a 404 fallback, then swapped to the derivative when
+  // Convex hydrated) and "Pizol / Jöriseen / Pic de Jallouvre reloading
+  // for no reason" (same URL pre and post but the IMG node was destroyed
+  // and recreated, costing a paint frame even on cache hits).
+  let renderedKey = '';
   function render() {
     counter.textContent = SPOTS.length;
     if (!SPOTS.length) {
+      if (renderedKey === 'EMPTY') return;
+      renderedKey = 'EMPTY';
       content.innerHTML = '';
       content.hidden = true;
       empty.hidden = false;
       return;
     }
-    empty.hidden = true;
-    content.hidden = false;
 
     // Flat 2-col grid — the wildcamping collection is intentionally
     // small (a curated handful), so chapter separators add visual
     // noise without aiding navigation. Sort by chapter so spots from
     // the same region stay together visually, then render edge-to-edge.
     SPOTS.sort((a, b) => (a.chapter || '').localeCompare(b.chapter || ''));
+
+    // Build the fingerprint from the bits the tile actually renders. If
+    // any of {spotKey, image URL, photoId, title, kicker, chapter} flips
+    // we re-render; otherwise it's a no-op.
+    const key = SPOTS.map(s => [
+      window.HB.spotKey(s) || s.title,
+      s.image || '',
+      s.imagePhotoId || '',
+      s.title,
+      s.kicker || '',
+      s.chapter || '',
+    ].join('\x1f')).join('\x1e');
+    if (key === renderedKey) return;
+    renderedKey = key;
+
+    empty.hidden = true;
+    content.hidden = false;
     content.innerHTML = '';
     const grid = document.createElement('div');
     grid.className = 'hb-saved-grid';
@@ -130,7 +159,8 @@
     content.appendChild(grid);
   }
 
-  // Re-render on Convex push (wildCamping verdicts may flip as Leon edits)
+  // Re-render on Convex push (wildCamping verdicts may flip as Leon edits).
+  // The render() guard above bails when nothing visible changed.
   window.HB.spots.subscribe(() => { refreshSpots(); render(); });
   render();
 </script>

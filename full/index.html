@@ -150,13 +150,19 @@
     { id: 'ticino',   name: 'Ticino',              description: 'Alpine lakes, turquoise rivers, Italian mountain style.' },
     { id: 'beyond',   name: 'Beyond the Border',   description: 'Chamonix, Mont Blanc, and one French side of Léman.' },
   ];
-  const chapterCards = CHAPTERS_META.map(ch => ({
-    isChapter:  true,
-    chapter_id: ch.id,
-    title:      ch.name,
-    kicker:     ch.description,
-    href:       `${ch.id}/index.html`,
-  }));
+  const chapterCards = CHAPTERS_META.map(ch => {
+    // Pull the legend entry by chapter NAME so chapters keep their canonical
+    // RGB color triplet without us re-typing it in two places.
+    const legend = LEGEND.find(l => l.name === ch.name);
+    return {
+      isChapter:  true,
+      chapter_id: ch.id,
+      title:      ch.name,
+      kicker:     ch.description,
+      color:      legend ? legend.color : '180,180,180',  // RGB triplet "R,G,B"
+      href:       `${ch.id}/index.html`,
+    };
+  });
 
   // === Featured hero (Introduction + the 7 chapters in order) ===
   // The Introduction card is always first so a fresh visitor's eye lands on
@@ -389,9 +395,17 @@
       // currently, but keeping the spot branch keeps the helper future-proof
       // if Leon ever wants to mix chapters + featured spots in the rotation).
       if (item.isChapter) {
+        // Six of the seven chapters have a region SVG map (everything except
+        // beyond, which lives outside the Swiss outline). Use the chapter
+        // header card's premium map treatment for the maps; fall back to
+        // the chapter cover photo for beyond so we don't show an empty box.
+        const HAS_MAP = ['central','valais','fribourg','western','eastern','ticino'];
+        const photoBody = HAS_MAP.includes(item.chapter_id)
+          ? `<span class="cv-map" style="--region-color: ${esc(item.color)};"><img src="img/region-${esc(item.chapter_id)}.svg" alt="" loading="lazy" /></span>`
+          : `<img src="img/chapters/${esc(item.chapter_id)}/w400.webp" alt="" loading="lazy" />`;
         return `
           <a class="up-next-card" href="${esc(item.href)}" data-hb-chapter="${esc(item.chapter_id)}">
-            <span class="photo"><img src="img/chapters/${esc(item.chapter_id)}/w400.webp" alt="" loading="lazy" /></span>
+            <span class="photo">${photoBody}</span>
             <span class="body">
               <span class="name">${esc(item.title)}</span>
               <span class="meta">${esc(item.kicker || '')}</span>

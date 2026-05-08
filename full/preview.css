@@ -1745,13 +1745,16 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   line-height: 1.2;
 }
 
-/* === Cover variant: region map silhouette + gradient (instead of a photo) ===
+/* === Region map silhouette + gradient (premium chapter thumbnail) ===
  * Dark editorial backdrop with the region color as an off-axis glow, the
- * light SVG map reads like a relief / topo print on top. Same .slide-cover
- * frame, swap cv-img for cv-map. */
-.slide-cover .cv-map {
+ * light SVG map reads like a relief / topo print on top. Originally only
+ * used in the chapter cover (.slide-cover .cv-map). Hoisted to a bare
+ * .cv-map selector so the home-page up-next thumbs can reuse the same
+ * treatment without copy-pasting the gradient. */
+.cv-map {
   position: relative;
   width: 100%;
+  height: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background:
@@ -1761,7 +1764,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   display: grid;
   place-items: center;
 }
-.slide-cover .cv-map::after {
+.cv-map::after {
   /* Fine grain to keep the gradient from looking flat-banded. */
   content: '';
   position: absolute;
@@ -1771,7 +1774,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   background-size: 3px 3px;
   pointer-events: none;
 }
-.slide-cover .cv-map img {
+.cv-map img {
   position: relative;
   width: 86%;
   height: auto;
