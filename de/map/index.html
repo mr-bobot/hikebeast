@@ -1422,6 +1422,32 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   const utmMedium = params.get("utm_medium") || "";
   const utmCampaign = params.get("utm_campaign") || "";
 
+  // Affiliate ref. `?r=<username>` on this page → stash in localStorage
+  // with a 60-day TTL so a buyer who clicks now and pays later still
+  // attributes back to the affiliate. Read on every checkout-session
+  // POST below. Slug is lowercased; the webhook will match it against
+  // users.username (also lowercase) when the purchase completes.
+  const REF_KEY = "hb:r";
+  const REF_TTL_MS = 60 * 24 * 60 * 60 * 1000;
+  (function persistRefIfPresent() {
+    const raw = (params.get("r") || "").trim().toLowerCase();
+    if (!raw) return;
+    if (!/^[a-z0-9._-]{2,32}$/.test(raw)) return;
+    try {
+      localStorage.setItem(REF_KEY, JSON.stringify({ slug: raw, exp: Date.now() + REF_TTL_MS }));
+    } catch {}
+  })();
+  function readStoredRef() {
+    try {
+      const s = localStorage.getItem(REF_KEY);
+      if (!s) return "";
+      const obj = JSON.parse(s);
+      if (!obj || typeof obj.slug !== "string" || typeof obj.exp !== "number") return "";
+      if (obj.exp < Date.now()) { localStorage.removeItem(REF_KEY); return ""; }
+      return obj.slug;
+    } catch { return ""; }
+  }
+
   // ---------- Carousel: dots + hover arrows ----------
   const carousel = document.getElementById("hero-carousel");
   const dotEls = document.querySelectorAll("#hero-dots span");
@@ -1595,6 +1621,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           utm_medium: utmMedium,
           utm_campaign: utmCampaign,
           locale: "de",
+          r: readStoredRef(),
         }),
       });
 
