@@ -481,6 +481,14 @@ button { font-family: inherit; }
   object-fit: cover;
   display: block;
 }
+/* Chapter-map variant of the thumb: shrink the silhouette so it has
+ * breathing room inside the dark gradient box. The cover-card uses 86%
+ * (large frame, plenty of room); the up-next thumb is only 96x64 so a
+ * tighter ratio keeps the map from kissing the edges. */
+.up-next-card .photo .cv-map img {
+  width: 60%;
+  max-height: 60%;
+}
 .up-next-card .body {
   display: flex;
   flex-direction: column;
