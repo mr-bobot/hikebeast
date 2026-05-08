@@ -43,39 +43,50 @@
     opacity: 0.9;
   }
 
-  /* Page wrapper · centers the card both horizontally and vertically
-     (when content fits the viewport). On taller content the wrapper
-     grows past 100dvh so the page scrolls normally — `margin: auto`
-     on the inner card centers when there's room and pins the card to
-     the top once activity overflows. */
+  /* Page wrapper · centers the card-wrap (back button + card + footer)
+     both horizontally and vertically when content fits the viewport.
+     `margin: auto` on .card-wrap centers when there's room and pins
+     to the top once activity overflows. */
   .aff-page {
     position: relative; z-index: 1;
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    padding: 60px 20px 32px;
+    padding: 24px 20px;
   }
   .card-wrap { margin: auto; width: 100%; max-width: 460px; }
 
-  /* Back link · top-left of the page, sits above the card. Floats over
-     the gradient layer (z-index above the body::before blob). */
+  /* Back link · sits above the card, left-aligned with the card edge.
+     Solid white pill so it reads cleanly against the gradient. */
   .back {
-    position: fixed;
-    top: 18px; left: 20px;
-    z-index: 3;
     display: inline-flex; align-items: center; gap: 4px;
-    color: var(--muted);
-    font-size: 13px;
+    color: var(--fg);
+    font-size: 13px; font-weight: 500;
     text-decoration: none;
-    padding: 6px 10px;
+    padding: 8px 14px;
     border-radius: 999px;
-    background: rgba(255,255,255,0.7);
-    -webkit-backdrop-filter: saturate(180%) blur(10px);
-    backdrop-filter: saturate(180%) blur(10px);
+    background: #fff;
     border: 1px solid var(--hairline);
-    transition: color 150ms ease, border-color 150ms ease;
+    margin-bottom: 14px;
+    transition: border-color 150ms ease, transform 100ms ease;
   }
-  .back:hover { color: var(--fg); border-color: var(--hairline-strong); }
+  .back:hover { border-color: var(--hairline-strong); }
+  .back:active { transform: scale(0.98); }
+
+  /* Legal footer · below the card, two stacked lines (Terms/Imprint/
+     Privacy + © Hikebeast). Same pattern across /full/affiliate and
+     /full/account. */
+  .legal-foot {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .legal-foot a { color: var(--muted); text-decoration: none; }
+  .legal-foot a:hover { color: var(--fg); }
+  .legal-foot .sep { margin: 0 6px; }
+  .legal-foot .copy { display: block; }
 
   /* The single card · same translucency / blur recipe as /login/. */
   .card {
@@ -208,10 +219,9 @@
 </head>
 <body>
 
-<a class="back" href="../">← Back</a>
-
 <main class="aff-page">
  <div class="card-wrap">
+  <a class="back" href="../">← Back</a>
   <div class="card">
     <div id="affLoading" class="state">Loading…</div>
 
@@ -270,6 +280,10 @@
       </div>
     </div>
   </div>
+  <footer class="legal-foot">
+    <a href="../../terms.html">Terms</a><span class="sep">·</span><a href="../../imprint.html">Imprint</a><span class="sep">·</span><a href="../../privacy.html">Privacy</a>
+    <span class="copy">© Hikebeast</span>
+  </footer>
  </div>
 </main>
 
