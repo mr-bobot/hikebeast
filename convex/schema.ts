@@ -126,6 +126,11 @@ export default defineSchema({
     avatarStorageId: v.optional(v.id("_storage")),
     whopLicenseKey:  v.optional(v.string()),        // future: Stripe / Whop license linkage
     isAdmin:         v.optional(v.boolean()),
+    // Affiliate eligibility flag. Gates the /full/affiliate/ dashboard
+    // and hides the teaser card on /full/account/ for non-eligible users.
+    // Flipped on by adminCreateUser({ isAffiliate: true }) for influencers,
+    // or after the fact by adminSetAffiliate. Default false (undefined).
+    isAffiliate:     v.optional(v.boolean()),
     createdAt:       v.number(),
     lastSeenAt:      v.number(),
   }).index("by_username", ["username"])
@@ -212,4 +217,39 @@ export default defineSchema({
     decidedAt: v.number(),
   }).index("by_user",      ["userId"])
     .index("by_user_spot", ["userId", "spotKey"]),
+
+  // ── Affiliate referrals ────────────────────────────────────────────────
+  // One row per purchase that arrived with a `?r=<slug>` param on the map
+  // page. The slug is the raw value (lowercased) and is matched against
+  // users.username in the account page query — so any user immediately
+  // sees referrals tagged to their handle, and orphan refs (slug never
+  // matched a user) just sit unattached until/unless a matching user
+  // registers later. Leon does payouts manually monthly, flipping `status`
+  // pending → paid and adding a `payoutNote` (Stripe transfer id, etc.).
+  // `voided` is set automatically by the webhook on charge.refunded.
+  referrals: defineTable({
+    refSlug:               v.string(),                          // ?r= value, lowercased
+    stripeSessionId:       v.string(),                          // cs_...
+    stripePaymentIntentId: v.optional(v.string()),              // pi_..., set when present on the session
+    buyerEmail:            v.optional(v.string()),
+    // ManyChat IG handle of the buyer, if the purchase came in via the
+    // ManyChat IG funnel (subscriberId/`s` in Stripe session metadata).
+    // Looked up via lib/manychat.js#getSubscriberIgUsername inside the
+    // webhook before recording. Direct-web buyers leave this null and
+    // the affiliate page falls back to a date-only row.
+    buyerIg:               v.optional(v.string()),
+    purchaseAmountCents:   v.number(),                          // gross, in minor units of `currency`
+    currency:              v.string(),                          // lowercase ISO (chf/eur/usd)
+    commissionCents:       v.number(),                          // 50% of gross, in same currency
+    status:                v.union(
+                             v.literal("pending"),
+                             v.literal("paid"),
+                             v.literal("voided"),
+                           ),
+    createdAt:             v.number(),
+    paidAt:                v.optional(v.number()),
+    payoutNote:            v.optional(v.string()),              // free-text, e.g. "Stripe transfer tr_..."
+  }).index("by_refSlug",       ["refSlug"])
+    .index("by_stripeSession", ["stripeSessionId"])
+    .index("by_paymentIntent", ["stripePaymentIntentId"]),
 });

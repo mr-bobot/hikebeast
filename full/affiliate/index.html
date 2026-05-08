@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Affiliate · Gems of Switzerland · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="stylesheet" href="../preview.css" />
+<style>
+  /* Affiliate dashboard · scoped to .aff-*. Three moving parts:
+       1. Share card — two links (English / Deutsch), Copy per row.
+       2. Stats grid — Total earned + referral count.
+       3. Activity list — per-referral rows, IG handle + status pill. */
+  .aff-page { max-width: 720px; margin: 0 auto; padding: 8px 18px 80px; }
+
+  /* Share card — two language rows stacked. Each row pairs a URL
+     display with its own Copy button. We deliberately don't use a
+     native Share button here; affiliates almost always paste the
+     link into a caption or DM, and the per-language label is the
+     thing that needs to be visible (which Share would hide). */
+  .aff-share {
+    margin-top: 18px;
+    padding: 6px 16px 12px;
+    background: var(--surface);
+    border-radius: var(--radius-card);
+  }
+  .aff-share-row {
+    padding: 12px 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .aff-share-row:first-child { border-top: 0; }
+  .aff-share-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin: 0 0 6px;
+  }
+  .aff-share-controls {
+    display: flex; align-items: stretch; gap: 8px;
+  }
+  .aff-share-url {
+    flex: 1; min-width: 0;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    font-size: 13.5px;
+    color: var(--fg);
+    user-select: all;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    display: flex; align-items: center;
+  }
+  .aff-btn-copy {
+    height: 44px; padding: 0 18px;
+    border-radius: var(--radius-btn);
+    background: var(--fg); color: #fff;
+    border: 0; cursor: pointer;
+    font: inherit; font-size: 14px; font-weight: 600;
+    letter-spacing: -0.01em;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 150ms ease, transform 100ms ease;
+    white-space: nowrap;
+  }
+  .aff-btn-copy:hover { opacity: 0.92; }
+  .aff-btn-copy:active { transform: scale(0.98); }
+  .aff-btn-copy.is-success {
+    background: #34c759;
+  }
+  .aff-share-msg {
+    margin: 8px 0 0;
+    font-size: 12px; color: var(--muted);
+    min-height: 1em;
+  }
+  .aff-share-msg[hidden] { display: none; }
+  .aff-share-msg.is-success { color: #1f7a36; }
+
+  /* Stats — two tiles. Total earned (across statuses except voided)
+     and a referral count. Currency-aware: when more than one currency
+     is in play the Total stacks each on its own line. */
+  .aff-stats {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+    margin-top: 14px;
+  }
+  .aff-stat {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 14px 14px 12px;
+    display: flex; flex-direction: column; gap: 4px;
+    min-height: 84px;
+  }
+  .aff-stat-label {
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .aff-stat-value {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px; font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    line-height: 1.15;
+    word-spacing: -0.04em;
+  }
+  .aff-stat-value.is-empty { color: var(--muted); font-weight: 500; }
+
+  /* Activity list */
+  .aff-section { margin-top: 20px; }
+  .aff-section-h {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 18px; font-weight: 600; letter-spacing: -0.02em;
+    margin: 0 0 8px; color: var(--fg);
+  }
+  .aff-list {
+    margin: 0; padding: 0; list-style: none;
+    background: var(--surface);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .aff-list li {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--hairline);
+  }
+  .aff-list li:first-child { border-top: 0; }
+  .aff-list .col-buyer {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .aff-list .col-buyer .ig {
+    font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
+    color: var(--fg);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .aff-list .col-buyer .ig.is-anon { font-weight: 500; color: var(--muted); }
+  .aff-list .col-buyer .ig a { color: var(--accent); text-decoration: none; }
+  .aff-list .col-buyer .ig a:hover { text-decoration: underline; }
+  .aff-list .col-buyer .date { color: var(--muted); font-size: 12px; }
+  .aff-list .col-amt {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 15px; font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  /* Voided rows fade — refunded purchases stay visible for transparency
+     but read as "didn't count" without needing a loud pill. */
+  .aff-list li.is-voided { opacity: 0.5; }
+  .aff-list li.is-voided .col-amt { text-decoration: line-through; }
+
+  /* Empty / loading / signed-out states */
+  .aff-empty {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 32px 18px;
+    text-align: center;
+  }
+  .aff-empty-icon {
+    width: 48px; height: 48px; margin: 0 auto 12px;
+    border-radius: 999px;
+    background: rgba(0,113,227,0.10);
+    display: grid; place-items: center;
+    color: var(--accent);
+  }
+  .aff-empty h3 {
+    margin: 0 0 4px;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 17px; font-weight: 600; letter-spacing: -0.01em;
+    color: var(--fg);
+  }
+  .aff-empty p {
+    margin: 0;
+    font-size: 14px; color: var(--muted); line-height: 1.5;
+    max-width: 36ch; margin-inline: auto;
+  }
+  .aff-loading, .aff-signed-out {
+    text-align: center; padding: 40px 0;
+    font-size: 14px; color: var(--muted);
+  }
+  .aff-signed-out a { color: var(--accent); text-decoration: none; font-weight: 500; }
+
+  /* Mobile: tighten button padding so URLs don't get squashed. */
+  @media (max-width: 540px) {
+    .aff-btn-copy { padding: 0 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="../index.html">
+    <span>Affiliate</span>
+  </a>
+  <div class="topbar-right">
+    <a class="pill" href="../account/">Account</a>
+  </div>
+</div>
+
+<main class="aff-page">
+  <div id="affLoading" class="aff-loading">Loading…</div>
+
+  <div id="affSignedOut" class="aff-signed-out" hidden>
+    <p>Sign in with your username and password to see your affiliate dashboard.</p>
+    <p><a href="/login/">Sign in →</a></p>
+  </div>
+
+  <!-- Not-eligible state · the user is signed in but doesn't have
+       isAffiliate=true (most users). The dashboard is invite-only;
+       this page tells them and points them back to the app. -->
+  <div id="affNotEligible" class="aff-signed-out" hidden>
+    <p style="margin-top:32px;">The affiliate program is invite-only.</p>
+    <p style="color:var(--muted); max-width:36ch; margin:8px auto 16px;">
+      We work with a small number of creators. If you'd like to be considered, drop a line to <a href="mailto:leon@hikebeast.ch" style="color:var(--accent);text-decoration:none;">leon@hikebeast.ch</a>.
+    </p>
+    <p><a href="../">← Back to the app</a></p>
+  </div>
+
+  <div id="affContent" hidden>
+    <!-- Share card · two language rows, one Copy each ───────────────── -->
+    <section class="aff-share">
+      <div class="aff-share-row">
+        <p class="aff-share-label">English</p>
+        <div class="aff-share-controls">
+          <span class="aff-share-url" id="linkEn">hikebeast.ch/map?r=…</span>
+          <button type="button" class="aff-btn-copy" data-target="linkEn">Copy</button>
+        </div>
+      </div>
+      <div class="aff-share-row">
+        <p class="aff-share-label">Deutsch</p>
+        <div class="aff-share-controls">
+          <span class="aff-share-url" id="linkDe">hikebeast.ch/de/map?r=…</span>
+          <button type="button" class="aff-btn-copy" data-target="linkDe">Copy</button>
+        </div>
+      </div>
+      <p class="aff-share-msg" id="affShareMsg" hidden></p>
+    </section>
+
+    <!-- Stats · total earned + count of valid referrals ────────────── -->
+    <div class="aff-stats">
+      <div class="aff-stat">
+        <span class="aff-stat-label">Total</span>
+        <span class="aff-stat-value is-empty" id="statTotal">0</span>
+      </div>
+      <div class="aff-stat">
+        <span class="aff-stat-label">Referrals</span>
+        <span class="aff-stat-value is-empty" id="statCount">0</span>
+      </div>
+    </div>
+
+    <!-- Activity list ──────────────────────────────────────────────── -->
+    <section class="aff-section">
+      <h2 class="aff-section-h">Activity</h2>
+      <ul class="aff-list" id="affList" hidden></ul>
+      <div class="aff-empty" id="affEmpty">
+        <div class="aff-empty-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        </div>
+        <h3>No referrals yet</h3>
+        <p>Share your link with a friend, post it on socials, drop it in a Strava description. It pays the moment they buy.</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="legal">
+  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  © Hikebeast
+</footer>
+
+<script src="../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
+<script>
+  // Standalone page — same auth shape as /full/account: read sessionToken
+  // from localStorage, talk to Convex directly. We don't load social.js
+  // because there are no spots / favorites / kebabs on this page.
+  (function () {
+    const SESSION_KEY = 'hb:session:v1';
+    const elLoading      = document.getElementById('affLoading');
+    const elSignedOut    = document.getElementById('affSignedOut');
+    const elNotEligible  = document.getElementById('affNotEligible');
+    const elContent      = document.getElementById('affContent');
+    const elLinkEn    = document.getElementById('linkEn');
+    const elLinkDe    = document.getElementById('linkDe');
+    const elShareMsg  = document.getElementById('affShareMsg');
+    const elStatTotal = document.getElementById('statTotal');
+    const elStatCount = document.getElementById('statCount');
+    const elList      = document.getElementById('affList');
+    const elEmpty     = document.getElementById('affEmpty');
+
+    const token = (() => {
+      try { return localStorage.getItem(SESSION_KEY) || ''; } catch { return ''; }
+    })();
+
+    let client = null;
+    if (window.convex && window.HB_CONVEX_URL) {
+      try { client = new window.convex.ConvexClient(window.HB_CONVEX_URL); }
+      catch (e) { console.warn('Convex init failed:', e); }
+    }
+    if (!client || !token) {
+      elLoading.hidden = true;
+      elSignedOut.hidden = false;
+      return;
+    }
+
+    // Currency formatting helpers — kept loose: minor units → major,
+    // strip trailing ".00", uppercase the ISO code. We don't sum across
+    // currencies (CHF + USD doesn't reduce to a single number without
+    // an FX rate) — we display each currency as its own term, joined
+    // by " + ". Same rule as the Convex query's totals shape.
+    function fmtMoney(cents, currency) {
+      const v = (cents / 100).toFixed(2).replace(/\.00$/, '');
+      return v + ' ' + (currency || '').toUpperCase();
+    }
+    // Sum of (paid + pending) per currency — voided rows are excluded
+    // because they don't count toward what the affiliate has earned.
+    // Returns a string like "94.50 CHF + 15.50 USD" or empty when zero.
+    function fmtTotalEarned(totals) {
+      const parts = [];
+      for (const cur of Object.keys(totals)) {
+        const t = totals[cur];
+        const cents = (t.paid || 0) + (t.pending || 0);
+        if (cents > 0) parts.push(fmtMoney(cents, cur));
+      }
+      return parts.join(' + ');
+    }
+    function fmtDate(ms) {
+      const d = new Date(ms);
+      return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+    // HTML-escape user-controlled strings before injecting into innerHTML.
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function paintShareLinks(username) {
+      const enc = encodeURIComponent(username);
+      const enUrl = 'https://hikebeast.ch/map?r=' + enc;
+      const deUrl = 'https://hikebeast.ch/de/map?r=' + enc;
+      elLinkEn.textContent = enUrl; elLinkEn.dataset.url = enUrl;
+      elLinkDe.textContent = deUrl; elLinkDe.dataset.url = deUrl;
+    }
+
+    // One handler for all `[data-target="<linkId>"]` Copy buttons. Reads
+    // the URL from the linked span's dataset. Brief "Copied" success
+    // state on the clicked button (no shared status line — keeps the
+    // two rows independent visually).
+    document.querySelectorAll('.aff-btn-copy').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const target = document.getElementById(btn.dataset.target);
+        const url = (target && (target.dataset.url || target.textContent)) || '';
+        elShareMsg.hidden = true;
+        elShareMsg.classList.remove('is-success');
+        const orig = btn.textContent;
+        try {
+          await navigator.clipboard.writeText(url);
+          btn.classList.add('is-success');
+          btn.textContent = 'Copied';
+          setTimeout(() => {
+            btn.classList.remove('is-success');
+            btn.textContent = orig;
+          }, 1400);
+        } catch {
+          // Clipboard API blocked — select the URL so the user can
+          // ⌘C manually. Status line takes over to explain.
+          if (target) {
+            const r = document.createRange();
+            r.selectNodeContents(target);
+            const sel = window.getSelection();
+            sel.removeAllRanges(); sel.addRange(r);
+          }
+          elShareMsg.hidden = false;
+          elShareMsg.textContent = 'Press Cmd/Ctrl+C to copy.';
+        }
+      });
+    });
+
+    function paintStats(totals, count) {
+      const totalStr = fmtTotalEarned(totals);
+      elStatTotal.textContent = totalStr || '0';
+      elStatTotal.classList.toggle('is-empty', !totalStr);
+      elStatCount.textContent = String(count);
+      elStatCount.classList.toggle('is-empty', count === 0);
+    }
+
+    function paintList(rows) {
+      if (!rows.length) {
+        elList.hidden = true;
+        elEmpty.hidden = false;
+        elList.innerHTML = '';
+        return;
+      }
+      elEmpty.hidden = true;
+      elList.hidden = false;
+      // Each row renders the buyer (clickable @handle linking to instagram.com,
+      // or a placeholder for direct-web buyers without an IG handle on file)
+      // above the date, then the commission on the right. Voided rows stay
+      // visible but get faded + strikethrough on the amount.
+      elList.innerHTML = rows.map((r) => {
+        const status = r.status || 'pending';
+        let buyerCell;
+        if (r.buyerIg) {
+          const ig = esc(r.buyerIg);
+          buyerCell = '<a href="https://instagram.com/' + ig + '" target="_blank" rel="noopener noreferrer">@' + ig + '</a>';
+        } else {
+          buyerCell = '<span class="is-anon">Direct buyer</span>';
+        }
+        const liClass = status === 'voided' ? ' class="is-voided"' : '';
+        return (
+          '<li' + liClass + '>' +
+            '<div class="col-buyer">' +
+              '<span class="ig' + (r.buyerIg ? '' : ' is-anon') + '">' + buyerCell + '</span>' +
+              '<span class="date">' + fmtDate(r.createdAt) + '</span>' +
+            '</div>' +
+            '<span class="col-amt">' + fmtMoney(r.commissionCents, r.currency) + '</span>' +
+          '</li>'
+        );
+      }).join('');
+    }
+
+    // Initial paint: get the user, then their referrals. Sequential
+    // because the share link depends on the username; the rest can
+    // render against an empty totals object even before referrals
+    // arrive.
+    client.query('auth:currentUser', { sessionToken: token })
+      .then(async (u) => {
+        if (!u) {
+          elLoading.hidden = true;
+          elSignedOut.hidden = false;
+          return;
+        }
+        // Eligibility gate: only isAffiliate=true users see the dashboard.
+        // Non-eligible users get a dedicated invite-only state.
+        if (!u.isAffiliate) {
+          elLoading.hidden = true;
+          elNotEligible.hidden = false;
+          return;
+        }
+        paintShareLinks(u.username);
+        const data = await client.query('referrals:listForCurrentUser', { sessionToken: token });
+        // Server-side gate: also returns { eligible: false } for non-affiliates
+        // even though we already filtered on the client. Defence in depth.
+        if (!data || data.eligible === false) {
+          elLoading.hidden = true;
+          elNotEligible.hidden = false;
+          return;
+        }
+        const rows = data.referrals || [];
+        const totals = data.totals || {};
+        paintStats(totals, rows.length);
+        paintList(rows);
+        elLoading.hidden = true;
+        elContent.hidden = false;
+      })
+      .catch((err) => {
+        console.warn('Affiliate load failed:', err);
+        elLoading.hidden = true;
+        elSignedOut.hidden = false;
+      });
+  })();
+</script>
+</body>
+</html>
