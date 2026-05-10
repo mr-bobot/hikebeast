@@ -34,17 +34,14 @@
 <meta property="og:title" content="Switzerland Map · 100+ Hidden Spots" />
 <meta property="og:description" content="The ultimate Swiss map." />
 <meta property="og:url" content="https://hikebeast.ch/map/" />
-<!-- og image lives under /images/ (not /map/img/) so social-media link
-     scrapers, which never send our auth cookie, don't get 302'd to the
-     login page by the middleware that gates /map/*. -->
-<meta property="og:image" content="https://hikebeast.ch/images/thumbnail.jpg" />
-<meta property="og:image:width" content="2464" />
-<meta property="og:image:height" content="1386" />
+<meta property="og:image" content="https://hikebeast.ch/themap/img/og.jpg" />
+<meta property="og:image:width" content="1920" />
+<meta property="og:image:height" content="987" />
 <meta property="og:image:alt" content="Switzerland Map · 100+ Hidden Spots" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Switzerland Map · 100+ Hidden Spots" />
 <meta name="twitter:description" content="100+ secret Swiss spots, exact GPS, lifetime updates." />
-<meta name="twitter:image" content="https://hikebeast.ch/images/thumbnail.jpg" />
+<meta name="twitter:image" content="https://hikebeast.ch/themap/img/og.jpg" />
 
 <!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -261,6 +258,54 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     margin: 0;
     font-weight: 600;
   }
+  .hero-sub {
+    margin: -2px 0 2px;
+    font-size: 17px;
+    line-height: 1.35;
+    color: var(--muted);
+    letter-spacing: -0.01em;
+  }
+  /* Product card · replaces the slim info-bar with a stacked layout
+     (rating · title · price) for a stronger product anchor below the
+     hero carousel. */
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .product-rating .stars {
+    color: var(--warn);
+    letter-spacing: 1px;
+    font-size: 14px;
+  }
+  .product-rating-count {
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .product-title {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 28px;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    margin: 0;
+    font-weight: 600;
+  }
+  .product-price {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
   ul.hero-bullets {
     list-style: none;
     margin: 0;
@@ -438,6 +483,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
 
   /* === Collection grid · full-bleed photo grid above the 6 cards === */
+  .collection-wrap {
+    padding-top: 10px;
+  }
   .collection-grid {
     width: 100%;
     display: block;
@@ -833,6 +881,29 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     width: 1px; height: 12px;
     background: var(--hairline);
   }
+  .guarantee-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 0 16px 14px;
+  }
+  .guarantee-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #f5f5f7;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--fg);
+    line-height: 1.35;
+    max-width: 100%;
+  }
+  .guarantee-pill svg {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
   .footer {
     text-align: center;
     color: var(--muted);
@@ -1145,7 +1216,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <img src="../images/avatar.jpg" alt="" />
       Hikebeast
     </a>
-    <a class="navbar-lang" href="/de/map/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">DE</a>
+    <a class="navbar-lang" href="/de/themap/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">DE</a>
   </header>
 
   <main>
@@ -1157,11 +1228,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <!-- Carousel -->
       <div class="carousel-wrap">
         <div class="carousel" id="hero-carousel">
-          <div class="slide"><img src="img/hero-1-mockup.jpg" alt="The ultimate Swiss Map · spot detail in your pocket" loading="eager" fetchpriority="high" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-2-map.jpg" alt="122 spots, one map" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-3-example.jpg" alt="A spot, fully detailed" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-4-wildcamp.jpg" alt="Where you can wildcamp" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-5-photos.jpg" alt="Secret spots, viral photos" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-1-hero.jpg" alt="Swiss Gems Guide · The unforgettable Summer" loading="eager" fetchpriority="high" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-2-mockup.jpg" alt="Spots tourists won't find" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-3-map.jpg" alt="122 spots, one map" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-4-example.jpg" alt="A spot, fully detailed" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-5-wildcamp.jpg" alt="Where you can wildcamp" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="img/hero-6-photos.jpg" alt="Secret spots, viral photos" loading="lazy" decoding="async" /></div>
         </div>
         <!-- Hover-only nav arrows (desktop only · hidden on touch devices
              where the carousel relies on swipe). Click handlers wired in
@@ -1177,24 +1249,21 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           </svg>
         </button>
         <div class="dots" id="hero-dots">
-          <span class="active"></span><span></span><span></span><span></span><span></span>
+          <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
         </div>
       </div>
 
-      <div class="px">
-        <div class="info-bar">
-          <span class="info-left">
-            <span class="price-display">CHF 27</span>
-          </span>
-          <span class="info-right">
-            <span class="stars" style="color: var(--warn); letter-spacing: 1px; font-size: 13px;">★★★★★</span>
-            5.0
-          </span>
+      <div class="px product-card">
+        <h1 class="product-title">Switzerland Map 🇨🇭</h1>
+        <div class="product-price"><span class="price-display">CHF 27</span></div>
+        <div class="product-rating">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span>5.0 <span class="product-rating-count">(41)</span></span>
         </div>
       </div>
 
       <div class="px hero-text">
-        <h1>Switzerland Map 🇨🇭</h1>
+        <p class="hero-sub">Your guide to the best summer in Switzerland.</p>
         <ul class="hero-bullets">
           <li>122 Gems of Switzerland + How to Get There</li>
           <li>Exact Location for every spot</li>
@@ -1218,7 +1287,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <section class="inside-section">
       <div class="px section-head">
         <h2>What's inside</h2>
-        <p>Five years of exploring went into this list.</p>
+        <p>The best places in Switzerland aren't on the tourist blogs. They're in local WhatsApp groups, in photographers' heads and now, well structured, in this guide.</p>
       </div>
       <div class="inside">
         <div class="inside-card">
@@ -1347,6 +1416,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <div class="section-head section-head--centered">
         <h2>Get the map</h2>
       </div>
+      <div class="guarantee-wrap">
+        <span class="guarantee-pill">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="10" cy="10" r="9" fill="#34c759"/>
+            <path d="M5.8 10.4l2.8 2.8 5.6-5.6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Less than 0.02% of buyers use our 30-day money-back guarantee!
+        </span>
+      </div>
       <div class="checkout-wrap">
         <div id="checkout">
           <div class="checkout-skeleton"></div>
@@ -1390,7 +1468,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <div class="buy-rating">
             <span class="stars" aria-hidden="true">★★★★★</span>
             <span class="buy-rating-num">5.0</span>
-            <span class="buy-rating-count">(6)</span>
+            <span class="buy-rating-count">(41)</span>
           </div>
           <div class="buy-name">Swiss Gems of Switzerland 🇨🇭</div>
           <div class="buy-price">CHF 27</div>

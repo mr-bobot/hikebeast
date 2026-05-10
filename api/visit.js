@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { subscriber_id, token, page } = req.body ?? {};
+  const { subscriber_id, token, page, browser_language } = req.body ?? {};
   // Need at least one identifier so the row can be matched to a person.
   // Anonymous /guide visits (PDF-link traffic with no params) hit Vercel
   // Analytics only, never the sheet — those are filtered out client-side.
@@ -33,6 +33,7 @@ export default async function handler(req, res) {
           token: token || "",
           page: page || "landing",
           visited_at: new Date().toISOString(),
+          browser_language: typeof browser_language === "string" ? browser_language.slice(0, 20) : "",
         }),
         signal: AbortSignal.timeout(5000),
       }).catch((err) => console.error("Visit log failed:", err)),

@@ -447,6 +447,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     padding: 4px 22px;
+    /* scroll-padding-inline-start so the first card snaps to align with
+       the padding edge (matches the heading's 22px), not to the
+       container's content edge (which made it look flush with viewport
+       left). */
+    scroll-padding-inline-start: 22px;
     scrollbar-width: none;
   }
   .inside::-webkit-scrollbar { display: none; }
@@ -1124,7 +1129,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <img src="/images/avatar.jpg" alt="" />
       Hikebeast
     </a>
-    <a class="navbar-lang" href="/map/" hreflang="en" aria-label="English version">EN</a>
+    <a class="navbar-lang" href="/map/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
   </header>
 
   <main>
@@ -1268,9 +1273,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="/map/img/avatars/jules.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/map/img/avatars/alexis-dansereau.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
-              <span class="review-name">Jules</span>
+              <span class="review-name">Alexis</span>
+              <a class="review-handle" href="https://www.instagram.com/alexis.dansereau/" target="_blank" rel="noopener">@alexis.dansereau</a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1280,15 +1286,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="/map/img/avatars/martin.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/map/img/avatars/simon_ys32.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
-              <span class="review-name">Martin</span>
+              <span class="review-name">Simon</span>
+              <a class="review-handle" href="https://www.instagram.com/simon_ys32/" target="_blank" rel="noopener">@simon_ys32</a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
             </div>
           </div>
-          <p class="review-quote">"Hatte den schönsten Wildcamp Ausflug meines Lebens direkt beim ersten Spot!"</p>
+          <p class="review-quote">"hatte den besten wildcamping ausflug meines lebens!!"</p>
         </div>
         <div class="review-card">
           <div class="review-head">
@@ -1712,6 +1719,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
+        browser_language: navigator.language || "",
       }),
       keepalive: true,
     }).catch(() => {});

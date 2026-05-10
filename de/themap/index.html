@@ -1,50 +1,32 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="utf-8" />
-<script>
-// Auto-redirect to German variant if the browser/device language is
-// German. Runs before any tracking script so Meta Pixel + Vercel
-// Analytics fire on the destination URL only, not both. Manual override
-// via localStorage 'hb_lang' set by the navbar EN/DE pill click below.
-(function () {
-  try {
-    if (localStorage.getItem('hb_lang') === 'en') return;
-    var lang = (navigator.language || '').toLowerCase();
-    if (!lang.startsWith('de')) return;
-    var target = location.pathname.replace(/^\/(themap|map)\b/, '/de/$1');
-    if (target === location.pathname) return;
-    location.replace(target + location.search + location.hash);
-  } catch (e) {}
-})();
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>Switzerland Map · 100+ Hidden Swiss Spots with GPS</title>
-<meta name="description" content="The Switzerland map with 100+ hidden gems. Exact GPS, hike difficulty and more." />
-<link rel="canonical" href="https://hikebeast.ch/map/" />
+<title>Schweizer Karte🇨🇭 · Gems of Switzerland Switzerland</title>
+<meta name="description" content="Die Schweizer Karte mit über 100 versteckten Spots. Genauer Standort, Wanderschwierigkeit und mehr." />
+<link rel="canonical" href="https://hikebeast.ch/de/map/" />
 <link rel="alternate" hreflang="en" href="https://hikebeast.ch/map/" />
 <link rel="alternate" hreflang="de" href="https://hikebeast.ch/de/map/" />
 <link rel="alternate" hreflang="x-default" href="https://hikebeast.ch/map/" />
-<link rel="icon" type="image/jpeg" href="../images/favicon.jpg" />
-<link rel="apple-touch-icon" href="../images/favicon.jpg" />
+<link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+<link rel="apple-touch-icon" href="/images/favicon.jpg" />
 <meta property="og:type" content="product" />
 <meta property="og:site_name" content="Hikebeast" />
-<meta property="og:locale" content="en_US" />
-<meta property="og:title" content="Switzerland Map · 100+ Hidden Spots" />
-<meta property="og:description" content="The ultimate Swiss map." />
-<meta property="og:url" content="https://hikebeast.ch/map/" />
-<!-- og image lives under /images/ (not /map/img/) so social-media link
-     scrapers, which never send our auth cookie, don't get 302'd to the
-     login page by the middleware that gates /map/*. -->
-<meta property="og:image" content="https://hikebeast.ch/images/thumbnail.jpg" />
-<meta property="og:image:width" content="2464" />
-<meta property="og:image:height" content="1386" />
-<meta property="og:image:alt" content="Switzerland Map · 100+ Hidden Spots" />
+<meta property="og:locale" content="de_CH" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:title" content="Schweizer Karte🇨🇭 · Gems of Switzerland Switzerland" />
+<meta property="og:description" content="Die ultimative Schweizer Karte." />
+<meta property="og:url" content="https://hikebeast.ch/de/map/" />
+<meta property="og:image" content="https://hikebeast.ch/themap/img/og.jpg" />
+<meta property="og:image:width" content="1920" />
+<meta property="og:image:height" content="987" />
+<meta property="og:image:alt" content="Schweizer Karte🇨🇭 · Gems of Switzerland Switzerland" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Switzerland Map · 100+ Hidden Spots" />
-<meta name="twitter:description" content="100+ secret Swiss spots, exact GPS, lifetime updates." />
-<meta name="twitter:image" content="https://hikebeast.ch/images/thumbnail.jpg" />
+<meta name="twitter:title" content="Schweizer Karte🇨🇭 · Gems of Switzerland Switzerland" />
+<meta name="twitter:description" content="Die ultimative Schweizer Karte." />
+<meta name="twitter:image" content="https://hikebeast.ch/themap/img/og.jpg" />
 
 <!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -81,13 +63,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": "Switzerland Map · Swiss Gems of Switzerland",
-  "description": "The Switzerland map with 100+ hidden gems. Exact GPS, hike difficulty and more.",
+  "name": "Schweizer Karte🇨🇭 · Gems of Switzerland Switzerland",
+  "description": "Die Schweizer Karte mit über 100 versteckten Spots. Genauer Standort, Wanderschwierigkeit und mehr.",
   "image": "https://hikebeast.ch/map/img/hero-1-mockup.jpg",
   "brand": { "@type": "Brand", "name": "Hikebeast" },
   "offers": {
     "@type": "Offer",
-    "url": "https://hikebeast.ch/map/",
+    "url": "https://hikebeast.ch/de/map/",
     "priceCurrency": "CHF",
     "price": "27.00",
     "availability": "https://schema.org/InStock"
@@ -260,6 +242,54 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     letter-spacing: -0.025em;
     margin: 0;
     font-weight: 600;
+  }
+  .hero-sub {
+    margin: -2px 0 2px;
+    font-size: 17px;
+    line-height: 1.35;
+    color: var(--muted);
+    letter-spacing: -0.01em;
+  }
+  /* Product card · replaces the slim info-bar with a stacked layout
+     (rating · title · price) for a stronger product anchor below the
+     hero carousel. */
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .product-rating .stars {
+    color: var(--warn);
+    letter-spacing: 1px;
+    font-size: 14px;
+  }
+  .product-rating-count {
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .product-title {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 28px;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    margin: 0;
+    font-weight: 600;
+  }
+  .product-price {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--fg);
   }
   ul.hero-bullets {
     list-style: none;
@@ -438,6 +468,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
 
   /* === Collection grid · full-bleed photo grid above the 6 cards === */
+  .collection-wrap {
+    padding-top: 10px;
+  }
   .collection-grid {
     width: 100%;
     display: block;
@@ -833,6 +866,29 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     width: 1px; height: 12px;
     background: var(--hairline);
   }
+  .guarantee-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 0 16px 14px;
+  }
+  .guarantee-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #f5f5f7;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--fg);
+    line-height: 1.35;
+    max-width: 100%;
+  }
+  .guarantee-pill svg {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
   .footer {
     text-align: center;
     color: var(--muted);
@@ -1141,11 +1197,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 </head>
 <body>
   <header class="navbar">
-    <a class="navbar-brand" href="/">
-      <img src="../images/avatar.jpg" alt="" />
+    <a class="navbar-brand" href="/de/">
+      <img src="/images/avatar.jpg" alt="" />
       Hikebeast
     </a>
-    <a class="navbar-lang" href="/de/map/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">DE</a>
+    <a class="navbar-lang" href="/themap/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
   </header>
 
   <main>
@@ -1157,11 +1213,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <!-- Carousel -->
       <div class="carousel-wrap">
         <div class="carousel" id="hero-carousel">
-          <div class="slide"><img src="img/hero-1-mockup.jpg" alt="The ultimate Swiss Map · spot detail in your pocket" loading="eager" fetchpriority="high" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-2-map.jpg" alt="122 spots, one map" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-3-example.jpg" alt="A spot, fully detailed" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-4-wildcamp.jpg" alt="Where you can wildcamp" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-5-photos.jpg" alt="Secret spots, viral photos" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/themap/img/hero-1-hero-de.jpg" alt="Swiss Gems Guide · Der Sommer deines Lebens" loading="eager" fetchpriority="high" decoding="async" /></div>
+          <div class="slide"><img src="/themap/img/hero-2-mockup-de.jpg" alt="Spots, die Touristen nie finden" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/themap/img/hero-3-map-de.jpg" alt="122 Spots, eine Karte" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/themap/img/hero-4-example-de.jpg" alt="Ein Spot, voll detailliert" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/themap/img/hero-5-wildcamp-de.jpg" alt="Orte wo du wildcampen darfst" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/themap/img/hero-6-photos-de.jpg" alt="Unbekannte Spots, virale Fotos" loading="lazy" decoding="async" /></div>
         </div>
         <!-- Hover-only nav arrows (desktop only · hidden on touch devices
              where the carousel relies on swipe). Click handlers wired in
@@ -1177,28 +1234,25 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           </svg>
         </button>
         <div class="dots" id="hero-dots">
-          <span class="active"></span><span></span><span></span><span></span><span></span>
+          <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
         </div>
       </div>
 
-      <div class="px">
-        <div class="info-bar">
-          <span class="info-left">
-            <span class="price-display">CHF 27</span>
-          </span>
-          <span class="info-right">
-            <span class="stars" style="color: var(--warn); letter-spacing: 1px; font-size: 13px;">★★★★★</span>
-            5.0
-          </span>
+      <div class="px product-card">
+        <h1 class="product-title">Schweizer Karte 🇨🇭</h1>
+        <div class="product-price"><span class="price-display">CHF 27</span></div>
+        <div class="product-rating">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span>5.0 <span class="product-rating-count">(41)</span></span>
         </div>
       </div>
 
       <div class="px hero-text">
-        <h1>Switzerland Map 🇨🇭</h1>
+        <p class="hero-sub">So erlebst du den perfekten Sommer in der Schweiz.</p>
         <ul class="hero-bullets">
-          <li>122 Gems of Switzerland + How to Get There</li>
-          <li>Exact Location for every spot</li>
-          <li>Hiking &amp; Camping Information</li>
+          <li>122 Geheimtipps mit Wegbeschreibung</li>
+          <li>Genaue Koordinaten zu jedem Spot</li>
+          <li>Wander- und Camping-Infos</li>
         </ul>
       </div>
       <!-- Photo collection grid · visual proof of what 122 spots looks
@@ -1206,7 +1260,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
            Whop-style, no internal 2-col split. -->
       <div class="px collection-wrap">
         <div class="collection-grid">
-          <img src="img/collection.jpg" alt="A grid of fifteen hidden Swiss spots from the guide" loading="lazy" decoding="async" />
+          <img src="/themap/img/collection.jpg" alt="Ein Grid mit Schweizer Spots vom Guide." loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
@@ -1217,39 +1271,39 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
          section visually. -->
     <section class="inside-section">
       <div class="px section-head">
-        <h2>What's inside</h2>
-        <p>Five years of exploring went into this list.</p>
+        <h2>Was dich erwartet</h2>
+        <p>Die besten Orte der Schweiz stehen nicht in Reiseblogs. Sie sind in WhatsApp-Gruppen von Schweizern, in der Fotos App von Fotografen und jetzt, übersichtlich dargestellt, in diesem Guide.</p>
       </div>
       <div class="inside">
         <div class="inside-card">
           <div class="ico-box" aria-hidden="true">📷</div>
-          <h3>Photo info</h3>
-          <p>Best hour and best season per spot, learned the hard way.</p>
+          <h3>Foto Tipps</h3>
+          <p>Beste Tages- und Jahreszeit für jeden Spot.</p>
         </div>
         <div class="inside-card">
           <div class="ico-box" aria-hidden="true">📲</div>
-          <h3>Offline use</h3>
-          <p>A downloadable PDF works even without signal on the trail.</p>
+          <h3>Offline</h3>
+          <p>Mit dem PDF kommst du auch ohne Empfang an dein Ziel.</p>
         </div>
         <div class="inside-card">
           <div class="ico-box" aria-hidden="true">⛺</div>
-          <h3>Wildcamp info</h3>
-          <p>Spots where you can wildcamp without any cortisol spikes.</p>
+          <h3>Wildcamp Infos</h3>
+          <p>Orte, an denen du keine Angst vor Rangern haben musst.</p>
         </div>
         <div class="inside-card">
           <div class="ico-box" aria-hidden="true">📍</div>
-          <h3>Exact Location</h3>
-          <p>Coordinates that drop you on the exact spot.</p>
+          <h3>Genaue Standorte</h3>
+          <p>Koordinaten, die dich direkt zum Spot führen.</p>
         </div>
         <div class="inside-card">
           <div class="ico-box" aria-hidden="true">💎</div>
-          <h3>122 Spots</h3>
-          <p>The best gems of Switzerland. Some famous, most aren't.</p>
+          <h3>122+ Spots</h3>
+          <p>Die schönsten Spots der Schweiz. Ein paar Klassiker, die meisten unbekannt.</p>
         </div>
         <div class="inside-card">
           <div class="ico-box" aria-hidden="true">🥾</div>
-          <h3>Hike info</h3>
-          <p>Trail and difficulty. So you know what you're walking into.</p>
+          <h3>Wander Infos</h3>
+          <p>Weg und Schwierigkeitsgrad. Damit du weisst, was dich erwartet.</p>
         </div>
       </div>
     </section>
@@ -1258,12 +1312,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
          (avatars pulled from public IG og:image where available). -->
     <section class="reviews">
       <div class="px section-head">
-        <h2>What people say</h2>
+        <h2>Bewertungen</h2>
       </div>
       <div class="reviews-carousel">
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/dimi_tt7.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/themap/img/avatars/dimi_tt7.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Dimi</span>
               <a class="review-handle" href="https://www.instagram.com/dimi_tt7" target="_blank" rel="noopener">@dimi_tt7</a>
@@ -1276,7 +1330,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/emirhansyz.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/themap/img/avatars/emirhansyz.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Emirhan</span>
               <a class="review-handle" href="https://www.instagram.com/emirhansyz" target="_blank" rel="noopener">@emirhansyz</a>
@@ -1289,7 +1343,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/alexis-dansereau.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/themap/img/avatars/alexis-dansereau.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Alexis</span>
               <a class="review-handle" href="https://www.instagram.com/alexis.dansereau/" target="_blank" rel="noopener">@alexis.dansereau</a>
@@ -1302,7 +1356,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/simon_ys32.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/themap/img/avatars/simon_ys32.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Simon</span>
               <a class="review-handle" href="https://www.instagram.com/simon_ys32/" target="_blank" rel="noopener">@simon_ys32</a>
@@ -1315,7 +1369,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/andres-soltermann.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/themap/img/avatars/andres-soltermann.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Andrés</span>
               <a class="review-handle" href="https://www.instagram.com/andres.soltermann/" target="_blank" rel="noopener">@andres.soltermann</a>
@@ -1324,11 +1378,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
               <span class="stars">★★★★★</span>
             </div>
           </div>
-          <p class="review-quote">"I bought 2 other Switzerland guides before that and this is by far the best."</p>
+          <p class="review-quote">"Das ist der 3. Schweiz-Guide den ich kaufe und es ist mit Abstand der Beste."</p>
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/oliwear_j.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/themap/img/avatars/oliwear_j.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Oli</span>
               <a class="review-handle" href="https://www.instagram.com/oliwear.j/" target="_blank" rel="noopener">@oliwear.j</a>
@@ -1337,7 +1391,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
               <span class="stars">★★★★★</span>
             </div>
           </div>
-          <p class="review-quote">"I showed Leon half the spots on this list but hey, it's a really good one 😄"</p>
+          <p class="review-quote">"Ich hab Leon zwar die Hälfte der Spots gezeigt, aber hey, sie sind echt krass. 😄"</p>
         </div>
       </div>
     </section>
@@ -1345,7 +1399,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <!-- Embedded Stripe Checkout -->
     <section class="px">
       <div class="section-head section-head--centered">
-        <h2>Get the map</h2>
+        <h2>Hol dir die Karte</h2>
+      </div>
+      <div class="guarantee-wrap">
+        <span class="guarantee-pill">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="10" cy="10" r="9" fill="#34c759"/>
+            <path d="M5.8 10.4l2.8 2.8 5.6-5.6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Weniger als 0,02 % unserer Käufer nutzen die 30-Tage-Geld-zurück-Garantie!
+        </span>
       </div>
       <div class="checkout-wrap">
         <div id="checkout">
@@ -1354,21 +1417,23 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
     </section>
 
-    <!-- Trust row · "30-day refund" is a small footer-pill repeat of
-         the guarantee above; links to /terms.html for the full text.
-         Saftladen GmbH lives in the imprint; no need to repeat it. -->
+    <!-- Trust row · pills repeated from earlier; the refund link goes
+         to the German Terms page even though the pill text stays in
+         English (Leon left these blank in the translation draft, which
+         the convention is to leave as English). -->
     <div class="px trust-row">
       <span>🔒 Secured by Stripe</span>
       <span class="sep"></span>
-      <a href="/terms.html"><span>↩ 30-day refund</span></a>
+      <a href="/de/terms.html"><span>↩ 30-day refund</span></a>
       <span class="sep"></span>
       <span>🇨🇭 Made in Switzerland</span>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer · "Privacy" stays English per the translation draft;
+         "AGB" and "Impressum" translate. -->
     <footer class="footer px">
       <div>© Hikebeast</div>
-      <div><a href="/terms.html">Terms</a> · <a href="/imprint.html">Imprint</a> · <a href="/privacy.html">Privacy</a></div>
+      <div><a href="/de/terms.html">AGB</a> · <a href="/de/imprint.html">Impressum</a> · <a href="/de/privacy.html">Privacy</a></div>
     </footer>
     </div><!-- /.page-main -->
 
@@ -1384,20 +1449,20 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
              buy-card's hero image instead. Goes edge-to-edge inside
              the card thanks to overflow:hidden + zero card padding. -->
         <a href="#checkout" class="buy-thumb" aria-hidden="true">
-          <img src="img/collection.jpg" alt="" loading="lazy" decoding="async" />
+          <img src="/themap/img/collection.jpg" alt="" loading="lazy" decoding="async" />
         </a>
         <div class="buy-content">
           <div class="buy-rating">
             <span class="stars" aria-hidden="true">★★★★★</span>
             <span class="buy-rating-num">5.0</span>
-            <span class="buy-rating-count">(6)</span>
+            <span class="buy-rating-count">(41)</span>
           </div>
           <div class="buy-name">Swiss Gems of Switzerland 🇨🇭</div>
           <div class="buy-price">CHF 27</div>
-          <a href="#checkout" class="buy-cta">Get the map</a>
+          <a href="#checkout" class="buy-cta">Hol dir die Karte</a>
           <div class="buy-foot">
             <span>Apple Pay · TWINT · Card</span>
-            <a href="/terms.html#refunds">↩ 30-day refund</a>
+            <a href="/de/terms.html#refunds">↩ 30-day refund</a>
           </div>
         </div>
       </div>
@@ -1407,7 +1472,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
   <!-- Sticky bottom buy bar (mobile) -->
   <div class="sticky-buy" id="sticky-buy">
-    <a class="buy-btn" href="#checkout">Buy · <span class="price-display">CHF 27</span></a>
+    <a class="buy-btn" href="#checkout">Kaufen · <span class="price-display">CHF 27</span></a>
   </div>
 
 <script>
@@ -1633,12 +1698,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         headers: { "Content-Type": "application/json" },
         // No `currency` field · server picks it from the buyer's IP so
         // they can't downgrade to a cheaper region by editing this POST.
+        // `locale: "de"` tells Stripe to render the embedded iframe
+        // (form labels, error text, "Pay" button) in German.
         body: JSON.stringify({
           t: cohortToken,
           s: cohortSubscriber,
           utm_source: utmSource,
           utm_medium: utmMedium,
           utm_campaign: utmCampaign,
+          locale: "de",
           r: readStoredRef(),
         }),
       });
