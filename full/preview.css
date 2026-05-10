@@ -3265,6 +3265,47 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
 }
 .app-rail.is-expanded .rail-section-head .label { opacity: 1; }
 
+/* Collapsible Chapters section: button-styled section head with a
+   chevron that rotates based on aria-expanded. The rail-section-head
+   base styles still apply; this adds button reset + chevron. */
+.rail-section-toggle {
+  appearance: none;
+  background: none;
+  border: 0;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+  color: var(--soft);
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+  padding: 14px 12px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 120ms ease;
+}
+.rail-section-toggle:hover { color: var(--fg); }
+.rail-section-chevron {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: transform 180ms ease, opacity 120ms ease;
+  margin-left: 6px;
+}
+.app-rail.is-expanded .rail-section-toggle .rail-section-chevron { opacity: 0.55; }
+.rail-section-toggle:hover .rail-section-chevron { opacity: 1; }
+.rail-section-toggle[aria-expanded="true"] .rail-section-chevron {
+  transform: rotate(90deg);
+}
+.app-rail .rail-chapters-list[hidden] { display: none; }
+
 /* Chapter row: small thumbnail avatar + label, used inside the Chapters
  * section. Active chapter gets a tinted background. */
 .rail-chapter {
