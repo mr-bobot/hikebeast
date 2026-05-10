@@ -990,7 +990,6 @@
   // Collapsed by default at 64px wide; toggle expands to 220px showing labels.
   // Mobile: hidden by default, opens as a drawer via the topbar burger button.
   const RAIL_KEY = 'hb:rail:v1';
-  const RAIL_CHAPTERS_KEY = 'hb:rail:chapters:v1';
 
   // Icons separate from the topbar set so we can size them independently.
   const SVG_HOME = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg>';
@@ -1004,7 +1003,6 @@
   // rail markup that references it doesn't TDZ-fault.
   const SVG_CHECK_CIRCLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 10"/></svg>';
   const SVG_CHEVRONS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>';
-  const SVG_CHEVRON_RIGHT = '<svg class="rail-section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>';
   const SVG_BURGER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
 
   // Chapter list, mirrored from the home page covers. Chapter `id` matches
@@ -1058,18 +1056,6 @@
     const introItem = renderChapter(RAIL_INTRO_CHAPTER);
     const chapterItems = RAIL_CHAPTERS.map(renderChapter).join('');
 
-    // Chapters section is collapsible. Default state: expanded if the
-    // visitor is currently on a chapter page (so sibling chapters are
-    // one click away), collapsed otherwise (so the rail isn't dominated
-    // by the 8-row chapter list). User choice overrides the default and
-    // is persisted to localStorage.
-    let chaptersExpanded = !!curCh;
-    try {
-      const stored = localStorage.getItem(RAIL_CHAPTERS_KEY);
-      if (stored === '1') chaptersExpanded = true;
-      else if (stored === '0') chaptersExpanded = false;
-    } catch {}
-
     rail.innerHTML = `
       <a class="rail-brand" href="${REL}index.html" title="Gems of Switzerland home">
         <img src="${REL}../images/avatar.jpg" alt="" />
@@ -1112,15 +1098,10 @@
           ${SVG_TENT}<span class="label">Wildcamping</span>
         </a>
         <div class="rail-divider"></div>
-        <button type="button" class="rail-section-head rail-section-toggle" data-hb-rail-chapters-toggle aria-expanded="${chaptersExpanded ? 'true' : 'false'}">
-          <span class="label">Chapters</span>
-          ${SVG_CHEVRON_RIGHT}
-        </button>
-        <div class="rail-chapters-list"${chaptersExpanded ? '' : ' hidden'}>
-          ${introItem}
-          <div class="rail-divider rail-divider-tight"></div>
-          ${chapterItems}
-        </div>
+        <div class="rail-section-head"><span class="label">Chapters</span></div>
+        ${introItem}
+        <div class="rail-divider rail-divider-tight"></div>
+        ${chapterItems}
       </div>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="Toggle navigation labels">
         ${SVG_CHEVRONS}<span class="label">Collapse</span>
@@ -1302,20 +1283,6 @@
       document.body.classList.toggle('rail-expanded', next);
       try { localStorage.setItem(RAIL_KEY, next ? '1' : '0'); } catch {}
     });
-
-    // Chapters section collapse toggle. Click the header → flip the
-    // chapter list visibility, persist the choice. Chevron rotation is
-    // CSS-driven from the aria-expanded attribute.
-    const chTog = rail.querySelector('[data-hb-rail-chapters-toggle]');
-    const chList = rail.querySelector('.rail-chapters-list');
-    if (chTog && chList) {
-      chTog.addEventListener('click', () => {
-        const next = chList.hidden;
-        chList.hidden = !next;
-        chTog.setAttribute('aria-expanded', next ? 'true' : 'false');
-        try { localStorage.setItem(RAIL_CHAPTERS_KEY, next ? '1' : '0'); } catch {}
-      });
-    }
 
     // Random — delegated globally so any `[data-hb-random]` button works
     // (rail item, the home-page "Surprise me" button, etc).
