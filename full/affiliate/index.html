@@ -165,6 +165,29 @@
   .stats {
     display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
   }
+
+  /* Resources · single tile linking to the shared Drive folder of promo
+     material affiliates can use (photos, clips, copy templates). */
+  .resources-link {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 150ms ease, background 150ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .resources-link:hover {
+    border-color: rgba(0,0,0,0.18);
+    background: #f9f9fa;
+  }
+  .resources-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .resources-title { font-size: 14px; font-weight: 600; letter-spacing: -0.005em; }
+  .resources-sub { font-size: 12px; color: var(--muted); }
+  .resources-arrow { font-size: 16px; color: var(--muted); flex-shrink: 0; }
   .stat-value {
     font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
     font-size: 22px; font-weight: 700;
@@ -271,6 +294,17 @@
             <p class="stat-value is-empty" id="statCount">0</p>
           </div>
         </div>
+      </div>
+
+      <div class="sec">
+        <p class="sec-label">Resources</p>
+        <a class="resources-link" href="https://drive.google.com/drive/folders/1oBZ1HWqt5P57ugwm3CZDxH2NS3IeahDZ?usp=share_link" target="_blank" rel="noopener">
+          <span class="resources-text">
+            <span class="resources-title">Promo material</span>
+            <span class="resources-sub">Photos, clips and ready-to-share copy</span>
+          </span>
+          <span class="resources-arrow" aria-hidden="true">↗</span>
+        </a>
       </div>
 
       <div class="sec last">
