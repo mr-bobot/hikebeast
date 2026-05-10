@@ -447,6 +447,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     padding: 4px 22px;
+    /* scroll-padding-inline-start so the first card snaps to align with
+       the padding edge (matches the heading's 22px), not to the
+       container's content edge (which made it look flush with viewport
+       left). */
+    scroll-padding-inline-start: 22px;
     scrollbar-width: none;
   }
   .inside::-webkit-scrollbar { display: none; }
