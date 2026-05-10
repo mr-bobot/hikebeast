@@ -881,23 +881,34 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     justify-content: center;
     padding: 0 16px 14px;
   }
-  .guarantee-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
+  .guarantee-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 540px;
+    padding: 14px 16px;
     background: #f5f5f7;
     border: 1px solid var(--hairline);
-    border-radius: 999px;
-    font-size: 13px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.5;
     color: var(--fg);
-    line-height: 1.35;
-    max-width: 100%;
   }
-  .guarantee-pill svg {
+  .guarantee-card svg {
     flex-shrink: 0;
-    width: 16px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+  }
+  .guarantee-card-text {
+    margin: 0;
+  }
+  .guarantee-card-text a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .guarantee-card-text a:hover {
+    text-decoration: underline;
   }
   .footer {
     text-align: center;
@@ -1412,13 +1423,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         <h2>Get the map</h2>
       </div>
       <div class="guarantee-wrap">
-        <span class="guarantee-pill">
+        <div class="guarantee-card">
           <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <circle cx="10" cy="10" r="9" fill="#34c759"/>
             <path d="M5.8 10.4l2.8 2.8 5.6-5.6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Less than 0.02% of buyers use our 30-day money-back guarantee!
-        </span>
+          <p class="guarantee-card-text">Try the first spot from your list. If you don't think "wow, I never would've found this", shoot me an email and I'll send the CHF 27 back. No questions, no form, just <a href="mailto:leon@hikebeast.ch">leon@hikebeast.ch</a>.</p>
+        </div>
       </div>
       <div class="checkout-wrap">
         <div id="checkout">
