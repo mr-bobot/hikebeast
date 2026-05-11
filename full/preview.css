@@ -443,6 +443,48 @@ button { font-family: inherit; }
 /* Crossfade between rotating featured spots so swaps feel intentional
  * rather than a hard cut. */
 .feature-card .feature-photo img.is-fading { opacity: 0; }
+
+/* Intro slide · cream gradient (same stops as /themap/success/) +
+ * the transparent polaroid PNG. The PNG is contained and centered so
+ * the polaroids never get clipped — matches the celebration moment
+ * the buyer just saw on the thank-you page. */
+.feature-card .feature-photo.is-intro {
+  background: linear-gradient(135deg, #F4F1EC 0%, #ECE6DC 100%);
+}
+.feature-card .feature-photo.is-intro img {
+  object-fit: contain;
+  object-position: center;
+  padding: 24px;
+}
+
+/* Chapter slides · dark gradient + region-colour glow + the chapter's
+ * white SVG silhouette. Same recipe as .slide-cover .cv-map but tuned
+ * for the hero scale: more padding around the silhouette, a stronger
+ * drop-shadow so the map reads at 600+ px wide. The region tint is
+ * driven by the inline `--region-color` CSS variable set per chapter
+ * in paintFeature. */
+.feature-card .feature-photo.is-map {
+  background:
+    radial-gradient(70% 60% at 22% 18%, rgba(var(--region-color, 200, 200, 200), 0.55) 0%, rgba(var(--region-color, 200, 200, 200), 0) 65%),
+    radial-gradient(60% 55% at 92% 95%, rgba(var(--region-color, 200, 200, 200), 0.32) 0%, rgba(var(--region-color, 200, 200, 200), 0) 70%),
+    linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
+}
+.feature-card .feature-photo.is-map::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+}
+.feature-card .feature-photo.is-map img {
+  object-fit: contain;
+  padding: 48px;
+  filter: drop-shadow(0 0 32px rgba(255, 255, 255, 0.10)) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.35));
+}
+@media (max-width: 699px) {
+  .feature-card .feature-photo.is-map img { padding: 32px; }
+  .feature-card .feature-photo.is-intro img { padding: 16px; }
+}
 .feature-card .feature-dots {
   position: absolute;
   bottom: 14px; left: 50%;

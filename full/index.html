@@ -160,32 +160,56 @@
   // decoded yet.
   let featureSwapping = false;
   let lastFeatureKey = null;  // dedupe re-paints when nothing visible changed
+  const featurePhotoBox = document.querySelector('.feature-card .feature-photo');
   function paintFeature(ch, idx) {
     if (!ch) return;
-    // Skip re-paint when nothing the user can see changed (same chapter
-    // and same idx). Keeps the 9-second cycle steady without retriggering
-    // the crossfade on incidental subscription ticks.
-    const key = `${ch.id}|${idx}|${ch.cover || ''}`;
+    // Skip re-paint when nothing the user can see changed.
+    const key = `${ch.id}|${idx}`;
     if (lastFeatureKey === key) return;
     lastFeatureKey = key;
 
     featureTitle.textContent = ch.name;
     featureDeck.textContent  = ch.description || '';
-    featureCta.href = ch.id + '/';
-    featureCta.querySelector('span:last-child').textContent = 'Open chapter';
+    featureCta.href = ch.href || (ch.id + '/');
+    featureCta.querySelector('span:last-child').textContent = ch.ctaLabel || 'Open chapter';
     const featureKicker = document.getElementById('featureKicker');
     const kickerLabel   = featureKicker?.querySelector('[data-kicker-label]');
-    if (kickerLabel) kickerLabel.textContent = 'Chapter';
-    featureKicker?.classList.remove('is-pinned');
+    if (kickerLabel) kickerLabel.textContent = ch.kicker || 'Chapter';
+    featureKicker?.classList.toggle('is-pinned', !!ch.kickerPinned);
 
     featureDots.innerHTML = featurePool.map((_, i) =>
       `<span class="${i === idx ? 'is-on' : ''}"></span>`
     ).join('');
-    featureCard.dataset.spotKey = '';   // not a spot — no Convex spot key
+    featureCard.dataset.spotKey = '';
 
-    // Chapter cover photos live at /full/img/m/<file>.jpg. They're
-    // pre-baked at 1600w, plenty for the hero photo column.
-    const src = 'img/m/' + ch.cover;
+    // The hero photo box has three visual modes, set by classes on the
+    // .feature-photo container:
+    //   - .is-intro: cream gradient + the transparent polaroid PNG
+    //     (matches the /themap/success/ celebration so the intro feels
+    //     like the same moment the buyer just experienced).
+    //   - .is-map:  dark gradient + region-colour glow + the chapter's
+    //     white SVG silhouette. Same recipe as the chapter-cover hero
+    //     and the small up-next thumbs — the home page reads as a
+    //     doorway into those pages.
+    //   - default:  fall back to a regular photo (object-fit: cover).
+    let src;
+    if (featurePhotoBox) {
+      featurePhotoBox.classList.remove('is-intro', 'is-map');
+      featurePhotoBox.style.removeProperty('--region-color');
+    }
+    if (ch.isIntro) {
+      featurePhotoBox?.classList.add('is-intro');
+      src = '../images/thanks-hero-transparent.png';
+    } else if (ch.mapSvg) {
+      featurePhotoBox?.classList.add('is-map');
+      if (ch.color) featurePhotoBox?.style.setProperty('--region-color', ch.color);
+      src = ch.mapSvg;
+    } else {
+      // Fallback: regular cover photo. Used when a chapter has no SVG
+      // (none today, but kept for safety — Beyond now has region-beyond.svg).
+      src = 'img/m/' + (ch.cover || '');
+    }
+
     if (!featureImg.src) {
       featureImg.src = src;
       featureImg.removeAttribute('srcset');
@@ -319,8 +343,24 @@
     { id: 'beyond',   name: 'Beyond the Border',   color: '89,89,89',    cover: 'beyond_cover.jpg',   mapSvg: 'img/region-beyond.svg',   description: 'Chamonix, Mont Blanc, one French slice of Léman.' },
   ];
 
+  // Introduction is the carousel's anchor — first slot so a fresh visitor
+  // always lands on it. Uses the same transparent polaroid hero PNG as
+  // /themap/success/ so the buyer feels they're in the same world. Not
+  // in CHAPTERS_META because the up-next column is just the regions; the
+  // intro lives in the hero rotation only.
+  const INTRO_CARD = {
+    id:           'intro',
+    name:         'Introduction',
+    description:  'Cover, camping rules, top picks · the front matter of the guide.',
+    href:         'intro/',
+    ctaLabel:     'Read the intro',
+    kicker:       'Read this first',
+    kickerPinned: true,
+    isIntro:      true,
+  };
+
   // Hand the hero its rotation pool now that CHAPTERS_META is in scope.
-  featurePool = CHAPTERS_META;
+  featurePool = [INTRO_CARD, ...CHAPTERS_META];
   if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
   const upNextEl = document.getElementById('upNext');
   // Cap the up-next column at 4 cards by default; the rest go behind a
