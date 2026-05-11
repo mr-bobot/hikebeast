@@ -59,10 +59,6 @@
   <section class="home-row">
     <div class="row-head">
       <h2>For you</h2>
-      <a class="see-all" href="swipe/">
-        <span>See all</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </a>
     </div>
     <div class="row-cards" id="rowForYou"></div>
   </section>
@@ -70,7 +66,7 @@
   <section class="home-row">
     <div class="row-head">
       <h2>Famous spots that deliver</h2>
-      <a class="see-all" href="intro/index.html#top-six">
+      <a class="see-all" href="famous-gems/">
         <span>See all</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
@@ -304,6 +300,23 @@
       }
     }, true);
     featurePhotoEl.style.cursor = 'pointer';
+  }
+
+  // Title + deck are intuitively clickable too — users tap "Central
+  // Switzerland" expecting the page to open. The CTA pill already
+  // navigates (native anchor), so we only need to wire the heading
+  // text. Click bubbles up from CTA harmlessly (same destination).
+  const featureTextEl = document.querySelector('.feature-card .feature-text');
+  if (featureTextEl) {
+    featureTextEl.addEventListener('click', (e) => {
+      // CTA pill handles its own navigation; let the native click run.
+      if (e.target.closest('.feature-cta')) return;
+      if (featureCta.href && featureCta.href !== '#') {
+        location.href = featureCta.href;
+      }
+    });
+    featureTitle.style.cursor = 'pointer';
+    featureDeck.style.cursor  = 'pointer';
   }
 
   function shuffle(arr) {

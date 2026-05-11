@@ -1082,7 +1082,7 @@
           ${SVG_HEART_OUT}<span class="label">Liked</span>
           <span class="rail-badge" data-hb-fav-count></span>
         </a>
-        <a class="rail-item${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link hidden>
+        <a class="rail-item${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link>
           ${SVG_CHECK_CIRCLE}<span class="label">Been there</span>
           <span class="rail-badge" data-hb-visited-count></span>
         </a>
@@ -1171,7 +1171,7 @@
           <span class="menu-row-label">Liked</span>
           <span class="menu-row-badge" data-hb-fav-count></span>
         </a>
-        <a class="menu-row${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link data-close hidden>
+        <a class="menu-row${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link data-close>
           <span class="menu-row-icon">${SVG_CHECK_CIRCLE}</span>
           <span class="menu-row-label">Been there</span>
           <span class="menu-row-badge" data-hb-visited-count></span>
@@ -1201,12 +1201,6 @@
           </a>
         `).join('')}
         <div class="menu-section-head">Account</div>
-        <a class="menu-row${cur('/account/')}" href="${REL}account/" data-close>
-          <span class="menu-row-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-1.82-.33l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          </span>
-          <span class="menu-row-label">Account settings</span>
-        </a>
         <div class="menu-sheet-account" data-hb-account></div>
       </div>
     `;
@@ -1354,19 +1348,6 @@
     }
     paintAccount();
     session.subscribe(paintAccount);
-
-    // Visited row visibility: hide when signed out (paid feature),
-    // show when signed in. Re-runs on sign-in/sign-out via the
-    // visited façade's subscribe (signedIn flips during _reattach).
-    function paintVisitedRow() {
-      document.querySelectorAll('[data-hb-visited-link]').forEach(el => {
-        if (visited.signedIn()) el.hidden = false;
-        else                    el.hidden = true;
-      });
-    }
-    paintVisitedRow();
-    visited.subscribe(paintVisitedRow);
-    session.subscribe(paintVisitedRow);
 
     refreshFavCount();
     refreshVisitedCount();
@@ -2696,6 +2677,43 @@
     });
   }
 
+  // The Back pill on spot/account/affiliate pages is hardcoded to its
+  // chapter (or "../") so users who land directly via search or share
+  // link still have a way out. But when they got here from inside the
+  // app (Map → spot, Browse → spot, etc.) the user expects native back
+  // behaviour. Mobile's system back arrow already does this; the
+  // in-page Back was always shooting them to the chapter.
+  //
+  // We can't rely on document.referrer: every /full page sets
+  // <meta name="referrer" content="no-referrer">. Instead, count
+  // in-app navigations per tab via sessionStorage. depth > 1 means at
+  // least one prior in-app page is in the back stack; hijack the click
+  // and use history.back(). depth === 1 (direct entry / new tab) falls
+  // through to the anchor's href, which is the chapter fallback.
+  const NAV_DEPTH_KEY = 'hb:nav:depth';
+  function bumpNavDepth() {
+    try {
+      const cur = parseInt(sessionStorage.getItem(NAV_DEPTH_KEY) || '0', 10) || 0;
+      sessionStorage.setItem(NAV_DEPTH_KEY, String(cur + 1));
+      return cur + 1;
+    } catch { return 1; }
+  }
+  function wireBackButtons() {
+    const depth = bumpNavDepth();
+    document.querySelectorAll('a.hb-back, a.back').forEach(a => {
+      a.addEventListener('click', (e) => {
+        // Cmd/Ctrl/middle-click → open in new tab, leave alone.
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+        if (depth > 1 && W.history.length > 1) {
+          e.preventDefault();
+          W.history.back();
+        }
+        // Otherwise let the anchor navigate to its href (the chapter
+        // for spot pages, "../" for account/affiliate).
+      });
+    });
+  }
+
   function injectHearts() {
     const ch = currentChapterId();
     if (!ch) return;
@@ -2975,6 +2993,7 @@
     visited._reattach();
     swipes._reattach();
     injectRail();
+    wireBackButtons();
     wireBakedCarousels();
     wireCardLinks();
     injectHearts();
