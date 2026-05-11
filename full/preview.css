@@ -3712,9 +3712,9 @@ body.has-rail .topbar .hb-nav { display: none; }
     /* Push search bar below iOS Safari's status bar so it's not
      * crammed against the time/battery. env(safe-area-inset-top)
      * resolves to ~47px on notch iPhones, 0 elsewhere. */
-    height: calc(52px + env(safe-area-inset-top));
-    padding-top: calc(8px + env(safe-area-inset-top));
-    padding-bottom: 8px;
+    height: calc(60px + env(safe-area-inset-top));
+    padding-top: calc(10px + env(safe-area-inset-top));
+    padding-bottom: 14px;
     /* Drop the empty right-column gap when both the burger and the
      * cog are hidden on mobile (see .rail-burger / .rail-cog).
      * Otherwise the 16px grid-gap allocates space for the missing
@@ -3776,8 +3776,11 @@ body.has-rail .topbar .hb-nav { display: none; }
     left: 0;
     right: 0;
     z-index: 70;
+    /* Match the body so the bar feels like the icons are floating
+     * directly on the page, no separate "plate". Body resolves to
+     * #ffffff at the bottom of the viewport (the radial gradients
+     * on body are fixed near top and fade well above the tab bar). */
     background: #fff;
-    border-top: 1px solid var(--hairline);
     padding-top: 6px;
     padding-bottom: env(safe-area-inset-bottom);
     height: calc(64px + env(safe-area-inset-bottom));
