@@ -172,10 +172,10 @@ button { font-family: inherit; }
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 16px;
-  padding: 12px 22px;
-  height: 64px;
+  padding: calc(12px + env(safe-area-inset-top)) 22px 12px;
+  height: calc(64px + env(safe-area-inset-top));
 }
-@media (min-width: 700px) { .home-topbar { padding: 12px 32px; gap: 24px; } }
+@media (min-width: 700px) { .home-topbar { padding: 12px 32px; gap: 24px; height: 64px; } }
 
 .home-search {
   position: relative;
@@ -3708,7 +3708,21 @@ body.has-rail .topbar .hb-nav { display: none; }
    * map shell, scroll-margin) collapses cleanly. The home page topbar
    * is `.home-topbar` (different element) and stays visible. */
   :root { --topbar-h: 0px; }
-  .home-topbar { height: 52px; padding-top: 8px; padding-bottom: 8px; }
+  .home-topbar {
+    /* Push search bar below iOS Safari's status bar so it's not
+     * crammed against the time/battery. env(safe-area-inset-top)
+     * resolves to ~47px on notch iPhones, 0 elsewhere. */
+    height: calc(60px + env(safe-area-inset-top));
+    padding-top: calc(10px + env(safe-area-inset-top));
+    padding-bottom: 14px;
+    /* Drop the empty right-column gap when both the burger and the
+     * cog are hidden on mobile (see .rail-burger / .rail-cog).
+     * Otherwise the 16px grid-gap allocates space for the missing
+     * column and the search bar drifts off-center to the left. */
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .home-topbar-actions { display: none; }
 
   body.has-rail { padding-left: 0; }
   body.has-rail.rail-expanded { padding-left: 0; }
@@ -3737,11 +3751,11 @@ body.has-rail .topbar .hb-nav { display: none; }
    * Account FAB stays in the top-right for sign-in / sign-out. */
   .rail-burger { display: none !important; }
   .topbar { padding-left: 12px; }
-  /* Home topbar's burger slot is now empty on mobile; collapse back to
-   * 2 cols (search · actions). */
+  /* Match .home-v2's 22px side padding so the search bar's edges
+   * line up with the feature card / chapter row below it. */
   .home-topbar {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 22px;
+    padding-right: 22px;
   }
 
   /* On mobile the page topbar (chapter name + spot count + Overview
@@ -3762,8 +3776,11 @@ body.has-rail .topbar .hb-nav { display: none; }
     left: 0;
     right: 0;
     z-index: 70;
+    /* Match the body so the bar feels like the icons are floating
+     * directly on the page, no separate "plate". Body resolves to
+     * #ffffff at the bottom of the viewport (the radial gradients
+     * on body are fixed near top and fade well above the tab bar). */
     background: #fff;
-    border-top: 1px solid var(--hairline);
     padding-top: 6px;
     padding-bottom: env(safe-area-inset-bottom);
     height: calc(64px + env(safe-area-inset-bottom));
