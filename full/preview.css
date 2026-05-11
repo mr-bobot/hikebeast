@@ -349,6 +349,13 @@ button { font-family: inherit; }
   gap: 12px;
   background: var(--surface-2);
   min-width: 0;
+  /* Mobile: lock the text block to a min-height so the card stays
+   * the same size across all slides. Without this, descriptions of
+   * different lengths reflow the card height between auto-advances,
+   * which reads as a "jump". Picked to fit the longest chapter case
+   * (2-line title + 2-line deck) plus the intro kicker. Above 900px
+   * the card has a fixed `height` (420/440px) so this is a no-op. */
+  min-height: 200px;
 }
 @media (min-width: 700px) { .feature-card .feature-text { padding: 36px 28px 36px 22px; } }
 @media (min-width: 1100px) { .feature-card .feature-text { padding: 48px 40px 48px 28px; } }
@@ -431,8 +438,12 @@ button { font-family: inherit; }
 }
 .feature-card .feature-cta:hover { background: var(--surface); }
 .feature-card .feature-cta:active { transform: scale(0.97); }
-/* See note on .feature-kicker[hidden] — same trick for the CTA. */
-.feature-card .feature-cta[hidden] { display: none; }
+/* CTA removed from the hero entirely. The photo is the affordance —
+ * clicking it navigates to the chapter (paintFeature still sets
+ * featureCta.href so the existing click handler keeps working). Hiding
+ * here instead of with `hidden` so all slides drop the button without
+ * per-slide JS toggling. */
+.feature-card .feature-cta { display: none; }
 .feature-card .feature-cta .play-icon {
   width: 28px; height: 28px;
   border-radius: 999px;
