@@ -174,17 +174,17 @@
     featureCta.querySelector('span:last-child').textContent = ch.ctaLabel || 'Open chapter';
     const featureKicker = document.getElementById('featureKicker');
     const kickerLabel   = featureKicker?.querySelector('[data-kicker-label]');
-    // Kicker pill + CTA only show when the slide carries an explicit
-    // kicker (intro has "Read this first"). Chapter slides skip both —
-    // the dark map silhouette + title + deck is enough; clicking the
-    // photo navigates to the chapter, matching the rest of the rail.
+    // Kicker pill only shows when the slide carries an explicit kicker
+    // (intro has "Read this first"). Chapters skip it — the silhouette
+    // + title + deck reads cleaner. The CTA element is kept in the DOM
+    // (and its href stays current per slide) so the photo-click handler
+    // can still navigate; it's hidden globally via CSS.
     const showKicker = !!ch.kicker;
     if (kickerLabel && ch.kicker) kickerLabel.textContent = ch.kicker;
     if (featureKicker) {
       featureKicker.hidden = !showKicker;
       featureKicker.classList.toggle('is-pinned', !!ch.kickerPinned);
     }
-    featureCta.hidden = !ch.ctaLabel;
 
     featureDots.innerHTML = featurePool.map((_, i) =>
       `<span class="${i === idx ? 'is-on' : ''}"></span>`
