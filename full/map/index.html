@@ -330,20 +330,29 @@
   let geoLayer = null;
   function styleCanton(feature) {
     const ch = CANTON_CHAPTER[feature.properties.name];
-    const isSolo = activeChapters && activeChapters.size === 1;
-    const isActive = isSolo && ch && activeChapters.has(ch);
-    if (isActive) {
-      const rgb = REGION_COLOR_BY_CH[ch];
+    const total = (typeof allChapters !== 'undefined') ? allChapters.size : 0;
+    const isAllOn = activeChapters && total > 0 && activeChapters.size === total;
+    const isOff = activeChapters && ch && !activeChapters.has(ch);
+    if (isOff) {
+      // User isolated other chapters; this canton fades back to white.
       return {
         color: '#ffffff', weight: 1.2,
-        fillColor: 'rgb(' + rgb + ')',
-        fillOpacity: 0.75, lineJoin: 'round',
+        fillColor: '#f5f5f5',
+        fillOpacity: 0.92, lineJoin: 'round',
       };
     }
+    // Default landing (all chapters active) AND isolated-state for the
+    // active chapter both paint with the chapter color. Slightly less
+    // opacity in the all-on overview so the country reads as a
+    // coherent multi-color map; bumped opacity when isolated so the
+    // single active region glows. Unmapped cantons fall back to a
+    // neutral gray.
+    const rgb = ch ? REGION_COLOR_BY_CH[ch] : '224, 224, 228';
+    const opacity = isAllOn ? 0.55 : 0.75;
     return {
       color: '#ffffff', weight: 1.2,
-      fillColor: '#f5f5f5',
-      fillOpacity: 0.92, lineJoin: 'round',
+      fillColor: 'rgb(' + rgb + ')',
+      fillOpacity: opacity, lineJoin: 'round',
     };
   }
   function paintGeoStyle() {
