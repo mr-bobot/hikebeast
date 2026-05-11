@@ -151,13 +151,11 @@
       b.className = 'hb-chip';
       b.innerHTML = `<span class="swatch" style="background: rgb(${c.color});"></span><span>${esc(c.name)}</span>`;
       b.addEventListener('click', () => {
-        // Toggle solo: if this is the only one selected, clear all (= show all).
-        // Otherwise, isolate to this one.
-        if (state.chapters.size === 1 && state.chapters.has(c.number)) {
-          state.chapters.clear();
-        } else {
-          state.chapters = new Set([c.number]);
-        }
+        // Multi-select OR: tap to add/remove, same as property chips
+        // below. Lets the user pick "Valais + Ticino" the way they
+        // can already pick "Lake + Glacier".
+        if (state.chapters.has(c.number)) state.chapters.delete(c.number);
+        else state.chapters.add(c.number);
         update();
       });
       chipsEl.appendChild(b);
