@@ -19,11 +19,16 @@
    * canton fills tinted in their chapter color at low opacity so
    * the region glows over the dark backdrop. */
   body {
+    /* Top-left ambient glow picks up the active chapter's accent color
+     * (e.g. rgb(175,165,122) for Central). Falls back to a soft white
+     * tint when no chapter is isolated. JS sets --active-chapter on
+     * the body via paintGeoStyle() on every legend click. */
     background:
-      radial-gradient(900px 600px at 18% 12%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+      radial-gradient(900px 600px at 18% 12%, rgba(var(--active-chapter, 255, 255, 255), 0.18) 0%, transparent 60%),
       radial-gradient(700px 500px at 88% 92%, rgba(255, 255, 255, 0.03) 0%, transparent 60%),
       linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
     background-attachment: fixed;
+    transition: background 280ms ease;
   }
   .map-shell { height: calc(100dvh - var(--topbar-h)); position: relative; isolation: isolate; }
   /* 1px dot-noise overlay (3px spacing), same as .feature-photo.is-map.
@@ -269,6 +274,17 @@
     tap: false,           // skip Leaflet's tap-delay on touch devices
   }).setView([46.82, 8.22], 8);
 
+  // social.js injects the left rail AFTER page parse, which shifts the
+  // body's padding-left and shrinks .map-shell width. Without this,
+  // Leaflet keeps its initial canvas size and Switzerland renders into
+  // only the original viewport-width slice (visible bug: tiny silhouette
+  // in the top-left, vast empty dark area to the right). A ResizeObserver
+  // calls invalidateSize() whenever the container changes.
+  const shellEl = document.querySelector('.map-shell');
+  if (shellEl && window.ResizeObserver) {
+    new ResizeObserver(() => map.invalidateSize()).observe(shellEl);
+  }
+
   // Sourced through HB.spots. Sidecar-seeded synchronously so the initial
   // forEach has data even before Convex's WebSocket connects. The first
   // Convex push then triggers a one-shot rebuild so the new spots (and
@@ -299,17 +315,54 @@
   const REGION_COLOR_BY_CH = {};
   LEGEND.forEach(c => { REGION_COLOR_BY_CH[c.number] = c.color; });
 
+  // Active chapter set (referenced by styleCanton below). Starts with
+  // every chapter on; legend clicks isolate to a single chapter and
+  // unisolate via the click handler further down.
+  const allChapters = new Set(LEGEND.map(c => c.number));
+  let activeChapters = new Set(allChapters);
+
+  // Switzerland silhouette: cantons paint white by default (chapter-cover
+  // recipe — light country shape on a dark backdrop). When the user
+  // isolates a single chapter from the legend, that chapter's cantons
+  // repaint in their chapter color so the active region glows; all
+  // other cantons stay white. Styled via geoLayer.setStyle() in
+  // paintGeoStyle() below — called on every chapter-state change.
+  let geoLayer = null;
+  function styleCanton(feature) {
+    const ch = CANTON_CHAPTER[feature.properties.name];
+    const isSolo = activeChapters && activeChapters.size === 1;
+    const isActive = isSolo && ch && activeChapters.has(ch);
+    if (isActive) {
+      const rgb = REGION_COLOR_BY_CH[ch];
+      return {
+        color: '#ffffff', weight: 1.2,
+        fillColor: 'rgb(' + rgb + ')',
+        fillOpacity: 0.75, lineJoin: 'round',
+      };
+    }
+    return {
+      color: '#ffffff', weight: 1.2,
+      fillColor: '#f5f5f5',
+      fillOpacity: 0.92, lineJoin: 'round',
+    };
+  }
+  function paintGeoStyle() {
+    if (geoLayer) geoLayer.setStyle(styleCanton);
+    // Push the active chapter color into a CSS variable so the body's
+    // ambient glow picks it up. Default is white-tint when no chapter
+    // is isolated (the all-chapters overview).
+    const isSolo = activeChapters && activeChapters.size === 1;
+    if (isSolo) {
+      const ch = [...activeChapters][0];
+      const rgb = REGION_COLOR_BY_CH[ch] || '255, 255, 255';
+      document.body.style.setProperty('--active-chapter', rgb);
+    } else {
+      document.body.style.removeProperty('--active-chapter');
+    }
+  }
   if (GEOJSON && GEOJSON.features && GEOJSON.features.length) {
-    L.geoJSON(GEOJSON, {
-      style: function (feature) {
-        const ch = CANTON_CHAPTER[feature.properties.name];
-        const rgb = ch ? REGION_COLOR_BY_CH[ch] : '224,224,228';
-        return {
-          color: '#ffffff', weight: 1.2,
-          fillColor: 'rgb(' + rgb + ')',
-          fillOpacity: 0.55, lineJoin: 'round',
-        };
-      },
+    geoLayer = L.geoJSON(GEOJSON, {
+      style: styleCanton,
       interactive: false,
     }).addTo(map);
   }
@@ -480,9 +533,10 @@
       if (!on && map.hasLayer(grp)) map.removeLayer(grp);
       el.classList.toggle('is-off', !on);
     });
+    // Repaint the canton fills + ambient backdrop glow whenever the
+    // active-chapter set changes.
+    paintGeoStyle();
   }
-  const allChapters = new Set(LEGEND.map(c => c.number));
-  let activeChapters = new Set(allChapters);  // start with all on
 
   LEGEND.forEach(c => {
     const item = document.createElement('button');
