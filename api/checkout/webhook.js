@@ -529,6 +529,7 @@ async function handleSessionCompleted({ stripe, event }) {
       metadata_t: cohortToken,
       metadata_s: subscriberId,
       instagram_handle: buyerIg || "",
+      referral_slug: refSlug || "",
       provider: "stripe",
       session_id: full.id,
       email_sent: emailOk ? "1" : "0",
