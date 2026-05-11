@@ -137,20 +137,15 @@
   }
   refreshCuratedPools();
 
-  // === Featured hero (rotates through curated pool) ===
-  // The Introduction card is always first so a fresh visitor's eye lands on
-  // "read this before the rest of the guide". After it cycles past, we
-  // alternate between the famous and hidden-gems pools.
-  const introCard = {
-    title: 'Introduction',
-    kicker: 'Before you go',
-    image: 'front_matter/page_05.jpg',
-    href: 'intro/index.html',
-    chapter_id: 'intro',
-    isIntro: true,
-  };
-  let featurePool = [introCard, ...famous, ...gems];
-  let featureIdx = 0;  // start with Introduction every visit
+  // === Featured hero (rotates through the seven regional chapters) ===
+  // Used to cycle through Introduction + curated famous + hidden gems;
+  // now scoped to chapters only so the home page reads as a high-level
+  // index of the guide rather than a teaser for individual spots.
+  // CHAPTERS_META is declared further down (used by buildUpNext too);
+  // we hoist a reference via a getter so order-of-declaration doesn't
+  // matter for IIFE-scoped consts.
+  let featurePool = [];  // populated below once CHAPTERS_META is in scope
+  let featureIdx = 0;
 
   const featureTitle = document.getElementById('featureTitle');
   const featureDeck  = document.getElementById('featureDeck');
@@ -165,54 +160,37 @@
   // decoded yet.
   let featureSwapping = false;
   let lastFeatureKey = null;  // dedupe re-paints when nothing visible changed
-  function paintFeature(spot, idx) {
-    if (!spot) return;
-    // The feature pool is rebuilt on every Convex spots:list update. With
-    // the introCard pinned at index 0, the post-Convex re-paint would call
-    // paintFeature(introCard, 0) again — which triggers the crossfade and
-    // looks like a "reload" even though the content is identical. Bail
-    // early when nothing the user can see changed (same spot, same idx,
-    // same image source). Note: lastFeatureKey is paired with idx so the
-    // 9-second auto-advance timer still works.
-    const key = `${spot.isIntro ? 'intro' : (window.HB.spotKey(spot) || spot.title)}|${idx}|${spot.image || spot.imagePhotoId || ''}`;
+  function paintFeature(ch, idx) {
+    if (!ch) return;
+    // Skip re-paint when nothing the user can see changed (same chapter
+    // and same idx). Keeps the 9-second cycle steady without retriggering
+    // the crossfade on incidental subscription ticks.
+    const key = `${ch.id}|${idx}|${ch.cover || ''}`;
     if (lastFeatureKey === key) return;
     lastFeatureKey = key;
 
-    featureTitle.textContent = spot.title;
+    featureTitle.textContent = ch.name;
+    featureDeck.textContent  = ch.description || '';
+    featureCta.href = ch.id + '/';
+    featureCta.querySelector('span:last-child').textContent = 'Open chapter';
     const featureKicker = document.getElementById('featureKicker');
-    const kickerLabel = featureKicker?.querySelector('[data-kicker-label]');
-    if (spot.isIntro) {
-      featureDeck.textContent = 'Cover, camping rules, top picks · the front matter of the guide.';
-      featureCta.href = 'intro/index.html';
-      featureCta.querySelector('span:last-child').textContent = 'Read the intro';
-      if (kickerLabel) kickerLabel.textContent = 'Read this first';
-      featureKicker?.classList.add('is-pinned');
-    } else {
-      const kicker = window.HB.singularKicker(spot.kicker || '');
-      const region = REGION_NAME[spot.chapter] || spot.chapter_id;
-      featureDeck.textContent = kicker ? `${kicker} · ${region}` : region;
-      featureCta.href = window.HB.spotDetailHref(spot, '');
-      featureCta.querySelector('span:last-child').textContent = 'Open spot';
-      if (kickerLabel) kickerLabel.textContent = 'Featured';
-      featureKicker?.classList.remove('is-pinned');
-    }
+    const kickerLabel   = featureKicker?.querySelector('[data-kicker-label]');
+    if (kickerLabel) kickerLabel.textContent = 'Chapter';
+    featureKicker?.classList.remove('is-pinned');
+
     featureDots.innerHTML = featurePool.map((_, i) =>
       `<span class="${i === idx ? 'is-on' : ''}"></span>`
     ).join('');
-    featureCard.dataset.spotKey = spot.isIntro ? '' : (window.HB.spotKey(spot) || '');
+    featureCard.dataset.spotKey = '';   // not a spot — no Convex spot key
 
-    // Hero uses the full-resolution source (1800w) so it stays sharp on
-    // desktop fullscreen where the photo column reaches ~1100px CSS / 2200px
-    // device pixels. The row cards and up-next thumbs stay on the 1000w
-    // mid-tier since they're rendered much smaller.
-    const heroAttrs = window.HB.photoAttrs({
-      photoId: spot.imagePhotoId, image: spot.image,
-      width: 2800, prefix: '', sizes: '100vw',
-    });
+    // Chapter cover photos live at /full/img/m/<file>.jpg. They're
+    // pre-baked at 1600w, plenty for the hero photo column.
+    const src = 'img/m/' + ch.cover;
     if (!featureImg.src) {
-      featureImg.src = heroAttrs.src;
-      if (heroAttrs.srcset) { featureImg.srcset = heroAttrs.srcset; featureImg.sizes = heroAttrs.sizes; }
-      featureImg.alt = spot.title;
+      featureImg.src = src;
+      featureImg.removeAttribute('srcset');
+      featureImg.removeAttribute('sizes');
+      featureImg.alt = ch.name;
       return;
     }
     if (featureSwapping) return;
@@ -221,21 +199,19 @@
     setTimeout(() => {
       const next = new Image();
       next.onload = () => {
-        featureImg.src = heroAttrs.src;
-        if (heroAttrs.srcset) { featureImg.srcset = heroAttrs.srcset; featureImg.sizes = heroAttrs.sizes; }
-        else { featureImg.removeAttribute('srcset'); featureImg.removeAttribute('sizes'); }
-        featureImg.alt = spot.title;
-        // Tiny delay so the new src has a paint frame before we fade in.
+        featureImg.src = src;
+        featureImg.removeAttribute('srcset');
+        featureImg.removeAttribute('sizes');
+        featureImg.alt = ch.name;
         requestAnimationFrame(() => {
           featureImg.classList.remove('is-fading');
           featureSwapping = false;
         });
       };
       next.onerror = () => { featureImg.classList.remove('is-fading'); featureSwapping = false; };
-      next.src = heroAttrs.src;
+      next.src = src;
     }, 220);
   }
-  if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
 
   // Slower cadence than YouTube's typical 5s -- 9s gives readers time to
   // actually parse the title before the next photo lands. Paused on
@@ -326,21 +302,26 @@
     return [...kept, ...fill];
   }
 
-  // === "Up next" stack to the right of the hero — one card per chapter ===
-  // Replaces the old curated-spot list. Each card uses the same dark
-  // gradient + region SVG silhouette as the chapter cover (.cv-map),
-  // so the home page reads as a doorway into the chapter pages.
-  // Beyond has no SVG silhouette (it's outside Switzerland); we fall
-  // back to its cover photo.
+  // === Chapter metadata · drives both the hero rotation and the up-next list. ===
+  // Beyond has no SVG silhouette (it's outside Switzerland); the up-next
+  // card falls back to its cover photo. `cover` is the file in img/m/
+  // and img/thumbs/ — note the chapter id and cover slug don't always
+  // match (western → leman_cover, eastern → east_cover) because the
+  // photos were named after the geographic feature rather than the
+  // chapter slug.
   const CHAPTERS_META = [
-    { id: 'central',  name: 'Central Switzerland', color: '175,165,122', mapSvg: 'img/region-central.svg'  },
-    { id: 'valais',   name: 'Valais',              color: '234,183,191', mapSvg: 'img/region-valais.svg'   },
-    { id: 'fribourg', name: 'Fribourg',            color: '216,216,209', mapSvg: 'img/region-fribourg.svg' },
-    { id: 'western',  name: 'Western Switzerland', color: '204,224,158', mapSvg: 'img/region-western.svg'  },
-    { id: 'eastern',  name: 'Eastern Switzerland', color: '124,181,168', mapSvg: 'img/region-eastern.svg'  },
-    { id: 'ticino',   name: 'Ticino',              color: '147,132,186', mapSvg: 'img/region-ticino.svg'   },
-    { id: 'beyond',   name: 'Beyond the Border',   color: '89,89,89',    mapSvg: null /* uses cover photo */ },
+    { id: 'central',  name: 'Central Switzerland', color: '175,165,122', cover: 'central_cover.jpg',  mapSvg: 'img/region-central.svg',  description: 'Waterfalls, ridges, glacier lakes.' },
+    { id: 'valais',   name: 'Valais',              color: '234,183,191', cover: 'valais_cover.jpg',   mapSvg: 'img/region-valais.svg',   description: 'Matterhorn country. Glaciers, ice caves, high passes.' },
+    { id: 'fribourg', name: 'Fribourg',            color: '216,216,209', cover: 'fribourg_cover.jpg', mapSvg: 'img/region-fribourg.svg', description: 'Pre-alpine lakes and the Gastlosen wall.' },
+    { id: 'western',  name: 'Western Switzerland', color: '204,224,158', cover: 'leman_cover.jpg',    mapSvg: 'img/region-western.svg',  description: 'Lake Léman, the Lavaux, smaller crowds.' },
+    { id: 'eastern',  name: 'Eastern Switzerland', color: '124,181,168', cover: 'east_cover.jpg',     mapSvg: 'img/region-eastern.svg',  description: 'Appenzell, Säntis, lesser-known summits.' },
+    { id: 'ticino',   name: 'Ticino',              color: '147,132,186', cover: 'ticino_cover.jpg',   mapSvg: 'img/region-ticino.svg',   description: 'Italian-Swiss country. Lakes, rivers, granite valleys.' },
+    { id: 'beyond',   name: 'Beyond the Border',   color: '89,89,89',    cover: 'beyond_cover.jpg',   mapSvg: null /* no SVG, uses photo */, description: 'Chamonix, Mont Blanc, one French slice of Léman.' },
   ];
+
+  // Hand the hero its rotation pool now that CHAPTERS_META is in scope.
+  featurePool = CHAPTERS_META;
+  if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
   const upNextEl = document.getElementById('upNext');
   function buildUpNext() {
     // Count spots per chapter so each card can show "N spots". Source of
@@ -443,13 +424,12 @@
 
   // When Convex pushes an update (admin edits a spot, photo published,
   // etc.), refresh every surface so the page reflects new data without
-  // a reload. Featured rotation index is preserved.
+  // a reload. Hero pool is CHAPTERS_META (static), so no re-poolinjg —
+  // we just refresh the spot-derived sections (For you / Famous / Gems)
+  // and the up-next spot counts.
   window.HB.spots.subscribe(() => {
     refreshSpots();
     refreshCuratedPools();
-    featurePool = [introCard, ...famous, ...gems];
-    if (featureIdx >= featurePool.length) featureIdx = 0;
-    if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
     buildUpNext();
     buildForYou();
     buildCurated('rowFamous', famous);
