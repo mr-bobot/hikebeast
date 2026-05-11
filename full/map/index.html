@@ -169,6 +169,14 @@
     .fav-toggle svg { width: 12px; height: 12px; }
     .spot-marker .thumb { width: 32px; height: 40px; border-width: 1.5px; }
 
+    /* Mobile: drop the visible-spots counter, the legend / filter, and
+     * Leaflet's +/- zoom controls. Pinch-zoom is the natural gesture on
+     * a phone, and the chapter filter belongs in the Menu sheet rather
+     * than overlaying the map. Keeps the Saved toggle reachable. */
+    .counter { display: none; }
+    .legend { display: none; }
+    .leaflet-control-zoom { display: none; }
+
     /* Shrink map shell on mobile so the bottom tab bar (56px + safe
      * area) doesn't overlap the legend / Leaflet attribution. */
     .map-shell {

@@ -28,7 +28,7 @@
 
   <header class="hb-hero">
     <p class="kicker">Browse</p>
-    <h1>All <span id="totalSpots">…</span> spots, one wall.</h1>
+    <h1>All spots, one wall.</h1>
     <p>Search, filter by region, save what you like.</p>
   </header>
 
@@ -393,7 +393,6 @@
     });
   });
 
-  document.getElementById('totalSpots').textContent = SPOTS.length;
   renderChips();
   renderPropChips();
 
@@ -402,7 +401,6 @@
   // rebuild too in case new categories appeared.
   window.HB.spots.subscribe(() => {
     refreshSpots();
-    document.getElementById('totalSpots').textContent = SPOTS.length;
     propChipsEl.innerHTML = '';
     renderPropChips();
     update();

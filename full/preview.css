@@ -278,6 +278,9 @@ button { font-family: inherit; }
   margin: 0;
 }
 @media (min-width: 700px) { .home-v2 > h1.page-title { font-size: 26px; } }
+/* Mobile: the bottom tab bar's Home icon already labels the page; the
+ * inline H1 above the hero is redundant and steals vertical space. */
+@media (max-width: 700px) { .home-v2 > h1.page-title { display: none; } }
 
 /* Featured hero · split text (left) + photo (right) + up-next column.
  * The chapters column on the right only kicks in once there's
@@ -3428,6 +3431,12 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
   display: flex;
   align-items: flex-end;
 }
+
+/* The rail-scroll is a flex column; without this, fixed-height children
+ * (rail-item h=42, rail-chapter h=44, rail-section-head h=32) shrink to
+ * fit the viewport instead of letting the container scroll. Pin them so
+ * the rail keeps its declared spacing and overflow:auto does its job. */
+.app-rail .rail-scroll > * { flex-shrink: 0; }
 .rail-section-head .label {
   opacity: 0;
   transition: opacity 120ms ease 30ms;
@@ -3808,11 +3817,17 @@ body.has-rail .topbar .hb-nav { display: none; }
     position: absolute;
     inset: 0;
     background: rgba(8, 10, 14, 0.42);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
     opacity: 0;
     transition: opacity 220ms ease;
     pointer-events: none;
+  }
+  /* backdrop-filter is only applied while the sheet is open. iOS Safari
+   * still composites backdrop-filter at opacity:0, blurring the entire
+   * viewport (incl. the bottom tab bar) — visible as a translucent
+   * gradient over the tabbar on Safari but not Chrome. */
+  .app-menu-sheet.is-open .menu-sheet-backdrop {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
   }
   .app-menu-sheet .menu-sheet-card {
     position: absolute;

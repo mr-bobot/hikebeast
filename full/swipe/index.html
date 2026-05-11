@@ -309,6 +309,11 @@
     .deck {
       max-height: calc(100dvh - var(--topbar-h) - 64px - env(safe-area-inset-bottom) - 130px);
     }
+    /* "X of Y · X saved" header chip — give the deck more room on
+     * phones; the action buttons (heart / skip / open) already convey
+     * progress through their use, and the bottom tab bar shows where
+     * the user is in the app. */
+    .swipe-progress { display: none; }
   }
 </style>
 </head>
