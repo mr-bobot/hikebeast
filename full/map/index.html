@@ -29,7 +29,7 @@
     background-color: #888;
     border: 2px solid #fff;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.10), 0 3px 8px rgba(0,0,0,0.20);
-    transition: transform 200ms ease, box-shadow 200ms ease;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
     cursor: pointer;
     /* --marker-scale grows as the user zooms in so spot photos read at higher
        zooms without overcrowding the country view at low zoom. Set on
@@ -46,6 +46,13 @@
   @media (hover: none) {
     .spot-marker .thumb { transition: none; }
     .spot-marker:hover .thumb { transform: scale(var(--marker-scale, 1)) translateZ(0); }
+  }
+  /* Favorited spots: red border (matches the heart/like color used in
+   * the rail badge + fav-toggle). Lets the user spot their saves at a
+   * glance without flipping the "Saved only" filter. */
+  .spot-marker.is-fav .thumb {
+    border-color: #ff375f;
+    box-shadow: 0 0 0 1px rgba(255, 55, 95, 0.45), 0 3px 10px rgba(255, 55, 95, 0.35);
   }
 
   .leaflet-popup-content-wrapper {
@@ -399,6 +406,10 @@
       });
     });
     updateCount();
+    // Re-adding a marker to its group rebuilds its DOM element, so
+    // the .is-fav class painted earlier needs to come back. Repaint
+    // after Leaflet renders the layer changes.
+    requestAnimationFrame(paintFavMarkers);
   }
 
   function refreshFavBadge() {
@@ -424,14 +435,32 @@
     refreshFavBadge();
   });
 
+  // Mark every favorited marker with .is-fav so the .thumb gets the
+  // red border. Re-runs on favorites change AND on every chapter
+  // toggle, because applyState removes/re-adds layer groups, which
+  // drops + recreates marker DOM elements and resets their classes.
+  function paintFavMarkers() {
+    const favs = (window.HB && window.HB.favorites) ? window.HB.favorites : null;
+    markersByChapter.forEach((list) => {
+      list.forEach(m => {
+        const el = m.getElement && m.getElement();
+        if (!el) return;
+        const isFav = !!(favs && m._spotKey && favs.has(m._spotKey));
+        el.classList.toggle('is-fav', isFav);
+      });
+    });
+  }
+
   // Repaint when favorites change in another tab or via the social.js heart.
   if (window.HB && window.HB.favorites) {
     window.HB.favorites.subscribe(() => {
       refreshFavBadge();
       if (favOnly) applyFavFilter();
+      paintFavMarkers();
     });
   }
   refreshFavBadge();
+  paintFavMarkers();
 
   // Legend behavior: clicking a chapter isolates it (deselects all others).
   // Clicking the same chapter again -- when it is the only one active --
@@ -454,6 +483,10 @@
       el.classList.toggle('is-off', !on);
     });
     updateCount();
+    // Re-adding a chapter group rebuilds its markers' DOM elements,
+    // wiping the .is-fav class painted earlier. Repaint after the
+    // group has rendered (next frame).
+    requestAnimationFrame(paintFavMarkers);
   }
   const allChapters = new Set(LEGEND.map(c => c.number));
   let activeChapters = new Set(allChapters);  // start with all on

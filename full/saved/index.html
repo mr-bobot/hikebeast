@@ -29,7 +29,7 @@
   <header class="hb-hero">
     <p class="kicker">Your favorites</p>
     <h1 id="title">Nothing saved yet.</h1>
-    <p id="subtitle">Tap the heart on any spot to bookmark it. Saved on this device.</p>
+    <p id="subtitle">Tap the heart on any spot to bookmark it.</p>
   </header>
 
   <div id="content"></div>
@@ -139,14 +139,14 @@
       content.hidden = true;
       empty.hidden = false;
       title.textContent = 'Nothing saved yet.';
-      subtitle.textContent = 'Tap the heart on any spot to bookmark it. Saved on this device.';
+      subtitle.textContent = 'Tap the heart on any spot to bookmark it.';
       return;
     }
 
     empty.hidden = true;
     content.hidden = false;
     title.textContent = saved.length === 1 ? '1 spot saved.' : `${saved.length} spots saved.`;
-    subtitle.textContent = 'Grouped by region. Tap a card to open the full entry. Saved on this device.';
+    subtitle.textContent = 'Grouped by region. Tap a card to open the full entry.';
 
     // Group by chapter, in LEGEND order.
     const byChapter = new Map();
