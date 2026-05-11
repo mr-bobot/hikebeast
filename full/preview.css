@@ -371,19 +371,22 @@ button { font-family: inherit; }
 .feature-card .feature-kicker.is-pinned svg { color: #fff; }
 .feature-card .feature-title {
   font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-  /* Fluid sizing so single-word titles ("Introduction") never overflow
-   * the text column into the photo. The text column is roughly half the
-   * card width on tablet+, so we clamp against 4vw. */
-  font-size: clamp(28px, 4vw, 44px);
-  line-height: 1.0;
-  letter-spacing: -0.035em;
+  /* Fluid sizing tuned so the longest single-word titles ("Introduction",
+   * "Central Switzerland") fit on one line at common desktop widths
+   * (1100-1600px) without splitting mid-word. The max used to be 44px,
+   * which was big enough that single words wrapped on smaller text
+   * columns. 34px keeps the title impactful but always fits. */
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   font-weight: 600;
   margin: 4px 0 0;
   color: var(--fg);
-  /* Long single words (e.g. "Introduction") wrap rather than getting
-   * clipped by the card's overflow:hidden. */
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  /* `break-word` only splits a word when it would actually overflow
+   * (e.g. extremely narrow viewport), not preemptively. `anywhere`
+   * was too eager and split "Introduction" into "Introducti / on"
+   * at sizes where it would otherwise have fit. */
+  overflow-wrap: break-word;
 }
 .feature-card .feature-deck {
   margin: 0;
