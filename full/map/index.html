@@ -29,7 +29,7 @@
     background-color: #888;
     border: 2px solid #fff;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.10), 0 3px 8px rgba(0,0,0,0.20);
-    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    transition: transform 200ms ease, box-shadow 200ms ease;
     cursor: pointer;
     /* --marker-scale grows as the user zooms in so spot photos read at higher
        zooms without overcrowding the country view at low zoom. Set on
@@ -47,14 +47,6 @@
     .spot-marker .thumb { transition: none; }
     .spot-marker:hover .thumb { transform: scale(var(--marker-scale, 1)) translateZ(0); }
   }
-  /* Favorited spots: red border (matches the heart/like color used in
-   * the rail badge + fav-toggle). Lets the user spot their saves at a
-   * glance without flipping the "Saved only" filter. */
-  .spot-marker.is-fav .thumb {
-    border-color: #ff375f;
-    box-shadow: 0 0 0 1px rgba(255, 55, 95, 0.45), 0 3px 10px rgba(255, 55, 95, 0.35);
-  }
-
   .leaflet-popup-content-wrapper {
     border-radius: 18px;
     padding: 0;
@@ -105,15 +97,6 @@
     position: absolute; top: 18px; right: 18px; z-index: 500;
     display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
   }
-  .counter {
-    background: rgba(255,255,255,0.94);
-    -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid var(--hairline); border-radius: 999px;
-    padding: 8px 14px; font-size: 12px; font-weight: 600; letter-spacing: -0.005em; color: var(--fg);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-  }
-  .counter b { color: var(--accent); font-weight: 700; }
-
   .fav-toggle {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 8px 12px; height: 32px;
@@ -146,7 +129,7 @@
   /* Toggle button -- only shown on mobile */
   .legend-toggle { display: none; }
 
-  /* Mobile: collapse legend behind a toggle, shrink counter */
+  /* Mobile: collapse legend behind a toggle */
   @media (max-width: 700px) {
     .legend { padding: 4px 6px; gap: 0; max-width: none; }
     .legend > h4 { display: none; }
@@ -170,17 +153,15 @@
     .legend.is-open > h4 { display: block; padding-top: 4px; font-size: 9px; }
     .legend.is-open > .legend-item { display: flex; font-size: 12px; padding: 3px 0; gap: 8px; }
     .legend.is-open > .legend-item .swatch { width: 12px; height: 12px; }
-    .counter { padding: 6px 10px; font-size: 11px; }
     .map-controls { top: 12px; right: 12px; gap: 6px; }
     .fav-toggle { height: 28px; padding: 6px 10px; font-size: 11px; }
     .fav-toggle svg { width: 12px; height: 12px; }
     .spot-marker .thumb { width: 32px; height: 40px; border-width: 1.5px; }
 
-    /* Mobile: drop the visible-spots counter, the legend / filter, and
-     * Leaflet's +/- zoom controls. Pinch-zoom is the natural gesture on
-     * a phone, and the chapter filter belongs in the Menu sheet rather
-     * than overlaying the map. Keeps the Saved toggle reachable. */
-    .counter { display: none; }
+    /* Mobile: drop the legend / filter and Leaflet's +/- zoom controls.
+     * Pinch-zoom is the natural gesture on a phone; the chapter filter
+     * belongs in the Menu sheet rather than overlaying the map. Saved
+     * toggle stays reachable. */
     .legend { display: none; }
     .leaflet-control-zoom { display: none; }
 
@@ -212,7 +193,6 @@
       <span>Saved</span>
       <span class="fav-count" id="favToggleCount" hidden>0</span>
     </button>
-    <div class="counter"><b id="visible">0</b>&nbsp;visible spots</div>
   </div>
   <aside class="legend" id="legend">
     <button class="legend-toggle" id="legendToggle" aria-expanded="false" aria-label="Show chapter filter">
@@ -362,16 +342,7 @@
     SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
     buildMarkers();
     if (typeof applyFavFilter === 'function') applyFavFilter();
-    if (typeof updateCount === 'function') updateCount();
   });
-
-  const visEl = document.getElementById('visible');
-  function updateCount() {
-    let n = 0;
-    layers.forEach(g => { if (map.hasLayer(g)) n += g.getLayers().length; });
-    visEl.textContent = n;
-  }
-  updateCount();
 
   // === Marker scale grows with zoom so spot thumbnails are legible up close
   // without crowding the low-zoom country view. Computed once per zoom and
@@ -405,11 +376,6 @@
         if (!shouldShow && isInGroup) grp.removeLayer(m);
       });
     });
-    updateCount();
-    // Re-adding a marker to its group rebuilds its DOM element, so
-    // the .is-fav class painted earlier needs to come back. Repaint
-    // after Leaflet renders the layer changes.
-    requestAnimationFrame(paintFavMarkers);
   }
 
   function refreshFavBadge() {
@@ -435,32 +401,14 @@
     refreshFavBadge();
   });
 
-  // Mark every favorited marker with .is-fav so the .thumb gets the
-  // red border. Re-runs on favorites change AND on every chapter
-  // toggle, because applyState removes/re-adds layer groups, which
-  // drops + recreates marker DOM elements and resets their classes.
-  function paintFavMarkers() {
-    const favs = (window.HB && window.HB.favorites) ? window.HB.favorites : null;
-    markersByChapter.forEach((list) => {
-      list.forEach(m => {
-        const el = m.getElement && m.getElement();
-        if (!el) return;
-        const isFav = !!(favs && m._spotKey && favs.has(m._spotKey));
-        el.classList.toggle('is-fav', isFav);
-      });
-    });
-  }
-
   // Repaint when favorites change in another tab or via the social.js heart.
   if (window.HB && window.HB.favorites) {
     window.HB.favorites.subscribe(() => {
       refreshFavBadge();
       if (favOnly) applyFavFilter();
-      paintFavMarkers();
     });
   }
   refreshFavBadge();
-  paintFavMarkers();
 
   // Legend behavior: clicking a chapter isolates it (deselects all others).
   // Clicking the same chapter again -- when it is the only one active --
@@ -482,11 +430,6 @@
       if (!on && map.hasLayer(grp)) map.removeLayer(grp);
       el.classList.toggle('is-off', !on);
     });
-    updateCount();
-    // Re-adding a chapter group rebuilds its markers' DOM elements,
-    // wiping the .is-fav class painted earlier. Repaint after the
-    // group has rendered (next frame).
-    requestAnimationFrame(paintFavMarkers);
   }
   const allChapters = new Set(LEGEND.map(c => c.number));
   let activeChapters = new Set(allChapters);  // start with all on
