@@ -3708,26 +3708,7 @@ body.has-rail .topbar .hb-nav { display: none; }
    * map shell, scroll-margin) collapses cleanly. The home page topbar
    * is `.home-topbar` (different element) and stays visible. */
   :root { --topbar-h: 0px; }
-  .home-topbar {
-    height: 52px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    background: #ffffff;
-  }
-  /* Nuke every backdrop-filter at <=700px. iOS Safari's unified
-   * compositor was leaking the blur from somewhere onto the bottom
-   * tab bar as a phantom gradient. Trying to narrow it down with
-   * surgical disables on .home-topbar and .cc badges didn't help.
-   * Killing the effect site-wide on mobile is the safest revert;
-   * the desktop look is unchanged. Visual cost on mobile: modal
-   * backdrops (menu sheet, filter sheet, modals) lose their frosted
-   * blur and just dim the page. Acceptable trade for opaque tabs. */
-  *,
-  *::before,
-  *::after {
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
-  }
+  .home-topbar { height: 52px; padding-top: 8px; padding-bottom: 8px; }
 
   body.has-rail { padding-left: 0; }
   body.has-rail.rail-expanded { padding-left: 0; }
@@ -3781,17 +3762,7 @@ body.has-rail .topbar .hb-nav { display: none; }
     left: 0;
     right: 0;
     z-index: 70;
-    background-color: #fff;
-    background-image: none;
-    /* Force own compositor layer + stacking context. iOS Safari was
-     * blending the home-topbar's backdrop-filter blur into this bar
-     * via the unified compositor, which read as a "weird gradient"
-     * across the top of the tabbar (page content showing through).
-     * translateZ + isolation pins it to its own layer so the blur
-     * stays where it's drawn. */
-    transform: translateZ(0);
-    isolation: isolate;
-    will-change: transform;
+    background: #fff;
     border-top: 1px solid var(--hairline);
     padding-top: 6px;
     padding-bottom: env(safe-area-inset-bottom);
