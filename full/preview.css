@@ -279,20 +279,25 @@ button { font-family: inherit; }
 }
 @media (min-width: 700px) { .home-v2 > h1.page-title { font-size: 26px; } }
 
-/* Featured hero · split text (left) + photo (right) + up-next column */
+/* Featured hero · split text (left) + photo (right) + up-next column.
+ * The chapters column on the right only kicks in once there's
+ * comfortable room for the rail (240px), the hero, AND the column —
+ * at narrower viewports the chapters stack below the hero so the
+ * rail never has to collapse to make space. Threshold tuned so a
+ * 1024px laptop with the rail expanded gets a full-width hero. */
 .home-feature {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
   align-items: stretch;
 }
-@media (min-width: 900px) {
+@media (min-width: 1200px) {
   .home-feature {
     grid-template-columns: minmax(0, 1fr) 320px;
     gap: 22px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .home-feature {
     grid-template-columns: minmax(0, 1fr) 360px;
   }
