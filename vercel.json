@@ -1,5 +1,10 @@
 {
   "outputDirectory": ".",
+  "git": {
+    "deploymentEnabled": {
+      "main": false
+    }
+  },
   "headers": [
     {
       "source": "/sample.pdf",
@@ -130,6 +135,11 @@
     {
       "source": "/map",
       "destination": "/map/",
+      "permanent": true
+    },
+    {
+      "source": "/themap",
+      "destination": "/themap/",
       "permanent": true
     },
     {

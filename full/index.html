@@ -316,13 +316,20 @@
     { id: 'western',  name: 'Western Switzerland', color: '204,224,158', cover: 'leman_cover.jpg',    mapSvg: 'img/region-western.svg',  description: 'Lake Léman, the Lavaux, smaller crowds.' },
     { id: 'eastern',  name: 'Eastern Switzerland', color: '124,181,168', cover: 'east_cover.jpg',     mapSvg: 'img/region-eastern.svg',  description: 'Appenzell, Säntis, lesser-known summits.' },
     { id: 'ticino',   name: 'Ticino',              color: '147,132,186', cover: 'ticino_cover.jpg',   mapSvg: 'img/region-ticino.svg',   description: 'Italian-Swiss country. Lakes, rivers, granite valleys.' },
-    { id: 'beyond',   name: 'Beyond the Border',   color: '89,89,89',    cover: 'beyond_cover.jpg',   mapSvg: null /* no SVG, uses photo */, description: 'Chamonix, Mont Blanc, one French slice of Léman.' },
+    { id: 'beyond',   name: 'Beyond the Border',   color: '89,89,89',    cover: 'beyond_cover.jpg',   mapSvg: 'img/region-beyond.svg',   description: 'Chamonix, Mont Blanc, one French slice of Léman.' },
   ];
 
   // Hand the hero its rotation pool now that CHAPTERS_META is in scope.
   featurePool = CHAPTERS_META;
   if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
   const upNextEl = document.getElementById('upNext');
+  // Cap the up-next column at 4 cards by default; the rest go behind a
+  // "Show all" button. Once the user clicks Show all, persist the
+  // expanded state so subsequent home-page loads skip the cap.
+  const HOME_UPNEXT_LIMIT = 4;
+  const HOME_UPNEXT_KEY = 'hb:home:upnext-expanded';
+  let homeUpNextExpanded = false;
+  try { if (localStorage.getItem(HOME_UPNEXT_KEY) === '1') homeUpNextExpanded = true; } catch {}
   function buildUpNext() {
     // Count spots per chapter so each card can show "N spots". Source of
     // truth is SPOTS, which is rebuilt from the unified store on every
@@ -332,7 +339,7 @@
       if (id) acc[id] = (acc[id] || 0) + 1;
       return acc;
     }, {});
-    upNextEl.innerHTML = CHAPTERS_META.map(ch => {
+    const renderCard = (ch) => {
       const count = counts[ch.id] || 0;
       const meta  = count + ' spot' + (count === 1 ? '' : 's');
       const photo = ch.mapSvg
@@ -347,7 +354,31 @@
           </span>
         </a>
       `;
-    }).join('');
+    };
+    const visible = CHAPTERS_META.slice(0, HOME_UPNEXT_LIMIT).map(renderCard).join('');
+    const extras = CHAPTERS_META.slice(HOME_UPNEXT_LIMIT);
+    const extrasMarkup = extras.length === 0 ? '' : `
+      <div class="up-next-extras"${homeUpNextExpanded ? '' : ' hidden'}>
+        ${extras.map(renderCard).join('')}
+      </div>
+      ${homeUpNextExpanded ? '' : `
+        <button type="button" class="up-next-more" data-hb-upnext-more>
+          Show all ${CHAPTERS_META.length}
+        </button>
+      `}
+    `;
+    upNextEl.innerHTML = visible + extrasMarkup;
+
+    const moreBtn = upNextEl.querySelector('[data-hb-upnext-more]');
+    if (moreBtn) {
+      moreBtn.addEventListener('click', () => {
+        const list = upNextEl.querySelector('.up-next-extras');
+        if (list) list.hidden = false;
+        moreBtn.remove();
+        homeUpNextExpanded = true;
+        try { localStorage.setItem(HOME_UPNEXT_KEY, '1'); } catch {}
+      });
+    }
   }
   buildUpNext();
 

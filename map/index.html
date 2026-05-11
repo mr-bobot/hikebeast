@@ -2,6 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
+<script>
+// Auto-redirect to German variant if the browser/device language is
+// German. Runs before any tracking script so Meta Pixel + Vercel
+// Analytics fire on the destination URL only, not both. Manual override
+// via localStorage 'hb_lang' set by the navbar EN/DE pill click below.
+(function () {
+  try {
+    if (localStorage.getItem('hb_lang') === 'en') return;
+    var lang = (navigator.language || '').toLowerCase();
+    if (!lang.startsWith('de')) return;
+    var target = location.pathname.replace(/^\/(themap|map)\b/, '/de/$1');
+    if (target === location.pathname) return;
+    location.replace(target + location.search + location.hash);
+  } catch (e) {}
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
 <title>Switzerland Map · 100+ Hidden Swiss Spots with GPS</title>
@@ -447,6 +463,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     padding: 4px 22px;
+    /* scroll-padding-inline-start so the first card snaps to align with
+       the padding edge (matches the heading's 22px), not to the
+       container's content edge (which made it look flush with viewport
+       left). */
+    scroll-padding-inline-start: 22px;
     scrollbar-width: none;
   }
   .inside::-webkit-scrollbar { display: none; }
@@ -1124,7 +1145,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <img src="../images/avatar.jpg" alt="" />
       Hikebeast
     </a>
-    <a class="navbar-lang" href="/de/map/" hreflang="de" aria-label="Deutsche Version">DE</a>
+    <a class="navbar-lang" href="/de/map/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">DE</a>
   </header>
 
   <main>
@@ -1268,9 +1289,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/jules.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="img/avatars/alexis-dansereau.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
-              <span class="review-name">Jules</span>
+              <span class="review-name">Alexis</span>
+              <a class="review-handle" href="https://www.instagram.com/alexis.dansereau/" target="_blank" rel="noopener">@alexis.dansereau</a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1280,15 +1302,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/martin.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="img/avatars/simon_ys32.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
-              <span class="review-name">Martin</span>
+              <span class="review-name">Simon</span>
+              <a class="review-handle" href="https://www.instagram.com/simon_ys32/" target="_blank" rel="noopener">@simon_ys32</a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
             </div>
           </div>
-          <p class="review-quote">"Had the best wildcamping trip ever to the first spot I tried!"</p>
+          <p class="review-quote">"hatte den besten wildcamping ausflug meines lebens!!"</p>
         </div>
         <div class="review-card">
           <div class="review-head">
@@ -1367,9 +1390,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <div class="buy-rating">
             <span class="stars" aria-hidden="true">★★★★★</span>
             <span class="buy-rating-num">5.0</span>
-            <span class="buy-rating-count">(6)</span>
+            <span class="buy-rating-count">(41)</span>
           </div>
-          <div class="buy-name">Swiss Gems of Switzerland 🇨🇭</div>
+          <div class="buy-name">Swiss Gems 🇨🇭</div>
           <div class="buy-price">CHF 27</div>
           <a href="#checkout" class="buy-cta">Get the map</a>
           <div class="buy-foot">
@@ -1707,6 +1730,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
+        browser_language: navigator.language || "",
       }),
       keepalive: true,
     }).catch(() => {});
