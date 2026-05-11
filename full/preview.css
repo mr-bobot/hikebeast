@@ -4489,6 +4489,13 @@ body.has-rail .topbar .hb-nav { display: none; }
   /* Touch: keep the name subtle but always present so users know what they're tapping */
   .hb-tile .hb-tile-name { opacity: 1; transform: translateY(0); padding: 36px 12px 10px; }
 }
+/* Phones: hide the name overlay entirely — the wall reads cleaner as
+ * just photos. Tapping still opens the spot. The TODO placeholder
+ * tile (.hb-tile-todo) keeps its name because there's no photo to
+ * identify it. */
+@media (max-width: 699px) {
+  .hb-tile:not(.hb-tile-todo) .hb-tile-name { display: none; }
+}
 
 /* TODO placeholder tile · spots without a photo yet (extras_entry rows or
    future spots whose source image is still missing). Distinct from real
