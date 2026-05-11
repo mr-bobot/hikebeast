@@ -373,12 +373,12 @@
   if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
   const upNextEl = document.getElementById('upNext');
   // Cap the up-next column at 4 cards by default; the rest go behind a
-  // "Show all" button. Once the user clicks Show all, persist the
-  // expanded state so subsequent home-page loads skip the cap.
+  // "Show all" button. The expansion is per-page-load only — coming
+  // back to home from another screen resets to collapsed, so the
+  // button is always available. (Used to persist via localStorage; now
+  // intentionally session-scoped.)
   const HOME_UPNEXT_LIMIT = 4;
-  const HOME_UPNEXT_KEY = 'hb:home:upnext-expanded';
   let homeUpNextExpanded = false;
-  try { if (localStorage.getItem(HOME_UPNEXT_KEY) === '1') homeUpNextExpanded = true; } catch {}
   function buildUpNext() {
     // Count spots per chapter so each card can show "N spots". Source of
     // truth is SPOTS, which is rebuilt from the unified store on every
@@ -425,7 +425,6 @@
         if (list) list.hidden = false;
         moreBtn.remove();
         homeUpNextExpanded = true;
-        try { localStorage.setItem(HOME_UPNEXT_KEY, '1'); } catch {}
       });
     }
   }
