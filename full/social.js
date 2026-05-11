@@ -1082,7 +1082,7 @@
           ${SVG_HEART_OUT}<span class="label">Liked</span>
           <span class="rail-badge" data-hb-fav-count></span>
         </a>
-        <a class="rail-item${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link hidden>
+        <a class="rail-item${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link>
           ${SVG_CHECK_CIRCLE}<span class="label">Been there</span>
           <span class="rail-badge" data-hb-visited-count></span>
         </a>
@@ -1171,7 +1171,7 @@
           <span class="menu-row-label">Liked</span>
           <span class="menu-row-badge" data-hb-fav-count></span>
         </a>
-        <a class="menu-row${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link data-close hidden>
+        <a class="menu-row${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link data-close>
           <span class="menu-row-icon">${SVG_CHECK_CIRCLE}</span>
           <span class="menu-row-label">Been there</span>
           <span class="menu-row-badge" data-hb-visited-count></span>
@@ -1348,19 +1348,6 @@
     }
     paintAccount();
     session.subscribe(paintAccount);
-
-    // Visited row visibility: hide when signed out (paid feature),
-    // show when signed in. Re-runs on sign-in/sign-out via the
-    // visited façade's subscribe (signedIn flips during _reattach).
-    function paintVisitedRow() {
-      document.querySelectorAll('[data-hb-visited-link]').forEach(el => {
-        if (visited.signedIn()) el.hidden = false;
-        else                    el.hidden = true;
-      });
-    }
-    paintVisitedRow();
-    visited.subscribe(paintVisitedRow);
-    session.subscribe(paintVisitedRow);
 
     refreshFavCount();
     refreshVisitedCount();
