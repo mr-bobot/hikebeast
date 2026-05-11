@@ -3708,7 +3708,27 @@ body.has-rail .topbar .hb-nav { display: none; }
    * map shell, scroll-margin) collapses cleanly. The home page topbar
    * is `.home-topbar` (different element) and stays visible. */
   :root { --topbar-h: 0px; }
-  .home-topbar { height: 52px; padding-top: 8px; padding-bottom: 8px; }
+  .home-topbar {
+    height: 52px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    /* Drop the desktop backdrop-blur on mobile. On iOS Safari it's
+     * the only blurred element on the page and the unified compositor
+     * was bleeding its blur into the bottom tab bar as a phantom
+     * gradient. Solid white is fine here — the search bar reads the
+     * same against either backdrop, and we still have the hairline
+     * border-bottom to separate sticky header from content. */
+    background: #ffffff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  /* Chapter-card badges also use backdrop-filter and sit in the
+   * scroll area. Same compositor-bleed risk. */
+  .cc .cc-photo .cc-num,
+  .cc .cc-photo .cc-tag {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 
   body.has-rail { padding-left: 0; }
   body.has-rail.rail-expanded { padding-left: 0; }
