@@ -2696,6 +2696,43 @@
     });
   }
 
+  // The Back pill on spot/account/affiliate pages is hardcoded to its
+  // chapter (or "../") so users who land directly via search or share
+  // link still have a way out. But when they got here from inside the
+  // app (Map → spot, Browse → spot, etc.) the user expects native back
+  // behaviour. Mobile's system back arrow already does this; the
+  // in-page Back was always shooting them to the chapter.
+  //
+  // We can't rely on document.referrer: every /full page sets
+  // <meta name="referrer" content="no-referrer">. Instead, count
+  // in-app navigations per tab via sessionStorage. depth > 1 means at
+  // least one prior in-app page is in the back stack; hijack the click
+  // and use history.back(). depth === 1 (direct entry / new tab) falls
+  // through to the anchor's href, which is the chapter fallback.
+  const NAV_DEPTH_KEY = 'hb:nav:depth';
+  function bumpNavDepth() {
+    try {
+      const cur = parseInt(sessionStorage.getItem(NAV_DEPTH_KEY) || '0', 10) || 0;
+      sessionStorage.setItem(NAV_DEPTH_KEY, String(cur + 1));
+      return cur + 1;
+    } catch { return 1; }
+  }
+  function wireBackButtons() {
+    const depth = bumpNavDepth();
+    document.querySelectorAll('a.hb-back, a.back').forEach(a => {
+      a.addEventListener('click', (e) => {
+        // Cmd/Ctrl/middle-click → open in new tab, leave alone.
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+        if (depth > 1 && W.history.length > 1) {
+          e.preventDefault();
+          W.history.back();
+        }
+        // Otherwise let the anchor navigate to its href (the chapter
+        // for spot pages, "../" for account/affiliate).
+      });
+    });
+  }
+
   function injectHearts() {
     const ch = currentChapterId();
     if (!ch) return;
@@ -2975,6 +3012,7 @@
     visited._reattach();
     swipes._reattach();
     injectRail();
+    wireBackButtons();
     wireBakedCarousels();
     wireCardLinks();
     injectHearts();
