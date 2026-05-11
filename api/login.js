@@ -203,6 +203,48 @@ export default async function handler(req, res) {
 
   const body = await readJsonBody(req);
 
+  // ── Flow 3.5: admin-triggered email send (e.g. claim-account blast) ────
+  // Body: { action: "admin_send_email", adminToken, to, subject, html, text }
+  // Sends a single email via Resend using server-side credentials. Locked
+  // down to the same ADMIN_TOKEN that gates Convex admin mutations, so a
+  // leaked token compromises both anyway (no widening of blast radius).
+  // Used by scripts/send-claim-emails.mjs because Sensitive Vercel env
+  // vars (like RESEND_API_KEY) aren't readable outside the Vercel runtime.
+  if (body?.action === 'admin_send_email') {
+    const expected = process.env.ADMIN_TOKEN || '';
+    const provided = typeof body.adminToken === 'string' ? body.adminToken : '';
+    if (!expected || provided.length !== expected.length ||
+        !crypto.timingSafeEqual(Buffer.from(provided), Buffer.from(expected))) {
+      return res.status(401).json({ error: 'unauthorized' });
+    }
+    const resendKey = process.env.RESEND_API_KEY;
+    if (!resendKey) return res.status(503).json({ error: 'resend_not_configured' });
+
+    const to      = typeof body.to === 'string' ? body.to.trim() : '';
+    const subject = typeof body.subject === 'string' ? body.subject : '';
+    const html    = typeof body.html === 'string' ? body.html : '';
+    const text    = typeof body.text === 'string' ? body.text : '';
+    if (!to || !to.includes('@') || !subject || (!html && !text)) {
+      return res.status(400).json({ error: 'missing_fields' });
+    }
+
+    try {
+      const resend = new Resend(resendKey);
+      const { data, error } = await resend.emails.send({
+        from:    RESEND_FROM,
+        to,
+        replyTo: RESEND_REPLY_TO,
+        subject,
+        html:    html || undefined,
+        text:    text || undefined,
+      });
+      if (error) return res.status(502).json({ error: 'resend_failed', message: error?.message || String(error) });
+      return res.status(200).json({ ok: true, id: data?.id });
+    } catch (err) {
+      return res.status(502).json({ error: 'resend_threw', message: err?.message || String(err) });
+    }
+  }
+
   // ── Flow 4: password-reset request (email a magic link) ────────────────
   // Body: { action: "request_password_reset", email }
   // Response is ALWAYS {ok: true} regardless of whether `email` matches a
