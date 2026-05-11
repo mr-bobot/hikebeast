@@ -312,6 +312,17 @@
       return h;
     }
     Array.from(grid.children).forEach(t => {
+      // Prefer the image's natural dimensions once it has loaded.
+      // Most Convex photos still carry width:null/height:null, so the
+      // tile-render fallback writes [4,3] into the dataset, which
+      // makes 90% of tiles read as "boring square" and miss the
+      // landscape (>1.4) / portrait (<0.8) thresholds below. Once the
+      // <img> decodes, naturalWidth gives us the truth.
+      const img = t.querySelector('img');
+      if (img && img.naturalWidth && img.naturalHeight) {
+        t.dataset.w = img.naturalWidth;
+        t.dataset.h = img.naturalHeight;
+      }
       const w = +t.dataset.w;
       const h = +t.dataset.h;
       if (!w || !h) return;
@@ -366,6 +377,18 @@
   // Recompute spans when the viewport crosses a column-count breakpoint.
   let resizeT = 0;
   new ResizeObserver(() => { clearTimeout(resizeT); resizeT = setTimeout(applySpans, 80); }).observe(grid);
+
+  // Re-run as images decode so landscapes that started with the [4,3]
+  // fallback get promoted to .span-wide once their real dims arrive.
+  // Debounced so a wave of lazy-loaded thumbnails triggers one layout
+  // pass instead of one per image.
+  let loadT = 0;
+  grid.addEventListener('load', (e) => {
+    if (e.target && e.target.tagName === 'IMG') {
+      clearTimeout(loadT);
+      loadT = setTimeout(applySpans, 100);
+    }
+  }, true);
 
   // --- Search wiring
   q.addEventListener('input', () => {
