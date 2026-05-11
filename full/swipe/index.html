@@ -142,27 +142,6 @@
     opacity: 0.85;
     letter-spacing: -0.005em;
   }
-  .card .open-link {
-    position: absolute;
-    top: 12px; left: 12px;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.92);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    color: var(--fg);
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: -0.005em;
-    border: 1px solid var(--hairline);
-  }
-  .card .open-link svg { width: 12px; height: 12px; }
-
   /* Decision stamps that appear as the user drags */
   .stamp {
     position: absolute;
@@ -450,10 +429,6 @@
     c.innerHTML = `
       <div class="stamp save">Save</div>
       <div class="stamp no">Nope</div>
-      <a class="open-link" href="${esc(href)}" title="Open full entry">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        Read
-      </a>
       <div class="photo">
         <!-- Sharp photo (w1800 default; browser swaps via srcset on bigger
              screens). Deck holds 3 cards so bandwidth is negligible. -->
@@ -535,9 +510,6 @@
 
   function onDown(e) {
     if (e.button !== undefined && e.button !== 0) return;
-    // Tap on the in-card "Read" pill or any other interactive child
-    // should pass through to the link/button, not start a card drag.
-    if (e.target.closest('.open-link')) return;
     const card = e.currentTarget;
     if (drag) return;
     card.setPointerCapture(e.pointerId);
