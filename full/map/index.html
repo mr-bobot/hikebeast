@@ -13,82 +13,52 @@
 <link rel="stylesheet" href="../preview.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <style>
-  /* Map page borrows the chapter-cover recipe: dark gradient base
-   * + ambient color glows + 1px dot-noise overlay. Country + canton
-   * outlines drawn in white (set in the geojson style block below),
-   * canton fills tinted in their chapter color at low opacity so
-   * the region glows over the dark backdrop. */
-  body {
-    /* Top-left ambient glow picks up the active chapter's accent color
-     * (e.g. rgb(175,165,122) for Central). Falls back to a soft white
-     * tint when no chapter is isolated. JS sets --active-chapter on
-     * the body via paintGeoStyle() on every legend click. */
-    background:
-      radial-gradient(900px 600px at 18% 12%, rgba(var(--active-chapter, 255, 255, 255), 0.18) 0%, transparent 60%),
-      radial-gradient(700px 500px at 88% 92%, rgba(255, 255, 255, 0.03) 0%, transparent 60%),
-      linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
-    background-attachment: fixed;
-    transition: background 280ms ease;
-  }
+  /* Map page matches the Figma light-version: pale gray country
+   * silhouette on an off-white backdrop, blue dot-with-halo markers,
+   * minimal chrome. Photo lives in the popup on click. */
+  body { background: #f6f7f9; }
   .map-shell { height: calc(100dvh - var(--topbar-h)); position: relative; isolation: isolate; }
-  /* 1px dot-noise overlay (3px spacing), same as .feature-photo.is-map.
-   * pointer-events:none so panning/zooming on the map underneath works. */
-  .map-shell::after {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 3px 3px;
-    pointer-events: none;
-    z-index: 400;  /* above tiles, below markers + controls */
-  }
-  #map { height: 100%; width: 100%; background: transparent; }
-  .leaflet-container { font-family: inherit; background: transparent; outline: 0; }
+  #map { height: 100%; width: 100%; background: #f6f7f9; }
+  .leaflet-container { font-family: inherit; background: #f6f7f9; outline: 0; }
   .leaflet-interactive { outline: 0 !important; }
 
+  /* Spot marker — solid accent-blue dot with a softer halo ring.
+   * The .thumb element is reused (so JS-set bg-image is harmless,
+   * just gets covered) and its background-color is overridden by
+   * the rules below. Sized small at low zoom, grows via --marker-scale. */
   .spot-marker { background: transparent; border: 0; }
   .spot-marker .thumb {
     display: block;
-    width: 42px; height: 52px;
-    border-radius: 8px;
-    background-size: cover;
-    background-position: center;
-    background-color: #2a2a2d;
-    /* Thinner white border + ambient white glow so the photo pops
-     * off the dark backdrop without the old "Pinterest sticker"
-     * heavy frame look. */
-    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background-image: none !important;  /* drop the spot photo seed */
+    background-color: var(--accent, #0071e3);
+    border: 2px solid #ffffff;
     box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.35),
-      0 0 18px rgba(255, 255, 255, 0.08),
-      0 6px 14px rgba(0, 0, 0, 0.45);
-    transition: transform 200ms ease, box-shadow 200ms ease;
+      0 0 0 6px rgba(0, 113, 227, 0.18),
+      0 2px 6px rgba(0, 0, 0, 0.18);
+    transition: transform 180ms ease, box-shadow 180ms ease;
     cursor: pointer;
-    /* --marker-scale grows as the user zooms in so spot photos read at higher
-       zooms without overcrowding the country view at low zoom. Set on
-       <html> by zoomend below. */
     transform: scale(var(--marker-scale, 1)) translateZ(0);
     will-change: transform;
   }
   .spot-marker:hover { z-index: 1000 !important; }
   .spot-marker:hover .thumb {
-    transform: scale(calc(var(--marker-scale, 1) * 1.4)) translateZ(0);
+    transform: scale(calc(var(--marker-scale, 1) * 1.35)) translateZ(0);
     box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.35),
-      0 0 28px rgba(255, 255, 255, 0.18),
-      0 12px 28px rgba(0, 0, 0, 0.55);
+      0 0 0 8px rgba(0, 113, 227, 0.22),
+      0 4px 10px rgba(0, 0, 0, 0.22);
   }
-  /* Touch devices: no hover-scale, no transition (causes jitter on tap). */
   @media (hover: none) {
     .spot-marker .thumb { transition: none; }
     .spot-marker:hover .thumb { transform: scale(var(--marker-scale, 1)) translateZ(0); }
   }
-  /* Popup keeps the light card look — popup is content-heavy
-   * (photo + title + meta + Read button), reads better on white. */
+  /* Popup — light card with the spot photo on top + title + meta. */
   .leaflet-popup-content-wrapper {
     border-radius: 18px;
     padding: 0;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.30);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20), 0 4px 12px rgba(0, 0, 0, 0.08);
   }
   .leaflet-popup-content { margin: 0; width: 240px !important; }
   .leaflet-popup-tip { background: #fff; }
@@ -99,58 +69,58 @@
   .spot-popup .meta { font-size: 11px; color: var(--muted); margin: 4px 0 0; }
   .spot-popup a.read { margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; height: 36px; border-radius: 999px; background: var(--fg); color: #fff; font-size: 13px; font-weight: 500; text-decoration: none; }
 
-  /* Spot title tooltip on hover — dark glass to match the page. */
+  /* Spot title tooltip on hover — light glass. */
   .spot-tip {
-    background: rgba(20, 20, 22, 0.85) !important;
+    background: rgba(255, 255, 255, 0.96) !important;
     -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    border: 1px solid var(--hairline) !important;
     border-radius: 12px !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.40) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14) !important;
     padding: 8px 12px !important;
-    color: rgba(255, 255, 255, 0.95) !important;
+    color: var(--fg) !important;
     font-size: 12.5px !important; font-weight: 500 !important; letter-spacing: -0.005em !important;
     white-space: nowrap;
   }
   .leaflet-tooltip-top.spot-tip:before { display: none; }
 
-  /* Chapters legend — dark glass card pinned bottom-left on desktop. */
+  /* Chapters legend — light glass card pinned bottom-left on desktop. */
   .legend {
     position: absolute; bottom: 18px; left: 18px; z-index: 500;
-    background: rgba(20, 20, 22, 0.75);
+    background: rgba(255, 255, 255, 0.94);
     -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 14px;
-    padding: 14px 16px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--hairline); border-radius: 14px;
+    padding: 14px 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
     display: flex; flex-direction: column; gap: 8px; max-width: 240px;
   }
-  .legend h4 { margin: 0 0 6px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.55); font-weight: 600; }
+  .legend h4 { margin: 0 0 6px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
   .legend-item {
     display: flex; align-items: center; gap: 10px;
-    font-size: 13px; cursor: pointer; user-select: none; color: rgba(255, 255, 255, 0.92); line-height: 1.2;
+    font-size: 13px; cursor: pointer; user-select: none; color: var(--fg); line-height: 1.2;
     padding: 6px 0; background: transparent; border: 0; text-align: left; font-family: inherit;
     transition: opacity 120ms ease;
   }
   .legend-item.is-off { opacity: 0.30; }
-  .legend-item .swatch { flex-shrink: 0; width: 14px; height: 14px; border-radius: 999px; border: 2px solid rgba(255, 255, 255, 0.85); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.40); }
+  .legend-item .swatch { flex-shrink: 0; width: 14px; height: 14px; border-radius: 999px; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08); }
 
   .map-controls {
     position: absolute; top: 18px; right: 18px; z-index: 500;
     display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
   }
-  /* Saved toggle — dark glass pill to match the legend. */
+  /* Saved toggle — light glass pill. */
   .fav-toggle {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 8px 12px; height: 32px;
-    background: rgba(20, 20, 22, 0.75);
+    background: rgba(255, 255, 255, 0.94);
     -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 999px;
-    font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: -0.005em; color: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--hairline); border-radius: 999px;
+    font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: -0.005em; color: var(--fg);
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.40);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
     transition: background 120ms ease, color 120ms ease, border-color 120ms ease, transform 100ms ease;
     -webkit-tap-highlight-color: transparent;
   }
-  .fav-toggle svg { width: 14px; height: 14px; color: rgba(255, 255, 255, 0.75); transition: color 120ms ease; }
-  .fav-toggle:hover { border-color: rgba(255, 255, 255, 0.25); }
+  .fav-toggle svg { width: 14px; height: 14px; color: rgba(0, 0, 0, 0.55); transition: color 120ms ease; }
+  .fav-toggle:hover { border-color: var(--hairline-strong); }
   .fav-toggle:active { transform: scale(0.97); }
   .fav-toggle .fav-count {
     display: inline-flex; align-items: center; justify-content: center;
@@ -158,28 +128,17 @@
     border-radius: 999px; background: var(--accent); color: #fff;
     font-size: 10px; font-weight: 700; line-height: 1; letter-spacing: 0;
   }
-  .fav-toggle.is-on {
-    background: #ff375f; color: #fff; border-color: #ff375f;
-  }
+  .fav-toggle.is-on { background: #ff375f; color: #fff; border-color: #ff375f; }
   .fav-toggle.is-on svg { color: #fff; }
   .fav-toggle.is-on .fav-count { background: #fff; color: #ff375f; }
   .fav-toggle.is-empty { opacity: 0.55; cursor: default; }
-  .fav-toggle.is-empty:hover { border-color: rgba(255, 255, 255, 0.10); }
+  .fav-toggle.is-empty:hover { border-color: var(--hairline); }
 
-  /* Hide the page topbar on the map view at any size — the dark
-   * canvas works best edge-to-edge, and the topbar's white chrome
-   * clashed with the gradient. Brand + Overview are still reachable
-   * from the left rail (desktop) and the bottom tab bar (mobile). */
+  /* Page topbar is hidden on the map view (light theme, edge-to-edge
+   * canvas reads cleanest). Brand + Overview are still reachable via
+   * the desktop rail and the mobile tab bar. */
   body.has-rail .topbar { display: none !important; }
   .map-shell { height: 100dvh; }
-  /* Pull the Leaflet attribution into the dark theme. */
-  .leaflet-control-attribution {
-    background: rgba(20, 20, 22, 0.70) !important;
-    color: rgba(255, 255, 255, 0.55) !important;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  .leaflet-control-attribution a { color: rgba(255, 255, 255, 0.75) !important; }
 
   /* Toggle button -- only shown on mobile */
   .legend-toggle { display: none; }
@@ -332,42 +291,29 @@
     const ch = CANTON_CHAPTER[feature.properties.name];
     const total = (typeof allChapters !== 'undefined') ? allChapters.size : 0;
     const isAllOn = activeChapters && total > 0 && activeChapters.size === total;
-    const isOff = activeChapters && ch && !activeChapters.has(ch);
-    if (isOff) {
-      // User isolated other chapters; this canton fades back to white.
+    const isActive = activeChapters && ch && activeChapters.has(ch);
+    if (!isAllOn && isActive) {
+      // User isolated this chapter — paint its region with the chapter
+      // accent color so the active area glows over the pale country.
+      const rgb = REGION_COLOR_BY_CH[ch];
       return {
-        color: '#ffffff', weight: 1.2,
-        fillColor: '#f5f5f5',
-        fillOpacity: 0.92, lineJoin: 'round',
+        color: '#d4d6dc', weight: 1,
+        fillColor: 'rgb(' + rgb + ')',
+        fillOpacity: 0.55, lineJoin: 'round',
       };
     }
-    // Default landing (all chapters active) AND isolated-state for the
-    // active chapter both paint with the chapter color. Slightly less
-    // opacity in the all-on overview so the country reads as a
-    // coherent multi-color map; bumped opacity when isolated so the
-    // single active region glows. Unmapped cantons fall back to a
-    // neutral gray.
-    const rgb = ch ? REGION_COLOR_BY_CH[ch] : '224, 224, 228';
-    const opacity = isAllOn ? 0.55 : 0.75;
+    // Default landing (all chapters on) AND non-active cantons in an
+    // isolated state: subtle pale fill with light gray hairline outline.
+    // Matches the Figma — country reads as a uniform calm silhouette,
+    // the blue dots are the figure on top.
     return {
-      color: '#ffffff', weight: 1.2,
-      fillColor: 'rgb(' + rgb + ')',
-      fillOpacity: opacity, lineJoin: 'round',
+      color: '#d4d6dc', weight: 1,
+      fillColor: '#eceef2',
+      fillOpacity: 1, lineJoin: 'round',
     };
   }
   function paintGeoStyle() {
     if (geoLayer) geoLayer.setStyle(styleCanton);
-    // Push the active chapter color into a CSS variable so the body's
-    // ambient glow picks it up. Default is white-tint when no chapter
-    // is isolated (the all-chapters overview).
-    const isSolo = activeChapters && activeChapters.size === 1;
-    if (isSolo) {
-      const ch = [...activeChapters][0];
-      const rgb = REGION_COLOR_BY_CH[ch] || '255, 255, 255';
-      document.body.style.setProperty('--active-chapter', rgb);
-    } else {
-      document.body.style.removeProperty('--active-chapter');
-    }
   }
   if (GEOJSON && GEOJSON.features && GEOJSON.features.length) {
     geoLayer = L.geoJSON(GEOJSON, {
