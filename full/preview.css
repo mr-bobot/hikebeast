@@ -3836,7 +3836,6 @@ body.has-rail .topbar .hb-nav { display: none; }
     bottom: 0;
     background: #fff;
     border-radius: 18px 18px 0 0;
-    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.18);
     transform: translateY(100%);
     transition: transform 280ms cubic-bezier(.2,.7,.3,1);
     padding: 8px 16px calc(20px + env(safe-area-inset-bottom));
@@ -3844,6 +3843,15 @@ body.has-rail .topbar .hb-nav { display: none; }
     overflow-y: auto;
     pointer-events: auto;
     -webkit-overflow-scrolling: touch;
+  }
+  /* box-shadow only when the sheet is actually open. iOS Safari
+   * composites box-shadow at the un-translated position, so an
+   * upward-cast shadow on a `translateY(100%)` off-screen sheet
+   * still paints OVER the bottom tab bar — visible as a vertical
+   * gradient across the top of the tab bar. Chrome's compositor
+   * honours the transform and doesn't show the bleed. */
+  .app-menu-sheet.is-open .menu-sheet-card {
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.18);
   }
   .app-menu-sheet.is-open { pointer-events: auto; }
   .app-menu-sheet.is-open .menu-sheet-backdrop { opacity: 1; pointer-events: auto; }
@@ -4418,7 +4426,6 @@ body.has-rail .topbar .hb-nav { display: none; }
     bottom: 0;
     background: #fff;
     border-radius: 18px 18px 0 0;
-    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.18);
     transform: translateY(100%);
     transition: transform 280ms cubic-bezier(.2,.7,.3,1);
     padding: 8px 16px calc(20px + env(safe-area-inset-bottom));
@@ -4432,7 +4439,14 @@ body.has-rail .topbar .hb-nav { display: none; }
   }
   .hb-filter-sheet.is-open { pointer-events: auto; }
   .hb-filter-sheet.is-open .hb-filter-sheet-backdrop { opacity: 1; pointer-events: auto; }
-  .hb-filter-sheet.is-open .hb-filter-sheet-card { transform: translateY(0); }
+  .hb-filter-sheet.is-open .hb-filter-sheet-card {
+    transform: translateY(0);
+    /* iOS Safari composites box-shadow at the un-translated position,
+     * so an upward-cast shadow on an off-screen `translateY(100%)`
+     * sheet still paints over the bottom tab bar. Only render the
+     * shadow when the sheet is actually open. */
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.18);
+  }
   .hb-filter-sheet .hb-filter-sheet-grabber {
     width: 36px;
     height: 4px;
