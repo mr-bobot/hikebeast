@@ -215,6 +215,9 @@
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   .col-buyer .ig.is-anon { font-weight: 500; color: var(--muted); }
+  /* Email fallback: slightly lighter weight + smaller size to read
+   * "buyer info" rather than "Instagram handle". */
+  .col-buyer .ig.is-email { font-weight: 500; font-size: 13px; color: var(--fg); }
   .col-buyer .ig a { color: var(--accent); text-decoration: none; }
   .col-buyer .ig a:hover { text-decoration: underline; }
   .col-buyer .date { color: var(--muted); font-size: 12px; }
@@ -442,24 +445,30 @@
       }
       elEmpty.hidden = true;
       elList.hidden = false;
-      // Each row renders the buyer (clickable @handle linking to instagram.com,
-      // or a placeholder for direct-web buyers without an IG handle on file)
-      // above the date, then the commission on the right. Voided rows stay
-      // visible but get faded + strikethrough on the amount.
+      // Each row renders the buyer above the date, then the commission on
+      // the right. Buyer cell prefers IG (clickable @handle linking to
+      // instagram.com); falls back to the email they checked out with;
+      // shows "Direct buyer" only when neither is on file. Voided rows
+      // stay visible but get faded + strikethrough on the amount.
       elList.innerHTML = rows.map((r) => {
         const status = r.status || 'pending';
         let buyerCell;
+        let buyerStyle = '';
         if (r.buyerIg) {
           const ig = esc(r.buyerIg);
           buyerCell = '<a href="https://instagram.com/' + ig + '" target="_blank" rel="noopener noreferrer">@' + ig + '</a>';
+        } else if (r.buyerEmail) {
+          buyerCell = esc(r.buyerEmail);
+          buyerStyle = ' is-email';
         } else {
           buyerCell = '<span class="is-anon">Direct buyer</span>';
         }
+        const hasId = !!(r.buyerIg || r.buyerEmail);
         const liClass = status === 'voided' ? ' class="is-voided"' : '';
         return (
           '<li' + liClass + '>' +
             '<div class="col-buyer">' +
-              '<span class="ig' + (r.buyerIg ? '' : ' is-anon') + '">' + buyerCell + '</span>' +
+              '<span class="ig' + (hasId ? '' : ' is-anon') + buyerStyle + '">' + buyerCell + '</span>' +
               '<span class="date">' + fmtDate(r.createdAt) + '</span>' +
             '</div>' +
             '<span class="col-amt">' + fmtMoney(r.commissionCents, r.currency) + '</span>' +
