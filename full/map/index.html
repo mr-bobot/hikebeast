@@ -13,22 +13,33 @@
 <link rel="stylesheet" href="../preview.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <style>
-  /* Map page matches the Figma light-version: pale gray country
-   * silhouette on an off-white backdrop, blue dot-with-halo markers,
-   * minimal chrome. Photo lives in the popup on click. */
-  body { background: #f6f7f9; }
+  /* Dark mode variant of the map (preview-only). Chapter-cover
+   * recipe: dark gradient backdrop + 1px dot-noise overlay. Same
+   * toggle infrastructure as the light page (body.markers-cards
+   * flips between dot markers and photo-thumbnail cards). */
+  body {
+    background:
+      radial-gradient(900px 600px at 18% 12%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+      radial-gradient(700px 500px at 88% 92%, rgba(255, 255, 255, 0.03) 0%, transparent 60%),
+      linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
+    background-attachment: fixed;
+  }
   .map-shell { height: calc(100dvh - var(--topbar-h)); position: relative; isolation: isolate; }
-  #map { height: 100%; width: 100%; background: #f6f7f9; }
-  .leaflet-container { font-family: inherit; background: #f6f7f9; outline: 0; }
+  /* 1px dot-noise overlay (3px spacing), same as .feature-photo.is-map */
+  .map-shell::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 3px 3px;
+    pointer-events: none;
+    z-index: 400;
+  }
+  #map { height: 100%; width: 100%; background: transparent; }
+  .leaflet-container { font-family: inherit; background: transparent; outline: 0; }
   .leaflet-interactive { outline: 0 !important; }
 
-  /* Spot marker — uniform blue dot (no chapter tinting) with a soft
-   * light-blue halo, matching the Figma "all-on-one-map" reference.
-   * The JS still sets background-color inline from spot.color
-   * (chapter color); !important here wins so every dot reads as the
-   * brand blue. background-image:none drops the photo seed. */
   .spot-marker { background: transparent; border: 0; }
-  /* Default = dots mode: blue dot with light halo, per Figma. */
+  /* Default = dots mode: bright blue dot, soft halo. */
   .spot-marker .thumb {
     display: block;
     width: 14px; height: 14px;
@@ -37,8 +48,8 @@
     background-color: #0071E3;
     border: 2px solid #ffffff;
     box-shadow:
-      0 0 0 6px rgba(0, 113, 227, 0.10),
-      0 2px 6px rgba(0, 0, 0, 0.10);
+      0 0 0 6px rgba(0, 113, 227, 0.22),
+      0 2px 6px rgba(0, 0, 0, 0.35);
     transition: transform 180ms ease, box-shadow 180ms ease;
     cursor: pointer;
     transform: scale(var(--marker-scale, 1)) translateZ(0);
@@ -48,30 +59,31 @@
   .spot-marker:hover .thumb {
     transform: scale(calc(var(--marker-scale, 1) * 1.35)) translateZ(0);
     box-shadow:
-      0 0 0 8px rgba(0, 113, 227, 0.14),
-      0 4px 10px rgba(0, 0, 0, 0.15);
+      0 0 0 8px rgba(0, 113, 227, 0.28),
+      0 4px 10px rgba(0, 0, 0, 0.45);
   }
-  /* Cards mode (toggled on body): show photo thumbnails using the
-   * --thumb-img CSS variable that the JS sets inline on each marker
-   * at build time. Falls back to a neutral fallback color when a
-   * spot has no photo (no var resolves to "none" by default). */
+  /* Cards mode (toggled on body) — photo thumbnails on the dark canvas.
+   * Thinner white border + ambient glow so the photo pops without the
+   * old "Pinterest sticker" heavy frame look. */
   body.markers-cards .spot-marker .thumb {
     width: 42px; height: 52px;
     border-radius: 8px;
     background-image: var(--thumb-img, none);
-    background-color: #f5f5f5;
+    background-color: #2a2a2d;
     background-size: cover;
     background-position: center;
-    border: 2px solid #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
     box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.06),
-      0 3px 8px rgba(0, 0, 0, 0.18);
+      0 0 0 1px rgba(0, 0, 0, 0.35),
+      0 0 18px rgba(255, 255, 255, 0.08),
+      0 6px 14px rgba(0, 0, 0, 0.45);
   }
   body.markers-cards .spot-marker:hover .thumb {
     transform: scale(calc(var(--marker-scale, 1) * 1.35)) translateZ(0);
     box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.06),
-      0 10px 22px rgba(0, 0, 0, 0.28);
+      0 0 0 1px rgba(0, 0, 0, 0.35),
+      0 0 28px rgba(255, 255, 255, 0.18),
+      0 12px 28px rgba(0, 0, 0, 0.55);
   }
   @media (hover: none) {
     .spot-marker .thumb { transition: none; }
@@ -93,58 +105,58 @@
   .spot-popup .meta { font-size: 11px; color: var(--muted); margin: 4px 0 0; }
   .spot-popup a.read { margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; height: 36px; border-radius: 999px; background: var(--fg); color: #fff; font-size: 13px; font-weight: 500; text-decoration: none; }
 
-  /* Spot title tooltip on hover — light glass. */
+  /* Spot title tooltip on hover — dark glass. */
   .spot-tip {
-    background: rgba(255, 255, 255, 0.96) !important;
+    background: rgba(20, 20, 22, 0.85) !important;
     -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-    border: 1px solid var(--hairline) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
     border-radius: 12px !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.40) !important;
     padding: 8px 12px !important;
-    color: var(--fg) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
     font-size: 12.5px !important; font-weight: 500 !important; letter-spacing: -0.005em !important;
     white-space: nowrap;
   }
   .leaflet-tooltip-top.spot-tip:before { display: none; }
 
-  /* Chapters legend — light glass card pinned bottom-left on desktop. */
+  /* Chapters legend — dark glass card pinned bottom-left. */
   .legend {
     position: absolute; bottom: 18px; left: 18px; z-index: 500;
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(20, 20, 22, 0.75);
     -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid var(--hairline); border-radius: 14px;
-    padding: 14px 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 14px;
+    padding: 14px 16px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
     display: flex; flex-direction: column; gap: 8px; max-width: 240px;
   }
-  .legend h4 { margin: 0 0 6px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .legend h4 { margin: 0 0 6px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.55); font-weight: 600; }
   .legend-item {
     display: flex; align-items: center; gap: 10px;
-    font-size: 13px; cursor: pointer; user-select: none; color: var(--fg); line-height: 1.2;
+    font-size: 13px; cursor: pointer; user-select: none; color: rgba(255, 255, 255, 0.92); line-height: 1.2;
     padding: 6px 0; background: transparent; border: 0; text-align: left; font-family: inherit;
     transition: opacity 120ms ease;
   }
   .legend-item.is-off { opacity: 0.30; }
-  .legend-item .swatch { flex-shrink: 0; width: 14px; height: 14px; border-radius: 999px; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08); }
+  .legend-item .swatch { flex-shrink: 0; width: 14px; height: 14px; border-radius: 999px; border: 2px solid rgba(255, 255, 255, 0.85); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.40); }
 
   .map-controls {
     position: absolute; top: 18px; right: 18px; z-index: 500;
     display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
   }
-  /* Saved toggle — light glass pill. */
+  /* Saved toggle — dark glass pill. */
   .fav-toggle {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 8px 12px; height: 32px;
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(20, 20, 22, 0.75);
     -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid var(--hairline); border-radius: 999px;
-    font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: -0.005em; color: var(--fg);
+    border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 999px;
+    font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: -0.005em; color: rgba(255, 255, 255, 0.92);
     cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.40);
     transition: background 120ms ease, color 120ms ease, border-color 120ms ease, transform 100ms ease;
     -webkit-tap-highlight-color: transparent;
   }
-  .fav-toggle svg { width: 14px; height: 14px; color: rgba(0, 0, 0, 0.55); transition: color 120ms ease; }
-  .fav-toggle:hover { border-color: var(--hairline-strong); }
+  .fav-toggle svg { width: 14px; height: 14px; color: rgba(255, 255, 255, 0.75); transition: color 120ms ease; }
+  .fav-toggle:hover { border-color: rgba(255, 255, 255, 0.25); }
   .fav-toggle:active { transform: scale(0.97); }
   .fav-toggle .fav-count {
     display: inline-flex; align-items: center; justify-content: center;
@@ -156,7 +168,7 @@
   .fav-toggle.is-on svg { color: #fff; }
   .fav-toggle.is-on .fav-count { background: #fff; color: #ff375f; }
   .fav-toggle.is-empty { opacity: 0.55; cursor: default; }
-  .fav-toggle.is-empty:hover { border-color: var(--hairline); }
+  .fav-toggle.is-empty:hover { border-color: rgba(255, 255, 255, 0.10); }
 
   /* Marker-mode switch — iOS-style on/off pill at top-left,
    * positioned to the right of Leaflet's +/- zoom controls on
@@ -166,17 +178,17 @@
     position: absolute;
     top: 18px; left: 60px;
     z-index: 500;
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(20, 20, 22, 0.75);
     -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid var(--hairline); border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 999px;
     padding: 8px 12px 8px 14px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.40);
     display: inline-flex;
     align-items: center;
     gap: 10px;
     font-family: inherit; font-size: 12px; font-weight: 600;
     letter-spacing: -0.005em;
-    color: var(--fg);
+    color: rgba(255, 255, 255, 0.92);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
@@ -250,28 +262,28 @@
     .fav-toggle { height: 28px; padding: 6px 10px; font-size: 11px; }
     .fav-toggle svg { width: 12px; height: 12px; }
 
-    /* Mobile dots: shrink from desktop's 14px to 12px with a 5px halo.
-     * Anything tighter (we tried 10/4) read too small to feel like
-     * solid markers; this hits the sweet spot. */
+    /* Mobile dots on the dark canvas: 12px with a slightly stronger
+     * halo than light mode so they stay visible against the gradient. */
     .spot-marker .thumb {
       width: 12px; height: 12px;
       border-width: 1.5px;
       box-shadow:
-        0 0 0 5px rgba(0, 113, 227, 0.10),
-        0 1px 4px rgba(0, 0, 0, 0.10);
+        0 0 0 5px rgba(0, 113, 227, 0.22),
+        0 1px 4px rgba(0, 0, 0, 0.45);
     }
     .spot-marker:hover .thumb {
       box-shadow:
-        0 0 0 6px rgba(0, 113, 227, 0.14),
-        0 2px 6px rgba(0, 0, 0, 0.15);
+        0 0 0 6px rgba(0, 113, 227, 0.28),
+        0 2px 6px rgba(0, 0, 0, 0.55);
     }
-    /* Cards mode on mobile keeps the original 32×40 thumbnail size. */
+    /* Cards mode on mobile keeps the 32×40 thumbnail size. */
     body.markers-cards .spot-marker .thumb {
       width: 32px; height: 40px;
       border-width: 1.5px;
       box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.06),
-        0 2px 6px rgba(0, 0, 0, 0.16);
+        0 0 0 1px rgba(0, 0, 0, 0.35),
+        0 0 14px rgba(255, 255, 255, 0.10),
+        0 4px 12px rgba(0, 0, 0, 0.50);
     }
 
     /* Mobile: drop the legend / filter and Leaflet's +/- zoom controls.
@@ -409,31 +421,32 @@
   // other cantons stay white. Styled via geoLayer.setStyle() in
   // paintGeoStyle() below — called on every chapter-state change.
   let geoLayer = null;
-  // Outline color shared by every canton path: #003162 at 50% opacity,
-  // per Figma — a soft navy hairline around Switzerland and between
-  // cantons.
-  const CANTON_OUTLINE = 'rgba(0, 49, 98, 0.50)';
+  // Dark mode: white hairline outlines, chapter colors tint the cantons
+  // at low opacity over the dark backdrop. Active-chapter isolation
+  // boosts that chapter to higher opacity so the active region glows.
+  const CANTON_OUTLINE = '#ffffff';
   function styleCanton(feature) {
     const ch = CANTON_CHAPTER[feature.properties.name];
     const total = (typeof allChapters !== 'undefined') ? allChapters.size : 0;
     const isAllOn = activeChapters && total > 0 && activeChapters.size === total;
     const isActive = activeChapters && ch && activeChapters.has(ch);
     if (!isAllOn && isActive) {
-      // User isolated this chapter — paint its region with the chapter
-      // accent color so the active area glows over the pale country.
       const rgb = REGION_COLOR_BY_CH[ch];
       return {
-        color: CANTON_OUTLINE, weight: 1,
+        color: CANTON_OUTLINE, weight: 1.2,
         fillColor: 'rgb(' + rgb + ')',
-        fillOpacity: 0.55, lineJoin: 'round',
+        fillOpacity: 0.65, lineJoin: 'round',
       };
     }
     // Default landing (all chapters on) AND non-active cantons in an
-    // isolated state: subtle pale fill with the navy hairline outline.
+    // isolated state: chapter-tinted at low opacity so the country
+    // reads as a coherent multi-color overview on dark.
+    const rgb = ch ? REGION_COLOR_BY_CH[ch] : '224, 224, 228';
+    const opacity = isAllOn ? 0.40 : 0.12;
     return {
-      color: CANTON_OUTLINE, weight: 1,
-      fillColor: '#eceef2',
-      fillOpacity: 1, lineJoin: 'round',
+      color: CANTON_OUTLINE, weight: 1.2,
+      fillColor: 'rgb(' + rgb + ')',
+      fillOpacity: opacity, lineJoin: 'round',
     };
   }
   function paintGeoStyle() {
