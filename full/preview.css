@@ -4037,6 +4037,43 @@ body.has-rail .topbar .hb-nav { display: none; }
     line-height: 1;
   }
   .app-menu-sheet .menu-row-badge[data-on="1"] { display: flex; }
+  /* Theme toggle · 3-segment pill (Auto / Light / Dark) inside the
+   * "Appearance" section. Active segment is filled with --paper +
+   * --shadow-soft so it pops from the surface track, matching iOS's
+   * segmented-control feel. */
+  .app-menu-sheet .menu-theme-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    margin: 6px 0;
+    padding: 4px;
+    background: var(--surface);
+    border-radius: 12px;
+  }
+  .app-menu-sheet .menu-theme-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 4px;
+    background: transparent;
+    border: 0;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 120ms ease, color 120ms ease, box-shadow 120ms ease;
+  }
+  .app-menu-sheet .menu-theme-seg svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .app-menu-sheet .menu-theme-seg:hover { color: var(--fg); }
+  .app-menu-sheet .menu-theme-seg[aria-pressed="true"] {
+    background: var(--paper);
+    color: var(--fg);
+    box-shadow: var(--shadow-soft);
+  }
   .app-menu-sheet .menu-sheet-account {
     margin-top: 16px;
     padding-top: 14px;
