@@ -18,11 +18,13 @@
      hairline rules inside one glassmorphic card; matches /login/ and
      /full/affiliate/. Helper text dropped — errors surface on save. */
 
-  /* Background — same blue-blob wash as /login/. */
+  /* Background — same blue-blob wash as /login/. In dark mode the
+     blob alphas drop ~3x so it reads as atmospheric haze, not Day-Glo.
+     See the dark override block at the bottom of this <style>. */
   body {
     margin: 0;
     min-height: 100dvh;
-    background: #fbfbfc;
+    background: var(--bg);
     color: var(--fg);
     position: relative;
     overflow-x: hidden;
@@ -60,7 +62,7 @@
     text-decoration: none;
     padding: 8px 14px;
     border-radius: 999px;
-    background: #fff;
+    background: var(--paper);
     border: 1px solid var(--hairline);
     margin-bottom: 14px;
     transition: border-color 150ms ease, transform 100ms ease;
@@ -81,12 +83,12 @@
   .legal-foot .sep { margin: 0 6px; }
   .legal-foot .copy { display: block; }
   .card {
-    background: rgba(255,255,255,0.86);
+    background: var(--glass);
     -webkit-backdrop-filter: saturate(180%) blur(18px);
     backdrop-filter: saturate(180%) blur(18px);
     border: 1px solid var(--hairline);
     border-radius: var(--radius-card);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.10), 0 4px 14px rgba(0,0,0,0.04);
+    box-shadow: var(--shadow-card);
     overflow: hidden;
   }
 
@@ -122,13 +124,13 @@
     width: 56px; height: 56px;
     border-radius: 999px;
     overflow: hidden;
-    background: #f0f0f3;
+    background: var(--surface);
     display: grid; place-items: center;
     flex-shrink: 0;
     border: 1px solid var(--hairline);
   }
   .avatar-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .avatar-preview[data-empty="false"] { background: #fff; }
+  .avatar-preview[data-empty="false"] { background: var(--paper); }
   .avatar-initials {
     font-size: 22px; font-weight: 600;
     color: var(--muted); letter-spacing: -0.02em;
@@ -142,7 +144,7 @@
   .input {
     flex: 1; min-width: 0;
     height: 42px; padding: 0 14px;
-    border: 1px solid var(--hairline); background: #fff;
+    border: 1px solid var(--hairline); background: var(--paper);
     border-radius: 12px; font: inherit; font-size: 15px;
     letter-spacing: -0.01em; color: var(--fg);
     -webkit-appearance: none;
@@ -208,7 +210,7 @@
   .aff-link-icon {
     width: 32px; height: 32px;
     border-radius: 999px;
-    background: rgba(0,113,227,0.10);
+    background: var(--accent-soft);
     color: var(--accent);
     display: grid; place-items: center;
     flex-shrink: 0;
@@ -225,6 +227,55 @@
     font-size: 13px; color: var(--muted); line-height: 1.55;
   }
   .state a { color: var(--accent); text-decoration: none; }
+
+  /* === Dark mode overrides === */
+
+  /* Blue-blob bg: drop alpha ~3x so it reads as haze, not Day-Glo. */
+  :root[data-theme="dark"] body::before {
+    background:
+      radial-gradient(460px 420px at 18% 22%, rgba(10, 132, 255, 0.16) 0%, transparent 70%),
+      radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.12) 0%, transparent 72%),
+      radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.14) 0%, transparent 70%),
+      radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.10) 0%, transparent 75%);
+    opacity: 0.7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root[data-theme="auto"] body::before, :root:not([data-theme]) body::before {
+      background:
+        radial-gradient(460px 420px at 18% 22%, rgba(10, 132, 255, 0.16) 0%, transparent 70%),
+        radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.12) 0%, transparent 72%),
+        radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.14) 0%, transparent 70%),
+        radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.10) 0%, transparent 75%);
+      opacity: 0.7;
+    }
+  }
+
+  /* Primary CTA: in dark, --fg is near-white so the default fill
+     would be white-on-white. Switch to deep navy so it still reads
+     as a primary heavy button. */
+  :root[data-theme="dark"] .btn { background: #003162; color: #fff; }
+  @media (prefers-color-scheme: dark) {
+    :root[data-theme="auto"] .btn, :root:not([data-theme]) .btn {
+      background: #003162; color: #fff;
+    }
+  }
+
+  /* Message pills: the inline color values (#c4302b, #1f7a36) are
+     dark-on-light. In dark they need lighter foreground equivalents. */
+  :root[data-theme="dark"] .msg.is-error,
+  :root[data-theme="dark"] .msg.is-success {
+    color: var(--fg);
+  }
+  :root[data-theme="dark"] .msg.is-error   { background: rgba(255, 69, 58, 0.18); color: #ff8a85; }
+  :root[data-theme="dark"] .msg.is-success { background: rgba(48, 209, 88, 0.18); color: #69e6a4; }
+  @media (prefers-color-scheme: dark) {
+    :root[data-theme="auto"] .msg.is-error, :root:not([data-theme]) .msg.is-error {
+      background: rgba(255, 69, 58, 0.18); color: #ff8a85;
+    }
+    :root[data-theme="auto"] .msg.is-success, :root:not([data-theme]) .msg.is-success {
+      background: rgba(48, 209, 88, 0.18); color: #69e6a4;
+    }
+  }
 
 </style>
 </head>
