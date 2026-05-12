@@ -71,13 +71,13 @@ front_matter:
   kind: map_summary
   kicker: SIX REGIONS, ONE COUNTRY
   title: Map Summary
-  deck: Where to find each chapter. The regions are ordered roughly west to east, start with whichever your weather window suits.
+  deck: Where to find each chapter.
   region_order:
+  - eastern
   - central
   - valais
   - fribourg
   - western
-  - eastern
   - ticino
   - beyond
 # `my_top_6_famous_spots` and `my_top_6_hidden_gems` were `kind: top_six`
@@ -85,52 +85,8 @@ front_matter:
 # They've moved to dedicated collection pages (/full/famous-gems/ and
 # /full/hidden-gems/) so the chapter view stays intro-only.
 chapters:
-- id: central
-  number: '01'
-  name: Central Switzerland
-  intro: Waterfalls, glacier lakes and iron bridges strung across gorges so deep they hum. The heart of this guide. Twelve spots from Adelboden to the Grimsel Pass.
-  description: Waterfalls, glacier lakes, the Hardergrat ridge.
-  color:
-  - 0.69
-  - 0.65
-  - 0.48
-  cover_image: chapters/central.jpg
-  cover_credit: dimitri_karastelev_unsplash
-- id: valais
-  number: '02'
-  name: Valais
-  intro: High alpine. Zermatt and the Matterhorn, glacier lakes, Riffelsee reflections. The chapter where Switzerland looks like its postcards. With room still for the ones nobody has printed yet.
-  description: Matterhorn country. Glaciers, ice caves, high passes.
-  color:
-  - 0.92
-  - 0.72
-  - 0.75
-  cover_image: chapters/valais.jpg
-  cover_credit: ernst_burki_unsplash
-- id: fribourg
-  number: '03'
-  name: Fribourg
-  intro: Cheese country, jagged pre-alps, and a handful of lakes that should be more famous than they are. The canton that looks like the cover of every Swiss guidebook. And still has corners all to yourself.
-  description: Hidden lakes and the Gastlosen limestone wall.
-  color:
-  - 0.85
-  - 0.85
-  - 0.82
-  cover_image: chapters/fribourg.jpg
-  cover_credit: xavier_von_erlach_unsplash_2
-- id: western
-  number: '04'
-  name: Western Switzerland
-  intro: The Léman arc, the Jura, and a slice of the Chablais. Vineyards down low, limestone cliffs up high, and a lake at the middle of everything. The most underrated quarter of the country for photographers.
-  description: Vineyards, lakeside cliffs, quieter roads.
-  color:
-  - 0.8
-  - 0.88
-  - 0.62
-  cover_image: chapters/western.jpg
-  cover_credit: tcheucestbeau
 - id: eastern
-  number: '05'
+  number: '01'
   name: Eastern Switzerland
   intro: Appenzell chalets, Glarus waterfalls, turquoise dam lakes, and the Engadin glaciers. This is where Switzerland gets quieter, higher, and a bit stranger. My favourite part of the country to explore
     at my own pace.
@@ -141,6 +97,50 @@ chapters:
   - 0.66
   cover_image: chapters/eastern.jpg
   cover_credit: leon.helg
+- id: central
+  number: '02'
+  name: Central Switzerland
+  intro: Waterfalls, glacier lakes and iron bridges strung across gorges so deep they hum. The heart of this guide. Twelve spots from Adelboden to the Grimsel Pass.
+  description: Waterfalls, glacier lakes, the Hardergrat ridge.
+  color:
+  - 0.69
+  - 0.65
+  - 0.48
+  cover_image: chapters/central.jpg
+  cover_credit: dimitri_karastelev_unsplash
+- id: valais
+  number: '03'
+  name: Valais
+  intro: High alpine. Zermatt and the Matterhorn, glacier lakes, Riffelsee reflections. The chapter where Switzerland looks like its postcards. With room still for the ones nobody has printed yet.
+  description: Matterhorn country. Glaciers, ice caves, high passes.
+  color:
+  - 0.92
+  - 0.72
+  - 0.75
+  cover_image: chapters/valais.jpg
+  cover_credit: ernst_burki_unsplash
+- id: fribourg
+  number: '04'
+  name: Fribourg
+  intro: Cheese country, jagged pre-alps, and a handful of lakes that should be more famous than they are. The canton that looks like the cover of every Swiss guidebook. And still has corners all to yourself.
+  description: Hidden lakes and the Gastlosen limestone wall.
+  color:
+  - 0.85
+  - 0.85
+  - 0.82
+  cover_image: chapters/fribourg.jpg
+  cover_credit: xavier_von_erlach_unsplash_2
+- id: western
+  number: '05'
+  name: Western Switzerland
+  intro: The Léman arc, the Jura, and a slice of the Chablais. Vineyards down low, limestone cliffs up high, and a lake at the middle of everything. The most underrated quarter of the country for photographers.
+  description: Vineyards, lakeside cliffs, quieter roads.
+  color:
+  - 0.8
+  - 0.88
+  - 0.62
+  cover_image: chapters/western.jpg
+  cover_credit: tcheucestbeau
 - id: ticino
   number: '06'
   name: Ticino
@@ -2973,9 +2973,6 @@ spots:
   image: spots/limmernsee/main.jpg
   image_credit: leon.helg
   photos:
-  - file: 04.jpg
-    credit: zimydakid
-    source_type: book
   - file: 05.jpg
     credit: zimydakid
     source_type: book
@@ -3599,12 +3596,6 @@ spots:
   title: Four more from the East
   deck: Pinned in my Google Maps but no proper photo for them yet. Worth the detour if you are in the area.
   entries:
-  - heading: MUTTENCHOPF
-    text: Mountain peak above the Klausen Pass. Quick scramble for the panorama, drone-friendly.
-    gps:
-      lat: 46.8514436
-      lng: 9.0150836
-    maps_url: https://www.google.com/maps/place/Muttenchopf/@46.8514436,9.0150836,17z/data=!3m1!4b1!4m6!3m5!1s0x47852383067be3d9:0x6accac70da2887ed!8m2!3d46.8514436!4d9.0150836
   - heading: HOHER KASTEN
     text: Appenzell ridge with a cable car to the top. Nice hikes radiate out from the summit station; pick your moment for the light.
     gps:
