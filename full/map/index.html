@@ -13,13 +13,31 @@
 <link rel="stylesheet" href="../preview.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <style>
-  /* Map page matches the Figma light-version: pale gray country
-   * silhouette on an off-white backdrop, blue dot-with-halo markers,
-   * minimal chrome. Photo lives in the popup on click. */
-  body { background: #f6f7f9; }
+  /* Map page — Figma light recipe with the same atmospheric
+   * treatment as the dark variant: subtle diagonal gradient with
+   * two soft cooler-tone glow blobs in opposite corners + a 1px
+   * dot-noise overlay. Reads as "premium paper" instead of flat
+   * gray, without ever leaving the light theme. */
+  body {
+    background:
+      radial-gradient(900px 600px at 18% 12%, rgba(0, 49, 98, 0.05) 0%, transparent 60%),
+      radial-gradient(700px 500px at 88% 92%, rgba(0, 49, 98, 0.04) 0%, transparent 60%),
+      linear-gradient(135deg, #fbfcfe 0%, #f3f5f9 60%, #ecf0f5 100%);
+    background-attachment: fixed;
+  }
   .map-shell { height: calc(100dvh - var(--topbar-h)); position: relative; isolation: isolate; }
-  #map { height: 100%; width: 100%; background: #f6f7f9; }
-  .leaflet-container { font-family: inherit; background: #f6f7f9; outline: 0; }
+  /* 1px dot-noise overlay (3px spacing), matches the dark version
+   * but in navy at 4% opacity so it reads as paper grain on light. */
+  .map-shell::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(0, 49, 98, 0.04) 1px, transparent 1px);
+    background-size: 3px 3px;
+    pointer-events: none;
+    z-index: 400;
+  }
+  #map { height: 100%; width: 100%; background: transparent; }
+  .leaflet-container { font-family: inherit; background: transparent; outline: 0; }
   .leaflet-interactive { outline: 0 !important; }
 
   /* Spot marker — uniform blue dot (no chapter tinting) with a soft
