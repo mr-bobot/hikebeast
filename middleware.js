@@ -24,7 +24,16 @@
 //   - per-page <meta robots> noindex on every generated HTML
 
 export const config = {
-  matcher: ['/full', '/full/:path*'],
+  // Skip auth on truly-public design assets so the Vercel edge can cache them
+  // for every visitor (including unauthenticated ones). The cache headers for
+  // each are configured in vercel.json. Auth-gated assets — spot photos
+  // (img/derivatives, img/m, img/thumbs, img/chapters, img/front_matter),
+  // spot data (map/spots-data.js, img/spot-images.js, map/switzerland.geojson)
+  // and every chapter HTML — still pass through this middleware.
+  matcher: [
+    '/full',
+    '/full/((?!preview\\.css$|preview\\.js$|social\\.js$|lib/|img/region-|img/thumbs/dimensions\\.js$).*)',
+  ],
 };
 
 const COOKIE_NAME = 'hb_full_auth';

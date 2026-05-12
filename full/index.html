@@ -198,13 +198,25 @@
     //     doorway into those pages.
     //   - default:  fall back to a regular photo (object-fit: cover).
     let src;
+    let srcset = '';
+    let sizes  = '';
     if (featurePhotoBox) {
       featurePhotoBox.classList.remove('is-intro', 'is-map');
       featurePhotoBox.style.removeProperty('--region-color');
     }
     if (ch.isIntro) {
       featurePhotoBox?.classList.add('is-intro');
-      src = '../images/intro-photos-transparent.png';
+      // WebP derivatives (built by scripts/build-intro-derivatives.mjs) shave
+      // the hero from ~1.94 MB PNG to ~32-210 KB depending on viewport.
+      src = '../images/intro-photos-transparent-w960.webp';
+      srcset = [
+        '../images/intro-photos-transparent-w480.webp 480w',
+        '../images/intro-photos-transparent-w960.webp 960w',
+        '../images/intro-photos-transparent-w1400.webp 1400w',
+      ].join(', ');
+      // The hero photo column is full-width on mobile and capped at
+      // roughly 480px on desktop where the card splits text/photo.
+      sizes = '(min-width: 900px) 480px, 100vw';
     } else if (ch.mapSvg) {
       featurePhotoBox?.classList.add('is-map');
       if (ch.color) featurePhotoBox?.style.setProperty('--region-color', ch.color);
@@ -215,11 +227,20 @@
       src = 'img/m/' + (ch.cover || '');
     }
 
-    if (!featureImg.src) {
+    function applyImg() {
       featureImg.src = src;
-      featureImg.removeAttribute('srcset');
-      featureImg.removeAttribute('sizes');
+      if (srcset) {
+        featureImg.setAttribute('srcset', srcset);
+        featureImg.setAttribute('sizes', sizes);
+      } else {
+        featureImg.removeAttribute('srcset');
+        featureImg.removeAttribute('sizes');
+      }
       featureImg.alt = ch.name;
+    }
+
+    if (!featureImg.src) {
+      applyImg();
       return;
     }
     if (featureSwapping) return;
@@ -228,10 +249,7 @@
     setTimeout(() => {
       const next = new Image();
       next.onload = () => {
-        featureImg.src = src;
-        featureImg.removeAttribute('srcset');
-        featureImg.removeAttribute('sizes');
-        featureImg.alt = ch.name;
+        applyImg();
         requestAnimationFrame(() => {
           featureImg.classList.remove('is-fading');
           featureSwapping = false;
