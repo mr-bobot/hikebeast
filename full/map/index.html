@@ -22,21 +22,21 @@
   .leaflet-container { font-family: inherit; background: #f6f7f9; outline: 0; }
   .leaflet-interactive { outline: 0 !important; }
 
-  /* Spot marker — solid accent-blue dot with a softer halo ring.
-   * The .thumb element is reused (so JS-set bg-image is harmless,
-   * just gets covered) and its background-color is overridden by
-   * the rules below. Sized small at low zoom, grows via --marker-scale. */
+  /* Spot marker — solid #003162 (Hikebeast deep navy) dot with a
+   * 2px white inner ring and a wider halo at 50% opacity, per
+   * Figma. The .thumb element is reused (JS-set bg-image is
+   * dropped via !important). */
   .spot-marker { background: transparent; border: 0; }
   .spot-marker .thumb {
     display: block;
     width: 14px; height: 14px;
     border-radius: 50%;
-    background-image: none !important;  /* drop the spot photo seed */
-    background-color: var(--accent, #0071e3);
+    background-image: none !important;
+    background-color: #003162;
     border: 2px solid #ffffff;
     box-shadow:
-      0 0 0 6px rgba(0, 113, 227, 0.18),
-      0 2px 6px rgba(0, 0, 0, 0.18);
+      0 0 0 6px rgba(0, 49, 98, 0.50),
+      0 2px 6px rgba(0, 0, 0, 0.15);
     transition: transform 180ms ease, box-shadow 180ms ease;
     cursor: pointer;
     transform: scale(var(--marker-scale, 1)) translateZ(0);
@@ -46,8 +46,8 @@
   .spot-marker:hover .thumb {
     transform: scale(calc(var(--marker-scale, 1) * 1.35)) translateZ(0);
     box-shadow:
-      0 0 0 8px rgba(0, 113, 227, 0.22),
-      0 4px 10px rgba(0, 0, 0, 0.22);
+      0 0 0 8px rgba(0, 49, 98, 0.50),
+      0 4px 10px rgba(0, 0, 0, 0.20);
   }
   @media (hover: none) {
     .spot-marker .thumb { transition: none; }
