@@ -288,6 +288,10 @@
   // other cantons stay white. Styled via geoLayer.setStyle() in
   // paintGeoStyle() below — called on every chapter-state change.
   let geoLayer = null;
+  // Outline color shared by every canton path: #003162 at 50% opacity,
+  // per Figma — a soft navy hairline around Switzerland and between
+  // cantons.
+  const CANTON_OUTLINE = 'rgba(0, 49, 98, 0.50)';
   function styleCanton(feature) {
     const ch = CANTON_CHAPTER[feature.properties.name];
     const total = (typeof allChapters !== 'undefined') ? allChapters.size : 0;
@@ -298,17 +302,15 @@
       // accent color so the active area glows over the pale country.
       const rgb = REGION_COLOR_BY_CH[ch];
       return {
-        color: '#d4d6dc', weight: 1,
+        color: CANTON_OUTLINE, weight: 1,
         fillColor: 'rgb(' + rgb + ')',
         fillOpacity: 0.55, lineJoin: 'round',
       };
     }
     // Default landing (all chapters on) AND non-active cantons in an
-    // isolated state: subtle pale fill with light gray hairline outline.
-    // Matches the Figma — country reads as a uniform calm silhouette,
-    // the blue dots are the figure on top.
+    // isolated state: subtle pale fill with the navy hairline outline.
     return {
-      color: '#d4d6dc', weight: 1,
+      color: CANTON_OUTLINE, weight: 1,
       fillColor: '#eceef2',
       fillOpacity: 1, lineJoin: 'round',
     };
