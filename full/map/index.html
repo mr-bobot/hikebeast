@@ -28,12 +28,13 @@
    * (chapter color); !important here wins so every dot reads as the
    * brand blue. background-image:none drops the photo seed. */
   .spot-marker { background: transparent; border: 0; }
+  /* Default = dots mode: blue dot with light halo, per Figma. */
   .spot-marker .thumb {
     display: block;
     width: 14px; height: 14px;
     border-radius: 50%;
-    background-image: none !important;
-    background-color: #0071E3 !important;
+    background-image: none;
+    background-color: #0071E3;
     border: 2px solid #ffffff;
     box-shadow:
       0 0 0 6px rgba(0, 113, 227, 0.10),
@@ -49,6 +50,28 @@
     box-shadow:
       0 0 0 8px rgba(0, 113, 227, 0.14),
       0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  /* Cards mode (toggled on body): show photo thumbnails using the
+   * --thumb-img CSS variable that the JS sets inline on each marker
+   * at build time. Falls back to a neutral fallback color when a
+   * spot has no photo (no var resolves to "none" by default). */
+  body.markers-cards .spot-marker .thumb {
+    width: 42px; height: 52px;
+    border-radius: 8px;
+    background-image: var(--thumb-img, none);
+    background-color: #f5f5f5;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #ffffff;
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.06),
+      0 3px 8px rgba(0, 0, 0, 0.18);
+  }
+  body.markers-cards .spot-marker:hover .thumb {
+    transform: scale(calc(var(--marker-scale, 1) * 1.35)) translateZ(0);
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.06),
+      0 10px 22px rgba(0, 0, 0, 0.28);
   }
   @media (hover: none) {
     .spot-marker .thumb { transition: none; }
@@ -203,6 +226,10 @@
 <div class="map-shell">
   <div id="map"></div>
   <div class="map-controls">
+    <button type="button" class="fav-toggle" id="markerModeToggle" aria-pressed="false" title="Show photo cards instead of dots">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span>Cards</span>
+    </button>
     <button type="button" class="fav-toggle" id="favToggle" aria-pressed="false" title="Show only favorites">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       <span>Saved</span>
@@ -355,9 +382,14 @@
       const popupUrl = window.HB.photoUrl({
         photoId: s.imagePhotoId, image: s.image, width: 1000, prefix: '../',
       });
+      // Pass the photo URL as a CSS custom property (--thumb-img) so
+      // the CSS can decide whether to render it (cards mode) or skip
+      // it (dots mode). Background-color (chapter tint) is no longer
+      // useful since the dot-mode rule paints solid blue and the
+      // card-mode rule paints a neutral fallback — drop it.
       const styleAttr = thumbUrl
-        ? "background-image: url('" + thumbUrl + "'); background-color: rgb(" + s.color + ");"
-        : "background-color: rgb(" + s.color + ");";
+        ? "--thumb-img: url('" + thumbUrl + "');"
+        : "";
       const iconSize = isMobile ? [36, 44] : [46, 56];
       const icon = L.divIcon({
         className: 'spot-marker',
@@ -460,6 +492,31 @@
     favToggle.title = favOnly ? 'Show all spots' : 'Show only favorites';
     applyFavFilter();
     refreshFavBadge();
+  });
+
+  // Marker-mode toggle: switch between dots (default, Figma look)
+  // and photo cards (the original Pinterest-sticker treatment).
+  // Persists to localStorage per device so the choice survives a
+  // reload.
+  const MARKER_MODE_KEY = 'hb:map:marker-mode';
+  const markerModeBtn = document.getElementById('markerModeToggle');
+  function applyMarkerMode(mode) {
+    const isCards = mode === 'cards';
+    document.body.classList.toggle('markers-cards', isCards);
+    markerModeBtn.classList.toggle('is-on', isCards);
+    markerModeBtn.setAttribute('aria-pressed', String(isCards));
+    markerModeBtn.title = isCards ? 'Show dots instead' : 'Show photo cards instead of dots';
+    const labelEl = markerModeBtn.querySelector('span');
+    if (labelEl) labelEl.textContent = isCards ? 'Dots' : 'Cards';
+  }
+  try {
+    const saved = localStorage.getItem(MARKER_MODE_KEY);
+    if (saved === 'cards') applyMarkerMode('cards');
+  } catch {}
+  markerModeBtn.addEventListener('click', () => {
+    const next = document.body.classList.contains('markers-cards') ? 'dots' : 'cards';
+    applyMarkerMode(next);
+    try { localStorage.setItem(MARKER_MODE_KEY, next); } catch {}
   });
 
   // Repaint when favorites change in another tab or via the social.js heart.
