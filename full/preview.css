@@ -28,6 +28,20 @@ html, body { margin: 0; padding: 0; }
 
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
+/* Users who've opted into "Reduce Motion" at the OS level (System
+ * Settings / iOS Accessibility) get a freeze on transitions + animations
+ * + smooth-scroll. The home hero carousel also stops auto-rotating; see
+ * the matching matchMedia check in full/index.html. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   min-height: 100dvh;
   color: var(--fg);
@@ -3721,8 +3735,22 @@ body.has-rail .topbar .hb-nav { display: none; }
      * column and the search bar drifts off-center to the left. */
     grid-template-columns: 1fr;
     gap: 0;
+    /* Sticky + backdrop-filter recomposites every scroll frame on
+     * mobile, which trashes scroll FPS on low-end Androids. Solid
+     * background, no blur — the visual difference is invisible on
+     * a 360 px wide topbar. Desktop keeps the translucent look. */
+    background: #fff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
   .home-topbar-actions { display: none; }
+  /* Same reasoning as .home-topbar: the chapter/spot .topbar is sized
+   * to 0 height on mobile (see --topbar-h above) but still creates a
+   * compositing layer because of the blur. Drop it. */
+  .topbar {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 
   body.has-rail { padding-left: 0; }
   body.has-rail.rail-expanded { padding-left: 0; }
