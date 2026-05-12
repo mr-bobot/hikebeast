@@ -1010,8 +1010,9 @@
   // section as a special "front matter" entry, visually separated from the
   // seven regional chapters by a divider.
   // Cover paths point at the build-image-derivatives output. Intro thumb
-  // is a JPG copied by build-static-assets from assets/front_matter/.
-  const RAIL_INTRO_CHAPTER = { id: 'intro', label: 'Introduction', cover: 'front_matter/page_05.jpg' };
+  // uses a WebP derivative built by scripts/build-front-matter-derivatives.mjs;
+  // matches the sidebar thumb on every chapter page.
+  const RAIL_INTRO_CHAPTER = { id: 'intro', label: 'Introduction', cover: 'front_matter/page_05-w192.webp' };
   const RAIL_CHAPTERS = [
     { id: 'central',  label: 'Central',             cover: 'chapters/central/w400.webp' },
     { id: 'valais',   label: 'Valais',              cover: 'chapters/valais/w400.webp' },

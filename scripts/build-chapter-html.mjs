@@ -78,21 +78,43 @@ const DERIVATIVES = join(FULL, "img", "derivatives");
 const CHAPTER_DERIVATIVES = join(FULL, "img", "chapters");
 function primarySrc(spotId) {
   const photoId = `${spotId}_p0`;
-  return `../img/derivatives/${photoId}/w1800.webp`;
+  return `../img/derivatives/${photoId}/w1000.webp`;
+}
+// Returns the {srcset, sizes} pair for a spot photo derivative. Combined
+// with src=… this lets the browser pick the right WebP variant for the
+// viewport instead of pulling the 1800-wide one everywhere.
+function spotPhotoSrcset(photoId) {
+  return [400, 1000, 1800]
+    .map(w => `../img/derivatives/${photoId}/w${w}.webp ${w}w`)
+    .join(", ");
 }
 // Spread images live alongside the parent spot's photos. yamlSrc looks
 // like "spots/<parentSpotId>/<file>"; resolve to the matching derivative.
 function spreadImgSrc(yamlSrc) {
-  if (!yamlSrc) return `../img/derivatives/_missing/w1800.webp`;
+  if (!yamlSrc) return `../img/derivatives/_missing/w1000.webp`;
   const m = yamlSrc.match(/^spots\/([^/]+)\/(.+)$/);
   if (!m) return yamlSrc;
   const [, parentSpotId, fileName] = m;
   const idx = spotPhotoIndex(parentSpotId, fileName);
-  if (idx < 0) return `../img/derivatives/${parentSpotId}_p0/w1800.webp`;
-  return `../img/derivatives/${parentSpotId}_p${idx}/w1800.webp`;
+  if (idx < 0) return `../img/derivatives/${parentSpotId}_p0/w1000.webp`;
+  return `../img/derivatives/${parentSpotId}_p${idx}/w1000.webp`;
+}
+function spreadImgSrcset(yamlSrc) {
+  if (!yamlSrc) return "";
+  const m = yamlSrc.match(/^spots\/([^/]+)\/(.+)$/);
+  if (!m) return "";
+  const [, parentSpotId, fileName] = m;
+  const idx = spotPhotoIndex(parentSpotId, fileName);
+  const photoId = idx < 0 ? `${parentSpotId}_p0` : `${parentSpotId}_p${idx}`;
+  return spotPhotoSrcset(photoId);
 }
 function chapterCoverSrc(chapterId) {
-  return `../img/chapters/${chapterId}/w1800.webp`;
+  return `../img/chapters/${chapterId}/w1000.webp`;
+}
+function chapterCoverSrcset(chapterId) {
+  return [400, 1000, 1800]
+    .map(w => `../img/chapters/${chapterId}/w${w}.webp ${w}w`)
+    .join(", ");
 }
 function chapterCoverThumbSrc(chapterId) {
   return `../img/chapters/${chapterId}/w400.webp`;
@@ -141,7 +163,7 @@ function renderSidebar(currentChapter) {
     `  <a class="sb-home" href="../index.html" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>`,
   );
   items.push(
-    `  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05.jpg" alt="" /><span class="lbl">Intro</span></a>`,
+    `  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl">Intro</span></a>`,
   );
   for (const chap of content.chapters) {
     const isCur = chap.id === currentChapter ? " is-current" : "";
@@ -158,8 +180,9 @@ function renderCover(chapter) {
   // It keeps the photo cover. All other chapters use the cv-map variant
   // with the region SVG on a dark editorial backdrop tinted by --region-color.
   if (chapter.id === "beyond") {
+    // Photo cover is the LCP for this chapter — eager + fetchpriority + srcset.
     return `    <section class="slide slide-cover" id="cover">
-  <img class="cv-img" src="${chapterCoverSrc(chapter.id)}" alt="" />
+  <img class="cv-img" src="${chapterCoverSrc(chapter.id)}" srcset="${chapterCoverSrcset(chapter.id)}" sizes="100vw" alt="" fetchpriority="high" decoding="async" />
   <div class="cv-content">
     <p class="cv-kicker">Region</p>
     <h1>${escapeHtml(chapter.name)}</h1>
@@ -169,7 +192,7 @@ function renderCover(chapter) {
   }
   return `    <section class="slide slide-cover" id="cover" style="--region-color: ${colorTriple(chapter.color)};">
   <div class="cv-map">
-    <img src="../img/region-${chapter.id}.svg" alt="${escapeHtml(chapter.name)} on the Swiss map" />
+    <img src="../img/region-${chapter.id}.svg" alt="${escapeHtml(chapter.name)} on the Swiss map" fetchpriority="high" decoding="async" />
   </div>
   <div class="cv-content">
     <p class="cv-kicker">Region</p>
@@ -280,9 +303,12 @@ ${cells}
 function renderSpotTile(spot) {
   // Compact tile that links to the spot's detail page. Used inside the
   // chapter TOC grid (replaces the old per-spot scroll-through cards).
+  // Grid view is hidden behind a toggle, so every image is lazy + small.
+  const photoId = `${spot.id}_p0`;
+  const srcset = spotPhotoSrcset(photoId);
   return `    <a class="ch-tile" href="../spot/${escapeHtml(spot.id)}/" title="${escapeHtml(spot.title)}">
       <div class="ch-tile-photo">
-        <img src="${primarySrc(spot.id)}" alt="${escapeHtml(spot.title)}" loading="lazy" />
+        <img src="${primarySrc(spot.id)}" srcset="${srcset}" sizes="(min-width: 900px) 320px, 45vw" alt="${escapeHtml(spot.title)}" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">${escapeHtml(spot.kicker || "")}</p>
@@ -291,7 +317,7 @@ function renderSpotTile(spot) {
     </a>`;
 }
 
-function renderSpotEbookCard(spot) {
+function renderSpotEbookCard(spot, spotIdx) {
   // Large reader-view card for the chapter scroll (ebook mode). Photo
   // on the left, content on the right (stacks on mobile). Uses the
   // `subheadline` field when set; falls back to `deck`. Body paragraphs
@@ -303,9 +329,16 @@ function renderSpotEbookCard(spot) {
   // social.js injectMultiImage produces (slides + counter + dots +
   // chevron arrows + credit pill), so chapter and spot-detail share
   // identical carousel visuals.
+  //
+  // spotIdx (0-based) lets us mark only the first spot's first photo as
+  // eager+LCP; all other photos are lazy. The chapter used to ship 26+
+  // eager w1800 WebPs on first paint — most below the fold — which made
+  // chapter navigation feel sluggish on desktop.
   const subhead = spot.subheadline || spot.deck || "";
   const kicker = spot.kicker || "HIDDEN GEMS";
   const href = `../spot/${spot.id}/`;
+  const isFirstSpot = spotIdx === 0;
+  const sizes = "(min-width: 900px) 600px, 90vw";
 
   const files = spotPhotoFiles(spot.id);
   const count = Math.max(1, files.length);
@@ -314,15 +347,25 @@ function renderSpotEbookCard(spot) {
 
   let photosBlock;
   if (count <= 1) {
+    const photoId = `${spot.id}_p0`;
+    const srcset = spotPhotoSrcset(photoId);
+    const loading = isFirstSpot ? "eager" : "lazy";
+    const fp = isFirstSpot ? ` fetchpriority="high"` : "";
     // Plain image — no carousel, no dots, no counter.
     photosBlock = `      <div class="cl-photos">
-        <img src="${primarySrc(spot.id)}" alt="${escapeHtml(spot.title)}" loading="lazy" />
+        <img src="${primarySrc(spot.id)}" srcset="${srcset}" sizes="${sizes}" alt="${escapeHtml(spot.title)}" loading="${loading}"${fp} />
         ${creditText ? `<span class="credit-pill">${creditText}</span>` : ""}
       </div>`;
   } else {
-    const slides = Array.from({ length: count }, (_, i) =>
-      `        <img class="hb-slide${i === 0 ? " is-current" : ""}" src="../img/derivatives/${spot.id}_p${i}/w1800.webp" alt="${i === 0 ? escapeHtml(spot.title) : ""}" loading="${i === 0 ? "eager" : "lazy"}" draggable="false" />`,
-    ).join("\n");
+    const slides = Array.from({ length: count }, (_, i) => {
+      const photoId = `${spot.id}_p${i}`;
+      const isLcp = isFirstSpot && i === 0;
+      const loading = isLcp ? "eager" : "lazy";
+      const fp = isLcp ? ` fetchpriority="high"` : "";
+      const srcset = spotPhotoSrcset(photoId);
+      const src = `../img/derivatives/${photoId}/w1000.webp`;
+      return `        <img class="hb-slide${i === 0 ? " is-current" : ""}" src="${src}" srcset="${srcset}" sizes="${sizes}" alt="${i === 0 ? escapeHtml(spot.title) : ""}" loading="${loading}"${fp} draggable="false" />`;
+    }).join("\n");
     const dotSpans = Array.from({ length: count }, (_, i) =>
       `<span class="${i === 0 ? "is-on" : ""}"></span>`,
     ).join("");
