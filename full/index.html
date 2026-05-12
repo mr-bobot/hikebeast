@@ -61,7 +61,10 @@
         </a>
       </div>
       <div class="feature-photo">
-        <img id="featureImg" src="" alt="" fetchpriority="high" decoding="async" />
+        <!-- width/height match the intro polaroid's intrinsic aspect (1868×1260 ≈ 3:2),
+             so the browser reserves the right vertical slot before the WebP decodes —
+             prevents a layout shift between text-only first paint and image paint. -->
+        <img id="featureImg" src="" alt="" width="1868" height="1260" fetchpriority="high" decoding="async" />
         <div class="feature-dots" id="featureDots"></div>
       </div>
     </article>
@@ -276,13 +279,18 @@
   // actually parse the title before the next photo lands. Paused on
   // hidden tabs (visibilitychange) AND when scrolled out of view
   // (IntersectionObserver) so the timer doesn't sit there decoding new
-  // images every 9s for a hero the user has scrolled past.
+  // images every 9s for a hero the user has scrolled past. Honors the
+  // OS-level "Reduce Motion" toggle by never starting the timer at all
+  // — users on iOS Accessibility / macOS Reduce Motion / Android prefer
+  // not to see motion-prone UI auto-cycle.
   const FEATURE_INTERVAL = 9000;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let featureTimer = null;
   let featureInView = true;
   function startFeatureTimer() {
     if (featureTimer) return;
     if (document.hidden || !featureInView) return;
+    if (reducedMotion.matches) return;
     featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
   }
   function stopFeatureTimer() {
