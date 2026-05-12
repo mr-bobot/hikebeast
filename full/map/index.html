@@ -158,10 +158,13 @@
   .fav-toggle.is-empty { opacity: 0.55; cursor: default; }
   .fav-toggle.is-empty:hover { border-color: var(--hairline); }
 
-  /* Marker-mode switch — iOS-style on/off pill at bottom-right. */
+  /* Marker-mode switch — iOS-style on/off pill at top-left,
+   * positioned to the right of Leaflet's +/- zoom controls on
+   * desktop. Mobile hides the zoom controls, so it slides to the
+   * left edge. */
   .marker-mode-switch {
     position: absolute;
-    bottom: 18px; right: 18px;
+    top: 18px; left: 60px;
     z-index: 500;
     background: rgba(255, 255, 255, 0.94);
     -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
@@ -247,20 +250,19 @@
     .fav-toggle { height: 28px; padding: 6px 10px; font-size: 11px; }
     .fav-toggle svg { width: 12px; height: 12px; }
 
-    /* Mobile dots: smaller circle + tighter halo. 14px dots felt
-     * oversized at phone scale, clumped together in dense areas
-     * (Central Switzerland) and their 6px halos poked outside the
-     * country borders. 10px + 4px halo reads cleaner. */
+    /* Mobile dots: shrink from desktop's 14px to 12px with a 5px halo.
+     * Anything tighter (we tried 10/4) read too small to feel like
+     * solid markers; this hits the sweet spot. */
     .spot-marker .thumb {
-      width: 10px; height: 10px;
+      width: 12px; height: 12px;
       border-width: 1.5px;
       box-shadow:
-        0 0 0 4px rgba(0, 113, 227, 0.10),
+        0 0 0 5px rgba(0, 113, 227, 0.10),
         0 1px 4px rgba(0, 0, 0, 0.10);
     }
     .spot-marker:hover .thumb {
       box-shadow:
-        0 0 0 5px rgba(0, 113, 227, 0.14),
+        0 0 0 6px rgba(0, 113, 227, 0.14),
         0 2px 6px rgba(0, 0, 0, 0.15);
     }
     /* Cards mode on mobile keeps the original 32×40 thumbnail size. */
@@ -279,10 +281,14 @@
     .legend { display: none; }
     .leaflet-control-zoom { display: none; }
 
-    /* Pull the marker-mode switch above the tab bar on mobile. */
+    /* Mobile: marker-mode switch slides to the left edge (no zoom
+     * controls in the way), bumped down by the safe-area-inset-top
+     * so it clears the iOS status bar / notch. */
     .marker-mode-switch {
-      bottom: calc(14px + 64px + env(safe-area-inset-bottom));
-      right: 12px;
+      top: calc(12px + env(safe-area-inset-top));
+      left: 12px;
+      bottom: auto;
+      right: auto;
       padding: 6px 10px 6px 12px;
       font-size: 11px;
     }
