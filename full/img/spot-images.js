@@ -1252,10 +1252,6 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/limmernsee_p2/w1800.webp",
-      "credit": "zimydakid"
-    },
-    {
-      "src": "derivatives/limmernsee_p3/w1800.webp",
       "credit": "Minsu B."
     }
   ],
