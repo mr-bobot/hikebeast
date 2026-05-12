@@ -11,6 +11,18 @@
 <link rel="icon" type="image/jpeg" href="../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../images/favicon.jpg" />
 <link rel="stylesheet" href="preview.css" />
+<!-- Convex's wss handshake is the second slowest thing on first paint after
+     the hero image; preconnect lets the browser get DNS + TCP + TLS out of
+     the way in parallel with HTML/CSS parse. inject-convex-url.mjs swaps
+     this host on staging/preview builds. -->
+<link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
+<!-- Preload the intro hero polaroid (slide 1 of the rotation) so it
+     downloads in parallel with HTML parse. Picks the right WebP via the
+     same srcset the <img> uses. -->
+<link rel="preload" as="image"
+      imagesrcset="../images/intro-photos-transparent-w480.webp 480w, ../images/intro-photos-transparent-w960.webp 960w, ../images/intro-photos-transparent-w1400.webp 1400w"
+      imagesizes="(min-width: 900px) 480px, 100vw"
+      fetchpriority="high" />
 </head>
 <body>
 
@@ -49,7 +61,7 @@
         </a>
       </div>
       <div class="feature-photo">
-        <img id="featureImg" src="" alt="" />
+        <img id="featureImg" src="" alt="" fetchpriority="high" decoding="async" />
         <div class="feature-dots" id="featureDots"></div>
       </div>
     </article>
@@ -262,13 +274,35 @@
 
   // Slower cadence than YouTube's typical 5s -- 9s gives readers time to
   // actually parse the title before the next photo lands. Paused on
-  // hidden tabs to save battery.
+  // hidden tabs (visibilitychange) AND when scrolled out of view
+  // (IntersectionObserver) so the timer doesn't sit there decoding new
+  // images every 9s for a hero the user has scrolled past.
   const FEATURE_INTERVAL = 9000;
-  let featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
-  document.addEventListener('visibilitychange', () => {
+  let featureTimer = null;
+  let featureInView = true;
+  function startFeatureTimer() {
+    if (featureTimer) return;
+    if (document.hidden || !featureInView) return;
+    featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
+  }
+  function stopFeatureTimer() {
+    if (!featureTimer) return;
     clearInterval(featureTimer);
-    if (!document.hidden) featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
+    featureTimer = null;
+  }
+  startFeatureTimer();
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopFeatureTimer(); else startFeatureTimer();
   });
+  if (featureCard && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        featureInView = e.isIntersecting;
+        if (featureInView) startFeatureTimer(); else stopFeatureTimer();
+      }
+    }, { threshold: 0.01 });
+    io.observe(featureCard);
+  }
   function advanceFeature() {
     if (!featurePool.length) return;
     featureIdx = (featureIdx + 1) % featurePool.length;
@@ -301,8 +335,8 @@
       const dy = t.clientY - touchStartY;
       if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
         if (dx < 0) advanceFeature(); else retreatFeature();
-        clearInterval(featureTimer);
-        featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
+        stopFeatureTimer();
+        startFeatureTimer();
         swipeFired = true;
       }
     }, { passive: true });

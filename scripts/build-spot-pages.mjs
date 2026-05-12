@@ -119,6 +119,7 @@ function renderSpotPage(spot) {
 <link rel="icon" type="image/jpeg" href="../../../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../../../images/favicon.jpg" />
 <link rel="stylesheet" href="../../preview.css" />
+<link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
 <!-- Spot detail pages render a single slide full-bleed. The chapter

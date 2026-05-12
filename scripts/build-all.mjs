@@ -11,6 +11,8 @@
 //   7. inject-convex-url — swap the prod Convex URL with $CONVEX_URL when
 //      it differs (staging / preview deploys); no-op for prod builds and
 //      for any local build without CONVEX_URL set.
+//   8. minify-assets — in-place CSS/JS minification (runs ONLY on Vercel
+//      via VERCEL=1; local builds keep readable preview.css / social.js).
 //
 // Convex seeding is intentionally NOT part of this — `npm run seed` runs it
 // separately, since it pushes to a live deployment.
@@ -32,6 +34,7 @@ const STEPS = [
   "build-spot-images.mjs",
   "inject-wildcamping-to-sidecar.mjs",
   "inject-convex-url.mjs",
+  "build-minify-assets.mjs",
 ];
 
 for (const step of STEPS) {
