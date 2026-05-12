@@ -181,9 +181,11 @@ function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId, s
             Save spots and sync them across your devices.
           </p>
 
+          <!-- Secondary CTA — outlined to differentiate from the primary
+               webapp button above. Same shape and size for symmetry. -->
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
-            <td style="border-radius:999px;background:#1d1d1f;">
-              <a href="${downloadUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Download the guide</a>
+            <td style="border-radius:999px;background:#ffffff;border:1.5px solid #1d1d1f;">
+              <a href="${downloadUrl}" style="display:inline-block;padding:12.5px 26.5px;color:#1d1d1f;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Download the guide</a>
             </td>
           </tr></table>
 
@@ -288,9 +290,10 @@ function purchaseEmailDeHtml({ firstName, downloadUrl, amountFormatted, orderId,
             Speichere deine Spots und synce sie geräteübergreifend.
           </p>
 
+          <!-- Secondary CTA — outlined, parallels the English template. -->
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
-            <td style="border-radius:999px;background:#1d1d1f;">
-              <a href="${downloadUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Guide herunterladen</a>
+            <td style="border-radius:999px;background:#ffffff;border:1.5px solid #1d1d1f;">
+              <a href="${downloadUrl}" style="display:inline-block;padding:12.5px 26.5px;color:#1d1d1f;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Guide herunterladen</a>
             </td>
           </tr></table>
 
