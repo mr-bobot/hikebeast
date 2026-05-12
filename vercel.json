@@ -81,6 +81,90 @@
       ]
     },
     {
+      "source": "/full/preview.css",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/social.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/preview.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/lib/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/region-:slug.svg",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/thumbs/dimensions.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/img/derivatives/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/m/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/thumbs/:slug.jpg",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/chapters/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/front_matter/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/map/spots-data.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=300, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/img/spot-images.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=300, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/map/switzerland.geojson",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
       "source": "/map/success/(.*)",
       "headers": [
         {
