@@ -51,7 +51,12 @@ function renderCredit(key) {
 // Spot detail pages live at /full/spot/<spotId>/index.html, so every
 // reference to /full/img/... goes up two levels.
 function primarySrc(spotId) {
-  return `../../img/derivatives/${spotId}_p0/w1800.webp`;
+  return `../../img/derivatives/${spotId}_p0/w1000.webp`;
+}
+function primarySrcset(spotId) {
+  return [400, 1000, 1800, 2800]
+    .map(w => `../../img/derivatives/${spotId}_p0/w${w}.webp ${w}w`)
+    .join(", ");
 }
 
 const MAPS_PIN_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
@@ -77,7 +82,7 @@ function renderSpotCard(spot) {
 
   return `    <section class="slide slide-spot" id="${escapeHtml(spot.id)}">
   <div class="sp-photo">
-    <img src="${primarySrc(spot.id)}" alt="${escapeHtml(spot.title)}" />
+    <img src="${primarySrc(spot.id)}" srcset="${primarySrcset(spot.id)}" sizes="(min-width: 768px) 800px, 100vw" alt="${escapeHtml(spot.title)}" fetchpriority="high" decoding="async" />
     ${creditPill}
   </div>
   <div class="sp-body">

@@ -29,6 +29,8 @@ const STEPS = [
   "build-image-derivatives.mjs",
   "build-intro-derivatives.mjs",
   "build-static-assets.mjs",
+  "build-front-matter-derivatives.mjs",
+  "build-geojson-minify.mjs",
   "build-chapter-html.mjs",
   "build-spot-pages.mjs",
   "build-spot-images.mjs",
