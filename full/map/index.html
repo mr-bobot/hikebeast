@@ -158,6 +158,58 @@
   .fav-toggle.is-empty { opacity: 0.55; cursor: default; }
   .fav-toggle.is-empty:hover { border-color: var(--hairline); }
 
+  /* Marker-mode switch — iOS-style on/off pill at bottom-right. */
+  .marker-mode-switch {
+    position: absolute;
+    bottom: 18px; right: 18px;
+    z-index: 500;
+    background: rgba(255, 255, 255, 0.94);
+    -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
+    border: 1px solid var(--hairline); border-radius: 999px;
+    padding: 8px 12px 8px 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: inherit; font-size: 12px; font-weight: 600;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .marker-mode-switch .switch {
+    position: relative;
+    display: inline-block;
+    width: 32px; height: 20px;
+    flex-shrink: 0;
+  }
+  .marker-mode-switch .switch input {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    margin: 0; opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .marker-mode-switch .track {
+    position: absolute; inset: 0;
+    background: #e5e5ea;
+    border-radius: 999px;
+    transition: background 180ms ease;
+  }
+  .marker-mode-switch .knob {
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 16px; height: 16px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
+    transition: transform 200ms cubic-bezier(.2, .7, .3, 1);
+    pointer-events: none;
+  }
+  .marker-mode-switch:has(input:checked) .track { background: #34c759; }
+  .marker-mode-switch:has(input:checked) .knob { transform: translateX(12px); }
+
   /* Page topbar is hidden on the map view (light theme, edge-to-edge
    * canvas reads cleanest). Brand + Overview are still reachable via
    * the desktop rail and the mobile tab bar. */
@@ -226,16 +278,20 @@
 <div class="map-shell">
   <div id="map"></div>
   <div class="map-controls">
-    <button type="button" class="fav-toggle" id="markerModeToggle" aria-pressed="false" title="Show photo cards instead of dots">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-      <span>Cards</span>
-    </button>
     <button type="button" class="fav-toggle" id="favToggle" aria-pressed="false" title="Show only favorites">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       <span>Saved</span>
       <span class="fav-count" id="favToggleCount" hidden>0</span>
     </button>
   </div>
+  <label class="marker-mode-switch" title="Show photo cards instead of dots">
+    <span class="label">Cards</span>
+    <span class="switch">
+      <input type="checkbox" id="markerModeToggle" />
+      <span class="track" aria-hidden="true"></span>
+      <span class="knob" aria-hidden="true"></span>
+    </span>
+  </label>
   <aside class="legend" id="legend">
     <button class="legend-toggle" id="legendToggle" aria-expanded="false" aria-label="Show chapter filter">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
@@ -497,24 +553,20 @@
   // Marker-mode toggle: switch between dots (default, Figma look)
   // and photo cards (the original Pinterest-sticker treatment).
   // Persists to localStorage per device so the choice survives a
-  // reload.
+  // reload. iOS-style pill switch at the bottom-right of the map.
   const MARKER_MODE_KEY = 'hb:map:marker-mode';
-  const markerModeBtn = document.getElementById('markerModeToggle');
+  const markerModeInput = document.getElementById('markerModeToggle');
   function applyMarkerMode(mode) {
     const isCards = mode === 'cards';
     document.body.classList.toggle('markers-cards', isCards);
-    markerModeBtn.classList.toggle('is-on', isCards);
-    markerModeBtn.setAttribute('aria-pressed', String(isCards));
-    markerModeBtn.title = isCards ? 'Show dots instead' : 'Show photo cards instead of dots';
-    const labelEl = markerModeBtn.querySelector('span');
-    if (labelEl) labelEl.textContent = isCards ? 'Dots' : 'Cards';
+    markerModeInput.checked = isCards;
   }
   try {
     const saved = localStorage.getItem(MARKER_MODE_KEY);
     if (saved === 'cards') applyMarkerMode('cards');
   } catch {}
-  markerModeBtn.addEventListener('click', () => {
-    const next = document.body.classList.contains('markers-cards') ? 'dots' : 'cards';
+  markerModeInput.addEventListener('change', () => {
+    const next = markerModeInput.checked ? 'cards' : 'dots';
     applyMarkerMode(next);
     try { localStorage.setItem(MARKER_MODE_KEY, next); } catch {}
   });
