@@ -336,7 +336,7 @@
   }
 </style>
 </head>
-<body>
+<body class="markers-animating">
 
 <div class="topbar">
   <a class="brand" href="../index.html">
@@ -553,6 +553,24 @@
   }
   buildMarkers();
 
+  // Initial-load reveal: poll for markers to be rendered to the DOM
+  // (Leaflet renders on next frame after addLayer; Convex may rebuild
+  // a few hundred ms in). Once we find them, kick the animation
+  // exactly once, then stop polling. Hard cap at 5s so we don't loop
+  // forever if buildMarkers never produces anything.
+  let initialRevealStarted = false;
+  function tryInitialReveal() {
+    if (initialRevealStarted) return true;
+    if (!document.querySelectorAll('.spot-marker').length) return false;
+    initialRevealStarted = true;
+    playCardReveal();
+    return true;
+  }
+  const initialRevealPoll = setInterval(() => {
+    if (tryInitialReveal()) clearInterval(initialRevealPoll);
+  }, 80);
+  setTimeout(() => clearInterval(initialRevealPoll), 5000);
+
   // One-shot rebuild on the first Convex push so the missing spots (no
   // GPS or recently added) and derivative thumbnails appear without a
   // page reload. Further updates are ignored — the map is snapshot-only
@@ -564,6 +582,11 @@
     SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
     buildMarkers();
     if (typeof applyFavFilter === 'function') applyFavFilter();
+    // Convex catch-up rebuilt the markers — kick the entrance
+    // animation now (or no-op if it's already started). Wraps in
+    // requestAnimationFrame so Leaflet has a chance to paint the
+    // new DOM nodes before we query them.
+    requestAnimationFrame(tryInitialReveal);
   });
 
   // === Marker scale grows with zoom so spot thumbnails are legible up close
@@ -650,7 +673,7 @@
   function playCardReveal() {
     if (revealCleanup) { revealCleanup(); revealCleanup = null; }
     const markers = Array.from(document.querySelectorAll('.spot-marker'));
-    if (!markers.length) return;
+    if (!markers.length) return;  // caller handles retry
     markers.forEach(m => m.classList.remove('is-revealed'));
     document.body.classList.add('markers-animating');
     const timers = [];
@@ -678,15 +701,16 @@
 
   markerModeInput.addEventListener('change', () => {
     const next = markerModeInput.checked ? 'cards' : 'dots';
-    const wasCards = document.body.classList.contains('markers-cards');
     applyMarkerMode(next);
     try { localStorage.setItem(MARKER_MODE_KEY, next); } catch {}
-    // Only play the reveal when we actually moved from dots → cards.
-    if (next === 'cards' && !wasCards) playCardReveal();
-    // If we're going back to dots while an animation is mid-flight,
-    // bail out cleanly.
-    if (next === 'dots' && revealCleanup) { revealCleanup(); revealCleanup = null; }
+    // Both directions play the reveal so dots and cards each get the
+    // animated entrance. Cancels any in-flight reveal first.
+    playCardReveal();
   });
+
+  // (Initial-load reveal hooks: playInitialRevealOnce + its 2s fallback
+  // timer are declared earlier — before the Convex subscribe — so the
+  // subscribe callback can call them safely.)
 
   // Repaint when favorites change in another tab or via the social.js heart.
   if (window.HB && window.HB.favorites) {
