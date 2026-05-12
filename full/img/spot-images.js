@@ -51,6 +51,16 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
+  "central#rosenlaui_public_waterfall": [
+    {
+      "src": "derivatives/rosenlaui_public_waterfall_p0/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/rosenlaui_public_waterfall_p1/w1800.webp",
+      "credit": "Jkphotos"
+    }
+  ],
   "central#rosenlauifall": [
     {
       "src": "derivatives/rosenlauifall_p0/w1800.webp",
@@ -161,6 +171,20 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/tannhorn_p1/w1800.webp",
       "credit": "zimydakid"
+    }
+  ],
+  "central#augstmatthorn": [
+    {
+      "src": "derivatives/augstmatthorn_p0/w1800.webp",
+      "credit": "Cédric Streit"
+    },
+    {
+      "src": "derivatives/augstmatthorn_p1/w1800.webp",
+      "credit": "Gian Porsius"
+    },
+    {
+      "src": "derivatives/augstmatthorn_p2/w1800.webp",
+      "credit": "Jana Leu"
     }
   ],
   "central#lake_lucerne": [
@@ -335,6 +359,26 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/oeschinensee_p1/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/oeschinensee_p2/w1800.webp",
+      "credit": "Peter Elijah"
+    },
+    {
+      "src": "derivatives/oeschinensee_p3/w1800.webp",
+      "credit": "Dennis H."
+    },
+    {
+      "src": "derivatives/oeschinensee_p4/w1800.webp",
+      "credit": "Pascal Debrunner"
+    },
+    {
+      "src": "derivatives/oeschinensee_p5/w1800.webp",
+      "credit": "Manca Cadez"
+    },
+    {
+      "src": "derivatives/oeschinensee_p6/w1800.webp",
+      "credit": "Gabriel Cirelli"
     }
   ],
   "central#piz_gloria": [
@@ -389,6 +433,14 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/riffelsee_p2/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/riffelsee_p3/w1800.webp",
+      "credit": "Lukáš Konvica"
+    },
+    {
+      "src": "derivatives/riffelsee_p4/w1800.webp",
+      "credit": "Ilia Bronskyi"
     }
   ],
   "valais#zermatt_village": [
@@ -399,6 +451,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/zermatt_village_p1/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/zermatt_village_p2/w1800.webp",
+      "credit": "Daniel Cox"
     }
   ],
   "valais#riffelalp": [
@@ -1139,6 +1195,14 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/seealpsee_p1/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/seealpsee_p2/w1800.webp",
+      "credit": "Ilia Bronskyi"
+    },
+    {
+      "src": "derivatives/seealpsee_p3/w1800.webp",
+      "credit": "Simon Spring"
     }
   ],
   "eastern#ascher": [
@@ -1189,6 +1253,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/limmernsee_p2/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/limmernsee_p3/w1800.webp",
+      "credit": "Minsu B."
     }
   ],
   "eastern#muttseehutte": [
@@ -1351,6 +1419,38 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/klontalersee_p1/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/klontalersee_p2/w1800.webp",
+      "credit": "Gabriel Herter"
+    }
+  ],
+  "eastern#stoos_kapelle": [
+    {
+      "src": "derivatives/stoos_kapelle_p0/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/stoos_kapelle_p1/w1800.webp",
+      "credit": "Max Bürgi"
+    },
+    {
+      "src": "derivatives/stoos_kapelle_p2/w1800.webp",
+      "credit": "Claudio Schwarz"
+    }
+  ],
+  "eastern#pizol": [
+    {
+      "src": "derivatives/pizol_p0/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/pizol_p1/w1800.webp",
+      "credit": "Boris Baldinger"
+    },
+    {
+      "src": "derivatives/pizol_p2/w1800.webp",
+      "credit": "Vasyl Dizhak"
     }
   ],
   "eastern#falensee": [
@@ -1361,6 +1461,14 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/falensee_p1/w1800.webp",
       "credit": "Chris Henry"
+    },
+    {
+      "src": "derivatives/falensee_p2/w1800.webp",
+      "credit": "Bö Benkö"
+    },
+    {
+      "src": "derivatives/falensee_p3/w1800.webp",
+      "credit": "Ilia Bronskyi"
     }
   ],
   "eastern#morteratsch_glacier": [
