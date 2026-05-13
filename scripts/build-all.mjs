@@ -2,13 +2,17 @@
 //
 // Runs the full build pipeline in order:
 //   1. webp derivative ladder (assets/spots/* → full/img/derivatives)
-//   2. static asset copy (assets/ui, assets/front_matter → full/img)
-//   3. chapter HTML (content.yaml → full/<chapter>/index.html)
-//   4. spot detail pages (one per spot, pre-rendered)
-//   5. spot-images sidecar (content.yaml → full/img/spot-images.js)
-//   6. inject-convex-url — swap the prod Convex URL with $CONVEX_URL when
+//   2. webp derivatives of the intro polaroid hero (images/intro-*.webp)
+//   3. static asset copy (assets/ui, assets/front_matter → full/img),
+//      with region SVGs minified on the way out
+//   4. chapter HTML (content.yaml → full/<chapter>/index.html)
+//   5. spot detail pages (one per spot, pre-rendered)
+//   6. spot-images sidecar (content.yaml → full/img/spot-images.js)
+//   7. inject-convex-url — swap the prod Convex URL with $CONVEX_URL when
 //      it differs (staging / preview deploys); no-op for prod builds and
 //      for any local build without CONVEX_URL set.
+//   8. minify-assets — in-place CSS/JS minification (runs ONLY on Vercel
+//      via VERCEL=1; local builds keep readable preview.css / social.js).
 //
 // Convex seeding is intentionally NOT part of this — `npm run seed` runs it
 // separately, since it pushes to a live deployment.
@@ -23,12 +27,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const STEPS = [
   "build-image-derivatives.mjs",
+  "build-intro-derivatives.mjs",
   "build-static-assets.mjs",
+  "build-front-matter-derivatives.mjs",
+  "build-geojson-minify.mjs",
   "build-chapter-html.mjs",
   "build-spot-pages.mjs",
   "build-spot-images.mjs",
+  "build-spots-data.mjs",
+  "build-photo-dims.mjs",
   "inject-wildcamping-to-sidecar.mjs",
   "inject-convex-url.mjs",
+  "build-minify-assets.mjs",
 ];
 
 for (const step of STEPS) {
