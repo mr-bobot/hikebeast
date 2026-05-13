@@ -1863,6 +1863,66 @@ window.HB_SPOT_IMAGES = {
       "credit": "@syma_photography"
     }
   ],
+  "central#brisen": [
+    {
+      "src": "derivatives/brisen_p0/w1800.webp",
+      "credit": "@oliwear.j"
+    },
+    {
+      "src": "derivatives/brisen_p1/w1800.webp",
+      "credit": "@andeast"
+    }
+  ],
+  "central#engstlensee": [
+    {
+      "src": "derivatives/engstlensee_p0/w1800.webp",
+      "credit": "@oliwear.j"
+    },
+    {
+      "src": "derivatives/engstlensee_p1/w1800.webp",
+      "credit": "@juiz.mein.nidwalden"
+    },
+    {
+      "src": "derivatives/engstlensee_p2/w1800.webp",
+      "credit": "@visitswitzerland"
+    },
+    {
+      "src": "derivatives/engstlensee_p3/w1800.webp",
+      "credit": "@obwaldentourismus"
+    }
+  ],
+  "eastern#maloja_pass": [
+    {
+      "src": "derivatives/maloja_pass_p0/w1800.webp",
+      "credit": "@oliwear.j"
+    },
+    {
+      "src": "derivatives/maloja_pass_p1/w1800.webp",
+      "credit": "Johannes Hofmann"
+    },
+    {
+      "src": "derivatives/maloja_pass_p2/w1800.webp",
+      "credit": "@me.and.eloise"
+    }
+  ],
+  "ticino#ponte_tibetano": [
+    {
+      "src": "derivatives/ponte_tibetano_p0/w1800.webp",
+      "credit": "@oliwear.j"
+    },
+    {
+      "src": "derivatives/ponte_tibetano_p1/w1800.webp",
+      "credit": "@alnai1mi"
+    },
+    {
+      "src": "derivatives/ponte_tibetano_p2/w1800.webp",
+      "credit": "@alnai1mi"
+    },
+    {
+      "src": "derivatives/ponte_tibetano_p3/w1800.webp",
+      "credit": "@ludovicpizzera"
+    }
+  ],
   "valais#zinal_glacier": [
     {
       "src": "derivatives/zinal_glacier_p0/w1800.webp",
@@ -1871,6 +1931,104 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/zinal_glacier_p1/w1800.webp",
       "credit": "@oliwear.j"
+    }
+  ],
+  "eastern#grappelensee": [
+    {
+      "src": "derivatives/grappelensee_p0/w1800.webp",
+      "credit": "@oliwear.j"
+    },
+    {
+      "src": "derivatives/grappelensee_p1/w1800.webp",
+      "credit": "Ivan Louis"
+    },
+    {
+      "src": "derivatives/grappelensee_p2/w1800.webp",
+      "credit": "Janosch Diggelmann"
+    }
+  ],
+  "central#mount_pilatus": [
+    {
+      "src": "derivatives/mount_pilatus_p0/w1800.webp",
+      "credit": "Emanuel Kionke"
+    },
+    {
+      "src": "derivatives/mount_pilatus_p1/w1800.webp",
+      "credit": "Razvan Sassu"
+    },
+    {
+      "src": "derivatives/mount_pilatus_p2/w1800.webp",
+      "credit": "Emanuel Kionke"
+    }
+  ],
+  "central#wasserfall_finstersee": [
+    {
+      "src": "derivatives/wasserfall_finstersee_p0/w1800.webp",
+      "credit": "@daniel_staub_photo"
+    },
+    {
+      "src": "derivatives/wasserfall_finstersee_p1/w1800.webp",
+      "credit": "@michelrohner_fotografie"
+    },
+    {
+      "src": "derivatives/wasserfall_finstersee_p2/w1800.webp",
+      "credit": "@fotobolle"
+    }
+  ],
+  "valais#lac_bleu": [
+    {
+      "src": "derivatives/lac_bleu_p0/w1800.webp",
+      "credit": "@annamariastravel"
+    },
+    {
+      "src": "derivatives/lac_bleu_p1/w1800.webp",
+      "credit": "@annamariastravel"
+    }
+  ],
+  "eastern#wildsee": [
+    {
+      "src": "derivatives/wildsee_p0/w1800.webp",
+      "credit": "Claudio Schwarz"
+    },
+    {
+      "src": "derivatives/wildsee_p1/w1800.webp",
+      "credit": "@upsidenomads"
+    },
+    {
+      "src": "derivatives/wildsee_p2/w1800.webp",
+      "credit": "@travel_with_domi"
+    }
+  ],
+  "eastern#julier_pass": [
+    {
+      "src": "derivatives/julier_pass_p0/w1800.webp",
+      "credit": "Sepp Rutz"
+    },
+    {
+      "src": "derivatives/julier_pass_p1/w1800.webp",
+      "credit": "@conquerthecols"
+    },
+    {
+      "src": "derivatives/julier_pass_p2/w1800.webp",
+      "credit": "@pm.focus"
+    },
+    {
+      "src": "derivatives/julier_pass_p3/w1800.webp",
+      "credit": "@pm.focus"
+    }
+  ],
+  "beyond#refuge_du_lac_blanc": [
+    {
+      "src": "derivatives/refuge_du_lac_blanc_p0/w1800.webp",
+      "credit": "@doytcheva"
+    },
+    {
+      "src": "derivatives/refuge_du_lac_blanc_p1/w1800.webp",
+      "credit": "@max.belbeoch"
+    },
+    {
+      "src": "derivatives/refuge_du_lac_blanc_p2/w1800.webp",
+      "credit": "@janameerman"
     }
   ]
 };

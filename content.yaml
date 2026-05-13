@@ -1109,18 +1109,6 @@ spots:
   title: Three more from Central
   deck: Pinned in my Google Maps but no proper photo for them yet. Worth the detour if you are in the area.
   entries:
-  - heading: MOUNT PILATUS
-    text: 360 view above Lake Lucerne. Cable car or cog railway to the top. Crowded but the view earns it.
-    gps:
-      lat: 46.9795
-      lng: 8.2548
-    maps_url: https://www.google.com/maps/place/Mount+Pilatus/@46.9795,8.2548,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.9795!4d8.2548
-  - heading: WASSERFALL FINSTERSEE
-    text: Hidden waterfall in the Zug hinterland. Short walk in. Best after rain when it actually runs.
-    gps:
-      lat: 47.1641014
-      lng: 8.6355808
-    maps_url: https://www.google.com/maps/place/Wasserfall+Finstersee/@47.1641014,8.6355808,17z/data=!3m1!4b1!4m6!3m5!1s0x479aad0c46e30ca3:0xdbf376ce0d1d5094!8m2!3d47.1641014!4d8.6355808
   - heading: ÄLLGÄU LÜCKE
     text: Saddle on the Hardergrat ridge between Brienzer Rothorn and Tannhorn. Less obvious than the named summits, same view.
     gps:
@@ -2038,12 +2026,6 @@ spots:
   title: Six more from the Valais
   deck: Pinned in my Google Maps but no proper photos for them yet. Worth the detour if you are in the area.
   entries:
-  - heading: LAC BLEU
-    text: Tiny turquoise pool near Arolla. Short hike, big colour. The lake is small so the frame works close.
-    gps:
-      lat: 46.050484
-      lng: 7.4800854
-    maps_url: https://www.google.com/maps/place/Lac+Bleu/@46.050484,7.4800854,17z/data=!3m1!4b1!4m6!3m5!1s0x478f29661d9d8675:0x83e0a41c8432263a!8m2!3d46.050484!4d7.4800854
   - heading: HÄNGEBRÜCKE FÜRGANGEN - MÜHLEBACH
     text: Hanging bridge in the upper Goms valley. Quick to visit, and a good frame on a moody day.
     gps:
@@ -3647,18 +3629,6 @@ spots:
       lat: 47.2834865
       lng: 9.4851199
     maps_url: https://www.google.com/maps/place/Hoher+Kasten/@47.2834865,9.4851199,17z/data=!3m1!4b1!4m6!3m5!1s0x479b24afb641d585:0x6da317254da55368!8m2!3d47.2834865!4d9.4851199
-  - heading: JULIER PASS
-    text: Famous mountain road for photos. Drone work in winter is the move. Snow, silhouettes, big sky.
-    gps:
-      lat: 46.4701639
-      lng: 9.7177092
-    maps_url: https://www.google.com/maps/place/Julier+Pass/@46.4701639,9.7177092,17z/data=!3m1!4b1!4m6!3m5!1s0x47848149d54cdb2f:0x796a0f271166c816!8m2!3d46.4701639!4d9.7177092
-  - heading: WILDSEE
-    text: One of the five lakes on the Pizol trail. Linked to Wildsee by the rest of the loop. Worth a day if you have not been.
-    gps:
-      lat: 46.9705369
-      lng: 9.3946907
-    maps_url: https://www.google.com/maps/place/Wildsee/@46.9705369,9.3946907,17z/data=!3m1!4b1!4m6!3m5!1s0x4784ce1c2192eb89:0x3eb211fd6596844b!8m2!3d46.9705369!4d9.3946907
   image:
   image_credit: xxx
   maps_url:
@@ -4164,6 +4134,11 @@ spots:
   maps_url: https://maps.app.goo.gl/koVZkZUHBqN9T7rw7
   image: spots/brisen/main.jpeg
   image_credit: oliwear.j
+  photos:
+  - file: 02.jpg
+    credit: andeast
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/Cyi9PbgMX7W/"
   gps:
     lat: 46.8988
     lng: 8.45835
@@ -4189,6 +4164,19 @@ spots:
   maps_url: https://maps.app.goo.gl/cHFf2Xag4jrtEowH6
   image: spots/engstlensee/main.jpeg
   image_credit: oliwear.j
+  photos:
+  - file: 02.jpg
+    credit: juiz.mein.nidwalden
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/DN7kNvpDAyT/"
+  - file: 03.jpg
+    credit: visitswitzerland
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/DL5C7iKoQl_/"
+  - file: 04.jpg
+    credit: obwaldentourismus
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/DMpZulLvRip/"
   gps:
     lat: 46.7739067
     lng: 8.3563524
@@ -4211,6 +4199,15 @@ spots:
   maps_url: https://maps.app.goo.gl/1X7in51rPakADN2B6
   image: spots/maloja_pass/main.jpeg
   image_credit: oliwear.j
+  photos:
+  - file: 02.jpg
+    credit: johannes_hofmann_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/luftaufnahme-der-zickzackstrasse-auf-dem-berg-gW3ddTAKTJg"
+  - file: 03.jpg
+    credit: me.and.eloise
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/DVB309XipQr/"
   gps:
     lat: 46.3944258
     lng: 9.6932995
@@ -4233,6 +4230,19 @@ spots:
   maps_url: https://maps.app.goo.gl/PkCiA47rbgdSdsed6
   image: spots/ponte_tibetano/main.jpeg
   image_credit: oliwear.j
+  photos:
+  - file: 02.jpg
+    credit: alnai1mi
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/CjNuaHDsAZB/"
+  - file: 03.jpg
+    credit: alnai1mi
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/CjNuaHDsAZB/"
+  - file: 04.jpg
+    credit: ludovicpizzera
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/CGxg-8aBJiG/"
   gps:
     lat: 46.1950235
     lng: 8.9742868
@@ -4280,25 +4290,196 @@ spots:
   maps_url: https://www.google.com/maps/place/Gr%C3%A4ppelensee/@47.2113508,9.2872551,17z
   image: spots/grappelensee/main.jpg
   image_credit: oliwear.j
+  photos:
+  - file: 02.jpg
+    credit: ivan_louis_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/see-in-der-nahe-des-schneebedeckten-berges-unter-bewolktem-himmel-tagsuber-rZSu8DB46Gk"
+  - file: 03.jpg
+    credit: janosch_diggelmann_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/grune-baume-in-der-nahe-von-see-und-berg-tagsuber-unter-blauem-himmel-KIUv0rYG8H4"
   gps:
     lat: 47.2113508
     lng: 9.2872551
-- id: beyond_extras
+- id: mount_pilatus
+  chapter: central
+  kicker: 360 ABOVE LAKE LUCERNE
+  title: Mount Pilatus
+  deck: 360 view above Lake Lucerne. Cable car or cog railway to the top. Crowded but the view earns it.
+  body: []
+  region: Lucerne, Central Switzerland
+  access: Cable car (Kriens) or cog railway (Alpnachstad)
+  effort: None
+  best_light: Sunrise or sunset for the cog railway
+  wildCamping:
+    verdict: discouraged
+    reason: Pilatus summit is a developed tourist node with hotels. Use the campsites around Lake Lucerne; the cog railway runs early.
+    canton: Obwalden (OW) / Nidwalden (NW)
+  maps_url: https://www.google.com/maps/place/Mount+Pilatus/@46.9795,8.2548,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.9795!4d8.2548
+  image: spots/mount_pilatus/main.jpg
+  image_credit: emanuel_kionke_unsplash
+  photos:
+  - file: 02.jpg
+    credit: razvan_sassu_unsplash_2
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/schwarze-seilbahn-ODFhnzEUXHA"
+  - file: 03.jpg
+    credit: emanuel_kionke_unsplash_2
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/luftaufnahme-der-stadt-bei-nacht-B4PLUutWPoU"
+  gps:
+    lat: 46.9795
+    lng: 8.2548
+- id: wasserfall_finstersee
+  chapter: central
+  kicker: A HIDDEN WATERFALL IN THE ZUG HINTERLAND
+  title: Wasserfall Finstersee
+  deck: Hidden waterfall in the Zug hinterland. Short walk in. Best after rain when it actually runs.
+  body: []
+  region: Menzingen, Central Switzerland
+  access: Short walk from parking
+  effort: Easy
+  best_light: After heavy rain
+  wildCamping:
+    verdict: forbidden
+    reason: Forested hinterland with strict cantonal enforcement; this is a day spot. Use campsites around Zug.
+    canton: Zug (ZG)
+  maps_url: https://www.google.com/maps/place/Wasserfall+Finstersee/@47.1641014,8.6355808,17z/data=!3m1!4b1!4m6!3m5!1s0x479aad0c46e30ca3:0xdbf376ce0d1d5094!8m2!3d47.1641014!4d8.6355808
+  image: spots/wasserfall_finstersee/main.jpg
+  image_credit: daniel_staub_photo
+  photos:
+  - file: 02.jpg
+    credit: michelrohner_fotografie
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/CMAOwLTsyXe/"
+  - file: 03.jpg
+    credit: fotobolle
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/CGl2zEzHw79/"
+  gps:
+    lat: 47.1641014
+    lng: 8.6355808
+- id: lac_bleu
+  chapter: valais
+  kicker: A TINY TURQUOISE POOL NEAR AROLLA
+  title: Lac Bleu
+  deck: Tiny turquoise pool near Arolla. Short hike, big colour. The lake is small so the frame works close.
+  body: []
+  region: Arolla, Valais
+  access: Hike from La Gouille
+  effort: Easy
+  best_light: Larch season (October) for the gold-on-turquoise
+  wildCamping:
+    verdict: forbidden
+    reason: "Val d'Hérens, inside BLN landscape \"Dent Blanche – Matterhorn – Monte Rosa\". Use the campsite at Arolla or huts in the valley."
+    canton: Valais (VS)
+    protections:
+    - BLN landscape — Dent Blanche – Matterhorn – Monte Rosa
+  maps_url: https://www.google.com/maps/place/Lac+Bleu/@46.050484,7.4800854,17z/data=!3m1!4b1!4m6!3m5!1s0x478f29661d9d8675:0x83e0a41c8432263a!8m2!3d46.050484!4d7.4800854
+  image: spots/lac_bleu/main.jpg
+  image_credit: annamariastravel
+  photos:
+  - file: 02.jpg
+    credit: annamariastravel
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/DCCUg09toH1/"
+  gps:
+    lat: 46.050484
+    lng: 7.4800854
+- id: wildsee
+  chapter: eastern
+  kicker: A LAKE ON THE PIZOL FIVE-LAKE TRAIL
+  title: Wildsee
+  deck: One of the five lakes on the Pizol trail. Worth a day if you have not been.
+  body: []
+  region: Sargans, Eastern Switzerland
+  access: Cable car + 5-Seen-Wanderung
+  effort: Long, 5-6h
+  best_light: Calm afternoon for the reflection
+  wildCamping:
+    verdict: restricted
+    reason: "Inside the Pizol federal game reserve: wild camping banned. Tolerated only outside the reserve boundary; check the BAFU map (jagdbanngebiete) before pitching."
+    canton: St. Gallen (SG)
+    protections:
+    - Federal hunting reserve — Graue Hörner
+  maps_url: https://www.google.com/maps/place/Wildsee/@46.9705369,9.3946907,17z/data=!3m1!4b1!4m6!3m5!1s0x4784ce1c2192eb89:0x3eb211fd6596844b!8m2!3d46.9705369!4d9.3946907
+  image: spots/wildsee/main.jpg
+  image_credit: claudio_schwarz_unsplash_3
+  photos:
+  - file: 02.jpg
+    credit: upsidenomads
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/CyxxaHOsaDs/"
+  - file: 03.jpg
+    credit: travel_with_domi
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/CiX3vjVKCmE/"
+  gps:
+    lat: 46.9705369
+    lng: 9.3946907
+- id: julier_pass
+  chapter: eastern
+  kicker: A FAMOUS MOUNTAIN ROAD IN WINTER
+  title: Julier Pass
+  deck: Famous mountain road for photos. Drone work in winter is the move. Snow, silhouettes, big sky.
+  body: []
+  region: Engadin, Grisons
+  access: Drive
+  effort: None
+  best_light: Winter blue hour
+  wildCamping:
+    verdict: discouraged
+    reason: Pass road in Grisons; busy roadside zones. Use campsites in Bivio or Silvaplana.
+    canton: Grisons (GR)
+  maps_url: https://www.google.com/maps/place/Julier+Pass/@46.4701639,9.7177092,17z/data=!3m1!4b1!4m6!3m5!1s0x47848149d54cdb2f:0x796a0f271166c816!8m2!3d46.4701639!4d9.7177092
+  image: spots/julier_pass/main.jpg
+  image_credit: sepp_rutz_unsplash
+  photos:
+  - file: 02.jpg
+    credit: conquerthecols
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/DA2kIvzp8bv/"
+  - file: 03.jpg
+    credit: pm.focus
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/DBBRLK8M0Es/"
+  - file: 04.jpg
+    credit: pm.focus
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/DBBRLK8M0Es/"
+  gps:
+    lat: 46.4701639
+    lng: 9.7177092
+- id: refuge_du_lac_blanc
   chapter: beyond
-  kind: extras
-  kicker: WORTH A PIN, NOT YET A PAGE
-  title: One more from Beyond
-  deck: Pinned in my Google Maps but no proper photo for it yet. Worth the detour if you are in the area.
-  entries:
-  - heading: REFUGE DU LAC BLANC
-    text: Hut above Chamonix with a direct view on the Aiguille du Dru and the Mont Blanc range. Sunset hits the wall hard. Stay overnight if you can.
-    gps:
-      lat: 45.9816543
-      lng: 6.8921261
-    maps_url: https://www.google.com/maps/place/Refuge+du+Lac+Blanc/@45.9816543,6.8921261,17z/data=!3m1!4b1!4m6!3m5!1s0x47894cbebe43de85:0x7d21421e0fdd8e7b!8m2!3d45.9816543!4d6.8921261
-  image:
-  image_credit: xxx
-  maps_url:
+  kicker: A HUT ABOVE CHAMONIX WITH A MONT BLANC VIEW
+  title: Refuge du Lac Blanc
+  deck: Hut above Chamonix with a direct view on the Aiguille du Dru and the Mont Blanc range. Sunset hits the wall hard. Stay overnight if you can.
+  body: []
+  region: Chamonix, France
+  access: Hike from La Flégère
+  effort: Moderate
+  best_light: Sunset on the Mont Blanc range
+  wildCamping:
+    verdict: restricted
+    reason: "Inside the Aiguilles Rouges Réserve Naturelle: bivouac only with online reservation, 19:00–09:00, one night, no fire. The Refuge itself is the easier legal option."
+    canton: France
+  maps_url: https://www.google.com/maps/place/Refuge+du+Lac+Blanc/@45.9816543,6.8921261,17z/data=!3m1!4b1!4m6!3m5!1s0x47894cbebe43de85:0x7d21421e0fdd8e7b!8m2!3d45.9816543!4d6.8921261
+  image: spots/refuge_du_lac_blanc/main.jpg
+  image_credit: doytcheva
+  photos:
+  - file: 02.jpg
+    credit: max.belbeoch
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/CFkOFBxATv_/"
+  - file: 03.jpg
+    credit: janameerman
+    source_type: instagram
+    source_url: "https://www.instagram.com/p/CwfEYI3M07D/"
+  gps:
+    lat: 45.9816543
+    lng: 6.8921261
 back_matter:
   thanks:
     kicker: Thank you
