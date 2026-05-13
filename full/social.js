@@ -10,6 +10,22 @@
  *   3. Expose window.HB.favorites for ad-hoc use (browse, saved, map pages)
  */
 (function () {
+  // Defensive theme reapply. The <head> bootstrap in every page is
+  // SUPPOSED to set data-theme="dark" before paint when localStorage
+  // says dark. On the spot detail pages something keeps slipping
+  // through (Safari bfcache restore, blocked inline script, etc.) —
+  // pages render light despite localStorage being dark. social.js is
+  // the last script that's guaranteed to re-run on every fresh nav,
+  // so it gets a belt-and-suspenders apply here.
+  try {
+    if (localStorage.getItem('hb-theme') === 'dark'
+        && document.documentElement.getAttribute('data-theme') !== 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      const tc = document.querySelector('meta[name="theme-color"]');
+      if (tc) tc.setAttribute('content', '#0b0d10');
+    }
+  } catch (_e) { /* localStorage blocked in some private modes */ }
+
   const KEY = 'hb:fav:v1';
   const NO_KEY = 'hb:skipped:v1';
   const SESSION_KEY = 'hb:session:v1';
