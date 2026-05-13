@@ -245,6 +245,51 @@ export default async function handler(req, res) {
     }
   }
 
+  // ── Flow 3.6: admin add a contact to the Resend audience ──────────────
+  // Body: { action: "admin_add_resend_contact", adminToken, email, firstName? }
+  // Used by scripts/backfill-resend-audience.mjs to retroactively add
+  // historical signups that fell through pre-2026-04-27, when the Resend
+  // API key was "Sending only" and resend.contacts.create silently failed
+  // with restricted_api_key. The SDK call is idempotent (Resend dedupes
+  // on email per audience), so re-running is safe.
+  if (body?.action === 'admin_add_resend_contact') {
+    const expected = process.env.ADMIN_TOKEN || '';
+    const provided = typeof body.adminToken === 'string' ? body.adminToken : '';
+    if (!expected || provided.length !== expected.length ||
+        !crypto.timingSafeEqual(Buffer.from(provided), Buffer.from(expected))) {
+      return res.status(401).json({ error: 'unauthorized' });
+    }
+    const resendKey  = process.env.RESEND_API_KEY;
+    const audienceId = process.env.RESEND_SEGMENT_ID;
+    if (!resendKey || !audienceId) return res.status(503).json({ error: 'resend_not_configured' });
+
+    const email     = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
+    const firstName = typeof body.firstName === 'string' ? body.firstName.trim() : '';
+    if (!email || !email.includes('@')) return res.status(400).json({ error: 'bad_email' });
+
+    try {
+      const resend = new Resend(resendKey);
+      const { data, error } = await resend.contacts.create({
+        audienceId,
+        email,
+        firstName: firstName || undefined,
+        unsubscribed: false,
+      });
+      if (error) {
+        // Resend returns a structured error when the contact already
+        // exists in this audience. Treat as success (idempotent intent).
+        const msg = String(error.message || '');
+        const isDupe = /already exists|already in/i.test(msg) ||
+                       error.name === 'invalid_parameter' && /already/i.test(msg);
+        if (isDupe) return res.status(200).json({ ok: true, status: 'existed' });
+        return res.status(502).json({ error: 'resend_failed', name: error.name, message: msg });
+      }
+      return res.status(200).json({ ok: true, status: 'created', id: data?.id });
+    } catch (err) {
+      return res.status(502).json({ error: 'resend_threw', message: err?.message || String(err) });
+    }
+  }
+
   // ── Flow 4: password-reset request (email a magic link) ────────────────
   // Body: { action: "request_password_reset", email }
   // Response is ALWAYS {ok: true} regardless of whether `email` matches a
