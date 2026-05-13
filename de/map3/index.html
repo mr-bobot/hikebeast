@@ -1962,7 +1962,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           utm_source: utmSource,
           utm_medium: utmMedium,
           utm_campaign: utmCampaign,
+          locale: "de",
           r: readStoredRef(),
+          source_page: "de_map3",
         }),
       });
 
@@ -2093,6 +2095,18 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   var triggers = document.querySelectorAll('[data-video-open]');
   var closers  = modal.querySelectorAll('[data-video-close]');
 
+  // Cohort identifiers from the URL (same source as the checkout-session
+  // call). Re-read here because this IIFE doesn't share scope with the
+  // checkout/visit IIFE earlier in the page. Empty for anonymous traffic.
+  var __vTok = '';
+  var __vSub = '';
+  try {
+    var __p = new URLSearchParams(window.location.search);
+    __vTok = __p.get('t') || '';
+    __vSub = __p.get('s') || '';
+  } catch (e) {}
+  var __videoPinged = false;
+
   function openModal () {
     modal.setAttribute('data-open', 'true');
     document.body.classList.add('video-modal-open');
@@ -2102,6 +2116,27 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     // (IG webview can reject if the user nav'd away mid-tap, etc.)
     var p = video.play();
     if (p && typeof p.catch === 'function') p.catch(function () {});
+
+    // First-tap-only beacon to /api/visit. Apps Script v12 writes the
+    // current ISO time into `video_clicked_at` when token/subscriber
+    // matches a row; anonymous taps are no-ops (tracked in Vercel
+    // Analytics instead, by design — same pattern as `scrolled`).
+    if (!__videoPinged) {
+      __videoPinged = true;
+      try {
+        fetch("/api/visit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            event: "video_clicked",
+            page: "de_map3",
+            token: __vTok,
+            subscriber_id: __vSub,
+          }),
+          keepalive: true,
+        }).catch(function () {});
+      } catch (e) { /* noop */ }
+    }
   }
 
   function closeModal () {
