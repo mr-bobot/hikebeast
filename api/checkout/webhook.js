@@ -457,6 +457,10 @@ async function handleSessionCompleted({ stripe, event }) {
   const localeHint = full.metadata?.locale || "";
   // Affiliate ref slug. Empty when the buyer didn't arrive via ?r=.
   const refSlug = full.metadata?.r || "";
+  // Which landing variant the buyer paid from. Forwarded to the Sheet's
+  // `source_page` column for A/B attribution (map / themap / map3 +
+  // their de_ variants).
+  const sourcePage = full.metadata?.source_page || "";
 
   if (!email) {
     console.error("Session completed without email:", full.id);
@@ -533,6 +537,7 @@ async function handleSessionCompleted({ stripe, event }) {
       metadata_s: subscriberId,
       instagram_handle: buyerIg || "",
       referral_slug: refSlug || "",
+      source_page: sourcePage || "",
       provider: "stripe",
       session_id: full.id,
       email_sent: emailOk ? "1" : "0",
