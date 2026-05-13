@@ -558,11 +558,18 @@ button { font-family: inherit; }
 .feature-card .feature-photo img.is-fading { opacity: 0; }
 
 /* Intro slide · cream gradient (same stops as /themap/success/) +
- * the transparent polaroid PNG. The PNG is contained and centered so
+ * the transparent polaroid WebP. The image is contained and centered so
  * the polaroids never get clipped — matches the celebration moment
- * the buyer just saw on the thank-you page. */
+ * the buyer just saw on the thank-you page.
+ *
+ * The polaroid asset is transparent so the gradient shows through the
+ * spaces between/around the photos. Dark mode swaps the cream for a
+ * navy gradient that matches the page's atmospheric wash. */
 .feature-card .feature-photo.is-intro {
   background: linear-gradient(135deg, #F4F1EC 0%, #ECE6DC 100%);
+}
+:root[data-theme="dark"] .feature-card .feature-photo.is-intro {
+  background: linear-gradient(135deg, #14171b 0%, #1c2026 60%, #11161c 100%);
 }
 .feature-card .feature-photo.is-intro img {
   object-fit: contain;
@@ -2976,6 +2983,9 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   -webkit-tap-highlight-color: transparent;
   transition: transform 120ms ease, background 120ms ease, opacity 120ms ease;
 }
+/* Dark: var(--fg) flips white → white-on-white CTA. Same deep-navy
+   anchor as the other primary CTAs. */
+:root[data-theme="dark"] .hb-wild-cta { background: #003162; color: #fff; }
 .hb-wild-cta:hover { transform: translateY(-1px); }
 .hb-wild-cta:active { transform: translateY(0); opacity: 0.9; }
 .hb-wild-cta svg { width: 16px; height: 16px; flex: 0 0 auto; }
@@ -3852,10 +3862,10 @@ body.has-rail .topbar .hb-nav { display: none; }
      * column and the search bar drifts off-center to the left. */
     grid-template-columns: 1fr;
     gap: 0;
-    /* Fully opaque on mobile — translucency adds nothing at this width
-     * and the base rule's 96% alpha can still show a faint seam over
-     * dark photos. */
-    background: #fff;
+    /* Fully opaque on mobile — translucency adds nothing at this width.
+     * var(--glass-strong) reads identically over the page body and
+     * flips with the theme. */
+    background: var(--glass-strong);
   }
   .home-topbar-actions { display: none; }
 
@@ -4194,7 +4204,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   border: 0;
   border-radius: 999px;
   background: var(--surface);
-  color: rgba(0,0,0,0.45);
+  color: var(--muted);
   cursor: pointer;
   transition: transform 120ms ease, color 120ms ease, background 120ms ease;
   -webkit-tap-highlight-color: transparent;
@@ -4221,7 +4231,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   border: 0;
   border-radius: 999px;
   background: var(--surface);
-  color: rgba(0,0,0,0.45);
+  color: var(--muted);
   cursor: pointer;
   transition: transform 120ms ease, color 120ms ease, background 120ms ease;
   -webkit-tap-highlight-color: transparent;

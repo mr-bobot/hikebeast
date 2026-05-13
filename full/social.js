@@ -1294,11 +1294,11 @@
             <span class="menu-row-label">${ch.label}</span>
           </a>
         `).join('')}
+        <div class="menu-section-head">Settings</div>
         <button type="button" class="menu-row" data-hb-theme-toggle aria-label="Toggle dark mode">
           <span class="menu-row-icon" data-hb-theme-icon>${SVG_MOON}</span>
           <span class="menu-row-label" data-hb-theme-label>Dark mode</span>
         </button>
-        <div class="menu-section-head">Account</div>
         <div class="menu-sheet-account" data-hb-account></div>
       </div>
     `;
