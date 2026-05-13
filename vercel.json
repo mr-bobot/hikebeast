@@ -235,6 +235,23 @@
       ]
     },
     {
+      "source": "/map5/success/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive, nosnippet"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store, max-age=0"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        }
+      ]
+    },
+    {
       "source": "/de/map/success/(.*)",
       "headers": [
         {
@@ -270,6 +287,23 @@
     },
     {
       "source": "/de/map4/success/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive, nosnippet"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store, max-age=0"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        }
+      ]
+    },
+    {
+      "source": "/de/map5/success/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -331,6 +365,16 @@
     {
       "source": "/de/map4",
       "destination": "/de/map4/",
+      "permanent": true
+    },
+    {
+      "source": "/map5",
+      "destination": "/map5/",
+      "permanent": true
+    },
+    {
+      "source": "/de/map5",
+      "destination": "/de/map5/",
       "permanent": true
     },
     {
