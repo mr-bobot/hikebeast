@@ -1,0 +1,143 @@
+cable_cars:
+- id: triftbahn-cable-car
+  name: Triftbahn
+  operator: Trift Brücke AG
+  description: Nessental valley station to Underi Trift, must be booked in advance
+  cost_chf_raw: 92 CHF
+  open_raw: June 1 - Oct 11
+  website: https://www.grimselwelt.ch/en/railways/triftbahn/
+- id: brienz-rothorn-bahn
+  name: Brienz Rothorn Bahn
+  operator: Brienz Rothorn Bahn AG
+  description: Steam cog railway from Brienz village up to the summit at 2,244 m
+  open_raw: Early June to late October
+  cost_chf_raw: 98 CHF return
+  website: https://brienz-rothorn-bahn.ch/en/
+- id: stoosbahn
+  name: Stoosbahn
+  operator: Stoosbahnen AG
+  description: Funicular from Schwyz-Schlattli up to Stoos, the steepest funicular in the world
+  cost_chf_raw: 56 CHF return
+  info_url: https://stoos-muotatal.ch/webcams/
+  open_raw: Year-round, brief maintenance closures in spring and autumn
+  website: https://www.stoos.ch/en/
+- id: oeschinensee-bergbahn
+  name: Bergbahnen Oeschinensee
+  operator: Bergbahnen Oeschinensee AG
+  description: Gondola from Kandersteg up to the Oeschinensee station
+  cost_chf_raw: Around 32 CHF return
+  open_raw: Mid-May to early November
+  website: https://www.oeschinensee.ch/en/
+- id: schilthornbahn
+  name: Schilthornbahn
+  operator: Schilthornbahn AG
+  description: 'Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn'
+  open_raw: Year-round, brief maintenance closures in May and October
+  cost_chf_raw: 115 CHF return
+  website: https://schilthorn.ch/en/
+- id: gornergrat-bahn
+  name: Gornergrat Bahn
+  operator: Matterhorn Gotthard Bahn
+  description: Rack railway from Zermatt up to Gornergrat at 3,089 m
+  open_raw: Year-round, reduced winter schedule
+  cost_chf_raw: 132 CHF return
+  website: https://www.gornergrat.ch/en/
+- id: grimentz-bendolla
+  name: Grimentz-Bendolla Gondola
+  operator: Télé Anniviers
+  description: Gondola from Grimentz village up to the Bendolla station at 2,141 m
+  open_raw: Mid-June to mid-October
+  cost_chf_raw: 24 CHF return
+  website: https://www.telegrimentzzinal.ch/
+- id: spielboden-laengfluh
+  name: Spielboden + Längfluh
+  operator: Saastal Bergbahnen
+  description: Gondola from Saas Fee to Spielboden (2,452 m), aerial cableway continues to Längfluh (2,870 m)
+  open_raw: Mid-June to mid-October
+  cost_chf_raw: 61 CHF return to Längfluh
+  website: https://www.saas-fee.ch/en/
+- id: alpin-express
+  name: Alpin Express
+  operator: Saastal Bergbahnen
+  description: Gondola from Saas Fee to Felskinn at 2,989 m
+  open_raw: Mid-July to end of October
+  cost_chf_raw: 55 CHF return to Felskinn
+  website: https://www.saas-fee.ch/en/
+- id: sanetsch-cable-car
+  name: Sanetsch Cable Car
+  operator: Sanetsch SA
+  description: Cable car from Gsteig-Sanetsch via the Sanetsch dam
+  open_raw: Mid-June to mid-October
+  cost_chf_raw: 81 CHF return
+  website: https://www.seilbahnsanetsch.ch/en/home-1.html
+- id: plaine-morte-cable-car
+  name: Pointe de la Plaine Morte
+  operator: CMA Bergbahnen
+  description: Gondola from Crans-Montana up to the Plaine Morte glacier plateau at 2,927 m
+  open_raw: Late June to early September
+  cost_chf_raw: 39 CHF pedestrian pass
+  website: https://www.mycma.ch/
+- id: schwarzsee-cable-car
+  name: Schwarzsee Cable Car
+  operator: Zermatt Bergbahnen
+  description: Zermatt to Furi to Schwarzsee, part of the Matterhorn Glacier Paradise system
+  open_raw: Late April to late September
+  cost_chf_raw: 67 CHF return
+  website: https://www.matterhornparadise.ch/en/
+- id: moleson-funiculaire
+  name: Funiculaire Moléson
+  operator: Société des Téléphériques Moléson
+  description: Moléson-Village to Plan Francey, then aerial cable car to the summit
+  open_raw: Early April to early November
+  cost_chf_raw: 44 CHF return (combined funicular + cable car)
+  website: https://www.moleson.ch/en/
+- id: staubern-luftseilbahn
+  name: Luftseilbahn Staubern
+  operator: Bergstation Staubern AG
+  description: Cable car from Frümsen up to Gasthaus Staubern
+  cost_chf_raw: 40 CHF return
+  open_raw: May - October
+  info_url: https://www.staubern.ch/
+  website: https://www.staubern.ch/bergbahn/
+- id: tierfehd-cable-car
+  name: Kraftwerke-Linth-Limmern Cable Car
+  operator: Kraftwerke Linth-Limmern AG
+  description: Cable car from Tierfehd up to Kalktrittli, then 4 km tunnel to the dam
+  open_raw: Mid-June to October
+  cost_chf_raw: 15 CHF return
+  website: https://www.kraftwerkelinthlimmern.ch/
+- id: flumserberg-maschgenkamm
+  name: Flumserberg Tannenboden-Maschgenkamm
+  operator: Bergbahnen Flumserberg
+  description: Gondola from Flumserberg-Tannenboden up to Maschgenkamm at 2,020 m
+  open_raw: Late May to late October
+  cost_chf_raw: 38 CHF return
+  website: https://www.flumserberg.ch/en/
+- id: montenvers-railway
+  name: Chemin de fer du Montenvers
+  operator: Compagnie du Mont-Blanc
+  description: Rack railway from Chamonix Montenvers station up to the Mer de Glace at 1,913 m
+  cost_chf_raw: ~38 € return
+  open_raw: Early May to early November
+  website: https://montenversmerdeglace.montblancnaturalresort.com/en
+- id: flegere-cable-car
+  name: Téléphérique de la Flégère
+  operator: Compagnie du Mont-Blanc
+  description: Cable car from Les Praz, Chamonix up to La Flégère
+  open_raw: Late June to mid-September (summer)
+  cost_chf_raw: ~25 € return
+  website: https://www.montblancnaturalresort.com/en/
+- id: glacier-bossons-chairlift
+  name: Télésiège du Glacier des Bossons
+  operator: Mont-Blanc Natural Resort
+  description: Chairlift from Chamonix valley up to the Chalet des Bossons at 1,410 m
+  cost_chf_raw: ~9 € one-way / 13.20 € return
+  open_raw: Mid-June to mid-September
+  website: https://www.montblancnaturalresort.com/en/
+- id: gelmerbahn-funicular
+  name: Gelmerbahn
+  operator: Grimselwelt / KWO
+  description: Open funicular from the Grimsel pass road up to Gelmersee, 106 percent gradient on the steepest section
+  cost_chf_raw: Around 36 CHF round-trip
+  open_raw: Mid-June to mid-October
+  website: https://grimselwelt.ch/bahnen/gelmerbahn/

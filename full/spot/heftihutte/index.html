@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778700368457" />
+<link rel="stylesheet" href="../../preview.css?v=1778701649624" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -128,7 +128,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Hirsegg (bus stop) <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">3h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">600 m gain</span></span></div>
-      
+      <div class="hb-route-operating">Hut: Year-round, self-service, key with hut warden</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button><button type="button" class="hb-route-row" data-route-idx="1">
@@ -212,7 +212,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"heftihutte-from-hirsegg","name":"From Hirsegg bus stop","start":"Hirsegg (bus stop)","transit":{"bus":"Postbus to Hirsegg"},"duration_min":180,"gain_m":600,"sac_grade":"T2","effort_label":"Moderate","hut":{"name":"Heftihütte"},"description_extra":"Standard approach from the Hirsegg bus stop. Trail goes via Kaiserschwand to Bodenhütten, then through forest to Heftiboden and up a good path to the hut at 1,904 m. About three hours, 600 m of gain. T2. Marked forest shortcut at Bursteggstall saves about 15 minutes. Hut is open in summer with dinner and breakfast. Bring cash, no card readers.","visits":["heftihutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/"],"quickest_for":["heftihutte"],"quickest":true},{"id":"heftihutte-from-fluehli","name":"From Flühli LU","start":"Flühli","transit":{"bus":"Postbus to Flühli"},"duration_min":240,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Longer approach via Flühli (bus from Schüpfheim). About four hours of T2 mountain trail with views over the Entlebuch valley and Mariental at Sörenberg. The ridge section between Toregg and Strick is the scenic highlight — open pasture with the Schrattenfluh ridge across the valley. Combine with the Schratteflue crossing for a strong two-day loop.","visits":["heftihutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/","https://de.wikipedia.org/wiki/Heftih%C3%BCtte"],"quickest":false}];
+  const ROUTES = [{"id":"heftihutte-from-hirsegg","name":"From Hirsegg bus stop","start":"Hirsegg (bus stop)","transit":{"bus":"Postbus to Hirsegg"},"duration_min":180,"gain_m":600,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Standard approach from the Hirsegg bus stop. Trail goes via Kaiserschwand to Bodenhütten, then through forest to Heftiboden and up a good path to the hut at 1,904 m. About three hours, 600 m of gain. T2. Marked forest shortcut at Bursteggstall saves about 15 minutes. Hut is open in summer with dinner and breakfast. Bring cash, no card readers.","visits":["heftihutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/"],"quickest_for":["heftihutte"],"hut_ids":["heftihuette"],"huts":[{"id":"heftihuette","name":"Heftihütte","open_raw":"Year-round, self-service, key with hut warden","cost_chf_raw":"Self-service, contact SAC Emmental for rates","website":"https://www.sac-emmental.ch/huetten/heftihuette"}],"hut":{"id":"heftihuette","name":"Heftihütte","open_raw":"Year-round, self-service, key with hut warden","cost_chf_raw":"Self-service, contact SAC Emmental for rates","website":"https://www.sac-emmental.ch/huetten/heftihuette"},"quickest":true},{"id":"heftihutte-from-fluehli","name":"From Flühli LU","start":"Flühli","transit":{"bus":"Postbus to Flühli"},"duration_min":240,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Longer approach via Flühli (bus from Schüpfheim). About four hours of T2 mountain trail with views over the Entlebuch valley and Mariental at Sörenberg. The ridge section between Toregg and Strick is the scenic highlight — open pasture with the Schrattenfluh ridge across the valley. Combine with the Schratteflue crossing for a strong two-day loop.","visits":["heftihutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/","https://de.wikipedia.org/wiki/Heftih%C3%BCtte"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

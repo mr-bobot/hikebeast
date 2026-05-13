@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778700368467" />
+<link rel="stylesheet" href="../../preview.css?v=1778701649639" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -128,7 +128,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Lauenensee <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">6h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate, exposed steps</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">750 m gain</span></span></div>
-      
+      <div class="hb-route-operating">Hut: Mid-June to mid-October</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -204,7 +204,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"geltenschuss-lauenensee-geltenhuette","name":"Lauenensee → Geltenhütte → Lauenensee","start":"Lauenensee","transit":{"bus":"Postbus to Lauenen + walk to lake"},"duration_min":360,"gain_m":750,"sac_grade":"T2","effort_label":"Moderate, exposed steps","hut":{"name":"Geltenhütte SAC"},"description_extra":"Six-hour loop from Lauenensee via the Geltenhütte SAC and back. Trail climbs into the Gelten valley right next to the Geltenschuss waterfall, with a short section behind a smaller fall near the top. About 750 m of cumulative gain. T2. The hut at 2,002 m sits under the Wildhorn and Gelten glacier in the Gelten-Iffigen nature reserve. The descent options are Chüetungel via Tungelschuss back to Lauenensee (1h 45) or via Usseri Tüffi (2h 20). Both rejoin the lake.","visits":["geltenschuss"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/geltenhuette-sac-2147000113/mountain-hiking/from-lauenen-louwenesee-geltenschuss-418/"],"quickest_for":["geltenschuss"],"quickest":true}];
+  const ROUTES = [{"id":"geltenschuss-lauenensee-geltenhuette","name":"Lauenensee → Geltenhütte → Lauenensee","start":"Lauenensee","transit":{"bus":"Postbus to Lauenen + walk to lake"},"duration_min":360,"gain_m":750,"sac_grade":"T2","effort_label":"Moderate, exposed steps","description_extra":"Six-hour loop from Lauenensee via the Geltenhütte SAC and back. Trail climbs into the Gelten valley right next to the Geltenschuss waterfall, with a short section behind a smaller fall near the top. About 750 m of cumulative gain. T2. The hut at 2,002 m sits under the Wildhorn and Gelten glacier in the Gelten-Iffigen nature reserve. The descent options are Chüetungel via Tungelschuss back to Lauenensee (1h 45) or via Usseri Tüffi (2h 20). Both rejoin the lake.","visits":["geltenschuss"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/geltenhuette-sac-2147000113/mountain-hiking/from-lauenen-louwenesee-geltenschuss-418/"],"quickest_for":["geltenschuss"],"hut_ids":["geltenhutte-sac"],"huts":[{"id":"geltenhutte-sac","name":"Geltenhütte SAC","description":"SAC hut at 2,002 m in the Gelten valley","open_raw":"Mid-June to mid-October","cost_chf_raw":"From 79 CHF half-board (SAC members), 92 CHF non-members","website":"https://www.gelten.ch/"}],"hut":{"id":"geltenhutte-sac","name":"Geltenhütte SAC","description":"SAC hut at 2,002 m in the Gelten valley","open_raw":"Mid-June to mid-October","cost_chf_raw":"From 79 CHF half-board (SAC members), 92 CHF non-members","website":"https://www.gelten.ch/"},"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

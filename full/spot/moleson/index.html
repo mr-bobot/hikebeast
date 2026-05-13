@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778700368465" />
+<link rel="stylesheet" href="../../preview.css?v=1778701649636" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -128,7 +128,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Plan-Francey (mid-station of Moléson funicular) <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">2h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">600 m gain</span></span></div>
-      
+      <div class="hb-route-operating">Cable car: Early April to early November</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -204,7 +204,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"moleson-plan-francey-summit","name":"Plan-Francey to summit and back","start":"Plan-Francey (mid-station of Moléson funicular)","transit":{"train":"Gruyères (TPF) + bus + funicular to Plan-Francey"},"duration_min":120,"gain_m":600,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Two-hour up-and-back from the mid-station of the Moléson funicular at Plan-Francey. The funicular saves the first 750 m of vertical from Moléson-sur-Gruyères, leaving you with about 600 m to the summit at 2,002 m. Trail climbs the north-west flank on a marked path, never very steep. Round-trip via the west flank below the North Wall takes about an hour for the descent. Summit gives a clean view over the Fribourg pre-Alps and Lake Geneva on a clear day. T2.","cable_car":{"line":"Funiculaire Moléson-Plan-Francey"},"visits":["moleson"],"sources":["https://www.myswitzerland.com/en-us/experiences/moleson-a-popular-destination-in-the-fribourg-pre-alps/","https://en.wikipedia.org/wiki/Mol%C3%A9son"],"quickest_for":["moleson"],"quickest":true}];
+  const ROUTES = [{"id":"moleson-plan-francey-summit","name":"Plan-Francey to summit and back","start":"Plan-Francey (mid-station of Moléson funicular)","transit":{"train":"Gruyères (TPF) + bus + funicular to Plan-Francey"},"duration_min":120,"gain_m":600,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Two-hour up-and-back from the mid-station of the Moléson funicular at Plan-Francey. The funicular saves the first 750 m of vertical from Moléson-sur-Gruyères, leaving you with about 600 m to the summit at 2,002 m. Trail climbs the north-west flank on a marked path, never very steep. Round-trip via the west flank below the North Wall takes about an hour for the descent. Summit gives a clean view over the Fribourg pre-Alps and Lake Geneva on a clear day. T2.","visits":["moleson"],"sources":["https://www.myswitzerland.com/en-us/experiences/moleson-a-popular-destination-in-the-fribourg-pre-alps/","https://en.wikipedia.org/wiki/Mol%C3%A9son"],"quickest_for":["moleson"],"cable_car_ids":["moleson-funiculaire"],"cable_cars":[{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","cost_chf_raw":"44 CHF return (combined funicular + cable car)","website":"https://www.moleson.ch/en/"}],"cable_car":{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","cost_chf_raw":"44 CHF return (combined funicular + cable car)","website":"https://www.moleson.ch/en/"},"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

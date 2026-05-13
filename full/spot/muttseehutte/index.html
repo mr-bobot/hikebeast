@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778700368469" />
+<link rel="stylesheet" href="../../preview.css?v=1778701649641" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -128,7 +128,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Tierfehd cable car (Linthal) <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">2h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">730 m gain</span></span></div>
-      
+      <div class="hb-route-operating">Cable car: Mid-June to October · Hut: Closed for renovation until late June 2026, then limited day operation</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -204,7 +204,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"muttseehutte-from-tierfehd-cable-car","name":"Tierfehd cable car + Chalchtrittli approach","start":"Tierfehd cable car (Linthal)","transit":{"train":"Linthal Braunwaldbahn (SBB) + cable car"},"duration_min":150,"gain_m":730,"sac_grade":"T3","effort_label":"Moderate","cable_car":{"line":"Kraftwerke-Linth-Limmern cable car"},"hut":{"name":"Muttseehütte SAC"},"description_extra":"Standard approach using the Kraftwerke-Linth-Limmern industrial cable car from Tierfehd. From the top station follow the marked trail via Chalchtrittli, traverse east along the ridge at P. 2237, then up through the Muttenwändli cliff band on zig-zags to the high plateau and the hut at 2,501 m. About 2.5 hours and 730 m of gain. The trail crosses Europe's highest-located concrete dam (1,054 m long, 2,500 m elevation). T3. Hut is open mid-June to mid-September.","visits":["muttseehutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/muttseehuette-sac-2147000188/mountain-hiking/from-tierfed-via-cable-car-and-chalchtrittli-382/"],"quickest_for":["muttseehutte"],"quickest":true}];
+  const ROUTES = [{"id":"muttseehutte-from-tierfehd-cable-car","name":"Tierfehd cable car + Chalchtrittli approach","start":"Tierfehd cable car (Linthal)","transit":{"train":"Linthal Braunwaldbahn (SBB) + cable car"},"duration_min":150,"gain_m":730,"sac_grade":"T3","effort_label":"Moderate","description_extra":"Standard approach using the Kraftwerke-Linth-Limmern industrial cable car from Tierfehd. From the top station follow the marked trail via Chalchtrittli, traverse east along the ridge at P. 2237, then up through the Muttenwändli cliff band on zig-zags to the high plateau and the hut at 2,501 m. About 2.5 hours and 730 m of gain. The trail crosses Europe's highest-located concrete dam (1,054 m long, 2,500 m elevation). T3. Hut is open mid-June to mid-September.","visits":["muttseehutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/muttseehuette-sac-2147000188/mountain-hiking/from-tierfed-via-cable-car-and-chalchtrittli-382/"],"quickest_for":["muttseehutte"],"cable_car_ids":["tierfehd-cable-car"],"hut_ids":["muttseehutte-sac"],"cable_cars":[{"id":"tierfehd-cable-car","name":"Kraftwerke-Linth-Limmern Cable Car","operator":"Kraftwerke Linth-Limmern AG","description":"Cable car from Tierfehd up to Kalktrittli, then 4 km tunnel to the dam","open_raw":"Mid-June to October","cost_chf_raw":"15 CHF return","website":"https://www.kraftwerkelinthlimmern.ch/"}],"cable_car":{"id":"tierfehd-cable-car","name":"Kraftwerke-Linth-Limmern Cable Car","operator":"Kraftwerke Linth-Limmern AG","description":"Cable car from Tierfehd up to Kalktrittli, then 4 km tunnel to the dam","open_raw":"Mid-June to October","cost_chf_raw":"15 CHF return","website":"https://www.kraftwerkelinthlimmern.ch/"},"huts":[{"id":"muttseehutte-sac","name":"Muttseehütte SAC","description":"Highest dam hut in Switzerland at 2,500 m, beside the Limmern reservoir","open_raw":"Closed for renovation until late June 2026, then limited day operation","cost_chf_raw":"From 79 CHF half-board (SAC members)","website":"https://www.muttseehuette.ch/"}],"hut":{"id":"muttseehutte-sac","name":"Muttseehütte SAC","description":"Highest dam hut in Switzerland at 2,500 m, beside the Limmern reservoir","open_raw":"Closed for renovation until late June 2026, then limited day operation","cost_chf_raw":"From 79 CHF half-board (SAC members)","website":"https://www.muttseehuette.ch/"},"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

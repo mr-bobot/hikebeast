@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778700368473" />
+<link rel="stylesheet" href="../../preview.css?v=1778701649645" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -128,7 +128,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Maschgenkamm top station (Flumserberg) <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">3h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">250 m gain</span></span></div>
-      
+      <div class="hb-route-operating">Cable car: Late May to late October · Hut: Early June to mid-October</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -204,7 +204,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"spitzmeilenhutte-from-maschgenkamm","name":"From Maschgenkamm cable car","start":"Maschgenkamm top station (Flumserberg)","transit":{"train":"Unterterzen (SBB) + Flumserberg cable cars"},"duration_min":180,"gain_m":250,"sac_grade":"T2","effort_label":"Moderate","cable_car":{"line":"Flumserberg Tannenboden-Maschgenkamm"},"hut":{"name":"Spitzmeilenhütte SAC"},"description_extra":"Three-hour approach from the top of the Maschgenkamm cable car (Flumserberg Tannenboden line). From Maschgenkamm at 2,008 m descend the ski slope to just before the Panüöl huts, then traverse southwest via Plattis to P. 1836, on to Fursch (tea hut), and follow the marker poles past Obetweid and Schwarzegg to the Spitzmeilenhütte at 2,087 m. About 250 m of cumulative gain, mostly rolling. T2. Hut is one of the SAC's earliest winter cabins, modernised since.","visits":["spitzmeilenhutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/spitzmeilenhuette-sac-2147000256/"],"quickest_for":["spitzmeilenhutte"],"quickest":true}];
+  const ROUTES = [{"id":"spitzmeilenhutte-from-maschgenkamm","name":"From Maschgenkamm cable car","start":"Maschgenkamm top station (Flumserberg)","transit":{"train":"Unterterzen (SBB) + Flumserberg cable cars"},"duration_min":180,"gain_m":250,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Three-hour approach from the top of the Maschgenkamm cable car (Flumserberg Tannenboden line). From Maschgenkamm at 2,008 m descend the ski slope to just before the Panüöl huts, then traverse southwest via Plattis to P. 1836, on to Fursch (tea hut), and follow the marker poles past Obetweid and Schwarzegg to the Spitzmeilenhütte at 2,087 m. About 250 m of cumulative gain, mostly rolling. T2. Hut is one of the SAC's earliest winter cabins, modernised since.","visits":["spitzmeilenhutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/spitzmeilenhuette-sac-2147000256/"],"quickest_for":["spitzmeilenhutte"],"cable_car_ids":["flumserberg-maschgenkamm"],"hut_ids":["spitzmeilenhutte-sac"],"cable_cars":[{"id":"flumserberg-maschgenkamm","name":"Flumserberg Tannenboden-Maschgenkamm","operator":"Bergbahnen Flumserberg","description":"Gondola from Flumserberg-Tannenboden up to Maschgenkamm at 2,020 m","open_raw":"Late May to late October","cost_chf_raw":"38 CHF return","website":"https://www.flumserberg.ch/en/"}],"cable_car":{"id":"flumserberg-maschgenkamm","name":"Flumserberg Tannenboden-Maschgenkamm","operator":"Bergbahnen Flumserberg","description":"Gondola from Flumserberg-Tannenboden up to Maschgenkamm at 2,020 m","open_raw":"Late May to late October","cost_chf_raw":"38 CHF return","website":"https://www.flumserberg.ch/en/"},"huts":[{"id":"spitzmeilenhutte-sac","name":"Spitzmeilenhütte SAC","description":"SAC hut at 2,087 m below the Spitzmeilen needle","open_raw":"Early June to mid-October","website":"https://www.spitzmeilenhuette.ch/"}],"hut":{"id":"spitzmeilenhutte-sac","name":"Spitzmeilenhütte SAC","description":"SAC hut at 2,087 m below the Spitzmeilen needle","open_raw":"Early June to mid-October","website":"https://www.spitzmeilenhuette.ch/"},"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

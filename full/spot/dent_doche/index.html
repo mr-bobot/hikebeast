@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778700368475" />
+<link rel="stylesheet" href="../../preview.css?v=1778701649649" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -128,7 +128,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Fétiuère parking (1206 m, above Bernex) <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">3h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Moderate, brief chain sections</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1015 m gain</span></span></div>
-      
+      <div class="hb-route-operating">Hut: Early June to late September</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -204,7 +204,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"dent_doche-from-bernex","name":"From Bernex via Fétiuère","start":"Fétiuère parking (1206 m, above Bernex)","transit":{"bus":"From Évian, drive to Fétiuère"},"duration_min":180,"gain_m":1015,"sac_grade":"T3","effort_label":"Moderate, brief chain sections","hut":{"name":"Refuge de la Dent d'Oche"},"description_extra":"Three-hour climb from the Fétiuère parking above Bernex (1,206 m) up to the Refuge de la Dent d'Oche, and on to the summit at 2,221 m — the highest point in the Bernex commune. About 1,015 m of vertical gain. Short rock sections near the refuge have chains for protection. T3. Views over Lake Geneva, Évian, and Thonon from the summit, with the French Alps and Swiss Pre-Alps stretched out behind. Refuge serves food and has beds for the night.","visits":["dent_doche"],"sources":["https://en.wikipedia.org/wiki/Dent_d%27Oche"],"quickest_for":["dent_doche"],"quickest":true}];
+  const ROUTES = [{"id":"dent_doche-from-bernex","name":"From Bernex via Fétiuère","start":"Fétiuère parking (1206 m, above Bernex)","transit":{"bus":"From Évian, drive to Fétiuère"},"duration_min":180,"gain_m":1015,"sac_grade":"T3","effort_label":"Moderate, brief chain sections","description_extra":"Three-hour climb from the Fétiuère parking above Bernex (1,206 m) up to the Refuge de la Dent d'Oche, and on to the summit at 2,221 m — the highest point in the Bernex commune. About 1,015 m of vertical gain. Short rock sections near the refuge have chains for protection. T3. Views over Lake Geneva, Évian, and Thonon from the summit, with the French Alps and Swiss Pre-Alps stretched out behind. Refuge serves food and has beds for the night.","visits":["dent_doche"],"sources":["https://en.wikipedia.org/wiki/Dent_d%27Oche"],"quickest_for":["dent_doche"],"hut_ids":["refuge-dent-oche"],"huts":[{"id":"refuge-dent-oche","name":"Refuge de la Dent d'Oche","description":"Refuge below the summit, French Alps, food and beds","open_raw":"Early June to late September","cost_chf_raw":"From 58 € half-board","website":"https://refugeladentdoche.ffcam.fr/"}],"hut":{"id":"refuge-dent-oche","name":"Refuge de la Dent d'Oche","description":"Refuge below the summit, French Alps, food and beds","open_raw":"Early June to late September","cost_chf_raw":"From 58 € half-board","website":"https://refugeladentdoche.ffcam.fr/"},"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

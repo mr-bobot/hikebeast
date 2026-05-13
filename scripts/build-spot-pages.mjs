@@ -26,13 +26,30 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const FULL = join(ROOT, "full");
 const CONTENT = join(ROOT, "content.yaml");
-const HIKES   = join(ROOT, "hikes.yaml");
-const CREDITS = join(ROOT, "credits.yaml");
+const HIKES      = join(ROOT, "hikes.yaml");
+const CABLE_CARS = join(ROOT, "cable_cars.yaml");
+const HUTS       = join(ROOT, "huts.yaml");
+const CREDITS    = join(ROOT, "credits.yaml");
 
 const CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";
 
 const content = yaml.load(readFileSync(CONTENT, "utf8"));
 const creditsYaml = yaml.load(readFileSync(CREDITS, "utf8"));
+
+// Sibling entity yamls. Cable cars and huts are first-class records that can
+// be referenced from multiple hikes and (in the cable car case) from spots
+// that ARE the cable car / cog railway (gelmerbahn, brienzer_rothorn).
+const cableCarsYaml = (() => {
+  try { return yaml.load(readFileSync(CABLE_CARS, "utf8")); }
+  catch { return { cable_cars: [] }; }
+})();
+const cableCarsById = Object.fromEntries((cableCarsYaml.cable_cars || []).map(c => [c.id, c]));
+
+const hutsYaml = (() => {
+  try { return yaml.load(readFileSync(HUTS, "utf8")); }
+  catch { return { huts: [] }; }
+})();
+const hutsById = Object.fromEntries((hutsYaml.huts || []).map(h => [h.id, h]));
 
 // Hikes live in a sibling hikes.yaml. Each spot references them by id via
 // spot.hike_ids[]. We resolve those references in-memory so the rest of this
@@ -46,9 +63,40 @@ const hikesYaml = (() => {
   try { return yaml.load(readFileSync(HIKES, "utf8")); }
   catch { return { hikes: [] }; }
 })();
-const hikesById = Object.fromEntries((hikesYaml.hikes || []).map(h => [h.id, h]));
+
+// Resolve cable_car_ids / hut_ids on each hike into full objects. The
+// renderer expects `r.cable_car` / `r.hut` (singular) — for routes with
+// multiple references we surface the first as the primary; the rest stay
+// available as `r.cable_cars[]` / `r.huts[]` for future multi-step rendering.
+function resolveInfrastructure(hike) {
+  const out = { ...hike };
+  if (Array.isArray(hike.cable_car_ids)) {
+    const ccs = hike.cable_car_ids.map(id => cableCarsById[id]).filter(Boolean);
+    if (ccs.length) {
+      out.cable_cars = ccs;
+      out.cable_car  = ccs[0];
+    }
+  }
+  if (Array.isArray(hike.hut_ids)) {
+    const hs = hike.hut_ids.map(id => hutsById[id]).filter(Boolean);
+    if (hs.length) {
+      out.huts = hs;
+      out.hut  = hs[0];
+    }
+  }
+  return out;
+}
+const hikesById = Object.fromEntries((hikesYaml.hikes || []).map(h => [h.id, resolveInfrastructure(h)]));
 
 for (const spot of content.spots || []) {
+  // Resolve cable_car_id / hut_id on the spot itself (for spots that ARE
+  // the cable car or hut, like gelmerbahn).
+  if (spot.cable_car_id && cableCarsById[spot.cable_car_id]) {
+    spot.cable_car = cableCarsById[spot.cable_car_id];
+  }
+  if (spot.hut_id && hutsById[spot.hut_id]) {
+    spot.hut = hutsById[spot.hut_id];
+  }
   if (!Array.isArray(spot.hike_ids)) continue;
   spot.routes = spot.hike_ids
     .map(hid => {
