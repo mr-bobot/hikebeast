@@ -4910,6 +4910,11 @@ spots:
   gps:
     lat: 46.8988
     lng: 8.45835
+  trip_facts:
+    busyness: 2
+    best_season: June - October
+  hike_ids:
+  - brisen-route-via-haldigrat
 - id: engstlensee
   chapter: central
   kicker: A TURQUOISE LAKE ON ENGSTLENALP
@@ -4937,6 +4942,21 @@ spots:
   gps:
     lat: 46.7739067
     lng: 8.3563524
+  trip_facts:
+    busyness: 3
+    best_season: June - October
+  arrival:
+    by_car:
+      directions: From Innertkirchen take the Gentalstrasse toward Sustenpass, then turn onto the private toll road through the Gental valley up to Engstlenalp.
+      parking: Engstlenalp end-of-road lot, next to Hotel Engstlenalp. Toll CHF 8 cash at the gate.
+      walk_to_spot_min: 5
+    by_train_bus:
+      route: Train to Meiringen, change for Innertkirchen, then PostAuto 161 to Engstlenalp (terminus).
+      walk_from_stop_min: 5
+    best_time: Mornings before 10:00 for still water. The small lot fills by midday on summer weekends.
+    operating: Toll road and PostAuto run early May to mid-October. Closed outside that window.
+  hike_ids:
+  - engstlensee-route-lakeshore-loop
 - id: maloja_pass
   chapter: eastern
   kicker: AUTUMN LARCHES ON THE SWITCHBACKS
@@ -4960,6 +4980,22 @@ spots:
   gps:
     lat: 46.3944258
     lng: 9.6932995
+  trip_facts:
+    busyness: 3
+    best_season: May - October
+  arrival:
+    by_car:
+      directions: From St. Moritz follow road 27 southwest along the Engadin lakes (Silvaplana, Sils) to the top of the pass. The viewpoint sits at the start of the hairpins on the Bregaglia
+        side, signed Belvedere.
+      parking: Maloja Orden parking, free, on the right roughly 100 m after the turn-off. Around 20 spaces, fills fast on autumn weekends.
+      walk_to_spot_min: 5
+    by_train_bus:
+      route: Train to St. Moritz, then PostAuto line 4 (St. Moritz, Maloja, Chiavenna) to the Maloja Poschta stop.
+      walk_from_stop_min: 15
+    by_boat:
+      route: Sils Maria to Maloja passenger boat across Lake Sils. Four runs per day from late June to late September.
+    best_time: Sunrise for warm light on Piz da la Margna and the Sils basin. Larches turn gold in early October, also the busiest week of the year.
+    operating: Road open year-round, occasionally closed for hours after heavy snow. Boat service late June to late September.
 - id: ponte_tibetano
   chapter: ticino
   kicker: A LONG SUSPENSION BRIDGE OVER THE GORGE
@@ -4984,6 +5020,11 @@ spots:
   gps:
     lat: 46.1950235
     lng: 8.9742868
+  trip_facts:
+    busyness: 4
+    best_season: April - November
+  hike_ids:
+  - ponte_tibetano-route-from-mornera
 - id: zinal_glacier
   chapter: valais
   kicker: AN ICE CAVE UNDER THE TONGUE
@@ -5010,6 +5051,11 @@ spots:
   gps:
     lat: 46.0636
     lng: 7.634
+  trip_facts:
+    busyness: 2
+    best_season: July - September
+  hike_ids:
+  - zinal_glacier-route-petit-mountet
 - id: grappelensee
   chapter: eastern
   kicker: A MIRROR LAKE IN TOGGENBURG
@@ -5033,6 +5079,11 @@ spots:
   gps:
     lat: 47.2113508
     lng: 9.2872551
+  trip_facts:
+    busyness: 3
+    best_season: May - October
+  hike_ids:
+  - grappelensee-route-from-laui
 - id: beyond_extras
   chapter: beyond
   kind: extras

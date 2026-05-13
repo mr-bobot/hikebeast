@@ -1985,3 +1985,116 @@ hikes:
   - https://en.wikipedia.org/wiki/Dent_d%27Oche
   quickest_for:
   - dent_doche
+- id: brisen-route-via-haldigrat
+  sac_grade: T3
+  effort_label: Difficult
+  duration_min: 270
+  gain_m: 460
+  equipment_required: false
+  start: Haldigrat chairlift upper station, above Niederrickenbach
+  transit:
+    train: Dallenwil (S-Bahn from Lucerne)
+    cable_car: Niederrickenbach cable car (Dallenwil to Niederrickenbach), then Haldigrat chairlift
+  visits:
+  - brisen
+  description_extra: Take the S-Bahn to Dallenwil, ride the small cable car up to the mountain village of Niederrickenbach, then walk roughly 30 minutes to the base of the Haldigrat
+    chairlift. The chairlift drops you onto the ridge at around 1940 m, and from there it is a 2-hour ridge walk east to the Brisen summit at 2404 m. The ridge is narrow in places with
+    steep drops on both sides, so head for heights and sure feet are non-negotiable. Counting the chairlift access you gain about 460 m and lose 1248 m if you walk back down to Niederrickenbach
+    via the Brisenhaus SAC hut, total around 4.5 hours. The easier option is to turn around at the summit and ride the chairlift back down. Best light is mid-morning before clouds build
+    over the Urner Alps. Skip it after rain, the limestone gets slippery and the scree descent is no joke.
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/brisen-242/mountain-hiking/
+  - https://en.wikipedia.org/wiki/Brisen
+  - https://www.nidwalden.com/en/tour/brisen-tour
+  quickest_for:
+  - brisen
+- id: engstlensee-route-lakeshore-loop
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 60
+  gain_m: 50
+  equipment_required: false
+  start: Hotel Engstlenalp, end of the toll road
+  transit:
+    bus: Engstlenalp (PostAuto 161 terminus, summer only)
+    train: Innertkirchen (then PostAuto 161)
+  visits:
+  - engstlensee
+  description_extra: From the hotel parking it is roughly 300 m down a gravel path to the lake shore, about 5 minutes. The full lakeshore loop is around 1.3 km and takes 30 minutes each
+    way along the western side, with the eastern shore being narrower and rockier. Total walking time for the loop is about an hour, basically flat with maybe 50 m of small ups and downs.
+    The lake sits at 1850 m, surrounded by stone pines and feeding into a hydropower tunnel, so the water level can shift through the season. Boat rentals are available at the hotel
+    reception if you want to be on the water. No open fires anywhere, this is a protected nature area. Pair it with the climb up to Joch Pass for views toward Titlis if you want a bigger
+    day, that adds about 350 m of gain and 90 minutes one way.
+  sources:
+  - https://en.wikipedia.org/wiki/Engstlensee
+  - https://jungfrauregion.swiss/en/map/detail/engstlensee-493643c7-eba3-42dd-bf3c-652909b97fe9.html
+  quickest_for:
+  - engstlensee
+- id: grappelensee-route-from-laui
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 50
+  gain_m: 250
+  equipment_required: false
+  start: Laui parking area, above Unterwasser
+  transit:
+    train: Unterwasser (SOB line from Wattwil), then ~20 min drive or taxi up to Laui
+  visits:
+  - grappelensee
+  description_extra: Drive up from Unterwasser to the Laui parking area, the closest you can get to the lake by car. From there it is roughly 3.25 km and 250 m of climbing on a clear
+    path through pasture and patches of woodland, about 50 minutes one way at a relaxed pace. The lake sits at 1307 m in a protected moorland basin, around 140 m long, with two grilling
+    spots and a small wooden jetty on the eastern shore. Swimming is allowed, the water is cold but clean. If you want the long version, start at the Iltios cable car parking in Unterwasser
+    and do the full loop via the Thur waterfalls and Chüeboden, around 12 km and 525 m of climbing. Spring through autumn is fine, but mosquitoes get aggressive after dusk in July.
+  sources:
+  - https://reisememo.ch/schweiz/graeppelensee-wanderung-toggenburg
+  - https://www.switzerland-highlights.com/en/graeppelensee-idyllic/
+  - https://www.komoot.com/smarttour/1020791
+  quickest_for:
+  - grappelensee
+- id: ponte_tibetano-route-from-mornera
+  sac_grade: T2
+  effort_label: Moderate
+  duration_min: 60
+  gain_m: 100
+  equipment_required: false
+  start: Mornera upper cable car station
+  transit:
+    bus: Bellinzona, line 2 to Monte Carasso, Funivia stop
+    train: Bellinzona (then bus 2)
+    cable_car: Monte Carasso to Curzútt to Mornera cable car, 8-person cabin every 15 minutes
+  visits:
+  - ponte_tibetano
+  description_extra: Take bus line 2 from Bellinzona station to the Monte Carasso funivia stop, then ride the small 8-seat cable car up to Mornera at 1400 m. From Mornera the path drops
+    down through chestnut woods to the bridge, about 20 minutes one way and an easy 100 m of descent. The bridge itself is 270 m long and hangs 130 m above the Sementina ravine on a
+    one-metre-wide larch deck, anchored at 696 m elevation. Walk across it and you reach the restored stone village of Curzútt, where there is a guesthouse and restaurant. Loop back
+    via the cable car mid-station at Curzútt rather than climbing the 500 m back up to Mornera. The bridge sways a bit when busy but the cables and safety net are solid. Cars cannot
+    reach the bridge, only the cable car or a steeper 90-minute hike from Monte Carasso or Sementina village.
+  sources:
+  - https://www.mornera.ch/en/my-product/tibetan-bridge-carasc/
+  - https://www.curzutt.ch/en/attractions/carasc-tibetan-bridge/
+  - https://www.ticino.ch/en/commons/details/Tibetan-bridge-Carasc-/137557.html
+  quickest_for:
+  - ponte_tibetano
+- id: zinal_glacier-route-petit-mountet
+  sac_grade: T2
+  effort_label: Moderate
+  duration_min: 210
+  gain_m: 500
+  equipment_required: false
+  start: Zinal village, south end parking near the Navisence river
+  transit:
+    bus: Zinal, Poste (PostAuto 452 from Sierre via Vissoie)
+    train: Sierre / Siders (then PostAuto)
+  visits:
+  - zinal_glacier
+  description_extra: Park at the south end of Zinal where the road ends near the river, then follow signs for Cabane du Petit Mountet. The path is a wide gravel track along the west
+    side of the Navisence river, climbing gently through larch forest and alpine pasture. It is roughly 5 km and 500 m of climbing one way, about 2 hours up and 90 minutes down for a
+    fit walker, total 3.5 hours round trip. The hut sits at 2142 m on an old lateral moraine looking straight up at the Zinal glacier tongue and the Weisshorn. The glacier itself is
+    5.8 km long and visibly retreating, the lower tongue mostly covered in stones. Ibex are regulars on the slopes above the hut. T2 throughout, no exposure, family-doable but the round-trip
+    distance is real. Snow can linger on the upper part of the track into early July.
+  sources:
+  - https://en.wikipedia.org/wiki/Zinal_Glacier
+  - https://www.valais.ch/en/activities/natural-sites/glaciers/zinal-glacier
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-du-mountet-cas-2147000184/mountain-hiking/
+  quickest_for:
+  - zinal_glacier

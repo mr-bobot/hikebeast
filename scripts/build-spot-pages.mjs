@@ -305,9 +305,16 @@ function renderAccessSection(spot) {
     </div>`);
   }
   if (a.by_boat) {
+    const bo = a.by_boat;
+    const lines = [];
+    if (typeof bo === "string") lines.push(escapeHtml(bo));
+    else {
+      if (bo.route) lines.push(escapeHtml(bo.route));
+      if (bo.walk_from_stop_min) lines.push(`<span class="hb-access-detail">Walk from stop</span> ${bo.walk_from_stop_min} min`);
+    }
     blocks.push(`<div class="hb-access-block">
       <p class="hb-access-mode"><span class="hb-access-icon">⛴</span>By boat</p>
-      <div class="hb-access-body"><p>${escapeHtml(a.by_boat)}</p></div>
+      <div class="hb-access-body">${lines.map(l => `<p>${l}</p>`).join("")}</div>
     </div>`);
   }
   if (a.best_time) {
