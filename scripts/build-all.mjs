@@ -34,6 +34,7 @@ const STEPS = [
   "build-chapter-html.mjs",
   "build-spot-pages.mjs",
   "build-spot-images.mjs",
+  "build-spots-data.mjs",
   "inject-wildcamping-to-sidecar.mjs",
   "inject-convex-url.mjs",
   "build-minify-assets.mjs",
