@@ -1858,5 +1858,15 @@ window.HB_SPOT_IMAGES = {
       "src": "derivatives/dent_doche_p3/w1800.webp",
       "credit": "@syma_photography"
     }
+  ],
+  "valais#zinal_glacier": [
+    {
+      "src": "derivatives/zinal_glacier_p0/w1800.webp",
+      "credit": "@oliwear.j"
+    },
+    {
+      "src": "derivatives/zinal_glacier_p1/w1800.webp",
+      "credit": "@oliwear.j"
+    }
   ]
 };
