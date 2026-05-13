@@ -898,7 +898,30 @@
       const list = sidecarSpots.map(s => {
         const anchor = (s.href || '').split('#')[1];
         const spotKey = anchor ? `${s.chapter_id}#${anchor}` : null;
-        if (spotKey && dbBySpotKey.has(spotKey)) return dbBySpotKey.get(spotKey);
+        if (spotKey && dbBySpotKey.has(spotKey)) {
+          const dbRow = dbBySpotKey.get(spotKey);
+          // Convex sometimes has a spot row with photos=[] (legacy spots
+          // that pre-date the photo migration, or admin cleared the
+          // gallery). The sidecar (built from content.yaml + the live
+          // Convex hydration pass in build-spot-images.mjs) carries the
+          // real photo list in those cases; keep it so Browse doesn't
+          // see the tile count change on first Convex push and
+          // rebuild → flicker.
+          if (dbRow.photos.length === 0) {
+            const sidecarRow = byKey.get(spotKey);
+            if (sidecarRow && sidecarRow.photos.length > 0) {
+              return {
+                ...dbRow,
+                photos: sidecarRow.photos,
+                image: sidecarRow.image,
+                imagePhotoId: sidecarRow.imagePhotoId,
+                imageWidth: sidecarRow.imageWidth,
+                imageHeight: sidecarRow.imageHeight,
+              };
+            }
+          }
+          return dbRow;
+        }
         // No DB row yet -- fall back to whatever the sidecar gave us.
         return byKey.get(spotKey) || null;
       }).filter(Boolean);
@@ -1015,8 +1038,9 @@
   // section as a special "front matter" entry, visually separated from the
   // seven regional chapters by a divider.
   // Cover paths point at the build-image-derivatives output. Intro thumb
-  // is a JPG copied by build-static-assets from assets/front_matter/.
-  const RAIL_INTRO_CHAPTER = { id: 'intro', label: 'Introduction', cover: 'front_matter/page_05.jpg' };
+  // uses a WebP derivative built by scripts/build-front-matter-derivatives.mjs;
+  // matches the sidebar thumb on every chapter page.
+  const RAIL_INTRO_CHAPTER = { id: 'intro', label: 'Introduction', cover: 'front_matter/page_05-w192.webp' };
   const RAIL_CHAPTERS = [
     { id: 'central',  label: 'Central',             cover: 'chapters/central/w400.webp' },
     { id: 'valais',   label: 'Valais',              cover: 'chapters/valais/w400.webp' },
@@ -2497,20 +2521,75 @@
     photoEl.appendChild(prev);
     photoEl.appendChild(next);
 
+    // Defensive runtime filter: when admin adds photos in Convex but the
+    // derivative WebP hasn't shipped to disk yet, those slides 404. We
+    // prune them on the img.onerror event — hide the slide + its dot,
+    // drop them from `liveIndices`, fix the counter, and skip them in
+    // navigation. `liveIndices` is the source of truth for navigation
+    // position; `idx` always points into `photos` via slideEls. Counter
+    // shows current position within the live set, not the original.
+    let liveIndices = photos.map((_, i) => i);
     let idx = 0;
-    function show(target) {
-      const n = ((target % photos.length) + photos.length) % photos.length;
-      if (n === idx) return;
-      slideEls[idx].classList.remove('is-current');
-      slideEls[n].classList.add('is-current');
-      dots.children[idx].classList.remove('is-on');
-      dots.children[n].classList.add('is-on');
-      counter.textContent = `${n + 1} / ${photos.length}`;
-      setCredit(photos[n]);
-      idx = n;
+    function refreshCounter() {
+      const pos = liveIndices.indexOf(idx);
+      counter.textContent = liveIndices.length === 0
+        ? '0 / 0'
+        : `${pos + 1} / ${liveIndices.length}`;
     }
-    prev.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); show(idx - 1); });
-    next.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); show(idx + 1); });
+    function dropBrokenSlide(brokenIdx) {
+      const pos = liveIndices.indexOf(brokenIdx);
+      if (pos === -1) return;
+      liveIndices.splice(pos, 1);
+      if (slideEls[brokenIdx]) slideEls[brokenIdx].style.display = 'none';
+      const dot = dots.children[brokenIdx];
+      if (dot) dot.style.display = 'none';
+      if (idx === brokenIdx && liveIndices.length > 0) {
+        // Was viewing the broken one — jump to the nearest live slide.
+        const fallback = liveIndices[Math.min(pos, liveIndices.length - 1)];
+        show(fallback);
+      } else {
+        refreshCounter();
+      }
+      // Hide the arrows + dots when fewer than two slides remain — the
+      // controls have nothing useful to do at that point.
+      if (liveIndices.length < 2) {
+        prev.style.display = 'none';
+        next.style.display = 'none';
+        dots.style.display = 'none';
+        if (liveIndices.length === 0) counter.style.display = 'none';
+      }
+    }
+    slideEls.forEach((img, i) => {
+      img.addEventListener('error', () => dropBrokenSlide(i));
+    });
+
+    function show(target) {
+      if (liveIndices.length === 0) return;
+      // Resolve `target` to a live index. If target itself is live, use
+      // it; otherwise nudge to the next live one in the same direction.
+      let n = target;
+      if (!liveIndices.includes(n)) {
+        const sorted = [...liveIndices].sort((a, b) => a - b);
+        n = sorted.find(i => i > target) ?? sorted[0];
+      }
+      if (n === idx) return;
+      if (slideEls[idx]) slideEls[idx].classList.remove('is-current');
+      slideEls[n].classList.add('is-current');
+      if (dots.children[idx]) dots.children[idx].classList.remove('is-on');
+      if (dots.children[n]) dots.children[n].classList.add('is-on');
+      idx = n;
+      refreshCounter();
+      setCredit(photos[n]);
+    }
+    function advance(step) {
+      if (liveIndices.length === 0) return;
+      const pos = liveIndices.indexOf(idx);
+      const safePos = pos < 0 ? 0 : pos;
+      const nextPos = ((safePos + step) % liveIndices.length + liveIndices.length) % liveIndices.length;
+      show(liveIndices[nextPos]);
+    }
+    prev.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); advance(-1); });
+    next.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); advance(+1); });
 
     // Touch swipe on the photo. Only triggers on horizontal travel > 40 px.
     let touchX = null, touchY = null;
@@ -2526,7 +2605,7 @@
       const dy = t.clientY - touchY;
       touchX = touchY = null;
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) {
-        show(idx + (dx < 0 ? 1 : -1));
+        advance(dx < 0 ? 1 : -1);
       }
     });
 

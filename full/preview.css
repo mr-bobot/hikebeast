@@ -74,6 +74,20 @@ html, body { margin: 0; padding: 0; }
 
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; color-scheme: light; }
 
+/* Users who've opted into "Reduce Motion" at the OS level (System
+ * Settings / iOS Accessibility) get a freeze on transitions + animations
+ * + smooth-scroll. The home hero carousel also stops auto-rotating; see
+ * the matching matchMedia check in full/index.html. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   min-height: 100dvh;
   color: var(--fg);
@@ -82,26 +96,48 @@ body {
   line-height: 1.5;
   letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
+  background: var(--bg);
+}
+/* Viewport-fixed gradient atmosphere on its own compositor layer.
+ * Used to live on <body> via background-attachment: fixed, but Safari
+ * re-rasterises that on every scroll frame — the dominant cause of
+ * home-page scroll jank on desktop Safari. A position:fixed pseudo
+ * gets promoted to its own GPU layer once, so scrolling content above
+ * never repaints it. Visual is identical. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
     radial-gradient(900px 500px at 20% 0%, var(--body-wash-1) 0%, transparent 60%),
-    radial-gradient(700px 500px at 85% 8%, var(--body-wash-2) 0%, transparent 55%),
-    var(--bg);
-  background-attachment: fixed;
+    radial-gradient(700px 500px at 85% 8%, var(--body-wash-2) 0%, transparent 55%);
+  /* Force Safari to promote this to its own GraphicsLayer so it
+   * never repaints when content scrolls above it. */
+  will-change: transform;
 }
 
 a { color: inherit; }
 button { font-family: inherit; }
 
 /* === Topbar === */
+/* Sticky topbar; backdrop-filter intentionally NOT used. Safari WebKit
+ * recomposites blur layers on every scroll frame, which is the single
+ * biggest cause of desktop-Safari scroll jank on this site. A 96%-opaque
+ * background reads identically over the mostly-white page body but
+ * keeps the topbar on a static composited layer. */
 .topbar {
   position: sticky;
   top: 0;
   z-index: 100;
   isolation: isolate;
   height: var(--topbar-h);
-  background: var(--glass);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
+  /* No backdrop-filter — Safari recomposites blur on every scroll frame
+   * (the perf branch dropped it for that reason). var(--glass-strong)
+   * is opaque enough to read identically over the page body and flips
+   * with the theme. */
+  background: var(--glass-strong);
   border-bottom: 1px solid var(--hairline);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -210,9 +246,8 @@ button { font-family: inherit; }
   position: sticky;
   top: 0;
   z-index: 80;
-  background: var(--glass);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
+  /* See note on .topbar above — no backdrop-filter to keep Safari smooth. */
+  background: var(--glass-strong);
   border-bottom: 1px solid var(--hairline);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -557,7 +592,12 @@ button { font-family: inherit; }
 .feature-card .feature-photo.is-map img {
   object-fit: contain;
   padding: 48px;
-  filter: drop-shadow(0 0 32px rgba(255, 255, 255, 0.10)) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.35));
+  /* Single small drop-shadow instead of the original double (32px white
+   * glow + 24px dark drop). The white glow at 10% alpha is barely visible
+   * over the dark gradient backdrop; the dark shadow at half radius reads
+   * the same. Safari's filter pipeline rasterises drop-shadow per-pixel,
+   * so each shadow + each pixel of blur radius compounds the cost. */
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
 }
 @media (max-width: 699px) {
   .feature-card .feature-photo.is-map img { padding: 32px; }
@@ -663,7 +703,8 @@ button { font-family: inherit; }
 .up-next-card.is-chapter .photo.cv-map img {
   width: 78%; height: auto; max-height: 78%;
   object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.10)) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.30));
+  /* Single small drop-shadow, see note on .feature-photo.is-map img. */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
 }
 .up-next-card .body {
   display: flex;
@@ -1962,8 +2003,9 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   max-height: 86%;
   object-fit: contain;
   /* Map paths are #eef0f3 / #fff strokes — they read at full opacity on
-   * the dark backdrop. Soft glow so the silhouette feels lit, not pasted. */
-  filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.08)) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+   * the dark backdrop. Single drop-shadow at small radius (see
+   * .feature-photo.is-map img above for the Safari perf rationale). */
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
 }
 @media (min-width: 760px) {
   .slide-cover .cv-map { aspect-ratio: auto; height: 100%; }
@@ -3431,9 +3473,12 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
   bottom: 0;
   width: 64px;
   z-index: 1100;
-  background: var(--glass);
-  -webkit-backdrop-filter: saturate(180%) blur(22px);
-  backdrop-filter: saturate(180%) blur(22px);
+  /* See note on .topbar above. The rail spans the full viewport height,
+   * so a per-frame backdrop-filter recomposite was the biggest single
+   * cost on desktop Safari — every scroll re-blurred the entire left
+   * edge. Near-opaque tokenized background gives the same visual and
+   * flips with the theme. */
+  background: var(--glass-strong);
   border-right: 1px solid var(--hairline);
   display: flex;
   flex-direction: column;
@@ -3800,6 +3845,10 @@ body.has-rail .topbar .hb-nav { display: none; }
      * column and the search bar drifts off-center to the left. */
     grid-template-columns: 1fr;
     gap: 0;
+    /* Fully opaque on mobile — translucency adds nothing at this width
+     * and the base rule's 96% alpha can still show a faint seam over
+     * dark photos. */
+    background: #fff;
   }
   .home-topbar-actions { display: none; }
 

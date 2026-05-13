@@ -55,6 +55,19 @@
       ]
     },
     {
+      "source": "/manifest.webmanifest",
+      "headers": [
+        { "key": "Content-Type", "value": "application/manifest+json; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/images/icon-:slug.png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=2592000, immutable" }
+      ]
+    },
+    {
       "source": "/preview/(.*)",
       "headers": [
         {
@@ -81,7 +94,114 @@
       ]
     },
     {
+      "source": "/full/preview.css",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/social.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/preview.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/lib/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/region-:slug.svg",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/thumbs/dimensions.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/img/derivatives/dimensions.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/img/derivatives/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/m/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/thumbs/:slug.jpg",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/chapters/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/img/front_matter/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
+      "source": "/full/map/spots-data.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=300, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/img/spot-images.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=300, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/full/map/switzerland.geojson",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }
+      ]
+    },
+    {
       "source": "/map/success/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive, nosnippet"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store, max-age=0"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        }
+      ]
+    },
+    {
+      "source": "/map3/success/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -140,6 +260,11 @@
     {
       "source": "/themap",
       "destination": "/themap/",
+      "permanent": true
+    },
+    {
+      "source": "/map3",
+      "destination": "/map3/",
       "permanent": true
     },
     {

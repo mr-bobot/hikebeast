@@ -543,6 +543,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/aletsch_glacier_p4/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/aletsch_glacier_p5/w1800.webp",
+      "credit": null
     }
   ],
   "valais#arolla_ice_cave": [
@@ -1857,6 +1861,16 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/dent_doche_p3/w1800.webp",
       "credit": "@syma_photography"
+    }
+  ],
+  "valais#zinal_glacier": [
+    {
+      "src": "derivatives/zinal_glacier_p0/w1800.webp",
+      "credit": "@oliwear.j"
+    },
+    {
+      "src": "derivatives/zinal_glacier_p1/w1800.webp",
+      "credit": "@oliwear.j"
     }
   ]
 };

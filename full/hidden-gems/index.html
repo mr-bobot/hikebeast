@@ -11,7 +11,13 @@
 <meta name="referrer" content="no-referrer" />
 <link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="manifest" href="../../manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Hikebeast" />
+<meta name="mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" href="../preview.css" />
+<link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body>
 
@@ -105,16 +111,24 @@
     return a;
   }
 
+  // Cache the rendered spot-keys so Convex's spots:list push doesn't
+  // rebuild an identical grid and flicker every image. Counter +
+  // empty-state toggles still run (cheap, no flicker risk).
+  let lastSpotsKey = '';
   function render() {
     counter.textContent = SPOTS.length;
     if (!SPOTS.length) {
-      content.innerHTML = '';
       content.hidden = true;
       empty.hidden = false;
+      if (lastSpotsKey !== '') { content.innerHTML = ''; lastSpotsKey = ''; }
       return;
     }
     empty.hidden = true;
     content.hidden = false;
+
+    const spotsKey = SPOTS.map(s => s.imagePhotoId || s.image || s.id || '').join('|');
+    if (spotsKey === lastSpotsKey) return;
+    lastSpotsKey = spotsKey;
 
     // No chapter grouping for the curated list — it's small and the
     // editorial order already matters. Single grid.
