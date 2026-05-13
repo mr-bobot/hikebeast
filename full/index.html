@@ -10,6 +10,15 @@
 <meta name="referrer" content="no-referrer" />
 <link rel="icon" type="image/jpeg" href="../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../images/favicon.jpg" />
+<!-- PWA: web manifest lives at /manifest.webmanifest (public, not auth-gated)
+     so Chrome/Edge/Brave can read it without a session. iOS Safari relies
+     on the apple-mobile-web-app-* meta tags + apple-touch-icon for its
+     own "Add to Home Screen" flow. -->
+<link rel="manifest" href="../manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Hikebeast" />
+<meta name="mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" href="preview.css" />
 <!-- Convex's wss handshake is the second slowest thing on first paint after
      the hero image; preconnect lets the browser get DNS + TCP + TLS out of
