@@ -1133,7 +1133,7 @@
         ${chapterItems}
       </div>
       <button type="button" class="rail-theme" data-hb-theme-toggle aria-label="Toggle dark mode">
-        <span class="rail-theme-icon">${SVG_MOON}</span><span class="label">Dark mode</span>
+        <span class="rail-theme-icon" data-hb-theme-icon>${SVG_MOON}</span><span class="label" data-hb-theme-label>Dark mode</span>
       </button>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="Toggle navigation labels">
         ${SVG_CHEVRONS}<span class="label">Collapse</span>
@@ -1147,10 +1147,25 @@
     // Default = light (no localStorage entry, no data-theme attribute).
     // The icon previews the destination: moon when in light (click → dark),
     // sun when in dark (click → light).
-    const themeBtn = rail.querySelector('[data-hb-theme-toggle]');
+    //
+    // Two buttons share this wiring: the rail toggle (desktop) and the
+    // menu sheet row (mobile — the rail drawer is unreachable on mobile,
+    // see the .rail-burger display:none rule in preview.css). Both carry
+    // data-hb-theme-toggle + child data-hb-theme-icon / -label spans.
+    // Menu sheet markup gets appended later (below), so we bind handlers
+    // via event delegation on <body> instead of direct addEventListener.
     function getTheme() {
       try { return localStorage.getItem('hb-theme') === 'dark' ? 'dark' : 'light'; }
       catch (_e) { return 'light'; }
+    }
+    function syncThemeBtns() {
+      const t = getTheme();
+      document.querySelectorAll('[data-hb-theme-toggle]').forEach(btn => {
+        const iconEl = btn.querySelector('[data-hb-theme-icon]');
+        const labelEl = btn.querySelector('[data-hb-theme-label]');
+        if (iconEl)  iconEl.innerHTML = (t === 'dark') ? SVG_SUN : SVG_MOON;
+        if (labelEl) labelEl.textContent = (t === 'dark') ? 'Light mode' : 'Dark mode';
+      });
     }
     function applyTheme(t) {
       const html = document.documentElement;
@@ -1159,17 +1174,18 @@
       try { localStorage.setItem('hb-theme', t); } catch (_e) {}
       const meta = document.querySelector('meta[name="theme-color"]');
       if (meta) meta.setAttribute('content', t === 'dark' ? '#0b0d10' : '#ffffff');
-      syncThemeBtn();
+      syncThemeBtns();
     }
-    function syncThemeBtn() {
-      const t = getTheme();
-      const iconEl = themeBtn.querySelector('.rail-theme-icon');
-      const labelEl = themeBtn.querySelector('.label');
-      if (iconEl)  iconEl.innerHTML = (t === 'dark') ? SVG_SUN : SVG_MOON;
-      if (labelEl) labelEl.textContent = (t === 'dark') ? 'Light mode' : 'Dark mode';
-    }
-    themeBtn.addEventListener('click', () => applyTheme(getTheme() === 'dark' ? 'light' : 'dark'));
-    syncThemeBtn();
+    document.body.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-hb-theme-toggle]');
+      if (!btn) return;
+      e.stopPropagation();  // don't trigger menu-sheet's [data-close] handler
+      applyTheme(getTheme() === 'dark' ? 'light' : 'dark');
+    });
+    // Sync now (rail button is already in DOM) and again after the menu
+    // sheet is appended below. The latter wins because querySelectorAll
+    // picks up both buttons.
+    syncThemeBtns();
 
     // Account FAB lives top-right of the viewport, regardless of page,
     // so it's reachable without scrolling the rail. paintAccount() below
@@ -1262,11 +1278,19 @@
             <span class="menu-row-label">${ch.label}</span>
           </a>
         `).join('')}
+        <button type="button" class="menu-row" data-hb-theme-toggle aria-label="Toggle dark mode">
+          <span class="menu-row-icon" data-hb-theme-icon>${SVG_MOON}</span>
+          <span class="menu-row-label" data-hb-theme-label>Dark mode</span>
+        </button>
         <div class="menu-section-head">Account</div>
         <div class="menu-sheet-account" data-hb-account></div>
       </div>
     `;
     document.body.appendChild(menuSheet);
+    // Re-sync now that the menu sheet's theme toggle is in the DOM —
+    // matches the rail toggle's initial state (moon icon + Dark mode label
+    // when in light, sun icon + Light mode label when in dark).
+    syncThemeBtns();
 
     function openMenuSheet() {
       menuSheet.classList.add('is-open');
