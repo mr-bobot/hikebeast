@@ -3087,6 +3087,13 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 .hb-wild-chip.is-note   { background: rgba(255, 204, 0, 0.14); color: #8a6300; border-color: rgba(255, 204, 0, 0.30); }
 .hb-wild-chip.is-ok     { background: rgba(40, 180, 99, 0.10); color: #1f7a3d; border-color: rgba(40, 180, 99, 0.22); }
 .hb-wild-chip.is-mute   { background: var(--press); color: var(--muted); border-color: var(--hairline); }
+/* Dark variants: light-on-tint fg colors replace the dark-on-tint
+   originals (which would be invisible on a dark page bg) and the
+   tinted alphas bump up so the chip surfaces still read. */
+:root[data-theme="dark"] .hb-wild-chip.is-danger { background: rgba(255, 69, 58, 0.18); color: #ff8a85; border-color: rgba(255, 69, 58, 0.30); }
+:root[data-theme="dark"] .hb-wild-chip.is-warn   { background: rgba(255, 159, 10, 0.18); color: #ffd28a; border-color: rgba(255, 159, 10, 0.30); }
+:root[data-theme="dark"] .hb-wild-chip.is-note   { background: rgba(255, 214, 10, 0.18); color: #ffe580; border-color: rgba(255, 214, 10, 0.30); }
+:root[data-theme="dark"] .hb-wild-chip.is-ok     { background: rgba(48, 209, 88, 0.18); color: #69e6a4; border-color: rgba(48, 209, 88, 0.30); }
 .hb-wild-reason {
   margin: 0;
   font-size: 14px;
@@ -4485,6 +4492,14 @@ body.has-rail .topbar .hb-nav { display: none; }
   background: var(--fg);
   color: #fff;
   border-color: var(--fg);
+}
+/* In dark mode --fg flips to near-white, so the "selected" chip would
+   be white-on-white. Anchor to deep navy instead (same pattern as the
+   account/affiliate/swipe primary CTAs). */
+:root[data-theme="dark"] .hb-chip.is-on {
+  background: #003162;
+  color: #fff;
+  border-color: #003162;
 }
 .hb-chip.is-on .swatch { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.4); }
 .hb-chip .chip-count {

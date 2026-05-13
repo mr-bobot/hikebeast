@@ -352,6 +352,33 @@
   /* iOS toggle off-state in dark mode: track darker, knob stays white
      (iOS convention even in dark themes). */
   :root[data-theme="dark"] .marker-mode-switch .track { background: rgba(255, 255, 255, 0.18); }
+
+  /* Leaflet's default +/- zoom buttons are white-on-light-gray. In dark
+     mode they read as bright white squares against the navy page.
+     Override the bar + each anchor + the disabled state. */
+  :root[data-theme="dark"] .leaflet-bar {
+    border-color: var(--hairline-strong);
+    box-shadow: var(--shadow-soft);
+  }
+  :root[data-theme="dark"] .leaflet-bar a,
+  :root[data-theme="dark"] .leaflet-bar a:hover,
+  :root[data-theme="dark"] .leaflet-bar a:focus {
+    background-color: var(--paper);
+    color: var(--fg);
+    border-bottom-color: var(--hairline);
+  }
+  :root[data-theme="dark"] .leaflet-bar a:hover { background-color: var(--surface-2); }
+  :root[data-theme="dark"] .leaflet-bar a.leaflet-disabled {
+    background-color: var(--surface);
+    color: var(--soft);
+  }
+  :root[data-theme="dark"] .leaflet-control-attribution {
+    background: rgba(20, 23, 27, 0.85);
+    color: var(--muted);
+  }
+  :root[data-theme="dark"] .leaflet-control-attribution a {
+    color: var(--accent);
+  }
 </style>
 </head>
 <body>
