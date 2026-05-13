@@ -2157,7 +2157,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   letter-spacing: -0.005em;
   color: var(--muted);
 }
-.sp-body p { margin: 0; font-size: 16px; line-height: 1.6; color: #1c1c1e; }
+.sp-body p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--fg); }
 .sp-body .body { display: flex; flex-direction: column; gap: 14px; }
 
 .specs {
