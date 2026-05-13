@@ -313,12 +313,15 @@
      paper. The marker dot stays brand blue; the halo lifts opacity
      so it still reads against the deep page. */
 
-  :root[data-theme="dark"] body {
+  /* Dark recipe overrides the ::before pseudo (where the light recipe
+     lives after the perf branch moved it off body) — NOT body, which
+     is just var(--bg). Targeting body in dark mode would leave the
+     light gradient still painting on the pseudo on top. */
+  :root[data-theme="dark"] body::before {
     background:
       radial-gradient(900px 600px at 18% 12%, rgba(10, 132, 255, 0.10) 0%, transparent 60%),
       radial-gradient(700px 500px at 88% 92%, rgba(0, 49, 98, 0.45) 0%, transparent 60%),
       linear-gradient(135deg, #0b0d10 0%, #11161c 60%, #181d24 100%);
-    background-attachment: fixed;
   }
 
   /* Marker halo bumped to 0.22 in dark so the bloom reads against
