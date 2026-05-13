@@ -50,11 +50,26 @@ body {
   line-height: 1.5;
   letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
+  background: var(--bg);
+}
+/* Viewport-fixed gradient atmosphere on its own compositor layer.
+ * Used to live on <body> via background-attachment: fixed, but Safari
+ * re-rasterises that on every scroll frame — the dominant cause of
+ * home-page scroll jank on desktop Safari. A position:fixed pseudo
+ * gets promoted to its own GPU layer once, so scrolling content above
+ * never repaints it. Visual is identical. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
     radial-gradient(900px 500px at 20% 0%, #eef1f5 0%, transparent 60%),
-    radial-gradient(700px 500px at 85% 8%, #f0ece6 0%, transparent 55%),
-    var(--bg);
-  background-attachment: fixed;
+    radial-gradient(700px 500px at 85% 8%, #f0ece6 0%, transparent 55%);
+  /* Force Safari to promote this to its own GraphicsLayer so it
+   * never repaints when content scrolls above it. */
+  will-change: transform;
 }
 
 a { color: inherit; }
