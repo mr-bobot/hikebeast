@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
+<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
 <title>Map · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
@@ -22,14 +23,14 @@
   /* Map page — Figma light recipe with the same atmospheric
    * treatment as the dark variant: subtle diagonal gradient with
    * two soft cooler-tone glow blobs in opposite corners + a 1px
-   * dot-noise overlay. Reads as "premium paper" instead of flat
-   * gray, without ever leaving the light theme. */
-  /* Atmospheric layered background. Used to live on <body> via
-   * background-attachment: fixed, but Safari re-rasterises that on
-   * every scroll frame; a position:fixed pseudo-element is hardware-
-   * composited once and stays put. The map itself doesn't scroll (it's
-   * a fixed-height Leaflet shell) so the body rarely actually scrolls
-   * on this page, but we keep the pattern for consistency. */
+   * dot-noise overlay. Reads as "premium paper" on light, "mountains
+   * at twilight" on dark. Body bg flips via the dark override block
+   * at the bottom of this <style>.
+   *
+   * The gradient lives on body::before (position:fixed, z-index:-1)
+   * rather than <body> with background-attachment:fixed — Safari
+   * re-rasterises the attachment-fixed bg every scroll frame, while
+   * a fixed pseudo-element promotes to its own GraphicsLayer. */
   body { background: var(--bg); }
   body::before {
     content: '';
@@ -43,12 +44,12 @@
       linear-gradient(135deg, #fbfcfe 0%, #f3f5f9 60%, #ecf0f5 100%);
   }
   .map-shell { height: calc(100dvh - var(--topbar-h)); position: relative; isolation: isolate; }
-  /* 1px dot-noise overlay (3px spacing), matches the dark version
-   * but in navy at 4% opacity so it reads as paper grain on light. */
+  /* 1px dot-noise overlay (3px spacing). Uses --map-noise so it
+   * flips from navy-on-light to white-on-dark per theme. */
   .map-shell::after {
     content: '';
     position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(0, 49, 98, 0.04) 1px, transparent 1px);
+    background-image: radial-gradient(var(--map-noise) 1px, transparent 1px);
     background-size: 3px 3px;
     pointer-events: none;
     z-index: 400;
@@ -94,7 +95,7 @@
     width: 42px; height: 52px;
     border-radius: 8px;
     background-image: var(--thumb-img, none);
-    background-color: #f5f5f5;
+    background-color: var(--surface);
     background-size: cover;
     background-position: center;
     border: 2px solid #ffffff;
@@ -137,13 +138,13 @@
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20), 0 4px 12px rgba(0, 0, 0, 0.08);
   }
   .leaflet-popup-content { margin: 0; width: 240px !important; }
-  .leaflet-popup-tip { background: #fff; }
+  .leaflet-popup-tip { background: var(--paper); }
   .spot-popup img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
   .spot-popup .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 4px; }
   .spot-popup .kicker { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 0; }
   .spot-popup h3 { margin: 2px 0 0; font-family: "SF Pro Display", -apple-system, system-ui, sans-serif; font-size: 18px; letter-spacing: -0.02em; line-height: 1.15; font-weight: 600; color: var(--fg); }
   .spot-popup .meta { font-size: 11px; color: var(--muted); margin: 4px 0 0; }
-  .spot-popup a.read { margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; height: 36px; border-radius: 999px; background: var(--fg); color: #fff; font-size: 13px; font-weight: 500; text-decoration: none; }
+  .spot-popup a.read { margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; height: 36px; border-radius: 999px; background: var(--cta-bg); color: #fff; font-size: 13px; font-weight: 500; text-decoration: none; }
 
   /* Spot title tooltip on hover — light glass. */
   .spot-tip {
@@ -165,20 +166,20 @@
     position: absolute; top: 18px; right: 18px; z-index: 500;
     display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
   }
-  /* Saved toggle — light glass pill. */
+  /* Saved toggle — glass pill. */
   .fav-toggle {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 8px 12px; height: 32px;
-    background: rgba(255, 255, 255, 0.94);
+    background: var(--glass-strong);
     -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
     border: 1px solid var(--hairline); border-radius: 999px;
     font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: -0.005em; color: var(--fg);
     cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-soft);
     transition: background 120ms ease, color 120ms ease, border-color 120ms ease, transform 100ms ease;
     -webkit-tap-highlight-color: transparent;
   }
-  .fav-toggle svg { width: 14px; height: 14px; color: rgba(0, 0, 0, 0.55); transition: color 120ms ease; }
+  .fav-toggle svg { width: 14px; height: 14px; color: var(--muted); transition: color 120ms ease; }
   .fav-toggle:hover { border-color: var(--hairline-strong); }
   .fav-toggle:active { transform: scale(0.97); }
   .fav-toggle .fav-count {
@@ -187,9 +188,9 @@
     border-radius: 999px; background: var(--accent); color: #fff;
     font-size: 10px; font-weight: 700; line-height: 1; letter-spacing: 0;
   }
-  .fav-toggle.is-on { background: #ff375f; color: #fff; border-color: #ff375f; }
+  .fav-toggle.is-on { background: var(--danger); color: #fff; border-color: var(--danger); }
   .fav-toggle.is-on svg { color: #fff; }
-  .fav-toggle.is-on .fav-count { background: #fff; color: #ff375f; }
+  .fav-toggle.is-on .fav-count { background: #fff; color: var(--danger); }
   .fav-toggle.is-empty { opacity: 0.55; cursor: default; }
   .fav-toggle.is-empty:hover { border-color: var(--hairline); }
 
@@ -201,11 +202,11 @@
     position: absolute;
     top: 18px; left: 60px;
     z-index: 500;
-    background: rgba(255, 255, 255, 0.94);
+    background: var(--glass-strong);
     -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
     border: 1px solid var(--hairline); border-radius: 999px;
     padding: 8px 12px 8px 14px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+    box-shadow: var(--shadow-soft);
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -245,7 +246,7 @@
     transition: transform 200ms cubic-bezier(.2, .7, .3, 1);
     pointer-events: none;
   }
-  .marker-mode-switch:has(input:checked) .track { background: #34c759; }
+  .marker-mode-switch:has(input:checked) .track { background: var(--success); }
   .marker-mode-switch:has(input:checked) .knob { transform: translateX(12px); }
 
   /* Page topbar is hidden on the map view (light theme, edge-to-edge
@@ -304,6 +305,79 @@
     .map-shell {
       height: calc(100dvh - var(--topbar-h) - 64px - env(safe-area-inset-bottom));
     }
+  }
+
+  /* === Dark mode === "Mountains at twilight" recipe.
+     Same atmospheric structure as light (diagonal base + two glow
+     blobs + dot noise) but built from navy depths instead of cream
+     paper. The marker dot stays brand blue; the halo lifts opacity
+     so it still reads against the deep page. */
+
+  /* Dark recipe overrides the ::before pseudo (where the light recipe
+     lives after the perf branch moved it off body) — NOT body, which
+     is just var(--bg). Targeting body in dark mode would leave the
+     light gradient still painting on the pseudo on top. */
+  :root[data-theme="dark"] body::before {
+    background:
+      radial-gradient(900px 600px at 18% 12%, rgba(10, 132, 255, 0.10) 0%, transparent 60%),
+      radial-gradient(700px 500px at 88% 92%, rgba(0, 49, 98, 0.45) 0%, transparent 60%),
+      linear-gradient(135deg, #0b0d10 0%, #11161c 60%, #181d24 100%);
+  }
+
+  /* Marker halo bumped to 0.22 in dark so the bloom reads against
+     the dark page (the 0.10 light value gets lost on a navy bg). */
+  :root[data-theme="dark"] .spot-marker .thumb {
+    box-shadow:
+      0 0 0 6px rgba(10, 132, 255, 0.22),
+      0 2px 6px rgba(0, 0, 0, 0.30);
+  }
+  :root[data-theme="dark"] .spot-marker:hover .thumb {
+    box-shadow:
+      0 0 0 8px rgba(10, 132, 255, 0.28),
+      0 4px 10px rgba(0, 0, 0, 0.40);
+  }
+
+  /* Spot-tooltip's !important light value needs an !important override. */
+  :root[data-theme="dark"] .spot-tip {
+    background: var(--glass-strong) !important;
+    border-color: var(--hairline) !important;
+    color: var(--fg) !important;
+    box-shadow: var(--shadow-soft) !important;
+  }
+
+  /* Popup "Read" CTA: var(--fg) becomes near-white in dark, white
+     text on white is invisible. Deep navy keeps the heavy-button feel. */
+  :root[data-theme="dark"] .spot-popup .read { background: #003162; color: #fff; }
+
+  /* iOS toggle off-state in dark mode: track darker, knob stays white
+     (iOS convention even in dark themes). */
+  :root[data-theme="dark"] .marker-mode-switch .track { background: rgba(255, 255, 255, 0.18); }
+
+  /* Leaflet's default +/- zoom buttons are white-on-light-gray. In dark
+     mode they read as bright white squares against the navy page.
+     Override the bar + each anchor + the disabled state. */
+  :root[data-theme="dark"] .leaflet-bar {
+    border-color: var(--hairline-strong);
+    box-shadow: var(--shadow-soft);
+  }
+  :root[data-theme="dark"] .leaflet-bar a,
+  :root[data-theme="dark"] .leaflet-bar a:hover,
+  :root[data-theme="dark"] .leaflet-bar a:focus {
+    background-color: var(--paper);
+    color: var(--fg);
+    border-bottom-color: var(--hairline);
+  }
+  :root[data-theme="dark"] .leaflet-bar a:hover { background-color: var(--surface-2); }
+  :root[data-theme="dark"] .leaflet-bar a.leaflet-disabled {
+    background-color: var(--surface);
+    color: var(--soft);
+  }
+  :root[data-theme="dark"] .leaflet-control-attribution {
+    background: rgba(20, 23, 27, 0.85);
+    color: var(--muted);
+  }
+  :root[data-theme="dark"] .leaflet-control-attribution a {
+    color: var(--accent);
   }
 </style>
 </head>
@@ -398,16 +472,36 @@
   // Switzerland silhouette: pale-fill cantons with a soft navy hairline.
   // (The chapter-isolate recolor that used to live here was removed
   // along with the legend filter; redesign coming in a separate
-  // session.) Outline color: #003162 at 50% opacity, per Figma.
-  const CANTON_OUTLINE = 'rgba(0, 49, 98, 0.50)';
-  const CANTON_STYLE = {
-    color: CANTON_OUTLINE, weight: 1,
-    fillColor: '#eceef2',
-    fillOpacity: 1, lineJoin: 'round',
-  };
-  if (GEOJSON && GEOJSON.features && GEOJSON.features.length) {
-    L.geoJSON(GEOJSON, { style: () => CANTON_STYLE, interactive: false }).addTo(map);
+  // session.) Outline + fill come from CSS custom properties so they
+  // flip with the theme: light = navy outline on pale fill, dark =
+  // white outline on near-invisible dark fill. paintGeoStyle()
+  // re-reads them on every paint, and we re-paint on theme change.
+  let geoLayer = null;
+  function cantonStyle() {
+    const root = getComputedStyle(document.documentElement);
+    return {
+      color: (root.getPropertyValue('--map-canton-outline').trim() || 'rgba(0, 49, 98, 0.50)'),
+      weight: 1,
+      fillColor: (root.getPropertyValue('--map-canton-fill').trim() || '#eceef2'),
+      fillOpacity: 1,
+      lineJoin: 'round',
+    };
   }
+  function paintGeoStyle() {
+    if (geoLayer) geoLayer.setStyle(cantonStyle());
+  }
+  if (GEOJSON && GEOJSON.features && GEOJSON.features.length) {
+    geoLayer = L.geoJSON(GEOJSON, { style: cantonStyle, interactive: false }).addTo(map);
+  }
+
+  // Repaint cantons whenever the user toggles the theme via the rail
+  // (mutates [data-theme] on <html>). Dark mode is opt-in only — we
+  // do not listen for OS preference changes.
+  try {
+    new MutationObserver(paintGeoStyle).observe(document.documentElement, {
+      attributes: true, attributeFilter: ['data-theme'],
+    });
+  } catch (_e) { /* old browsers — cantons stay light, no biggie */ }
 
   const layers = new Map();
   LEGEND.forEach(c => layers.set(c.number, L.layerGroup().addTo(map)));

@@ -16,6 +16,21 @@ html, body { margin: 0; padding: 0; }
   --accent: #0071e3;
   --accent-soft: rgba(0,113,227,0.10);
   --success: #34c759;
+  --danger: #ff375f;
+  /* Dark CTA fill. In light mode it's the same near-black as text;
+     in dark mode it flips to deep navy so primary CTAs (var(--fg)
+     would become near-white → white-on-white) stay readable. */
+  --cta-bg: #1d1d1f;
+  --glass: rgba(255,255,255,0.82);
+  --glass-strong: rgba(255,255,255,0.94);
+  --glass-filter: saturate(180%) blur(20px);
+  --press: rgba(0,0,0,0.05);
+  --photo-overlay: rgba(0,0,0,0.55);
+  --body-wash-1: #eef1f5;
+  --body-wash-2: #f0ece6;
+  --map-noise: rgba(0,49,98,0.04);
+  --map-canton-fill: #eceef2;
+  --map-canton-outline: rgba(0,49,98,0.50);
   --radius-card: 22px;
   --radius-sm: 10px;
   --radius-btn: 980px;
@@ -26,7 +41,43 @@ html, body { margin: 0; padding: 0; }
   --content-max: 1500px;
 }
 
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+/* === Dark theme tokens ===
+   Opt-in only. The bootstrap script reads localStorage['hb-theme']
+   and sets <html data-theme="dark"> when the user explicitly picked
+   dark via the rail toggle. Default = light (no attribute set).
+   We intentionally do NOT respond to prefers-color-scheme — dark
+   mode is an explicit user choice, never inferred from the OS. */
+:root[data-theme="dark"] {
+  --bg: #0b0d10;
+  --paper: #14171b;
+  --surface: #14171b;
+  --surface-2: #1c2026;
+  --fg: #f2f4f7;
+  --muted: #a8adb5;
+  --soft: #6e747d;
+  --hairline: rgba(255,255,255,0.08);
+  --hairline-strong: rgba(255,255,255,0.14);
+  --accent: #0a84ff;
+  --accent-soft: rgba(10,132,255,0.18);
+  --success: #30d158;
+  --danger: #ff453a;
+  --cta-bg: #003162;
+  --glass: rgba(20,23,27,0.78);
+  --glass-strong: rgba(20,23,27,0.92);
+  --glass-filter: saturate(120%) blur(20px);
+  --press: rgba(255,255,255,0.06);
+  --photo-overlay: rgba(0,0,0,0.65);
+  --body-wash-1: rgba(10,132,255,0.06);
+  --body-wash-2: rgba(0,49,98,0.20);
+  --map-noise: rgba(255,255,255,0.04);
+  --map-canton-fill: rgba(255,255,255,0.05);
+  --map-canton-outline: rgba(255,255,255,0.40);
+  --shadow-card: inset 0 0 0 1px rgba(255,255,255,0.06), 0 18px 40px rgba(0,0,0,0.50);
+  --shadow-soft: inset 0 0 0 1px rgba(255,255,255,0.04), 0 4px 14px rgba(0,0,0,0.30);
+  color-scheme: dark;
+}
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; color-scheme: light; }
 
 /* Users who've opted into "Reduce Motion" at the OS level (System
  * Settings / iOS Accessibility) get a freeze on transitions + animations
@@ -65,8 +116,8 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(900px 500px at 20% 0%, #eef1f5 0%, transparent 60%),
-    radial-gradient(700px 500px at 85% 8%, #f0ece6 0%, transparent 55%);
+    radial-gradient(900px 500px at 20% 0%, var(--body-wash-1) 0%, transparent 60%),
+    radial-gradient(700px 500px at 85% 8%, var(--body-wash-2) 0%, transparent 55%);
   /* Force Safari to promote this to its own GraphicsLayer so it
    * never repaints when content scrolls above it. */
   will-change: transform;
@@ -87,7 +138,11 @@ button { font-family: inherit; }
   z-index: 100;
   isolation: isolate;
   height: var(--topbar-h);
-  background: rgba(255,255,255,0.96);
+  /* No backdrop-filter — Safari recomposites blur on every scroll frame
+   * (the perf branch dropped it for that reason). var(--glass-strong)
+   * is opaque enough to read identically over the page body and flips
+   * with the theme. */
+  background: var(--glass-strong);
   border-bottom: 1px solid var(--hairline);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -148,7 +203,7 @@ button { font-family: inherit; }
   padding: 0 14px;
   border-radius: 999px;
   border: 1px solid var(--hairline);
-  background: #fff;
+  background: var(--paper);
   color: var(--fg);
   text-decoration: none;
   font-size: 13px;
@@ -163,11 +218,11 @@ button { font-family: inherit; }
 .pill:active { transform: scale(0.97); }
 .pill svg { width: 14px; height: 14px; }
 .pill-cta {
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
-  border-color: var(--fg);
+  border-color: var(--cta-bg);
 }
-.pill-cta:hover { opacity: 0.92; border-color: var(--fg); }
+.pill-cta:hover { opacity: 0.92; border-color: var(--cta-bg); }
 .pill .label-sm { display: none; }
 @media (min-width: 700px) {
   .topbar { padding: 0 22px; }
@@ -197,7 +252,7 @@ button { font-family: inherit; }
   top: 0;
   z-index: 80;
   /* See note on .topbar above — no backdrop-filter to keep Safari smooth. */
-  background: rgba(255,255,255,0.96);
+  background: var(--glass-strong);
   border-bottom: 1px solid var(--hairline);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -242,7 +297,7 @@ button { font-family: inherit; }
 }
 .home-search input::placeholder { color: var(--muted); }
 .home-search input:focus {
-  background: #fff;
+  background: var(--paper);
   border-color: var(--accent);
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
@@ -266,7 +321,7 @@ button { font-family: inherit; }
   transition: background 120ms ease, color 120ms ease;
   font-family: inherit;
 }
-.home-topbar-actions .icon-btn:hover { background: rgba(0,0,0,0.05); color: var(--fg); }
+.home-topbar-actions .icon-btn:hover { background: var(--press); color: var(--fg); }
 .home-topbar-actions .icon-btn svg { width: 18px; height: 18px; }
 /* Random + Liked are also rail items on desktop, so hide them in the
    topbar there. Settings cog is the inverse: only useful on desktop
@@ -458,7 +513,7 @@ button { font-family: inherit; }
   height: 44px;
   padding: 0 18px;
   border-radius: 999px;
-  background: #fff;
+  background: var(--paper);
   color: var(--fg);
   text-decoration: none;
   font-size: 14px;
@@ -481,7 +536,7 @@ button { font-family: inherit; }
 .feature-card .feature-cta .play-icon {
   width: 28px; height: 28px;
   border-radius: 999px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   display: grid;
   place-items: center;
@@ -508,11 +563,18 @@ button { font-family: inherit; }
 .feature-card .feature-photo img.is-fading { opacity: 0; }
 
 /* Intro slide · cream gradient (same stops as /themap/success/) +
- * the transparent polaroid PNG. The PNG is contained and centered so
+ * the transparent polaroid WebP. The image is contained and centered so
  * the polaroids never get clipped — matches the celebration moment
- * the buyer just saw on the thank-you page. */
+ * the buyer just saw on the thank-you page.
+ *
+ * The polaroid asset is transparent so the gradient shows through the
+ * spaces between/around the photos. Dark mode swaps the cream for a
+ * navy gradient that matches the page's atmospheric wash. */
 .feature-card .feature-photo.is-intro {
   background: linear-gradient(135deg, #F4F1EC 0%, #ECE6DC 100%);
+}
+:root[data-theme="dark"] .feature-card .feature-photo.is-intro {
+  background: linear-gradient(135deg, #14171b 0%, #1c2026 60%, #11161c 100%);
 }
 .feature-card .feature-photo.is-intro img {
   object-fit: contain;
@@ -615,7 +677,7 @@ button { font-family: inherit; }
 .up-next-more:hover {
   background: rgba(0,0,0,0.03);
   color: var(--fg);
-  border-color: rgba(0,0,0,0.18);
+  border-color: var(--hairline-strong);
 }
 .up-next-card .photo {
   width: 96px; height: 64px;
@@ -713,7 +775,7 @@ button { font-family: inherit; }
   padding: 0 14px;
   border-radius: 999px;
   border: 1px solid var(--hairline);
-  background: #fff;
+  background: var(--paper);
   color: var(--fg);
   text-decoration: none;
   font-size: 13px;
@@ -882,7 +944,7 @@ button { font-family: inherit; }
 .cc .cc-photo .cc-num {
   position: absolute;
   top: 12px; left: 12px;
-  background: rgba(255,255,255,0.92);
+  background: var(--glass-strong);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   color: var(--fg);
@@ -994,7 +1056,7 @@ button { font-family: inherit; }
   align-self: flex-start;
   padding: 10px 18px;
   border-radius: 999px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   font-size: 14px;
   font-weight: 500;
@@ -1034,7 +1096,7 @@ button { font-family: inherit; }
   background: rgba(0,0,0,0.18);
 }
 .cc.is-locked .cc-num {
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
 }
 .cc-lock {
@@ -1078,7 +1140,7 @@ button { font-family: inherit; }
   height: 44px;
   padding: 0 22px;
   border-radius: 999px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   text-decoration: none;
   font-size: 14px;
@@ -1091,7 +1153,7 @@ button { font-family: inherit; }
   height: 44px;
   padding: 0 18px;
   border-radius: 999px;
-  background: #fff;
+  background: var(--paper);
   color: var(--fg);
   text-decoration: none;
   font-size: 14px;
@@ -1190,7 +1252,7 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   align-self: start;
   height: calc(100dvh - var(--topbar-h));
   overflow-y: auto;
-  background: rgba(250,250,250,0.7);
+  background: var(--glass);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   backdrop-filter: saturate(180%) blur(12px);
   border-right: 1px solid var(--hairline);
@@ -1225,7 +1287,7 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   width: 100%;
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-sm);
-  background: #fff;
+  background: var(--paper);
   border: 1px solid var(--hairline);
   color: var(--muted);
   text-decoration: none;
@@ -1256,7 +1318,7 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.55) 100%);
+  background: linear-gradient(180deg, transparent 50%, var(--photo-overlay) 100%);
 }
 .sb-thumb .lbl {
   position: absolute;
@@ -1283,7 +1345,7 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   transform: translate(-50%, -50%);
   z-index: 2;
   color: rgba(255,255,255,0.95);
-  background: rgba(0,0,0,0.55);
+  background: var(--photo-overlay);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   width: 26px; height: 26px;
@@ -1624,7 +1686,7 @@ body[data-page="spot-detail"] .specs {
 .ch-view-btn svg { width: 13px; height: 13px; }
 .ch-view-btn:hover { color: var(--fg); }
 .ch-view-btn.is-active {
-  background: #fff;
+  background: var(--paper);
   color: var(--fg);
   box-shadow: 0 1px 2px rgba(0,0,0,0.06);
 }
@@ -1975,7 +2037,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   position: absolute;
   bottom: 14px;
   left: 14px;
-  background: rgba(0,0,0,0.55);
+  background: var(--photo-overlay);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
   backdrop-filter: saturate(180%) blur(10px);
   color: rgba(255,255,255,0.95);
@@ -2120,7 +2182,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   letter-spacing: -0.005em;
   color: var(--muted);
 }
-.sp-body p { margin: 0; font-size: 16px; line-height: 1.6; color: #1c1c1e; }
+.sp-body p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--fg); }
 .sp-body .body { display: flex; flex-direction: column; gap: 14px; }
 
 .specs {
@@ -2380,7 +2442,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   margin-left: auto;
   flex-shrink: 0;
   color: #fff;
-  background: var(--fg);
+  background: var(--cta-bg);
   padding: 5px 10px;
   border-radius: 999px;
   font-size: 11px;
@@ -2458,7 +2520,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 /* End-of-chapter footer card */
 .slide-end {
   grid-template-columns: 1fr;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #f5f5f7;
   padding: 28px 26px;
   text-align: center;
@@ -2574,7 +2636,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   margin-top: 14px;
   padding: 10px 16px;
   border-radius: 999px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   font-size: 13px;
   font-weight: 500;
@@ -2633,7 +2695,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   width: 40px;
   height: 40px;
   border-radius: 999px;
-  background: rgba(0,0,0,0.55);
+  background: var(--photo-overlay);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   border: 0;
@@ -2695,7 +2757,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 }
 .sp-photo.hb-multi .hb-dots span.is-on,
 .cl-photos.hb-multi .hb-dots span.is-on {
-  background: #fff;
+  background: var(--paper);
   width: 16px;
 }
 /* Photo counter badge (top-RIGHT — was top-left, but on mobile that
@@ -2740,7 +2802,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   position: fixed;
   z-index: 800;
   min-width: 200px;
-  background: rgba(255,255,255,0.96);
+  background: var(--glass-strong);
   -webkit-backdrop-filter: saturate(180%) blur(22px);
   backdrop-filter: saturate(180%) blur(22px);
   border: 1px solid var(--hairline);
@@ -2773,7 +2835,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   text-align: left;
   -webkit-tap-highlight-color: transparent;
 }
-.hb-spot-menu-item:hover { background: rgba(0,0,0,0.05); }
+.hb-spot-menu-item:hover { background: var(--press); }
 .hb-spot-menu-item svg { width: 16px; height: 16px; color: var(--muted); }
 
 /* Modal (Apple HIG): translucent backdrop, rounded white card. */
@@ -2792,7 +2854,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 }
 .hb-modal-backdrop.is-show { opacity: 1; }
 .hb-modal {
-  background: #fff;
+  background: var(--paper);
   border-radius: 18px;
   padding: 22px 22px 18px;
   width: 100%;
@@ -2916,7 +2978,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   gap: 8px;
   border: 0;
   border-radius: 12px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   font: inherit;
   font-size: 14px;
@@ -3004,7 +3066,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   -webkit-tap-highlight-color: transparent;
   transition: background 120ms ease, color 120ms ease;
 }
-.hb-wild-close:hover { background: rgba(0,0,0,0.05); color: var(--fg); }
+.hb-wild-close:hover { background: var(--press); color: var(--fg); }
 .hb-wild-close svg { width: 18px; height: 18px; }
 .hb-wild-head { display: flex; flex-direction: column; gap: 6px; padding-right: 36px; }
 .hb-wild-kicker {
@@ -3036,7 +3098,14 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 .hb-wild-chip.is-warn   { background: rgba(255, 149, 0, 0.10); color: #b25c00; border-color: rgba(255, 149, 0, 0.20); }
 .hb-wild-chip.is-note   { background: rgba(255, 204, 0, 0.14); color: #8a6300; border-color: rgba(255, 204, 0, 0.30); }
 .hb-wild-chip.is-ok     { background: rgba(40, 180, 99, 0.10); color: #1f7a3d; border-color: rgba(40, 180, 99, 0.22); }
-.hb-wild-chip.is-mute   { background: rgba(0, 0, 0, 0.05); color: var(--muted); border-color: var(--hairline); }
+.hb-wild-chip.is-mute   { background: var(--press); color: var(--muted); border-color: var(--hairline); }
+/* Dark variants: light-on-tint fg colors replace the dark-on-tint
+   originals (which would be invisible on a dark page bg) and the
+   tinted alphas bump up so the chip surfaces still read. */
+:root[data-theme="dark"] .hb-wild-chip.is-danger { background: rgba(255, 69, 58, 0.18); color: #ff8a85; border-color: rgba(255, 69, 58, 0.30); }
+:root[data-theme="dark"] .hb-wild-chip.is-warn   { background: rgba(255, 159, 10, 0.18); color: #ffd28a; border-color: rgba(255, 159, 10, 0.30); }
+:root[data-theme="dark"] .hb-wild-chip.is-note   { background: rgba(255, 214, 10, 0.18); color: #ffe580; border-color: rgba(255, 214, 10, 0.30); }
+:root[data-theme="dark"] .hb-wild-chip.is-ok     { background: rgba(48, 209, 88, 0.18); color: #69e6a4; border-color: rgba(48, 209, 88, 0.30); }
 .hb-wild-reason {
   margin: 0;
   font-size: 14px;
@@ -3143,7 +3212,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   height: 40px;
   border-radius: 10px;
   border: 1px solid var(--hairline);
-  background: #fff;
+  background: var(--paper);
   padding: 0 12px;
   font-family: inherit;
   font-size: 14px;
@@ -3212,7 +3281,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   transition: opacity 120ms ease, transform 100ms ease;
 }
 .hb-modal .btn-ghost { background: transparent; color: var(--fg); border: 1px solid var(--hairline); }
-.hb-modal .btn-primary { background: var(--fg); color: #fff; }
+.hb-modal .btn-primary { background: var(--cta-bg); color: #fff; }
 .hb-modal .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 .hb-modal .btn-primary:active:not(:disabled) { transform: scale(0.97); }
 
@@ -3381,7 +3450,7 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
 }
 .hb-random-winner .rw-btn svg { width: 14px; height: 14px; flex: 0 0 auto; }
 .hb-random-winner .rw-btn:active { transform: scale(0.96); }
-.hb-random-winner .rw-btn.primary { background: #fff; color: var(--fg); }
+.hb-random-winner .rw-btn.primary { background: #fff; color: #1d1d1f; }
 .hb-random-winner .rw-btn.primary:hover { opacity: 0.95; }
 .hb-random-winner .rw-btn.ghost {
   background: rgba(255,255,255,0.12);
@@ -3426,9 +3495,9 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
   /* See note on .topbar above. The rail spans the full viewport height,
    * so a per-frame backdrop-filter recomposite was the biggest single
    * cost on desktop Safari — every scroll re-blurred the entire left
-   * edge. Near-opaque solid background gives the same visual on most
-   * page backgrounds. */
-  background: rgba(250,250,250,0.98);
+   * edge. Near-opaque tokenized background gives the same visual and
+   * flips with the theme. */
+  background: var(--glass-strong);
   border-right: 1px solid var(--hairline);
   display: flex;
   flex-direction: column;
@@ -3449,14 +3518,14 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
   flex-direction: column;
   gap: 2px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.08) transparent;
+  scrollbar-color: var(--hairline) transparent;
   /* a touch of breathing room from the brand and the bottom toggle */
   padding: 4px 2px;
   margin: 0 -2px;
 }
 .app-rail .rail-scroll::-webkit-scrollbar { width: 4px; }
-.app-rail .rail-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 2px; }
-.app-rail .rail-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.18); }
+.app-rail .rail-scroll::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 2px; }
+.app-rail .rail-scroll::-webkit-scrollbar-thumb:hover { background: var(--hairline-strong); }
 
 /* Section heading inside the rail (e.g. "Chapters") */
 .rail-section-head {
@@ -3504,7 +3573,7 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
   font-weight: 500;
   letter-spacing: -0.005em;
 }
-.rail-chapter:hover { background: rgba(0,0,0,0.045); color: var(--fg); }
+.rail-chapter:hover { background: var(--press); color: var(--fg); }
 .rail-chapter.is-current { background: var(--accent-soft); color: var(--accent); }
 .rail-chapter .rail-chapter-thumb {
   flex-shrink: 0;
@@ -3590,7 +3659,7 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
   transition: background 120ms ease, color 120ms ease;
   width: 100%;
 }
-.rail-item:hover { background: rgba(0,0,0,0.045); color: var(--fg); }
+.rail-item:hover { background: var(--press); color: var(--fg); }
 .rail-item.is-current { background: var(--accent-soft); color: var(--accent); }
 .rail-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 /* Button user-agent styles add inline padding and centre text -- neutralise
@@ -3643,8 +3712,11 @@ button.rail-item {
 .app-rail.is-expanded .rail-item .rail-dot { display: none; }
 .rail-item-wrap { position: relative; }
 
-.rail-toggle {
-  margin-top: auto;
+/* Dark-mode toggle, sits just above the collapse/expand toggle at
+ * the bottom of the rail. Reuses .rail-toggle's visual recipe so the
+ * two bottom buttons match. Icon previews the destination theme:
+ * moon while in light, sun while in dark. */
+.rail-theme {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -3660,7 +3732,37 @@ button.rail-item {
   white-space: nowrap;
   -webkit-tap-highlight-color: transparent;
 }
-.rail-toggle:hover { background: rgba(0,0,0,0.045); color: var(--fg); }
+.rail-theme:hover { background: var(--press); color: var(--fg); }
+.rail-theme .rail-theme-icon {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  display: grid;
+  place-items: center;
+}
+.rail-theme .rail-theme-icon svg { width: 18px; height: 18px; }
+.rail-theme .label {
+  opacity: 0;
+  transition: opacity 120ms ease 30ms;
+}
+.app-rail.is-expanded .rail-theme .label { opacity: 1; }
+
+.rail-toggle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.rail-toggle:hover { background: var(--press); color: var(--fg); }
 .rail-toggle svg {
   flex-shrink: 0;
   width: 18px; height: 18px;
@@ -3707,7 +3809,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   width: 36px;
   height: 36px;
   border-radius: 999px;
-  background: #fff;
+  background: var(--paper);
   border: 1px solid var(--hairline);
   align-items: center;
   justify-content: center;
@@ -3762,10 +3864,10 @@ body.has-rail .topbar .hb-nav { display: none; }
      * column and the search bar drifts off-center to the left. */
     grid-template-columns: 1fr;
     gap: 0;
-    /* Fully opaque on mobile — translucency adds nothing at this width
-     * and the base rule's 96% alpha can still show a faint seam over
-     * dark photos. */
-    background: #fff;
+    /* Fully opaque on mobile — translucency adds nothing at this width.
+     * var(--glass-strong) reads identically over the page body and
+     * flips with the theme. */
+    background: var(--glass-strong);
   }
   .home-topbar-actions { display: none; }
 
@@ -3778,8 +3880,9 @@ body.has-rail .topbar .hb-nav { display: none; }
     padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
     /* Solid surface on mobile -- the translucent desktop look bleeds page
      * content through the drawer (Safari's backdrop-filter is unreliable
-     * over fast-paint pages and over Leaflet maps). */
-    background: #fafafa;
+     * over fast-paint pages and over Leaflet maps). --surface-2 flips
+     * with the theme so the drawer reads correctly in dark too. */
+    background: var(--surface-2);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
@@ -3825,7 +3928,7 @@ body.has-rail .topbar .hb-nav { display: none; }
      * directly on the page, no separate "plate". Body resolves to
      * #ffffff at the bottom of the viewport (the radial gradients
      * on body are fixed near top and fade well above the tab bar). */
-    background: #fff;
+    background: var(--paper);
     padding-top: 6px;
     padding-bottom: env(safe-area-inset-bottom);
     height: calc(64px + env(safe-area-inset-bottom));
@@ -3896,7 +3999,7 @@ body.has-rail .topbar .hb-nav { display: none; }
     left: 0;
     right: 0;
     bottom: 0;
-    background: #fff;
+    background: var(--paper);
     border-radius: 18px 18px 0 0;
     transform: translateY(100%);
     transition: transform 280ms cubic-bezier(.2,.7,.3,1);
@@ -3959,7 +4062,7 @@ body.has-rail .topbar .hb-nav { display: none; }
    * gate. CSS `display: flex` above would otherwise override the
    * hidden attribute. */
   .app-menu-sheet .menu-row[hidden] { display: none !important; }
-  .app-menu-sheet .menu-row:active { background: rgba(0, 0, 0, 0.05); }
+  .app-menu-sheet .menu-row:active { background: var(--press); }
   .app-menu-sheet .menu-row.is-current { color: var(--accent); }
   .app-menu-sheet .menu-row.is-current::before {
     content: "";
@@ -3986,7 +4089,7 @@ body.has-rail .topbar .hb-nav { display: none; }
     border-radius: 8px;
     overflow: hidden;
     flex: 0 0 auto;
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--press);
   }
   .app-menu-sheet .menu-row-thumb img {
     width: 100%; height: 100%; object-fit: cover; display: block;
@@ -4050,9 +4153,9 @@ body.has-rail .topbar .hb-nav { display: none; }
   .topbar .hb-pill { padding: 0 12px; height: 34px; font-size: 13px; }
 }
 .topbar .hb-pill.is-current {
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
-  border-color: var(--fg);
+  border-color: var(--cta-bg);
 }
 .topbar .hb-pill .hb-badge {
   display: inline-flex;
@@ -4070,7 +4173,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   letter-spacing: 0;
 }
 .topbar .hb-pill[data-hb-link="saved"].is-current .hb-badge {
-  background: #fff;
+  background: var(--paper);
   color: var(--fg);
 }
 
@@ -4104,7 +4207,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   border: 0;
   border-radius: 999px;
   background: var(--surface);
-  color: rgba(0,0,0,0.45);
+  color: var(--muted);
   cursor: pointer;
   transition: transform 120ms ease, color 120ms ease, background 120ms ease;
   -webkit-tap-highlight-color: transparent;
@@ -4115,10 +4218,10 @@ body.has-rail .topbar .hb-nav { display: none; }
 .slide-spot .sp-kicker,
 .slide-spot .sp-title { padding-right: 132px; }
 .hb-fav svg { width: 20px; height: 20px; }
-.hb-fav:hover { transform: scale(1.06); color: #ff375f; }
+.hb-fav:hover { transform: scale(1.06); color: var(--danger); }
 .hb-fav:active { transform: scale(0.92); }
-.hb-fav.is-on { color: #ff375f; }
-.hb-fav.is-on:hover { color: #ff375f; background: #fff; }
+.hb-fav.is-on { color: var(--danger); }
+.hb-fav.is-on:hover { color: var(--danger); background: var(--paper); }
 @keyframes hb-pop { 0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
 .hb-fav.is-on { animation: hb-pop 220ms ease; }
 
@@ -4131,16 +4234,16 @@ body.has-rail .topbar .hb-nav { display: none; }
   border: 0;
   border-radius: 999px;
   background: var(--surface);
-  color: rgba(0,0,0,0.45);
+  color: var(--muted);
   cursor: pointer;
   transition: transform 120ms ease, color 120ms ease, background 120ms ease;
   -webkit-tap-highlight-color: transparent;
 }
 .hb-visited svg { width: 20px; height: 20px; }
-.hb-visited:hover { transform: scale(1.06); color: #34c759; }
+.hb-visited:hover { transform: scale(1.06); color: var(--success); }
 .hb-visited:active { transform: scale(0.92); }
-.hb-visited.is-on { color: #34c759; }
-.hb-visited.is-on:hover { color: #34c759; background: #fff; }
+.hb-visited.is-on { color: var(--success); }
+.hb-visited.is-on:hover { color: var(--success); background: var(--paper); }
 .hb-visited.is-on { animation: hb-pop 220ms ease; }
 .hb-visited[hidden] { display: none !important; }
 
@@ -4207,10 +4310,10 @@ body.has-rail .topbar .hb-nav { display: none; }
   place-items: center;
   border: 0;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--glass-strong);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
   backdrop-filter: saturate(180%) blur(10px);
-  color: rgba(0, 0, 0, 0.55);
+  color: var(--muted);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -4220,9 +4323,9 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-kebab-overlay { right: 48px; }
 .hb-fav-overlay svg,
 .hb-kebab-overlay svg { width: 16px; height: 16px; }
-.hb-fav-overlay:hover { color: #ff375f; background: #fff; transform: scale(1.05); }
-.hb-fav-overlay.is-on { color: #ff375f; background: #fff; }
-.hb-kebab-overlay:hover { color: var(--fg); background: #fff; transform: scale(1.05); }
+.hb-fav-overlay:hover { color: var(--danger); background: var(--paper); transform: scale(1.05); }
+.hb-fav-overlay.is-on { color: var(--danger); background: var(--paper); }
+.hb-kebab-overlay:hover { color: var(--fg); background: var(--paper); transform: scale(1.05); }
 .hb-fav-overlay:active,
 .hb-kebab-overlay:active { transform: scale(0.92); }
 
@@ -4335,7 +4438,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   padding: 0 44px 0 40px;
   border-radius: 999px;
   border: 1px solid var(--hairline);
-  background: #fff;
+  background: var(--paper);
   font-family: inherit;
   font-size: 15px;
   letter-spacing: -0.01em;
@@ -4381,7 +4484,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   padding: 0 12px;
   border-radius: 999px;
   border: 1px solid var(--hairline);
-  background: #fff;
+  background: var(--paper);
   color: var(--fg);
   font-size: 12.5px;
   font-weight: 500;
@@ -4399,9 +4502,9 @@ body.has-rail .topbar .hb-nav { display: none; }
   flex-shrink: 0;
 }
 .hb-chip.is-on {
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
-  border-color: var(--fg);
+  border-color: var(--cta-bg);
 }
 .hb-chip.is-on .swatch { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.4); }
 .hb-chip .chip-count {
@@ -4435,7 +4538,7 @@ body.has-rail .topbar .hb-nav { display: none; }
     padding: 0 14px;
     border-radius: 999px;
     border: 1px solid var(--hairline);
-    background: #fff;
+    background: var(--paper);
     color: var(--fg);
     font-family: inherit;
     font-size: 13px;
@@ -4446,7 +4549,7 @@ body.has-rail .topbar .hb-nav { display: none; }
     transition: background 120ms ease, border-color 120ms ease;
   }
   .hb-filter-trigger svg { width: 14px; height: 14px; }
-  .hb-filter-trigger:active { background: rgba(0, 0, 0, 0.05); }
+  .hb-filter-trigger:active { background: var(--press); }
   .hb-filter-trigger .hb-filter-badge {
     display: inline-flex;
     align-items: center;
@@ -4486,7 +4589,7 @@ body.has-rail .topbar .hb-nav { display: none; }
     left: 0;
     right: 0;
     bottom: 0;
-    background: #fff;
+    background: var(--paper);
     border-radius: 18px 18px 0 0;
     transform: translateY(100%);
     transition: transform 280ms cubic-bezier(.2,.7,.3,1);
@@ -4558,14 +4661,14 @@ body.has-rail .topbar .hb-nav { display: none; }
     bottom: 0;
     margin-top: 12px;
     padding: 12px 0 4px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #fff 30%);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--bg) 30%);
   }
   .hb-filter-sheet .hb-filter-apply {
     width: 100%;
     height: 48px;
     border-radius: 999px;
     border: 0;
-    background: var(--fg);
+    background: var(--cta-bg);
     color: #fff;
     font-family: inherit;
     font-size: 15px;
@@ -4675,15 +4778,15 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-tile.hb-tile-todo .hb-tile-name {
   opacity: 1;
   transform: none;
-  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.55) 100%);
+  background: linear-gradient(180deg, transparent 0%, var(--photo-overlay) 100%);
   color: #f7f7fa;
   padding-top: 60px;
 }
 .hb-tile.hb-tile-todo .hb-tile-todo-tag {
   position: absolute;
   top: 8px; left: 8px;
-  background: rgba(255,255,255,0.92);
-  color: #1d1d1f;
+  background: var(--glass-strong);
+  color: var(--fg);
   font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -4699,10 +4802,10 @@ body.has-rail .topbar .hb-nav { display: none; }
   height: 30px;
   top: 8px;
   right: 8px;
-  background: rgba(255,255,255,0.88);
+  background: var(--glass);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
   backdrop-filter: saturate(180%) blur(10px);
-  color: rgba(0,0,0,0.55);
+  color: var(--muted);
   box-shadow: 0 2px 8px rgba(0,0,0,0.18);
   opacity: 0;
   transform: scale(0.92);
@@ -4712,8 +4815,8 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-tile:hover .hb-fav,
 .hb-tile:focus-within .hb-fav,
 .hb-tile .hb-fav.is-on { opacity: 1; transform: scale(1); }
-.hb-tile .hb-fav:hover { color: #ff375f; background: #fff; }
-.hb-tile .hb-fav.is-on { color: #ff375f; background: #fff; }
+.hb-tile .hb-fav:hover { color: var(--danger); background: var(--paper); }
+.hb-tile .hb-fav.is-on { color: var(--danger); background: var(--paper); }
 /* Touch devices have no hover · always show the heart so it's tappable */
 @media (hover: none) {
   .hb-tile .hb-fav { opacity: 1; transform: scale(1); }
@@ -4751,7 +4854,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   height: 44px;
   padding: 0 22px;
   border-radius: 999px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   text-decoration: none;
   font-size: 14px;
@@ -4868,10 +4971,10 @@ body.has-rail .topbar .hb-nav { display: none; }
   right: 10px;
   width: 32px;
   height: 32px;
-  background: rgba(255,255,255,0.95);
+  background: var(--glass-strong);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  color: #ff375f;
+  color: var(--danger);
   border: 0;
   border-radius: 999px;
   display: grid;
@@ -4894,10 +4997,10 @@ body.has-rail .topbar .hb-nav { display: none; }
   right: 10px;
   width: 32px;
   height: 32px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--glass-strong);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  color: #34c759;
+  color: var(--success);
   border: 0;
   border-radius: 999px;
   display: grid;
@@ -4910,16 +5013,16 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-saved-tile .hb-visited-badge:hover { transform: scale(1.06); }
 .hb-saved-tile .hb-visited-badge:active { transform: scale(0.92); }
 .hb-saved-tile .hb-visited-badge svg { width: 16px; height: 16px; }
-.hb-saved-tile .hb-visited-badge.is-on { color: #34c759; }
+.hb-saved-tile .hb-visited-badge.is-on { color: var(--success); }
 
 /* Kebab menu "Been there" item: green tick when on, neutral icon
  * when off. Matches the badge colour on the visited page. */
-.hb-spot-menu-item.is-on { color: #34c759; }
-.hb-spot-menu-item.is-on svg { color: #34c759; }
+.hb-spot-menu-item.is-on { color: var(--success); }
+.hb-spot-menu-item.is-on svg { color: var(--success); }
 
 /* === Print / PDF export === */
 @media print {
-  body { background: #fff; }
+  body { background: var(--paper); }
   .topbar, .sidebar { display: none !important; }
   .app { display: block; }
   .viewer { padding: 0; gap: 0; max-width: 100%; }
@@ -4959,7 +5062,7 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-account-fab .rail-user {
   height: 36px;
   padding: 0 6px 0 6px;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--glass-strong);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   backdrop-filter: saturate(180%) blur(12px);
   border: 1px solid var(--hairline);
@@ -4984,7 +5087,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   height: 36px;
   width: auto;
   padding: 0 14px;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--glass-strong);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   backdrop-filter: saturate(180%) blur(12px);
   border: 1px solid var(--hairline);
@@ -5032,7 +5135,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   -webkit-tap-highlight-color: transparent;
   transition: background 120ms ease, color 120ms ease;
 }
-.rail-signin:hover { background: rgba(0,0,0,0.045); color: var(--fg); }
+.rail-signin:hover { background: var(--press); color: var(--fg); }
 .rail-signin svg { flex: 0 0 auto; width: 20px; height: 20px; }
 .rail-signin .label {
   opacity: 0;
@@ -5069,7 +5172,7 @@ body.has-rail .topbar .hb-nav { display: none; }
    bordered image circle. Initials chip styles still apply (background,
    shape) but the <img> covers them with object-fit:cover. */
 .rail-user-avatar-img {
-  background: #fff;
+  background: var(--paper);
   overflow: hidden;
   padding: 0;
 }
@@ -5107,7 +5210,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   pointer-events: none;
 }
 .rail-user-out svg { width: 18px; height: 18px; }
-.rail-user-out:hover { background: rgba(0,0,0,0.045); color: var(--fg); }
+.rail-user-out:hover { background: var(--press); color: var(--fg); }
 .app-rail.is-expanded .rail-user-out { opacity: 1; pointer-events: auto; }
 
 /* ─── Sign-in modal ────────────────────────────────────────────────────── */
@@ -5157,7 +5260,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   transition: background 120ms ease, color 120ms ease;
 }
 .hb-signin-close svg { width: 18px; height: 18px; }
-.hb-signin-close:hover { background: rgba(0,0,0,0.045); color: var(--fg); }
+.hb-signin-close:hover { background: var(--press); color: var(--fg); }
 .hb-signin-title {
   margin: 0 0 6px;
   font-size: 22px;
@@ -5193,7 +5296,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   padding: 0 14px;
   border: 1px solid var(--hairline);
   border-radius: 10px;
-  background: #fff;
+  background: var(--paper);
   font: inherit;
   font-size: 15px;
   color: var(--fg);

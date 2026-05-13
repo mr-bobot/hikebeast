@@ -10,6 +10,22 @@
  *   3. Expose window.HB.favorites for ad-hoc use (browse, saved, map pages)
  */
 (function () {
+  // Defensive theme reapply. The <head> bootstrap in every page is
+  // SUPPOSED to set data-theme="dark" before paint when localStorage
+  // says dark. On the spot detail pages something keeps slipping
+  // through (Safari bfcache restore, blocked inline script, etc.) —
+  // pages render light despite localStorage being dark. social.js is
+  // the last script that's guaranteed to re-run on every fresh nav,
+  // so it gets a belt-and-suspenders apply here.
+  try {
+    if (localStorage.getItem('hb-theme') === 'dark'
+        && document.documentElement.getAttribute('data-theme') !== 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      const tc = document.querySelector('meta[name="theme-color"]');
+      if (tc) tc.setAttribute('content', '#0b0d10');
+    }
+  } catch (_e) { /* localStorage blocked in some private modes */ }
+
   const KEY = 'hb:fav:v1';
   const NO_KEY = 'hb:skipped:v1';
   const SESSION_KEY = 'hb:session:v1';
@@ -1027,6 +1043,11 @@
   const SVG_CHECK_CIRCLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 10"/></svg>';
   const SVG_CHEVRONS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>';
   const SVG_BURGER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
+  // Theme toggle icons (rail bottom). The currently-shown icon
+  // previews the *destination* theme: moon in light mode, sun in
+  // dark mode — so the user knows what the click will do.
+  const SVG_SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/></svg>';
+  const SVG_MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
 
   // Chapter list, mirrored from the home page covers. Chapter `id` matches
   // the URL segment under /full/<id>/. Introduction sits at the top of the
@@ -1127,11 +1148,60 @@
         <div class="rail-divider rail-divider-tight"></div>
         ${chapterItems}
       </div>
+      <button type="button" class="rail-theme" data-hb-theme-toggle aria-label="Toggle dark mode">
+        <span class="rail-theme-icon" data-hb-theme-icon>${SVG_MOON}</span><span class="label" data-hb-theme-label>Dark mode</span>
+      </button>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="Toggle navigation labels">
         ${SVG_CHEVRONS}<span class="label">Collapse</span>
       </button>
     `;
     document.body.insertBefore(rail, document.body.firstChild);
+
+    // === Theme toggle ===
+    // Opt-in only. Bootstrap script in <head> reads localStorage['hb-theme']
+    // and sets <html data-theme="dark"> when the user previously picked dark.
+    // Default = light (no localStorage entry, no data-theme attribute).
+    // The icon previews the destination: moon when in light (click → dark),
+    // sun when in dark (click → light).
+    //
+    // Two buttons share this wiring: the rail toggle (desktop) and the
+    // menu sheet row (mobile — the rail drawer is unreachable on mobile,
+    // see the .rail-burger display:none rule in preview.css). Both carry
+    // data-hb-theme-toggle + child data-hb-theme-icon / -label spans.
+    // Menu sheet markup gets appended later (below), so we bind handlers
+    // via event delegation on <body> instead of direct addEventListener.
+    function getTheme() {
+      try { return localStorage.getItem('hb-theme') === 'dark' ? 'dark' : 'light'; }
+      catch (_e) { return 'light'; }
+    }
+    function syncThemeBtns() {
+      const t = getTheme();
+      document.querySelectorAll('[data-hb-theme-toggle]').forEach(btn => {
+        const iconEl = btn.querySelector('[data-hb-theme-icon]');
+        const labelEl = btn.querySelector('[data-hb-theme-label]');
+        if (iconEl)  iconEl.innerHTML = (t === 'dark') ? SVG_SUN : SVG_MOON;
+        if (labelEl) labelEl.textContent = (t === 'dark') ? 'Light mode' : 'Dark mode';
+      });
+    }
+    function applyTheme(t) {
+      const html = document.documentElement;
+      if (t === 'dark') html.setAttribute('data-theme', 'dark');
+      else html.removeAttribute('data-theme');
+      try { localStorage.setItem('hb-theme', t); } catch (_e) {}
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', t === 'dark' ? '#0b0d10' : '#ffffff');
+      syncThemeBtns();
+    }
+    document.body.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-hb-theme-toggle]');
+      if (!btn) return;
+      e.stopPropagation();  // don't trigger menu-sheet's [data-close] handler
+      applyTheme(getTheme() === 'dark' ? 'light' : 'dark');
+    });
+    // Sync now (rail button is already in DOM) and again after the menu
+    // sheet is appended below. The latter wins because querySelectorAll
+    // picks up both buttons.
+    syncThemeBtns();
 
     // Account FAB lives top-right of the viewport, regardless of page,
     // so it's reachable without scrolling the rail. paintAccount() below
@@ -1224,11 +1294,19 @@
             <span class="menu-row-label">${ch.label}</span>
           </a>
         `).join('')}
-        <div class="menu-section-head">Account</div>
+        <div class="menu-section-head">Settings</div>
+        <button type="button" class="menu-row" data-hb-theme-toggle aria-label="Toggle dark mode">
+          <span class="menu-row-icon" data-hb-theme-icon>${SVG_MOON}</span>
+          <span class="menu-row-label" data-hb-theme-label>Dark mode</span>
+        </button>
         <div class="menu-sheet-account" data-hb-account></div>
       </div>
     `;
     document.body.appendChild(menuSheet);
+    // Re-sync now that the menu sheet's theme toggle is in the DOM —
+    // matches the rail toggle's initial state (moon icon + Dark mode label
+    // when in light, sun icon + Light mode label when in dark).
+    syncThemeBtns();
 
     function openMenuSheet() {
       menuSheet.classList.add('is-open');
