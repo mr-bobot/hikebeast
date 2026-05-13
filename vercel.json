@@ -130,6 +130,12 @@
       ]
     },
     {
+      "source": "/full/img/derivatives/dimensions.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
+    },
+    {
       "source": "/full/img/derivatives/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "private, max-age=2592000, immutable" }

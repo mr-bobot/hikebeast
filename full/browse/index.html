@@ -68,6 +68,7 @@
 
 <script src="../map/spots-data.js"></script>
 <script src="../img/thumbs/dimensions.js"></script>
+<script src="../img/derivatives/dimensions.js"></script>
 <script src="../lib/convex.js"></script>
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script src="../social.js"></script>
@@ -238,11 +239,26 @@
       return a;
     }
 
-    // Intrinsic dims drive row-span layout. Convex carries the original dims
-    // per photo; legacy spots fall back to the static thumb-dims sidecar.
+    // Intrinsic dims drive row-span layout. Three fallback tiers:
+    //   1. photo.width/height — Convex-carried per-photo dims (rare; most
+    //      Convex rows still have null dims).
+    //   2. HB_PHOTO_DIMS[photo.photoId] — every derivative photoId is in
+    //      this sidecar (built from w400.webp via build-photo-dims.mjs).
+    //      This covers the universal case: every multi-photo gallery + every
+    //      single-photo spot whose derivative ladder shipped.
+    //   3. HB_THUMB_DIMS[photo.src | spot.image] — legacy thumb-dims sidecar
+    //      keyed by file name. Kept for safety / pre-derivative spots.
+    //   4. [4, 3] — last-resort guess. Triggers an applySpans re-flow.
+    // Without tier 2, ~32 spots whose s.image filename didn't match a
+    // thumb-dim key all started at [4, 3] and reshuffled once the WebP
+    // decoded — the visible "load then resize" the user reported on Explore.
+    const photoDims = (window.HB_PHOTO_DIMS || {})[photo.photoId];
     const dimsArr = (photo.width && photo.height)
       ? [photo.width, photo.height]
-      : ((window.HB_THUMB_DIMS || {})[photo.src] || (window.HB_THUMB_DIMS || {})[spot.image] || [4, 3]);
+      : (photoDims
+          || (window.HB_THUMB_DIMS || {})[photo.src]
+          || (window.HB_THUMB_DIMS || {})[spot.image]
+          || [4, 3]);
     a.dataset.w = dimsArr[0];
     a.dataset.h = dimsArr[1];
     const attrs = window.HB.photoAttrs({
