@@ -10,7 +10,13 @@
 <meta name="referrer" content="no-referrer" />
 <link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="manifest" href="../../manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Hikebeast" />
+<meta name="mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" href="../preview.css" />
+<link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body>
 <div class="topbar">
@@ -27,7 +33,7 @@
 
   <aside class="sidebar" aria-label="Chapters">
   <a class="sb-home" href="../index.html" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>
-  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05.jpg" alt="" /><span class="lbl">Intro</span></a>
+  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl">Intro</span></a>
   <a class="sb-thumb" href="../eastern/index.html" title="Eastern Switzerland"><img src="../img/chapters/eastern/w400.webp" alt="" /><span class="lbl">Eastern</span></a>
   <a class="sb-thumb" href="../central/index.html" title="Central Switzerland"><img src="../img/chapters/central/w400.webp" alt="" /><span class="lbl">Central</span></a>
   <a class="sb-thumb" href="../valais/index.html" title="Valais"><img src="../img/chapters/valais/w400.webp" alt="" /><span class="lbl">Valais</span></a>
@@ -41,7 +47,7 @@
 
     <section class="slide slide-cover" id="cover" style="--region-color: 148, 133, 186;">
   <div class="cv-map">
-    <img src="../img/region-ticino.svg" alt="Ticino on the Swiss map" />
+    <img src="../img/region-ticino.svg" alt="Ticino on the Swiss map" fetchpriority="high" decoding="async" />
   </div>
   <div class="cv-content">
     <p class="cv-kicker">Region</p>
@@ -61,8 +67,8 @@
       <div class="chapter-list">
     <article class="cl-card" id="cascata_la_froda" data-href="../spot/cascata_la_froda/" tabindex="0" role="link" aria-label="Cascata La Froda">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/cascata_la_froda_p0/w1800.webp" alt="Cascata La Froda" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/cascata_la_froda_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/cascata_la_froda_p0/w1000.webp" srcset="../img/derivatives/cascata_la_froda_p0/w400.webp 400w, ../img/derivatives/cascata_la_froda_p0/w1000.webp 1000w, ../img/derivatives/cascata_la_froda_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Cascata La Froda" loading="eager" fetchpriority="high" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/cascata_la_froda_p1/w1000.webp" srcset="../img/derivatives/cascata_la_froda_p1/w400.webp 400w, ../img/derivatives/cascata_la_froda_p1/w1000.webp 1000w, ../img/derivatives/cascata_la_froda_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         <span class="credit-pill hb-credit">Photo · @kalapascal</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -84,9 +90,9 @@
     </article>
     <article class="cl-card" id="ponte_dei_salti" data-href="../spot/ponte_dei_salti/" tabindex="0" role="link" aria-label="Ponte dei Salti">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/ponte_dei_salti_p0/w1800.webp" alt="Ponte dei Salti" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/ponte_dei_salti_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/ponte_dei_salti_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/ponte_dei_salti_p0/w1000.webp" srcset="../img/derivatives/ponte_dei_salti_p0/w400.webp 400w, ../img/derivatives/ponte_dei_salti_p0/w1000.webp 1000w, ../img/derivatives/ponte_dei_salti_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Ponte dei Salti" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/ponte_dei_salti_p1/w1000.webp" srcset="../img/derivatives/ponte_dei_salti_p1/w400.webp 400w, ../img/derivatives/ponte_dei_salti_p1/w1000.webp 1000w, ../img/derivatives/ponte_dei_salti_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/ponte_dei_salti_p2/w1000.webp" srcset="../img/derivatives/ponte_dei_salti_p2/w400.webp 400w, ../img/derivatives/ponte_dei_salti_p2/w1000.webp 1000w, ../img/derivatives/ponte_dei_salti_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
         <span class="credit-pill hb-credit">Photo · Claudio Schwarz</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
@@ -108,12 +114,12 @@
     </article>
     <article class="cl-card" id="valle_verzasca" data-href="../spot/valle_verzasca/" tabindex="0" role="link" aria-label="Valle Verzasca">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/valle_verzasca_p0/w1800.webp" alt="Valle Verzasca" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/valle_verzasca_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/valle_verzasca_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/valle_verzasca_p3/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/valle_verzasca_p4/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/valle_verzasca_p5/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/valle_verzasca_p0/w1000.webp" srcset="../img/derivatives/valle_verzasca_p0/w400.webp 400w, ../img/derivatives/valle_verzasca_p0/w1000.webp 1000w, ../img/derivatives/valle_verzasca_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Valle Verzasca" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/valle_verzasca_p1/w1000.webp" srcset="../img/derivatives/valle_verzasca_p1/w400.webp 400w, ../img/derivatives/valle_verzasca_p1/w1000.webp 1000w, ../img/derivatives/valle_verzasca_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/valle_verzasca_p2/w1000.webp" srcset="../img/derivatives/valle_verzasca_p2/w400.webp 400w, ../img/derivatives/valle_verzasca_p2/w1000.webp 1000w, ../img/derivatives/valle_verzasca_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/valle_verzasca_p3/w1000.webp" srcset="../img/derivatives/valle_verzasca_p3/w400.webp 400w, ../img/derivatives/valle_verzasca_p3/w1000.webp 1000w, ../img/derivatives/valle_verzasca_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/valle_verzasca_p4/w1000.webp" srcset="../img/derivatives/valle_verzasca_p4/w400.webp 400w, ../img/derivatives/valle_verzasca_p4/w1000.webp 1000w, ../img/derivatives/valle_verzasca_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/valle_verzasca_p5/w1000.webp" srcset="../img/derivatives/valle_verzasca_p5/w400.webp 400w, ../img/derivatives/valle_verzasca_p5/w1000.webp 1000w, ../img/derivatives/valle_verzasca_p5/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 6</span>
         <span class="credit-pill hb-credit">Photo · Artiom Vallat</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
@@ -135,8 +141,8 @@
     </article>
     <article class="cl-card" id="lavertezzo" data-href="../spot/lavertezzo/" tabindex="0" role="link" aria-label="Lavertezzo">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/lavertezzo_p0/w1800.webp" alt="Lavertezzo" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/lavertezzo_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/lavertezzo_p0/w1000.webp" srcset="../img/derivatives/lavertezzo_p0/w400.webp 400w, ../img/derivatives/lavertezzo_p0/w1000.webp 1000w, ../img/derivatives/lavertezzo_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Lavertezzo" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/lavertezzo_p1/w1000.webp" srcset="../img/derivatives/lavertezzo_p1/w400.webp 400w, ../img/derivatives/lavertezzo_p1/w1000.webp 1000w, ../img/derivatives/lavertezzo_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         <span class="credit-pill hb-credit">Photo · @oliwear.j</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -158,9 +164,9 @@
     </article>
     <article class="cl-card" id="ponte_brolla" data-href="../spot/ponte_brolla/" tabindex="0" role="link" aria-label="Ponte Brolla">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/ponte_brolla_p0/w1800.webp" alt="Ponte Brolla" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/ponte_brolla_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/ponte_brolla_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/ponte_brolla_p0/w1000.webp" srcset="../img/derivatives/ponte_brolla_p0/w400.webp 400w, ../img/derivatives/ponte_brolla_p0/w1000.webp 1000w, ../img/derivatives/ponte_brolla_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Ponte Brolla" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/ponte_brolla_p1/w1000.webp" srcset="../img/derivatives/ponte_brolla_p1/w400.webp 400w, ../img/derivatives/ponte_brolla_p1/w1000.webp 1000w, ../img/derivatives/ponte_brolla_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/ponte_brolla_p2/w1000.webp" srcset="../img/derivatives/ponte_brolla_p2/w400.webp 400w, ../img/derivatives/ponte_brolla_p2/w1000.webp 1000w, ../img/derivatives/ponte_brolla_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
         <span class="credit-pill hb-credit">Photo · @locarnesetv</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
@@ -182,7 +188,7 @@
     </article>
     <article class="cl-card" id="cascata_di_foroglio" data-href="../spot/cascata_di_foroglio/" tabindex="0" role="link" aria-label="Cascata di Foroglio">
       <div class="cl-photos">
-        <img src="../img/derivatives/cascata_di_foroglio_p0/w1800.webp" alt="Cascata di Foroglio" loading="lazy" />
+        <img src="../img/derivatives/cascata_di_foroglio_p0/w1000.webp" srcset="../img/derivatives/cascata_di_foroglio_p0/w400.webp 400w, ../img/derivatives/cascata_di_foroglio_p0/w1000.webp 1000w, ../img/derivatives/cascata_di_foroglio_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Cascata di Foroglio" loading="lazy" />
         <span class="credit-pill">Photo · Kuno Schweizer</span>
       </div>
       <div class="cl-body">
@@ -200,7 +206,7 @@
     </article>
     <article class="cl-card" id="ponte_tibetano" data-href="../spot/ponte_tibetano/" tabindex="0" role="link" aria-label="Ponte Tibetano">
       <div class="cl-photos">
-        <img src="../img/derivatives/ponte_tibetano_p0/w1800.webp" alt="Ponte Tibetano" loading="lazy" />
+        <img src="../img/derivatives/ponte_tibetano_p0/w1000.webp" srcset="../img/derivatives/ponte_tibetano_p0/w400.webp 400w, ../img/derivatives/ponte_tibetano_p0/w1000.webp 1000w, ../img/derivatives/ponte_tibetano_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Ponte Tibetano" loading="lazy" />
         <span class="credit-pill">Photo · @oliwear.j</span>
       </div>
       <div class="cl-body">
@@ -220,7 +226,7 @@
       <div class="chapter-grid-inner">
     <a class="ch-tile" href="../spot/cascata_la_froda/" title="Cascata La Froda">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/cascata_la_froda_p0/w1800.webp" alt="Cascata La Froda" loading="lazy" />
+        <img src="../img/derivatives/cascata_la_froda_p0/w1000.webp" srcset="../img/derivatives/cascata_la_froda_p0/w400.webp 400w, ../img/derivatives/cascata_la_froda_p0/w1000.webp 1000w, ../img/derivatives/cascata_la_froda_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Cascata La Froda" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">A FREEZING DIP UNDER A WATERFALL</p>
@@ -229,7 +235,7 @@
     </a>
     <a class="ch-tile" href="../spot/ponte_dei_salti/" title="Ponte dei Salti">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/ponte_dei_salti_p0/w1800.webp" alt="Ponte dei Salti" loading="lazy" />
+        <img src="../img/derivatives/ponte_dei_salti_p0/w1000.webp" srcset="../img/derivatives/ponte_dei_salti_p0/w400.webp 400w, ../img/derivatives/ponte_dei_salti_p0/w1000.webp 1000w, ../img/derivatives/ponte_dei_salti_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Ponte dei Salti" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">THE ARCH, THE JUMP, THE ICON</p>
@@ -238,7 +244,7 @@
     </a>
     <a class="ch-tile" href="../spot/valle_verzasca/" title="Valle Verzasca">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/valle_verzasca_p0/w1800.webp" alt="Valle Verzasca" loading="lazy" />
+        <img src="../img/derivatives/valle_verzasca_p0/w1000.webp" srcset="../img/derivatives/valle_verzasca_p0/w400.webp 400w, ../img/derivatives/valle_verzasca_p0/w1000.webp 1000w, ../img/derivatives/valle_verzasca_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Valle Verzasca" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">THE WHOLE VALLEY IS THE SPOT</p>
@@ -247,7 +253,7 @@
     </a>
     <a class="ch-tile" href="../spot/lavertezzo/" title="Lavertezzo">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/lavertezzo_p0/w1800.webp" alt="Lavertezzo" loading="lazy" />
+        <img src="../img/derivatives/lavertezzo_p0/w1000.webp" srcset="../img/derivatives/lavertezzo_p0/w400.webp 400w, ../img/derivatives/lavertezzo_p0/w1000.webp 1000w, ../img/derivatives/lavertezzo_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Lavertezzo" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">THE VILLAGE AT THE HEART OF IT</p>
@@ -256,7 +262,7 @@
     </a>
     <a class="ch-tile" href="../spot/ponte_brolla/" title="Ponte Brolla">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/ponte_brolla_p0/w1800.webp" alt="Ponte Brolla" loading="lazy" />
+        <img src="../img/derivatives/ponte_brolla_p0/w1000.webp" srcset="../img/derivatives/ponte_brolla_p0/w400.webp 400w, ../img/derivatives/ponte_brolla_p0/w1000.webp 1000w, ../img/derivatives/ponte_brolla_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Ponte Brolla" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">RIVERS</p>
@@ -265,7 +271,7 @@
     </a>
     <a class="ch-tile" href="../spot/cascata_di_foroglio/" title="Cascata di Foroglio">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/cascata_di_foroglio_p0/w1800.webp" alt="Cascata di Foroglio" loading="lazy" />
+        <img src="../img/derivatives/cascata_di_foroglio_p0/w1000.webp" srcset="../img/derivatives/cascata_di_foroglio_p0/w400.webp 400w, ../img/derivatives/cascata_di_foroglio_p0/w1000.webp 1000w, ../img/derivatives/cascata_di_foroglio_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Cascata di Foroglio" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">WATERFALLS</p>
@@ -274,7 +280,7 @@
     </a>
     <a class="ch-tile" href="../spot/ponte_tibetano/" title="Ponte Tibetano">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/ponte_tibetano_p0/w1800.webp" alt="Ponte Tibetano" loading="lazy" />
+        <img src="../img/derivatives/ponte_tibetano_p0/w1000.webp" srcset="../img/derivatives/ponte_tibetano_p0/w400.webp 400w, ../img/derivatives/ponte_tibetano_p0/w1000.webp 1000w, ../img/derivatives/ponte_tibetano_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Ponte Tibetano" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">A LONG SUSPENSION BRIDGE OVER THE GORGE</p>
