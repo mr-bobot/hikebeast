@@ -139,6 +139,20 @@
 
   function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+  // setHtmlIfChanged — only assigns innerHTML when the new string differs
+  // from the last one we set on that element. Otherwise we'd rebuild the
+  // DOM identically (the sidecar paint + every Convex/session/favorites/
+  // swipes subscribe fires the same render, with the same image URLs),
+  // and each rebuild flickers the cached images for a frame.
+  const __lastHtml = new WeakMap();
+  function setHtmlIfChanged(el, html) {
+    if (!el) return false;
+    if (__lastHtml.get(el) === html) return false;
+    __lastHtml.set(el, html);
+    el.innerHTML = html;
+    return true;
+  }
+
   // Curated lists pulled from the editorial Top 6 sections in /full/intro/.
   // Names must match window.SPOTS entry titles; if not, the card is silently
   // skipped so a typo here can't crash the page.
@@ -498,7 +512,7 @@
         </button>
       `}
     `;
-    upNextEl.innerHTML = visible + extrasMarkup;
+    if (!setHtmlIfChanged(upNextEl, visible + extrasMarkup)) return;
 
     const moreBtn = upNextEl.querySelector('[data-hb-upnext-more]');
     if (moreBtn) {
@@ -555,14 +569,12 @@
     const byKey = new Map(SPOTS.map(s => [window.HB.spotKey(s), s]));
     const picks = forYouKeys.map(k => byKey.get(k)).filter(Boolean);
     const el = document.getElementById('rowForYou');
-    el.innerHTML = picks.map(rowCard).join('');
-    wireRowCardActions(el);
+    if (setHtmlIfChanged(el, picks.map(rowCard).join(''))) wireRowCardActions(el);
   }
   function buildCurated(id, list) {
     const el = document.getElementById(id);
-    if (!list.length) { el.innerHTML = ''; return; }
-    el.innerHTML = list.slice(0, 4).map(rowCard).join('');
-    wireRowCardActions(el);
+    const html = list.length ? list.slice(0, 4).map(rowCard).join('') : '';
+    if (setHtmlIfChanged(el, html)) wireRowCardActions(el);
   }
 
   buildForYou();

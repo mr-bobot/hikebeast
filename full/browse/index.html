@@ -367,16 +367,28 @@
     return out;
   }
 
+  // Cached tiles-key for the most-recent render. Convex pushes spots:list
+  // a few hundred ms after the sidecar paint and again on every
+  // favorites/swipe broadcast; if the filtered list is byte-identical to
+  // what's already in the grid, the rebuild would just flicker every
+  // image. Skip the DOM swap in that case; chips + counts are still
+  // safe to update (they're textContent / class toggles, no flicker).
+  let lastTilesKey = '';
   function update() {
     const list = filtered();
     const tileItems = expandToPhotoTiles(list);
-    grid.classList.remove('is-ready');
-    grid.innerHTML = '';
-    tileItems.forEach(it => grid.appendChild(tile(it)));
+    const tilesKey = tileItems
+      .map(it => (it.photo && it.photo.photoId) || it.spot?.image || it.spot?.id || '')
+      .join('|');
     visibleCount.textContent = tileItems.length;
     empty.hidden = tileItems.length > 0;
     grid.hidden = list.length === 0;
     paintChips();
+    if (tilesKey === lastTilesKey) return;
+    lastTilesKey = tilesKey;
+    grid.classList.remove('is-ready');
+    grid.innerHTML = '';
+    tileItems.forEach(it => grid.appendChild(tile(it)));
     requestAnimationFrame(applySpans);
   }
 
