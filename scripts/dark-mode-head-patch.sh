@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
-# Mechanical one-shot patch that wires dark mode into every webapp page.
-# Replaces the lone <meta name="theme-color" content="#ffffff" /> tag with:
-#   - paired media-aware theme-color metas (light/dark) for iOS status bar
-#   - <meta name="color-scheme" content="light dark"> for native form controls
-#   - inline blocking bootstrap script that reads localStorage['hb-theme']
-#     and sets <html data-theme="..."> before preview.css loads
+# Idempotent one-shot that wires the opt-in-only dark mode into every
+# webapp page. Replaces the prior auto-detect setup (paired media-aware
+# theme-color metas + color-scheme meta + auto-defaulting bootstrap)
+# with a simpler single-meta + dark-only bootstrap.
 #
-# Safe to re-run: idempotent because the new replacement string no longer
-# contains the old "content=\"#ffffff\" />" exact suffix.
+# The bootstrap script runs synchronously in <head> before preview.css
+# loads. Default = light (script no-ops unless localStorage has dark).
+#
+# Safe to re-run on the post-Commit-7 state; the regex matches the
+# 4-line auto-detect block exactly and won't double-patch.
 #
 # Usage:  bash scripts/dark-mode-head-patch.sh
 set -euo pipefail
@@ -19,8 +20,13 @@ COUNT=$(printf '%s\n' "$FILES" | wc -l | tr -d ' ')
 
 echo "Patching $COUNT files…"
 
-perl -i -pe '
-  s{<meta name="theme-color" content="#ffffff" />}{<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />\n<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)" />\n<meta name="color-scheme" content="light dark" />\n<script>(function(){try{var t=localStorage.getItem("hb-theme")||"auto";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>}
+# Match the 4-line auto-detect head block (paired theme-color metas +
+# color-scheme meta + auto-defaulting bootstrap) and replace with the
+# opt-in version (single theme-color + dark-only bootstrap). JS uses
+# single quotes so the inner attribute selector keeps clean double
+# quotes without HTML-attribute escape headaches.
+perl -i -0pe '
+  s{<meta name="theme-color" content="#ffffff" media="\(prefers-color-scheme: light\)" />\n<meta name="theme-color" content="#0b0d10" media="\(prefers-color-scheme: dark\)" />\n<meta name="color-scheme" content="light dark" />\n<script>\(function\(\)\{try\{var t=localStorage\.getItem\("hb-theme"\)\|\|"auto";document\.documentElement\.setAttribute\("data-theme",t\);\}catch\(e\)\{\}\}\)\(\);</script>}{<meta name="theme-color" content="#ffffff" />\n<script>(function(){try{if(localStorage.getItem(\x27hb-theme\x27)===\x27dark\x27){document.documentElement.setAttribute(\x27data-theme\x27,\x27dark\x27);var m=document.querySelector(\x27meta[name="theme-color"]\x27);if(m)m.setAttribute(\x27content\x27,\x27#0b0d10\x27);}}catch(e){}})();</script>}g
 ' $FILES
 
 echo "Done."

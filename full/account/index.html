@@ -3,10 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)" />
-<meta name="color-scheme" content="light dark" />
-<script>(function(){try{var t=localStorage.getItem("hb-theme")||"auto";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<meta name="theme-color" content="#ffffff" />
+<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
 <title>Account · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
@@ -242,43 +240,16 @@
       radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.10) 0%, transparent 75%);
     opacity: 0.7;
   }
-  @media (prefers-color-scheme: dark) {
-    :root[data-theme="auto"] body::before, :root:not([data-theme]) body::before {
-      background:
-        radial-gradient(460px 420px at 18% 22%, rgba(10, 132, 255, 0.16) 0%, transparent 70%),
-        radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.12) 0%, transparent 72%),
-        radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.14) 0%, transparent 70%),
-        radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.10) 0%, transparent 75%);
-      opacity: 0.7;
-    }
-  }
 
   /* Primary CTA: in dark, --fg is near-white so the default fill
      would be white-on-white. Switch to deep navy so it still reads
      as a primary heavy button. */
   :root[data-theme="dark"] .btn { background: #003162; color: #fff; }
-  @media (prefers-color-scheme: dark) {
-    :root[data-theme="auto"] .btn, :root:not([data-theme]) .btn {
-      background: #003162; color: #fff;
-    }
-  }
 
   /* Message pills: the inline color values (#c4302b, #1f7a36) are
      dark-on-light. In dark they need lighter foreground equivalents. */
-  :root[data-theme="dark"] .msg.is-error,
-  :root[data-theme="dark"] .msg.is-success {
-    color: var(--fg);
-  }
   :root[data-theme="dark"] .msg.is-error   { background: rgba(255, 69, 58, 0.18); color: #ff8a85; }
   :root[data-theme="dark"] .msg.is-success { background: rgba(48, 209, 88, 0.18); color: #69e6a4; }
-  @media (prefers-color-scheme: dark) {
-    :root[data-theme="auto"] .msg.is-error, :root:not([data-theme]) .msg.is-error {
-      background: rgba(255, 69, 58, 0.18); color: #ff8a85;
-    }
-    :root[data-theme="auto"] .msg.is-success, :root:not([data-theme]) .msg.is-success {
-      background: rgba(48, 209, 88, 0.18); color: #69e6a4;
-    }
-  }
 
 </style>
 </head>

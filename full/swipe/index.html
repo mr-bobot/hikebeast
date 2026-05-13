@@ -3,10 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)" />
-<meta name="color-scheme" content="light dark" />
-<script>(function(){try{var t=localStorage.getItem("hb-theme")||"auto";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<meta name="theme-color" content="#ffffff" />
+<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
 <title>Swipe · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
@@ -304,15 +302,6 @@
      navy so it still reads as a primary heavy button. */
   :root[data-theme="dark"] .empty a,
   :root[data-theme="dark"] .empty button { background: #003162; color: #fff; }
-  @media (prefers-color-scheme: dark) {
-    :root[data-theme="auto"] .empty a, :root:not([data-theme]) .empty a,
-    :root[data-theme="auto"] .empty button, :root:not([data-theme]) .empty button {
-      background: #003162; color: #fff;
-    }
-    :root[data-theme="auto"] .empty .ghost, :root:not([data-theme]) .empty .ghost {
-      background: var(--paper); color: var(--fg);
-    }
-  }
   :root[data-theme="dark"] .empty .ghost { background: var(--paper); color: var(--fg); }
 </style>
 </head>

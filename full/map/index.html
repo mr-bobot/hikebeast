@@ -3,10 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)" />
-<meta name="color-scheme" content="light dark" />
-<script>(function(){try{var t=localStorage.getItem("hb-theme")||"auto";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<meta name="theme-color" content="#ffffff" />
+<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
 <title>Map · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
@@ -352,15 +350,6 @@
       linear-gradient(135deg, #0b0d10 0%, #11161c 60%, #181d24 100%);
     background-attachment: fixed;
   }
-  @media (prefers-color-scheme: dark) {
-    :root[data-theme="auto"] body, :root:not([data-theme]) body {
-      background:
-        radial-gradient(900px 600px at 18% 12%, rgba(10, 132, 255, 0.10) 0%, transparent 60%),
-        radial-gradient(700px 500px at 88% 92%, rgba(0, 49, 98, 0.45) 0%, transparent 60%),
-        linear-gradient(135deg, #0b0d10 0%, #11161c 60%, #181d24 100%);
-      background-attachment: fixed;
-    }
-  }
 
   /* Marker halo bumped to 0.22 in dark so the bloom reads against
      the dark page (the 0.10 light value gets lost on a navy bg). */
@@ -374,18 +363,6 @@
       0 0 0 8px rgba(10, 132, 255, 0.28),
       0 4px 10px rgba(0, 0, 0, 0.40);
   }
-  @media (prefers-color-scheme: dark) {
-    :root[data-theme="auto"] .spot-marker .thumb, :root:not([data-theme]) .spot-marker .thumb {
-      box-shadow:
-        0 0 0 6px rgba(10, 132, 255, 0.22),
-        0 2px 6px rgba(0, 0, 0, 0.30);
-    }
-    :root[data-theme="auto"] .spot-marker:hover .thumb, :root:not([data-theme]) .spot-marker:hover .thumb {
-      box-shadow:
-        0 0 0 8px rgba(10, 132, 255, 0.28),
-        0 4px 10px rgba(0, 0, 0, 0.40);
-    }
-  }
 
   /* Spot-tooltip's !important light value needs an !important override. */
   :root[data-theme="dark"] .spot-tip {
@@ -394,33 +371,14 @@
     color: var(--fg) !important;
     box-shadow: var(--shadow-soft) !important;
   }
-  @media (prefers-color-scheme: dark) {
-    :root[data-theme="auto"] .spot-tip, :root:not([data-theme]) .spot-tip {
-      background: var(--glass-strong) !important;
-      border-color: var(--hairline) !important;
-      color: var(--fg) !important;
-      box-shadow: var(--shadow-soft) !important;
-    }
-  }
 
   /* Popup "Read" CTA: var(--fg) becomes near-white in dark, white
      text on white is invisible. Deep navy keeps the heavy-button feel. */
   :root[data-theme="dark"] .spot-popup .read { background: #003162; color: #fff; }
-  @media (prefers-color-scheme: dark) {
-    :root[data-theme="auto"] .spot-popup .read, :root:not([data-theme]) .spot-popup .read {
-      background: #003162; color: #fff;
-    }
-  }
 
   /* iOS toggle off-state in dark mode: track darker, knob stays white
      (iOS convention even in dark themes). */
   :root[data-theme="dark"] .marker-mode-switch .track { background: rgba(255, 255, 255, 0.18); }
-  @media (prefers-color-scheme: dark) {
-    :root[data-theme="auto"] .marker-mode-switch .track,
-    :root:not([data-theme]) .marker-mode-switch .track {
-      background: rgba(255, 255, 255, 0.18);
-    }
-  }
 </style>
 </head>
 <body class="markers-animating">
@@ -576,16 +534,13 @@
     }).addTo(map);
   }
 
-  // Repaint cantons whenever the theme changes — either via the menu
-  // sheet's Auto/Light/Dark control (mutates [data-theme] on <html>)
-  // or via an OS preference switch while in auto mode.
+  // Repaint cantons whenever the user toggles the theme via the rail
+  // (mutates [data-theme] on <html>). Dark mode is opt-in only — we
+  // do not listen for OS preference changes.
   try {
     new MutationObserver(paintGeoStyle).observe(document.documentElement, {
       attributes: true, attributeFilter: ['data-theme'],
     });
-    const mq = matchMedia('(prefers-color-scheme: dark)');
-    if (mq.addEventListener) mq.addEventListener('change', paintGeoStyle);
-    else if (mq.addListener) mq.addListener(paintGeoStyle);
   } catch (_e) { /* old browsers — cantons stay light, no biggie */ }
 
   const layers = new Map();

@@ -1004,10 +1004,9 @@
   const SVG_CHECK_CIRCLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 10"/></svg>';
   const SVG_CHEVRONS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>';
   const SVG_BURGER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
-  // Theme toggle icons (Appearance section in the menu sheet).
-  // Auto = half-filled circle, the macOS appearance convention.
-  // Sun = stroke-only sun. Moon = classic crescent silhouette.
-  const SVG_THEME_AUTO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3 a9 9 0 0 0 0 18 z" fill="currentColor" stroke="none"/></svg>';
+  // Theme toggle icons (rail bottom). The currently-shown icon
+  // previews the *destination* theme: moon in light mode, sun in
+  // dark mode — so the user knows what the click will do.
   const SVG_SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/></svg>';
   const SVG_MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
 
@@ -1109,11 +1108,44 @@
         <div class="rail-divider rail-divider-tight"></div>
         ${chapterItems}
       </div>
+      <button type="button" class="rail-theme" data-hb-theme-toggle aria-label="Toggle dark mode">
+        <span class="rail-theme-icon">${SVG_MOON}</span><span class="label">Dark mode</span>
+      </button>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="Toggle navigation labels">
         ${SVG_CHEVRONS}<span class="label">Collapse</span>
       </button>
     `;
     document.body.insertBefore(rail, document.body.firstChild);
+
+    // === Theme toggle ===
+    // Opt-in only. Bootstrap script in <head> reads localStorage['hb-theme']
+    // and sets <html data-theme="dark"> when the user previously picked dark.
+    // Default = light (no localStorage entry, no data-theme attribute).
+    // The icon previews the destination: moon when in light (click → dark),
+    // sun when in dark (click → light).
+    const themeBtn = rail.querySelector('[data-hb-theme-toggle]');
+    function getTheme() {
+      try { return localStorage.getItem('hb-theme') === 'dark' ? 'dark' : 'light'; }
+      catch (_e) { return 'light'; }
+    }
+    function applyTheme(t) {
+      const html = document.documentElement;
+      if (t === 'dark') html.setAttribute('data-theme', 'dark');
+      else html.removeAttribute('data-theme');
+      try { localStorage.setItem('hb-theme', t); } catch (_e) {}
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', t === 'dark' ? '#0b0d10' : '#ffffff');
+      syncThemeBtn();
+    }
+    function syncThemeBtn() {
+      const t = getTheme();
+      const iconEl = themeBtn.querySelector('.rail-theme-icon');
+      const labelEl = themeBtn.querySelector('.label');
+      if (iconEl)  iconEl.innerHTML = (t === 'dark') ? SVG_SUN : SVG_MOON;
+      if (labelEl) labelEl.textContent = (t === 'dark') ? 'Light mode' : 'Dark mode';
+    }
+    themeBtn.addEventListener('click', () => applyTheme(getTheme() === 'dark' ? 'light' : 'dark'));
+    syncThemeBtn();
 
     // Account FAB lives top-right of the viewport, regardless of page,
     // so it's reachable without scrolling the rail. paintAccount() below
@@ -1206,18 +1238,6 @@
             <span class="menu-row-label">${ch.label}</span>
           </a>
         `).join('')}
-        <div class="menu-section-head">Appearance</div>
-        <div class="menu-theme-toggle" role="group" aria-label="Theme">
-          <button type="button" class="menu-theme-seg" data-theme-set="auto" aria-pressed="false">
-            ${SVG_THEME_AUTO}<span>Auto</span>
-          </button>
-          <button type="button" class="menu-theme-seg" data-theme-set="light" aria-pressed="false">
-            ${SVG_SUN}<span>Light</span>
-          </button>
-          <button type="button" class="menu-theme-seg" data-theme-set="dark" aria-pressed="false">
-            ${SVG_MOON}<span>Dark</span>
-          </button>
-        </div>
         <div class="menu-section-head">Account</div>
         <div class="menu-sheet-account" data-hb-account></div>
       </div>
@@ -1240,71 +1260,6 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && menuSheet.classList.contains('is-open')) closeMenuSheet();
     });
-
-    // === Theme toggle ===
-    // The <head> bootstrap script reads localStorage['hb-theme'] before
-    // the stylesheet loads, so first paint is always correct. This block
-    // handles user clicks in the Appearance section and keeps the iOS
-    // status bar in sync when the user picks an explicit Light/Dark
-    // that overrides their OS preference.
-    const THEME_KEY = 'hb-theme';
-    function getTheme() {
-      try { return localStorage.getItem(THEME_KEY) || 'auto'; } catch (_e) { return 'auto'; }
-    }
-    function effectiveTheme() {
-      const t = getTheme();
-      if (t === 'light' || t === 'dark') return t;
-      return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    function updateActiveThemeColor() {
-      // The paired <meta name="theme-color" media="..."> tags in <head>
-      // only react to OS preference. When the user picks an explicit
-      // Light/Dark via the toggle, we need iOS status bar to follow
-      // THAT choice. We add a third "active" meta with no media query
-      // (highest precedence) and keep its content in sync.
-      const eff = effectiveTheme();
-      const color = eff === 'dark' ? '#0b0d10' : '#ffffff';
-      let active = document.querySelector('meta[name="theme-color"][data-hb-active]');
-      if (!active) {
-        active = document.createElement('meta');
-        active.name = 'theme-color';
-        active.dataset.hbActive = '';
-        document.head.appendChild(active);
-      }
-      active.content = color;
-    }
-    function setTheme(t) {
-      try { localStorage.setItem(THEME_KEY, t); } catch (_e) {}
-      document.documentElement.setAttribute('data-theme', t);
-      updateActiveThemeColor();
-      syncThemeSegs();
-    }
-    function syncThemeSegs() {
-      const cur = getTheme();
-      menuSheet.querySelectorAll('[data-theme-set]').forEach(b => {
-        b.setAttribute('aria-pressed', b.dataset.themeSet === cur ? 'true' : 'false');
-      });
-    }
-    menuSheet.addEventListener('click', (e) => {
-      const seg = e.target.closest('[data-theme-set]');
-      if (!seg) return;
-      // Theme buttons intentionally lack data-close — clicking one
-      // updates the theme without dismissing the sheet, so the user
-      // can compare options without re-opening.
-      setTheme(seg.dataset.themeSet);
-    });
-    // OS preference change while in auto mode: refresh the active
-    // theme-color meta. (CSS picks up bg automatically via the
-    // @media (prefers-color-scheme: dark) blocks.)
-    try {
-      const mq = matchMedia('(prefers-color-scheme: dark)');
-      const refresh = () => { if (getTheme() === 'auto') updateActiveThemeColor(); };
-      if (mq.addEventListener) mq.addEventListener('change', refresh);
-      else if (mq.addListener) mq.addListener(refresh);
-    } catch (_e) { /* old browsers — no live response */ }
-    // Initial pass: sync segments + active theme-color meta.
-    syncThemeSegs();
-    updateActiveThemeColor();
 
     // Backdrop for mobile drawer
     const backdrop = document.createElement('div');
