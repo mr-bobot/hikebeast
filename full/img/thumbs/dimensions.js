@@ -140,6 +140,5 @@ window.HB_THUMB_DIMS = {
   "valais_cover.jpg":[160,106],
   "valle_verzasca.jpg":[128,160],
   "valle_verzasca_kayak.jpg":[128,160],
-  "vevey_docks.jpg":[128,160],
-  "zdk_placeholder.jpg":[160,160]
+  "vevey_docks.jpg":[128,160]
 };
