@@ -276,15 +276,17 @@ function renderWildcampingNote(spot) {
 // transit-accessed spots. Sub-blocks are only emitted when the spot has
 // that data — empty fields don't render.
 function renderAccessSection(spot) {
-  // The front-side `access` string (e.g. "Firstbahn cable car + 50-60 min hike")
-  // is a useful summary for the back too. Surface it as a lead line on top of
-  // the structured arrival blocks (if any). For hike-only spots without an
-  // arrival object, this single line is the whole section. We still skip
-  // rendering anything if there's neither a summary nor structured data —
+  // Prefer the longer paragraph form (`access_long`) on the back if it's been
+  // authored. Otherwise fall back to the short front-side `access` string
+  // ("Firstbahn cable car + 50-60 min hike"). For hike-only spots without an
+  // arrival object, this paragraph IS the whole "How to get there" section.
+  // We skip rendering anything if neither summary nor structured data exists —
   // there'd be nothing left to show.
-  const accessSummary = (typeof spot.access === "string" && spot.access.trim())
-    ? spot.access.trim()
-    : null;
+  const accessSummary = (typeof spot.access_long === "string" && spot.access_long.trim())
+    ? spot.access_long.trim()
+    : (typeof spot.access === "string" && spot.access.trim())
+      ? spot.access.trim()
+      : null;
   const hasArrival = hasAccessData(spot);
   if (!accessSummary && !hasArrival) return "";
   const a = spot.arrival || {};

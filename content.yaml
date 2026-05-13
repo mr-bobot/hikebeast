@@ -209,6 +209,8 @@ spots:
     best_season: April - July
   hike_ids:
   - engstligen_falls-route-48
+  access_long: Take the cable car from Adelboden Unter dem Birg up to the Engstligenalp plateau, or walk up the side trail in about 1h 10. The main viewing area for the lower fall is
+    a 20-minute walk from Unter dem Birg. Overcast days work best, direct sun blows out the white of the water.
 - id: oltschibachfall
   chapter: central
   kicker: WATERFALLS
@@ -244,6 +246,8 @@ spots:
     best_season: May – October
   hike_ids:
   - oltschibachfall-from-meiringen
+  access_long: From Meiringen station, hike up the slope through forest and open ground to the base of the upper fall. About 1h 30 and 500 metres of climbing on a marked but quiet trail.
+    The upper fall reads best from mid-summer once the rock around it dries out and the wind is not blowing the spray sideways.
 - id: rosenlaui
   chapter: central
   kicker: VALLEYS
@@ -280,6 +284,8 @@ spots:
     best_season: June - October
   hike_ids:
   - rosenlaui-route-99
+  access_long: Drive or take the postbus from Meiringen up the Grosse Scheidegg road to the Gletscherschlucht parking. A five-minute path from the toilet block leads to the lower viewpoint,
+    which gives the cleanest angle on the falls with the Wetterhorn in the back. Do not bother continuing up to Rosenlaui village, the plateau before is the better frame.
 - id: rosenlaui_public_waterfall
   chapter: central
   kicker: WATERFALLS
@@ -315,6 +321,8 @@ spots:
     best_season: June - October
   hike_ids:
   - rosenlaui_public_waterfall-route-99
+  access_long: Same Rosenlaui falls, public viewpoint. Drive or postbus to the Gletscherschlucht parking on the Grosse Scheidegg road from Meiringen, then a five-minute walk on the path
+    next to the toilet block. The gorge entry costs a few francs, bring a tripod since the inside is dark and handheld will not cut it.
 - id: rosenlauifall
   chapter: central
   kicker: WATERFALLS
@@ -348,6 +356,9 @@ spots:
     best_season: June - October
   hike_ids:
   - rosenlauifall-route-99
+  access_long: Drive or take the postbus from Meiringen to the Gletscherschlucht parking, then walk five minutes on the path beside the toilet block to the lower viewpoint. Access to
+    the falls themselves runs through the grounds of Hotel Rosenlaui, so be quiet and respect the guests. Morning light is when the sun is on the spray and the rainbow forms across the
+    basin.
 - id: triftbrucke
   chapter: central
   kicker: SUSPENSION BRIDGES
@@ -380,6 +391,7 @@ spots:
     best_season: June 1 - Sept 29
   hike_ids:
   - triftbrucke-route-40
+  access_long: Park in Gadmen and take the Triftbahn cable car. From the top station, it is a steep uphill hike to the bridge. About 410 metres of elevation, around two hours of walking.
 - id: triftsee
   chapter: central
   kicker: GLACIER LAKES
@@ -408,6 +420,8 @@ spots:
     best_season: June 1 - Sept 29
   hike_ids:
   - triftsee-route-40
+  access_long: Take the Triftbahn cable car from Nessental, then hike about 1h 30 from the top station on the same trail used for the Triftbrücke. T2, around 400 metres of gain. The
+    cable car does not run early or late enough for sunrise or sunset, so plan around its hours. Camping is not permitted, the alpine landscape around the lake is fragile.
 - id: gelmersee
   chapter: central
   kicker: GLACIER LAKES
@@ -451,6 +465,8 @@ spots:
     best_season: June - October
   hike_ids:
   - gelmersee-default
+  access_long: Drive to the base of the Gelmerbahn, where you will take one of the steepest funiculars in the world up to the lake. It only runs in summer and gets busy. Check if it
+    is open, and book your seat in advance.
 - id: gelmerbahn
   chapter: central
   kicker: CABLE CARS
@@ -486,6 +502,8 @@ spots:
       walk_from_stop_min: 1
     best_time: Book in advance — the funicular sells out on summer weekends. Round-trip around 36 CHF.
     operating: Funicular runs mid-June to mid-October. Steepest section is 106% gradient.
+  access_long: Drive the Grimsel Pass road from Innertkirchen, or take Postbus 161 from Meiringen in summer. The funicular valley station is signposted off the pass road with a small
+    lot right there. Book in advance, the front and back seats sell out on summer weekends. Round-trip is around 36 CHF, the steepest section pitches at 106 percent.
 - id: guttannen_valley
   chapter: central
   kicker: CAMPER SPOTS
@@ -526,6 +544,7 @@ spots:
       walk_from_stop_min: 1
     best_time: Late summer when the Grimsel road is fully open and the valley is in full green.
     operating: Grimsel road usually open June to October.
+  access_long: If you are visiting Gelmersee, this valley makes a great place to spend the night nearby. Thirty minutes to the funicular in the morning.
 - id: aare_gorge
   chapter: central
   kicker: GORGES
@@ -574,6 +593,7 @@ spots:
       walk_from_stop_min: 2
     best_time: Bright overcast for the most even light inside the gorge. Sunny days cause harsh contrast through the slit.
     operating: Boardwalk open April to early November. Entry fee around 12 CHF adult.
+  access_long: There is an entrance fee, so check the opening hours before you go. It can get crowded, which makes it tricky to take clean shots without people in them.
 - id: brienzer_rothorn
   chapter: central
   kicker: SUMMITS
@@ -615,6 +635,8 @@ spots:
   - brienzer_rothorn-default
   - brienzer_rothorn-cog-railway
   - brienzer_rothorn-brienz-via-planalp
+  access_long: Two ways up. The Brienz Rothorn Bahn is a steam cog railway from Brienzersee, slow and scenic. The Sörenberg cable car is the fast side. Both drop you within a short walk
+    of the summit.
 - id: hardergrat_trail
   chapter: central
   kicker: RIDGES
@@ -655,6 +677,7 @@ spots:
     best_season: Late June – October
   hike_ids:
   - hardergrat_trail-harder-to-rothorn
+  access_long: Take the cable car up to the Brienzer Rothorn (either from Brienz or from Sörenberg) and start the hike there. It ends at Harder Kulm above Interlaken.
 - id: tannhorn
   chapter: central
   kicker: RIDGES
@@ -689,6 +712,8 @@ spots:
     best_season: July – early October
   hike_ids:
   - tannhorn-brienzergrat-segment
+  access_long: Heading west from Brienzer Rothorn, the walk to Tannhorn takes about two to three hours. It sits in the eastern third of the Hardergrat, the point where the ridge narrows
+    to a clean line of grass with drops on both sides.
 - id: augstmatthorn
   chapter: central
   kicker: RIDGES
@@ -732,6 +757,7 @@ spots:
     best_season: June - October
   hike_ids:
   - augstmatthorn-route-85
+  access_long: On the Hardergrat ridge but accessible from the other side too. Park at Lombachalp in Habkern and do the two hour hike up. Lighter than the full traverse, same view.
 - id: lake_lucerne
   chapter: central
   kicker: LAKES
@@ -766,6 +792,8 @@ spots:
   gps:
     lat: 47.0136401
     lng: 8.4371598
+  access_long: 'There is no single shooting spot. Every town on the lake has a different frame: Lucerne old town for the postcard, Bürgenstock for the cliff edge, Morschach for the Fronalpstock
+    view, Brunnen for the Rütli angle. If you only have time for one, take the cable car up Fronalpstock on a clear winter morning for the full length of the lake.'
 - id: fronalpstock
   chapter: central
   kicker: VIEWPOINTS
@@ -803,6 +831,7 @@ spots:
     best_season: June - October
   hike_ids:
   - fronalpstock-route-72
+  access_long: Take the cable car from Morschach up to Stoos village, then the chairlift to Fronalpstock. Walk ten minutes along the ridge to the main viewpoint. Stone bench, zero work.
 - id: fulberg
   chapter: central
   kicker: HIDDEN GEMS
@@ -844,6 +873,8 @@ spots:
   gps:
     lat: 46.9352224
     lng: 8.5397221
+  access_long: Take the Niederbauen-Klewenalp cable car up from Emmetten, then follow the ridge trail. It is a steady climb with no technical sections, but the ridge exposes you to weather
+    fast, so pick a clear window.
 - id: fulberg_spread
   chapter: central
   kind: spread
@@ -890,6 +921,8 @@ spots:
     best_season: Late June – October
   hike_ids:
   - iffigfalle-lenk-to-iffigenalp
+  access_long: The waterfall is close to the road but the best angle requires a quick hike above the parking area. May and June is peak water time - if you come later, plan for smaller
+    volume.
 - id: schrattenfluh
   chapter: central
   kicker: RIDGES
@@ -944,6 +977,7 @@ spots:
     best_season: July – October
   hike_ids:
   - schrattenfluh-schratteflue-crossing
+  access_long: Take the cable car up to Marbachegg, then hike via Imbrig to Heftihütte. The ridgeline from there gives you alpine views without the crowds of more famous peaks.
 - id: schrattenfluh_ridge_line_spread
   chapter: central
   kind: spread
@@ -988,6 +1022,7 @@ spots:
   hike_ids:
   - heftihutte-from-hirsegg
   - heftihutte-from-fluehli
+  access_long: Start from the Marbachegg cable car. Hike via Imbrig and along the ridge with the mountains on your right, then up to the hut. Long day, demanding pace.
 - id: bachalpsee
   chapter: central
   kicker: LAKES
@@ -999,6 +1034,7 @@ spots:
     to.
   region: Grindelwald, Central Switzerland
   access: Firstbahn cable car + 50-60 min hike
+  access_long: Take the Firstbahn from Grindelwald, then hike about 50 to 60 minutes to the lake. The trail is well-marked and easy enough that you can do it on a half day.
   effort: Easy
   best_light: Anytime, mornings for reflection
   wildCamping:
@@ -1076,6 +1112,8 @@ spots:
       walk_from_stop_min: 1
     best_time: Spring sunset when the late light catches the Eiger north face. April-May for wildflowers in the meadows.
     operating: Year-round.
+  access_long: Drive from Interlaken via Wilderswil and Zweilütschinen, or take the BOB train from Interlaken Ost (every 30 minutes). Village parking runs 5 to 10 CHF a day. Spring is
+    the window, late afternoon catches the Eiger north face after the village goes into shadow.
 - id: iseltwald
   chapter: central
   kicker: VILLAGES
@@ -1126,6 +1164,8 @@ spots:
       walk_from_stop_min: 2
     best_time: Before 7 in summer or after 18:00. The pier is mobbed midday because of K-drama tourism.
     operating: Drive-up year-round. Ferry runs April to October.
+  access_long: Drive from Interlaken along the south shore of Lake Brienz, or take Postbus 103 from Interlaken Ost. The ferry from Interlaken or Brienz runs April to October. Village
+    parking near the lakefront is 5 CHF for two hours and fills by 8:30 in summer. The pier is mobbed midday because of K-drama tourism, go before 7 or after 18:00.
 - id: viewpoint_beatenberg
   chapter: central
   kicker: ROADS
@@ -1162,6 +1202,8 @@ spots:
       walk_from_stop_min: 5
     best_time: Clear winter mornings for the inversion fog floating over Lake Thun below.
     operating: Drive-up year-round. Niederhorn cable car runs late May to mid-October and December to March.
+  access_long: From Beatenberg village, follow signs up to the Aussichtspunkt. Park there and walk to the railing. The road and lake align below with no power lines or fences in the
+    frame.
 - id: oeschinensee
   chapter: central
   kicker: LAKES
@@ -1222,6 +1264,9 @@ spots:
   - oeschinensee-kandersteg-foot
   - oeschinensee-cable-car
   - oeschinensee-hohturli-extension
+  access_long: Quickest way in is the Bergbahnen Oeschinensee cable car from Kandersteg, which drops you about ten minutes' walk from the lake on a wide gravel path. Round-trip around
+    32 CHF, runs late May through October. On foot from Kandersteg station it is about an hour through forest with 400 metres of gain. Start by 7 for the morning reflection, by mid-morning
+    the wind off the Hohtürli side ripples the surface.
 - id: piz_gloria
   chapter: central
   kicker: SUMMITS
@@ -1263,6 +1308,8 @@ spots:
   hike_ids:
   - piz_gloria-cable-car-to-summit
   - piz_gloria-gimmelwald-on-foot
+  access_long: Take the cable car all the way up to Piz Gloria. The view from the terrace is hard to beat, mountains in every direction, with the Eiger, Mönch and Jungfrau standing in
+    a row across the valley.
 - id: lauterbrunnen
   chapter: central
   kicker: VALLEYS
@@ -1312,6 +1359,8 @@ spots:
       walk_from_stop_min: 2
     best_time: First light on the Staubbach Falls before tour buses arrive at 9.
     operating: Year-round drive-up. Lauterbrunnen waterfalls flow strongest May-July.
+  access_long: Drive from Interlaken via Wilderswil, or take the BLS train from Interlaken Ost. Village parking is 8 CHF a day in summer. Avoid the middle of the day, mornings work for
+    the village shots before the tour buses arrive at 9, late afternoon catches the Staubbach in side-light.
 - id: central_extras
   chapter: central
   kind: extras
@@ -1392,6 +1441,7 @@ spots:
     best_season: Late June - October
   hike_ids:
   - riffelsee-default
+  access_long: Take the Gornergrat Bahn from Zermatt up to Rotenboden. From the station it is a short walk down to the lake. Maybe ten minutes on an easy path.
 - id: zermatt_village
   chapter: valais
   kicker: VILLAGES
@@ -1433,6 +1483,7 @@ spots:
       walk_from_stop_min: 1
     best_time: Sunrise from anywhere up the valley. Pre-dawn light on the Matterhorn is the photographer's window.
     operating: Year-round, but the village empties out between ski season and summer hiking season.
+  access_long: A few minutes outside the village, you can line up the Matterhorn and the lit chalets in the same composition. That is the one that goes viral.
 - id: riffelalp
   chapter: valais
   kicker: VIEWPOINTS
@@ -1467,6 +1518,7 @@ spots:
   hike_ids:
   - riffelalp-easy-round-trip
   - riffelalp-findeln-loop
+  access_long: Same Gornergrat Bahn as for Riffelsee, but get off earlier at Riffelalp. Ten to fifteen minutes on the trail brings you to a quieter viewpoint.
 - id: gorner_glacier
   chapter: valais
   kicker: GLACIERS
@@ -1508,6 +1560,8 @@ spots:
   - gorner_glacier-gornergrat-railway
   - gorner_glacier-path-of-silence
   - gorner_glacier-descent-via-riffelsee
+  access_long: Take the Matterhorn Gotthard Bahn to Zermatt, then the Gornergrat rack railway about 33 minutes up to 3,089 metres. From the top, the Sunshine Trail follows the rails
+    down to Riffelberg in an easy hour with the Matterhorn in view the whole way. A telephoto in the 100 to 400 range compresses the ice better than any wide angle.
 - id: zermatt_huts
   chapter: valais
   kicker: OLD WOOD, SURREAL LIGHT
@@ -1537,6 +1591,8 @@ spots:
     lat: 46.006481
     lng: 7.732045
   pdf: false
+  access_long: From Zermatt, hike to the end of the village and then up toward the cable car station at Furi. You'll find this little hamlet of old wooden houses, only a ghost town in
+    winter when the restaurant is closed.
 - id: aletsch_glacier
   chapter: valais
   kicker: SWITZERLAND'S LARGEST, FOR NOW
@@ -1588,6 +1644,8 @@ spots:
   - aletsch_glacier-eggishorn-circular
   - aletsch_glacier-bettmerhorn-eggishorn-ridge
   - aletsch_glacier-aletsch-panoramaweg
+  access_long: Start from Bettmeralp or Fiescheralp, both reached by cable car from the Rhone valley. The classic viewpoint is Eggishorn at 2,927 metres via a second lift from Fiescheralp,
+    about 20 minutes from the top station gets you to the main summit. The Aletsch Panorama trail along the ridge offers a few hours of uninterrupted views if you would rather stay grounded.
 - id: arolla_ice_cave
   chapter: valais
   kicker: GLACIERS
@@ -1626,6 +1684,7 @@ spots:
   hike_ids:
   - arolla_ice_cave-arolla-glacier-trail
   - arolla_ice_cave-arolla-pas-de-chevres
+  access_long: Park at coordinates 46.020048, 7.481951 and hike to the cave at 45.992908, 7.494244. The cave collapsed in September 2022 after a small Val d'Hérens earthquake.
 - id: cabane_becs_de_bosson
   chapter: valais
   kicker: SLEEP HIGH, EAT WELL
@@ -1664,6 +1723,8 @@ spots:
     best_season: Late June – Late September
   hike_ids:
   - cabane_becs_de_bosson-from-bendolla
+  access_long: Cable car up from Grimentz, then a 2-hour hike to the hut at around 2,985m. The approach is mostly on packed dirt trail; winter visits need avalanche awareness and proper
+    gear.
 - id: moiry_glacier
   chapter: valais
   kicker: A HUT ABOVE THE ICE
@@ -1714,6 +1775,8 @@ spots:
   hike_ids:
   - moiry_glacier-bus-to-moiry-barrage
   - moiry_glacier-from-grimentz-on-foot
+  access_long: Drive or take the bus from Grimentz up to Lac de Moiry, then hike up the moraine trail. Steep but well-marked. The cabane at the top is a good lunch stop and a solid base
+    for photos late in the day when the glacier goes pink.
 - id: the_ice_cave
   chapter: valais
   kicker: DEEP WINTER ONLY, AND ONLY IF IT'S COLD
@@ -1769,6 +1832,8 @@ spots:
       walk_from_stop_min: 0
     best_time: Midday in summer when the cave's blue ice catches indirect light.
     operating: Cable cars run mid-June to early October.
+  access_long: Drive to the Mont Fort valley station in Verbier, or take the train to Le Châble and the Verbier cable car system up. Cable cars run mid-June to early October, parking
+    at Médran is 15 CHF a day. The cave is a deep-winter spot, never go after warm days, never alone. Bring crampons or microspikes, headlamp, and a tripod, it is darker than it looks.
 - id: ferpecle_glacier
   chapter: valais
   kicker: A GLACIER YOU CAN STILL REACH ON FOOT
@@ -1805,6 +1870,8 @@ spots:
   hike_ids:
   - ferpecle_glacier-easy-glacier-trail
   - ferpecle_glacier-les-salays-to-bricola
+  access_long: Drive to the hamlet of Ferpècle at the end of the road, park, and walk in toward the glacier front. About 2 hours of mostly flat to gently rising terrain. You will share
+    the valley with a handful of day hikers and some very serious-looking goats.
 - id: ferpecle_river
   chapter: valais
   kicker: ABSTRACT FROM ABOVE
@@ -1833,6 +1900,8 @@ spots:
   - file: 04.jpg
     credit: zimydakid
     source_type: book
+  access_long: Drive into the Val d'Hérens to the end of the Ferpècle road, same approach as the glacier. The interesting frame is from the air over the flats where the river fans across
+    the gravel bed. Shoot top-down between 10 and 14:00 for the cleanest separation between water and stone.
 - id: spielboden
   chapter: valais
   kicker: THE EASIEST MARMOTS IN SWITZERLAND
@@ -1868,6 +1937,8 @@ spots:
     best_season: Late June – Late September
   hike_ids:
   - spielboden-laengfluh-glacier-trail
+  access_long: Take the train to Brig and the postbus to Saas-Fee, then the Spielboden cable car up to 2,452 metres. About ten minutes from the top station gets you among the marmots,
+    which are habituated and will sniff your lens. A 70 to 200 lens is plenty. For the Allalinhorn backdrop, walk ten minutes up toward the Hannig trail intersection.
 - id: goms_bridge
   chapter: valais
   kicker: BRIDGES
@@ -1905,6 +1976,7 @@ spots:
       walk_from_stop_min: 15
     best_time: Late afternoon when the sun lights the bridge from the south side.
     operating: Bridge open year-round, but the access trail may be snow-covered in winter.
+  access_long: A quick half-hour detour if you are driving through the Goms on your way to or from Grimsel. Easy walk, solid views, and fewer crowds than the famous Randa bridge.
 - id: randa_bridge
   chapter: valais
   kicker: BRIDGES
@@ -1943,6 +2015,8 @@ spots:
       walk_from_stop_min: 90
     best_time: Clear weather mid-summer. The 494 m bridge is exposed to wind — check forecast.
     operating: Bridge open July through October. Closed in winter and high winds.
+  access_long: The bridge sits between Visp and Zermatt in Randa. It's a 1.5 to 2 hour hike up from Randa village to the Europaweg trail; the crossing itself is around ten minutes. It
+    swings more than you might expect, but it's not technical, just commitment.
 - id: barrhorn
   chapter: valais
   kicker: SUMMITS
@@ -1972,6 +2046,9 @@ spots:
     best_season: July – early September
   hike_ids:
   - barrhorn-from-turtmannhuette
+  access_long: Long approach. Train to Visp, bus, then the multi-hour walk up to the Turtmannhütte at 2,519 metres, most parties stay a night before summit day. From the hut, six hours
+    and 1,100 metres of gain on scree and rock to the Üssers Barrhorn at 3,610 metres. T4 by altitude and length, no technical difficulty but a full mountain day. Start early, watch
+    the weather.
 - id: saas_fee_glacier
   chapter: valais
   kicker: 13,000 YEARS OF ICE, RETREATING FAST
@@ -2005,6 +2082,8 @@ spots:
     best_season: July – mid-September
   hike_ids:
   - saas_fee_glacier-glacier-trail-felskinn
+  access_long: 'Mittelallalin is the reachable high point: cable car from Saas Fee to Felskinn, then the Metro Alpin funicular inside the mountain. The terrace gives you a panorama of
+    the ice fields and the Mischabel peaks. Crowded in ski season, empty in the shoulder months.'
 - id: lac_de_derborence
   chapter: valais
   kicker: DROWNED TREES, STILL STANDING
@@ -2049,6 +2128,8 @@ spots:
       walk_from_stop_min: 5
     best_time: Late October when the larch turns gold. The basin is shaded most of the morning, so afternoon light works best.
     operating: Road open June to October only. Closed by snow in winter.
+  access_long: East end of the lake. Drive up from Aven or hike in from the hamlet of Derborence itself. The flooded trees are visible in low water. Best chances are late summer into
+    early autumn when the lake level drops.
 - id: la_fouly
   chapter: valais
   kicker: A VILLAGE AT THE MOUTH OF A GLACIER
@@ -2102,6 +2183,8 @@ spots:
     best_season: Late June – Late September
   hike_ids:
   - la_fouly-tmb-arnuva-la-fouly
+  access_long: For photos, walk 15 minutes out of the village toward the glacier moraine. The alpenglow hits the peaks about 20 minutes before sunset. You will want a tele (135 to 200mm)
+    to compress the layers.
 - id: sanetschpass
   chapter: valais
   kicker: A PASS WITH A LAKE ON TOP
@@ -2140,6 +2223,8 @@ spots:
   hike_ids:
   - sanetschpass-from-gsteig-on-foot
   - sanetschpass-cable-car-shortcut
+  access_long: For photos, walk 30 minutes west along the dam toward the open meadows. The ridges catch morning light cleanly. A drone works well up here. No crowds, no airspace restrictions
+    to worry about.
 - id: gorges_du_durnand
   chapter: valais
   kicker: A CANYON HUNG WITH IRON WALKWAYS
@@ -2175,6 +2260,8 @@ spots:
   gps:
     lat: 46.069739
     lng: 7.071399
+  access_long: Drive to Bovernier and follow signs to the gorges entrance (small entry fee). The loop takes about 45 minutes; wear grippy shoes because the wood gets slick from spray.
+    The walkways zigzag up the falls, giving you angles you cannot get any other way.
 - id: gorges_du_dailley
   chapter: valais
   kicker: NARROWER, OLDER, LESS KNOWN
@@ -2213,6 +2300,8 @@ spots:
   gps:
     lat: 46.1392092
     lng: 7.0185055
+  access_long: Park near the village of Salvan and walk in on the signposted trail. Old wooden bridges stack the falls one above the next for almost a kilometre. Mid-morning is when
+    the light filters down through the canopy. In heavy rain the spray gets intense, so protect the camera.
 - id: nax_via_ferrata
   chapter: valais
   kicker: A SHORT VERTICAL WITH BIG CONSEQUENCE
@@ -2249,6 +2338,8 @@ spots:
     best_season: Late May – October
   hike_ids:
   - nax_via_ferrata-belvedere-via-ferrata
+  access_long: Park at 46.200456, 7.031477 and walk to the route start. You need a full via ferrata kit (harness, Y-lanyard with energy absorber, helmet, gloves) and some climbing experience.
+    It is rated around K3. Not a beginner's route, but doable for a confident scrambler.
 - id: crans_montana
   chapter: valais
   kicker: THE SKI STATION IN SUMMER
@@ -2283,6 +2374,8 @@ spots:
   hike_ids:
   - crans_montana-bisse-du-ro
   - crans_montana-plaine-morte-glacier
+  access_long: Take any of the lifts up from Crans-Montana village, most run summer service. The interesting frames are on the upper slopes above 2,000 metres. For something longer,
+    the bisse path follows a medieval water channel along the south flank for about three hours, narrow and exposed in places. Avoid weekends in mid-summer, it gets crowded.
 - id: tseuzier_lake
   chapter: valais
   kicker: A LAKE THAT REFLECTS LIKE GLASS
@@ -2326,6 +2419,8 @@ spots:
     best_season: June - October
   hike_ids:
   - tseuzier_lake-route-23
+  access_long: Drive up the Rawyl road from Ayent. The lake sits at the top. Park at the dam, then walk the path along the north shore. The best reflections are at sunrise in late October
+    when the larches on the surrounding slopes turn gold.
 - id: salanfe_lake
   chapter: valais
   kicker: A HIDDEN LAKE IN A HANGING VALLEY
@@ -2361,6 +2456,8 @@ spots:
     best_season: Late June – October
   hike_ids:
   - salanfe_lake-from-van-d-en-haut
+  access_long: 'Accessible via Van d''en Haut above Salvan. Park where the road ends and hike about 2 hours up. Alternative: approach from Mex in the Rhône valley, longer but quieter.
+    Either way, the climb opens out suddenly to a huge still lake ringed by walls of rock.'
 - id: la_tzoumaz
   chapter: valais
   kicker: FROZEN PINES, A TWENTY-MINUTE WINDOW
@@ -2400,6 +2497,8 @@ spots:
       walk_from_stop_min: 2
     best_time: Summer for the trail networks above; winter for the Savoleyres ski connection to Verbier.
     operating: Cable cars run June to October and December to April.
+  access_long: Drive from Riddes up the winding road to La Tzoumaz, or take Postbus 393 from Riddes station. Village lots are free outside ski season. Park and walk up toward the treeline.
+    In spring, the frozen pines melt fast, sometimes in twenty minutes, so set up before first light.
 - id: pointe_du_tsate
   chapter: valais
   kicker: SUMMITS
@@ -2428,6 +2527,9 @@ spots:
     best_season: Late June – September
   hike_ids:
   - pointe_du_tsate-from-la-forclaz
+  access_long: Take the postbus to La Forclaz above Évolène, then climb steadily through pasture to Lac du Tsaté and on up the scree slopes to the summit at 3,078 metres. About five
+    hours up and 1,200 metres of gain, T3. The upper section is loose and the summit area is sparsely marked, surefootedness essential. Plan a full day or split it with a night at Cabane
+    des Becs de Bosson.
 - id: valais_extras
   chapter: valais
   kind: extras
@@ -2506,6 +2608,8 @@ spots:
     best_season: June – October
   hike_ids:
   - gastlosen-gastlosen-circular
+  access_long: Drive up toward Le Chalet du Soldat and hike a short while to the saddle that looks over the whole range. Sunrise is the best shot. Inversions happen more often in the
+    early morning than in the evening.
 - id: ritzli_alp
   chapter: fribourg
   kicker: DINNER WITH A VIEW
@@ -2534,6 +2638,8 @@ spots:
   gps:
     lat: 46.6295236
     lng: 7.2828498
+  access_long: Sits right on the descent from the Gastlosen ridge in the Gruyère, no detour needed. End a long hiking day with food and a slow sunset, then stick around for blue hour,
+    the sky goes deep indigo and the warm lamps on the restaurant pick up.
 - id: la_tine_canyon
   chapter: fribourg
   kicker: GO WITH A GUIDE THE FIRST TIME
@@ -2557,6 +2663,8 @@ spots:
   gps:
     lat: 46.4879565
     lng: 7.0439846
+  access_long: Drive into the Pays-d'Enhaut to access La Tine de Montbovon. There is a dam in the upper valley which means flash flood risk if you do not know the signals, do not walk
+    in blind. Book a first trip with Gruyère Escapade canyoning to learn the terrain, then come back on your own. The canyon is shaded most of the day, bring a tripod.
 - id: dent_de_broc
   chapter: fribourg
   kicker: A DISTANT PEAK, A LONG LENS
@@ -2599,6 +2707,7 @@ spots:
     best_season: Late May – October
   hike_ids:
   - dent_de_broc-from-broc
+  access_long: On the way up to Moléson from the bottom parking, stop at 46.554424, 7.032846. The peak pops above the foreground meadow perfectly from here.
 - id: schwarzsee
   chapter: fribourg
   kicker: THE CLASSIC FRIBOURG LAKE
@@ -2639,6 +2748,8 @@ spots:
   hike_ids:
   - schwarzsee-cable-car
   - schwarzsee-from-furi-via-stafelalp
+  access_long: Take the Matterhorn Gotthard Bahn to Zermatt, then the Schwarzsee cable car system from the village via Furi. About 25 minutes total ride time, then a five-minute walk
+    from the top station to the lake at 2,583 metres. On foot from Furi it is about four hours and 800 metres of gain through forest and below the Matterhorn's north face, T2.
 - id: dent_de_lys
   chapter: fribourg
   kicker: A SHARP TRIANGLE ABOVE LES PACCOTS
@@ -2681,6 +2792,8 @@ spots:
     best_season: June – October
   hike_ids:
   - dent_de_lys-les-paccots-circular
+  access_long: 'Take the TPF train to Châtel-St-Denis and the bus to Les Paccots. Four-hour circular loop via Lac des Joncs and Les Sciernes-d''Albeuve. Mostly T2 with one short T3 section
+    near the summit: a 50-metre schrofen downclimb with chains. Be careful in wet or windy weather, people have gotten hurt on this one.'
 - id: moleson
   chapter: fribourg
   kicker: HIGH RIDGES NEAR THE CABLE CAR
@@ -2722,6 +2835,7 @@ spots:
     best_season: Late May – October
   hike_ids:
   - moleson-plan-francey-summit
+  access_long: Head out on the ridgeline from the top station. Five minutes and you've left the crowd at the café behind. Watch your footing. Drops on both sides in places.
 - id: teysachaux
   chapter: fribourg
   kicker: RIDGE WALK FROM MOLÉSON
@@ -2762,6 +2876,8 @@ spots:
     best_season: Late May – October
   hike_ids:
   - teysachaux-les-paccots-to-moleson
+  access_long: 'Two options: the long way, traversing the ridges from Moléson, which is a proper day out. Or parking at 46.534395, 6.975091 and hiking straight up, which cuts it down
+    to a couple of hours.'
 - id: cap_au_moine
   chapter: western
   kicker: A NARROW RIDGE ABOVE COL DE JAMAN
@@ -2805,6 +2921,8 @@ spots:
     best_season: Late May – October
   hike_ids:
   - cap_au_moine-from-allieres
+  access_long: Park at Col de Jaman (46.451752, 6.977129) and hike toward Col de Pierra-Perchia. It takes about an hour. Keep your attention on the trail. Parts of the ridge are exposed
+    enough that a fall would be fatal.
 - id: dent_de_jaman
   chapter: western
   kicker: THE MOST PHOTOGRAPHED PEAK ABOVE MONTREUX
@@ -2847,6 +2965,7 @@ spots:
     best_season: Mid June - October
   hike_ids:
   - dent_de_jaman-route-87
+  access_long: From Col de Jaman (46.451752, 6.977129), it's a straight hike up. Nothing technical, but steep enough to feel like a climb. Allow an hour each way.
 - id: gorges_du_chauderon
   chapter: western
   kicker: WATERFALL HIDDEN IN THE MONTREUX CANYON
@@ -2876,6 +2995,8 @@ spots:
   - file: 02.jpg
     credit: zimydakid
     source_type: book
+  access_long: The waterfall sits on the lower part of the canyon closer to Montreux. From the path above it is completely hidden, the shot is a drone launched from a clearing above
+    and flown down into the gorge. Cloudy or rainy days in late spring and summer are best, the ferns go neon green and the diffused light keeps the highlights manageable.
 - id: pisse_chevre
   chapter: western
   kicker: A REMOTE VAUD WATERFALL
@@ -2902,6 +3023,8 @@ spots:
   gps:
     lat: 46.198
     lng: 7.02769
+  access_long: Park and launch the drone from 46.200456, 7.031477 above Lavey-Morcles, the waterfall sits at 46.202355, 7.031412. The aerial perspective is where this one earns its place.
+    Go at the end of summer after a rainy week, or in April or May when the snow is coming off fast.
 - id: route_de_morcles
   chapter: western
   kicker: LEADING LINES ABOVE THE RHÔNE
@@ -2928,6 +3051,7 @@ spots:
   - file: 03.jpg
     credit: zimydakid
     source_type: book
+  access_long: Overcast days flatter this one. Strong sun kills the mood. If you're driving up to Pisse-Chèvre anyway, take an extra hour and shoot this on the way.
 - id: creux_du_van
   chapter: western
   kicker: HUGE CLIFFS IN THE JURA
@@ -2985,6 +3109,7 @@ spots:
     best_season: May – October
   hike_ids:
   - creux_du_van-noiraigue-14-bends
+  access_long: Drive to Restaurant Le Soliat, park there, and walk to the rim. Don't run to the edge. The drop is severe and there's no railing in most places.
 - id: tine_de_conflens
   chapter: western
   kicker: A QUIET WATERFALL IN THE VAUD
@@ -3012,6 +3137,7 @@ spots:
   gps:
     lat: 46.6557956
     lng: 6.4939321
+  access_long: Park at 46.654948, 6.492129 and hike down. It's short and easy, good for families, and rarely busy.
 - id: lac_de_taney
   chapter: western
   kicker: AN ALPINE LAKE ABOVE LÉMAN
@@ -3055,6 +3181,7 @@ spots:
     best_season: Late April - Nov
   hike_ids:
   - lac_de_taney-route-50
+  access_long: Park at 46.338388, 6.848829 and hike up. The trail is obvious and not too long. Doable as a sunrise mission if you start before dawn.
 - id: grammont
   chapter: western
   kicker: ABOVE THE LAKE, MAYBE WITH IBEX
@@ -3094,6 +3221,7 @@ spots:
     best_season: Late May - October
   hike_ids:
   - grammont-route-154
+  access_long: From Lac de Taney, the trail continues up. Plan around two hours depending on your pace. Bring water and warm layers. Exposed summit, wind is common.
 - id: st_prex
   chapter: western
   kicker: CLIFF JUMPING INTO LAKE GENEVA
@@ -3120,6 +3248,8 @@ spots:
   - file: 03.jpg
     credit: zimydakid
     source_type: book
+  access_long: Train from Lausanne to St-Prex along the lake. The swim platform is at 46.478432, 6.456433 with deep warm water and the French Alps across the lake. Check the depth yourself
+    before any big jump. Afternoon is when the sun hits the water right.
 - id: marchairuz
   chapter: western
   kicker: WINTER WONDERLAND IN THE JURA
@@ -3156,6 +3286,8 @@ spots:
     best_season: May – October
   hike_ids:
   - marchairuz-mollendruz-mont-tendre-marchairuz
+  access_long: Drive the Jura pass road above Le Brassus to the col at 46.564254, 6.239464. Not a hike, a drive-up view. Go the morning after a fresh snowstorm before the roads get ploughed
+    wide. For a longer outing, the five-hour ridge walk from Col du Mollendruz over Mont Tendre lands at Marchairuz with a postbus back to Le Brassus.
 - id: geltenschuss
   chapter: western
   kicker: A LONG HIKE TO A BIG WATERFALL
@@ -3189,6 +3321,8 @@ spots:
     best_season: Late June – Late September
   hike_ids:
   - geltenschuss-lauenensee-geltenhuette
+  access_long: Take the postbus to Lauenen and walk to the lake. From there, a six-hour loop climbs into the Gelten valley right next to the falls, on through the Geltenhütte SAC at
+    2,002 metres, then back via Tungelschuss or Usseri Tüffi. 750 metres of cumulative gain, T2. Go in June for peak flow, later in summer the falls drop off hard.
 - id: lavaux_vineyards
   chapter: western
   kicker: LANDSCAPES
@@ -3221,6 +3355,7 @@ spots:
     best_season: April – October (vintage in September)
   hike_ids:
   - lavaux_vineyards-terrasses-de-lavaux
+  access_long: Park in Lavaux or take the train to Cully and walk the vineyard trails. The lake below and the Alps above make for multiple compositions.
 - id: etang_de_la_gruere
   chapter: western
   kicker: REFLECTIONS
@@ -3261,6 +3396,8 @@ spots:
   gps:
     lat: 47.2385175
     lng: 7.0463746
+  access_long: Drive to the lot near the Etang in the Jura above Saignelégier, then walk in about 10 minutes. Short and easy. The composition game is all about waiting for sunrise mist
+    or sunset alpenglow over the moorland lake.
 - id: le_doubs
   chapter: western
   kicker: RIVERS
@@ -3287,6 +3424,8 @@ spots:
   gps:
     lat: 47.091939
     lng: 6.751217
+  access_long: Drive to the Restaurant Les Roches de Moron above Les Brenets and walk to the cliffs above the river. Short stroll to the rim. Overcast light suits this Jura spot, or
+    catch the sunset when the canyon walls glow.
 - id: western_extras
   chapter: western
   kind: extras
@@ -3346,6 +3485,7 @@ spots:
     best_season: Late May - Mid October
   hike_ids:
   - schafler-route-42
+  access_long: Take the cable car to Ebenalp, then hike up to Schäfler. Moderate pace, obvious trail. There's a chalet at the top where you can sleep. Book ahead.
 - id: seealpsee
   chapter: eastern
   kicker: SWISS POSTCARD, ACTUAL VERSION
@@ -3394,6 +3534,8 @@ spots:
     best_season: April - November
   hike_ids:
   - seealpsee-route-43
+  access_long: On the way down from Schäfler, stop at Äscher and then keep going to Seealpsee. The boat rental is cheap and being on the water gives you a completely different angle
+    than the shoreline shots.
 - id: ascher
   chapter: eastern
   kicker: THE CHALET IN THE CLIFF
@@ -3432,6 +3574,8 @@ spots:
     best_season: Late May - Mid October
   hike_ids:
   - ascher-route-73
+  access_long: Take the train to Wasserauen, then the Luftseilbahn up to Ebenalp, then a 15-minute walk down to the guest house tucked against the cliff face. Round-trip cable car around
+    38 CHF, station runs late May through October. To continue along the limestone ridge to Schäfler, plan another hour, T2. Weekdays are way quieter than weekends.
 - id: saxer_lucke
   chapter: eastern
   kicker: A NOTCH IN THE RIDGE
@@ -3477,6 +3621,7 @@ spots:
     best_season: May - October
   hike_ids:
   - saxer_lucke-route-71
+  access_long: Take the cable car from Frümsen up to Gasthaus Staubern, then hike to Saxer Lücke. It's an easy walk along the ridge. Well-maintained trail, family-friendly.
 - id: limmernsee
   chapter: eastern
   kicker: RESERVOIR, TUNNEL, THEN MOUNTAINS
@@ -3517,6 +3662,8 @@ spots:
   hike_ids:
   - limmernsee-tierfehd-cable-car
   - limmernsee-linthal-on-foot
+  access_long: Take the Luftseilbahn Tierfehd-Kalktrittli. Double-check the schedule, it usually only runs mid-June to end of September. From the top, you cross a tunnel and climb toward
+    the dam.
 - id: muttseehutte
   chapter: eastern
   kicker: SLEEP ABOVE THE TURQUOISE
@@ -3553,6 +3700,7 @@ spots:
     best_season: Late June – Late September
   hike_ids:
   - muttseehutte-from-tierfehd-cable-car
+  access_long: Same approach as Limmernsee. Cable car, tunnel, then climb. Book the hut in advance (muttseehuette.ch, or call). It fills up fast in peak season.
 - id: berschnerfall
   chapter: eastern
   kicker: SOFT LIGHT, LONG EXPOSURES
@@ -3599,6 +3747,8 @@ spots:
     best_season: Early Summer
   hike_ids:
   - berschnerfall-route-44
+  access_long: Postbus or drive to Berschis, Unterdorf above Walenstadt, then a 2 to 3 hour climb up through deciduous forest on the south side of the Churfirsten. About 200 metres of
+    gain. The lower viewpoint is easier to reach, best in late spring and early summer when the water volume is highest.
 - id: klausenpass
   chapter: eastern
   kicker: A HIGH PASS WITH ROOM TO CAMP
@@ -3636,6 +3786,8 @@ spots:
     best_season: June – October
   hike_ids:
   - klausenpass-urnerboden-to-altdorf
+  access_long: Park at the Klausenpass and hike toward the GPS point. Note the road is only open roughly June through September; closed for snow the rest of the year. The terrain opens
+    up and there's a flat area that works as a bivy spot if you're set up for it.
 - id: barglistuber
   chapter: eastern
   kicker: A SHORT WALK, LOTS OF WATER IN SPRING
@@ -3668,6 +3820,8 @@ spots:
     best_season: Early Summer
   hike_ids:
   - barglistuber-route-14
+  access_long: Drive to the Parkplatz Wasserfall Berglistüber near Linthal, or take the postbus to Linthal, Bergli. Short walk from the road to the viewing platforms. The falls drop
+    straight out of the cliff above the road. Peak water is May to June with the snowmelt, cloudy days or shade hours work best.
 - id: urnerboden
   chapter: eastern
   kicker: LIMESTONE THAT LOOKS ITALIAN
@@ -3702,6 +3856,8 @@ spots:
     best_season: May – October
   hike_ids:
   - urnerboden-panorama-walk
+  access_long: Park along the pass road and walk up a short ridge. The peaks above the Urnerboden valley have the kind of jagged limestone that looks lifted from the Dolomites, with
+    zero crowd.
 - id: ice_lake_griesslisee
   chapter: eastern
   kicker: FLOATING ICE IN SUMMER
@@ -3740,6 +3896,8 @@ spots:
     best_season: Late June – Late September
   hike_ids:
   - ice_lake_griesslisee-kloental-via-chaeseren
+  access_long: Take the postbus from Glarus to Klöntal-Vorauen at the head of Klöntalersee, then climb steeply up to the Glärnischhütte area. About 4.5 hours and 1,100 metres of gain
+    on grass slopes past the Chilchli rock towers, T3 to T4 with sporadic markings. Go mid-July to early August, earlier there is snow around the lake, later the ice has gone.
 - id: gigerwaldsee
   chapter: eastern
   kicker: A CROSS ON THE HILL, THE BEST VIEW
@@ -3782,6 +3940,9 @@ spots:
   hike_ids:
   - gigerwaldsee-calfeisental-round
   - gigerwaldsee-st-martin-to-sardona
+  access_long: Train to Sargans, bus to Vättis, then postbus to the Gigerwald reservoir. The path behind the little village climbs up to the cross visible from below, which gives the
+    cleanest angle on the lake. For a full day, the 19.3 km loop into the Calfeisental and the Walser village of St. Martin takes about seven hours with 1,254 metres of cumulative gain,
+    T2.
 - id: caumasee
   chapter: eastern
   kicker: PHOTOGENIC. BUT A BIT SOULLESS
@@ -3833,6 +3994,9 @@ spots:
       walk_from_stop_min: 10
     best_time: Early morning before 9 or after 17:00. The lake's deepest blue is mid-morning when the sun is high.
     operating: Lake is accessible year-round on foot. The funicular down to the shore runs May to October.
+  access_long: Drive to Flims Waldhaus or take Postbus 81 from Chur. Caumasee parking is around 5 CHF for the day in season. The funicular down to the shore runs May to October. Lake
+    is accessible year-round on foot, but it is run as an outdoor swimming complex with little nature left around the shore. Shoot at sunrise before it opens, or walk to Crestasee nearby
+    instead.
 - id: ruinaulta
   chapter: eastern
   kicker: A DEEP CANYON IN THE EAST
@@ -3869,6 +4033,8 @@ spots:
   hike_ids:
   - ruinaulta-versam-circular
   - ruinaulta-flims-out-and-back
+  access_long: From Caumasee, follow the hiking signs to the Il Spir viewpoint, a short walk to the rim. Be careful near the edge, the drop is big. For a longer outing, take the RhB
+    to Versam-Safien and do the four-hour forest circular with multiple viewpoints over the gorge, T2, 400 metres of gain. Sunrise is the light, mist often sits low in the bottom.
 - id: crestasee
   chapter: eastern
   kicker: QUIETER THAN CAUMASEE, WAY BETTER
@@ -3909,6 +4075,8 @@ spots:
   hike_ids:
   - crestasee-four-lakes-hike
   - crestasee-short-staderas-conn
+  access_long: From Flims, take the postbus to Flims Staderas and walk 75 minutes through the forest past Caumasee. T1, family-friendly, mostly under tree cover. For the full Senda quatter
+    lags da Flem (four lakes hike), allow four hours from Flims looping past Lag Prau Pulté, Lag Prau Tuleritg, Caumasee, and Crestasee. Early morning has the cleanest reflections.
 - id: klontalersee
   chapter: eastern
   kicker: SUP, CAMPER VAN, LAKE
@@ -3958,6 +4126,9 @@ spots:
       walk_from_stop_min: 2
     best_time: Late afternoon for the best light on the Glärnisch wall above the lake. The lake faces north so morning light is flat.
     operating: Road is open year-round. Lakeshore campgrounds run May to October.
+  access_long: Drive from Glarus along the Klöntalstrasse to the lakeshore, or take Postbus 506 to Klöntal-Vorauen. Roadside parking is free in most sections. Around-the-lake loop is
+    about four hours and mostly flat, T1. Use the Vorauen campsite for overnight, Glarus has cracked down on roadside van bivouacs. Late afternoon catches gold light on the Glärnisch
+    wall above the lake.
 - id: stoos_kapelle
   chapter: eastern
   kicker: CHAPELS
@@ -3996,6 +4167,7 @@ spots:
     best_season: June - October
   hike_ids:
   - stoos_kapelle-route-35
+  access_long: Stoos is the car-free village reached by the Stoosbahn funicular from Schwyz-Schlattli. Walk a few minutes from the village to the Stooskapelle Maria Hilf.
 - id: pizol
   chapter: eastern
   kicker: ALPINE LAKES
@@ -4036,6 +4208,7 @@ spots:
     best_season: Late June – Early October
   hike_ids:
   - pizol-5-lakes-hike
+  access_long: Take the cable car from Wangs-Pizolbahn up to Furt and follow the 5-Seen-Wanderung. Plan five to six hours for the full loop.
 - id: joriseen
   chapter: eastern
   kicker: ALPINE LAKES
@@ -4081,6 +4254,7 @@ spots:
     best_season: Late June - October
   hike_ids:
   - joriseen-route-126
+  access_long: From Flüelapass, take the path up past the Winterlücke to the Jöriflüelafurgga saddle. Four hours one way if you are moving.
 - id: falensee
   chapter: eastern
   kicker: LAKES
@@ -4125,6 +4299,8 @@ spots:
     best_season: May - October
   hike_ids:
   - falensee-route-69
+  access_long: From Brülisau, take the cable car up to Hoher Kasten, then traverse the Saxer Lücke ridge and drop down toward Bollenwees. About 3 to 4 hours one way, T2. The view that
+    sells it is from the ridge above, looking straight down the lake with an 85 to 135 lens to compress the walls. Berggasthaus Bollenwees at the north end has dorm beds and food.
 - id: batoni_wasserfallarena
   chapter: eastern
   kicker: WATERFALLS
@@ -4156,6 +4332,7 @@ spots:
     best_season: Early Summer/After Rain
   hike_ids:
   - batoni_wasserfallarena-route-125
+  access_long: Drive up Weisstannental to Weisstannen, then hike in toward Batöni. Around two hours to reach the main amphitheatre.
 - id: morteratsch_glacier
   chapter: eastern
   kicker: AN ICE RIVER IN ENGADIN
@@ -4205,6 +4382,9 @@ spots:
   hike_ids:
   - morteratsch_glacier-aussichtsweg-glacier-trail
   - morteratsch_glacier-short-glacier-tongue
+  access_long: Take the RhB to Morteratsch station. From there, yellow signs lead to the Aussichtsweg theme trail along the moraine, about 50 minutes one way with sixteen interpretive
+    stations marking the glacier's retreat since 1850. T1, family-friendly. Direct ice access has been closed since May 2024 due to rockfall, so stay on the marked viewpoints. Overcast
+    is best for reading the ice texture.
 - id: bovalhutte
   chapter: eastern
   kicker: HUT ABOVE THE GLACIER
@@ -4243,6 +4423,7 @@ spots:
     best_season: Late June – Late September
   hike_ids:
   - bovalhutte-from-morteratsch
+  access_long: From Morteratsch train station, follow the yellow 'Bovalhütte' signs. You'll climb above and to the right of the glacier tongue. Solid path, moderate effort.
 - id: spitzmeilenhutte
   chapter: eastern
   title: Spitzmeilenhütte
@@ -4274,6 +4455,7 @@ spots:
     best_season: Late June – October
   hike_ids:
   - spitzmeilenhutte-from-maschgenkamm
+  access_long: Cable car from Flumserberg up to Maschgenkamm, then a 1.5 to 2 hour hike to the hut. Book ahead in summer, the hut fills fast on weekends.
 - id: eastern_extras
   chapter: eastern
   kind: extras
@@ -4335,6 +4517,7 @@ spots:
     best_season: April – October
   hike_ids:
   - cascata_la_froda-from-sonogno-village
+  access_long: Drive to Sonogno and follow the short hike to the falls. The pool underneath is deep and ice-cold even in summer. Jumping in is basically tradition at this point.
 - id: ponte_dei_salti
   chapter: ticino
   kicker: THE ARCH, THE JUMP, THE ICON
@@ -4380,6 +4563,7 @@ spots:
       walk_from_stop_min: 2
     best_time: Sunrise on the bridge with the morning fog above the river. By 10 the parking is full.
     operating: Bridge accessible year-round.
+  access_long: Park in Lavertezzo and walk to the bridge. The jump is about 15 meters and the water is freezing even in August. Check the river level and for any rocks before you commit.
 - id: valle_verzasca
   chapter: ticino
   kicker: THE WHOLE VALLEY IS THE SPOT
@@ -4428,6 +4612,8 @@ spots:
     best_season: April – October
   hike_ids:
   - valle_verzasca-sonogno-to-lavertezzo
+  access_long: Drive up the valley from Locarno-Tenero, or take the postbus from Locarno via Tenero to Sonogno at the head of the valley. The Sentiero Verzasca stage from Sonogno to
+    Lavertezzo runs 14 km, about 3.5 hours, T1. Current is serious, people drown in this river every summer, do not jump into water you have not scouted.
 - id: lavertezzo
   chapter: ticino
   kicker: THE VILLAGE AT THE HEART OF IT
@@ -4469,6 +4655,9 @@ spots:
       walk_from_stop_min: 1
     best_time: Early morning before swimmers arrive, or stormy weather when the water turns greener.
     operating: Year-round. The road is plowed but icy sections in winter.
+  access_long: Drive up Val Verzasca from Locarno-Tenero, about 45 minutes from the autostrada, or take Postbus 321 to Lavertezzo, Paese. Village lots are 15 CHF a day in summer for
+    the upper one. The slate-roofed stone village past the bridge is worth half a morning even if you came for the water. Early morning before the swimmers arrive, or stormy weather
+    when the river turns greener.
 - id: ponte_brolla
   chapter: ticino
   kicker: RIVERS
@@ -4511,6 +4700,8 @@ spots:
       route: Locarno (FFS) + Centovalli train to Ponte Brolla
       walk_from_stop_min: 1
     best_time: Year-round but most photogenic in autumn when the gorge walls show colour.
+  access_long: Drive from Locarno toward Centovalli, Ponte Brolla is the first hamlet after the gorge. Roadside parking is free. Or take the Centovalli train from Locarno. Not a hiking
+    destination, a cliff-jumping one, locals know it well. Come in summer when the water is warm and high enough.
 - id: cascata_di_foroglio
   chapter: ticino
   kicker: WATERFALLS
@@ -4551,6 +4742,7 @@ spots:
       walk_from_stop_min: 3
     best_time: Spring and early summer for the strongest water volume. Falls dry up significantly by August.
     operating: Road is closed in winter, typically November to April.
+  access_long: Drive into Val Bavona from Cavergno and park at Foroglio. The viewpoint is a ten-minute walk from the road. The valley is tight and lush - the light cuts through in shafts.
 - id: mer_de_glace
   chapter: beyond
   kicker: A RIVER OF ICE ABOVE CHAMONIX
@@ -4600,6 +4792,8 @@ spots:
   hike_ids:
   - mer_de_glace-montenvers-train
   - mer_de_glace-chamonix-on-foot
+  access_long: From Chamonix, catch the Montenvers train to its upper station. The view takes in the whole glacier, with markers along the descent showing where the ice was in 1985,
+    2000, and 2010. A new telecabine (Feb 2024) drops to ice level; the moraine trail (45 to 60 min) holds the better vantages.
 - id: les_drus
   chapter: beyond
   kicker: TWIN SPIRES OVER THE GLACIER
@@ -4639,6 +4833,8 @@ spots:
   gps:
     lat: 45.932945
     lng: 6.9558754
+  access_long: Seen from the same Mer de Glace viewpoints you hiked for the glacier, no separate trip needed. Shoot on the same outing with a longer lens to isolate the spires. Winter
+    coats the granite in ice and sharpens the contrast, same access with snowshoes and the reduced Montenvers schedule.
 - id: aiguille_du_grepon
   chapter: beyond
   kicker: A POINTED NEEDLE IN THE RANGE
@@ -4666,6 +4862,7 @@ spots:
   gps:
     lat: 45.902811
     lng: 6.918926
+  access_long: Visible from the Mer de Glace approach. No separate trek. You'll pass the right angle on the same walk that gets you the glacier shots.
 - id: les_cheserys
   chapter: beyond
   kicker: THE BEST VIEW OF MONT BLANC
@@ -4714,6 +4911,7 @@ spots:
   hike_ids:
   - les_cheserys-tre-le-champ-to-lac-blanc
   - les_cheserys-flegere-shortcut
+  access_long: Park in La Flégère, take the cable car up, then hike to the lakes. Lac Blanc is part of the same system and worth the extra walk. Bigger lake, equally good reflections.
 - id: camping_in_cheserys
   chapter: beyond
   kicker: BIVY UP HIGH, ABOVE THE CROWDS
@@ -4740,6 +4938,8 @@ spots:
   gps:
     lat: 45.984858
     lng: 6.90184
+  access_long: The area around the main lakes gets busy. Walk a bit further, find an empty spot with your own view. We've camped a ridge away from the main lake and had the whole scene
+    to ourselves.
 - id: mont_blanc
   chapter: beyond
   kicker: WESTERN EUROPE'S HIGHEST. WITH A TELE
@@ -4772,6 +4972,8 @@ spots:
   - file: 05.jpg
     credit: zimydakid
     source_type: book
+  access_long: Shot from Les Chéserys above Argentière, reached from the Aiguilles Rouges side of the Chamonix valley. Bring a 100-400 lens, the range reveals ridges and texture a wide
+    cannot match. Sunset and blue hour are the windows, blue hour lasts longer at altitude and gives that soft saturated palette.
 - id: glacier_des_bossons
   chapter: beyond
   kicker: MY FAVOURITE GLACIER OF THE RANGE
@@ -4809,6 +5011,8 @@ spots:
   hike_ids:
   - glacier_des_bossons-chairlift-to-chalet
   - glacier_des_bossons-chalet-to-la-jonction
+  access_long: From Chamonix, take bus line 2 to the Glacier des Bossons stop, then the 15-minute chairlift up to the Chalet du Glacier des Bossons at 1,410 metres. Around 9 € one-way
+    or 13.20 € return, open 8:30 to 18:30 in season. For a longer day, climb four more hours up to La Jonction at the head of the glacier, 800 metres of gain on steady zig-zags, T2.
 - id: pic_de_jallouvre
   chapter: beyond
   kicker: PEAKS
@@ -4845,6 +5049,8 @@ spots:
     best_season: June – October
   hike_ids:
   - pic_de_jallouvre-from-petit-bornand
+  access_long: Start from the Col de la Colombière, take the left fork toward Pic de Jallouvre and follow the ridge over Col du Rasoir to the summit. Pointe Blanche is the optional add-on
+    from the same ridge. Around five and a half hours round trip.
 - id: dent_doche
   chapter: beyond
   kicker: THE PEAK YOU SEE FROM LAVAUX
@@ -4887,6 +5093,8 @@ spots:
     best_season: June – October
   hike_ids:
   - dent_doche-from-bernex
+  access_long: Drive from Évian up to the Fétiuère parking above Bernex at 1,206 metres. About three hours up to the Refuge de la Dent d'Oche and on to the summit at 2,221 metres, 1,015
+    metres of gain. Short rock sections near the refuge have chains, T3. It is long and gets very steep toward the top, bring poles and time. The refuge serves food and has beds.
 - id: brisen
   chapter: central
   kicker: A RIDGE ABOVE ENGELBERG
@@ -4915,6 +5123,7 @@ spots:
     best_season: June - October
   hike_ids:
   - brisen-route-via-haldigrat
+  access_long: Take the cable car from Niederrickenbach to Brisen-Ostegg, then walk the ridge west. About two hours of clean alpine path to the summit. No exposure, no scrambling.
 - id: engstlensee
   chapter: central
   kicker: A TURQUOISE LAKE ON ENGSTLENALP
@@ -4957,6 +5166,8 @@ spots:
     operating: Toll road and PostAuto run early May to mid-October. Closed outside that window.
   hike_ids:
   - engstlensee-route-lakeshore-loop
+  access_long: Drive or take the postbus up to Engstlenalp from Innertkirchen. The lake is a five-minute walk from the parking lot. For the view that earns the spot, keep going up the
+    trail toward the Jochpass and shoot from above.
 - id: maloja_pass
   chapter: eastern
   kicker: AUTUMN LARCHES ON THE SWITCHBACKS
@@ -4996,6 +5207,7 @@ spots:
       route: Sils Maria to Maloja passenger boat across Lake Sils. Four runs per day from late June to late September.
     best_time: Sunrise for warm light on Piz da la Margna and the Sils basin. Larches turn gold in early October, also the busiest week of the year.
     operating: Road open year-round, occasionally closed for hours after heavy snow. Boat service late June to late September.
+  access_long: Drive up to the viewpoint parking on the Engadin side of the pass. Five minutes from the car to the lip overlooking the switchbacks. No hike.
 - id: ponte_tibetano
   chapter: ticino
   kicker: A LONG SUSPENSION BRIDGE OVER THE GORGE
@@ -5025,6 +5237,8 @@ spots:
     best_season: April - November
   hike_ids:
   - ponte_tibetano-route-from-mornera
+  access_long: From Monte Carasso, take the funicular up to Mornera and walk twenty minutes down to the bridge. Signposted from the funicular station. Cross in the early morning before
+    the day-trippers arrive.
 - id: zinal_glacier
   chapter: valais
   kicker: AN ICE CAVE UNDER THE TONGUE
@@ -5056,6 +5270,9 @@ spots:
     best_season: July - September
   hike_ids:
   - zinal_glacier-route-petit-mountet
+  access_long: From Zinal village (PostAuto 452 from Sierre via Vissoie), park at the south end where the road ends near the river. Follow signs for Cabane du Petit Mountet on a wide
+    gravel track along the west side of the Navisence. About 5 km and 500 metres of climbing one way, around 2 hours up. The hut sits at 2,142 metres on the old lateral moraine looking
+    up at the glacier tongue and the Weisshorn.
 - id: grappelensee
   chapter: eastern
   kicker: A MIRROR LAKE IN TOGGENBURG
@@ -5084,6 +5301,7 @@ spots:
     best_season: May - October
   hike_ids:
   - grappelensee-route-from-laui
+  access_long: Drive to the parking area at Stein, on the road between Alt St. Johann and Wildhaus. The lake is a 20-minute walk on a clear path, almost flat the whole way.
 - id: beyond_extras
   chapter: beyond
   kind: extras
