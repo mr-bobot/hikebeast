@@ -17,6 +17,10 @@ html, body { margin: 0; padding: 0; }
   --accent-soft: rgba(0,113,227,0.10);
   --success: #34c759;
   --danger: #ff375f;
+  /* Dark CTA fill. In light mode it's the same near-black as text;
+     in dark mode it flips to deep navy so primary CTAs (var(--fg)
+     would become near-white → white-on-white) stay readable. */
+  --cta-bg: #1d1d1f;
   --glass: rgba(255,255,255,0.82);
   --glass-strong: rgba(255,255,255,0.94);
   --glass-filter: saturate(180%) blur(20px);
@@ -57,6 +61,7 @@ html, body { margin: 0; padding: 0; }
   --accent-soft: rgba(10,132,255,0.18);
   --success: #30d158;
   --danger: #ff453a;
+  --cta-bg: #003162;
   --glass: rgba(20,23,27,0.78);
   --glass-strong: rgba(20,23,27,0.92);
   --glass-filter: saturate(120%) blur(20px);
@@ -213,11 +218,11 @@ button { font-family: inherit; }
 .pill:active { transform: scale(0.97); }
 .pill svg { width: 14px; height: 14px; }
 .pill-cta {
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
-  border-color: var(--fg);
+  border-color: var(--cta-bg);
 }
-.pill-cta:hover { opacity: 0.92; border-color: var(--fg); }
+.pill-cta:hover { opacity: 0.92; border-color: var(--cta-bg); }
 .pill .label-sm { display: none; }
 @media (min-width: 700px) {
   .topbar { padding: 0 22px; }
@@ -531,7 +536,7 @@ button { font-family: inherit; }
 .feature-card .feature-cta .play-icon {
   width: 28px; height: 28px;
   border-radius: 999px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   display: grid;
   place-items: center;
@@ -1051,7 +1056,7 @@ button { font-family: inherit; }
   align-self: flex-start;
   padding: 10px 18px;
   border-radius: 999px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   font-size: 14px;
   font-weight: 500;
@@ -1091,7 +1096,7 @@ button { font-family: inherit; }
   background: rgba(0,0,0,0.18);
 }
 .cc.is-locked .cc-num {
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
 }
 .cc-lock {
@@ -1135,7 +1140,7 @@ button { font-family: inherit; }
   height: 44px;
   padding: 0 22px;
   border-radius: 999px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   text-decoration: none;
   font-size: 14px;
@@ -2437,7 +2442,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   margin-left: auto;
   flex-shrink: 0;
   color: #fff;
-  background: var(--fg);
+  background: var(--cta-bg);
   padding: 5px 10px;
   border-radius: 999px;
   font-size: 11px;
@@ -2515,7 +2520,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 /* End-of-chapter footer card */
 .slide-end {
   grid-template-columns: 1fr;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #f5f5f7;
   padding: 28px 26px;
   text-align: center;
@@ -2631,7 +2636,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   margin-top: 14px;
   padding: 10px 16px;
   border-radius: 999px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   font-size: 13px;
   font-weight: 500;
@@ -2973,7 +2978,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   gap: 8px;
   border: 0;
   border-radius: 12px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   font: inherit;
   font-size: 14px;
@@ -2983,9 +2988,6 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   -webkit-tap-highlight-color: transparent;
   transition: transform 120ms ease, background 120ms ease, opacity 120ms ease;
 }
-/* Dark: var(--fg) flips white → white-on-white CTA. Same deep-navy
-   anchor as the other primary CTAs. */
-:root[data-theme="dark"] .hb-wild-cta { background: #003162; color: #fff; }
 .hb-wild-cta:hover { transform: translateY(-1px); }
 .hb-wild-cta:active { transform: translateY(0); opacity: 0.9; }
 .hb-wild-cta svg { width: 16px; height: 16px; flex: 0 0 auto; }
@@ -3279,7 +3281,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   transition: opacity 120ms ease, transform 100ms ease;
 }
 .hb-modal .btn-ghost { background: transparent; color: var(--fg); border: 1px solid var(--hairline); }
-.hb-modal .btn-primary { background: var(--fg); color: #fff; }
+.hb-modal .btn-primary { background: var(--cta-bg); color: #fff; }
 .hb-modal .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 .hb-modal .btn-primary:active:not(:disabled) { transform: scale(0.97); }
 
@@ -3878,8 +3880,9 @@ body.has-rail .topbar .hb-nav { display: none; }
     padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
     /* Solid surface on mobile -- the translucent desktop look bleeds page
      * content through the drawer (Safari's backdrop-filter is unreliable
-     * over fast-paint pages and over Leaflet maps). */
-    background: #fafafa;
+     * over fast-paint pages and over Leaflet maps). --surface-2 flips
+     * with the theme so the drawer reads correctly in dark too. */
+    background: var(--surface-2);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
@@ -4150,9 +4153,9 @@ body.has-rail .topbar .hb-nav { display: none; }
   .topbar .hb-pill { padding: 0 12px; height: 34px; font-size: 13px; }
 }
 .topbar .hb-pill.is-current {
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
-  border-color: var(--fg);
+  border-color: var(--cta-bg);
 }
 .topbar .hb-pill .hb-badge {
   display: inline-flex;
@@ -4499,17 +4502,9 @@ body.has-rail .topbar .hb-nav { display: none; }
   flex-shrink: 0;
 }
 .hb-chip.is-on {
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
-  border-color: var(--fg);
-}
-/* In dark mode --fg flips to near-white, so the "selected" chip would
-   be white-on-white. Anchor to deep navy instead (same pattern as the
-   account/affiliate/swipe primary CTAs). */
-:root[data-theme="dark"] .hb-chip.is-on {
-  background: #003162;
-  color: #fff;
-  border-color: #003162;
+  border-color: var(--cta-bg);
 }
 .hb-chip.is-on .swatch { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.4); }
 .hb-chip .chip-count {
@@ -4673,7 +4668,7 @@ body.has-rail .topbar .hb-nav { display: none; }
     height: 48px;
     border-radius: 999px;
     border: 0;
-    background: var(--fg);
+    background: var(--cta-bg);
     color: #fff;
     font-family: inherit;
     font-size: 15px;
@@ -4859,7 +4854,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   height: 44px;
   padding: 0 22px;
   border-radius: 999px;
-  background: var(--fg);
+  background: var(--cta-bg);
   color: #fff;
   text-decoration: none;
   font-size: 14px;
