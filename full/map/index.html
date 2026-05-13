@@ -159,24 +159,7 @@
   }
   .leaflet-tooltip-top.spot-tip:before { display: none; }
 
-  /* Chapters legend — light glass card pinned bottom-left on desktop. */
-  .legend {
-    position: absolute; bottom: 18px; left: 18px; z-index: 500;
-    background: rgba(255, 255, 255, 0.94);
-    -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid var(--hairline); border-radius: 14px;
-    padding: 14px 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
-    display: flex; flex-direction: column; gap: 8px; max-width: 240px;
-  }
-  .legend h4 { margin: 0 0 6px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-  .legend-item {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 13px; cursor: pointer; user-select: none; color: var(--fg); line-height: 1.2;
-    padding: 6px 0; background: transparent; border: 0; text-align: left; font-family: inherit;
-    transition: opacity 120ms ease;
-  }
-  .legend-item.is-off { opacity: 0.30; }
-  .legend-item .swatch { flex-shrink: 0; width: 14px; height: 14px; border-radius: 999px; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08); }
+  /* Chapter-filter legend removed; redesign coming in a separate session. */
 
   .map-controls {
     position: absolute; top: 18px; right: 18px; z-index: 500;
@@ -271,33 +254,7 @@
   body.has-rail .topbar { display: none !important; }
   .map-shell { height: 100dvh; }
 
-  /* Toggle button -- only shown on mobile */
-  .legend-toggle { display: none; }
-
-  /* Mobile: collapse legend behind a toggle */
   @media (max-width: 700px) {
-    .legend { padding: 4px 6px; gap: 0; max-width: none; }
-    .legend > h4 { display: none; }
-    .legend > .legend-item { display: none; }
-    .legend-toggle {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      background: transparent;
-      border: 0;
-      color: var(--fg);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: inherit;
-      letter-spacing: -0.005em;
-    }
-    .legend-toggle svg { width: 14px; height: 14px; color: var(--muted); }
-    .legend.is-open { padding: 8px 10px; gap: 4px; max-width: 200px; }
-    .legend.is-open > h4 { display: block; padding-top: 4px; font-size: 9px; }
-    .legend.is-open > .legend-item { display: flex; font-size: 12px; padding: 3px 0; gap: 8px; }
-    .legend.is-open > .legend-item .swatch { width: 12px; height: 12px; }
     .map-controls { top: 12px; right: 12px; gap: 6px; }
     .fav-toggle { height: 28px; padding: 6px 10px; font-size: 11px; }
     .fav-toggle svg { width: 12px; height: 12px; }
@@ -326,11 +283,8 @@
         0 2px 6px rgba(0, 0, 0, 0.16);
     }
 
-    /* Mobile: drop the legend / filter and Leaflet's +/- zoom controls.
-     * Pinch-zoom is the natural gesture on a phone; the chapter filter
-     * belongs in the Menu sheet rather than overlaying the map. Saved
-     * toggle stays reachable. */
-    .legend { display: none; }
+    /* Mobile: hide Leaflet's +/- zoom controls. Pinch-zoom is the
+     * natural gesture on a phone. Saved toggle stays reachable. */
     .leaflet-control-zoom { display: none; }
 
     /* Mobile: marker-mode switch slides to the left edge (no zoom
@@ -382,13 +336,9 @@
       <span class="knob" aria-hidden="true"></span>
     </span>
   </label>
-  <aside class="legend" id="legend">
-    <button class="legend-toggle" id="legendToggle" aria-expanded="false" aria-label="Show chapter filter">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-      <span>Filter</span>
-    </button>
-    <h4>Chapters · click to isolate</h4>
-  </aside>
+  <!-- Chapter-filter legend removed: the click-to-isolate behaviour was
+       lighting up the wrong region after the chapter renumber, and the
+       feature is being redesigned in a separate session. -->
 </div>
 
 <script src="../lib/leaflet/leaflet.js"></script>
@@ -445,57 +395,18 @@
     'Schaffhausen': '05', 'Thurgau': '05', 'Zürich': '05',
     'Ticino': '06',
   };
-  const REGION_COLOR_BY_CH = {};
-  LEGEND.forEach(c => { REGION_COLOR_BY_CH[c.number] = c.color; });
-
-  // Active chapter set (referenced by styleCanton below). Starts with
-  // every chapter on; legend clicks isolate to a single chapter and
-  // unisolate via the click handler further down.
-  const allChapters = new Set(LEGEND.map(c => c.number));
-  let activeChapters = new Set(allChapters);
-
-  // Switzerland silhouette: cantons paint white by default (chapter-cover
-  // recipe — light country shape on a dark backdrop). When the user
-  // isolates a single chapter from the legend, that chapter's cantons
-  // repaint in their chapter color so the active region glows; all
-  // other cantons stay white. Styled via geoLayer.setStyle() in
-  // paintGeoStyle() below — called on every chapter-state change.
-  let geoLayer = null;
-  // Outline color shared by every canton path: #003162 at 50% opacity,
-  // per Figma — a soft navy hairline around Switzerland and between
-  // cantons.
+  // Switzerland silhouette: pale-fill cantons with a soft navy hairline.
+  // (The chapter-isolate recolor that used to live here was removed
+  // along with the legend filter; redesign coming in a separate
+  // session.) Outline color: #003162 at 50% opacity, per Figma.
   const CANTON_OUTLINE = 'rgba(0, 49, 98, 0.50)';
-  function styleCanton(feature) {
-    const ch = CANTON_CHAPTER[feature.properties.name];
-    const total = (typeof allChapters !== 'undefined') ? allChapters.size : 0;
-    const isAllOn = activeChapters && total > 0 && activeChapters.size === total;
-    const isActive = activeChapters && ch && activeChapters.has(ch);
-    if (!isAllOn && isActive) {
-      // User isolated this chapter — paint its region with the chapter
-      // accent color so the active area glows over the pale country.
-      const rgb = REGION_COLOR_BY_CH[ch];
-      return {
-        color: CANTON_OUTLINE, weight: 1,
-        fillColor: 'rgb(' + rgb + ')',
-        fillOpacity: 0.55, lineJoin: 'round',
-      };
-    }
-    // Default landing (all chapters on) AND non-active cantons in an
-    // isolated state: subtle pale fill with the navy hairline outline.
-    return {
-      color: CANTON_OUTLINE, weight: 1,
-      fillColor: '#eceef2',
-      fillOpacity: 1, lineJoin: 'round',
-    };
-  }
-  function paintGeoStyle() {
-    if (geoLayer) geoLayer.setStyle(styleCanton);
-  }
+  const CANTON_STYLE = {
+    color: CANTON_OUTLINE, weight: 1,
+    fillColor: '#eceef2',
+    fillOpacity: 1, lineJoin: 'round',
+  };
   if (GEOJSON && GEOJSON.features && GEOJSON.features.length) {
-    geoLayer = L.geoJSON(GEOJSON, {
-      style: styleCanton,
-      interactive: false,
-    }).addTo(map);
+    L.geoJSON(GEOJSON, { style: () => CANTON_STYLE, interactive: false }).addTo(map);
   }
 
   const layers = new Map();
@@ -723,49 +634,11 @@
   }
   refreshFavBadge();
 
-  // Legend behavior: clicking a chapter isolates it (deselects all others).
-  // Clicking the same chapter again -- when it is the only one active --
-  // toggles back to all-selected. On mobile, the whole legend is collapsed
-  // until the user taps the Filter toggle.
-  const legend = document.getElementById('legend');
-  const legendToggle = document.getElementById('legendToggle');
-  if (legendToggle) {
-    legendToggle.addEventListener('click', () => {
-      const isOpen = legend.classList.toggle('is-open');
-      legendToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-  }
-  const items = [];
-  function applyState() {
-    items.forEach(({ num, el, grp }) => {
-      const on = activeChapters.has(num);
-      if (on && !map.hasLayer(grp)) grp.addTo(map);
-      if (!on && map.hasLayer(grp)) map.removeLayer(grp);
-      el.classList.toggle('is-off', !on);
-    });
-    // Repaint the canton fills + ambient backdrop glow whenever the
-    // active-chapter set changes.
-    paintGeoStyle();
-  }
-
-  LEGEND.forEach(c => {
-    const item = document.createElement('button');
-    item.className = 'legend-item';
-    item.innerHTML = '<span class="swatch" style="background: rgb(' + c.color + ');"></span>'
-      + '<span>' + esc(c.name) + '</span>';
-    const grp = layers.get(c.number);
-    items.push({ num: c.number, el: item, grp });
-    item.addEventListener('click', () => {
-      const isSolo = activeChapters.size === 1 && activeChapters.has(c.number);
-      if (isSolo) {
-        activeChapters = new Set(allChapters);   // restore all
-      } else {
-        activeChapters = new Set([c.number]);    // isolate this chapter
-      }
-      applyState();
-    });
-    legend.appendChild(item);
-  });
+  // Legend (click-to-isolate-chapter) removed: the renumber that landed
+  // earlier in this branch broke the canton mapping and the feature is
+  // being redesigned in a separate session. All chapter layer groups
+  // stay on the map by default; per-marker visibility is now governed
+  // entirely by the favorites toggle.
 </script>
 </body>
 </html>
