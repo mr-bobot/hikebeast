@@ -4261,6 +4261,28 @@ spots:
   gps:
     lat: 46.0636
     lng: 7.634
+- id: grappelensee
+  chapter: eastern
+  kicker: A MIRROR LAKE IN TOGGENBURG
+  title: Gräppelensee
+  deck: A small alpine lake in Toggenburg with the Churfirsten reflected in glass on calm days. Twenty minutes from the car.
+  body:
+  - Drive to the parking area at Stein, on the road between Alt St. Johann and Wildhaus. The lake is a 20-minute walk on a clear path, almost flat the whole way.
+  - The shot is the reflection. You need a windless morning or evening for the water to mirror cleanly. Reedy grass in the foreground gives free depth.
+  region: Wildhaus, Toggenburg
+  access: Drive + 20 min walk
+  effort: Easy
+  best_light: Calm morning or evening for the reflection
+  wildCamping:
+    verdict: discouraged
+    reason: Toggenburg is a popular hiking and picnic area; SG generally allows single-night bivouac above tree line outside reserves, but the Gräppelensee shore is a busy day-use spot. Use the campsites in Wildhaus or Alt St. Johann.
+    canton: St. Gallen (SG)
+  maps_url: https://www.google.com/maps/place/Gr%C3%A4ppelensee/@47.2113508,9.2872551,17z
+  image: spots/grappelensee/main.jpg
+  image_credit: oliwear.j
+  gps:
+    lat: 47.2113508
+    lng: 9.2872551
 - id: beyond_extras
   chapter: beyond
   kind: extras
