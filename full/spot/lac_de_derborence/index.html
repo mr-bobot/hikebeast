@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406277" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449376" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -138,9 +138,17 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/lac_de_derborence_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Route 1 <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Route 1 </div>
       <div class="hb-route-stats"></div>
       <div class="hb-route-operating">Hut: May to end of October</div>
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/lac_de_derborence_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Solalex, above Gryon (Vaud Alps) <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">3h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">580 m gain</span></span></div>
+      
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -216,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"lac_de_derborence-default","description_extra":"Lac de Derborence at 1,449 m in the upper Lizerne valley in the municipality of Conthey. Drive in from Aven via narrow mountain road, then a short walk to the lake. The lake was formed by rockfalls in 1714 and 1749 that blocked the valley, with the surrounding rock face still showing the bare scar. Loop around the lake is about 1.5 hours, T1. Refuge du Lac Derborence at the lake has rooms and food.","visits":["lac_de_derborence"],"sources":["https://www.refugederborence.ch/agenda-saison/","https://en.wikipedia.org/wiki/Lac_de_Derborence"],"quickest_for":["lac_de_derborence"],"hut_ids":["refuge-derborence"],"huts":[{"id":"refuge-derborence","name":"Refuge du Lac Derborence","description":"Hut at the lakeshore, accessible by car","website":"https://www.refugederborence.ch/agenda-saison/","open_raw":"May to end of October","cost_chf_raw":"71 CHF half-board"}],"hut":{"id":"refuge-derborence","name":"Refuge du Lac Derborence","description":"Hut at the lakeshore, accessible by car","website":"https://www.refugederborence.ch/agenda-saison/","open_raw":"May to end of October","cost_chf_raw":"71 CHF half-board"},"quickest":true}];
+  const ROUTES = [{"id":"lac_de_derborence-default","description_extra":"Lac de Derborence at 1,449 m in the upper Lizerne valley in the municipality of Conthey. Drive in from Aven via narrow mountain road, then a short walk to the lake. The lake was formed by rockfalls in 1714 and 1749 that blocked the valley, with the surrounding rock face still showing the bare scar. Loop around the lake is about 1.5 hours, T1. Refuge du Lac Derborence at the lake has rooms and food.","visits":["lac_de_derborence"],"sources":["https://www.refugederborence.ch/agenda-saison/","https://en.wikipedia.org/wiki/Lac_de_Derborence"],"hut_ids":["refuge-derborence"],"huts":[{"id":"refuge-derborence","name":"Refuge du Lac Derborence","description":"Hut at the lakeshore, accessible by car","website":"https://www.refugederborence.ch/agenda-saison/","open_raw":"May to end of October","cost_chf_raw":"71 CHF half-board"}],"hut":{"id":"refuge-derborence","name":"Refuge du Lac Derborence","description":"Hut at the lakeshore, accessible by car","website":"https://www.refugederborence.ch/agenda-saison/","open_raw":"May to end of October","cost_chf_raw":"71 CHF half-board"},"quickest":false},{"id":"lac_de_derborence-from-solalex","visits":["lac_de_derborence"],"sac_grade":"T2","effort_label":"Moderate","duration_min":180,"gain_m":580,"distance_km":7.3,"equipment_list":[],"start":"Solalex, above Gryon (Vaud Alps)","transit":{"bus":"Bex, then Bex-Villars-Bretaye line to Gryon, then Postbus to Solalex (summer only)"},"description_extra":"Cross-cantonal approach from the Vaud side. From Solalex at about 1,470 m, the rocky trail climbs through larches to Anzeindaz at 1,876 m, then up to the Pas de Cheville at 2,038 m, the saddle between Vaud and Valais at the foot of the Diablerets. Drop down through pastures into the upper Lizerne valley to the lake at 1,449 m. About 7.3 km, 3 hours, 580 m of ascent and 580 m of descent, T2 on a marked Sanetsch-Muveran-Weg stage. Combine with a stop at the Anzeindaz hut for food.","sources":["https://www.alpesvaudoises.ch/en/V1390/from-solalex-to-derborence","https://www.lescoteauxdusoleil.ch/fr/derborence-cheville-anzeindaz-anzeinde-solalex-1176.html"],"quickest_for":["lac_de_derborence"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

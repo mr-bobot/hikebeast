@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406297" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449390" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -127,8 +127,16 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/valle_verzasca_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Sonogno (last village in the valley) <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Hike from Sonogno (last village in the valley) </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">3h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy, day-long stroll</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/valle_verzasca_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Lavertezzo (Ponte dei Salti) <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">2h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">360 m gain</span></span></div>
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
@@ -205,7 +213,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"valle_verzasca-sonogno-to-lavertezzo","name":"Sentiero Verzasca · Sonogno → Lavertezzo","start":"Sonogno (last village in the valley)","transit":{"bus":"Postbus from Locarno via Tenero to Sonogno"},"duration_min":210,"distance_km":14,"sac_grade":"T1","effort_label":"Easy, day-long stroll","description_extra":"Sentiero Verzasca, stage 1 of the federal hiking route through one of Ticino's most photographed valleys. From Sonogno (the last village, end of the postbus line from Locarno) to Lavertezzo runs about 14 km, around 3 h 30 of walking. Trail follows the emerald Verzasca past rustici, chapels, and the medieval Ponte dei Salti at Lavertezzo. T1 throughout. Plan 5 to 6 hours if you stop for photos and grotti meals.","visits":["valle_verzasca"],"sources":["https://schweizmobil.ch/en/hiking-in-switzerland/route-74/stage-1","https://www.myswitzerland.com/en-us/experiences/route/sentiero-verzasca/"],"quickest_for":["valle_verzasca"],"quickest":true}];
+  const ROUTES = [{"id":"valle_verzasca-sonogno-to-lavertezzo","name":"Sentiero Verzasca · Sonogno → Lavertezzo","start":"Sonogno (last village in the valley)","transit":{"bus":"Postbus from Locarno via Tenero to Sonogno"},"duration_min":210,"distance_km":14,"sac_grade":"T1","effort_label":"Easy, day-long stroll","description_extra":"Sentiero Verzasca, stage 1 of the federal hiking route through one of Ticino's most photographed valleys. From Sonogno (the last village, end of the postbus line from Locarno) to Lavertezzo runs about 14 km, around 3 h 30 of walking. Trail follows the emerald Verzasca past rustici, chapels, and the medieval Ponte dei Salti at Lavertezzo. T1 throughout. Plan 5 to 6 hours if you stop for photos and grotti meals.","visits":["valle_verzasca"],"sources":["https://schweizmobil.ch/en/hiking-in-switzerland/route-74/stage-1","https://www.myswitzerland.com/en-us/experiences/route/sentiero-verzasca/"],"quickest":false},{"id":"valle_verzasca-lavertezzo-to-brione","visits":["valle_verzasca"],"sac_grade":"T1","effort_label":"Easy","duration_min":150,"gain_m":360,"distance_km":6.4,"equipment_list":[],"start":"Lavertezzo (Ponte dei Salti)","transit":{"bus":"Locarno, then PostBus 321 to Lavertezzo, Paese"},"description_extra":"Lower segment of the Sentiero Verzasca, from Lavertezzo down to Brione rather than the Sonogno-to-Lavertezzo stage. The trail follows the Verzasca river past art installations and waterfalls in the floor of the valley, with several swimming spots on smooth granite. About 6.4 km, 2 hours 30 minutes, T1. Bus 321 returns to Lavertezzo. The full Sentiero Verzasca is federal route 74, 35 km in two stages.","sources":["https://schweizmobil.ch/en/hiking-in-switzerland/route-74","https://www.bergfex.com/sommer/tessin/touren/fernwanderweg/2065768,sentiero-verzasca-svizzeramobile-74/"],"quickest_for":["valle_verzasca"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

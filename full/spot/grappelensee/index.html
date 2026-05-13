@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406301" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449394" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -131,6 +131,14 @@
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/grappelensee_p0/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Alt St. Johann village (train station) </div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">4h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">565 m gain</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
     
   </div>
@@ -204,7 +212,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"grappelensee-route-from-laui","sac_grade":"T1","effort_label":"Easy","duration_min":50,"gain_m":250,"start":"Laui parking area, above Unterwasser","transit":{"train":"Unterwasser (SOB line from Wattwil), then ~20 min drive or taxi up to Laui"},"visits":["grappelensee"],"description_extra":"Drive or taxi up from Unterwasser to the Laui parking, the closest you can get to the lake by car. From there it is roughly 3.25 km and 250 m of climbing on a clear path through pasture and patches of woodland, about 50 minutes one way. The lake sits at 1,307 m in a protected moorland basin, around 140 m long, with two grilling spots and a small wooden jetty on the eastern shore. Swimming is allowed: the water is cold but clean. For the long version, start at the Iltios cable car parking in Unterwasser and do the full loop via the Thur waterfalls and Chüeboden, around 12 km and 525 m of climbing.","sources":["https://reisememo.ch/schweiz/graeppelensee-wanderung-toggenburg","https://www.switzerland-highlights.com/en/graeppelensee-idyllic/","https://www.komoot.com/smarttour/1020791"],"quickest_for":["grappelensee"],"equipment_list":[],"quickest":true}];
+  const ROUTES = [{"id":"grappelensee-route-from-laui","sac_grade":"T1","effort_label":"Easy","duration_min":50,"gain_m":250,"start":"Laui parking area, above Unterwasser","transit":{"train":"Unterwasser (SOB line from Wattwil), then ~20 min drive or taxi up to Laui"},"visits":["grappelensee"],"description_extra":"Drive or taxi up from Unterwasser to the Laui parking, the closest you can get to the lake by car. From there it is roughly 3.25 km and 250 m of climbing on a clear path through pasture and patches of woodland, about 50 minutes one way. The lake sits at 1,307 m in a protected moorland basin, around 140 m long, with two grilling spots and a small wooden jetty on the eastern shore. Swimming is allowed: the water is cold but clean. For the long version, start at the Iltios cable car parking in Unterwasser and do the full loop via the Thur waterfalls and Chüeboden, around 12 km and 525 m of climbing.","sources":["https://reisememo.ch/schweiz/graeppelensee-wanderung-toggenburg","https://www.switzerland-highlights.com/en/graeppelensee-idyllic/","https://www.komoot.com/smarttour/1020791"],"quickest_for":["grappelensee"],"equipment_list":[],"quickest":true},{"id":"grappelensee-from-alt-st-johann","visits":["grappelensee"],"sac_grade":"T2","effort_label":"Moderate","duration_min":240,"gain_m":565,"distance_km":11.4,"equipment_list":[],"start":"Alt St. Johann village (train station)","transit":{"train":"Wattwil to Alt St. Johann on the Toggenburg line"},"description_extra":"North-side approach instead of climbing up from Unterwasser. From Alt St. Johann at about 890 m, the trail climbs through forest and the Schwandernrot area, contouring at the foot of the Mittelberg at 1,483 m before dropping to the Gräppelensee at 1,307 m. About 4 to 4.5 hours for the loop, around 565 m of cumulative gain, T2, partly paved. Fireplaces with stocked wood and a wooden walkway into the water at the lake. Loop back via Halden and Berg keeps the route varied.","sources":["https://www.verlagshaus-schwellbrunn.ch/toggenburg/wanderparadies-toggenburg/detail/news/alt-stjohann-halden-graeppelensee-berg.html"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406299" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449392" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -127,8 +127,16 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/pic_de_jallouvre_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Le Petit-Bornand-les-Glières <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Hike from Le Petit-Bornand-les-Glières </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">6h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Long day</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1300 m gain</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/pic_de_jallouvre_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Col de la Colombière (1,607 m, France) <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">5h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T4 · Demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1200 m gain</span></span></div>
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
@@ -205,7 +213,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"pic_de_jallouvre-from-petit-bornand","name":"From Le Petit-Bornand-les-Glières","start":"Le Petit-Bornand-les-Glières","duration_min":360,"gain_m":1300,"sac_grade":"T3","effort_label":"Long day","description_extra":"Six-hour summit day in the French Bornes Massif (Haute-Savoie). From Le Petit-Bornand-les-Glières the trail climbs steadily through pastures and forest to the rocky upper section of the Pic de Jallouvre at 2,408 m. About 1,300 m of vertical gain, T3, with easy scrambling on the final section. Summit gives long views over the Aravis chain and toward Mont Blanc. Often done as part of a longer Bornes traverse between Le Grand-Bornand and Le Petit-Bornand.","visits":["pic_de_jallouvre"],"sources":["https://en.wikipedia.org/wiki/Pic_de_Jallouvre","https://en.wikipedia.org/wiki/Bornes_Massif"],"quickest_for":["pic_de_jallouvre"],"quickest":true}];
+  const ROUTES = [{"id":"pic_de_jallouvre-from-petit-bornand","name":"From Le Petit-Bornand-les-Glières","start":"Le Petit-Bornand-les-Glières","duration_min":360,"gain_m":1300,"sac_grade":"T3","effort_label":"Long day","description_extra":"Six-hour summit day in the French Bornes Massif (Haute-Savoie). From Le Petit-Bornand-les-Glières the trail climbs steadily through pastures and forest to the rocky upper section of the Pic de Jallouvre at 2,408 m. About 1,300 m of vertical gain, T3, with easy scrambling on the final section. Summit gives long views over the Aravis chain and toward Mont Blanc. Often done as part of a longer Bornes traverse between Le Grand-Bornand and Le Petit-Bornand.","visits":["pic_de_jallouvre"],"sources":["https://en.wikipedia.org/wiki/Pic_de_Jallouvre","https://en.wikipedia.org/wiki/Bornes_Massif"],"quickest":false},{"id":"pic_de_jallouvre-from-col-de-la-colombiere","visits":["pic_de_jallouvre"],"sac_grade":"T4","effort_label":"Demanding","duration_min":330,"gain_m":1200,"distance_km":10.4,"equipment_list":["Sturdy hiking boots","Poles","Helmet (rockfall sections)"],"start":"Col de la Colombière (1,607 m, France)","transit":{"car":"Cluses to Le Grand-Bornand via the D4 road to Col de la Colombière (open in summer)"},"description_extra":"Approach from the Le Reposoir side, opposite valley from Le Petit-Bornand. The loop climbs from the Col de la Colombière up the south flank to the Col du Rasoir, a narrow ridge passage, then traverses under the rock face of the Cravate to the summit at 2,408 m. Descent goes north past the Col de Sosay to the Lac de Lessy refuge and around the lake before returning to the col. About 10.4 km, 1,200 m of cumulative gain, 5 h 30. The Cravate passage exposes hikers to rockfall and must be free of late snow before the summit ridge is safe.","sources":["https://www.altituderando.com/Pic-de-Jallouvre-2408m-en-boucle-par-le-col-de-la-Colombiere-et-le-Lac-de-Lessy","https://www.altituderando.com/Pic-de-Jallouvre-2408m-versant-Cenise-par-les-Aiguilles-Vertes"],"quickest_for":["pic_de_jallouvre"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

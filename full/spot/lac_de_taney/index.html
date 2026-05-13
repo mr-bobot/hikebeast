@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406284" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449382" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -131,6 +131,14 @@
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/lac_de_taney_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from St-Gingolph (374 m), on Lake Geneva </div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">6h 40</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1380 m gain</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
     
   </div>
@@ -204,7 +212,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"lac_de_taney-route-50","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":374,"start":"Parking du Flon","transit":{"bus":"Le Flon, village"},"visits":["lac_de_taney"],"description_extra":"Lac de Tanay at 1,408 m sits in a high basin above Vouvry. From Le Flon (drive or postbus), the trail climbs through forest and over the Col de Tanay to the lake in about 1 hour, 374 m of gain, T1. The lake and surroundings are protected under the Swiss Federal Inventory of Landscapes and Natural Monuments: no camping at the lakeshore. Continue another 1.5 hours up to Le Grammont for a full day.","sources":["https://en.wikipedia.org/wiki/Lac_de_Tanay"],"quickest_for":["lac_de_taney"],"equipment_list":[],"quickest":true}];
+  const ROUTES = [{"id":"lac_de_taney-route-50","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":374,"start":"Parking du Flon","transit":{"bus":"Le Flon, village"},"visits":["lac_de_taney"],"description_extra":"Lac de Tanay at 1,408 m sits in a high basin above Vouvry. From Le Flon (drive or postbus), the trail climbs through forest and over the Col de Tanay to the lake in about 1 hour, 374 m of gain, T1. The lake and surroundings are protected under the Swiss Federal Inventory of Landscapes and Natural Monuments: no camping at the lakeshore. Continue another 1.5 hours up to Le Grammont for a full day.","sources":["https://en.wikipedia.org/wiki/Lac_de_Tanay"],"quickest_for":["lac_de_taney"],"equipment_list":[],"quickest":true},{"id":"lac_de_taney-from-st-gingolph-via-col-de-la-croix","visits":["lac_de_taney"],"sac_grade":"T2","effort_label":"Demanding","duration_min":400,"gain_m":1380,"equipment_list":["Sturdy hiking boots","Poles"],"start":"St-Gingolph (374 m), on Lake Geneva","transit":{"train":"Direct train to St-Gingolph from Geneva or Lausanne"},"description_extra":"Long approach from lake level rather than from the road head at Le Flon. From St-Gingolph the path climbs through southern-facing forest via La Croix-des-Dames and Le Freney to Novel at 960 m, continues to L'Au de Morge and the Col de la Croix at 1,755 m, then drops to Lac de Taney at 1,408 m and out via Miex Le Flon. About 6 hours 40 minutes on the marked T2 line, 1,380 m of ascent and 1,170 m of descent. Overnight options at Novel or the lake make this a two-day option.","sources":["https://www.wandersite.ch/Tageswanderung/633_Wallis.html","https://schweizmobil.ch/en/hiking-in-switzerland/route-216","https://www.myswitzerland.com/en-us/experiences/lac-de-taney-mountain-lake-on-the-haute-savoie-border/"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

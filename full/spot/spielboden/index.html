@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406276" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449375" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -131,6 +131,14 @@
       <div class="hb-route-operating">Cable car: Mid-June to mid-October</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/spielboden_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Saas-Fee village (1,783 m) </div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">3h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">670 m gain</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
     
   </div>
@@ -204,7 +212,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"spielboden-laengfluh-glacier-trail","name":"Längfluh → Spielboden → Saas-Fee","start":"Längfluh cable car top station","transit":{"train":"Brig + Postbus to Saas-Fee + Spielboden cable car + Längfluh"},"duration_min":180,"gain_m":0,"sac_grade":"T2","effort_label":"Moderate descent","description_extra":"Three-hour descent from Längfluh top station (2,869 m) back to Saas-Fee village (1,783 m) via Spielboden. 6.4 km, about 1,120 m of descent, T2. The path crosses below the Dom and the Fee glacier to the Skibrücke, then zig-zags down to Spielboden at 2,452 m and continues through larch forest to the village. Stop at Spielboden for the tame marmots.","visits":["spielboden"],"sources":["https://www.outdooractive.com/en/route/hiking-trail/saas-fee-saastal/laengfluh-saas-fee/47620698/","https://www.myswitzerland.com/en-ch/planning/offers/cable-car-ride-to-laengfluh-saas-fee/"],"quickest_for":["spielboden"],"cable_car_ids":["spielboden-laengfluh"],"cable_cars":[{"id":"spielboden-laengfluh","name":"Spielboden + Längfluh","operator":"Saastal Bergbahnen","description":"Gondola from Saas Fee to Spielboden (2,452 m), aerial cableway continues to Längfluh (2,870 m)","open_raw":"Mid-June to mid-October","cost_chf_raw":"61 CHF return to Längfluh","website":"https://www.saas-fee.ch/en/"}],"cable_car":{"id":"spielboden-laengfluh","name":"Spielboden + Längfluh","operator":"Saastal Bergbahnen","description":"Gondola from Saas Fee to Spielboden (2,452 m), aerial cableway continues to Längfluh (2,870 m)","open_raw":"Mid-June to mid-October","cost_chf_raw":"61 CHF return to Längfluh","website":"https://www.saas-fee.ch/en/"},"quickest":true}];
+  const ROUTES = [{"id":"spielboden-laengfluh-glacier-trail","name":"Längfluh → Spielboden → Saas-Fee","start":"Längfluh cable car top station","transit":{"train":"Brig + Postbus to Saas-Fee + Spielboden cable car + Längfluh"},"duration_min":180,"gain_m":0,"sac_grade":"T2","effort_label":"Moderate descent","description_extra":"Three-hour descent from Längfluh top station (2,869 m) back to Saas-Fee village (1,783 m) via Spielboden. 6.4 km, about 1,120 m of descent, T2. The path crosses below the Dom and the Fee glacier to the Skibrücke, then zig-zags down to Spielboden at 2,452 m and continues through larch forest to the village. Stop at Spielboden for the tame marmots.","visits":["spielboden"],"sources":["https://www.outdooractive.com/en/route/hiking-trail/saas-fee-saastal/laengfluh-saas-fee/47620698/","https://www.myswitzerland.com/en-ch/planning/offers/cable-car-ride-to-laengfluh-saas-fee/"],"quickest_for":["spielboden"],"cable_car_ids":["spielboden-laengfluh"],"cable_cars":[{"id":"spielboden-laengfluh","name":"Spielboden + Längfluh","operator":"Saastal Bergbahnen","description":"Gondola from Saas Fee to Spielboden (2,452 m), aerial cableway continues to Längfluh (2,870 m)","open_raw":"Mid-June to mid-October","cost_chf_raw":"61 CHF return to Längfluh","website":"https://www.saas-fee.ch/en/"}],"cable_car":{"id":"spielboden-laengfluh","name":"Spielboden + Längfluh","operator":"Saastal Bergbahnen","description":"Gondola from Saas Fee to Spielboden (2,452 m), aerial cableway continues to Längfluh (2,870 m)","open_raw":"Mid-June to mid-October","cost_chf_raw":"61 CHF return to Längfluh","website":"https://www.saas-fee.ch/en/"},"quickest":true},{"id":"spielboden-ascent-from-saas-fee-village","visits":["spielboden"],"sac_grade":"T2","effort_label":"Moderate","duration_min":210,"gain_m":670,"equipment_list":[],"start":"Saas-Fee village (1,783 m)","transit":{"train":"Visp","bus":"PostBus 511 from Visp to Saas-Fee"},"description_extra":"Ascent on foot to Spielboden from the village, the reverse of the existing Längfluh descent. The path climbs alpine meadows to the Gletschergrotte at 1,998 m, looking over the Gletschersee, then a steeper section over the Gletscheralp leads up to Spielboden at 2,447 m. About 3 hours 30 minutes of ascent, roughly 670 m of cumulative gain, T2. Continue another 420 m up the Längfluhweg zigzags to Längfluh, or take the Spielboden cable car back.","sources":["https://hiking-switzerland.ch/kantons/wallis/hannigalp-spielboden/","https://www.bergfex.com/sommer/wallis/touren/wanderung/602774,laengfluh--saas-fee"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

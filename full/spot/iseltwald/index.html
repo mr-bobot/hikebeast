@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406270" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449370" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -138,8 +138,16 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/iseltwald_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Route 1 <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Route 1 </div>
       <div class="hb-route-stats"></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/iseltwald_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Bönigen boat station, east of Interlaken <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h 50</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">130 m gain</span></span></div>
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
@@ -216,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"iseltwald-default","description_extra":"Iseltwald sits on a delta on the south shore of Lake Brienz, 14 km from Interlaken. The village became a draw for visitors after appearing in the Korean drama Crash Landing on You, with the small pier as the main photo spot. Drive in, or take the summer steamship from Interlaken. The pier is a few minutes from village parking. T1.","visits":["iseltwald"],"sources":["https://en.wikipedia.org/wiki/Iseltwald"],"quickest_for":["iseltwald"],"quickest":true}];
+  const ROUTES = [{"id":"iseltwald-default","description_extra":"Iseltwald sits on a delta on the south shore of Lake Brienz, 14 km from Interlaken. The village became a draw for visitors after appearing in the Korean drama Crash Landing on You, with the small pier as the main photo spot. Drive in, or take the summer steamship from Interlaken. The pier is a few minutes from village parking. T1.","visits":["iseltwald"],"sources":["https://en.wikipedia.org/wiki/Iseltwald"],"quickest":false},{"id":"iseltwald-from-boenigen-uferweg","visits":["iseltwald"],"sac_grade":"T1","effort_label":"Easy","duration_min":110,"gain_m":130,"distance_km":6.5,"equipment_list":[],"start":"Bönigen boat station, east of Interlaken","transit":{"train":"Interlaken Ost","bus":"Bus 104 from Interlaken Ost to Bönigen, See (or 10 minutes on foot)"},"description_extra":"Lakeside walk-in along the north shore of Lake Brienz, the first stage of the federal Brienzersee Drei Wasserfälleweg route 360. From Bönigen the path follows the shore for about 1 km, then turns into the forest and climbs gently to the Eschwanden waterfall, continues along a cliff face on the pilgrim path, and drops to Iseltwald at the Fura. About 6.5 km, 1 hour 50 minutes, T1. Combine with the onward Iseltwald to Giessbach section for a longer day.","sources":["https://schweizmobil.ch/de/wanderland/route-360/etappe-1","https://www.brienzersee.ch/reiseziele/brienzersee/boenigen-iseltwald","https://www.myswitzerland.com/en-us/experiences/route/brienzersee-drei-wasserfaelleweg-360_01/"],"quickest_for":["iseltwald"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

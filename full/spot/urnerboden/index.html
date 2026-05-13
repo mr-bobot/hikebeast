@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406290" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449386" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -131,6 +131,14 @@
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/urnerboden_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Klausenpass (Postbus from Linthal or Altdorf) </div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">6h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">900 m gain</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
     
   </div>
@@ -204,7 +212,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"urnerboden-panorama-walk","name":"Panorama walk around the alpine valley","start":"Urnerboden village","transit":{"bus":"Postbus to Urnerboden"},"duration_min":180,"gain_m":200,"sac_grade":"T1","effort_label":"Easy","description_extra":"Easy panoramic loop around Urnerboden, believed to be the largest alp in Switzerland. The valley runs 8 to 10 km long at about 1,380 m, with summer cattle grazing and the Stäubifall waterfall on the south side. Trails are mostly flat on grass and gravel. About three hours and 200 m of cumulative gain. T1, family-friendly. Access via the Klausen Pass road (open summer only, Postbus serves the valley). Pair with a stop at one of the working alpine dairies.","visits":["urnerboden"],"sources":["https://en.wikipedia.org/wiki/Urnerboden","https://www.myswitzerland.com/en-ch/destinations/urnerboden/"],"quickest_for":["urnerboden"],"quickest":true}];
+  const ROUTES = [{"id":"urnerboden-panorama-walk","name":"Panorama walk around the alpine valley","start":"Urnerboden village","transit":{"bus":"Postbus to Urnerboden"},"duration_min":180,"gain_m":200,"sac_grade":"T1","effort_label":"Easy","description_extra":"Easy panoramic loop around Urnerboden, believed to be the largest alp in Switzerland. The valley runs 8 to 10 km long at about 1,380 m, with summer cattle grazing and the Stäubifall waterfall on the south side. Trails are mostly flat on grass and gravel. About three hours and 200 m of cumulative gain. T1, family-friendly. Access via the Klausen Pass road (open summer only, Postbus serves the valley). Pair with a stop at one of the working alpine dairies.","visits":["urnerboden"],"sources":["https://en.wikipedia.org/wiki/Urnerboden","https://www.myswitzerland.com/en-ch/destinations/urnerboden/"],"quickest_for":["urnerboden"],"quickest":true},{"id":"urnerboden-clariden-hoehenweg","visits":["urnerboden"],"sac_grade":"T3","effort_label":"Demanding","duration_min":390,"gain_m":900,"distance_km":18.5,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Klausenpass (Postbus from Linthal or Altdorf)","transit":{"bus":"Linthal or Flüelen, then Postbus over the Klausenpass road (summer only, mid-June to mid-September)"},"description_extra":"Ridge traverse high above the valley floor instead of the easy loop on the alp. The Clariden Höhenweg (Schweizmobil route 588) leaves the Klausenpass at 1,948 m, climbs onto the Clariden ridge, crosses the Gemsfairenboden plateau, and traverses to the Fisetengrat at 2,033 m before descending to Urnerboden village. The Hasentrittli section has a short steep rock pitch with chains for security. About 6 to 7 hours, T2 to T3, around 18 km. Returns via the small Urnerboden-Fisetengrat cable car or on foot down to the alp. Switzerland's largest alp grazes about 1,200 cows below the trail in summer.","sources":["https://www.travelita.ch/clariden-hoehenweg-wanderung-klausenpass-fisetengrat/","https://swissfamilyfun.com/klausen-pass-clariden-hohenweg-hike/"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

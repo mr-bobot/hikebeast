@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406256" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449359" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -127,9 +127,17 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/engstligen_falls_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Adelboden, Unter dem Birg <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Hike from Adelboden, Unter dem Birg </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h 10</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">395 m gain</span></span></div>
       <div class="hb-route-operating">Cable car: Mid-June to mid-October</div>
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/engstligen_falls_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Engstligenalp top station (cable car from Unter dem Birg) <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h 10</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Easy</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">256 m gain</span></span></div>
+      
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -205,7 +213,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"engstligen_falls-route-48","sac_grade":"T1","effort_label":"Easy","duration_min":70,"gain_m":395,"start":"Adelboden, Unter dem Birg","transit":{"bus":"Adelboden, Unter dem Birg"},"visits":["engstligen_falls"],"description_extra":"Engstligenfälle drops in two stages off the Engstligenalp plateau above Adelboden, roughly 370 m total. The main viewing area is at the foot of the lower fall, a 20-minute walk from Unter dem Birg. Combine with the cable car up to the Engstligenalp plateau, or hike up the side trail (1 h 10, 395 m of gain). The site has been protected since 1948 and is on Switzerland's federal landscape inventory.","sources":["https://www.myswitzerland.com/en-us/destinations/engstligen-falls/","https://en.wikipedia.org/wiki/Engstligenfall"],"quickest_for":["engstligen_falls"],"equipment_list":[],"cable_car_ids":["engstligenalp-cable-car"],"cable_cars":[{"id":"engstligenalp-cable-car","operator":"Bergbahnen Engstligenalp AG","description":"Cable car from Unter dem Birg above Adelboden up to the Engstligenalp plateau","open_raw":"Mid-June to mid-October","cost_chf_raw":"37 CHF return","website":"https://engstligenalp.ch/"}],"cable_car":{"id":"engstligenalp-cable-car","operator":"Bergbahnen Engstligenalp AG","description":"Cable car from Unter dem Birg above Adelboden up to the Engstligenalp plateau","open_raw":"Mid-June to mid-October","cost_chf_raw":"37 CHF return","website":"https://engstligenalp.ch/"},"quickest":true}];
+  const ROUTES = [{"id":"engstligen_falls-route-48","sac_grade":"T1","effort_label":"Easy","duration_min":70,"gain_m":395,"start":"Adelboden, Unter dem Birg","transit":{"bus":"Adelboden, Unter dem Birg"},"visits":["engstligen_falls"],"description_extra":"Engstligenfälle drops in two stages off the Engstligenalp plateau above Adelboden, roughly 370 m total. The main viewing area is at the foot of the lower fall, a 20-minute walk from Unter dem Birg. Combine with the cable car up to the Engstligenalp plateau, or hike up the side trail (1 h 10, 395 m of gain). The site has been protected since 1948 and is on Switzerland's federal landscape inventory.","sources":["https://www.myswitzerland.com/en-us/destinations/engstligen-falls/","https://en.wikipedia.org/wiki/Engstligenfall"],"equipment_list":[],"cable_car_ids":["engstligenalp-cable-car"],"cable_cars":[{"id":"engstligenalp-cable-car","operator":"Bergbahnen Engstligenalp AG","description":"Cable car from Unter dem Birg above Adelboden up to the Engstligenalp plateau","open_raw":"Mid-June to mid-October","cost_chf_raw":"37 CHF return","website":"https://engstligenalp.ch/"}],"cable_car":{"id":"engstligenalp-cable-car","operator":"Bergbahnen Engstligenalp AG","description":"Cable car from Unter dem Birg above Adelboden up to the Engstligenalp plateau","open_raw":"Mid-June to mid-October","cost_chf_raw":"37 CHF return","website":"https://engstligenalp.ch/"},"quickest":false},{"id":"engstligen_falls-from-above-via-cable-car","visits":["engstligen_falls"],"sac_grade":"T2","effort_label":"Easy","duration_min":70,"gain_m":256,"distance_km":3,"equipment_list":[],"start":"Engstligenalp top station (cable car from Unter dem Birg)","transit":{"bus":"Adelboden postbus to Unter dem Birg","cable_car":"Engstligenbahn cable car to the Engstligenalp plateau"},"description_extra":"View the falls from the top edge of the plateau rather than from below. From the cable car top station a marked circular path drops onto the lip of the falls where the water plunges off the Engstligenalp into the valley, then loops back across pasture. About 3 km, 1 h 10, 256 m of cumulative gain, rated medium by the cable car operator. From the top station, the upper waterfall is also visible without leaving the wheelchair-accessible part of the plateau. The Engstligenfälle II/III trails directly through the cliff are seasonally closed for rockfall, so the upper plateau loop is the alternative when the lower path is shut.","sources":["https://engstligenalp.ch/en/summer/experience/plateau-engstligen-falls/","https://www.myswitzerland.com/en-us/experiences/engstligen-falls-engstligenalp/"],"quickest_for":["engstligen_falls"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

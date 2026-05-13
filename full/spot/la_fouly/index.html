@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406277" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449376" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -126,8 +126,16 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/la_fouly_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Arnuva (Italian Val Ferret) <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Hike from Arnuva (Italian Val Ferret) </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">6h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Long day</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">800 m gain</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/la_fouly_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Champex-Lac (1,466 m) <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">5h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">635 m gain</span></span></div>
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
@@ -204,7 +212,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"la_fouly-tmb-arnuva-la-fouly","name":"Tour du Mont Blanc · Arnuva → Grand Col Ferret → La Fouly","start":"Arnuva (Italian Val Ferret)","transit":{"bus":"Bus from Courmayeur to Arnuva"},"duration_min":360,"gain_m":800,"sac_grade":"T2","effort_label":"Long day","description_extra":"Tour du Mont Blanc stage from Arnuva in the Italian Val Ferret over the Grand Col Ferret at 2,536 m and down into the Swiss Val Ferret to La Fouly. About 14.5 km, 5h 30, 865 m of climb and just over 1,000 m of descent. T2. Mostly well-maintained path, climbing a wide grassy pass and then a long descent past Rifugio Elena (early) and the dairy farm at la Peule (late). Carry lunch supplies, as neither stop is well timed for a meal. Italy to Switzerland on foot.","visits":["la_fouly"],"sources":["https://en.wikipedia.org/wiki/Tour_du_Mont_Blanc","https://www.outdooractive.com/en/route/hiking-trail/mont-blanc-and-la-thuile/arnuva-to-la-fouly/57379300/"],"quickest_for":["la_fouly"],"quickest":true}];
+  const ROUTES = [{"id":"la_fouly-tmb-arnuva-la-fouly","name":"Tour du Mont Blanc · Arnuva → Grand Col Ferret → La Fouly","start":"Arnuva (Italian Val Ferret)","transit":{"bus":"Bus from Courmayeur to Arnuva"},"duration_min":360,"gain_m":800,"sac_grade":"T2","effort_label":"Long day","description_extra":"Tour du Mont Blanc stage from Arnuva in the Italian Val Ferret over the Grand Col Ferret at 2,536 m and down into the Swiss Val Ferret to La Fouly. About 14.5 km, 5h 30, 865 m of climb and just over 1,000 m of descent. T2. Mostly well-maintained path, climbing a wide grassy pass and then a long descent past Rifugio Elena (early) and the dairy farm at la Peule (late). Carry lunch supplies, as neither stop is well timed for a meal. Italy to Switzerland on foot.","visits":["la_fouly"],"sources":["https://en.wikipedia.org/wiki/Tour_du_Mont_Blanc","https://www.outdooractive.com/en/route/hiking-trail/mont-blanc-and-la-thuile/arnuva-to-la-fouly/57379300/"],"quickest":false},{"id":"la_fouly-tmb-champex-to-la-fouly","visits":["la_fouly"],"sac_grade":"T2","effort_label":"Moderate","duration_min":330,"gain_m":635,"distance_km":15,"equipment_list":[],"start":"Champex-Lac (1,466 m)","transit":{"train":"Martigny to Orsières","bus":"Orsières postbus to Champex-Lac"},"description_extra":"Reach La Fouly from the Champex side via the Swiss Val Ferret, opposite direction from the standard TMB stage that comes over the Grand Col Ferret from Italy. Stage 7 of the Tour du Mont Blanc descends from Champex-Lac through the villages of Issert and Praz-de-Fort along the valley floor, then climbs gently up the Val Ferret to La Fouly. About 15 km, 5 h 30, 420 m of climb and 565 m of descent. Mostly forest and meadow path through traditional Valais hamlets with public fountains for water. T2 throughout, the shortest and easiest stage of the TMB.","sources":["https://tourdumontblanchike.com/tour-du-mont-blanc-stage-7/","https://www.outdooractive.com/en/route/hiking-trail/mont-blanc-massif/la-fouly-to-champex/57383925/"],"quickest_for":["la_fouly"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

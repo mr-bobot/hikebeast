@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406282" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449381" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -126,8 +126,16 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/cap_au_moine_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Allières <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Hike from Allières </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">5h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Moderate, brief exposure</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/cap_au_moine_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Les Avants train station (968 m) <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">4h 25</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T4 · Demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1090 m gain</span></span></div>
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
@@ -204,7 +212,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"cap_au_moine-from-allieres","name":"Allières → Cape au Moine","start":"Allières","transit":{"train":"Allières (MOB)"},"duration_min":300,"sac_grade":"T3","effort_label":"Moderate, brief exposure","description_extra":"Ascent from the Allières train station (MOB line) up to Cape au Moine at 1,941 m, in the Gruyère Pays-d'Enhaut. SAC grades the route T3. About five hours from Allières. The summit is one of the sharper double summits of the Vaud Prealps, with views south over the Sarine valley. Pair with a descent on the same valley or continue north toward Charmey for a one-way day.","visits":["cap_au_moine"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cape-au-moine-vd-300/mountain-hiking/"],"quickest_for":["cap_au_moine"],"quickest":true}];
+  const ROUTES = [{"id":"cap_au_moine-from-allieres","name":"Allières → Cape au Moine","start":"Allières","transit":{"train":"Allières (MOB)"},"duration_min":300,"sac_grade":"T3","effort_label":"Moderate, brief exposure","description_extra":"Ascent from the Allières train station (MOB line) up to Cape au Moine at 1,941 m, in the Gruyère Pays-d'Enhaut. SAC grades the route T3. About five hours from Allières. The summit is one of the sharper double summits of the Vaud Prealps, with views south over the Sarine valley. Pair with a descent on the same valley or continue north toward Charmey for a one-way day.","visits":["cap_au_moine"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cape-au-moine-vd-300/mountain-hiking/"],"quickest":false},{"id":"cap_au_moine-from-les-avants-via-col-de-jaman","visits":["cap_au_moine"],"sac_grade":"T4","effort_label":"Demanding","duration_min":265,"gain_m":1090,"distance_km":14.3,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Les Avants train station (968 m)","transit":{"train":"Montreux to Les Avants (MOB line)"},"description_extra":"Approach from the Lake Geneva side rather than from Allières. From Les Avants the path climbs to Col de Jaman, then traverses north along the Verraux ridge to Col de Pierra Perchia and on to the rocky summit ridge at 1,941 m. About 14 km and 1,090 m of climb, six hours, graded T4 with one short exposed scrambling passage above steep grass. The summit ridge between Pierra Perchia and Cape au Moine is the crux: narrow, slippery when wet, no protection. Return via Col de Soladier and Molard for a loop.","sources":["https://sommets.ch/excursions/details/cape_au_moine/","https://en.wikipedia.org/wiki/Cape_au_Moine"],"quickest_for":["cap_au_moine"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

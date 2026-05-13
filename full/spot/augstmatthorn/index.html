@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406266" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449368" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -131,6 +131,14 @@
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/augstmatthorn_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Harder Kulm (top station of the Harderbahn funicular above Interlaken) </div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">6h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T4 · Demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1000 m gain</span></span></div>
+      <div class="hb-route-operating">Cable car: Early April to late November</div>
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
     <p class="hb-wildcamping-note">Not allowed on the ridge. The line is an ibex sanctuary and the car park below is watched.</p>
   </div>
@@ -204,7 +212,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"augstmatthorn-route-85","sac_grade":"T3","effort_label":"Mid","duration_min":100,"gain_m":580,"start":"Lombachalp","description_extra":"Augstmatthorn at 2,137 m is a Brienzergrat summit on the Habkern side of Lake Brienz. Approach from Lombachalp (drive or postbus from Habkern). About one hour 40 minutes up, 580 m of gain, T3 mountain trail. The Augstmatthorn was the site of the first alpine ibex reintroduction in canton Bern, and the colony is usually visible on or above the trail.","visits":["augstmatthorn"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/augstmatthorn-1928/mountain-hiking/","https://en.wikipedia.org/wiki/Augstmatthorn"],"quickest_for":["augstmatthorn"],"equipment_list":[],"quickest":true}];
+  const ROUTES = [{"id":"augstmatthorn-route-85","sac_grade":"T3","effort_label":"Mid","duration_min":100,"gain_m":580,"start":"Lombachalp","description_extra":"Augstmatthorn at 2,137 m is a Brienzergrat summit on the Habkern side of Lake Brienz. Approach from Lombachalp (drive or postbus from Habkern). About one hour 40 minutes up, 580 m of gain, T3 mountain trail. The Augstmatthorn was the site of the first alpine ibex reintroduction in canton Bern, and the colony is usually visible on or above the trail.","visits":["augstmatthorn"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/augstmatthorn-1928/mountain-hiking/","https://en.wikipedia.org/wiki/Augstmatthorn"],"quickest_for":["augstmatthorn"],"equipment_list":[],"quickest":true},{"id":"augstmatthorn-from-harder-kulm","visits":["augstmatthorn"],"sac_grade":"T4","effort_label":"Demanding","duration_min":390,"gain_m":1000,"distance_km":17,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Harder Kulm (top station of the Harderbahn funicular above Interlaken)","transit":{"train":"Interlaken Ost","cable_car":"Harderbahn funicular to Harder Kulm"},"description_extra":"Ridge approach from the Interlaken side instead of the back of Habkern. Take the Harderbahn funicular from Interlaken Ost up to Harder Kulm at 1,322 m, then follow the Hardergrat ridge east over Suggiture (2,085 m) to the Augstmatthorn summit at 2,137 m, descending to Habkern. About 17 km and 6 to 7 hours one way. Rated T3 to T4 with brief T5 passages on the upper ridge; mostly steep grass with drops on either side. The full ridge from Brienzer Rothorn over Tannhorn to Harder Kulm runs 25 to 28 km in 7 to 10 hours and is one of the more exposed grass ridges in Switzerland; the Harder Kulm segment is the gentler half. Wildlife protection zone: no camping, no drones.","sources":["https://www.brienzergrat.com/brienzergrat_to_hardergrat.html","https://www.hardergrat.com/"],"cable_car_ids":["harderbahn"],"cable_cars":[{"id":"harderbahn","operator":"Jungfraubahnen","description":"Funicular from Interlaken Ost up to Harder Kulm at 1,322 m","open_raw":"Early April to late November","cost_chf_raw":"44 CHF return","website":"https://www.harder-kulm.com/"}],"cable_car":{"id":"harderbahn","operator":"Jungfraubahnen","description":"Funicular from Interlaken Ost up to Harder Kulm at 1,322 m","open_raw":"Early April to late November","cost_chf_raw":"44 CHF return","website":"https://www.harder-kulm.com/"},"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

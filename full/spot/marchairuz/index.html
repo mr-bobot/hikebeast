@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406285" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449383" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -131,6 +131,14 @@
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/marchairuz_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Saint-Cergue (train station on the Nyon-Saint-Cergue-La Cure line) </div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">5h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">450 m gain</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
     
   </div>
@@ -204,7 +212,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"marchairuz-mollendruz-mont-tendre-marchairuz","name":"Col du Mollendruz → Mont Tendre → Col du Marchairuz","start":"Col du Mollendruz","transit":{"bus":"Postbus to Col du Mollendruz"},"duration_min":300,"gain_m":500,"sac_grade":"T2","effort_label":"Long, easy ridge","description_extra":"Classic Jura ridge walk. About 4.5 hours from Col du Mollendruz over Mont Tendre at 1,679 m, the highest summit of the Swiss Jura, then a gentle descent to Col du Marchairuz. Around 500 m of cumulative gain, T2, mostly easy ridge walking. The route traverses the Jura Vaudois Nature Park's pastures and mountain chalets, with dry-stone walls throughout. Postbus serves both passes.","visits":["marchairuz"],"sources":["https://www.myswitzerland.com/en/experiences/route/mont-tendre-from-mollendruz-to-marchairuz/","https://en.wikipedia.org/wiki/Mont_Tendre"],"quickest_for":["marchairuz"],"quickest":true}];
+  const ROUTES = [{"id":"marchairuz-mollendruz-mont-tendre-marchairuz","name":"Col du Mollendruz → Mont Tendre → Col du Marchairuz","start":"Col du Mollendruz","transit":{"bus":"Postbus to Col du Mollendruz"},"duration_min":300,"gain_m":500,"sac_grade":"T2","effort_label":"Long, easy ridge","description_extra":"Classic Jura ridge walk. About 4.5 hours from Col du Mollendruz over Mont Tendre at 1,679 m, the highest summit of the Swiss Jura, then a gentle descent to Col du Marchairuz. Around 500 m of cumulative gain, T2, mostly easy ridge walking. The route traverses the Jura Vaudois Nature Park's pastures and mountain chalets, with dry-stone walls throughout. Postbus serves both passes.","visits":["marchairuz"],"sources":["https://www.myswitzerland.com/en/experiences/route/mont-tendre-from-mollendruz-to-marchairuz/","https://en.wikipedia.org/wiki/Mont_Tendre"],"quickest_for":["marchairuz"],"quickest":true},{"id":"marchairuz-from-saint-cergue","visits":["marchairuz"],"sac_grade":"T2","effort_label":"Moderate","duration_min":330,"gain_m":450,"distance_km":17,"equipment_list":[],"start":"Saint-Cergue (train station on the Nyon-Saint-Cergue-La Cure line)","transit":{"train":"Nyon, then NStCM line to Saint-Cergue"},"description_extra":"Southern stage of the Jura Crest Trail, arriving at Col du Marchairuz from the Lake Geneva side rather than from Mollendruz. From Saint-Cergue at 1,046 m the trail climbs steadily through pasture and forest past the ruins of the Oujon Carthusian monastery (abandoned in the 1500s), Les Frasses nature reserve, and Le Planet, then over the Crêt de la Neuve at 1,493 m with views to Mont Blanc and Lake Geneva, before reaching the Col du Marchairuz at 1,446 m. About 17 km, 5 to 6 hours, around 450 m of cumulative gain, T2 mostly easy underfoot but with some slippery sections. Postbus from the pass.","sources":["https://activityworkshop.net/hiking/jura/coldemarchairuz-stcergue.html","https://www.parks.swiss/en/visit-the-parks/summer-activities/offer-detail/col-du-marchairuz-saint-cergue-24361"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

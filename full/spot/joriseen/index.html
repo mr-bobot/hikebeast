@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406294" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449388" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -132,6 +132,14 @@
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/joriseen_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Berghaus Vereina (1,943 m, Klosters side) </div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">4h 45</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">805 m gain</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
     <p class="hb-wildcamping-note">Tolerated.</p>
   </div>
@@ -205,7 +213,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"joriseen-route-126","sac_grade":"T2","effort_label":"Easy","duration_min":256,"gain_m":888,"start":"Fluela Pass","transit":{"bus":"Flüela, Ospiz"},"visits":["joriseen"],"description_extra":"Jöriseen is a cluster of small alpine lakes at around 2,500 m in the Silvretta range near Davos. Approach from the Flüelapass road (postbus from Davos to Flüela, Ospiz or Wägerhuus) over the Winterlücke or Jöriflüelafurgga. T2, about four hours and 880 m of gain to the lakes. The lakes sit in a high cirque surrounded by Silvretta granite. Best in July and August once the snowfields melt out.","sources":["https://www.outdooractive.com/en/route/hiking-trail/davos-klosters/joeriseen-hike/27179027/"],"quickest_for":["joriseen"],"equipment_list":[],"quickest":true}];
+  const ROUTES = [{"id":"joriseen-route-126","sac_grade":"T2","effort_label":"Easy","duration_min":256,"gain_m":888,"start":"Fluela Pass","transit":{"bus":"Flüela, Ospiz"},"visits":["joriseen"],"description_extra":"Jöriseen is a cluster of small alpine lakes at around 2,500 m in the Silvretta range near Davos. Approach from the Flüelapass road (postbus from Davos to Flüela, Ospiz or Wägerhuus) over the Winterlücke or Jöriflüelafurgga. T2, about four hours and 880 m of gain to the lakes. The lakes sit in a high cirque surrounded by Silvretta granite. Best in July and August once the snowfields melt out.","sources":["https://www.outdooractive.com/en/route/hiking-trail/davos-klosters/joeriseen-hike/27179027/"],"quickest_for":["joriseen"],"equipment_list":[],"quickest":true},{"id":"joriseen-from-klosters-via-berghaus-vereina","visits":["joriseen"],"sac_grade":"T3","effort_label":"Demanding","duration_min":285,"gain_m":805,"distance_km":12.2,"equipment_list":[],"start":"Berghaus Vereina (1,943 m, Klosters side)","transit":{"train":"Klosters Platz, then Klosters-Vereina shuttle bus (reservation by phone)"},"description_extra":"Approach the Jöriseen from Klosters / Prättigau side instead of from the Flüelapass road. From the Berghaus Vereina at 1,943 m, the trail climbs the Jörital up to the Winterlücke at 2,785 m or the Jöriflüelafurgga at 2,725 m, then drops into the basin of the lakes at around 2,500 m. 12.2 km, 4 h 45, 805 m of gain and 1,076 m of descent, T2 to T3 mountain trail. Berghaus Vereina is reached from Klosters by a 12.6 km, 3 h 30 walk up the Vereina valley or by the hut shuttle from Klosters Platz.","sources":["https://travelita-blog.com/hike-joriseen/","https://reisememo.ch/schweiz/joeriseen-rundwanderung-flueelapass-vereina","https://www.berghausvereina.com/wanderungen/"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

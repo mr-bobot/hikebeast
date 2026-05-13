@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778705406283" />
+<link rel="stylesheet" href="../../preview.css?v=1778711449381" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -131,6 +131,14 @@
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/dent_de_jaman_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Hike from Les Avants station (970 m) </div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">4h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">880 m gain</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
     
   </div>
@@ -204,7 +212,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"dent_de_jaman-route-87","duration_min":30,"gain_m":141,"start":"Jaman Train Station","transit":{"train":"Jaman"},"description_extra":"Dent de Jaman at 1,875 m, above Lake Geneva north of the Rochers de Naye. The popular approach takes the MOB train from Montreux or Les Avants to Jaman station, then a short climb to the summit (around 30 minutes, roughly 140 m of gain). Longer alternatives start from Les Avants or Col de Jaman. The summit is a sharp limestone fang, and the final approach is the steepest part of the day.","visits":["dent_de_jaman"],"sources":["https://en.wikipedia.org/wiki/Dent_de_Jaman"],"quickest_for":["dent_de_jaman"],"equipment_list":[],"quickest":true}];
+  const ROUTES = [{"id":"dent_de_jaman-route-87","duration_min":30,"gain_m":141,"start":"Jaman Train Station","transit":{"train":"Jaman"},"description_extra":"Dent de Jaman at 1,875 m, above Lake Geneva north of the Rochers de Naye. The popular approach takes the MOB train from Montreux or Les Avants to Jaman station, then a short climb to the summit (around 30 minutes, roughly 140 m of gain). Longer alternatives start from Les Avants or Col de Jaman. The summit is a sharp limestone fang, and the final approach is the steepest part of the day.","visits":["dent_de_jaman"],"sources":["https://en.wikipedia.org/wiki/Dent_de_Jaman"],"quickest_for":["dent_de_jaman"],"equipment_list":[],"quickest":true},{"id":"dent_de_jaman-from-les-avants","visits":["dent_de_jaman"],"sac_grade":"T2","effort_label":"Moderate","duration_min":240,"gain_m":880,"distance_km":10.6,"equipment_list":[],"start":"Les Avants station (970 m)","transit":{"train":"Montreux, then MOB to Les Avants"},"description_extra":"Foot ascent without using the Rochers de Naye rack railway. From Les Avants, the path climbs through pasture to the Col de Jaman at 1,512 m, where the Cabane de Jaman sits in the meadows. From the col, the final 360 m up the north flank reaches the summit at 1,875 m. About 4 hours round trip, 880 m of cumulative gain, T2. The col itself is on the Vaud-Fribourg boundary and connects Montreux to Montbovon.","sources":["https://en.wikipedia.org/wiki/Col_de_Jaman","https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-jaman-959/"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
