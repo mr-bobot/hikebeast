@@ -235,6 +235,23 @@
       ]
     },
     {
+      "source": "/de/map3/success/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive, nosnippet"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store, max-age=0"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        }
+      ]
+    },
+    {
       "source": "/forgot/(.*)",
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
@@ -265,6 +282,11 @@
     {
       "source": "/map3",
       "destination": "/map3/",
+      "permanent": true
+    },
+    {
+      "source": "/de/map3",
+      "destination": "/de/map3/",
       "permanent": true
     },
     {
