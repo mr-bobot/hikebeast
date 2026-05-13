@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778701649637" />
+<link rel="stylesheet" href="../../preview.css?v=1778702329034" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -128,7 +128,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Les Paccots <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">4h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Exposed ridge</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">900 m gain</span></span></div>
-      
+      <div class="hb-route-operating">Cable car: Early April to early November</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -204,7 +204,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"teysachaux-les-paccots-to-moleson","name":"Les Paccots → Téysachaux → Moléson","start":"Les Paccots","transit":{"train":"Châtel-St-Denis (TPF) + bus to Les Paccots"},"duration_min":240,"gain_m":900,"sac_grade":"T3","effort_label":"Exposed ridge","description_extra":"Ridge traverse from Les Paccots over Téysachaux (1,909 m) to Le Moléson (2,002 m). Four-hour day with 900 m of cumulative gain. The Les Paccots ascent is T1-T2 on grassy meadow paths. The final stretch to Téysachaux's southwest ridge becomes exposed and the ridge between Téysachaux and Le Moléson grades up to T3 — narrow with drop-offs. From Moléson the Plan-Francey funicular descends. Best done counter-clockwise so the harder ridge is climbed not descended.","visits":["teysachaux"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/teysachaux-1963/mountain-hiking/les-paccots-teysachaux-le-moleson-bulle-1617/"],"quickest_for":["teysachaux"],"quickest":true}];
+  const ROUTES = [{"id":"teysachaux-les-paccots-to-moleson","name":"Les Paccots → Téysachaux → Moléson","start":"Les Paccots","transit":{"train":"Châtel-St-Denis (TPF) + bus to Les Paccots"},"duration_min":240,"gain_m":900,"sac_grade":"T3","effort_label":"Exposed ridge","description_extra":"Ridge traverse from Les Paccots over Téysachaux (1,909 m) to Le Moléson (2,002 m). Four-hour day with 900 m of cumulative gain. The Les Paccots ascent is T1-T2 on grassy meadow paths. The final stretch to Téysachaux's southwest ridge becomes exposed and the ridge between Téysachaux and Le Moléson grades up to T3 — narrow with drop-offs. From Moléson the Plan-Francey funicular descends. Best done counter-clockwise so the harder ridge is climbed not descended.","visits":["teysachaux"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/teysachaux-1963/mountain-hiking/les-paccots-teysachaux-le-moleson-bulle-1617/"],"quickest_for":["teysachaux"],"cable_car_ids":["moleson-funiculaire"],"cable_cars":[{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","cost_chf_raw":"44 CHF return (combined funicular + cable car)","website":"https://www.moleson.ch/en/"}],"cable_car":{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","cost_chf_raw":"44 CHF return (combined funicular + cable car)","website":"https://www.moleson.ch/en/"},"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

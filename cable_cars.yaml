@@ -141,3 +141,75 @@ cable_cars:
   cost_chf_raw: Around 36 CHF round-trip
   open_raw: Mid-June to mid-October
   website: https://grimselwelt.ch/bahnen/gelmerbahn/
+- id: firstbahn
+  operator: Jungfraubahnen
+  description: Gondola from Grindelwald village up to First at 2,168 m
+  open_raw: Early April to late October, with revision break late October to late November
+  cost_chf_raw: 76 CHF return
+  website: https://www.jungfrau.ch/en-gb/grindelwaldfirst/
+- id: engstligenalp-cable-car
+  operator: Bergbahnen Engstligenalp AG
+  description: Cable car from Unter dem Birg above Adelboden up to the Engstligenalp plateau
+  open_raw: Mid-June to mid-October
+  cost_chf_raw: 37 CHF return
+  website: https://engstligenalp.ch/
+- id: harderbahn
+  operator: Jungfraubahnen
+  description: Funicular from Interlaken Ost up to Harder Kulm at 1,322 m
+  open_raw: Early April to late November
+  cost_chf_raw: 44 CHF return
+  website: https://www.harder-kulm.com/
+- id: marbachegg-gondola
+  operator: Sportbahnen Marbachegg
+  description: Gondola from Marbach village up to Marbachegg in the UNESCO Entlebuch Biosphere
+  open_raw: Late May to mid-October
+  cost_chf_raw: 30 CHF return
+  website: https://www.marbachegg.ch/
+- id: eggishorn-cable-car
+  operator: Aletsch Bahnen
+  description: Two-stage cable car from Fiesch via Fiescheralp up to Eggishorn at 2,927 m
+  open_raw: Early June to late October
+  cost_chf_raw: 52 CHF return
+  website: https://www.aletscharena.ch/en/
+- id: bettmerhorn-cable-car
+  operator: Aletsch Bahnen
+  description: Cable car from Bettmeralp up to the Bettmerhorn ridge at 2,647 m
+  open_raw: Early June to late October
+  cost_chf_raw: 52 CHF return from Betten valley (32 CHF return from Bettmeralp)
+  website: https://www.aletscharena.ch/en/
+- id: ebenalp-luftseilbahn
+  operator: Luftseilbahn Wasserauen-Ebenalp AG
+  description: Cable car from Wasserauen up to Ebenalp at 1,640 m, gateway to the Alpstein
+  open_raw: Year-round, with revision closures in April and November to December
+  cost_chf_raw: 36 CHF return
+  website: https://www.ebenalp.ch/
+- id: pizol-bergbahnen
+  operator: Pizolbahnen AG
+  description: Gondola and chairlift chain from Wangs up to Pizolhütte, start of the 5-Seen-Wanderung
+  open_raw: Late June to mid-October
+  cost_chf_raw: 54 CHF return
+  website: https://pizol.com/
+- id: hoher-kasten-bahn
+  operator: Hoher Kasten Drehrestaurant und Seilbahn AG
+  description: Cable car from Brülisau up to the Hoher Kasten summit at 1,795 m
+  open_raw: Year-round, daily operation
+  cost_chf_raw: 40 CHF return
+  website: https://www.hoherkasten.ch/
+- id: niederrickenbach-cable-car
+  operator: Luftseilbahn Dallenwil-Niederrickenbach AG
+  description: Cable car from Dallenwil up to the mountain hamlet of Niederrickenbach at 1,156 m
+  open_raw: Year-round, with revision break in April
+  cost_chf_raw: 26.40 CHF return
+  website: https://maria-rickenbach.ch/dallenwil-niederrickenbach/
+- id: haldigrat-chairlift
+  operator: Bergbahn Brisen-Haldigrat
+  description: Small chairlift from Niederrickenbach up to the Haldigrat ridge around 1,940 m
+  open_raw: Mid-June to early November daily, weekends only in winter
+  cost_chf_raw: 20 CHF return
+  website: https://www.haldigrat.ch/
+- id: monte-carasso-mornera-cable-car
+  operator: Funivia Monte Carasso-Mornera
+  description: Two-stage cable car from Monte Carasso via Curzútt up to Mornera at 1,400 m
+  open_raw: Year-round, daily 06:30 to 21:30
+  cost_chf_raw: 12 CHF return
+  website: https://www.mornera.ch/

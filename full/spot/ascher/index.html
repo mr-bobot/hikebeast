@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778701649640" />
+<link rel="stylesheet" href="../../preview.css?v=1778702329037" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -128,7 +128,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Luftseilbahn Wasserauen-Ebenalp <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"></div>
-      <div class="hb-route-operating">Hut: Mid May - Mid Oct</div>
+      <div class="hb-route-operating">Cable car: Year-round, with revision closures in April and November to December · Hut: Mid May - Mid Oct</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -204,7 +204,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"ascher-route-73","start":"Luftseilbahn Wasserauen-Ebenalp","transit":{"train":"Wasserauen"},"visits":["ascher"],"description_extra":"Aescher is reached by the Luftseilbahn from Wasserauen to Ebenalp, then a 15-minute walk down to the famous guest house tucked against the cliff face. The cable car saves the 1,000 m of climb from Wasserauen. Round-trip ticket runs around 38 CHF. Once at Aescher, continue along the limestone ridge to Schäfler in about an hour for the full Alpstein classic. T1 to the guest house, T2 if you continue along the ridge. Ebenalp station opens late May through October.","sources":["https://aescher.ch/","https://en.wikipedia.org/wiki/%C3%84scher"],"quickest_for":["ascher"],"hut_ids":["aescher-gasthaus"],"huts":[{"id":"aescher-gasthaus","name":"Aescher Gasthaus","description":"Iconic cliff-face guesthouse tucked under the Ebenalp wall","cost_chf_raw":"From 55 CHF","open_raw":"Mid May - Mid Oct","website":"https://aescher.ch/"}],"hut":{"id":"aescher-gasthaus","name":"Aescher Gasthaus","description":"Iconic cliff-face guesthouse tucked under the Ebenalp wall","cost_chf_raw":"From 55 CHF","open_raw":"Mid May - Mid Oct","website":"https://aescher.ch/"},"quickest":true}];
+  const ROUTES = [{"id":"ascher-route-73","start":"Luftseilbahn Wasserauen-Ebenalp","transit":{"train":"Wasserauen"},"visits":["ascher"],"description_extra":"Aescher is reached by the Luftseilbahn from Wasserauen to Ebenalp, then a 15-minute walk down to the famous guest house tucked against the cliff face. The cable car saves the 1,000 m of climb from Wasserauen. Round-trip ticket runs around 38 CHF. Once at Aescher, continue along the limestone ridge to Schäfler in about an hour for the full Alpstein classic. T1 to the guest house, T2 if you continue along the ridge. Ebenalp station opens late May through October.","sources":["https://aescher.ch/","https://en.wikipedia.org/wiki/%C3%84scher"],"quickest_for":["ascher"],"hut_ids":["aescher-gasthaus"],"cable_car_ids":["ebenalp-luftseilbahn"],"cable_cars":[{"id":"ebenalp-luftseilbahn","operator":"Luftseilbahn Wasserauen-Ebenalp AG","description":"Cable car from Wasserauen up to Ebenalp at 1,640 m, gateway to the Alpstein","open_raw":"Year-round, with revision closures in April and November to December","cost_chf_raw":"36 CHF return","website":"https://www.ebenalp.ch/"}],"cable_car":{"id":"ebenalp-luftseilbahn","operator":"Luftseilbahn Wasserauen-Ebenalp AG","description":"Cable car from Wasserauen up to Ebenalp at 1,640 m, gateway to the Alpstein","open_raw":"Year-round, with revision closures in April and November to December","cost_chf_raw":"36 CHF return","website":"https://www.ebenalp.ch/"},"huts":[{"id":"aescher-gasthaus","name":"Aescher Gasthaus","description":"Iconic cliff-face guesthouse tucked under the Ebenalp wall","cost_chf_raw":"From 55 CHF","open_raw":"Mid May - Mid Oct","website":"https://aescher.ch/"}],"hut":{"id":"aescher-gasthaus","name":"Aescher Gasthaus","description":"Iconic cliff-face guesthouse tucked under the Ebenalp wall","cost_chf_raw":"From 55 CHF","open_raw":"Mid May - Mid Oct","website":"https://aescher.ch/"},"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

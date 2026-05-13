@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778701649624" />
+<link rel="stylesheet" href="../../preview.css?v=1778702329023" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -128,7 +128,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Sörenberg or Bumbach <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">6h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T4 · Long, exposed karst</span></span></div>
-      
+      <div class="hb-route-operating">Cable car: Late May to mid-October</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -204,7 +204,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"schrattenfluh-schratteflue-crossing","name":"Schratteflue crossing (advanced)","start":"Sörenberg or Bumbach","transit":{"bus":"Postbus to Sörenberg"},"duration_min":360,"sac_grade":"T4","effort_label":"Long, exposed karst","description_extra":"Six-kilometre limestone ridge with four peaks: Schibegütsch, Hängst, Hächle, and Strick. Full crossing takes about six hours, T4 territory with exposed scrambling. The ridge is also riddled with deep karst potholes off the marked line — staying on the trail matters here. Starts and ends at Sörenberg or Bumbach (bus from Schüpfheim). For advanced hikers only. Sure-footedness, a head for heights, and good visibility required.","visits":["schrattenfluh"],"sources":["https://www.outdooractive.com/en/route/mountain-hike/district-entlebuch/schratteflue-crossing-for-advanced-hikers/801971278/","https://en.wikipedia.org/wiki/Schrattenfluh"],"quickest_for":["schrattenfluh"],"equipment_list":["Sturdy hiking boots","Poles","Gloves (limestone karst)"],"quickest":true}];
+  const ROUTES = [{"id":"schrattenfluh-schratteflue-crossing","name":"Schratteflue crossing (advanced)","start":"Sörenberg or Bumbach","transit":{"bus":"Postbus to Sörenberg"},"duration_min":360,"sac_grade":"T4","effort_label":"Long, exposed karst","description_extra":"Six-kilometre limestone ridge with four peaks: Schibegütsch, Hängst, Hächle, and Strick. Full crossing takes about six hours, T4 territory with exposed scrambling. The ridge is also riddled with deep karst potholes off the marked line — staying on the trail matters here. Starts and ends at Sörenberg or Bumbach (bus from Schüpfheim). For advanced hikers only. Sure-footedness, a head for heights, and good visibility required.","visits":["schrattenfluh"],"sources":["https://www.outdooractive.com/en/route/mountain-hike/district-entlebuch/schratteflue-crossing-for-advanced-hikers/801971278/","https://en.wikipedia.org/wiki/Schrattenfluh"],"quickest_for":["schrattenfluh"],"equipment_list":["Sturdy hiking boots","Poles","Gloves (limestone karst)"],"cable_car_ids":["marbachegg-gondola"],"cable_cars":[{"id":"marbachegg-gondola","operator":"Sportbahnen Marbachegg","description":"Gondola from Marbach village up to Marbachegg in the UNESCO Entlebuch Biosphere","open_raw":"Late May to mid-October","cost_chf_raw":"30 CHF return","website":"https://www.marbachegg.ch/"}],"cable_car":{"id":"marbachegg-gondola","operator":"Sportbahnen Marbachegg","description":"Gondola from Marbach village up to Marbachegg in the UNESCO Entlebuch Biosphere","open_raw":"Late May to mid-October","cost_chf_raw":"30 CHF return","website":"https://www.marbachegg.ch/"},"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

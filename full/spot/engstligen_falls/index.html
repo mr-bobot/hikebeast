@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778701649614" />
+<link rel="stylesheet" href="../../preview.css?v=1778702329014" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -129,7 +129,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Adelboden, Unter dem Birg <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h 10</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">395 m gain</span></span></div>
-      
+      <div class="hb-route-operating">Cable car: Mid-June to mid-October</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -205,7 +205,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"engstligen_falls-route-48","sac_grade":"T1","effort_label":"Easy","duration_min":70,"gain_m":395,"start":"Adelboden, Unter dem Birg","transit":{"bus":"Adelboden, Unter dem Birg"},"visits":["engstligen_falls"],"description_extra":"Engstligenfälle is one of Switzerland's higher waterfall systems, dropping in two stages off the Engstligenalp plateau above Adelboden. The main viewing area is at the foot of the lower fall — a 20-minute walk from Unter dem Birg. Combine with the cable car up to the Engstligenalp plateau (1h 10 hike if walking up the side trail, 395 m of gain). The alp is a federal BLN-protected landscape. Best photographed when overcast — direct sun blows out the falls.","sources":["https://www.myswitzerland.com/en-us/destinations/engstligen-falls/","https://en.wikipedia.org/wiki/Engstligenfall"],"quickest_for":["engstligen_falls"],"equipment_list":[],"quickest":true}];
+  const ROUTES = [{"id":"engstligen_falls-route-48","sac_grade":"T1","effort_label":"Easy","duration_min":70,"gain_m":395,"start":"Adelboden, Unter dem Birg","transit":{"bus":"Adelboden, Unter dem Birg"},"visits":["engstligen_falls"],"description_extra":"Engstligenfälle is one of Switzerland's higher waterfall systems, dropping in two stages off the Engstligenalp plateau above Adelboden. The main viewing area is at the foot of the lower fall — a 20-minute walk from Unter dem Birg. Combine with the cable car up to the Engstligenalp plateau (1h 10 hike if walking up the side trail, 395 m of gain). The alp is a federal BLN-protected landscape. Best photographed when overcast — direct sun blows out the falls.","sources":["https://www.myswitzerland.com/en-us/destinations/engstligen-falls/","https://en.wikipedia.org/wiki/Engstligenfall"],"quickest_for":["engstligen_falls"],"equipment_list":[],"cable_car_ids":["engstligenalp-cable-car"],"cable_cars":[{"id":"engstligenalp-cable-car","operator":"Bergbahnen Engstligenalp AG","description":"Cable car from Unter dem Birg above Adelboden up to the Engstligenalp plateau","open_raw":"Mid-June to mid-October","cost_chf_raw":"37 CHF return","website":"https://engstligenalp.ch/"}],"cable_car":{"id":"engstligenalp-cable-car","operator":"Bergbahnen Engstligenalp AG","description":"Cable car from Unter dem Birg above Adelboden up to the Engstligenalp plateau","open_raw":"Mid-June to mid-October","cost_chf_raw":"37 CHF return","website":"https://engstligenalp.ch/"},"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

@@ -18,6 +18,8 @@ hikes:
   quickest_for:
   - engstligen_falls
   equipment_list: []
+  cable_car_ids:
+  - engstligenalp-cable-car
 - id: oltschibachfall-from-meiringen
   name: From Meiringen
   start: Meiringen train station
@@ -127,6 +129,8 @@ hikes:
   - gelmersee
   hut_ids:
   - gelmerhutte
+  cable_car_ids:
+  - gelmerbahn-funicular
 - id: brienzer_rothorn-default
   visits:
   - brienzer_rothorn
@@ -138,6 +142,8 @@ hikes:
   - https://en.wikipedia.org/wiki/Brienz_Rothorn_Bahn
   hut_ids:
   - berghaus-rothorn
+  cable_car_ids:
+  - brienz-rothorn-bahn
 - id: brienzer_rothorn-cog-railway
   name: Brienz Rothorn Bahn (cog railway)
   start: Brienz station
@@ -199,6 +205,9 @@ hikes:
   - Sturdy hiking boots
   - Poles
   - Helmet (rockfall sections)
+  cable_car_ids:
+  - harderbahn
+  - brienz-rothorn-bahn
 - id: tannhorn-brienzergrat-segment
   name: Rothorn → Tannhorn → Planalp
   start: Brienzer Rothorn summit (top of Brienz cog railway)
@@ -222,6 +231,8 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
+  cable_car_ids:
+  - brienz-rothorn-bahn
 - id: augstmatthorn-route-85
   sac_grade: T3
   effort_label: Mid
@@ -297,6 +308,8 @@ hikes:
   - Sturdy hiking boots
   - Poles
   - Gloves (limestone karst)
+  cable_car_ids:
+  - marbachegg-gondola
 - id: heftihutte-from-hirsegg
   name: From Hirsegg bus stop
   start: Hirsegg (bus stop)
@@ -351,6 +364,8 @@ hikes:
   quickest_for:
   - bachalpsee
   equipment_list: []
+  cable_car_ids:
+  - firstbahn
 - id: bachalpsee-bussalp-alternative
   name: From Bussalp
   start: Bussalp parking
@@ -432,6 +447,8 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/fruendenhuette-sac-2147000102/mountain-hiking/from-oeschinensee-or-kandersteg-closed-474/
   - https://www.outdooractive.com/en/route/mountain-hike/kandersteg/kandersteg-oeschinensee-hohtuerli-griesalp/51641556/
+  cable_car_ids:
+  - oeschinensee-bergbahn
 - id: piz_gloria-cable-car-to-summit
   name: Cable car (Stechelberg → Schilthorn)
   start: Stechelberg cable car
@@ -515,6 +532,8 @@ hikes:
   - riffelalp
   sources:
   - https://www.outdooractive.com/en/route/hiking-trail/zermatt-matterhorn/riffelalp-gruensee-findeln-tiefmatten-zermatt/225130785/
+  cable_car_ids:
+  - gornergrat-bahn
 - id: gorner_glacier-gornergrat-railway
   name: Gornergrat railway + Sunshine Trail
   start: Zermatt train station
@@ -584,6 +603,8 @@ hikes:
   - https://www.myswitzerland.com/en-us/experiences/eggishorn-circular-trail/
   quickest_for:
   - aletsch_glacier
+  cable_car_ids:
+  - eggishorn-cable-car
 - id: aletsch_glacier-bettmerhorn-eggishorn-ridge
   name: Bettmerhorn → Eggishorn ridge traverse
   start: Bettmerhorn top station
@@ -601,6 +622,9 @@ hikes:
   sources:
   - https://www.outdooractive.com/en/route/mountain-hike/aletsch-arena/aletsch-panorama-circuit/802297583/
   - https://www.myswitzerland.com/en-us/experiences/route/aletsch-panoramaweg-the-swiss-glacier-trail/
+  cable_car_ids:
+  - bettmerhorn-cable-car
+  - eggishorn-cable-car
 - id: aletsch_glacier-aletsch-panoramaweg
   name: Aletsch Panoramaweg
   start: Bettmerhorn
@@ -618,6 +642,8 @@ hikes:
   sources:
   - https://www.myswitzerland.com/en-us/experiences/route/aletsch-panoramaweg-the-swiss-glacier-trail/
   - https://www.outdooractive.com/en/route/mountain-hike/aletsch-arena/aletsch-panorama-circuit/802297583/
+  cable_car_ids:
+  - bettmerhorn-cable-car
 - id: arolla_ice_cave-arolla-glacier-trail
   name: Arolla glacier circular
   start: Arolla village
@@ -1079,6 +1105,8 @@ hikes:
   - schwarzsee
   sources:
   - https://www.sac-cas.ch/de/huetten-und-touren/sac-tourenportal/hoernlihuette-2147000136/berg-und-alpinwandern/von-zermatt-furi-via-stafelalp-261/
+  cable_car_ids:
+  - schwarzsee-cable-car
 - id: dent_de_lys-les-paccots-circular
   name: Les Paccots loop via Lac des Joncs
   start: Les Paccots
@@ -1137,6 +1165,8 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/teysachaux-1963/mountain-hiking/les-paccots-teysachaux-le-moleson-bulle-1617/
   quickest_for:
   - teysachaux
+  cable_car_ids:
+  - moleson-funiculaire
 - id: cap_au_moine-from-allieres
   name: Allières → Cape au Moine
   start: Allières
@@ -1306,6 +1336,8 @@ hikes:
   equipment_list: []
   hut_ids:
   - berggasthaus-schafler
+  cable_car_ids:
+  - ebenalp-luftseilbahn
 - id: seealpsee-route-43
   sac_grade: T1
   effort_label: Easy
@@ -1338,6 +1370,8 @@ hikes:
   - ascher
   hut_ids:
   - aescher-gasthaus
+  cable_car_ids:
+  - ebenalp-luftseilbahn
 - id: saxer_lucke-route-71
   sac_grade: T1
   effort_label: Easy
@@ -1628,6 +1662,8 @@ hikes:
   - https://www.stoos.ch/
   quickest_for:
   - stoos_kapelle
+  cable_car_ids:
+  - stoosbahn
 - id: pizol-5-lakes-hike
   name: 5-Lakes hike (Pizolhütte → Wildsee → Schottensee → Schwarzsee → Baschalvasee → Gaffia)
   start: Pizolhütte (top of Wangs gondola + chair lifts)
@@ -1649,6 +1685,8 @@ hikes:
   - https://en.wikipedia.org/wiki/Pizol
   quickest_for:
   - pizol
+  cable_car_ids:
+  - pizol-bergbahnen
 - id: joriseen-route-126
   sac_grade: T2
   effort_label: Easy
@@ -1686,6 +1724,8 @@ hikes:
   equipment_list: []
   hut_ids:
   - berggasthaus-bollenwees
+  cable_car_ids:
+  - hoher-kasten-bahn
 - id: batoni_wasserfallarena-route-125
   sac_grade: T2
   effort_label: Easy
@@ -1928,6 +1968,8 @@ hikes:
   sources:
   - https://www.outdooractive.com/en/route/hiking-route/mont-blanc-massif/chamonix-dayhike-les-bossons-to-la-jonction/64789199/
   - https://en.wikipedia.org/wiki/Bossons_Glacier
+  cable_car_ids:
+  - glacier-bossons-chairlift
 - id: pic_de_jallouvre-from-petit-bornand
   name: From Le Petit-Bornand-les-Glières
   start: Le Petit-Bornand-les-Glières
@@ -1988,6 +2030,9 @@ hikes:
   quickest_for:
   - brisen
   equipment_list: []
+  cable_car_ids:
+  - niederrickenbach-cable-car
+  - haldigrat-chairlift
 - id: engstlensee-route-lakeshore-loop
   sac_grade: T1
   effort_label: Easy
@@ -2055,6 +2100,8 @@ hikes:
   quickest_for:
   - ponte_tibetano
   equipment_list: []
+  cable_car_ids:
+  - monte-carasso-mornera-cable-car
 - id: zinal_glacier-route-petit-mountet
   sac_grade: T2
   effort_label: Moderate
