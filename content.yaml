@@ -2068,12 +2068,6 @@ spots:
       lat: 46.2793244
       lng: 7.2172313
     maps_url: https://www.google.com/maps/place/Lac+de+Derborence/@46.2793244,7.2172313,17z/data=!3m1!4b1!4m6!3m5!1s0x478ec20dffda7db3:0x7a9df6822f6e8527!8m2!3d46.2793244!4d7.2172313
-  - heading: ZINAL GLACIER
-    text: End of the Val d'Anniviers. Long approach from Zinal village or via the Cabane des Bossons. Glacier reads bigger from the moraine ridge.
-    gps:
-      lat: 46.0636
-      lng: 7.634
-    maps_url: https://www.google.com/maps/place/Zinal+Glacier/@46.0636,7.634,17z/data=!3m1!4b1!4m6!3m5!1s0x478f31b171fe81d5:0x3506fab4414fe053!8m2!3d46.0636!4d7.634
   image:
   image_credit: xxx
   maps_url:
@@ -4151,6 +4145,122 @@ spots:
   gps:
     lat: 46.353057
     lng: 6.731264
+- id: brisen
+  chapter: central
+  kicker: A RIDGE ABOVE ENGELBERG
+  title: Brisen
+  deck: A 2,400m ridge above Engelberg with views across the Bernese Oberland. Less famous than the Hardergrat, same kind of view.
+  body:
+  - Take the cable car from Niederrickenbach to Brisen-Ostegg, then walk the ridge west. About two hours of clean alpine path to the summit. No exposure, no scrambling.
+  - The shot is the descending ridge line itself, with a figure on the trail for scale. Cloudy or breaking-light days are stronger than blue skies up here.
+  region: Engelberg, Central Switzerland
+  access: Cable car + 2h ridge walk
+  effort: Moderate
+  best_light: Cloudy or breaking light
+  wildCamping:
+    verdict: discouraged
+    reason: Open alpine ridge on the Nidwalden / Uri border. SAC bivouac rule technically permits single-night above tree line, but the ridge is fully exposed with no water. The Bannalp huts in the valley below are the legal alternative.
+    canton: Nidwalden (NW)
+  maps_url: https://maps.app.goo.gl/koVZkZUHBqN9T7rw7
+  image: spots/brisen/main.jpeg
+  image_credit: oliwear.j
+  gps:
+    lat: 46.8988
+    lng: 8.45835
+- id: engstlensee
+  chapter: central
+  kicker: A TURQUOISE LAKE ON ENGSTLENALP
+  title: Engstlensee
+  deck: An alpine lake on the Engstlenalp plateau between Innertkirchen and Engelberg. Quiet enough most days that you can hear the wind on the water.
+  body:
+  - Drive or take the postbus up to Engstlenalp from Innertkirchen. The lake is a five-minute walk from the parking lot. For the view that earns the spot, keep going up the trail toward the Jochpass and shoot from above.
+  - Late summer brings out the red gentians in the foreground grass. Frame the wildflowers low and let the water and peaks fill the back.
+  region: Innertkirchen, Bernese Oberland
+  access: Postbus or drive to Engstlenalp
+  effort: Easy
+  best_light: Late summer for the gentians
+  wildCamping:
+    verdict: forbidden
+    reason: "Inside BLN landscape \"Berner Hochalpen und Aletsch-Bietschhorn-Gebiet\" and UNESCO Schweizer Alpen Jungfrau-Aletsch buffer. Bern enforces; rangers patrol. The Engstlenalp hotel and the Innertkirchen campsite are the legal options."
+    canton: Bern (BE)
+    protections:
+    - BLN landscape — Berner Hochalpen und Aletsch-Bietschhorn-Gebiet
+    - UNESCO World Heritage — Schweizer Alpen Jungfrau-Aletsch
+  maps_url: https://maps.app.goo.gl/cHFf2Xag4jrtEowH6
+  image: spots/engstlensee/main.jpeg
+  image_credit: oliwear.j
+  gps:
+    lat: 46.7739067
+    lng: 8.3563524
+- id: maloja_pass
+  chapter: eastern
+  kicker: AUTUMN LARCHES ON THE SWITCHBACKS
+  title: Maloja Pass
+  deck: The switchback road from Bregaglia up to the Engadin. Autumn larches and long-exposure car headlights make the shot.
+  body:
+  - Drive up to the viewpoint parking on the Engadin side of the pass. Five minutes from the car to the lip overlooking the switchbacks. No hike.
+  - October is the only month. The larches turn orange-gold and the road snakes through them. Tripod, 8 to 30 second exposure, wait for traffic. Cloudy works; blue hour is best.
+  region: Engadin, Grisons
+  access: Drive to viewpoint parking
+  effort: None
+  best_light: Blue hour, October larches
+  wildCamping:
+    verdict: discouraged
+    reason: Pass-top is a busy roadside node in Grisons; cantonal park areas nearby are off-limits. Use Camping Plaun da Lej (Sils-Maria, ~10 minutes down the Engadin side) or campsites in Bregaglia.
+    canton: Grisons (GR)
+  maps_url: https://maps.app.goo.gl/1X7in51rPakADN2B6
+  image: spots/maloja_pass/main.jpeg
+  image_credit: oliwear.j
+  gps:
+    lat: 46.3944258
+    lng: 9.6932995
+- id: ponte_tibetano
+  chapter: ticino
+  kicker: A LONG SUSPENSION BRIDGE OVER THE GORGE
+  title: Ponte Tibetano
+  deck: A 270m Tibetan-style footbridge above Curzútt, near Bellinzona. Long, narrow, and a different kind of leading-line shot.
+  body:
+  - From Monte Carasso, take the funicular up to Mornera and walk twenty minutes down to the bridge. Signposted from the funicular station. Cross in the early morning before the day-trippers arrive.
+  - The shot is the leading-lines version. Person in colour at the far end, both sides of the bridge converging on them. The gorge falls away on both sides for free depth.
+  region: Bellinzona, Ticino
+  access: Funicular Monte Carasso to Mornera + 20 min walk
+  effort: Easy
+  best_light: Morning before crowds
+  wildCamping:
+    verdict: discouraged
+    reason: Curzútt is a restored heritage hamlet with the Ostello Curzútt for paid lodging. Ticino's general bivouac tolerance applies above tree line on the slopes higher up, but the bridge approach is forested and trafficked.
+    canton: Ticino (TI)
+  maps_url: https://maps.app.goo.gl/PkCiA47rbgdSdsed6
+  image: spots/ponte_tibetano/main.jpeg
+  image_credit: oliwear.j
+  gps:
+    lat: 46.1950235
+    lng: 8.9742868
+- id: zinal_glacier
+  chapter: valais
+  kicker: AN ICE CAVE UNDER THE TONGUE
+  title: Zinal Glacier
+  deck: Ice caves under the Zinal glacier tongue. Blue ceilings and frozen waterfall pillars, when the cave is still standing.
+  body:
+  - From Zinal village, follow the trail up Val de Zinal to the glacier moraine. Cave openings shift season to season. Ask at the Zinal tourist office or check current reports before going in.
+  - Real talk. Ice caves under active glacier tongues collapse. Don't go alone, don't go on a warm afternoon, and don't stay long inside. The shot is not worth a roof fall.
+  region: Val d'Anniviers, Valais
+  access: Hike from Zinal village
+  effort: Moderate
+  best_light: Cold winter midday for the blue ceiling
+  wildCamping:
+    verdict: forbidden
+    reason: Glacier tongue and proglacial area. Objective hazards (rockfall, icefall, crevasses) and protected high alpine zone. Use the Zinal campsite or the Hôtel Europe in the village.
+    canton: Valais (VS)
+  maps_url: https://maps.app.goo.gl/iNSmLEysBjyASGMy9
+  image: spots/zinal_glacier/main.jpg
+  image_credit: oliwear.j
+  photos:
+  - file: 02.jpg
+    credit: oliwear.j
+  gps:
+    lat: 46.0636
+    lng: 7.634
 - id: beyond_extras
   chapter: beyond
   kind: extras
