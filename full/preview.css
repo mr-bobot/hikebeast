@@ -5530,3 +5530,19 @@ body.has-rail .topbar .hb-nav { display: none; }
   text-transform: uppercase;
   margin-right: 6px;
 }
+
+/* TL;DR line that mirrors the front-side access string. Sits at the top of
+   the "How to get there" section, above the structured arrival blocks. Holds
+   the whole section on its own for hike-only spots that have no `arrival`. */
+.hb-access-summary {
+  margin: 0 0 12px 0;
+  padding: 11px 16px;
+  background: rgba(0, 0, 0, 0.025);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--fg);
+  font-weight: 500;
+}
+.hb-access-summary + .hb-access-card { margin-top: 0; }

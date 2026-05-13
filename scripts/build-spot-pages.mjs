@@ -276,8 +276,18 @@ function renderWildcampingNote(spot) {
 // transit-accessed spots. Sub-blocks are only emitted when the spot has
 // that data — empty fields don't render.
 function renderAccessSection(spot) {
-  if (!hasAccessData(spot)) return "";
-  const a = spot.arrival;
+  // The front-side `access` string (e.g. "Firstbahn cable car + 50-60 min hike")
+  // is a useful summary for the back too. Surface it as a lead line on top of
+  // the structured arrival blocks (if any). For hike-only spots without an
+  // arrival object, this single line is the whole section. We still skip
+  // rendering anything if there's neither a summary nor structured data —
+  // there'd be nothing left to show.
+  const accessSummary = (typeof spot.access === "string" && spot.access.trim())
+    ? spot.access.trim()
+    : null;
+  const hasArrival = hasAccessData(spot);
+  if (!accessSummary && !hasArrival) return "";
+  const a = spot.arrival || {};
   const blocks = [];
 
   if (a.by_car) {
@@ -330,8 +340,13 @@ function renderAccessSection(spot) {
     </div>`);
   }
 
-  return `<p class="hb-section-h">How to get there</p>
-  <div class="hb-access-card">${blocks.join("")}</div>`;
+  const summaryHtml = accessSummary
+    ? `<p class="hb-access-summary">${escapeHtml(accessSummary)}</p>`
+    : "";
+  const cardHtml = blocks.length
+    ? `<div class="hb-access-card">${blocks.join("")}</div>`
+    : "";
+  return `<p class="hb-section-h">How to get there</p>${summaryHtml}${cardHtml}`;
 }
 
 function renderBackOverview(spot) {
