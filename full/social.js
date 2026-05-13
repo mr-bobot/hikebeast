@@ -898,7 +898,30 @@
       const list = sidecarSpots.map(s => {
         const anchor = (s.href || '').split('#')[1];
         const spotKey = anchor ? `${s.chapter_id}#${anchor}` : null;
-        if (spotKey && dbBySpotKey.has(spotKey)) return dbBySpotKey.get(spotKey);
+        if (spotKey && dbBySpotKey.has(spotKey)) {
+          const dbRow = dbBySpotKey.get(spotKey);
+          // Convex sometimes has a spot row with photos=[] (legacy spots
+          // that pre-date the photo migration, or admin cleared the
+          // gallery). The sidecar (built from content.yaml + the live
+          // Convex hydration pass in build-spot-images.mjs) carries the
+          // real photo list in those cases; keep it so Browse doesn't
+          // see the tile count change on first Convex push and
+          // rebuild → flicker.
+          if (dbRow.photos.length === 0) {
+            const sidecarRow = byKey.get(spotKey);
+            if (sidecarRow && sidecarRow.photos.length > 0) {
+              return {
+                ...dbRow,
+                photos: sidecarRow.photos,
+                image: sidecarRow.image,
+                imagePhotoId: sidecarRow.imagePhotoId,
+                imageWidth: sidecarRow.imageWidth,
+                imageHeight: sidecarRow.imageHeight,
+              };
+            }
+          }
+          return dbRow;
+        }
         // No DB row yet -- fall back to whatever the sidecar gave us.
         return byKey.get(spotKey) || null;
       }).filter(Boolean);
