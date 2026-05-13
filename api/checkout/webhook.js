@@ -90,6 +90,59 @@ function downloadLink(token) {
   return `${SITE}/api/checkout/download?t=${encodeURIComponent(token)}`;
 }
 
+// Affiliate "you earned X" notification. Plain, minimal — the affiliate
+// already knows the rules; the email is just a nudge to check the
+// dashboard. Same FONT + greeting style as the buyer purchase email so
+// it feels like the same sender.
+function affiliateEarnedHtml({ firstName, buyerIg, amountFormatted, dashboardUrl }) {
+  const greeting = firstName ? `Hey ${firstName},` : "Hey,";
+  const buyerLine = buyerIg
+    ? `<a href="https://instagram.com/${buyerIg}" style="color:#0071e3;text-decoration:none;">@${buyerIg}</a> just bought Swiss Gems through your link.`
+    : `Someone just bought Swiss Gems through your link.`;
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>You earned ${amountFormatted}</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f5f7;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f5f5f7;padding:32px 16px;">
+    <tr><td align="center">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="480" style="max-width:480px;background:#ffffff;border-radius:20px;">
+        <tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
+          <p style="margin:0 0 16px;font-size:16px;">${greeting}</p>
+          <p style="margin:0 0 24px;font-size:16px;">${buyerLine} You earned ${amountFormatted}.</p>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 8px;"><tr>
+            <td style="border-radius:999px;background:#1d1d1f;">
+              <a href="${dashboardUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Open your dashboard</a>
+            </td>
+          </tr></table>
+          <p style="margin:24px 0 0;font-size:16px;">Leon</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+function affiliateEarnedText({ firstName, buyerIg, amountFormatted, dashboardUrl }) {
+  const greeting = firstName ? `Hey ${firstName},` : "Hey,";
+  const buyerLine = buyerIg
+    ? `@${buyerIg} just bought Swiss Gems through your link.`
+    : `Someone just bought Swiss Gems through your link.`;
+  return `${greeting}
+
+${buyerLine} You earned ${amountFormatted}.
+
+Open your dashboard:
+${dashboardUrl}
+
+Leon
+`;
+}
+
 function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId, sessionId }) {
   const greeting = firstName ? `Hey ${firstName},` : "Hey,";
   // Onboarding return-link points at the same /map/success page. The page
@@ -128,9 +181,11 @@ function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId, s
             Save spots and sync them across your devices.
           </p>
 
+          <!-- Secondary CTA — outlined to differentiate from the primary
+               webapp button above. Same shape and size for symmetry. -->
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
-            <td style="border-radius:999px;background:#1d1d1f;">
-              <a href="${downloadUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Download the guide</a>
+            <td style="border-radius:999px;background:#ffffff;border:1.5px solid #1d1d1f;">
+              <a href="${downloadUrl}" style="display:inline-block;padding:12.5px 26.5px;color:#1d1d1f;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Download the guide</a>
             </td>
           </tr></table>
 
@@ -235,9 +290,10 @@ function purchaseEmailDeHtml({ firstName, downloadUrl, amountFormatted, orderId,
             Speichere deine Spots und synce sie geräteübergreifend.
           </p>
 
+          <!-- Secondary CTA — outlined, parallels the English template. -->
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
-            <td style="border-radius:999px;background:#1d1d1f;">
-              <a href="${downloadUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Guide herunterladen</a>
+            <td style="border-radius:999px;background:#ffffff;border:1.5px solid #1d1d1f;">
+              <a href="${downloadUrl}" style="display:inline-block;padding:12.5px 26.5px;color:#1d1d1f;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Guide herunterladen</a>
             </td>
           </tr></table>
 
@@ -476,6 +532,7 @@ async function handleSessionCompleted({ stripe, event }) {
       metadata_t: cohortToken,
       metadata_s: subscriberId,
       instagram_handle: buyerIg || "",
+      referral_slug: refSlug || "",
       provider: "stripe",
       session_id: full.id,
       email_sent: emailOk ? "1" : "0",
@@ -504,22 +561,59 @@ async function handleSessionCompleted({ stripe, event }) {
   // event, which would re-send the email + log the Sheet row again).
   // `buyerIg` is hoisted above (looked up once, reused here + in the
   // Sheet logPurchase payload).
+  //
+  // The mutation also returns `notify: { email, firstName } | null`
+  // when the slug matched an isAffiliate=true user with an email on
+  // file. We fire a "you earned X" email to that address. Affiliates
+  // without an email skip silently (they'll see the row in their
+  // dashboard regardless).
   if (refSlug) {
     const convexUrl = process.env.CONVEX_URL;
     if (convexUrl) {
-      sideEffects.push(
-        convexMutation(convexUrl, "referrals:recordPurchase", {
-          refSlug,
-          stripeSessionId:       full.id,
-          stripePaymentIntentId: paymentIntent,
-          buyerEmail:            email,
-          buyerIg:               buyerIg || undefined,
-          purchaseAmountCents:   typeof full.amount_total === "number" ? full.amount_total : 0,
-          currency:              (full.currency || "").toLowerCase(),
-        }).catch(err => {
+      sideEffects.push((async () => {
+        let result;
+        try {
+          result = await convexMutation(convexUrl, "referrals:recordPurchase", {
+            refSlug,
+            stripeSessionId:       full.id,
+            stripePaymentIntentId: paymentIntent,
+            buyerEmail:            email,
+            buyerIg:               buyerIg || undefined,
+            purchaseAmountCents:   typeof full.amount_total === "number" ? full.amount_total : 0,
+            currency:              (full.currency || "").toLowerCase(),
+          });
+        } catch (err) {
           console.error("referrals:recordPurchase failed:", err?.message || err);
-        }),
-      );
+          return;
+        }
+        // Don't notify on a deduped (Stripe redelivery) write — the
+        // affiliate already got the email on the original delivery.
+        if (!result || result.deduped || !result.notify) return;
+        const dashboardUrl = `${SITE}/full/affiliate/`;
+        const tplArgs = {
+          firstName:       result.notify.firstName,
+          buyerIg:         buyerIg,
+          amountFormatted: formatAmount(
+            Math.floor((typeof full.amount_total === "number" ? full.amount_total : 0) / 2),
+            full.currency,
+          ),
+          dashboardUrl,
+        };
+        try {
+          const resend = new Resend(process.env.RESEND_API_KEY);
+          const { error } = await resend.emails.send({
+            from:    FROM,
+            to:      result.notify.email,
+            replyTo: REPLY_TO,
+            subject: `You earned ${tplArgs.amountFormatted} on Hikebeast`,
+            html:    affiliateEarnedHtml(tplArgs),
+            text:    affiliateEarnedText(tplArgs),
+          });
+          if (error) console.error("Affiliate-earned email error:", error);
+        } catch (err) {
+          console.error("Affiliate-earned email threw:", err?.message || err);
+        }
+      })());
     } else {
       console.error("CONVEX_URL not set; skipping affiliate referral record");
     }

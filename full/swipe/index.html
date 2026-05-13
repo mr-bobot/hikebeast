@@ -10,7 +10,13 @@
 <meta name="referrer" content="no-referrer" />
 <link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="manifest" href="../../manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Hikebeast" />
+<meta name="mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" href="../preview.css" />
+<link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <style>
   /* Swipe UI lives only on this page so it stays out of preview.css. */
   body {
@@ -142,27 +148,6 @@
     opacity: 0.85;
     letter-spacing: -0.005em;
   }
-  .card .open-link {
-    position: absolute;
-    top: 12px; left: 12px;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.92);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    color: var(--fg);
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: -0.005em;
-    border: 1px solid var(--hairline);
-  }
-  .card .open-link svg { width: 12px; height: 12px; }
-
   /* Decision stamps that appear as the user drags */
   .stamp {
     position: absolute;
@@ -309,6 +294,11 @@
     .deck {
       max-height: calc(100dvh - var(--topbar-h) - 64px - env(safe-area-inset-bottom) - 130px);
     }
+    /* "X of Y · X saved" header chip — give the deck more room on
+     * phones; the action buttons (heart / skip / open) already convey
+     * progress through their use, and the bottom tab bar shows where
+     * the user is in the app. */
+    .swipe-progress { display: none; }
   }
 </style>
 </head>
@@ -332,9 +322,6 @@
   <div class="deck" id="deck"></div>
 
   <div class="actions">
-    <button type="button" class="act-btn tertiary" id="resetBtn" title="Start over (clears your no pile)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-    </button>
     <button type="button" class="act-btn no" id="noBtn" title="No · skip (drag left)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
@@ -374,7 +361,6 @@
   const leftCountEl = document.getElementById('leftCount');
   const noBtn = document.getElementById('noBtn');
   const saveBtn = document.getElementById('saveBtn');
-  const resetBtn = document.getElementById('resetBtn');
   const openLink = document.getElementById('openLink');
 
   totalCountEl.textContent = SPOTS.length;
@@ -394,17 +380,38 @@
 
   function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-  // Build the queue: anything the user hasn't decided on. HB.swipes.has()
-  // covers both verdicts (save and no), so one check is enough.
+  // Session-stable shuffle seed. Cached in sessionStorage so a refresh
+  // mid-session keeps the same order, but a new tab gets a fresh deck.
+  // Previously the seed was tied to swipes.list().length, which meant
+  // every decision reshuffled the entire remaining queue — users saw
+  // the card peeking behind the top get swapped out on every click,
+  // which read as "it skipped one and showed a new card."
+  const SWIPE_SEED_KEY = 'hb:swipe:seed';
+  const SWIPE_SEED = (() => {
+    try {
+      const cached = parseInt(sessionStorage.getItem(SWIPE_SEED_KEY) || '0', 10);
+      if (cached) return cached;
+      const fresh = (Math.random() * 0x7fffffff) | 0 || 1;
+      sessionStorage.setItem(SWIPE_SEED_KEY, String(fresh));
+      return fresh;
+    } catch {
+      return 1;
+    }
+  })();
+  // Shuffle the full catalogue once; buildQueue() just filters out
+  // already-decided spots, preserving the relative order. So the card
+  // peeking behind the top stays put when the user heart/skips above.
+  let SHUFFLED_ALL = null;
+  function rebuildShuffledAll() { SHUFFLED_ALL = shuffle(SPOTS, SWIPE_SEED); }
+  rebuildShuffledAll();
+
   function buildQueue() {
-    const remaining = SPOTS.filter(s => {
+    // SPOTS may grow when Convex pushes (refreshSpots → rebuild).
+    if (!SHUFFLED_ALL || SHUFFLED_ALL.length !== SPOTS.length) rebuildShuffledAll();
+    return SHUFFLED_ALL.filter(s => {
       const k = window.HB.spotKey(s);
       return k && !window.HB.swipes.has(k);
     });
-    // Stable shuffle keyed off pile sizes so refreshes don't reorder
-    // mid-session, but a reset re-shuffles.
-    const decisionsCount = window.HB.swipes.list().length;
-    return shuffle(remaining, 1 + decisionsCount);
   }
 
   // Mulberry32 deterministic shuffle
@@ -445,10 +452,6 @@
     c.innerHTML = `
       <div class="stamp save">Save</div>
       <div class="stamp no">Nope</div>
-      <a class="open-link" href="${esc(href)}" title="Open full entry">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        Read
-      </a>
       <div class="photo">
         <!-- Sharp photo (w1800 default; browser swaps via srcset on bigger
              screens). Deck holds 3 cards so bandwidth is negligible. -->
@@ -486,15 +489,13 @@
       <div class="empty">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         <h2>${seenAll ? "You've been through them all." : 'No spots to swipe.'}</h2>
-        <p>${savedNow ? `${savedNow} saved on this device.` : 'Your saves will show up here once you start hearting cards.'}</p>
+        <p>${savedNow ? `${savedNow} saved.` : 'Your saves will show up here once you start hearting cards.'}</p>
         <div class="actions-row">
           <a href="../saved/">View saves</a>
           <a class="ghost" href="../browse/">Browse all</a>
-          <button class="ghost" id="emptyReset">Reset and start over</button>
         </div>
       </div>
     `;
-    document.getElementById('emptyReset')?.addEventListener('click', resetSkipped);
   }
 
   function updateCounts() {
@@ -505,18 +506,6 @@
     savedCountEl.textContent = saved;
     leftCountEl.textContent = queue.length;
     openLink.href = (deck.querySelector('.card.is-top')?.dataset.href) || '#';
-  }
-
-  // Reset clears the "no" decisions only (saves stay). For signed-in users
-  // we walk the decisions list and call swipes.undo() for each "no" so the
-  // server-side state matches; the façade handles the localStorage path.
-  function resetPiles() {
-    const noKeys = window.HB.swipes.list()
-      .filter(d => d.decision === 'no')
-      .map(d => d.spotKey);
-    for (const k of noKeys) window.HB.swipes.undo(k);
-    queue = buildQueue();
-    renderDeck();
   }
 
   // === Drag handling on the top card ===
@@ -530,9 +519,6 @@
 
   function onDown(e) {
     if (e.button !== undefined && e.button !== 0) return;
-    // Tap on the in-card "Read" pill or any other interactive child
-    // should pass through to the link/button, not start a card drag.
-    if (e.target.closest('.open-link')) return;
     const card = e.currentTarget;
     if (drag) return;
     card.setPointerCapture(e.pointerId);
@@ -656,12 +642,7 @@
     const { card } = drag;
     drag = null;
     const k = card.dataset.spotKey;
-    if (k) {
-      // record() routes to either Convex or localStorage based on auth
-      // state; "save" also flips the favorite via the favorites façade.
-      window.HB.swipes.record(k, verdict);
-      if (verdict === 'save') emitHearts();
-    }
+    if (verdict === 'save') emitHearts();
     card.classList.add('fly-out');
     const dir = verdict === 'save' ? 1 : -1;
     const stamp = card.querySelector('.stamp.' + verdict);
@@ -670,9 +651,14 @@
       card.style.transform = `translate(${dir * 140}vw, 30px) rotate(${dir * 24}deg)`;
       card.style.opacity = '0';
     });
+    // Record the decision AFTER the fly-out animation ends. record()
+    // fires the swipes subscription which rebuilds the queue (without
+    // the decided card) and re-renders. Doing it earlier meant the
+    // subscription wiped the deck mid-animation AND the setTimeout
+    // below also queue.shifted+renderDeck'd, advancing the deck twice
+    // per click. Now: one record, one rebuild, exactly one card moves.
     setTimeout(() => {
-      queue.shift();
-      renderDeck();
+      if (k) window.HB.swipes.record(k, verdict);
     }, 290);
   }
 
@@ -685,10 +671,6 @@
 
   noBtn.addEventListener('click', () => programmaticSwipe('no'));
   saveBtn.addEventListener('click', () => programmaticSwipe('save'));
-  resetBtn.addEventListener('click', () => {
-    if (confirm('Start over? Clears your No pile and re-shuffles. Saves stay.')) resetPiles();
-  });
-
   // Keyboard
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') programmaticSwipe('no');

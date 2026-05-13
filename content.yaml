@@ -71,13 +71,13 @@ front_matter:
   kind: map_summary
   kicker: SIX REGIONS, ONE COUNTRY
   title: Map Summary
-  deck: Where to find each chapter. The regions are ordered roughly west to east, start with whichever your weather window suits.
+  deck: Where to find each chapter.
   region_order:
+  - eastern
   - central
   - valais
   - fribourg
   - western
-  - eastern
   - ticino
   - beyond
 # `my_top_6_famous_spots` and `my_top_6_hidden_gems` were `kind: top_six`
@@ -85,52 +85,8 @@ front_matter:
 # They've moved to dedicated collection pages (/full/famous-gems/ and
 # /full/hidden-gems/) so the chapter view stays intro-only.
 chapters:
-- id: central
-  number: '01'
-  name: Central Switzerland
-  intro: Waterfalls, glacier lakes and iron bridges strung across gorges so deep they hum. The heart of this guide. Twelve spots from Adelboden to the Grimsel Pass.
-  description: Waterfalls, glacier lakes, the Hardergrat ridge.
-  color:
-  - 0.69
-  - 0.65
-  - 0.48
-  cover_image: chapters/central.jpg
-  cover_credit: dimitri_karastelev_unsplash
-- id: valais
-  number: '02'
-  name: Valais
-  intro: High alpine. Zermatt and the Matterhorn, glacier lakes, Riffelsee reflections. The chapter where Switzerland looks like its postcards. With room still for the ones nobody has printed yet.
-  description: Matterhorn country. Glaciers, ice caves, high passes.
-  color:
-  - 0.92
-  - 0.72
-  - 0.75
-  cover_image: chapters/valais.jpg
-  cover_credit: ernst_burki_unsplash
-- id: fribourg
-  number: '03'
-  name: Fribourg
-  intro: Cheese country, jagged pre-alps, and a handful of lakes that should be more famous than they are. The canton that looks like the cover of every Swiss guidebook. And still has corners all to yourself.
-  description: Hidden lakes and the Gastlosen limestone wall.
-  color:
-  - 0.85
-  - 0.85
-  - 0.82
-  cover_image: chapters/fribourg.jpg
-  cover_credit: xavier_von_erlach_unsplash_2
-- id: western
-  number: '04'
-  name: Western Switzerland
-  intro: The Léman arc, the Jura, and a slice of the Chablais. Vineyards down low, limestone cliffs up high, and a lake at the middle of everything. The most underrated quarter of the country for photographers.
-  description: Vineyards, lakeside cliffs, quieter roads.
-  color:
-  - 0.8
-  - 0.88
-  - 0.62
-  cover_image: chapters/western.jpg
-  cover_credit: tcheucestbeau
 - id: eastern
-  number: '05'
+  number: '01'
   name: Eastern Switzerland
   intro: Appenzell chalets, Glarus waterfalls, turquoise dam lakes, and the Engadin glaciers. This is where Switzerland gets quieter, higher, and a bit stranger. My favourite part of the country to explore
     at my own pace.
@@ -141,6 +97,50 @@ chapters:
   - 0.66
   cover_image: chapters/eastern.jpg
   cover_credit: leon.helg
+- id: central
+  number: '02'
+  name: Central Switzerland
+  intro: Waterfalls, glacier lakes and iron bridges strung across gorges so deep they hum. The heart of this guide. Twelve spots from Adelboden to the Grimsel Pass.
+  description: Waterfalls, glacier lakes, the Hardergrat ridge.
+  color:
+  - 0.69
+  - 0.65
+  - 0.48
+  cover_image: chapters/central.jpg
+  cover_credit: dimitri_karastelev_unsplash
+- id: valais
+  number: '03'
+  name: Valais
+  intro: High alpine. Zermatt and the Matterhorn, glacier lakes, Riffelsee reflections. The chapter where Switzerland looks like its postcards. With room still for the ones nobody has printed yet.
+  description: Matterhorn country. Glaciers, ice caves, high passes.
+  color:
+  - 0.92
+  - 0.72
+  - 0.75
+  cover_image: chapters/valais.jpg
+  cover_credit: ernst_burki_unsplash
+- id: fribourg
+  number: '04'
+  name: Fribourg
+  intro: Cheese country, jagged pre-alps, and a handful of lakes that should be more famous than they are. The canton that looks like the cover of every Swiss guidebook. And still has corners all to yourself.
+  description: Hidden lakes and the Gastlosen limestone wall.
+  color:
+  - 0.85
+  - 0.85
+  - 0.82
+  cover_image: chapters/fribourg.jpg
+  cover_credit: xavier_von_erlach_unsplash_2
+- id: western
+  number: '05'
+  name: Western Switzerland
+  intro: The Léman arc, the Jura, and a slice of the Chablais. Vineyards down low, limestone cliffs up high, and a lake at the middle of everything. The most underrated quarter of the country for photographers.
+  description: Vineyards, lakeside cliffs, quieter roads.
+  color:
+  - 0.8
+  - 0.88
+  - 0.62
+  cover_image: chapters/western.jpg
+  cover_credit: tcheucestbeau
 - id: ticino
   number: '06'
   name: Ticino
@@ -262,7 +262,7 @@ spots:
 - id: rosenlaui_public_waterfall
   chapter: central
   kicker: WATERFALLS
-  title: Rosenlaui Public Waterfall
+  title: Rosenlaui Gorge
   deck: A gorge carved into the mountain next to the hotel. Paid entry, but the light is worth it.
   body:
   - It costs a few francs to enter but it is very nice. Definitely bring a tripod to be able to properly expose the shot. The gorge is dark, the water is lit from above, and handheld will not cut it.
@@ -280,6 +280,11 @@ spots:
   maps_url: https://www.google.com/maps/place/Rosenlaui,+3860+Schattenhalb/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f854e2f14adf3:0x75e02d334586fdf8!8m2!3d46.6795746!4d8.1548593!16s%2Fg%2F1tmqq876
   image: spots/rosenlaui_public_waterfall/main.jpg
   image_credit: leon.helg
+  photos:
+  - file: 06.jpg
+    credit: jkphotos_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/ein-fluss-der-durch-eine-enge-felsige-schlucht-fliesst-MVkm8mqaQg0"
   gps:
     lat: 46.6795746
     lng: 8.1548593
@@ -546,6 +551,8 @@ spots:
   - file: 02.jpg
     credit: zimydakid
     source_type: book
+  - file: 04.jpg
+    credit: leon.helg
   gps:
     lat: 46.7239488
     lng: 7.9028922
@@ -598,6 +605,17 @@ spots:
   maps_url: https://www.google.com/maps/place/Augstmatthorn/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd01d3aab78b:0x80ca6ccdfe2dbfad!8m2!3d46.7422263!4d7.9286089!16s%2Fm%2F04mym9q
   image: spots/augstmatthorn/main.jpg
   image_credit: cedric_streit_unsplash
+  photos:
+  - file: 06.jpg
+    credit: gian_porsius_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/brauner-berg-unter-blauem-himmel-tagsuber-ng4e-ibXH2o"
+  - file: 07.jpg
+    credit: jana_leu_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/brauner-rocky-mountain-tagsuber-unter-blauem-himmel-Wg8iqWXw8KY"
+  - file: 08.jpg
+    credit: leon.helg
   gps:
     lat: 46.7422263
     lng: 7.9286089
@@ -692,6 +710,14 @@ spots:
   - file: 02.jpg
     credit: leon.helg
   - file: 03.jpg
+    credit: leon.helg
+  - file: 04.jpg
+    credit: leon.helg
+  - file: 05.jpg
+    credit: leon.helg
+  - file: 06.jpg
+    credit: leon.helg
+  - file: 07.jpg
     credit: leon.helg
   gps:
     lat: 46.9352224
@@ -980,6 +1006,28 @@ spots:
   - file: 03.jpg
     credit: zimydakid
     source_type: book
+  - file: 06.jpg
+    credit: peter_elijah_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/ein-gewasser-mit-bergen-im-hintergrund-nj8WzIbV9Tw"
+  - file: 07.jpg
+    credit: dennis_h_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/ein-see-umgeben-von-bergen-aXxA2q-k0ko"
+  - file: 08.jpg
+    credit: pascal_debrunner_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/blick-auf-eine-bergkette-mit-einem-see-im-vordergrund-Ap53G_567Dc"
+  - file: 09.jpg
+    credit: manca_cadez_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/bergweg-mit-blick-auf-einen-turkisfarbenen-see-und-schneebedeckte-gipfel-fm4hsFvKLdY"
+  - file: 10.jpg
+    credit: gabriel_cirelli_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/turkiser-see-eingebettet-zwischen-majestatischen-bergen-und-kiefern-qTkMs5FataM"
+  - file: 11.jpg
+    credit: leon.helg
   gps:
     lat: 46.4989089
     lng: 7.7291063
@@ -1111,6 +1159,16 @@ spots:
   - file: 05.jpg
     credit: zimydakid
     source_type: book
+  - file: 06.jpg
+    credit: lukas_konvica_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/ein-berg-mit-einem-see-davor-2fDlpki7Hx0"
+  - file: 07.jpg
+    credit: ilia_bronskyi_unsplash_3
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/eine-bergkette-mit-einem-see-im-vordergrund-tGuQ2Xh5XN8"
+  - file: 08.jpg
+    credit: leon.helg
   gps:
     lat: 45.983269
     lng: 7.7620615
@@ -1138,6 +1196,10 @@ spots:
   - file: 03.jpg
     credit: zimydakid
     source_type: book
+  - file: 06.jpg
+    credit: daniel_cox_unsplash_2
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/braune-hauser-mit-blick-auf-die-berge-unter-blauem-und-weissem-himmel-wahrend-des-tages-UzCh9tp1VLs"
   gps:
     lat: 46.0207133
     lng: 7.749117
@@ -2006,12 +2068,6 @@ spots:
       lat: 46.2793244
       lng: 7.2172313
     maps_url: https://www.google.com/maps/place/Lac+de+Derborence/@46.2793244,7.2172313,17z/data=!3m1!4b1!4m6!3m5!1s0x478ec20dffda7db3:0x7a9df6822f6e8527!8m2!3d46.2793244!4d7.2172313
-  - heading: ZINAL GLACIER
-    text: End of the Val d'Anniviers. Long approach from Zinal village or via the Cabane des Bossons. Glacier reads bigger from the moraine ridge.
-    gps:
-      lat: 46.0636
-      lng: 7.634
-    maps_url: https://www.google.com/maps/place/Zinal+Glacier/@46.0636,7.634,17z/data=!3m1!4b1!4m6!3m5!1s0x478f31b171fe81d5:0x3506fab4414fe053!8m2!3d46.0636!4d7.634
   image:
   image_credit: xxx
   maps_url:
@@ -2799,6 +2855,12 @@ spots:
   - file: 02.jpg
     credit: zimydakid
     source_type: book
+  - file: 04.jpg
+    credit: leon.helg
+  - file: 05.jpg
+    credit: leon.helg
+  - file: 06.jpg
+    credit: leon.helg
   gps:
     lat: 47.2761
     lng: 9.39133
@@ -2827,6 +2889,18 @@ spots:
   - file: 03.jpg
     credit: zimydakid
     source_type: book
+  - file: 06.jpg
+    credit: ilia_bronskyi_unsplash_4
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/ein-gewasser-umgeben-von-bergen-und-baumen-Cw2ep-lvSjE"
+  - file: 07.jpg
+    credit: simon_spring_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/ein-fluss-der-durch-ein-tal-zwischen-bergen-fliesst-tO4bB3T22Xw"
+  - file: 08.jpg
+    credit: leon.helg
+  - file: 09.jpg
+    credit: leon.helg
   gps:
     lat: 47.2697778
     lng: 9.4026451
@@ -2896,6 +2970,8 @@ spots:
   - file: 02.jpg
     credit: zimydakid
     source_type: book
+  - file: 08.jpg
+    credit: leon.helg
   gps:
     lat: 47.2473
     lng: 9.42481
@@ -2919,12 +2995,17 @@ spots:
   image: spots/limmernsee/main.jpg
   image_credit: leon.helg
   photos:
-  - file: 04.jpg
-    credit: zimydakid
-    source_type: book
   - file: 05.jpg
     credit: zimydakid
     source_type: book
+  - file: 06.jpg
+    credit: minsu_b_pexels
+    source_type: pexels
+    source_url: "https://www.pexels.com/de-de/foto/landschaft-natur-wahrzeichen-wasser-11870606/"
+  - file: 07.jpg
+    credit: leon.helg
+  - file: 08.jpg
+    credit: leon.helg
   gps:
     lat: 46.8353795
     lng: 9.0135015
@@ -2954,6 +3035,8 @@ spots:
     source_url: "https://www.instagram.com/p/DL0KWScIxH-/"
   - file: 03.jpg
     credit: jvm_photography
+  - file: 04.jpg
+    credit: leon.helg
   gps:
     lat: 46.8573949
     lng: 9.0187737
@@ -3021,6 +3104,10 @@ spots:
   - file: 03.jpg
     credit: zimydakid
     source_type: book
+  - file: 04.jpg
+    credit: leon.helg
+  - file: 05.jpg
+    credit: leon.helg
   gps:
     lat: 46.8682419
     lng: 8.8553908
@@ -3270,6 +3357,12 @@ spots:
   - file: 03.jpg
     credit: zimydakid
     source_type: book
+  - file: 06.jpg
+    credit: gabriel_herter_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/eine-gruppe-von-booten-die-auf-einem-see-schwimmen-ZUJTc3vlFnI"
+  - file: 07.jpg
+    credit: leon.helg
   gps:
     lat: 47.0224341
     lng: 8.9596699
@@ -3293,6 +3386,15 @@ spots:
   maps_url: https://www.google.com/maps/place/Stooskapelle+Maria+Hilf/@46.9803409,8.662024,17z/data=!3m1!4b1!4m6!3m5!1s0x47854f9e17f89bef:0x6fb895f734c38639!8m2!3d46.9803409!4d8.6645989!16s%2Fg%2F11fyzf091j
   image: spots/stoos_kapelle/main.jpg
   image_credit: leon.helg
+  photos:
+  - file: 06.jpg
+    credit: max_burgi_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/eine-kirche-auf-einem-grasbewachsenen-hugel-mit-bergen-im-hintergrund-B8crKzSwydM"
+  - file: 07.jpg
+    credit: claudio_schwarz_unsplash_2
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/braune-holzkirche-auf-schneebedecktem-boden-3pDedVXRIzI"
   gps:
     lat: 46.9803409
     lng: 8.6645989
@@ -3319,6 +3421,15 @@ spots:
   maps_url: https://www.google.com/maps/place/Pizol/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784ce277d754655:0x2be22078083784a5!8m2!3d46.9591!4d9.38679!16s%2Fm%2F043jxxy
   image: spots/pizol/main.jpg
   image_credit: leon.helg
+  photos:
+  - file: 06.jpg
+    credit: boris_baldinger_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/gewasser-umgeben-von-felsigen-bergen-k7Hn0GBiN-o"
+  - file: 07.jpg
+    credit: vasyl_dizhak_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/ein-blauer-see-umgeben-von-bergen-und-felsen-pGrfTUCCmzg"
   gps:
     lat: 46.9591
     lng: 9.38679
@@ -3345,6 +3456,17 @@ spots:
   maps_url: https://www.google.com/maps/place/J%C3%B6riseen/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47835ed266f2cb2f:0x41955dbc43165373!8m2!3d46.7763!4d9.97241!16s%2Fm%2F0w7q3yw
   image: spots/joriseen/main.jpg
   image_credit: leon.helg
+  photos:
+  - file: 02.jpg
+    credit: leon.helg
+  - file: 03.jpg
+    credit: leon.helg
+  - file: 04.jpg
+    credit: leon.helg
+  - file: 05.jpg
+    credit: leon.helg
+  - file: 06.jpg
+    credit: leon.helg
   gps:
     lat: 46.7763
     lng: 9.97241
@@ -3375,6 +3497,14 @@ spots:
     credit: Chris Henry
     source_type: unsplash
     source_url: "https://unsplash.com/photos/3cGpYqg3Nck"
+  - file: 06.jpg
+    credit: bo_benko_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/ein-gewasser-mit-bergen-im-rucken-WlJHg46JtUg"
+  - file: 07.jpg
+    credit: ilia_bronskyi_unsplash_2
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/blick-auf-eine-bergkette-mit-einem-see-im-vordergrund-QZC52e262do"
   gps:
     lat: 47.2511404
     lng: 9.4173218
@@ -3511,12 +3641,6 @@ spots:
   title: Four more from the East
   deck: Pinned in my Google Maps but no proper photo for them yet. Worth the detour if you are in the area.
   entries:
-  - heading: MUTTENCHOPF
-    text: Mountain peak above the Klausen Pass. Quick scramble for the panorama, drone-friendly.
-    gps:
-      lat: 46.8514436
-      lng: 9.0150836
-    maps_url: https://www.google.com/maps/place/Muttenchopf/@46.8514436,9.0150836,17z/data=!3m1!4b1!4m6!3m5!1s0x47852383067be3d9:0x6accac70da2887ed!8m2!3d46.8514436!4d9.0150836
   - heading: HOHER KASTEN
     text: Appenzell ridge with a cable car to the top. Nice hikes radiate out from the summit station; pick your moment for the light.
     gps:
@@ -3889,6 +4013,9 @@ spots:
   maps_url: https://www.google.com/maps/place/Lacs+des+Ch%C3%A9serys/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894cdf11eee317:0x3205ec87a48b021e!8m2!3d45.984858!4d6.90184!16s%2Fg%2F11fy_109py
   image: spots/camping_in_cheserys/main.jpg
   image_credit: damien_paysages_et_sport
+  photos:
+  - file: 02.jpg
+    credit: leon.helg
   gps:
     lat: 45.984858
     lng: 6.90184
@@ -3974,6 +4101,11 @@ spots:
   maps_url: https://www.google.com/maps/place/Pic+de+Jallouvre/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478bf65328e39ee7:0xc6c8697aa884f7bb!8m2!3d45.9964141!4d6.453518!16s%2Fm%2F0czf6zz
   image: spots/pic_de_jallouvre/main.jpg
   image_credit: leon.helg
+  photos:
+  - file: 02.jpg
+    credit: leon.helg
+  - file: 03.jpg
+    credit: leon.helg
   gps:
     lat: 45.9964141
     lng: 6.453518
@@ -4013,6 +4145,144 @@ spots:
   gps:
     lat: 46.353057
     lng: 6.731264
+- id: brisen
+  chapter: central
+  kicker: A RIDGE ABOVE ENGELBERG
+  title: Brisen
+  deck: A 2,400m ridge above Engelberg with views across the Bernese Oberland. Less famous than the Hardergrat, same kind of view.
+  body:
+  - Take the cable car from Niederrickenbach to Brisen-Ostegg, then walk the ridge west. About two hours of clean alpine path to the summit. No exposure, no scrambling.
+  - The shot is the descending ridge line itself, with a figure on the trail for scale. Cloudy or breaking-light days are stronger than blue skies up here.
+  region: Engelberg, Central Switzerland
+  access: Cable car + 2h ridge walk
+  effort: Moderate
+  best_light: Cloudy or breaking light
+  wildCamping:
+    verdict: discouraged
+    reason: Open alpine ridge on the Nidwalden / Uri border. SAC bivouac rule technically permits single-night above tree line, but the ridge is fully exposed with no water. The Bannalp huts in the valley below are the legal alternative.
+    canton: Nidwalden (NW)
+  maps_url: https://maps.app.goo.gl/koVZkZUHBqN9T7rw7
+  image: spots/brisen/main.jpeg
+  image_credit: oliwear.j
+  gps:
+    lat: 46.8988
+    lng: 8.45835
+- id: engstlensee
+  chapter: central
+  kicker: A TURQUOISE LAKE ON ENGSTLENALP
+  title: Engstlensee
+  deck: An alpine lake on the Engstlenalp plateau between Innertkirchen and Engelberg. Quiet enough most days that you can hear the wind on the water.
+  body:
+  - Drive or take the postbus up to Engstlenalp from Innertkirchen. The lake is a five-minute walk from the parking lot. For the view that earns the spot, keep going up the trail toward the Jochpass and shoot from above.
+  - Late summer brings out the red gentians in the foreground grass. Frame the wildflowers low and let the water and peaks fill the back.
+  region: Innertkirchen, Bernese Oberland
+  access: Postbus or drive to Engstlenalp
+  effort: Easy
+  best_light: Late summer for the gentians
+  wildCamping:
+    verdict: forbidden
+    reason: "Inside BLN landscape \"Berner Hochalpen und Aletsch-Bietschhorn-Gebiet\" and UNESCO Schweizer Alpen Jungfrau-Aletsch buffer. Bern enforces; rangers patrol. The Engstlenalp hotel and the Innertkirchen campsite are the legal options."
+    canton: Bern (BE)
+    protections:
+    - BLN landscape — Berner Hochalpen und Aletsch-Bietschhorn-Gebiet
+    - UNESCO World Heritage — Schweizer Alpen Jungfrau-Aletsch
+  maps_url: https://maps.app.goo.gl/cHFf2Xag4jrtEowH6
+  image: spots/engstlensee/main.jpeg
+  image_credit: oliwear.j
+  gps:
+    lat: 46.7739067
+    lng: 8.3563524
+- id: maloja_pass
+  chapter: eastern
+  kicker: AUTUMN LARCHES ON THE SWITCHBACKS
+  title: Maloja Pass
+  deck: The switchback road from Bregaglia up to the Engadin. Autumn larches and long-exposure car headlights make the shot.
+  body:
+  - Drive up to the viewpoint parking on the Engadin side of the pass. Five minutes from the car to the lip overlooking the switchbacks. No hike.
+  - October is the only month. The larches turn orange-gold and the road snakes through them. Tripod, 8 to 30 second exposure, wait for traffic. Cloudy works; blue hour is best.
+  region: Engadin, Grisons
+  access: Drive to viewpoint parking
+  effort: None
+  best_light: Blue hour, October larches
+  wildCamping:
+    verdict: discouraged
+    reason: Pass-top is a busy roadside node in Grisons; cantonal park areas nearby are off-limits. Use Camping Plaun da Lej (Sils-Maria, ~10 minutes down the Engadin side) or campsites in Bregaglia.
+    canton: Grisons (GR)
+  maps_url: https://maps.app.goo.gl/1X7in51rPakADN2B6
+  image: spots/maloja_pass/main.jpeg
+  image_credit: oliwear.j
+  gps:
+    lat: 46.3944258
+    lng: 9.6932995
+- id: ponte_tibetano
+  chapter: ticino
+  kicker: A LONG SUSPENSION BRIDGE OVER THE GORGE
+  title: Ponte Tibetano
+  deck: A 270m Tibetan-style footbridge above Curzútt, near Bellinzona. Long, narrow, and a different kind of leading-line shot.
+  body:
+  - From Monte Carasso, take the funicular up to Mornera and walk twenty minutes down to the bridge. Signposted from the funicular station. Cross in the early morning before the day-trippers arrive.
+  - The shot is the leading-lines version. Person in colour at the far end, both sides of the bridge converging on them. The gorge falls away on both sides for free depth.
+  region: Bellinzona, Ticino
+  access: Funicular Monte Carasso to Mornera + 20 min walk
+  effort: Easy
+  best_light: Morning before crowds
+  wildCamping:
+    verdict: discouraged
+    reason: Curzútt is a restored heritage hamlet with the Ostello Curzútt for paid lodging. Ticino's general bivouac tolerance applies above tree line on the slopes higher up, but the bridge approach is forested and trafficked.
+    canton: Ticino (TI)
+  maps_url: https://maps.app.goo.gl/PkCiA47rbgdSdsed6
+  image: spots/ponte_tibetano/main.jpeg
+  image_credit: oliwear.j
+  gps:
+    lat: 46.1950235
+    lng: 8.9742868
+- id: zinal_glacier
+  chapter: valais
+  kicker: AN ICE CAVE UNDER THE TONGUE
+  title: Zinal Glacier
+  deck: Ice caves under the Zinal glacier tongue. Blue ceilings and frozen waterfall pillars, when the cave is still standing.
+  body:
+  - From Zinal village, follow the trail up Val de Zinal to the glacier moraine. Cave openings shift season to season. Ask at the Zinal tourist office or check current reports before going in.
+  - Real talk. Ice caves under active glacier tongues collapse. Don't go alone, don't go on a warm afternoon, and don't stay long inside. The shot is not worth a roof fall.
+  region: Val d'Anniviers, Valais
+  access: Hike from Zinal village
+  effort: Moderate
+  best_light: Cold winter midday for the blue ceiling
+  wildCamping:
+    verdict: forbidden
+    reason: Glacier tongue and proglacial area. Objective hazards (rockfall, icefall, crevasses) and protected high alpine zone. Use the Zinal campsite or the Hôtel Europe in the village.
+    canton: Valais (VS)
+  maps_url: https://maps.app.goo.gl/iNSmLEysBjyASGMy9
+  image: spots/zinal_glacier/main.jpg
+  image_credit: oliwear.j
+  photos:
+  - file: 02.jpg
+    credit: oliwear.j
+  gps:
+    lat: 46.0636
+    lng: 7.634
+- id: grappelensee
+  chapter: eastern
+  kicker: A MIRROR LAKE IN TOGGENBURG
+  title: Gräppelensee
+  deck: A small alpine lake in Toggenburg with the Churfirsten reflected in glass on calm days. Twenty minutes from the car.
+  body:
+  - Drive to the parking area at Stein, on the road between Alt St. Johann and Wildhaus. The lake is a 20-minute walk on a clear path, almost flat the whole way.
+  - The shot is the reflection. You need a windless morning or evening for the water to mirror cleanly. Reedy grass in the foreground gives free depth.
+  region: Wildhaus, Toggenburg
+  access: Drive + 20 min walk
+  effort: Easy
+  best_light: Calm morning or evening for the reflection
+  wildCamping:
+    verdict: discouraged
+    reason: Toggenburg is a popular hiking and picnic area; SG generally allows single-night bivouac above tree line outside reserves, but the Gräppelensee shore is a busy day-use spot. Use the campsites in Wildhaus or Alt St. Johann.
+    canton: St. Gallen (SG)
+  maps_url: https://www.google.com/maps/place/Gr%C3%A4ppelensee/@47.2113508,9.2872551,17z
+  image: spots/grappelensee/main.jpg
+  image_credit: oliwear.j
+  gps:
+    lat: 47.2113508
+    lng: 9.2872551
 - id: beyond_extras
   chapter: beyond
   kind: extras

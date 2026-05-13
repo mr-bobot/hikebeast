@@ -10,14 +10,20 @@
 <meta name="referrer" content="no-referrer" />
 <link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="manifest" href="../../manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Hikebeast" />
+<meta name="mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" href="../preview.css" />
+<link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body>
 <div class="topbar">
   <a class="brand" href="../index.html">
     <span>Valais</span>
   </a>
-  <span class="crumb"><b>28</b> spots</span>
+  <span class="crumb"><b>29</b> spots</span>
   <div class="topbar-right">
     <a class="pill" href="../index.html">Overview</a>
   </div>
@@ -27,12 +33,12 @@
 
   <aside class="sidebar" aria-label="Chapters">
   <a class="sb-home" href="../index.html" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>
-  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05.jpg" alt="" /><span class="lbl">Intro</span></a>
+  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl">Intro</span></a>
+  <a class="sb-thumb" href="../eastern/index.html" title="Eastern Switzerland"><img src="../img/chapters/eastern/w400.webp" alt="" /><span class="lbl">Eastern</span></a>
   <a class="sb-thumb" href="../central/index.html" title="Central Switzerland"><img src="../img/chapters/central/w400.webp" alt="" /><span class="lbl">Central</span></a>
   <a class="sb-thumb is-current" href="../valais/index.html" title="Valais"><img src="../img/chapters/valais/w400.webp" alt="" /><span class="lbl">Valais</span></a>
   <a class="sb-thumb" href="../fribourg/index.html" title="Fribourg"><img src="../img/chapters/fribourg/w400.webp" alt="" /><span class="lbl">Fribourg</span></a>
   <a class="sb-thumb" href="../western/index.html" title="Western Switzerland"><img src="../img/chapters/western/w400.webp" alt="" /><span class="lbl">Western</span></a>
-  <a class="sb-thumb" href="../eastern/index.html" title="Eastern Switzerland"><img src="../img/chapters/eastern/w400.webp" alt="" /><span class="lbl">Eastern</span></a>
   <a class="sb-thumb" href="../ticino/index.html" title="Ticino"><img src="../img/chapters/ticino/w400.webp" alt="" /><span class="lbl">Ticino</span></a>
   <a class="sb-thumb" href="../beyond/index.html" title="Beyond the Border"><img src="../img/chapters/beyond/w400.webp" alt="" /><span class="lbl">Beyond</span></a>
 </aside>
@@ -41,7 +47,7 @@
 
     <section class="slide slide-cover" id="cover" style="--region-color: 235, 184, 191;">
   <div class="cv-map">
-    <img src="../img/region-valais.svg" alt="Valais on the Swiss map" />
+    <img src="../img/region-valais.svg" alt="Valais on the Swiss map" fetchpriority="high" decoding="async" />
   </div>
   <div class="cv-content">
     <p class="cv-kicker">Region</p>
@@ -52,7 +58,7 @@
 
     <section class="chapter-views" aria-label="Valais spots">
       <div class="chapter-views-head">
-        <p class="chapter-views-meta">28 spots</p>
+        <p class="chapter-views-meta">29 spots</p>
         <div class="chapter-view-toggle" role="tablist" aria-label="Chapter view">
           <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span>Reader</span></button>
           <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Grid</span></button>
@@ -61,12 +67,15 @@
       <div class="chapter-list">
     <article class="cl-card" id="riffelsee" data-href="../spot/riffelsee/" tabindex="0" role="link" aria-label="Riffelsee">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/riffelsee_p0/w1800.webp" alt="Riffelsee" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/riffelsee_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/riffelsee_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <span class="hb-counter">1 / 3</span>
+        <img class="hb-slide is-current" src="../img/derivatives/riffelsee_p0/w1000.webp" srcset="../img/derivatives/riffelsee_p0/w400.webp 400w, ../img/derivatives/riffelsee_p0/w1000.webp 1000w, ../img/derivatives/riffelsee_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Riffelsee" loading="eager" fetchpriority="high" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/riffelsee_p1/w1000.webp" srcset="../img/derivatives/riffelsee_p1/w400.webp 400w, ../img/derivatives/riffelsee_p1/w1000.webp 1000w, ../img/derivatives/riffelsee_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/riffelsee_p2/w1000.webp" srcset="../img/derivatives/riffelsee_p2/w400.webp 400w, ../img/derivatives/riffelsee_p2/w1000.webp 1000w, ../img/derivatives/riffelsee_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/riffelsee_p3/w1000.webp" srcset="../img/derivatives/riffelsee_p3/w400.webp 400w, ../img/derivatives/riffelsee_p3/w1000.webp 1000w, ../img/derivatives/riffelsee_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/riffelsee_p4/w1000.webp" srcset="../img/derivatives/riffelsee_p4/w400.webp 400w, ../img/derivatives/riffelsee_p4/w1000.webp 1000w, ../img/derivatives/riffelsee_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/riffelsee_p5/w1000.webp" srcset="../img/derivatives/riffelsee_p5/w400.webp 400w, ../img/derivatives/riffelsee_p5/w1000.webp 1000w, ../img/derivatives/riffelsee_p5/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <span class="hb-counter">1 / 6</span>
         <span class="credit-pill hb-credit">Photo · @leon.helg</span>
-        <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
+        <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
       </div>
@@ -85,11 +94,12 @@
     </article>
     <article class="cl-card" id="zermatt_village" data-href="../spot/zermatt_village/" tabindex="0" role="link" aria-label="Zermatt Village">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/zermatt_village_p0/w1800.webp" alt="Zermatt Village" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/zermatt_village_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <span class="hb-counter">1 / 2</span>
+        <img class="hb-slide is-current" src="../img/derivatives/zermatt_village_p0/w1000.webp" srcset="../img/derivatives/zermatt_village_p0/w400.webp 400w, ../img/derivatives/zermatt_village_p0/w1000.webp 1000w, ../img/derivatives/zermatt_village_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Zermatt Village" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/zermatt_village_p1/w1000.webp" srcset="../img/derivatives/zermatt_village_p1/w400.webp 400w, ../img/derivatives/zermatt_village_p1/w1000.webp 1000w, ../img/derivatives/zermatt_village_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/zermatt_village_p2/w1000.webp" srcset="../img/derivatives/zermatt_village_p2/w400.webp 400w, ../img/derivatives/zermatt_village_p2/w1000.webp 1000w, ../img/derivatives/zermatt_village_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <span class="hb-counter">1 / 3</span>
         <span class="credit-pill hb-credit">Photo · @oliwear.j</span>
-        <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
+        <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
       </div>
@@ -108,8 +118,8 @@
     </article>
     <article class="cl-card" id="riffelalp" data-href="../spot/riffelalp/" tabindex="0" role="link" aria-label="Riffelalp">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/riffelalp_p0/w1800.webp" alt="Riffelalp" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/riffelalp_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/riffelalp_p0/w1000.webp" srcset="../img/derivatives/riffelalp_p0/w400.webp 400w, ../img/derivatives/riffelalp_p0/w1000.webp 1000w, ../img/derivatives/riffelalp_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Riffelalp" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/riffelalp_p1/w1000.webp" srcset="../img/derivatives/riffelalp_p1/w400.webp 400w, ../img/derivatives/riffelalp_p1/w1000.webp 1000w, ../img/derivatives/riffelalp_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         <span class="credit-pill hb-credit">Photo · @oliwear.j</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -131,9 +141,9 @@
     </article>
     <article class="cl-card" id="gorner_glacier" data-href="../spot/gorner_glacier/" tabindex="0" role="link" aria-label="Gorner Glacier">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/gorner_glacier_p0/w1800.webp" alt="Gorner Glacier" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/gorner_glacier_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/gorner_glacier_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/gorner_glacier_p0/w1000.webp" srcset="../img/derivatives/gorner_glacier_p0/w400.webp 400w, ../img/derivatives/gorner_glacier_p0/w1000.webp 1000w, ../img/derivatives/gorner_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Gorner Glacier" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/gorner_glacier_p1/w1000.webp" srcset="../img/derivatives/gorner_glacier_p1/w400.webp 400w, ../img/derivatives/gorner_glacier_p1/w1000.webp 1000w, ../img/derivatives/gorner_glacier_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/gorner_glacier_p2/w1000.webp" srcset="../img/derivatives/gorner_glacier_p2/w400.webp 400w, ../img/derivatives/gorner_glacier_p2/w1000.webp 1000w, ../img/derivatives/gorner_glacier_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
         <span class="credit-pill hb-credit">Photo · Thomas Lipke</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
@@ -155,8 +165,8 @@
     </article>
     <article class="cl-card" id="zermatt_huts" data-href="../spot/zermatt_huts/" tabindex="0" role="link" aria-label="Zermatt huts">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/zermatt_huts_p0/w1800.webp" alt="Zermatt huts" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/zermatt_huts_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/zermatt_huts_p0/w1000.webp" srcset="../img/derivatives/zermatt_huts_p0/w400.webp 400w, ../img/derivatives/zermatt_huts_p0/w1000.webp 1000w, ../img/derivatives/zermatt_huts_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Zermatt huts" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/zermatt_huts_p1/w1000.webp" srcset="../img/derivatives/zermatt_huts_p1/w400.webp 400w, ../img/derivatives/zermatt_huts_p1/w1000.webp 1000w, ../img/derivatives/zermatt_huts_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -178,11 +188,11 @@
     </article>
     <article class="cl-card" id="aletsch_glacier" data-href="../spot/aletsch_glacier/" tabindex="0" role="link" aria-label="Aletsch Glacier">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/aletsch_glacier_p0/w1800.webp" alt="Aletsch Glacier" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/aletsch_glacier_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/aletsch_glacier_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/aletsch_glacier_p3/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/aletsch_glacier_p4/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/aletsch_glacier_p0/w1000.webp" srcset="../img/derivatives/aletsch_glacier_p0/w400.webp 400w, ../img/derivatives/aletsch_glacier_p0/w1000.webp 1000w, ../img/derivatives/aletsch_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Aletsch Glacier" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/aletsch_glacier_p1/w1000.webp" srcset="../img/derivatives/aletsch_glacier_p1/w400.webp 400w, ../img/derivatives/aletsch_glacier_p1/w1000.webp 1000w, ../img/derivatives/aletsch_glacier_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/aletsch_glacier_p2/w1000.webp" srcset="../img/derivatives/aletsch_glacier_p2/w400.webp 400w, ../img/derivatives/aletsch_glacier_p2/w1000.webp 1000w, ../img/derivatives/aletsch_glacier_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/aletsch_glacier_p3/w1000.webp" srcset="../img/derivatives/aletsch_glacier_p3/w400.webp 400w, ../img/derivatives/aletsch_glacier_p3/w1000.webp 1000w, ../img/derivatives/aletsch_glacier_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/aletsch_glacier_p4/w1000.webp" srcset="../img/derivatives/aletsch_glacier_p4/w400.webp 400w, ../img/derivatives/aletsch_glacier_p4/w1000.webp 1000w, ../img/derivatives/aletsch_glacier_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 5</span>
         <span class="credit-pill hb-credit">Photo · Louise Pipet</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
@@ -204,9 +214,9 @@
     </article>
     <article class="cl-card" id="arolla_ice_cave" data-href="../spot/arolla_ice_cave/" tabindex="0" role="link" aria-label="Arolla Ice Cave">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/arolla_ice_cave_p0/w1800.webp" alt="Arolla Ice Cave" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/arolla_ice_cave_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/arolla_ice_cave_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/arolla_ice_cave_p0/w1000.webp" srcset="../img/derivatives/arolla_ice_cave_p0/w400.webp 400w, ../img/derivatives/arolla_ice_cave_p0/w1000.webp 1000w, ../img/derivatives/arolla_ice_cave_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Arolla Ice Cave" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/arolla_ice_cave_p1/w1000.webp" srcset="../img/derivatives/arolla_ice_cave_p1/w400.webp 400w, ../img/derivatives/arolla_ice_cave_p1/w1000.webp 1000w, ../img/derivatives/arolla_ice_cave_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/arolla_ice_cave_p2/w1000.webp" srcset="../img/derivatives/arolla_ice_cave_p2/w400.webp 400w, ../img/derivatives/arolla_ice_cave_p2/w1000.webp 1000w, ../img/derivatives/arolla_ice_cave_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
         <span class="credit-pill hb-credit">Photo · @glacionaut</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
@@ -228,9 +238,9 @@
     </article>
     <article class="cl-card" id="cabane_becs_de_bosson" data-href="../spot/cabane_becs_de_bosson/" tabindex="0" role="link" aria-label="Cabane Becs de Bosson">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/cabane_becs_de_bosson_p0/w1800.webp" alt="Cabane Becs de Bosson" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/cabane_becs_de_bosson_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/cabane_becs_de_bosson_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/cabane_becs_de_bosson_p0/w1000.webp" srcset="../img/derivatives/cabane_becs_de_bosson_p0/w400.webp 400w, ../img/derivatives/cabane_becs_de_bosson_p0/w1000.webp 1000w, ../img/derivatives/cabane_becs_de_bosson_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Cabane Becs de Bosson" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/cabane_becs_de_bosson_p1/w1000.webp" srcset="../img/derivatives/cabane_becs_de_bosson_p1/w400.webp 400w, ../img/derivatives/cabane_becs_de_bosson_p1/w1000.webp 1000w, ../img/derivatives/cabane_becs_de_bosson_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/cabane_becs_de_bosson_p2/w1000.webp" srcset="../img/derivatives/cabane_becs_de_bosson_p2/w400.webp 400w, ../img/derivatives/cabane_becs_de_bosson_p2/w1000.webp 1000w, ../img/derivatives/cabane_becs_de_bosson_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
         <span class="credit-pill hb-credit">Photo · @damien.bozzini</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
@@ -252,13 +262,13 @@
     </article>
     <article class="cl-card" id="moiry_glacier" data-href="../spot/moiry_glacier/" tabindex="0" role="link" aria-label="Moiry Glacier">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/moiry_glacier_p0/w1800.webp" alt="Moiry Glacier" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p3/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p4/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p5/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p6/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/moiry_glacier_p0/w1000.webp" srcset="../img/derivatives/moiry_glacier_p0/w400.webp 400w, ../img/derivatives/moiry_glacier_p0/w1000.webp 1000w, ../img/derivatives/moiry_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Moiry Glacier" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p1/w1000.webp" srcset="../img/derivatives/moiry_glacier_p1/w400.webp 400w, ../img/derivatives/moiry_glacier_p1/w1000.webp 1000w, ../img/derivatives/moiry_glacier_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p2/w1000.webp" srcset="../img/derivatives/moiry_glacier_p2/w400.webp 400w, ../img/derivatives/moiry_glacier_p2/w1000.webp 1000w, ../img/derivatives/moiry_glacier_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p3/w1000.webp" srcset="../img/derivatives/moiry_glacier_p3/w400.webp 400w, ../img/derivatives/moiry_glacier_p3/w1000.webp 1000w, ../img/derivatives/moiry_glacier_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p4/w1000.webp" srcset="../img/derivatives/moiry_glacier_p4/w400.webp 400w, ../img/derivatives/moiry_glacier_p4/w1000.webp 1000w, ../img/derivatives/moiry_glacier_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p5/w1000.webp" srcset="../img/derivatives/moiry_glacier_p5/w400.webp 400w, ../img/derivatives/moiry_glacier_p5/w1000.webp 1000w, ../img/derivatives/moiry_glacier_p5/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/moiry_glacier_p6/w1000.webp" srcset="../img/derivatives/moiry_glacier_p6/w400.webp 400w, ../img/derivatives/moiry_glacier_p6/w1000.webp 1000w, ../img/derivatives/moiry_glacier_p6/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 7</span>
         <span class="credit-pill hb-credit">Photo · @mofitrando</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
@@ -280,15 +290,15 @@
     </article>
     <article class="cl-card" id="the_ice_cave" data-href="../spot/the_ice_cave/" tabindex="0" role="link" aria-label="The Ice Cave">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/the_ice_cave_p0/w1800.webp" alt="The Ice Cave" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p3/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p4/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p5/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p6/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p7/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p8/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/the_ice_cave_p0/w1000.webp" srcset="../img/derivatives/the_ice_cave_p0/w400.webp 400w, ../img/derivatives/the_ice_cave_p0/w1000.webp 1000w, ../img/derivatives/the_ice_cave_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="The Ice Cave" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p1/w1000.webp" srcset="../img/derivatives/the_ice_cave_p1/w400.webp 400w, ../img/derivatives/the_ice_cave_p1/w1000.webp 1000w, ../img/derivatives/the_ice_cave_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p2/w1000.webp" srcset="../img/derivatives/the_ice_cave_p2/w400.webp 400w, ../img/derivatives/the_ice_cave_p2/w1000.webp 1000w, ../img/derivatives/the_ice_cave_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p3/w1000.webp" srcset="../img/derivatives/the_ice_cave_p3/w400.webp 400w, ../img/derivatives/the_ice_cave_p3/w1000.webp 1000w, ../img/derivatives/the_ice_cave_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p4/w1000.webp" srcset="../img/derivatives/the_ice_cave_p4/w400.webp 400w, ../img/derivatives/the_ice_cave_p4/w1000.webp 1000w, ../img/derivatives/the_ice_cave_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p5/w1000.webp" srcset="../img/derivatives/the_ice_cave_p5/w400.webp 400w, ../img/derivatives/the_ice_cave_p5/w1000.webp 1000w, ../img/derivatives/the_ice_cave_p5/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p6/w1000.webp" srcset="../img/derivatives/the_ice_cave_p6/w400.webp 400w, ../img/derivatives/the_ice_cave_p6/w1000.webp 1000w, ../img/derivatives/the_ice_cave_p6/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p7/w1000.webp" srcset="../img/derivatives/the_ice_cave_p7/w400.webp 400w, ../img/derivatives/the_ice_cave_p7/w1000.webp 1000w, ../img/derivatives/the_ice_cave_p7/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/the_ice_cave_p8/w1000.webp" srcset="../img/derivatives/the_ice_cave_p8/w400.webp 400w, ../img/derivatives/the_ice_cave_p8/w1000.webp 1000w, ../img/derivatives/the_ice_cave_p8/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 9</span>
         <span class="credit-pill hb-credit">Photo · @isleifureli</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
@@ -310,8 +320,8 @@
     </article>
     <article class="cl-card" id="ferpecle_glacier" data-href="../spot/ferpecle_glacier/" tabindex="0" role="link" aria-label="Ferpècle Glacier">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/ferpecle_glacier_p0/w1800.webp" alt="Ferpècle Glacier" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/ferpecle_glacier_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/ferpecle_glacier_p0/w1000.webp" srcset="../img/derivatives/ferpecle_glacier_p0/w400.webp 400w, ../img/derivatives/ferpecle_glacier_p0/w1000.webp 1000w, ../img/derivatives/ferpecle_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Ferpècle Glacier" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/ferpecle_glacier_p1/w1000.webp" srcset="../img/derivatives/ferpecle_glacier_p1/w400.webp 400w, ../img/derivatives/ferpecle_glacier_p1/w1000.webp 1000w, ../img/derivatives/ferpecle_glacier_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         <span class="credit-pill hb-credit">Photo · @mofitrando</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -333,9 +343,9 @@
     </article>
     <article class="cl-card" id="ferpecle_river" data-href="../spot/ferpecle_river/" tabindex="0" role="link" aria-label="Ferpècle River">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/ferpecle_river_p0/w1800.webp" alt="Ferpècle River" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/ferpecle_river_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/ferpecle_river_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/ferpecle_river_p0/w1000.webp" srcset="../img/derivatives/ferpecle_river_p0/w400.webp 400w, ../img/derivatives/ferpecle_river_p0/w1000.webp 1000w, ../img/derivatives/ferpecle_river_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Ferpècle River" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/ferpecle_river_p1/w1000.webp" srcset="../img/derivatives/ferpecle_river_p1/w400.webp 400w, ../img/derivatives/ferpecle_river_p1/w1000.webp 1000w, ../img/derivatives/ferpecle_river_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/ferpecle_river_p2/w1000.webp" srcset="../img/derivatives/ferpecle_river_p2/w400.webp 400w, ../img/derivatives/ferpecle_river_p2/w1000.webp 1000w, ../img/derivatives/ferpecle_river_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
         <span class="credit-pill hb-credit">Photo · @oliwvair</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
@@ -357,8 +367,8 @@
     </article>
     <article class="cl-card" id="spielboden" data-href="../spot/spielboden/" tabindex="0" role="link" aria-label="Spielboden">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/spielboden_p0/w1800.webp" alt="Spielboden" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/spielboden_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/spielboden_p0/w1000.webp" srcset="../img/derivatives/spielboden_p0/w400.webp 400w, ../img/derivatives/spielboden_p0/w1000.webp 1000w, ../img/derivatives/spielboden_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Spielboden" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/spielboden_p1/w1000.webp" srcset="../img/derivatives/spielboden_p1/w400.webp 400w, ../img/derivatives/spielboden_p1/w1000.webp 1000w, ../img/derivatives/spielboden_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         <span class="credit-pill hb-credit">Photo · @babooshka_pl</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -380,8 +390,8 @@
     </article>
     <article class="cl-card" id="goms_bridge" data-href="../spot/goms_bridge/" tabindex="0" role="link" aria-label="Goms Bridge">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/goms_bridge_p0/w1800.webp" alt="Goms Bridge" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/goms_bridge_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/goms_bridge_p0/w1000.webp" srcset="../img/derivatives/goms_bridge_p0/w400.webp 400w, ../img/derivatives/goms_bridge_p0/w1000.webp 1000w, ../img/derivatives/goms_bridge_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Goms Bridge" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/goms_bridge_p1/w1000.webp" srcset="../img/derivatives/goms_bridge_p1/w400.webp 400w, ../img/derivatives/goms_bridge_p1/w1000.webp 1000w, ../img/derivatives/goms_bridge_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         <span class="credit-pill hb-credit">Photo · Adrien Olichon</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -403,8 +413,8 @@
     </article>
     <article class="cl-card" id="randa_bridge" data-href="../spot/randa_bridge/" tabindex="0" role="link" aria-label="Randa Bridge">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/randa_bridge_p0/w1800.webp" alt="Randa Bridge" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/randa_bridge_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/randa_bridge_p0/w1000.webp" srcset="../img/derivatives/randa_bridge_p0/w400.webp 400w, ../img/derivatives/randa_bridge_p0/w1000.webp 1000w, ../img/derivatives/randa_bridge_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Randa Bridge" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/randa_bridge_p1/w1000.webp" srcset="../img/derivatives/randa_bridge_p1/w400.webp 400w, ../img/derivatives/randa_bridge_p1/w1000.webp 1000w, ../img/derivatives/randa_bridge_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         <span class="credit-pill hb-credit">Photo · @tricking.adventures</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -426,7 +436,7 @@
     </article>
     <article class="cl-card" id="barrhorn" data-href="../spot/barrhorn/" tabindex="0" role="link" aria-label="Barrhorn">
       <div class="cl-photos">
-        <img src="../img/derivatives/barrhorn_p0/w1800.webp" alt="Barrhorn" loading="lazy" />
+        <img src="../img/derivatives/barrhorn_p0/w1000.webp" srcset="../img/derivatives/barrhorn_p0/w400.webp 400w, ../img/derivatives/barrhorn_p0/w1000.webp 1000w, ../img/derivatives/barrhorn_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Barrhorn" loading="lazy" />
         <span class="credit-pill">Photo · Szocs Zoltan</span>
       </div>
       <div class="cl-body">
@@ -444,8 +454,8 @@
     </article>
     <article class="cl-card" id="saas_fee_glacier" data-href="../spot/saas_fee_glacier/" tabindex="0" role="link" aria-label="Saas Fee Glacier">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/saas_fee_glacier_p0/w1800.webp" alt="Saas Fee Glacier" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/saas_fee_glacier_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/saas_fee_glacier_p0/w1000.webp" srcset="../img/derivatives/saas_fee_glacier_p0/w400.webp 400w, ../img/derivatives/saas_fee_glacier_p0/w1000.webp 1000w, ../img/derivatives/saas_fee_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Saas Fee Glacier" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/saas_fee_glacier_p1/w1000.webp" srcset="../img/derivatives/saas_fee_glacier_p1/w400.webp 400w, ../img/derivatives/saas_fee_glacier_p1/w1000.webp 1000w, ../img/derivatives/saas_fee_glacier_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         <span class="credit-pill hb-credit">Photo · @oliwear.j</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -467,8 +477,8 @@
     </article>
     <article class="cl-card" id="lac_de_derborence" data-href="../spot/lac_de_derborence/" tabindex="0" role="link" aria-label="Derborence Lake">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/lac_de_derborence_p0/w1800.webp" alt="Derborence Lake" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/lac_de_derborence_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/lac_de_derborence_p0/w1000.webp" srcset="../img/derivatives/lac_de_derborence_p0/w400.webp 400w, ../img/derivatives/lac_de_derborence_p0/w1000.webp 1000w, ../img/derivatives/lac_de_derborence_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Derborence Lake" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/lac_de_derborence_p1/w1000.webp" srcset="../img/derivatives/lac_de_derborence_p1/w400.webp 400w, ../img/derivatives/lac_de_derborence_p1/w1000.webp 1000w, ../img/derivatives/lac_de_derborence_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -490,13 +500,13 @@
     </article>
     <article class="cl-card" id="la_fouly" data-href="../spot/la_fouly/" tabindex="0" role="link" aria-label="La Fouly">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/la_fouly_p0/w1800.webp" alt="La Fouly" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/la_fouly_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/la_fouly_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/la_fouly_p3/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/la_fouly_p4/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/la_fouly_p5/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/la_fouly_p6/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/la_fouly_p0/w1000.webp" srcset="../img/derivatives/la_fouly_p0/w400.webp 400w, ../img/derivatives/la_fouly_p0/w1000.webp 1000w, ../img/derivatives/la_fouly_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="La Fouly" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/la_fouly_p1/w1000.webp" srcset="../img/derivatives/la_fouly_p1/w400.webp 400w, ../img/derivatives/la_fouly_p1/w1000.webp 1000w, ../img/derivatives/la_fouly_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/la_fouly_p2/w1000.webp" srcset="../img/derivatives/la_fouly_p2/w400.webp 400w, ../img/derivatives/la_fouly_p2/w1000.webp 1000w, ../img/derivatives/la_fouly_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/la_fouly_p3/w1000.webp" srcset="../img/derivatives/la_fouly_p3/w400.webp 400w, ../img/derivatives/la_fouly_p3/w1000.webp 1000w, ../img/derivatives/la_fouly_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/la_fouly_p4/w1000.webp" srcset="../img/derivatives/la_fouly_p4/w400.webp 400w, ../img/derivatives/la_fouly_p4/w1000.webp 1000w, ../img/derivatives/la_fouly_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/la_fouly_p5/w1000.webp" srcset="../img/derivatives/la_fouly_p5/w400.webp 400w, ../img/derivatives/la_fouly_p5/w1000.webp 1000w, ../img/derivatives/la_fouly_p5/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/la_fouly_p6/w1000.webp" srcset="../img/derivatives/la_fouly_p6/w400.webp 400w, ../img/derivatives/la_fouly_p6/w1000.webp 1000w, ../img/derivatives/la_fouly_p6/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 7</span>
         <span class="credit-pill hb-credit">Photo · @explore_a_perte_de_vue</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
@@ -518,9 +528,9 @@
     </article>
     <article class="cl-card" id="sanetschpass" data-href="../spot/sanetschpass/" tabindex="0" role="link" aria-label="Sanetschpass">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/sanetschpass_p0/w1800.webp" alt="Sanetschpass" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/sanetschpass_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/sanetschpass_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/sanetschpass_p0/w1000.webp" srcset="../img/derivatives/sanetschpass_p0/w400.webp 400w, ../img/derivatives/sanetschpass_p0/w1000.webp 1000w, ../img/derivatives/sanetschpass_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Sanetschpass" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/sanetschpass_p1/w1000.webp" srcset="../img/derivatives/sanetschpass_p1/w400.webp 400w, ../img/derivatives/sanetschpass_p1/w1000.webp 1000w, ../img/derivatives/sanetschpass_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/sanetschpass_p2/w1000.webp" srcset="../img/derivatives/sanetschpass_p2/w400.webp 400w, ../img/derivatives/sanetschpass_p2/w1000.webp 1000w, ../img/derivatives/sanetschpass_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
         <span class="credit-pill hb-credit">Photo · @berniejustlooksaround</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
@@ -542,10 +552,10 @@
     </article>
     <article class="cl-card" id="gorges_du_durnand" data-href="../spot/gorges_du_durnand/" tabindex="0" role="link" aria-label="Gorges du Durnand">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/gorges_du_durnand_p0/w1800.webp" alt="Gorges du Durnand" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/gorges_du_durnand_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/gorges_du_durnand_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/gorges_du_durnand_p3/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/gorges_du_durnand_p0/w1000.webp" srcset="../img/derivatives/gorges_du_durnand_p0/w400.webp 400w, ../img/derivatives/gorges_du_durnand_p0/w1000.webp 1000w, ../img/derivatives/gorges_du_durnand_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Gorges du Durnand" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/gorges_du_durnand_p1/w1000.webp" srcset="../img/derivatives/gorges_du_durnand_p1/w400.webp 400w, ../img/derivatives/gorges_du_durnand_p1/w1000.webp 1000w, ../img/derivatives/gorges_du_durnand_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/gorges_du_durnand_p2/w1000.webp" srcset="../img/derivatives/gorges_du_durnand_p2/w400.webp 400w, ../img/derivatives/gorges_du_durnand_p2/w1000.webp 1000w, ../img/derivatives/gorges_du_durnand_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/gorges_du_durnand_p3/w1000.webp" srcset="../img/derivatives/gorges_du_durnand_p3/w400.webp 400w, ../img/derivatives/gorges_du_durnand_p3/w1000.webp 1000w, ../img/derivatives/gorges_du_durnand_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
         <span class="credit-pill hb-credit">Photo · @travelwithmaria_</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
@@ -567,10 +577,10 @@
     </article>
     <article class="cl-card" id="gorges_du_dailley" data-href="../spot/gorges_du_dailley/" tabindex="0" role="link" aria-label="Gorges du Dailley">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/gorges_du_dailley_p0/w1800.webp" alt="Gorges du Dailley" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/gorges_du_dailley_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/gorges_du_dailley_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/gorges_du_dailley_p3/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/gorges_du_dailley_p0/w1000.webp" srcset="../img/derivatives/gorges_du_dailley_p0/w400.webp 400w, ../img/derivatives/gorges_du_dailley_p0/w1000.webp 1000w, ../img/derivatives/gorges_du_dailley_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Gorges du Dailley" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/gorges_du_dailley_p1/w1000.webp" srcset="../img/derivatives/gorges_du_dailley_p1/w400.webp 400w, ../img/derivatives/gorges_du_dailley_p1/w1000.webp 1000w, ../img/derivatives/gorges_du_dailley_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/gorges_du_dailley_p2/w1000.webp" srcset="../img/derivatives/gorges_du_dailley_p2/w400.webp 400w, ../img/derivatives/gorges_du_dailley_p2/w1000.webp 1000w, ../img/derivatives/gorges_du_dailley_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/gorges_du_dailley_p3/w1000.webp" srcset="../img/derivatives/gorges_du_dailley_p3/w400.webp 400w, ../img/derivatives/gorges_du_dailley_p3/w1000.webp 1000w, ../img/derivatives/gorges_du_dailley_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
         <span class="credit-pill hb-credit">Photo · @hebergements_les_rochers</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
@@ -592,9 +602,9 @@
     </article>
     <article class="cl-card" id="nax_via_ferrata" data-href="../spot/nax_via_ferrata/" tabindex="0" role="link" aria-label="Nax Via Ferrata">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/nax_via_ferrata_p0/w1800.webp" alt="Nax Via Ferrata" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/nax_via_ferrata_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/nax_via_ferrata_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/nax_via_ferrata_p0/w1000.webp" srcset="../img/derivatives/nax_via_ferrata_p0/w400.webp 400w, ../img/derivatives/nax_via_ferrata_p0/w1000.webp 1000w, ../img/derivatives/nax_via_ferrata_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Nax Via Ferrata" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/nax_via_ferrata_p1/w1000.webp" srcset="../img/derivatives/nax_via_ferrata_p1/w400.webp 400w, ../img/derivatives/nax_via_ferrata_p1/w1000.webp 1000w, ../img/derivatives/nax_via_ferrata_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/nax_via_ferrata_p2/w1000.webp" srcset="../img/derivatives/nax_via_ferrata_p2/w400.webp 400w, ../img/derivatives/nax_via_ferrata_p2/w1000.webp 1000w, ../img/derivatives/nax_via_ferrata_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
         <span class="credit-pill hb-credit">Photo · @tanguy.espejo</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
@@ -616,8 +626,8 @@
     </article>
     <article class="cl-card" id="crans_montana" data-href="../spot/crans_montana/" tabindex="0" role="link" aria-label="Crans-Montana">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/crans_montana_p0/w1800.webp" alt="Crans-Montana" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/crans_montana_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/crans_montana_p0/w1000.webp" srcset="../img/derivatives/crans_montana_p0/w400.webp 400w, ../img/derivatives/crans_montana_p0/w1000.webp 1000w, ../img/derivatives/crans_montana_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Crans-Montana" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/crans_montana_p1/w1000.webp" srcset="../img/derivatives/crans_montana_p1/w400.webp 400w, ../img/derivatives/crans_montana_p1/w1000.webp 1000w, ../img/derivatives/crans_montana_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         <span class="credit-pill hb-credit">Photo · Artiom Vallat</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -639,10 +649,10 @@
     </article>
     <article class="cl-card" id="tseuzier_lake" data-href="../spot/tseuzier_lake/" tabindex="0" role="link" aria-label="Tseuzier Lake">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/tseuzier_lake_p0/w1800.webp" alt="Tseuzier Lake" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/tseuzier_lake_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/tseuzier_lake_p2/w1800.webp" alt="" loading="lazy" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/tseuzier_lake_p3/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/tseuzier_lake_p0/w1000.webp" srcset="../img/derivatives/tseuzier_lake_p0/w400.webp 400w, ../img/derivatives/tseuzier_lake_p0/w1000.webp 1000w, ../img/derivatives/tseuzier_lake_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Tseuzier Lake" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/tseuzier_lake_p1/w1000.webp" srcset="../img/derivatives/tseuzier_lake_p1/w400.webp 400w, ../img/derivatives/tseuzier_lake_p1/w1000.webp 1000w, ../img/derivatives/tseuzier_lake_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/tseuzier_lake_p2/w1000.webp" srcset="../img/derivatives/tseuzier_lake_p2/w400.webp 400w, ../img/derivatives/tseuzier_lake_p2/w1000.webp 1000w, ../img/derivatives/tseuzier_lake_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/tseuzier_lake_p3/w1000.webp" srcset="../img/derivatives/tseuzier_lake_p3/w400.webp 400w, ../img/derivatives/tseuzier_lake_p3/w1000.webp 1000w, ../img/derivatives/tseuzier_lake_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
         <span class="credit-pill hb-credit">Photo · @benwe_</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
@@ -664,8 +674,8 @@
     </article>
     <article class="cl-card" id="salanfe_lake" data-href="../spot/salanfe_lake/" tabindex="0" role="link" aria-label="Salanfe Lake">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/salanfe_lake_p0/w1800.webp" alt="Salanfe Lake" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/salanfe_lake_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/salanfe_lake_p0/w1000.webp" srcset="../img/derivatives/salanfe_lake_p0/w400.webp 400w, ../img/derivatives/salanfe_lake_p0/w1000.webp 1000w, ../img/derivatives/salanfe_lake_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Salanfe Lake" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/salanfe_lake_p1/w1000.webp" srcset="../img/derivatives/salanfe_lake_p1/w400.webp 400w, ../img/derivatives/salanfe_lake_p1/w1000.webp 1000w, ../img/derivatives/salanfe_lake_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         <span class="credit-pill hb-credit">Photo · @guidos.tours</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -687,8 +697,8 @@
     </article>
     <article class="cl-card" id="la_tzoumaz" data-href="../spot/la_tzoumaz/" tabindex="0" role="link" aria-label="La Tzoumaz">
       <div class="cl-photos hb-multi">
-        <img class="hb-slide is-current" src="../img/derivatives/la_tzoumaz_p0/w1800.webp" alt="La Tzoumaz" loading="eager" draggable="false" />
-        <img class="hb-slide" src="../img/derivatives/la_tzoumaz_p1/w1800.webp" alt="" loading="lazy" draggable="false" />
+        <img class="hb-slide is-current" src="../img/derivatives/la_tzoumaz_p0/w1000.webp" srcset="../img/derivatives/la_tzoumaz_p0/w400.webp 400w, ../img/derivatives/la_tzoumaz_p0/w1000.webp 1000w, ../img/derivatives/la_tzoumaz_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="La Tzoumaz" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/la_tzoumaz_p1/w1000.webp" srcset="../img/derivatives/la_tzoumaz_p1/w400.webp 400w, ../img/derivatives/la_tzoumaz_p1/w1000.webp 1000w, ../img/derivatives/la_tzoumaz_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
         
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
@@ -710,7 +720,7 @@
     </article>
     <article class="cl-card" id="pointe_du_tsate" data-href="../spot/pointe_du_tsate/" tabindex="0" role="link" aria-label="Pointe du Tsaté">
       <div class="cl-photos">
-        <img src="../img/derivatives/pointe_du_tsate_p0/w1800.webp" alt="Pointe du Tsaté" loading="lazy" />
+        <img src="../img/derivatives/pointe_du_tsate_p0/w1000.webp" srcset="../img/derivatives/pointe_du_tsate_p0/w400.webp 400w, ../img/derivatives/pointe_du_tsate_p0/w1000.webp 1000w, ../img/derivatives/pointe_du_tsate_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Pointe du Tsaté" loading="lazy" />
         <span class="credit-pill">Photo · @sherpa__tenzin</span>
       </div>
       <div class="cl-body">
@@ -726,11 +736,34 @@
       <a class="cl-maps" href="https://www.google.com/maps/place/Pointe+du+Tsat%C3%A9/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f2f60dbe88dcd:0xda318e579dad731!8m2!3d46.109369!4d7.5488781!16s%2Fm%2F047prqz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
       </div>
     </article>
+    <article class="cl-card" id="zinal_glacier" data-href="../spot/zinal_glacier/" tabindex="0" role="link" aria-label="Zinal Glacier">
+      <div class="cl-photos hb-multi">
+        <img class="hb-slide is-current" src="../img/derivatives/zinal_glacier_p0/w1000.webp" srcset="../img/derivatives/zinal_glacier_p0/w400.webp 400w, ../img/derivatives/zinal_glacier_p0/w1000.webp 1000w, ../img/derivatives/zinal_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Zinal Glacier" loading="lazy" draggable="false" />
+        <img class="hb-slide" src="../img/derivatives/zinal_glacier_p1/w1000.webp" srcset="../img/derivatives/zinal_glacier_p1/w400.webp 400w, ../img/derivatives/zinal_glacier_p1/w1000.webp 1000w, ../img/derivatives/zinal_glacier_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
+        <span class="hb-counter">1 / 2</span>
+        <span class="credit-pill hb-credit">Photo · @oliwear.j</span>
+        <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
+        <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+      <div class="cl-body">
+        <p class="cl-kicker">AN ICE CAVE UNDER THE TONGUE</p>
+        <h2 class="cl-title">Zinal Glacier</h2>
+        <p class="cl-subhead">Ice caves under the Zinal glacier tongue. Blue ceilings and frozen waterfall pillars, when the cave is still standing.</p>
+        <div class="cl-specs">
+        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Val d&#x27;Anniviers, Valais</span></div>
+        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Hike from Zinal village</span></div>
+        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate</span></div>
+        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Cold winter midday for the blue ceiling</span></div>
+        </div>
+      <a class="cl-maps" href="https://maps.app.goo.gl/iNSmLEysBjyASGMy9" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      </div>
+    </article>
       </div>
       <div class="chapter-grid-inner">
     <a class="ch-tile" href="../spot/riffelsee/" title="Riffelsee">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/riffelsee_p0/w1800.webp" alt="Riffelsee" loading="lazy" />
+        <img src="../img/derivatives/riffelsee_p0/w1000.webp" srcset="../img/derivatives/riffelsee_p0/w400.webp 400w, ../img/derivatives/riffelsee_p0/w1000.webp 1000w, ../img/derivatives/riffelsee_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Riffelsee" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">LAKES</p>
@@ -739,7 +772,7 @@
     </a>
     <a class="ch-tile" href="../spot/zermatt_village/" title="Zermatt Village">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/zermatt_village_p0/w1800.webp" alt="Zermatt Village" loading="lazy" />
+        <img src="../img/derivatives/zermatt_village_p0/w1000.webp" srcset="../img/derivatives/zermatt_village_p0/w400.webp 400w, ../img/derivatives/zermatt_village_p0/w1000.webp 1000w, ../img/derivatives/zermatt_village_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Zermatt Village" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">VILLAGES</p>
@@ -748,7 +781,7 @@
     </a>
     <a class="ch-tile" href="../spot/riffelalp/" title="Riffelalp">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/riffelalp_p0/w1800.webp" alt="Riffelalp" loading="lazy" />
+        <img src="../img/derivatives/riffelalp_p0/w1000.webp" srcset="../img/derivatives/riffelalp_p0/w400.webp 400w, ../img/derivatives/riffelalp_p0/w1000.webp 1000w, ../img/derivatives/riffelalp_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Riffelalp" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">VIEWPOINTS</p>
@@ -757,7 +790,7 @@
     </a>
     <a class="ch-tile" href="../spot/gorner_glacier/" title="Gorner Glacier">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/gorner_glacier_p0/w1800.webp" alt="Gorner Glacier" loading="lazy" />
+        <img src="../img/derivatives/gorner_glacier_p0/w1000.webp" srcset="../img/derivatives/gorner_glacier_p0/w400.webp 400w, ../img/derivatives/gorner_glacier_p0/w1000.webp 1000w, ../img/derivatives/gorner_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Gorner Glacier" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">GLACIERS</p>
@@ -766,7 +799,7 @@
     </a>
     <a class="ch-tile" href="../spot/zermatt_huts/" title="Zermatt huts">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/zermatt_huts_p0/w1800.webp" alt="Zermatt huts" loading="lazy" />
+        <img src="../img/derivatives/zermatt_huts_p0/w1000.webp" srcset="../img/derivatives/zermatt_huts_p0/w400.webp 400w, ../img/derivatives/zermatt_huts_p0/w1000.webp 1000w, ../img/derivatives/zermatt_huts_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Zermatt huts" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">OLD WOOD, SURREAL LIGHT</p>
@@ -775,7 +808,7 @@
     </a>
     <a class="ch-tile" href="../spot/aletsch_glacier/" title="Aletsch Glacier">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/aletsch_glacier_p0/w1800.webp" alt="Aletsch Glacier" loading="lazy" />
+        <img src="../img/derivatives/aletsch_glacier_p0/w1000.webp" srcset="../img/derivatives/aletsch_glacier_p0/w400.webp 400w, ../img/derivatives/aletsch_glacier_p0/w1000.webp 1000w, ../img/derivatives/aletsch_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Aletsch Glacier" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">SWITZERLAND&#x27;S LARGEST, FOR NOW</p>
@@ -784,7 +817,7 @@
     </a>
     <a class="ch-tile" href="../spot/arolla_ice_cave/" title="Arolla Ice Cave">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/arolla_ice_cave_p0/w1800.webp" alt="Arolla Ice Cave" loading="lazy" />
+        <img src="../img/derivatives/arolla_ice_cave_p0/w1000.webp" srcset="../img/derivatives/arolla_ice_cave_p0/w400.webp 400w, ../img/derivatives/arolla_ice_cave_p0/w1000.webp 1000w, ../img/derivatives/arolla_ice_cave_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Arolla Ice Cave" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">GLACIERS</p>
@@ -793,7 +826,7 @@
     </a>
     <a class="ch-tile" href="../spot/cabane_becs_de_bosson/" title="Cabane Becs de Bosson">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/cabane_becs_de_bosson_p0/w1800.webp" alt="Cabane Becs de Bosson" loading="lazy" />
+        <img src="../img/derivatives/cabane_becs_de_bosson_p0/w1000.webp" srcset="../img/derivatives/cabane_becs_de_bosson_p0/w400.webp 400w, ../img/derivatives/cabane_becs_de_bosson_p0/w1000.webp 1000w, ../img/derivatives/cabane_becs_de_bosson_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Cabane Becs de Bosson" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">SLEEP HIGH, EAT WELL</p>
@@ -802,7 +835,7 @@
     </a>
     <a class="ch-tile" href="../spot/moiry_glacier/" title="Moiry Glacier">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/moiry_glacier_p0/w1800.webp" alt="Moiry Glacier" loading="lazy" />
+        <img src="../img/derivatives/moiry_glacier_p0/w1000.webp" srcset="../img/derivatives/moiry_glacier_p0/w400.webp 400w, ../img/derivatives/moiry_glacier_p0/w1000.webp 1000w, ../img/derivatives/moiry_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Moiry Glacier" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">A HUT ABOVE THE ICE</p>
@@ -811,7 +844,7 @@
     </a>
     <a class="ch-tile" href="../spot/the_ice_cave/" title="The Ice Cave">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/the_ice_cave_p0/w1800.webp" alt="The Ice Cave" loading="lazy" />
+        <img src="../img/derivatives/the_ice_cave_p0/w1000.webp" srcset="../img/derivatives/the_ice_cave_p0/w400.webp 400w, ../img/derivatives/the_ice_cave_p0/w1000.webp 1000w, ../img/derivatives/the_ice_cave_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="The Ice Cave" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">DEEP WINTER ONLY, AND ONLY IF IT&#x27;S COLD</p>
@@ -820,7 +853,7 @@
     </a>
     <a class="ch-tile" href="../spot/ferpecle_glacier/" title="Ferpècle Glacier">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/ferpecle_glacier_p0/w1800.webp" alt="Ferpècle Glacier" loading="lazy" />
+        <img src="../img/derivatives/ferpecle_glacier_p0/w1000.webp" srcset="../img/derivatives/ferpecle_glacier_p0/w400.webp 400w, ../img/derivatives/ferpecle_glacier_p0/w1000.webp 1000w, ../img/derivatives/ferpecle_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Ferpècle Glacier" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">A GLACIER YOU CAN STILL REACH ON FOOT</p>
@@ -829,7 +862,7 @@
     </a>
     <a class="ch-tile" href="../spot/ferpecle_river/" title="Ferpècle River">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/ferpecle_river_p0/w1800.webp" alt="Ferpècle River" loading="lazy" />
+        <img src="../img/derivatives/ferpecle_river_p0/w1000.webp" srcset="../img/derivatives/ferpecle_river_p0/w400.webp 400w, ../img/derivatives/ferpecle_river_p0/w1000.webp 1000w, ../img/derivatives/ferpecle_river_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Ferpècle River" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">ABSTRACT FROM ABOVE</p>
@@ -838,7 +871,7 @@
     </a>
     <a class="ch-tile" href="../spot/spielboden/" title="Spielboden">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/spielboden_p0/w1800.webp" alt="Spielboden" loading="lazy" />
+        <img src="../img/derivatives/spielboden_p0/w1000.webp" srcset="../img/derivatives/spielboden_p0/w400.webp 400w, ../img/derivatives/spielboden_p0/w1000.webp 1000w, ../img/derivatives/spielboden_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Spielboden" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">THE EASIEST MARMOTS IN SWITZERLAND</p>
@@ -847,7 +880,7 @@
     </a>
     <a class="ch-tile" href="../spot/goms_bridge/" title="Goms Bridge">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/goms_bridge_p0/w1800.webp" alt="Goms Bridge" loading="lazy" />
+        <img src="../img/derivatives/goms_bridge_p0/w1000.webp" srcset="../img/derivatives/goms_bridge_p0/w400.webp 400w, ../img/derivatives/goms_bridge_p0/w1000.webp 1000w, ../img/derivatives/goms_bridge_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Goms Bridge" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">BRIDGES</p>
@@ -856,7 +889,7 @@
     </a>
     <a class="ch-tile" href="../spot/randa_bridge/" title="Randa Bridge">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/randa_bridge_p0/w1800.webp" alt="Randa Bridge" loading="lazy" />
+        <img src="../img/derivatives/randa_bridge_p0/w1000.webp" srcset="../img/derivatives/randa_bridge_p0/w400.webp 400w, ../img/derivatives/randa_bridge_p0/w1000.webp 1000w, ../img/derivatives/randa_bridge_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Randa Bridge" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">BRIDGES</p>
@@ -865,7 +898,7 @@
     </a>
     <a class="ch-tile" href="../spot/barrhorn/" title="Barrhorn">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/barrhorn_p0/w1800.webp" alt="Barrhorn" loading="lazy" />
+        <img src="../img/derivatives/barrhorn_p0/w1000.webp" srcset="../img/derivatives/barrhorn_p0/w400.webp 400w, ../img/derivatives/barrhorn_p0/w1000.webp 1000w, ../img/derivatives/barrhorn_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Barrhorn" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">SUMMITS</p>
@@ -874,7 +907,7 @@
     </a>
     <a class="ch-tile" href="../spot/saas_fee_glacier/" title="Saas Fee Glacier">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/saas_fee_glacier_p0/w1800.webp" alt="Saas Fee Glacier" loading="lazy" />
+        <img src="../img/derivatives/saas_fee_glacier_p0/w1000.webp" srcset="../img/derivatives/saas_fee_glacier_p0/w400.webp 400w, ../img/derivatives/saas_fee_glacier_p0/w1000.webp 1000w, ../img/derivatives/saas_fee_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Saas Fee Glacier" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">13,000 YEARS OF ICE, RETREATING FAST</p>
@@ -883,7 +916,7 @@
     </a>
     <a class="ch-tile" href="../spot/lac_de_derborence/" title="Derborence Lake">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/lac_de_derborence_p0/w1800.webp" alt="Derborence Lake" loading="lazy" />
+        <img src="../img/derivatives/lac_de_derborence_p0/w1000.webp" srcset="../img/derivatives/lac_de_derborence_p0/w400.webp 400w, ../img/derivatives/lac_de_derborence_p0/w1000.webp 1000w, ../img/derivatives/lac_de_derborence_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Derborence Lake" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">DROWNED TREES, STILL STANDING</p>
@@ -892,7 +925,7 @@
     </a>
     <a class="ch-tile" href="../spot/la_fouly/" title="La Fouly">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/la_fouly_p0/w1800.webp" alt="La Fouly" loading="lazy" />
+        <img src="../img/derivatives/la_fouly_p0/w1000.webp" srcset="../img/derivatives/la_fouly_p0/w400.webp 400w, ../img/derivatives/la_fouly_p0/w1000.webp 1000w, ../img/derivatives/la_fouly_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="La Fouly" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">A VILLAGE AT THE MOUTH OF A GLACIER</p>
@@ -901,7 +934,7 @@
     </a>
     <a class="ch-tile" href="../spot/sanetschpass/" title="Sanetschpass">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/sanetschpass_p0/w1800.webp" alt="Sanetschpass" loading="lazy" />
+        <img src="../img/derivatives/sanetschpass_p0/w1000.webp" srcset="../img/derivatives/sanetschpass_p0/w400.webp 400w, ../img/derivatives/sanetschpass_p0/w1000.webp 1000w, ../img/derivatives/sanetschpass_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Sanetschpass" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">A PASS WITH A LAKE ON TOP</p>
@@ -910,7 +943,7 @@
     </a>
     <a class="ch-tile" href="../spot/gorges_du_durnand/" title="Gorges du Durnand">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/gorges_du_durnand_p0/w1800.webp" alt="Gorges du Durnand" loading="lazy" />
+        <img src="../img/derivatives/gorges_du_durnand_p0/w1000.webp" srcset="../img/derivatives/gorges_du_durnand_p0/w400.webp 400w, ../img/derivatives/gorges_du_durnand_p0/w1000.webp 1000w, ../img/derivatives/gorges_du_durnand_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Gorges du Durnand" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">A CANYON HUNG WITH IRON WALKWAYS</p>
@@ -919,7 +952,7 @@
     </a>
     <a class="ch-tile" href="../spot/gorges_du_dailley/" title="Gorges du Dailley">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/gorges_du_dailley_p0/w1800.webp" alt="Gorges du Dailley" loading="lazy" />
+        <img src="../img/derivatives/gorges_du_dailley_p0/w1000.webp" srcset="../img/derivatives/gorges_du_dailley_p0/w400.webp 400w, ../img/derivatives/gorges_du_dailley_p0/w1000.webp 1000w, ../img/derivatives/gorges_du_dailley_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Gorges du Dailley" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">NARROWER, OLDER, LESS KNOWN</p>
@@ -928,7 +961,7 @@
     </a>
     <a class="ch-tile" href="../spot/nax_via_ferrata/" title="Nax Via Ferrata">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/nax_via_ferrata_p0/w1800.webp" alt="Nax Via Ferrata" loading="lazy" />
+        <img src="../img/derivatives/nax_via_ferrata_p0/w1000.webp" srcset="../img/derivatives/nax_via_ferrata_p0/w400.webp 400w, ../img/derivatives/nax_via_ferrata_p0/w1000.webp 1000w, ../img/derivatives/nax_via_ferrata_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Nax Via Ferrata" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">A SHORT VERTICAL WITH BIG CONSEQUENCE</p>
@@ -937,7 +970,7 @@
     </a>
     <a class="ch-tile" href="../spot/crans_montana/" title="Crans-Montana">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/crans_montana_p0/w1800.webp" alt="Crans-Montana" loading="lazy" />
+        <img src="../img/derivatives/crans_montana_p0/w1000.webp" srcset="../img/derivatives/crans_montana_p0/w400.webp 400w, ../img/derivatives/crans_montana_p0/w1000.webp 1000w, ../img/derivatives/crans_montana_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Crans-Montana" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">THE SKI STATION IN SUMMER</p>
@@ -946,7 +979,7 @@
     </a>
     <a class="ch-tile" href="../spot/tseuzier_lake/" title="Tseuzier Lake">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/tseuzier_lake_p0/w1800.webp" alt="Tseuzier Lake" loading="lazy" />
+        <img src="../img/derivatives/tseuzier_lake_p0/w1000.webp" srcset="../img/derivatives/tseuzier_lake_p0/w400.webp 400w, ../img/derivatives/tseuzier_lake_p0/w1000.webp 1000w, ../img/derivatives/tseuzier_lake_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Tseuzier Lake" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">A LAKE THAT REFLECTS LIKE GLASS</p>
@@ -955,7 +988,7 @@
     </a>
     <a class="ch-tile" href="../spot/salanfe_lake/" title="Salanfe Lake">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/salanfe_lake_p0/w1800.webp" alt="Salanfe Lake" loading="lazy" />
+        <img src="../img/derivatives/salanfe_lake_p0/w1000.webp" srcset="../img/derivatives/salanfe_lake_p0/w400.webp 400w, ../img/derivatives/salanfe_lake_p0/w1000.webp 1000w, ../img/derivatives/salanfe_lake_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Salanfe Lake" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">A HIDDEN LAKE IN A HANGING VALLEY</p>
@@ -964,7 +997,7 @@
     </a>
     <a class="ch-tile" href="../spot/la_tzoumaz/" title="La Tzoumaz">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/la_tzoumaz_p0/w1800.webp" alt="La Tzoumaz" loading="lazy" />
+        <img src="../img/derivatives/la_tzoumaz_p0/w1000.webp" srcset="../img/derivatives/la_tzoumaz_p0/w400.webp 400w, ../img/derivatives/la_tzoumaz_p0/w1000.webp 1000w, ../img/derivatives/la_tzoumaz_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="La Tzoumaz" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">FROZEN PINES, A TWENTY-MINUTE WINDOW</p>
@@ -973,11 +1006,20 @@
     </a>
     <a class="ch-tile" href="../spot/pointe_du_tsate/" title="Pointe du Tsaté">
       <div class="ch-tile-photo">
-        <img src="../img/derivatives/pointe_du_tsate_p0/w1800.webp" alt="Pointe du Tsaté" loading="lazy" />
+        <img src="../img/derivatives/pointe_du_tsate_p0/w1000.webp" srcset="../img/derivatives/pointe_du_tsate_p0/w400.webp 400w, ../img/derivatives/pointe_du_tsate_p0/w1000.webp 1000w, ../img/derivatives/pointe_du_tsate_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Pointe du Tsaté" loading="lazy" />
       </div>
       <div class="ch-tile-meta">
         <p class="ch-tile-kicker">SUMMITS</p>
         <h3 class="ch-tile-title">Pointe du Tsaté</h3>
+      </div>
+    </a>
+    <a class="ch-tile" href="../spot/zinal_glacier/" title="Zinal Glacier">
+      <div class="ch-tile-photo">
+        <img src="../img/derivatives/zinal_glacier_p0/w1000.webp" srcset="../img/derivatives/zinal_glacier_p0/w400.webp 400w, ../img/derivatives/zinal_glacier_p0/w1000.webp 1000w, ../img/derivatives/zinal_glacier_p0/w1800.webp 1800w" sizes="(min-width: 900px) 320px, 45vw" alt="Zinal Glacier" loading="lazy" />
+      </div>
+      <div class="ch-tile-meta">
+        <p class="ch-tile-kicker">AN ICE CAVE UNDER THE TONGUE</p>
+        <h3 class="ch-tile-title">Zinal Glacier</h3>
       </div>
     </a>
       </div>
@@ -996,7 +1038,6 @@
         <div class="plan-cell"><span class="num">·</span><div><h3>VAN D&#x27;EN BAS</h3><p>Hamlet above Salvan with a clean line of sight on the Mont Blanc range. Drive up, walk a few minutes, frame the peaks.</p></div></div>
         <div class="plan-cell"><span class="num">·</span><div><h3>SANETSCH PASS</h3><p>Mountain pass accessible by car. Beginning of winter is the window — snowy arctic vibes before the road closes for the season.</p></div></div>
         <div class="plan-cell"><span class="num">·</span><div><h3>LAC DE DERBORENCE</h3><p>Quiet alpine lake formed by an old rockslide. Late afternoon light catches the cliff face on the far shore.</p></div></div>
-        <div class="plan-cell"><span class="num">·</span><div><h3>ZINAL GLACIER</h3><p>End of the Val d&#x27;Anniviers. Long approach from Zinal village or via the Cabane des Bossons. Glacier reads bigger from the moraine ridge.</p></div></div>
     </div>
   </div>
 </section>

@@ -10,7 +10,28 @@
 <meta name="referrer" content="no-referrer" />
 <link rel="icon" type="image/jpeg" href="../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../images/favicon.jpg" />
+<!-- PWA: web manifest lives at /manifest.webmanifest (public, not auth-gated)
+     so Chrome/Edge/Brave can read it without a session. iOS Safari relies
+     on the apple-mobile-web-app-* meta tags + apple-touch-icon for its
+     own "Add to Home Screen" flow. -->
+<link rel="manifest" href="../manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Hikebeast" />
+<meta name="mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" href="preview.css" />
+<!-- Convex's wss handshake is the second slowest thing on first paint after
+     the hero image; preconnect lets the browser get DNS + TCP + TLS out of
+     the way in parallel with HTML/CSS parse. inject-convex-url.mjs swaps
+     this host on staging/preview builds. -->
+<link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
+<!-- Preload the intro hero polaroid (slide 1 of the rotation) so it
+     downloads in parallel with HTML parse. Picks the right WebP via the
+     same srcset the <img> uses. -->
+<link rel="preload" as="image"
+      imagesrcset="../images/intro-photos-transparent-w480.webp 480w, ../images/intro-photos-transparent-w960.webp 960w, ../images/intro-photos-transparent-w1400.webp 1400w"
+      imagesizes="(min-width: 900px) 480px, 100vw"
+      fetchpriority="high" />
 </head>
 <body>
 
@@ -49,7 +70,10 @@
         </a>
       </div>
       <div class="feature-photo">
-        <img id="featureImg" src="" alt="" />
+        <!-- width/height match the intro polaroid's intrinsic aspect (1868×1260 ≈ 3:2),
+             so the browser reserves the right vertical slot before the WebP decodes —
+             prevents a layout shift between text-only first paint and image paint. -->
+        <img id="featureImg" src="" alt="" width="1868" height="1260" fetchpriority="high" decoding="async" />
         <div class="feature-dots" id="featureDots"></div>
       </div>
     </article>
@@ -59,10 +83,6 @@
   <section class="home-row">
     <div class="row-head">
       <h2>For you</h2>
-      <a class="see-all" href="swipe/">
-        <span>See all</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </a>
     </div>
     <div class="row-cards" id="rowForYou"></div>
   </section>
@@ -70,7 +90,7 @@
   <section class="home-row">
     <div class="row-head">
       <h2>Famous spots that deliver</h2>
-      <a class="see-all" href="intro/index.html#top-six">
+      <a class="see-all" href="famous-gems/">
         <span>See all</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
@@ -119,6 +139,20 @@
 
   function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+  // setHtmlIfChanged — only assigns innerHTML when the new string differs
+  // from the last one we set on that element. Otherwise we'd rebuild the
+  // DOM identically (the sidecar paint + every Convex/session/favorites/
+  // swipes subscribe fires the same render, with the same image URLs),
+  // and each rebuild flickers the cached images for a frame.
+  const __lastHtml = new WeakMap();
+  function setHtmlIfChanged(el, html) {
+    if (!el) return false;
+    if (__lastHtml.get(el) === html) return false;
+    __lastHtml.set(el, html);
+    el.innerHTML = html;
+    return true;
+  }
+
   // Curated lists pulled from the editorial Top 6 sections in /full/intro/.
   // Names must match window.SPOTS entry titles; if not, the card is silently
   // skipped so a typo here can't crash the page.
@@ -137,48 +171,15 @@
   }
   refreshCuratedPools();
 
-  // Chapter metadata for the home-hero rotation. Mirrors content.yaml's
-  // chapters: block. Hand-maintained because the legacy build-full.py is
-  // the only thing that reads chapters into a sidecar today; we'd duplicate
-  // build-full.py's logic in node otherwise. Seven chapters, seldom change.
-  const CHAPTERS_META = [
-    { id: 'central',  name: 'Central Switzerland', description: 'Waterfalls, glacier lakes, the Hardergrat ridge.' },
-    { id: 'valais',   name: 'Valais',              description: 'Matterhorn country. Glaciers, ice caves, high passes.' },
-    { id: 'fribourg', name: 'Fribourg',            description: 'Hidden lakes and the Gastlosen limestone wall.' },
-    { id: 'western',  name: 'Western Switzerland', description: 'Vineyards, lakeside cliffs, quieter roads.' },
-    { id: 'eastern',  name: 'Eastern Switzerland', description: 'Appenzell, Säntis, lesser-known summits.' },
-    { id: 'ticino',   name: 'Ticino',              description: 'Alpine lakes, turquoise rivers, Italian mountain style.' },
-    { id: 'beyond',   name: 'Beyond the Border',   description: 'Chamonix, Mont Blanc, and one French side of Léman.' },
-  ];
-  const chapterCards = CHAPTERS_META.map(ch => {
-    // Pull the legend entry by chapter NAME so chapters keep their canonical
-    // RGB color triplet without us re-typing it in two places.
-    const legend = LEGEND.find(l => l.name === ch.name);
-    return {
-      isChapter:  true,
-      chapter_id: ch.id,
-      title:      ch.name,
-      kicker:     ch.description,
-      color:      legend ? legend.color : '180,180,180',  // RGB triplet "R,G,B"
-      href:       `${ch.id}/index.html`,
-    };
-  });
-
-  // === Featured hero (Introduction + the 7 chapters in order) ===
-  // The Introduction card is always first so a fresh visitor's eye lands on
-  // "read this before the rest of the guide". After it cycles past, we
-  // walk through the chapters in geographic-ish order. Spot-level discovery
-  // happens further down the page (For You / Famous / Hidden Gems rows).
-  const introCard = {
-    title: 'Introduction',
-    kicker: 'Before you go',
-    image: 'front_matter/page_05.jpg',
-    href: 'intro/index.html',
-    chapter_id: 'intro',
-    isIntro: true,
-  };
-  let featurePool = [introCard, ...chapterCards];
-  let featureIdx = 0;  // start with Introduction every visit
+  // === Featured hero (rotates through the seven regional chapters) ===
+  // Used to cycle through Introduction + curated famous + hidden gems;
+  // now scoped to chapters only so the home page reads as a high-level
+  // index of the guide rather than a teaser for individual spots.
+  // CHAPTERS_META is declared further down (used by buildUpNext too);
+  // we hoist a reference via a getter so order-of-declaration doesn't
+  // matter for IIFE-scoped consts.
+  let featurePool = [];  // populated below once CHAPTERS_META is in scope
+  let featureIdx = 0;
 
   const featureTitle = document.getElementById('featureTitle');
   const featureDeck  = document.getElementById('featureDeck');
@@ -193,73 +194,91 @@
   // decoded yet.
   let featureSwapping = false;
   let lastFeatureKey = null;  // dedupe re-paints when nothing visible changed
-  function paintFeature(spot, idx) {
-    if (!spot) return;
-    // The feature pool is rebuilt on every Convex spots:list update. With
-    // the introCard pinned at index 0, the post-Convex re-paint would call
-    // paintFeature(introCard, 0) again — which triggers the crossfade and
-    // looks like a "reload" even though the content is identical. Bail
-    // early when nothing the user can see changed (same spot, same idx,
-    // same image source). Note: lastFeatureKey is paired with idx so the
-    // 9-second auto-advance timer still works.
-    const featureKey = spot.isIntro ? 'intro'
-                      : spot.isChapter ? `chapter:${spot.chapter_id}`
-                      : (window.HB.spotKey(spot) || spot.title);
-    const key = `${featureKey}|${idx}|${spot.image || spot.imagePhotoId || spot.chapter_id || ''}`;
+  const featurePhotoBox = document.querySelector('.feature-card .feature-photo');
+  function paintFeature(ch, idx) {
+    if (!ch) return;
+    // Skip re-paint when nothing the user can see changed.
+    const key = `${ch.id}|${idx}`;
     if (lastFeatureKey === key) return;
     lastFeatureKey = key;
 
-    featureTitle.textContent = spot.title;
+    featureTitle.textContent = ch.name;
+    featureDeck.textContent  = ch.description || '';
+    featureCta.href = ch.href || (ch.id + '/');
+    featureCta.querySelector('span:last-child').textContent = ch.ctaLabel || 'Open chapter';
     const featureKicker = document.getElementById('featureKicker');
-    const kickerLabel = featureKicker?.querySelector('[data-kicker-label]');
-    if (spot.isIntro) {
-      featureDeck.textContent = 'Cover, camping rules, top picks · the front matter of the guide.';
-      featureCta.href = 'intro/index.html';
-      featureCta.querySelector('span:last-child').textContent = 'Read the intro';
-      if (kickerLabel) kickerLabel.textContent = 'Read this first';
-      featureKicker?.classList.add('is-pinned');
-    } else if (spot.isChapter) {
-      featureDeck.textContent = spot.kicker || '';
-      featureCta.href = spot.href;
-      featureCta.querySelector('span:last-child').textContent = 'Open chapter';
-      if (kickerLabel) kickerLabel.textContent = 'Chapter';
-      featureKicker?.classList.add('is-pinned');
-    } else {
-      const kicker = window.HB.singularKicker(spot.kicker || '');
-      const region = REGION_NAME[spot.chapter] || spot.chapter_id;
-      featureDeck.textContent = kicker ? `${kicker} · ${region}` : region;
-      featureCta.href = window.HB.spotDetailHref(spot, '');
-      featureCta.querySelector('span:last-child').textContent = 'Open spot';
-      if (kickerLabel) kickerLabel.textContent = 'Featured';
-      featureKicker?.classList.remove('is-pinned');
+    const kickerLabel   = featureKicker?.querySelector('[data-kicker-label]');
+    // Kicker pill only shows when the slide carries an explicit kicker
+    // (intro has "Read this first"). Chapters skip it — the silhouette
+    // + title + deck reads cleaner. The CTA element is kept in the DOM
+    // (and its href stays current per slide) so the photo-click handler
+    // can still navigate; it's hidden globally via CSS.
+    const showKicker = !!ch.kicker;
+    if (kickerLabel && ch.kicker) kickerLabel.textContent = ch.kicker;
+    if (featureKicker) {
+      featureKicker.hidden = !showKicker;
+      featureKicker.classList.toggle('is-pinned', !!ch.kickerPinned);
     }
+
     featureDots.innerHTML = featurePool.map((_, i) =>
       `<span class="${i === idx ? 'is-on' : ''}"></span>`
     ).join('');
-    featureCard.dataset.spotKey = spot.isIntro ? '' : (window.HB.spotKey(spot) || '');
+    featureCard.dataset.spotKey = '';
 
-    // Hero uses the full-resolution source so it stays sharp on desktop
-    // fullscreen where the photo column reaches ~1100px CSS / 2200px device
-    // pixels. Chapter covers live at /full/img/chapters/<id>/w<W>.webp,
-    // outside the spot-derivative system; build their srcset by hand.
-    let heroAttrs;
-    if (spot.isChapter) {
-      const widths = [400, 1000, 1800, 2800];
-      heroAttrs = {
-        src: `img/chapters/${spot.chapter_id}/w2800.webp`,
-        srcset: widths.map(w => `img/chapters/${spot.chapter_id}/w${w}.webp ${w}w`).join(', '),
-        sizes: '100vw',
-      };
-    } else {
-      heroAttrs = window.HB.photoAttrs({
-        photoId: spot.imagePhotoId, image: spot.image,
-        width: 2800, prefix: '', sizes: '100vw',
-      });
+    // The hero photo box has three visual modes, set by classes on the
+    // .feature-photo container:
+    //   - .is-intro: cream gradient + the transparent polaroid PNG
+    //     (matches the /themap/success/ celebration so the intro feels
+    //     like the same moment the buyer just experienced).
+    //   - .is-map:  dark gradient + region-colour glow + the chapter's
+    //     white SVG silhouette. Same recipe as the chapter-cover hero
+    //     and the small up-next thumbs — the home page reads as a
+    //     doorway into those pages.
+    //   - default:  fall back to a regular photo (object-fit: cover).
+    let src;
+    let srcset = '';
+    let sizes  = '';
+    if (featurePhotoBox) {
+      featurePhotoBox.classList.remove('is-intro', 'is-map');
+      featurePhotoBox.style.removeProperty('--region-color');
     }
+    if (ch.isIntro) {
+      featurePhotoBox?.classList.add('is-intro');
+      // WebP derivatives (built by scripts/build-intro-derivatives.mjs) shave
+      // the hero from ~1.94 MB PNG to ~32-210 KB depending on viewport.
+      src = '../images/intro-photos-transparent-w960.webp';
+      srcset = [
+        '../images/intro-photos-transparent-w480.webp 480w',
+        '../images/intro-photos-transparent-w960.webp 960w',
+        '../images/intro-photos-transparent-w1400.webp 1400w',
+      ].join(', ');
+      // The hero photo column is full-width on mobile and capped at
+      // roughly 480px on desktop where the card splits text/photo.
+      sizes = '(min-width: 900px) 480px, 100vw';
+    } else if (ch.mapSvg) {
+      featurePhotoBox?.classList.add('is-map');
+      if (ch.color) featurePhotoBox?.style.setProperty('--region-color', ch.color);
+      src = ch.mapSvg;
+    } else {
+      // Fallback: regular cover photo. Used when a chapter has no SVG
+      // (none today, but kept for safety — Beyond now has region-beyond.svg).
+      src = 'img/m/' + (ch.cover || '');
+    }
+
+    function applyImg() {
+      featureImg.src = src;
+      if (srcset) {
+        featureImg.setAttribute('srcset', srcset);
+        featureImg.setAttribute('sizes', sizes);
+      } else {
+        featureImg.removeAttribute('srcset');
+        featureImg.removeAttribute('sizes');
+      }
+      featureImg.alt = ch.name;
+    }
+
     if (!featureImg.src) {
-      featureImg.src = heroAttrs.src;
-      if (heroAttrs.srcset) { featureImg.srcset = heroAttrs.srcset; featureImg.sizes = heroAttrs.sizes; }
-      featureImg.alt = spot.title;
+      applyImg();
       return;
     }
     if (featureSwapping) return;
@@ -268,42 +287,62 @@
     setTimeout(() => {
       const next = new Image();
       next.onload = () => {
-        featureImg.src = heroAttrs.src;
-        if (heroAttrs.srcset) { featureImg.srcset = heroAttrs.srcset; featureImg.sizes = heroAttrs.sizes; }
-        else { featureImg.removeAttribute('srcset'); featureImg.removeAttribute('sizes'); }
-        featureImg.alt = spot.title;
-        // Tiny delay so the new src has a paint frame before we fade in.
+        applyImg();
         requestAnimationFrame(() => {
           featureImg.classList.remove('is-fading');
           featureSwapping = false;
         });
       };
       next.onerror = () => { featureImg.classList.remove('is-fading'); featureSwapping = false; };
-      next.src = heroAttrs.src;
+      next.src = src;
     }, 220);
   }
-  if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
 
   // Slower cadence than YouTube's typical 5s -- 9s gives readers time to
   // actually parse the title before the next photo lands. Paused on
-  // hidden tabs to save battery.
+  // hidden tabs (visibilitychange) AND when scrolled out of view
+  // (IntersectionObserver) so the timer doesn't sit there decoding new
+  // images every 9s for a hero the user has scrolled past. Honors the
+  // OS-level "Reduce Motion" toggle by never starting the timer at all
+  // — users on iOS Accessibility / macOS Reduce Motion / Android prefer
+  // not to see motion-prone UI auto-cycle.
   const FEATURE_INTERVAL = 9000;
-  let featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
-  document.addEventListener('visibilitychange', () => {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let featureTimer = null;
+  let featureInView = true;
+  function startFeatureTimer() {
+    if (featureTimer) return;
+    if (document.hidden || !featureInView) return;
+    if (reducedMotion.matches) return;
+    featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
+  }
+  function stopFeatureTimer() {
+    if (!featureTimer) return;
     clearInterval(featureTimer);
-    if (!document.hidden) featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
+    featureTimer = null;
+  }
+  startFeatureTimer();
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopFeatureTimer(); else startFeatureTimer();
   });
+  if (featureCard && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        featureInView = e.isIntersecting;
+        if (featureInView) startFeatureTimer(); else stopFeatureTimer();
+      }
+    }, { threshold: 0.01 });
+    io.observe(featureCard);
+  }
   function advanceFeature() {
     if (!featurePool.length) return;
     featureIdx = (featureIdx + 1) % featurePool.length;
     paintFeature(featurePool[featureIdx], featureIdx);
-    buildUpNext();
   }
   function retreatFeature() {
     if (!featurePool.length) return;
     featureIdx = (featureIdx - 1 + featurePool.length) % featurePool.length;
     paintFeature(featurePool[featureIdx], featureIdx);
-    buildUpNext();
   }
   // Tap the photo opens the spot (same destination as the "Open spot" /
   // "Read the intro" CTA). Swipe horizontally still cycles the carousel
@@ -327,8 +366,8 @@
       const dy = t.clientY - touchStartY;
       if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
         if (dx < 0) advanceFeature(); else retreatFeature();
-        clearInterval(featureTimer);
-        featureTimer = setInterval(advanceFeature, FEATURE_INTERVAL);
+        stopFeatureTimer();
+        startFeatureTimer();
         swipeFired = true;
       }
     }, { passive: true });
@@ -344,6 +383,23 @@
       }
     }, true);
     featurePhotoEl.style.cursor = 'pointer';
+  }
+
+  // Title + deck are intuitively clickable too — users tap "Central
+  // Switzerland" expecting the page to open. The CTA pill already
+  // navigates (native anchor), so we only need to wire the heading
+  // text. Click bubbles up from CTA harmlessly (same destination).
+  const featureTextEl = document.querySelector('.feature-card .feature-text');
+  if (featureTextEl) {
+    featureTextEl.addEventListener('click', (e) => {
+      // CTA pill handles its own navigation; let the native click run.
+      if (e.target.closest('.feature-cta')) return;
+      if (featureCta.href && featureCta.href !== '#') {
+        location.href = featureCta.href;
+      }
+    });
+    featureTitle.style.cursor = 'pointer';
+    featureDeck.style.cursor  = 'pointer';
   }
 
   function shuffle(arr) {
@@ -375,69 +431,98 @@
     return [...kept, ...fill];
   }
 
-  // === "Up next" stack to the right of the hero (4 chapter cards) ===
-  // Shows the next 4 entries from the featured rotation, skipping the
-  // Introduction (its image isn't a chapter cover and would jar visually
-  // alongside the chapter thumbs). As the carousel advances on the left,
-  // these thumbs cycle accordingly so users see "what's coming up next".
+  // === Chapter metadata · drives both the hero rotation and the up-next list. ===
+  // Beyond has no SVG silhouette (it's outside Switzerland); the up-next
+  // card falls back to its cover photo. `cover` is the file in img/m/
+  // and img/thumbs/ — note the chapter id and cover slug don't always
+  // match (western → leman_cover, eastern → east_cover) because the
+  // photos were named after the geographic feature rather than the
+  // chapter slug.
+  const CHAPTERS_META = [
+    { id: 'central',  name: 'Central Switzerland', color: '175,165,122', cover: 'central_cover.jpg',  mapSvg: 'img/region-central.svg',  description: 'Waterfalls, ridges, glacier lakes.' },
+    { id: 'valais',   name: 'Valais',              color: '234,183,191', cover: 'valais_cover.jpg',   mapSvg: 'img/region-valais.svg',   description: 'Matterhorn country. Glaciers, ice caves, high passes.' },
+    { id: 'fribourg', name: 'Fribourg',            color: '216,216,209', cover: 'fribourg_cover.jpg', mapSvg: 'img/region-fribourg.svg', description: 'Pre-alpine lakes and the Gastlosen wall.' },
+    { id: 'western',  name: 'Western Switzerland', color: '204,224,158', cover: 'leman_cover.jpg',    mapSvg: 'img/region-western.svg',  description: 'Lake Léman, the Lavaux, smaller crowds.' },
+    { id: 'eastern',  name: 'Eastern Switzerland', color: '124,181,168', cover: 'east_cover.jpg',     mapSvg: 'img/region-eastern.svg',  description: 'Appenzell, Säntis, lesser-known summits.' },
+    { id: 'ticino',   name: 'Ticino',              color: '147,132,186', cover: 'ticino_cover.jpg',   mapSvg: 'img/region-ticino.svg',   description: 'Italian-Swiss country. Lakes, rivers, granite valleys.' },
+    { id: 'beyond',   name: 'Beyond the Border',   color: '89,89,89',    cover: 'beyond_cover.jpg',   mapSvg: 'img/region-beyond.svg',   description: 'Chamonix, Mont Blanc, one French slice of Léman.' },
+  ];
+
+  // Introduction is the carousel's anchor — first slot so a fresh visitor
+  // always lands on it. Uses the same transparent polaroid hero PNG as
+  // /themap/success/ so the buyer feels they're in the same world. Not
+  // in CHAPTERS_META because the up-next column is just the regions; the
+  // intro lives in the hero rotation only.
+  const INTRO_CARD = {
+    id:           'intro',
+    name:         'Introduction',
+    description:  'Cover, camping rules, top picks · the front matter of the guide.',
+    href:         'intro/',
+    ctaLabel:     'Read the intro',
+    kicker:       'Read this first',
+    kickerPinned: true,
+    isIntro:      true,
+  };
+
+  // Hand the hero its rotation pool now that CHAPTERS_META is in scope.
+  featurePool = [INTRO_CARD, ...CHAPTERS_META];
+  if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
   const upNextEl = document.getElementById('upNext');
+  // Cap the up-next column at 4 cards by default; the rest go behind a
+  // "Show all" button. The expansion is per-page-load only — coming
+  // back to home from another screen resets to collapsed, so the
+  // button is always available. (Used to persist via localStorage; now
+  // intentionally session-scoped.)
+  const HOME_UPNEXT_LIMIT = 4;
+  let homeUpNextExpanded = false;
   function buildUpNext() {
-    const items = [];
-    let offset = 1;
-    while (items.length < 4 && offset <= featurePool.length) {
-      const idx = (featureIdx + offset) % featurePool.length;
-      const item = featurePool[idx];
-      if (item && !item.isIntro) items.push(item);
-      offset++;
-    }
-    upNextEl.innerHTML = items.map(item => {
-      // Both isChapter cards (the new normal) and any stray spot cards (none
-      // currently, but keeping the spot branch keeps the helper future-proof
-      // if Leon ever wants to mix chapters + featured spots in the rotation).
-      if (item.isChapter) {
-        // Six of the seven chapters have a region SVG map (everything except
-        // beyond, which lives outside the Swiss outline). Use the chapter
-        // header card's premium map treatment for the maps; fall back to
-        // the chapter cover photo for beyond so we don't show an empty box.
-        const HAS_MAP = ['central','valais','fribourg','western','eastern','ticino'];
-        const photoBody = HAS_MAP.includes(item.chapter_id)
-          ? `<span class="cv-map" style="--region-color: ${esc(item.color)};"><img src="img/region-${esc(item.chapter_id)}.svg" alt="" loading="lazy" /></span>`
-          : `<img src="img/chapters/${esc(item.chapter_id)}/w400.webp" alt="" loading="lazy" />`;
-        return `
-          <a class="up-next-card" href="${esc(item.href)}" data-hb-chapter="${esc(item.chapter_id)}">
-            <span class="photo">${photoBody}</span>
-            <span class="body">
-              <span class="name">${esc(item.title)}</span>
-              <span class="meta">${esc(item.kicker || '')}</span>
-            </span>
-          </a>
-        `;
-      }
-      const region = REGION_NAME[item.chapter] || item.chapter_id;
-      const kicker = window.HB.singularKicker(item.kicker || '');
-      const a = window.HB.photoAttrs({
-        photoId: item.imagePhotoId, image: item.image,
-        width: 400, prefix: '', sizes: '160px',
-      });
-      const ss = a.srcset ? ` srcset="${esc(a.srcset)}" sizes="${esc(a.sizes)}"` : '';
-      const k = window.HB.spotKey(item) || '';
+    // Count spots per chapter so each card can show "N spots". Source of
+    // truth is SPOTS, which is rebuilt from the unified store on every
+    // Convex push, so this stays accurate across reactive updates.
+    const counts = SPOTS.reduce((acc, s) => {
+      const id = s.chapter_id;
+      if (id) acc[id] = (acc[id] || 0) + 1;
+      return acc;
+    }, {});
+    const renderCard = (ch) => {
+      const count = counts[ch.id] || 0;
+      const meta  = count + ' spot' + (count === 1 ? '' : 's');
+      const photo = ch.mapSvg
+        ? `<span class="photo cv-map" style="--region-color: ${ch.color}"><img src="${esc(ch.mapSvg)}" alt="" loading="lazy" /></span>`
+        : `<span class="photo"><img src="img/thumbs/${ch.id}_cover.jpg" alt="" loading="lazy" /></span>`;
       return `
-        <a class="up-next-card" href="${esc(window.HB.spotDetailHref(item, ''))}" data-hb-spotkey="${esc(k)}">
-          <span class="photo"><img src="${esc(a.src)}"${ss} alt="" loading="lazy" /></span>
+        <a class="up-next-card is-chapter" href="${esc(ch.id)}/">
+          ${photo}
           <span class="body">
-            <span class="name">${esc(item.title)}</span>
-            <span class="meta">${esc(region)}</span>
-            ${kicker ? `<span class="duration">${esc(kicker)}</span>` : ''}
+            <span class="name">${esc(ch.name)}</span>
+            <span class="meta">${esc(meta)}</span>
           </span>
         </a>
       `;
-    }).join('');
-    // Heart overlays only make sense for spot cards; no-op for chapter
-    // entries because data-hb-spotkey is absent.
-    upNextEl.querySelectorAll('.up-next-card[data-hb-spotkey]').forEach(card => {
-      const k = card.getAttribute('data-hb-spotkey');
-      if (k) window.HB.attachCardActions(card, k);
-    });
+    };
+    const visible = CHAPTERS_META.slice(0, HOME_UPNEXT_LIMIT).map(renderCard).join('');
+    const extras = CHAPTERS_META.slice(HOME_UPNEXT_LIMIT);
+    const extrasMarkup = extras.length === 0 ? '' : `
+      <div class="up-next-extras"${homeUpNextExpanded ? '' : ' hidden'}>
+        ${extras.map(renderCard).join('')}
+      </div>
+      ${homeUpNextExpanded ? '' : `
+        <button type="button" class="up-next-more" data-hb-upnext-more>
+          Show all ${CHAPTERS_META.length}
+        </button>
+      `}
+    `;
+    if (!setHtmlIfChanged(upNextEl, visible + extrasMarkup)) return;
+
+    const moreBtn = upNextEl.querySelector('[data-hb-upnext-more]');
+    if (moreBtn) {
+      moreBtn.addEventListener('click', () => {
+        const list = upNextEl.querySelector('.up-next-extras');
+        if (list) list.hidden = false;
+        moreBtn.remove();
+        homeUpNextExpanded = true;
+      });
+    }
   }
   buildUpNext();
 
@@ -484,14 +569,12 @@
     const byKey = new Map(SPOTS.map(s => [window.HB.spotKey(s), s]));
     const picks = forYouKeys.map(k => byKey.get(k)).filter(Boolean);
     const el = document.getElementById('rowForYou');
-    el.innerHTML = picks.map(rowCard).join('');
-    wireRowCardActions(el);
+    if (setHtmlIfChanged(el, picks.map(rowCard).join(''))) wireRowCardActions(el);
   }
   function buildCurated(id, list) {
     const el = document.getElementById(id);
-    if (!list.length) { el.innerHTML = ''; return; }
-    el.innerHTML = list.slice(0, 4).map(rowCard).join('');
-    wireRowCardActions(el);
+    const html = list.length ? list.slice(0, 4).map(rowCard).join('') : '';
+    if (setHtmlIfChanged(el, html)) wireRowCardActions(el);
   }
 
   buildForYou();
@@ -514,16 +597,12 @@
 
   // When Convex pushes an update (admin edits a spot, photo published,
   // etc.), refresh every surface so the page reflects new data without
-  // a reload. Featured rotation index is preserved. The hero pool is
-  // [intro + chapters], static metadata that doesn't change with Convex
-  // pushes — but rebuild it anyway so any code path that mutates
-  // featurePool stays consistent.
+  // a reload. Hero pool is CHAPTERS_META (static), so no re-poolinjg —
+  // we just refresh the spot-derived sections (For you / Famous / Gems)
+  // and the up-next spot counts.
   window.HB.spots.subscribe(() => {
     refreshSpots();
     refreshCuratedPools();
-    featurePool = [introCard, ...chapterCards];
-    if (featureIdx >= featurePool.length) featureIdx = 0;
-    if (featurePool.length) paintFeature(featurePool[featureIdx], featureIdx);
     buildUpNext();
     buildForYou();
     buildCurated('rowFamous', famous);

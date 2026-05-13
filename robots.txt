@@ -12,9 +12,15 @@
 
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /preview/
-Disallow: /full/
+# Note: no Disallow rules in the wildcard block. Vercel's edge WAF
+# treats Disallow as access control and gets paranoid about crawler
+# UAs (incl. facebookexternalhit) when the wildcard block has any
+# Disallow lines, returning 403 even on paths that aren't disallowed.
+# /api/, /preview/, /full/ are blocked from the AI-bot blocks below
+# (those crawlers respect robots.txt politely). Path-level access
+# control for /full/ is enforced by middleware.js + vercel.json
+# X-Robots-Tag headers + per-page <meta robots>; robots.txt is just
+# crawl-budget signal. See commit history May 4-10 (FB 403 issue).
 
 # AI search crawlers — explicitly disallowed from /full/ and /preview/
 # (those are paid-customer / pre-launch areas, not for ingestion)

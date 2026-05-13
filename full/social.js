@@ -898,7 +898,30 @@
       const list = sidecarSpots.map(s => {
         const anchor = (s.href || '').split('#')[1];
         const spotKey = anchor ? `${s.chapter_id}#${anchor}` : null;
-        if (spotKey && dbBySpotKey.has(spotKey)) return dbBySpotKey.get(spotKey);
+        if (spotKey && dbBySpotKey.has(spotKey)) {
+          const dbRow = dbBySpotKey.get(spotKey);
+          // Convex sometimes has a spot row with photos=[] (legacy spots
+          // that pre-date the photo migration, or admin cleared the
+          // gallery). The sidecar (built from content.yaml + the live
+          // Convex hydration pass in build-spot-images.mjs) carries the
+          // real photo list in those cases; keep it so Browse doesn't
+          // see the tile count change on first Convex push and
+          // rebuild → flicker.
+          if (dbRow.photos.length === 0) {
+            const sidecarRow = byKey.get(spotKey);
+            if (sidecarRow && sidecarRow.photos.length > 0) {
+              return {
+                ...dbRow,
+                photos: sidecarRow.photos,
+                image: sidecarRow.image,
+                imagePhotoId: sidecarRow.imagePhotoId,
+                imageWidth: sidecarRow.imageWidth,
+                imageHeight: sidecarRow.imageHeight,
+              };
+            }
+          }
+          return dbRow;
+        }
         // No DB row yet -- fall back to whatever the sidecar gave us.
         return byKey.get(spotKey) || null;
       }).filter(Boolean);
@@ -1010,8 +1033,9 @@
   // section as a special "front matter" entry, visually separated from the
   // seven regional chapters by a divider.
   // Cover paths point at the build-image-derivatives output. Intro thumb
-  // is a JPG copied by build-static-assets from assets/front_matter/.
-  const RAIL_INTRO_CHAPTER = { id: 'intro', label: 'Introduction', cover: 'front_matter/page_05.jpg' };
+  // uses a WebP derivative built by scripts/build-front-matter-derivatives.mjs;
+  // matches the sidebar thumb on every chapter page.
+  const RAIL_INTRO_CHAPTER = { id: 'intro', label: 'Introduction', cover: 'front_matter/page_05-w192.webp' };
   const RAIL_CHAPTERS = [
     { id: 'central',  label: 'Central',             cover: 'chapters/central/w400.webp' },
     { id: 'valais',   label: 'Valais',              cover: 'chapters/valais/w400.webp' },
@@ -1082,7 +1106,7 @@
           ${SVG_HEART_OUT}<span class="label">Liked</span>
           <span class="rail-badge" data-hb-fav-count></span>
         </a>
-        <a class="rail-item${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link hidden>
+        <a class="rail-item${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link>
           ${SVG_CHECK_CIRCLE}<span class="label">Been there</span>
           <span class="rail-badge" data-hb-visited-count></span>
         </a>
@@ -1171,7 +1195,7 @@
           <span class="menu-row-label">Liked</span>
           <span class="menu-row-badge" data-hb-fav-count></span>
         </a>
-        <a class="menu-row${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link data-close hidden>
+        <a class="menu-row${cur('/visited/')}" href="${REL}visited/" data-hb-visited-link data-close>
           <span class="menu-row-icon">${SVG_CHECK_CIRCLE}</span>
           <span class="menu-row-label">Been there</span>
           <span class="menu-row-badge" data-hb-visited-count></span>
@@ -1201,12 +1225,6 @@
           </a>
         `).join('')}
         <div class="menu-section-head">Account</div>
-        <a class="menu-row${cur('/account/')}" href="${REL}account/" data-close>
-          <span class="menu-row-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-1.82-.33l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          </span>
-          <span class="menu-row-label">Account settings</span>
-        </a>
         <div class="menu-sheet-account" data-hb-account></div>
       </div>
     `;
@@ -1354,19 +1372,6 @@
     }
     paintAccount();
     session.subscribe(paintAccount);
-
-    // Visited row visibility: hide when signed out (paid feature),
-    // show when signed in. Re-runs on sign-in/sign-out via the
-    // visited façade's subscribe (signedIn flips during _reattach).
-    function paintVisitedRow() {
-      document.querySelectorAll('[data-hb-visited-link]').forEach(el => {
-        if (visited.signedIn()) el.hidden = false;
-        else                    el.hidden = true;
-      });
-    }
-    paintVisitedRow();
-    visited.subscribe(paintVisitedRow);
-    session.subscribe(paintVisitedRow);
 
     refreshFavCount();
     refreshVisitedCount();
@@ -2478,20 +2483,75 @@
     photoEl.appendChild(prev);
     photoEl.appendChild(next);
 
+    // Defensive runtime filter: when admin adds photos in Convex but the
+    // derivative WebP hasn't shipped to disk yet, those slides 404. We
+    // prune them on the img.onerror event — hide the slide + its dot,
+    // drop them from `liveIndices`, fix the counter, and skip them in
+    // navigation. `liveIndices` is the source of truth for navigation
+    // position; `idx` always points into `photos` via slideEls. Counter
+    // shows current position within the live set, not the original.
+    let liveIndices = photos.map((_, i) => i);
     let idx = 0;
-    function show(target) {
-      const n = ((target % photos.length) + photos.length) % photos.length;
-      if (n === idx) return;
-      slideEls[idx].classList.remove('is-current');
-      slideEls[n].classList.add('is-current');
-      dots.children[idx].classList.remove('is-on');
-      dots.children[n].classList.add('is-on');
-      counter.textContent = `${n + 1} / ${photos.length}`;
-      setCredit(photos[n]);
-      idx = n;
+    function refreshCounter() {
+      const pos = liveIndices.indexOf(idx);
+      counter.textContent = liveIndices.length === 0
+        ? '0 / 0'
+        : `${pos + 1} / ${liveIndices.length}`;
     }
-    prev.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); show(idx - 1); });
-    next.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); show(idx + 1); });
+    function dropBrokenSlide(brokenIdx) {
+      const pos = liveIndices.indexOf(brokenIdx);
+      if (pos === -1) return;
+      liveIndices.splice(pos, 1);
+      if (slideEls[brokenIdx]) slideEls[brokenIdx].style.display = 'none';
+      const dot = dots.children[brokenIdx];
+      if (dot) dot.style.display = 'none';
+      if (idx === brokenIdx && liveIndices.length > 0) {
+        // Was viewing the broken one — jump to the nearest live slide.
+        const fallback = liveIndices[Math.min(pos, liveIndices.length - 1)];
+        show(fallback);
+      } else {
+        refreshCounter();
+      }
+      // Hide the arrows + dots when fewer than two slides remain — the
+      // controls have nothing useful to do at that point.
+      if (liveIndices.length < 2) {
+        prev.style.display = 'none';
+        next.style.display = 'none';
+        dots.style.display = 'none';
+        if (liveIndices.length === 0) counter.style.display = 'none';
+      }
+    }
+    slideEls.forEach((img, i) => {
+      img.addEventListener('error', () => dropBrokenSlide(i));
+    });
+
+    function show(target) {
+      if (liveIndices.length === 0) return;
+      // Resolve `target` to a live index. If target itself is live, use
+      // it; otherwise nudge to the next live one in the same direction.
+      let n = target;
+      if (!liveIndices.includes(n)) {
+        const sorted = [...liveIndices].sort((a, b) => a - b);
+        n = sorted.find(i => i > target) ?? sorted[0];
+      }
+      if (n === idx) return;
+      if (slideEls[idx]) slideEls[idx].classList.remove('is-current');
+      slideEls[n].classList.add('is-current');
+      if (dots.children[idx]) dots.children[idx].classList.remove('is-on');
+      if (dots.children[n]) dots.children[n].classList.add('is-on');
+      idx = n;
+      refreshCounter();
+      setCredit(photos[n]);
+    }
+    function advance(step) {
+      if (liveIndices.length === 0) return;
+      const pos = liveIndices.indexOf(idx);
+      const safePos = pos < 0 ? 0 : pos;
+      const nextPos = ((safePos + step) % liveIndices.length + liveIndices.length) % liveIndices.length;
+      show(liveIndices[nextPos]);
+    }
+    prev.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); advance(-1); });
+    next.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); advance(+1); });
 
     // Touch swipe on the photo. Only triggers on horizontal travel > 40 px.
     let touchX = null, touchY = null;
@@ -2507,7 +2567,7 @@
       const dy = t.clientY - touchY;
       touchX = touchY = null;
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) {
-        show(idx + (dx < 0 ? 1 : -1));
+        advance(dx < 0 ? 1 : -1);
       }
     });
 
@@ -2693,6 +2753,43 @@
       const id = m[1];
       const title = card.getAttribute('title') || id;
       attachCardActions(card, `${ch}#${id}`, { spotId: id, title });
+    });
+  }
+
+  // The Back pill on spot/account/affiliate pages is hardcoded to its
+  // chapter (or "../") so users who land directly via search or share
+  // link still have a way out. But when they got here from inside the
+  // app (Map → spot, Browse → spot, etc.) the user expects native back
+  // behaviour. Mobile's system back arrow already does this; the
+  // in-page Back was always shooting them to the chapter.
+  //
+  // We can't rely on document.referrer: every /full page sets
+  // <meta name="referrer" content="no-referrer">. Instead, count
+  // in-app navigations per tab via sessionStorage. depth > 1 means at
+  // least one prior in-app page is in the back stack; hijack the click
+  // and use history.back(). depth === 1 (direct entry / new tab) falls
+  // through to the anchor's href, which is the chapter fallback.
+  const NAV_DEPTH_KEY = 'hb:nav:depth';
+  function bumpNavDepth() {
+    try {
+      const cur = parseInt(sessionStorage.getItem(NAV_DEPTH_KEY) || '0', 10) || 0;
+      sessionStorage.setItem(NAV_DEPTH_KEY, String(cur + 1));
+      return cur + 1;
+    } catch { return 1; }
+  }
+  function wireBackButtons() {
+    const depth = bumpNavDepth();
+    document.querySelectorAll('a.hb-back, a.back').forEach(a => {
+      a.addEventListener('click', (e) => {
+        // Cmd/Ctrl/middle-click → open in new tab, leave alone.
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+        if (depth > 1 && W.history.length > 1) {
+          e.preventDefault();
+          W.history.back();
+        }
+        // Otherwise let the anchor navigate to its href (the chapter
+        // for spot pages, "../" for account/affiliate).
+      });
     });
   }
 
@@ -2975,6 +3072,7 @@
     visited._reattach();
     swipes._reattach();
     injectRail();
+    wireBackButtons();
     wireBakedCarousels();
     wireCardLinks();
     injectHearts();

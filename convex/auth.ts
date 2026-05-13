@@ -338,6 +338,44 @@ export const adminCreateUser = mutation({
   },
 });
 
+// Mint a 7-day claim-your-account magic link for an existing user.
+// Same shape as a password-reset link (purpose=password_reset, /reset/?t=
+// page works unchanged), but TTL is long enough for a one-off email blast
+// where buyers may not open the message for days. Admin-only.
+export const adminMintClaimLink = mutation({
+  args: { email: v.string(), adminToken: v.string() },
+  handler: async (ctx, { email, adminToken }) => {
+    await requireAdmin(adminToken);
+    const lower = email.trim().toLowerCase();
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_email", q => q.eq("email", lower))
+      .unique();
+    if (!user) throw new Error(`No user with email: ${lower}`);
+
+    // Invalidate prior unused reset links so the inbox has one canonical link.
+    const stale = await ctx.db
+      .query("magicLinks")
+      .withIndex("by_user", q => q.eq("userId", user._id))
+      .collect();
+    for (const m of stale) {
+      if (m.purpose === "password_reset" && !m.usedAt) await ctx.db.delete(m._id);
+    }
+
+    const rawToken = newSessionToken();
+    const tokenHash = await sha256Base64(rawToken);
+    const now = Date.now();
+    await ctx.db.insert("magicLinks", {
+      userId:    user._id,
+      purpose:   "password_reset",
+      tokenHash,
+      createdAt: now,
+      expiresAt: now + 7 * 24 * 60 * 60 * 1000,
+    });
+    return { token: rawToken, username: user.username, handle: user.handle ?? null };
+  },
+});
+
 // Flip the affiliate flag on an existing user. Useful for promoting
 // someone to influencer / affiliate status after the fact, or revoking
 // it. Admin-token gated, same as adminCreateUser.

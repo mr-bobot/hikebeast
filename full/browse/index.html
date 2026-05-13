@@ -10,7 +10,13 @@
 <meta name="referrer" content="no-referrer" />
 <link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="manifest" href="../../manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Hikebeast" />
+<meta name="mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" href="../preview.css" />
+<link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body>
 
@@ -28,7 +34,7 @@
 
   <header class="hb-hero">
     <p class="kicker">Browse</p>
-    <h1>All <span id="totalSpots">…</span> spots, one wall.</h1>
+    <h1>All spots, one wall.</h1>
     <p>Search, filter by region, save what you like.</p>
   </header>
 
@@ -62,6 +68,7 @@
 
 <script src="../map/spots-data.js"></script>
 <script src="../img/thumbs/dimensions.js"></script>
+<script src="../img/derivatives/dimensions.js"></script>
 <script src="../lib/convex.js"></script>
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script src="../social.js"></script>
@@ -151,13 +158,11 @@
       b.className = 'hb-chip';
       b.innerHTML = `<span class="swatch" style="background: rgb(${c.color});"></span><span>${esc(c.name)}</span>`;
       b.addEventListener('click', () => {
-        // Toggle solo: if this is the only one selected, clear all (= show all).
-        // Otherwise, isolate to this one.
-        if (state.chapters.size === 1 && state.chapters.has(c.number)) {
-          state.chapters.clear();
-        } else {
-          state.chapters = new Set([c.number]);
-        }
+        // Multi-select OR: tap to add/remove, same as property chips
+        // below. Lets the user pick "Valais + Ticino" the way they
+        // can already pick "Lake + Glacier".
+        if (state.chapters.has(c.number)) state.chapters.delete(c.number);
+        else state.chapters.add(c.number);
         update();
       });
       chipsEl.appendChild(b);
@@ -234,11 +239,26 @@
       return a;
     }
 
-    // Intrinsic dims drive row-span layout. Convex carries the original dims
-    // per photo; legacy spots fall back to the static thumb-dims sidecar.
+    // Intrinsic dims drive row-span layout. Three fallback tiers:
+    //   1. photo.width/height — Convex-carried per-photo dims (rare; most
+    //      Convex rows still have null dims).
+    //   2. HB_PHOTO_DIMS[photo.photoId] — every derivative photoId is in
+    //      this sidecar (built from w400.webp via build-photo-dims.mjs).
+    //      This covers the universal case: every multi-photo gallery + every
+    //      single-photo spot whose derivative ladder shipped.
+    //   3. HB_THUMB_DIMS[photo.src | spot.image] — legacy thumb-dims sidecar
+    //      keyed by file name. Kept for safety / pre-derivative spots.
+    //   4. [4, 3] — last-resort guess. Triggers an applySpans re-flow.
+    // Without tier 2, ~32 spots whose s.image filename didn't match a
+    // thumb-dim key all started at [4, 3] and reshuffled once the WebP
+    // decoded — the visible "load then resize" the user reported on Explore.
+    const photoDims = (window.HB_PHOTO_DIMS || {})[photo.photoId];
     const dimsArr = (photo.width && photo.height)
       ? [photo.width, photo.height]
-      : ((window.HB_THUMB_DIMS || {})[photo.src] || (window.HB_THUMB_DIMS || {})[spot.image] || [4, 3]);
+      : (photoDims
+          || (window.HB_THUMB_DIMS || {})[photo.src]
+          || (window.HB_THUMB_DIMS || {})[spot.image]
+          || [4, 3]);
     a.dataset.w = dimsArr[0];
     a.dataset.h = dimsArr[1];
     const attrs = window.HB.photoAttrs({
@@ -314,6 +334,17 @@
       return h;
     }
     Array.from(grid.children).forEach(t => {
+      // Prefer the image's natural dimensions once it has loaded.
+      // Most Convex photos still carry width:null/height:null, so the
+      // tile-render fallback writes [4,3] into the dataset, which
+      // makes 90% of tiles read as "boring square" and miss the
+      // landscape (>1.4) / portrait (<0.8) thresholds below. Once the
+      // <img> decodes, naturalWidth gives us the truth.
+      const img = t.querySelector('img');
+      if (img && img.naturalWidth && img.naturalHeight) {
+        t.dataset.w = img.naturalWidth;
+        t.dataset.h = img.naturalHeight;
+      }
       const w = +t.dataset.w;
       const h = +t.dataset.h;
       if (!w || !h) return;
@@ -352,22 +383,46 @@
     return out;
   }
 
+  // Cached tiles-key for the most-recent render. Convex pushes spots:list
+  // a few hundred ms after the sidecar paint and again on every
+  // favorites/swipe broadcast; if the filtered list is byte-identical to
+  // what's already in the grid, the rebuild would just flicker every
+  // image. Skip the DOM swap in that case; chips + counts are still
+  // safe to update (they're textContent / class toggles, no flicker).
+  let lastTilesKey = '';
   function update() {
     const list = filtered();
     const tileItems = expandToPhotoTiles(list);
-    grid.classList.remove('is-ready');
-    grid.innerHTML = '';
-    tileItems.forEach(it => grid.appendChild(tile(it)));
+    const tilesKey = tileItems
+      .map(it => (it.photo && it.photo.photoId) || it.spot?.image || it.spot?.id || '')
+      .join('|');
     visibleCount.textContent = tileItems.length;
     empty.hidden = tileItems.length > 0;
     grid.hidden = list.length === 0;
     paintChips();
+    if (tilesKey === lastTilesKey) return;
+    lastTilesKey = tilesKey;
+    grid.classList.remove('is-ready');
+    grid.innerHTML = '';
+    tileItems.forEach(it => grid.appendChild(tile(it)));
     requestAnimationFrame(applySpans);
   }
 
   // Recompute spans when the viewport crosses a column-count breakpoint.
   let resizeT = 0;
   new ResizeObserver(() => { clearTimeout(resizeT); resizeT = setTimeout(applySpans, 80); }).observe(grid);
+
+  // Re-run as images decode so landscapes that started with the [4,3]
+  // fallback get promoted to .span-wide once their real dims arrive.
+  // Debounced so a wave of lazy-loaded thumbnails triggers one layout
+  // pass instead of one per image.
+  let loadT = 0;
+  grid.addEventListener('load', (e) => {
+    if (e.target && e.target.tagName === 'IMG') {
+      clearTimeout(loadT);
+      loadT = setTimeout(applySpans, 100);
+    }
+  }, true);
 
   // --- Search wiring
   q.addEventListener('input', () => {
@@ -393,7 +448,6 @@
     });
   });
 
-  document.getElementById('totalSpots').textContent = SPOTS.length;
   renderChips();
   renderPropChips();
 
@@ -402,7 +456,6 @@
   // rebuild too in case new categories appeared.
   window.HB.spots.subscribe(() => {
     refreshSpots();
-    document.getElementById('totalSpots').textContent = SPOTS.length;
     propChipsEl.innerHTML = '';
     renderPropChips();
     update();

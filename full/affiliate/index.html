@@ -10,322 +10,325 @@
 <meta name="referrer" content="no-referrer" />
 <link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
 <link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="manifest" href="../../manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Hikebeast" />
+<meta name="mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" href="../preview.css" />
+<link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <style>
-  /* Affiliate dashboard · scoped to .aff-*. Four moving parts:
-       1. Header — title + short value-prop, blue gradient wash behind.
-       2. Share card — two links (English / Deutsch), Copy per row.
-       3. Stats grid — Total Earned, Referrals, Your Cut.
-       4. Activity list — per-referral rows, IG handle + status pill. */
-  .aff-page { max-width: 720px; margin: 0 auto; padding: 8px 18px 80px; }
+  /* Affiliate dashboard · single centered card, login-style. The page
+     is one glassmorphic surface containing brand + share links + stats
+     + activity list, separated by hairline rules — no nested glass
+     panels, no topbar. Matches the visual feel of /login/. */
 
-  /* Page header. Mirrors the soft blurred blue blobs from /login —
-     same accent palette, same blur+saturate filter — clipped to the
-     header card so the rest of the page stays neutral. The blobs sit
-     behind a translucent white card; the title + subtitle sit on top
-     via z-index. */
-  .aff-header {
+  /* Background — same soft blue-blob wash as /login/. We override the
+     default preview.css gradients so this page sits on a clean blue
+     surface instead of the warm /full/ wash. */
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: #fbfbfc;
+    color: var(--fg);
     position: relative;
-    margin-top: 18px;
-    padding: 32px 24px 28px;
-    border-radius: var(--radius-card);
-    background: rgba(255, 255, 255, 0.65);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
-    backdrop-filter: saturate(180%) blur(14px);
-    border: 1px solid var(--hairline);
-    overflow: hidden;
-    isolation: isolate;
+    overflow-x: hidden;
   }
-  .aff-header::before {
+  body::before {
     content: '';
-    position: absolute;
-    inset: -40px;
-    z-index: -1;
+    position: fixed;
+    inset: -120px;
+    z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(280px 240px at 18% 28%, rgba(0, 113, 227, 0.42) 0%, transparent 70%),
-      radial-gradient(260px 220px at 82% 30%, rgba(96, 165, 250, 0.34) 0%, transparent 72%),
-      radial-gradient(320px 280px at 50% 100%, rgba(56, 132, 220, 0.36) 0%, transparent 72%),
-      radial-gradient(220px 200px at 95% 78%, rgba(180, 210, 255, 0.50) 0%, transparent 75%);
-    filter: blur(60px) saturate(1.1);
-    opacity: 0.85;
-  }
-  .aff-title {
-    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 28px; font-weight: 700; letter-spacing: -0.025em;
-    margin: 0 0 6px; color: var(--fg);
-  }
-  .aff-subtitle {
-    margin: 0;
-    font-size: 14px; line-height: 1.5;
-    color: var(--muted);
-    max-width: 44ch;
+      radial-gradient(460px 420px at 18% 22%, rgba(0, 113, 227, 0.45) 0%, transparent 70%),
+      radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.38) 0%, transparent 72%),
+      radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.40) 0%, transparent 70%),
+      radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.55) 0%, transparent 75%);
+    filter: blur(70px) saturate(1.1);
+    opacity: 0.9;
   }
 
-  /* Share card — two language rows stacked. Each row pairs a URL
-     display with its own Copy button. We deliberately don't use a
-     native Share button here; affiliates almost always paste the
-     link into a caption or DM, and the per-language label is the
-     thing that needs to be visible (which Share would hide). */
-  .aff-share {
-    margin-top: 14px;
-    padding: 6px 16px 12px;
-    background: var(--surface);
-    border-radius: var(--radius-card);
+  /* Page wrapper · centers the card-wrap (back button + card + footer)
+     both horizontally and vertically when content fits the viewport.
+     `margin: auto` on .card-wrap centers when there's room and pins
+     to the top once activity overflows. */
+  .aff-page {
+    position: relative; z-index: 1;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 20px;
   }
-  .aff-share-row {
-    padding: 12px 0;
+  .card-wrap { margin: auto; width: 100%; max-width: 460px; }
+
+  /* Back link · sits above the card, left-aligned with the card edge.
+     Solid white pill so it reads cleanly against the gradient. */
+  .back {
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--fg);
+    font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    margin-bottom: 14px;
+    transition: border-color 150ms ease, transform 100ms ease;
+  }
+  .back:hover { border-color: var(--hairline-strong); }
+  .back:active { transform: scale(0.98); }
+
+  /* Legal footer · below the card, two stacked lines (Terms/Imprint/
+     Privacy + © Hikebeast). Same pattern across /full/affiliate and
+     /full/account. */
+  .legal-foot {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .legal-foot a { color: var(--muted); text-decoration: none; }
+  .legal-foot a:hover { color: var(--fg); }
+  .legal-foot .sep { margin: 0 6px; }
+  .legal-foot .copy { display: block; }
+
+  /* The single card · same translucency / blur recipe as /login/. */
+  .card {
+    background: rgba(255,255,255,0.86);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    backdrop-filter: saturate(180%) blur(18px);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-card);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.10), 0 4px 14px rgba(0,0,0,0.04);
+    overflow: hidden;
+  }
+
+  /* Brand mark at the top of the card — same as /login/, plus a small
+     subtitle for the only commission mention on the page. */
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    padding: 28px 28px 18px;
+  }
+  .brand img {
+    width: 32px; height: 32px;
+    border-radius: 999px; object-fit: cover; object-position: 70% 45%;
+  }
+  .brand-text { display: flex; flex-direction: column; gap: 1px; }
+  .brand b {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
+  }
+  .brand-sub {
+    font-size: 12px; color: var(--muted); letter-spacing: 0;
+  }
+
+  /* Internal section · padding + a top hairline. First section after
+     .brand has no top rule (the brand already separates it). */
+  .sec {
+    padding: 18px 28px;
     border-top: 1px solid var(--hairline);
   }
-  .aff-share-row:first-child { border-top: 0; }
-  .aff-share-label {
+  .sec.first { border-top: 0; padding-top: 4px; }
+  .sec.last  { padding-bottom: 24px; }
+  .sec-label {
     font-size: 11px; font-weight: 600;
     color: var(--muted);
     text-transform: uppercase; letter-spacing: 0.08em;
-    margin: 0 0 6px;
+    margin: 0 0 8px;
   }
-  .aff-share-controls {
-    display: flex; align-items: stretch; gap: 8px;
-  }
-  .aff-share-url {
+
+  /* Share row · URL display + Copy button, side by side. */
+  .share-controls { display: flex; align-items: stretch; gap: 8px; }
+  .share-url {
     flex: 1; min-width: 0;
-    padding: 12px 14px;
+    padding: 11px 14px;
     background: #fff;
     border: 1px solid var(--hairline);
     border-radius: 12px;
     font-family: "SF Mono", ui-monospace, Menlo, monospace;
-    font-size: 13.5px;
-    color: var(--fg);
+    font-size: 13px; color: var(--fg);
     user-select: all;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     display: flex; align-items: center;
   }
-  .aff-btn-copy {
-    height: 44px; padding: 0 18px;
+  .btn-copy {
+    height: 42px; padding: 0 16px;
     border-radius: var(--radius-btn);
-    background: var(--accent); color: #fff;
+    background: var(--fg); color: #fff;
     border: 0; cursor: pointer;
-    font: inherit; font-size: 14px; font-weight: 600;
-    letter-spacing: -0.01em;
+    font: inherit; font-size: 13.5px; font-weight: 600;
+    letter-spacing: -0.01em; white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
     transition: opacity 150ms ease, transform 100ms ease;
-    white-space: nowrap;
   }
-  .aff-btn-copy:hover { opacity: 0.92; }
-  .aff-btn-copy:active { transform: scale(0.98); }
-  .aff-btn-copy.is-success {
-    background: #34c759;
-  }
-  .aff-share-msg {
-    margin: 8px 0 0;
-    font-size: 12px; color: var(--muted);
-    min-height: 1em;
-  }
-  .aff-share-msg[hidden] { display: none; }
-  .aff-share-msg.is-success { color: #1f7a36; }
+  .btn-copy:hover { opacity: 0.92; }
+  .btn-copy:active { transform: scale(0.98); }
+  .btn-copy.is-success { background: #34c759; }
 
-  /* Stats — two tiles. Total earned (across statuses except voided)
-     and a referral count. Currency-aware: when more than one currency
-     is in play the Total stacks each on its own line. */
-  .aff-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-    margin-top: 14px;
+  /* Stats · two values inline, each on its own column. */
+  .stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
   }
-  .aff-stat {
-    background: var(--surface);
-    border-radius: 16px;
-    padding: 14px 14px 12px;
-    display: flex; flex-direction: column; gap: 4px;
-    min-height: 84px;
+
+  /* Resources · single tile linking to the shared Drive folder of promo
+     material affiliates can use (photos, clips, copy templates). */
+  .resources-link {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 150ms ease, background 150ms ease;
+    -webkit-tap-highlight-color: transparent;
   }
-  .aff-stat-label {
-    font-size: 11px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.06em;
-    color: var(--muted);
+  .resources-link:hover {
+    border-color: rgba(0,0,0,0.18);
+    background: #f9f9fa;
   }
-  .aff-stat-value {
+  .resources-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .resources-title { font-size: 14px; font-weight: 600; letter-spacing: -0.005em; }
+  .resources-sub { font-size: 12px; color: var(--muted); }
+  .resources-arrow { font-size: 16px; color: var(--muted); flex-shrink: 0; }
+  .stat-value {
     font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
     font-size: 22px; font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--fg);
+    letter-spacing: -0.02em; color: var(--fg);
     line-height: 1.15;
-    word-spacing: -0.04em;
   }
-  .aff-stat-value.is-empty { color: var(--muted); font-weight: 500; }
+  .stat-value.is-empty { color: var(--muted); font-weight: 500; }
 
-  /* Activity list */
-  .aff-section { margin-top: 20px; }
-  .aff-section-h {
-    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 18px; font-weight: 600; letter-spacing: -0.02em;
-    margin: 0 0 8px; color: var(--fg);
-  }
-  .aff-list {
-    margin: 0; padding: 0; list-style: none;
-    background: var(--surface);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-  .aff-list li {
+  /* Activity list. No external glass — the parent card is the surface. */
+  .activity { margin: 0; padding: 0; list-style: none; }
+  .activity li {
     display: flex; align-items: center; gap: 12px;
-    padding: 12px 16px;
+    padding: 10px 0;
     border-top: 1px solid var(--hairline);
   }
-  .aff-list li:first-child { border-top: 0; }
-  .aff-list .col-buyer {
+  .activity li:first-child { border-top: 0; padding-top: 0; }
+  .activity li:last-child  { padding-bottom: 0; }
+  .col-buyer {
     flex: 1; min-width: 0;
     display: flex; flex-direction: column; gap: 2px;
   }
-  .aff-list .col-buyer .ig {
+  .col-buyer .ig {
     font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
     color: var(--fg);
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
-  .aff-list .col-buyer .ig.is-anon { font-weight: 500; color: var(--muted); }
-  .aff-list .col-buyer .ig a { color: var(--accent); text-decoration: none; }
-  .aff-list .col-buyer .ig a:hover { text-decoration: underline; }
-  .aff-list .col-buyer .date { color: var(--muted); font-size: 12px; }
-  .aff-list .col-amt {
+  .col-buyer .ig.is-anon { font-weight: 500; color: var(--muted); }
+  /* Email fallback: slightly lighter weight + smaller size to read
+   * "buyer info" rather than "Instagram handle". */
+  .col-buyer .ig.is-email { font-weight: 500; font-size: 13px; color: var(--fg); }
+  .col-buyer .ig a { color: var(--accent); text-decoration: none; }
+  .col-buyer .ig a:hover { text-decoration: underline; }
+  .col-buyer .date { color: var(--muted); font-size: 12px; }
+  .col-amt {
     font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 15px; font-weight: 600;
-    letter-spacing: -0.01em;
+    font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
   }
-  /* Voided rows fade — refunded purchases stay visible for transparency
-     but read as "didn't count" without needing a loud pill. */
-  .aff-list li.is-voided { opacity: 0.5; }
-  .aff-list li.is-voided .col-amt { text-decoration: line-through; }
+  .activity li.is-voided { opacity: 0.5; }
+  .activity li.is-voided .col-amt { text-decoration: line-through; }
 
-  /* Empty / loading / signed-out states */
-  .aff-empty {
-    background: var(--surface);
-    border-radius: 16px;
-    padding: 32px 18px;
-    text-align: center;
-  }
-  .aff-empty-icon {
-    width: 48px; height: 48px; margin: 0 auto 12px;
-    border-radius: 999px;
-    background: rgba(0,113,227,0.10);
-    display: grid; place-items: center;
-    color: var(--accent);
-  }
-  .aff-empty h3 {
-    margin: 0 0 4px;
-    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 17px; font-weight: 600; letter-spacing: -0.01em;
-    color: var(--fg);
-  }
-  .aff-empty p {
+  .empty {
     margin: 0;
-    font-size: 14px; color: var(--muted); line-height: 1.5;
-    max-width: 36ch; margin-inline: auto;
+    font-size: 13px; color: var(--muted); line-height: 1.5;
   }
-  .aff-loading, .aff-signed-out {
-    text-align: center; padding: 40px 0;
-    font-size: 14px; color: var(--muted);
-  }
-  .aff-signed-out a { color: var(--accent); text-decoration: none; font-weight: 500; }
 
-  /* Mobile: tighten button padding so URLs don't get squashed. */
-  @media (max-width: 540px) {
-    .aff-btn-copy { padding: 0 14px; font-size: 13px; }
+  /* Loading / signed-out / not-eligible inside the card too. */
+  .state {
+    padding: 32px 28px;
+    text-align: center;
+    font-size: 13px; color: var(--muted); line-height: 1.55;
   }
+  .state a { color: var(--accent); text-decoration: none; }
+
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <a class="brand" href="../index.html">
-    <span>Affiliate</span>
-  </a>
-  <div class="topbar-right">
-    <a class="pill" href="../account/">Account</a>
-  </div>
-</div>
-
 <main class="aff-page">
-  <div id="affLoading" class="aff-loading">Loading…</div>
+ <div class="card-wrap">
+  <a class="back" href="../">← Back</a>
+  <div class="card">
+    <div id="affLoading" class="state">Loading…</div>
 
-  <div id="affSignedOut" class="aff-signed-out" hidden>
-    <p>Sign in with your username and password to see your affiliate dashboard.</p>
-    <p><a href="/login/">Sign in →</a></p>
-  </div>
-
-  <!-- Not-eligible state · the user is signed in but doesn't have
-       isAffiliate=true (most users). The dashboard is invite-only;
-       this page tells them and points them back to the app. -->
-  <div id="affNotEligible" class="aff-signed-out" hidden>
-    <p style="margin-top:32px;">The affiliate program is invite-only.</p>
-    <p style="color:var(--muted); max-width:36ch; margin:8px auto 16px;">
-      We work with a small number of creators. If you'd like to be considered, drop a line to <a href="mailto:leon@hikebeast.ch" style="color:var(--accent);text-decoration:none;">leon@hikebeast.ch</a>.
-    </p>
-    <p><a href="../">← Back to the app</a></p>
-  </div>
-
-  <div id="affContent" hidden>
-    <!-- Header · title + value-prop on a soft blue gradient ─────────── -->
-    <header class="aff-header">
-      <h1 class="aff-title">Earn 50% commission</h1>
-      <p class="aff-subtitle">On every Gems of Switzerland sale that comes through your link.</p>
-    </header>
-
-    <!-- Share card · two language rows, one Copy each ───────────────── -->
-    <section class="aff-share">
-      <div class="aff-share-row">
-        <p class="aff-share-label">English</p>
-        <div class="aff-share-controls">
-          <span class="aff-share-url" id="linkEn">hikebeast.ch/map?r=…</span>
-          <button type="button" class="aff-btn-copy" data-target="linkEn">Copy</button>
-        </div>
-      </div>
-      <div class="aff-share-row">
-        <p class="aff-share-label">Deutsch</p>
-        <div class="aff-share-controls">
-          <span class="aff-share-url" id="linkDe">hikebeast.ch/de/map?r=…</span>
-          <button type="button" class="aff-btn-copy" data-target="linkDe">Copy</button>
-        </div>
-      </div>
-      <p class="aff-share-msg" id="affShareMsg" hidden></p>
-    </section>
-
-    <!-- Stats · total earned + count of valid referrals + your cut ─── -->
-    <div class="aff-stats">
-      <div class="aff-stat">
-        <span class="aff-stat-label">Total Earned</span>
-        <span class="aff-stat-value is-empty" id="statTotal">$0</span>
-      </div>
-      <div class="aff-stat">
-        <span class="aff-stat-label">Referrals</span>
-        <span class="aff-stat-value is-empty" id="statCount">0</span>
-      </div>
-      <div class="aff-stat">
-        <span class="aff-stat-label">Your Cut</span>
-        <span class="aff-stat-value">50%</span>
-      </div>
+    <div id="affSignedOut" class="state" hidden>
+      Sign in to see your affiliate dashboard.<br>
+      <a href="/login/">Sign in →</a>
     </div>
 
-    <!-- Activity list ──────────────────────────────────────────────── -->
-    <section class="aff-section">
-      <h2 class="aff-section-h">Activity</h2>
-      <ul class="aff-list" id="affList" hidden></ul>
-      <div class="aff-empty" id="affEmpty">
-        <div class="aff-empty-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        </div>
-        <h3>No referrals yet</h3>
-        <p>Share your link and earn 50% commission.</p>
+    <div id="affNotEligible" class="state" hidden>
+      The affiliate program is invite-only.<br>
+      <a href="mailto:leon@hikebeast.ch">leon@hikebeast.ch</a>
+    </div>
+
+    <div id="affContent" hidden>
+      <div class="brand">
+        <img src="/images/avatar.jpg" alt="" />
+        <span class="brand-text">
+          <b>Hikebeast · Affiliate</b>
+          <span class="brand-sub">50% per sale</span>
+        </span>
       </div>
-    </section>
 
+      <div class="sec first">
+        <p class="sec-label">English</p>
+        <div class="share-controls">
+          <span class="share-url" id="linkEn">hikebeast.ch/map?r=…</span>
+          <button type="button" class="btn-copy" data-target="linkEn">Copy</button>
+        </div>
+      </div>
+
+      <div class="sec">
+        <p class="sec-label">Deutsch</p>
+        <div class="share-controls">
+          <span class="share-url" id="linkDe">hikebeast.ch/de/map?r=…</span>
+          <button type="button" class="btn-copy" data-target="linkDe">Copy</button>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="stats">
+          <div>
+            <p class="sec-label">Total</p>
+            <p class="stat-value is-empty" id="statTotal">0</p>
+          </div>
+          <div>
+            <p class="sec-label">Referrals</p>
+            <p class="stat-value is-empty" id="statCount">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <p class="sec-label">Resources</p>
+        <a class="resources-link" href="https://drive.google.com/drive/folders/1oBZ1HWqt5P57ugwm3CZDxH2NS3IeahDZ?usp=share_link" target="_blank" rel="noopener">
+          <span class="resources-text">
+            <span class="resources-title">Promo material</span>
+            <span class="resources-sub">Photos, clips and ready-to-share copy</span>
+          </span>
+          <span class="resources-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <div class="sec last">
+        <p class="sec-label">Activity</p>
+        <ul class="activity" id="affList" hidden></ul>
+        <p class="empty" id="affEmpty">No referrals yet.</p>
+      </div>
+    </div>
   </div>
+  <footer class="legal-foot">
+    <a href="../../terms.html">Terms</a><span class="sep">·</span><a href="../../imprint.html">Imprint</a><span class="sep">·</span><a href="../../privacy.html">Privacy</a>
+    <span class="copy">© Hikebeast</span>
+  </footer>
+ </div>
 </main>
-
-<footer class="legal">
-  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../terms.html">Terms</a><span class="sep">·</span>
-  © Hikebeast
-</footer>
 
 <script src="../lib/convex.js"></script>
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
@@ -341,7 +344,6 @@
     const elContent      = document.getElementById('affContent');
     const elLinkEn    = document.getElementById('linkEn');
     const elLinkDe    = document.getElementById('linkDe');
-    const elShareMsg  = document.getElementById('affShareMsg');
     const elStatTotal = document.getElementById('statTotal');
     const elStatCount = document.getElementById('statCount');
     const elList      = document.getElementById('affList');
@@ -367,12 +369,9 @@
     // currencies (CHF + USD doesn't reduce to a single number without
     // an FX rate) — we display each currency as its own term, joined
     // by " + ". Same rule as the Convex query's totals shape.
-    function fmtMoney(cents, _currency) {
-      // Per Leon: prefix amounts with `$` (regardless of underlying
-      // currency code on the row). The currency arg is kept for
-      // backward-compat with call sites but ignored at render time.
+    function fmtMoney(cents, currency) {
       const v = (cents / 100).toFixed(2).replace(/\.00$/, '');
-      return '$' + v;
+      return v + ' ' + (currency || '').toUpperCase();
     }
     // Sum of (paid + pending) per currency — voided rows are excluded
     // because they don't count toward what the affiliate has earned.
@@ -405,14 +404,12 @@
 
     // One handler for all `[data-target="<linkId>"]` Copy buttons. Reads
     // the URL from the linked span's dataset. Brief "Copied" success
-    // state on the clicked button (no shared status line — keeps the
-    // two rows independent visually).
-    document.querySelectorAll('.aff-btn-copy').forEach((btn) => {
+    // state on the clicked button — no separate status line; the
+    // colour-flip on the button itself is the entire feedback.
+    document.querySelectorAll('.btn-copy').forEach((btn) => {
       btn.addEventListener('click', async () => {
         const target = document.getElementById(btn.dataset.target);
         const url = (target && (target.dataset.url || target.textContent)) || '';
-        elShareMsg.hidden = true;
-        elShareMsg.classList.remove('is-success');
         const orig = btn.textContent;
         try {
           await navigator.clipboard.writeText(url);
@@ -424,22 +421,22 @@
           }, 1400);
         } catch {
           // Clipboard API blocked — select the URL so the user can
-          // ⌘C manually. Status line takes over to explain.
+          // ⌘C manually. Button label flips to a hint.
           if (target) {
             const r = document.createRange();
             r.selectNodeContents(target);
             const sel = window.getSelection();
             sel.removeAllRanges(); sel.addRange(r);
           }
-          elShareMsg.hidden = false;
-          elShareMsg.textContent = 'Press Cmd/Ctrl+C to copy.';
+          btn.textContent = '⌘C';
+          setTimeout(() => { btn.textContent = orig; }, 1400);
         }
       });
     });
 
     function paintStats(totals, count) {
       const totalStr = fmtTotalEarned(totals);
-      elStatTotal.textContent = totalStr || '$0';
+      elStatTotal.textContent = totalStr || '0';
       elStatTotal.classList.toggle('is-empty', !totalStr);
       elStatCount.textContent = String(count);
       elStatCount.classList.toggle('is-empty', count === 0);
@@ -454,24 +451,30 @@
       }
       elEmpty.hidden = true;
       elList.hidden = false;
-      // Each row renders the buyer (clickable @handle linking to instagram.com,
-      // or a placeholder for direct-web buyers without an IG handle on file)
-      // above the date, then the commission on the right. Voided rows stay
-      // visible but get faded + strikethrough on the amount.
+      // Each row renders the buyer above the date, then the commission on
+      // the right. Buyer cell prefers IG (clickable @handle linking to
+      // instagram.com); falls back to the email they checked out with;
+      // shows "Direct buyer" only when neither is on file. Voided rows
+      // stay visible but get faded + strikethrough on the amount.
       elList.innerHTML = rows.map((r) => {
         const status = r.status || 'pending';
         let buyerCell;
+        let buyerStyle = '';
         if (r.buyerIg) {
           const ig = esc(r.buyerIg);
           buyerCell = '<a href="https://instagram.com/' + ig + '" target="_blank" rel="noopener noreferrer">@' + ig + '</a>';
+        } else if (r.buyerEmail) {
+          buyerCell = esc(r.buyerEmail);
+          buyerStyle = ' is-email';
         } else {
           buyerCell = '<span class="is-anon">Direct buyer</span>';
         }
+        const hasId = !!(r.buyerIg || r.buyerEmail);
         const liClass = status === 'voided' ? ' class="is-voided"' : '';
         return (
           '<li' + liClass + '>' +
             '<div class="col-buyer">' +
-              '<span class="ig' + (r.buyerIg ? '' : ' is-anon') + '">' + buyerCell + '</span>' +
+              '<span class="ig' + (hasId ? '' : ' is-anon') + buyerStyle + '">' + buyerCell + '</span>' +
               '<span class="date">' + fmtDate(r.createdAt) + '</span>' +
             '</div>' +
             '<span class="col-amt">' + fmtMoney(r.commissionCents, r.currency) + '</span>' +

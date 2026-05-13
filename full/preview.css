@@ -28,6 +28,20 @@ html, body { margin: 0; padding: 0; }
 
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
+/* Users who've opted into "Reduce Motion" at the OS level (System
+ * Settings / iOS Accessibility) get a freeze on transitions + animations
+ * + smooth-scroll. The home hero carousel also stops auto-rotating; see
+ * the matching matchMedia check in full/index.html. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   min-height: 100dvh;
   color: var(--fg);
@@ -36,26 +50,44 @@ body {
   line-height: 1.5;
   letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
+  background: var(--bg);
+}
+/* Viewport-fixed gradient atmosphere on its own compositor layer.
+ * Used to live on <body> via background-attachment: fixed, but Safari
+ * re-rasterises that on every scroll frame — the dominant cause of
+ * home-page scroll jank on desktop Safari. A position:fixed pseudo
+ * gets promoted to its own GPU layer once, so scrolling content above
+ * never repaints it. Visual is identical. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
     radial-gradient(900px 500px at 20% 0%, #eef1f5 0%, transparent 60%),
-    radial-gradient(700px 500px at 85% 8%, #f0ece6 0%, transparent 55%),
-    var(--bg);
-  background-attachment: fixed;
+    radial-gradient(700px 500px at 85% 8%, #f0ece6 0%, transparent 55%);
+  /* Force Safari to promote this to its own GraphicsLayer so it
+   * never repaints when content scrolls above it. */
+  will-change: transform;
 }
 
 a { color: inherit; }
 button { font-family: inherit; }
 
 /* === Topbar === */
+/* Sticky topbar; backdrop-filter intentionally NOT used. Safari WebKit
+ * recomposites blur layers on every scroll frame, which is the single
+ * biggest cause of desktop-Safari scroll jank on this site. A 96%-opaque
+ * background reads identically over the mostly-white page body but
+ * keeps the topbar on a static composited layer. */
 .topbar {
   position: sticky;
   top: 0;
   z-index: 100;
   isolation: isolate;
   height: var(--topbar-h);
-  background: rgba(255,255,255,0.82);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
+  background: rgba(255,255,255,0.96);
   border-bottom: 1px solid var(--hairline);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -164,18 +196,17 @@ button { font-family: inherit; }
   position: sticky;
   top: 0;
   z-index: 80;
-  background: rgba(255,255,255,0.86);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
+  /* See note on .topbar above — no backdrop-filter to keep Safari smooth. */
+  background: rgba(255,255,255,0.96);
   border-bottom: 1px solid var(--hairline);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 16px;
-  padding: 12px 22px;
-  height: 64px;
+  padding: calc(12px + env(safe-area-inset-top)) 22px 12px;
+  height: calc(64px + env(safe-area-inset-top));
 }
-@media (min-width: 700px) { .home-topbar { padding: 12px 32px; gap: 24px; } }
+@media (min-width: 700px) { .home-topbar { padding: 12px 32px; gap: 24px; height: 64px; } }
 
 .home-search {
   position: relative;
@@ -278,21 +309,29 @@ button { font-family: inherit; }
   margin: 0;
 }
 @media (min-width: 700px) { .home-v2 > h1.page-title { font-size: 26px; } }
+/* Mobile: the bottom tab bar's Home icon already labels the page; the
+ * inline H1 above the hero is redundant and steals vertical space. */
+@media (max-width: 700px) { .home-v2 > h1.page-title { display: none; } }
 
-/* Featured hero · split text (left) + photo (right) + up-next column */
+/* Featured hero · split text (left) + photo (right) + up-next column.
+ * The chapters column on the right only kicks in once there's
+ * comfortable room for the rail (240px), the hero, AND the column —
+ * at narrower viewports the chapters stack below the hero so the
+ * rail never has to collapse to make space. Threshold tuned so a
+ * 1024px laptop with the rail expanded gets a full-width hero. */
 .home-feature {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
   align-items: stretch;
 }
-@media (min-width: 900px) {
+@media (min-width: 1200px) {
   .home-feature {
     grid-template-columns: minmax(0, 1fr) 320px;
     gap: 22px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .home-feature {
     grid-template-columns: minmax(0, 1fr) 360px;
   }
@@ -313,11 +352,16 @@ button { font-family: inherit; }
   overflow: hidden;
   box-shadow: var(--shadow-soft);
 }
-.feature-card .feature-photo { aspect-ratio: 4 / 5; }
-@media (min-width: 700px) { .feature-card .feature-photo { aspect-ratio: auto; } }
+.feature-card .feature-photo { aspect-ratio: 5 / 4; }
+@media (min-width: 900px) { .feature-card .feature-photo { aspect-ratio: auto; } }
 .feature-card .feature-photo { grid-area: photo; }
 .feature-card .feature-text  { grid-area: text;  }
-@media (min-width: 700px) {
+/* The card switches to side-by-side at 900px instead of 700px. Below
+ * that, the photo column was too narrow for the chapter map silhouette
+ * to read at any reasonable size (a thin dark strip with a tiny dot).
+ * Single-column on narrow viewports gives the silhouette the full
+ * width and the text the full width below it. */
+@media (min-width: 900px) {
   .feature-card {
     grid-template-columns: minmax(280px, 1.05fr) minmax(0, 1.4fr);
     grid-template-rows: auto;
@@ -329,16 +373,26 @@ button { font-family: inherit; }
 }
 @media (min-width: 1100px) { .feature-card { height: 440px; } }
 .feature-card .feature-text {
-  padding: 28px 26px;
+  /* Tighter left padding (vs right) so the title gets more horizontal
+   * room before it wraps; right side stays a bit roomier to keep the
+   * text comfortably away from the photo column. */
+  padding: 28px 22px 28px 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 12px;
   background: var(--surface-2);
   min-width: 0;
+  /* Mobile: lock the text block to a min-height so the card stays
+   * the same size across all slides. Without this, descriptions of
+   * different lengths reflow the card height between auto-advances,
+   * which reads as a "jump". Picked to fit the longest chapter case
+   * (2-line title + 2-line deck) plus the intro kicker. Above 900px
+   * the card has a fixed `height` (420/440px) so this is a no-op. */
+  min-height: 200px;
 }
-@media (min-width: 700px) { .feature-card .feature-text { padding: 36px 36px; } }
-@media (min-width: 1100px) { .feature-card .feature-text { padding: 48px 56px; } }
+@media (min-width: 700px) { .feature-card .feature-text { padding: 36px 28px 36px 22px; } }
+@media (min-width: 1100px) { .feature-card .feature-text { padding: 48px 40px 48px 28px; } }
 .feature-card .feature-kicker {
   display: inline-flex;
   align-items: center;
@@ -354,6 +408,11 @@ button { font-family: inherit; }
   color: var(--muted);
   align-self: flex-start;
 }
+/* Explicit hidden-attribute rule · the user-agent [hidden]{display:none}
+ * loses to the inline-flex rule above (same specificity, later wins),
+ * so we restore it here. paintFeature toggles `.hidden` on this element
+ * to skip the kicker on chapter slides. */
+.feature-card .feature-kicker[hidden] { display: none; }
 .feature-card .feature-kicker svg { width: 12px; height: 12px; color: var(--fg); }
 /* "Read this first" state: accent-filled pill so the introduction
  * stands out from the rotating regular spots. The icon (currently a
@@ -366,15 +425,23 @@ button { font-family: inherit; }
 .feature-card .feature-kicker.is-pinned svg { color: #fff; }
 .feature-card .feature-title {
   font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-  font-size: 32px;
-  line-height: 1.0;
-  letter-spacing: -0.035em;
+  /* Fluid sizing tuned so the longest single-word titles ("Introduction",
+   * "Central Switzerland") fit on one line at common desktop widths
+   * (1100-1600px) without splitting mid-word. The max used to be 44px,
+   * which was big enough that single words wrapped on smaller text
+   * columns. 34px keeps the title impactful but always fits. */
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   font-weight: 600;
   margin: 4px 0 0;
   color: var(--fg);
+  /* `break-word` only splits a word when it would actually overflow
+   * (e.g. extremely narrow viewport), not preemptively. `anywhere`
+   * was too eager and split "Introduction" into "Introducti / on"
+   * at sizes where it would otherwise have fit. */
+  overflow-wrap: break-word;
 }
-@media (min-width: 700px) { .feature-card .feature-title { font-size: 40px; } }
-@media (min-width: 1100px) { .feature-card .feature-title { font-size: 48px; } }
 .feature-card .feature-deck {
   margin: 0;
   font-size: 14px;
@@ -405,6 +472,12 @@ button { font-family: inherit; }
 }
 .feature-card .feature-cta:hover { background: var(--surface); }
 .feature-card .feature-cta:active { transform: scale(0.97); }
+/* CTA removed from the hero entirely. The photo is the affordance —
+ * clicking it navigates to the chapter (paintFeature still sets
+ * featureCta.href so the existing click handler keeps working). Hiding
+ * here instead of with `hidden` so all slides drop the button without
+ * per-slide JS toggling. */
+.feature-card .feature-cta { display: none; }
 .feature-card .feature-cta .play-icon {
   width: 28px; height: 28px;
   border-radius: 999px;
@@ -433,6 +506,53 @@ button { font-family: inherit; }
 /* Crossfade between rotating featured spots so swaps feel intentional
  * rather than a hard cut. */
 .feature-card .feature-photo img.is-fading { opacity: 0; }
+
+/* Intro slide · cream gradient (same stops as /themap/success/) +
+ * the transparent polaroid PNG. The PNG is contained and centered so
+ * the polaroids never get clipped — matches the celebration moment
+ * the buyer just saw on the thank-you page. */
+.feature-card .feature-photo.is-intro {
+  background: linear-gradient(135deg, #F4F1EC 0%, #ECE6DC 100%);
+}
+.feature-card .feature-photo.is-intro img {
+  object-fit: contain;
+  object-position: center;
+  padding: 24px;
+}
+
+/* Chapter slides · dark gradient + region-colour glow + the chapter's
+ * white SVG silhouette. Same recipe as .slide-cover .cv-map but tuned
+ * for the hero scale: more padding around the silhouette, a stronger
+ * drop-shadow so the map reads at 600+ px wide. The region tint is
+ * driven by the inline `--region-color` CSS variable set per chapter
+ * in paintFeature. */
+.feature-card .feature-photo.is-map {
+  background:
+    radial-gradient(70% 60% at 22% 18%, rgba(var(--region-color, 200, 200, 200), 0.55) 0%, rgba(var(--region-color, 200, 200, 200), 0) 65%),
+    radial-gradient(60% 55% at 92% 95%, rgba(var(--region-color, 200, 200, 200), 0.32) 0%, rgba(var(--region-color, 200, 200, 200), 0) 70%),
+    linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
+}
+.feature-card .feature-photo.is-map::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+}
+.feature-card .feature-photo.is-map img {
+  object-fit: contain;
+  padding: 48px;
+  /* Single small drop-shadow instead of the original double (32px white
+   * glow + 24px dark drop). The white glow at 10% alpha is barely visible
+   * over the dark gradient backdrop; the dark shadow at half radius reads
+   * the same. Safari's filter pipeline rasterises drop-shadow per-pixel,
+   * so each shadow + each pixel of blur radius compounds the cost. */
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+}
+@media (max-width: 699px) {
+  .feature-card .feature-photo.is-map img { padding: 32px; }
+  .feature-card .feature-photo.is-intro img { padding: 16px; }
+}
 .feature-card .feature-dots {
   position: absolute;
   bottom: 14px; left: 50%;
@@ -469,6 +589,34 @@ button { font-family: inherit; }
   -webkit-tap-highlight-color: transparent;
 }
 .up-next-card:hover { background: rgba(0,0,0,0.045); }
+
+/* "Show all 7" button + hidden extras container. The extras container
+   uses display:contents so its children flow into the parent flex
+   layout (no extra wrapper) when expanded; when hidden, the container
+   itself is removed from the layout via [hidden]. */
+.up-next-extras { display: contents; }
+.up-next-extras[hidden] { display: none; }
+.up-next-more {
+  appearance: none;
+  background: none;
+  border: 1px dashed var(--hairline);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-top: 2px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  text-align: center;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.up-next-more:hover {
+  background: rgba(0,0,0,0.03);
+  color: var(--fg);
+  border-color: rgba(0,0,0,0.18);
+}
 .up-next-card .photo {
   width: 96px; height: 64px;
   border-radius: 10px;
@@ -481,18 +629,32 @@ button { font-family: inherit; }
   object-fit: cover;
   display: block;
 }
-/* Chapter-map variant of the thumb: pad the gradient box so the
- * silhouette has breathing room. 86% (the cover-card default) makes
- * the map kiss the edges in this 96x64 frame; using padding + a
- * 100%-of-padded-area image gives a clean inset look without
- * shrinking the silhouette into a tiny dot. */
-.up-next-card .photo .cv-map {
-  padding: 8px;
+/* Chapter variant of the up-next card — the photo block becomes the same
+ * dark-gradient frame used on /full/<chapter>/ slide covers, with the
+ * region SVG silhouette glowing on top. Reuses the .cv-map look so the
+ * home page reads as a continuation of the chapter pages. Drives the
+ * region tint via the inline `--region-color` CSS variable set per chapter. */
+.up-next-card.is-chapter .photo.cv-map {
+  position: relative;
+  background:
+    radial-gradient(70% 60% at 22% 18%, rgba(var(--region-color, 200, 200, 200), 0.55) 0%, rgba(var(--region-color, 200, 200, 200), 0) 65%),
+    radial-gradient(60% 55% at 92% 95%, rgba(var(--region-color, 200, 200, 200), 0.32) 0%, rgba(var(--region-color, 200, 200, 200), 0) 70%),
+    linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
+  display: grid;
+  place-items: center;
 }
-.up-next-card .photo .cv-map img {
-  width: 100%;
-  height: auto;
-  max-height: 100%;
+.up-next-card.is-chapter .photo.cv-map::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+}
+.up-next-card.is-chapter .photo.cv-map img {
+  width: 78%; height: auto; max-height: 78%;
+  object-fit: contain;
+  /* Single small drop-shadow, see note on .feature-photo.is-map img. */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
 }
 .up-next-card .body {
   display: flex;
@@ -1758,16 +1920,13 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   line-height: 1.2;
 }
 
-/* === Region map silhouette + gradient (premium chapter thumbnail) ===
+/* === Cover variant: region map silhouette + gradient (instead of a photo) ===
  * Dark editorial backdrop with the region color as an off-axis glow, the
- * light SVG map reads like a relief / topo print on top. Originally only
- * used in the chapter cover (.slide-cover .cv-map). Hoisted to a bare
- * .cv-map selector so the home-page up-next thumbs can reuse the same
- * treatment without copy-pasting the gradient. */
-.cv-map {
+ * light SVG map reads like a relief / topo print on top. Same .slide-cover
+ * frame, swap cv-img for cv-map. */
+.slide-cover .cv-map {
   position: relative;
   width: 100%;
-  height: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background:
@@ -1777,7 +1936,7 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   display: grid;
   place-items: center;
 }
-.cv-map::after {
+.slide-cover .cv-map::after {
   /* Fine grain to keep the gradient from looking flat-banded. */
   content: '';
   position: absolute;
@@ -1787,15 +1946,16 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   background-size: 3px 3px;
   pointer-events: none;
 }
-.cv-map img {
+.slide-cover .cv-map img {
   position: relative;
   width: 86%;
   height: auto;
   max-height: 86%;
   object-fit: contain;
   /* Map paths are #eef0f3 / #fff strokes — they read at full opacity on
-   * the dark backdrop. Soft glow so the silhouette feels lit, not pasted. */
-  filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.08)) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+   * the dark backdrop. Single drop-shadow at small radius (see
+   * .feature-photo.is-map img above for the Safari perf rationale). */
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
 }
 @media (min-width: 760px) {
   .slide-cover .cv-map { aspect-ratio: auto; height: 100%; }
@@ -2066,6 +2226,71 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
   .slide-preface.no-photo .pf-body { padding: 48px 56px; }
   .slide-preface.no-photo .pf-extras { padding: 48px 56px 48px 0; }
 }
+
+/* === Three-collection teaser · last slide of /full/intro/ ===
+ * Three image cards side-by-side at every viewport (per Leon's spec).
+ * Each card is just photo + title; the whole card is the link.
+ * Lives in the same .slide rhythm as the other intro sections. */
+.slide-collections {
+  background: var(--paper);
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (min-width: 760px) { .slide-collections { padding: 32px 32px 36px; gap: 14px; } }
+@media (min-width: 1100px) { .slide-collections { padding: 40px 48px 48px; gap: 16px; } }
+.slide-collections .sp-kicker,
+.slide-collections .sp-title { margin: 0; }
+.slide-collections .sp-title { margin-bottom: 8px; }
+
+.collections-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+@media (min-width: 760px)  { .collections-row { gap: 14px; } }
+@media (min-width: 1100px) { .collections-row { gap: 18px; } }
+
+.cc-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--fg);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 120ms ease;
+}
+.cc-card:active { transform: scale(0.98); }
+
+.cc-photo {
+  display: block;
+  aspect-ratio: 4 / 5;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--surface);
+}
+@media (min-width: 760px) { .cc-photo { border-radius: 16px; } }
+.cc-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 320ms ease;
+}
+.cc-card:hover .cc-photo img { transform: scale(1.03); }
+
+.cc-title {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  /* Centered to mirror the photo's grid column width on mobile, where
+   * card widths are small and the title would otherwise hug the left. */
+  text-align: center;
+}
+@media (min-width: 760px)  { .cc-title { font-size: 15px; } }
+@media (min-width: 1100px) { .cc-title { font-size: 16px; } }
 
 /* Plan grid (4 cards) — fills extras column */
 .plan-grid {
@@ -3198,9 +3423,12 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
   bottom: 0;
   width: 64px;
   z-index: 1100;
-  background: rgba(250,250,250,0.86);
-  -webkit-backdrop-filter: saturate(180%) blur(22px);
-  backdrop-filter: saturate(180%) blur(22px);
+  /* See note on .topbar above. The rail spans the full viewport height,
+   * so a per-frame backdrop-filter recomposite was the biggest single
+   * cost on desktop Safari — every scroll re-blurred the entire left
+   * edge. Near-opaque solid background gives the same visual on most
+   * page backgrounds. */
+  background: rgba(250,250,250,0.98);
   border-right: 1px solid var(--hairline);
   display: flex;
   flex-direction: column;
@@ -3244,6 +3472,12 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
   display: flex;
   align-items: flex-end;
 }
+
+/* The rail-scroll is a flex column; without this, fixed-height children
+ * (rail-item h=42, rail-chapter h=44, rail-section-head h=32) shrink to
+ * fit the viewport instead of letting the container scroll. Pin them so
+ * the rail keeps its declared spacing and overflow:auto does its job. */
+.app-rail .rail-scroll > * { flex-shrink: 0; }
 .rail-section-head .label {
   opacity: 0;
   transition: opacity 120ms ease 30ms;
@@ -3515,7 +3749,25 @@ body.has-rail .topbar .hb-nav { display: none; }
    * map shell, scroll-margin) collapses cleanly. The home page topbar
    * is `.home-topbar` (different element) and stays visible. */
   :root { --topbar-h: 0px; }
-  .home-topbar { height: 52px; padding-top: 8px; padding-bottom: 8px; }
+  .home-topbar {
+    /* Push search bar below iOS Safari's status bar so it's not
+     * crammed against the time/battery. env(safe-area-inset-top)
+     * resolves to ~47px on notch iPhones, 0 elsewhere. */
+    height: calc(60px + env(safe-area-inset-top));
+    padding-top: calc(10px + env(safe-area-inset-top));
+    padding-bottom: 14px;
+    /* Drop the empty right-column gap when both the burger and the
+     * cog are hidden on mobile (see .rail-burger / .rail-cog).
+     * Otherwise the 16px grid-gap allocates space for the missing
+     * column and the search bar drifts off-center to the left. */
+    grid-template-columns: 1fr;
+    gap: 0;
+    /* Fully opaque on mobile — translucency adds nothing at this width
+     * and the base rule's 96% alpha can still show a faint seam over
+     * dark photos. */
+    background: #fff;
+  }
+  .home-topbar-actions { display: none; }
 
   body.has-rail { padding-left: 0; }
   body.has-rail.rail-expanded { padding-left: 0; }
@@ -3544,11 +3796,11 @@ body.has-rail .topbar .hb-nav { display: none; }
    * Account FAB stays in the top-right for sign-in / sign-out. */
   .rail-burger { display: none !important; }
   .topbar { padding-left: 12px; }
-  /* Home topbar's burger slot is now empty on mobile; collapse back to
-   * 2 cols (search · actions). */
+  /* Match .home-v2's 22px side padding so the search bar's edges
+   * line up with the feature card / chapter row below it. */
   .home-topbar {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 22px;
+    padding-right: 22px;
   }
 
   /* On mobile the page topbar (chapter name + spot count + Overview
@@ -3569,8 +3821,11 @@ body.has-rail .topbar .hb-nav { display: none; }
     left: 0;
     right: 0;
     z-index: 70;
+    /* Match the body so the bar feels like the icons are floating
+     * directly on the page, no separate "plate". Body resolves to
+     * #ffffff at the bottom of the viewport (the radial gradients
+     * on body are fixed near top and fade well above the tab bar). */
     background: #fff;
-    border-top: 1px solid var(--hairline);
     padding-top: 6px;
     padding-bottom: env(safe-area-inset-bottom);
     height: calc(64px + env(safe-area-inset-bottom));
@@ -3624,11 +3879,17 @@ body.has-rail .topbar .hb-nav { display: none; }
     position: absolute;
     inset: 0;
     background: rgba(8, 10, 14, 0.42);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
     opacity: 0;
     transition: opacity 220ms ease;
     pointer-events: none;
+  }
+  /* backdrop-filter is only applied while the sheet is open. iOS Safari
+   * still composites backdrop-filter at opacity:0, blurring the entire
+   * viewport (incl. the bottom tab bar) — visible as a translucent
+   * gradient over the tabbar on Safari but not Chrome. */
+  .app-menu-sheet.is-open .menu-sheet-backdrop {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
   }
   .app-menu-sheet .menu-sheet-card {
     position: absolute;
@@ -3637,7 +3898,6 @@ body.has-rail .topbar .hb-nav { display: none; }
     bottom: 0;
     background: #fff;
     border-radius: 18px 18px 0 0;
-    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.18);
     transform: translateY(100%);
     transition: transform 280ms cubic-bezier(.2,.7,.3,1);
     padding: 8px 16px calc(20px + env(safe-area-inset-bottom));
@@ -3645,6 +3905,15 @@ body.has-rail .topbar .hb-nav { display: none; }
     overflow-y: auto;
     pointer-events: auto;
     -webkit-overflow-scrolling: touch;
+  }
+  /* box-shadow only when the sheet is actually open. iOS Safari
+   * composites box-shadow at the un-translated position, so an
+   * upward-cast shadow on a `translateY(100%)` off-screen sheet
+   * still paints OVER the bottom tab bar — visible as a vertical
+   * gradient across the top of the tab bar. Chrome's compositor
+   * honours the transform and doesn't show the bleed. */
+  .app-menu-sheet.is-open .menu-sheet-card {
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.18);
   }
   .app-menu-sheet.is-open { pointer-events: auto; }
   .app-menu-sheet.is-open .menu-sheet-backdrop { opacity: 1; pointer-events: auto; }
@@ -4219,7 +4488,6 @@ body.has-rail .topbar .hb-nav { display: none; }
     bottom: 0;
     background: #fff;
     border-radius: 18px 18px 0 0;
-    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.18);
     transform: translateY(100%);
     transition: transform 280ms cubic-bezier(.2,.7,.3,1);
     padding: 8px 16px calc(20px + env(safe-area-inset-bottom));
@@ -4233,7 +4501,14 @@ body.has-rail .topbar .hb-nav { display: none; }
   }
   .hb-filter-sheet.is-open { pointer-events: auto; }
   .hb-filter-sheet.is-open .hb-filter-sheet-backdrop { opacity: 1; pointer-events: auto; }
-  .hb-filter-sheet.is-open .hb-filter-sheet-card { transform: translateY(0); }
+  .hb-filter-sheet.is-open .hb-filter-sheet-card {
+    transform: translateY(0);
+    /* iOS Safari composites box-shadow at the un-translated position,
+     * so an upward-cast shadow on an off-screen `translateY(100%)`
+     * sheet still paints over the bottom tab bar. Only render the
+     * shadow when the sheet is actually open. */
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.18);
+  }
   .hb-filter-sheet .hb-filter-sheet-grabber {
     width: 36px;
     height: 4px;
@@ -4369,6 +4644,13 @@ body.has-rail .topbar .hb-nav { display: none; }
 @media (hover: none) {
   /* Touch: keep the name subtle but always present so users know what they're tapping */
   .hb-tile .hb-tile-name { opacity: 1; transform: translateY(0); padding: 36px 12px 10px; }
+}
+/* Phones: hide the name overlay entirely — the wall reads cleaner as
+ * just photos. Tapping still opens the spot. The TODO placeholder
+ * tile (.hb-tile-todo) keeps its name because there's no photo to
+ * identify it. */
+@media (max-width: 699px) {
+  .hb-tile:not(.hb-tile-todo) .hb-tile-name { display: none; }
 }
 
 /* TODO placeholder tile · spots without a photo yet (extras_entry rows or
@@ -4947,3 +5229,29 @@ body.has-rail .topbar .hb-nav { display: none; }
 }
 .hb-signin-submit:hover { filter: brightness(0.94); }
 .hb-signin-submit:disabled { opacity: 0.6; cursor: default; filter: none; }
+
+/* === Hike sources block in the route detail sub-view === */
+.hb-route-sources {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline);
+}
+.hb-sources-h {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--soft);
+  margin: 0 0 8px;
+}
+.hb-sources-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.hb-source-item {
+  font-size: 12.5px; color: var(--muted);
+  letter-spacing: -0.005em;
+}
+.hb-source-item a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.hb-source-item a:hover { text-decoration: underline; }
+.hb-source-item.hb-source-text { color: var(--soft); font-style: italic; }
