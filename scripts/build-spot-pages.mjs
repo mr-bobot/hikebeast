@@ -246,6 +246,19 @@ function routeRow(spot, route, idx) {
   const badge = route.quickest ? `<span class="hb-route-badge">Quickest</span>` : "";
   const name = route.start ? `Hike from ${escapeHtml(route.start)}` : `Route ${idx + 1}`;
 
+  // Surface operating hours for cable cars and huts at a glance so the user
+  // doesn't have to drill into the route detail view to find them.
+  const opening = [];
+  if (route.cable_car && route.cable_car.open_raw) {
+    opening.push(`Cable car: ${escapeHtml(route.cable_car.open_raw)}`);
+  }
+  if (route.hut && route.hut.open_raw) {
+    opening.push(`Hut: ${escapeHtml(route.hut.open_raw)}`);
+  }
+  const openingHtml = opening.length
+    ? `<div class="hb-route-operating">${opening.join(" · ")}</div>`
+    : "";
+
   const thumbSrc = route.thumb || routeThumbSrc(spot, idx);
   const thumb = `<div class="hb-route-thumb"><img src="${escapeHtml(thumbSrc)}" alt="" loading="lazy" /></div>`;
 
@@ -254,6 +267,7 @@ function routeRow(spot, route, idx) {
     <div class="hb-route-meta">
       <div class="hb-route-name">${name} ${badge}</div>
       <div class="hb-route-stats">${stats.join("")}</div>
+      ${openingHtml}
     </div>
     <span class="hb-route-chev">${CHEV_RIGHT_SVG}</span>
   </button>`;
@@ -551,8 +565,16 @@ function flipScriptFor(spot) {
       r.sac_grade ? (r.sac_grade + (r.effort_label ? (' · ' + r.effort_label) : '')) : '—');
     setText('[data-rd-time]', fmtDuration(r.duration_min) || '—');
     setText('[data-rd-gain]', r.gain_m ? (r.gain_m + ' m') : '—');
-    setText('[data-rd-equipment]',
-      r.equipment_required === undefined ? '—' : (r.equipment_required ? 'Required' : 'None'));
+    // Prefer the concrete equipment_list (array of items). Fall back to the
+    // legacy boolean for any hikes that haven't been migrated yet. Empty array
+    // explicitly means "no gear needed", not unknown.
+    if (Array.isArray(r.equipment_list)) {
+      setText('[data-rd-equipment]', r.equipment_list.length ? r.equipment_list.join(' · ') : 'None');
+    } else if (r.equipment_required === undefined) {
+      setText('[data-rd-equipment]', '—');
+    } else {
+      setText('[data-rd-equipment]', r.equipment_required ? 'Required' : 'None');
+    }
 
     if (r.start) {
       setHTML('[data-rd-start]',

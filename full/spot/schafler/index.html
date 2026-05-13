@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778666077238" />
+<link rel="stylesheet" href="../../preview.css?v=1778700368468" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -128,6 +128,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Luftseilbahn Wasserauen-Ebenalp <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">329 m gain</span></span></div>
+      <div class="hb-route-operating">Hut: May 24 - Mid Oct</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -203,7 +204,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"schafler-route-42","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":329,"equipment_required":false,"start":"Luftseilbahn Wasserauen-Ebenalp","transit":{"train":"Wasserauen"},"hut":{"cost_chf_raw":"From 48 CHF","open_raw":"May 24 - Mid Oct","website":"https://www.schaefler.ch/geniessen/"},"description_extra":"Berggasthaus Schäfler sits on the limestone ridge above Aescher in the Alpstein. Approach via the Ebenalp cable car from Wasserauen, then 30-40 minutes along the ridge. T2 — the ridge is narrow in places with some exposure. The Schäfler views go south over the Säntis massif and north toward Lake Constance. Pair with Seealpsee in the same day by descending the back side from Schäfler down to the lake (2 hours, then climb back to Wasserauen or take the cable car).","visits":["schafler"],"sources":["https://www.schaefler.ch/"],"quickest_for":["schafler"],"quickest":true}];
+  const ROUTES = [{"id":"schafler-route-42","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":329,"start":"Luftseilbahn Wasserauen-Ebenalp","transit":{"train":"Wasserauen"},"hut":{"cost_chf_raw":"From 48 CHF","open_raw":"May 24 - Mid Oct","website":"https://www.schaefler.ch/geniessen/"},"description_extra":"Berggasthaus Schäfler sits on the limestone ridge above Aescher in the Alpstein. Approach via the Ebenalp cable car from Wasserauen, then 30-40 minutes along the ridge. T2 — the ridge is narrow in places with some exposure. The Schäfler views go south over the Säntis massif and north toward Lake Constance. Pair with Seealpsee in the same day by descending the back side from Schäfler down to the lake (2 hours, then climb back to Wasserauen or take the cable car).","visits":["schafler"],"sources":["https://www.schaefler.ch/"],"quickest_for":["schafler"],"equipment_list":[],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -263,8 +264,16 @@
       r.sac_grade ? (r.sac_grade + (r.effort_label ? (' · ' + r.effort_label) : '')) : '—');
     setText('[data-rd-time]', fmtDuration(r.duration_min) || '—');
     setText('[data-rd-gain]', r.gain_m ? (r.gain_m + ' m') : '—');
-    setText('[data-rd-equipment]',
-      r.equipment_required === undefined ? '—' : (r.equipment_required ? 'Required' : 'None'));
+    // Prefer the concrete equipment_list (array of items). Fall back to the
+    // legacy boolean for any hikes that haven't been migrated yet. Empty array
+    // explicitly means "no gear needed", not unknown.
+    if (Array.isArray(r.equipment_list)) {
+      setText('[data-rd-equipment]', r.equipment_list.length ? r.equipment_list.join(' · ') : 'None');
+    } else if (r.equipment_required === undefined) {
+      setText('[data-rd-equipment]', '—');
+    } else {
+      setText('[data-rd-equipment]', r.equipment_required ? 'Required' : 'None');
+    }
 
     if (r.start) {
       setHTML('[data-rd-start]',

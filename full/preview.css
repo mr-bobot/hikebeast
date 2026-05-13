@@ -5446,6 +5446,7 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-route-stat { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--muted); letter-spacing: -0.005em; }
 .hb-route-stat svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .hb-route-stat .v { color: var(--fg); font-weight: 500; }
+.hb-route-operating { font-size: 11.5px; color: var(--soft); letter-spacing: -0.005em; }
 .hb-route-chev { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
 .hb-route-chev svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .hb-route-row:hover .hb-route-chev { color: var(--accent); }

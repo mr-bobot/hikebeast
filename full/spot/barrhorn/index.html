@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778666077229" />
+<link rel="stylesheet" href="../../preview.css?v=1778700368462" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -128,6 +128,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">Hike from Turtmannhütte (2519 m) <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">6h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T4 · High-altitude, long day</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1100 m gain</span></span></div>
+      
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -203,7 +204,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"barrhorn-from-turtmannhuette","name":"From Turtmannhütte via Schöllijoch","start":"Turtmannhütte (2519 m)","transit":{"train":"Visp (SBB) + bus + long approach to Turtmannhütte"},"duration_min":360,"gain_m":1100,"sac_grade":"T4","effort_label":"High-altitude, long day","equipment_required":false,"hut":{"name":"Turtmannhütte SAC"},"description_extra":"Six-hour summit day from the Turtmannhütte (2,519 m). The Üssers Barrhorn at 3,610 m is one of the highest peaks reachable on foot in the Alps without rope or crampons — a rare combination of high altitude and pure walking-grade terrain. Trail climbs scree and rock past the Schöllijoch, then up the long south slopes to the summit. 1,100 m of gain. T4. No technical difficulty but high altitude and long day. The Turtmannhütte itself takes a long approach from Gruben — most parties stay one night before the summit day.","visits":["barrhorn"],"sources":["https://en.wikipedia.org/wiki/Barrhorn","https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/uessers-barrhorn-145/mountain-hiking/"],"quickest_for":["barrhorn"],"quickest":true}];
+  const ROUTES = [{"id":"barrhorn-from-turtmannhuette","name":"From Turtmannhütte via Schöllijoch","start":"Turtmannhütte (2519 m)","transit":{"train":"Visp (SBB) + bus + long approach to Turtmannhütte"},"duration_min":360,"gain_m":1100,"sac_grade":"T4","effort_label":"High-altitude, long day","hut":{"name":"Turtmannhütte SAC"},"description_extra":"Six-hour summit day from the Turtmannhütte (2,519 m). The Üssers Barrhorn at 3,610 m is one of the highest peaks reachable on foot in the Alps without rope or crampons — a rare combination of high altitude and pure walking-grade terrain. Trail climbs scree and rock past the Schöllijoch, then up the long south slopes to the summit. 1,100 m of gain. T4. No technical difficulty but high altitude and long day. The Turtmannhütte itself takes a long approach from Gruben — most parties stay one night before the summit day.","visits":["barrhorn"],"sources":["https://en.wikipedia.org/wiki/Barrhorn","https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/uessers-barrhorn-145/mountain-hiking/"],"quickest_for":["barrhorn"],"equipment_list":[],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -263,8 +264,16 @@
       r.sac_grade ? (r.sac_grade + (r.effort_label ? (' · ' + r.effort_label) : '')) : '—');
     setText('[data-rd-time]', fmtDuration(r.duration_min) || '—');
     setText('[data-rd-gain]', r.gain_m ? (r.gain_m + ' m') : '—');
-    setText('[data-rd-equipment]',
-      r.equipment_required === undefined ? '—' : (r.equipment_required ? 'Required' : 'None'));
+    // Prefer the concrete equipment_list (array of items). Fall back to the
+    // legacy boolean for any hikes that haven't been migrated yet. Empty array
+    // explicitly means "no gear needed", not unknown.
+    if (Array.isArray(r.equipment_list)) {
+      setText('[data-rd-equipment]', r.equipment_list.length ? r.equipment_list.join(' · ') : 'None');
+    } else if (r.equipment_required === undefined) {
+      setText('[data-rd-equipment]', '—');
+    } else {
+      setText('[data-rd-equipment]', r.equipment_required ? 'Required' : 'None');
+    }
 
     if (r.start) {
       setHTML('[data-rd-start]',

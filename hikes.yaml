@@ -4,7 +4,6 @@ hikes:
   effort_label: Easy
   duration_min: 70
   gain_m: 395
-  equipment_required: false
   start: Adelboden, Unter dem Birg
   transit:
     bus: Adelboden, Unter dem Birg
@@ -18,6 +17,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Engstligenfall
   quickest_for:
   - engstligen_falls
+  equipment_list: []
 - id: oltschibachfall-from-meiringen
   name: From Meiringen
   start: Meiringen train station
@@ -75,7 +75,6 @@ hikes:
   effort_label: Easy
   duration_min: 80
   gain_m: 415
-  equipment_required: false
   start: Triftbahn
   transit:
     bus: Nessental, Triftbahn
@@ -98,12 +97,12 @@ hikes:
   - https://www.grimselwelt.ch/en/sports/hiking/trift-bridge/
   quickest_for:
   - triftbrucke
+  equipment_list: []
 - id: triftsee-route-40
   sac_grade: T2
   effort_label: Easy
   duration_min: 80
   gain_m: 415
-  equipment_required: false
   start: Triftbahn
   transit:
     bus: Nessental, Triftbahn
@@ -125,6 +124,7 @@ hikes:
   - https://www.grimselwelt.ch/en/sports/hiking/triftsee/
   quickest_for:
   - triftsee
+  equipment_list: []
 - id: gelmersee-default
   hut:
     name: Gelmerhutte
@@ -200,7 +200,6 @@ hikes:
   gain_m: 2000
   sac_grade: T4
   effort_label: Very long, exposed
-  equipment_required: true
   description_extra: Twenty-four kilometres along the ridge between Harder Kulm above Interlaken and Brienzer Rothorn above Brienz. The trail is mostly narrow grass spine with big drops
     on both sides. Sections near Augstmatthorn and Tannhorn are knife-edge. Trail runners do the full traverse as a long single day; hikers usually split it with a bivouac. T4 in places,
     exposed, weather-dependent, not for anyone uneasy with heights. Ibex frequently sighted on the Augstmatthorn cliffs.
@@ -212,6 +211,10 @@ hikes:
   - https://en.wikipedia.org/wiki/Augstmatthorn
   quickest_for:
   - hardergrat_trail
+  equipment_list:
+  - Sturdy hiking boots
+  - Poles
+  - Helmet (rockfall sections)
 - id: tannhorn-brienzergrat-segment
   name: Rothorn → Tannhorn → Planalp
   start: Brienzer Rothorn summit (top of Brienz cog railway)
@@ -222,7 +225,6 @@ hikes:
   distance_km: 14
   sac_grade: T4
   effort_label: Exposed grass ridges
-  equipment_required: true
   description_extra: Six-hour segment from Brienzer Rothorn (top of the Brienz cog railway) along the ridge to Tannhorn and down to Planalp. About 14 km, 500 m of cumulative climb, but
     1,500 m of descent — knees-on-the-line. The Tannhorn passage is the most demanding section of the entire Brienzergrat, traversed on exposed grass ridges where there's nothing to
     hold on to. T4. Take cog railway down from Planalp. Don't attempt in wet or windy conditions.
@@ -233,12 +235,14 @@ hikes:
   - https://en.wikipedia.org/wiki/Tannhorn
   quickest_for:
   - tannhorn
+  equipment_list:
+  - Sturdy hiking boots
+  - Poles
 - id: augstmatthorn-route-85
   sac_grade: T3
   effort_label: Mid
   duration_min: 100
   gain_m: 580
-  equipment_required: false
   start: Lombachalp
   description_extra: Augstmatthorn at 2,137 m is the highest point reachable on the Brienzergrat without going full T4 exposure. Approach from Lombachalp (drive or postbus from Habkern).
     One hour and 40 minutes up, 580 m of gain, T3 mountain trail. The ridge above Augstmatthorn is a protected ibex sanctuary — at dawn and dusk in summer the colony is usually visible
@@ -250,11 +254,11 @@ hikes:
   - https://en.wikipedia.org/wiki/Augstmatthorn
   quickest_for:
   - augstmatthorn
+  equipment_list: []
 - id: fronalpstock-route-72
   sac_grade: T1
   effort_label: Easy
   duration_min: 120
-  equipment_required: false
   start: Schwyz, Stoosbahn
   cable_car:
     line: 'Name: Stoosbahn'
@@ -269,6 +273,7 @@ hikes:
   - https://www.myswitzerland.com/en-us/destinations/stoos-fronalpstock/
   quickest_for:
   - fronalpstock
+  equipment_list: []
 - id: iffigfalle-lenk-to-iffigenalp
   name: Lenk → Iffigfall → Iffigenalp
   start: Lenk train station
@@ -296,7 +301,6 @@ hikes:
   duration_min: 360
   sac_grade: T4
   effort_label: Long, exposed karst
-  equipment_required: true
   description_extra: 'Six-kilometre limestone ridge with four peaks: Schibegütsch, Hängst, Hächle, and Strick. Full crossing takes about six hours, T4 territory with exposed scrambling.
     The ridge is also riddled with deep karst potholes off the marked line — staying on the trail matters here. Starts and ends at Sörenberg or Bumbach (bus from Schüpfheim). For advanced
     hikers only. Sure-footedness, a head for heights, and good visibility required.'
@@ -307,6 +311,10 @@ hikes:
   - https://en.wikipedia.org/wiki/Schrattenfluh
   quickest_for:
   - schrattenfluh
+  equipment_list:
+  - Sturdy hiking boots
+  - Poles
+  - Gloves (limestone karst)
 - id: heftihutte-from-hirsegg
   name: From Hirsegg bus stop
   start: Hirsegg (bus stop)
@@ -347,7 +355,6 @@ hikes:
   effort_label: Easy
   duration_min: 60
   gain_m: 161
-  equipment_required: false
   start: Berggasthaus First
   transit:
     train: Grindelwald
@@ -361,6 +368,7 @@ hikes:
   - https://www.myswitzerland.com/en-us/experiences/bachalpsee-mountain-lake/
   quickest_for:
   - bachalpsee
+  equipment_list: []
 - id: bachalpsee-bussalp-alternative
   name: From Bussalp
   start: Bussalp parking
@@ -788,7 +796,6 @@ hikes:
   gain_m: 1100
   sac_grade: T4
   effort_label: High-altitude, long day
-  equipment_required: false
   hut:
     name: Turtmannhütte SAC
   description_extra: Six-hour summit day from the Turtmannhütte (2,519 m). The Üssers Barrhorn at 3,610 m is one of the highest peaks reachable on foot in the Alps without rope or crampons
@@ -801,6 +808,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/uessers-barrhorn-145/mountain-hiking/
   quickest_for:
   - barrhorn
+  equipment_list: []
 - id: saas_fee_glacier-glacier-trail-felskinn
   name: Glacier Trail via Britanniahütte
   start: Felskinn top station
@@ -810,7 +818,6 @@ hikes:
   gain_m: 200
   sac_grade: T3
   effort_label: Alpine, surefootedness required
-  equipment_required: true
   cable_car:
     line: Alpin Express (Saas-Fee – Felskinn)
   hut:
@@ -825,6 +832,12 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/britanniahuette-sac-2147000046/
   quickest_for:
   - saas_fee_glacier
+  equipment_list:
+  - Crampons
+  - Ice axe
+  - Rope
+  - Harness
+  - Roped travel as a team
 - id: lac_de_derborence-default
   hut:
     name: Refuge du Lac Derborence
@@ -904,7 +917,6 @@ hikes:
   gain_m: 220
   sac_grade: K3
   effort_label: 1-2 hours climbing
-  equipment_required: true
   description_extra: The Belvédère via ferrata above Nax village in the Val d'Hérens. About 1-2 hours of climbing depending on experience. Starts in woodland at 1,000 m and ascends 220
     m up the cliffs. Graded among the easier via ferratas in Valais — accessible to most fit walkers with proper kit (harness, lanyards, helmet). The trailhead is a 30-minute walk from
     the village. Views over the Rhone valley at the top are exceptional. Equipment can be rented in Nax.
@@ -915,6 +927,10 @@ hikes:
   - https://www.myswitzerland.com/en-ch/experiences/belvedere-via-ferrata/
   quickest_for:
   - nax_via_ferrata
+  equipment_list:
+  - Via ferrata set (helmet, harness, lanyard with energy absorber)
+  - Gloves
+  - Sturdy boots
 - id: crans_montana-bisse-du-ro
   name: Bisse du Ro
   start: Crans-Montana centre
@@ -956,7 +972,6 @@ hikes:
   effort_label: Easy
   duration_min: 60
   gain_m: 117
-  equipment_required: false
   start: Anzère, Barrage de Tseuzier
   transit:
     bus: Anzère, Barrage de Tseuzier
@@ -969,6 +984,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Lac_de_Tseuzier
   quickest_for:
   - tseuzier_lake
+  equipment_list: []
 - id: salanfe_lake-from-van-d-en-haut
   name: From Van d'En Haut
   start: Van d'En Haut campsite (1393 m)
@@ -1162,7 +1178,6 @@ hikes:
 - id: dent_de_jaman-route-87
   duration_min: 30
   gain_m: 141
-  equipment_required: false
   start: Jaman Train Station
   transit:
     train: Jaman
@@ -1175,6 +1190,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Dent_de_Jaman
   quickest_for:
   - dent_de_jaman
+  equipment_list: []
 - id: creux_du_van-noiraigue-14-bends
   name: Sentier des 14 contours (from Noiraigue)
   start: Noiraigue train station
@@ -1201,7 +1217,6 @@ hikes:
   effort_label: Easy
   duration_min: 60
   gain_m: 374
-  equipment_required: false
   start: Parking du Flon
   transit:
     bus: Le Flon, village
@@ -1214,12 +1229,12 @@ hikes:
   - https://en.wikipedia.org/wiki/Lac_de_Tanay
   quickest_for:
   - lac_de_taney
+  equipment_list: []
 - id: grammont-route-154
   sac_grade: T2
   effort_label: Mid
   duration_min: 210
   gain_m: 1131
-  equipment_required: false
   start: Parking du Flon
   transit:
     bus: Le Flon, village
@@ -1232,6 +1247,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Grammont_(mountain)
   quickest_for:
   - grammont
+  equipment_list: []
 - id: marchairuz-mollendruz-mont-tendre-marchairuz
   name: Col du Mollendruz → Mont Tendre → Col du Marchairuz
   start: Col du Mollendruz
@@ -1296,7 +1312,6 @@ hikes:
   effort_label: Easy
   duration_min: 60
   gain_m: 329
-  equipment_required: false
   start: Luftseilbahn Wasserauen-Ebenalp
   transit:
     train: Wasserauen
@@ -1313,12 +1328,12 @@ hikes:
   - https://www.schaefler.ch/
   quickest_for:
   - schafler
+  equipment_list: []
 - id: seealpsee-route-43
   sac_grade: T1
   effort_label: Easy
   duration_min: 60
   gain_m: 280
-  equipment_required: false
   start: Wasserauen, Ebenalp
   visits:
   - seealpsee
@@ -1329,6 +1344,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Seealpsee
   quickest_for:
   - seealpsee
+  equipment_list: []
 - id: ascher-route-73
   start: Luftseilbahn Wasserauen-Ebenalp
   transit:
@@ -1352,7 +1368,6 @@ hikes:
   effort_label: Easy
   duration_min: 60
   gain_m: 157
-  equipment_required: false
   start: Luftseilbahn Staubern
   hut:
     name: Berggasthaus Staubern
@@ -1374,6 +1389,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Saxer_L%C3%BCcke
   quickest_for:
   - saxer_lucke
+  equipment_list: []
 - id: limmernsee-tierfehd-cable-car
   name: Tierfehd cable car + Pantenbrücke trail
   start: Tierfehd cable car (Linthal)
@@ -1437,7 +1453,6 @@ hikes:
   effort_label: Easy
   duration_min: 37
   gain_m: 200
-  equipment_required: false
   start: Berschis, Unterdorf
   transit:
     bus: Berschis, Unterdorf
@@ -1450,6 +1465,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/heidiland/berschnerfall/23426193/
   quickest_for:
   - berschnerfall
+  equipment_list: []
 - id: klausenpass-urnerboden-to-altdorf
   name: Urnerboden → Klausenpass → Altdorf
   start: Urnerboden
@@ -1669,7 +1685,6 @@ hikes:
   effort_label: Easy
   duration_min: 256
   gain_m: 888
-  equipment_required: false
   start: Fluela Pass
   transit:
     bus: Flüela, Ospiz
@@ -1682,12 +1697,12 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/davos-klosters/joeriseen-hike/27179027/
   quickest_for:
   - joriseen
+  equipment_list: []
 - id: falensee-route-69
   sac_grade: T1
   effort_label: Easy
   duration_min: 210
   gain_m: 834
-  equipment_required: false
   start: Brülisau
   hut:
     name: Berggasthaus Bollenwees
@@ -1704,12 +1719,12 @@ hikes:
   - https://www.bollenwees.ch/
   quickest_for:
   - falensee
+  equipment_list: []
 - id: batoni_wasserfallarena-route-125
   sac_grade: T2
   effort_label: Easy
   duration_min: 120
   gain_m: 661
-  equipment_required: false
   start: Weisstannen
   transit:
     bus: Weisstannen, Oberdorf
@@ -1722,6 +1737,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/heidiland/wasserfall-arena-baetoeni/23429637/
   quickest_for:
   - batoni_wasserfallarena
+  equipment_list: []
 - id: morteratsch_glacier-aussichtsweg-glacier-trail
   name: Glacier theme trail (Aussichtsweg)
   start: Morteratsch railway station
@@ -1884,7 +1900,6 @@ hikes:
   gain_m: 900
   sac_grade: T3
   effort_label: Steep, ladder sections
-  equipment_required: false
   description_extra: Four-hour climb from Tré-le-Champ (above Argentière) into the Aiguilles Rouges nature reserve. The trail ascends through forest then quickly above the treeline,
     crosses fixed ladders on the Aiguillette de Argentière, and reaches the Grand Balcon Sud. Continues past three small Cheserys lakes and the Refuge du Lac Blanc. The lakes give the
     most famous reflection of the Mont Blanc range in Chamonix. T3 — sustained exposure on the ladder section, head for heights required. Descend by cable car from La Flégère.
@@ -1893,6 +1908,7 @@ hikes:
   sources:
   - https://www.outdooractive.com/en/route/hiking-route/rhone-alpes/tre-le-champ-argentiere-to-planpraz-via-lac-blanc-and-le-flegere/23203675/
   - https://en.wikipedia.org/wiki/Lac_Blanc_(Chamonix)
+  equipment_list: []
 - id: les_cheserys-flegere-shortcut
   name: Flégère cable car shortcut
   start: Flégère top station
@@ -1990,7 +2006,6 @@ hikes:
   effort_label: Difficult
   duration_min: 270
   gain_m: 460
-  equipment_required: false
   start: Haldigrat chairlift upper station, above Niederrickenbach
   transit:
     train: Dallenwil (S-Bahn from Lucerne)
@@ -2008,12 +2023,12 @@ hikes:
   - https://www.nidwalden.com/en/tour/brisen-tour
   quickest_for:
   - brisen
+  equipment_list: []
 - id: engstlensee-route-lakeshore-loop
   sac_grade: T1
   effort_label: Easy
   duration_min: 60
   gain_m: 50
-  equipment_required: false
   start: Hotel Engstlenalp, end of the toll road
   transit:
     bus: Engstlenalp (PostAuto 161 terminus, summer only)
@@ -2030,12 +2045,12 @@ hikes:
   - https://jungfrauregion.swiss/en/map/detail/engstlensee-493643c7-eba3-42dd-bf3c-652909b97fe9.html
   quickest_for:
   - engstlensee
+  equipment_list: []
 - id: grappelensee-route-from-laui
   sac_grade: T1
   effort_label: Easy
   duration_min: 50
   gain_m: 250
-  equipment_required: false
   start: Laui parking area, above Unterwasser
   transit:
     train: Unterwasser (SOB line from Wattwil), then ~20 min drive or taxi up to Laui
@@ -2051,12 +2066,12 @@ hikes:
   - https://www.komoot.com/smarttour/1020791
   quickest_for:
   - grappelensee
+  equipment_list: []
 - id: ponte_tibetano-route-from-mornera
   sac_grade: T2
   effort_label: Moderate
   duration_min: 60
   gain_m: 100
-  equipment_required: false
   start: Mornera upper cable car station
   transit:
     bus: Bellinzona, line 2 to Monte Carasso, Funivia stop
@@ -2075,12 +2090,12 @@ hikes:
   - https://www.ticino.ch/en/commons/details/Tibetan-bridge-Carasc-/137557.html
   quickest_for:
   - ponte_tibetano
+  equipment_list: []
 - id: zinal_glacier-route-petit-mountet
   sac_grade: T2
   effort_label: Moderate
   duration_min: 210
   gain_m: 500
-  equipment_required: false
   start: Zinal village, south end parking near the Navisence river
   transit:
     bus: Zinal, Poste (PostAuto 452 from Sierre via Vissoie)
@@ -2098,3 +2113,4 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-du-mountet-cas-2147000184/mountain-hiking/
   quickest_for:
   - zinal_glacier
+  equipment_list: []
