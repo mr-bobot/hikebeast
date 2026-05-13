@@ -105,6 +105,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     --accent: #0071e3;
     --success: #34c759;
     --warn: #ff9500;
+    --gold: #f5b400;
     --radius-card: 18px;
     --radius-btn: 980px;
   }
@@ -243,6 +244,45 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     object-position: 70% 45%;
     display: block;
   }
+  /* Sale strip · full-width BOTTOM row inside the info-bar. grid-column
+     1/-1 spans both 1fr cells. Background mirrors the hero-bullet
+     checkmark pill exactly. The text uses a slightly darker green than
+     the checkmark's #34c759 stroke — thin glyphs anti-alias more than
+     a 3.2px SVG stroke, so equal-hex reads as lighter to the eye. */
+  .info-sale {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 14px;
+    background: rgba(52, 199, 89, 0.15);
+    color: #1a8232;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1;
+    border-top: 1px solid var(--hairline);
+    white-space: nowrap;
+  }
+  .info-bar .info-right .stars {
+    color: var(--gold);
+    letter-spacing: 1px;
+    font-size: 14px;
+  }
+  .info-sale .sale-sep { opacity: 0.55; margin: 0 1px; }
+  /* Strikethrough sits inline with the live price in the left cell.
+     14px aligns with the bar's base font size so the live 17px bold
+     stays the obvious anchor and the anchor-price stays a quiet hint. */
+  .info-bar .price-was {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+    letter-spacing: -0.01em;
+  }
 
   .hero-text {
     display: flex;
@@ -326,33 +366,18 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     align-self: flex-start;
     align-items: center;
     gap: 6px;
-    padding: 5px 10px 5px 9px;
+    padding: 7px 13px;
     border-radius: 999px;
-    background: rgba(255, 75, 75, 0.10);
-    color: #c0322f;
+    background: rgba(46, 160, 67, 0.13);
+    color: #1a7f37;
     font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: -0.005em;
     line-height: 1;
     white-space: nowrap;
   }
   .sale-badge .sale-sep { opacity: 0.55; margin: 0 1px; }
-  .sale-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: #ff4b4b;
-    flex: 0 0 6px;
-    animation: sale-dot-pulse 1.6s ease-in-out infinite;
-  }
-  @keyframes sale-dot-pulse {
-    0%, 100% { opacity: 1;    transform: scale(1); }
-    50%      { opacity: 0.45; transform: scale(0.9); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .sale-dot { animation: none; }
-  }
   ul.hero-bullets {
     list-style: none;
     margin: 0;
@@ -1288,6 +1313,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     width: 100%;
     aspect-ratio: 1600 / 1080;
     background: #fafafa;
+    /* position:relative so the .collection-play pill (absolute) anchors
+       to the thumbnail, not the document */
+    position: relative;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
   .buy-thumb img {
     width: 100%; height: 100%;
@@ -1458,26 +1488,30 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
       </div>
 
-      <div class="px product-card">
-        <h1 class="product-title">Switzerland Map 🇨🇭</h1>
-        <div class="product-price">
-          <span class="price-was" data-sale-was hidden>CHF 49</span>
-          <span class="price-display">CHF 27</span>
-        </div>
-        <div class="sale-badge" data-sale-badge hidden>
-          <span class="sale-dot" aria-hidden="true"></span>
-          <span>Summer sale</span>
-          <span class="sale-sep" aria-hidden="true">·</span>
-          <span data-sale-countdown>ends soon</span>
-        </div>
-        <div class="product-rating">
-          <span class="stars" aria-hidden="true">★★★★★</span>
-          <span>5.0 <span class="product-rating-count">(41)</span></span>
+      <!-- Info bar · slim 2-cell badge (price | rating) ported from /map/.
+           Sale strip sits as a full-width top row inside the same badge,
+           visually combining sale + offer terms into one component
+           rather than two stacked elements. -->
+      <div class="px">
+        <div class="info-bar">
+          <span class="info-left">
+            <span class="price-was" data-sale-was hidden>CHF 49</span>
+            <span class="price-display">CHF 27</span>
+          </span>
+          <span class="info-right">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            5.0
+          </span>
+          <div class="info-sale" data-sale-badge hidden>
+            <span>Start of Summer Sale</span>
+            <span class="sale-sep" aria-hidden="true">·</span>
+            <span data-sale-countdown>ends soon</span>
+          </div>
         </div>
       </div>
 
       <div class="px hero-text">
-        <p class="hero-sub">Your guide to the best summer in Switzerland.</p>
+        <h1 class="product-title">Switzerland Map 🇨🇭</h1>
         <ul class="hero-bullets">
           <li>122 Gems of Switzerland + How to Get There</li>
           <li>Exact Location for every spot</li>
@@ -1507,7 +1541,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <section class="inside-section">
       <div class="px section-head">
         <h2>What's inside</h2>
-        <p>The best places in Switzerland aren't on the tourist blogs. They're in local WhatsApp groups, in photographers' heads and now, well structured, in this guide.</p>
+        <p>The best places in Switzerland aren't in tourist blogs. They are in Swiss WhatsApp groups, in photographers' notes and now, well structured, in this guide.</p>
       </div>
       <div class="inside">
         <div class="inside-card">
@@ -1516,14 +1550,14 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <p>Best hour and best season per spot, learned the hard way.</p>
         </div>
         <div class="inside-card">
+          <div class="ico-box" aria-hidden="true">⛺</div>
+          <h3>Wildcamping info</h3>
+          <p>Spots where you can wildcamp without any cortisol spikes.</p>
+        </div>
+        <div class="inside-card">
           <div class="ico-box" aria-hidden="true">📲</div>
           <h3>Offline use</h3>
           <p>A downloadable PDF works even without signal on the trail.</p>
-        </div>
-        <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">⛺</div>
-          <h3>Wildcamp info</h3>
-          <p>Spots where you can wildcamp without any cortisol spikes.</p>
         </div>
         <div class="inside-card">
           <div class="ico-box" aria-hidden="true">📍</div>
@@ -1681,8 +1715,14 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
              live in the main column flow on desktop; now it's the
              buy-card's hero image instead. Goes edge-to-edge inside
              the card thanks to overflow:hidden + zero card padding. -->
-        <a href="#checkout" class="buy-thumb" aria-hidden="true">
-          <img src="img/collection.jpg" alt="" loading="lazy" decoding="async" />
+        <a href="#checkout" class="buy-thumb" data-video-open aria-label="Watch the 20-second video about the guide">
+          <img src="img/collection.jpg" alt="A grid of fifteen hidden Swiss spots from the guide" loading="lazy" decoding="async" />
+          <span class="collection-play" aria-hidden="true">
+            <svg class="play-ico" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+            <span>Watch</span>
+            <span class="play-sep">·</span>
+            <span>0:20</span>
+          </span>
         </a>
         <div class="buy-content">
           <div class="buy-rating">
@@ -2113,33 +2153,18 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 })();
 </script>
 
-<!-- Summer-sale countdown · pick (or reuse) an end-timestamp 1–5 days
-     out, persisted in localStorage so the same visitor sees the same
-     countdown on every reload. Shows the CHF 49 strikethrough + the
-     sale badge while running; hides both once expired (or if the
-     countdown elements aren't on the page). -->
+<!-- Summer-sale countdown · fixed end at end-of-Sunday 2026-05-17 CEST
+     (= 21:59:59 UTC, since CEST is UTC+2 in May). Every visitor sees
+     the same wall-clock end, formatted in their local-time delta.
+     Shows the CHF 49 strikethrough + the sale badge while running;
+     hides both once expired. -->
 <script>
 (function () {
-  var KEY      = 'hb_sale_end_v1';
-  var MAX_MS   = 5 * 86400000;       // 5 days
-  var MIN_MS   = 1 * 86400000;       // 1 day
-  var was      = document.querySelector('[data-sale-was]');
-  var badge    = document.querySelector('[data-sale-badge]');
-  var label    = document.querySelector('[data-sale-countdown]');
+  var END_MS = Date.UTC(2026, 4, 17, 21, 59, 59);  // May = month 4 (0-indexed)
+  var was    = document.querySelector('[data-sale-was]');
+  var badge  = document.querySelector('[data-sale-badge]');
+  var label  = document.querySelector('[data-sale-countdown]');
   if (!was || !badge || !label) return;
-
-  var endMs = 0;
-  try {
-    endMs = parseInt(localStorage.getItem(KEY) || '0', 10);
-  } catch (e) {}
-
-  // Reseed if missing, invalid, already-expired, or implausibly far in
-  // the future (e.g. localStorage tampered).
-  var now = Date.now();
-  if (!endMs || isNaN(endMs) || endMs <= now || endMs - now > MAX_MS + 60000) {
-    endMs = now + MIN_MS + Math.random() * (MAX_MS - MIN_MS);
-    try { localStorage.setItem(KEY, String(Math.floor(endMs))); } catch (e) {}
-  }
 
   function fmt (remainingMs) {
     if (remainingMs <= 0) return null;
@@ -2153,7 +2178,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
 
   function tick () {
-    var s = fmt(endMs - Date.now());
+    var s = fmt(END_MS - Date.now());
     if (s == null) {
       was.hidden = true;
       badge.hidden = true;
