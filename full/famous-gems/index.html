@@ -114,16 +114,23 @@
     return a;
   }
 
+  // Cache the rendered spot-keys so Convex's spots:list push doesn't
+  // rebuild an identical grid and flicker every image.
+  let lastSpotsKey = '';
   function render() {
     counter.textContent = SPOTS.length;
     if (!SPOTS.length) {
-      content.innerHTML = '';
       content.hidden = true;
       empty.hidden = false;
+      if (lastSpotsKey !== '') { content.innerHTML = ''; lastSpotsKey = ''; }
       return;
     }
     empty.hidden = true;
     content.hidden = false;
+
+    const spotsKey = SPOTS.map(s => s.imagePhotoId || s.image || s.id || '').join('|');
+    if (spotsKey === lastSpotsKey) return;
+    lastSpotsKey = spotsKey;
 
     content.innerHTML = '';
     const grid = document.createElement('div');
