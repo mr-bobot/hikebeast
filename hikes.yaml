@@ -1,0 +1,1987 @@
+hikes:
+- id: engstligen_falls-route-48
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 70
+  gain_m: 395
+  equipment_required: false
+  start: Adelboden, Unter dem Birg
+  transit:
+    bus: Adelboden, Unter dem Birg
+  visits:
+  - engstligen_falls
+  description_extra: Engstligenfälle is one of Switzerland's higher waterfall systems, dropping in two stages off the Engstligenalp plateau above Adelboden. The main viewing area is
+    at the foot of the lower fall — a 20-minute walk from Unter dem Birg. Combine with the cable car up to the Engstligenalp plateau (1h 10 hike if walking up the side trail, 395 m of
+    gain). The alp is a federal BLN-protected landscape. Best photographed when overcast — direct sun blows out the falls.
+  sources:
+  - https://www.myswitzerland.com/en-us/destinations/engstligen-falls/
+  - https://en.wikipedia.org/wiki/Engstligenfall
+  quickest_for:
+  - engstligen_falls
+- id: oltschibachfall-from-meiringen
+  name: From Meiringen
+  start: Meiringen train station
+  transit:
+    train: Meiringen (BLS)
+  duration_min: 90
+  gain_m: 500
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Hike up the slope above Meiringen to reach the base of the upper Oltschibachfall, which drops freely about 140 m from an overhanging cliff. The trail climbs roughly
+    500 m over 1.5 hours through forest and open ground. Marked but not heavily trafficked. The lower cascade visible from the trail is impressive in spring snowmelt; the upper fall
+    is best from mid-summer when the rock around it dries out and the wind isn't blowing the spray sideways.
+  visits:
+  - oltschibachfall
+  sources:
+  - https://www.outdooractive.com/en/poi/bernese-oberland/oltschibachfall-meiringen/8649167/
+  - https://de.wikipedia.org/wiki/Oltschibachfall
+  quickest_for:
+  - oltschibachfall
+- id: rosenlaui-route-99
+  start: Parkplatz Gletscherschlucht
+  transit:
+    bus: Rosenlaui, Gletscherschlucht
+  description_extra: Rosenlaui waterfall is in the Reichenbach valley between Meiringen and Grindelwald. Drive in from Meiringen via the Grosse Scheidegg road or postbus. The lower viewpoint,
+    accessible by a five-minute walk from the road, gives the cleanest angle on the falls. Path starts beside the toilet block at the parking. T1. Combine with the Rosenlaui glacier
+    gorge a few minutes further up the valley for a half-day.
+  visits:
+  - rosenlaui
+  sources:
+  - https://en.wikipedia.org/wiki/Rosenlaui
+  quickest_for:
+  - rosenlaui
+- id: rosenlaui_public_waterfall-route-99
+  start: Parkplatz Gletscherschlucht
+  transit:
+    bus: Rosenlaui, Gletscherschlucht
+  description_extra: Same Rosenlaui falls — the public viewpoint accessible from the Grosse Scheidegg road. Five-minute walk from the parking on a path starting beside the toilet block.
+    The view from below is the postcard angle. T1. The valley also has the famous Rosenlauischlucht ice-blue glacier gorge a kilometre further along the road.
+  visits:
+  - rosenlaui_public_waterfall
+  quickest_for:
+  - rosenlaui_public_waterfall
+- id: rosenlauifall-route-99
+  start: Parkplatz Gletscherschlucht
+  transit:
+    bus: Rosenlaui, Gletscherschlucht
+  description_extra: The waterfall itself, dropping out of the Rosenlaui glacier above. Best photographed from the lower viewpoint reached via the five-minute trail next to the parking
+    toilet block. Approach the falls in the morning when the sun is on the spray and the rainbow forms across the basin. T1.
+  visits:
+  - rosenlauifall
+  quickest_for:
+  - rosenlauifall
+- id: triftbrucke-route-40
+  sac_grade: T2
+  effort_label: Easy
+  duration_min: 80
+  gain_m: 415
+  equipment_required: false
+  start: Triftbahn
+  transit:
+    bus: Nessental, Triftbahn
+  hut:
+    name: Windegghütte SAC
+    cost_chf_raw: 92 CHF
+    open_raw: June 1 - Oct 11
+    website: https://www.windegghuette.ch/
+  cable_car:
+    line: Cable car required to start the hike. Cable car cost 26 CHF and must be booked in advance here
+    cost_chf_raw: 92 CHF
+    open_raw: June 1 - Oct 11
+  visits:
+  - triftbrucke
+  description_extra: Triftbrücke is a 170-metre-long suspension footbridge 100 metres above the Trift glacier basin near Innertkirchen. Reach the trailhead via the Triftbahn cable car
+    (must be booked in advance, around 26 CHF). From the top, 1h 20 walk on a T2 mountain trail with 415 m of gain to the bridge. Nessental, Triftbahn is the postbus stop. Continue past
+    the bridge to the Windegghütte SAC (92 CHF dorm, June to mid-October) for an overnight.
+  sources:
+  - https://www.windegghuette.ch/
+  - https://www.grimselwelt.ch/en/sports/hiking/trift-bridge/
+  quickest_for:
+  - triftbrucke
+- id: triftsee-route-40
+  sac_grade: T2
+  effort_label: Easy
+  duration_min: 80
+  gain_m: 415
+  equipment_required: false
+  start: Triftbahn
+  transit:
+    bus: Nessental, Triftbahn
+  hut:
+    name: Windegghütte SAC
+    cost_chf_raw: 92 CHF
+    open_raw: June 1 - Oct 11
+    website: https://www.windegghuette.ch/
+  cable_car:
+    line: Cable car required to start the hike. Cable car cost 26 CHF and must be booked in advance here
+    cost_chf_raw: 92 CHF
+    open_raw: June 1 - Oct 11
+  visits:
+  - triftsee
+  description_extra: Triftsee is the milky-blue glacial lake fed by the retreating Trift glacier in the Innertkirchen back-country. Reached via the Triftbahn cable car and the same trail
+    as the Triftbrücke suspension bridge. About 1h 30 from the cable car top station, T2, 400+ m of gain. The lake is one of Switzerland's most recently-formed natural lakes — it only
+    appeared as the glacier receded in the early 2000s. Camping not permitted, fragile alpine landscape.
+  sources:
+  - https://www.grimselwelt.ch/en/sports/hiking/triftsee/
+  quickest_for:
+  - triftsee
+- id: gelmersee-default
+  hut:
+    name: Gelmerhutte
+    cost_chf_raw: 45 CHF
+    open_raw: Mid June - Mid Oct
+    website: https://www.gelmerhuette.ch/
+  description_extra: Gelmersee reservoir sits at 1,860 m above the Grimsel road. Accessed via the Gelmerbahn funicular from the valley — one of Switzerland's steepest at 106 % gradient.
+    The funicular runs June to October. From the top, a flat 1-1.5 hour walk loops the reservoir. T1 once you're up. The water is drinking-water green and the surrounding granite walls
+    give it an alpine-Patagonia feel. The Gelmerhütte SAC sits at the far end of the lake for those continuing further.
+  visits:
+  - gelmersee
+  sources:
+  - https://en.wikipedia.org/wiki/Gelmersee
+  quickest_for:
+  - gelmersee
+- id: brienzer_rothorn-default
+  hut:
+    name: Berghaus Rothorn
+    cost_chf_raw: 120 CHF
+    open_raw: June 8 - Oct 20
+    website: https://brienz-rothorn-bahn.ch/fahrplan-preise/
+  visits:
+  - brienzer_rothorn
+  description_extra: Brienzer Rothorn is the easternmost peak of the Brienzergrat ridge, at 2,350 m. Most visitors take the historic steam cog railway from Brienz to the summit — about
+    an hour each way. June to October operations. From the top, easy ridge walks to the west open up the Brienzergrat traverse for stronger parties. Berghaus Rothorn at the summit serves
+    food and has overnight rooms.
+  sources:
+  - https://en.wikipedia.org/wiki/Brienzer_Rothorn
+  - https://en.wikipedia.org/wiki/Brienz_Rothorn_Bahn
+- id: brienzer_rothorn-cog-railway
+  name: Brienz Rothorn Bahn (cog railway)
+  start: Brienz station
+  transit:
+    train: Brienz (BLS)
+  duration_min: 60
+  sac_grade: T1
+  effort_label: Cog railway ride
+  cable_car:
+    line: Brienz Rothorn Bahn (steam cog railway, Jun-Oct)
+  description_extra: Historic steam cog railway from Brienz at lake level up to the Rothorn summit at 2,350 m. About an hour each way. Operates June to October. The Brienzer Rothorn
+    Bahn is one of Switzerland's oldest steam-driven mountain railways and still uses original locomotives on most departures. From the summit, easy walks lead along the ridge with views
+    over both Lake Brienz and Lake Lucerne on a clear day.
+  visits:
+  - brienzer_rothorn
+  sources:
+  - https://en.wikipedia.org/wiki/Brienz_Rothorn_Bahn
+  - https://en.wikipedia.org/wiki/Brienzer_Rothorn
+  quickest_for:
+  - brienzer_rothorn
+- id: brienzer_rothorn-brienz-via-planalp
+  name: From Brienz on foot via Planalp
+  start: Brienz station
+  transit:
+    train: Brienz (BLS)
+  duration_min: 360
+  gain_m: 1800
+  sac_grade: T2
+  effort_label: Big vertical
+  description_extra: Six-hour foot ascent from Brienz station to the Rothorn ridge at 2,350 m. About 1,800 m of vertical gain. First section to Planalp is 5.3 km, 2h 45, 778 m of gain
+    — a well-signposted varied trail along the Trachtbach stream via Gäldried. Note the Milibach stream route is closed since the August 2024 debris flow. From Planalp at 1,344 m, the
+    path continues another two-plus hours up across alpine meadows to the ridge. Take the cog railway back down to spare the knees. T2 throughout.
+  visits:
+  - brienzer_rothorn
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/holiday-region-interlaken/hike-to-the-brienzer-rothorn/23490971/
+  - https://en.wikipedia.org/wiki/Brienzer_Rothorn
+- id: hardergrat_trail-harder-to-rothorn
+  name: Harder Kulm → Brienzer Rothorn
+  start: Harder Kulm
+  transit:
+    train: Interlaken Ost + Harder cable car
+  duration_min: 720
+  gain_m: 2000
+  sac_grade: T4
+  effort_label: Very long, exposed
+  equipment_required: true
+  description_extra: Twenty-four kilometres along the ridge between Harder Kulm above Interlaken and Brienzer Rothorn above Brienz. The trail is mostly narrow grass spine with big drops
+    on both sides. Sections near Augstmatthorn and Tannhorn are knife-edge. Trail runners do the full traverse as a long single day; hikers usually split it with a bivouac. T4 in places,
+    exposed, weather-dependent, not for anyone uneasy with heights. Ibex frequently sighted on the Augstmatthorn cliffs.
+  visits:
+  - hardergrat_trail
+  sources:
+  - https://www.outdooractive.com/en/hikes/interlaken/hikes-in-the-municipality-of-interlaken/1453743/
+  - https://www.myswitzerland.com/en-ch/experiences/route/trail-run-brienzergrat/
+  - https://en.wikipedia.org/wiki/Augstmatthorn
+  quickest_for:
+  - hardergrat_trail
+- id: tannhorn-brienzergrat-segment
+  name: Rothorn → Tannhorn → Planalp
+  start: Brienzer Rothorn summit (top of Brienz cog railway)
+  transit:
+    train: Brienz BLS + Rothorn Bahn
+  duration_min: 360
+  gain_m: 500
+  distance_km: 14
+  sac_grade: T4
+  effort_label: Exposed grass ridges
+  equipment_required: true
+  description_extra: Six-hour segment from Brienzer Rothorn (top of the Brienz cog railway) along the ridge to Tannhorn and down to Planalp. About 14 km, 500 m of cumulative climb, but
+    1,500 m of descent — knees-on-the-line. The Tannhorn passage is the most demanding section of the entire Brienzergrat, traversed on exposed grass ridges where there's nothing to
+    hold on to. T4. Take cog railway down from Planalp. Don't attempt in wet or windy conditions.
+  visits:
+  - tannhorn
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/tannhorn-1933/mountain-hiking/
+  - https://en.wikipedia.org/wiki/Tannhorn
+  quickest_for:
+  - tannhorn
+- id: augstmatthorn-route-85
+  sac_grade: T3
+  effort_label: Mid
+  duration_min: 100
+  gain_m: 580
+  equipment_required: false
+  start: Lombachalp
+  description_extra: Augstmatthorn at 2,137 m is the highest point reachable on the Brienzergrat without going full T4 exposure. Approach from Lombachalp (drive or postbus from Habkern).
+    One hour and 40 minutes up, 580 m of gain, T3 mountain trail. The ridge above Augstmatthorn is a protected ibex sanctuary — at dawn and dusk in summer the colony is usually visible
+    from the trail. Sunrise here puts the sun directly over Lake Brienz; sunset turns the ridge red. Both work, photographically very different.
+  visits:
+  - augstmatthorn
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/augstmatthorn-1928/mountain-hiking/
+  - https://en.wikipedia.org/wiki/Augstmatthorn
+  quickest_for:
+  - augstmatthorn
+- id: fronalpstock-route-72
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 120
+  equipment_required: false
+  start: Schwyz, Stoosbahn
+  cable_car:
+    line: 'Name: Stoosbahn'
+    cost_chf_raw: 56 CHF return
+    info_url: https://stoos-muotatal.ch/webcams/
+  description_extra: 'Fronalpstock at 1,922 m looks out over Lake Lucerne. Standard approach: funicular from Schwyz to Stoos, then a two-minute walk to the Klingenstock cable car. The
+    hike ridge between the two summits is the actual walking — about 2 hours along grass and gravel paths. T2 with brief exposed sections. Wide-angle view of the four-canton lake from
+    the summit. Designated camping spot on the summit with a small fee paid at the Fronalpstock Hotel.'
+  visits:
+  - fronalpstock
+  sources:
+  - https://www.myswitzerland.com/en-us/destinations/stoos-fronalpstock/
+  quickest_for:
+  - fronalpstock
+- id: iffigfalle-lenk-to-iffigenalp
+  name: Lenk → Iffigfall → Iffigenalp
+  start: Lenk train station
+  transit:
+    train: Lenk im Simmental (BLS)
+  duration_min: 150
+  gain_m: 500
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Well-marked trail from Lenk train station via Teufebode, Färiche, and Langersite up to the Iffigfall waterfall and on to Iffigenalp at 1,584 m. About 2.5 hours one
+    way, 500 m of gain. The trail follows the Iffigbach stream the whole way. In summer the Iffigenalp post bus runs from Lenk and skips the lower section if you want to start at the
+    waterfall. The Gelten-Iffigen nature reserve above hosts rare alpine flora. Continue to Iffigsee for a full day.
+  visits:
+  - iffigfalle
+  sources:
+  - https://www.myswitzerland.com/en-us/experiences/route/iffigfall-trail-1/
+  - https://en.wikipedia.org/wiki/Iffigsee
+  quickest_for:
+  - iffigfalle
+- id: schrattenfluh-schratteflue-crossing
+  name: Schratteflue crossing (advanced)
+  start: Sörenberg or Bumbach
+  transit:
+    bus: Postbus to Sörenberg
+  duration_min: 360
+  sac_grade: T4
+  effort_label: Long, exposed karst
+  equipment_required: true
+  description_extra: 'Six-kilometre limestone ridge with four peaks: Schibegütsch, Hängst, Hächle, and Strick. Full crossing takes about six hours, T4 territory with exposed scrambling.
+    The ridge is also riddled with deep karst potholes off the marked line — staying on the trail matters here. Starts and ends at Sörenberg or Bumbach (bus from Schüpfheim). For advanced
+    hikers only. Sure-footedness, a head for heights, and good visibility required.'
+  visits:
+  - schrattenfluh
+  sources:
+  - https://www.outdooractive.com/en/route/mountain-hike/district-entlebuch/schratteflue-crossing-for-advanced-hikers/801971278/
+  - https://en.wikipedia.org/wiki/Schrattenfluh
+  quickest_for:
+  - schrattenfluh
+- id: heftihutte-from-hirsegg
+  name: From Hirsegg bus stop
+  start: Hirsegg (bus stop)
+  transit:
+    bus: Postbus to Hirsegg
+  duration_min: 180
+  gain_m: 600
+  sac_grade: T2
+  effort_label: Moderate
+  hut:
+    name: Heftihütte
+  description_extra: Standard approach from the Hirsegg bus stop. Trail goes via Kaiserschwand to Bodenhütten, then through forest to Heftiboden and up a good path to the hut at 1,904
+    m. About three hours, 600 m of gain. T2. Marked forest shortcut at Bursteggstall saves about 15 minutes. Hut is open in summer with dinner and breakfast. Bring cash, no card readers.
+  visits:
+  - heftihutte
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/
+  quickest_for:
+  - heftihutte
+- id: heftihutte-from-fluehli
+  name: From Flühli LU
+  start: Flühli
+  transit:
+    bus: Postbus to Flühli
+  duration_min: 240
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Longer approach via Flühli (bus from Schüpfheim). About four hours of T2 mountain trail with views over the Entlebuch valley and Mariental at Sörenberg. The ridge
+    section between Toregg and Strick is the scenic highlight — open pasture with the Schrattenfluh ridge across the valley. Combine with the Schratteflue crossing for a strong two-day
+    loop.
+  visits:
+  - heftihutte
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/
+  - https://de.wikipedia.org/wiki/Heftih%C3%BCtte
+- id: bachalpsee-route-38
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 60
+  gain_m: 161
+  equipment_required: false
+  start: Berggasthaus First
+  transit:
+    train: Grindelwald
+  description_extra: Standard Bachalpsee day from the First gondola top station. Wide gravel path heads east-northeast, climbing gradually through alpine pasture with views back across
+    Grindelwald. About an hour each way, almost no exposure. The famous reflection of the Schreckhorn works best on still mornings before the wind picks up — by 10 the lake is usually
+    busy. Continue 10 minutes past the main lake to a smaller second one that nobody walks to.
+  visits:
+  - bachalpsee
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/faulhorn-597/mountain-hiking/
+  - https://www.myswitzerland.com/en-us/experiences/bachalpsee-mountain-lake/
+  quickest_for:
+  - bachalpsee
+- id: bachalpsee-bussalp-alternative
+  name: From Bussalp
+  start: Bussalp parking
+  transit:
+    bus: Bus 122 from Grindelwald
+  duration_min: 100
+  gain_m: 470
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Quieter alternative to the Firstbahn approach. Drive or take bus 122 from Grindelwald to the Bussalp parking, then climb the open meadow trail northeast to the lake.
+    About 470 m of vertical gain over 1h 40, mostly on grass paths. Far fewer people because most visitors don't want to climb. The route approaches Bachalpsee from the back side — different
+    angle for photos, with the lake in the foreground and the Firstbahn ridge visible across.
+  visits:
+  - bachalpsee
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/faulhorn-597/mountain-hiking/
+  - https://en.wikipedia.org/wiki/Bachalpsee
+- id: iseltwald-default
+  description_extra: Iseltwald sits on the south shore of Lake Brienz — a small village famous for its 19th-century castle and pier, both made famous by Korean K-drama tourism in recent
+    years. Drive in directly or take the ferry from Interlaken. The pier and castle are accessible from village parking in under five minutes. Famously crowded most of the day; early
+    morning or last light is the only window for clean photos. T1.
+  visits:
+  - iseltwald
+  sources:
+  - https://en.wikipedia.org/wiki/Iseltwald
+  quickest_for:
+  - iseltwald
+- id: oeschinensee-kandersteg-foot
+  name: From Kandersteg on foot
+  start: Kandersteg train station
+  transit:
+    train: Kandersteg (SBB)
+  duration_min: 60
+  gain_m: 418
+  sac_grade: T1
+  effort_label: Easy
+  description_extra: Standard approach without the cable car. From Kandersteg train station the trail follows the Öschibach east through forest, climbing steadily about 400 metres over
+    the hour to the lake at 1,578 m. The path is signposted throughout and wide enough for two-way traffic without trouble. No exposure on this stretch. If you want the morning reflection
+    on the lake, start by 7. By mid-morning the wind off the Hohtürli side ripples the surface and the photo's gone.
+  visits:
+  - oeschinensee
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/oeschinensee-7848/mountain-hiking/
+  - https://www.myswitzerland.com/en-us/experiences/gondola-to-lake-oeschinen/
+  - https://en.wikipedia.org/wiki/Oeschinen_Lake
+- id: oeschinensee-cable-car
+  name: Cable car from Kandersteg + short walk
+  start: Kandersteg cable car valley station
+  transit:
+    train: Kandersteg (SBB), then 10 min walk or shuttle to Bergbahnen
+  duration_min: 15
+  gain_m: 30
+  sac_grade: T1
+  effort_label: Trivial
+  cable_car:
+    line: Bergbahnen Oeschinensee
+    cost_chf_raw: Around 32 CHF return
+  visits:
+  - oeschinensee
+  description_extra: Quickest way in. The Bergbahnen Oeschinensee cable car from Kandersteg drops you at 1,683 m, about ten minutes' walk from the lake on a wide gravel path. Round-trip
+    ticket runs around 32 CHF and operates from late May through October, with breaks for snow conditions in the shoulder months. The walk down from the top station to the lake is stroller-accessible
+    and signposted. Most families take this option.
+  sources:
+  - https://www.myswitzerland.com/en-us/experiences/gondola-to-lake-oeschinen/
+  - https://www.oeschinensee.ch/
+  quickest_for:
+  - oeschinensee
+- id: oeschinensee-hohturli-extension
+  name: Continuation to Hohtürli + Griesalp
+  start: Oeschinensee
+  duration_min: 360
+  gain_m: 1100
+  sac_grade: T3
+  effort_label: Full day, demanding
+  description_extra: Real mountain day from the lake. The trail climbs out of the basin toward the Blüemlisalp hut and over the Hohtürli pass at 2,778 m, then drops on the south side
+    to Griesalp in the Kien valley. About six hours total once you're at Oeschinensee. The crux is the steep section above Unterbergli with big drop-offs to the lake basin — the trail
+    is cabled where it matters, but exposure is real. Sure-footedness and a head for heights required. T3.
+  visits:
+  - oeschinensee
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/fruendenhuette-sac-2147000102/mountain-hiking/from-oeschinensee-or-kandersteg-closed-474/
+  - https://www.outdooractive.com/en/route/mountain-hike/kandersteg/kandersteg-oeschinensee-hohtuerli-griesalp/51641556/
+- id: piz_gloria-cable-car-to-summit
+  name: Cable car (Stechelberg → Schilthorn)
+  start: Stechelberg cable car
+  transit:
+    train: Lauterbrunnen (BLS) + bus to Stechelberg
+  duration_min: 30
+  sac_grade: T1
+  effort_label: Cable car ride
+  cable_car:
+    line: Schilthornbahn (4 stages · Stechelberg → Gimmelwald → Mürren → Birg → Schilthorn)
+  description_extra: Four-stage Schilthornbahn cable car from Stechelberg up to the 2,970 m summit. Total ride time about 30 minutes through Gimmelwald, Mürren, Birg, and finally Schilthorn.
+    The revolving Piz Gloria restaurant at the top rotates once every 45 minutes and is famous as the location of the 1969 James Bond film 'On Her Majesty's Secret Service'. Clear-weather
+    views over the Jungfrau, Mönch, and Eiger across the Lauterbrunnen valley.
+  visits:
+  - piz_gloria
+  sources:
+  - https://en.wikipedia.org/wiki/Schilthorn
+  - https://www.myswitzerland.com/en-us/experiences/schilthorn-1/
+  quickest_for:
+  - piz_gloria
+- id: piz_gloria-gimmelwald-on-foot
+  name: From Gimmelwald on foot
+  start: Gimmelwald
+  transit:
+    train: Lauterbrunnen + Stechelberg-Gimmelwald cable car
+  duration_min: 300
+  gain_m: 1600
+  sac_grade: T3
+  effort_label: Long, big vertical
+  description_extra: Five-hour foot ascent from Gimmelwald to the Schilthorn summit. About 1,600 m of vertical gain on a marked trail that climbs steadily, crossing below the cable car
+    line and passing through Mürren and Birg. T3 — the upper section above Birg is exposed and steep. Most people take cable cars one way and walk down or vice versa. Bring water and
+    layers; the summit is regularly windy and 15 °C cooler than the valley.
+  visits:
+  - piz_gloria
+  sources:
+  - https://en.wikipedia.org/wiki/Schilthorn
+- id: riffelsee-default
+  description_extra: 'Riffelsee in Zermatt at 2,757 m — the famous lake that mirrors the Matterhorn. Reached by the Gornergrat railway from Zermatt: stop at Rotenboden, then a 10-minute
+    walk to the lake. Round-trip train ticket runs around 110 CHF in 2026. The reflection works best on still mornings before the wind picks up across the surface — typically early morning,
+    before the railway''s first descent. No nearby SAC huts but the Kulmhotel Gornergrat and Riffelhaus 1853 are walking distance on the ridge.'
+  visits:
+  - riffelsee
+  sources:
+  - https://www.gornergrat.ch/
+  - https://en.wikipedia.org/wiki/Riffelsee
+  quickest_for:
+  - riffelsee
+- id: riffelalp-easy-round-trip
+  name: Easy round-trip via Grünsee
+  start: Riffelalp station
+  transit:
+    train: Zermatt + Gornergrat Bahn to Riffelalp
+  duration_min: 90
+  distance_km: 3
+  sac_grade: T1
+  effort_label: Easy
+  cable_car:
+    line: Gornergrat Bahn (rack railway)
+  description_extra: Easy 90-minute three-kilometre loop from Riffelalp station (Gornergrat railway). Trail heads east toward Grünsee through Swiss stone pine and larch forest, below
+    the rock band of Laubern. After small alpine meadows the path turns right and climbs back to Riffelalp. T1, family-friendly. Matterhorn views from multiple points. Marmot sightings
+    common in mid-summer. Gornergrat railway back to Zermatt from the same station.
+  visits:
+  - riffelalp
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/zermatt/easy-round-trip-hike-on-riffelalp/43157089/
+  quickest_for:
+  - riffelalp
+- id: riffelalp-findeln-loop
+  name: Riffelalp → Findeln → Sunnegga loop
+  start: Riffelalp station
+  transit:
+    train: Zermatt + Gornergrat Bahn to Riffelalp
+  duration_min: 240
+  gain_m: 300
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Four-hour loop from Riffelalp through meadows and past small glacial lakes down to the Sunnegga funicular and back. About 300 m of cumulative gain on the return
+    leg. T2. The Findeln area in the middle has working alpine farms and several restaurants tucked into the hillside. Take the Sunnegga funicular up if you want to do the loop in reverse
+    — it's an easier ascent than from Riffelalp.
+  visits:
+  - riffelalp
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/zermatt-matterhorn/riffelalp-gruensee-findeln-tiefmatten-zermatt/225130785/
+- id: gorner_glacier-gornergrat-railway
+  name: Gornergrat railway + Sunshine Trail
+  start: Zermatt train station
+  transit:
+    train: Zermatt (Matterhorn Gotthard Bahn) + Gornergrat Bahn
+  duration_min: 60
+  sac_grade: T1
+  effort_label: Easy
+  cable_car:
+    line: Gornergrat Bahn (rack railway)
+  description_extra: Standard Zermatt panorama trip. The Gornergrat rack railway climbs 1,469 m from Zermatt at 1,620 m to Gornergrat at 3,089 m in about 33 minutes. From the top, the
+    Sunshine Trail follows the rails down to Riffelberg in an easy hour with the Matterhorn in view the entire way. T1. The Gornergrat ridge sits in the middle of 29 four-thousand-metre
+    peaks including the Matterhorn, Dufourspitze, and the Dom. Train runs year-round.
+  visits:
+  - gorner_glacier
+  sources:
+  - https://en.wikipedia.org/wiki/Gornergrat
+  - https://www.myswitzerland.com/en-se/experiences/route/descent-from-gornergrat-via-lake-riffel/
+  quickest_for:
+  - gorner_glacier
+- id: gorner_glacier-path-of-silence
+  name: Path of Silence (Gornergrat → Grünsee → Riffelalp)
+  start: Gornergrat top station
+  transit:
+    train: Zermatt + Gornergrat Bahn
+  duration_min: 180
+  gain_m: 0
+  sac_grade: T2
+  effort_label: Moderate, descent
+  description_extra: Three-hour descent on the Path of Silence from Gornergrat (3,089 m) down into a seldom-visited valley below the ridge. Trail passes the Grünsee lake and continues
+    through the Arvenwald pine forest to Riffelalp at 2,222 m. T2. Catch the Gornergrat railway up from Zermatt and walk down. The valley is genuinely quiet — the Sunshine Trail along
+    the rails carries most of the foot traffic, while the Path of Silence drops off the south side.
+  visits:
+  - gorner_glacier
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/zermatt/the-path-of-silence-from-the-gornergrat-to-riffelalp/56111172/
+- id: gorner_glacier-descent-via-riffelsee
+  name: Gornergrat → Riffelsee → Zermatt
+  start: Gornergrat top station
+  duration_min: 240
+  gain_m: 0
+  sac_grade: T2
+  effort_label: Moderate, long descent
+  description_extra: Four-hour descent from Gornergrat down past Riffelsee to Zermatt. About 1,500 m of cumulative descent (you go down the whole time). Riffelsee is the famous mirror
+    lake — the Matterhorn reflects in its surface on still mornings before the wind picks up across the surface. Trail continues through alpine pastures and the Riffelalp loop area before
+    dropping back to Zermatt. T2.
+  visits:
+  - gorner_glacier
+  sources:
+  - https://www.outdooractive.com/en/route/mountain-hike/valais-alps/vom-gornergrat-ueber-den-riffelsee-nach-zermatt/19172801/
+- id: aletsch_glacier-eggishorn-circular
+  name: Eggishorn circular trail
+  start: Eggishorn top station
+  transit:
+    train: Fiesch + Eggishorn cable car
+  duration_min: 60
+  gain_m: 100
+  sac_grade: T1
+  effort_label: Easy
+  description_extra: Short loop from the top of the Eggishorn cable car (Fiesch + two cable cars). Twenty minutes to the main summit gives a 360° panorama over the Great Aletsch Glacier
+    — the longest in the Alps. The full circular adds another 40 minutes with stop-offs at the lounges built into the rock. Wide gravel paths throughout, no exposure. Best done in the
+    morning when the sun lights the glacier from the south.
+  visits:
+  - aletsch_glacier
+  sources:
+  - https://www.myswitzerland.com/en-us/experiences/eggishorn-viewpoint-look-out-over-the-great-aletsch-glacier/
+  - https://www.myswitzerland.com/en-us/experiences/eggishorn-circular-trail/
+  quickest_for:
+  - aletsch_glacier
+- id: aletsch_glacier-bettmerhorn-eggishorn-ridge
+  name: Bettmerhorn → Eggishorn ridge traverse
+  start: Bettmerhorn top station
+  transit:
+    train: Betten + Bettmeralp cable car + Bettmerhorn lift
+  duration_min: 240
+  gain_m: 600
+  sac_grade: T3
+  effort_label: Moderate, light scrambling
+  description_extra: High traverse along the ridge between two cable cars. Starts at Bettmerhorn (top of the Bettmeralp + Bettmerhorn cable car system from Betten station) and ends at
+    Eggishorn (top of the Fiesch cable car). About four hours of moderate ridge walking with exposed sections that are cabled and stepped where it matters. T3 — not for anyone uncomfortable
+    with hands-on rock. Continuous views of the glacier the entire way.
+  visits:
+  - aletsch_glacier
+  sources:
+  - https://www.outdooractive.com/en/route/mountain-hike/aletsch-arena/aletsch-panorama-circuit/802297583/
+  - https://www.myswitzerland.com/en-us/experiences/route/aletsch-panoramaweg-the-swiss-glacier-trail/
+- id: aletsch_glacier-aletsch-panoramaweg
+  name: Aletsch Panoramaweg
+  start: Bettmerhorn
+  transit:
+    train: Betten + cable car
+  duration_min: 240
+  gain_m: 400
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Classic panoramic route along the south-facing slope above the glacier. From the Bettmerhorn cable car top station the trail traverses west toward Riederalp with
+    the glacier in view the entire way. About four hours of moderate walking, mostly gentle, with one short steep section near Hohbalm. T2. Multiple exit points via cable car at Bettmeralp
+    and Riederalp shorten the day if needed.
+  visits:
+  - aletsch_glacier
+  sources:
+  - https://www.myswitzerland.com/en-us/experiences/route/aletsch-panoramaweg-the-swiss-glacier-trail/
+  - https://www.outdooractive.com/en/route/mountain-hike/aletsch-arena/aletsch-panorama-circuit/802297583/
+- id: arolla_ice_cave-arolla-glacier-trail
+  name: Arolla glacier circular
+  start: Arolla village
+  transit:
+    bus: Postbus from Sion via Évolène to Arolla
+  duration_min: 420
+  gain_m: 870
+  distance_km: 14
+  sac_grade: T2
+  effort_label: Long day
+  description_extra: Seven-hour 14-kilometre circular from Arolla village (2,050 m). The trail climbs 870 m past the Bas Glacier d'Arolla and the Haut Glacier d'Arolla viewpoints, loops
+    below the south flank of the Pigne d'Arolla, and returns. T2. Don't venture onto the glaciers themselves — they're crevassed and require a guide. The route is one of the longer flagship
+    hikes in the Val d'Hérens and crosses several alpine pastures with grazing herds in summer.
+  visits:
+  - arolla_ice_cave
+  sources:
+  - https://www.myswitzerland.com/en-ch/experiences/arolla-glacier-trail/
+  - https://en.wikipedia.org/wiki/Arolla_Glacier
+- id: arolla_ice_cave-arolla-pas-de-chevres
+  name: Arolla → Pas de Chèvres
+  start: Arolla village
+  transit:
+    bus: Postbus from Sion via Évolène to Arolla
+  duration_min: 150
+  gain_m: 850
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Two-and-a-half-hour climb from Arolla up the marked T2 trail to the Pas de Chèvres at 2,854 m. About 850 m of vertical. The eastern Arolla-side ascent is fairly
+    steep at the end but presents no real obstacles. The pass itself has dramatic views into the Val des Dix on the west side. Note the western descent via the original ladders is currently
+    flagged for rockfall risk — go up and come back the same way unless you're confident in alpine assessment.
+  visits:
+  - arolla_ice_cave
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-des-dix-cas-2147000078/mountain-hiking/from-arolla-via-pas-de-chevres-550/
+  quickest_for:
+  - arolla_ice_cave
+- id: cabane_becs_de_bosson-from-bendolla
+  name: From Bendolla (top of Grimentz gondola)
+  start: Bendolla (2130 m)
+  transit:
+    train: Sierre (SBB) + bus to Grimentz + gondola to Bendolla
+  duration_min: 165
+  gain_m: 855
+  sac_grade: T2
+  effort_label: Moderate
+  cable_car:
+    line: Grimentz-Bendolla gondola
+  hut:
+    name: Cabane des Becs de Bosson
+  description_extra: Standard approach via the Grimentz-Bendolla gondola. From Bendolla (2,130 m) the trail heads northeast toward Lac de Lona, climbing steadily through pasture and
+    contouring around the Pointe de Lona ridge. After about 1.5 hours the path reaches a high hanging valley with the small Lona lake, then climbs to the Pas de Lona pass at 2,787 m.
+    From the pass the final 40 minutes to the hut at 2,985 m is fairly steep on scree. Total 2h 45, 855 m of gain. T2. Hut has dorm beds and dinner June to mid-October.
+  visits:
+  - cabane_becs_de_bosson
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-route/sierre-anniviers-vercorin/grimentz-dayhike-becs-de-bosson/66024866/
+  - https://en.wikipedia.org/wiki/Becs_de_Bosson
+  quickest_for:
+  - cabane_becs_de_bosson
+- id: moiry_glacier-bus-to-moiry-barrage
+  name: Bus to Moiry dam + walk to hut
+  start: Moiry barrage bus stop
+  transit:
+    bus: Postbus from Grimentz to Moiry, barrage
+  duration_min: 150
+  gain_m: 580
+  sac_grade: T2
+  effort_label: Moderate, final stretch steep
+  hut:
+    name: Cabane de Moiry CAS
+  description_extra: Standard approach. Postbus from Grimentz to the Moiry, barrage stop. Cross the dam to the west side of the reservoir, then a flat hour-long walk along the lakeshore
+    to the head of the valley. From there a steep but well-graded trail climbs the lateral moraine of the Moiry Glacier to the Cabane de Moiry at 2,826 m. 2.5 hours total, 580 m of gain.
+    T2. To shave an hour off, take the postbus all the way to the Moiry glacier stop at the far end of the reservoir.
+  visits:
+  - moiry_glacier
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-route/switzerland/grimentz-to-moiry-hut/66408873/
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-de-moiry-cas-2147000177/mountain-hiking/
+  quickest_for:
+  - moiry_glacier
+- id: moiry_glacier-from-grimentz-on-foot
+  name: From Grimentz on foot
+  start: Grimentz village
+  duration_min: 300
+  gain_m: 1200
+  sac_grade: T2
+  effort_label: Long day
+  description_extra: Full foot approach from Grimentz village (1,572 m). About five hours, 1,200 m of gain. The trail follows the valley floor, threading through woods and meadows up
+    to the western edge of the Moiry reservoir (2 hours). From there the same lakeshore walk and moraine climb as the bus-to-barrage approach. T2 throughout. Mostly used by those doing
+    the longer Tour du Val d'Anniviers hut-to-hut route.
+  visits:
+  - moiry_glacier
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-route/switzerland/grimentz-to-moiry-hut/66408873/
+- id: ferpecle_glacier-easy-glacier-trail
+  name: Barrage de Ferpècle → glacier foot
+  start: Barrage de Ferpècle
+  transit:
+    bus: Postbus from Sion via Évolène to Les Haudères + Ferpècle
+  duration_min: 30
+  gain_m: 70
+  distance_km: 1.3
+  sac_grade: T1
+  effort_label: Easy
+  description_extra: Easy 30-minute walk (also bikeable) from the Barrage de Ferpècle to the foot of the Mont Miné glacier. The path is flat, 1.3 km, gaining about 70 m. Tadpole-filled
+    puddles on the way and a dramatic view at the end where the glacier tongue meets the valley floor. T1. Good family option or warm-up before the steeper Bricola route.
+  visits:
+  - ferpecle_glacier
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/val-d-herens/ferpecle-mont-mine-glacier-easy-bike-ride-or-easy-hike/165975796/
+  - https://en.wikipedia.org/wiki/Ferp%C3%A8cle
+  quickest_for:
+  - ferpecle_glacier
+- id: ferpecle_glacier-les-salays-to-bricola
+  name: Les Salays → Bricola → Roc Noir
+  start: Les Salays (Ferpècle)
+  transit:
+    bus: Postbus to Les Haudères + Ferpècle
+  duration_min: 120
+  gain_m: 540
+  sac_grade: T3
+  effort_label: Moderate, ravined path
+  description_extra: Two-hour climb from Les Salays (small Ferpècle hamlet) up a ravined path to Bricola at 2,416 m — the old herder's chalet at the foot of the Dent Blanche. About 540
+    m of vertical, steep in places. T3. The path is part of the approach to the Cabane de la Dent Blanche and is also used by climbers headed for the Dent Blanche normal route. Vegetation
+    thins to scree and rock above 2,000 m.
+  visits:
+  - ferpecle_glacier
+  sources:
+  - https://www.sac-cas.ch/fr/cabanes-et-courses/portail-des-courses-du-cas/cabane-de-la-dent-blanche-cas-2147000073/randonnee-en-montagne/depuis-ferpecle-les-salays-par-bricola-et-le-roc-noir-248/
+- id: spielboden-laengfluh-glacier-trail
+  name: Längfluh → Spielboden → Saas-Fee
+  start: Längfluh cable car top station
+  transit:
+    train: Brig + Postbus to Saas-Fee + Spielboden cable car + Längfluh
+  duration_min: 180
+  gain_m: 0
+  sac_grade: T2
+  effort_label: Moderate descent
+  cable_car:
+    line: Spielboden cable car + Längfluh
+  description_extra: Three-hour descent from Längfluh top station back to Saas-Fee village via Spielboden. From the Längfluh cable car at 2,870 m the path crosses a ski slope beneath
+    the Dom and the foot of the Fee glacier to the Skibrücke. Zig-zags down to Spielboden at 2,452 m, then steep winding trail back to the village at 1,800 m. T2. Stop at Spielboden
+    to see the tame marmots that eat out of your hand. Larch forest and crystal-clear glacial water characterise the lower half.
+  visits:
+  - spielboden
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/saas-fee-saastal/laengfluh-saas-fee/47620698/
+  - https://www.myswitzerland.com/en-ch/planning/offers/cable-car-ride-to-laengfluh-saas-fee/
+  quickest_for:
+  - spielboden
+- id: barrhorn-from-turtmannhuette
+  name: From Turtmannhütte via Schöllijoch
+  start: Turtmannhütte (2519 m)
+  transit:
+    train: Visp (SBB) + bus + long approach to Turtmannhütte
+  duration_min: 360
+  gain_m: 1100
+  sac_grade: T4
+  effort_label: High-altitude, long day
+  equipment_required: false
+  hut:
+    name: Turtmannhütte SAC
+  description_extra: Six-hour summit day from the Turtmannhütte (2,519 m). The Üssers Barrhorn at 3,610 m is one of the highest peaks reachable on foot in the Alps without rope or crampons
+    — a rare combination of high altitude and pure walking-grade terrain. Trail climbs scree and rock past the Schöllijoch, then up the long south slopes to the summit. 1,100 m of gain.
+    T4. No technical difficulty but high altitude and long day. The Turtmannhütte itself takes a long approach from Gruben — most parties stay one night before the summit day.
+  visits:
+  - barrhorn
+  sources:
+  - https://en.wikipedia.org/wiki/Barrhorn
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/uessers-barrhorn-145/mountain-hiking/
+  quickest_for:
+  - barrhorn
+- id: saas_fee_glacier-glacier-trail-felskinn
+  name: Glacier Trail via Britanniahütte
+  start: Felskinn top station
+  transit:
+    train: Brig + Postbus to Saas-Fee + Alpin Express cable car to Felskinn
+  duration_min: 270
+  gain_m: 200
+  sac_grade: T3
+  effort_label: Alpine, surefootedness required
+  equipment_required: true
+  cable_car:
+    line: Alpin Express (Saas-Fee – Felskinn)
+  hut:
+    name: Britanniahütte SAC
+  description_extra: Glacier Trail — the only alpine hiking route in the Saas valley that crosses two glaciers. From Felskinn (top of the Alpin Express cable car from Saas-Fee) the trail
+    climbs to the Egginerjoch, then descends to the Britanniahütte at 3,030 m. The route then drops down behind the hut across the Hohlaub and Allalin glaciers. About 4.5 hours, 200
+    m of cumulative gain. T3 with crevasse risk in places — sure-footed, free from vertigo, good physical condition required. Rope and ice axe rec for glacier crossings.
+  visits:
+  - saas_fee_glacier
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-route/saas-fee/glacier-trail/23425972/
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/britanniahuette-sac-2147000046/
+  quickest_for:
+  - saas_fee_glacier
+- id: lac_de_derborence-default
+  hut:
+    name: Refuge du Lac Derborence
+    website: https://www.refugederborence.ch/agenda-saison/
+  description_extra: Lac de Derborence at 1,449 m in the upper Lizerne valley above Conthey. Drive in from Aven via narrow mountain road, then short walk to the lake. The lake was formed
+    by a 1714 landslide that blocked the valley — the surrounding rock face shows the still-bare scar. UNESCO-listed primary forest of fir surrounds the basin. Loop around the lake is
+    about 1.5 hours, T1. Refuge du Lac Derborence has rooms and food. Best visited late October when larch turns golden.
+  visits:
+  - lac_de_derborence
+  sources:
+  - https://www.refugederborence.ch/agenda-saison/
+  - https://en.wikipedia.org/wiki/Lac_de_Derborence
+  quickest_for:
+  - lac_de_derborence
+- id: la_fouly-tmb-arnuva-la-fouly
+  name: Tour du Mont Blanc · Arnuva → Grand Col Ferret → La Fouly
+  start: Arnuva (Italian Val Ferret)
+  transit:
+    bus: Bus from Courmayeur to Arnuva
+  duration_min: 360
+  gain_m: 800
+  sac_grade: T2
+  effort_label: Long day
+  description_extra: Six-hour Tour du Mont Blanc stage from Arnuva (Italian Val Ferret) over the Grand Col Ferret at 2,537 m and down into the Swiss Val Ferret to La Fouly. About 800
+    m of climb and 1,000 m of descent. Steady ascent through pasture to the pass, then a long grass-and-rock descent past Gite Alpage de la Peule, Ferret, and finally La Fouly. T2 throughout,
+    well-marked. Carry water and food — limited refilling between Arnuva and La Fouly. One of the great Alpine border crossings.
+  visits:
+  - la_fouly
+  sources:
+  - https://en.wikipedia.org/wiki/Tour_du_Mont_Blanc
+  - https://www.outdooractive.com/en/route/hiking-trail/mont-blanc-and-la-thuile/arnuva-to-la-fouly/57379300/
+  quickest_for:
+  - la_fouly
+- id: sanetschpass-from-gsteig-on-foot
+  name: From Gsteig on foot
+  start: Gsteig bei Gstaad
+  transit:
+    bus: Postbus to Gsteig
+  duration_min: 180
+  gain_m: 1000
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Steep three-hour climb from Gsteig bei Gstaad (1,184 m) up to the Sanetschpass at 2,252 m. The trail follows the old pass road and shepherds' tracks. About 1,000
+    m of vertical gain. T2 throughout, well-marked. Most hikers take the cable car from the Sanetsch valley station to save the climb, but the foot approach is the historic crossing
+    between Bern and Valais. Continue over the pass into Valais for the Hôtel du Sanetsch and the Sanetschsee reservoir.
+  visits:
+  - sanetschpass
+  sources:
+  - https://www.myswitzerland.com/en-us/experiences/sanetsch-between-bern-and-valais/
+  - https://en.wikipedia.org/wiki/Sanetschpass
+- id: sanetschpass-cable-car-shortcut
+  name: Sanetsch cable car + walk to lake
+  start: Gsteig cable car valley station
+  transit:
+    bus: Postbus to Gsteig + 25 min walk to cable car
+  duration_min: 30
+  gain_m: 50
+  sac_grade: T1
+  effort_label: Easy
+  cable_car:
+    line: Sanetsch cable car
+  description_extra: Cable car shortcut. From Gsteig walk 25 minutes to the Sanetsch valley station, then ride the gondola up to the pass at 2,252 m. Walking time to the lake from the
+    top station is 10-15 minutes on a wide gravel path. Loop around the Sanetschsee reservoir is easy lakeshore, about an hour. Hôtel du Sanetsch is the only accommodation up here and
+    a popular lunch stop.
+  visits:
+  - sanetschpass
+  sources:
+  - https://www.myswitzerland.com/en-us/experiences/sanetsch-between-bern-and-valais/
+  quickest_for:
+  - sanetschpass
+- id: nax_via_ferrata-belvedere-via-ferrata
+  name: Belvédère via ferrata
+  start: Nax village
+  transit:
+    bus: Postbus from Sion to Nax
+  duration_min: 90
+  gain_m: 220
+  sac_grade: K3
+  effort_label: 1-2 hours climbing
+  equipment_required: true
+  description_extra: The Belvédère via ferrata above Nax village in the Val d'Hérens. About 1-2 hours of climbing depending on experience. Starts in woodland at 1,000 m and ascends 220
+    m up the cliffs. Graded among the easier via ferratas in Valais — accessible to most fit walkers with proper kit (harness, lanyards, helmet). The trailhead is a 30-minute walk from
+    the village. Views over the Rhone valley at the top are exceptional. Equipment can be rented in Nax.
+  visits:
+  - nax_via_ferrata
+  sources:
+  - https://www.outdooractive.com/en/route/via-ferrata/nax/belvedere-via-ferrata/20116980/
+  - https://www.myswitzerland.com/en-ch/experiences/belvedere-via-ferrata/
+  quickest_for:
+  - nax_via_ferrata
+- id: crans_montana-bisse-du-ro
+  name: Bisse du Ro
+  start: Crans-Montana centre
+  transit:
+    bus: Postbus to Crans-Montana
+  duration_min: 180
+  distance_km: 5.5
+  sac_grade: T2
+  effort_label: Moderate, some exposure
+  description_extra: 'Three-hour traverse along a 5.5 km medieval water-channel path carved into the south flank above Crans-Montana. The route follows the bisse — the historic irrigation
+    system that brought water from the Plaine Morte glacier down to the dry south-facing terraces. Sections cut through rocky diagonals, smooth corridors, and scree forest with sheer
+    drops to the Sionne valley. Not recommended for hikers prone to vertigo: some passages are narrow and exposed even though the channel itself is at handrail height. T2.'
+  visits:
+  - crans_montana
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/crans-montana/grand-bisse-de-lens/26640979/
+- id: crans_montana-plaine-morte-glacier
+  name: Plaine Morte glacial plateau
+  start: Top of Pointe de la Plaine Morte cable car
+  transit:
+    train: Sierre + funicular + multiple lifts
+  duration_min: 120
+  gain_m: 200
+  sac_grade: T2
+  effort_label: Moderate, high altitude
+  cable_car:
+    line: Pointe de la Plaine Morte
+  description_extra: Two-hour walk on the glacial plateau at 2,927 m. Reached by cable car (Crans-Montana – Cry d'Er – Bella Lui – Plaine Morte). The plateau itself is mostly flat snow
+    and ice in summer, with marked tracks for hikers. Views over the 4,000-metre peaks of Valais (Weisshorn, Dent Blanche, the Mischabel). Cold and windy even in August — bring layers.
+    T2 once you're up. The Plaine Morte glacier is retreating fast and the route changes year to year.
+  visits:
+  - crans_montana
+  sources:
+  - https://www.myswitzerland.com/en-us/experiences/plaine-morte-glacial-plateau/
+  quickest_for:
+  - crans_montana
+- id: tseuzier_lake-route-23
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 60
+  gain_m: 117
+  equipment_required: false
+  start: Anzère, Barrage de Tseuzier
+  transit:
+    bus: Anzère, Barrage de Tseuzier
+  description_extra: 'Lac de Tseuzier reservoir at 1,777 m above Anzère. Drive in or postbus from Sion to Anzère, Barrage de Tseuzier stop. The lake is directly accessible — no hike
+    required. Walk around the reservoir on a marked path: about 1 hour each way, 117 m of cumulative gain. T1. The dam itself is a 156-m arch structure. Quieter than Crans-Montana and
+    a good base for less-trafficked Valais hikes.'
+  visits:
+  - tseuzier_lake
+  sources:
+  - https://en.wikipedia.org/wiki/Lac_de_Tseuzier
+  quickest_for:
+  - tseuzier_lake
+- id: salanfe_lake-from-van-d-en-haut
+  name: From Van d'En Haut
+  start: Van d'En Haut campsite (1393 m)
+  transit:
+    train: Salvan (Mont-Blanc Express) + drive/walk
+  duration_min: 150
+  gain_m: 516
+  sac_grade: T2
+  effort_label: Moderate, steep approach
+  description_extra: Steep 2.5-hour climb from the Van d'En Haut campsite (1,393 m) up to the Lac de Salanfe reservoir at 1,909 m. Starts at the end of the public road in the Vallon
+    de Van and climbs through the upper valley to the dam. Steep stairs near the dam can be avoided by switching to the old construction road. The lake loop is dramatic — surreal rock
+    formations, a natural delta fed by the hanging Glacier Noir, and views of the Dents du Midi. Auberge de Salanfe at the dam serves food and has rooms.
+  visits:
+  - salanfe_lake
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-route/valais/sentier-de-salanfe/27185718/
+  - https://en.wikipedia.org/wiki/Lac_de_Salanfe
+  quickest_for:
+  - salanfe_lake
+- id: pointe_du_tsate-from-la-forclaz
+  name: From La Forclaz via Lac du Tsaté
+  start: La Forclaz (Évolène)
+  transit:
+    bus: Postbus to La Forclaz
+  duration_min: 300
+  gain_m: 1200
+  sac_grade: T3
+  effort_label: Long day, sparsely marked
+  description_extra: Five-hour summit day from La Forclaz (bus from Évolène) above the Val d'Hérens. Trail climbs steadily through pasture to Lac du Tsaté, then up sparse, scree-covered
+    slopes to the summit at 3,078 m. 1,200 m of cumulative gain. T3 — the upper section has loose terrain and the summit area is sparsely marked. Surefootedness essential. Views over
+    the Val d'Hérens to the Dent Blanche and across to Pigne d'Arolla. The summit sits between Sasseneire and Pointe du Bandon.
+  visits:
+  - pointe_du_tsate
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/
+  - https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9
+  quickest_for:
+  - pointe_du_tsate
+- id: gastlosen-gastlosen-circular
+  name: Gastlosen circular (Jaun → Chalet du Soldat → Jaun)
+  start: Jaun-Chalet
+  transit:
+    bus: Postbus to Jaun, Chalet
+  duration_min: 360
+  gain_m: 1099
+  sac_grade: T2
+  effort_label: Long day
+  hut:
+    name: Chalet du Soldat
+    open_raw: June – October
+  description_extra: Six-hour loop around the jagged limestone range that's been called Switzerland's Dolomites. From Jaun-Chalet the trail climbs through the Wols Ort col, passes under
+    the south face of the ridge to the Chalet du Soldat at 1,752 m, then descends through pastures back to Jaun. About 1,100 m of cumulative gain over 14.5 km. Bring water — the limestone
+    makes for dry trail until the Chalet du Soldat. The Chalet itself is a working alpine restaurant open June to October.
+  visits:
+  - gastlosen
+  sources:
+  - https://www.outdooractive.com/en/mountaineering-routes/fribourg/mountaineering-in-fribourg/5884930/
+  - https://schweizmobil.ch/en/hiking-in-switzerland/route-3/stage-21
+  - https://en.wikipedia.org/wiki/Gastlosen
+  quickest_for:
+  - gastlosen
+- id: dent_de_broc-from-broc
+  name: From Broc via Col des Combes
+  start: Broc (TPF station)
+  transit:
+    train: Broc-Fabrique (TPF)
+  duration_min: 300
+  gain_m: 1100
+  sac_grade: T4
+  effort_label: Exposed summit ridge
+  description_extra: From the Broc-Fabrique train station the trail climbs to the Col des Combes (1,668 m) through pastures and forest. The rest of the route to the summit is T2 hiking
+    until the final ridge, which is graded T4 with chains and significant exposure. The cross at the top sits at 1,829 m above Lake Gruyère with one of the cleanest views in Fribourg.
+    The exposed section requires surefootedness and a head for heights — not a route for everyone in the party if anyone is unsure.
+  visits:
+  - dent_de_broc
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-broc-246/mountain-hiking/
+  - https://en.wikipedia.org/wiki/Dent_de_Broc
+  quickest_for:
+  - dent_de_broc
+- id: schwarzsee-cable-car
+  name: Cable car from Zermatt via Furi
+  start: Zermatt cable car
+  transit:
+    train: Zermatt (Matterhorn Gotthard Bahn)
+  duration_min: 25
+  sac_grade: T1
+  effort_label: Cable car ride + viewing platform
+  cable_car:
+    line: Schwarzsee cable car (Zermatt – Furi – Schwarzsee)
+  description_extra: Zermatt's Schwarzsee at 2,583 m is reached directly by cable car from the village via Furi. About 25 minutes total ride time on the Schwarzsee cable car system.
+    The small lake sits directly below the Matterhorn's north face — one of the iconic Zermatt photo points. From the top station a five-minute walk gets you to the lake's edge. Also
+    the starting point for hikers heading up to the Hörnli hut (3,260 m) for the Matterhorn approach.
+  visits:
+  - schwarzsee
+  sources:
+  - https://www.matterhornparadise.ch/en
+  quickest_for:
+  - schwarzsee
+- id: schwarzsee-from-furi-via-stafelalp
+  name: From Furi via Stafelalp
+  start: Furi (mid-station)
+  transit:
+    train: Zermatt + cable car to Furi
+  duration_min: 240
+  gain_m: 800
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Four-hour foot approach from Furi (mid-station of the cable car from Zermatt). Trail climbs through the Innere Wälder forest to Stafelalp in about an hour, then
+    traverses west below the Matterhorn's north face on grass and gravel paths to Schwarzsee. About 800 m of cumulative gain. T2. Stafelalp is a working alpine farm with a restaurant.
+    The final stretch to Schwarzsee has the Matterhorn directly overhead the entire way — most dramatic from late morning when the sun is on the north face.
+  visits:
+  - schwarzsee
+  sources:
+  - https://www.sac-cas.ch/de/huetten-und-touren/sac-tourenportal/hoernlihuette-2147000136/berg-und-alpinwandern/von-zermatt-furi-via-stafelalp-261/
+- id: dent_de_lys-les-paccots-circular
+  name: Les Paccots loop via Lac des Joncs
+  start: Les Paccots
+  transit:
+    train: Châtel-St-Denis (TPF) + bus to Les Paccots
+  duration_min: 240
+  gain_m: 800
+  sac_grade: T2
+  effort_label: Moderate, brief T3 scramble
+  description_extra: 'Four-hour circular hike from Les Paccots (bus from Châtel-St-Denis). The trail loops via Lac des Joncs and Les Sciernes-d''Albeuve back to the start. Mostly T2
+    mountain trail with one short T3 section near the summit: a 50 m schrofen downclimb with chains for protection. Summit cross sits at 2,013 m. The peak is the highest point in the
+    Châtel-St-Denis commune and gives long views west to Lake Geneva and east into the Fribourg Alps.'
+  visits:
+  - dent_de_lys
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-lys-1086/mountain-hiking/les-paccots-dent-de-lys-les-sciernes-dalbeuve-139/
+  - https://en.wikipedia.org/wiki/Les_Paccots
+  quickest_for:
+  - dent_de_lys
+- id: moleson-plan-francey-summit
+  name: Plan-Francey to summit and back
+  start: Plan-Francey (mid-station of Moléson funicular)
+  transit:
+    train: Gruyères (TPF) + bus + funicular to Plan-Francey
+  duration_min: 120
+  gain_m: 600
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Two-hour up-and-back from the mid-station of the Moléson funicular at Plan-Francey. The funicular saves the first 750 m of vertical from Moléson-sur-Gruyères, leaving
+    you with about 600 m to the summit at 2,002 m. Trail climbs the north-west flank on a marked path, never very steep. Round-trip via the west flank below the North Wall takes about
+    an hour for the descent. Summit gives a clean view over the Fribourg pre-Alps and Lake Geneva on a clear day. T2.
+  cable_car:
+    line: Funiculaire Moléson-Plan-Francey
+  visits:
+  - moleson
+  sources:
+  - https://www.myswitzerland.com/en-us/experiences/moleson-a-popular-destination-in-the-fribourg-pre-alps/
+  - https://en.wikipedia.org/wiki/Mol%C3%A9son
+  quickest_for:
+  - moleson
+- id: teysachaux-les-paccots-to-moleson
+  name: Les Paccots → Téysachaux → Moléson
+  start: Les Paccots
+  transit:
+    train: Châtel-St-Denis (TPF) + bus to Les Paccots
+  duration_min: 240
+  gain_m: 900
+  sac_grade: T3
+  effort_label: Exposed ridge
+  description_extra: Ridge traverse from Les Paccots over Téysachaux (1,909 m) to Le Moléson (2,002 m). Four-hour day with 900 m of cumulative gain. The Les Paccots ascent is T1-T2 on
+    grassy meadow paths. The final stretch to Téysachaux's southwest ridge becomes exposed and the ridge between Téysachaux and Le Moléson grades up to T3 — narrow with drop-offs. From
+    Moléson the Plan-Francey funicular descends. Best done counter-clockwise so the harder ridge is climbed not descended.
+  visits:
+  - teysachaux
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/teysachaux-1963/mountain-hiking/les-paccots-teysachaux-le-moleson-bulle-1617/
+  quickest_for:
+  - teysachaux
+- id: cap_au_moine-from-allieres
+  name: Allières → Cape au Moine
+  start: Allières
+  transit:
+    train: Allières (MOB)
+  duration_min: 300
+  sac_grade: T3
+  effort_label: Moderate, brief exposure
+  description_extra: Five-hour ascent from the Allières train station (MOB line) into the Gruyère Pays-d'Enhaut nature park. Trail climbs through richly structured alpine pasture and
+    forest to the summit at 1,941 m. Most of the route is T1-T2; one section near the top reaches T3 with brief exposure. The viewpoint at the summit looks south over the Sarine valley
+    and the Mont Vully on the lake. Pair with a return via the same valley or descend to Charmey for a one-way day.
+  visits:
+  - cap_au_moine
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cape-au-moine-vd-300/mountain-hiking/
+  quickest_for:
+  - cap_au_moine
+- id: dent_de_jaman-route-87
+  duration_min: 30
+  gain_m: 141
+  equipment_required: false
+  start: Jaman Train Station
+  transit:
+    train: Jaman
+  description_extra: 'Dent de Jaman at 1,875 m above Lake Geneva. The popular approach takes the MOB train from Montreux or Les Avants to Jaman station (1,500 m), then a 30-minute climb
+    to the summit. Faster alternatives: hike from Les Avants in 2h 30, or drive to Col de Jaman and walk up in an hour. The summit is a pure limestone fang with steep sides — chains
+    on the final approach. T2 with brief T3 at the top. Spans view from Lake Geneva to the Dents du Midi.'
+  visits:
+  - dent_de_jaman
+  sources:
+  - https://en.wikipedia.org/wiki/Dent_de_Jaman
+  quickest_for:
+  - dent_de_jaman
+- id: creux_du_van-noiraigue-14-bends
+  name: Sentier des 14 contours (from Noiraigue)
+  start: Noiraigue train station
+  transit:
+    train: Noiraigue (RER fribourgeois)
+  duration_min: 180
+  gain_m: 725
+  distance_km: 14
+  sac_grade: T2
+  effort_label: Moderate, steep ascent
+  description_extra: The Sentier des 14 contours, literally the path of fourteen bends — the classic approach from Noiraigue train station to the natural rock amphitheatre. The first
+    hour is steady forest climbing, then the path narrows and steepens with the fourteen switchbacks that give the route its name. About 725 m of vertical gain over 14 km, well marked.
+    Top out at Le Soliat with views down 160 m of vertical cliff into the Jura basin. Sturdy shoes required, sections can be muddy after rain.
+  visits:
+  - creux_du_van
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/switzerland/a-mighty-arena-the-creux-du-van/8483375/
+  - https://www.myswitzerland.com/en-ch/experiences/route/creux-du-van-round-trip-in-the-val-de-travers/
+  - https://en.wikipedia.org/wiki/Creux_du_Van
+  quickest_for:
+  - creux_du_van
+- id: lac_de_taney-route-50
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 60
+  gain_m: 374
+  equipment_required: false
+  start: Parking du Flon
+  transit:
+    bus: Le Flon, village
+  visits:
+  - lac_de_taney
+  description_extra: Lac de Taney is a small high lake at 1,408 m in the Vouvry hinterland above the Rhone. From the Le Flon parking (drive or postbus from Vouvry, Plan-de-Croix), the
+    trail climbs about 700 m through forest in 1.5 hours to the lake. T2. The lake is in a federal nature reserve — no camping at the lakeshore. Continue another 1.5 hours up to Le Grammont
+    summit for a full day. The lake is the only high glacial lake in lower Valais that's still accessible without a long approach.
+  sources:
+  - https://en.wikipedia.org/wiki/Lac_de_Tanay
+  quickest_for:
+  - lac_de_taney
+- id: grammont-route-154
+  sac_grade: T2
+  effort_label: Mid
+  duration_min: 210
+  gain_m: 1131
+  equipment_required: false
+  start: Parking du Flon
+  transit:
+    bus: Le Flon, village
+  visits:
+  - grammont
+  description_extra: Le Grammont at 2,172 m above Lake Geneva. Approach from Miex or Tannay above Vouvry, drive to the Flon de Tanay parking, then 3-4 hour climb to the summit. About
+    1,000 m of vertical. T2 mountain trail with one exposed section near the top. Summit panorama spans Lake Geneva, the Dents du Midi, and into the French Chablais. Ibex live on the
+    summit area; leave no trace. Camping tolerated on the summit ridge.
+  sources:
+  - https://en.wikipedia.org/wiki/Grammont_(mountain)
+  quickest_for:
+  - grammont
+- id: marchairuz-mollendruz-mont-tendre-marchairuz
+  name: Col du Mollendruz → Mont Tendre → Col du Marchairuz
+  start: Col du Mollendruz
+  transit:
+    bus: Postbus to Col du Mollendruz
+  duration_min: 300
+  gain_m: 500
+  sac_grade: T2
+  effort_label: Long, easy ridge
+  description_extra: Classic Jura ridge walk. Five-hour traverse from Col du Mollendruz (postbus from Le Pont or Vaulion) up Mont Tendre at 1,679 m — the highest summit in the Swiss
+    Jura — then a gentle descent to Col du Marchairuz. About 500 m of cumulative gain. T2, mostly easy ridge walking with wide views. The route passes through the Jura Vaudois Nature
+    Park's wooded pastures and mountain chalets that only open for the summer alp season. Dry-stone walls everywhere. Postbus from Marchairuz back to Le Brassus.
+  visits:
+  - marchairuz
+  sources:
+  - https://www.myswitzerland.com/en/experiences/route/mont-tendre-from-mollendruz-to-marchairuz/
+  - https://en.wikipedia.org/wiki/Mont_Tendre
+  quickest_for:
+  - marchairuz
+- id: geltenschuss-lauenensee-geltenhuette
+  name: Lauenensee → Geltenhütte → Lauenensee
+  start: Lauenensee
+  transit:
+    bus: Postbus to Lauenen + walk to lake
+  duration_min: 360
+  gain_m: 750
+  sac_grade: T2
+  effort_label: Moderate, exposed steps
+  hut:
+    name: Geltenhütte SAC
+  description_extra: Six-hour loop from Lauenensee via the Geltenhütte SAC and back. Trail climbs into the Gelten valley right next to the Geltenschuss waterfall, with a short section
+    behind a smaller fall near the top. About 750 m of cumulative gain. T2. The hut at 2,002 m sits under the Wildhorn and Gelten glacier in the Gelten-Iffigen nature reserve. The descent
+    options are Chüetungel via Tungelschuss back to Lauenensee (1h 45) or via Usseri Tüffi (2h 20). Both rejoin the lake.
+  visits:
+  - geltenschuss
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/geltenhuette-sac-2147000113/mountain-hiking/from-lauenen-louwenesee-geltenschuss-418/
+  quickest_for:
+  - geltenschuss
+- id: lavaux_vineyards-terrasses-de-lavaux
+  name: Terrasses de Lavaux (St-Saphorin → Lutry)
+  start: St-Saphorin train station
+  transit:
+    train: St-Saphorin (CFF/MOB)
+  duration_min: 240
+  distance_km: 11
+  sac_grade: T1
+  effort_label: Easy
+  description_extra: Linear four-hour walk along the UNESCO Lavaux terraces from St-Saphorin to Lutry. About 11 km on mostly paved or stepped paths through 800 hectares of vines above
+    Lake Geneva. Passes through the wine villages of Rivaz, Epesses, Cully, and Villette. T1 throughout, but cumulative steps add up — the terraces drop hundreds of metres on the south
+    face. Trains link both ends; the Lavaux Express and Panoramic shortcut tired sections.
+  visits:
+  - lavaux_vineyards
+  sources:
+  - https://www.myswitzerland.com/en-ch/experiences/route/lavaux-vineyard-terraces-the-swiss-wine-route/
+  - https://schweizmobil.ch/en/hiking-in-switzerland/route-113
+  - https://en.wikipedia.org/wiki/Lavaux
+  quickest_for:
+  - lavaux_vineyards
+- id: schafler-route-42
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 60
+  gain_m: 329
+  equipment_required: false
+  start: Luftseilbahn Wasserauen-Ebenalp
+  transit:
+    train: Wasserauen
+  hut:
+    cost_chf_raw: From 48 CHF
+    open_raw: May 24 - Mid Oct
+    website: https://www.schaefler.ch/geniessen/
+  description_extra: Berggasthaus Schäfler sits on the limestone ridge above Aescher in the Alpstein. Approach via the Ebenalp cable car from Wasserauen, then 30-40 minutes along the
+    ridge. T2 — the ridge is narrow in places with some exposure. The Schäfler views go south over the Säntis massif and north toward Lake Constance. Pair with Seealpsee in the same
+    day by descending the back side from Schäfler down to the lake (2 hours, then climb back to Wasserauen or take the cable car).
+  visits:
+  - schafler
+  sources:
+  - https://www.schaefler.ch/
+  quickest_for:
+  - schafler
+- id: seealpsee-route-43
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 60
+  gain_m: 280
+  equipment_required: false
+  start: Wasserauen, Ebenalp
+  visits:
+  - seealpsee
+  description_extra: Seealpsee is one of the Alpstein's most photographed lakes, sitting at 1,143 m in a cirque below Säntis. Approach from Wasserauen station — about 1.5 hours up on
+    a steady trail through pasture and forest. T2, 400-500 m of gain. Berggasthaus Seealpsee at the lake serves food. Designated camping spot at the upper end of the lake; ask the farmer
+    for permission, typically 7 CHF per night. Often combined with Schäfler in a circular day. Best in early morning when the lake is still.
+  sources:
+  - https://en.wikipedia.org/wiki/Seealpsee
+  quickest_for:
+  - seealpsee
+- id: ascher-route-73
+  start: Luftseilbahn Wasserauen-Ebenalp
+  transit:
+    train: Wasserauen
+  hut:
+    cost_chf_raw: From 55 CHF
+    open_raw: Mid May - Mid Oct
+    website: https://aescher.ch/
+  visits:
+  - ascher
+  description_extra: Aescher is reached by the Luftseilbahn from Wasserauen to Ebenalp, then a 15-minute walk down to the famous guest house tucked against the cliff face. The cable
+    car saves the 1,000 m of climb from Wasserauen. Round-trip ticket runs around 38 CHF. Once at Aescher, continue along the limestone ridge to Schäfler in about an hour for the full
+    Alpstein classic. T1 to the guest house, T2 if you continue along the ridge. Ebenalp station opens late May through October.
+  sources:
+  - https://aescher.ch/
+  - https://en.wikipedia.org/wiki/%C3%84scher
+  quickest_for:
+  - ascher
+- id: saxer_lucke-route-71
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 60
+  gain_m: 157
+  equipment_required: false
+  start: Luftseilbahn Staubern
+  hut:
+    name: Berggasthaus Staubern
+    cost_chf_raw: From 45 CHF
+    open_raw: May - October
+    website: https://www.staubern.ch/
+  cable_car:
+    line: Luftseilbahn Staubern
+    cost_chf_raw: 40 CHF return
+    open_raw: May - October
+    info_url: https://www.staubern.ch/
+  description_extra: Saxer Lücke is the dramatic notch in the Alpstein ridge between Hoher Kasten and Fälensee. From Brülisau, take the cable car to Staubern (1,830 m), then 1 hour on
+    the ridge trail to the gap. About 157 m of cumulative gain. T1, the easiest of the classic Alpstein viewpoints to reach. Berggasthaus Staubern (45 CHF dorm) is a working alpine restaurant.
+    Combine with a descent through Fälensee for a longer day.
+  visits:
+  - saxer_lucke
+  sources:
+  - https://www.staubern.ch/
+  - https://en.wikipedia.org/wiki/Saxer_L%C3%BCcke
+  quickest_for:
+  - saxer_lucke
+- id: limmernsee-tierfehd-cable-car
+  name: Tierfehd cable car + Pantenbrücke trail
+  start: Tierfehd cable car (Linthal)
+  transit:
+    train: Linthal Braunwaldbahn (SBB) + cable car
+  duration_min: 60
+  gain_m: 100
+  sac_grade: T1
+  effort_label: Easy
+  cable_car:
+    line: Kraftwerke-Linth-Limmern Tierfehd cable car
+  description_extra: One-hour easy approach using the Kraftwerke-Linth-Limmern industrial cable car from Tierfehd. From the top station the path leads onto the high plateau where the
+    reservoir sits at 1,858 m. Mostly flat lakeshore walking, T1. The dam crossing (Switzerland's longest concrete dam at 1,054 m) and the historic Pantenbrücke suspension bridge are
+    accessible as a 30-minute side trip from Tierfehd either before or after.
+  visits:
+  - limmernsee
+  sources:
+  - https://en.wikipedia.org/wiki/Limmernsee
+  - https://www.myswitzerland.com/en-us/experiences/summer-autumn/hiking/hiking-to-suspension-bridges/
+  quickest_for:
+  - limmernsee
+- id: limmernsee-linthal-on-foot
+  name: From Linthal on foot
+  start: Linthal train station
+  transit:
+    train: Linthal Braunwaldbahn (SBB)
+  duration_min: 90
+  gain_m: 200
+  sac_grade: T1
+  effort_label: Easy
+  description_extra: Foot approach from Linthal train station to Tierfehd, then continue up. About 1h 30 from Linthal to Tierfehd via the Pantenbrücke suspension bridge. From Tierfehd
+    you can take the cable car or continue on foot another four hours up through the Sandalp valley to the reservoir. Trail follows the river and old industrial roads. T2.
+  visits:
+  - limmernsee
+  sources:
+  - https://en.wikipedia.org/wiki/Limmernsee
+- id: muttseehutte-from-tierfehd-cable-car
+  name: Tierfehd cable car + Chalchtrittli approach
+  start: Tierfehd cable car (Linthal)
+  transit:
+    train: Linthal Braunwaldbahn (SBB) + cable car
+  duration_min: 150
+  gain_m: 730
+  sac_grade: T3
+  effort_label: Moderate
+  cable_car:
+    line: Kraftwerke-Linth-Limmern cable car
+  hut:
+    name: Muttseehütte SAC
+  description_extra: Standard approach using the Kraftwerke-Linth-Limmern industrial cable car from Tierfehd. From the top station follow the marked trail via Chalchtrittli, traverse
+    east along the ridge at P. 2237, then up through the Muttenwändli cliff band on zig-zags to the high plateau and the hut at 2,501 m. About 2.5 hours and 730 m of gain. The trail
+    crosses Europe's highest-located concrete dam (1,054 m long, 2,500 m elevation). T3. Hut is open mid-June to mid-September.
+  visits:
+  - muttseehutte
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/muttseehuette-sac-2147000188/mountain-hiking/from-tierfed-via-cable-car-and-chalchtrittli-382/
+  quickest_for:
+  - muttseehutte
+- id: berschnerfall-route-44
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 37
+  gain_m: 200
+  equipment_required: false
+  start: Berschis, Unterdorf
+  transit:
+    bus: Berschis, Unterdorf
+  visits:
+  - berschnerfall
+  description_extra: Berschner waterfall above Walenstadt, on the south-facing side of the Churfirsten. Postbus or drive to Berschis, then 2-3 hour climb to the falls. The trail follows
+    the stream up through deciduous forest. The falls drop in two cascades — the lower viewpoint is easier to reach. Best in late spring and early summer when the water volume is highest.
+    T2.
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/heidiland/berschnerfall/23426193/
+  quickest_for:
+  - berschnerfall
+- id: klausenpass-urnerboden-to-altdorf
+  name: Urnerboden → Klausenpass → Altdorf
+  start: Urnerboden
+  transit:
+    bus: Postbus to Urnerboden
+  duration_min: 480
+  gain_m: 700
+  sac_grade: T2
+  effort_label: Long day
+  description_extra: Part of the Alpine Pass Route. About eight hours one way from Urnerboden (bus stop) over the Klausen Pass at 1,948 m and down the Schächental valley to Altdorf.
+    The climb from Urnerboden is steady alongside the Fätschbach river, crossing the pass road several times. Long descent on the Uri side with the Stäubifall waterfall and traditional
+    alpine farms en route. T2 throughout, well-signposted as part of Switzerland's federal long-distance trail network.
+  visits:
+  - klausenpass
+  sources:
+  - https://en.wikipedia.org/wiki/Klausen_Pass
+  - https://schweizmobil.ch/en/hiking-in-switzerland/route-1/stage-7
+  quickest_for:
+  - klausenpass
+- id: barglistuber-route-14
+  start: Parkplatz Wasserfall Berglistüber
+  transit:
+    bus: Linthal, Bergli
+  visits:
+  - barglistuber
+  description_extra: Bärglistüber waterfall near Linthal. Park at the Parkplatz Wasserfall Berglistüber or take the postbus to Linthal, Bergli stop. The falls drop directly out of the
+    cliff face above the road — short walk to the viewing platforms. The waterfall is at its strongest in spring snowmelt (May-June). Best visited early summer when the volume is highest
+    and the morning light catches the spray. T1, suitable for anyone.
+  sources:
+  - https://www.myswitzerland.com/en-us/destinations/berglistueber/
+  quickest_for:
+  - barglistuber
+- id: urnerboden-panorama-walk
+  name: Panorama walk around the alpine valley
+  start: Urnerboden village
+  transit:
+    bus: Postbus to Urnerboden
+  duration_min: 180
+  gain_m: 200
+  sac_grade: T1
+  effort_label: Easy
+  description_extra: Easy panoramic loop around Switzerland's largest alp. Urnerboden's high pasture summer-grazes around 1,200 cows and the trails through it are mostly flat, on grass
+    or gravel. About three hours and 200 m of cumulative gain. The Stäubifall waterfall, traditional cheese huts, and views up to the Klausenpass road are the highlights. T1, suitable
+    for families. Combine with a cheese tasting at one of the working alpine dairies.
+  visits:
+  - urnerboden
+  sources:
+  - https://en.wikipedia.org/wiki/Urnerboden
+  - https://www.myswitzerland.com/en-ch/destinations/urnerboden/
+  quickest_for:
+  - urnerboden
+- id: ice_lake_griesslisee-kloental-via-chaeseren
+  name: Klöntal → Chäseren → Glärnischhütte
+  start: Plätz (head of Klöntalersee)
+  transit:
+    bus: Postbus from Glarus to Klöntal-Vorauen
+  duration_min: 270
+  gain_m: 1100
+  sac_grade: T3
+  effort_label: Moderate, steep
+  hut:
+    name: Glärnischhütte SAC
+  description_extra: Demanding climb from the head of Klöntalersee up to the Glärnischhütte at 1,857 m and the lake area above. About 4.5 hours and 1,100 m of vertical gain. The trail
+    climbs steep grassy slopes with sporadic markings (T3 to T4+) past rock towers known as the Chilchli. The Glärnisch massif rises more than 2,000 m above Klöntalersee — this is one
+    of the steepest popular hikes in Glarus. Postbus from Glarus to Klöntal-Vorauen for the trailhead.
+  visits:
+  - ice_lake_griesslisee
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/glaernischhuette-sac-2147000116/mountain-hiking/from-kloental-via-chaeseren-406/
+  - https://en.wikipedia.org/wiki/Gl%C3%A4rnisch
+  quickest_for:
+  - ice_lake_griesslisee
+- id: gigerwaldsee-calfeisental-round
+  name: Calfeisental round (Gigerwald → Sardona → Gigerwald)
+  start: Gigerwald reservoir
+  transit:
+    train: Sargans (SBB) + bus to Vättis + Postbus to Gigerwald
+  duration_min: 437
+  gain_m: 1254
+  distance_km: 19.3
+  sac_grade: T2
+  effort_label: Long day
+  description_extra: Long day inside the UNESCO Tectonic Arena Sardona. From the Gigerwald reservoir, the loop covers 19.3 km in about 7 hours with 1,254 m of cumulative gain. Trail
+    passes through the Calfeisen valley, the Walser village of St. Martin at 1,340 m, and up to Alp Sardona before circling back. T2. The upper Sardona region holds one of Switzerland's
+    largest ibex colonies — early morning sightings are common above the alp.
+  visits:
+  - gigerwaldsee
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/sardonahuette-sac-2147000234/mountain-hiking/from-the-gigerwald-dam-via-alp-sardona-216/
+  - https://www.myswitzerland.com/en/experiences/route/mountain-hike-in-calfeisen-valley/
+- id: gigerwaldsee-st-martin-to-sardona
+  name: St. Martin → Alp Sardona
+  start: St. Martin (Walser village)
+  transit:
+    train: Sargans + Postbus to St. Martin
+  duration_min: 315
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Shorter alternative from St. Martin direct to Alp Sardona. About 5h 15 up. Follow the alp access road five kilometres into Calfeisental, then turn onto the marked
+    trail at Stübliwald and climb to Gamserälpli Untersäss and Obersäss. T2. Returns the same way. Good option if you want the Sardona ibex colony without the full reservoir loop.
+  visits:
+  - gigerwaldsee
+  sources:
+  - https://www.outdooractive.com/en/route/hikes/ferienregion-heidiland/route-of-amazement-calfeisental/23430458/
+  quickest_for:
+  - gigerwaldsee
+- id: ruinaulta-versam-circular
+  name: Versam circular through the gorge
+  start: Versam station
+  transit:
+    train: Versam-Safien (RhB)
+  duration_min: 240
+  gain_m: 400
+  sac_grade: T2
+  effort_label: Moderate
+  description_extra: Short circular hike through sparse deciduous forest with views down into the Rhine gorge (Switzerland's Grand Canyon). Starts and ends at Versam-Safien train station
+    on the RhB line. About four hours, 400 m of cumulative gain. Multiple viewpoints over the white cliffs and the milky-green Rhine. The trail is well-developed, T2, and a good rainy-day
+    option since most of it is in the trees.
+  visits:
+  - ruinaulta
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-route/surselva/rheinschlucht-rundwanderung-versam/23438257/
+  - https://en.wikipedia.org/wiki/Ruinaulta
+- id: ruinaulta-flims-out-and-back
+  name: From Flims Waldhaus
+  start: Flims Waldhaus
+  transit:
+    bus: Postbus to Flims Waldhaus
+  duration_min: 120
+  sac_grade: T1
+  effort_label: Easy
+  description_extra: Two-hour out-and-back from Flims Waldhaus down to a viewpoint over the Rhine gorge. Trail descends through forest to Conn and the Il Spir viewing platform, then
+    climbs back. Mostly easy, T1. Less of a wilderness feel than the Versam approach since it stays close to the Flims resort, but the Il Spir platform is one of the better dedicated
+    viewpoints in the gorge.
+  visits:
+  - ruinaulta
+  sources:
+  - https://www.myswitzerland.com/en-us/experiences/ruinaulta-switzerlands-grand-canyon/
+  quickest_for:
+  - ruinaulta
+- id: crestasee-four-lakes-hike
+  name: Senda quatter lags da Flem (Four Lakes Hike)
+  start: Flims
+  transit:
+    train: Chur (SBB) + Postbus to Flims
+  duration_min: 240
+  sac_grade: T1
+  effort_label: Easy
+  description_extra: Four-hour Senda quatter lags da Flem (Romansh for Four Lakes Hike) starting in Flims. Loops past Lag Prau Pulté, Lag Prau Tuleritg, Caumasee, and Crestasee. T1 throughout
+    — flat to gently rolling through forest and along lakeshores. Includes the Il Spir viewing platform near Conn for views over the Rhine Gorge. All four lakes are swimmable in summer
+    and have natural-coloured water (no glacier milk). Caumasee and Crestasee are the two most photographed and most popular.
+  visits:
+  - crestasee
+  sources:
+  - https://www.myswitzerland.com/en-us/experiences/route/senda-quatter-lags-da-flem/
+- id: crestasee-short-staderas-conn
+  name: Staderas → Caumasee → Conn
+  start: Flims Staderas
+  transit:
+    train: Chur + Postbus to Flims Staderas
+  duration_min: 75
+  distance_km: 4.6
+  sac_grade: T1
+  effort_label: Easy
+  description_extra: Short 75-minute one-way walk through the Flims forest, past Caumasee to the Il Spir viewing platform over the Rhine Gorge. About 4.6 km. T1, family-friendly. Good
+    rainy-day option since most of the route is under tree cover. Postbus connects back to Flims from Conn area or you can loop via Crestasee.
+  visits:
+  - crestasee
+  sources:
+  - https://www.outdooractive.com/en/route/winter-hiking/flims-laax/staderas-sportzentrum-caumasee-conn/43396654/
+  quickest_for:
+  - crestasee
+- id: klontalersee-default
+  description_extra: Klöntalersee is a long deep lake in the Glarus mountains, set in a valley below the Glärnisch massif. Drive or take postbus from Glarus. The lake itself is at 850
+    m with the cliffs of Glärnisch rising 2,000 m above. Around-the-lake loop is about 4 hours, T1, mostly flat. Multiple campsites and BBQ areas along the perimeter. Good base for harder
+    hikes up to the Glärnischhütte. Boat rental and lakeshore swimming spots.
+  visits:
+  - klontalersee
+  sources:
+  - https://en.wikipedia.org/wiki/Kl%C3%B6ntalersee
+  quickest_for:
+  - klontalersee
+- id: stoos_kapelle-route-35
+  start: Schwyz, Stoosbahn
+  description_extra: Stooskapelle Maria Hilf is a small alpine chapel in the car-free village of Stoos. Reach Stoos via the famous Stoosbahn funicular from Schwyz — currently the world's
+    steepest funicular at 110 % gradient. From the upper Stoos station, the chapel is a 2-3 minute walk away. T1. Combine with the ridge walk to Fronalpstock (cable car + ridge hike)
+    for a half-day.
+  visits:
+  - stoos_kapelle
+  sources:
+  - https://www.stoos.ch/
+  quickest_for:
+  - stoos_kapelle
+- id: pizol-5-lakes-hike
+  name: 5-Lakes hike (Pizolhütte → Wildsee → Schottensee → Schwarzsee → Baschalvasee → Gaffia)
+  start: Pizolhütte (top of Wangs gondola + chair lifts)
+  transit:
+    train: Sargans (SBB) + Bus to Wangs + Pizolbahn gondola + chairlift to Gaffia
+  duration_min: 270
+  gain_m: 553
+  distance_km: 11.4
+  sac_grade: T2
+  effort_label: Moderate, well-marked
+  description_extra: Eastern Switzerland's most famous day hike. The full loop is 11.4 km, 4.5 hours, 553 m of gain — starts at the Pizolhütte top station and visits Wildsee, Schottensee,
+    Schwarzsee, Wildsee Pizol, and Baschalvasee before descending to the Gaffia chairlift. Five turquoise tarns each with a different character. The trail is well-marked yellow signage
+    throughout, T2 underfoot. Highest point 2,507 m. Layer up — the wind off the Pizol summit picks up after 11 in the morning.
+  visits:
+  - pizol
+  sources:
+  - https://www.outdooractive.com/en/hiking-trail/buendner-herrschaft/5-lake-hike/23429843/
+  - https://www.myswitzerland.com/en-us/experiences/pizol-single-summit-and-five-lakes/
+  - https://en.wikipedia.org/wiki/Pizol
+  quickest_for:
+  - pizol
+- id: joriseen-route-126
+  sac_grade: T2
+  effort_label: Easy
+  duration_min: 256
+  gain_m: 888
+  equipment_required: false
+  start: Fluela Pass
+  transit:
+    bus: Flüela, Ospiz
+  visits:
+  - joriseen
+  description_extra: Jöriseen is a cluster of small alpine lakes at around 2,500 m in the Silvretta range near Davos. Approach from Wägerhuus on the Flüelapass road (postbus from Davos)
+    — about 2-3 hours to the lakes. T2. The lakes lie in a high cirque surrounded by Silvretta granite. Camping is tolerated here. Best in July and August when the snowfields around
+    the lakes have melted out.
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/davos-klosters/joeriseen-hike/27179027/
+  quickest_for:
+  - joriseen
+- id: falensee-route-69
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 210
+  gain_m: 834
+  equipment_required: false
+  start: Brülisau
+  hut:
+    name: Berggasthaus Bollenwees
+    cost_chf_raw: From 45 CHF
+    open_raw: May - October
+    website: https://www.bollenwees.ch/home.html
+  visits:
+  - falensee
+  description_extra: Fälensee sits in a steep limestone bowl in the Alpstein. From the Brülisau cable car to Hoher Kasten, traverse the Saxer Lücke ridge and drop down to the lake —
+    about 3-4 hours one way. The lake's vivid green-blue colour comes from limestone dissolved in the water. Berggasthaus Bollenwees at the north end of the lake has dorm beds and food.
+    Return via Berggasthaus Bollenwees and the Sämtisersee valley to Brülisau for a 7-8 hour day. T2 throughout.
+  sources:
+  - https://en.wikipedia.org/wiki/F%C3%A4lensee
+  - https://www.bollenwees.ch/
+  quickest_for:
+  - falensee
+- id: batoni_wasserfallarena-route-125
+  sac_grade: T2
+  effort_label: Easy
+  duration_min: 120
+  gain_m: 661
+  equipment_required: false
+  start: Weisstannen
+  transit:
+    bus: Weisstannen, Oberdorf
+  visits:
+  - batoni_wasserfallarena
+  description_extra: Batöni waterfall arena above Weisstannen in the Calfeisen region. Long approach but uncrowded. Park in Weisstannen or take postbus from Mels, then 3-4 hours up the
+    valley to the arena. The arena is a natural amphitheatre with multiple falls dropping from the surrounding cliffs. T2 throughout. Worth the effort if you want a falls hike without
+    the tourist volume of Lauterbrunnen or Engstligen.
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/heidiland/wasserfall-arena-baetoeni/23429637/
+  quickest_for:
+  - batoni_wasserfallarena
+- id: morteratsch_glacier-aussichtsweg-glacier-trail
+  name: Glacier theme trail (Aussichtsweg)
+  start: Morteratsch railway station
+  transit:
+    train: Morteratsch (RhB)
+  duration_min: 50
+  sac_grade: T1
+  effort_label: Easy
+  description_extra: Glacier theme trail (Aussichtsweg) from Morteratsch railway station to the glacier tongue. Sixteen interpretive stations along a good dirt path explain the causes
+    and consequences of glacier melt. About 50 minutes one way. Information markers show how far the glacier has retreated since 1850 — the historical positions are still visibly marked
+    along the trail. T1, family-friendly. Round-trip with the various stations takes about two hours.
+  visits:
+  - morteratsch_glacier
+  sources:
+  - https://www.schweizmobil.ch/en/hiking-in-switzerland/route-806
+  - https://www.myswitzerland.com/en/experiences/route/gletscheraussichten-morteratsch/
+- id: morteratsch_glacier-short-glacier-tongue
+  name: Short walk to glacier tongue
+  start: Morteratsch station
+  duration_min: 30
+  gain_m: 0
+  sac_grade: T1
+  effort_label: Trivial
+  description_extra: Half-hour walk on a dirt track from Morteratsch railway station to the foreland and the glacier tongue itself. Very flat, T1. Tongue position has retreated significantly
+    since 1900 — be aware you're now standing where the ice was, not where it is. Family-friendly, stroller-passable. Combine with the longer Aussichtsweg theme trail for context.
+  visits:
+  - morteratsch_glacier
+  sources:
+  - https://www.schweizmobil.ch/en/hiking-in-switzerland/route-806
+  quickest_for:
+  - morteratsch_glacier
+- id: bovalhutte-from-morteratsch
+  name: From Morteratsch station
+  start: Morteratsch railway station (1896 m)
+  transit:
+    train: Morteratsch (RhB)
+  duration_min: 120
+  gain_m: 600
+  sac_grade: T3
+  effort_label: Moderate
+  hut:
+    name: Chamanna da Boval CAS
+  description_extra: Two-hour climb from Morteratsch railway station up the western lateral moraine of the Morteratsch Glacier to the Chamanna da Boval at 2,496 m. From the station cross
+    the tracks and head right toward the glacier, following the moraine. The lower section below the hut crosses rocks requiring sure-footedness, then the trail climbs steeply over grassy
+    mounds to the hut at the foot of Piz Boval. 600 m of gain. T3. The hut is the standard base for Piz Bernina and Piz Morteratsch.
+  visits:
+  - bovalhutte
+  sources:
+  - https://www.sac-cas.ch/de/huetten-und-touren/sac-tourenportal/chamanna-da-boval-cas-2147000042/berg-und-alpinwandern/von-morteratsch-111/
+  quickest_for:
+  - bovalhutte
+- id: spitzmeilenhutte-from-maschgenkamm
+  name: From Maschgenkamm cable car
+  start: Maschgenkamm top station (Flumserberg)
+  transit:
+    train: Unterterzen (SBB) + Flumserberg cable cars
+  duration_min: 180
+  gain_m: 250
+  sac_grade: T2
+  effort_label: Moderate
+  cable_car:
+    line: Flumserberg Tannenboden-Maschgenkamm
+  hut:
+    name: Spitzmeilenhütte SAC
+  description_extra: Three-hour approach from the top of the Maschgenkamm cable car (Flumserberg Tannenboden line). From Maschgenkamm at 2,008 m descend the ski slope to just before
+    the Panüöl huts, then traverse southwest via Plattis to P. 1836, on to Fursch (tea hut), and follow the marker poles past Obetweid and Schwarzegg to the Spitzmeilenhütte at 2,087
+    m. About 250 m of cumulative gain, mostly rolling. T2. Hut is one of the SAC's earliest winter cabins, modernised since.
+  visits:
+  - spitzmeilenhutte
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/spitzmeilenhuette-sac-2147000256/
+  quickest_for:
+  - spitzmeilenhutte
+- id: cascata_la_froda-from-sonogno-village
+  name: From Sonogno (short walk to base)
+  start: Sonogno village
+  transit:
+    bus: Postbus from Locarno via Tenero to Sonogno
+  duration_min: 15
+  gain_m: 50
+  sac_grade: T1
+  effort_label: Easy, short walk
+  description_extra: Short walk from Sonogno village to the base of the 100 m La Froda fall. From the playground in Sonogno, cross the bridge and follow the Redorta on the opposite side.
+    Reach the falls in about 15 minutes on a good path. T1. Continue along the Costa della Valegia to Corte for a longer loop of about an hour. Best after rain or in spring snowmelt
+    when the falls are at full volume.
+  visits:
+  - cascata_la_froda
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-trail/ascona-locarno/sonogno-corte-sonogno/43228411/
+  quickest_for:
+  - cascata_la_froda
+- id: valle_verzasca-sonogno-to-lavertezzo
+  name: Sentiero Verzasca · Sonogno → Lavertezzo
+  start: Sonogno (last village in the valley)
+  transit:
+    bus: Postbus from Locarno via Tenero to Sonogno
+  duration_min: 210
+  distance_km: 14
+  sac_grade: T1
+  effort_label: Easy, day-long stroll
+  description_extra: Sentiero Verzasca — the federal hiking route through one of Ticino's most photographed valleys. Stage 1 from Sonogno (the last village, end of the postbus line from
+    Locarno) to Lavertezzo runs 14 km, about 3.5 hours of walking. Trail follows the emerald Verzasca through chestnut and birch forest, past rustici, chapels, and the medieval Ponte
+    dei Salti at Lavertezzo. Between Brione and Lavertezzo passes thirty sculptures and installations. T1 throughout. Plan 5-6 hours if you stop for photos and grotti meals.
+  visits:
+  - valle_verzasca
+  sources:
+  - https://schweizmobil.ch/en/hiking-in-switzerland/route-74/stage-1
+  - https://www.myswitzerland.com/en-us/experiences/route/sentiero-verzasca/
+  quickest_for:
+  - valle_verzasca
+- id: cascata_di_foroglio-default
+  description_extra: Cascata di Foroglio drops 80 metres directly behind the small Ticino village of Foroglio in Val Bavona. Drive or postbus from Cevio. The waterfall is visible from
+    the village square — a short five-minute walk on a paved path brings you to the base. T1, suitable for anyone. Foroglio itself is one of the more photogenic stone-roofed villages
+    in the valley. Best photographed early or late in the day when the falls are in soft side-light.
+  visits:
+  - cascata_di_foroglio
+  sources:
+  - https://en.wikipedia.org/wiki/Foroglio
+  quickest_for:
+  - cascata_di_foroglio
+- id: mer_de_glace-montenvers-train
+  name: Montenvers rack train + walk to ice cave
+  start: Chamonix Montenvers train station
+  duration_min: 30
+  sac_grade: T1
+  effort_label: Tourist walk
+  cable_car:
+    line: Chemin de fer du Montenvers (rack railway)
+    cost_chf_raw: ~38 € return
+  description_extra: Tourist approach using the historic Chemin de fer du Montenvers rack railway from Chamonix to Montenvers at 1,913 m. 5.1 km of track, 871 m of vertical, about 20
+    minutes. From the top station a gondola drops further down to a man-made ice cave cut into the glacier. The cave is rebuilt every year because the Mer de Glace moves around 70 m
+    annually. Round-trip ticket is around 38 € and the round-trip walk including the cave adds about an hour. Open mid-May to October.
+  visits:
+  - mer_de_glace
+  sources:
+  - https://en.wikipedia.org/wiki/Mer_de_Glace
+  - https://en.wikipedia.org/wiki/Chemin_de_fer_du_Montenvers
+  quickest_for:
+  - mer_de_glace
+- id: mer_de_glace-chamonix-on-foot
+  name: From Chamonix on foot
+  start: Chamonix town
+  duration_min: 180
+  gain_m: 870
+  sac_grade: T2
+  effort_label: Moderate, wooded climb
+  description_extra: Three-hour wooded climb from Chamonix town up to Montenvers, about 870 m of vertical. The trail follows old shepherds' routes through pine and larch forest with
+    occasional opening views toward the Aiguilles. Take the rack railway back down to save knees, or continue across to Plan de l'Aiguille for a full day. T2 — mostly easy underfoot,
+    just sustained climbing.
+  visits:
+  - mer_de_glace
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-route/chamonix/chamonix-dayhike-mer-de-glace-to-aiguille-du-midi/803341313/
+- id: les_cheserys-tre-le-champ-to-lac-blanc
+  name: Tré-le-Champ → Cheserys → Lac Blanc
+  start: Tré-le-Champ (Argentière)
+  transit:
+    train: Argentière (Mont-Blanc Express) + short walk
+  duration_min: 240
+  gain_m: 900
+  sac_grade: T3
+  effort_label: Steep, ladder sections
+  equipment_required: false
+  description_extra: Four-hour climb from Tré-le-Champ (above Argentière) into the Aiguilles Rouges nature reserve. The trail ascends through forest then quickly above the treeline,
+    crosses fixed ladders on the Aiguillette de Argentière, and reaches the Grand Balcon Sud. Continues past three small Cheserys lakes and the Refuge du Lac Blanc. The lakes give the
+    most famous reflection of the Mont Blanc range in Chamonix. T3 — sustained exposure on the ladder section, head for heights required. Descend by cable car from La Flégère.
+  visits:
+  - les_cheserys
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-route/rhone-alpes/tre-le-champ-argentiere-to-planpraz-via-lac-blanc-and-le-flegere/23203675/
+  - https://en.wikipedia.org/wiki/Lac_Blanc_(Chamonix)
+- id: les_cheserys-flegere-shortcut
+  name: Flégère cable car shortcut
+  start: Flégère top station
+  transit:
+    train: Les Praz de Chamonix + Flégère cable car
+  duration_min: 110
+  gain_m: 300
+  sac_grade: T2
+  effort_label: Moderate
+  cable_car:
+    line: Téléphérique de la Flégère
+  description_extra: Two-hour climb from the top of the La Flégère cable car up to the Refuge du Lac Blanc and the lakes. About 300 m of gain. Avoids the ladder section on the Tré-le-Champ
+    approach. Trail is well-marked and T2 throughout. From the lake you get the Mont Blanc reflection in the morning and the entire south wall of the Mont Blanc massif laid out across
+    the valley. The Flégère cable car runs from Les Praz de Chamonix mid-June through September.
+  visits:
+  - les_cheserys
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-route/rhone-alpes/tre-le-champ-argentiere-to-planpraz-via-lac-blanc-and-le-flegere/23203675/
+  quickest_for:
+  - les_cheserys
+- id: glacier_des_bossons-chairlift-to-chalet
+  name: Chairlift to Chalet du Glacier
+  start: Les Bossons (bus stop)
+  transit:
+    bus: Chamonix bus line 2 to Glacier des Bossons stop
+  duration_min: 15
+  sac_grade: T1
+  effort_label: Trivial (chairlift)
+  cable_car:
+    line: Télésiège du Glacier des Bossons
+    cost_chf_raw: ~9 € one-way / 13.20 € return
+  description_extra: Fifteen-minute chairlift ride from Les Bossons (bus from Chamonix on line 2) up to the Chalet du Glacier des Bossons at 1,410 m. The chairlift skips 1,000 feet of
+    forest climb. The Chalet has a restaurant with great views down onto the glacier and an informative walk explaining glacier features. Chairlift fare is around 9 € one-way / 13.20
+    € return. Open daily 8:30 to 18:30 in season.
+  visits:
+  - glacier_des_bossons
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-route/mont-blanc-massif/chamonix-dayhike-les-bossons-to-la-jonction/64789199/
+  quickest_for:
+  - glacier_des_bossons
+- id: glacier_des_bossons-chalet-to-la-jonction
+  name: Chalet → Chalet des Pyramides → La Jonction
+  start: Chalet du Glacier des Bossons
+  duration_min: 240
+  gain_m: 800
+  sac_grade: T2
+  effort_label: Moderate, steep zigzag
+  description_extra: Four-hour climb from the Chalet du Glacier des Bossons up to La Jonction at the head of the glacier. The trail follows the ridge separating the Bossons and Taconnaz
+    glaciers — historic ground, used by Balmat and Paccard on their 1786 first ascent of Mont Blanc. About 800 m of vertical gain on steady zig-zags through forest, then exposed glacier-side
+    trail above. T2. Out-and-back; allow seven hours round-trip with the chairlift, or nine if walking from Chamonix.
+  visits:
+  - glacier_des_bossons
+  sources:
+  - https://www.outdooractive.com/en/route/hiking-route/mont-blanc-massif/chamonix-dayhike-les-bossons-to-la-jonction/64789199/
+  - https://en.wikipedia.org/wiki/Bossons_Glacier
+- id: pic_de_jallouvre-from-petit-bornand
+  name: From Le Petit-Bornand-les-Glières
+  start: Le Petit-Bornand-les-Glières
+  duration_min: 360
+  gain_m: 1300
+  sac_grade: T3
+  effort_label: Long day
+  description_extra: Six-hour summit day in the French Bornes Massif (Haute-Savoie). From Le Petit-Bornand-les-Glières the trail climbs steadily through pastures and forest to the rocky
+    upper section of the Pic de Jallouvre at 2,408 m. About 1,300 m of vertical gain. T3 — final section involves easy scrambling. Summit gives long views over the Aravis chain and toward
+    Mont Blanc. Done as part of a longer Bornes traverse, the peak sits between Le Grand-Bornand and Le Petit-Bornand on the chain.
+  visits:
+  - pic_de_jallouvre
+  sources:
+  - https://en.wikipedia.org/wiki/Pic_de_Jallouvre
+  - https://en.wikipedia.org/wiki/Bornes_Massif
+  quickest_for:
+  - pic_de_jallouvre
+- id: dent_doche-from-bernex
+  name: From Bernex via Fétiuère
+  start: Fétiuère parking (1206 m, above Bernex)
+  transit:
+    bus: From Évian, drive to Fétiuère
+  duration_min: 180
+  gain_m: 1015
+  sac_grade: T3
+  effort_label: Moderate, brief chain sections
+  hut:
+    name: Refuge de la Dent d'Oche
+  description_extra: Three-hour climb from the Fétiuère parking above Bernex (1,206 m) up to the Refuge de la Dent d'Oche, and on to the summit at 2,221 m — the highest point in the
+    Bernex commune. About 1,015 m of vertical gain. Short rock sections near the refuge have chains for protection. T3. Views over Lake Geneva, Évian, and Thonon from the summit, with
+    the French Alps and Swiss Pre-Alps stretched out behind. Refuge serves food and has beds for the night.
+  visits:
+  - dent_doche
+  sources:
+  - https://en.wikipedia.org/wiki/Dent_d%27Oche
+  quickest_for:
+  - dent_doche
