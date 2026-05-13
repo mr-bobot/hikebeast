@@ -543,6 +543,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/aletsch_glacier_p4/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/aletsch_glacier_p5/w1800.webp",
+      "credit": null
     }
   ],
   "valais#arolla_ice_cave": [
