@@ -5332,3 +5332,29 @@ body.has-rail .topbar .hb-nav { display: none; }
 }
 .hb-signin-submit:hover { filter: brightness(0.94); }
 .hb-signin-submit:disabled { opacity: 0.6; cursor: default; filter: none; }
+
+/* === Hike sources block in the route detail sub-view === */
+.hb-route-sources {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline);
+}
+.hb-sources-h {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--soft);
+  margin: 0 0 8px;
+}
+.hb-sources-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.hb-source-item {
+  font-size: 12.5px; color: var(--muted);
+  letter-spacing: -0.005em;
+}
+.hb-source-item a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.hb-source-item a:hover { text-decoration: underline; }
+.hb-source-item.hb-source-text { color: var(--soft); font-style: italic; }
