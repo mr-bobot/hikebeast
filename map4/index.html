@@ -1603,7 +1603,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   //   - the checkout iframe is NOT yet within ~250px of the viewport
   //     bottom (so the bar fades before covering the Pay button).
   const stickyBuy = document.getElementById("sticky-buy");
-  const triggerEl = document.querySelector(".product-card") || document.querySelector(".hero");
+  const triggerEl = document.querySelector(".carousel-wrap") || document.querySelector(".hero");
   const checkoutEl = document.getElementById("checkout");
   if (stickyBuy && triggerEl) {
     let lastVisible = false;
