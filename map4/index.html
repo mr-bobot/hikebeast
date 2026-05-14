@@ -1570,11 +1570,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       const sw = slideWidth();
       if (sw <= 0) return;
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-      const next = carousel.scrollLeft + sw;
-      if (next > maxScroll - 4) {
+      if (carousel.scrollLeft >= maxScroll - 4) {
         carousel.scrollTo({ left: 0, behavior: "smooth" });
       } else {
-        carousel.scrollTo({ left: next, behavior: "smooth" });
+        carousel.scrollTo({ left: carousel.scrollLeft + sw, behavior: "smooth" });
       }
     }, 5000);
 
