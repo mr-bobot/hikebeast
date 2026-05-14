@@ -1589,14 +1589,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   //   - the checkout iframe is NOT yet within ~250px of the viewport
   //     bottom (so the bar fades before covering the Pay button).
   const stickyBuy = document.getElementById("sticky-buy");
-  const triggerEl = document.querySelector("ul.hero-bullets") || document.querySelector(".hero");
+  const triggerEl = document.querySelector(".product-card") || document.querySelector(".hero");
   const checkoutEl = document.getElementById("checkout");
   if (stickyBuy && triggerEl) {
     let lastVisible = false;
     const update = () => {
-      // Show once the buyer has scrolled past the bullets list (the
-      // value-prop block). That's roughly when they're starting to
-      // evaluate, much earlier than waiting for the whole hero section.
+      // Show once the buyer has scrolled past the price + rating block.
+      // Earlier than waiting for the bullets list to fully scroll off.
       const triggerBottom = triggerEl.offsetTop + triggerEl.offsetHeight;
       const triggerPast = window.scrollY > triggerBottom;
       let nearCheckout = false;
