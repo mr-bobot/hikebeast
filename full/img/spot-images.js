@@ -2030,5 +2030,23 @@ window.HB_SPOT_IMAGES = {
       "src": "derivatives/refuge_du_lac_blanc_p2/w1800.webp",
       "credit": "@janameerman"
     }
+  ],
+  "eastern#engadin_autumn": [
+    {
+      "src": "derivatives/engadin_autumn_p0/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/engadin_autumn_p1/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/engadin_autumn_p2/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/engadin_autumn_p3/w1800.webp",
+      "credit": "@leon.helg"
+    }
   ]
 };
