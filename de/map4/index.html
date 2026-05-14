@@ -475,33 +475,31 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     scroll-snap-align: start;
     background: var(--surface);
     border-radius: 16px;
-    padding: 0;
-    overflow: hidden;
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    gap: 6px;
   }
-  .inside-card .card-photo {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    display: block;
-    background: #eaeaec;
-    overflow: hidden;
-  }
-  .inside-card .card-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  .inside-card .ico-box {
+    width: 88px;
+    height: 88px;
+    margin-bottom: 14px;
+    border-radius: 20px;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 113, 227, 0.08);
+    font-size: 52px;
+    line-height: 1;
   }
   .inside-card h3 {
-    margin: 14px 16px 4px;
-    font-size: 15px;
+    margin: 0;
+    font-size: 16px;
     font-weight: 600;
     letter-spacing: -0.01em;
   }
   .inside-card p {
-    margin: 0 16px 16px;
-    font-size: 13px;
+    margin: 0;
+    font-size: 14px;
     line-height: 1.45;
     color: var(--muted);
   }
@@ -1241,37 +1239,37 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
       <div class="inside">
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/wildcamping.jpg" alt="Schlafsäcke auf einer Bergwiese in der goldenen Stunde mit Blick auf verschneite Gipfel" loading="lazy" decoding="async" /></div>
+          <div class="ico-box" aria-hidden="true">⛺</div>
           <h3>Wildcamping Infos</h3>
           <p>Orte, an denen du keine Angst vor Rangern haben musst.</p>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/photo-info.jpg" alt="Wanderer auf einem Bergkamm in der goldenen Stunde" loading="lazy" decoding="async" /></div>
+          <div class="ico-box" aria-hidden="true">📷</div>
           <h3>Foto Tipps</h3>
           <p>Beste Tages- und Jahreszeit für jeden Spot.</p>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/spots.jpg" alt="Wanderer mit Blick über neblige Alpentäler" loading="lazy" decoding="async" /></div>
+          <div class="ico-box" aria-hidden="true">💎</div>
           <h3>141+ Spots</h3>
           <p>Die schönsten Spots der Schweiz. Ein paar Klassiker, die meisten unbekannt.</p>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/exact-location.jpg" alt="Ruderboot auf einem türkisen Alpensee" loading="lazy" decoding="async" /></div>
+          <div class="ico-box" aria-hidden="true">📍</div>
           <h3>Genaue Standorte</h3>
           <p>Koordinaten, die dich direkt zum Spot führen.</p>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/hike-info.jpg" alt="Blick von einem Gipfel auf einen Alpensee bei Sonnenuntergang" loading="lazy" decoding="async" /></div>
+          <div class="ico-box" aria-hidden="true">🥾</div>
           <h3>Wander Infos</h3>
           <p>Weg und Schwierigkeitsgrad. Damit du weisst, was dich erwartet.</p>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/webapp.jpg" alt="iPhone mit der Hikebeast Webapp, 141 Spots auf einen Blick" loading="lazy" decoding="async" /></div>
+          <div class="ico-box" aria-hidden="true">📱</div>
           <h3>Eine Webapp</h3>
           <p>Mit Spass neue Spots entdecken.</p>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/offline.jpg" alt="Wanderer allein auf einem Bergkamm im Sonnenuntergang" loading="lazy" decoding="async" /></div>
+          <div class="ico-box" aria-hidden="true">📲</div>
           <h3>Offline-Zugang</h3>
           <p>Mit dem PDF kommst du auch ohne Empfang an dein Ziel.</p>
         </div>
