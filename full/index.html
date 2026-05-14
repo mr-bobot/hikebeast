@@ -564,9 +564,30 @@
     });
   }
 
-  let forYouKeys = [];
+  // Persist the For-You picks across nav so coming back to the home page
+  // doesn't reshuffle the row. 1-hour TTL: long enough that quick hops
+  // (home → spot → back) stay stable, short enough that the row feels
+  // alive across a session. Cleared automatically when stale.
+  const FOR_YOU_KEY = 'hb:home:for-you';
+  const FOR_YOU_TTL_MS = 60 * 60 * 1000;
+  function readPersistedKeys() {
+    try {
+      const raw = localStorage.getItem(FOR_YOU_KEY);
+      if (!raw) return [];
+      const { savedAt, keys } = JSON.parse(raw);
+      if (!Array.isArray(keys)) return [];
+      if (Date.now() - (savedAt || 0) > FOR_YOU_TTL_MS) return [];
+      return keys.filter(k => typeof k === 'string');
+    } catch { return []; }
+  }
+  function writePersistedKeys(keys) {
+    try { localStorage.setItem(FOR_YOU_KEY, JSON.stringify({ savedAt: Date.now(), keys })); } catch {}
+  }
+
+  let forYouKeys = readPersistedKeys();
   function buildForYou() {
     forYouKeys = pickStable(forYouKeys, 4);
+    writePersistedKeys(forYouKeys);
     const byKey = new Map(SPOTS.map(s => [window.HB.spotKey(s), s]));
     const picks = forYouKeys.map(k => byKey.get(k)).filter(Boolean);
     const el = document.getElementById('rowForYou');

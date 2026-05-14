@@ -81,12 +81,33 @@
   let SPOTS = [];
   let propIndex = [];
   let spotProps = new Map();
-  // Stable random order: shuffle once on first load, cache the position per
-  // spot. Subsequent refreshes (Convex updates) reuse the cached position so
-  // the wall doesn't jump around when a spot's photo updates. New spots
-  // discovered later get appended at the end (still in random order via the
-  // fractional position).
-  let randomOrder = null;  // spotKey -> position
+  // Stable random order: shuffle once, cache the position per spot, persist
+  // across nav with a 1-hour TTL so coming back to /browse/ shows the same
+  // wall (within the hour). Subsequent in-page refreshes (Convex updates)
+  // reuse the cached position so the wall doesn't jump around when a spot's
+  // photo updates. New spots discovered later get appended at the end
+  // (still in random order via the fractional position).
+  const BROWSE_ORDER_KEY = 'hb:browse:order';
+  const BROWSE_ORDER_TTL_MS = 60 * 60 * 1000;
+  function readPersistedOrder() {
+    try {
+      const raw = localStorage.getItem(BROWSE_ORDER_KEY);
+      if (!raw) return null;
+      const { savedAt, entries } = JSON.parse(raw);
+      if (!Array.isArray(entries)) return null;
+      if (Date.now() - (savedAt || 0) > BROWSE_ORDER_TTL_MS) return null;
+      return new Map(entries);
+    } catch { return null; }
+  }
+  function writePersistedOrder(map) {
+    try {
+      localStorage.setItem(BROWSE_ORDER_KEY, JSON.stringify({
+        savedAt: Date.now(),
+        entries: Array.from(map.entries()),
+      }));
+    } catch {}
+  }
+  let randomOrder = readPersistedOrder();  // spotKey -> position
   function shuffle(arr) {
     const a = arr.slice();
     for (let i = a.length - 1; i > 0; i--) {
@@ -120,6 +141,7 @@
         if (!randomOrder.has(k)) randomOrder.set(k, nextPos++ + Math.random());
       });
     }
+    writePersistedOrder(randomOrder);
     SPOTS = list;
     propIndex = window.HB.buildPropertyIndex(SPOTS);
     spotProps = new Map(SPOTS.map(s => [s, new Set(window.HB.propertiesOf(s))]));
