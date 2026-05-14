@@ -635,35 +635,41 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     scrollbar-width: none;
   }
   .inside::-webkit-scrollbar { display: none; }
+  /* Photo cards · photo on top, caption below. Wider than the icon
+     variant so the photo has real estate: ~72% of viewport on mobile,
+     ~5/6 portrait aspect. Padding zero on the card itself so the photo
+     goes edge-to-edge; copy block has its own inner padding. */
   .inside-card {
-    flex: 0 0 calc(50% - 24px);
+    flex: 0 0 calc(72% - 12px);
     scroll-snap-align: start;
     background: var(--surface);
-    border-radius: 14px;
-    padding: 16px;
+    border-radius: 16px;
+    padding: 0;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 6px;
   }
-  .inside-card .ico-box {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    display: grid;
-    place-items: center;
-    background: rgba(0, 113, 227, 0.08);
-    font-size: 22px;
-    line-height: 1;
-    /* Emojis carry their own color, so no `color` rule needed here. */
-    margin-bottom: 6px;
+  .inside-card .card-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    display: block;
+    background: #eaeaec;
+    overflow: hidden;
+  }
+  .inside-card .card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .inside-card h3 {
-    margin: 0;
+    margin: 14px 16px 4px;
     font-size: 15px;
     font-weight: 600;
     letter-spacing: -0.01em;
   }
   .inside-card p {
-    margin: 0;
+    margin: 0 16px 16px;
     font-size: 13px;
     line-height: 1.45;
     color: var(--muted);
@@ -1419,32 +1425,32 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
       <div class="inside">
         <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">📷</div>
+          <div class="card-photo"><img src="/map3/img/inside/photo-info.jpg" alt="Mountain reflection in an alpine lake at golden hour" loading="lazy" decoding="async" /></div>
           <h3>Photo info</h3>
           <p>Best hour and best season per spot, learned the hard way.</p>
         </div>
         <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">⛺</div>
+          <div class="card-photo"><img src="/map3/img/inside/wildcamping.jpg" alt="Tent glowing under the Milky Way above Mont Blanc" loading="lazy" decoding="async" /></div>
           <h3>Wildcamping info</h3>
           <p>Spots where you can wildcamp without any cortisol spikes.</p>
         </div>
         <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">📲</div>
+          <div class="card-photo"><img src="/map3/img/inside/offline.jpg" alt="Hiker resting on rocks above a remote glacier" loading="lazy" decoding="async" /></div>
           <h3>Offline use</h3>
           <p>A downloadable PDF works even without signal on the trail.</p>
         </div>
         <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">📍</div>
+          <div class="card-photo"><img src="/map3/img/inside/exact-location.jpg" alt="Turquoise alpine lake surrounded by pines" loading="lazy" decoding="async" /></div>
           <h3>Exact Location</h3>
           <p>Coordinates that drop you on the exact spot.</p>
         </div>
         <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">💎</div>
+          <div class="card-photo"><img src="/map3/img/inside/spots-122.jpg" alt="Hiker overlooking a turquoise lake with mountain wildflowers" loading="lazy" decoding="async" /></div>
           <h3>122 Spots</h3>
           <p>The best gems of Switzerland. Some famous, most aren't.</p>
         </div>
         <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">🥾</div>
+          <div class="card-photo"><img src="/map3/img/inside/hike-info.jpg" alt="A misty alpine ridge piercing the clouds" loading="lazy" decoding="async" /></div>
           <h3>Hike info</h3>
           <p>Trail and difficulty. So you know what you're walking into.</p>
         </div>
