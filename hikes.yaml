@@ -132,8 +132,9 @@ hikes:
   - berghaus-rothorn
   cable_car_ids:
   - brienz-rothorn-bahn
+  name: Brienzer Rothorn summit overview
 - id: brienzer_rothorn-cog-railway
-  name: Brienz Rothorn Bahn (cog railway)
+  name: Cog railway from Brienz
   start: Brienz station
   transit:
     train: Brienz (BLS)
@@ -153,7 +154,7 @@ hikes:
   cable_car_ids:
   - brienz-rothorn-bahn
 - id: brienzer_rothorn-brienz-via-planalp
-  name: From Brienz on foot via Planalp
+  name: Foot ascent from Brienz via Planalp
   start: Brienz station
   transit:
     train: Brienz (BLS)
@@ -170,7 +171,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/holiday-region-interlaken/hike-to-the-brienzer-rothorn/23490971/
   - https://en.wikipedia.org/wiki/Brienzer_Rothorn
 - id: hardergrat_trail-harder-to-rothorn
-  name: Harder Kulm → Brienzer Rothorn
+  name: 'Full Brienzergrat traverse: Harder Kulm to Brienzer Rothorn'
   start: Harder Kulm
   transit:
     train: Interlaken Ost + Harder cable car
@@ -198,7 +199,7 @@ hikes:
   - harderbahn
   - brienz-rothorn-bahn
 - id: tannhorn-brienzergrat-segment
-  name: Rothorn → Tannhorn → Planalp
+  name: 'Brienzergrat segment: Rothorn to Tannhorn to Planalp'
   start: Brienzer Rothorn summit (top of Brienz cog railway)
   transit:
     train: Brienz BLS + Rothorn Bahn
@@ -242,6 +243,7 @@ hikes:
   quickest_for:
   - augstmatthorn
   equipment_list: []
+  name: Lombachalp short ascent
 - id: fronalpstock-route-72
   sac_grade: T1
   effort_label: Easy
@@ -482,7 +484,7 @@ hikes:
   - https://www.gornergrat.ch/
   - https://en.wikipedia.org/wiki/Riffelsee
 - id: riffelalp-easy-round-trip
-  name: Easy round-trip via Grünsee
+  name: Riffelalp short loop via Grünsee
   start: Riffelalp station
   transit:
     train: Zermatt + Gornergrat Bahn to Riffelalp
@@ -502,7 +504,7 @@ hikes:
   cable_car_ids:
   - gornergrat-bahn
 - id: riffelalp-findeln-loop
-  name: Riffelalp → Findeln → Sunnegga loop
+  name: Riffelalp to Findeln via Sunnegga
   start: Riffelalp station
   transit:
     train: Zermatt + Gornergrat Bahn to Riffelalp
@@ -539,7 +541,7 @@ hikes:
   cable_car_ids:
   - gornergrat-bahn
 - id: gorner_glacier-path-of-silence
-  name: Path of Silence (Gornergrat → Grünsee → Riffelalp)
+  name: Path of Silence to Riffelalp
   start: Gornergrat top station
   transit:
     train: Zermatt + Gornergrat Bahn
@@ -555,7 +557,7 @@ hikes:
   sources:
   - https://www.outdooractive.com/en/route/hiking-trail/zermatt/the-path-of-silence-from-the-gornergrat-to-riffelalp/56111172/
 - id: gorner_glacier-descent-via-riffelsee
-  name: Gornergrat → Riffelsee → Zermatt
+  name: Gornergrat to Zermatt via Riffelsee
   start: Gornergrat top station
   duration_min: 240
   gain_m: 0
@@ -627,7 +629,7 @@ hikes:
   cable_car_ids:
   - bettmerhorn-cable-car
 - id: arolla_ice_cave-arolla-glacier-trail
-  name: Arolla glacier circular
+  name: Arolla glacier trail (14 km loop)
   start: Arolla village
   transit:
     bus: Postbus from Sion via Évolène to Arolla
@@ -645,7 +647,7 @@ hikes:
   - https://www.myswitzerland.com/en-ch/experiences/arolla-glacier-trail/
   - https://en.wikipedia.org/wiki/Arolla_Glacier
 - id: arolla_ice_cave-arolla-pas-de-chevres
-  name: Arolla → Pas de Chèvres
+  name: Pas de Chèvres climb
   start: Arolla village
   transit:
     bus: Postbus from Sion via Évolène to Arolla
@@ -2534,6 +2536,7 @@ hikes:
   - https://www.hardergrat.com/
   cable_car_ids:
   - harderbahn
+  name: Harder Kulm ridge approach
 - id: brisen-from-niederrickenbach-direct
   visits:
   - brisen
@@ -3060,6 +3063,7 @@ hikes:
     T4 in the steep upper sections.
   sources:
   - https://www.hardergrat.com/
+  name: Lombachalp ridge variant
 - id: iseltwald-from-boenigen-uferweg
   visits:
   - iseltwald

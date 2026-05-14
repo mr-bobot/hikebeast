@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778741967481" />
+<link rel="stylesheet" href="../../preview.css?v=1778768661071" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -126,7 +126,7 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/arolla_ice_cave_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Arolla village </div>
+      <div class="hb-route-name">Arolla glacier trail (14 km loop) </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">7h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Long day</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">870 m gain</span></span></div>
       
     </div>
@@ -134,7 +134,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/arolla_ice_cave_p1/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Arolla village <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Pas de Chèvres climb <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">2h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">850 m gain</span></span></div>
       
     </div>
@@ -212,7 +212,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"arolla_ice_cave-arolla-glacier-trail","name":"Arolla glacier circular","start":"Arolla village","transit":{"bus":"Postbus from Sion via Évolène to Arolla"},"duration_min":420,"gain_m":870,"distance_km":14,"sac_grade":"T2","effort_label":"Long day","description_extra":"Roughly 14 km circular from Arolla village (2,050 m) in the Val d'Hérens. The trail climbs 870 m past the Bas Glacier d'Arolla and Haut Glacier d'Arolla viewpoints, loops below the Pigne d'Arolla, and returns. About seven hours, T2. The route is built around the geology and geomorphology of the valley, not a glacier crossing: stay off the ice itself, both arms are crevassed.","visits":["arolla_ice_cave"],"sources":["https://www.myswitzerland.com/en-ch/experiences/arolla-glacier-trail/","https://en.wikipedia.org/wiki/Arolla_Glacier"],"quickest":false},{"id":"arolla_ice_cave-arolla-pas-de-chevres","name":"Arolla → Pas de Chèvres","start":"Arolla village","transit":{"bus":"Postbus from Sion via Évolène to Arolla"},"duration_min":150,"gain_m":850,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Marked climb from Arolla up to the Pas de Chèvres at 2,854 m, reached by Postbus from Sion via Évolène. T2, about 2h 30 with roughly 850 m of gain. The eastern Arolla-side ascent follows the forest path up through the old Swiss stone pine forest. The pass sits on the watershed above the Val des Dix; the SAC notes the western descent (the ladders side) is no longer recommended due to rockfall, so plan an out-and-back from Arolla unless you can assess current conditions.","visits":["arolla_ice_cave"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-des-dix-cas-2147000078/mountain-hiking/from-arolla-via-pas-de-chevres-550/"],"quickest_for":["arolla_ice_cave"],"quickest":true}];
+  const ROUTES = [{"id":"arolla_ice_cave-arolla-glacier-trail","name":"Arolla glacier trail (14 km loop)","start":"Arolla village","transit":{"bus":"Postbus from Sion via Évolène to Arolla"},"duration_min":420,"gain_m":870,"distance_km":14,"sac_grade":"T2","effort_label":"Long day","description_extra":"Roughly 14 km circular from Arolla village (2,050 m) in the Val d'Hérens. The trail climbs 870 m past the Bas Glacier d'Arolla and Haut Glacier d'Arolla viewpoints, loops below the Pigne d'Arolla, and returns. About seven hours, T2. The route is built around the geology and geomorphology of the valley, not a glacier crossing: stay off the ice itself, both arms are crevassed.","visits":["arolla_ice_cave"],"sources":["https://www.myswitzerland.com/en-ch/experiences/arolla-glacier-trail/","https://en.wikipedia.org/wiki/Arolla_Glacier"],"quickest":false},{"id":"arolla_ice_cave-arolla-pas-de-chevres","name":"Pas de Chèvres climb","start":"Arolla village","transit":{"bus":"Postbus from Sion via Évolène to Arolla"},"duration_min":150,"gain_m":850,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Marked climb from Arolla up to the Pas de Chèvres at 2,854 m, reached by Postbus from Sion via Évolène. T2, about 2h 30 with roughly 850 m of gain. The eastern Arolla-side ascent follows the forest path up through the old Swiss stone pine forest. The pass sits on the watershed above the Val des Dix; the SAC notes the western descent (the ladders side) is no longer recommended due to rockfall, so plan an out-and-back from Arolla unless you can assess current conditions.","visits":["arolla_ice_cave"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-des-dix-cas-2147000078/mountain-hiking/from-arolla-via-pas-de-chevres-550/"],"quickest_for":["arolla_ice_cave"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -247,7 +247,7 @@
     const r = ROUTES[i];
     if (!r) return;
 
-    setText('[data-rd-name]', r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1)));
+    setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
     const badgeHost = back.querySelector('.hb-rd-name');
     let badge = badgeHost.querySelector('.hb-route-badge');
     if (r.quickest) {

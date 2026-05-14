@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778741967480" />
+<link rel="stylesheet" href="../../preview.css?v=1778768661070" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -127,7 +127,7 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/riffelalp_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Riffelalp station <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Riffelalp short loop via Grünsee <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span></div>
       <div class="hb-route-operating">Cable car: Year-round, reduced winter schedule</div>
     </div>
@@ -135,7 +135,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/riffelalp_p1/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Riffelalp station </div>
+      <div class="hb-route-name">Riffelalp to Findeln via Sunnegga </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">4h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">300 m gain</span></span></div>
       <div class="hb-route-operating">Cable car: Year-round, reduced winter schedule</div>
     </div>
@@ -213,7 +213,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"riffelalp-easy-round-trip","name":"Easy round-trip via Grünsee","start":"Riffelalp station","transit":{"train":"Zermatt + Gornergrat Bahn to Riffelalp"},"duration_min":90,"distance_km":3,"sac_grade":"T1","effort_label":"Easy","description_extra":"Easy 90-minute three-kilometre loop from Riffelalp station on the Gornergrat railway. Trail heads east toward Grünsee through Swiss stone pine and larch forest, below the Laubern rock band. After small alpine meadows the path turns right and climbs back to Riffelalp. T1, family-friendly. Matterhorn views from multiple points, marmot sightings common in summer. Gornergrat railway back to Zermatt from the same station.","visits":["riffelalp"],"sources":["https://www.outdooractive.com/en/route/hiking-trail/zermatt/easy-round-trip-hike-on-riffelalp/43157089/"],"quickest_for":["riffelalp"],"cable_car_ids":["gornergrat-bahn"],"cable_cars":[{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"}],"cable_car":{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"},"quickest":true},{"id":"riffelalp-findeln-loop","name":"Riffelalp → Findeln → Sunnegga loop","start":"Riffelalp station","transit":{"train":"Zermatt + Gornergrat Bahn to Riffelalp"},"duration_min":240,"gain_m":300,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Loop from Riffelalp through Pinus cembra and larch forest past Grünsee, then on to Findeln and back via the Sunnegga funicular. About four hours, around 180 m of ascent on the return leg and roughly 750 m of descent. T2. The Findeln area has several restaurants in the village. Hike works in either direction.","visits":["riffelalp"],"sources":["https://www.outdooractive.com/en/route/hiking-trail/zermatt-matterhorn/riffelalp-gruensee-findeln-tiefmatten-zermatt/225130785/"],"cable_car_ids":["gornergrat-bahn"],"cable_cars":[{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"}],"cable_car":{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"},"quickest":false}];
+  const ROUTES = [{"id":"riffelalp-easy-round-trip","name":"Riffelalp short loop via Grünsee","start":"Riffelalp station","transit":{"train":"Zermatt + Gornergrat Bahn to Riffelalp"},"duration_min":90,"distance_km":3,"sac_grade":"T1","effort_label":"Easy","description_extra":"Easy 90-minute three-kilometre loop from Riffelalp station on the Gornergrat railway. Trail heads east toward Grünsee through Swiss stone pine and larch forest, below the Laubern rock band. After small alpine meadows the path turns right and climbs back to Riffelalp. T1, family-friendly. Matterhorn views from multiple points, marmot sightings common in summer. Gornergrat railway back to Zermatt from the same station.","visits":["riffelalp"],"sources":["https://www.outdooractive.com/en/route/hiking-trail/zermatt/easy-round-trip-hike-on-riffelalp/43157089/"],"quickest_for":["riffelalp"],"cable_car_ids":["gornergrat-bahn"],"cable_cars":[{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"}],"cable_car":{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"},"quickest":true},{"id":"riffelalp-findeln-loop","name":"Riffelalp to Findeln via Sunnegga","start":"Riffelalp station","transit":{"train":"Zermatt + Gornergrat Bahn to Riffelalp"},"duration_min":240,"gain_m":300,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Loop from Riffelalp through Pinus cembra and larch forest past Grünsee, then on to Findeln and back via the Sunnegga funicular. About four hours, around 180 m of ascent on the return leg and roughly 750 m of descent. T2. The Findeln area has several restaurants in the village. Hike works in either direction.","visits":["riffelalp"],"sources":["https://www.outdooractive.com/en/route/hiking-trail/zermatt-matterhorn/riffelalp-gruensee-findeln-tiefmatten-zermatt/225130785/"],"cable_car_ids":["gornergrat-bahn"],"cable_cars":[{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"}],"cable_car":{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"},"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -248,7 +248,7 @@
     const r = ROUTES[i];
     if (!r) return;
 
-    setText('[data-rd-name]', r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1)));
+    setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
     const badgeHost = back.querySelector('.hb-rd-name');
     let badge = badgeHost.querySelector('.hb-route-badge');
     if (r.quickest) {

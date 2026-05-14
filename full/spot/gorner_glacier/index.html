@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778741967480" />
+<link rel="stylesheet" href="../../preview.css?v=1778768661070" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -127,7 +127,7 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/gorner_glacier_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Zermatt train station <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Gornergrat railway + Sunshine Trail <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span></div>
       <div class="hb-route-operating">Cable car: Year-round, reduced winter schedule</div>
     </div>
@@ -135,7 +135,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/gorner_glacier_p1/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Gornergrat top station </div>
+      <div class="hb-route-name">Path of Silence to Riffelalp </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">3h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate, descent</span></span></div>
       
     </div>
@@ -143,7 +143,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="2">
     <div class="hb-route-thumb"><img src="../../img/derivatives/gorner_glacier_p2/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Gornergrat top station </div>
+      <div class="hb-route-name">Gornergrat to Zermatt via Riffelsee </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">4h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate, long descent</span></span></div>
       
     </div>
@@ -221,7 +221,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"gorner_glacier-gornergrat-railway","name":"Gornergrat railway + Sunshine Trail","start":"Zermatt train station","transit":{"train":"Zermatt (Matterhorn Gotthard Bahn) + Gornergrat Bahn"},"duration_min":60,"sac_grade":"T1","effort_label":"Easy","description_extra":"Standard Zermatt panorama trip. The Gornergrat rack railway, the highest open-air railway in Europe, climbs from Zermatt to the Gornergrat ridge at 3,135 m, gaining nearly 1,500 m. From the top, the trail follows the rails down to Riffelberg in about an hour, T1. The Gornergrat looks onto 29 four-thousand-metre peaks, including the Matterhorn, Dufourspitze, and the Dom.","visits":["gorner_glacier"],"sources":["https://en.wikipedia.org/wiki/Gornergrat","https://www.myswitzerland.com/en-se/experiences/route/descent-from-gornergrat-via-lake-riffel/"],"quickest_for":["gorner_glacier"],"cable_car_ids":["gornergrat-bahn"],"cable_cars":[{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"}],"cable_car":{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"},"quickest":true},{"id":"gorner_glacier-path-of-silence","name":"Path of Silence (Gornergrat → Grünsee → Riffelalp)","start":"Gornergrat top station","transit":{"train":"Zermatt + Gornergrat Bahn"},"duration_min":180,"gain_m":0,"sac_grade":"T2","effort_label":"Moderate, descent","description_extra":"Path of Silence from Gornergrat (3,089 m) down to Riffelalp at about 2,200 m, an exclusively downhill route of about 3h 15 covering 887 m of descent. The trail passes the Grünsee, where there's a clear view of the Matterhorn, and continues through the old-growth stone pine forest. T2. Take the Gornergrat railway up from Zermatt and walk down. Mountain Lodge Ze Seewjinu by the lake is a refreshment option. Bring binoculars; ibex and chamois are regular sightings.","visits":["gorner_glacier"],"sources":["https://www.outdooractive.com/en/route/hiking-trail/zermatt/the-path-of-silence-from-the-gornergrat-to-riffelalp/56111172/"],"quickest":false},{"id":"gorner_glacier-descent-via-riffelsee","name":"Gornergrat → Riffelsee → Zermatt","start":"Gornergrat top station","duration_min":240,"gain_m":0,"sac_grade":"T2","effort_label":"Moderate, long descent","description_extra":"Four-hour descent from Gornergrat down past Riffelsee to Zermatt, about 1,475 m of descent across 12.6 km. Riffelsee is the famous mirror lake where the Matterhorn reflects on still mornings. The trail continues through alpine pastures and the Riffelalp area before dropping back to Zermatt. T2.","visits":["gorner_glacier"],"sources":["https://www.outdooractive.com/en/route/mountain-hike/valais-alps/vom-gornergrat-ueber-den-riffelsee-nach-zermatt/19172801/"],"quickest":false}];
+  const ROUTES = [{"id":"gorner_glacier-gornergrat-railway","name":"Gornergrat railway + Sunshine Trail","start":"Zermatt train station","transit":{"train":"Zermatt (Matterhorn Gotthard Bahn) + Gornergrat Bahn"},"duration_min":60,"sac_grade":"T1","effort_label":"Easy","description_extra":"Standard Zermatt panorama trip. The Gornergrat rack railway, the highest open-air railway in Europe, climbs from Zermatt to the Gornergrat ridge at 3,135 m, gaining nearly 1,500 m. From the top, the trail follows the rails down to Riffelberg in about an hour, T1. The Gornergrat looks onto 29 four-thousand-metre peaks, including the Matterhorn, Dufourspitze, and the Dom.","visits":["gorner_glacier"],"sources":["https://en.wikipedia.org/wiki/Gornergrat","https://www.myswitzerland.com/en-se/experiences/route/descent-from-gornergrat-via-lake-riffel/"],"quickest_for":["gorner_glacier"],"cable_car_ids":["gornergrat-bahn"],"cable_cars":[{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"}],"cable_car":{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","cost_chf_raw":"132 CHF return","website":"https://www.gornergrat.ch/en/"},"quickest":true},{"id":"gorner_glacier-path-of-silence","name":"Path of Silence to Riffelalp","start":"Gornergrat top station","transit":{"train":"Zermatt + Gornergrat Bahn"},"duration_min":180,"gain_m":0,"sac_grade":"T2","effort_label":"Moderate, descent","description_extra":"Path of Silence from Gornergrat (3,089 m) down to Riffelalp at about 2,200 m, an exclusively downhill route of about 3h 15 covering 887 m of descent. The trail passes the Grünsee, where there's a clear view of the Matterhorn, and continues through the old-growth stone pine forest. T2. Take the Gornergrat railway up from Zermatt and walk down. Mountain Lodge Ze Seewjinu by the lake is a refreshment option. Bring binoculars; ibex and chamois are regular sightings.","visits":["gorner_glacier"],"sources":["https://www.outdooractive.com/en/route/hiking-trail/zermatt/the-path-of-silence-from-the-gornergrat-to-riffelalp/56111172/"],"quickest":false},{"id":"gorner_glacier-descent-via-riffelsee","name":"Gornergrat to Zermatt via Riffelsee","start":"Gornergrat top station","duration_min":240,"gain_m":0,"sac_grade":"T2","effort_label":"Moderate, long descent","description_extra":"Four-hour descent from Gornergrat down past Riffelsee to Zermatt, about 1,475 m of descent across 12.6 km. Riffelsee is the famous mirror lake where the Matterhorn reflects on still mornings. The trail continues through alpine pastures and the Riffelalp area before dropping back to Zermatt. T2.","visits":["gorner_glacier"],"sources":["https://www.outdooractive.com/en/route/mountain-hike/valais-alps/vom-gornergrat-ueber-den-riffelsee-nach-zermatt/19172801/"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -256,7 +256,7 @@
     const r = ROUTES[i];
     if (!r) return;
 
-    setText('[data-rd-name]', r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1)));
+    setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
     const badgeHost = back.querySelector('.hb-rd-name');
     let badge = badgeHost.querySelector('.hb-route-badge');
     if (r.quickest) {

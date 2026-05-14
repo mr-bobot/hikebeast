@@ -292,7 +292,15 @@ function routeRow(spot, route, idx) {
   if (route.gain_m) stats.push(`<span class="hb-route-stat">${ICON_GAIN}<span class="v">${route.gain_m} m gain</span></span>`);
 
   const badge = route.quickest ? `<span class="hb-route-badge">Quickest</span>` : "";
-  const name = route.start ? `Hike from ${escapeHtml(route.start)}` : `Route ${idx + 1}`;
+  // Prefer the hike's curated `name` (perspective-independent, set when two
+  // hikes for the same spot share a trailhead label or when "Hike from X"
+  // reads awkwardly because the spot itself IS X). Fall back to the
+  // trailhead string, then to a numeric placeholder.
+  const name = route.name
+    ? escapeHtml(route.name)
+    : route.start
+      ? `Hike from ${escapeHtml(route.start)}`
+      : `Route ${idx + 1}`;
 
   // Surface operating hours for cable cars and huts at a glance so the user
   // doesn't have to drill into the route detail view to find them.
@@ -588,7 +596,7 @@ function flipScriptFor(spot) {
     const r = ROUTES[i];
     if (!r) return;
 
-    setText('[data-rd-name]', r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1)));
+    setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
     const badgeHost = back.querySelector('.hb-rd-name');
     let badge = badgeHost.querySelector('.hb-route-badge');
     if (r.quickest) {

@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778741967478" />
+<link rel="stylesheet" href="../../preview.css?v=1778768661068" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -127,7 +127,7 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/oeschinensee_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Kandersteg train station </div>
+      <div class="hb-route-name">From Kandersteg on foot </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">418 m gain</span></span></div>
       
     </div>
@@ -135,7 +135,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/oeschinensee_p1/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Kandersteg cable car valley station <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Cable car from Kandersteg + short walk <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">15 min</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Trivial</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">30 m gain</span></span></div>
       <div class="hb-route-operating">Cable car: Mid-May to early November</div>
     </div>
@@ -143,7 +143,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="2">
     <div class="hb-route-thumb"><img src="../../img/derivatives/oeschinensee_p2/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Oeschinensee </div>
+      <div class="hb-route-name">Continuation to Hohtürli + Griesalp </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">6h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Full day, demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1100 m gain</span></span></div>
       <div class="hb-route-operating">Cable car: Mid-May to early November</div>
     </div>
@@ -256,7 +256,7 @@
     const r = ROUTES[i];
     if (!r) return;
 
-    setText('[data-rd-name]', r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1)));
+    setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
     const badgeHost = back.querySelector('.hb-rd-name');
     let badge = badgeHost.querySelector('.hb-route-badge');
     if (r.quickest) {
