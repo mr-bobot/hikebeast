@@ -365,15 +365,36 @@
     grid.classList.add('is-ready');
   }
 
+  // Hidden URL filter: ?by=<handle> keeps only photos credited to that
+  // handle (case-insensitive, with or without leading "@"). Used for
+  // screen-record demos like "every Leon shot in the guide". Spots
+  // that have zero matching photos are dropped from the wall.
+  // Hero title + chrome stay untouched so the page reads as the normal
+  // Explore view — just with a curated set of tiles.
+  const BY_FILTER = (() => {
+    try {
+      const v = new URLSearchParams(location.search).get('by');
+      return v ? v.toLowerCase().replace(/^@/, '') : null;
+    } catch { return null; }
+  })();
+  function matchesByFilter(credit) {
+    if (!BY_FILTER) return true;
+    if (!credit) return false;
+    return String(credit).toLowerCase().replace(/^@/, '') === BY_FILTER;
+  }
+
   // Round-robin every spot's photos into a flat tile list so the same spot's
   // multiple photos get spread across the wall instead of clumping. Single-
   // photo spots and TODO markers contribute exactly one tile each.
   function expandToPhotoTiles(spots) {
     const queues = spots.map(s => {
       if (s.kind === 'extras_entry' || !s.photos || s.photos.length === 0) {
+        // No photos = nothing to credit. Skip in BY mode.
+        if (BY_FILTER) return [];
         return [{ spot: s, photo: null }];
       }
-      return s.photos.map(p => ({ spot: s, photo: p }));
+      const matched = s.photos.filter(p => matchesByFilter(p.credit));
+      return matched.map(p => ({ spot: s, photo: p }));
     });
     const out = [];
     let active = queues.filter(q => q.length > 0);
