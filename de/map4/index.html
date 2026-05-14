@@ -444,163 +444,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     display: block;
   }
 
-  /* === Collection grid · video trigger ·
-     The image is wrapped in a <button> so the whole tile is a tap target.
-     The play affordance is a glass pill ("Watch · 0:20") centered over
-     the image — reads like premium video-player chrome and survives any
-     background via backdrop-filter blur, so no separate scrim needed. */
-  .collection-trigger {
-    display: block;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    background: none;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-    position: relative;
-    border-radius: var(--radius-card);
-    overflow: hidden;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .collection-trigger:focus-visible {
-    outline: 2px solid var(--accent, #0071E3);
-    outline-offset: 2px;
-  }
-  .collection-play {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    /* transform is owned by the pulse animation (translate is repeated
-       inside each keyframe so centering survives the scale step) */
-    transform: translate(-50%, -50%);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 9px 14px 9px 12px;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(14px) saturate(160%);
-    -webkit-backdrop-filter: blur(14px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    color: #fff;
-    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: -0.005em;
-    line-height: 1;
-    pointer-events: none;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.32);
-    white-space: nowrap;
-    animation: collection-play-pulse 3s ease-in-out infinite;
-  }
-  /* Breathing pulse · barely-there scale and a faint halo that expands
-     and fades. Long cycle + tiny amplitude reads as ambient motion, not
-     a flashing CTA. Stops on press (see :active rule below). */
-  @keyframes collection-play-pulse {
-    0%, 100% {
-      transform: translate(-50%, -50%) scale(1);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.32),
-                  0 0 0 0 rgba(255,255,255,0.22);
-    }
-    50% {
-      transform: translate(-50%, -50%) scale(1.02);
-      box-shadow: 0 9px 30px rgba(0,0,0,0.34),
-                  0 0 0 7px rgba(255,255,255,0);
-    }
-  }
-  .collection-trigger:active .collection-play {
-    animation-play-state: paused;
-    transform: translate(-50%, -50%) scale(0.97);
-    background: rgba(0, 0, 0, 0.7);
-    transition: transform 120ms ease, background 120ms ease;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .collection-play { animation: none; }
-  }
-  .collection-play .play-ico {
-    width: 12px;
-    height: 12px;
-    fill: #fff;
-    flex: 0 0 12px;
-  }
-  .collection-play .play-sep {
-    /* middle-dot separator (brand voice: no em dashes) */
-    opacity: 0.55;
-    margin: 0 1px;
-  }
-
-  /* === Video modal · lightbox-style overlay ·
-     CSS-only positioning (no Fullscreen API — IG in-app webview doesn't
-     handle it cleanly). Hidden by default; the [data-open] attribute is
-     toggled by JS. Body scroll is locked while open. */
-  .video-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,0.92);
-    padding: 24px;
-    /* respect device safe areas on iOS (notch / home indicator) */
-    padding-top: max(24px, env(safe-area-inset-top));
-    padding-bottom: max(24px, env(safe-area-inset-bottom));
-  }
-  .video-modal[data-open="true"] {
-    display: flex;
-  }
-  .video-modal-stage {
-    position: relative;
-    width: 100%;
-    max-width: 440px;
-    /* vertical (9:16) — bounded by height so the video never overflows
-       the viewport on short screens */
-    max-height: 100%;
-    aspect-ratio: 9 / 16;
-    border-radius: 18px;
-    overflow: hidden;
-    background: #000;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.55);
-  }
-  .video-modal-stage video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    background: #000;
-  }
-  .video-modal-close {
-    position: absolute;
-    top: max(12px, env(safe-area-inset-top));
-    right: 12px;
-    width: 40px;
-    height: 40px;
-    border-radius: 999px;
-    border: 0;
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: #fff;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    z-index: 2;
-  }
-  .video-modal-close svg {
-    width: 18px;
-    height: 18px;
-    stroke: #fff;
-    stroke-width: 2.2;
-    fill: none;
-    stroke-linecap: round;
-  }
-  /* lock body scroll while the modal is open */
-  body.video-modal-open {
-    overflow: hidden;
-  }
 
   /* === What's inside (signature bullets) ·
      Horizontal scroll-snap, 2 cards visible at once with a peek of the
@@ -1189,11 +1032,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     width: 100%;
     aspect-ratio: 1600 / 1080;
     background: #fafafa;
-    /* position:relative so the .collection-play pill (absolute) anchors
-       to the thumbnail, not the document */
-    position: relative;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
   }
   .buy-thumb img {
     width: 100%; height: 100%;
@@ -1384,18 +1222,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </ul>
       </div>
       <!-- Photo collection grid · visual proof of what 122 spots looks
-           like. The whole tile is a button: tap opens a vertical-video
-           lightbox (see #video-modal at the end of <body>). -->
+           like. Static tile (no video overlay for this variant). -->
       <div class="px collection-wrap">
-        <button type="button" class="collection-trigger collection-grid" data-video-open aria-label="20-Sekunden-Video zum Guide ansehen">
+        <div class="collection-grid">
           <img src="/map3/img/collection.jpg" alt="Ein Grid mit fünfzehn versteckten Schweizer Spots vom Guide" loading="lazy" decoding="async" />
-          <span class="collection-play" aria-hidden="true">
-            <svg class="play-ico" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-            <span>Ansehen</span>
-            <span class="play-sep">·</span>
-            <span>0:20</span>
-          </span>
-        </button>
+        </div>
       </div>
     </section>
 
@@ -1580,14 +1411,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
              live in the main column flow on desktop; now it's the
              buy-card's hero image instead. Goes edge-to-edge inside
              the card thanks to overflow:hidden + zero card padding. -->
-        <a href="#checkout" class="buy-thumb" data-video-open aria-label="20-Sekunden-Video zum Guide ansehen">
-          <img src="/map3/img/collection.jpg" alt="Ein Grid mit fünfzehn versteckten Schweizer Spots vom Guide" loading="lazy" decoding="async" />
-          <span class="collection-play" aria-hidden="true">
-            <svg class="play-ico" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-            <span>Ansehen</span>
-            <span class="play-sep">·</span>
-            <span>0:20</span>
-          </span>
+        <a href="#checkout" class="buy-thumb" aria-hidden="true">
+          <img src="/map3/img/collection.jpg" alt="" loading="lazy" decoding="async" />
         </a>
         <div class="buy-content">
           <div class="buy-rating">
@@ -1940,116 +1765,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       keepalive: true,
     }).catch(() => {});
   } catch (e) { /* noop */ }
-})();
-</script>
-
-<!-- Video modal · vertical-video lightbox, opened by the collection-grid
-     button. playsinline (+ webkit-playsinline) is REQUIRED here: the
-     Instagram in-app webview otherwise punts iOS playback into the
-     native fullscreen player, which is janky inside IG. poster falls
-     back to the still collection image while the video loads. -->
-<div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="Video" data-open="false">
-  <div class="video-modal-stage">
-    <button type="button" class="video-modal-close" data-video-close aria-label="Video schliessen">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <video
-      id="video-modal-player"
-      playsinline
-      webkit-playsinline="true"
-      preload="metadata"
-      controls
-      poster="/map3/img/collection.jpg"
-    >
-      <source src="/map3/img/sample.mp4" type="video/mp4" />
-    </video>
-  </div>
-</div>
-
-<script>
-(function () {
-  var modal  = document.getElementById('video-modal');
-  var video  = document.getElementById('video-modal-player');
-  if (!modal || !video) return;
-
-  var triggers = document.querySelectorAll('[data-video-open]');
-  var closers  = modal.querySelectorAll('[data-video-close]');
-
-  // Cohort identifiers from the URL (same source as the checkout-session
-  // call). Re-read here because this IIFE doesn't share scope with the
-  // checkout/visit IIFE earlier in the page. Empty for anonymous traffic.
-  var __vTok = '';
-  var __vSub = '';
-  try {
-    var __p = new URLSearchParams(window.location.search);
-    __vTok = __p.get('t') || '';
-    __vSub = __p.get('s') || '';
-  } catch (e) {}
-  var __videoPinged = false;
-
-  function openModal () {
-    modal.setAttribute('data-open', 'true');
-    document.body.classList.add('video-modal-open');
-    // Start at frame 0 every open so the user always sees the intro.
-    try { video.currentTime = 0; } catch (e) {}
-    // play() returns a promise on modern browsers — swallow rejection
-    // (IG webview can reject if the user nav'd away mid-tap, etc.)
-    var p = video.play();
-    if (p && typeof p.catch === 'function') p.catch(function () {});
-
-    // First-tap-only beacon to /api/visit. Apps Script v12 writes the
-    // current ISO time into `video_clicked_at` when token/subscriber
-    // matches a row; anonymous taps are no-ops (tracked in Vercel
-    // Analytics instead, by design — same pattern as `scrolled`).
-    if (!__videoPinged) {
-      __videoPinged = true;
-      try {
-        fetch("/api/visit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            event: "video_clicked",
-            page: "de_map4",
-            token: __vTok,
-            subscriber_id: __vSub,
-          }),
-          keepalive: true,
-        }).catch(function () {});
-      } catch (e) { /* noop */ }
-    }
-  }
-
-  function closeModal () {
-    modal.setAttribute('data-open', 'false');
-    document.body.classList.remove('video-modal-open');
-    try { video.pause(); } catch (e) {}
-  }
-
-  triggers.forEach(function (el) {
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      openModal();
-    });
-  });
-
-  closers.forEach(function (el) {
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      closeModal();
-    });
-  });
-
-  // Tap on the dim backdrop (anywhere outside the video stage) closes.
-  modal.addEventListener('click', function (e) {
-    if (e.target === modal) closeModal();
-  });
-
-  // ESC closes on desktop (no-op inside IG mobile webview, but free).
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && modal.getAttribute('data-open') === 'true') {
-      closeModal();
-    }
-  });
 })();
 </script>
 
