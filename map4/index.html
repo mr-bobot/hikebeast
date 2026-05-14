@@ -524,6 +524,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     flex-direction: column;
     gap: 14px;
   }
+  /* Sticky navbar offset so the "Get the map" heading lands below it,
+     not behind it, when the buy CTAs scroll the page here. */
+  #get-the-map {
+    scroll-margin-top: 70px;
+  }
   #checkout {
     min-height: 480px;
     border-radius: var(--radius-card);
@@ -1230,8 +1235,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
 
       <div class="px hero-text">
+        <p class="hero-sub">Your guide to the best summer in Switzerland.</p>
         <ul class="hero-bullets">
-          <li>122 Gems of Switzerland + How to Get There</li>
+          <li>XXX Gems of Switzerland + How to Get There</li>
           <li>Exact Location for every spot</li>
           <li>Hiking &amp; Camping Information</li>
         </ul>
@@ -1256,34 +1262,39 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
       <div class="inside">
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/photo-info.jpg" alt="Mountain reflection in an alpine lake at golden hour" loading="lazy" decoding="async" /></div>
-          <h3>Photo info</h3>
-          <p>Best hour and best season per spot, learned the hard way.</p>
-        </div>
-        <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/wildcamping.jpg" alt="Tent glowing under the Milky Way above Mont Blanc" loading="lazy" decoding="async" /></div>
+          <div class="card-photo"><img src="/map3/img/inside/wildcamping.jpg" alt="Woman watching the sunrise from her tent above Mont Blanc" loading="lazy" decoding="async" /></div>
           <h3>Wildcamping info</h3>
           <p>Spots where you can wildcamp without any cortisol spikes.</p>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/offline.jpg" alt="Hiker resting on rocks above a remote glacier" loading="lazy" decoding="async" /></div>
-          <h3>Offline use</h3>
-          <p>A downloadable PDF works even without signal on the trail.</p>
+          <div class="card-photo"><img src="/map3/img/inside/photo-info.jpg" alt="Hiker on a ridge at golden hour" loading="lazy" decoding="async" /></div>
+          <h3>Photo info</h3>
+          <p>Best hour and best season per spot, learned the hard way.</p>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/exact-location.jpg" alt="Turquoise alpine lake surrounded by pines" loading="lazy" decoding="async" /></div>
+          <div class="card-photo"><img src="/map3/img/inside/spots.jpg" alt="Hiker overlooking misty alpine valleys" loading="lazy" decoding="async" /></div>
+          <h3>XXX Spots</h3>
+          <p>The best gems of Switzerland. Some famous, most aren't.</p>
+        </div>
+        <div class="inside-card">
+          <div class="card-photo"><img src="/map3/img/inside/exact-location.jpg" alt="Rowboat on a turquoise alpine lake" loading="lazy" decoding="async" /></div>
           <h3>Exact Location</h3>
           <p>Coordinates that drop you on the exact spot.</p>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/spots-122.jpg" alt="Hiker overlooking a turquoise lake with mountain wildflowers" loading="lazy" decoding="async" /></div>
-          <h3>122 Spots</h3>
-          <p>The best gems of Switzerland. Some famous, most aren't.</p>
+          <div class="card-photo"><img src="/map3/img/inside/hike-info.jpg" alt="POV from a peak overlooking an alpine lake at sunset" loading="lazy" decoding="async" /></div>
+          <h3>Hiking Info</h3>
+          <p>Trail and difficulty. So you know what you're walking into.</p>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/hike-info.jpg" alt="A misty alpine ridge piercing the clouds" loading="lazy" decoding="async" /></div>
-          <h3>Hike info</h3>
-          <p>Trail and difficulty. So you know what you're walking into.</p>
+          <div class="card-photo"><img src="/map3/img/inside/webapp.jpg" alt="" loading="lazy" decoding="async" /></div>
+          <h3>A Webapp</h3>
+          <p>Open it on any phone or laptop. No download needed.</p>
+        </div>
+        <div class="inside-card">
+          <div class="card-photo"><img src="/map3/img/inside/offline.jpg" alt="Hiker walking a sunset ridge alone" loading="lazy" decoding="async" /></div>
+          <h3>Offline access</h3>
+          <p>A downloadable PDF works even without signal on the trail.</p>
         </div>
       </div>
     </section>
@@ -1377,7 +1388,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     </section>
 
     <!-- Embedded Stripe Checkout -->
-    <section class="px">
+    <section class="px" id="get-the-map">
       <div class="section-head section-head--centered">
         <h2>Get the map</h2>
       </div>
@@ -1426,7 +1437,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
              live in the main column flow on desktop; now it's the
              buy-card's hero image instead. Goes edge-to-edge inside
              the card thanks to overflow:hidden + zero card padding. -->
-        <a href="#checkout" class="buy-thumb" aria-hidden="true">
+        <a href="#get-the-map" class="buy-thumb" aria-hidden="true">
           <img src="/map3/img/collection.jpg" alt="" loading="lazy" decoding="async" />
         </a>
         <div class="buy-content">
@@ -1437,7 +1448,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           </div>
           <div class="buy-name">Swiss Gems 🇨🇭</div>
           <div class="buy-price">CHF 27</div>
-          <a href="#checkout" class="buy-cta">Get the map</a>
+          <a href="#get-the-map" class="buy-cta">Get the map</a>
           <div class="buy-foot">
             <span>Apple Pay · TWINT · Card</span>
             <a href="/terms.html#refunds">↩ 30-day refund</a>
@@ -1450,7 +1461,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
   <!-- Sticky bottom buy bar (mobile) -->
   <div class="sticky-buy" id="sticky-buy">
-    <a class="buy-btn" href="#checkout">Buy · <span class="price-display">CHF 27</span></a>
+    <a class="buy-btn" href="#get-the-map">Buy · <span class="price-display">CHF 27</span></a>
   </div>
 
 <script>
@@ -1571,7 +1582,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       } else {
         carousel.scrollTo({ left: next, behavior: "smooth" });
       }
-    }, 3000);
+    }, 5000);
 
     const stopAutoplay = () => {
       if (autoplayTimer) {
@@ -1599,19 +1610,22 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   //   - the checkout iframe is NOT yet within ~250px of the viewport
   //     bottom (so the bar fades before covering the Pay button).
   const stickyBuy = document.getElementById("sticky-buy");
-  const heroEl = document.querySelector(".hero");
+  const triggerEl = document.querySelector("ul.hero-bullets") || document.querySelector(".hero");
   const checkoutEl = document.getElementById("checkout");
-  if (stickyBuy && heroEl) {
+  if (stickyBuy && triggerEl) {
     let lastVisible = false;
     const update = () => {
-      const heroBottom = heroEl.offsetTop + heroEl.offsetHeight;
-      const heroPast = window.scrollY > heroBottom - 100;
+      // Show once the buyer has scrolled past the bullets list (the
+      // value-prop block). That's roughly when they're starting to
+      // evaluate, much earlier than waiting for the whole hero section.
+      const triggerBottom = triggerEl.offsetTop + triggerEl.offsetHeight;
+      const triggerPast = window.scrollY > triggerBottom;
       let nearCheckout = false;
       if (checkoutEl) {
         const rect = checkoutEl.getBoundingClientRect();
         nearCheckout = rect.top < window.innerHeight - 250;
       }
-      const visible = heroPast && !nearCheckout;
+      const visible = triggerPast && !nearCheckout;
       if (visible !== lastVisible) {
         stickyBuy.classList.toggle("is-visible", visible);
         lastVisible = visible;
