@@ -12,7 +12,7 @@
     if (localStorage.getItem('hb_lang') === 'en') return;
     var lang = (navigator.language || '').toLowerCase();
     if (!lang.startsWith('de')) return;
-    var target = location.pathname.replace(/^\/(themap|map)\b/, '/de/$1');
+    var target = location.pathname.replace(/^\/(map4|map3|themap|map)\b/, '/de/$1');
     if (target === location.pathname) return;
     location.replace(target + location.search + location.hash);
   } catch (e) {}
@@ -33,15 +33,15 @@
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Switzerland Map · 100+ Hidden Spots" />
 <meta property="og:description" content="The ultimate Swiss map." />
-<meta property="og:url" content="https://hikebeast.ch/themap/" />
-<meta property="og:image" content="https://hikebeast.ch/themap/img/og.jpg" />
+<meta property="og:url" content="https://hikebeast.ch/map4/" />
+<meta property="og:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 <meta property="og:image:width" content="1920" />
 <meta property="og:image:height" content="987" />
 <meta property="og:image:alt" content="Switzerland Map · 100+ Hidden Spots" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Switzerland Map · 100+ Hidden Spots" />
 <meta name="twitter:description" content="100+ secret Swiss spots, exact GPS, lifetime updates." />
-<meta name="twitter:image" content="https://hikebeast.ch/themap/img/og.jpg" />
+<meta name="twitter:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 
 <!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -105,6 +105,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     --accent: #0071e3;
     --success: #34c759;
     --warn: #ff9500;
+    --gold: #f5b400;
     --radius-card: 18px;
     --radius-btn: 980px;
   }
@@ -195,53 +196,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   .px { padding-left: 22px; padding-right: 22px; }
 
   /* === Hero === */
-  .info-bar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-    border-radius: 12px;
-    background: var(--surface);
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--fg);
-    letter-spacing: -0.005em;
-  }
-  /* Price label, used in both the info bar and the sticky buy button.
-     Bold so it stands out as the anchor of the row. */
+  /* Price label, used in the product card and the sticky buy button.
+     Bold so it stands out as the anchor. */
   .price-display {
     font-weight: 700;
-  }
-  /* Slightly larger in the info-bar badge so the price reads as the
-     headline of the row rather than a small inline label. The sticky
-     buy button keeps the smaller size since it's already inside a
-     16px button. */
-  .info-bar .price-display {
-    font-size: 17px;
-    letter-spacing: -0.02em;
-  }
-  .info-bar .info-left,
-  .info-bar .info-right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 14px 16px;
-  }
-  .info-bar .info-right {
-    border-left: 1px solid var(--hairline);
-  }
-  .info-bar .info-avatar {
-    width: 22px; height: 22px;
-    border-radius: 999px;
-    overflow: hidden;
-    display: inline-block;
-  }
-  .info-bar .info-avatar img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: 70% 45%;
-    display: block;
   }
 
   .hero-text {
@@ -482,6 +440,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.5;
   }
 
+  /* Extra breathing room between hero bullets and "What's inside" */
+  .inside-section { margin-top: 24px; }
+
   /* === Collection grid · full-bleed photo grid above the 6 cards === */
   .collection-wrap {
     padding-top: 10px;
@@ -501,6 +462,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     display: block;
   }
 
+
   /* === What's inside (signature bullets) ·
      Horizontal scroll-snap, 2 cards visible at once with a peek of the
      third on the right. Mirrors the testimonials/hero carousel pattern. */
@@ -519,35 +481,41 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     scrollbar-width: none;
   }
   .inside::-webkit-scrollbar { display: none; }
+  /* Photo cards · photo on top, caption below. Wider than the icon
+     variant so the photo has real estate: ~72% of viewport on mobile,
+     ~5/6 portrait aspect. Padding zero on the card itself so the photo
+     goes edge-to-edge; copy block has its own inner padding. */
   .inside-card {
-    flex: 0 0 calc(50% - 24px);
+    flex: 0 0 calc(72% - 12px);
     scroll-snap-align: start;
     background: var(--surface);
-    border-radius: 14px;
-    padding: 16px;
+    border-radius: 16px;
+    padding: 0;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 6px;
   }
-  .inside-card .ico-box {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    display: grid;
-    place-items: center;
-    background: rgba(0, 113, 227, 0.08);
-    font-size: 22px;
-    line-height: 1;
-    /* Emojis carry their own color, so no `color` rule needed here. */
-    margin-bottom: 6px;
+  .inside-card .card-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    display: block;
+    background: #eaeaec;
+    overflow: hidden;
+  }
+  .inside-card .card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .inside-card h3 {
-    margin: 0;
+    margin: 14px 16px 4px;
     font-size: 15px;
     font-weight: 600;
     letter-spacing: -0.01em;
   }
   .inside-card p {
-    margin: 0;
+    margin: 0 16px 16px;
     font-size: 13px;
     line-height: 1.45;
     color: var(--muted);
@@ -558,6 +526,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     display: flex;
     flex-direction: column;
     gap: 14px;
+  }
+  /* Sticky navbar offset so the "Get the map" heading lands below it,
+     not behind it, when the buy CTAs scroll the page here. */
+  #get-the-map {
+    scroll-margin-top: 70px;
   }
   #checkout {
     min-height: 480px;
@@ -991,7 +964,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     /* Hero text + bullets get a touch more presence on desktop. */
     h1 { font-size: 34px; }
     ul.hero-bullets { font-size: 16px; gap: 12px; }
-    .info-bar { font-size: 15px; }
 
     /* Section heads. */
     .section-head h2 { font-size: 26px; }
@@ -1216,7 +1188,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <img src="../images/avatar.jpg" alt="" />
       Hikebeast
     </a>
-    <a class="navbar-lang" href="/de/themap/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">DE</a>
+    <a class="navbar-lang" href="/de/map4/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">DE</a>
   </header>
 
   <main>
@@ -1228,12 +1200,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <!-- Carousel -->
       <div class="carousel-wrap">
         <div class="carousel" id="hero-carousel">
-          <div class="slide"><img src="img/hero-1-hero.jpg" alt="Swiss Gems Guide · The unforgettable Summer" loading="eager" fetchpriority="high" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-2-mockup.jpg" alt="Spots tourists won't find" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-3-map.jpg" alt="122 spots, one map" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-4-example.jpg" alt="A spot, fully detailed" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-5-wildcamp.jpg" alt="Where you can wildcamp" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="img/hero-6-photos.jpg" alt="Secret spots, viral photos" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/hero-1-hero.jpg" alt="Swiss Gems Guide · The unforgettable Summer" loading="eager" fetchpriority="high" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/hero-2-mockup.jpg" alt="Spots tourists won't find" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/collection.jpg" alt="A grid of eighteen hidden Swiss spots from the guide" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/hero-3-map.jpg" alt="141 spots, one map" loading="lazy" decoding="async" /></div>
         </div>
         <!-- Hover-only nav arrows (desktop only · hidden on touch devices
              where the carousel relies on swipe). Click handlers wired in
@@ -1249,10 +1219,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           </svg>
         </button>
         <div class="dots" id="hero-dots">
-          <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
+          <span class="active"></span><span></span><span></span><span></span>
         </div>
       </div>
 
+      <!-- Product card · title, price, rating stacked. Ported from /themap/
+           — no sale strip, no strikethrough, just the offer terms in plain
+           form. Reverts the map3 sale-card experiment. -->
       <div class="px product-card">
         <h1 class="product-title">Switzerland Map 🇨🇭</h1>
         <div class="product-price"><span class="price-display">CHF 27</span></div>
@@ -1265,18 +1238,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <div class="px hero-text">
         <p class="hero-sub">Your guide to the best summer in Switzerland.</p>
         <ul class="hero-bullets">
-          <li>122 Gems of Switzerland + How to Get There</li>
+          <li>141 Gems of Switzerland + How to Get There</li>
           <li>Exact Location for every spot</li>
           <li>Hiking &amp; Camping Information</li>
         </ul>
-      </div>
-      <!-- Photo collection grid · visual proof of what 122 spots looks
-           like. Stays in the main column flow on every breakpoint --
-           Whop-style, no internal 2-col split. -->
-      <div class="px collection-wrap">
-        <div class="collection-grid">
-          <img src="img/collection.jpg" alt="A grid of fifteen hidden Swiss spots from the guide" loading="lazy" decoding="async" />
-        </div>
       </div>
     </section>
 
@@ -1287,38 +1252,43 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <section class="inside-section">
       <div class="px section-head">
         <h2>What's inside</h2>
-        <p>The best places in Switzerland aren't on the tourist blogs. They're in local WhatsApp groups, in photographers' heads and now, well structured, in this guide.</p>
+        <p>You wont find the best places of Switzerland in tourist blogs. They are in WhatsApp groups of Swiss photographers, books about the alps, and now, well structured, in this guide.</p>
       </div>
       <div class="inside">
         <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">📷</div>
+          <div class="card-photo"><img src="/map3/img/inside/wildcamping.jpg" alt="Sleeping bags on alpine grass at golden hour overlooking snowy peaks" loading="lazy" decoding="async" /></div>
+          <h3>Wildcamping info</h3>
+          <p>Spots where you can wildcamp without any cortisol spikes.</p>
+        </div>
+        <div class="inside-card">
+          <div class="card-photo"><img src="/map3/img/inside/photo-info.jpg" alt="Hiker on a ridge at golden hour" loading="lazy" decoding="async" /></div>
           <h3>Photo info</h3>
           <p>Best hour and best season per spot, learned the hard way.</p>
         </div>
         <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">📲</div>
-          <h3>Offline use</h3>
-          <p>A downloadable PDF works even without signal on the trail.</p>
+          <div class="card-photo"><img src="/map3/img/inside/spots.jpg" alt="Hiker overlooking misty alpine valleys" loading="lazy" decoding="async" /></div>
+          <h3>141 Spots</h3>
+          <p>The best gems of Switzerland. Some famous, most aren't.</p>
         </div>
         <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">⛺</div>
-          <h3>Wildcamp info</h3>
-          <p>Spots where you can wildcamp without any cortisol spikes.</p>
-        </div>
-        <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">📍</div>
+          <div class="card-photo"><img src="/map3/img/inside/exact-location.jpg" alt="Rowboat on a turquoise alpine lake" loading="lazy" decoding="async" /></div>
           <h3>Exact Location</h3>
           <p>Coordinates that drop you on the exact spot.</p>
         </div>
         <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">💎</div>
-          <h3>122 Spots</h3>
-          <p>The best gems of Switzerland. Some famous, most aren't.</p>
+          <div class="card-photo"><img src="/map3/img/inside/hike-info.jpg" alt="POV from a peak overlooking an alpine lake at sunset" loading="lazy" decoding="async" /></div>
+          <h3>Hiking Info</h3>
+          <p>Trail and difficulty. So you know what you're walking into.</p>
         </div>
         <div class="inside-card">
-          <div class="ico-box" aria-hidden="true">🥾</div>
-          <h3>Hike info</h3>
-          <p>Trail and difficulty. So you know what you're walking into.</p>
+          <div class="card-photo"><img src="/map3/img/inside/webapp.jpg" alt="iPhone showing the Hikebeast webapp browsing 141 spots" loading="lazy" decoding="async" /></div>
+          <h3>A Webapp</h3>
+          <p>The fun way to discover new spots.</p>
+        </div>
+        <div class="inside-card">
+          <div class="card-photo"><img src="/map3/img/inside/offline.jpg" alt="Hiker walking a sunset ridge alone" loading="lazy" decoding="async" /></div>
+          <h3>Offline access</h3>
+          <p>A downloadable PDF works even without signal on the trail.</p>
         </div>
       </div>
     </section>
@@ -1332,7 +1302,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <div class="reviews-carousel">
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/dimi_tt7.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/map3/img/avatars/dimi_tt7.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Dimi</span>
               <a class="review-handle" href="https://www.instagram.com/dimi_tt7" target="_blank" rel="noopener">@dimi_tt7</a>
@@ -1345,7 +1315,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/emirhansyz.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/map3/img/avatars/emirhansyz.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Emirhan</span>
               <a class="review-handle" href="https://www.instagram.com/emirhansyz" target="_blank" rel="noopener">@emirhansyz</a>
@@ -1358,7 +1328,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/alexis-dansereau.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/map3/img/avatars/alexis-dansereau.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Alexis</span>
               <a class="review-handle" href="https://www.instagram.com/alexis.dansereau/" target="_blank" rel="noopener">@alexis.dansereau</a>
@@ -1371,7 +1341,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/simon_ys32.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/map3/img/avatars/simon_ys32.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Simon</span>
               <a class="review-handle" href="https://www.instagram.com/simon_ys32/" target="_blank" rel="noopener">@simon_ys32</a>
@@ -1384,7 +1354,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/andres-soltermann.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/map3/img/avatars/andres-soltermann.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Andrés</span>
               <a class="review-handle" href="https://www.instagram.com/andres.soltermann/" target="_blank" rel="noopener">@andres.soltermann</a>
@@ -1397,7 +1367,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="img/avatars/oliwear_j.jpg" alt="" loading="lazy" /></div>
+            <div class="review-avatar"><img src="/map3/img/avatars/oliwear_j.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Oli</span>
               <a class="review-handle" href="https://www.instagram.com/oliwear.j/" target="_blank" rel="noopener">@oliwear.j</a>
@@ -1412,7 +1382,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     </section>
 
     <!-- Embedded Stripe Checkout -->
-    <section class="px">
+    <section class="px" id="get-the-map">
       <div class="section-head section-head--centered">
         <h2>Get the map</h2>
       </div>
@@ -1457,12 +1427,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
          to the in-flow checkout iframe further down the page. -->
     <aside class="page-side">
       <div class="buy-card">
-        <!-- Thumbnail · the collection grid (5x3 photo collage) used to
+        <!-- Thumbnail · the collection grid (6x3 photo collage) used to
              live in the main column flow on desktop; now it's the
              buy-card's hero image instead. Goes edge-to-edge inside
              the card thanks to overflow:hidden + zero card padding. -->
-        <a href="#checkout" class="buy-thumb" aria-hidden="true">
-          <img src="img/collection.jpg" alt="" loading="lazy" decoding="async" />
+        <a href="#get-the-map" class="buy-thumb" aria-hidden="true">
+          <img src="/map3/img/collection.jpg" alt="" loading="lazy" decoding="async" />
         </a>
         <div class="buy-content">
           <div class="buy-rating">
@@ -1472,7 +1442,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           </div>
           <div class="buy-name">Swiss Gems 🇨🇭</div>
           <div class="buy-price">CHF 27</div>
-          <a href="#checkout" class="buy-cta">Get the map</a>
+          <a href="#get-the-map" class="buy-cta">Get the map</a>
           <div class="buy-foot">
             <span>Apple Pay · TWINT · Card</span>
             <a href="/terms.html#refunds">↩ 30-day refund</a>
@@ -1485,7 +1455,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
   <!-- Sticky bottom buy bar (mobile) -->
   <div class="sticky-buy" id="sticky-buy">
-    <a class="buy-btn" href="#checkout">Buy · <span class="price-display">CHF 27</span></a>
+    <a class="buy-btn" href="#get-the-map">Buy · <span class="price-display">CHF 27</span></a>
   </div>
 
 <script>
@@ -1600,13 +1570,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       const sw = slideWidth();
       if (sw <= 0) return;
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-      const next = carousel.scrollLeft + sw;
-      if (next > maxScroll - 4) {
+      if (carousel.scrollLeft >= maxScroll - 4) {
         carousel.scrollTo({ left: 0, behavior: "smooth" });
       } else {
-        carousel.scrollTo({ left: next, behavior: "smooth" });
+        carousel.scrollTo({ left: carousel.scrollLeft + sw, behavior: "smooth" });
       }
-    }, 3000);
+    }, 5000);
 
     const stopAutoplay = () => {
       if (autoplayTimer) {
@@ -1634,19 +1603,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   //   - the checkout iframe is NOT yet within ~250px of the viewport
   //     bottom (so the bar fades before covering the Pay button).
   const stickyBuy = document.getElementById("sticky-buy");
-  const heroEl = document.querySelector(".hero");
-  const checkoutEl = document.getElementById("checkout");
-  if (stickyBuy && heroEl) {
+  if (stickyBuy) {
+    // Simple rule: show the bar the moment the user scrolls at all.
+    // Hide it only if they're all the way back at the top.
     let lastVisible = false;
     const update = () => {
-      const heroBottom = heroEl.offsetTop + heroEl.offsetHeight;
-      const heroPast = window.scrollY > heroBottom - 100;
-      let nearCheckout = false;
-      if (checkoutEl) {
-        const rect = checkoutEl.getBoundingClientRect();
-        nearCheckout = rect.top < window.innerHeight - 250;
-      }
-      const visible = heroPast && !nearCheckout;
+      const visible = window.scrollY > 10;
       if (visible !== lastVisible) {
         stickyBuy.classList.toggle("is-visible", visible);
         lastVisible = visible;
@@ -1718,7 +1680,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           utm_medium: utmMedium,
           utm_campaign: utmCampaign,
           r: readStoredRef(),
-          source_page: "themap",
+          source_page: "map4",
         }),
       });
 
@@ -1803,7 +1765,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        page: "map",
+        page: "map4",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
         utm_source: utmSource,
@@ -1816,5 +1778,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   } catch (e) { /* noop */ }
 })();
 </script>
+
 </body>
 </html>
