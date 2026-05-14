@@ -183,6 +183,9 @@ hikes:
     (2,137 m), partway along, hosts one of the oldest reintroduced alpine ibex colonies in Bern, established in the early 20th century, so ibex sightings are common on the cliffs.
   visits:
   - hardergrat_trail
+  - augstmatthorn
+  - tannhorn
+  - brienzer_rothorn
   sources:
   - https://www.outdooractive.com/en/hikes/interlaken/hikes-in-the-municipality-of-interlaken/1453743/
   - https://www.myswitzerland.com/en-ch/experiences/route/trail-run-brienzergrat/
@@ -209,10 +212,13 @@ hikes:
     Brienzergrat. Take the cog railway down from Planalp.
   visits:
   - tannhorn
+  - brienzer_rothorn
+  - hardergrat_trail
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/tannhorn-1933/mountain-hiking/
   - https://en.wikipedia.org/wiki/Tannhorn
   quickest_for:
+  - hardergrat_trail
   - tannhorn
   equipment_list:
   - Sturdy hiking boots
@@ -2506,6 +2512,7 @@ hikes:
 - id: augstmatthorn-from-harder-kulm
   visits:
   - augstmatthorn
+  - hardergrat_trail
   sac_grade: T4
   effort_label: Demanding
   duration_min: 390
@@ -3034,6 +3041,7 @@ hikes:
 - id: hardergrat_trail-augstmatthorn-from-lombachalp
   visits:
   - hardergrat_trail
+  - augstmatthorn
   sac_grade: T4
   effort_label: Demanding
   duration_min: 360
@@ -3052,8 +3060,6 @@ hikes:
     T4 in the steep upper sections.
   sources:
   - https://www.hardergrat.com/
-  quickest_for:
-  - hardergrat_trail
 - id: iseltwald-from-boenigen-uferweg
   visits:
   - iseltwald

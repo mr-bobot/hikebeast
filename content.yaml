@@ -653,6 +653,8 @@ spots:
   - brienzer_rothorn-default
   - brienzer_rothorn-cog-railway
   - brienzer_rothorn-brienz-via-planalp
+  - hardergrat_trail-harder-to-rothorn
+  - tannhorn-brienzergrat-segment
   access_long: Two ways up. The Brienz Rothorn Bahn is a steam cog railway from Brienzersee, slow and scenic. The Sörenberg cable car is the fast side. Both drop you within a short walk
     of the summit.
   cable_car_id: brienz-rothorn-bahn
@@ -697,6 +699,8 @@ spots:
   hike_ids:
   - hardergrat_trail-harder-to-rothorn
   - hardergrat_trail-augstmatthorn-from-lombachalp
+  - tannhorn-brienzergrat-segment
+  - augstmatthorn-from-harder-kulm
   access_long: Take the cable car up to the Brienzer Rothorn (either from Brienz or from Sörenberg) and start the hike there. It ends at Harder Kulm above Interlaken.
 - id: tannhorn
   chapter: central
@@ -732,6 +736,7 @@ spots:
     best_season: July – early October
   hike_ids:
   - tannhorn-brienzergrat-segment
+  - hardergrat_trail-harder-to-rothorn
   access_long: Heading west from Brienzer Rothorn, the walk to Tannhorn takes about two to three hours. It sits in the eastern third of the Hardergrat, the point where the ridge narrows
     to a clean line of grass with drops on both sides.
 - id: augstmatthorn
@@ -778,6 +783,8 @@ spots:
   hike_ids:
   - augstmatthorn-route-85
   - augstmatthorn-from-harder-kulm
+  - hardergrat_trail-harder-to-rothorn
+  - hardergrat_trail-augstmatthorn-from-lombachalp
   access_long: On the Hardergrat ridge but accessible from the other side too. Park at Lombachalp in Habkern and do the two hour hike up. Lighter than the full traverse, same view.
 - id: lake_lucerne
   chapter: central
