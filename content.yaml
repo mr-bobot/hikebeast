@@ -3425,6 +3425,8 @@ spots:
     credit: leon.helg
   - file: 09.jpg
     credit: yannick_sutter
+  - file: 10.jpg
+    credit: oliwear.j
   gps:
     lat: 46.9803409
     lng: 8.6645989
@@ -4598,32 +4600,12 @@ spots:
     canton: Grisons (GR)
     protections:
     - BLN landscape — Oberengadiner Seenlandschaft
-  maps_url: https://www.google.com/maps/place/Silsersee/@46.4327,9.7611,14z
+  maps_url: https://maps.app.goo.gl/Tk4g2EPBM4i1C6s57
   image: spots/silsersee/main.jpg
   image_credit: oliwear.j
   gps:
-    lat: 46.4327
-    lng: 9.7611
-- id: stoos
-  chapter: central
-  kicker: THE CAR-FREE VILLAGE WITH THE STEEPEST FUNICULAR
-  title: Stoos
-  deck: The car-free village above Schwyz, reached by the steepest funicular in the world. Base camp for the Stoos-Klingenstock-Fronalpstock ridge.
-  body: []
-  region: Stoos, Schwyz
-  access: Stoosbahn funicular from Schwyz-Schlattli
-  effort: Easy
-  best_light: Afternoon
-  wildCamping:
-    verdict: forbidden
-    reason: Developed ski-resort village; wild camping not permitted. Use the campsite near the Fronalpstock Hotel or at Morschach.
-    canton: Schwyz (SZ)
-  maps_url: https://www.google.com/maps/place/Stoos/@46.9779,8.6597,14z
-  image: spots/stoos/main.jpg
-  image_credit: oliwear.j
-  gps:
-    lat: 46.9779
-    lng: 8.6597
+    lat: 46.418592
+    lng: 9.728617
 - id: engadin_autumn
   chapter: eastern
   kicker: LARCH SEASON, MID TO LATE OCTOBER
