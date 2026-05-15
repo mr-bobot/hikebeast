@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Opening YouTube...</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1.25rem; text-align: center; padding: 1.5rem; }
+  p { margin: 0; font-size: 1rem; opacity: 0.85; }
+  a.btn { display: inline-block; padding: 0.85rem 1.4rem; border-radius: 999px;
+    background: #ff0033; color: #fff; text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+<p>Opening in YouTube...</p>
+<a class="btn" id="fallback" href="https://www.youtube.com/watch?v=Aq5WXmQQooo">Open video</a>
+<script>
+(function () {
+  var videoId = 'Aq5WXmQQooo';
+  var webUrl  = 'https://www.youtube.com/watch?v=' + videoId;
+  var ua      = navigator.userAgent || '';
+  var isIOS   = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /Android/.test(ua);
+
+  if (isAndroid) {
+    // Android intent: opens YouTube app, falls back to web if not installed.
+    var intent = 'intent://www.youtube.com/watch?v=' + videoId
+      + '#Intent;package=com.google.android.youtube;scheme=https;'
+      + 'S.browser_fallback_url=' + encodeURIComponent(webUrl) + ';end';
+    window.location.replace(intent);
+    return;
+  }
+
+  if (isIOS) {
+    // iOS: try the YouTube app scheme. If the app isn't installed (or in-app
+    // browsers block custom schemes), fall back to the web URL — which itself
+    // is a YouTube universal link and will open the app when allowed.
+    var fellBack = false;
+    var fallback = function () {
+      if (fellBack) return;
+      fellBack = true;
+      window.location.replace(webUrl);
+    };
+    // If the app opens, the page is backgrounded; cancel the fallback.
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) fellBack = true;
+    });
+    setTimeout(fallback, 1200);
+    window.location.replace('vnd.youtube://' + videoId);
+    return;
+  }
+
+  // Desktop / unknown: straight to web.
+  window.location.replace(webUrl);
+})();
+</script>
+</body>
+</html>

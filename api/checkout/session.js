@@ -182,6 +182,12 @@ async function handleGetSession(req, res, stripe) {
     access_url: `${origin}/api/checkout/access?t=${encodeURIComponent(token)}`,
     drive_url: DRIVE_URL,
     order_id: session.id,
+    // Returned so the success page can pass it as `eventID` to its
+    // client-side fbq("track","Purchase",...) call, matching the
+    // event_id the webhook uses for the CAPI Purchase event. Without
+    // this Meta counts the pixel + CAPI events separately (Events
+    // Manager 2026-05-15 showed 119 Purchase events for 54 buyers).
+    payment_intent: paymentIntent,
   });
 }
 

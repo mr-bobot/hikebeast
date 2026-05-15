@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "static",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8125"],
-      "port": 8125
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "python3 -m http.server $PORT"],
+      "port": 8125,
+      "autoPort": true
     }
   ]
 }

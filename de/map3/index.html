@@ -18,7 +18,7 @@
 <meta property="og:locale:alternate" content="en_US" />
 <meta property="og:title" content="Schweizer Karte🇨🇭 · Gems of Switzerland" />
 <meta property="og:description" content="Die ultimative Schweizer Karte." />
-<meta property="og:url" content="https://hikebeast.ch/de/map/" />
+<meta property="og:url" content="https://hikebeast.ch/de/map3/" />
 <meta property="og:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 <meta property="og:image:width" content="1920" />
 <meta property="og:image:height" content="987" />
@@ -2018,14 +2018,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       container.innerHTML = "";
       container.classList.add("is-mounted");
       checkout.mount("#checkout");
-
-      // InitiateCheckout signal for Meta
-      if (typeof fbq === "function") {
-        fbq("track", "InitiateCheckout", {
-          value: 27.0,
-          currency: currentCurrency.toUpperCase(),
-        });
-      }
     } catch (err) {
       console.error("Checkout mount failed:", err);
       container.innerHTML =
@@ -2035,11 +2027,43 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     }
   }
 
+  // InitiateCheckout · fires ONCE per session when the buyer first
+  // interacts with the embedded checkout form (tap/click or focus
+  // into the Stripe iframe). Used to fire inside mountCheckout
+  // itself, which made every page view look like a checkout intent —
+  // Events Manager on 2026-05-15 showed 2.4K InitiateCheckout vs ~50
+  // actual buyers.
+  function attachInitiateCheckoutSignal() {
+    var container = document.getElementById("checkout");
+    if (!container) return;
+    var key = "hb:ic_fired";
+    try { if (sessionStorage.getItem(key) === "1") return; } catch (e) {}
+
+    function fire() {
+      container.removeEventListener("pointerdown", fire, true);
+      container.removeEventListener("focusin", fire, true);
+      try { sessionStorage.setItem(key, "1"); } catch (e) {}
+      if (typeof fbq !== "function") return;
+      try {
+        fbq("track", "InitiateCheckout", {
+          value: typeof currentAmount === "number" ? currentAmount : 27,
+          currency: (currentCurrency || "chf").toUpperCase(),
+        });
+      } catch (e) {}
+    }
+    container.addEventListener("pointerdown", fire, true);
+    container.addEventListener("focusin", fire, true);
+  }
+
   // Auto-mount checkout when the page is interactive
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mountCheckout);
-  } else {
+  function bootCheckout() {
     mountCheckout();
+    attachInitiateCheckoutSignal();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootCheckout);
+  } else {
+    bootCheckout();
   }
 
   // ---------- Page-visit ping for the funnel sheet ----------
@@ -2055,6 +2079,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
+        source_page: "de_map3",
         browser_language: navigator.language || "",
       }),
       keepalive: true,
