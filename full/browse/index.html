@@ -80,6 +80,28 @@
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script src="../social.js"></script>
 <script>
+  // Manual scroll restoration. Safari's back-button shows a visible bounce
+  // from scroll=0 to the saved position because its automatic restoration
+  // runs after first paint. Taking over: save scroll on every visibility
+  // change + navigation, restore synchronously on load before paint.
+  // Chrome's behavior already nails it but the manual path is harmless.
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch {}
+  const SCROLL_KEY = 'hb:browse:scrollY';
+  function saveScroll() { try { sessionStorage.setItem(SCROLL_KEY, String(window.scrollY)); } catch {} }
+  function restoreScroll() {
+    try {
+      const y = parseFloat(sessionStorage.getItem(SCROLL_KEY));
+      if (Number.isFinite(y) && y > 0) window.scrollTo(0, y);
+    } catch {}
+  }
+  // Save on every nav-away signal (covers tab swaps, link clicks, pagehide).
+  window.addEventListener('pagehide', saveScroll);
+  window.addEventListener('beforeunload', saveScroll);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) saveScroll(); });
+  // Restore as early as possible. pageshow fires both on first load AND on
+  // bfcache restore (event.persisted === true on the latter).
+  window.addEventListener('pageshow', restoreScroll);
+
   // Read the catalog through the unified spots store so the page stays in
   // sync with Convex. window.HB.spots seeds synchronously from the static
   // sidecar (spots-data.js) and replaces with Convex data once the
