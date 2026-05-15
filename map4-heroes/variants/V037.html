@@ -1,0 +1,108 @@
+<!-- V037 · Mystery · secret · layout=type-dominant · treatment=high-contrast · img=/map4-heroes/emotional/tannhorn.jpeg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V037</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .slice {
+    position:absolute;
+    right:0; top:0;
+    width:280px; height:100%;
+    overflow:hidden;
+  }
+  .slice img {
+    position:absolute;
+    right:0; top:0;
+    width:1400px;
+    height:787px;
+    object-fit:cover;
+    object-position:50% 50%;
+    filter: contrast(1.7) brightness(1.12) saturate(1.05);
+  }
+  .leak {
+    position:absolute;
+    top:0; right:280px;
+    width:240px; height:100%;
+    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(255,180,90,0.0) 30%, rgba(255,180,90,0.12) 80%, rgba(255,180,90,0.25) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:88px;
+    top:50%;
+    transform: translateY(-50%);
+    max-width: 880px;
+    color:#f4efe6;
+  }
+  .copy .label {
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:0.36em;
+    text-transform:uppercase;
+    color: rgba(244,239,230,0.45);
+    margin-bottom: 36px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .copy .label .line {
+    width:48px;
+    height:1px;
+    background: rgba(244,239,230,0.45);
+  }
+  .copy h1 {
+    margin:0;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-size: 168px;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+  .copy h1 .em {
+    font-style: italic;
+    font-weight: 400;
+    color: #f0c47a;
+  }
+  .copy .sub {
+    margin-top: 40px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color: rgba(244,239,230,0.5);
+  }
+  .redact-marks {
+    position:absolute;
+    left:88px;
+    bottom:48px;
+    font-family:'Inter', sans-serif;
+    font-size:10px;
+    letter-spacing:0.3em;
+    color:rgba(244,239,230,0.28);
+    text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="slice"><img src="/map4-heroes/emotional/tannhorn.jpeg" alt=""></div>
+    <div class="leak"></div>
+
+    <div class="copy">
+      <div class="label">SWISS GEMS <span class="line"></span> CONFIDENTIAL</div>
+      <h1>Hidden,<br><span class="em">on purpose.</span></h1>
+      <div class="sub">141 spots · access only</div>
+    </div>
+
+    <div class="redact-marks">Sec. 03 · Spot list · Redacted</div>
+  </div>
+</body>
+</html>

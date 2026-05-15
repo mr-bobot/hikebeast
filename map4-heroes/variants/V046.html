@@ -1,0 +1,110 @@
+<!-- V046 · Anticipation · early · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/hardgergrat%20camping.jpeg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V046</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 45%;
+    display:block;
+  }
+  /* soft dawn warmth glow */
+  .glow {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 50% 95%, rgba(255,190,120,0.22) 0%, transparent 50%),
+      linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.08) 35%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.45) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:0; right:0; top:88px;
+    text-align:center;
+    color:#fff;
+  }
+  .copy .kicker {
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:18px;
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    color: rgba(255,235,200,0.78);
+    margin-bottom:34px;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.5);
+  }
+  .copy h1 {
+    margin:0;
+    font-family:'Fraunces', serif;
+    font-weight:300;
+    font-size:128px;
+    line-height:0.96;
+    letter-spacing:-0.025em;
+    text-shadow: 0 4px 60px rgba(0,0,0,0.55);
+  }
+  .copy h1 .you {
+    font-style:italic;
+    font-weight:500;
+  }
+  /* horizon coordinate strip bottom */
+  .bottombar {
+    position:absolute;
+    left:0; right:0; bottom:36px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: 0 80px;
+    color: rgba(255,235,200,0.78);
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:15px;
+    letter-spacing:0.1em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.55);
+  }
+  .bottombar .dot {
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:#ffd9a1; vertical-align:middle; margin: 0 14px;
+    box-shadow: 0 0 14px rgba(255,217,161,0.85);
+  }
+  /* faint scale tick marks above headline */
+  .ticks {
+    position:absolute;
+    top:268px; left:50%; transform:translateX(-50%);
+    display:flex; gap:28px;
+  }
+  .ticks span {
+    width:1px; height:14px; background: rgba(255,255,255,0.45);
+  }
+  .ticks span.tall { height:22px; background: rgba(255,235,200,0.85); }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/hardgergrat%20camping.jpeg" alt="">
+    <div class="glow"></div>
+
+    <div class="copy">
+      <div class="kicker">— TONIGHT —</div>
+      <h1>Tomorrow <span class="you">you wake up</span><br>here.</h1>
+    </div>
+
+    <div class="ticks">
+      <span></span><span></span><span class="tall"></span><span></span><span></span><span></span><span class="tall"></span><span></span><span></span>
+    </div>
+
+    <div class="bottombar">
+      <span>46° 41' N · 7° 51' E</span>
+      <span>HARDERGRAT <span class="dot"></span> BERNESE OBERLAND <span class="dot"></span> SUMMER 26</span>
+      <span>SUNRISE 05:42</span>
+    </div>
+  </div>
+</body>
+</html>

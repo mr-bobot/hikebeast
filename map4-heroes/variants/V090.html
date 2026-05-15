@@ -1,0 +1,81 @@
+<!-- V090 · Intimacy · whispered · layout=blurred-bokeh · treatment=blurred-bokeh · img=/map4-heroes/emotional/riffelsee4.jpg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V090</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0c0a07; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute;
+    left:-12%; top:-12%;
+    width:124%; height:124%;
+    object-fit:cover; object-position:50% 80%;
+    filter: blur(22px) saturate(1.15) brightness(1.05);
+    display:block;
+  }
+  .bokeh-dots {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 18% 30%, rgba(255,220,170,0.22) 0px, rgba(255,220,170,0) 80px),
+      radial-gradient(circle at 72% 22%, rgba(240,200,160,0.18) 0px, rgba(240,200,160,0) 120px),
+      radial-gradient(circle at 88% 68%, rgba(200,180,150,0.16) 0px, rgba(200,180,150,0) 100px),
+      radial-gradient(circle at 32% 78%, rgba(255,230,190,0.14) 0px, rgba(255,230,190,0) 90px);
+    mix-blend-mode:screen;
+    pointer-events:none;
+  }
+  .vignette {
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at 50% 55%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.6) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    color:#f6ede0;
+    text-align:center;
+    padding: 0 120px;
+  }
+  .copy h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 76px;
+    line-height: 1.08;
+    letter-spacing: -0.005em;
+    margin: 0;
+    max-width: 900px;
+    text-shadow: 0 2px 40px rgba(0,0,0,0.5);
+  }
+  .copy h1 .one {
+    font-style: italic;
+    font-weight: 400;
+  }
+  .whisper-line {
+    width: 64px;
+    height: 1px;
+    background: rgba(246,237,224,0.5);
+    margin-bottom: 36px;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/riffelsee4.jpg" alt="">
+    <div class="bokeh-dots"></div>
+    <div class="vignette"></div>
+    <div class="copy">
+      <div class="whisper-line"></div>
+      <h1>Some places, you tell only <span class="one">one</span> person.</h1>
+    </div>
+  </div>
+</body>
+</html>

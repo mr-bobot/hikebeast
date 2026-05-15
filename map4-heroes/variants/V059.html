@@ -1,0 +1,149 @@
+<!-- V059 · Joy · sunlit · layout=painted · treatment=painted · img=/map4-heroes/emotional/rosenlaui.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V059</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#efe7d4; font-family:'Inter', sans-serif; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden;
+    background:
+      radial-gradient(ellipse at 28% 28%, #f6efdd 0%, #ece4d0 50%, #d8ccb1 100%);
+  }
+  .paper {
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='800'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' /><feColorMatrix values='0 0 0 0 0.2  0 0 0 0 0.15  0 0 0 0 0.09  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode:multiply;
+    opacity:0.38;
+    pointer-events:none;
+  }
+  .frame {
+    position:absolute;
+    left:90px; top:120px;
+    width:840px; height:560px;
+    box-shadow:
+      0 36px 80px rgba(60,40,20,0.32),
+      0 8px 18px rgba(60,40,20,0.16);
+    transform:rotate(-1.5deg);
+  }
+  .frame-inner {
+    position:relative;
+    width:100%; height:100%;
+    overflow:hidden;
+  }
+  .frame-inner img {
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:60% 50%;
+    /* impressionist treatment: soft blur, lifted saturation, lifted shadows */
+    filter:
+      blur(1.6px)
+      saturate(1.42)
+      contrast(0.92)
+      brightness(1.05);
+  }
+  /* warm color wash for impressionist meadow feel */
+  .paint-wash {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(255,210,140,0.32), transparent 55%),
+      radial-gradient(ellipse at 75% 70%, rgba(120,170,90,0.28), transparent 60%),
+      radial-gradient(ellipse at 50% 90%, rgba(180,100,90,0.18), transparent 70%);
+    mix-blend-mode:overlay;
+    opacity:0.85;
+    pointer-events:none;
+  }
+  /* fake brush-stroke streaks via repeating gradient */
+  .strokes {
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(72deg,
+        rgba(255,255,255,0) 0px,
+        rgba(255,255,255,0) 8px,
+        rgba(255,240,200,0.04) 8px,
+        rgba(255,240,200,0.04) 11px),
+      repeating-linear-gradient(110deg,
+        rgba(40,30,10,0) 0px,
+        rgba(40,30,10,0) 14px,
+        rgba(40,30,10,0.045) 14px,
+        rgba(40,30,10,0.045) 17px);
+    mix-blend-mode:overlay;
+    pointer-events:none;
+  }
+  .frame-border {
+    position:absolute; inset:0;
+    border:18px solid #f4ecd6;
+    box-shadow: inset 0 0 0 2px rgba(70,55,35,0.22);
+    pointer-events:none;
+  }
+  .copy-side {
+    position:absolute;
+    left:1000px; top:160px;
+    right:80px;
+  }
+  .meta-line {
+    font-family:'Inter', sans-serif;
+    font-size:11px;
+    letter-spacing:0.34em;
+    text-transform:uppercase;
+    color:rgba(60,45,25,0.7);
+    margin-bottom:46px;
+  }
+  .meta-line .dash {
+    display:inline-block; width:32px; height:1px;
+    background:rgba(60,45,25,0.55);
+    vertical-align:middle;
+    margin-right:14px;
+  }
+  .headline {
+    font-family:'Cormorant Garamond', serif;
+    font-weight:400;
+    font-size:56px;
+    line-height:1.08;
+    color:#3a2a14;
+    letter-spacing:-0.008em;
+  }
+  .headline .em {
+    font-style:italic;
+    font-weight:300;
+    color:#7a4a1a;
+  }
+  .signature {
+    position:absolute;
+    left:108px; top:728px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:18px;
+    color:rgba(60,45,25,0.7);
+  }
+  .signature::before {
+    content:""; display:inline-block;
+    width:34px; height:1px;
+    background:rgba(60,45,25,0.4);
+    vertical-align:middle;
+    margin-right:14px;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="paper"></div>
+    <div class="frame">
+      <div class="frame-inner">
+        <img src="/map4-heroes/emotional/rosenlaui.jpg" alt="">
+        <div class="paint-wash"></div>
+        <div class="strokes"></div>
+      </div>
+      <div class="frame-border"></div>
+    </div>
+    <div class="copy-side">
+      <div class="meta-line"><span class="dash"></span>Études Alpines · Sommer</div>
+      <div class="headline">Die Alpen waren schon immer ein <span class="em">Sommerstaat.</span></div>
+    </div>
+    <div class="signature">Rosenlaui · nach L. Helg</div>
+  </div>
+</body>
+</html>

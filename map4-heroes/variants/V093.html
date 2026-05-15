@@ -1,0 +1,137 @@
+<!-- V093 · Gratitude · enough · layout=type-dominant · treatment=none · img=/map4-heroes/emotional/LOST7855-Edit.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V093</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#f1ead9; }
+  .hero {
+    position:relative; width:1400px; height:787px; overflow:hidden;
+    background:
+      radial-gradient(ellipse at 18% 8%, #f6f0e2 0%, #f1ead9 60%, #e8dfca 100%);
+  }
+  .grain {
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(rgba(120,90,40,0.06) 1px, transparent 1px),
+      radial-gradient(rgba(60,40,10,0.04) 1px, transparent 1px);
+    background-size: 4px 4px, 7px 7px;
+    background-position: 0 0, 2px 3px;
+    pointer-events:none;
+  }
+  .kicker {
+    position:absolute;
+    top:84px;
+    left:96px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    color:#7a6238;
+  }
+  .kicker::before {
+    content:"";
+    display:inline-block;
+    width:34px; height:1px;
+    background:#7a6238;
+    vertical-align:middle;
+    margin-right:14px;
+    transform:translateY(-2px);
+  }
+  .copy {
+    position:absolute;
+    left:96px;
+    top:50%;
+    transform: translateY(-50%);
+    color:#1c1610;
+    max-width: 900px;
+  }
+  .copy h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 264px;
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+  .copy h1 .em {
+    font-style: italic;
+    font-weight: 400;
+    color:#2b231a;
+  }
+  .sub {
+    margin-top: 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1.28;
+    letter-spacing: -0.005em;
+    color:#3a2f22;
+    max-width: 620px;
+  }
+  .photo-frame {
+    position:absolute;
+    right:64px;
+    bottom:64px;
+    width:340px;
+    height:230px;
+    overflow:hidden;
+    box-shadow: 0 12px 28px rgba(60,40,10,0.18), 0 3px 8px rgba(60,40,10,0.12);
+  }
+  .photo-frame img {
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:50% 60%;
+    display:block;
+  }
+  .cta {
+    position:absolute;
+    right:64px;
+    bottom:316px;
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:0.36em;
+    color:#f1ead9;
+    text-transform:uppercase;
+    padding: 14px 24px;
+    background:#1c1610;
+  }
+  .price-tag {
+    position:absolute;
+    right:64px;
+    top:84px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:0.32em;
+    color:#7a6238;
+    text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="grain"></div>
+    <div class="kicker">DAS HANDBUCH</div>
+    <div class="price-tag">141 / 141</div>
+    <div class="copy">
+      <h1>141 <span class="em">Spots.</span></h1>
+      <div class="sub">Mehr brauchst du diesen Sommer nicht.</div>
+    </div>
+    <div class="cta">27 CHF &rarr;</div>
+    <div class="photo-frame">
+      <img src="/map4-heroes/emotional/LOST7855-Edit.jpeg" alt="">
+    </div>
+  </div>
+</body>
+</html>

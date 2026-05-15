@@ -1,0 +1,2072 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hikebeast Swiss Gems · 100 Hero Variants · v10</title>
+<style>
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #f5f5f7; color: #1d1d1f; }
+header {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding: 14px 24px;
+}
+h1 { margin: 0 0 8px 0; font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
+h1 small { font-weight: 400; color: #6e6e73; margin-left: 8px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.filters input[type=search] {
+  appearance: none; border: 1px solid rgba(0,0,0,0.12);
+  padding: 6px 12px; border-radius: 999px; font-size: 13px;
+  font-family: inherit; outline: none; width: 220px;
+}
+.filters input[type=search]:focus { border-color: #0071e3; }
+.filters select {
+  appearance: none; -webkit-appearance: none;
+  border: 1px solid rgba(0,0,0,0.12); background: white;
+  padding: 6px 24px 6px 10px; border-radius: 999px;
+  font-size: 13px; font-family: inherit;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%236e6e73' stroke-width='1.5'><polyline points='1.5 1.5, 6 6, 10.5 1.5'/></svg>");
+  background-repeat: no-repeat; background-position: right 8px center; background-size: 10px;
+}
+.filters .count { margin-left: auto; font-size: 12px; color: #6e6e73; }
+main { padding: 20px 24px 80px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 24px;
+}
+.card {
+  position: relative;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 6px 24px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+.frame-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1400 / 787;
+  background: #e5e5ea;
+  overflow: hidden;
+}
+.frame-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1400px; height: 787px;
+  border: 0;
+  transform-origin: top left;
+  /* scale = container width / 1400; we use a CSS custom property set via JS */
+}
+.meta {
+  padding: 12px 14px 14px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.meta-top { display: flex; gap: 8px; font-size: 11px; align-items: center; flex-wrap: wrap; }
+.vid { font-weight: 600; color: #1d1d1f; font-variant-numeric: tabular-nums; }
+.cat { background: #eef4ff; color: #0a4ea0; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
+.emo { color: #6e6e73; font-style: italic; }
+.lang { margin-left: auto; font-size: 10px; color: #6e6e73; letter-spacing: 0.1em; }
+.headline { margin-top: 6px; font-size: 13px; font-weight: 500; color: #1d1d1f; }
+.subhead { font-size: 12px; color: #6e6e73; margin-top: 2px; }
+.meta-bot { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+.meta-bot span { font-size: 10px; color: #6e6e73; background: #f5f5f7; padding: 2px 8px; border-radius: 999px; }
+details.why { margin-top: 8px; font-size: 11px; color: #6e6e73; }
+details.why summary { cursor: pointer; user-select: none; color: #0071e3; }
+details.why p { margin: 4px 0 0; }
+.open {
+  position: absolute; top: 8px; right: 8px;
+  width: 28px; height: 28px;
+  background: rgba(0,0,0,0.55);
+  color: white;
+  border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0; transition: opacity 150ms ease;
+}
+.card:hover .open { opacity: 1; }
+.card.hidden { display: none; }
+.empty {
+  padding: 24px;
+  text-align: center;
+  color: #6e6e73;
+  font-size: 13px;
+}
+.empty:empty { display: none; }
+/* missing iframe fallback */
+.frame-wrap.missing::after {
+  content: 'not rendered yet';
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: #8a8a8e;
+  background: repeating-linear-gradient(45deg, #f5f5f7, #f5f5f7 8px, #ebebef 8px, #ebebef 16px);
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Hikebeast Swiss Gems · Hero Variants v10 <small>100 designs across 20 emotional categories</small></h1>
+  <div class="filters">
+    <input type="search" id="q" placeholder="Search headline, id, emotion..." />
+    <select id="f-cat"><option value="">All categories</option><option value="Achievement">Achievement</option><option value="Anticipation">Anticipation</option><option value="Awe">Awe</option><option value="Belonging">Belonging</option><option value="Discovery">Discovery</option><option value="Escape">Escape</option><option value="FOMO">FOMO</option><option value="Freedom">Freedom</option><option value="Gratitude">Gratitude</option><option value="Intimacy">Intimacy</option><option value="Joy">Joy</option><option value="Longing">Longing</option><option value="Mystery">Mystery</option><option value="Nostalgia">Nostalgia</option><option value="Peace">Peace</option><option value="Pride">Pride</option><option value="Solitude">Solitude</option><option value="Tension">Tension</option><option value="Transformation">Transformation</option><option value="Wonder">Wonder</option></select>
+    <select id="f-lay"><option value="">All layouts</option><option value="B&amp;W">B&amp;W</option><option value="blurred-bokeh">blurred-bokeh</option><option value="color-pop">color-pop</option><option value="data-led">data-led</option><option value="duotone">duotone</option><option value="edge-to-edge">edge-to-edge</option><option value="framed-aperture">framed-aperture</option><option value="full-bleed">full-bleed</option><option value="magazine-cover">magazine-cover</option><option value="map-led">map-led</option><option value="mockup-led">mockup-led</option><option value="multi-image grid">multi-image grid</option><option value="paint-over">paint-over</option><option value="painted">painted</option><option value="photo-as-texture">photo-as-texture</option><option value="polaroid-collage">polaroid-collage</option><option value="polaroid-single">polaroid-single</option><option value="polaroid-stack">polaroid-stack</option><option value="postcard">postcard</option><option value="split-screen">split-screen</option><option value="sun-flare">sun-flare</option><option value="type-dominant">type-dominant</option></select>
+    <select id="f-treat"><option value="">All treatments</option><option value="B&amp;W">B&amp;W</option><option value="blurred-bokeh">blurred-bokeh</option><option value="color-pop">color-pop</option><option value="cross-process">cross-process</option><option value="desaturated">desaturated</option><option value="duotone-blue">duotone-blue</option><option value="duotone-pastel">duotone-pastel</option><option value="duotone-warm">duotone-warm</option><option value="grain">grain</option><option value="high-contrast">high-contrast</option><option value="low-contrast">low-contrast</option><option value="none">none</option><option value="oil-paint">oil-paint</option><option value="overexposed">overexposed</option><option value="painted">painted</option><option value="sun-flare-boost">sun-flare-boost</option><option value="vignette">vignette</option><option value="watercolor">watercolor</option></select>
+    <select id="f-lang"><option value="">EN + DE</option><option value="EN">EN only</option><option value="DE">DE only</option></select>
+    <span class="count" id="count">100 / 100</span>
+  </div>
+</header>
+<main>
+  <div class="grid" id="grid">
+    
+    <article class="card" data-id="V001" data-cat="Awe" data-emo="hushed" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="141 spots, die nicht auf der karte stehen.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V001.html" title="V001"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V001</span>
+          <span class="cat">Awe</span>
+          <span class="emo">hushed</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">141 Spots, die nicht auf der Karte stehen.</div>
+        <div class="subhead">Ein Handbuch von Leon Helg.</div>
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Tells the buyer this is a different tier of Switzerland than what their feed shows.</p></details>
+      </div>
+      <a class="open" href="variants/V001.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V002" data-cat="Awe" data-emo="sublime" data-lay="type-dominant" data-lang="EN" data-treat="none" data-headline="switzerland, undiluted.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V002.html" title="V002"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V002</span>
+          <span class="cat">Awe</span>
+          <span class="emo">sublime</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Switzerland, undiluted.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">type-dominant</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Image-first composition lets the photo do the persuading.</p></details>
+      </div>
+      <a class="open" href="variants/V002.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V003" data-cat="Awe" data-emo="reverent" data-lay="B&amp;W" data-lang="EN" data-treat="B&amp;W" data-headline="photographers travel here for one shot.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V003.html" title="V003"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V003</span>
+          <span class="cat">Awe</span>
+          <span class="emo">reverent</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Photographers travel here for one shot.</div>
+        <div class="subhead">We give you 141.</div>
+        <div class="meta-bot">
+          <span class="lay">B&amp;W</span>
+          <span class="treat">B&amp;W</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Authority by aesthetic restraint, then a quantified payoff.</p></details>
+      </div>
+      <a class="open" href="variants/V003.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V004" data-cat="Awe" data-emo="small" data-lay="framed-aperture" data-lang="DE" data-treat="none" data-headline="du bist nicht zu spät. du bist nur am falschen ort.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V004.html" title="V004"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V004</span>
+          <span class="cat">Awe</span>
+          <span class="emo">small</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Du bist nicht zu spät. Du bist nur am falschen Ort.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">framed-aperture</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Negation hook reframes scarcity anxiety into geography.</p></details>
+      </div>
+      <a class="open" href="variants/V004.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V005" data-cat="Awe" data-emo="breathless" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="the places people whisper about.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V005.html" title="V005"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V005</span>
+          <span class="cat">Awe</span>
+          <span class="emo">breathless</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">The places people whisper about.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Whisper framing positions the guide as insider knowledge.</p></details>
+      </div>
+      <a class="open" href="variants/V005.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V006" data-cat="Freedom" data-emo="weightless" data-lay="sun-flare" data-lang="DE" data-treat="sun-flare-boost" data-headline="geh weiter als die markierung.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V006.html" title="V006"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V006</span>
+          <span class="cat">Freedom</span>
+          <span class="emo">weightless</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Geh weiter als die Markierung.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">sun-flare</span>
+          <span class="treat">sun-flare-boost</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Single-action command makes the buyer feel decisive.</p></details>
+      </div>
+      <a class="open" href="variants/V006.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V007" data-cat="Freedom" data-emo="unbound" data-lay="edge-to-edge" data-lang="EN" data-treat="none" data-headline="take the long way home.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V007.html" title="V007"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V007</span>
+          <span class="cat">Freedom</span>
+          <span class="emo">unbound</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Take the long way home.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">edge-to-edge</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Universal end-of-day cue triggers Sunday-feeling longing.</p></details>
+      </div>
+      <a class="open" href="variants/V007.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V008" data-cat="Freedom" data-emo="open" data-lay="split-screen" data-lang="EN" data-treat="none" data-headline="choose your tuesday.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V008.html" title="V008"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V008</span>
+          <span class="cat">Freedom</span>
+          <span class="emo">open</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Choose your Tuesday.</div>
+        <div class="subhead">Office or alps. Same week, two endings.</div>
+        <div class="meta-bot">
+          <span class="lay">split-screen</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Contrast layout forces the buyer to pick the side they want.</p></details>
+      </div>
+      <a class="open" href="variants/V008.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V009" data-cat="Freedom" data-emo="uncaged" data-lay="full-bleed" data-lang="DE" data-treat="vignette" data-headline="141 gründe, das hotel abzusagen.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V009.html" title="V009"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V009</span>
+          <span class="cat">Freedom</span>
+          <span class="emo">uncaged</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">141 Gründe, das Hotel abzusagen.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">vignette</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Plays directly into the wildcamp identity vs paid lodging.</p></details>
+      </div>
+      <a class="open" href="variants/V009.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V010" data-cat="Freedom" data-emo="feral" data-lay="B&amp;W" data-lang="DE" data-treat="B&amp;W" data-headline="frei. nicht günstig. nicht bequem. frei.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V010.html" title="V010"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V010</span>
+          <span class="cat">Freedom</span>
+          <span class="emo">feral</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Frei. Nicht günstig. Nicht bequem. Frei.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">B&amp;W</span>
+          <span class="treat">B&amp;W</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Lists what it isn&#x27;t, which makes &quot;frei&quot; land harder.</p></details>
+      </div>
+      <a class="open" href="variants/V010.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V011" data-cat="Belonging" data-emo="shared" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="send this to the friend you&#x27;d wake up at 4.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V011.html" title="V011"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V011</span>
+          <span class="cat">Belonging</span>
+          <span class="emo">shared</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Send this to the friend you&#x27;d wake up at 4.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Built-in viral mechanic, the page is the message.</p></details>
+      </div>
+      <a class="open" href="variants/V011.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V012" data-cat="Belonging" data-emo="warm" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="für die person, die mitkommt, wenn du fragst.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V012.html" title="V012"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V012</span>
+          <span class="cat">Belonging</span>
+          <span class="emo">warm</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Für die Person, die mitkommt, wenn du fragst.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Identity-aspiration plus a tiny pang of gratitude for &quot;your person&quot;.</p></details>
+      </div>
+      <a class="open" href="variants/V012.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V013" data-cat="Belonging" data-emo="tribe" data-lay="polaroid-collage" data-lang="DE" data-treat="grain" data-headline="du bist nicht der einzige, der das sucht.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V013.html" title="V013"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V013</span>
+          <span class="cat">Belonging</span>
+          <span class="emo">tribe</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Du bist nicht der Einzige, der das sucht.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">polaroid-collage</span>
+          <span class="treat">grain</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Social proof through composition, not testimonials.</p></details>
+      </div>
+      <a class="open" href="variants/V013.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V014" data-cat="Belonging" data-emo="included" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="welcome to the group chat that owns the alps.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V014.html" title="V014"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V014</span>
+          <span class="cat">Belonging</span>
+          <span class="emo">included</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Welcome to the group chat that owns the alps.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Frames the product as access, not just information.</p></details>
+      </div>
+      <a class="open" href="variants/V014.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V015" data-cat="Belonging" data-emo="seen" data-lay="photo-as-texture" data-lang="EN" data-treat="blurred-bokeh" data-headline="two mugs, 141 mornings.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V015.html" title="V015"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V015</span>
+          <span class="cat">Belonging</span>
+          <span class="emo">seen</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Two mugs, 141 mornings.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">photo-as-texture</span>
+          <span class="treat">blurred-bokeh</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Domestic detail scales the romance into something usable.</p></details>
+      </div>
+      <a class="open" href="variants/V015.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V016" data-cat="Discovery" data-emo="finding" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="there. that one. you&#x27;ve never heard of it.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V016.html" title="V016"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V016</span>
+          <span class="cat">Discovery</span>
+          <span class="emo">finding</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">There. That one. You&#x27;ve never heard of it.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Pointing gesture is the conversion engine, eye follows finger to the lake.</p></details>
+      </div>
+      <a class="open" href="variants/V016.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V017" data-cat="Discovery" data-emo="curious" data-lay="polaroid-stack" data-lang="EN" data-treat="grain" data-headline="pick a card. any of 141.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V017.html" title="V017"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V017</span>
+          <span class="cat">Discovery</span>
+          <span class="emo">curious</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Pick a card. Any of 141.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">polaroid-stack</span>
+          <span class="treat">grain</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Choice-architecture nudge, abundance without overwhelm.</p></details>
+      </div>
+      <a class="open" href="variants/V017.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V018" data-cat="Discovery" data-emo="ravenous" data-lay="magazine-cover" data-lang="EN" data-treat="none" data-headline="where leon actually goes.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V018.html" title="V018"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V018</span>
+          <span class="cat">Discovery</span>
+          <span class="emo">ravenous</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Where Leon actually goes.</div>
+        <div class="subhead">141 spots, lifetime updates, 27 CHF.</div>
+        <div class="meta-bot">
+          <span class="lay">magazine-cover</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Established print frame signals editorial trust, not ad.</p></details>
+      </div>
+      <a class="open" href="variants/V018.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V019" data-cat="Discovery" data-emo="mapped" data-lay="map-led" data-lang="DE" data-treat="desaturated" data-headline="141 punkte. eine liste. kein geheimnis mehr.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V019.html" title="V019"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V019</span>
+          <span class="cat">Discovery</span>
+          <span class="emo">mapped</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">141 Punkte. Eine Liste. Kein Geheimnis mehr.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">map-led</span>
+          <span class="treat">desaturated</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Demystifies the product and the country in one move.</p></details>
+      </div>
+      <a class="open" href="variants/V019.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V020" data-cat="Discovery" data-emo="uncovered" data-lay="paint-over" data-lang="DE" data-treat="none" data-headline="ungelistet. bis jetzt.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V020.html" title="V020"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V020</span>
+          <span class="cat">Discovery</span>
+          <span class="emo">uncovered</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Ungelistet. Bis jetzt.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">paint-over</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Reveal-mechanic gives the eye a tiny dopamine hit.</p></details>
+      </div>
+      <a class="open" href="variants/V020.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V021" data-cat="Peace" data-emo="still" data-lay="edge-to-edge" data-lang="DE" data-treat="none" data-headline="stillgewässer.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V021.html" title="V021"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V021</span>
+          <span class="cat">Peace</span>
+          <span class="emo">still</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Stillgewässer.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">edge-to-edge</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Trust through restraint, sells without a sales line.</p></details>
+      </div>
+      <a class="open" href="variants/V021.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V022" data-cat="Peace" data-emo="slow" data-lay="duotone" data-lang="EN" data-treat="duotone-blue" data-headline="slow sundays, fixed price.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V022.html" title="V022"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V022</span>
+          <span class="cat">Peace</span>
+          <span class="emo">slow</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Slow Sundays, fixed price.</div>
+        <div class="subhead">27 CHF, lifetime updates.</div>
+        <div class="meta-bot">
+          <span class="lay">duotone</span>
+          <span class="treat">duotone-blue</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Frames the guide as a lifestyle subscription, not a download.</p></details>
+      </div>
+      <a class="open" href="variants/V022.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V023" data-cat="Peace" data-emo="hushed" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="nicht jeder ort braucht ein foto.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V023.html" title="V023"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V023</span>
+          <span class="cat">Peace</span>
+          <span class="emo">hushed</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Nicht jeder Ort braucht ein Foto.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Counter-intuitive positioning that anti-Instagram people trust.</p></details>
+      </div>
+      <a class="open" href="variants/V023.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V024" data-cat="Peace" data-emo="gentle" data-lay="painted" data-lang="DE" data-treat="watercolor" data-headline="bewegung ohne eile.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V024.html" title="V024"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V024</span>
+          <span class="cat">Peace</span>
+          <span class="emo">gentle</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Bewegung ohne Eile.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">painted</span>
+          <span class="treat">watercolor</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Painterly mode bypasses ad-fatigue eyes.</p></details>
+      </div>
+      <a class="open" href="variants/V024.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V025" data-cat="Peace" data-emo="washed" data-lay="duotone" data-lang="EN" data-treat="duotone-pastel" data-headline="lake mode, on.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V025.html" title="V025"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V025</span>
+          <span class="cat">Peace</span>
+          <span class="emo">washed</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Lake mode, on.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">duotone</span>
+          <span class="treat">duotone-pastel</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Tagline reframes a place as a state of being.</p></details>
+      </div>
+      <a class="open" href="variants/V025.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V026" data-cat="Achievement" data-emo="smug" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="you&#x27;ll mark this peak off before september.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V026.html" title="V026"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V026</span>
+          <span class="cat">Achievement</span>
+          <span class="emo">smug</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">You&#x27;ll mark this peak off before September.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Time-bound goal anchored to a season the buyer is already in.</p></details>
+      </div>
+      <a class="open" href="variants/V026.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V027" data-cat="Achievement" data-emo="earned" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="27 chf. the 141 places worth the walk.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V027.html" title="V027"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V027</span>
+          <span class="cat">Achievement</span>
+          <span class="emo">earned</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">27 CHF. The 141 places worth the walk.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Value framing: tiny price next to a sky-sized payoff.</p></details>
+      </div>
+      <a class="open" href="variants/V027.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V028" data-cat="Achievement" data-emo="accomplished" data-lay="data-led" data-lang="EN" data-treat="none" data-headline="a summer, on paper.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V028.html" title="V028"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V028</span>
+          <span class="cat">Achievement</span>
+          <span class="emo">accomplished</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">A summer, on paper.</div>
+        <div class="subhead">141 spots. Tick them as you go.</div>
+        <div class="meta-bot">
+          <span class="lay">data-led</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>List visualization makes 141 feel completable, not overwhelming.</p></details>
+      </div>
+      <a class="open" href="variants/V028.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V029" data-cat="Achievement" data-emo="proud" data-lay="B&amp;W" data-lang="EN" data-treat="B&amp;W" data-headline="the summer you finally do it.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V029.html" title="V029"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V029</span>
+          <span class="cat">Achievement</span>
+          <span class="emo">proud</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">The summer you finally do it.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">B&amp;W</span>
+          <span class="treat">B&amp;W</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Identity-aspiration, low on adjectives, high on resolve.</p></details>
+      </div>
+      <a class="open" href="variants/V029.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V030" data-cat="Achievement" data-emo="tallied" data-lay="multi-image grid" data-lang="EN" data-treat="none" data-headline="spots, not promises.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V030.html" title="V030"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V030</span>
+          <span class="cat">Achievement</span>
+          <span class="emo">tallied</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Spots, not promises.</div>
+        <div class="subhead">141, plotted, ready.</div>
+        <div class="meta-bot">
+          <span class="lay">multi-image grid</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Visual proof of inventory, makes the offer feel concrete.</p></details>
+      </div>
+      <a class="open" href="variants/V030.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V031" data-cat="Longing" data-emo="wistful" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="was, wenn dieser sommer doch noch der gute wird?">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V031.html" title="V031"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V031</span>
+          <span class="cat">Longing</span>
+          <span class="emo">wistful</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Was, wenn dieser Sommer doch noch der gute wird?</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Conditional question lowers defenses; reader fills the blank themselves.</p></details>
+      </div>
+      <a class="open" href="variants/V031.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V032" data-cat="Longing" data-emo="aching" data-lay="full-bleed" data-lang="DE" data-treat="color-pop" data-headline="diese farbe gibt es. in echt.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V032.html" title="V032"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V032</span>
+          <span class="cat">Longing</span>
+          <span class="emo">aching</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Diese Farbe gibt es. In echt.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">color-pop</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Anti-feed claim: this isn&#x27;t a filter, it&#x27;s a postcode.</p></details>
+      </div>
+      <a class="open" href="variants/V032.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V033" data-cat="Longing" data-emo="melancholy" data-lay="duotone" data-lang="EN" data-treat="duotone-warm" data-headline="end of summer is a setting, not a date.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V033.html" title="V033"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V033</span>
+          <span class="cat">Longing</span>
+          <span class="emo">melancholy</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">End of summer is a setting, not a date.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">duotone</span>
+          <span class="treat">duotone-warm</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Borrowed melancholy converts to action faster than urgency claims.</p></details>
+      </div>
+      <a class="open" href="variants/V033.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V034" data-cat="Longing" data-emo="unfinished" data-lay="postcard" data-lang="DE" data-treat="grain" data-headline="komm vorbei, bevor&#x27;s vorbei ist.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V034.html" title="V034"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V034</span>
+          <span class="cat">Longing</span>
+          <span class="emo">unfinished</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Komm vorbei, bevor&#x27;s vorbei ist.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">postcard</span>
+          <span class="treat">grain</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Postcard format makes the CTA feel personal, not promotional.</p></details>
+      </div>
+      <a class="open" href="variants/V034.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V035" data-cat="Longing" data-emo="distant" data-lay="full-bleed" data-lang="DE" data-treat="grain" data-headline="du erinnerst dich an einen sommer, den du nie hattest.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V035.html" title="V035"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V035</span>
+          <span class="cat">Longing</span>
+          <span class="emo">distant</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Du erinnerst dich an einen Sommer, den du nie hattest.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">grain</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Faux-nostalgia mechanic; the buyer wants to make the memory real.</p></details>
+      </div>
+      <a class="open" href="variants/V035.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V036" data-cat="Mystery" data-emo="unknown" data-lay="full-bleed" data-lang="DE" data-treat="low-contrast" data-headline="manche spots verraten wir nur, wenn du fragst.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V036.html" title="V036"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V036</span>
+          <span class="cat">Mystery</span>
+          <span class="emo">unknown</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Manche Spots verraten wir nur, wenn du fragst.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">low-contrast</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Curiosity gap, the buyer leans in to find the answer.</p></details>
+      </div>
+      <a class="open" href="variants/V036.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V037" data-cat="Mystery" data-emo="secret" data-lay="type-dominant" data-lang="EN" data-treat="high-contrast" data-headline="hidden, on purpose.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V037.html" title="V037"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V037</span>
+          <span class="cat">Mystery</span>
+          <span class="emo">secret</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Hidden, on purpose.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">type-dominant</span>
+          <span class="treat">high-contrast</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Visual restraint creates value, like a redacted document.</p></details>
+      </div>
+      <a class="open" href="variants/V037.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V038" data-cat="Mystery" data-emo="dim" data-lay="duotone" data-lang="DE" data-treat="duotone-blue" data-headline="die alpen kennen ihre lieblinge.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V038.html" title="V038"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V038</span>
+          <span class="cat">Mystery</span>
+          <span class="emo">dim</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Die Alpen kennen ihre Lieblinge.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">duotone</span>
+          <span class="treat">duotone-blue</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Anthropomorphises the alps, flattering the reader as one of the chosen.</p></details>
+      </div>
+      <a class="open" href="variants/V038.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V039" data-cat="Mystery" data-emo="hidden" data-lay="polaroid-single" data-lang="DE" data-treat="grain" data-headline="spot 84 von 141.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V039.html" title="V039"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V039</span>
+          <span class="cat">Mystery</span>
+          <span class="emo">hidden</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Spot 84 von 141.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">polaroid-single</span>
+          <span class="treat">grain</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Numbered fragment implies a larger collection worth owning.</p></details>
+      </div>
+      <a class="open" href="variants/V039.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V040" data-cat="Mystery" data-emo="esoteric" data-lay="painted" data-lang="DE" data-treat="oil-paint" data-headline="vor uns malten sie. jetzt wandern wir.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V040.html" title="V040"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V040</span>
+          <span class="cat">Mystery</span>
+          <span class="emo">esoteric</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Vor uns malten sie. Jetzt wandern wir.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">painted</span>
+          <span class="treat">oil-paint</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Cultural cachet, the mountains as Romantic-era art.</p></details>
+      </div>
+      <a class="open" href="variants/V040.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V041" data-cat="Nostalgia" data-emo="warm" data-lay="polaroid-collage" data-lang="DE" data-treat="grain" data-headline="sommer, wie er gemeint war.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V041.html" title="V041"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V041</span>
+          <span class="cat">Nostalgia</span>
+          <span class="emo">warm</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Sommer, wie er gemeint war.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">polaroid-collage</span>
+          <span class="treat">grain</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Polaroid format triggers the format-emotion shortcut to memory.</p></details>
+      </div>
+      <a class="open" href="variants/V041.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V042" data-cat="Nostalgia" data-emo="sepia" data-lay="polaroid-single" data-lang="EN" data-treat="cross-process" data-headline="switzerland, before the algorithm.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V042.html" title="V042"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V042</span>
+          <span class="cat">Nostalgia</span>
+          <span class="emo">sepia</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Switzerland, before the algorithm.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">polaroid-single</span>
+          <span class="treat">cross-process</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Anti-tech framing for tech-fatigued buyers.</p></details>
+      </div>
+      <a class="open" href="variants/V042.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V043" data-cat="Nostalgia" data-emo="analogue" data-lay="duotone" data-lang="DE" data-treat="duotone-warm" data-headline="wie die sommerferien, die du in erinnerung hast. nur in echt.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V043.html" title="V043"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V043</span>
+          <span class="cat">Nostalgia</span>
+          <span class="emo">analogue</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Wie die Sommerferien, die du in Erinnerung hast. Nur in echt.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">duotone</span>
+          <span class="treat">duotone-warm</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Reframes the buyer&#x27;s missing memory as still purchasable.</p></details>
+      </div>
+      <a class="open" href="variants/V043.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V044" data-cat="Nostalgia" data-emo="filmic" data-lay="photo-as-texture" data-lang="DE" data-treat="grain" data-headline="echt. nicht retro.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V044.html" title="V044"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V044</span>
+          <span class="cat">Nostalgia</span>
+          <span class="emo">filmic</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Echt. Nicht retro.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">photo-as-texture</span>
+          <span class="treat">grain</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Disclaims the filter to claim authenticity.</p></details>
+      </div>
+      <a class="open" href="variants/V044.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V045" data-cat="Nostalgia" data-emo="childhood" data-lay="postcard" data-lang="DE" data-treat="none" data-headline="die postkarten-schweiz gibt es noch.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V045.html" title="V045"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V045</span>
+          <span class="cat">Nostalgia</span>
+          <span class="emo">childhood</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Die Postkarten-Schweiz gibt es noch.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">postcard</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Heritage angle that turns into a discovery hook.</p></details>
+      </div>
+      <a class="open" href="variants/V045.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V046" data-cat="Anticipation" data-emo="early" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="tomorrow you wake up here.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V046.html" title="V046"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V046</span>
+          <span class="cat">Anticipation</span>
+          <span class="emo">early</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Tomorrow you wake up here.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Second-person future tense puts the buyer in the scene already.</p></details>
+      </div>
+      <a class="open" href="variants/V046.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V047" data-cat="Anticipation" data-emo="brewing" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="set the alarm. pack the coffee.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V047.html" title="V047"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V047</span>
+          <span class="cat">Anticipation</span>
+          <span class="emo">brewing</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Set the alarm. Pack the coffee.</div>
+        <div class="subhead">The Matterhorn shows up at 5:42.</div>
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Concrete time turns intention into a calendar entry.</p></details>
+      </div>
+      <a class="open" href="variants/V047.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V048" data-cat="Anticipation" data-emo="electric" data-lay="multi-image grid" data-lang="DE" data-treat="none" data-headline="fängt am wochenende an.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V048.html" title="V048"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V048</span>
+          <span class="cat">Anticipation</span>
+          <span class="emo">electric</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Fängt am Wochenende an.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">multi-image grid</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Date-anchored urgency wired to the user&#x27;s actual calendar.</p></details>
+      </div>
+      <a class="open" href="variants/V048.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V049" data-cat="Anticipation" data-emo="packed" data-lay="mockup-led" data-lang="DE" data-treat="none" data-headline="karte offen, auto parkt morgen früh.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V049.html" title="V049"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V049</span>
+          <span class="cat">Anticipation</span>
+          <span class="emo">packed</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Karte offen, Auto parkt morgen früh.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">mockup-led</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Product-led visual that shortcuts &quot;how does it work&quot; objections.</p></details>
+      </div>
+      <a class="open" href="variants/V049.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V050" data-cat="Anticipation" data-emo="imminent" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="noch 14 wochenenden bis schnee.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V050.html" title="V050"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V050</span>
+          <span class="cat">Anticipation</span>
+          <span class="emo">imminent</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Noch 14 Wochenenden bis Schnee.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Hard-data urgency without claiming scarcity of the product.</p></details>
+      </div>
+      <a class="open" href="variants/V050.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V051" data-cat="Solitude" data-emo="alone" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="genug platz für genau dich.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V051.html" title="V051"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V051</span>
+          <span class="cat">Solitude</span>
+          <span class="emo">alone</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Genug Platz für genau dich.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Anti-overrun positioning, the core unspoken pitch of the guide.</p></details>
+      </div>
+      <a class="open" href="variants/V051.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V052" data-cat="Solitude" data-emo="lonely" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="nicht einsam. allein.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V052.html" title="V052"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V052</span>
+          <span class="cat">Solitude</span>
+          <span class="emo">lonely</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Nicht einsam. Allein.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Reframes a feeling the reader was already trying to defend.</p></details>
+      </div>
+      <a class="open" href="variants/V052.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V053" data-cat="Solitude" data-emo="empty" data-lay="B&amp;W" data-lang="EN" data-treat="B&amp;W" data-headline="find the spots no one&#x27;s pointing a phone at.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V053.html" title="V053"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V053</span>
+          <span class="cat">Solitude</span>
+          <span class="emo">empty</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Find the spots no one&#x27;s pointing a phone at.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">B&amp;W</span>
+          <span class="treat">B&amp;W</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Anti-tourism flex, attractive to the people who already know the script.</p></details>
+      </div>
+      <a class="open" href="variants/V053.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V054" data-cat="Solitude" data-emo="private" data-lay="painted" data-lang="DE" data-treat="painted" data-headline="manche tage gehören nur dir.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V054.html" title="V054"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V054</span>
+          <span class="cat">Solitude</span>
+          <span class="emo">private</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Manche Tage gehören nur dir.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">painted</span>
+          <span class="treat">painted</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Sells time-as-property, the deepest unspoken want.</p></details>
+      </div>
+      <a class="open" href="variants/V054.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V055" data-cat="Solitude" data-emo="quiet" data-lay="type-dominant" data-lang="DE" data-treat="none" data-headline="141 spots. ohne menschen drauf.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V055.html" title="V055"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V055</span>
+          <span class="cat">Solitude</span>
+          <span class="emo">quiet</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">141 Spots. Ohne Menschen drauf.</div>
+        <div class="subhead">Kein Trick. Karte plus Anleitung.</div>
+        <div class="meta-bot">
+          <span class="lay">type-dominant</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Plain, factual, low-claim copy reads as the most honest ad on the page.</p></details>
+      </div>
+      <a class="open" href="variants/V055.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V056" data-cat="Joy" data-emo="bright" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="summer, no notes.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V056.html" title="V056"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V056</span>
+          <span class="cat">Joy</span>
+          <span class="emo">bright</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Summer, no notes.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Two-word tagline does the work, no claim needed.</p></details>
+      </div>
+      <a class="open" href="variants/V056.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V057" data-cat="Joy" data-emo="giddy" data-lay="color-pop" data-lang="DE" data-treat="color-pop" data-headline="27 chf. diese farbe inklusive.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V057.html" title="V057"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V057</span>
+          <span class="cat">Joy</span>
+          <span class="emo">giddy</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">27 CHF. Diese Farbe inklusive.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">color-pop</span>
+          <span class="treat">color-pop</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Visual claim tied to a price, the math feels favorable.</p></details>
+      </div>
+      <a class="open" href="variants/V057.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V058" data-cat="Joy" data-emo="playful" data-lay="polaroid-stack" data-lang="DE" data-treat="grain" data-headline="drei wochenenden. drei orte. drei geschichten.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V058.html" title="V058"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V058</span>
+          <span class="cat">Joy</span>
+          <span class="emo">playful</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Drei Wochenenden. Drei Orte. Drei Geschichten.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">polaroid-stack</span>
+          <span class="treat">grain</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Numbered structure scales the value without listing features.</p></details>
+      </div>
+      <a class="open" href="variants/V058.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V059" data-cat="Joy" data-emo="sunlit" data-lay="painted" data-lang="DE" data-treat="painted" data-headline="die alpen waren schon immer ein sommerstaat.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V059.html" title="V059"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V059</span>
+          <span class="cat">Joy</span>
+          <span class="emo">sunlit</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Die Alpen waren schon immer ein Sommerstaat.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">painted</span>
+          <span class="treat">painted</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Brand-level claim, the guide becomes the citizenship card.</p></details>
+      </div>
+      <a class="open" href="variants/V059.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V060" data-cat="Joy" data-emo="golden" data-lay="color-pop" data-lang="DE" data-treat="color-pop" data-headline="ein sommer, ein preis: 27.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V060.html" title="V060"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V060</span>
+          <span class="cat">Joy</span>
+          <span class="emo">golden</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Ein Sommer, ein Preis: 27.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">color-pop</span>
+          <span class="treat">color-pop</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Bargain framing for an emotional purchase.</p></details>
+      </div>
+      <a class="open" href="variants/V060.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V061" data-cat="Wonder" data-emo="dazzled" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="ja, das ist echt. ja, du kommst hin.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V061.html" title="V061"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V061</span>
+          <span class="cat">Wonder</span>
+          <span class="emo">dazzled</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Ja, das ist echt. Ja, du kommst hin.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Pre-empts objections, the conversation gets shorter.</p></details>
+      </div>
+      <a class="open" href="variants/V061.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V062" data-cat="Wonder" data-emo="wide-eyed" data-lay="framed-aperture" data-lang="DE" data-treat="none" data-headline="erste mal hier? spot 12 von 141.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V062.html" title="V062"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V062</span>
+          <span class="cat">Wonder</span>
+          <span class="emo">wide-eyed</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Erste Mal hier? Spot 12 von 141.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">framed-aperture</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Numbering teases the rest of the inventory.</p></details>
+      </div>
+      <a class="open" href="variants/V062.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V063" data-cat="Wonder" data-emo="spellbound" data-lay="blurred-bokeh" data-lang="EN" data-treat="blurred-bokeh" data-headline="switzerland still does this.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V063.html" title="V063"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V063</span>
+          <span class="cat">Wonder</span>
+          <span class="emo">spellbound</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Switzerland still does this.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">blurred-bokeh</span>
+          <span class="treat">blurred-bokeh</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Subtle pride hook for residents, awe hook for visitors.</p></details>
+      </div>
+      <a class="open" href="variants/V063.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V064" data-cat="Wonder" data-emo="luminous" data-lay="magazine-cover" data-lang="EN" data-treat="none" data-headline="one guide. 141 spots.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V064.html" title="V064"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V064</span>
+          <span class="cat">Wonder</span>
+          <span class="emo">luminous</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">One guide. 141 spots.</div>
+        <div class="subhead">Lifetime updates. 27 CHF.</div>
+        <div class="meta-bot">
+          <span class="lay">magazine-cover</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Borrowed editorial format upgrades perceived value.</p></details>
+      </div>
+      <a class="open" href="variants/V064.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V065" data-cat="Wonder" data-emo="floating" data-lay="painted" data-lang="DE" data-treat="painted" data-headline="ein leiser ort. 140 weitere.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V065.html" title="V065"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V065</span>
+          <span class="cat">Wonder</span>
+          <span class="emo">floating</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Ein leiser Ort. 140 weitere.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">painted</span>
+          <span class="treat">painted</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Soft sell that lands because it isn&#x27;t trying.</p></details>
+      </div>
+      <a class="open" href="variants/V065.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V066" data-cat="Pride" data-emo="rooted" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="das ist deins, wenn du willst.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V066.html" title="V066"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V066</span>
+          <span class="cat">Pride</span>
+          <span class="emo">rooted</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Das ist deins, wenn du willst.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Possession framing, the country as personal asset.</p></details>
+      </div>
+      <a class="open" href="variants/V066.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V067" data-cat="Pride" data-emo="local" data-lay="type-dominant" data-lang="DE" data-treat="none" data-headline="aus der schweiz, für die, die sie nochmal entdecken.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V067.html" title="V067"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V067</span>
+          <span class="cat">Pride</span>
+          <span class="emo">local</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Aus der Schweiz, für die, die sie nochmal entdecken.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">type-dominant</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Localism beats globalism for DACH readers.</p></details>
+      </div>
+      <a class="open" href="variants/V067.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V068" data-cat="Pride" data-emo="quiet" data-lay="painted" data-lang="DE" data-treat="painted" data-headline="ein sommer, ehrlich verdient.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V068.html" title="V068"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V068</span>
+          <span class="cat">Pride</span>
+          <span class="emo">quiet</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Ein Sommer, ehrlich verdient.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">painted</span>
+          <span class="treat">painted</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Effort-as-status, the values readers want associated with their leisure.</p></details>
+      </div>
+      <a class="open" href="variants/V068.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V069" data-cat="Pride" data-emo="calm" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="lokal, nicht touristisch.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V069.html" title="V069"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V069</span>
+          <span class="cat">Pride</span>
+          <span class="emo">calm</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Lokal, nicht touristisch.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Anti-tourist identity that paying customers self-select into.</p></details>
+      </div>
+      <a class="open" href="variants/V069.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V070" data-cat="Pride" data-emo="settled" data-lay="multi-image grid" data-lang="DE" data-treat="none" data-headline="die schweiz, die wir leise behalten.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V070.html" title="V070"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V070</span>
+          <span class="cat">Pride</span>
+          <span class="emo">settled</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Die Schweiz, die wir leise behalten.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">multi-image grid</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Implies trust and inclusion in a small circle.</p></details>
+      </div>
+      <a class="open" href="variants/V070.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V071" data-cat="Transformation" data-emo="reset" data-lay="split-screen" data-lang="EN" data-treat="none" data-headline="same week, different you.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V071.html" title="V071"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V071</span>
+          <span class="cat">Transformation</span>
+          <span class="emo">reset</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Same week, different you.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">split-screen</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Before/after structure converts the contrast into intent.</p></details>
+      </div>
+      <a class="open" href="variants/V071.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V072" data-cat="Transformation" data-emo="shed" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="leave the version of you that scrolled past this.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V072.html" title="V072"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V072</span>
+          <span class="cat">Transformation</span>
+          <span class="emo">shed</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Leave the version of you that scrolled past this.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Identity rejection framed as forward motion.</p></details>
+      </div>
+      <a class="open" href="variants/V072.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V073" data-cat="Transformation" data-emo="renewed" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="du brauchst nicht den langen urlaub. du brauchst diesen morgen.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V073.html" title="V073"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V073</span>
+          <span class="cat">Transformation</span>
+          <span class="emo">renewed</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Du brauchst nicht den langen Urlaub. Du brauchst diesen Morgen.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Reframes the unit of recovery as a morning, not weeks.</p></details>
+      </div>
+      <a class="open" href="variants/V073.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V074" data-cat="Transformation" data-emo="unlearned" data-lay="B&amp;W" data-lang="DE" data-treat="B&amp;W" data-headline="weniger spots fürs foto. mehr fürs kopfaufräumen.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V074.html" title="V074"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V074</span>
+          <span class="cat">Transformation</span>
+          <span class="emo">unlearned</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Weniger Spots fürs Foto. Mehr fürs Kopfaufräumen.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">B&amp;W</span>
+          <span class="treat">B&amp;W</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Reframes the value from media to mental.</p></details>
+      </div>
+      <a class="open" href="variants/V074.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V075" data-cat="Transformation" data-emo="unwound" data-lay="painted" data-lang="DE" data-treat="painted" data-headline="manchmal heisst urlaub: telefon stumm, 600 höhenmeter.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V075.html" title="V075"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V075</span>
+          <span class="cat">Transformation</span>
+          <span class="emo">unwound</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Manchmal heisst Urlaub: Telefon stumm, 600 Höhenmeter.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">painted</span>
+          <span class="treat">painted</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Counter-positioning to spa/wellness Switzerland.</p></details>
+      </div>
+      <a class="open" href="variants/V075.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V076" data-cat="FOMO" data-emo="electric" data-lay="polaroid-collage" data-lang="DE" data-treat="grain" data-headline="spot 87 ist erst nächste woche gut.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V076.html" title="V076"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V076</span>
+          <span class="cat">FOMO</span>
+          <span class="emo">electric</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Spot 87 ist erst nächste Woche gut.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">polaroid-collage</span>
+          <span class="treat">grain</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Numbered FOMO without claiming product scarcity.</p></details>
+      </div>
+      <a class="open" href="variants/V076.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V077" data-cat="FOMO" data-emo="racing" data-lay="full-bleed" data-lang="DE" data-treat="overexposed" data-headline="8 wochen schweizer sommer. wie viele willst du verpassen?">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V077.html" title="V077"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V077</span>
+          <span class="cat">FOMO</span>
+          <span class="emo">racing</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">8 Wochen Schweizer Sommer. Wie viele willst du verpassen?</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">overexposed</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Loss-framed question outperforms gain-framed claim.</p></details>
+      </div>
+      <a class="open" href="variants/V077.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V078" data-cat="FOMO" data-emo="watching" data-lay="multi-image grid" data-lang="DE" data-treat="none" data-headline="diesmal kennst du den spot vor allen anderen.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V078.html" title="V078"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V078</span>
+          <span class="cat">FOMO</span>
+          <span class="emo">watching</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Diesmal kennst du den Spot vor allen anderen.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">multi-image grid</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Status-among-peers wins where price-comparisons fail.</p></details>
+      </div>
+      <a class="open" href="variants/V078.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V079" data-cat="FOMO" data-emo="edge" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="sie haben den spot dieses wochenende. du auch, wenn du willst.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V079.html" title="V079"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V079</span>
+          <span class="cat">FOMO</span>
+          <span class="emo">edge</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Sie haben den Spot dieses Wochenende. Du auch, wenn du willst.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Permission framing, the offer feels like an invite.</p></details>
+      </div>
+      <a class="open" href="variants/V079.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V080" data-cat="FOMO" data-emo="timed" data-lay="data-led" data-lang="DE" data-treat="none" data-headline="noch 14 mal gute bedingungen.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V080.html" title="V080"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V080</span>
+          <span class="cat">FOMO</span>
+          <span class="emo">timed</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Noch 14 mal gute Bedingungen.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">data-led</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Borrowed-from-finance framing reads as honest, not hype.</p></details>
+      </div>
+      <a class="open" href="variants/V080.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V081" data-cat="Escape" data-emo="exhale" data-lay="framed-aperture" data-lang="EN" data-treat="none" data-headline="out-of-office. mountain-replied.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V081.html" title="V081"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V081</span>
+          <span class="cat">Escape</span>
+          <span class="emo">exhale</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Out-of-office. Mountain-replied.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">framed-aperture</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Workplace pun without being cringe.</p></details>
+      </div>
+      <a class="open" href="variants/V081.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V082" data-cat="Escape" data-emo="leaving" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="du brauchst keine erlaubnis.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V082.html" title="V082"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V082</span>
+          <span class="cat">Escape</span>
+          <span class="emo">leaving</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Du brauchst keine Erlaubnis.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Soft permission for the buyer who&#x27;s already justifying it.</p></details>
+      </div>
+      <a class="open" href="variants/V082.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V083" data-cat="Escape" data-emo="cancelled" data-lay="data-led" data-lang="DE" data-treat="none" data-headline="27 chf und du weisst, wohin.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V083.html" title="V083"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V083</span>
+          <span class="cat">Escape</span>
+          <span class="emo">cancelled</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">27 CHF und du weisst, wohin.</div>
+        <div class="subhead">Kein Booking. Kein Airbnb. Kein Reservierungsstress.</div>
+        <div class="meta-bot">
+          <span class="lay">data-led</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Plays directly into wildcamper economics.</p></details>
+      </div>
+      <a class="open" href="variants/V083.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V084" data-cat="Escape" data-emo="unbooked" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="kein hotel. kein buffet. kein wlan.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V084.html" title="V084"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V084</span>
+          <span class="cat">Escape</span>
+          <span class="emo">unbooked</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Kein Hotel. Kein Buffet. Kein WLAN.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Anti-industry stance the audience already holds.</p></details>
+      </div>
+      <a class="open" href="variants/V084.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V085" data-cat="Escape" data-emo="drifting" data-lay="split-screen" data-lang="DE" data-treat="none" data-headline="eine stunde fahrt. anderer planet.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V085.html" title="V085"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V085</span>
+          <span class="cat">Escape</span>
+          <span class="emo">drifting</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Eine Stunde Fahrt. Anderer Planet.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">split-screen</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Specific distance makes the promise feel real.</p></details>
+      </div>
+      <a class="open" href="variants/V085.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V086" data-cat="Intimacy" data-emo="tender" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="bring the person you&#x27;d take in a wedding photo.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V086.html" title="V086"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V086</span>
+          <span class="cat">Intimacy</span>
+          <span class="emo">tender</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Bring the person you&#x27;d take in a wedding photo.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Pulls the partner into the buying decision.</p></details>
+      </div>
+      <a class="open" href="variants/V086.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V087" data-cat="Intimacy" data-emo="close" data-lay="full-bleed" data-lang="EN" data-treat="none" data-headline="two coffees. one mountain. no phones.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V087.html" title="V087"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V087</span>
+          <span class="cat">Intimacy</span>
+          <span class="emo">close</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Two coffees. One mountain. No phones.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Rejects the phone-mediated relationship; sells the alternative.</p></details>
+      </div>
+      <a class="open" href="variants/V087.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V088" data-cat="Intimacy" data-emo="shared" data-lay="polaroid-single" data-lang="DE" data-treat="grain" data-headline="geheimnis zu zweit.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V088.html" title="V088"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V088</span>
+          <span class="cat">Intimacy</span>
+          <span class="emo">shared</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Geheimnis zu zweit.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">polaroid-single</span>
+          <span class="treat">grain</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Tiny intimacy frames a tiny luxury.</p></details>
+      </div>
+      <a class="open" href="variants/V088.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V089" data-cat="Intimacy" data-emo="held" data-lay="painted" data-lang="DE" data-treat="painted" data-headline="sommer für zwei. 27 chf.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V089.html" title="V089"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V089</span>
+          <span class="cat">Intimacy</span>
+          <span class="emo">held</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Sommer für zwei. 27 CHF.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">painted</span>
+          <span class="treat">painted</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Price-per-person makes the gift-instinct kick in.</p></details>
+      </div>
+      <a class="open" href="variants/V089.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V090" data-cat="Intimacy" data-emo="whispered" data-lay="blurred-bokeh" data-lang="EN" data-treat="blurred-bokeh" data-headline="some places, you tell only one person.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V090.html" title="V090"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V090</span>
+          <span class="cat">Intimacy</span>
+          <span class="emo">whispered</span>
+          <span class="lang">EN</span>
+        </div>
+        <div class="headline">Some places, you tell only one person.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">blurred-bokeh</span>
+          <span class="treat">blurred-bokeh</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Insider-circle of two, exclusive without being smug.</p></details>
+      </div>
+      <a class="open" href="variants/V090.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V091" data-cat="Gratitude" data-emo="content" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="27 chf. danach hast du keine ausreden mehr.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V091.html" title="V091"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V091</span>
+          <span class="cat">Gratitude</span>
+          <span class="emo">content</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">27 CHF. Danach hast du keine Ausreden mehr.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Removes friction by removing reasons to delay.</p></details>
+      </div>
+      <a class="open" href="variants/V091.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V092" data-cat="Gratitude" data-emo="thankful" data-lay="blurred-bokeh" data-lang="DE" data-treat="blurred-bokeh" data-headline="die schweiz ist verdammt nett zu uns.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V092.html" title="V092"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V092</span>
+          <span class="cat">Gratitude</span>
+          <span class="emo">thankful</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Die Schweiz ist verdammt nett zu uns.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">blurred-bokeh</span>
+          <span class="treat">blurred-bokeh</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Soft pride that converts because it&#x27;s not braggy.</p></details>
+      </div>
+      <a class="open" href="variants/V092.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V093" data-cat="Gratitude" data-emo="enough" data-lay="type-dominant" data-lang="DE" data-treat="none" data-headline="141 spots.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V093.html" title="V093"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V093</span>
+          <span class="cat">Gratitude</span>
+          <span class="emo">enough</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">141 Spots.</div>
+        <div class="subhead">Mehr brauchst du diesen Sommer nicht.</div>
+        <div class="meta-bot">
+          <span class="lay">type-dominant</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Replaces FOMO with sufficiency, a quieter conversion path.</p></details>
+      </div>
+      <a class="open" href="variants/V093.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V094" data-cat="Gratitude" data-emo="full" data-lay="multi-image grid" data-lang="DE" data-treat="none" data-headline="genug für einen guten sommer.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V094.html" title="V094"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V094</span>
+          <span class="cat">Gratitude</span>
+          <span class="emo">full</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Genug für einen guten Sommer.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">multi-image grid</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Visual sufficiency makes a small price look generous.</p></details>
+      </div>
+      <a class="open" href="variants/V094.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V095" data-cat="Gratitude" data-emo="quiet-thanks" data-lay="full-bleed" data-lang="DE" data-treat="none" data-headline="für alles, was die alpen uns leihen.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V095.html" title="V095"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V095</span>
+          <span class="cat">Gratitude</span>
+          <span class="emo">quiet-thanks</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Für alles, was die Alpen uns leihen.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Brand-level humility that buyers reward with trust.</p></details>
+      </div>
+      <a class="open" href="variants/V095.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V096" data-cat="Tension" data-emo="charged" data-lay="B&amp;W" data-lang="DE" data-treat="B&amp;W" data-headline="manche spots musst du dir holen.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V096.html" title="V096"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V096</span>
+          <span class="cat">Tension</span>
+          <span class="emo">charged</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Manche Spots musst du dir holen.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">B&amp;W</span>
+          <span class="treat">B&amp;W</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Effort-priced product appeals to the buyer who hates &quot;easy&quot;.</p></details>
+      </div>
+      <a class="open" href="variants/V096.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V097" data-cat="Tension" data-emo="edge" data-lay="full-bleed" data-lang="DE" data-treat="high-contrast" data-headline="du oder die sommerferien? einer gewinnt.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V097.html" title="V097"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V097</span>
+          <span class="cat">Tension</span>
+          <span class="emo">edge</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Du oder die Sommerferien? Einer gewinnt.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">full-bleed</span>
+          <span class="treat">high-contrast</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Self-confrontation framing, the reader buys to win the argument.</p></details>
+      </div>
+      <a class="open" href="variants/V097.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V098" data-cat="Tension" data-emo="wired" data-lay="color-pop" data-lang="DE" data-treat="color-pop" data-headline="spätsommer schlägt zu. bist du fertig?">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V098.html" title="V098"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V098</span>
+          <span class="cat">Tension</span>
+          <span class="emo">wired</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Spätsommer schlägt zu. Bist du fertig?</div>
+        
+        <div class="meta-bot">
+          <span class="lay">color-pop</span>
+          <span class="treat">color-pop</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Climate-as-deadline, more credible than artificial scarcity.</p></details>
+      </div>
+      <a class="open" href="variants/V098.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V099" data-cat="Tension" data-emo="tight" data-lay="mockup-led" data-lang="DE" data-treat="none" data-headline="karte offen, wetter checken, los.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V099.html" title="V099"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V099</span>
+          <span class="cat">Tension</span>
+          <span class="emo">tight</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">Karte offen, Wetter checken, los.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">mockup-led</span>
+          <span class="treat">none</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Removes execution doubt by showing the next click.</p></details>
+      </div>
+      <a class="open" href="variants/V099.html" target="_blank" title="Open full size">↗</a>
+    </article>
+    <article class="card" data-id="V100" data-cat="Tension" data-emo="unfinished" data-lay="map-led" data-lang="DE" data-treat="desaturated" data-headline="141 spots. du hast noch 139.">
+      <div class="frame-wrap"><iframe loading="lazy" src="variants/V100.html" title="V100"></iframe></div>
+      <div class="meta">
+        <div class="meta-top">
+          <span class="vid">V100</span>
+          <span class="cat">Tension</span>
+          <span class="emo">unfinished</span>
+          <span class="lang">DE</span>
+        </div>
+        <div class="headline">141 Spots. Du hast noch 139.</div>
+        
+        <div class="meta-bot">
+          <span class="lay">map-led</span>
+          <span class="treat">desaturated</span>
+        </div>
+        <details class="why"><summary>why</summary><p>Implied progress bar, the page sells the rest of the list.</p></details>
+      </div>
+      <a class="open" href="variants/V100.html" target="_blank" title="Open full size">↗</a>
+    </article>
+  </div>
+  <p class="empty" id="empty"></p>
+</main>
+<script>
+// Scale iframes based on container width (1400 native -> fit container)
+function scaleIframes() {
+  document.querySelectorAll('.frame-wrap').forEach(w => {
+    const iframe = w.querySelector('iframe');
+    if (!iframe) return;
+    const scale = w.clientWidth / 1400;
+    iframe.style.transform = `scale(${scale})`;
+    w.style.height = (787 * scale) + 'px';
+  });
+}
+new ResizeObserver(scaleIframes).observe(document.body);
+window.addEventListener('load', scaleIframes);
+setTimeout(scaleIframes, 0);
+
+// Filtering
+const q = document.getElementById('q');
+const fc = document.getElementById('f-cat');
+const fl = document.getElementById('f-lay');
+const ft = document.getElementById('f-treat');
+const flang = document.getElementById('f-lang');
+const count = document.getElementById('count');
+const cards = [...document.querySelectorAll('.card')];
+
+function apply() {
+  const qv = q.value.trim().toLowerCase();
+  const cv = fc.value, lv = fl.value, tv = ft.value, lang = flang.value;
+  let shown = 0;
+  cards.forEach(c => {
+    const okQ = !qv || c.dataset.id.toLowerCase().includes(qv) || c.dataset.headline.includes(qv) || c.dataset.emo.toLowerCase().includes(qv);
+    const okC = !cv || c.dataset.cat === cv;
+    const okL = !lv || c.dataset.lay === lv;
+    const okT = !tv || c.dataset.treat === tv;
+    const okLang = !lang || c.dataset.lang === lang;
+    const ok = okQ && okC && okL && okT && okLang;
+    c.classList.toggle('hidden', !ok);
+    if (ok) shown++;
+  });
+  count.textContent = `${shown} / ${cards.length}`;
+}
+[q, fc, fl, ft, flang].forEach(el => el.addEventListener('input', apply));
+</script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!-- V028 · Achievement · accomplished · layout=data-led · treatment=none · img=/map4-heroes/emotional/pic%20de%20jallouvre.jpeg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V028</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#f3eee5; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; display:grid; grid-template-columns: 740px 660px; }
+  .left { position:relative; overflow:hidden; }
+  .left img {
+    width:100%; height:100%; object-fit:cover; object-position:30% 50%;
+    display:block;
+  }
+  .left .scrim {
+    position:absolute; inset:0;
+    background: linear-gradient(90deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 40%, rgba(243,238,229,0.0) 70%, rgba(243,238,229,0.35) 100%);
+  }
+  .left .tag {
+    position:absolute;
+    left:36px; top:36px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.22em;
+    color:#fff;
+    background:rgba(0,0,0,0.42);
+    padding:8px 12px;
+    border-radius:4px;
+  }
+  .left .stamp {
+    position:absolute;
+    left:36px; bottom:36px;
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-style:italic;
+    color:#fff;
+    font-size:18px;
+    text-shadow:0 1px 16px rgba(0,0,0,0.35);
+  }
+  .right {
+    background:#f3eee5;
+    padding:64px 56px;
+    display:flex; flex-direction:column;
+    color:#1f1a14;
+  }
+  .right .label {
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:#7a6a55;
+    margin-bottom:24px;
+  }
+  .right h1 {
+    margin:0;
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:66px;
+    line-height:0.95;
+    letter-spacing:-0.02em;
+    color:#1f1a14;
+  }
+  .right h1 em { font-style:italic; font-weight:400; }
+  .right .sub {
+    margin-top:18px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:16px;
+    letter-spacing:0.02em;
+    color:#5a4d3a;
+  }
+  .list {
+    margin-top:36px;
+    columns:3;
+    column-gap:12px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    line-height:1.8;
+    color:#5a4d3a;
+  }
+  .list .item {
+    display:flex; align-items:center; gap:8px;
+    break-inside:avoid;
+  }
+  .list .item .box {
+    width:11px; height:11px;
+    border:1px solid #b9aa90;
+    border-radius:2px;
+    display:inline-block;
+    flex-shrink:0;
+  }
+  .list .item.done .box {
+    background:#1f1a14;
+    border-color:#1f1a14;
+    position:relative;
+  }
+  .list .item.done .box::after {
+    content:"";
+    position:absolute;
+    left:2px; top:0px;
+    width:5px; height:8px;
+    border:solid #f3eee5;
+    border-width:0 1.6px 1.6px 0;
+    transform:rotate(45deg);
+  }
+  .list .item.done span:last-child { color:#1f1a14; }
+  .footer {
+    margin-top:auto;
+    display:flex; justify-content:space-between; align-items:flex-end;
+  }
+  .count {
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:60px;
+    line-height:0.9;
+    color:#1f1a14;
+  }
+  .count small {
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.2em;
+    color:#7a6a55;
+    display:block;
+    margin-top:6px;
+    text-transform:uppercase;
+  }
+  .progress-bar {
+    flex:1;
+    margin-left:32px;
+    height:6px;
+    background:#dfd5c1;
+    border-radius:999px;
+    overflow:hidden;
+    align-self:center;
+  }
+  .progress-bar .fill {
+    width:18%;
+    height:100%;
+    background:#1f1a14;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="left">
+      <img src="/map4-heroes/emotional/pic%20de%20jallouvre.jpeg" alt="">
+      <div class="scrim"></div>
+      <div class="tag">PIC DE JALLOUVRE / 2,408 m</div>
+      <div class="stamp">Spot 026 of 141.</div>
+    </div>
+    <div class="right">
+      <div class="label">Swiss Gems · The Summer Manifest</div>
+      <h1>A summer,<br><em>on paper.</em></h1>
+      <div class="sub">141 spots. Tick them as you go.</div>
+      <div class="list">
+        <div class="item done"><span class="box"></span><span>Seealpsee</span></div>
+        <div class="item done"><span class="box"></span><span>Oeschinensee</span></div>
+        <div class="item done"><span class="box"></span><span>Limmernsee</span></div>
+        <div class="item done"><span class="box"></span><span>Bachalpsee</span></div>
+        <div class="item done"><span class="box"></span><span>Rosenlaui</span></div>
+        <div class="item"><span class="box"></span><span>Aletsch</span></div>
+        <div class="item"><span class="box"></span><span>Fronalpstock</span></div>
+        <div class="item"><span class="box"></span><span>Tannhorn</span></div>
+        <div class="item"><span class="box"></span><span>Hardergrat</span></div>
+        <div class="item"><span class="box"></span><span>Cheserys</span></div>
+        <div class="item"><span class="box"></span><span>Fulbergmain</span></div>
+        <div class="item"><span class="box"></span><span>Jallouvre</span></div>
+        <div class="item"><span class="box"></span><span>Greina</span></div>
+        <div class="item"><span class="box"></span><span>Susten</span></div>
+        <div class="item"><span class="box"></span><span>Furka</span></div>
+        <div class="item"><span class="box"></span><span>Engstligenalp</span></div>
+        <div class="item"><span class="box"></span><span>Faulhornblick</span></div>
+        <div class="item"><span class="box"></span><span>+ 124 more</span></div>
+      </div>
+      <div class="footer">
+        <div class="count">141<small>spots plotted</small></div>
+        <div class="progress-bar"><div class="fill"></div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

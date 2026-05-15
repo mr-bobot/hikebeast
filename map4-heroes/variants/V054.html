@@ -1,0 +1,117 @@
+<!-- V054 · Solitude · private · layout=painted · treatment=painted · img=/map4-heroes/emotional/seealpsee.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V054</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#1a1612; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  /* SVG painted filter applied to img */
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 60%;
+    display:block;
+    filter: url(#paint54) saturate(0.92) brightness(0.97) contrast(0.94);
+  }
+  /* texture canvas faking brushstrokes */
+  .paint-layer {
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(112deg, rgba(255,238,210,0.05) 0px, rgba(0,0,0,0) 2px, rgba(180,150,110,0.04) 4px, rgba(0,0,0,0) 9px),
+      repeating-linear-gradient(-22deg, rgba(160,170,140,0.04) 0px, rgba(0,0,0,0) 3px, rgba(255,255,255,0.03) 5px, rgba(0,0,0,0) 11px);
+    mix-blend-mode:overlay;
+    pointer-events:none;
+  }
+  .canvas-grain {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 28% 32%, rgba(255,235,195,0.10), transparent 60%),
+      radial-gradient(circle at 78% 72%, rgba(70,60,50,0.18), transparent 65%);
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(28,20,14,0.42) 0%, rgba(0,0,0,0) 38%, rgba(28,20,14,0.55) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    top:80px;
+    left:88px;
+    right:88px;
+    color:#f5ecd9;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+  }
+  .copy h1 {
+    margin:0;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-size:88px;
+    line-height:1.02;
+    letter-spacing:-0.005em;
+    max-width:1100px;
+  }
+  .copy h1 .em {
+    font-style:italic;
+    font-weight:400;
+    color:#f3d99a;
+  }
+  .foot {
+    position:absolute;
+    bottom:54px;
+    left:88px;
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:12px;
+    letter-spacing:0.38em;
+    text-transform:uppercase;
+    color:rgba(245,236,217,0.66);
+  }
+  .signature {
+    position:absolute;
+    bottom:54px;
+    right:96px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:18px;
+    color:rgba(245,236,217,0.55);
+    letter-spacing:0.04em;
+  }
+</style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <filter id="paint54">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="blur"/>
+        <feColorMatrix in="blur" type="matrix" values="
+          1.06 0    0    0 -0.02
+          0    1.04 0    0 -0.02
+          0    0    1.0  0 -0.02
+          0    0    0    1  0"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.022" numOctaves="2" seed="7" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G" result="warp"/>
+        <feGaussianBlur in="warp" stdDeviation="1.2"/>
+      </filter>
+    </defs>
+  </svg>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/seealpsee.jpeg" alt="">
+    <div class="paint-layer"></div>
+    <div class="canvas-grain"></div>
+    <div class="scrim"></div>
+    <div class="copy">
+      <h1>Manche Tage <span class="em">gehören nur dir.</span></h1>
+    </div>
+    <div class="foot">Seealpsee, gemalt aus Erinnerung</div>
+    <div class="signature">— L.H.</div>
+  </div>
+</body>
+</html>

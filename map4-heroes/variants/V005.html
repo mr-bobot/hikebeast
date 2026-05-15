@@ -1,0 +1,68 @@
+<!-- V005 · Awe · breathless · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/LOST7855-Edit.jpeg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V005</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 65%;
+    display:block;
+  }
+  /* horizon-line text band: a narrow soft band of slightly darker tint near the lake waterline */
+  .band {
+    position:absolute;
+    left:0; right:0;
+    top: 56%; /* approximate waterline */
+    height: 130px;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 40%, rgba(0,0,0,0.18) 60%, rgba(0,0,0,0) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:0; right:0;
+    top: 56%;
+    height: 130px;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    color:#f7f3ec;
+  }
+  .copy h1 {
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:300;
+    font-size: 72px;
+    line-height: 1.0;
+    letter-spacing:-0.01em;
+    margin:0;
+    text-shadow: 0 1px 24px rgba(0,0,0,0.4);
+  }
+  .mark {
+    position:absolute;
+    bottom: 40px; left:0; right:0;
+    text-align:center;
+    color: rgba(247,243,236,0.55);
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/LOST7855-Edit.jpeg" alt="">
+    <div class="band"></div>
+    <div class="copy">
+      <h1>The places people whisper about.</h1>
+    </div>
+  </div>
+</body>
+</html>

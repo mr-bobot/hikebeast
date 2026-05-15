@@ -1,0 +1,55 @@
+<!-- V086 · Intimacy · tender · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/rosenlaui.jpg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V086</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:60% 50%;
+    display:block;
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.05) 45%, rgba(0,0,0,0.55) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:88px;
+    right:88px;
+    bottom:88px;
+    color:#f4efe6;
+    text-shadow: 0 1px 28px rgba(0,0,0,0.45);
+  }
+  .copy h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 72px;
+    line-height: 1.02;
+    letter-spacing: -0.012em;
+    margin: 0;
+    max-width: 940px;
+  }
+  .copy h1 .em {
+    font-style: italic;
+    font-weight: 400;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/rosenlaui.jpg" alt="">
+    <div class="scrim"></div>
+    <div class="copy">
+      <h1>Bring the person you'd take in a <span class="em">wedding photo</span>.</h1>
+    </div>
+  </div>
+</body>
+</html>

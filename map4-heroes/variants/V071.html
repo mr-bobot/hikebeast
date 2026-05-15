@@ -1,0 +1,139 @@
+<!-- V071 · Transformation · reset · layout=split-screen · treatment=none · img=/map4-heroes/emotional/limmernsee1.jpg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>V071</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; font-family:'Inter', sans-serif; }
+  .hero { position:relative; width:1400px; height:787px; background:#000; display:flex; }
+  /* LEFT: synthetic office scene */
+  .left {
+    width:700px; height:787px; position:relative; overflow:hidden;
+    background:
+      linear-gradient(180deg, #b9bdc2 0%, #a3a8ae 30%, #9c9fa3 60%, #888c91 100%);
+  }
+  /* office wall/floor: subtle perspective with floor line */
+  .left::before {
+    content:""; position:absolute; left:0; right:0; bottom:0; height:34%;
+    background:linear-gradient(180deg, #6b6e72, #4f5256 70%, #3e4145);
+    box-shadow:inset 0 1px 0 rgba(0,0,0,0.25);
+  }
+  /* ceiling tile grid */
+  .ceiling {
+    position:absolute; left:0; right:0; top:0; height:32%;
+    background:
+      linear-gradient(180deg, #cfd3d8 0%, #b4b8be 100%),
+      repeating-linear-gradient(to right, transparent 0, transparent 79px, rgba(0,0,0,0.18) 79px, rgba(0,0,0,0.18) 80px);
+    background-blend-mode:multiply;
+  }
+  .ceiling::after {
+    content:""; position:absolute; inset:0;
+    background:repeating-linear-gradient(to bottom, transparent 0, transparent 39px, rgba(0,0,0,0.18) 39px, rgba(0,0,0,0.18) 40px);
+  }
+  /* fluorescent strip light */
+  .strip {
+    position:absolute; left:18%; right:18%; top:46px; height:32px;
+    background:linear-gradient(180deg, #fefefe 0%, #f2f4f0 45%, #cbd0c8 100%);
+    box-shadow:0 14px 60px rgba(255,255,255,0.6), 0 28px 90px rgba(255,255,255,0.25), inset 0 1px 0 rgba(255,255,255,0.9);
+    border:1px solid rgba(0,0,0,0.18);
+  }
+  .strip::before {
+    content:""; position:absolute; left:6%; right:6%; top:0; bottom:0;
+    background:repeating-linear-gradient(to right, transparent 0, transparent 26px, rgba(0,0,0,0.04) 26px, rgba(0,0,0,0.04) 28px);
+  }
+  /* monitor on a desk */
+  .desk {
+    position:absolute; left:18%; right:18%; bottom:5%; height:38%;
+    background:linear-gradient(180deg, #8c8f93 0%, #75787c 100%);
+    border-top:2px solid rgba(0,0,0,0.18);
+  }
+  .monitor {
+    position:absolute; left:34%; bottom:55%; width:32%; aspect-ratio: 16/10; height:auto;
+    background:#0e0e0e; border:8px solid #2a2c2f;
+    box-shadow:0 14px 28px rgba(0,0,0,0.4);
+  }
+  .monitor::before {
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(120deg, rgba(80,90,110,0.7), rgba(120,140,170,0.5)),
+      repeating-linear-gradient(to bottom, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 4px);
+  }
+  .monitor::after {
+    content:"Inbox · 247 unread"; position:absolute; left:10px; top:10px; font-family:'JetBrains Mono', monospace; font-size:9px; color:rgba(255,255,255,0.65); letter-spacing:0.1em;
+  }
+  .monitor-stand {
+    position:absolute; left:46%; bottom:44%; width:8%; height:8%;
+    background:linear-gradient(180deg, #2a2c2f, #1a1c1f);
+    transform:skewX(0);
+  }
+  /* timestamp + cubicle metadata */
+  .meta-l {
+    position:absolute; top:24px; left:24px; right:24px; display:flex; justify-content:space-between; font-family:'JetBrains Mono', monospace; font-size:11px; color:rgba(20,20,20,0.55); letter-spacing:0.06em;
+  }
+  .meta-l .date { color:rgba(20,20,20,0.7); }
+  .label-l {
+    position:absolute; bottom:24px; left:24px; right:24px; display:flex; justify-content:space-between; align-items:flex-end; font-family:'JetBrains Mono', monospace; font-size:11px; color:rgba(245,245,245,0.65); letter-spacing:0.1em;
+  }
+  .label-l strong { color:#fff; }
+  .left-title { position:absolute; left:30px; top:46%; transform:translateY(-50%); font-family:'Fraunces', serif; font-weight:300; font-style:italic; font-size:74px; line-height:0.96; color:rgba(20,22,26,0.4); letter-spacing:-0.02em; pointer-events:none; }
+  .left-tag { position:absolute; left:30px; top:32%; font-size:10px; letter-spacing:0.4em; text-transform:uppercase; color:rgba(20,22,26,0.5); font-weight:600; }
+  /* RIGHT: alpine */
+  .right { width:700px; height:787px; position:relative; overflow:hidden; }
+  .right img { width:100%; height:100%; object-fit:cover; object-position:50% 50%; display:block; }
+  .meta-r {
+    position:absolute; top:24px; left:24px; right:24px; display:flex; justify-content:space-between; font-family:'JetBrains Mono', monospace; font-size:11px; color:rgba(255,255,255,0.85); letter-spacing:0.06em; text-shadow:0 1px 4px rgba(0,0,0,0.4);
+  }
+  .label-r {
+    position:absolute; bottom:24px; left:24px; right:24px; display:flex; justify-content:space-between; align-items:flex-end; font-family:'JetBrains Mono', monospace; font-size:11px; color:rgba(255,255,255,0.85); letter-spacing:0.1em; text-shadow:0 1px 4px rgba(0,0,0,0.4);
+  }
+  .label-r strong { color:#fff; }
+  .right-tag { position:absolute; right:30px; top:32%; font-size:10px; letter-spacing:0.4em; text-transform:uppercase; color:rgba(255,255,255,0.85); font-weight:600; text-align:right; }
+  /* CENTER BAND */
+  .center {
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:10;
+    background:#0f1014; color:#fff; padding:32px 42px; min-width:560px; text-align:center;
+    box-shadow:0 30px 80px rgba(0,0,0,0.55);
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .center .pre { font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.4em; text-transform:uppercase; color:rgba(255,255,255,0.65); margin-bottom:14px; }
+  .center .pre .dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#ffd66b; vertical-align:middle; margin:0 12px 2px; }
+  .center h1 { font-family:'Fraunces', serif; font-weight:300; font-size:64px; line-height:0.98; letter-spacing:-0.025em; margin:0; }
+  .center h1 em { font-style:italic; font-weight:500; color:#ffd66b; }
+  .center .vs {
+    position:absolute; left:50%; transform:translateX(-50%); top:-28px; width:56px; height:56px; border-radius:50%; background:#fff; color:#0f1014; display:flex; align-items:center; justify-content:center; font-family:'Inter', sans-serif; font-weight:700; font-size:13px; letter-spacing:0.16em; box-shadow:0 8px 22px rgba(0,0,0,0.4);
+  }
+  .seam { position:absolute; left:50%; top:0; bottom:0; width:1px; background:rgba(255,255,255,0.5); transform:translateX(-50%); }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="left">
+      <div class="ceiling"></div>
+      <div class="strip"></div>
+      <div class="monitor"></div>
+      <div class="monitor-stand"></div>
+      <div class="desk"></div>
+      <div class="meta-l"><span>FLR 04 · DESK 12-B</span><span class="date">Mon · 11:42 AM</span></div>
+      <div class="left-tag">A — Mon · indoors · 47 emails</div>
+      <div class="left-title">Mon ➝ Fri</div>
+      <div class="label-l"><span><strong>This week, today.</strong></span><span>Cubicle 12-B</span></div>
+    </div>
+    <div class="right">
+      <img src="/map4-heroes/emotional/limmernsee1.jpg" alt="">
+      <div class="meta-r"><span>LIMMERNSEE · GLARUS</span><span>Sat · 06:12 AM</span></div>
+      <div class="right-tag">B — Sat · alpine · 0 emails</div>
+      <div class="label-r"><span><strong>Same week, Saturday.</strong></span><span>2092 m</span></div>
+    </div>
+    <div class="seam"></div>
+    <div class="center">
+      <div class="vs">VS</div>
+      <div class="pre">A<span class="dot"></span>B</div>
+      <h1>Same week, <em>different you</em>.</h1>
+    </div>
+  </div>
+</body>
+</html>

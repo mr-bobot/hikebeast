@@ -1,0 +1,102 @@
+<!-- V088 · Intimacy · shared · layout=polaroid-single · treatment=grain · img=/map4-heroes/emotional/limmernsee1.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V088</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Inter:wght@400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#1a1610; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden;
+    background:
+      radial-gradient(ellipse at 50% 45%, #2a241c 0%, #1a1610 70%, #0e0b07 100%);
+  }
+  .polaroid {
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%) rotate(-2.5deg);
+    width:760px;
+    height:680px;
+    background:#f1ebde;
+    padding:28px 28px 110px 28px;
+    box-shadow:
+      0 28px 60px rgba(0,0,0,0.55),
+      0 8px 18px rgba(0,0,0,0.35);
+    box-sizing:border-box;
+  }
+  .polaroid .frame {
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+  }
+  .polaroid img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:50% 50%;
+    filter: sepia(0.18) contrast(0.92) saturate(0.85) brightness(0.92);
+    display:block;
+  }
+  .polaroid .grain {
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(rgba(255,240,210,0.06) 1px, transparent 1px),
+      radial-gradient(rgba(0,0,0,0.18) 1px, transparent 1px);
+    background-size: 3px 3px, 5px 5px;
+    background-position: 0 0, 1px 2px;
+    mix-blend-mode:overlay;
+    opacity:0.7;
+    pointer-events:none;
+  }
+  .polaroid .burn {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 8% 92%, rgba(60,30,10,0.65) 0%, rgba(60,30,10,0) 22%),
+      radial-gradient(circle at 92% 6%, rgba(60,30,10,0.55) 0%, rgba(60,30,10,0) 20%),
+      radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(20,10,0,0.45) 100%);
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+  .polaroid .caption {
+    position:absolute;
+    left:0; right:0; bottom:28px;
+    text-align:center;
+    font-family:'Caveat', cursive;
+    font-weight:600;
+    font-size:38px;
+    color:#2a2218;
+    letter-spacing: 0.01em;
+  }
+  .signature {
+    position:absolute;
+    left:50%;
+    bottom:36px;
+    transform:translateX(-50%);
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:11px;
+    letter-spacing:0.32em;
+    color:rgba(241,235,222,0.42);
+    text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="polaroid">
+      <div class="frame">
+        <img src="/map4-heroes/emotional/limmernsee1.jpg" alt="">
+        <div class="grain"></div>
+        <div class="burn"></div>
+      </div>
+      <div class="caption">Geheimnis zu zweit.</div>
+    </div>
+    <div class="signature">Hikebeast</div>
+  </div>
+</body>
+</html>

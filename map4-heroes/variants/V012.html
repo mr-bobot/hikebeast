@@ -1,0 +1,52 @@
+<!-- V012 · Belonging · warm · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/rosenlaui.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V012</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:60% 50%;
+    display:block;
+  }
+  /* warm corner glow lower-left where copy lives */
+  .lift {
+    position:absolute; left:0; bottom:0; width:60%; height:55%;
+    background: radial-gradient(ellipse at 0% 100%, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0) 65%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:64px; bottom:64px;
+    color:#fffaf0;
+    max-width: 720px;
+  }
+  h1 {
+    font-family:'DM Serif Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1.05;
+    letter-spacing: -0.005em;
+    margin: 0;
+    color:#fffaf0;
+    text-shadow: 0 2px 22px rgba(0,0,0,0.45);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/rosenlaui.jpg" alt="">
+    <div class="lift"></div>
+    <div class="copy">
+      <h1>Für die Person, die mitkommt, wenn du fragst.</h1>
+    </div>
+  </div>
+</body>
+</html>

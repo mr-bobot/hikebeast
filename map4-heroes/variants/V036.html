@@ -1,0 +1,77 @@
+<!-- V036 · Mystery · unknown · layout=full-bleed · treatment=low-contrast · img=/map4-heroes/emotional/fulbergmain.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V036</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#cfcec9; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    filter: contrast(0.62) brightness(1.18) saturate(0.55);
+    display:block;
+  }
+  .fog {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(232,228,218,0.55) 0%, rgba(232,228,218,0.18) 40%, rgba(232,228,218,0) 70%),
+      linear-gradient(180deg, rgba(232,228,218,0) 50%, rgba(232,228,218,0.35) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:96px;
+    bottom:96px;
+    max-width:920px;
+    color:#2a2a26;
+  }
+  .copy h1 {
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-size:54px;
+    line-height:1.14;
+    letter-spacing:-0.005em;
+    margin:0;
+  }
+  .copy h1 .em {
+    font-style:italic;
+    color:#4a4a44;
+  }
+  .key {
+    position:absolute;
+    right:96px;
+    bottom:108px;
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:13px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:rgba(40,40,36,0.5);
+  }
+  .key::before {
+    content:"";
+    display:inline-block;
+    width:14px; height:1px;
+    background:rgba(40,40,36,0.4);
+    vertical-align:middle;
+    margin-right:12px;
+    transform:translateY(-2px);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/fulbergmain.jpeg" alt="">
+    <div class="fog"></div>
+    <div class="copy">
+      <h1>Manche Spots <span class="em">verraten</span> wir nur,<br>wenn du fragst.</h1>
+    </div>
+    <div class="key">auf anfrage</div>
+  </div>
+</body>
+</html>

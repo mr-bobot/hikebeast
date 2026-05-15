@@ -1,0 +1,113 @@
+<!-- V015 · Belonging · seen · layout=photo-as-texture · treatment=blurred-bokeh · img=/map4-heroes/emotional/riffelsee4.jpg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V015</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0d0a07; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+
+  /* base photo, tightly cropped to the laps/cups area, softly blurred to read as texture */
+  .photo {
+    position:absolute; inset:-40px;
+    width: calc(100% + 80px); height: calc(100% + 80px);
+    object-fit:cover; object-position:50% 80%;
+    filter: blur(22px) saturate(1.08) brightness(0.86);
+    transform: scale(1.05);
+  }
+  /* a second crisp pass, masked to a soft circle, gives the bokeh-but-anchored feel */
+  .photo-sharp {
+    position:absolute;
+    left: 60%; top: 38%;
+    width: 760px; height: 760px;
+    object-fit:cover; object-position:50% 80%;
+    filter: saturate(1.05) contrast(1.04);
+    -webkit-mask-image: radial-gradient(ellipse 55% 50% at 50% 55%, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse 55% 50% at 50% 55%, #000 30%, transparent 75%);
+    transform: translate(-30%, -38%);
+  }
+
+  /* warm vignette */
+  .vignette {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 65% 60%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 75%),
+      linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.45) 100%);
+  }
+  /* warm color cast */
+  .warm {
+    position:absolute; inset:0;
+    background: linear-gradient(135deg, rgba(255,170,90,0.10) 0%, rgba(0,0,0,0) 40%, rgba(80,40,20,0.25) 100%);
+    mix-blend-mode: overlay;
+  }
+
+  /* steam-like wisps */
+  .steam {
+    position:absolute;
+    width: 240px; height: 280px;
+    left: 760px; top: 280px;
+    background: radial-gradient(ellipse 40% 60% at 50% 30%, rgba(255,255,255,0.10), transparent 70%);
+    filter: blur(14px);
+    opacity: 0.9;
+  }
+  .steam.s2 {
+    left: 880px; top: 240px; width: 200px; height: 240px;
+    background: radial-gradient(ellipse 40% 60% at 50% 30%, rgba(255,255,255,0.08), transparent 70%);
+  }
+
+  .copy {
+    position:absolute;
+    left: 88px; top: 280px;
+    max-width: 720px;
+    color: #f4ecd9;
+  }
+  .copy .marker {
+    display:inline-block;
+    width: 44px; height: 1px;
+    background: rgba(244,236,217,0.6);
+    margin-bottom: 24px;
+  }
+  .copy h1 {
+    font-family:'Fraunces', serif;
+    font-weight: 300;
+    font-size: 92px;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .copy h1 .num {
+    font-style: italic;
+    font-weight: 400;
+    color: #f8d28a;
+  }
+  .copy .small {
+    margin-top: 28px;
+    font-family:'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(244,236,217,0.55);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/riffelsee4.jpg" alt="">
+    <img class="photo-sharp" src="/map4-heroes/emotional/riffelsee4.jpg" alt="">
+    <div class="vignette"></div>
+    <div class="warm"></div>
+    <div class="steam"></div>
+    <div class="steam s2"></div>
+
+    <div class="copy">
+      <div class="marker"></div>
+      <h1>Two mugs,<br><span class="num">141</span> mornings.</h1>
+      <div class="small">Riffelsee · before the world wakes up</div>
+    </div>
+  </div>
+</body>
+</html>

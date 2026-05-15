@@ -1,0 +1,130 @@
+<!-- V060 · Joy · golden · layout=color-pop · treatment=color-pop · img=/map4-heroes/emotional/fronalpstock.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V060</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0c0805; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 55%;
+    /* color-pop: pump warm sunset gold */
+    filter: saturate(1.62) contrast(1.08) brightness(1.04) hue-rotate(-6deg);
+    display:block;
+  }
+  /* warm gold wash sitting over the sky band */
+  .pop {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 50% 38%, rgba(255,180,90,0.28) 0%, rgba(255,140,70,0.14) 38%, rgba(0,0,0,0) 68%),
+      linear-gradient(180deg, rgba(255,170,80,0.10) 0%, rgba(0,0,0,0) 35%);
+    mix-blend-mode:screen;
+    pointer-events:none;
+  }
+  .vignette {
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at 50% 55%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%);
+    pointer-events:none;
+  }
+  .scrim-bottom {
+    position:absolute; inset:0;
+    background: linear-gradient(0deg, rgba(20,8,2,0.78) 0%, rgba(20,8,2,0.2) 28%, rgba(0,0,0,0) 50%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:88px;
+    bottom:88px;
+    right:88px;
+    color:#fff5e3;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:48px;
+  }
+  .copy .lockup h1 {
+    margin:0;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:46px;
+    line-height:1.08;
+    letter-spacing:-0.015em;
+    max-width:760px;
+    text-shadow: 0 1px 18px rgba(0,0,0,0.55);
+  }
+  .copy .lockup h1 .num {
+    font-weight:700;
+    color:#ffcf6a;
+  }
+  .cta {
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+    background:#ffcf6a;
+    color:#2a1a08;
+    padding:18px 28px 18px 32px;
+    border-radius:999px;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:0.01em;
+    box-shadow: 0 16px 32px rgba(255,180,90,0.35), 0 4px 10px rgba(0,0,0,0.3);
+    white-space:nowrap;
+  }
+  .cta .arrow {
+    display:inline-block;
+    width:22px; height:2px;
+    background:#2a1a08;
+    position:relative;
+  }
+  .cta .arrow::after {
+    content:"";
+    position:absolute;
+    right:-1px; top:-4px;
+    width:10px; height:10px;
+    border-right:2px solid #2a1a08;
+    border-top:2px solid #2a1a08;
+    transform:rotate(45deg);
+  }
+  .kicker {
+    position:absolute;
+    left:88px; top:88px;
+    font-family:'Inter', sans-serif;
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:0.36em;
+    text-transform:uppercase;
+    color:rgba(255,245,227,0.85);
+  }
+  .kicker .dot {
+    display:inline-block;
+    width:6px; height:6px;
+    background:#ffcf6a;
+    border-radius:50%;
+    margin-right:14px;
+    vertical-align:middle;
+    box-shadow: 0 0 14px rgba(255,207,106,0.7);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/fronalpstock.jpg" alt="">
+    <div class="pop"></div>
+    <div class="vignette"></div>
+    <div class="scrim-bottom"></div>
+    <div class="kicker"><span class="dot"></span>Schweizer Sommer · 141 Spots</div>
+    <div class="copy">
+      <div class="lockup">
+        <h1>Ein Sommer, ein Preis: <span class="num">27.</span></h1>
+      </div>
+      <a class="cta">Map ansehen <span class="arrow"></span></a>
+    </div>
+  </div>
+</body>
+</html>

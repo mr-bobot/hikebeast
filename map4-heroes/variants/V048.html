@@ -1,0 +1,130 @@
+<!-- V048 · Anticipation · electric · layout=multi-image-grid · treatment=none · img=/map4-heroes/emotional/hardgergrat%20camping.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V048</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0a0a0a; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; background:#000; }
+  /* 6-cell asymmetric grid */
+  .grid {
+    position:absolute; inset:0;
+    display:grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap:3px;
+    background:#000;
+  }
+  .cell {
+    position:relative; overflow:hidden;
+    background-size:cover; background-position:center;
+  }
+  .cell.big { grid-row: span 2; }
+  .cell.c1 { background-image:url('/map4-heroes/emotional/hardgergrat%20camping.jpeg'); background-position:50% 45%; }
+  .cell.c2 { background-image:url('/map4-heroes/spots/bachalpsee/main.jpg'); }
+  .cell.c3 { background-image:url('/map4-heroes/spots/oeschinensee/main.jpg'); }
+  .cell.c4 { background-image:url('/map4-heroes/spots/joriseen/main.jpg'); }
+  .cell.c5 { background-image:url('/map4-heroes/spots/aletsch_glacier/main.jpg'); }
+  .cell.c6 { background-image:url('/map4-heroes/spots/grindelwald/main.jpg'); }
+  /* slight cool-dawn tonal cohesion across */
+  .grid::after {
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(170deg, rgba(20,30,80,0.18) 0%, transparent 35%, rgba(255,170,90,0.12) 100%);
+    pointer-events:none;
+  }
+  /* center card with kicker + headline + cta */
+  .card {
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:640px;
+    background:#fbf6e6;
+    padding:54px 56px 50px 56px;
+    box-shadow: 0 36px 80px rgba(0,0,0,0.55), 0 6px 16px rgba(0,0,0,0.35);
+  }
+  .kicker {
+    font-family:'Inter', sans-serif;
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:0.42em;
+    color:#c75d18;
+    margin-bottom:18px;
+  }
+  .kicker::before {
+    content:""; display:inline-block; width:28px; height:1.5px;
+    background:#c75d18; vertical-align:middle; margin-right:14px;
+    transform:translateY(-3px);
+  }
+  h1 {
+    margin:0;
+    font-family:'Inter', sans-serif;
+    font-weight:900;
+    font-size:78px;
+    line-height:0.95;
+    letter-spacing:-0.04em;
+    color:#1a1207;
+  }
+  .cta {
+    margin-top:38px;
+    display:inline-flex; align-items:center;
+    gap:14px;
+    padding:18px 30px;
+    background:#1a1207;
+    color:#fbf6e6;
+    font-family:'Inter', sans-serif;
+    font-weight:800;
+    font-size:15px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+  }
+  .cta .arrow {
+    display:inline-block;
+    width:32px; height:1.5px;
+    background:#fbf6e6;
+    position:relative;
+  }
+  .cta .arrow::after {
+    content:""; position:absolute; right:0; top:-4px;
+    border-left:8px solid #fbf6e6;
+    border-top:5px solid transparent;
+    border-bottom:5px solid transparent;
+  }
+  /* date corner */
+  .datecorner {
+    position:absolute; top:38px; right:48px;
+    z-index:2;
+    color:#fff;
+    font-family:'Inter', sans-serif;
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:0.35em;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.7);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="grid">
+      <div class="cell c1 big"></div>
+      <div class="cell c2"></div>
+      <div class="cell c3"></div>
+      <div class="cell c4"></div>
+      <div class="cell c5"></div>
+      <div class="cell c6"></div>
+    </div>
+
+    <div class="datecorner">SA · 20.06.26 · 05:42</div>
+
+    <div class="card">
+      <div class="kicker">SOMMER 2026</div>
+      <h1>Fängt am<br>Wochenende an.</h1>
+      <div class="cta">Hol's dir <span class="arrow"></span></div>
+    </div>
+  </div>
+</body>
+</html>

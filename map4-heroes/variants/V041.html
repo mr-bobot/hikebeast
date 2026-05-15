@@ -1,0 +1,110 @@
+<!-- V041 · Nostalgia · warm · layout=polaroid-collage · treatment=grain · img=/map4-heroes/emotional/rosenlaui.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V041</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#e8e1d3; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden;
+    background:
+      radial-gradient(circle at 30% 20%, #f3eddf 0%, #e8e1d3 50%, #d8cfbf 100%);
+  }
+  /* paper texture */
+  .paper {
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(120,90,50,0.025) 0px, rgba(120,90,50,0.025) 1px, transparent 1px, transparent 3px),
+      repeating-linear-gradient(90deg, rgba(120,90,50,0.025) 0px, rgba(120,90,50,0.025) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+  }
+  .polaroid {
+    position:absolute;
+    background:#fbf7ec;
+    padding:14px 14px 56px 14px;
+    box-shadow: 0 12px 28px rgba(40,30,15,0.28), 0 2px 4px rgba(40,30,15,0.18);
+    border-radius:2px;
+  }
+  .polaroid .ph {
+    width:170px; height:170px;
+    background-size:cover; background-position:center;
+    filter:saturate(0.78) sepia(0.08) contrast(0.96);
+    display:block;
+  }
+  .polaroid .cap {
+    position:absolute;
+    bottom:14px; left:0; right:0;
+    text-align:center;
+    font-family:'Caveat', cursive;
+    font-size:18px;
+    color:#3a2e1a;
+    letter-spacing:0.01em;
+  }
+  /* place 9 polaroids in a loose layered grid */
+  .p1 { top:42px; left:64px; transform:rotate(-5deg); }
+  .p2 { top:30px; left:312px; transform:rotate(3deg); }
+  .p3 { top:50px; left:560px; transform:rotate(-2deg); z-index:3; }
+  .p4 { top:38px; left:820px; transform:rotate(4deg); }
+  .p5 { top:54px; left:1080px; transform:rotate(-3deg); }
+  .p6 { top:330px; left:48px; transform:rotate(4deg); }
+  .p7 { top:430px; left:300px; transform:rotate(-3deg); }
+  .p8 { top:450px; left:870px; transform:rotate(2deg); }
+  .p9 { top:460px; left:1130px; transform:rotate(-4deg); }
+  /* hero card with strap line, sitting center-ish */
+  .strap {
+    position:absolute;
+    top:340px; left:540px;
+    width:360px;
+    background:#fbf7ec;
+    padding:38px 36px 36px 36px;
+    box-shadow: 0 18px 40px rgba(40,30,15,0.32);
+    transform:rotate(-1.5deg);
+    z-index:5;
+  }
+  .strap h1 {
+    margin:0;
+    font-family:'Caveat', cursive;
+    font-weight:500;
+    font-size:46px;
+    line-height:1.05;
+    color:#2c2010;
+    letter-spacing:-0.005em;
+  }
+  /* grain overlay */
+  .grain {
+    position:absolute; inset:0;
+    pointer-events:none;
+    opacity:0.5;
+    mix-blend-mode:multiply;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="paper"></div>
+
+    <div class="polaroid p1"><div class="ph" style="background-image:url('/map4-heroes/emotional/rosenlaui.jpg'); background-position:60% 50%;"></div><div class="cap">Rosenlaui · '24</div></div>
+    <div class="polaroid p2"><div class="ph" style="background-image:url('/map4-heroes/emotional/fronalpstock.jpg');"></div><div class="cap">Fronalpstock</div></div>
+    <div class="polaroid p3"><div class="ph" style="background-image:url('/map4-heroes/emotional/riffelsee4.jpg');"></div><div class="cap">Riffelsee</div></div>
+    <div class="polaroid p4"><div class="ph" style="background-image:url('/map4-heroes/spots/bachalpsee/main.jpg');"></div><div class="cap">Bachalpsee</div></div>
+    <div class="polaroid p5"><div class="ph" style="background-image:url('/map4-heroes/spots/oeschinensee/main.jpg');"></div><div class="cap">Oeschinensee</div></div>
+    <div class="polaroid p6"><div class="ph" style="background-image:url('/map4-heroes/spots/lauterbrunnen/main.jpg');"></div><div class="cap">Lauterbrunnen</div></div>
+    <div class="polaroid p7"><div class="ph" style="background-image:url('/map4-heroes/spots/aletsch_glacier/main.jpg');"></div><div class="cap">Aletsch</div></div>
+    <div class="polaroid p8"><div class="ph" style="background-image:url('/map4-heroes/spots/caumasee/main.jpg');"></div><div class="cap">Caumasee</div></div>
+    <div class="polaroid p9"><div class="ph" style="background-image:url('/map4-heroes/spots/iseltwald/main.jpg');"></div><div class="cap">Iseltwald</div></div>
+
+    <div class="strap"><h1>Sommer, wie er<br>gemeint war.</h1></div>
+
+    <svg class="grain" width="1400" height="787" xmlns="http://www.w3.org/2000/svg">
+      <filter id="g">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+        <feColorMatrix values="0 0 0 0 0.2  0 0 0 0 0.16  0 0 0 0 0.1  0 0 0 0.35 0"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#g)"/>
+    </svg>
+  </div>
+</body>
+</html>

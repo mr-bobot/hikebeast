@@ -1,0 +1,134 @@
+<!-- V083 · Escape · cancelled · layout=data-led · treatment=none · img=/map4-heroes/emotional/camping_cheserys.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>V083</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; font-family:'Inter', sans-serif; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.bg {
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background:linear-gradient(120deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 50%);
+    pointer-events:none;
+  }
+  .card {
+    position:absolute;
+    top:78px; left:78px;
+    width:520px;
+    background:#fff;
+    border-radius:18px;
+    padding:36px 36px 28px 36px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 4px 14px rgba(0,0,0,0.2);
+  }
+  .card .ttl {
+    font-size:13px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:#777;
+    font-weight:600;
+    margin-bottom:24px;
+  }
+  .card .row {
+    display:flex; align-items:center; gap:18px;
+    padding:14px 0;
+    border-bottom:1px solid #eee;
+  }
+  .card .row:last-child { border-bottom:none; }
+  .card .box {
+    width:30px; height:30px;
+    border-radius:7px;
+    border:2px solid #d8d8d8;
+    flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .card .row.checked .box {
+    background:#0a8a3e;
+    border-color:#0a8a3e;
+  }
+  .card .row .label {
+    font-size:24px;
+    color:#111;
+    font-weight:500;
+    letter-spacing:-0.005em;
+  }
+  .card .row.checked .label {
+    color:#999;
+    text-decoration:line-through;
+    text-decoration-thickness:2px;
+  }
+  .headline {
+    position:absolute;
+    left:78px; right:78px; bottom:170px;
+    font-family:'Inter', sans-serif;
+    font-weight:300;
+    font-size:88px;
+    line-height:0.98;
+    letter-spacing:-0.04em;
+    color:#fff;
+    text-shadow:0 2px 24px rgba(0,0,0,0.5);
+  }
+  .headline strong { font-weight:700; }
+  .sub {
+    position:absolute;
+    left:78px; bottom:120px;
+    font-family:'Inter', sans-serif;
+    font-size:18px;
+    color:rgba(255,255,255,0.82);
+    font-weight:400;
+    letter-spacing:0.005em;
+  }
+  .cta {
+    position:absolute;
+    left:78px; bottom:50px;
+    background:#fff; color:#111;
+    padding:18px 32px;
+    border-radius:999px;
+    font-size:17px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    box-shadow:0 12px 28px rgba(0,0,0,0.3);
+  }
+  .cta .arrow { margin-left:10px; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="bg" src="/map4-heroes/emotional/camping_cheserys.jpg" alt="">
+    <div class="scrim"></div>
+    <div class="card">
+      <div class="ttl">Buchungen, Sommer 2026</div>
+      <div class="row checked">
+        <div class="box">
+          <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8 L7 12 L13 4" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="label">Booking.com</div>
+      </div>
+      <div class="row checked">
+        <div class="box">
+          <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8 L7 12 L13 4" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="label">Airbnb</div>
+      </div>
+      <div class="row checked">
+        <div class="box">
+          <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8 L7 12 L13 4" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="label">Hotelreservation</div>
+      </div>
+    </div>
+    <div class="headline">27 CHF und du<br><strong>weisst, wohin.</strong></div>
+    <div class="sub">Kein Booking. Kein Airbnb. Kein Reservierungsstress.</div>
+    <div class="cta">Hol's dir <span class="arrow">→</span></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!-- V076 · FOMO · electric · layout=polaroid-collage · treatment=grain · img=/map4-heroes/spots/bachalpsee/main.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V076</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:wght@300;400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#1a1612; font-family:'Inter',sans-serif; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden;
+    background:
+      radial-gradient(ellipse at 30% 20%, #2a241d 0%, #15110d 70%),
+      #15110d;
+  }
+  /* Subtle cork/paper grain backdrop */
+  .hero::before {
+    content:""; position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 5px),
+      repeating-linear-gradient(-45deg, rgba(0,0,0,0.08) 0 1px, transparent 1px 3px);
+    pointer-events:none;
+  }
+  .polaroid {
+    position:absolute;
+    width:240px; height:280px;
+    background:#f5f1e8;
+    padding:12px 12px 44px 12px;
+    box-sizing:border-box;
+    box-shadow:
+      0 12px 28px rgba(0,0,0,0.55),
+      0 2px 6px rgba(0,0,0,0.4);
+    border-radius:2px;
+  }
+  .polaroid .frame {
+    width:100%; height:216px;
+    overflow:hidden;
+    background:#222;
+    position:relative;
+  }
+  .polaroid .frame img {
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    filter: saturate(0.85) contrast(0.96);
+  }
+  /* Grain overlay on each frame */
+  .polaroid .frame::after {
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px);
+    background-size: 3px 3px, 5px 5px;
+    background-position: 0 0, 1px 2px;
+    mix-blend-mode: overlay;
+    pointer-events:none;
+  }
+  .polaroid .cap {
+    font-family:'Caveat', cursive;
+    font-size:22px;
+    line-height:1;
+    color:#222;
+    text-align:center;
+    margin-top:14px;
+    letter-spacing:0.01em;
+  }
+  /* Marked-out polaroids: red marker stroke + month caption */
+  .polaroid.marked {
+    background:#f8f4eb;
+  }
+  .polaroid.marked .frame img {
+    filter: saturate(0.6) contrast(0.92) brightness(0.78);
+  }
+  .polaroid.marked .x {
+    position:absolute;
+    left:12px; top:12px;
+    width:216px; height:216px;
+    pointer-events:none;
+  }
+  .polaroid.marked .x svg { width:100%; height:100%; display:block; }
+  .polaroid.marked .cap {
+    color:#b8362a;
+    font-weight:600;
+    font-size:26px;
+  }
+  /* Position + rotate each polaroid */
+  .p1 { left:60px;  top:88px;  transform:rotate(-6deg); z-index:2; }
+  .p2 { left:300px; top:50px;  transform:rotate(3deg);  z-index:3; }
+  .p3 { left:540px; top:96px;  transform:rotate(-2deg); z-index:2; }
+  .p4 { left:128px; top:440px; transform:rotate(5deg);  z-index:3; }
+  .p5 { left:380px; top:430px; transform:rotate(-3deg); z-index:2; }
+  .p6 { left:608px; top:476px; transform:rotate(7deg);  z-index:1; }
+  .p7 { left:760px; top:300px; transform:rotate(-4deg); z-index:4; }
+  /* Headline panel */
+  .copy {
+    position:absolute;
+    right:64px; top:64px;
+    width:520px;
+    color:#f4efe6;
+    z-index:10;
+  }
+  .copy h1 {
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-size:56px;
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    margin:0;
+    text-shadow: 0 1px 30px rgba(0,0,0,0.5);
+  }
+  .copy h1 .em { font-style:italic; font-weight:400; color:#e8a23a; }
+  .meta {
+    position:absolute;
+    right:64px; bottom:48px;
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:rgba(244,239,230,0.5);
+    z-index:10;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+
+    <div class="polaroid p1">
+      <div class="frame"><img src="/map4-heroes/spots/oeschinensee/main.jpg" alt=""></div>
+      <div class="cap">Oeschinensee</div>
+    </div>
+
+    <div class="polaroid p2 marked">
+      <div class="frame"><img src="/map4-heroes/spots/bachalpsee/main.jpg" alt=""></div>
+      <div class="x">
+        <svg viewBox="0 0 216 216" preserveAspectRatio="none">
+          <line x1="14" y1="20" x2="200" y2="200" stroke="#b8362a" stroke-width="9" stroke-linecap="round" opacity="0.88"/>
+          <line x1="200" y1="22" x2="18" y2="198" stroke="#b8362a" stroke-width="9" stroke-linecap="round" opacity="0.88"/>
+        </svg>
+      </div>
+      <div class="cap">August</div>
+    </div>
+
+    <div class="polaroid p3">
+      <div class="frame"><img src="/map4-heroes/spots/aletsch_glacier/main.jpg" alt=""></div>
+      <div class="cap">Aletsch</div>
+    </div>
+
+    <div class="polaroid p4">
+      <div class="frame"><img src="/map4-heroes/spots/lac_de_taney/main.jpg" alt=""></div>
+      <div class="cap">Lac de Taney</div>
+    </div>
+
+    <div class="polaroid p5 marked">
+      <div class="frame"><img src="/map4-heroes/spots/joriseen/main.jpg" alt=""></div>
+      <div class="x">
+        <svg viewBox="0 0 216 216" preserveAspectRatio="none">
+          <line x1="14" y1="20" x2="200" y2="200" stroke="#b8362a" stroke-width="9" stroke-linecap="round" opacity="0.88"/>
+          <line x1="200" y1="22" x2="18" y2="198" stroke="#b8362a" stroke-width="9" stroke-linecap="round" opacity="0.88"/>
+        </svg>
+      </div>
+      <div class="cap">September</div>
+    </div>
+
+    <div class="polaroid p6">
+      <div class="frame"><img src="/map4-heroes/spots/falensee/main.jpg" alt=""></div>
+      <div class="cap">Fälensee</div>
+    </div>
+
+    <div class="polaroid p7">
+      <div class="frame"><img src="/map4-heroes/spots/triftsee/main.jpg" alt=""></div>
+      <div class="cap">Triftsee</div>
+    </div>
+
+    <div class="copy">
+      <h1>Spot <span class="em">87</span> ist erst nächste Woche gut.</h1>
+    </div>
+
+    <div class="meta">141 Spots · 8 Wochen</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!-- V074 · Transformation · unlearned · layout=B&W · treatment=B&W · img=/map4-heroes/emotional/fulbergmain.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>V074</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; font-family:'Inter', sans-serif; }
+  .hero { position:relative; width:1400px; height:787px; background:#0c0c0c; }
+  .hero img.bg { width:100%; height:100%; object-fit:cover; object-position:50% 50%; display:block;
+    filter: grayscale(1) contrast(1.12) brightness(0.9); }
+  .grad { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.7) 100%); pointer-events:none; }
+  .grain { position:absolute; inset:0; pointer-events:none; opacity:0.45; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' /><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  /* top brand mark */
+  .top { position:absolute; top:42px; left:80px; right:80px; display:flex; justify-content:space-between; align-items:center; color:rgba(255,255,255,0.85); font-size:11px; letter-spacing:0.4em; text-transform:uppercase; font-weight:600; }
+  .top .l { display:flex; align-items:center; gap:14px; }
+  .top .l::before { content:""; display:inline-block; width:36px; height:1px; background:rgba(255,255,255,0.6); }
+  /* two-line comparison block */
+  .comparison { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:1080px; }
+  .row { display:grid; grid-template-columns:120px 1fr; align-items:flex-end; gap:32px; padding:24px 0; border-bottom:1px solid rgba(255,255,255,0.15); }
+  .row .qty { font-family:'Fraunces', serif; font-weight:300; font-size:78px; line-height:0.9; letter-spacing:-0.04em; color:rgba(255,255,255,0.55); text-align:right; font-variant-numeric:tabular-nums; }
+  .row .qty .neg { color:rgba(255,255,255,0.4); text-decoration:line-through; text-decoration-thickness:1.5px; }
+  .row .qty.plus { color:#fff; }
+  .row .lbl { font-family:'Fraunces', serif; font-weight:300; font-size:60px; line-height:1.0; letter-spacing:-0.02em; color:#fff; }
+  .row .lbl em { font-style:italic; font-weight:500; }
+  .row.minus .lbl { color:rgba(255,255,255,0.55); }
+  .row.plus .lbl em { color:#fff; }
+  .row .icon { width:46px; height:46px; border-radius:50%; border:1px solid rgba(255,255,255,0.55); display:inline-flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.85); font-weight:500; font-size:22px; font-family:'Fraunces', serif; margin-left:14px; vertical-align:middle; }
+  .row.minus .icon { border-color:rgba(255,255,255,0.35); color:rgba(255,255,255,0.5); }
+  .pre-comp { font-family:'Inter', sans-serif; font-size:11px; letter-spacing:0.42em; text-transform:uppercase; color:rgba(255,255,255,0.7); font-weight:600; margin-bottom:18px; text-align:center; }
+  .pre-comp .x { display:inline-block; width:36px; height:1px; background:rgba(255,255,255,0.5); vertical-align:middle; margin:0 16px; }
+  /* bottom signature */
+  .bot { position:absolute; bottom:36px; left:80px; right:80px; display:flex; justify-content:space-between; font-size:11px; letter-spacing:0.32em; text-transform:uppercase; color:rgba(255,255,255,0.6); font-weight:500; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="bg" src="/map4-heroes/emotional/fulbergmain.jpeg" alt="">
+    <div class="grad"></div>
+    <div class="grain"></div>
+    <div class="top">
+      <div class="l">Schweizer Stille · Hikebeast</div>
+      <div>Fulberg · 25 mm · ASA 400</div>
+    </div>
+    <div class="comparison">
+      <div class="pre-comp"><span class="x"></span>Eine andere Recheneinheit<span class="x"></span></div>
+      <div class="row minus">
+        <div class="qty"><span class="neg">−42</span></div>
+        <div class="lbl">Weniger Spots fürs <em>Foto</em>.<span class="icon">−</span></div>
+      </div>
+      <div class="row plus">
+        <div class="qty plus">+99</div>
+        <div class="lbl">Mehr fürs <em>Kopfaufräumen</em>.<span class="icon">+</span></div>
+      </div>
+    </div>
+    <div class="bot">
+      <div>Schwarz-Weiss, weil Farbe nicht der Punkt ist.</div>
+      <div>Hikebeast · 074 / 141</div>
+    </div>
+  </div>
+</body>
+</html>

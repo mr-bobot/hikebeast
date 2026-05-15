@@ -1,0 +1,99 @@
+<!-- V022 · Peace · slow · layout=duotone · treatment=duotone-blue · img=/map4-heroes/emotional/seealpsee.jpeg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V022</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0c1c2e; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .photo-wrap {
+    position:absolute; inset:0;
+    filter: url(#duotone-blue) contrast(1.05);
+  }
+  .photo-wrap img {
+    width:100%; height:100%; object-fit:cover; object-position:50% 60%;
+    display:block;
+  }
+  .cream-layer {
+    position:absolute; inset:0;
+    background: linear-gradient(120deg, rgba(244,229,196,0.0) 35%, rgba(244,229,196,0.12) 100%);
+    mix-blend-mode:screen;
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:80px; bottom:96px;
+    color:#f4e5c4;
+    max-width:760px;
+  }
+  .copy h1 {
+    font-family:'Fraunces', serif;
+    font-weight:300;
+    font-size:88px;
+    line-height:0.98;
+    letter-spacing:-0.02em;
+    margin:0 0 22px 0;
+  }
+  .copy h1 em {
+    font-style:italic;
+    font-weight:400;
+  }
+  .sub {
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:18px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:rgba(244,229,196,0.7);
+    display:flex; align-items:center; gap:18px;
+  }
+  .sub .dot {
+    width:5px; height:5px; border-radius:50%;
+    background:#f4e5c4; opacity:0.55;
+  }
+  .cta-pill {
+    position:absolute;
+    top:62px; right:62px;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:0.18em;
+    color:#0c1c2e;
+    background:#f4e5c4;
+    padding:14px 22px;
+    border-radius:999px;
+  }
+</style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute">
+    <filter id="duotone-blue">
+      <feColorMatrix type="matrix" values="
+        0.33 0.33 0.33 0 0
+        0.33 0.33 0.33 0 0
+        0.33 0.33 0.33 0 0
+        0    0    0    1 0"/>
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR tableValues="0.05 0.96" type="table"/>
+        <feFuncG tableValues="0.11 0.91" type="table"/>
+        <feFuncB tableValues="0.18 0.78" type="table"/>
+      </feComponentTransfer>
+    </filter>
+  </svg>
+  <div class="hero">
+    <div class="photo-wrap">
+      <img src="/map4-heroes/emotional/seealpsee.jpeg" alt="">
+    </div>
+    <div class="cream-layer"></div>
+    <div class="cta-pill">27 CHF</div>
+    <div class="copy">
+      <h1>Slow Sundays,<br><em>fixed price.</em></h1>
+      <div class="sub"><span>27 CHF</span><span class="dot"></span><span>lifetime updates</span></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!-- V081 · Escape · exhale · layout=framed-aperture · treatment=none · img=/map4-heroes/emotional/camping_cheserys.jpg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>V081</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0d0d10; font-family:'Inter', sans-serif; color:#fff; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; background:#0d0d10; }
+  .frame {
+    position:absolute;
+    left:60px; top:60px; right:60px; bottom:60px;
+    overflow:hidden;
+    border-radius:2px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.06);
+  }
+  .frame img {
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  .frame::after {
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.55) 100%);
+    pointer-events:none;
+  }
+  .meta-top {
+    position:absolute;
+    top:96px; left:96px;
+    display:flex; align-items:center; gap:14px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    color:rgba(255,255,255,0.78);
+    text-transform:uppercase;
+  }
+  .meta-top .pill {
+    padding:5px 10px;
+    border:1px solid rgba(255,255,255,0.4);
+    border-radius:3px;
+    background:rgba(0,0,0,0.32);
+    backdrop-filter:blur(4px);
+  }
+  .meta-top .dot { width:6px; height:6px; border-radius:50%; background:#7dffa6; box-shadow:0 0 12px #7dffa6; }
+  .meta-right {
+    position:absolute;
+    top:96px; right:96px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.2em;
+    color:rgba(255,255,255,0.55);
+    text-transform:uppercase;
+    text-align:right;
+  }
+  .headline {
+    position:absolute;
+    left:96px; right:96px; bottom:110px;
+    font-family:'Inter', sans-serif;
+    font-weight:200;
+    font-size:96px;
+    line-height:0.98;
+    letter-spacing:-0.045em;
+    color:#fff;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+  }
+  .headline strong { font-weight:600; }
+  .corner-mark {
+    position:absolute;
+    left:96px; bottom:78px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.22em;
+    color:rgba(255,255,255,0.55);
+    text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="frame">
+      <img src="/map4-heroes/emotional/camping_cheserys.jpg" alt="">
+    </div>
+    <div class="meta-top"><span class="dot"></span><span class="pill">AUTO-REPLY</span><span>2026 · CHESERYS</span></div>
+    <div class="meta-right">141 SPOTS<br>HIKEBEAST</div>
+    <div class="corner-mark">— sent from a tent</div>
+    <div class="headline">Out-of-office.<br><strong>Mountain-replied.</strong></div>
+  </div>
+</body>
+</html>

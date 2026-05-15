@@ -1,0 +1,159 @@
+<!-- V049 · Anticipation · packed · layout=mockup-led · treatment=none · img=/map4-heroes/emotional/hardgergrat%20camping.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V049</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0a0e10; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .bg {
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover; object-position:30% 50%;
+    display:block;
+    filter: brightness(0.86) saturate(0.92);
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(110deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.22) 38%, rgba(0,0,0,0.3) 100%);
+    pointer-events:none;
+  }
+  /* phone mockup right-side */
+  .phone {
+    position:absolute;
+    right:78px; top:50%;
+    transform: translateY(-50%) rotate(-4deg);
+    width:316px; height:644px;
+    background:#0e0e12;
+    border-radius:46px;
+    box-shadow:
+      0 50px 100px rgba(0,0,0,0.7),
+      0 14px 28px rgba(0,0,0,0.5),
+      inset 0 0 0 2px rgba(255,255,255,0.08);
+    padding:11px;
+  }
+  .phone::before {
+    content:""; position:absolute; top:18px; left:50%; transform:translateX(-50%);
+    width:108px; height:30px; background:#000;
+    border-radius:18px;
+    z-index:3;
+  }
+  .phone .screen {
+    width:100%; height:100%;
+    border-radius:36px;
+    overflow:hidden;
+    position:relative;
+    background:#222;
+  }
+  .phone .screen img {
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  /* phone reflection */
+  .phone .screen::after {
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 35%, rgba(255,255,255,0.08) 65%, rgba(255,255,255,0) 100%);
+    pointer-events:none;
+  }
+  /* status bar on phone */
+  .phone .status {
+    position:absolute; top:18px; left:0; right:0;
+    display:flex; justify-content:space-between;
+    padding:0 38px;
+    color:#fff;
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    z-index:4;
+  }
+  /* copy */
+  .copy {
+    position:absolute;
+    left:80px; top:50%; transform:translateY(-50%);
+    width:640px;
+    color:#fff;
+  }
+  .copy .tag {
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:0.32em;
+    color: rgba(255,235,200,0.85);
+    text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .copy .tag .pulse {
+    width:8px; height:8px; border-radius:50%;
+    background:#ffc56b;
+    box-shadow: 0 0 14px rgba(255,197,107,0.95);
+    animation: pulse49 2s ease-in-out infinite;
+  }
+  @keyframes pulse49 { 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:0.55; transform:scale(0.75);} }
+  .copy h1 {
+    margin:0;
+    font-family:'Inter', sans-serif;
+    font-weight:800;
+    font-size:88px;
+    line-height:0.96;
+    letter-spacing:-0.034em;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.5);
+  }
+  .copy h1 .alt {
+    font-weight:400;
+    color: rgba(255,255,255,0.78);
+  }
+  .copy .feet {
+    margin-top:38px;
+    padding-top:22px;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:14px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color: rgba(255,235,200,0.7);
+  }
+  .copy .feet b {
+    color:#ffc56b;
+    font-weight:700;
+    margin-right:10px;
+  }
+  /* tent corner accent foreground */
+  .accent {
+    position:absolute;
+    left:0; bottom:0;
+    width:520px; height:340px;
+    background: radial-gradient(circle at 25% 75%, rgba(255,170,90,0.12) 0%, transparent 60%);
+    pointer-events:none;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="bg" src="/map4-heroes/emotional/hardgergrat%20camping.jpeg" alt="">
+    <div class="scrim"></div>
+    <div class="accent"></div>
+
+    <div class="copy">
+      <div class="tag"><span class="pulse"></span>HEUTE · 21:48 UHR</div>
+      <h1>Karte offen,<br><span class="alt">Auto parkt</span><br>morgen früh.</h1>
+      <div class="feet"><b>·</b>141 SPOTS · OFFLINE GELADEN</div>
+    </div>
+
+    <div class="phone">
+      <div class="screen">
+        <img src="/map3/img/hero-2-mockup.jpg" alt="">
+        <div class="status"><span>09:41</span><span>5G</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

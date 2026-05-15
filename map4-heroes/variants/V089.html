@@ -1,0 +1,106 @@
+<!-- V089 · Intimacy · held · layout=painted · treatment=painted · img=/map4-heroes/emotional/rosenlaui.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V089</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#1c1a16; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:60% 50%;
+    filter: blur(0.6px) saturate(1.05) contrast(0.92) brightness(1.02);
+    display:block;
+  }
+  .paint-canvas {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 22% 28%, rgba(255,225,180,0.16) 0%, rgba(255,225,180,0) 40%),
+      radial-gradient(circle at 78% 72%, rgba(110,160,180,0.18) 0%, rgba(110,160,180,0) 45%),
+      linear-gradient(180deg, rgba(70,55,40,0.18) 0%, rgba(40,30,20,0.28) 100%);
+    mix-blend-mode:soft-light;
+    pointer-events:none;
+  }
+  .paint-strokes {
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(110deg,
+        rgba(255,245,220,0.04) 0px,
+        rgba(255,245,220,0.04) 2px,
+        transparent 2px,
+        transparent 9px),
+      repeating-linear-gradient(-25deg,
+        rgba(40,28,18,0.05) 0px,
+        rgba(40,28,18,0.05) 1px,
+        transparent 1px,
+        transparent 7px);
+    mix-blend-mode:overlay;
+    pointer-events:none;
+  }
+  .vignette {
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 50%, rgba(20,15,8,0.55) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:88px;
+    bottom:84px;
+    color:#f6ede0;
+  }
+  .copy h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 96px;
+    line-height: 1.0;
+    letter-spacing: -0.018em;
+    margin: 0;
+    text-shadow: 0 2px 36px rgba(0,0,0,0.5);
+  }
+  .copy h1 .em {
+    font-style: italic;
+    font-weight: 400;
+  }
+  .copy h1 .price {
+    display:block;
+    font-style: italic;
+    font-weight: 300;
+    color:#f3d9a6;
+    margin-top: 8px;
+  }
+  .cta {
+    margin-top: 28px;
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:14px;
+    letter-spacing:0.32em;
+    color:#f6ede0;
+    text-transform:uppercase;
+    padding: 14px 26px;
+    border: 1px solid rgba(246,237,224,0.55);
+    background: rgba(20,12,5,0.18);
+    backdrop-filter: blur(2px);
+  }
+  .cta .arrow { font-size:18px; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/rosenlaui.jpg" alt="">
+    <div class="paint-canvas"></div>
+    <div class="paint-strokes"></div>
+    <div class="vignette"></div>
+    <div class="copy">
+      <h1>Sommer für <span class="em">zwei</span>.<span class="price">27 CHF.</span></h1>
+      <div class="cta">Hol's dir <span class="arrow">&rarr;</span></div>
+    </div>
+  </div>
+</body>
+</html>

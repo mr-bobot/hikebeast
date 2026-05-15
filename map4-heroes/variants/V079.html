@@ -1,0 +1,103 @@
+<!-- V079 · FOMO · edge · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/limmernsee1.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V079</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  /* Bottom-up legibility scrim, bias to left where copy sits */
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.18) 65%, rgba(0,0,0,0.62) 100%),
+      linear-gradient(90deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.08) 45%, rgba(0,0,0,0) 70%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:88px;
+    bottom:108px;
+    max-width:780px;
+    color:#f4efe6;
+    text-shadow: 0 2px 30px rgba(0,0,0,0.6);
+  }
+  .copy h1 {
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-size:64px;
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .copy h1 .em {
+    font-style:italic;
+    font-weight:400;
+  }
+  .copy h1 .second {
+    display:block;
+    margin-top:8px;
+    color:rgba(244,239,230,0.86);
+    font-style:italic;
+    font-weight:300;
+  }
+  .meta {
+    position:absolute;
+    left:88px;
+    bottom:60px;
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:rgba(244,239,230,0.65);
+  }
+  .corner {
+    position:absolute;
+    right:64px;
+    top:60px;
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:rgba(244,239,230,0.55);
+    text-align:right;
+    line-height:1.5;
+  }
+  .corner .dot {
+    display:inline-block;
+    width:6px; height:6px; border-radius:50%;
+    background:#e8a23a;
+    margin-right:8px;
+    vertical-align:middle;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/limmernsee1.jpg" alt="">
+    <div class="scrim"></div>
+
+    <div class="corner">
+      <span class="dot"></span>Dieses Wochenende offen
+    </div>
+
+    <div class="copy">
+      <h1>
+        Sie haben den <span class="em">Spot</span> dieses Wochenende.
+        <span class="second">Du auch, wenn du willst.</span>
+      </h1>
+    </div>
+
+    <div class="meta">Hikebeast · 141 Hidden Gems</div>
+  </div>
+</body>
+</html>

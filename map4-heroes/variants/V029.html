@@ -1,0 +1,103 @@
+<!-- V029 · Achievement · proud · layout=B&W · treatment=B&W · img=/map4-heroes/emotional/tannhorn.jpeg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V029</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+    filter: grayscale(1) contrast(1.18) brightness(1.12);
+  }
+  .blow {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 720px 520px at 68% 30%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.45) 28%, rgba(255,255,255,0) 60%);
+    mix-blend-mode:screen;
+    pointer-events:none;
+  }
+  .bottom-haze {
+    position:absolute; left:0; right:0; bottom:0; height:48%;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%);
+    pointer-events:none;
+  }
+  .label {
+    position:absolute;
+    top:62px; left:80px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:11px;
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.78);
+  }
+  .rule-top {
+    position:absolute;
+    top:74px; left:240px; right:80px;
+    height:1px; background:rgba(255,255,255,0.32);
+  }
+  .copy {
+    position:absolute;
+    left:80px; bottom:90px; right:80px;
+    color:#fff;
+  }
+  .copy h1 {
+    margin:0;
+    font-family:'Archivo Black', sans-serif;
+    font-size:128px;
+    line-height:0.92;
+    letter-spacing:-0.035em;
+    text-transform:uppercase;
+    text-shadow:0 2px 24px rgba(0,0,0,0.4);
+  }
+  .copy h1 .small {
+    display:block;
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:32px;
+    letter-spacing:0.04em;
+    text-transform:none;
+    color:rgba(255,255,255,0.92);
+    margin-bottom:14px;
+  }
+  .corner {
+    position:absolute;
+    right:80px; bottom:90px;
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:18px;
+    color:rgba(255,255,255,0.92);
+    letter-spacing:0.03em;
+    text-align:right;
+  }
+  .corner small {
+    display:block;
+    font-weight:500;
+    font-size:11px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.6);
+    margin-top:6px;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/tannhorn.jpeg" alt="">
+    <div class="blow"></div>
+    <div class="bottom-haze"></div>
+    <div class="label">Swiss Gems · A Field Manual</div>
+    <div class="rule-top"></div>
+    <div class="copy">
+      <h1><span class="small">The summer</span>you finally<br>do it.</h1>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!-- V052 · Solitude · lonely · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/fulbergmain.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V052</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0c0e10; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.18) 38%, rgba(0,0,0,0) 60%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    top:50%;
+    left:96px;
+    transform:translateY(-50%);
+    max-width:560px;
+    color:#f1ede4;
+    text-shadow: 0 2px 26px rgba(0,0,0,0.45);
+  }
+  .copy .line {
+    display:block;
+    font-family:'Cormorant Garamond', serif;
+    font-size:96px;
+    line-height:1.0;
+    letter-spacing:-0.005em;
+    margin:0;
+  }
+  .copy .line.first {
+    font-weight:300;
+    color:rgba(241,237,228,0.7);
+    font-style:italic;
+  }
+  .copy .line.second {
+    font-weight:500;
+    margin-top:6px;
+  }
+  .copy .line.second::after {
+    content:".";
+    color:rgba(241,237,228,0.5);
+  }
+  .foot {
+    position:absolute;
+    bottom:46px;
+    left:96px;
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:12px;
+    letter-spacing:0.38em;
+    text-transform:uppercase;
+    color:rgba(241,237,228,0.55);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/fulbergmain.jpeg" alt="">
+    <div class="scrim"></div>
+    <div class="copy">
+      <span class="line first">Nicht einsam.</span>
+      <span class="line second">Allein</span>
+    </div>
+    <div class="foot">141 Spots · ein Wort Unterschied</div>
+  </div>
+</body>
+</html>

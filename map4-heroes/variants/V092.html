@@ -1,0 +1,86 @@
+<!-- V092 · Gratitude · thankful · layout=blurred-bokeh · treatment=blurred-bokeh · img=/map4-heroes/emotional/stoos_kapelle2.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V092</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0c0a07; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute;
+    left:-8%; top:-8%;
+    width:116%; height:116%;
+    object-fit:cover; object-position:50% 50%;
+    filter: blur(16px) saturate(1.1) brightness(1.05);
+    display:block;
+  }
+  .bokeh-warm {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 22% 36%, rgba(240,210,170,0.22) 0px, rgba(240,210,170,0) 130px),
+      radial-gradient(circle at 78% 30%, rgba(220,200,170,0.18) 0px, rgba(220,200,170,0) 150px),
+      radial-gradient(circle at 64% 78%, rgba(180,200,200,0.16) 0px, rgba(180,200,200,0) 140px);
+    mix-blend-mode:screen;
+    pointer-events:none;
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.0) 35%, rgba(0,0,0,0.45) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:88px;
+    right:88px;
+    bottom:96px;
+    color:#f4efe6;
+    text-align:left;
+  }
+  .copy h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 82px;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    margin: 0;
+    max-width: 1100px;
+    text-shadow: 0 2px 38px rgba(0,0,0,0.5);
+  }
+  .copy h1 .em {
+    font-weight: 400;
+  }
+  .ribbon {
+    width: 48px;
+    height: 1px;
+    background: rgba(244,239,230,0.55);
+    margin-bottom: 28px;
+  }
+  .credit {
+    margin-top: 26px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    color: rgba(244,239,230,0.65);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/stoos_kapelle2.jpg" alt="">
+    <div class="bokeh-warm"></div>
+    <div class="scrim"></div>
+    <div class="copy">
+      <div class="ribbon"></div>
+      <h1>Die Schweiz ist <span class="em">verdammt nett</span> zu uns.</h1>
+      <div class="credit">Stoos, ein Dienstagmorgen.</div>
+    </div>
+  </div>
+</body>
+</html>

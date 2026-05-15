@@ -1,0 +1,83 @@
+<!-- V075 · Transformation · unwound · layout=painted · treatment=painted · img=/map4-heroes/emotional/lac%20de%20cheserys.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>V075</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; font-family:'Inter', sans-serif; background:#e9e2d3; }
+  .hero { position:relative; width:1400px; height:787px; background:#ece4d2; overflow:hidden; }
+  .paper { position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(255,240,210,0.6), transparent 55%),
+      radial-gradient(ellipse at 80% 80%, rgba(150,120,80,0.18), transparent 60%),
+      #efe7d5;
+  }
+  .paper::before { content:""; position:absolute; inset:0; opacity:0.5; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /><feColorMatrix values='0 0 0 0 0.2  0 0 0 0 0.14  0 0 0 0 0.08  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  /* painted image with SVG filter */
+  .canvas { position:absolute; left:80px; top:80px; right:80px; bottom:80px; box-shadow:0 30px 60px rgba(60,40,20,0.22), 0 8px 18px rgba(60,40,20,0.18); }
+  .canvas-inner { position:relative; width:100%; height:100%; overflow:hidden; background:#000; }
+  .canvas-inner img { width:100%; height:100%; object-fit:cover; object-position:50% 50%; filter:url(#brush) saturate(1.1) contrast(0.95); }
+  .brush-strokes { position:absolute; inset:0; mix-blend-mode:overlay; pointer-events:none; opacity:0.55;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><filter id='b'><feTurbulence baseFrequency='0.006 0.08' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 0.9  0 0 0 0 0.7  0 0 0 0.7 0'/></filter><rect width='100%' height='100%' filter='url(%23b)'/></svg>");
+  }
+  .frame-border { position:absolute; inset:0; border:14px solid #f6efd9; box-shadow:inset 0 0 0 2px rgba(80,60,30,0.25); pointer-events:none; }
+  /* phone-silent icon top right */
+  .phone-mute { position:absolute; right:130px; top:130px; width:88px; height:128px; border-radius:18px; background:rgba(20,20,20,0.85); box-shadow:0 8px 28px rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center; transform:rotate(6deg); }
+  .phone-mute::before { content:""; position:absolute; inset:8px; border-radius:12px; background:linear-gradient(140deg, #2a2a26, #15140f); }
+  .phone-mute::after { content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) rotate(45deg); width:60px; height:3px; background:#ff5b3b; border-radius:2px; }
+  .phone-mute .speaker { position:absolute; left:50%; top:15px; transform:translateX(-50%); width:28px; height:4px; border-radius:2px; background:#0a0a0a; z-index:2; }
+  .phone-mute .label { position:absolute; left:50%; top:124px; transform:translateX(-50%); font-family:'Inter', sans-serif; font-size:10px; letter-spacing:0.32em; color:rgba(60,45,25,0.7); text-transform:uppercase; font-weight:600; white-space:nowrap; }
+  /* meters chip bottom left */
+  .meters { position:absolute; left:130px; bottom:130px; padding:14px 22px; background:rgba(40,30,15,0.86); color:#f6efd9; font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:400; font-size:24px; letter-spacing:0.02em; border-radius:2px; box-shadow:0 6px 22px rgba(0,0,0,0.3); }
+  .meters .num { font-style:normal; font-weight:500; font-size:34px; letter-spacing:-0.01em; margin-right:6px; }
+  /* headline plate centered overlay */
+  .plate { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:rgba(246,239,217,0.96); padding:40px 56px; max-width:880px; text-align:center; box-shadow:0 30px 70px rgba(60,40,20,0.32); border:1px solid rgba(80,60,30,0.18); }
+  .plate .pre { font-family:'Inter', sans-serif; font-size:11px; letter-spacing:0.46em; text-transform:uppercase; color:#7a5a2c; font-weight:600; margin-bottom:22px; }
+  .plate .pre .x { display:inline-block; width:36px; height:1px; background:#7a5a2c; vertical-align:middle; margin:0 14px; }
+  .plate .head { font-family:'Cormorant Garamond', serif; font-weight:400; font-style:italic; font-size:60px; line-height:1.04; color:#3a2a14; letter-spacing:-0.005em; }
+  .plate .head em { font-style:normal; font-weight:500; color:#a13b2c; }
+  .plate .sig { margin-top:20px; font-family:'Cormorant Garamond', serif; font-style:italic; font-size:18px; color:rgba(60,45,25,0.7); }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="paper"></div>
+    <div class="canvas">
+      <div class="canvas-inner">
+        <svg width="0" height="0" style="position:absolute">
+          <defs>
+            <filter id="brush">
+              <feGaussianBlur stdDeviation="2" result="b"/>
+              <feColorMatrix in="b" type="matrix" values="
+                1.08 0 0 0 0
+                0 1.02 0 0 0
+                0 0 0.95 0 0
+                0 0 0 1 0"/>
+              <feComponentTransfer>
+                <feFuncR type="discrete" tableValues="0.05 0.2 0.34 0.5 0.66 0.82 0.95 1"/>
+                <feFuncG type="discrete" tableValues="0.05 0.2 0.34 0.5 0.66 0.82 0.95 1"/>
+                <feFuncB type="discrete" tableValues="0.05 0.2 0.34 0.5 0.66 0.82 0.95 1"/>
+              </feComponentTransfer>
+            </filter>
+          </defs>
+        </svg>
+        <img src="/map4-heroes/emotional/lac%20de%20cheserys.jpeg" alt="">
+        <div class="brush-strokes"></div>
+      </div>
+      <div class="frame-border"></div>
+    </div>
+    <div class="phone-mute"><div class="speaker"></div><div class="label">Telefon stumm</div></div>
+    <div class="meters"><span class="num">600 m</span> Höhenmeter</div>
+    <div class="plate">
+      <div class="pre"><span class="x"></span>Étude · Was Urlaub heisst<span class="x"></span></div>
+      <div class="head">Manchmal heisst <em>Urlaub</em>:<br>Telefon stumm, <em>600 Höhenmeter</em>.</div>
+      <div class="sig">Lac de Chéserys · Études Alpines</div>
+    </div>
+  </div>
+</body>
+</html>

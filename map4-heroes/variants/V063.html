@@ -1,0 +1,51 @@
+<!-- V063 · Wonder · spellbound · layout=blurred-bokeh · treatment=blurred-bokeh · img=/map4-heroes/emotional/stoos_kapelle2.jpg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>V063</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,200;9..144,300;9..144,400;9..144,500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; font-family:'Inter', sans-serif; }
+  .hero { position:relative; width:1400px; height:787px; background:#000; }
+  .layer { position:absolute; inset:0; width:100%; height:100%; }
+  .layer img { width:100%; height:100%; object-fit:cover; object-position:50% 50%; display:block; }
+  .layer.blur img { filter: blur(18px) saturate(1.05) brightness(0.95); transform:scale(1.06); }
+  .layer.sharp { /* mask center to keep some sharpness */
+     -webkit-mask-image: radial-gradient(ellipse 36% 48% at 36% 70%, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 75%);
+             mask-image: radial-gradient(ellipse 36% 48% at 36% 70%, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 75%);
+  }
+  .grad { position:absolute; inset:0; background:linear-gradient(120deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0) 70%); }
+  .bokeh-dots { position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen; }
+  .dot { position:absolute; border-radius:50%; background:radial-gradient(circle, rgba(255,235,200,0.45) 0%, rgba(255,210,150,0.1) 60%, rgba(255,210,150,0) 100%); filter:blur(2px); }
+  .headline-wrap { position:absolute; top:50%; right:90px; transform:translateY(-50%); text-align:right; max-width:760px; }
+  .smallcap { font-family:'Inter', sans-serif; font-size:12px; letter-spacing:0.38em; text-transform:uppercase; color:rgba(255,255,255,0.75); font-weight:500; margin-bottom:24px; }
+  .smallcap .line { display:inline-block; width:46px; height:1px; background:rgba(255,255,255,0.6); vertical-align:middle; margin-right:14px; }
+  .headline { font-family:'Fraunces', serif; font-weight:200; font-size:118px; line-height:0.95; color:#fff; letter-spacing:-0.035em; }
+  .headline .underline { display:block; height:1px; background:rgba(255,255,255,0.4); margin-top:34px; width:60%; margin-left:auto; }
+  .signature { position:absolute; bottom:50px; left:90px; font-family:'Fraunces', serif; font-style:italic; font-size:18px; color:rgba(255,255,255,0.7); }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="layer blur"><img src="/map4-heroes/emotional/stoos_kapelle2.jpg" alt=""></div>
+    <div class="layer sharp"><img src="/map4-heroes/emotional/stoos_kapelle2.jpg" alt=""></div>
+    <div class="grad"></div>
+    <div class="bokeh-dots">
+      <div class="dot" style="left:24%; top:28%; width:60px; height:60px;"></div>
+      <div class="dot" style="left:18%; top:55%; width:34px; height:34px;"></div>
+      <div class="dot" style="left:62%; top:18%; width:88px; height:88px; opacity:0.55;"></div>
+      <div class="dot" style="left:78%; top:62%; width:42px; height:42px;"></div>
+      <div class="dot" style="left:40%; top:14%; width:24px; height:24px;"></div>
+      <div class="dot" style="left:88%; top:24%; width:54px; height:54px; opacity:0.7;"></div>
+    </div>
+    <div class="headline-wrap">
+      <div class="smallcap"><span class="line"></span>Stoos · Schwyz</div>
+      <div class="headline">Switzerland<br>still does<br><em>this</em>.<span class="underline"></span></div>
+    </div>
+    <div class="signature">Photographed at first light, no filter.</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!-- V055 · Solitude · quiet · layout=type-dominant · treatment=none · img=/map4-heroes/emotional/seealpsee.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V055</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#f1eadb; }
+  .hero {
+    position:relative; width:1400px; height:787px; overflow:hidden;
+    background:
+      radial-gradient(ellipse at 20% 10%, #f6f0e0 0%, #ece2cc 60%, #e2d5b7 100%);
+  }
+  .paper-grain {
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(94deg, rgba(60,40,18,0.02) 0px, rgba(0,0,0,0) 2px, rgba(60,40,18,0.015) 4px, rgba(0,0,0,0) 7px),
+      radial-gradient(circle at 70% 60%, rgba(110,80,40,0.04), transparent 60%);
+    pointer-events:none;
+  }
+  .kicker {
+    position:absolute;
+    top:74px;
+    left:96px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:0.46em;
+    text-transform:uppercase;
+    color:#7a6443;
+  }
+  .kicker::after {
+    content:"";
+    display:inline-block;
+    width:46px; height:1px;
+    background:#9a8158;
+    margin-left:16px;
+    vertical-align:middle;
+  }
+  .body {
+    position:absolute;
+    top:178px;
+    left:96px;
+    right:430px;
+    color:#2a1f0e;
+  }
+  .body p {
+    margin:0;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-size:62px;
+    line-height:1.12;
+    letter-spacing:-0.002em;
+    color:#2a1f0e;
+  }
+  .body p .heavy {
+    font-weight:500;
+  }
+  .body p .em {
+    font-style:italic;
+    font-weight:400;
+    color:#5a4220;
+  }
+  .body .num {
+    font-feature-settings: "tnum" 1;
+  }
+  .pricerow {
+    position:absolute;
+    left:96px;
+    bottom:88px;
+    display:flex;
+    align-items:flex-end;
+    gap:30px;
+    color:#2a1f0e;
+  }
+  .pricerow .price {
+    font-family:'Cormorant Garamond', serif;
+    font-weight:400;
+    font-size:54px;
+    line-height:1;
+    letter-spacing:-0.01em;
+  }
+  .pricerow .price .em {
+    font-style:italic;
+    color:#7a5828;
+  }
+  .pricerow .sep {
+    width:1px; height:46px;
+    background:rgba(58,40,18,0.32);
+    margin-bottom:6px;
+  }
+  .pricerow .note {
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:13px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:rgba(58,40,18,0.7);
+    padding-bottom:10px;
+  }
+  /* tiny photo bottom right corner */
+  .corner {
+    position:absolute;
+    right:74px;
+    bottom:74px;
+    width:248px;
+    height:330px;
+    box-shadow:
+      0 22px 44px rgba(45,30,12,0.18),
+      0 6px 14px rgba(45,30,12,0.12);
+  }
+  .corner img {
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 60%;
+    display:block;
+    filter: saturate(0.92) brightness(0.96);
+  }
+  .corner .cap {
+    position:absolute;
+    left:0; right:0; bottom:-30px;
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:10.5px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:rgba(58,40,18,0.55);
+    text-align:center;
+  }
+  /* small mark in top right */
+  .mark {
+    position:absolute;
+    top:74px;
+    right:96px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:16px;
+    color:rgba(58,40,18,0.55);
+    letter-spacing:0.04em;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="paper-grain"></div>
+
+    <div class="kicker">Das Handbuch</div>
+    <div class="mark">Hikebeast · L.H.</div>
+
+    <div class="body">
+      <p><span class="heavy num">141</span> Spots.<br>
+      <span class="em">Ohne Menschen drauf.</span><br>
+      Kein Trick. Karte plus Anleitung.</p>
+    </div>
+
+    <div class="pricerow">
+      <div class="price"><span class="em">27</span> CHF</div>
+      <div class="sep"></div>
+      <div class="note">Einmalig · Sofort offline</div>
+    </div>
+
+    <div class="corner">
+      <img src="/map4-heroes/emotional/seealpsee.jpeg" alt="">
+      <div class="cap">Seealpsee · ein Mensch</div>
+    </div>
+  </div>
+</body>
+</html>

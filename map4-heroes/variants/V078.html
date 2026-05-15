@@ -1,0 +1,224 @@
+<!-- V078 · FOMO · watching · layout=multi-image-grid · treatment=none · img=/map4-heroes/spots/oeschinensee/main.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V078</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0e0e10; font-family:'Inter',sans-serif; color:#f4efe6; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden;
+    background: #0e0e10;
+  }
+  .grid {
+    position:absolute;
+    left:64px; top:80px;
+    width:720px; height:660px;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap:18px;
+  }
+  .tile {
+    position:relative;
+    background:#1a1a1d;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  }
+  .tile img {
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  /* Instagram-style top bar */
+  .tile .topbar {
+    position:absolute; left:0; right:0; top:0;
+    height:36px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0));
+    display:flex; align-items:center;
+    padding:0 12px;
+    gap:8px;
+    z-index:2;
+  }
+  .tile .avatar {
+    width:22px; height:22px; border-radius:50%;
+    background: linear-gradient(135deg, #f6c453, #c1452a);
+    border:1.5px solid #fff;
+    flex-shrink:0;
+  }
+  .tile .handle {
+    font-size:11px;
+    font-weight:600;
+    color:#fff;
+    letter-spacing:0.02em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .tile .handle .dot {
+    color:rgba(255,255,255,0.55);
+    font-weight:400;
+    margin:0 5px;
+  }
+  .tile .handle .place {
+    color:rgba(255,255,255,0.75);
+    font-weight:400;
+  }
+  /* Bottom heart-row */
+  .tile .actions {
+    position:absolute; left:0; right:0; bottom:0;
+    height:30px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0));
+    display:flex; align-items:center;
+    padding:0 12px;
+    gap:10px;
+    z-index:2;
+  }
+  .tile .heart {
+    width:14px; height:14px;
+    color:#fff;
+    opacity:0.92;
+  }
+  .tile .likes {
+    font-size:10.5px;
+    font-weight:500;
+    color:rgba(255,255,255,0.92);
+    letter-spacing:0.02em;
+  }
+  /* Hero tile spans both columns top */
+  .tile.hero-tile {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+  /* Right copy panel */
+  .copy {
+    position:absolute;
+    right:64px; top:140px;
+    width:480px;
+  }
+  .copy .kicker {
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:rgba(244,239,230,0.55);
+    margin-bottom:24px;
+  }
+  .copy h1 {
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-size:54px;
+    line-height:1.07;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:#f4efe6;
+  }
+  .copy h1 .em {
+    font-style:italic;
+    font-weight:400;
+    color:#e8b96a;
+  }
+  .copy .underline {
+    width:64px; height:1px;
+    background:rgba(244,239,230,0.4);
+    margin-top:32px;
+  }
+  .meta {
+    position:absolute;
+    right:64px; bottom:64px;
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:rgba(244,239,230,0.5);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="grid">
+
+      <div class="tile hero-tile">
+        <div class="topbar">
+          <div class="avatar"></div>
+          <div class="handle">lena.zh<span class="dot">·</span><span class="place">Oeschinensee</span></div>
+        </div>
+        <img src="/map4-heroes/spots/oeschinensee/main.jpg" alt="">
+        <div class="actions">
+          <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-9.5-9C.9 8 3 4 6.5 4c2 0 3.5 1.2 4.5 2.6C12 5.2 13.5 4 15.5 4 19 4 21.1 8 19.5 12c-2.5 4.65-9.5 9-9.5 9z"/></svg>
+          <span class="likes">1 284 Likes</span>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="topbar">
+          <div class="avatar" style="background:linear-gradient(135deg,#88c2ee,#3d6fa8)"></div>
+          <div class="handle">mira.t<span class="dot">·</span><span class="place">Aletsch</span></div>
+        </div>
+        <img src="/map4-heroes/spots/aletsch_glacier/main.jpg" alt="">
+        <div class="actions">
+          <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-9.5-9C.9 8 3 4 6.5 4c2 0 3.5 1.2 4.5 2.6C12 5.2 13.5 4 15.5 4 19 4 21.1 8 19.5 12c-2.5 4.65-9.5 9-9.5 9z"/></svg>
+          <span class="likes">982 Likes</span>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="topbar">
+          <div class="avatar" style="background:linear-gradient(135deg,#e08962,#8a3b22)"></div>
+          <div class="handle">jonas.b<span class="dot">·</span><span class="place">Bachalpsee</span></div>
+        </div>
+        <img src="/map4-heroes/spots/bachalpsee/main.jpg" alt="">
+        <div class="actions">
+          <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-9.5-9C.9 8 3 4 6.5 4c2 0 3.5 1.2 4.5 2.6C12 5.2 13.5 4 15.5 4 19 4 21.1 8 19.5 12c-2.5 4.65-9.5 9-9.5 9z"/></svg>
+          <span class="likes">2 104 Likes</span>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="topbar">
+          <div class="avatar" style="background:linear-gradient(135deg,#9bb88a,#3d5e3a)"></div>
+          <div class="handle">sina_p<span class="dot">·</span><span class="place">Seealpsee</span></div>
+        </div>
+        <img src="/map4-heroes/spots/seealpsee/main.jpg" alt="">
+        <div class="actions">
+          <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-9.5-9C.9 8 3 4 6.5 4c2 0 3.5 1.2 4.5 2.6C12 5.2 13.5 4 15.5 4 19 4 21.1 8 19.5 12c-2.5 4.65-9.5 9-9.5 9z"/></svg>
+          <span class="likes">658 Likes</span>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="topbar">
+          <div class="avatar" style="background:linear-gradient(135deg,#cfb47b,#7a5c28)"></div>
+          <div class="handle">tobi.k<span class="dot">·</span><span class="place">Lauterbrunnen</span></div>
+        </div>
+        <img src="/map4-heroes/spots/lauterbrunnen/main.jpg" alt="">
+        <div class="actions">
+          <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-9.5-9C.9 8 3 4 6.5 4c2 0 3.5 1.2 4.5 2.6C12 5.2 13.5 4 15.5 4 19 4 21.1 8 19.5 12c-2.5 4.65-9.5 9-9.5 9z"/></svg>
+          <span class="likes">3 470 Likes</span>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="topbar">
+          <div class="avatar" style="background:linear-gradient(135deg,#a07ad1,#4a2b78)"></div>
+          <div class="handle">eva.ch<span class="dot">·</span><span class="place">Iseltwald</span></div>
+        </div>
+        <img src="/map4-heroes/spots/iseltwald/main.jpg" alt="">
+        <div class="actions">
+          <svg class="heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-9.5-9C.9 8 3 4 6.5 4c2 0 3.5 1.2 4.5 2.6C12 5.2 13.5 4 15.5 4 19 4 21.1 8 19.5 12c-2.5 4.65-9.5 9-9.5 9z"/></svg>
+          <span class="likes">1 902 Likes</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="copy">
+      <div class="kicker">Diesmal nicht im Feed</div>
+      <h1>Diesmal kennst du den <span class="em">Spot</span> vor allen anderen.</h1>
+      <div class="underline"></div>
+    </div>
+
+    <div class="meta">141 Hidden Gems</div>
+  </div>
+</body>
+</html>

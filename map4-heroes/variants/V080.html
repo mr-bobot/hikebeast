@@ -1,0 +1,227 @@
+<!-- V080 · FOMO · timed · layout=data-led · treatment=none · img=/map4-heroes/emotional/tannhorn.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V080</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0d0f12; font-family:'Inter',sans-serif; color:#f4efe6; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  /* Strong left-to-mid scrim so the chart panel is legible */
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(90deg, rgba(8,10,14,0.92) 0%, rgba(8,10,14,0.78) 38%, rgba(8,10,14,0.32) 60%, rgba(0,0,0,0) 80%),
+      linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.4) 100%);
+    pointer-events:none;
+  }
+  .panel {
+    position:absolute;
+    left:72px; top:72px;
+    width:680px;
+  }
+  .panel .kicker {
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:rgba(232,162,58,0.85);
+    margin-bottom:18px;
+  }
+  .panel h1 {
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-size:62px;
+    line-height:1.03;
+    letter-spacing:-0.012em;
+    margin:0 0 8px 0;
+    color:#f4efe6;
+  }
+  .panel h1 .num {
+    font-style:italic;
+    font-weight:400;
+    color:#e8a23a;
+  }
+  .panel .sub {
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    letter-spacing:0.04em;
+    color:rgba(244,239,230,0.6);
+    margin-top:10px;
+  }
+  /* Chart container */
+  .chart {
+    position:absolute;
+    left:72px; bottom:148px;
+    width:680px; height:260px;
+  }
+  .chart .axis-label {
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    fill:rgba(244,239,230,0.5);
+  }
+  .chart .week-label {
+    font-family:'JetBrains Mono', monospace;
+    font-size:9.5px;
+    fill:rgba(244,239,230,0.55);
+    letter-spacing:0.04em;
+  }
+  .chart .bar-past { fill: rgba(244,239,230,0.14); }
+  .chart .bar-now  { fill: #e8a23a; }
+  .chart .bar-future { fill: rgba(232,162,58,0.42); }
+  .chart .gridline { stroke: rgba(244,239,230,0.08); stroke-width:1; }
+  .chart .baseline { stroke: rgba(244,239,230,0.3); stroke-width:1; }
+  .chart .callout-line { stroke:#e8a23a; stroke-width:1; stroke-dasharray:3 3; }
+  .chart .callout-text {
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    fill:#e8a23a;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  /* CTA + footer */
+  .cta-row {
+    position:absolute;
+    left:72px; bottom:60px;
+    display:flex;
+    align-items:center;
+    gap:24px;
+  }
+  .cta {
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 22px;
+    background:#e8a23a;
+    color:#1a1207;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    border-radius:2px;
+    box-shadow: 0 8px 24px rgba(232,162,58,0.25);
+  }
+  .cta .arrow {
+    display:inline-block;
+    width:14px; height:1.5px;
+    background:#1a1207;
+    position:relative;
+  }
+  .cta .arrow::after {
+    content:""; position:absolute; right:-1px; top:-3.5px;
+    border-left:6px solid #1a1207;
+    border-top:4px solid transparent;
+    border-bottom:4px solid transparent;
+  }
+  .source {
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:rgba(244,239,230,0.45);
+  }
+  .corner {
+    position:absolute;
+    right:64px; top:64px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:rgba(244,239,230,0.6);
+    text-align:right;
+    line-height:1.7;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/tannhorn.jpeg" alt="">
+    <div class="scrim"></div>
+
+    <div class="corner">
+      Stand · 15. Mai<br>
+      <span style="color:#e8a23a">14 / 22 Wochenenden</span>
+    </div>
+
+    <div class="panel">
+      <div class="kicker">Saison-Index · Schweizer Sommer 2026</div>
+      <h1>Noch <span class="num">14 mal</span> gute Bedingungen.</h1>
+      <div class="sub">Bis Mitte Oktober. Danach Schnee auf Spot 87.</div>
+    </div>
+
+    <div class="chart">
+      <svg viewBox="0 0 680 260" width="680" height="260" preserveAspectRatio="none">
+        <!-- gridlines -->
+        <line class="gridline" x1="40" y1="40"  x2="680" y2="40"/>
+        <line class="gridline" x1="40" y1="90"  x2="680" y2="90"/>
+        <line class="gridline" x1="40" y1="140" x2="680" y2="140"/>
+        <line class="gridline" x1="40" y1="190" x2="680" y2="190"/>
+        <line class="baseline" x1="40" y1="220" x2="680" y2="220"/>
+
+        <!-- y axis label -->
+        <text class="axis-label" x="0" y="46">Cond.</text>
+        <text class="axis-label" x="0" y="226">0</text>
+
+        <!-- 22 bars: 8 past (grey), 1 current (gold solid), 13 future (gold faded). 14 total remaining -->
+        <!-- bar geometry: x_start 50, gap 6, bar width 22 -->
+        <!-- past 8 bars: x=50,78,106,134,162,190,218,246 -->
+        <rect class="bar-past" x="50"  y="120" width="22" height="100"/>
+        <rect class="bar-past" x="78"  y="110" width="22" height="110"/>
+        <rect class="bar-past" x="106" y="135" width="22" height="85"/>
+        <rect class="bar-past" x="134" y="100" width="22" height="120"/>
+        <rect class="bar-past" x="162" y="90"  width="22" height="130"/>
+        <rect class="bar-past" x="190" y="105" width="22" height="115"/>
+        <rect class="bar-past" x="218" y="125" width="22" height="95"/>
+        <rect class="bar-past" x="246" y="115" width="22" height="105"/>
+
+        <!-- current week (this weekend) -->
+        <rect class="bar-now" x="274" y="70" width="22" height="150"/>
+
+        <!-- future 13 bars: x = 302,330,358,386,414,442,470,498,526,554,582,610,638 -->
+        <rect class="bar-future" x="302" y="60"  width="22" height="160"/>
+        <rect class="bar-future" x="330" y="55"  width="22" height="165"/>
+        <rect class="bar-future" x="358" y="65"  width="22" height="155"/>
+        <rect class="bar-future" x="386" y="72"  width="22" height="148"/>
+        <rect class="bar-future" x="414" y="80"  width="22" height="140"/>
+        <rect class="bar-future" x="442" y="90"  width="22" height="130"/>
+        <rect class="bar-future" x="470" y="100" width="22" height="120"/>
+        <rect class="bar-future" x="498" y="115" width="22" height="105"/>
+        <rect class="bar-future" x="526" y="130" width="22" height="90"/>
+        <rect class="bar-future" x="554" y="150" width="22" height="70"/>
+        <rect class="bar-future" x="582" y="170" width="22" height="50"/>
+        <rect class="bar-future" x="610" y="185" width="22" height="35"/>
+        <rect class="bar-future" x="638" y="200" width="22" height="20"/>
+
+        <!-- callout on current bar -->
+        <line class="callout-line" x1="285" y1="70" x2="285" y2="32"/>
+        <text class="callout-text" x="294" y="35">Jetzt</text>
+
+        <!-- x axis month labels -->
+        <text class="week-label" x="48"  y="240">MAI</text>
+        <text class="week-label" x="160" y="240">JUN</text>
+        <text class="week-label" x="270" y="240">JUL</text>
+        <text class="week-label" x="380" y="240">AUG</text>
+        <text class="week-label" x="490" y="240">SEP</text>
+        <text class="week-label" x="610" y="240">OKT</text>
+      </svg>
+    </div>
+
+    <div class="cta-row">
+      <a class="cta">Karte holen <span class="arrow"></span></a>
+      <span class="source">141 Spots · 27 CHF · Lifetime</span>
+    </div>
+  </div>
+</body>
+</html>

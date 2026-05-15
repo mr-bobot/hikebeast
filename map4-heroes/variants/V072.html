@@ -1,0 +1,60 @@
+<!-- V072 · Transformation · shed · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/fronalpstock.jpg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>V072</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; font-family:'Inter', sans-serif; }
+  .hero { position:relative; width:1400px; height:787px; background:#000; }
+  .hero img.bg { width:100%; height:100%; object-fit:cover; object-position:50% 55%; display:block; }
+  .grad-bottom { position:absolute; left:0; right:0; bottom:0; height:62%; background:linear-gradient(to top, rgba(10,8,4,0.85) 0%, rgba(10,8,4,0.3) 55%, rgba(10,8,4,0) 100%); pointer-events:none; }
+  .grad-top { position:absolute; left:0; right:0; top:0; height:30%; background:linear-gradient(to bottom, rgba(0,0,0,0.32), rgba(0,0,0,0)); pointer-events:none; }
+  /* very small label top-left */
+  .top { position:absolute; top:42px; left:80px; color:rgba(255,255,255,0.8); font-size:11px; letter-spacing:0.4em; text-transform:uppercase; font-weight:500; display:flex; align-items:center; gap:14px; }
+  .top::before { content:""; display:inline-block; width:46px; height:1px; background:rgba(255,255,255,0.6); }
+  .top-r { position:absolute; top:42px; right:80px; color:rgba(255,255,255,0.65); font-size:11px; letter-spacing:0.36em; text-transform:uppercase; font-weight:500; }
+  /* large copy block on right, leaving hiker silhouette breathing */
+  .copy { position:absolute; left:80px; right:80px; bottom:80px; display:flex; align-items:flex-end; justify-content:space-between; gap:60px; }
+  .left-cluster { max-width:920px; }
+  .strike { font-family:'Fraunces', serif; font-weight:400; font-style:italic; font-size:32px; line-height:1.2; color:rgba(255,210,150,0.65); margin-bottom:24px; text-decoration:line-through; text-decoration-thickness:1px; text-decoration-color:rgba(255,210,150,0.55); }
+  .headline { font-family:'Fraunces', serif; font-weight:300; font-size:92px; line-height:0.98; letter-spacing:-0.03em; color:#fff; }
+  .headline em { font-style:italic; font-weight:500; color:#ffd28a; }
+  .headline .scratch { position:relative; display:inline-block; }
+  .headline .scratch::after { content:""; position:absolute; left:-4%; right:-4%; top:54%; height:6px; background:rgba(255,210,150,0.7); transform:rotate(-1deg); }
+  .arrow-cluster { display:flex; flex-direction:column; align-items:flex-end; gap:14px; color:#ffd28a; font-family:'Inter', sans-serif; font-size:11px; letter-spacing:0.4em; text-transform:uppercase; font-weight:600; }
+  .arrow-cluster .ar { font-size:48px; line-height:0.6; font-family:'Fraunces', serif; font-weight:300; }
+  /* footstep markers near the bottom */
+  .steps { position:absolute; left:80px; bottom:38px; display:flex; align-items:center; gap:10px; color:rgba(255,255,255,0.55); font-size:10px; letter-spacing:0.3em; text-transform:uppercase; font-weight:500; }
+  .steps .dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.45); }
+  .steps .dot.on { background:#ffd28a; box-shadow:0 0 12px #ffd28a; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="bg" src="/map4-heroes/emotional/fronalpstock.jpg" alt="">
+    <div class="grad-top"></div>
+    <div class="grad-bottom"></div>
+    <div class="top">Fronalpstock · 1922 m · Sunset</div>
+    <div class="top-r">N°072 / 141</div>
+    <div class="copy">
+      <div class="left-cluster">
+        <div class="strike">The person who keeps scrolling.</div>
+        <div class="headline"><span class="scratch">Leave</span> the version<br>of you that <em>scrolled past</em><br>this.</div>
+      </div>
+      <div class="arrow-cluster">
+        <div>This way →</div>
+        <div class="ar">→</div>
+        <div>1922 m up</div>
+      </div>
+    </div>
+    <div class="steps">
+      <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span style="margin-left:14px">Step 4 of 7 · keep going</span>
+    </div>
+  </div>
+</body>
+</html>

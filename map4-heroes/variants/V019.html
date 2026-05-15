@@ -1,0 +1,275 @@
+<!-- V019 · Discovery · mapped · layout=map-led · treatment=desaturated · img=/map4-heroes/emotional/lac%20de%20cheserys.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V019</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0d1014; }
+  .hero {
+    position:relative; width:1400px; height:787px; overflow:hidden;
+    background: radial-gradient(ellipse at 30% 35%, #1a2330 0%, #0d1014 65%);
+  }
+  .bg-photo {
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    filter: grayscale(0.55) brightness(0.42) contrast(1.05);
+    opacity:0.32;
+  }
+  .grid {
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mix-blend-mode:overlay;
+    pointer-events:none;
+  }
+  .map-wrap {
+    position:absolute;
+    right:60px;
+    top:50%;
+    transform:translateY(-50%);
+    width:720px;
+    height:640px;
+  }
+  .map-shape { width:100%; height:100%; position:relative; }
+  .map-shape svg { width:100%; height:100%; display:block; filter: drop-shadow(0 0 40px rgba(120,170,220,0.18)); }
+  .dot {
+    position:absolute;
+    width:6px; height:6px;
+    border-radius:50%;
+    background:#f6d572;
+    box-shadow: 0 0 8px rgba(246,213,114,0.85), 0 0 20px rgba(246,213,114,0.35);
+  }
+  .dot.s { width:4px; height:4px; opacity:0.65; }
+  .dot.l { width:8px; height:8px; }
+  .copy {
+    position:absolute;
+    left:72px;
+    top:50%;
+    transform:translateY(-50%);
+    max-width:540px;
+    color:#f1ece1;
+    z-index:2;
+  }
+  .copy .tag {
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:0.34em;
+    text-transform:uppercase;
+    color:#f6d572;
+    margin-bottom:24px;
+  }
+  .copy h1 {
+    font-family:'Cormorant Garamond', serif;
+    font-weight:400;
+    font-size:62px;
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:#f4efe3;
+  }
+  .copy h1 .em { font-style:italic; }
+  .copy .stat {
+    margin-top:38px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:14px;
+    letter-spacing:0.08em;
+    color:rgba(241,236,225,0.6);
+    line-height:1.7;
+  }
+  .copy .stat span { color:#f6d572; font-weight:700; }
+  .legend {
+    position:absolute;
+    left:72px;
+    bottom:48px;
+    font-family:'Inter', sans-serif;
+    font-size:10px;
+    letter-spacing:0.28em;
+    color:rgba(241,236,225,0.45);
+    text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="bg-photo" src="/map4-heroes/emotional/lac%20de%20cheserys.jpeg" alt="">
+    <div class="grid"></div>
+
+    <div class="copy">
+      <div class="tag">Swiss Gems · Karte</div>
+      <h1>141 Punkte. Eine Liste.<br><span class="em">Kein Geheimnis mehr.</span></h1>
+      <div class="stat"><span>141</span> Spots &nbsp;·&nbsp; <span>26</span> Kantone &nbsp;·&nbsp; <span>1</span> Liste</div>
+    </div>
+
+    <div class="map-wrap">
+      <div class="map-shape">
+        <svg viewBox="0 0 720 640" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <clipPath id="ch">
+              <path d="M85,300 C100,250 130,210 170,190 C200,175 230,170 265,170 C300,168 320,158 345,150 C380,140 415,138 445,148 C470,156 495,168 520,170 C560,172 590,168 620,176 C640,182 655,196 660,218 C665,240 660,260 645,280 C638,290 622,300 615,320 C608,342 612,360 618,378 C625,398 624,420 605,438 C585,456 555,460 525,455 C495,450 465,455 440,468 C410,484 380,492 350,490 C320,488 295,478 268,470 C242,462 215,460 188,452 C160,444 132,432 112,410 C92,388 80,358 82,330 C82,318 84,310 85,300 Z"/>
+            </clipPath>
+          </defs>
+          <image href="/map4-heroes/emotional/lac%20de%20cheserys.jpeg" x="60" y="130" width="620" height="380"
+            preserveAspectRatio="xMidYMid slice"
+            clip-path="url(#ch)"
+            style="filter: grayscale(0.6) brightness(0.7) contrast(1.08); opacity:0.78;" />
+          <path d="M85,300 C100,250 130,210 170,190 C200,175 230,170 265,170 C300,168 320,158 345,150 C380,140 415,138 445,148 C470,156 495,168 520,170 C560,172 590,168 620,176 C640,182 655,196 660,218 C665,240 660,260 645,280 C638,290 622,300 615,320 C608,342 612,360 618,378 C625,398 624,420 605,438 C585,456 555,460 525,455 C495,450 465,455 440,468 C410,484 380,492 350,490 C320,488 295,478 268,470 C242,462 215,460 188,452 C160,444 132,432 112,410 C92,388 80,358 82,330 C82,318 84,310 85,300 Z"
+            fill="none" stroke="rgba(246,213,114,0.7)" stroke-width="1.6"/>
+        </svg>
+        <div class="dot l" style="left:18%; top:38%;"></div>
+        <div class="dot" style="left:24%; top:32%;"></div>
+        <div class="dot s" style="left:30%; top:28%;"></div>
+        <div class="dot" style="left:36%; top:32%;"></div>
+        <div class="dot s" style="left:42%; top:26%;"></div>
+        <div class="dot l" style="left:48%; top:30%;"></div>
+        <div class="dot" style="left:55%; top:34%;"></div>
+        <div class="dot s" style="left:62%; top:30%;"></div>
+        <div class="dot" style="left:70%; top:34%;"></div>
+        <div class="dot s" style="left:78%; top:36%;"></div>
+        <div class="dot" style="left:22%; top:46%;"></div>
+        <div class="dot l" style="left:30%; top:44%;"></div>
+        <div class="dot s" style="left:38%; top:42%;"></div>
+        <div class="dot" style="left:44%; top:44%;"></div>
+        <div class="dot s" style="left:50%; top:46%;"></div>
+        <div class="dot" style="left:56%; top:48%;"></div>
+        <div class="dot l" style="left:64%; top:46%;"></div>
+        <div class="dot" style="left:72%; top:48%;"></div>
+        <div class="dot s" style="left:80%; top:50%;"></div>
+        <div class="dot" style="left:18%; top:55%;"></div>
+        <div class="dot l" style="left:26%; top:58%;"></div>
+        <div class="dot s" style="left:34%; top:56%;"></div>
+        <div class="dot" style="left:42%; top:58%;"></div>
+        <div class="dot s" style="left:50%; top:60%;"></div>
+        <div class="dot" style="left:58%; top:58%;"></div>
+        <div class="dot l" style="left:66%; top:60%;"></div>
+        <div class="dot s" style="left:74%; top:62%;"></div>
+        <div class="dot" style="left:82%; top:60%;"></div>
+        <div class="dot s" style="left:28%; top:66%;"></div>
+        <div class="dot" style="left:36%; top:68%;"></div>
+        <div class="dot l" style="left:46%; top:70%;"></div>
+        <div class="dot s" style="left:54%; top:68%;"></div>
+        <div class="dot" style="left:62%; top:70%;"></div>
+        <div class="dot s" style="left:70%; top:72%;"></div>
+        <div class="dot" style="left:78%; top:70%;"></div>
+        <div class="dot s" style="left:22%; top:72%;"></div>
+        <div class="dot" style="left:40%; top:78%;"></div>
+        <div class="dot s" style="left:48%; top:80%;"></div>
+        <div class="dot" style="left:58%; top:78%;"></div>
+        <div class="dot l" style="left:32%; top:36%;"></div>
+        <div class="dot s" style="left:46%; top:38%;"></div>
+        <div class="dot" style="left:60%; top:40%;"></div>
+        <div class="dot s" style="left:24%; top:50%;"></div>
+        <div class="dot" style="left:36%; top:50%;"></div>
+        <div class="dot s" style="left:52%; top:52%;"></div>
+        <div class="dot" style="left:68%; top:54%;"></div>
+        <div class="dot s" style="left:30%; top:62%;"></div>
+        <div class="dot" style="left:44%; top:62%;"></div>
+        <div class="dot s" style="left:60%; top:64%;"></div>
+        <div class="dot" style="left:76%; top:66%;"></div>
+        <div class="dot s" style="left:34%; top:74%;"></div>
+        <div class="dot" style="left:52%; top:74%;"></div>
+        <div class="dot s" style="left:68%; top:76%;"></div>
+        <div class="dot" style="left:42%; top:34%;"></div>
+        <div class="dot s" style="left:58%; top:32%;"></div>
+        <div class="dot" style="left:74%; top:38%;"></div>
+        <div class="dot s" style="left:20%; top:40%;"></div>
+        <div class="dot" style="left:32%; top:42%;"></div>
+        <div class="dot s" style="left:48%; top:42%;"></div>
+        <div class="dot" style="left:64%; top:42%;"></div>
+        <div class="dot s" style="left:76%; top:44%;"></div>
+        <div class="dot" style="left:28%; top:52%;"></div>
+        <div class="dot s" style="left:40%; top:54%;"></div>
+        <div class="dot" style="left:56%; top:54%;"></div>
+        <div class="dot s" style="left:72%; top:56%;"></div>
+        <div class="dot" style="left:20%; top:64%;"></div>
+        <div class="dot s" style="left:38%; top:64%;"></div>
+        <div class="dot" style="left:50%; top:64%;"></div>
+        <div class="dot s" style="left:66%; top:66%;"></div>
+        <div class="dot" style="left:78%; top:68%;"></div>
+        <div class="dot s" style="left:26%; top:70%;"></div>
+        <div class="dot" style="left:42%; top:72%;"></div>
+        <div class="dot s" style="left:56%; top:72%;"></div>
+        <div class="dot" style="left:70%; top:74%;"></div>
+        <div class="dot s" style="left:36%; top:80%;"></div>
+        <div class="dot" style="left:50%; top:82%;"></div>
+        <div class="dot s" style="left:64%; top:80%;"></div>
+        <div class="dot l" style="left:38%; top:46%;"></div>
+        <div class="dot s" style="left:54%; top:36%;"></div>
+        <div class="dot" style="left:68%; top:50%;"></div>
+        <div class="dot s" style="left:24%; top:60%;"></div>
+        <div class="dot" style="left:46%; top:50%;"></div>
+        <div class="dot s" style="left:60%; top:50%;"></div>
+        <div class="dot" style="left:74%; top:52%;"></div>
+        <div class="dot s" style="left:30%; top:50%;"></div>
+        <div class="dot" style="left:44%; top:56%;"></div>
+        <div class="dot s" style="left:58%; top:42%;"></div>
+        <div class="dot" style="left:70%; top:40%;"></div>
+        <div class="dot s" style="left:34%; top:60%;"></div>
+        <div class="dot" style="left:48%; top:66%;"></div>
+        <div class="dot s" style="left:62%; top:74%;"></div>
+        <div class="dot" style="left:76%; top:58%;"></div>
+        <div class="dot s" style="left:26%; top:42%;"></div>
+        <div class="dot" style="left:50%; top:30%;"></div>
+        <div class="dot s" style="left:66%; top:36%;"></div>
+        <div class="dot" style="left:80%; top:42%;"></div>
+        <div class="dot s" style="left:32%; top:48%;"></div>
+        <div class="dot" style="left:54%; top:46%;"></div>
+        <div class="dot s" style="left:70%; top:46%;"></div>
+        <div class="dot" style="left:84%; top:48%;"></div>
+        <div class="dot s" style="left:38%; top:38%;"></div>
+        <div class="dot" style="left:52%; top:40%;"></div>
+        <div class="dot s" style="left:66%; top:42%;"></div>
+        <div class="dot" style="left:78%; top:48%;"></div>
+        <div class="dot s" style="left:22%; top:56%;"></div>
+        <div class="dot" style="left:36%; top:58%;"></div>
+        <div class="dot s" style="left:52%; top:58%;"></div>
+        <div class="dot" style="left:68%; top:58%;"></div>
+        <div class="dot s" style="left:80%; top:54%;"></div>
+        <div class="dot" style="left:30%; top:38%;"></div>
+        <div class="dot s" style="left:42%; top:50%;"></div>
+        <div class="dot" style="left:58%; top:64%;"></div>
+        <div class="dot s" style="left:72%; top:66%;"></div>
+        <div class="dot" style="left:84%; top:62%;"></div>
+        <div class="dot s" style="left:28%; top:48%;"></div>
+        <div class="dot" style="left:40%; top:46%;"></div>
+        <div class="dot s" style="left:54%; top:50%;"></div>
+        <div class="dot" style="left:64%; top:54%;"></div>
+        <div class="dot s" style="left:76%; top:50%;"></div>
+        <div class="dot" style="left:32%; top:54%;"></div>
+        <div class="dot s" style="left:46%; top:60%;"></div>
+        <div class="dot" style="left:60%; top:56%;"></div>
+        <div class="dot s" style="left:74%; top:60%;"></div>
+        <div class="dot" style="left:20%; top:48%;"></div>
+        <div class="dot s" style="left:34%; top:46%;"></div>
+        <div class="dot" style="left:48%; top:54%;"></div>
+        <div class="dot s" style="left:62%; top:62%;"></div>
+        <div class="dot" style="left:76%; top:74%;"></div>
+        <div class="dot s" style="left:40%; top:68%;"></div>
+        <div class="dot" style="left:54%; top:64%;"></div>
+        <div class="dot s" style="left:68%; top:68%;"></div>
+        <div class="dot" style="left:80%; top:66%;"></div>
+        <div class="dot s" style="left:26%; top:54%;"></div>
+        <div class="dot" style="left:42%; top:40%;"></div>
+        <div class="dot s" style="left:56%; top:56%;"></div>
+        <div class="dot" style="left:70%; top:56%;"></div>
+        <div class="dot s" style="left:24%; top:36%;"></div>
+        <div class="dot" style="left:38%; top:44%;"></div>
+        <div class="dot s" style="left:52%; top:48%;"></div>
+        <div class="dot" style="left:66%; top:48%;"></div>
+        <div class="dot s" style="left:80%; top:38%;"></div>
+        <div class="dot l" style="left:46%; top:64%;"></div>
+      </div>
+    </div>
+
+    <div class="legend">N · Schweiz / CH · 1:Tausende</div>
+  </div>
+</body>
+</html>

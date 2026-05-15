@@ -1,0 +1,77 @@
+<!-- V068 · Pride · quiet · layout=painted · treatment=painted · img=/map4-heroes/emotional/hardgergrat%20camping.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>V068</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; font-family:'Inter', sans-serif; background:#0e1116; }
+  .hero { position:relative; width:1400px; height:787px; background:#0e1116; overflow:hidden; }
+  /* SVG painted filter applied to image */
+  .paint-img { width:100%; height:100%; object-fit:cover; object-position:50% 50%;
+     filter: url(#oilpaint) saturate(0.92) contrast(1.08); display:block;
+  }
+  /* canvas warm overlay */
+  .warm-cast { position:absolute; inset:0; background:
+    radial-gradient(ellipse at 70% 35%, rgba(255,170,90,0.18), transparent 55%),
+    linear-gradient(180deg, rgba(255,200,140,0.06) 0%, rgba(20,15,8,0.35) 100%);
+    mix-blend-mode:overlay; pointer-events:none;
+  }
+  .brush-tex { position:absolute; inset:0; pointer-events:none; opacity:0.35; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><filter id='b'><feTurbulence baseFrequency='0.012 0.06' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.85  0 0 0 0 0.75  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23b)'/></svg>");
+  }
+  /* line-work silhouette overlay (subtle) */
+  .lineart { position:absolute; left:0; right:0; bottom:120px; height:280px; pointer-events:none; opacity:0.5; }
+  .corner-mark { position:absolute; top:46px; left:84px; font-family:'Cormorant Garamond', serif; font-style:italic; font-size:18px; color:rgba(255,235,210,0.85); letter-spacing:0.04em; }
+  .corner-mark .sub { font-family:'Inter', sans-serif; font-style:normal; font-size:10px; letter-spacing:0.4em; text-transform:uppercase; opacity:0.7; margin-top:6px; }
+  .topright { position:absolute; top:50px; right:84px; font-family:'Cormorant Garamond', serif; font-style:italic; font-size:16px; color:rgba(255,235,210,0.7); }
+  .headline-band { position:absolute; left:84px; right:84px; bottom:0; padding-bottom:110px; }
+  .pre { font-family:'Inter', sans-serif; font-size:11px; letter-spacing:0.42em; text-transform:uppercase; color:rgba(255,235,210,0.7); font-weight:500; margin-bottom:28px; display:flex; align-items:center; gap:14px; }
+  .pre::before { content:""; display:inline-block; width:50px; height:1px; background:rgba(255,235,210,0.6); }
+  .headline { font-family:'Cormorant Garamond', serif; font-weight:400; font-style:italic; font-size:104px; line-height:0.96; color:#fdf3e2; letter-spacing:-0.012em; text-shadow:0 2px 28px rgba(0,0,0,0.5); max-width:1200px; }
+  .headline .accent { font-weight:300; font-style:normal; }
+  .signature-script { position:absolute; right:90px; bottom:42px; font-family:'Cormorant Garamond', serif; font-style:italic; font-size:18px; color:rgba(255,235,210,0.7); }
+  .signature-script::before { content:""; display:inline-block; width:36px; height:1px; background:rgba(255,235,210,0.4); vertical-align:middle; margin-right:14px; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <filter id="oilpaint">
+          <feGaussianBlur stdDeviation="1.6" result="b"/>
+          <feColorMatrix in="b" type="matrix" values="
+            1.05 0 0 0 0
+            0 1.02 0 0 0
+            0 0 0.98 0 0
+            0 0 0 1 0"/>
+          <feComponentTransfer>
+            <feFuncR type="discrete" tableValues="0 0.18 0.32 0.48 0.62 0.78 0.92 1"/>
+            <feFuncG type="discrete" tableValues="0 0.18 0.32 0.48 0.62 0.78 0.92 1"/>
+            <feFuncB type="discrete" tableValues="0 0.18 0.32 0.48 0.62 0.78 0.92 1"/>
+          </feComponentTransfer>
+        </filter>
+      </defs>
+    </svg>
+    <img class="paint-img" src="/map4-heroes/emotional/hardgergrat%20camping.jpeg" alt="">
+    <div class="warm-cast"></div>
+    <div class="brush-tex"></div>
+    <svg class="lineart" viewBox="0 0 1400 280" preserveAspectRatio="none">
+      <path d="M0 220 L80 180 L160 200 L240 130 L320 170 L420 100 L500 150 L600 80 L700 140 L820 70 L920 160 L1020 110 L1140 180 L1240 130 L1400 200 L1400 280 L0 280 Z"
+            fill="none" stroke="rgba(255,235,210,0.4)" stroke-width="1.2"/>
+      <path d="M0 220 L80 180 L160 200 L240 130 L320 170 L420 100 L500 150 L600 80 L700 140 L820 70 L920 160 L1020 110 L1140 180 L1240 130 L1400 200"
+            fill="none" stroke="rgba(255,235,210,0.18)" stroke-width="6"/>
+    </svg>
+    <div class="corner-mark">Hardergrat<br><span class="sub">Étude Bernoise · MMXXVI</span></div>
+    <div class="topright">Première lueur, 5h12</div>
+    <div class="headline-band">
+      <div class="pre">Berner Oberland · Étude Nº VII</div>
+      <div class="headline">Ein Sommer,<br><span class="accent">ehrlich</span> verdient.</div>
+    </div>
+    <div class="signature-script">Öl auf Leinen, Hardergrat</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!-- V002 · Awe · sublime · layout=type-dominant · treatment=none · img=/map4-heroes/emotional/lac%20de%20cheserys.jpeg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V002</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,144,300;1,144,300;1,144,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#f1ece0; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; display:flex; }
+  .photo-pane {
+    position:relative;
+    width:840px; height:787px; overflow:hidden;
+    flex: 0 0 840px;
+  }
+  .photo-pane img {
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  .paper-pane {
+    flex: 1 1 auto;
+    background: #efe7d6;
+    position:relative;
+    padding: 56px 64px 64px 64px;
+    box-sizing: border-box;
+    display:flex; flex-direction:column; justify-content:flex-end;
+  }
+  /* faint paper texture using radial highlights */
+  .paper-pane:before{
+    content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(120% 80% at 10% 0%, rgba(255,255,255,0.5), transparent 60%),
+      radial-gradient(100% 100% at 90% 100%, rgba(120,80,40,0.07), transparent 60%);
+    pointer-events:none;
+  }
+  .kicker {
+    position:absolute;
+    top:48px; right:64px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:11px;
+    letter-spacing:0.34em;
+    color:#5a4b32;
+  }
+  .kicker:after{
+    content:""; display:inline-block;
+    width:28px; height:1px; background:#5a4b32; margin-left:14px; vertical-align:4px;
+  }
+  h1 {
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 88px;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color:#221a10;
+    margin: 0 0 36px 0;
+  }
+  .rule {
+    position:absolute;
+    bottom: 56px; right: 64px;
+    width: 78px; height: 1px; background:#221a10;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="photo-pane">
+      <img src="/map4-heroes/emotional/lac%20de%20cheserys.jpeg" alt="">
+    </div>
+    <div class="paper-pane">
+      <div class="kicker">SWISS GEMS</div>
+      <h1>Switzerland,<br>undiluted.</h1>
+      <div class="rule"></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!-- V039 · Mystery · hidden · layout=polaroid-single · treatment=grain · img=/map4-heroes/emotional/LOST7855-Edit.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V039</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0a0a0b; }
+  .hero {
+    position:relative;
+    width:1400px; height:787px;
+    overflow:hidden;
+    background: radial-gradient(ellipse at 50% 45%, #18181a 0%, #08080a 70%);
+  }
+  .board {
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.012) 0 1px, transparent 1px 4px);
+    mix-blend-mode: screen;
+    pointer-events:none;
+  }
+  .polaroid {
+    position:absolute;
+    left:50%; top:50%;
+    width:720px;
+    height:600px;
+    margin-left:-360px;
+    margin-top:-300px;
+    transform: rotate(-3.5deg);
+    background:#f4ecdb;
+    padding: 22px 22px 84px 22px;
+    box-sizing: border-box;
+    box-shadow:
+      0 24px 60px rgba(0,0,0,0.55),
+      0 8px 20px rgba(0,0,0,0.4),
+      inset 0 0 0 1px rgba(0,0,0,0.04);
+  }
+  .polaroid::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:
+      radial-gradient(ellipse 240px 140px at 0% 0%, rgba(40,18,8,0.55) 0%, rgba(40,18,8,0) 70%),
+      radial-gradient(ellipse 200px 120px at 100% 0%, rgba(40,18,8,0.45) 0%, rgba(40,18,8,0) 70%),
+      radial-gradient(ellipse 260px 160px at 100% 100%, rgba(40,18,8,0.5) 0%, rgba(40,18,8,0) 70%),
+      radial-gradient(ellipse 220px 140px at 0% 100%, rgba(40,18,8,0.4) 0%, rgba(40,18,8,0) 70%);
+    mix-blend-mode: multiply;
+  }
+  .polaroid::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:
+      linear-gradient(45deg, rgba(20,10,4,0.85) 0%, rgba(20,10,4,0) 4%),
+      linear-gradient(-45deg, rgba(20,10,4,0.85) 0%, rgba(20,10,4,0) 4%),
+      linear-gradient(135deg, rgba(20,10,4,0.85) 0%, rgba(20,10,4,0) 4%),
+      linear-gradient(-135deg, rgba(20,10,4,0.85) 0%, rgba(20,10,4,0) 4%);
+    mix-blend-mode: multiply;
+  }
+  .photo-frame {
+    position:relative;
+    width:100%;
+    height:472px;
+    overflow:hidden;
+    background:#000;
+  }
+  .photo-frame img {
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 60%;
+    filter: contrast(1.04) brightness(0.96) sepia(0.06);
+    display:block;
+  }
+  .grain {
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: overlay;
+    opacity:0.6;
+    pointer-events:none;
+  }
+  .caption {
+    position:absolute;
+    left:0; right:0;
+    bottom:16px;
+    text-align:center;
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:34px;
+    color:#222018;
+    letter-spacing:0.01em;
+  }
+  .tape {
+    position:absolute;
+    width:170px; height:36px;
+    background: rgba(220, 200, 150, 0.55);
+    border:1px solid rgba(255,235,180,0.18);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  }
+  .tape.t1 {
+    top: 80px; left: 320px;
+    transform: rotate(-8deg);
+    background: rgba(230, 215, 175, 0.45);
+  }
+  .tape.t2 {
+    top: 108px; right: 290px;
+    transform: rotate(7deg);
+  }
+  .note {
+    position:absolute;
+    right:72px;
+    bottom:88px;
+    transform: rotate(4deg);
+    font-family:'Caveat', cursive;
+    font-weight:500;
+    color:#e2d8b8;
+    font-size:30px;
+    line-height:1.2;
+    text-align:right;
+  }
+  .note .num {
+    font-weight:700;
+    color:#f6c453;
+    font-size:46px;
+    display:block;
+    line-height:1;
+    margin-bottom:6px;
+  }
+  .header {
+    position:absolute;
+    left:60px;
+    top:54px;
+    font-family:'Inter', sans-serif;
+    color:#e2d8b8;
+  }
+  .header .kicker {
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:0.4em;
+    text-transform:uppercase;
+    color: rgba(226,216,184,0.55);
+    margin-bottom:14px;
+  }
+  .header h1 {
+    margin:0;
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:68px;
+    line-height:1;
+    color:#f6c453;
+    transform: rotate(-1.5deg);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="board"></div>
+
+    <div class="header">
+      <div class="kicker">Swiss Gems · Logbuch</div>
+      <h1>Spot 84 von 141.</h1>
+    </div>
+
+    <div class="polaroid">
+      <div class="photo-frame">
+        <img src="/map4-heroes/emotional/LOST7855-Edit.jpeg" alt="">
+        <div class="grain"></div>
+      </div>
+      <div class="caption">Seealpsee &middot; 05:42</div>
+    </div>
+    <div class="tape t1"></div>
+    <div class="tape t2"></div>
+
+    <div class="note">
+      <span class="num">N.84</span>
+      ungelistet,<br>noch nicht im Index
+    </div>
+  </div>
+</body>
+</html>

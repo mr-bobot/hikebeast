@@ -1,0 +1,61 @@
+<!-- V023 · Peace · hushed · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/fulbergmain.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V023</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 55%;
+    display:block;
+  }
+  .breath {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 50% 70%, rgba(0,0,0,0) 0%, rgba(255,255,255,0.06) 60%, rgba(0,0,0,0) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:50%; bottom:188px;
+    transform:translateX(-50%);
+    text-align:center;
+    color:#efe7d8;
+  }
+  .copy h1 {
+    margin:0;
+    font-family:'EB Garamond', serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:34px;
+    line-height:1.3;
+    letter-spacing:0.01em;
+    text-shadow:0 1px 24px rgba(0,0,0,0.45);
+    max-width:760px;
+  }
+  .hairline {
+    position:absolute;
+    left:50%; bottom:262px;
+    transform:translateX(-50%);
+    width:80px; height:1px;
+    background:rgba(239,231,216,0.55);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/fulbergmain.jpeg" alt="">
+    <div class="breath"></div>
+    <div class="hairline"></div>
+    <div class="copy">
+      <h1>Nicht jeder Ort braucht ein Foto.</h1>
+    </div>
+  </div>
+</body>
+</html>

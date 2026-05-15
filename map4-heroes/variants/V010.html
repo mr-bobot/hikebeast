@@ -1,0 +1,99 @@
+<!-- V010 · Freedom · feral · layout=B&W · treatment=B&W · img=/map4-heroes/emotional/tannhorn.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V010</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#fff; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; background:#fff; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 55%;
+    display:block;
+    filter: grayscale(1) contrast(1.5) brightness(1.05);
+    /* punch sky to white */
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 4%, #000 30%);
+            mask-image: linear-gradient(180deg, transparent 0%, transparent 4%, #000 30%);
+  }
+  .punch-white {
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.85) 25%, rgba(255,255,255,0) 50%);
+    pointer-events:none;
+  }
+  .grain {
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px),
+      radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 3px 3px, 5px 5px;
+    background-position: 0 0, 1px 1px;
+    mix-blend-mode: overlay;
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:60px; bottom:60px;
+    color:#0a0a0a;
+  }
+  h1 {
+    font-family:'Anton', sans-serif;
+    font-weight: 400;
+    font-size: 142px;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color:#0a0a0a;
+    text-transform: uppercase;
+  }
+  h1 .dim {
+    color: rgba(10,10,10,0.32);
+  }
+  h1 .free {
+    display:block;
+  }
+  .meta {
+    position:absolute;
+    top: 60px; right: 60px;
+    font-family:'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    color: #0a0a0a;
+    text-transform: uppercase;
+  }
+  .stamp {
+    position:absolute;
+    bottom: 60px; right: 60px;
+    width:96px; height:96px;
+    border: 2px solid #0a0a0a;
+    border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    transform: rotate(-12deg);
+    font-family:'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color:#0a0a0a;
+    text-align:center;
+    line-height: 1.1;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/tannhorn.jpeg" alt="">
+    <div class="punch-white"></div>
+    <div class="grain"></div>
+    <div class="copy">
+      <h1 class="free">FREI.</h1>
+      <h1 class="free"><span class="dim">NICHT GÜNSTIG.</span></h1>
+      <h1 class="free"><span class="dim">NICHT BEQUEM.</span></h1>
+      <h1 class="free">FREI.</h1>
+    </div>
+  </div>
+</body>
+</html>

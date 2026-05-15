@@ -1,0 +1,548 @@
+<!-- V100 · Tension · unfinished · layout=map-led · treatment=desaturated · img=/map4-heroes/emotional/tannhorn.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V100</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#f1ece1; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; background:#f1ece1; }
+
+  /* Subtle paper grid */
+  .paper {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(0deg, rgba(28,24,18,0.04) 1px, transparent 1px) 0 0 / 40px 40px,
+      linear-gradient(90deg, rgba(28,24,18,0.04) 1px, transparent 1px) 0 0 / 40px 40px,
+      radial-gradient(ellipse at center, rgba(241,236,225,0) 50%, rgba(120,108,84,0.18) 100%);
+    pointer-events:none;
+  }
+
+  .stage {
+    position:absolute;
+    left: 0; top: 0;
+    width: 1400px; height: 787px;
+  }
+
+  .map-wrap {
+    position:absolute;
+    left: 60px;
+    top: 70px;
+    width: 820px;
+    height: 660px;
+  }
+
+  .map-wrap svg {
+    width: 100%; height: 100%;
+    display: block;
+    overflow: visible;
+  }
+
+  .copy {
+    position:absolute;
+    right: 70px;
+    top: 92px;
+    width: 460px;
+    color: #1a1814;
+  }
+  .copy .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.44em;
+    text-transform: uppercase;
+    color: rgba(26,24,20,0.62);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 30px;
+  }
+  .copy .kicker::before {
+    content: '';
+    width: 36px; height: 1px;
+    background: rgba(26,24,20,0.55);
+  }
+  .copy h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 96px;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin: 0;
+    color: #1a1814;
+  }
+  .copy h1 .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: #b53826;
+    letter-spacing: -0.02em;
+  }
+  .copy .divide {
+    width: 60px;
+    height: 1px;
+    background: #1a1814;
+    margin: 36px 0 28px;
+    opacity: 0.55;
+  }
+  .copy h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1;
+    margin: 0;
+    color: rgba(26,24,20,0.92);
+  }
+  .copy h2 .strike {
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgba(26,24,20,0.42);
+    color: rgba(26,24,20,0.4);
+  }
+
+  .progress {
+    margin-top: 44px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(26,24,20,0.7);
+  }
+  .progress .bar {
+    margin-top: 12px;
+    width: 100%;
+    height: 4px;
+    background: rgba(26,24,20,0.14);
+    position: relative;
+    overflow: hidden;
+  }
+  .progress .bar::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1.42%;
+    background: #b53826;
+  }
+  .progress .labels {
+    margin-top: 8px;
+    display: flex; justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: rgba(26,24,20,0.55);
+  }
+
+  .cta {
+    margin-top: 38px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: #1a1814;
+    color: #f4ecdb;
+    padding: 16px 26px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+  .cta .arr { font-family: 'Cormorant Garamond', serif; font-size: 20px; letter-spacing: 0; font-style: italic; }
+
+  .topmark {
+    position:absolute;
+    top: 36px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(26,24,20,0.55);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+  }
+  .botmark {
+    position:absolute;
+    bottom: 30px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(26,24,20,0.5);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+  }
+
+  /* SVG styling */
+  .map-fill image {
+    filter: saturate(0.18) contrast(1.05) brightness(0.96);
+  }
+  .country-stroke {
+    fill: none;
+    stroke: #1a1814;
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+    opacity: 0.78;
+  }
+  .country-shadow {
+    fill: rgba(26,24,20,0.06);
+  }
+  .pin {
+    fill: #1a1814;
+    opacity: 0.7;
+  }
+  .pin-visited {
+    fill: #b53826;
+    stroke: #f1ece1;
+    stroke-width: 1.2;
+    opacity: 1;
+  }
+  .city-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    fill: rgba(26,24,20,0.7);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="paper"></div>
+    <div class="topmark">
+      <span>Hikebeast · Atlas der versteckten Schweiz</span>
+      <span>Edition 01 · 2026</span>
+    </div>
+
+    <div class="map-wrap">
+      <svg viewBox="0 0 820 660" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <clipPath id="ch-clip">
+            <path d="M 78 280
+                     C 70 260, 80 232, 110 222
+                     C 140 210, 158 220, 178 212
+                     C 200 202, 214 188, 240 184
+                     C 268 178, 286 196, 312 188
+                     C 340 178, 358 158, 388 156
+                     C 418 154, 442 168, 472 162
+                     C 504 154, 522 132, 552 130
+                     C 584 128, 608 144, 636 140
+                     C 660 136, 680 124, 702 130
+                     C 722 136, 730 154, 746 168
+                     C 762 184, 776 200, 766 224
+                     C 758 246, 736 250, 728 270
+                     C 720 290, 736 312, 720 332
+                     C 700 358, 660 348, 632 360
+                     C 600 374, 588 396, 558 408
+                     C 528 420, 504 412, 478 420
+                     C 450 430, 432 458, 402 462
+                     C 370 466, 348 452, 320 454
+                     C 290 458, 268 482, 238 478
+                     C 208 474, 192 452, 168 442
+                     C 142 432, 110 432, 92 412
+                     C 76 392, 86 366, 80 342
+                     C 74 318, 86 298, 78 280 Z"/>
+          </clipPath>
+        </defs>
+
+        <!-- soft shadow under Switzerland -->
+        <path class="country-shadow" transform="translate(6,8)" d="M 78 280
+                     C 70 260, 80 232, 110 222
+                     C 140 210, 158 220, 178 212
+                     C 200 202, 214 188, 240 184
+                     C 268 178, 286 196, 312 188
+                     C 340 178, 358 158, 388 156
+                     C 418 154, 442 168, 472 162
+                     C 504 154, 522 132, 552 130
+                     C 584 128, 608 144, 636 140
+                     C 660 136, 680 124, 702 130
+                     C 722 136, 730 154, 746 168
+                     C 762 184, 776 200, 766 224
+                     C 758 246, 736 250, 728 270
+                     C 720 290, 736 312, 720 332
+                     C 700 358, 660 348, 632 360
+                     C 600 374, 588 396, 558 408
+                     C 528 420, 504 412, 478 420
+                     C 450 430, 432 458, 402 462
+                     C 370 466, 348 452, 320 454
+                     C 290 458, 268 482, 238 478
+                     C 208 474, 192 452, 168 442
+                     C 142 432, 110 432, 92 412
+                     C 76 392, 86 366, 80 342
+                     C 74 318, 86 298, 78 280 Z"/>
+
+        <!-- Tannhorn ridge clipped inside Switzerland -->
+        <g class="map-fill" clip-path="url(#ch-clip)">
+          <image href="/map4-heroes/emotional/tannhorn.jpeg" x="40" y="80" width="780" height="460" preserveAspectRatio="xMidYMid slice"/>
+          <!-- desaturating wash on top -->
+          <rect x="0" y="0" width="820" height="660" fill="#f1ece1" opacity="0.46"/>
+        </g>
+
+        <!-- Country outline on top -->
+        <path class="country-stroke" d="M 78 280
+                     C 70 260, 80 232, 110 222
+                     C 140 210, 158 220, 178 212
+                     C 200 202, 214 188, 240 184
+                     C 268 178, 286 196, 312 188
+                     C 340 178, 358 158, 388 156
+                     C 418 154, 442 168, 472 162
+                     C 504 154, 522 132, 552 130
+                     C 584 128, 608 144, 636 140
+                     C 660 136, 680 124, 702 130
+                     C 722 136, 730 154, 746 168
+                     C 762 184, 776 200, 766 224
+                     C 758 246, 736 250, 728 270
+                     C 720 290, 736 312, 720 332
+                     C 700 358, 660 348, 632 360
+                     C 600 374, 588 396, 558 408
+                     C 528 420, 504 412, 478 420
+                     C 450 430, 432 458, 402 462
+                     C 370 466, 348 452, 320 454
+                     C 290 458, 268 482, 238 478
+                     C 208 474, 192 452, 168 442
+                     C 142 432, 110 432, 92 412
+                     C 76 392, 86 366, 80 342
+                     C 74 318, 86 298, 78 280 Z"/>
+
+        <!-- City labels -->
+        <text class="city-label" x="200" y="294">Genf</text>
+        <text class="city-label" x="290" y="220">Bern</text>
+        <text class="city-label" x="420" y="208">Luzern</text>
+        <text class="city-label" x="510" y="186">Zürich</text>
+        <text class="city-label" x="668" y="208">St. Moritz</text>
+        <text class="city-label" x="430" y="406">Locarno</text>
+
+        <!-- 141 pins (139 unvisited + 2 visited). Coordinates picked inside the country shape. -->
+        <g>
+          <!-- visited (2) -->
+          <circle class="pin-visited" cx="350" cy="252" r="5"/>
+          <circle class="pin-visited" cx="470" cy="298" r="5"/>
+
+          <!-- unvisited 139 -->
+          <circle class="pin" cx="120" cy="266" r="2.4"/>
+          <circle class="pin" cx="138" cy="252" r="2.4"/>
+          <circle class="pin" cx="156" cy="240" r="2.4"/>
+          <circle class="pin" cx="172" cy="232" r="2.4"/>
+          <circle class="pin" cx="188" cy="226" r="2.4"/>
+          <circle class="pin" cx="206" cy="222" r="2.4"/>
+          <circle class="pin" cx="226" cy="212" r="2.4"/>
+          <circle class="pin" cx="248" cy="208" r="2.4"/>
+          <circle class="pin" cx="266" cy="200" r="2.4"/>
+          <circle class="pin" cx="284" cy="196" r="2.4"/>
+          <circle class="pin" cx="302" cy="190" r="2.4"/>
+          <circle class="pin" cx="320" cy="184" r="2.4"/>
+          <circle class="pin" cx="338" cy="178" r="2.4"/>
+          <circle class="pin" cx="356" cy="174" r="2.4"/>
+          <circle class="pin" cx="376" cy="172" r="2.4"/>
+          <circle class="pin" cx="396" cy="170" r="2.4"/>
+          <circle class="pin" cx="416" cy="168" r="2.4"/>
+          <circle class="pin" cx="436" cy="166" r="2.4"/>
+          <circle class="pin" cx="456" cy="164" r="2.4"/>
+          <circle class="pin" cx="476" cy="162" r="2.4"/>
+          <circle class="pin" cx="496" cy="158" r="2.4"/>
+          <circle class="pin" cx="516" cy="156" r="2.4"/>
+          <circle class="pin" cx="536" cy="148" r="2.4"/>
+          <circle class="pin" cx="558" cy="144" r="2.4"/>
+          <circle class="pin" cx="580" cy="138" r="2.4"/>
+          <circle class="pin" cx="600" cy="138" r="2.4"/>
+          <circle class="pin" cx="622" cy="142" r="2.4"/>
+          <circle class="pin" cx="644" cy="144" r="2.4"/>
+          <circle class="pin" cx="666" cy="142" r="2.4"/>
+          <circle class="pin" cx="686" cy="140" r="2.4"/>
+          <circle class="pin" cx="706" cy="146" r="2.4"/>
+          <circle class="pin" cx="724" cy="156" r="2.4"/>
+          <circle class="pin" cx="738" cy="170" r="2.4"/>
+          <circle class="pin" cx="748" cy="186" r="2.4"/>
+          <circle class="pin" cx="754" cy="204" r="2.4"/>
+          <circle class="pin" cx="752" cy="222" r="2.4"/>
+          <circle class="pin" cx="744" cy="238" r="2.4"/>
+          <circle class="pin" cx="732" cy="252" r="2.4"/>
+          <circle class="pin" cx="722" cy="268" r="2.4"/>
+          <circle class="pin" cx="718" cy="286" r="2.4"/>
+          <circle class="pin" cx="720" cy="304" r="2.4"/>
+          <circle class="pin" cx="716" cy="322" r="2.4"/>
+          <circle class="pin" cx="702" cy="338" r="2.4"/>
+          <circle class="pin" cx="684" cy="346" r="2.4"/>
+          <circle class="pin" cx="664" cy="350" r="2.4"/>
+          <circle class="pin" cx="644" cy="356" r="2.4"/>
+          <circle class="pin" cx="624" cy="362" r="2.4"/>
+          <circle class="pin" cx="606" cy="372" r="2.4"/>
+          <circle class="pin" cx="590" cy="384" r="2.4"/>
+          <circle class="pin" cx="572" cy="396" r="2.4"/>
+          <circle class="pin" cx="552" cy="404" r="2.4"/>
+          <circle class="pin" cx="532" cy="410" r="2.4"/>
+          <circle class="pin" cx="512" cy="414" r="2.4"/>
+          <circle class="pin" cx="492" cy="416" r="2.4"/>
+          <circle class="pin" cx="472" cy="422" r="2.4"/>
+          <circle class="pin" cx="452" cy="432" r="2.4"/>
+          <circle class="pin" cx="432" cy="446" r="2.4"/>
+          <circle class="pin" cx="414" cy="456" r="2.4"/>
+          <circle class="pin" cx="394" cy="458" r="2.4"/>
+          <circle class="pin" cx="374" cy="458" r="2.4"/>
+          <circle class="pin" cx="354" cy="456" r="2.4"/>
+          <circle class="pin" cx="334" cy="454" r="2.4"/>
+          <circle class="pin" cx="314" cy="456" r="2.4"/>
+          <circle class="pin" cx="294" cy="462" r="2.4"/>
+          <circle class="pin" cx="274" cy="468" r="2.4"/>
+          <circle class="pin" cx="254" cy="474" r="2.4"/>
+          <circle class="pin" cx="234" cy="474" r="2.4"/>
+          <circle class="pin" cx="214" cy="466" r="2.4"/>
+          <circle class="pin" cx="196" cy="458" r="2.4"/>
+          <circle class="pin" cx="178" cy="448" r="2.4"/>
+          <circle class="pin" cx="160" cy="440" r="2.4"/>
+          <circle class="pin" cx="140" cy="432" r="2.4"/>
+          <circle class="pin" cx="120" cy="424" r="2.4"/>
+          <circle class="pin" cx="104" cy="410" r="2.4"/>
+          <circle class="pin" cx="94" cy="392" r="2.4"/>
+          <circle class="pin" cx="88" cy="372" r="2.4"/>
+          <circle class="pin" cx="84" cy="352" r="2.4"/>
+          <circle class="pin" cx="82" cy="332" r="2.4"/>
+          <circle class="pin" cx="86" cy="312" r="2.4"/>
+          <circle class="pin" cx="92" cy="294" r="2.4"/>
+          <!-- interior cluster -->
+          <circle class="pin" cx="200" cy="260" r="2.4"/>
+          <circle class="pin" cx="220" cy="252" r="2.4"/>
+          <circle class="pin" cx="242" cy="248" r="2.4"/>
+          <circle class="pin" cx="262" cy="244" r="2.4"/>
+          <circle class="pin" cx="282" cy="240" r="2.4"/>
+          <circle class="pin" cx="302" cy="234" r="2.4"/>
+          <circle class="pin" cx="322" cy="228" r="2.4"/>
+          <circle class="pin" cx="342" cy="224" r="2.4"/>
+          <circle class="pin" cx="362" cy="220" r="2.4"/>
+          <circle class="pin" cx="382" cy="218" r="2.4"/>
+          <circle class="pin" cx="402" cy="216" r="2.4"/>
+          <circle class="pin" cx="422" cy="214" r="2.4"/>
+          <circle class="pin" cx="442" cy="208" r="2.4"/>
+          <circle class="pin" cx="462" cy="204" r="2.4"/>
+          <circle class="pin" cx="482" cy="198" r="2.4"/>
+          <circle class="pin" cx="502" cy="194" r="2.4"/>
+          <circle class="pin" cx="522" cy="190" r="2.4"/>
+          <circle class="pin" cx="542" cy="186" r="2.4"/>
+          <circle class="pin" cx="562" cy="180" r="2.4"/>
+          <circle class="pin" cx="582" cy="174" r="2.4"/>
+          <circle class="pin" cx="602" cy="170" r="2.4"/>
+          <circle class="pin" cx="622" cy="172" r="2.4"/>
+          <circle class="pin" cx="642" cy="174" r="2.4"/>
+          <circle class="pin" cx="662" cy="176" r="2.4"/>
+          <circle class="pin" cx="682" cy="180" r="2.4"/>
+          <circle class="pin" cx="702" cy="186" r="2.4"/>
+          <!-- row 3 -->
+          <circle class="pin" cx="220" cy="288" r="2.4"/>
+          <circle class="pin" cx="244" cy="282" r="2.4"/>
+          <circle class="pin" cx="268" cy="278" r="2.4"/>
+          <circle class="pin" cx="290" cy="272" r="2.4"/>
+          <circle class="pin" cx="312" cy="268" r="2.4"/>
+          <circle class="pin" cx="332" cy="266" r="2.4"/>
+          <circle class="pin" cx="378" cy="266" r="2.4"/>
+          <circle class="pin" cx="402" cy="268" r="2.4"/>
+          <circle class="pin" cx="426" cy="270" r="2.4"/>
+          <circle class="pin" cx="448" cy="272" r="2.4"/>
+          <circle class="pin" cx="494" cy="288" r="2.4"/>
+          <circle class="pin" cx="516" cy="282" r="2.4"/>
+          <circle class="pin" cx="540" cy="278" r="2.4"/>
+          <circle class="pin" cx="562" cy="272" r="2.4"/>
+          <circle class="pin" cx="584" cy="268" r="2.4"/>
+          <circle class="pin" cx="608" cy="266" r="2.4"/>
+          <circle class="pin" cx="628" cy="270" r="2.4"/>
+          <circle class="pin" cx="648" cy="274" r="2.4"/>
+          <circle class="pin" cx="668" cy="280" r="2.4"/>
+          <circle class="pin" cx="688" cy="286" r="2.4"/>
+          <!-- row 4 -->
+          <circle class="pin" cx="240" cy="318" r="2.4"/>
+          <circle class="pin" cx="262" cy="312" r="2.4"/>
+          <circle class="pin" cx="288" cy="306" r="2.4"/>
+          <circle class="pin" cx="312" cy="302" r="2.4"/>
+          <circle class="pin" cx="334" cy="298" r="2.4"/>
+          <circle class="pin" cx="376" cy="298" r="2.4"/>
+          <circle class="pin" cx="398" cy="302" r="2.4"/>
+          <circle class="pin" cx="422" cy="306" r="2.4"/>
+          <circle class="pin" cx="446" cy="310" r="2.4"/>
+          <circle class="pin" cx="494" cy="316" r="2.4"/>
+          <circle class="pin" cx="516" cy="312" r="2.4"/>
+          <circle class="pin" cx="538" cy="308" r="2.4"/>
+          <circle class="pin" cx="560" cy="304" r="2.4"/>
+          <circle class="pin" cx="582" cy="302" r="2.4"/>
+          <circle class="pin" cx="604" cy="304" r="2.4"/>
+          <circle class="pin" cx="626" cy="306" r="2.4"/>
+          <circle class="pin" cx="648" cy="312" r="2.4"/>
+          <circle class="pin" cx="670" cy="316" r="2.4"/>
+          <!-- row 5 -->
+          <circle class="pin" cx="260" cy="348" r="2.4"/>
+          <circle class="pin" cx="284" cy="346" r="2.4"/>
+          <circle class="pin" cx="308" cy="342" r="2.4"/>
+          <circle class="pin" cx="332" cy="340" r="2.4"/>
+          <circle class="pin" cx="378" cy="338" r="2.4"/>
+          <circle class="pin" cx="402" cy="338" r="2.4"/>
+          <circle class="pin" cx="426" cy="338" r="2.4"/>
+          <circle class="pin" cx="450" cy="340" r="2.4"/>
+          <circle class="pin" cx="498" cy="346" r="2.4"/>
+          <circle class="pin" cx="522" cy="342" r="2.4"/>
+          <circle class="pin" cx="546" cy="340" r="2.4"/>
+          <circle class="pin" cx="568" cy="338" r="2.4"/>
+          <circle class="pin" cx="590" cy="338" r="2.4"/>
+          <circle class="pin" cx="612" cy="340" r="2.4"/>
+          <circle class="pin" cx="634" cy="344" r="2.4"/>
+          <!-- row 6 -->
+          <circle class="pin" cx="284" cy="380" r="2.4"/>
+          <circle class="pin" cx="308" cy="376" r="2.4"/>
+          <circle class="pin" cx="332" cy="374" r="2.4"/>
+          <circle class="pin" cx="378" cy="372" r="2.4"/>
+          <circle class="pin" cx="402" cy="374" r="2.4"/>
+          <circle class="pin" cx="426" cy="376" r="2.4"/>
+          <circle class="pin" cx="494" cy="382" r="2.4"/>
+          <circle class="pin" cx="518" cy="378" r="2.4"/>
+          <circle class="pin" cx="542" cy="376" r="2.4"/>
+          <circle class="pin" cx="566" cy="376" r="2.4"/>
+          <circle class="pin" cx="588" cy="378" r="2.4"/>
+          <circle class="pin" cx="612" cy="382" r="2.4"/>
+          <!-- row 7 -->
+          <circle class="pin" cx="306" cy="412" r="2.4"/>
+          <circle class="pin" cx="330" cy="410" r="2.4"/>
+          <circle class="pin" cx="376" cy="408" r="2.4"/>
+          <circle class="pin" cx="400" cy="410" r="2.4"/>
+          <circle class="pin" cx="424" cy="414" r="2.4"/>
+          <circle class="pin" cx="494" cy="416" r="2.4"/>
+          <circle class="pin" cx="518" cy="412" r="2.4"/>
+          <circle class="pin" cx="542" cy="410" r="2.4"/>
+          <circle class="pin" cx="566" cy="412" r="2.4"/>
+          <!-- row 8 -->
+          <circle class="pin" cx="332" cy="442" r="2.4"/>
+          <circle class="pin" cx="358" cy="446" r="2.4"/>
+          <circle class="pin" cx="382" cy="444" r="2.4"/>
+          <circle class="pin" cx="496" cy="446" r="2.4"/>
+          <circle class="pin" cx="518" cy="444" r="2.4"/>
+          <!-- scattered remainders -->
+          <circle class="pin" cx="156" cy="296" r="2.4"/>
+          <circle class="pin" cx="172" cy="320" r="2.4"/>
+          <circle class="pin" cx="190" cy="346" r="2.4"/>
+          <circle class="pin" cx="208" cy="372" r="2.4"/>
+          <circle class="pin" cx="226" cy="396" r="2.4"/>
+          <circle class="pin" cx="262" cy="416" r="2.4"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="copy">
+      <div class="kicker">141 Spots · du bist drauf</div>
+      <h1><span class="num">141</span> Spots.</h1>
+      <div class="divide"></div>
+      <h2>Du hast noch <span style="font-style:normal; font-weight:600; color:#b53826;">139.</span></h2>
+
+      <div class="progress">
+        <div>Fortschritt · 2 von 141</div>
+        <div class="bar"></div>
+        <div class="labels"><span>0</span><span>141</span></div>
+      </div>
+
+      <div class="cta">See the spots <span class="arr">→</span></div>
+    </div>
+
+    <div class="botmark">
+      <span>Schweiz · 41 285 km²</span>
+      <span>Edition 01 · Sommer 26</span>
+    </div>
+  </div>
+</body>
+</html>

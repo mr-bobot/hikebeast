@@ -1,0 +1,111 @@
+<!-- V077 · FOMO · racing · layout=full-bleed · treatment=overexposed · img=/map4-heroes/emotional/fronalpstock.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V077</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 55%;
+    display:block;
+    /* Overexposed: push highlights/saturation/brightness */
+    filter:
+      brightness(1.22)
+      contrast(0.94)
+      saturate(1.18)
+      hue-rotate(-4deg);
+  }
+  /* Hot-sun wash from the top + golden bleed */
+  .wash {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 52% 22%, rgba(255,225,150,0.32) 0%, rgba(255,210,120,0.10) 35%, rgba(0,0,0,0) 65%),
+      linear-gradient(180deg, rgba(255,220,140,0.18) 0%, rgba(255,200,100,0.04) 30%, rgba(0,0,0,0) 60%);
+    mix-blend-mode: screen;
+    pointer-events:none;
+  }
+  /* Bottom legibility scrim */
+  .scrim-bottom {
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.32) 78%, rgba(0,0,0,0.55) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:88px;
+    bottom:120px;
+    max-width:1080px;
+    color:#fffaf0;
+    text-shadow: 0 2px 28px rgba(0,0,0,0.55), 0 1px 2px rgba(0,0,0,0.6);
+  }
+  .copy h1 {
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-size:84px;
+    line-height:1.02;
+    letter-spacing:-0.012em;
+    margin:0;
+  }
+  .copy h1 .num {
+    font-style:italic;
+    font-weight:500;
+    color:#ffe7a3;
+  }
+  .copy h1 .ask {
+    display:block;
+    margin-top:14px;
+    font-weight:300;
+    font-style:italic;
+    color:rgba(255,250,240,0.94);
+  }
+  .meta {
+    position:absolute;
+    left:88px;
+    bottom:64px;
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:rgba(255,245,220,0.7);
+  }
+  .corner {
+    position:absolute;
+    right:64px; top:56px;
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:rgba(255,240,210,0.6);
+    text-align:right;
+    line-height:1.4;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/fronalpstock.jpg" alt="">
+    <div class="wash"></div>
+    <div class="scrim-bottom"></div>
+
+    <div class="corner">
+      Sommer 2026<br>
+      <span style="color:rgba(255,210,140,0.85)">8 Wochen offen</span>
+    </div>
+
+    <div class="copy">
+      <h1>
+        <span class="num">8 Wochen</span> Schweizer Sommer.
+        <span class="ask">Wie viele willst du verpassen?</span>
+      </h1>
+    </div>
+
+    <div class="meta">Hikebeast · Hidden Gems</div>
+  </div>
+</body>
+</html>

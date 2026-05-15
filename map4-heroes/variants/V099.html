@@ -1,0 +1,191 @@
+<!-- V099 · Tension · tight · layout=mockup-led · treatment=none · img=/map4-heroes/emotional/limmernsee1.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V099</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0e0d0a; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(90deg, rgba(8,10,12,0.78) 0%, rgba(8,10,12,0.35) 38%, rgba(8,10,12,0) 62%),
+      linear-gradient(0deg, rgba(8,10,12,0.42) 0%, rgba(8,10,12,0) 32%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    top: 156px;
+    left: 76px;
+    max-width: 560px;
+    color: #f4ecdb;
+  }
+  .copy .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: rgba(244,236,219,0.72);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 26px;
+  }
+  .copy .kicker::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(244,236,219,0.4);
+  }
+  .copy h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 58px;
+    line-height: 1.02;
+    letter-spacing: -0.022em;
+    margin: 0;
+  }
+  .copy h1 .em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+  .copy .steps {
+    margin-top: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244,236,219,0.78);
+    display: flex;
+    gap: 22px;
+    align-items: center;
+  }
+  .copy .steps .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: #ffd388;
+    letter-spacing: 0;
+    text-transform: none;
+    margin-right: 6px;
+  }
+  .copy .steps .dot { width: 4px; height: 4px; background: rgba(244,236,219,0.5); border-radius: 50%; }
+  .copy .cta {
+    margin-top: 38px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: #f4ecdb;
+    color: #161410;
+    padding: 16px 26px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .copy .cta .arr { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: 0; }
+
+  .device {
+    position:absolute;
+    right: 96px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-5deg);
+    width: 360px;
+    height: 740px;
+    background: #0b0b0c;
+    border-radius: 56px;
+    box-shadow:
+      0 60px 100px rgba(0,0,0,0.55),
+      0 12px 28px rgba(0,0,0,0.35),
+      inset 0 0 0 2px #2a2722;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+  .device::before {
+    content: '';
+    position: absolute;
+    top: 22px; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 28px;
+    background: #050505;
+    border-radius: 20px;
+    z-index: 2;
+  }
+  .device .screen {
+    position:relative;
+    width: 100%; height: 100%;
+    border-radius: 44px;
+    overflow: hidden;
+    background: #1a1815;
+  }
+  .device .screen img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    display: block;
+  }
+  .device .weather-chip {
+    position: absolute;
+    top: 72px; left: 50%; transform: translateX(-50%);
+    background: rgba(12,10,8,0.78);
+    backdrop-filter: blur(8px);
+    color: #f4ecdb;
+    padding: 10px 16px;
+    border-radius: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    z-index: 3;
+  }
+  .device .weather-chip .sun { color: #ffd388; font-size: 14px; }
+  .device .pin {
+    position: absolute;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #ff5a28;
+    box-shadow: 0 0 0 6px rgba(255,90,40,0.22), 0 4px 10px rgba(0,0,0,0.45);
+  }
+  .pin.p1 { top: 42%; left: 36%; }
+  .pin.p2 { top: 58%; left: 58%; }
+  .pin.p3 { top: 30%; left: 60%; background:#f4ecdb; box-shadow: 0 0 0 6px rgba(244,236,219,0.18), 0 4px 10px rgba(0,0,0,0.45); }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/limmernsee1.jpg" alt="">
+    <div class="scrim"></div>
+    <div class="copy">
+      <div class="kicker">Schritt für Schritt</div>
+      <h1>Karte offen,<br>Wetter checken,<br><span class="em">los.</span></h1>
+      <div class="steps">
+        <span><span class="num">01</span>Map</span>
+        <span class="dot"></span>
+        <span><span class="num">02</span>Wetter</span>
+        <span class="dot"></span>
+        <span><span class="num">03</span>Auto</span>
+      </div>
+      <div class="cta">Map holen <span class="arr">→</span></div>
+    </div>
+    <div class="device">
+      <div class="screen">
+        <img src="/map3/img/hero-2-mockup.jpg" alt="">
+        <div class="weather-chip"><span class="sun">☼</span><span>24° · Klar bis Sonntag</span></div>
+        <div class="pin p1"></div>
+        <div class="pin p2"></div>
+        <div class="pin p3"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

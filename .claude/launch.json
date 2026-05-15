@@ -6,6 +6,13 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8125"],
       "port": 8125
+    },
+    {
+      "name": "v10-gallery",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8190", "--directory", "/Users/lost/Documents/Claude/Projects/Hiking Influencer/output/thumbnails/v10"],
+      "port": 8190,
+      "autoPort": false
     }
   ]
 }

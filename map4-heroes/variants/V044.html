@@ -1,0 +1,142 @@
+<!-- V044 · Nostalgia · filmic · layout=photo-as-texture · treatment=grain · img=/map4-heroes/emotional/LOST7855-Edit.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V044</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0a0a0a; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .photo {
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 60%;
+    display:block;
+    filter: contrast(1.06) saturate(0.88) brightness(0.96);
+  }
+  /* light leak 1, top-right */
+  .leak1 {
+    position:absolute; top:-80px; right:-100px;
+    width:540px; height:540px;
+    background: radial-gradient(circle at 40% 50%, rgba(255,170,60,0.65) 0%, rgba(255,90,40,0.32) 35%, rgba(220,40,30,0) 70%);
+    mix-blend-mode:screen;
+    pointer-events:none;
+  }
+  /* light leak 2, lower-left magenta strip */
+  .leak2 {
+    position:absolute; bottom:0; left:-60px;
+    width:480px; height:340px;
+    background: linear-gradient(45deg, rgba(255,80,140,0.45) 0%, rgba(255,140,40,0.18) 40%, transparent 70%);
+    mix-blend-mode:screen;
+    pointer-events:none;
+  }
+  /* sprocket holes — top/bottom edges */
+  .sprockets {
+    position:absolute; left:0; right:0; height:32px;
+    display:flex; gap:18px;
+    padding:0 24px;
+    align-items:center;
+  }
+  .sprockets.top { top:0; }
+  .sprockets.bot { bottom:0; }
+  .sprockets span {
+    width:22px; height:16px; border-radius:2px;
+    background: rgba(8,5,2,0.78);
+    flex:0 0 auto;
+  }
+  /* heavy grain via SVG */
+  .grain {
+    position:absolute; inset:0; pointer-events:none;
+    opacity:0.85; mix-blend-mode:overlay;
+  }
+  .grain2 {
+    position:absolute; inset:0; pointer-events:none;
+    opacity:0.45; mix-blend-mode:multiply;
+  }
+  /* copy */
+  .copy {
+    position:absolute;
+    left:80px; bottom:100px;
+    color:#faf2da;
+  }
+  .copy h1 {
+    margin:0;
+    font-family:'Inter', sans-serif;
+    font-weight:800;
+    font-size:148px;
+    line-height:0.92;
+    letter-spacing:-0.05em;
+    color:#fff;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.4), 0 14px 60px rgba(0,0,0,0.65);
+  }
+  .copy h1 .dim {
+    color: rgba(255,255,255,0.5);
+    font-weight:500;
+  }
+  .copy .meta {
+    margin-top:18px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:0.42em;
+    color: rgba(250,242,218,0.7);
+  }
+  /* tiny frame number, top-right */
+  .frameno {
+    position:absolute; top:54px; right:78px;
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:0.32em;
+    color: rgba(255,200,120,0.85);
+    text-shadow:0 1px 8px rgba(0,0,0,0.6);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/LOST7855-Edit.jpeg" alt="">
+
+    <div class="leak1"></div>
+    <div class="leak2"></div>
+
+    <div class="sprockets top">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="sprockets bot">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="frameno">36A · KODAK PORTRA · 2025-07-14</div>
+
+    <div class="copy">
+      <h1>Echt.<br><span class="dim">Nicht retro.</span></h1>
+      <div class="meta">SEEALPSEE · NO FILTER STACK</div>
+    </div>
+
+    <svg class="grain" width="1400" height="787" xmlns="http://www.w3.org/2000/svg">
+      <filter id="g44">
+        <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="3" stitchTiles="stitch"/>
+        <feColorMatrix values="0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0.6 0"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#g44)"/>
+    </svg>
+    <svg class="grain2" width="1400" height="787" xmlns="http://www.w3.org/2000/svg">
+      <filter id="g44b">
+        <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" stitchTiles="stitch"/>
+        <feColorMatrix values="0 0 0 0 0.15  0 0 0 0 0.12  0 0 0 0 0.08  0 0 0 0.42 0"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#g44b)"/>
+    </svg>
+  </div>
+</body>
+</html>

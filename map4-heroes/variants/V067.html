@@ -1,0 +1,65 @@
+<!-- V067 · Pride · local · layout=type-dominant · treatment=none · img=/map4-heroes/emotional/stoos_kapelle2.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>V067</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; font-family:'Inter', sans-serif; background:#f3efe7; }
+  .hero { position:relative; width:1400px; height:787px; background:#f3efe7; color:#15140f; }
+  .paper-tex { position:absolute; inset:0; opacity:0.55; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' /><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.10  0 0 0 0 0.07  0 0 0 0.35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); mix-blend-mode:multiply; pointer-events:none; }
+  .top-rule { position:absolute; top:46px; left:80px; right:80px; height:1px; background:#15140f; }
+  .top-row { position:absolute; top:24px; left:80px; right:80px; display:flex; justify-content:space-between; align-items:flex-end; font-size:11px; letter-spacing:0.36em; text-transform:uppercase; font-weight:600; }
+  .top-row .right { font-variant-numeric:tabular-nums; letter-spacing:0.3em; font-weight:500; opacity:0.7; }
+  .typewall { position:absolute; left:80px; top:140px; width:760px; }
+  .typewall .ed { font-family:'Inter', sans-serif; font-size:12px; letter-spacing:0.4em; text-transform:uppercase; font-weight:600; color:#a13b2c; margin-bottom:36px; }
+  .typewall h1 { font-family:'Fraunces', serif; font-weight:300; font-size:114px; line-height:0.92; letter-spacing:-0.035em; margin:0; color:#15140f; }
+  .typewall h1 em { font-style:italic; font-weight:500; color:#a13b2c; }
+  .typewall .div { margin:40px 0 32px; height:1px; background:#15140f; width:140px; }
+  .typewall .second { font-family:'Fraunces', serif; font-style:italic; font-weight:400; font-size:32px; line-height:1.25; color:#15140f; max-width:520px; }
+  .photo-box { position:absolute; right:80px; bottom:80px; width:480px; height:560px; box-shadow:0 26px 60px rgba(0,0,0,0.18); overflow:hidden; background:#000; }
+  .photo-box img { width:100%; height:100%; object-fit:cover; object-position:50% 50%; }
+  .photo-box .caption { position:absolute; left:0; right:0; bottom:0; padding:14px 18px; background:rgba(255,255,255,0.95); color:#15140f; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; font-weight:600; display:flex; justify-content:space-between; }
+  .photo-box .caption .num { color:#a13b2c; }
+  .bot-rule { position:absolute; bottom:36px; left:80px; right:580px; height:1px; background:#15140f; opacity:0.5; }
+  .bot-row { position:absolute; bottom:14px; left:80px; right:80px; display:flex; justify-content:space-between; font-size:10px; letter-spacing:0.34em; text-transform:uppercase; font-weight:600; opacity:0.7; }
+  .swiss-mark { position:absolute; left:80px; bottom:80px; width:30px; height:30px; background:#a13b2c; }
+  .swiss-mark::before, .swiss-mark::after { content:""; position:absolute; background:#fff; }
+  .swiss-mark::before { left:50%; top:22%; bottom:22%; width:5px; transform:translateX(-50%); }
+  .swiss-mark::after { top:50%; left:22%; right:22%; height:5px; transform:translateY(-50%); }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="paper-tex"></div>
+    <div class="top-row">
+      <div>Hikebeast · Schweiz-Edition</div>
+      <div class="right">N° 03 · 2026 · 141 / 141</div>
+    </div>
+    <div class="top-rule"></div>
+
+    <div class="typewall">
+      <div class="ed">Manifest · Ausgabe Sommer</div>
+      <h1>Aus der<br>Schweiz,<br>für <em>die, die sie</em><br>nochmal<br>entdecken.</h1>
+      <div class="div"></div>
+      <div class="second">Kein Reiseführer für Erstbesucher.<br>Eine Karte für Nachbarn.</div>
+    </div>
+
+    <div class="swiss-mark"></div>
+
+    <div class="photo-box">
+      <img src="/map4-heroes/emotional/stoos_kapelle2.jpg" alt="">
+      <div class="caption"><span>Stoos · Schwyz</span><span class="num">Plate 047</span></div>
+    </div>
+
+    <div class="bot-rule"></div>
+    <div class="bot-row">
+      <div>Lokale Kuration · keine Drohnenparks</div>
+      <div>Hikebeast.com</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!-- V026 · Achievement · smug · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/pic%20de%20jallouvre.jpeg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  .bottom-scrim {
+    position:absolute; left:0; right:0; bottom:0; height:55%;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 30%, rgba(0,0,0,0.68) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:80px; bottom:96px;
+    color:#fff;
+    max-width:900px;
+  }
+  .copy h1 {
+    margin:0;
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:700;
+    font-size:78px;
+    line-height:0.98;
+    letter-spacing:-0.025em;
+    text-shadow:0 2px 24px rgba(0,0,0,0.45);
+  }
+  .copy h1 b {
+    font-weight:800;
+    background: linear-gradient(180deg, #ffd87a 0%, #ffae3a 100%);
+    -webkit-background-clip:text;
+            background-clip:text;
+    color:transparent;
+  }
+  .cta {
+    margin-top:34px;
+    display:inline-flex; align-items:center; gap:14px;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:#0e1410;
+    background:#fff;
+    padding:18px 28px;
+    border-radius:6px;
+  }
+  .cta .arrow {
+    font-size:18px;
+    transform:translateY(-1px);
+  }
+  .badge {
+    position:absolute;
+    top:62px; right:62px;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:#0e1410;
+    background:#ffae3a;
+    padding:9px 16px;
+    border-radius:999px;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/pic%20de%20jallouvre.jpeg" alt="">
+    <div class="bottom-scrim"></div>
+    <div class="badge">Sommer 26</div>
+    <div class="copy">
+      <h1>You'll mark this peak<br>off <b>before September.</b></h1>
+      <div class="cta">Map ansehen <span class="arrow">&rarr;</span></div>
+    </div>
+  </div>
+</body>
+</html>

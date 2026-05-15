@@ -1,0 +1,173 @@
+<!-- V034 · Longing · unfinished · layout=postcard · treatment=grain · img=/map4-heroes/emotional/tannhorn.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V034</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#1a1612; }
+  .hero {
+    position:relative; width:1400px; height:787px; overflow:hidden;
+    background:
+      radial-gradient(circle at 18% 22%, #2a221b 0%, #15110d 70%);
+  }
+  .desk {
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(92deg, rgba(60,40,22,0.18) 0px, rgba(60,40,22,0.18) 2px, rgba(60,40,22,0) 4px, rgba(60,40,22,0) 38px);
+    opacity:0.32;
+    pointer-events:none;
+  }
+  .card {
+    position:absolute;
+    left:140px; top:74px;
+    width:1120px; height:640px;
+    background:#f4ead4;
+    box-shadow:
+      0 30px 60px -20px rgba(0,0,0,0.55),
+      0 6px 14px rgba(0,0,0,0.35);
+    transform:rotate(-1.2deg);
+    overflow:hidden;
+  }
+  /* postage-stamp serration around card edges */
+  .card::before, .card::after {
+    content:"";
+    position:absolute;
+    left:0; right:0; height:14px;
+    background-image:
+      radial-gradient(circle at 7px 7px, #1a1612 5.5px, transparent 6px);
+    background-size:14px 14px;
+    background-repeat:repeat-x;
+  }
+  .card::before { top:-7px; }
+  .card::after  { bottom:-7px; }
+  .serr-v {
+    position:absolute; top:0; bottom:0; width:14px;
+    background-image:
+      radial-gradient(circle at 7px 7px, #1a1612 5.5px, transparent 6px);
+    background-size:14px 14px;
+    background-repeat:repeat-y;
+  }
+  .serr-v.l { left:-7px; }
+  .serr-v.r { right:-7px; }
+  /* photo left */
+  .photo-side {
+    position:absolute;
+    left:0; top:0; bottom:0; width:640px;
+    overflow:hidden;
+  }
+  .photo-side img {
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 55%;
+    filter: sepia(0.18) saturate(0.88) contrast(1.05);
+  }
+  .photo-side::after {
+    content:"";
+    position:absolute; inset:0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.18 0'/></filter><rect width='220' height='220' filter='url(%23g)'/></svg>");
+    mix-blend-mode:multiply;
+    opacity:0.55;
+  }
+  /* divider */
+  .divider {
+    position:absolute;
+    left:640px; top:46px; bottom:46px;
+    width:1px;
+    background:rgba(70,52,30,0.35);
+  }
+  /* address side */
+  .addr {
+    position:absolute;
+    left:680px; top:0; right:0; bottom:0;
+    padding:54px 50px 50px 30px;
+    box-sizing:border-box;
+    color:#3a2d18;
+  }
+  .stamp {
+    position:absolute;
+    right:48px; top:42px;
+    width:118px; height:140px;
+    background:#e7c98a;
+    border:6px solid #f4ead4;
+    outline:1px dashed rgba(60,40,18,0.4);
+    box-shadow: 0 0 0 6px #f4ead4 inset;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Special Elite', monospace;
+    font-size:11px;
+    color:#3a2d18;
+    text-align:center;
+    line-height:1.3;
+    transform:rotate(2deg);
+  }
+  .stamp span { transform:rotate(-2deg); display:block; }
+  .from {
+    font-family:'Special Elite', monospace;
+    font-size:13px;
+    letter-spacing:0.06em;
+    color:rgba(58,45,24,0.7);
+    text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .body-hand {
+    font-family:'Caveat', cursive;
+    font-weight:500;
+    font-size:34px;
+    line-height:1.25;
+    color:#2a2010;
+    max-width:380px;
+    margin-top:140px;
+  }
+  .ps {
+    font-family:'Caveat', cursive;
+    font-weight:600;
+    font-size:42px;
+    line-height:1.15;
+    color:#2a2010;
+    max-width:430px;
+    margin-top:36px;
+  }
+  .ps .label {
+    display:block;
+    font-size:24px;
+    color:rgba(58,45,24,0.65);
+    margin-bottom:4px;
+    letter-spacing:0.04em;
+  }
+  .cancel {
+    position:absolute;
+    right:38px; top:52px;
+    width:160px; height:120px;
+    pointer-events:none;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="desk"></div>
+    <div class="card">
+      <div class="serr-v l"></div>
+      <div class="serr-v r"></div>
+      <div class="photo-side">
+        <img src="/map4-heroes/emotional/tannhorn.jpeg" alt="">
+      </div>
+      <div class="divider"></div>
+      <div class="addr">
+        <div class="from">Postkarte · CH</div>
+        <div class="stamp"><span>HELVETIA<br>2024<br>0.90</span></div>
+        <svg class="cancel" viewBox="0 0 160 120">
+          <ellipse cx="80" cy="60" rx="60" ry="58" fill="none" stroke="#3a2d18" stroke-width="2" opacity="0.55"/>
+          <ellipse cx="80" cy="60" rx="48" ry="46" fill="none" stroke="#3a2d18" stroke-width="1" opacity="0.4"/>
+          <text x="80" y="48" text-anchor="middle" font-family="Special Elite" font-size="10" fill="#3a2d18" opacity="0.7">BRIENZ</text>
+          <text x="80" y="64" text-anchor="middle" font-family="Special Elite" font-size="13" fill="#3a2d18" opacity="0.8">15·VIII</text>
+          <text x="80" y="80" text-anchor="middle" font-family="Special Elite" font-size="10" fill="#3a2d18" opacity="0.7">2024</text>
+        </svg>
+        <div class="body-hand">heute auf dem Tannhorn. das Licht hält nicht lange.</div>
+        <div class="ps"><span class="label">P.S.</span>Komm vorbei, bevor's vorbei ist.</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

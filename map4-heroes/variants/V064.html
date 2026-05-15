@@ -1,0 +1,71 @@
+<!-- V064 · Wonder · luminous · layout=magazine-cover · treatment=none · img=/map4-heroes/emotional/LOST7855-Edit.jpeg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>V064</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; font-family:'Inter', sans-serif; }
+  .hero { position:relative; width:1400px; height:787px; background:#000; }
+  .hero img.bg { width:100%; height:100%; object-fit:cover; object-position:50% 60%; display:block; }
+  /* masthead */
+  .masthead { position:absolute; top:0; left:0; right:0; padding:38px 70px 28px; display:flex; justify-content:space-between; align-items:flex-start; }
+  .mast-left { display:flex; flex-direction:column; gap:6px; }
+  .mast-title { font-family:'Playfair Display', serif; font-weight:900; font-size:96px; line-height:0.85; color:#fff; letter-spacing:-0.03em; text-shadow:0 2px 16px rgba(0,0,0,0.45); }
+  .mast-sub { font-family:'Inter', sans-serif; font-size:11px; letter-spacing:0.4em; color:rgba(255,255,255,0.9); text-transform:uppercase; font-weight:500; margin-top:6px; }
+  .mast-right { text-align:right; color:#fff; }
+  .edition { font-family:'Inter', sans-serif; font-size:13px; letter-spacing:0.32em; text-transform:uppercase; font-weight:600; padding:6px 14px; border:1px solid rgba(255,255,255,0.7); display:inline-block; }
+  .barcode { margin-top:14px; height:36px; width:84px; background:
+    repeating-linear-gradient(to right, #fff 0, #fff 2px, transparent 2px, transparent 4px),
+    repeating-linear-gradient(to right, #fff 0, #fff 1px, transparent 1px, transparent 3px);
+    background-size: 100% 100%;
+    margin-left:auto;
+  }
+  .coverlines { position:absolute; left:70px; bottom:0; padding-bottom:48px; max-width:780px; color:#fff; }
+  .cl-1 { font-family:'Playfair Display', serif; font-weight:700; font-size:88px; line-height:0.92; letter-spacing:-0.02em; text-shadow:0 2px 24px rgba(0,0,0,0.5); }
+  .cl-1 em { font-style:italic; font-weight:400; }
+  .cl-bullets { margin-top:30px; display:flex; flex-wrap:wrap; gap:10px 18px; }
+  .cl-bullet { font-family:'Inter', sans-serif; font-size:13px; letter-spacing:0.18em; text-transform:uppercase; font-weight:600; padding:9px 16px; background:rgba(255,255,255,0.92); color:#0a0a0a; }
+  .cl-bullet.alt { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.85); }
+  .cta-pill { position:absolute; right:70px; bottom:54px; padding:18px 28px; background:#fff; color:#0a0a0a; font-family:'Inter', sans-serif; font-weight:700; font-size:15px; letter-spacing:0.2em; text-transform:uppercase; }
+  .cta-pill::after { content:" →"; }
+  .price-tag { position:absolute; right:70px; bottom:128px; font-family:'Playfair Display', serif; font-weight:900; font-size:62px; color:#fff; letter-spacing:-0.02em; text-shadow:0 2px 18px rgba(0,0,0,0.5); }
+  .price-tag .chf { font-family:'Inter', sans-serif; font-weight:500; font-size:18px; letter-spacing:0.3em; vertical-align:super; margin-left:6px; }
+  .spine { position:absolute; left:32px; top:50%; transform:translateY(-50%) rotate(-90deg); transform-origin:left center; font-family:'Inter', sans-serif; font-size:11px; letter-spacing:0.5em; color:rgba(255,255,255,0.7); text-transform:uppercase; }
+  .grad-top { position:absolute; left:0; right:0; top:0; height:35%; background:linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0)); pointer-events:none; }
+  .grad-bottom { position:absolute; left:0; right:0; bottom:0; height:55%; background:linear-gradient(to top, rgba(0,0,0,0.62), rgba(0,0,0,0)); pointer-events:none; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="bg" src="/map4-heroes/emotional/LOST7855-Edit.jpeg" alt="">
+    <div class="grad-top"></div>
+    <div class="grad-bottom"></div>
+    <div class="masthead">
+      <div class="mast-left">
+        <div class="mast-title">HIKEBEAST</div>
+        <div class="mast-sub">A Field Guide to Swiss Quiet · Volume III · 2026</div>
+      </div>
+      <div class="mast-right">
+        <div class="edition">Edition 03</div>
+        <div class="barcode"></div>
+      </div>
+    </div>
+    <div class="spine">N°03 · The Inventory Issue</div>
+    <div class="coverlines">
+      <div class="cl-1">One guide.<br><em>141</em> spots.</div>
+      <div class="cl-bullets">
+        <div class="cl-bullet">141 Spots</div>
+        <div class="cl-bullet alt">One Guide</div>
+        <div class="cl-bullet">Lifetime Updates</div>
+        <div class="cl-bullet alt">27 CHF</div>
+      </div>
+    </div>
+    <div class="price-tag">27<span class="chf">CHF</span></div>
+    <div class="cta-pill">Get the issue</div>
+  </div>
+</body>
+</html>

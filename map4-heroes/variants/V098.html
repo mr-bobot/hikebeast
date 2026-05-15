@@ -1,0 +1,124 @@
+<!-- V098 · Tension · wired · layout=color-pop · treatment=color-pop · img=/map4-heroes/emotional/tannhorn.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V098</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0a0806; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+    filter: saturate(1.65) contrast(1.18) brightness(1.05) hue-rotate(-4deg);
+  }
+  .pop-glow {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 75% 35%, rgba(255,180,60,0.32) 0%, rgba(255,180,60,0) 40%),
+      radial-gradient(circle at 25% 70%, rgba(255,90,40,0.22) 0%, rgba(255,90,40,0) 38%);
+    mix-blend-mode: screen;
+    pointer-events:none;
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(20,8,4,0.42) 0%, rgba(20,8,4,0) 28%),
+      linear-gradient(0deg, rgba(20,8,4,0.65) 0%, rgba(20,8,4,0) 40%);
+    pointer-events:none;
+  }
+  .countdown {
+    position:absolute;
+    top: 56px;
+    left: 64px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Inter', sans-serif;
+    color: #ffe8b8;
+  }
+  .countdown .chip {
+    background: #ff5a28;
+    color: #1a0a04;
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+  .countdown .meta {
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: rgba(255,232,184,0.78);
+  }
+  .copy {
+    position:absolute;
+    bottom: 92px;
+    left: 64px;
+    right: 64px;
+    color: #fff5e0;
+  }
+  .copy h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 102px;
+    line-height: 0.92;
+    letter-spacing: -0.032em;
+    margin: 0;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+  .copy h1 .pop {
+    color: #ffae3a;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .copy .row2 {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: 22px;
+  }
+  .copy h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 46px;
+    line-height: 1;
+    margin: 0;
+    color: rgba(255,245,224,0.95);
+  }
+  .copy .tail {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: rgba(255,245,224,0.7);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/tannhorn.jpeg" alt="">
+    <div class="pop-glow"></div>
+    <div class="scrim"></div>
+    <div class="countdown">
+      <span class="chip">August läuft</span>
+      <span class="meta">Spätsommer 26 · 38 Tage Licht</span>
+    </div>
+    <div class="copy">
+      <h1>Spätsommer<br>schlägt <span class="pop">zu.</span></h1>
+      <div class="row2">
+        <h2>Bist du fertig?</h2>
+        <div class="tail">141 Spots · Schweiz</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

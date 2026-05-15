@@ -1,0 +1,85 @@
+<!-- V050 · Anticipation · imminent · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/fronalpstock.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V050</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#1a0e07; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 55%;
+    display:block;
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.08) 32%, rgba(0,0,0,0) 55%, rgba(20,8,2,0.45) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    top:88px;
+    left:88px;
+    right:88px;
+    color:#fff;
+  }
+  .copy h1 {
+    margin:0;
+    font-family:'Inter', sans-serif;
+    font-weight:800;
+    font-size:104px;
+    line-height:0.94;
+    letter-spacing:-0.038em;
+    text-shadow: 0 4px 36px rgba(0,0,0,0.4);
+    max-width:1140px;
+  }
+  .copy h1 .num {
+    color:#ffd07a;
+    font-weight:800;
+  }
+  .meta {
+    position:absolute;
+    left:88px;
+    bottom:64px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:0.34em;
+    text-transform:uppercase;
+    color:rgba(255,228,194,0.86);
+  }
+  .meta .dot {
+    width:8px; height:8px; border-radius:50%;
+    background:#ffd07a;
+    box-shadow:0 0 14px rgba(255,208,122,0.85);
+  }
+  .meta .div {
+    width:48px; height:1px;
+    background:rgba(255,228,194,0.4);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/fronalpstock.jpg" alt="">
+    <div class="scrim"></div>
+    <div class="copy">
+      <h1>Noch <span class="num">14</span> Wochenenden bis Schnee.</h1>
+    </div>
+    <div class="meta">
+      <span class="dot"></span>
+      <span>FRONALPSTOCK · 19:42</span>
+      <span class="div"></span>
+      <span>141 SPOTS</span>
+    </div>
+  </div>
+</body>
+</html>

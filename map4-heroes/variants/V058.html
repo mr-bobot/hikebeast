@@ -1,0 +1,132 @@
+<!-- V058 · Joy · playful · layout=polaroid-stack · treatment=grain · img=/map4-heroes/emotional/rosenlaui.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V058</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#e8e1d3; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden;
+    background:
+      radial-gradient(circle at 70% 30%, #f5efe1 0%, #ebe3d2 48%, #d6ccb8 100%);
+  }
+  .paper {
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(120,90,50,0.022) 0px, rgba(120,90,50,0.022) 1px, transparent 1px, transparent 3px),
+      repeating-linear-gradient(90deg, rgba(120,90,50,0.022) 0px, rgba(120,90,50,0.022) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+  }
+  /* three big polaroids, leaning against each other */
+  .polaroid {
+    position:absolute;
+    background:#fbf7ec;
+    padding:18px 18px 78px 18px;
+    box-shadow: 0 22px 42px rgba(40,30,15,0.30), 0 4px 8px rgba(40,30,15,0.18);
+    border-radius:2px;
+  }
+  .polaroid .ph {
+    width:300px; height:300px;
+    background-size:cover;
+    filter: saturate(0.84) sepia(0.06) contrast(0.97);
+    display:block;
+  }
+  .polaroid .cap {
+    position:absolute;
+    bottom:24px; left:0; right:0;
+    text-align:center;
+    font-family:'Caveat', cursive;
+    font-weight:500;
+    font-size:26px;
+    color:#3a2e1a;
+    letter-spacing:0.005em;
+  }
+  .polaroid .num {
+    position:absolute;
+    top:-14px; left:-14px;
+    width:42px; height:42px;
+    border-radius:50%;
+    background:#d96a3a;
+    color:#fbf7ec;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:20px;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 4px 10px rgba(40,30,15,0.3);
+    z-index:2;
+  }
+  .p1 { top:188px; left:108px; transform:rotate(-7deg); z-index:1; }
+  .p2 { top:160px; left:482px; transform:rotate(2deg); z-index:2; }
+  .p3 { top:200px; left:858px; transform:rotate(8deg); z-index:1; }
+  .strap {
+    position:absolute;
+    left:108px; bottom:62px;
+    right:108px;
+    z-index:5;
+  }
+  .strap .kicker {
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:rgba(60,45,25,0.62);
+    margin-bottom:14px;
+  }
+  .strap h1 {
+    margin:0;
+    font-family:'Caveat', cursive;
+    font-weight:600;
+    font-size:50px;
+    line-height:1.05;
+    color:#2c2010;
+    letter-spacing:-0.005em;
+    max-width:980px;
+  }
+  .strap h1 .accent { color:#b14a1e; }
+  .grain {
+    position:absolute; inset:0;
+    pointer-events:none;
+    opacity:0.45;
+    mix-blend-mode:multiply;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="paper"></div>
+
+    <div class="polaroid p1">
+      <div class="num">1</div>
+      <div class="ph" style="background-image:url('/map4-heroes/emotional/rosenlaui.jpg'); background-position:60% 50%;"></div>
+      <div class="cap">Rosenlaui · Juni</div>
+    </div>
+    <div class="polaroid p2">
+      <div class="num">2</div>
+      <div class="ph" style="background-image:url('/map4-heroes/emotional/limmernsee1.jpg'); background-position:50% 50%;"></div>
+      <div class="cap">Limmernsee · Juli</div>
+    </div>
+    <div class="polaroid p3">
+      <div class="num">3</div>
+      <div class="ph" style="background-image:url('/map4-heroes/emotional/LOST7855-Edit.jpeg'); background-position:50% 60%;"></div>
+      <div class="cap">Seealpsee · August</div>
+    </div>
+
+    <div class="strap">
+      <div class="kicker">3 Wochenenden</div>
+      <h1>Drei Wochenenden. Drei Orte. <span class="accent">Drei Geschichten.</span></h1>
+    </div>
+
+    <svg class="grain" width="1400" height="787" xmlns="http://www.w3.org/2000/svg">
+      <filter id="g">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+        <feColorMatrix values="0 0 0 0 0.2  0 0 0 0 0.16  0 0 0 0 0.1  0 0 0 0.32 0"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#g)"/>
+    </svg>
+  </div>
+</body>
+</html>

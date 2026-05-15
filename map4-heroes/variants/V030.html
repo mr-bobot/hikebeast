@@ -1,0 +1,132 @@
+<!-- V030 · Achievement · tallied · layout=multi-image grid · treatment=none · img=/map3/img/collection.jpg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V030</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0e0c0a; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .grid {
+    position:absolute; inset:0;
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap:6px;
+    background:#0e0c0a;
+  }
+  .grid > div {
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+  }
+  .center-band {
+    position:absolute;
+    left:0; right:0;
+    top:50%; transform:translateY(-50%);
+    height:300px;
+    background: rgba(14,12,10,0.78);
+    backdrop-filter: blur(2px);
+    border-top:1px solid rgba(255,255,255,0.12);
+    border-bottom:1px solid rgba(255,255,255,0.12);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .big-num {
+    font-family:'Anton', sans-serif;
+    font-size:280px;
+    line-height:0.85;
+    letter-spacing:-0.03em;
+    color:#f4eddc;
+    -webkit-text-stroke:0;
+    margin:0;
+    text-shadow:0 6px 60px rgba(0,0,0,0.55);
+  }
+  .copy {
+    position:absolute;
+    left:80px; top:50%;
+    transform:translateY(-50%);
+    color:#f4eddc;
+    font-family:'Inter', sans-serif;
+    z-index:3;
+  }
+  .copy .kicker {
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    color:rgba(244,237,220,0.7);
+    margin-bottom:14px;
+  }
+  .copy h1 {
+    margin:0;
+    font-family:'Anton', sans-serif;
+    font-size:88px;
+    line-height:0.95;
+    letter-spacing:-0.02em;
+    text-transform:uppercase;
+    color:#f4eddc;
+  }
+  .right-copy {
+    position:absolute;
+    right:80px; top:50%;
+    transform:translateY(-50%);
+    text-align:right;
+    color:#f4eddc;
+    font-family:'Inter', sans-serif;
+    z-index:3;
+  }
+  .right-copy .sub {
+    font-size:22px;
+    font-weight:500;
+    line-height:1.3;
+    color:#f4eddc;
+    max-width:340px;
+    margin-left:auto;
+  }
+  .right-copy .micro {
+    margin-top:14px;
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:rgba(244,237,220,0.6);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="grid">
+      <div style="background-image:url('/map4-heroes/spots/aletsch_glacier/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/bachalpsee/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/oeschinensee/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/rosenlaui/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/seealpsee/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/limmernsee/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/bachalpsee/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/oeschinensee/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/rosenlaui/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/seealpsee/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/limmernsee/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/aletsch_glacier/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/oeschinensee/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/rosenlaui/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/seealpsee/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/limmernsee/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/aletsch_glacier/main.jpg')"></div>
+      <div style="background-image:url('/map4-heroes/spots/bachalpsee/main.jpg')"></div>
+    </div>
+    <div class="center-band"></div>
+    <div class="copy">
+      <div class="kicker">Swiss Gems</div>
+      <h1>Spots,<br>not promises.</h1>
+    </div>
+    <div class="right-copy">
+      <div class="sub">141, plotted, ready.</div>
+      <div class="micro">Plotted &middot; Photographed &middot; Walked</div>
+    </div>
+  </div>
+</body>
+</html>

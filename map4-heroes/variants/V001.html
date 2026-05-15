@@ -1,0 +1,63 @@
+<!-- V001 · Awe · hushed · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/seealpsee.jpeg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V001</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 60%;
+    display:block;
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.18) 32%, rgba(0,0,0,0) 60%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    top:74px;
+    left:88px;
+    max-width:720px;
+    color:#f4efe6;
+    text-shadow: 0 1px 30px rgba(0,0,0,0.35);
+  }
+  .copy h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 64px;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .copy h1 .em {
+    font-style: italic;
+    font-weight: 400;
+  }
+  .copy .sub {
+    margin-top: 24px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: rgba(244,239,230,0.62);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/seealpsee.jpeg" alt="">
+    <div class="scrim"></div>
+    <div class="copy">
+      <h1>141 <span class="em">Spots</span>, die nicht auf der Karte stehen.</h1>
+      <div class="sub">Ein Handbuch von Leon Helg.</div>
+    </div>
+  </div>
+</body>
+</html>

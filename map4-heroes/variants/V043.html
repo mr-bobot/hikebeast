@@ -1,0 +1,109 @@
+<!-- V043 · Nostalgia · analogue · layout=duotone · treatment=duotone-warm · img=/map4-heroes/emotional/rosenlaui.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V043</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#1b1206; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  svg.bg { position:absolute; inset:0; width:100%; height:100%; display:block; }
+  /* warm duotone via feColorMatrix: maps lum to gradient cream -> deep terracotta */
+  .frame { position:absolute; inset:0; filter: url(#duotoneWarm); }
+  .frame img {
+    width:100%; height:100%; object-fit:cover; object-position:60% 50%;
+    display:block;
+    filter: grayscale(1) contrast(1.05) brightness(0.96);
+  }
+  .vignette {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at center, transparent 35%, rgba(40,18,4,0.55) 100%);
+    mix-blend-mode:multiply;
+  }
+  /* faux-emulsion edges */
+  .emulsion {
+    position:absolute; inset:0;
+    box-shadow:
+      inset 0 0 80px rgba(20,8,0,0.35),
+      inset 60px 0 120px -40px rgba(255,200,120,0.18),
+      inset -80px -40px 140px -40px rgba(20,5,0,0.45);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:78px; bottom:78px;
+    width:920px;
+    color:#f3e6c6;
+  }
+  .copy h1 {
+    margin:0;
+    font-family:'Fraunces', serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:72px;
+    line-height:1.04;
+    letter-spacing:-0.015em;
+    text-shadow: 0 2px 40px rgba(20,10,0,0.55);
+  }
+  .copy h1 .strong {
+    font-style:normal;
+    font-weight:500;
+    color:#fbf2da;
+  }
+  .corner {
+    position:absolute;
+    top:48px; left:78px;
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:0.28em;
+    color:rgba(243,230,198,0.6);
+  }
+  .grain {
+    position:absolute; inset:0; pointer-events:none;
+    opacity:0.55; mix-blend-mode:overlay;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <svg class="bg" width="0" height="0" style="position:absolute;">
+      <defs>
+        <filter id="duotoneWarm" color-interpolation-filters="sRGB">
+          <feColorMatrix type="matrix" values="
+            0.33 0.33 0.33 0 0
+            0.33 0.33 0.33 0 0
+            0.33 0.33 0.33 0 0
+            0    0    0    1 0"/>
+          <feComponentTransfer>
+            <feFuncR type="table" tableValues="0.16 0.99"/>
+            <feFuncG type="table" tableValues="0.08 0.85"/>
+            <feFuncB type="table" tableValues="0.06 0.55"/>
+          </feComponentTransfer>
+        </filter>
+      </defs>
+    </svg>
+
+    <div class="frame"><img src="/map4-heroes/emotional/rosenlaui.jpg" alt=""></div>
+    <div class="vignette"></div>
+    <div class="emulsion"></div>
+
+    <div class="corner">KODACHROME · 1994</div>
+    <div class="copy">
+      <h1>Wie die Sommerferien,<br>die du <span class="strong">in Erinnerung</span> hast.<br>Nur in echt.</h1>
+    </div>
+
+    <svg class="grain" width="1400" height="787" xmlns="http://www.w3.org/2000/svg">
+      <filter id="gr43">
+        <feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" stitchTiles="stitch"/>
+        <feColorMatrix values="0 0 0 0 1  0 0 0 0 0.85  0 0 0 0 0.55  0 0 0 0.35 0"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#gr43)"/>
+    </svg>
+  </div>
+</body>
+</html>

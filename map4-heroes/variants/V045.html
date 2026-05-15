@@ -1,0 +1,172 @@
+<!-- V045 · Nostalgia · childhood · layout=postcard · treatment=none · img=/map4-heroes/emotional/stoos_kapelle2.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V045</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Inter:wght@400;500;700&family=Playfair+Display:ital,wght@1,500;1,700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden;
+    background:#d9cdb1;
+  }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden;
+    background:
+      radial-gradient(ellipse at 30% 40%, #e6dac0 0%, #c9bb9a 70%, #b3a481 100%);
+  }
+  /* postcard card centered */
+  .card {
+    position:absolute;
+    top:54px; left:88px;
+    width:1224px; height:680px;
+    background:#fbf6e6;
+    box-shadow:
+      0 36px 80px rgba(50,40,18,0.4),
+      0 8px 18px rgba(50,40,18,0.22);
+    transform:rotate(-1.2deg);
+    display:grid;
+    grid-template-columns: 1.32fr 1fr;
+    overflow:hidden;
+  }
+  /* left: photo half */
+  .photoside {
+    position:relative;
+    overflow:hidden;
+    border-right:14px solid #fbf6e6;
+  }
+  .photoside img {
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  /* postage stamp top-left */
+  .stamp {
+    position:absolute; top:24px; right:24px;
+    width:120px; height:140px;
+    background:#fff;
+    padding:8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    /* stamp perforation: scalloped edges via radial gradient */
+    --d: 8px;
+    -webkit-mask:
+       radial-gradient(circle at top left, #0000 var(--d), #000 calc(var(--d) + 1px)) top left,
+       radial-gradient(circle at top right, #0000 var(--d), #000 calc(var(--d) + 1px)) top right,
+       radial-gradient(circle at bottom left, #0000 var(--d), #000 calc(var(--d) + 1px)) bottom left,
+       radial-gradient(circle at bottom right, #0000 var(--d), #000 calc(var(--d) + 1px)) bottom right,
+       linear-gradient(#000,#000);
+    -webkit-mask-size: 50% 50%, 50% 50%, 50% 50%, 50% 50%, calc(100% - 16px) calc(100% - 16px);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: top left, top right, bottom left, bottom right, center;
+    -webkit-mask-composite: source-over;
+  }
+  .stamp .inner {
+    width:100%; height:100%;
+    background:#a72020;
+    color:#fff;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    letter-spacing:0.05em;
+  }
+  .stamp .inner b {
+    font-size:38px; font-weight:800; line-height:1; margin-bottom:4px;
+  }
+  .stamp .inner s {
+    text-decoration:none;
+    font-size:9px; letter-spacing:0.25em; opacity:0.85;
+  }
+  /* postmark circle */
+  .postmark {
+    position:absolute; top:48px; right:170px;
+    width:120px; height:120px;
+    border:2px solid rgba(60,20,12,0.55);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    color:rgba(60,20,12,0.6);
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-align:center;
+    line-height:1.3;
+    transform:rotate(-8deg);
+    opacity:0.78;
+  }
+  /* right: written side */
+  .textside {
+    padding:60px 56px 48px 56px;
+    position:relative;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .label {
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:0.4em;
+    color:#7a6b48;
+  }
+  .headline {
+    margin-top:22px;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:64px;
+    line-height:1.04;
+    letter-spacing:-0.01em;
+    color:#1d160a;
+  }
+  .headline em {
+    font-weight:700;
+    font-style:italic;
+  }
+  /* address lines */
+  .addr {
+    display:flex; flex-direction:column; gap:10px;
+    margin-top:28px;
+  }
+  .addr .line {
+    height:1px; background:#7a6b48; opacity:0.4;
+  }
+  .addr .line.s { width:60%; }
+  .addr .line.m { width:75%; }
+  .addr .line.l { width:90%; }
+  .sig {
+    font-family:'Caveat', cursive;
+    font-size:28px;
+    color:#3a2c14;
+    margin-top:8px;
+  }
+  /* vertical divider on the postcard right */
+  .divider {
+    position:absolute; left:50%; top:64px; bottom:64px;
+    width:1px; background:#7a6b48; opacity:0.32;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="card">
+      <div class="photoside">
+        <img src="/map4-heroes/emotional/stoos_kapelle2.jpg" alt="">
+      </div>
+      <div class="textside">
+        <div>
+          <div class="label">CARTE POSTALE · HELVETIA</div>
+          <div class="headline">Die Postkarten-<br><em>Schweiz</em> gibt es<br>noch.</div>
+        </div>
+        <div class="addr">
+          <div class="line l"></div>
+          <div class="line m"></div>
+          <div class="line s"></div>
+          <div class="sig">— Stoos, Juli '24</div>
+        </div>
+        <div class="divider"></div>
+        <div class="stamp"><div class="inner"><b>27</b><s>CHF</s></div></div>
+        <div class="postmark">HELVETIA<br>· 2026 ·<br>POSTA</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

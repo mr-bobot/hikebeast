@@ -1,0 +1,150 @@
+<!-- V014 · Belonging · included · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/limmernsee1.jpg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V014</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; font-family:'Inter', sans-serif; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  /* darken left side where chat sits */
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(90deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.25) 38%, rgba(0,0,0,0) 60%),
+      linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.35) 100%);
+  }
+
+  /* group-chat header strip */
+  .chat-header {
+    position:absolute;
+    top: 36px; left: 64px;
+    display:flex; align-items:center; gap: 14px;
+    color: #f3f3f5;
+    letter-spacing: 0.01em;
+  }
+  .chat-header .avatars { display:flex; }
+  .chat-header .avatars .av {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.92);
+    margin-left: -10px;
+    background-size: cover; background-position: center;
+  }
+  .chat-header .avatars .av:first-child { margin-left: 0; }
+  .av1 { background: linear-gradient(135deg, #fbb040, #c2462a); }
+  .av2 { background: linear-gradient(135deg, #4f7ea8, #1c2d4a); }
+  .av3 { background: linear-gradient(135deg, #5a8a4f, #2c4a1f); }
+  .av4 { background: linear-gradient(135deg, #d4a5cf, #8a4f78); }
+  .chat-header .title { font-size: 15px; font-weight: 600; }
+  .chat-header .sub { font-size: 12px; font-weight: 400; color: rgba(243,243,245,0.62); margin-top: 2px; }
+  .chat-header .meta { display:flex; flex-direction:column; }
+
+  /* headline as a chat bubble */
+  .bubble {
+    position:absolute;
+    left: 64px; top: 220px;
+    max-width: 560px;
+    background: #2e2e35;
+    color: #f3f3f5;
+    padding: 22px 26px;
+    border-radius: 22px 22px 22px 6px;
+    font-size: 36px;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+  }
+  .bubble .tail-label {
+    display:block;
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: rgba(243,243,245,0.55);
+    text-transform: uppercase;
+  }
+
+  /* tiny "Leon · 5:42" line under */
+  .stamp {
+    position:absolute;
+    left: 78px; top: 410px;
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+  .stamp .dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#3acf6f; margin:0 8px 1px 4px; vertical-align:middle; }
+
+  /* CTA shaped like an iMessage send pill */
+  .cta {
+    position:absolute;
+    left: 64px; bottom: 60px;
+    display:inline-flex; align-items:center; gap: 12px;
+    background: #1d9bf0;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 16px 26px 16px 22px;
+    border-radius: 999px;
+    box-shadow: 0 18px 36px rgba(29,155,240,0.45);
+  }
+  .cta::after {
+    content: "";
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.22);
+    display:inline-block;
+    background-image: linear-gradient(135deg, transparent 38%, #fff 38%, #fff 54%, transparent 54%);
+    background-size: 10px 10px;
+    background-repeat: no-repeat;
+    background-position: 6px 6px;
+  }
+
+  /* faint typing dots beside bubble */
+  .typing {
+    position:absolute;
+    left: 96px; top: 380px;
+    display:flex; gap: 6px;
+  }
+  .typing span {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.45);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/limmernsee1.jpg" alt="">
+    <div class="scrim"></div>
+
+    <div class="chat-header">
+      <div class="avatars">
+        <div class="av av1"></div>
+        <div class="av av2"></div>
+        <div class="av av3"></div>
+        <div class="av av4"></div>
+      </div>
+      <div class="meta">
+        <div class="title">swiss gems</div>
+        <div class="sub">Leon, Jana, Oli, +138</div>
+      </div>
+    </div>
+
+    <div class="bubble">
+      Welcome to the group chat that owns the alps.
+      <span class="tail-label">Leon added you</span>
+    </div>
+
+    <div class="stamp"><span class="dot"></span>active now</div>
+
+    <div class="cta">I'm in</div>
+  </div>
+</body>
+</html>

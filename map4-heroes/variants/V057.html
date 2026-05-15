@@ -1,0 +1,138 @@
+<!-- V057 · Joy · giddy · layout=color-pop · treatment=color-pop · img=/map4-heroes/emotional/limmernsee1.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V057</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#0a0d10; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  /* desaturated base layer */
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    filter: saturate(0.18) brightness(0.78) contrast(1.04);
+    display:block;
+  }
+  /* color-pop layer: same image, masked to the turquoise water band */
+  .pop-layer {
+    position:absolute; inset:0;
+    background-image:url('/map4-heroes/emotional/limmernsee1.jpg');
+    background-size:cover;
+    background-position:50% 50%;
+    filter: saturate(2.05) contrast(1.06) brightness(1.02) hue-rotate(-4deg);
+    -webkit-mask-image: linear-gradient(180deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) 38%,
+      rgba(0,0,0,1) 50%,
+      rgba(0,0,0,1) 78%,
+      rgba(0,0,0,0) 90%);
+            mask-image: linear-gradient(180deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) 38%,
+      rgba(0,0,0,1) 50%,
+      rgba(0,0,0,1) 78%,
+      rgba(0,0,0,0) 90%);
+    pointer-events:none;
+  }
+  /* turquoise lift, just on the water band */
+  .tint {
+    position:absolute; inset:0;
+    background: linear-gradient(180deg,
+      rgba(0,0,0,0) 40%,
+      rgba(20,180,200,0.18) 55%,
+      rgba(30,200,210,0.16) 72%,
+      rgba(0,0,0,0) 90%);
+    mix-blend-mode:screen;
+    pointer-events:none;
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 38%),
+      linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 32%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:88px;
+    bottom:88px;
+    color:#f4efe6;
+  }
+  .copy .price {
+    display:flex;
+    align-items:baseline;
+    gap:18px;
+    font-family:'Inter', sans-serif;
+  }
+  .copy .price .big {
+    font-weight:700;
+    font-size:120px;
+    line-height:1;
+    letter-spacing:-0.04em;
+    color:#5fe4e8;
+    text-shadow: 0 2px 30px rgba(0,0,0,0.35);
+  }
+  .copy .price .unit {
+    font-weight:500;
+    font-size:34px;
+    color:#f4efe6;
+    letter-spacing:0.02em;
+  }
+  .copy .line {
+    margin-top:14px;
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:24px;
+    letter-spacing:0.005em;
+    color:rgba(244,239,230,0.86);
+    text-shadow: 0 1px 14px rgba(0,0,0,0.55);
+  }
+  .copy .line .em {
+    color:#5fe4e8;
+    font-weight:500;
+  }
+  .swatch {
+    position:absolute;
+    right:88px;
+    top:88px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    font-family:'Inter', sans-serif;
+    font-size:11px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:rgba(244,239,230,0.78);
+    text-align:right;
+  }
+  .swatch .chip {
+    width:54px;
+    height:54px;
+    background:#5fe4e8;
+    border-radius:2px;
+    margin-left:auto;
+    box-shadow: 0 6px 22px rgba(95,228,232,0.35);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/limmernsee1.jpg" alt="">
+    <div class="pop-layer"></div>
+    <div class="tint"></div>
+    <div class="scrim"></div>
+    <div class="swatch">
+      <div class="chip"></div>
+      <div>Limmernsee · CH</div>
+    </div>
+    <div class="copy">
+      <div class="price"><span class="big">27</span><span class="unit">CHF</span></div>
+      <div class="line">Diese <span class="em">Farbe</span> inklusive.</div>
+    </div>
+  </div>
+</body>
+</html>

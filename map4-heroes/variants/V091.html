@@ -1,0 +1,93 @@
+<!-- V091 · Gratitude · content · layout=full-bleed · treatment=none · img=/map4-heroes/emotional/limmernsee1.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V091</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#000; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .hero img.photo {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.18) 50%, rgba(0,0,0,0) 100%);
+    pointer-events:none;
+  }
+  .copy {
+    position:absolute;
+    left:88px;
+    top:50%;
+    transform: translateY(-50%);
+    color:#f4efe6;
+    max-width: 620px;
+  }
+  .price-mark {
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size: 112px;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: #f4efe6;
+    text-shadow: 0 2px 28px rgba(0,0,0,0.45);
+  }
+  .price-mark .unit {
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin-left: 10px;
+    color: rgba(244,239,230,0.78);
+  }
+  .rule {
+    width: 80px;
+    height: 1px;
+    background: rgba(244,239,230,0.55);
+    margin: 32px 0 28px 0;
+  }
+  .copy h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.32;
+    letter-spacing: -0.005em;
+    margin: 0;
+    color: #f4efe6;
+    text-shadow: 0 1px 22px rgba(0,0,0,0.45);
+  }
+  .cta {
+    margin-top: 36px;
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:0.34em;
+    color:#0e0a05;
+    text-transform:uppercase;
+    padding: 14px 24px;
+    background:#f4efe6;
+  }
+  .cta .arrow { font-size:16px; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img class="photo" src="/map4-heroes/emotional/limmernsee1.jpg" alt="">
+    <div class="scrim"></div>
+    <div class="copy">
+      <div class="price-mark">27<span class="unit">CHF</span></div>
+      <div class="rule"></div>
+      <h1>Danach hast du keine Ausreden mehr.</h1>
+      <div class="cta">Karte ansehen <span class="arrow">&rarr;</span></div>
+    </div>
+  </div>
+</body>
+</html>

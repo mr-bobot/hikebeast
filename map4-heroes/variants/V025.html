@@ -1,0 +1,106 @@
+<!-- V025 · Peace · washed · layout=duotone · treatment=duotone-pastel · img=/map4-heroes/emotional/lac%20de%20cheserys.jpeg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;500;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#f0ddd6; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; }
+  .photo-wrap {
+    position:absolute; inset:0;
+    filter: url(#duotone-pastel) saturate(0.65) contrast(0.92);
+  }
+  .photo-wrap img {
+    width:100%; height:100%; object-fit:cover; object-position:50% 50%;
+    display:block;
+  }
+  .haze {
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(255,235,225,0.22) 0%, rgba(190,210,225,0.08) 50%, rgba(255,235,225,0.18) 100%);
+    mix-blend-mode:screen;
+    pointer-events:none;
+  }
+  .toggle {
+    position:absolute;
+    left:80px; top:64px;
+    display:flex; align-items:center; gap:18px;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:#5e4a4a;
+  }
+  .switch {
+    position:relative;
+    width:64px; height:32px;
+    border-radius:999px;
+    background:#5e4a4a;
+  }
+  .switch::after {
+    content:"";
+    position:absolute;
+    top:4px; right:4px;
+    width:24px; height:24px;
+    border-radius:50%;
+    background:#fbe5d6;
+    box-shadow:0 2px 8px rgba(94,74,74,0.35);
+  }
+  .copy {
+    position:absolute;
+    left:50%; top:50%;
+    transform:translate(-50%, -50%);
+    text-align:center;
+    color:#fbe5d6;
+  }
+  .copy h1 {
+    margin:0;
+    font-family:'Inter', sans-serif;
+    font-weight:200;
+    font-size:184px;
+    line-height:0.92;
+    letter-spacing:-0.055em;
+    text-shadow:0 2px 32px rgba(94,74,74,0.18);
+  }
+  .copy h1 b {
+    font-weight:700;
+    font-style:normal;
+    color:#fbe5d6;
+  }
+</style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute">
+    <filter id="duotone-pastel">
+      <feColorMatrix type="matrix" values="
+        0.33 0.33 0.33 0 0
+        0.33 0.33 0.33 0 0
+        0.33 0.33 0.33 0 0
+        0    0    0    1 0"/>
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR tableValues="0.36 0.99" type="table"/>
+        <feFuncG tableValues="0.42 0.92" type="table"/>
+        <feFuncB tableValues="0.55 0.86" type="table"/>
+      </feComponentTransfer>
+    </filter>
+  </svg>
+  <div class="hero">
+    <div class="photo-wrap">
+      <img src="/map4-heroes/emotional/lac%20de%20cheserys.jpeg" alt="">
+    </div>
+    <div class="haze"></div>
+    <div class="toggle">
+      <span>Lake mode</span>
+      <div class="switch"></div>
+      <span>on</span>
+    </div>
+    <div class="copy">
+      <h1>Lake mode,<br><b>on.</b></h1>
+    </div>
+  </div>
+</body>
+</html>

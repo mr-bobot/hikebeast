@@ -1,0 +1,90 @@
+<!-- V094 · Gratitude · full · layout=multi-image grid · treatment=none · img=/map4-heroes/spots/oeschinensee/main.jpg -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>V094</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#efe9dd; }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden; background:#efe9dd; }
+  .grid {
+    position:absolute; inset:0;
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 6px;
+    padding: 6px;
+    box-sizing: border-box;
+  }
+  .grid .cell { position:relative; overflow:hidden; background:#1a1a1a; }
+  .grid .cell img {
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    display:block;
+    filter: saturate(0.92) contrast(0.96);
+  }
+  .center-card {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 620px;
+    padding: 44px 56px;
+    background: #f6f0e3;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.42), 0 6px 18px rgba(0,0,0,0.22);
+    text-align: center;
+  }
+  .center-card h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 62px;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    color: #1c1a16;
+    margin: 0;
+  }
+  .center-card .rule {
+    width: 36px;
+    height: 1px;
+    background: #1c1a16;
+    margin: 22px auto 0;
+    opacity: 0.55;
+  }
+  .center-card .tag {
+    margin-top: 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(28,26,22,0.65);
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="grid">
+      <div class="cell"><img src="/map4-heroes/spots/oeschinensee/main.jpg" alt=""></div>
+      <div class="cell"><img src="/map4-heroes/spots/bachalpsee/main.jpg" alt=""></div>
+      <div class="cell"><img src="/map4-heroes/spots/aletsch_glacier/main.jpg" alt=""></div>
+      <div class="cell"><img src="/map4-heroes/spots/rosenlaui/main.jpg" alt=""></div>
+      <div class="cell"><img src="/map4-heroes/spots/seealpsee/main.jpg" alt=""></div>
+      <div class="cell"><img src="/map4-heroes/spots/limmernsee/main.jpg" alt=""></div>
+      <div class="cell"><img src="/map4-heroes/spots/lauterbrunnen/main.jpg" alt=""></div>
+      <div class="cell"><img src="/map4-heroes/spots/caumasee/main.jpg" alt=""></div>
+      <div class="cell"><img src="/map4-heroes/spots/grindelwald/main.jpg" alt=""></div>
+      <div class="cell"><img src="/map4-heroes/spots/iseltwald/main.jpg" alt=""></div>
+      <div class="cell"><img src="/map4-heroes/spots/joriseen/main.jpg" alt=""></div>
+      <div class="cell"><img src="/map4-heroes/spots/falensee/main.jpg" alt=""></div>
+    </div>
+    <div class="center-card">
+      <h1>Genug für einen<br>guten Sommer.</h1>
+      <div class="rule"></div>
+      <div class="tag">141 Spots · Sommer 26</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!-- V017 · Discovery · curious · layout=polaroid-stack · treatment=grain · img=/map4-heroes/spots/joriseen/main.jpg -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V017</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1400px; height:787px; overflow:hidden; background:#1a1612;
+    font-family:'Inter', sans-serif;
+  }
+  .hero { position:relative; width:1400px; height:787px; overflow:hidden;
+    background:
+      radial-gradient(ellipse at 30% 20%, #2a221b 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, #3a2a1a 0%, transparent 65%),
+      #14110d;
+  }
+  /* table grain */
+  .grain {
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      radial-gradient(rgba(0,0,0,0.18) 1px, transparent 1px);
+    background-size: 5px 5px, 7px 7px;
+    background-position: 0 0, 2px 2px;
+    pointer-events:none;
+  }
+  /* soft spotlight from upper-left */
+  .spot {
+    position:absolute; inset:0;
+    background: radial-gradient(circle at 30% 35%, rgba(255,220,170,0.10) 0%, transparent 50%);
+    pointer-events:none;
+  }
+
+  .polaroid {
+    position:absolute;
+    background:#f3ece0;
+    padding: 14px 14px 50px 14px;
+    box-shadow:
+      0 30px 50px rgba(0,0,0,0.45),
+      0 8px 16px rgba(0,0,0,0.25);
+  }
+  .polaroid .frame {
+    width: 230px; height: 280px;
+    overflow:hidden;
+    background:#111;
+    position:relative;
+  }
+  .polaroid img {
+    width:100%; height:100%;
+    object-fit:cover; object-position:50% 50%;
+    filter: saturate(0.94) contrast(1.04);
+  }
+  .polaroid .filmgrain {
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(rgba(0,0,0,0.16) 1px, transparent 1px),
+      radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 3px 3px, 4px 4px;
+    background-position: 0 0, 1px 1px;
+    mix-blend-mode: overlay;
+  }
+  .polaroid .lbl {
+    position:absolute;
+    left: 14px; right: 14px; bottom: 14px;
+    text-align:center;
+    font-family:'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #4a3e2c;
+  }
+  .polaroid .num {
+    position:absolute;
+    top: 18px; right: 22px;
+    font-family:'Playfair Display', serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: #8a7558;
+  }
+
+  /* stack: fanned at center-right, slight rotations */
+  .p1 { left: 760px; top: 360px; transform: rotate(-22deg); z-index: 1; }
+  .p2 { left: 800px; top: 320px; transform: rotate(-14deg); z-index: 2; }
+  .p3 { left: 840px; top: 280px; transform: rotate(-7deg); z-index: 3; }
+  .p4 { left: 880px; top: 250px; transform: rotate(0deg); z-index: 4; }
+  .p5 { left: 920px; top: 270px; transform: rotate(8deg); z-index: 5; }
+  .p6 { left: 960px; top: 320px; transform: rotate(15deg); z-index: 6; }
+  /* the pulled-out hero card - Joriseen */
+  .hero-card {
+    left: 660px; top: 130px;
+    transform: rotate(-9deg);
+    z-index: 12;
+    box-shadow:
+      0 40px 80px rgba(0,0,0,0.6),
+      0 12px 24px rgba(0,0,0,0.4);
+  }
+  .hero-card .frame { width: 280px; height: 340px; }
+
+  /* type — left side */
+  .copy {
+    position:absolute;
+    left: 84px; top: 230px;
+    max-width: 540px;
+    color: #f1e9d8;
+  }
+  .copy .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(241,233,216,0.5);
+    margin-bottom: 28px;
+  }
+  .copy .eyebrow .dot {
+    display:inline-block;
+    width: 18px; height: 1px; background: rgba(241,233,216,0.45);
+    vertical-align: middle; margin-right: 12px;
+  }
+  .copy h1 {
+    margin: 0;
+    font-family:'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 84px;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+  .copy h1 .italic { font-style: italic; color:#ffd87a; }
+  .copy h1 .stack-num {
+    font-weight: 700;
+    color: #ffd87a;
+  }
+
+  .cta {
+    position:absolute;
+    left: 84px; bottom: 84px;
+    display:inline-flex; align-items:center; gap: 18px;
+    border: 1px solid rgba(255,216,122,0.6);
+    color: #ffd87a;
+    padding: 16px 26px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .cta::after {
+    content: "";
+    width: 38px; height: 1px; background: #ffd87a;
+    position:relative;
+  }
+  .cta .arr { font-size: 18px; line-height: 1; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="grain"></div>
+    <div class="spot"></div>
+
+    <div class="polaroid p1">
+      <div class="frame">
+        <img src="/map4-heroes/spots/oeschinensee/main.jpg" alt="">
+        <div class="filmgrain"></div>
+      </div>
+    </div>
+    <div class="polaroid p2">
+      <div class="frame">
+        <img src="/map4-heroes/spots/bachalpsee/main.jpg" alt="">
+        <div class="filmgrain"></div>
+      </div>
+    </div>
+    <div class="polaroid p3">
+      <div class="frame">
+        <img src="/map4-heroes/spots/falensee/main.jpg" alt="">
+        <div class="filmgrain"></div>
+      </div>
+    </div>
+    <div class="polaroid p4">
+      <div class="frame">
+        <img src="/map4-heroes/spots/gelmersee/main.jpg" alt="">
+        <div class="filmgrain"></div>
+      </div>
+    </div>
+    <div class="polaroid p5">
+      <div class="frame">
+        <img src="/map4-heroes/spots/seealpsee/main.jpg" alt="">
+        <div class="filmgrain"></div>
+      </div>
+    </div>
+    <div class="polaroid p6">
+      <div class="frame">
+        <img src="/map4-heroes/spots/lac_de_taney/main.jpg" alt="">
+        <div class="filmgrain"></div>
+      </div>
+    </div>
+
+    <div class="polaroid hero-card">
+      <div class="frame">
+        <img src="/map4-heroes/spots/joriseen/main.jpg" alt="">
+        <div class="filmgrain"></div>
+      </div>
+      <div class="num">No. 047 / 141</div>
+      <div class="lbl">Joriseen</div>
+    </div>
+
+    <div class="copy">
+      <div class="eyebrow"><span class="dot"></span>The deck</div>
+      <h1>Pick a card.<br><span class="italic">Any of</span> <span class="stack-num">141</span>.</h1>
+    </div>
+
+    <div class="cta">Open the deck <span class="arr">&rarr;</span></div>
+  </div>
+</body>
+</html>
