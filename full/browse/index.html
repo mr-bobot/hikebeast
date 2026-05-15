@@ -303,10 +303,25 @@
           || [4, 3]);
     a.dataset.w = dimsArr[0];
     a.dataset.h = dimsArr[1];
-    // Set the column-span class NOW (before the <img> is parented) so its
-    // CSS width is final from first paint. See spanClassFor() comments.
-    const spanCls = spanClassFor(dimsArr[0], dimsArr[1], gridCols(), photo.photoId || photo.src || spot.image || spot.id || '');
+    // Set the column-span class AND the gridRowEnd NOW so every visual
+    // dimension of the tile is final before it's appended to the DOM.
+    // The previous version deferred gridRowEnd to applySpans() via
+    // requestAnimationFrame, which meant tiles painted at 6px tall
+    // (grid-auto-rows default) and then grew to their image height once
+    // applySpans ran — Safari rendered the squish-then-grow as a visible
+    // image resize. Computing inline costs one getComputedStyle per
+    // render pass (memoised in gridMetrics()) and zero forced relayouts
+    // between appendChild calls.
+    const m = gridMetrics();
+    const spanCls = spanClassFor(dimsArr[0], dimsArr[1], m.cols, photo.photoId || photo.src || spot.image || spot.id || '');
     if (spanCls) a.classList.add(spanCls);
+    if (m.colW && m.rowH) {
+      const spanCol = spanCls ? 2 : 1;
+      const tileW = m.colW * spanCol + m.gap * (spanCol - 1);
+      const tileH = tileW * (dimsArr[1] / dimsArr[0]);
+      const spanRow = Math.max(1, Math.round((tileH + m.gap) / (m.rowH + m.gap)));
+      a.style.gridRowEnd = 'span ' + spanRow;
+    }
     const attrs = window.HB.photoAttrs({
       photoId: photo.photoId, image: photo.src || spot.image,
       width: 1000, prefix: '../',
@@ -386,52 +401,57 @@
     return '';
   }
 
-  // Memoize the grid's column count for the duration of one update() pass.
-  // Read once from getComputedStyle; expensive to call per-tile.
-  let cachedCols = null;
-  function gridCols() {
-    if (cachedCols !== null) return cachedCols;
-    const cs = getComputedStyle(grid);
-    cachedCols = cs.gridTemplateColumns.split(' ').filter(Boolean).length;
-    return cachedCols;
-  }
-
-  // After every tile has its column-span class set, compute the grid-row
-  // span (gridRowEnd) so each tile occupies the right number of auto-rows.
-  // Row-span doesn't change a tile's *width*, only its *height*, so this
-  // can run after first paint (e.g. on image-decode) without causing
-  // srcset re-picks. We only re-toggle the column-span classes when the
-  // grid's column count actually changes (resize across breakpoint).
-  let lastSpansCols = null;
-  function applySpans() {
-    if (!grid.children.length) return;
+  // Memoize the grid's layout metrics for one update() pass. Read once
+  // from getComputedStyle; expensive to call per-tile. Invalidated by
+  // update() (new render pass) and by the resize observer.
+  let cachedMetrics = null;
+  function gridMetrics() {
+    if (cachedMetrics) return cachedMetrics;
     const cs = getComputedStyle(grid);
     const tmpl = cs.gridTemplateColumns.split(' ').filter(Boolean);
-    const cols = tmpl.length;
-    const colW = parseFloat(tmpl[0]);
-    const gap = parseFloat(cs.rowGap || cs.gap || '0');
-    const rowH = parseFloat(cs.gridAutoRows);
-    if (!colW || !rowH) return;
-    const colCountChanged = lastSpansCols !== cols;
-    lastSpansCols = cols;
+    cachedMetrics = {
+      cols: tmpl.length,
+      colW: parseFloat(tmpl[0]) || 0,
+      gap:  parseFloat(cs.rowGap || cs.gap || '0') || 0,
+      rowH: parseFloat(cs.gridAutoRows) || 0,
+    };
+    return cachedMetrics;
+  }
+
+  // Re-apply spans on resize (the grid's column count may have crossed a
+  // breakpoint, so a 4-col landscape needs to demote to 2-col on rotation).
+  // Most of the time tile() has already set the final spans inline, so
+  // this is a no-op outside breakpoint crossings.
+  function applySpans() {
+    if (!grid.children.length) return;
+    cachedMetrics = null;  // re-read for fresh viewport size
+    const m = gridMetrics();
+    if (!m.colW || !m.rowH) return;
     Array.from(grid.children).forEach(t => {
+      // Edge case: tile rendered with the [4,3] fallback because no
+      // dimensions sidecar entry exists. Once the image has decoded
+      // we know its true aspect — write it back so the span math here
+      // produces the right tile height. Skip if dims are already
+      // anything other than the fallback (HB_PHOTO_DIMS coverage is
+      // ~100% so this is the only place we'd ever overwrite).
+      if (t.dataset.w === '4' && t.dataset.h === '3') {
+        const img = t.querySelector('img');
+        if (img && img.naturalWidth && img.naturalHeight) {
+          t.dataset.w = img.naturalWidth;
+          t.dataset.h = img.naturalHeight;
+        }
+      }
       const w = +t.dataset.w;
       const h = +t.dataset.h;
       if (!w || !h) return;
-      if (colCountChanged) {
-        // Resize across a breakpoint -- a 2-col landscape may need to
-        // collapse back to 1-col on mobile, or vice versa. Pay the srcset
-        // re-pick cost here; the alternative (locking the class forever)
-        // would break the layout on rotation.
-        const featureKey = t.querySelector('img')?.src || '';
-        const newClass = spanClassFor(w, h, cols, featureKey);
-        t.classList.toggle('span-wide', newClass === 'span-wide');
-        t.classList.toggle('span-tall', newClass === 'span-tall');
-      }
-      const spanCol = t.classList.contains('span-wide') || t.classList.contains('span-tall') ? 2 : 1;
-      const tileW = colW * spanCol + gap * (spanCol - 1);
+      const featureKey = t.querySelector('img')?.src || '';
+      const newClass = spanClassFor(w, h, m.cols, featureKey);
+      t.classList.toggle('span-wide', newClass === 'span-wide');
+      t.classList.toggle('span-tall', newClass === 'span-tall');
+      const spanCol = newClass ? 2 : 1;
+      const tileW = m.colW * spanCol + m.gap * (spanCol - 1);
       const tileH = tileW * (h / w);
-      const spanRow = Math.max(1, Math.round((tileH + gap) / (rowH + gap)));
+      const spanRow = Math.max(1, Math.round((tileH + m.gap) / (m.rowH + m.gap)));
       t.style.gridRowEnd = 'span ' + spanRow;
     });
     grid.classList.add('is-ready');
@@ -475,11 +495,13 @@
     paintChips();
     if (tilesKey === lastTilesKey) return;
     lastTilesKey = tilesKey;
-    cachedCols = null;  // re-read column count once per render pass
+    cachedMetrics = null;  // force re-read of grid metrics for this pass
     grid.classList.remove('is-ready');
     grid.innerHTML = '';
     tileItems.forEach(it => grid.appendChild(tile(it)));
-    requestAnimationFrame(applySpans);
+    // Every tile sets its own gridRowEnd inline; just unhide the grid.
+    // applySpans() isn't needed on first paint anymore.
+    grid.classList.add('is-ready');
   }
 
   // Recompute spans when the viewport crosses a column-count breakpoint.
