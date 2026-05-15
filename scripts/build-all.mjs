@@ -14,6 +14,11 @@
 //   8. minify-assets — in-place CSS/JS minification (runs ONLY on Vercel
 //      via VERCEL=1; local builds keep readable preview.css / social.js).
 //
+// A tracking-pipeline lint runs first (step 0) so the build aborts before
+// any expensive image work if a page sends a tracked field that the
+// receiving API doesn't read · see lint-tracking-pipeline.mjs. Added
+// 2026-05-15 after the utm_source/medium/campaign silent-drop bug.
+//
 // Convex seeding is intentionally NOT part of this — `npm run seed` runs it
 // separately, since it pushes to a live deployment.
 //
@@ -26,6 +31,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const STEPS = [
+  "lint-tracking-pipeline.mjs",
   "build-image-derivatives.mjs",
   "build-intro-derivatives.mjs",
   "build-static-assets.mjs",
