@@ -14,6 +14,7 @@ export default async function handler(req, res) {
     utm_source,
     utm_medium,
     utm_campaign,
+    source_page,
   } = req.body ?? {};
   // Whitelist of beacon event names. Anything else gets dropped before
   // hitting Apps Script so the column writers don't receive bogus values.
@@ -26,6 +27,13 @@ export default async function handler(req, res) {
   const safeUtmSource = typeof utm_source === "string" ? utm_source.slice(0, 100) : "";
   const safeUtmMedium = typeof utm_medium === "string" ? utm_medium.slice(0, 100) : "";
   const safeUtmCampaign = typeof utm_campaign === "string" ? utm_campaign.slice(0, 100) : "";
+
+  // Which landing-page variant this visit came from (themap, map3, de_map4,
+  // etc.). Hardcoded per page in the page-visit fetch body · mirrors the
+  // value `/api/checkout/session` already stamps into Stripe metadata so
+  // visit-rows and purchase-rows share the same source_page and per-page
+  // conversion math can be done from the Sheet alone.
+  const safeSourcePage = typeof source_page === "string" ? source_page.slice(0, 64) : "";
 
   // For default landing pings we need at least one identifier so the row
   // can be matched to a person. Anonymous /guide visits (PDF-link traffic
@@ -63,6 +71,7 @@ export default async function handler(req, res) {
           utm_source: safeUtmSource,
           utm_medium: safeUtmMedium,
           utm_campaign: safeUtmCampaign,
+          source_page: safeSourcePage,
         }),
         signal: AbortSignal.timeout(5000),
       }).catch((err) => console.error("Visit log failed:", err)),
