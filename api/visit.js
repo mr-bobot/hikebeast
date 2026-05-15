@@ -5,7 +5,13 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { subscriber_id, token, page, browser_language, event } = req.body ?? {};
+  const { subscriber_id, token, page, browser_language, event, source_page } = req.body ?? {};
+  // Which landing-page variant this visit came from (themap, map3, de_map4,
+  // etc.). Hardcoded per page in the page-visit fetch body; mirrors the
+  // value `/api/checkout/session` already stamps into Stripe metadata so
+  // page-conversion math can be done from the Sheet alone, without
+  // cross-referencing Vercel Analytics for the denominator.
+  const safeSourcePage = typeof source_page === "string" ? source_page.slice(0, 64) : "";
   // Whitelist of beacon event names. Anything else gets dropped before
   // hitting Apps Script so the column writers don't receive bogus values.
   const ALLOWED_EVENTS = new Set(["scrolled", "video_clicked"]);
@@ -44,6 +50,7 @@ export default async function handler(req, res) {
           event: safeEvent,
           visited_at: new Date().toISOString(),
           browser_language: typeof browser_language === "string" ? browser_language.slice(0, 20) : "",
+          source_page: safeSourcePage,
         }),
         signal: AbortSignal.timeout(5000),
       }).catch((err) => console.error("Visit log failed:", err)),
