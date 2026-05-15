@@ -148,6 +148,8 @@ const ICON_DIFF = `<svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="
 const ICON_TIME = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
 const ICON_GAIN = `<svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg>`;
 const ICON_BUSY = `<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M14 19c0-2 2-3 4-3s3 1 3 3"/></svg>`;
+// Distance: a footsteps-track icon (two oblong soles).
+const ICON_DIST = `<svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg>`;
 
 const BRAND_SPRITES = `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="brand-gmaps" viewBox="0 0 32 32">
@@ -233,12 +235,12 @@ function statCell(label, valueHtml, iconSvg) {
   </div>`;
 }
 
-// Back-overview stats bar: 3 cells (Elevation, Accessibility, Crowdedness).
+// Back-overview stats bar: 3 cells (Altitude, Accessibility, Crowdedness).
 // "Accessibility" surfaces the easiest grade across all the spot's hikes —
 // what's the gentlest way in. For drive-up-only spots it shows "Drive-up".
 function renderOverviewStatsBar(spot) {
   const tf = spot.trip_facts || {};
-  const elev = tf.elevation_m ? `${fmtThousands(tf.elevation_m)}<span class="unit">m</span>` : `<span class="missing">—</span>`;
+  const alt = tf.elevation_m ? `${fmtThousands(tf.elevation_m)}<span class="unit">m</span>` : `<span class="missing">—</span>`;
 
   // Lowest sac_grade across the spot's routes. T-grades sort by their number;
   // K-grades (via ferrata) fall behind T-grades since they imply gear.
@@ -262,32 +264,53 @@ function renderOverviewStatsBar(spot) {
   }
 
   return `<div class="hb-stats-bar">
-    ${statCell("Elevation", elev, ICON_ELEV)}
+    ${statCell("Altitude", alt, ICON_ELEV)}
     ${statCell("Accessibility", access, ICON_DIFF)}
     ${statCell("Crowdedness", busyDotsHtml(tf.busyness), ICON_BUSY)}
   </div>`;
 }
 
-// Per-route stats bar: 5 cells (Elevation, Difficulty, Duration, Gain,
-// Crowdedness). Elevation + Crowdedness are spot-level constants reused on
-// every route's detail view; Difficulty / Duration / Gain are route-specific.
+// Per-route stats bar: 5 cells (Altitude, Difficulty, Duration, Elevation
+// change, Distance). Altitude is a spot-level constant; the rest are
+// route-specific. Crowdedness is NOT shown here — it's a spot attribute,
+// not a route attribute.
+//
+// Elevation change cell shows "+gain" when only ascent is known, or
+// "+gain / -loss" when descent_m differs. Distance shows "—" when unknown.
+//
 // Called server-side once with the first route as a placeholder; the JS in
 // flipScriptFor swaps the route-specific values per click.
+function fmtElevationChange(gainM, descentM) {
+  if (!gainM && !descentM) return null;
+  if (gainM && descentM && descentM !== gainM) {
+    return `+${gainM} <span class="unit">/</span> -${descentM}`;
+  }
+  return `+${gainM || descentM}`;
+}
+
 function renderRouteStatsBar(spot, route) {
   const tf = spot.trip_facts || {};
   const r = route || (spot.routes && spot.routes[0]) || {};
-  const elev = tf.elevation_m ? `${fmtThousands(tf.elevation_m)}<span class="unit">m</span>` : `<span class="missing">—</span>`;
-  const sac = r.sac_grade ? `<span data-rd-sac>${escapeHtml(r.sac_grade)}</span>${r.effort_label ? `<span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>${escapeHtml(r.effort_label)}</span></span>` : ""}` : `<span class="missing" data-rd-sac>—</span>`;
+  const alt = tf.elevation_m ? `${fmtThousands(tf.elevation_m)}<span class="unit">m</span>` : `<span class="missing">—</span>`;
+  const sac = r.sac_grade ? `<span data-rd-sac>${escapeHtml(r.sac_grade)}</span>${r.effort_label ? `<span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>${escapeHtml(r.effort_label)}</span></span>` : `<span class="unit" data-rd-sac-tail></span>`}` : `<span class="missing" data-rd-sac>—</span><span class="unit" data-rd-sac-tail></span>`;
   const t = fmtDuration(r.duration_min);
-  const time = t ? `<span data-rd-dur>${t.value}</span>${t.unit ? `<span class="unit" data-rd-dur-unit>${t.unit}</span>` : `<span class="unit" data-rd-dur-unit></span>`}` : `<span class="missing" data-rd-dur>—</span>`;
-  const gain = r.gain_m ? `<span data-rd-gain-v>${r.gain_m}</span><span class="unit">m</span>` : `<span class="missing" data-rd-gain-v>—</span>`;
+  const time = t
+    ? `<span data-rd-dur>${t.value}</span>${t.unit ? `<span class="unit" data-rd-dur-unit>${t.unit}</span>` : `<span class="unit" data-rd-dur-unit></span>`}`
+    : `<span class="missing" data-rd-dur>—</span><span class="unit" data-rd-dur-unit></span>`;
+  const elevChange = fmtElevationChange(r.gain_m, r.descent_m);
+  const elev = elevChange
+    ? `<span data-rd-elev-change>${elevChange}</span><span class="unit">m</span>`
+    : `<span class="missing" data-rd-elev-change>—</span>`;
+  const dist = r.distance_km
+    ? `<span data-rd-dist>${r.distance_km}</span><span class="unit">km</span>`
+    : `<span class="missing" data-rd-dist>—</span>`;
 
   return `<div class="hb-stats-bar">
-    ${statCell("Elevation", elev, ICON_ELEV)}
+    ${statCell("Altitude", alt, ICON_ELEV)}
     ${statCell("Difficulty", sac, ICON_DIFF)}
     ${statCell("Duration", time, ICON_TIME)}
-    ${statCell("Elevation gain", gain, ICON_GAIN)}
-    ${statCell("Crowdedness", busyDotsHtml(tf.busyness), ICON_BUSY)}
+    ${statCell("Elevation change", elev, ICON_GAIN)}
+    ${statCell("Distance", dist, ICON_DIST)}
   </div>`;
 }
 
@@ -618,9 +641,17 @@ function flipScriptFor(spot) {
 
   function fmtDuration(min) {
     if (!min) return null;
-    if (min < 60) return min + ' min';
+    if (min < 60) return { value: String(min), unit: 'min' };
     const h = Math.floor(min / 60), m = min % 60;
-    return m ? (h + 'h ' + m) : (h + 'h');
+    return m ? { value: h + 'h ' + m, unit: '' } : { value: h + 'h', unit: '' };
+  }
+
+  function fmtElevationChange(gainM, descentM) {
+    if (!gainM && !descentM) return null;
+    if (gainM && descentM && descentM !== gainM) {
+      return '+' + gainM + ' / -' + descentM;
+    }
+    return '+' + (gainM || descentM);
   }
 
   function setText(sel, txt) {
@@ -704,15 +735,29 @@ function flipScriptFor(spot) {
       }
     }
 
-    // Elevation gain cell
-    const gainEl = back.querySelector('[data-rd-gain-v]');
-    if (gainEl) {
-      if (r.gain_m) {
-        gainEl.textContent = r.gain_m;
-        gainEl.classList.remove('missing');
+    // Elevation change cell: "+gain" or "+gain / -loss" if both are known.
+    // The "m" unit suffix is fixed in the template; we just swap the number(s).
+    const elevEl = back.querySelector('[data-rd-elev-change]');
+    if (elevEl) {
+      const ec = fmtElevationChange(r.gain_m, r.descent_m);
+      if (ec) {
+        elevEl.innerHTML = ec.replace(/\//g, '<span class="unit">/</span>');
+        elevEl.classList.remove('missing');
       } else {
-        gainEl.textContent = '—';
-        gainEl.classList.add('missing');
+        elevEl.textContent = '—';
+        elevEl.classList.add('missing');
+      }
+    }
+
+    // Distance cell
+    const distEl = back.querySelector('[data-rd-dist]');
+    if (distEl) {
+      if (r.distance_km) {
+        distEl.textContent = r.distance_km;
+        distEl.classList.remove('missing');
+      } else {
+        distEl.textContent = '—';
+        distEl.classList.add('missing');
       }
     }
     // Prefer the concrete equipment_list (array of items). Fall back to the

@@ -48,6 +48,15 @@ hikes:
   - rosenlaui
   sources:
   - https://en.wikipedia.org/wiki/Rosenlaui
+  name: Drive-in from the Grosse Scheidegg road
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 5
+  gain_m: 0
+  distance_km: 0.2
+  equipment_list: []
+  quickest_for:
+  - rosenlaui
 - id: rosenlaui_public_waterfall-route-99
   start: Parkplatz Gletscherschlucht
   transit:
@@ -56,6 +65,15 @@ hikes:
     and walk a few minutes from beside the toilet block. T1. The valley also has the Rosenlauischlucht glacier gorge a kilometre further along the road.
   visits:
   - rosenlaui_public_waterfall
+  name: Drive-in from the Grosse Scheidegg road
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 5
+  gain_m: 0
+  distance_km: 0.2
+  equipment_list: []
+  quickest_for:
+  - rosenlaui_public_waterfall
 - id: rosenlauifall-route-99
   start: Parkplatz Gletscherschlucht
   transit:
@@ -63,6 +81,15 @@ hikes:
   description_extra: The waterfall drops out of the Rosenlaui valley above the Gletscherschlucht parking. A five-minute trail from the parking reaches the lower viewpoint. T1. Reached
     by Postbus to Rosenlaui, Gletscherschlucht.
   visits:
+  - rosenlauifall
+  name: Drive-in from the Grosse Scheidegg road
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 5
+  gain_m: 0
+  distance_km: 0.2
+  equipment_list: []
+  quickest_for:
   - rosenlauifall
 - id: triftbrucke-route-40
   sac_grade: T2
@@ -121,6 +148,19 @@ hikes:
   - gelmerhutte
   cable_car_ids:
   - gelmerbahn-funicular
+  name: Lakeshore loop from the funicular top
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 75
+  gain_m: 0
+  distance_km: 3.5
+  equipment_list: []
+  start: Gelmersee top station (Gelmerbahn from the Grimsel road)
+  transit:
+    bus: Postbus from Meiringen toward Grimsel Hospiz, stop Handegg, Kunzentännlein
+    cable_car: Gelmerbahn funicular up to the reservoir
+  quickest_for:
+  - gelmersee
 - id: brienzer_rothorn-default
   visits:
   - brienzer_rothorn
@@ -135,6 +175,18 @@ hikes:
   cable_car_ids:
   - brienz-rothorn-bahn
   name: Brienzer Rothorn summit overview
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 10
+  gain_m: 30
+  distance_km: 0.4
+  equipment_list: []
+  start: Brienzer Rothorn Bahn summit station (2,244 m)
+  transit:
+    train: Brienz
+    cable_car: Brienz Rothorn Bahn (steam cog railway)
+  quickest_for:
+  - brienzer_rothorn
 - id: brienzer_rothorn-cog-railway
   name: Cog railway from Brienz
   start: Brienz station
@@ -151,8 +203,6 @@ hikes:
   sources:
   - https://en.wikipedia.org/wiki/Brienz_Rothorn_Bahn
   - https://en.wikipedia.org/wiki/Brienzer_Rothorn
-  quickest_for:
-  - brienzer_rothorn
   cable_car_ids:
   - brienz-rothorn-bahn
 - id: brienzer_rothorn-brienz-via-planalp
@@ -385,6 +435,19 @@ hikes:
   - iseltwald
   sources:
   - https://en.wikipedia.org/wiki/Iseltwald
+  name: Pier walk from village parking
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 5
+  gain_m: 0
+  distance_km: 0.3
+  equipment_list: []
+  start: Iseltwald village, lakefront parking
+  transit:
+    bus: Postbus 103 from Interlaken Ost to Iseltwald
+    boat: Lake Brienz steamship from Interlaken or Brienz (April to October)
+  quickest_for:
+  - iseltwald
 - id: oeschinensee-kandersteg-foot
   name: From Kandersteg on foot
   start: Kandersteg train station
@@ -485,6 +548,19 @@ hikes:
   sources:
   - https://www.gornergrat.ch/
   - https://en.wikipedia.org/wiki/Riffelsee
+  name: Short walk from Rotenboden station
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 10
+  gain_m: 0
+  descent_m: 58
+  distance_km: 0.5
+  equipment_list: []
+  start: Rotenboden station (2,815 m, Gornergratbahn from Zermatt)
+  transit:
+    train: Zermatt, then Gornergratbahn to Rotenboden
+  quickest_for:
+  - riffelsee
 - id: riffelalp-easy-round-trip
   name: Riffelalp short loop via Grünsee
   start: Riffelalp station
@@ -844,6 +920,18 @@ hikes:
   - https://en.wikipedia.org/wiki/Lac_de_Derborence
   hut_ids:
   - refuge-derborence
+  name: Lakeshore loop from the road
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 90
+  gain_m: 50
+  distance_km: 4.0
+  equipment_list: []
+  start: Lac de Derborence parking (1,449 m)
+  transit:
+    car: Drive in from Aven via the narrow Lizerne valley road
+  quickest_for:
+  - lac_de_derborence
 - id: la_fouly-tmb-arnuva-la-fouly
   name: Tour du Mont Blanc · Arnuva → Grand Col Ferret → La Fouly
   start: Arnuva (Italian Val Ferret)
@@ -1175,6 +1263,9 @@ hikes:
   quickest_for:
   - dent_de_jaman
   equipment_list: []
+  name: Direct ascent from Jaman station
+  sac_grade: T2
+  effort_label: Moderate
 - id: creux_du_van-noiraigue-14-bends
   name: Sentier des 14 contours (from Noiraigue)
   start: Noiraigue train station
@@ -1335,6 +1426,16 @@ hikes:
   - aescher-gasthaus
   cable_car_ids:
   - ebenalp-luftseilbahn
+  name: Cable-car-served descent from Ebenalp
+  sac_grade: T2
+  effort_label: Moderate
+  duration_min: 15
+  gain_m: 0
+  descent_m: 185
+  distance_km: 0.8
+  equipment_list: []
+  quickest_for:
+  - ascher
 - id: saxer_lucke-route-71
   sac_grade: T1
   effort_label: Easy
@@ -1460,6 +1561,13 @@ hikes:
   - https://www.myswitzerland.com/en-us/destinations/berglistueber/
   quickest_for:
   - barglistuber
+  name: Roadside walk from the Linthal parking
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 5
+  gain_m: 0
+  distance_km: 0.2
+  equipment_list: []
 - id: urnerboden-panorama-walk
   name: Panorama walk around the alpine valley
   start: Urnerboden village
@@ -1606,6 +1714,16 @@ hikes:
   - https://en.wikipedia.org/wiki/Kl%C3%B6ntalersee
   quickest_for:
   - klontalersee
+  name: Lakeshore loop on the marked path
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 240
+  gain_m: 50
+  distance_km: 13
+  equipment_list: []
+  start: Klöntal-Vorauen (Postbus 506 from Glarus)
+  transit:
+    bus: Glarus, then Postbus 506 along the Klöntalstrasse to Klöntal-Vorauen
 - id: stoos_kapelle-route-35
   start: Schwyz, Stoosbahn
   description_extra: Stooskapelle Maria Hilf is a small alpine chapel in the car-free village of Stoos. Reach Stoos via the Stoosbahn funicular from Schwyz. From the upper Stoos station,
@@ -1616,6 +1734,18 @@ hikes:
   - https://www.stoos.ch/
   cable_car_ids:
   - stoosbahn
+  name: Chapel walk from the Stoosbahn top
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 3
+  gain_m: 0
+  distance_km: 0.2
+  equipment_list: []
+  transit:
+    train: Brunnen, then bus to Schwyz, Stoosbahn
+    cable_car: Stoosbahn funicular (steepest funicular in the world)
+  quickest_for:
+  - stoos_kapelle
 - id: pizol-5-lakes-hike
   name: 5-Lakes hike (Pizolhütte → Wildsee → Schottensee → Schwarzsee → Baschalvasee → Gaffia)
   start: Pizolhütte (top of Wangs gondola + chair lifts)
@@ -1810,6 +1940,18 @@ hikes:
   - cascata_di_foroglio
   sources:
   - https://en.wikipedia.org/wiki/Foroglio
+  name: Village walk from Foroglio parking
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 5
+  gain_m: 0
+  distance_km: 0.3
+  equipment_list: []
+  start: Foroglio village (Val Bavona)
+  transit:
+    bus: Postbus from Cevio to Val Bavona, San Carlo line
+  quickest_for:
+  - cascata_di_foroglio
 - id: mer_de_glace-montenvers-train
   name: Montenvers rack train + walk to ice cave
   start: Chamonix Montenvers train station
@@ -2080,8 +2222,6 @@ hikes:
   sources:
   - https://www.appenzell.ch/en/alpstein/hiking/hiking-tour-suggestions.html
   - https://www.alltrails.com/en-gb/trail/switzerland/outer-rhodes/schwende-berggasthaus-ascher-wildkirchli
-  quickest_for:
-  - ascher
 - id: barrhorn-from-st-niklaus-via-topalihuette
   visits:
   - barrhorn
@@ -2377,8 +2517,6 @@ hikes:
   - https://www.viaberna.ch/en/stages/first-rosenlaui
   cable_car_ids:
   - firstbahn
-  quickest_for:
-  - rosenlaui_public_waterfall
 - id: salanfe_lake-from-mex-via-col-du-jorat
   visits:
   - salanfe_lake
@@ -2580,8 +2718,6 @@ hikes:
   sources:
   - https://www.ascona-locarno.com/en/hike/details/Val-Bavona-Foroglio-San-Carlo/67018087
   - https://www.ticino.ch/en/commons/details/From-Bignasco-to-Foroglio-A-waterfall-full-of-emotions/42469.html
-  quickest_for:
-  - cascata_di_foroglio
 - id: dent_de_broc-from-motelon
   visits:
   - dent_de_broc
@@ -2661,8 +2797,6 @@ hikes:
   - https://www.travelhackergirl.com/gelmersee-hike-how-to-visit-the-lake-for-free/
   hut_ids:
   - gelmerhutte
-  quickest_for:
-  - gelmersee
 - id: grappelensee-from-alt-st-johann
   visits:
   - grappelensee
@@ -2741,8 +2875,6 @@ hikes:
   sources:
   - https://www.alpesvaudoises.ch/en/V1390/from-solalex-to-derborence
   - https://www.lescoteauxdusoleil.ch/fr/derborence-cheville-anzeindaz-anzeinde-solalex-1176.html
-  quickest_for:
-  - lac_de_derborence
 - id: marchairuz-from-saint-cergue
   visits:
   - marchairuz
@@ -2806,8 +2938,6 @@ hikes:
   - https://www.moonhoneytravel.com/gornergrat-hike-zermatt/
   cable_car_ids:
   - gornergrat-bahn
-  quickest_for:
-  - riffelsee
 - id: rosenlauifall-from-grosse-scheidegg
   visits:
   - rosenlauifall
@@ -2827,8 +2957,6 @@ hikes:
   sources:
   - https://wegwandern.ch/wanderung/wanderung-rosenlaui-gletscherschlucht-schwarzwaldalp-grosse-scheidegg-wandern/
   - https://www.interlaken.ch/en/experiences/tour/rosenlauital-von-der-schwarzwaldalp-zum-reichenbachfall
-  quickest_for:
-  - rosenlauifall
 - id: saxer_lucke-from-brulisau-via-bollenwees
   visits:
   - saxer_lucke
@@ -2889,8 +3017,6 @@ hikes:
     mountain path. Alternative to the funicular and the Morschach cable car.
   sources:
   - https://swissholidaypark.ch/en/activities/surroundings/stoos
-  quickest_for:
-  - stoos_kapelle
 - id: triftbrucke-from-nessental-via-erggeli
   visits:
   - triftbrucke
@@ -3084,8 +3210,6 @@ hikes:
   - https://schweizmobil.ch/de/wanderland/route-360/etappe-1
   - https://www.brienzersee.ch/reiseziele/brienzersee/boenigen-iseltwald
   - https://www.myswitzerland.com/en-us/experiences/route/brienzersee-drei-wasserfaelleweg-360_01/
-  quickest_for:
-  - iseltwald
 - id: lac_de_taney-from-st-gingolph-via-col-de-la-croix
   visits:
   - lac_de_taney
@@ -3186,8 +3310,6 @@ hikes:
   - https://wegwandern.ch/wanderung/wanderung-rosenlaui-gletscherschlucht-schwarzwaldalp-grosse-scheidegg-wandern/
   cable_car_ids:
   - firstbahn
-  quickest_for:
-  - rosenlaui
 - id: saas_fee_glacier-britanniahuette-from-kreuzboden
   visits:
   - saas_fee_glacier
