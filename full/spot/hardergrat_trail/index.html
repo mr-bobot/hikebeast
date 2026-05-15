@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778768661062" />
+<link rel="stylesheet" href="../../preview.css?v=1778833764055" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -102,26 +102,15 @@
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
     <span class="value">T4<span class="unit">· Very long, exposed</span></span>
-    <span class="label">Difficulty</span>
-  </div>
-    <div class="hb-stats-cell">
-    <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-    <span class="value">12h</span>
-    <span class="label">Duration</span>
-  </div>
-    <div class="hb-stats-cell">
-    <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg></span>
-    <span class="value">2000<span class="unit">m</span></span>
-    <span class="label">Elevation gain</span>
+    <span class="label">Accessibility</span>
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M14 19c0-2 2-3 4-3s3 1 3 3"/></svg></span>
-    <span class="value"><span class="missing">—</span></span>
+    <span class="value"><span class="hb-busy"><span class="on"></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span></span></span>
     <span class="label">Crowdedness</span>
   </div>
   </div>
-    <p class="hb-chips-caption">Stats reflect the quickest route</p>
-    <p class="hb-section-h">How to get there</p><p class="hb-access-summary">Take the cable car up to the Brienzer Rothorn (either from Brienz or from Sörenberg) and start the hike there. It ends at Harder Kulm above Interlaken.</p>
+    
     <p class="hb-section-h">Routes</p>
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/hardergrat_trail_p0/w1800.webp" alt="" loading="lazy" /></div>
@@ -168,10 +157,34 @@
       <h3 class="hb-rd-name"><span data-rd-name>—</span></h3>
     </div>
     <p class="hb-spot-description" data-rd-description hidden></p>
+    <div class="hb-stats-bar">
+    <div class="hb-stats-cell">
+    <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 20l5-9 4 6 3-4 6 7"/></svg></span>
+    <span class="value">2,230<span class="unit">m</span></span>
+    <span class="label">Elevation</span>
+  </div>
+    <div class="hb-stats-cell">
+    <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
+    <span class="value"><span data-rd-sac>T4</span><span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>Very long, exposed</span></span></span>
+    <span class="label">Difficulty</span>
+  </div>
+    <div class="hb-stats-cell">
+    <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+    <span class="value"><span data-rd-dur>12h</span><span class="unit" data-rd-dur-unit></span></span>
+    <span class="label">Duration</span>
+  </div>
+    <div class="hb-stats-cell">
+    <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg></span>
+    <span class="value"><span data-rd-gain-v>2000</span><span class="unit">m</span></span>
+    <span class="label">Elevation gain</span>
+  </div>
+    <div class="hb-stats-cell">
+    <span class="icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M14 19c0-2 2-3 4-3s3 1 3 3"/></svg></span>
+    <span class="value"><span class="hb-busy"><span class="on"></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span></span></span>
+    <span class="label">Crowdedness</span>
+  </div>
+  </div>
     <div class="hb-detail-card"><div class="hb-detail-grid">
-      <div><span class="lbl">Difficulty</span><span class="val" data-rd-difficulty>—</span></div>
-      <div><span class="lbl">Time (one way)</span><span class="val" data-rd-time>—</span></div>
-      <div><span class="lbl">Elevation gain</span><span class="val" data-rd-gain>—</span></div>
       <div><span class="lbl">Equipment</span><span class="val" data-rd-equipment>—</span></div>
       <div><span class="lbl">Start</span><span class="val" data-rd-start>—</span></div>
       <div><span class="lbl">Transit</span><span class="val" data-rd-transit>—</span></div>
@@ -284,10 +297,58 @@
       descEl.setAttribute('hidden', '');
     }
 
-    setText('[data-rd-difficulty]',
-      r.sac_grade ? (r.sac_grade + (r.effort_label ? (' · ' + r.effort_label) : '')) : '—');
-    setText('[data-rd-time]', fmtDuration(r.duration_min) || '—');
-    setText('[data-rd-gain]', r.gain_m ? (r.gain_m + ' m') : '—');
+    // SAC grade cell: separate spans for the grade vs. the optional "· Label"
+    // suffix so the JS can populate them independently. setText handles the
+    // missing case by clearing the cell.
+    const sacEl       = back.querySelector('[data-rd-sac]');
+    const sacSepEl    = back.querySelector('[data-rd-sac-sep]');
+    const sacLabelEl  = back.querySelector('[data-rd-sac-label]');
+    if (sacEl) {
+      if (r.sac_grade) {
+        sacEl.textContent = r.sac_grade;
+        sacEl.classList.remove('missing');
+        if (r.effort_label && sacLabelEl) {
+          sacLabelEl.textContent = r.effort_label;
+          if (sacSepEl) sacSepEl.textContent = '·';
+        } else if (sacLabelEl) {
+          sacLabelEl.textContent = '';
+          if (sacSepEl) sacSepEl.textContent = '';
+        }
+      } else {
+        sacEl.textContent = '—';
+        sacEl.classList.add('missing');
+        if (sacLabelEl) sacLabelEl.textContent = '';
+        if (sacSepEl) sacSepEl.textContent = '';
+      }
+    }
+
+    // Duration cell: split value + unit so units stay subtle.
+    const durEl     = back.querySelector('[data-rd-dur]');
+    const durUnitEl = back.querySelector('[data-rd-dur-unit]');
+    if (durEl) {
+      const fd = fmtDuration(r.duration_min);
+      if (fd) {
+        durEl.textContent = fd.value;
+        durEl.classList.remove('missing');
+        if (durUnitEl) durUnitEl.textContent = fd.unit || '';
+      } else {
+        durEl.textContent = '—';
+        durEl.classList.add('missing');
+        if (durUnitEl) durUnitEl.textContent = '';
+      }
+    }
+
+    // Elevation gain cell
+    const gainEl = back.querySelector('[data-rd-gain-v]');
+    if (gainEl) {
+      if (r.gain_m) {
+        gainEl.textContent = r.gain_m;
+        gainEl.classList.remove('missing');
+      } else {
+        gainEl.textContent = '—';
+        gainEl.classList.add('missing');
+      }
+    }
     // Prefer the concrete equipment_list (array of items). Fall back to the
     // legacy boolean for any hikes that haven't been migrated yet. Empty array
     // explicitly means "no gear needed", not unknown.

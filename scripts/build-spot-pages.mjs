@@ -233,15 +233,54 @@ function statCell(label, valueHtml, iconSvg) {
   </div>`;
 }
 
-function renderStatsBar(spot) {
+// Back-overview stats bar: 3 cells (Elevation, Accessibility, Crowdedness).
+// "Accessibility" surfaces the easiest grade across all the spot's hikes —
+// what's the gentlest way in. For drive-up-only spots it shows "Drive-up".
+function renderOverviewStatsBar(spot) {
   const tf = spot.trip_facts || {};
-  const r = (spot.routes && spot.routes[0]) || {};
-
   const elev = tf.elevation_m ? `${fmtThousands(tf.elevation_m)}<span class="unit">m</span>` : `<span class="missing">—</span>`;
-  const sac = r.sac_grade ? `${escapeHtml(r.sac_grade)}${r.effort_label ? `<span class="unit">· ${escapeHtml(r.effort_label)}</span>` : ""}` : `<span class="missing">—</span>`;
+
+  // Lowest sac_grade across the spot's routes. T-grades sort by their number;
+  // K-grades (via ferrata) fall behind T-grades since they imply gear.
+  let access = `<span class="missing">—</span>`;
+  if (Array.isArray(spot.routes) && spot.routes.length) {
+    const ranked = spot.routes
+      .filter(r => r.sac_grade)
+      .map(r => {
+        const g = String(r.sac_grade);
+        const t = g.startsWith("T") ? parseInt(g.slice(1), 10) || 9 : 99;
+        return { route: r, sort: t };
+      })
+      .sort((a, b) => a.sort - b.sort);
+    if (ranked.length) {
+      const easiest = ranked[0].route;
+      const label = easiest.effort_label || "";
+      access = `${escapeHtml(easiest.sac_grade)}${label ? `<span class="unit">· ${escapeHtml(label)}</span>` : ""}`;
+    }
+  } else if (hasAccessData(spot)) {
+    access = `Drive-up`;
+  }
+
+  return `<div class="hb-stats-bar">
+    ${statCell("Elevation", elev, ICON_ELEV)}
+    ${statCell("Accessibility", access, ICON_DIFF)}
+    ${statCell("Crowdedness", busyDotsHtml(tf.busyness), ICON_BUSY)}
+  </div>`;
+}
+
+// Per-route stats bar: 5 cells (Elevation, Difficulty, Duration, Gain,
+// Crowdedness). Elevation + Crowdedness are spot-level constants reused on
+// every route's detail view; Difficulty / Duration / Gain are route-specific.
+// Called server-side once with the first route as a placeholder; the JS in
+// flipScriptFor swaps the route-specific values per click.
+function renderRouteStatsBar(spot, route) {
+  const tf = spot.trip_facts || {};
+  const r = route || (spot.routes && spot.routes[0]) || {};
+  const elev = tf.elevation_m ? `${fmtThousands(tf.elevation_m)}<span class="unit">m</span>` : `<span class="missing">—</span>`;
+  const sac = r.sac_grade ? `<span data-rd-sac>${escapeHtml(r.sac_grade)}</span>${r.effort_label ? `<span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>${escapeHtml(r.effort_label)}</span></span>` : ""}` : `<span class="missing" data-rd-sac>—</span>`;
   const t = fmtDuration(r.duration_min);
-  const time = t ? `${t.value}${t.unit ? `<span class="unit">${t.unit}</span>` : ""}` : `<span class="missing">—</span>`;
-  const gain = r.gain_m ? `${r.gain_m}<span class="unit">m</span>` : `<span class="missing">—</span>`;
+  const time = t ? `<span data-rd-dur>${t.value}</span>${t.unit ? `<span class="unit" data-rd-dur-unit>${t.unit}</span>` : `<span class="unit" data-rd-dur-unit></span>`}` : `<span class="missing" data-rd-dur>—</span>`;
+  const gain = r.gain_m ? `<span data-rd-gain-v>${r.gain_m}</span><span class="unit">m</span>` : `<span class="missing" data-rd-gain-v>—</span>`;
 
   return `<div class="hb-stats-bar">
     ${statCell("Elevation", elev, ICON_ELEV)}
@@ -422,15 +461,19 @@ function renderAccessSection(spot) {
 }
 
 function renderBackOverview(spot) {
+  // The "How to get there" section is rendered ONLY for drive-up-only spots
+  // (no hikes). When the spot has hikes, the per-route details cover access,
+  // so a separate access paragraph would be redundant or contradictory.
+  const hasHikes = Array.isArray(spot.routes) && spot.routes.length > 0;
+  const arrivalSection = !hasHikes ? renderAccessSection(spot) : "";
   return `<div class="hb-flip-back-view hb-flip-back-view-overview">
     <div class="hb-back-topbar">
       <button type="button" class="hb-back-flip-back" data-action="flip-front">${ARROW_LEFT_SVG}Back to photo</button>
       <p class="hb-back-title">Planning · <b>${escapeHtml(spot.title)}</b></p>
     </div>
     ${renderLinksRow(spot)}
-    ${renderStatsBar(spot)}
-    ${spot.routes && spot.routes.length ? `<p class="hb-chips-caption">Stats reflect the quickest route</p>` : ""}
-    ${renderAccessSection(spot)}
+    ${renderOverviewStatsBar(spot)}
+    ${arrivalSection}
     ${renderRoutesList(spot)}
     ${renderWildcampingNote(spot)}
   </div>`;
@@ -440,6 +483,11 @@ function renderRouteDetailView(spot) {
   // Placeholder route detail. JS swaps the content per-route at runtime.
   // The hut / cable-car / description slots only appear when the active
   // route carries that data — the JS hides empty ones.
+  //
+  // The 5-cell stats bar reuses the overview bar's design (same .hb-stats-bar
+  // class), populated per-route. Elevation + Crowdedness are spot-level
+  // constants so they stay static; Difficulty / Duration / Gain change per
+  // route via the data-rd-* hooks.
   return `<div class="hb-flip-back-view hb-flip-back-view-route">
     <div class="hb-back-topbar">
       <button type="button" class="hb-back-route-btn" data-action="flip-overview">${ARROW_LEFT_SVG}Routes</button>
@@ -450,10 +498,8 @@ function renderRouteDetailView(spot) {
       <h3 class="hb-rd-name"><span data-rd-name>—</span></h3>
     </div>
     <p class="hb-spot-description" data-rd-description hidden></p>
+    ${renderRouteStatsBar(spot)}
     <div class="hb-detail-card"><div class="hb-detail-grid">
-      <div><span class="lbl">Difficulty</span><span class="val" data-rd-difficulty>—</span></div>
-      <div><span class="lbl">Time (one way)</span><span class="val" data-rd-time>—</span></div>
-      <div><span class="lbl">Elevation gain</span><span class="val" data-rd-gain>—</span></div>
       <div><span class="lbl">Equipment</span><span class="val" data-rd-equipment>—</span></div>
       <div><span class="lbl">Start</span><span class="val" data-rd-start>—</span></div>
       <div><span class="lbl">Transit</span><span class="val" data-rd-transit>—</span></div>
@@ -617,10 +663,58 @@ function flipScriptFor(spot) {
       descEl.setAttribute('hidden', '');
     }
 
-    setText('[data-rd-difficulty]',
-      r.sac_grade ? (r.sac_grade + (r.effort_label ? (' · ' + r.effort_label) : '')) : '—');
-    setText('[data-rd-time]', fmtDuration(r.duration_min) || '—');
-    setText('[data-rd-gain]', r.gain_m ? (r.gain_m + ' m') : '—');
+    // SAC grade cell: separate spans for the grade vs. the optional "· Label"
+    // suffix so the JS can populate them independently. setText handles the
+    // missing case by clearing the cell.
+    const sacEl       = back.querySelector('[data-rd-sac]');
+    const sacSepEl    = back.querySelector('[data-rd-sac-sep]');
+    const sacLabelEl  = back.querySelector('[data-rd-sac-label]');
+    if (sacEl) {
+      if (r.sac_grade) {
+        sacEl.textContent = r.sac_grade;
+        sacEl.classList.remove('missing');
+        if (r.effort_label && sacLabelEl) {
+          sacLabelEl.textContent = r.effort_label;
+          if (sacSepEl) sacSepEl.textContent = '·';
+        } else if (sacLabelEl) {
+          sacLabelEl.textContent = '';
+          if (sacSepEl) sacSepEl.textContent = '';
+        }
+      } else {
+        sacEl.textContent = '—';
+        sacEl.classList.add('missing');
+        if (sacLabelEl) sacLabelEl.textContent = '';
+        if (sacSepEl) sacSepEl.textContent = '';
+      }
+    }
+
+    // Duration cell: split value + unit so units stay subtle.
+    const durEl     = back.querySelector('[data-rd-dur]');
+    const durUnitEl = back.querySelector('[data-rd-dur-unit]');
+    if (durEl) {
+      const fd = fmtDuration(r.duration_min);
+      if (fd) {
+        durEl.textContent = fd.value;
+        durEl.classList.remove('missing');
+        if (durUnitEl) durUnitEl.textContent = fd.unit || '';
+      } else {
+        durEl.textContent = '—';
+        durEl.classList.add('missing');
+        if (durUnitEl) durUnitEl.textContent = '';
+      }
+    }
+
+    // Elevation gain cell
+    const gainEl = back.querySelector('[data-rd-gain-v]');
+    if (gainEl) {
+      if (r.gain_m) {
+        gainEl.textContent = r.gain_m;
+        gainEl.classList.remove('missing');
+      } else {
+        gainEl.textContent = '—';
+        gainEl.classList.add('missing');
+      }
+    }
     // Prefer the concrete equipment_list (array of items). Fall back to the
     // legacy boolean for any hikes that haven't been migrated yet. Empty array
     // explicitly means "no gear needed", not unknown.

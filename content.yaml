@@ -205,12 +205,13 @@ spots:
     lat: 46.4539395
     lng: 7.5607365
   trip_facts:
-    busyness: 5
+    busyness: 2
     best_season: April - July
     elevation_m: 1450
   hike_ids:
-  - engstligen_falls-route-48
+  - engstligen_falls-lower-viewpoint
   - engstligen_falls-from-above-via-cable-car
+  - engstligen_falls-side-trail-to-plateau
   access_long: Take the cable car from Adelboden Unter dem Birg up to the Engstligenalp plateau, or walk up the side trail in about 1h 10. The main viewing area for the lower fall is
     a 20-minute walk from Unter dem Birg. Overcast days work best, direct sun blows out the white of the water.
 - id: oltschibachfall
@@ -246,6 +247,7 @@ spots:
   trip_facts:
     elevation_m: 1100
     best_season: May – October
+    busyness: 1
   hike_ids:
   - oltschibachfall-from-meiringen
   - oltschibachfall-from-unterbach
@@ -283,7 +285,7 @@ spots:
     lat: 46.6795746
     lng: 8.1548593
   trip_facts:
-    busyness: 1
+    busyness: 5
     best_season: June - October
     elevation_m: 1330
   hike_ids:
@@ -322,7 +324,7 @@ spots:
     lat: 46.6795746
     lng: 8.1548593
   trip_facts:
-    busyness: 1
+    busyness: 5
     best_season: June - October
     elevation_m: 1330
   hike_ids:
@@ -359,7 +361,7 @@ spots:
     lat: 46.6800759
     lng: 8.1509677
   trip_facts:
-    busyness: 1
+    busyness: 5
     best_season: June - October
     elevation_m: 1330
   hike_ids:
@@ -396,7 +398,7 @@ spots:
     lng: 8.357416
   trip_facts:
     elevation_m: 1739
-    busyness: 5
+    busyness: 4
     best_season: June 1 - Sept 29
   hike_ids:
   - triftbrucke-route-40
@@ -426,7 +428,7 @@ spots:
     lng: 8.3591
   trip_facts:
     elevation_m: 1739
-    busyness: 5
+    busyness: 4
     best_season: June 1 - Sept 29
   hike_ids:
   - triftsee-route-40
@@ -472,7 +474,7 @@ spots:
     lng: 8.3302012
   trip_facts:
     elevation_m: 1850
-    busyness: 5
+    busyness: 4
     best_season: June - October
   hike_ids:
   - gelmersee-default
@@ -502,7 +504,7 @@ spots:
     lat: 46.6136385
     lng: 8.3085363
   trip_facts:
-    busyness: 5
+    busyness: 4
     best_season: June - October
     elevation_m: 1378
   arrival:
@@ -561,6 +563,7 @@ spots:
   access_long: If you are visiting Gelmersee, this valley makes a great place to spend the night nearby. Thirty minutes to the funicular in the morning.
   trip_facts:
     elevation_m: 1057
+    busyness: 2
 - id: aare_gorge
   chapter: central
   kicker: GORGES
@@ -612,6 +615,7 @@ spots:
   access_long: There is an entrance fee, so check the opening hours before you go. It can get crowded, which makes it tricky to take clean shots without people in them.
   trip_facts:
     elevation_m: 650
+    busyness: 4
 - id: brienzer_rothorn
   chapter: central
   kicker: SUMMITS
@@ -647,7 +651,7 @@ spots:
     lng: 8.04701
   trip_facts:
     elevation_m: 2262
-    busyness: 5
+    busyness: 4
     best_season: June - October
   hike_ids:
   - brienzer_rothorn-default
@@ -696,6 +700,7 @@ spots:
   trip_facts:
     elevation_m: 2230
     best_season: Late June – October
+    busyness: 2
   hike_ids:
   - hardergrat_trail-harder-to-rothorn
   - hardergrat_trail-augstmatthorn-from-lombachalp
@@ -734,6 +739,7 @@ spots:
   trip_facts:
     elevation_m: 2221
     best_season: July – early October
+    busyness: 2
   hike_ids:
   - tannhorn-brienzergrat-segment
   - hardergrat_trail-harder-to-rothorn
@@ -778,7 +784,7 @@ spots:
     lng: 7.9286089
   trip_facts:
     elevation_m: 2136
-    busyness: 2
+    busyness: 4
     best_season: June - October
   hike_ids:
   - augstmatthorn-route-85
@@ -824,6 +830,7 @@ spots:
     view, Brunnen for the Rütli angle. If you only have time for one, take the cable car up Fronalpstock on a clear winter morning for the full length of the lake.'
   trip_facts:
     elevation_m: 434
+    busyness: 4
 - id: fronalpstock
   chapter: central
   kicker: VIEWPOINTS
@@ -908,6 +915,7 @@ spots:
     fast, so pick a clear window.
   trip_facts:
     elevation_m: 1920
+    busyness: 2
 - id: fulberg_spread
   chapter: central
   kind: spread
@@ -952,6 +960,7 @@ spots:
   trip_facts:
     elevation_m: 1584
     best_season: Late June – October
+    busyness: 2
   hike_ids:
   - iffigfalle-lenk-to-iffigenalp
   - iffigfalle-from-lauenen-via-tungelpass
@@ -1009,6 +1018,7 @@ spots:
   trip_facts:
     elevation_m: 2092
     best_season: July – October
+    busyness: 2
   hike_ids:
   - schrattenfluh-schratteflue-crossing
   - schrattenfluh-from-hirsegg
@@ -1054,6 +1064,7 @@ spots:
   trip_facts:
     elevation_m: 1904
     best_season: Late June – October
+    busyness: 1
   hike_ids:
   - heftihutte-from-hirsegg
   - heftihutte-from-fluehli
@@ -1151,6 +1162,7 @@ spots:
     the window, late afternoon catches the Eiger north face after the village goes into shadow.
   trip_facts:
     elevation_m: 1034
+    busyness: 4
 - id: iseltwald
   chapter: central
   kicker: VILLAGES
@@ -1245,6 +1257,7 @@ spots:
     frame.
   trip_facts:
     elevation_m: 1150
+    busyness: 3
 - id: oeschinensee
   chapter: central
   kicker: LAKES
@@ -1301,6 +1314,7 @@ spots:
   trip_facts:
     elevation_m: 1578
     best_season: Late May – October
+    busyness: 5
   hike_ids:
   - oeschinensee-kandersteg-foot
   - oeschinensee-cable-car
@@ -1346,6 +1360,7 @@ spots:
   trip_facts:
     elevation_m: 2970
     best_season: Late June – October
+    busyness: 5
   hike_ids:
   - piz_gloria-cable-car-to-summit
   - piz_gloria-gimmelwald-on-foot
@@ -1404,6 +1419,7 @@ spots:
     the village shots before the tour buses arrive at 9, late afternoon catches the Staubbach in side-light.
   trip_facts:
     elevation_m: 795
+    busyness: 5
 - id: central_extras
   chapter: central
   kind: extras
@@ -1530,6 +1546,7 @@ spots:
   access_long: A few minutes outside the village, you can line up the Matterhorn and the lit chalets in the same composition. That is the one that goes viral.
   trip_facts:
     elevation_m: 1620
+    busyness: 5
 - id: riffelalp
   chapter: valais
   kicker: VIEWPOINTS
@@ -1561,6 +1578,7 @@ spots:
   trip_facts:
     elevation_m: 2222
     best_season: Late June – October
+    busyness: 4
   hike_ids:
   - riffelalp-easy-round-trip
   - riffelalp-findeln-loop
@@ -1602,6 +1620,7 @@ spots:
   trip_facts:
     elevation_m: 3089
     best_season: June – October
+    busyness: 4
   hike_ids:
   - gorner_glacier-gornergrat-railway
   - gorner_glacier-path-of-silence
@@ -1641,6 +1660,7 @@ spots:
     winter when the restaurant is closed.
   trip_facts:
     elevation_m: 1867
+    busyness: 3
 - id: aletsch_glacier
   chapter: valais
   kicker: SWITZERLAND'S LARGEST, FOR NOW
@@ -1688,6 +1708,7 @@ spots:
   trip_facts:
     elevation_m: 2869
     best_season: Late June – October
+    busyness: 4
   hike_ids:
   - aletsch_glacier-eggishorn-circular
   - aletsch_glacier-bettmerhorn-eggishorn-ridge
@@ -1729,6 +1750,7 @@ spots:
   trip_facts:
     elevation_m: 2050
     best_season: Late June – Late September
+    busyness: 1
   hike_ids:
   - arolla_ice_cave-arolla-glacier-trail
   - arolla_ice_cave-arolla-pas-de-chevres
@@ -1769,6 +1791,7 @@ spots:
   trip_facts:
     elevation_m: 2985
     best_season: Late June – Late September
+    busyness: 2
   hike_ids:
   - cabane_becs_de_bosson-from-bendolla
   - cabane_becs_de_bosson-from-grimentz-via-roc-orzival
@@ -1821,6 +1844,7 @@ spots:
   trip_facts:
     elevation_m: 2826
     best_season: Late June – Late September
+    busyness: 2
   hike_ids:
   - moiry_glacier-bus-to-moiry-barrage
   - moiry_glacier-from-grimentz-on-foot
@@ -1885,6 +1909,7 @@ spots:
     at Médran is 15 CHF a day. The cave is a deep-winter spot, never go after warm days, never alone. Bring crampons or microspikes, headlamp, and a tripod, it is darker than it looks.
   trip_facts:
     elevation_m: 2150
+    busyness: 1
 - id: ferpecle_glacier
   chapter: valais
   kicker: A GLACIER YOU CAN STILL REACH ON FOOT
@@ -1918,6 +1943,7 @@ spots:
   trip_facts:
     elevation_m: 1900
     best_season: Late June – Late September
+    busyness: 2
   hike_ids:
   - ferpecle_glacier-easy-glacier-trail
   - ferpecle_glacier-les-salays-to-bricola
@@ -1955,6 +1981,7 @@ spots:
     the gravel bed. Shoot top-down between 10 and 14:00 for the cleanest separation between water and stone.
   trip_facts:
     elevation_m: 1770
+    busyness: 2
 - id: spielboden
   chapter: valais
   kicker: THE EASIEST MARMOTS IN SWITZERLAND
@@ -1988,6 +2015,7 @@ spots:
   trip_facts:
     elevation_m: 2452
     best_season: Late June – Late September
+    busyness: 4
   hike_ids:
   - spielboden-laengfluh-glacier-trail
   - spielboden-ascent-from-saas-fee-village
@@ -2033,6 +2061,7 @@ spots:
   access_long: A quick half-hour detour if you are driving through the Goms on your way to or from Grimsel. Easy walk, solid views, and fewer crowds than the famous Randa bridge.
   trip_facts:
     elevation_m: 1080
+    busyness: 3
 - id: randa_bridge
   chapter: valais
   kicker: BRIDGES
@@ -2075,6 +2104,7 @@ spots:
     swings more than you might expect, but it's not technical, just commitment.
   trip_facts:
     elevation_m: 2080
+    busyness: 4
 - id: barrhorn
   chapter: valais
   kicker: SUMMITS
@@ -2102,6 +2132,7 @@ spots:
   trip_facts:
     elevation_m: 3610
     best_season: July – early September
+    busyness: 1
   hike_ids:
   - barrhorn-from-turtmannhuette
   - barrhorn-from-st-niklaus-via-topalihuette
@@ -2139,6 +2170,7 @@ spots:
   trip_facts:
     elevation_m: 3030
     best_season: July – mid-September
+    busyness: 3
   hike_ids:
   - saas_fee_glacier-glacier-trail-felskinn
   - saas_fee_glacier-britanniahuette-from-kreuzboden
@@ -2174,7 +2206,7 @@ spots:
     lng: 7.2172313
   trip_facts:
     elevation_m: 1449
-    busyness: 4
+    busyness: 3
     best_season: Late October
   hike_ids:
   - lac_de_derborence-default
@@ -2242,6 +2274,7 @@ spots:
   trip_facts:
     elevation_m: 1610
     best_season: Late June – Late September
+    busyness: 2
   hike_ids:
   - la_fouly-tmb-arnuva-la-fouly
   - la_fouly-tmb-champex-to-la-fouly
@@ -2282,6 +2315,7 @@ spots:
   trip_facts:
     elevation_m: 2252
     best_season: June – October
+    busyness: 2
   hike_ids:
   - sanetschpass-from-gsteig-on-foot
   - sanetschpass-cable-car-shortcut
@@ -2326,6 +2360,7 @@ spots:
     The walkways zigzag up the falls, giving you angles you cannot get any other way.
   trip_facts:
     elevation_m: 613
+    busyness: 3
 - id: gorges_du_dailley
   chapter: valais
   kicker: NARROWER, OLDER, LESS KNOWN
@@ -2368,6 +2403,7 @@ spots:
     the light filters down through the canopy. In heavy rain the spray gets intense, so protect the camera.
   trip_facts:
     elevation_m: 1066
+    busyness: 2
 - id: nax_via_ferrata
   chapter: valais
   kicker: A SHORT VERTICAL WITH BIG CONSEQUENCE
@@ -2402,6 +2438,7 @@ spots:
   trip_facts:
     elevation_m: 1220
     best_season: Late May – October
+    busyness: 2
   hike_ids:
   - nax_via_ferrata-belvedere-via-ferrata
   access_long: Park at 46.200456, 7.031477 and walk to the route start. You need a full via ferrata kit (harness, Y-lanyard with energy absorber, helmet, gloves) and some climbing experience.
@@ -2437,6 +2474,7 @@ spots:
   trip_facts:
     elevation_m: 1500
     best_season: Late May – October
+    busyness: 3
   hike_ids:
   - crans_montana-bisse-du-ro
   - crans_montana-plaine-morte-glacier
@@ -2481,7 +2519,7 @@ spots:
     lng: 7.4301043
   trip_facts:
     elevation_m: 1778
-    busyness: 4
+    busyness: 3
     best_season: June - October
   hike_ids:
   - tseuzier_lake-route-23
@@ -2521,6 +2559,7 @@ spots:
   trip_facts:
     elevation_m: 1909
     best_season: Late June – October
+    busyness: 3
   hike_ids:
   - salanfe_lake-from-van-d-en-haut
   - salanfe_lake-from-mex-via-col-du-jorat
@@ -2569,6 +2608,7 @@ spots:
     In spring, the frozen pines melt fast, sometimes in twenty minutes, so set up before first light.
   trip_facts:
     elevation_m: 1500
+    busyness: 2
 - id: pointe_du_tsate
   chapter: valais
   kicker: SUMMITS
@@ -2595,6 +2635,7 @@ spots:
   trip_facts:
     elevation_m: 3078
     best_season: Late June – September
+    busyness: 1
   hike_ids:
   - pointe_du_tsate-from-la-forclaz
   - pointe_du_tsate-from-moiry-via-col-du-tsate
@@ -2677,6 +2718,7 @@ spots:
   trip_facts:
     elevation_m: 1935
     best_season: June – October
+    busyness: 3
   hike_ids:
   - gastlosen-gastlosen-circular
   - gastlosen-from-musersbergli
@@ -2714,6 +2756,7 @@ spots:
     the sky goes deep indigo and the warm lamps on the restaurant pick up.
   trip_facts:
     elevation_m: 1656
+    busyness: 2
 - id: la_tine_canyon
   chapter: fribourg
   kicker: GO WITH A GUIDE THE FIRST TIME
@@ -2741,6 +2784,7 @@ spots:
     in blind. Book a first trip with Gruyère Escapade canyoning to learn the terrain, then come back on your own. The canyon is shaded most of the day, bring a tripod.
   trip_facts:
     elevation_m: 870
+    busyness: 2
 - id: dent_de_broc
   chapter: fribourg
   kicker: A DISTANT PEAK, A LONG LENS
@@ -2781,6 +2825,7 @@ spots:
   trip_facts:
     elevation_m: 1829
     best_season: Late May – October
+    busyness: 3
   hike_ids:
   - dent_de_broc-from-broc
   - dent_de_broc-from-motelon
@@ -2822,6 +2867,7 @@ spots:
   trip_facts:
     elevation_m: 2583
     best_season: Mid-June – October
+    busyness: 4
   hike_ids:
   - schwarzsee-cable-car
   - schwarzsee-from-furi-via-stafelalp
@@ -2867,6 +2913,7 @@ spots:
   trip_facts:
     elevation_m: 2014
     best_season: June – October
+    busyness: 2
   hike_ids:
   - dent_de_lys-les-paccots-circular
   - dent_de_lys-from-les-sciernes-dalbeuve
@@ -2911,6 +2958,7 @@ spots:
   trip_facts:
     elevation_m: 2002
     best_season: Late May – October
+    busyness: 4
   hike_ids:
   - moleson-plan-francey-summit
   - moleson-from-moleson-village
@@ -2953,6 +3001,7 @@ spots:
   trip_facts:
     elevation_m: 1909
     best_season: Late May – October
+    busyness: 2
   hike_ids:
   - teysachaux-les-paccots-to-moleson
   - teysachaux-loop-from-plan-francey
@@ -2999,6 +3048,7 @@ spots:
   trip_facts:
     elevation_m: 1941
     best_season: Late May – October
+    busyness: 2
   hike_ids:
   - cap_au_moine-from-allieres
   - cap_au_moine-from-les-avants-via-col-de-jaman
@@ -3042,7 +3092,7 @@ spots:
     lng: 6.9748
   trip_facts:
     elevation_m: 1875
-    busyness: 3
+    busyness: 4
     best_season: Mid June - October
   hike_ids:
   - dent_de_jaman-route-87
@@ -3081,6 +3131,7 @@ spots:
     and flown down into the gorge. Cloudy or rainy days in late spring and summer are best, the ferns go neon green and the diffused light keeps the highlights manageable.
   trip_facts:
     elevation_m: 460
+    busyness: 2
 - id: pisse_chevre
   chapter: western
   kicker: A REMOTE VAUD WATERFALL
@@ -3111,6 +3162,7 @@ spots:
     Go at the end of summer after a rainy week, or in April or May when the snow is coming off fast.
   trip_facts:
     elevation_m: 1100
+    busyness: 1
 - id: route_de_morcles
   chapter: western
   kicker: LEADING LINES ABOVE THE RHÔNE
@@ -3140,6 +3192,7 @@ spots:
   access_long: Overcast days flatter this one. Strong sun kills the mood. If you're driving up to Pisse-Chèvre anyway, take an extra hour and shoot this on the way.
   trip_facts:
     elevation_m: 1100
+    busyness: 2
 - id: creux_du_van
   chapter: western
   kicker: HUGE CLIFFS IN THE JURA
@@ -3195,6 +3248,7 @@ spots:
   trip_facts:
     elevation_m: 1465
     best_season: May – October
+    busyness: 4
   hike_ids:
   - creux_du_van-noiraigue-14-bends
   - creux_du_van-from-le-soliat
@@ -3229,6 +3283,7 @@ spots:
   access_long: Park at 46.654948, 6.492129 and hike down. It's short and easy, good for families, and rarely busy.
   trip_facts:
     elevation_m: 500
+    busyness: 2
 - id: lac_de_taney
   chapter: western
   kicker: AN ALPINE LAKE ABOVE LÉMAN
@@ -3345,6 +3400,7 @@ spots:
     before any big jump. Afternoon is when the sun hits the water right.
   trip_facts:
     elevation_m: 377
+    busyness: 3
 - id: marchairuz
   chapter: western
   kicker: WINTER WONDERLAND IN THE JURA
@@ -3379,6 +3435,7 @@ spots:
   trip_facts:
     elevation_m: 1679
     best_season: May – October
+    busyness: 2
   hike_ids:
   - marchairuz-mollendruz-mont-tendre-marchairuz
   - marchairuz-from-saint-cergue
@@ -3415,6 +3472,7 @@ spots:
   trip_facts:
     elevation_m: 2002
     best_season: Late June – Late September
+    busyness: 2
   hike_ids:
   - geltenschuss-lauenensee-geltenhuette
   - geltenschuss-from-iffigenalp-via-wildhornhuette
@@ -3450,6 +3508,7 @@ spots:
   trip_facts:
     elevation_m: 600
     best_season: April – October (vintage in September)
+    busyness: 4
   hike_ids:
   - lavaux_vineyards-terrasses-de-lavaux
   - lavaux_vineyards-from-chexbres-via-dezaley
@@ -3498,6 +3557,7 @@ spots:
     or sunset alpenglow over the moorland lake.
   trip_facts:
     elevation_m: 998
+    busyness: 3
 - id: le_doubs
   chapter: western
   kicker: RIVERS
@@ -3528,6 +3588,7 @@ spots:
     catch the sunset when the canyon walls glow.
   trip_facts:
     elevation_m: 830
+    busyness: 2
 - id: western_extras
   chapter: western
   kind: extras
@@ -3583,7 +3644,7 @@ spots:
     lng: 9.39133
   trip_facts:
     elevation_m: 1910
-    busyness: 5
+    busyness: 4
     best_season: Late May - Mid October
   hike_ids:
   - schafler-route-42
@@ -3765,6 +3826,7 @@ spots:
   trip_facts:
     elevation_m: 1858
     best_season: Late June – Late September
+    busyness: 3
   hike_ids:
   - limmernsee-tierfehd-cable-car
   - limmernsee-linthal-on-foot
@@ -3804,6 +3866,7 @@ spots:
   trip_facts:
     elevation_m: 2501
     best_season: Late June – Late September
+    busyness: 2
   hike_ids:
   - muttseehutte-from-tierfehd-cable-car
   access_long: Same approach as Limmernsee. Cable car, tunnel, then climb. Book the hut in advance (muttseehuette.ch, or call). It fills up fast in peak season.
@@ -3890,6 +3953,7 @@ spots:
   trip_facts:
     elevation_m: 1948
     best_season: June – October
+    busyness: 3
   hike_ids:
   - klausenpass-urnerboden-to-altdorf
   - klausenpass-schaechentaler-hoehenweg
@@ -3961,6 +4025,7 @@ spots:
   trip_facts:
     elevation_m: 1372
     best_season: May – October
+    busyness: 2
   hike_ids:
   - urnerboden-panorama-walk
   - urnerboden-clariden-hoehenweg
@@ -4002,6 +4067,7 @@ spots:
   trip_facts:
     elevation_m: 1857
     best_season: Late June – Late September
+    busyness: 1
   hike_ids:
   - ice_lake_griesslisee-kloental-via-chaeseren
   - ice_lake_griesslisee-from-klausenpass
@@ -4046,6 +4112,7 @@ spots:
   trip_facts:
     elevation_m: 1340
     best_season: June – October
+    busyness: 2
   hike_ids:
   - gigerwaldsee-calfeisental-round
   - gigerwaldsee-st-martin-to-sardona
@@ -4139,6 +4206,7 @@ spots:
   trip_facts:
     elevation_m: 700
     best_season: May – October
+    busyness: 3
   hike_ids:
   - ruinaulta-versam-circular
   - ruinaulta-flims-out-and-back
@@ -4181,6 +4249,7 @@ spots:
   trip_facts:
     elevation_m: 920
     best_season: May – October
+    busyness: 4
   hike_ids:
   - crestasee-four-lakes-hike
   - crestasee-short-staderas-conn
@@ -4221,7 +4290,7 @@ spots:
     lng: 8.9596699
   trip_facts:
     elevation_m: 848
-    busyness: 5
+    busyness: 4
     best_season: April - October
   hike_ids:
   - klontalersee-default
@@ -4272,7 +4341,7 @@ spots:
     lng: 8.6645989
   trip_facts:
     elevation_m: 1305
-    busyness: 2
+    busyness: 3
     best_season: June - October
   hike_ids:
   - stoos_kapelle-route-35
@@ -4316,6 +4385,7 @@ spots:
   trip_facts:
     elevation_m: 2507
     best_season: Late June – Early October
+    busyness: 4
   hike_ids:
   - pizol-5-lakes-hike
   - pizol-from-bad-ragaz-bettlerweg
@@ -4361,7 +4431,7 @@ spots:
     lng: 9.97241
   trip_facts:
     elevation_m: 2218
-    busyness: 2
+    busyness: 3
     best_season: Late June - October
   hike_ids:
   - joriseen-route-126
@@ -4407,7 +4477,7 @@ spots:
     lng: 9.4173218
   trip_facts:
     elevation_m: 1471
-    busyness: 4
+    busyness: 3
     best_season: May - October
   hike_ids:
   - falensee-route-69
@@ -4492,6 +4562,7 @@ spots:
   trip_facts:
     elevation_m: 1896
     best_season: Late May – October
+    busyness: 4
   hike_ids:
   - morteratsch_glacier-aussichtsweg-glacier-trail
   - morteratsch_glacier-short-glacier-tongue
@@ -4534,6 +4605,7 @@ spots:
   trip_facts:
     elevation_m: 2496
     best_season: Late June – Late September
+    busyness: 2
   hike_ids:
   - bovalhutte-from-morteratsch
   access_long: From Morteratsch train station, follow the yellow 'Bovalhütte' signs. You'll climb above and to the right of the glacier tongue. Solid path, moderate effort.
@@ -4566,6 +4638,7 @@ spots:
   trip_facts:
     elevation_m: 2087
     best_season: Late June – October
+    busyness: 2
   hike_ids:
   - spitzmeilenhutte-from-maschgenkamm
   - spitzmeilenhutte-from-weisstannen
@@ -4629,6 +4702,7 @@ spots:
   trip_facts:
     elevation_m: 920
     best_season: April – October
+    busyness: 3
   hike_ids:
   - cascata_la_froda-from-sonogno-village
   access_long: Drive to Sonogno and follow the short hike to the falls. The pool underneath is deep and ice-cold even in summer. Jumping in is basically tradition at this point.
@@ -4725,6 +4799,7 @@ spots:
   trip_facts:
     elevation_m: 480
     best_season: April – October
+    busyness: 4
   hike_ids:
   - valle_verzasca-sonogno-to-lavertezzo
   - valle_verzasca-lavertezzo-to-brione
@@ -4821,6 +4896,7 @@ spots:
     destination, a cliff-jumping one, locals know it well. Come in summer when the water is warm and high enough.
   trip_facts:
     elevation_m: 244
+    busyness: 4
 - id: cascata_di_foroglio
   chapter: ticino
   kicker: WATERFALLS
@@ -4909,6 +4985,7 @@ spots:
   trip_facts:
     elevation_m: 1913
     best_season: Mid-May – October
+    busyness: 5
   hike_ids:
   - mer_de_glace-montenvers-train
   - mer_de_glace-chamonix-on-foot
@@ -4957,6 +5034,7 @@ spots:
     coats the granite in ice and sharpens the contrast, same access with snowshoes and the reduced Montenvers schedule.
   trip_facts:
     elevation_m: 1913
+    busyness: 4
 - id: aiguille_du_grepon
   chapter: beyond
   kicker: A POINTED NEEDLE IN THE RANGE
@@ -4987,6 +5065,7 @@ spots:
   access_long: Visible from the Mer de Glace approach. No separate trek. You'll pass the right angle on the same walk that gets you the glacier shots.
   trip_facts:
     elevation_m: 1913
+    busyness: 4
 - id: les_cheserys
   chapter: beyond
   kicker: THE BEST VIEW OF MONT BLANC
@@ -5032,6 +5111,7 @@ spots:
   trip_facts:
     elevation_m: 2240
     best_season: Late June – October
+    busyness: 3
   hike_ids:
   - les_cheserys-tre-le-champ-to-lac-blanc
   - les_cheserys-flegere-shortcut
@@ -5066,6 +5146,7 @@ spots:
     to ourselves.
   trip_facts:
     elevation_m: 2100
+    busyness: 2
 - id: mont_blanc
   chapter: beyond
   kicker: WESTERN EUROPE'S HIGHEST. WITH A TELE
@@ -5102,6 +5183,7 @@ spots:
     cannot match. Sunset and blue hour are the windows, blue hour lasts longer at altitude and gives that soft saturated palette.
   trip_facts:
     elevation_m: 2100
+    busyness: 4
 - id: glacier_des_bossons
   chapter: beyond
   kicker: MY FAVOURITE GLACIER OF THE RANGE
@@ -5136,6 +5218,7 @@ spots:
   trip_facts:
     elevation_m: 1410
     best_season: Late June – Late September
+    busyness: 3
   hike_ids:
   - glacier_des_bossons-chairlift-to-chalet
   - glacier_des_bossons-chalet-to-la-jonction
@@ -5175,6 +5258,7 @@ spots:
   trip_facts:
     elevation_m: 2408
     best_season: June – October
+    busyness: 2
   hike_ids:
   - pic_de_jallouvre-from-petit-bornand
   - pic_de_jallouvre-from-col-de-la-colombiere
@@ -5220,6 +5304,7 @@ spots:
   trip_facts:
     elevation_m: 2221
     best_season: June – October
+    busyness: 3
   hike_ids:
   - dent_doche-from-bernex
   - dent_doche-from-la-planche
@@ -5249,7 +5334,7 @@ spots:
     lat: 46.8988
     lng: 8.45835
   trip_facts:
-    busyness: 2
+    busyness: 1
     best_season: June - October
     elevation_m: 2404
   hike_ids:
@@ -5326,7 +5411,7 @@ spots:
     lat: 46.3944258
     lng: 9.6932995
   trip_facts:
-    busyness: 3
+    busyness: 4
     best_season: May - October
     elevation_m: 1815
   arrival:

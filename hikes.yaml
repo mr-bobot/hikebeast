@@ -1,23 +1,25 @@
 hikes:
-- id: engstligen_falls-route-48
+- id: engstligen_falls-lower-viewpoint
   sac_grade: T1
   effort_label: Easy
-  duration_min: 70
-  gain_m: 395
-  start: Adelboden, Unter dem Birg
+  duration_min: 20
+  gain_m: 50
+  start: Adelboden, Unter dem Birg (postbus stop)
   transit:
-    bus: Adelboden, Unter dem Birg
+    bus: Adelboden postbus to Unter dem Birg
   visits:
   - engstligen_falls
-  description_extra: Engstligenfälle drops in two stages off the Engstligenalp plateau above Adelboden, roughly 370 m total. The main viewing area is at the foot of the lower fall, a
-    20-minute walk from Unter dem Birg. Combine with the cable car up to the Engstligenalp plateau, or hike up the side trail (1 h 10, 395 m of gain). The site has been protected since
-    1948 and is on Switzerland's federal landscape inventory.
+  description_extra: Park at Unter dem Birg, or take the Adelboden postbus, then follow the wide gravel path 20 minutes to the foot of the lower fall. T1, family-friendly. The lower
+    fall is the larger of the two stages off the Engstligenalp plateau. Falls are at their fullest in spring snowmelt. The site has been protected since 1948 and sits on Switzerland's
+    federal landscape inventory.
   sources:
   - https://www.myswitzerland.com/en-us/destinations/engstligen-falls/
   - https://en.wikipedia.org/wiki/Engstligenfall
   equipment_list: []
-  cable_car_ids:
-  - engstligenalp-cable-car
+  name: Lower-viewpoint walk from Unter dem Birg
+  distance_km: 1.5
+  quickest_for:
+  - engstligen_falls
 - id: oltschibachfall-from-meiringen
   name: From Meiringen
   start: Meiringen train station
@@ -2183,8 +2185,6 @@ hikes:
   sources:
   - https://engstligenalp.ch/en/summer/experience/plateau-engstligen-falls/
   - https://www.myswitzerland.com/en-us/experiences/engstligen-falls-engstligenalp/
-  quickest_for:
-  - engstligen_falls
 - id: gastlosen-from-musersbergli
   visits:
   - gastlosen
@@ -3298,3 +3298,23 @@ hikes:
   - https://www.bergfex.com/sommer/tessin/touren/fernwanderweg/2065768,sentiero-verzasca-svizzeramobile-74/
   quickest_for:
   - valle_verzasca
+- id: engstligen_falls-side-trail-to-plateau
+  name: Side trail to the Engstligenalp plateau
+  sac_grade: T2
+  effort_label: Moderate
+  duration_min: 70
+  gain_m: 395
+  equipment_list: []
+  start: Adelboden, Unter dem Birg (postbus stop)
+  transit:
+    bus: Adelboden postbus to Unter dem Birg
+  visits:
+  - engstligen_falls
+  description_extra: Steep side trail up the cliff beside the falls themselves, the on-foot alternative to riding the Engstligenbahn cable car up to the plateau at 1,964 m. About 1 h
+    10, 395 m of gain, T2. Switchbacks give close views of the upper sections of the fall as you climb. The dedicated Engstligenfälle II / III paths directly through the cliff are seasonally
+    closed for rockfall, so check the operator's site before starting. From the top, descend by cable car or continue the plateau walk.
+  sources:
+  - https://engstligenalp.ch/en/summer/experience/plateau-engstligen-falls/
+  - https://en.wikipedia.org/wiki/Engstligenfall
+  cable_car_ids:
+  - engstligenalp-cable-car
