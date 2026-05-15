@@ -5358,3 +5358,7 @@ body.has-rail .topbar .hb-nav { display: none; }
 }
 .hb-source-item a:hover { text-decoration: underline; }
 .hb-source-item.hb-source-text { color: var(--soft); font-style: italic; }
+
+/* === Shuffle button on the browse topbar === */
+.hb-shuffle svg { transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1); }
+.hb-shuffle.is-spinning svg { transform: rotate(360deg); }

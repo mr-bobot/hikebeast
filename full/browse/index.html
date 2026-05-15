@@ -27,6 +27,10 @@
   </a>
   <span class="crumb"><b id="visibleCount">0</b> photos</span>
   <div class="topbar-right">
+    <button type="button" class="pill hb-shuffle" id="shuffleBtn" aria-label="Shuffle the wall">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      <span>Shuffle</span>
+    </button>
     <a class="pill" href="../index.html">Overview</a>
   </div>
 </div>
@@ -459,6 +463,27 @@
     search.classList.remove('has-value');
     q.focus();
     update();
+  });
+
+  // --- Shuffle: discard the persisted order and re-randomise the wall.
+  // Useful when the user wants new tiles on top instead of waiting for
+  // the 1-hour TTL to expire. Clears localStorage so the new order
+  // becomes the next persisted snapshot.
+  const shuffleBtn = document.getElementById('shuffleBtn');
+  shuffleBtn.addEventListener('click', () => {
+    try { localStorage.removeItem(BROWSE_ORDER_KEY); } catch {}
+    randomOrder = null;
+    refreshSpots();
+    // refreshSpots writes the freshly-shuffled order back to localStorage.
+    // We also clear lastTilesKey so update() actually rebuilds the grid
+    // (otherwise the early-return would think nothing changed).
+    lastTilesKey = '';
+    update();
+    // Scroll back to the top so the first row of new tiles is visible.
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Brief spin so the user sees the action registered.
+    shuffleBtn.classList.add('is-spinning');
+    setTimeout(() => shuffleBtn.classList.remove('is-spinning'), 600);
   });
 
   // Re-paint hearts when fav state changes (e.g. cross-tab or from another tile)
