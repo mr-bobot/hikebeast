@@ -80,27 +80,18 @@
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script src="../social.js"></script>
 <script>
-  // Manual scroll restoration. Safari's back-button shows a visible bounce
-  // from scroll=0 to the saved position because its automatic restoration
-  // runs after first paint. Taking over: save scroll on every visibility
-  // change + navigation, restore synchronously on load before paint.
-  // Chrome's behavior already nails it but the manual path is harmless.
-  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch {}
-  const SCROLL_KEY = 'hb:browse:scrollY';
-  function saveScroll() { try { sessionStorage.setItem(SCROLL_KEY, String(window.scrollY)); } catch {} }
-  function restoreScroll() {
-    try {
-      const y = parseFloat(sessionStorage.getItem(SCROLL_KEY));
-      if (Number.isFinite(y) && y > 0) window.scrollTo(0, y);
-    } catch {}
+  // Safari back-button: snap to top instead of bouncing scroll=0 → saved
+  // position → image reload. Chrome's bfcache restore is silky-smooth, so
+  // we leave Chrome alone and only intervene on Safari. Manual scroll
+  // restoration didn't help (Safari fires pageshow late so the bounce
+  // happens before our restore catches up). Scrolling to top sidesteps
+  // the whole sequence — user re-enters the wall and starts fresh.
+  const isSafari = /Safari/.test(navigator.userAgent)
+                && !/Chrome|Chromium|Edg|OPR|CriOS|FxiOS/.test(navigator.userAgent);
+  if (isSafari) {
+    try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch {}
+    window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
   }
-  // Save on every nav-away signal (covers tab swaps, link clicks, pagehide).
-  window.addEventListener('pagehide', saveScroll);
-  window.addEventListener('beforeunload', saveScroll);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) saveScroll(); });
-  // Restore as early as possible. pageshow fires both on first load AND on
-  // bfcache restore (event.persisted === true on the latter).
-  window.addEventListener('pageshow', restoreScroll);
 
   // Read the catalog through the unified spots store so the page stays in
   // sync with Convex. window.HB.spots seeds synchronously from the static
@@ -312,6 +303,10 @@
           || [4, 3]);
     a.dataset.w = dimsArr[0];
     a.dataset.h = dimsArr[1];
+    // Set the column-span class NOW (before the <img> is parented) so its
+    // CSS width is final from first paint. See spanClassFor() comments.
+    const spanCls = spanClassFor(dimsArr[0], dimsArr[1], gridCols(), photo.photoId || photo.src || spot.image || spot.id || '');
+    if (spanCls) a.classList.add(spanCls);
     const attrs = window.HB.photoAttrs({
       photoId: photo.photoId, image: photo.src || spot.image,
       width: 1000, prefix: '../',
@@ -363,11 +358,51 @@
     });
   }
 
-  // Compute grid-row span (and grid-column span for landscapes) from intrinsic
-  // image dims. Wide images (aspect > 1.4) get .span-wide so they take 2 cols,
-  // but only when the grid is at least 3 cols wide -- a 2-col-span on mobile
-  // would mean every wide spot blows up to full width and the layout feels
-  // like a single column.
+  // Stable per-tile "feature" flag drawn from the image filename so the
+  // same tiles get hero treatment between renders (no random reshuffles
+  // on filter / fav toggle). Roughly every 7th tall portrait is promoted.
+  function hashStr(s) {
+    let h = 0; for (let i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) >>> 0; }
+    return h;
+  }
+
+  // Decide a tile's column-span class from its intrinsic aspect + the grid's
+  // current column count. Wide images (aspect > 1.4) take 2 cols; every 7th
+  // tall portrait gets featured-portrait treatment. Only applied when the
+  // grid is at least 3 cols wide -- 2-col-span on a 2-col mobile layout
+  // would force every wide tile to full-width and the page reads as a
+  // single column.
+  //
+  // We deliberately set this class in tile() BEFORE the <img> is parented
+  // so its CSS width is final on first paint. Setting it in applySpans
+  // (which only runs after first paint) used to make Safari re-pick from
+  // srcset when the column-span flipped from 1 to 2 -- visible as the
+  // "image reloads after ~2s" flicker.
+  function spanClassFor(w, h, cols, featureKey) {
+    if (!w || !h || cols < 3) return '';
+    const aspect = w / h;
+    if (aspect > 1.4) return 'span-wide';
+    if (aspect < 0.8 && hashStr(featureKey) % 7 === 0) return 'span-tall';
+    return '';
+  }
+
+  // Memoize the grid's column count for the duration of one update() pass.
+  // Read once from getComputedStyle; expensive to call per-tile.
+  let cachedCols = null;
+  function gridCols() {
+    if (cachedCols !== null) return cachedCols;
+    const cs = getComputedStyle(grid);
+    cachedCols = cs.gridTemplateColumns.split(' ').filter(Boolean).length;
+    return cachedCols;
+  }
+
+  // After every tile has its column-span class set, compute the grid-row
+  // span (gridRowEnd) so each tile occupies the right number of auto-rows.
+  // Row-span doesn't change a tile's *width*, only its *height*, so this
+  // can run after first paint (e.g. on image-decode) without causing
+  // srcset re-picks. We only re-toggle the column-span classes when the
+  // grid's column count actually changes (resize across breakpoint).
+  let lastSpansCols = null;
   function applySpans() {
     if (!grid.children.length) return;
     const cs = getComputedStyle(grid);
@@ -377,39 +412,26 @@
     const gap = parseFloat(cs.rowGap || cs.gap || '0');
     const rowH = parseFloat(cs.gridAutoRows);
     if (!colW || !rowH) return;
-    // Stable per-tile "feature" flag drawn from the image filename so the
-    // same tiles get hero treatment between renders (no random reshuffles
-    // on filter / fav toggle). Roughly every 7th tall portrait is promoted.
-    function hash(s) {
-      let h = 0; for (let i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) >>> 0; }
-      return h;
-    }
+    const colCountChanged = lastSpansCols !== cols;
+    lastSpansCols = cols;
     Array.from(grid.children).forEach(t => {
-      // Prefer the image's natural dimensions once it has loaded.
-      // Most Convex photos still carry width:null/height:null, so the
-      // tile-render fallback writes [4,3] into the dataset, which
-      // makes 90% of tiles read as "boring square" and miss the
-      // landscape (>1.4) / portrait (<0.8) thresholds below. Once the
-      // <img> decodes, naturalWidth gives us the truth.
-      const img = t.querySelector('img');
-      if (img && img.naturalWidth && img.naturalHeight) {
-        t.dataset.w = img.naturalWidth;
-        t.dataset.h = img.naturalHeight;
-      }
       const w = +t.dataset.w;
       const h = +t.dataset.h;
       if (!w || !h) return;
-      const aspect = w / h;
-      const isLandscape = aspect > 1.4;
-      const isTallPortrait = aspect < 0.8;
-      const featureKey = t.querySelector('img')?.src || '';
-      const featurePortrait = isTallPortrait && (hash(featureKey) % 7 === 0);
-      const spanCol = (cols >= 3 && (isLandscape || featurePortrait)) ? 2 : 1;
+      if (colCountChanged) {
+        // Resize across a breakpoint -- a 2-col landscape may need to
+        // collapse back to 1-col on mobile, or vice versa. Pay the srcset
+        // re-pick cost here; the alternative (locking the class forever)
+        // would break the layout on rotation.
+        const featureKey = t.querySelector('img')?.src || '';
+        const newClass = spanClassFor(w, h, cols, featureKey);
+        t.classList.toggle('span-wide', newClass === 'span-wide');
+        t.classList.toggle('span-tall', newClass === 'span-tall');
+      }
+      const spanCol = t.classList.contains('span-wide') || t.classList.contains('span-tall') ? 2 : 1;
       const tileW = colW * spanCol + gap * (spanCol - 1);
       const tileH = tileW * (h / w);
       const spanRow = Math.max(1, Math.round((tileH + gap) / (rowH + gap)));
-      t.classList.toggle('span-wide', spanCol === 2 && isLandscape);
-      t.classList.toggle('span-tall', spanCol === 2 && featurePortrait);
       t.style.gridRowEnd = 'span ' + spanRow;
     });
     grid.classList.add('is-ready');
@@ -453,6 +475,7 @@
     paintChips();
     if (tilesKey === lastTilesKey) return;
     lastTilesKey = tilesKey;
+    cachedCols = null;  // re-read column count once per render pass
     grid.classList.remove('is-ready');
     grid.innerHTML = '';
     tileItems.forEach(it => grid.appendChild(tile(it)));
