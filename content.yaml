@@ -641,7 +641,7 @@ spots:
   - brienzer_rothorn-default
   - brienzer_rothorn-cog-railway
   - brienzer_rothorn-brienz-via-planalp
-  - hardergrat_trail-harder-to-rothorn
+  - hardergrat_trail-rothorn-to-harder-kulm
   - tannhorn-brienzergrat-segment
   cable_car_id: brienz-rothorn-bahn
 - id: hardergrat_trail
@@ -688,7 +688,7 @@ spots:
     best_season: Late June – October
     busyness: 2
   hike_ids:
-  - hardergrat_trail-harder-to-rothorn
+  - hardergrat_trail-rothorn-to-harder-kulm
   - hardergrat_trail-augstmatthorn-from-lombachalp
   - tannhorn-brienzergrat-segment
   - augstmatthorn-from-harder-kulm
@@ -731,7 +731,7 @@ spots:
     busyness: 2
   hike_ids:
   - tannhorn-brienzergrat-segment
-  - hardergrat_trail-harder-to-rothorn
+  - hardergrat_trail-rothorn-to-harder-kulm
 - id: augstmatthorn
   chapter: central
   kicker: RIDGES
@@ -778,7 +778,7 @@ spots:
   hike_ids:
   - augstmatthorn-route-85
   - augstmatthorn-from-harder-kulm
-  - hardergrat_trail-harder-to-rothorn
+  - hardergrat_trail-rothorn-to-harder-kulm
   - hardergrat_trail-augstmatthorn-from-lombachalp
 - id: lake_lucerne
   chapter: central
@@ -5420,6 +5420,23 @@ spots:
   gps:
     lat: 46.9795
     lng: 8.2548
+  trip_facts:
+    busyness: 5
+    best_season: May - October
+    elevation_m: 2128
+  arrival:
+    by_car:
+      directions: Drive to Kriens (cable car valley station) or Alpnachstad (cog railway valley station). Paid parking at both bases.
+      parking: Kriens, Luzern (cable car) or Alpnachstad, Obwalden (cog railway).
+    by_train_bus:
+      route: Trains from Lucerne to Alpnachstad in about 17 minutes for the cog railway. From Lucerne, bus 1 to Kriens Linde then the gondola for the Kriens side.
+    by_boat:
+      route: Lake Lucerne steamer from Lucerne to Alpnachstad pier connects directly with the cog railway in summer.
+    best_time: Early morning trips give the clearest views before the midday haze. Sunset on the summit can be photographed by staying at Pilatus-Kulm Hotels.
+    operating: Cog railway from Alpnachstad runs roughly mid-May to late November. The Kriens cable car runs year-round.
+  hike_ids:
+  - mount_pilatus-alpnachstad-aemsigen-kulm
+  - mount_pilatus-fraekmuentegg-tomlishorn
 - id: wasserfall_finstersee
   chapter: central
   kicker: A HIDDEN WATERFALL IN THE ZUG HINTERLAND
@@ -5449,6 +5466,12 @@ spots:
   gps:
     lat: 47.1641014
     lng: 8.6355808
+  trip_facts:
+    busyness: 2
+    best_season: April - October
+    elevation_m: 790
+  hike_ids:
+  - wasserfall_finstersee-village-walk
 - id: lac_bleu
   chapter: valais
   kicker: A TINY TURQUOISE POOL NEAR AROLLA
@@ -5476,6 +5499,12 @@ spots:
   gps:
     lat: 46.050484
     lng: 7.4800854
+  trip_facts:
+    busyness: 3
+    best_season: June - October
+    elevation_m: 2090
+  hike_ids:
+  - lac_bleu-la-gouille-direct
 - id: wildsee
   chapter: eastern
   kicker: A LAKE ON THE PIZOL FIVE-LAKE TRAIL
@@ -5507,6 +5536,12 @@ spots:
   gps:
     lat: 46.9705369
     lng: 9.3946907
+  trip_facts:
+    busyness: 4
+    best_season: July - October
+    elevation_m: 2493
+  hike_ids:
+  - wildsee-pizol-5-seen-wanderung
 - id: julier_pass
   chapter: eastern
   kicker: A FAMOUS MOUNTAIN ROAD IN WINTER
@@ -5540,6 +5575,18 @@ spots:
   gps:
     lat: 46.4701639
     lng: 9.7177092
+  trip_facts:
+    busyness: 3
+    best_season: May - October
+    elevation_m: 2284
+  arrival:
+    by_car:
+      directions: Drive over the pass on H3 between Tiefencastel / Bivio on the Surses side and Silvaplana on the Engadin side. Several small lay-bys near the summit.
+      parking: Pass dal Güglia / Julierpass, between Bivio (GR) and Silvaplana (GR)
+    by_train_bus:
+      route: PostBus 184 runs over the pass between St. Moritz and Chur via Tiefencastel. Stops at Julier Hospiz on the summit.
+    best_time: Autumn for the larches around the lower flanks toward Engadin, and winter at dawn or dusk for snow silhouettes.
+    operating: Open year-round, one of the few high alpine roads in Switzerland kept open through winter. Snow chains may be required in heavy weather.
 - id: refuge_du_lac_blanc
   chapter: beyond
   kicker: A HUT ABOVE CHAMONIX WITH A MONT BLANC VIEW
@@ -5569,6 +5616,12 @@ spots:
   gps:
     lat: 45.9816543
     lng: 6.8921261
+  trip_facts:
+    busyness: 4
+    best_season: July - mid-October
+    elevation_m: 2352
+  hike_ids:
+  - refuge_du_lac_blanc-flegere
 - id: lac_de_peyre
   chapter: beyond
   kicker: A QUIET LAC NEXT TO PIC DE JALLOUVRE
@@ -5592,6 +5645,12 @@ spots:
   gps:
     lat: 45.9907
     lng: 6.4915
+  trip_facts:
+    busyness: 2
+    best_season: June - October
+    elevation_m: 2108
+  hike_ids:
+  - lac_de_peyre-colombiere
 - id: lago_di_saoseo
   chapter: eastern
   kicker: A TURQUOISE LAKE IN VAL POSCHIAVO
@@ -5612,6 +5671,12 @@ spots:
   gps:
     lat: 46.2868
     lng: 10.1029
+  trip_facts:
+    busyness: 4
+    best_season: June - September
+    elevation_m: 2028
+  hike_ids:
+  - lago_di_saoseo-sfazu-val-da-camp
 - id: silsersee
   chapter: eastern
   kicker: THE LAKE AT THE TOP OF THE ENGADIN
@@ -5634,6 +5699,23 @@ spots:
   gps:
     lat: 46.418592
     lng: 9.728617
+  trip_facts:
+    busyness: 4
+    best_season: June - October
+    elevation_m: 1797
+  arrival:
+    by_car:
+      directions: Drive along the Engadin road (H27) from St. Moritz or over the Maloja Pass. Public car parks at Sils Maria and along the lake at Sils Baselgia and Plaun da Lej.
+      parking: Sils im Engadin / Segl, 7514, Grisons
+    by_train_bus:
+      route: Train to St. Moritz, then PostBus 4 toward Maloja stops at Sils Maria, Sils Baselgia, Plaun da Lej and Maloja Posta along the lakeshore.
+    by_boat:
+      route: The Segl-Maria boat runs from late June to late September between Sils Maria, the Chastè peninsula, Plaun da Lej, Isola and Maloja. The crossing takes about 40 minutes and
+        is one of the highest scheduled lake boat routes in Europe.
+    best_time: Calm mornings give the mirror reflection of Piz Corvatsch and Piz da la Margna. The first half of October peaks for the larches around the lake.
+    operating: Lakeshore footpath is open year-round; the boat runs end of June through end of September.
+  hike_ids:
+  - silsersee-chaste-peninsula
 - id: engadin_autumn
   chapter: eastern
   kicker: LARCH SEASON, MID TO LATE OCTOBER
@@ -5657,6 +5739,20 @@ spots:
     credit: leon.helg
   - file: 04.jpg
     credit: leon.helg
+  trip_facts:
+    busyness: 4
+    best_season: Early to mid-October
+    elevation_m: 1800
+  arrival:
+    by_car:
+      directions: Drive the Engadin road (H27) between St. Moritz and Maloja for the lake belt (Silvaplana, Sils, Maloja). For the Stazerwald, park at Pontresina or Celerina and walk
+        in. For the Lej da Cavloc, park at Maloja and walk up the Val Forno track. The Lej da Staz is accessed on foot from Celerina or St. Moritz Bad.
+      parking: Engadin valley between St. Moritz, Sils-Maria and Maloja (GR)
+    by_train_bus:
+      route: Train to St. Moritz on the Albula line. PostBus 4 covers the lake belt from St. Moritz to Maloja. Trains also stop at Pontresina and Celerina for the Stazerwald.
+    best_time: The greatest colour intensity of the Engadin larches falls around mid-October. Needles begin to turn from the first week of October and drop in the first half of November.
+      Warm afternoon light intensifies the colour; early morning or evening gives the cleanest skies.
+    operating: All access roads stay open through October. The Maloja Pass road and the Engadin valley road are kept clear year-round.
 back_matter:
   thanks:
     kicker: Thank you
