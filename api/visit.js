@@ -5,11 +5,27 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { subscriber_id, token, page, browser_language, event } = req.body ?? {};
+  const {
+    subscriber_id,
+    token,
+    page,
+    browser_language,
+    event,
+    utm_source,
+    utm_medium,
+    utm_campaign,
+  } = req.body ?? {};
   // Whitelist of beacon event names. Anything else gets dropped before
   // hitting Apps Script so the column writers don't receive bogus values.
   const ALLOWED_EVENTS = new Set(["scrolled", "video_clicked"]);
   const safeEvent = typeof event === "string" && ALLOWED_EVENTS.has(event) ? event : "";
+
+  // UTM passthrough · cap each at 100 chars so a hostile or malformed link
+  // can't blow up the Sheet row. Empty string when missing so Apps Script
+  // overwrites the column with "" rather than skipping it.
+  const safeUtmSource = typeof utm_source === "string" ? utm_source.slice(0, 100) : "";
+  const safeUtmMedium = typeof utm_medium === "string" ? utm_medium.slice(0, 100) : "";
+  const safeUtmCampaign = typeof utm_campaign === "string" ? utm_campaign.slice(0, 100) : "";
 
   // For default landing pings we need at least one identifier so the row
   // can be matched to a person. Anonymous /guide visits (PDF-link traffic
@@ -44,6 +60,9 @@ export default async function handler(req, res) {
           event: safeEvent,
           visited_at: new Date().toISOString(),
           browser_language: typeof browser_language === "string" ? browser_language.slice(0, 20) : "",
+          utm_source: safeUtmSource,
+          utm_medium: safeUtmMedium,
+          utm_campaign: safeUtmCampaign,
         }),
         signal: AbortSignal.timeout(5000),
       }).catch((err) => console.error("Visit log failed:", err)),
