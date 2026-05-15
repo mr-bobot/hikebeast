@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
+<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
 <title>Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
@@ -563,9 +564,30 @@
     });
   }
 
-  let forYouKeys = [];
+  // Persist the For-You picks across nav so coming back to the home page
+  // doesn't reshuffle the row. 1-hour TTL: long enough that quick hops
+  // (home → spot → back) stay stable, short enough that the row feels
+  // alive across a session. Cleared automatically when stale.
+  const FOR_YOU_KEY = 'hb:home:for-you';
+  const FOR_YOU_TTL_MS = 60 * 60 * 1000;
+  function readPersistedKeys() {
+    try {
+      const raw = localStorage.getItem(FOR_YOU_KEY);
+      if (!raw) return [];
+      const { savedAt, keys } = JSON.parse(raw);
+      if (!Array.isArray(keys)) return [];
+      if (Date.now() - (savedAt || 0) > FOR_YOU_TTL_MS) return [];
+      return keys.filter(k => typeof k === 'string');
+    } catch { return []; }
+  }
+  function writePersistedKeys(keys) {
+    try { localStorage.setItem(FOR_YOU_KEY, JSON.stringify({ savedAt: Date.now(), keys })); } catch {}
+  }
+
+  let forYouKeys = readPersistedKeys();
   function buildForYou() {
     forYouKeys = pickStable(forYouKeys, 4);
+    writePersistedKeys(forYouKeys);
     const byKey = new Map(SPOTS.map(s => [window.HB.spotKey(s), s]));
     const picks = forYouKeys.map(k => byKey.get(k)).filter(Boolean);
     const el = document.getElementById('rowForYou');

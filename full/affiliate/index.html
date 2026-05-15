@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
+<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
 <title>Affiliate · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
@@ -29,7 +30,7 @@
   body {
     margin: 0;
     min-height: 100dvh;
-    background: #fbfbfc;
+    background: var(--bg);
     color: var(--fg);
     position: relative;
     overflow-x: hidden;
@@ -71,7 +72,7 @@
     text-decoration: none;
     padding: 8px 14px;
     border-radius: 999px;
-    background: #fff;
+    background: var(--paper);
     border: 1px solid var(--hairline);
     margin-bottom: 14px;
     transition: border-color 150ms ease, transform 100ms ease;
@@ -96,12 +97,12 @@
 
   /* The single card · same translucency / blur recipe as /login/. */
   .card {
-    background: rgba(255,255,255,0.86);
+    background: var(--glass);
     -webkit-backdrop-filter: saturate(180%) blur(18px);
     backdrop-filter: saturate(180%) blur(18px);
     border: 1px solid var(--hairline);
     border-radius: var(--radius-card);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.10), 0 4px 14px rgba(0,0,0,0.04);
+    box-shadow: var(--shadow-card);
     overflow: hidden;
   }
 
@@ -144,7 +145,7 @@
   .share-url {
     flex: 1; min-width: 0;
     padding: 11px 14px;
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--hairline);
     border-radius: 12px;
     font-family: "SF Mono", ui-monospace, Menlo, monospace;
@@ -156,7 +157,7 @@
   .btn-copy {
     height: 42px; padding: 0 16px;
     border-radius: var(--radius-btn);
-    background: var(--fg); color: #fff;
+    background: var(--cta-bg); color: #fff;
     border: 0; cursor: pointer;
     font: inherit; font-size: 13.5px; font-weight: 600;
     letter-spacing: -0.01em; white-space: nowrap;
@@ -165,7 +166,7 @@
   }
   .btn-copy:hover { opacity: 0.92; }
   .btn-copy:active { transform: scale(0.98); }
-  .btn-copy.is-success { background: #34c759; }
+  .btn-copy.is-success { background: var(--success); }
 
   /* Stats · two values inline, each on its own column. */
   .stats {
@@ -178,7 +179,7 @@
     display: flex; align-items: center; justify-content: space-between;
     gap: 12px;
     padding: 12px 14px;
-    background: #fff;
+    background: var(--paper);
     border: 1px solid var(--hairline);
     border-radius: 12px;
     text-decoration: none;
@@ -187,8 +188,8 @@
     -webkit-tap-highlight-color: transparent;
   }
   .resources-link:hover {
-    border-color: rgba(0,0,0,0.18);
-    background: #f9f9fa;
+    border-color: var(--hairline-strong);
+    background: var(--surface-2);
   }
   .resources-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
   .resources-title { font-size: 14px; font-weight: 600; letter-spacing: -0.005em; }
@@ -247,6 +248,21 @@
   }
   .state a { color: var(--accent); text-decoration: none; }
 
+  /* === Dark mode overrides ===
+     Mirrors the account page recipe: drop blue-blob alphas ~3x,
+     swap the primary CTA to deep navy (--fg becomes near-white in
+     dark so a default fill would be unreadable). */
+
+  :root[data-theme="dark"] body::before {
+    background:
+      radial-gradient(460px 420px at 18% 22%, rgba(10, 132, 255, 0.16) 0%, transparent 70%),
+      radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.12) 0%, transparent 72%),
+      radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.14) 0%, transparent 70%),
+      radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.10) 0%, transparent 75%);
+    opacity: 0.7;
+  }
+
+  :root[data-theme="dark"] .btn-copy { background: #003162; color: #fff; }
 </style>
 </head>
 <body>

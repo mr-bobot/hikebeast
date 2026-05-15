@@ -457,6 +457,16 @@ async function handleSessionCompleted({ stripe, event }) {
   const localeHint = full.metadata?.locale || "";
   // Affiliate ref slug. Empty when the buyer didn't arrive via ?r=.
   const refSlug = full.metadata?.r || "";
+  // Which landing variant the buyer paid from. Forwarded to the Sheet's
+  // `source_page` column for A/B attribution (map / themap / map3 +
+  // their de_ variants).
+  const sourcePage = full.metadata?.source_page || "";
+  // UTM params · stamped into Stripe metadata by /api/checkout/session
+  // from the buyer's URL params. Forwarded to the Sheet's utm_* columns
+  // so off-platform traffic (TikTok bio, Linktree, ads) can be attributed.
+  const utmSource = full.metadata?.utm_source || "";
+  const utmMedium = full.metadata?.utm_medium || "";
+  const utmCampaign = full.metadata?.utm_campaign || "";
 
   if (!email) {
     console.error("Session completed without email:", full.id);
@@ -533,6 +543,11 @@ async function handleSessionCompleted({ stripe, event }) {
       metadata_s: subscriberId,
       instagram_handle: buyerIg || "",
       referral_slug: refSlug || "",
+      source_page: sourcePage || "",
+      utm_source: utmSource,
+      utm_medium: utmMedium,
+      utm_campaign: utmCampaign,
+      ip_country: ipCountry || "",
       provider: "stripe",
       session_id: full.id,
       email_sent: emailOk ? "1" : "0",

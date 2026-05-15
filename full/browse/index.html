@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
+<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
 <title>Browse · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
@@ -39,13 +40,19 @@
   </header>
 
   <div class="hb-filters">
-    <label class="hb-search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
-      <input id="q" type="search" placeholder="Search spots, regions, themes…" autocomplete="off" />
-      <button type="button" class="clear" id="clearQ" aria-label="Clear search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <div class="hb-search-row">
+      <label class="hb-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+        <input id="q" type="search" placeholder="Search spots, regions, themes…" autocomplete="off" />
+        <button type="button" class="clear" id="clearQ" aria-label="Clear search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </label>
+      <button type="button" class="hb-shuffle-btn" id="shuffleBtn" aria-label="Shuffle the wall">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        <span>Shuffle</span>
       </button>
-    </label>
+    </div>
     <div class="hb-chips" id="chips" data-axis="region"></div>
     <div class="hb-chips" id="propChips" data-axis="property"></div>
   </div>
@@ -73,6 +80,19 @@
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script src="../social.js"></script>
 <script>
+  // Safari back-button: snap to top instead of bouncing scroll=0 → saved
+  // position → image reload. Chrome's bfcache restore is silky-smooth, so
+  // we leave Chrome alone and only intervene on Safari. Manual scroll
+  // restoration didn't help (Safari fires pageshow late so the bounce
+  // happens before our restore catches up). Scrolling to top sidesteps
+  // the whole sequence — user re-enters the wall and starts fresh.
+  const isSafari = /Safari/.test(navigator.userAgent)
+                && !/Chrome|Chromium|Edg|OPR|CriOS|FxiOS/.test(navigator.userAgent);
+  if (isSafari) {
+    try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch {}
+    window.addEventListener('pageshow', () => { window.scrollTo(0, 0); });
+  }
+
   // Read the catalog through the unified spots store so the page stays in
   // sync with Convex. window.HB.spots seeds synchronously from the static
   // sidecar (spots-data.js) and replaces with Convex data once the
@@ -80,12 +100,33 @@
   let SPOTS = [];
   let propIndex = [];
   let spotProps = new Map();
-  // Stable random order: shuffle once on first load, cache the position per
-  // spot. Subsequent refreshes (Convex updates) reuse the cached position so
-  // the wall doesn't jump around when a spot's photo updates. New spots
-  // discovered later get appended at the end (still in random order via the
-  // fractional position).
-  let randomOrder = null;  // spotKey -> position
+  // Stable random order: shuffle once, cache the position per spot, persist
+  // across nav with a 1-hour TTL so coming back to /browse/ shows the same
+  // wall (within the hour). Subsequent in-page refreshes (Convex updates)
+  // reuse the cached position so the wall doesn't jump around when a spot's
+  // photo updates. New spots discovered later get appended at the end
+  // (still in random order via the fractional position).
+  const BROWSE_ORDER_KEY = 'hb:browse:order';
+  const BROWSE_ORDER_TTL_MS = 60 * 60 * 1000;
+  function readPersistedOrder() {
+    try {
+      const raw = localStorage.getItem(BROWSE_ORDER_KEY);
+      if (!raw) return null;
+      const { savedAt, entries } = JSON.parse(raw);
+      if (!Array.isArray(entries)) return null;
+      if (Date.now() - (savedAt || 0) > BROWSE_ORDER_TTL_MS) return null;
+      return new Map(entries);
+    } catch { return null; }
+  }
+  function writePersistedOrder(map) {
+    try {
+      localStorage.setItem(BROWSE_ORDER_KEY, JSON.stringify({
+        savedAt: Date.now(),
+        entries: Array.from(map.entries()),
+      }));
+    } catch {}
+  }
+  let randomOrder = readPersistedOrder();  // spotKey -> position
   function shuffle(arr) {
     const a = arr.slice();
     for (let i = a.length - 1; i > 0; i--) {
@@ -119,6 +160,7 @@
         if (!randomOrder.has(k)) randomOrder.set(k, nextPos++ + Math.random());
       });
     }
+    writePersistedOrder(randomOrder);
     SPOTS = list;
     propIndex = window.HB.buildPropertyIndex(SPOTS);
     spotProps = new Map(SPOTS.map(s => [s, new Set(window.HB.propertiesOf(s))]));
@@ -261,6 +303,25 @@
           || [4, 3]);
     a.dataset.w = dimsArr[0];
     a.dataset.h = dimsArr[1];
+    // Set the column-span class AND the gridRowEnd NOW so every visual
+    // dimension of the tile is final before it's appended to the DOM.
+    // The previous version deferred gridRowEnd to applySpans() via
+    // requestAnimationFrame, which meant tiles painted at 6px tall
+    // (grid-auto-rows default) and then grew to their image height once
+    // applySpans ran — Safari rendered the squish-then-grow as a visible
+    // image resize. Computing inline costs one getComputedStyle per
+    // render pass (memoised in gridMetrics()) and zero forced relayouts
+    // between appendChild calls.
+    const m = gridMetrics();
+    const spanCls = spanClassFor(dimsArr[0], dimsArr[1], m.cols, photo.photoId || photo.src || spot.image || spot.id || '');
+    if (spanCls) a.classList.add(spanCls);
+    if (m.colW && m.rowH) {
+      const spanCol = spanCls ? 2 : 1;
+      const tileW = m.colW * spanCol + m.gap * (spanCol - 1);
+      const tileH = tileW * (dimsArr[1] / dimsArr[0]);
+      const spanRow = Math.max(1, Math.round((tileH + m.gap) / (m.rowH + m.gap)));
+      a.style.gridRowEnd = 'span ' + spanRow;
+    }
     const attrs = window.HB.photoAttrs({
       photoId: photo.photoId, image: photo.src || spot.image,
       width: 1000, prefix: '../',
@@ -312,56 +373,111 @@
     });
   }
 
-  // Compute grid-row span (and grid-column span for landscapes) from intrinsic
-  // image dims. Wide images (aspect > 1.4) get .span-wide so they take 2 cols,
-  // but only when the grid is at least 3 cols wide -- a 2-col-span on mobile
-  // would mean every wide spot blows up to full width and the layout feels
-  // like a single column.
-  function applySpans() {
-    if (!grid.children.length) return;
+  // Stable per-tile "feature" flag drawn from the image filename so the
+  // same tiles get hero treatment between renders (no random reshuffles
+  // on filter / fav toggle). Roughly every 7th tall portrait is promoted.
+  function hashStr(s) {
+    let h = 0; for (let i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) >>> 0; }
+    return h;
+  }
+
+  // Decide a tile's column-span class from its intrinsic aspect + the grid's
+  // current column count. Wide images (aspect > 1.4) take 2 cols; every 7th
+  // tall portrait gets featured-portrait treatment. Only applied when the
+  // grid is at least 3 cols wide -- 2-col-span on a 2-col mobile layout
+  // would force every wide tile to full-width and the page reads as a
+  // single column.
+  //
+  // We deliberately set this class in tile() BEFORE the <img> is parented
+  // so its CSS width is final on first paint. Setting it in applySpans
+  // (which only runs after first paint) used to make Safari re-pick from
+  // srcset when the column-span flipped from 1 to 2 -- visible as the
+  // "image reloads after ~2s" flicker.
+  function spanClassFor(w, h, cols, featureKey) {
+    if (!w || !h || cols < 3) return '';
+    const aspect = w / h;
+    if (aspect > 1.4) return 'span-wide';
+    if (aspect < 0.8 && hashStr(featureKey) % 7 === 0) return 'span-tall';
+    return '';
+  }
+
+  // Memoize the grid's layout metrics for one update() pass. Read once
+  // from getComputedStyle; expensive to call per-tile. Invalidated by
+  // update() (new render pass) and by the resize observer.
+  let cachedMetrics = null;
+  function gridMetrics() {
+    if (cachedMetrics) return cachedMetrics;
     const cs = getComputedStyle(grid);
     const tmpl = cs.gridTemplateColumns.split(' ').filter(Boolean);
-    const cols = tmpl.length;
-    const colW = parseFloat(tmpl[0]);
-    const gap = parseFloat(cs.rowGap || cs.gap || '0');
-    const rowH = parseFloat(cs.gridAutoRows);
-    if (!colW || !rowH) return;
-    // Stable per-tile "feature" flag drawn from the image filename so the
-    // same tiles get hero treatment between renders (no random reshuffles
-    // on filter / fav toggle). Roughly every 7th tall portrait is promoted.
-    function hash(s) {
-      let h = 0; for (let i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) >>> 0; }
-      return h;
-    }
+    cachedMetrics = {
+      cols: tmpl.length,
+      colW: parseFloat(tmpl[0]) || 0,
+      gap:  parseFloat(cs.rowGap || cs.gap || '0') || 0,
+      rowH: parseFloat(cs.gridAutoRows) || 0,
+    };
+    return cachedMetrics;
+  }
+
+  // Re-apply spans on resize (the grid's column count may have crossed a
+  // breakpoint, so a 4-col landscape needs to demote to 2-col on rotation).
+  // Most of the time tile() has already set the final spans inline, so
+  // this is a no-op outside breakpoint crossings.
+  function applySpans() {
+    if (!grid.children.length) return;
+    cachedMetrics = null;  // re-read for fresh viewport size
+    const m = gridMetrics();
+    if (!m.colW || !m.rowH) return;
     Array.from(grid.children).forEach(t => {
-      // Prefer the image's natural dimensions once it has loaded.
-      // Most Convex photos still carry width:null/height:null, so the
-      // tile-render fallback writes [4,3] into the dataset, which
-      // makes 90% of tiles read as "boring square" and miss the
-      // landscape (>1.4) / portrait (<0.8) thresholds below. Once the
-      // <img> decodes, naturalWidth gives us the truth.
-      const img = t.querySelector('img');
-      if (img && img.naturalWidth && img.naturalHeight) {
-        t.dataset.w = img.naturalWidth;
-        t.dataset.h = img.naturalHeight;
+      // Edge case: tile rendered with the [4,3] fallback because no
+      // dimensions sidecar entry exists. Once the image has decoded
+      // we know its true aspect — write it back so the span math here
+      // produces the right tile height. Skip if dims are already
+      // anything other than the fallback (HB_PHOTO_DIMS coverage is
+      // ~100% so this is the only place we'd ever overwrite).
+      if (t.dataset.w === '4' && t.dataset.h === '3') {
+        const img = t.querySelector('img');
+        if (img && img.naturalWidth && img.naturalHeight) {
+          t.dataset.w = img.naturalWidth;
+          t.dataset.h = img.naturalHeight;
+        }
       }
       const w = +t.dataset.w;
       const h = +t.dataset.h;
       if (!w || !h) return;
-      const aspect = w / h;
-      const isLandscape = aspect > 1.4;
-      const isTallPortrait = aspect < 0.8;
       const featureKey = t.querySelector('img')?.src || '';
-      const featurePortrait = isTallPortrait && (hash(featureKey) % 7 === 0);
-      const spanCol = (cols >= 3 && (isLandscape || featurePortrait)) ? 2 : 1;
-      const tileW = colW * spanCol + gap * (spanCol - 1);
+      const newClass = spanClassFor(w, h, m.cols, featureKey);
+      t.classList.toggle('span-wide', newClass === 'span-wide');
+      t.classList.toggle('span-tall', newClass === 'span-tall');
+      const spanCol = newClass ? 2 : 1;
+      const tileW = m.colW * spanCol + m.gap * (spanCol - 1);
       const tileH = tileW * (h / w);
-      const spanRow = Math.max(1, Math.round((tileH + gap) / (rowH + gap)));
-      t.classList.toggle('span-wide', spanCol === 2 && isLandscape);
-      t.classList.toggle('span-tall', spanCol === 2 && featurePortrait);
+      const spanRow = Math.max(1, Math.round((tileH + m.gap) / (m.rowH + m.gap)));
       t.style.gridRowEnd = 'span ' + spanRow;
     });
     grid.classList.add('is-ready');
+  }
+
+  // Hidden URL filter: ?by=<handle>[,<handle>...] keeps only photos
+  // credited to one of those handles (case-insensitive, with or
+  // without leading "@"). Used for screen-record demos like "every
+  // Leon shot in the guide" or "shots by Leon, Oli, Yannick".
+  // Spots that have zero matching photos are dropped from the wall.
+  // Hero title + chrome stay untouched so the page reads as the
+  // normal Explore view — just with a curated set of tiles.
+  const BY_FILTER = (() => {
+    try {
+      const v = new URLSearchParams(location.search).get('by');
+      if (!v) return null;
+      const handles = v.split(',')
+        .map(s => s.trim().toLowerCase().replace(/^@/, ''))
+        .filter(Boolean);
+      return handles.length ? new Set(handles) : null;
+    } catch { return null; }
+  })();
+  function matchesByFilter(credit) {
+    if (!BY_FILTER) return true;
+    if (!credit) return false;
+    return BY_FILTER.has(String(credit).toLowerCase().replace(/^@/, ''));
   }
 
   // Round-robin every spot's photos into a flat tile list so the same spot's
@@ -370,9 +486,12 @@
   function expandToPhotoTiles(spots) {
     const queues = spots.map(s => {
       if (s.kind === 'extras_entry' || !s.photos || s.photos.length === 0) {
+        // No photos = nothing to credit. Skip in BY mode.
+        if (BY_FILTER) return [];
         return [{ spot: s, photo: null }];
       }
-      return s.photos.map(p => ({ spot: s, photo: p }));
+      const matched = s.photos.filter(p => matchesByFilter(p.credit));
+      return matched.map(p => ({ spot: s, photo: p }));
     });
     const out = [];
     let active = queues.filter(q => q.length > 0);
@@ -402,10 +521,13 @@
     paintChips();
     if (tilesKey === lastTilesKey) return;
     lastTilesKey = tilesKey;
+    cachedMetrics = null;  // force re-read of grid metrics for this pass
     grid.classList.remove('is-ready');
     grid.innerHTML = '';
     tileItems.forEach(it => grid.appendChild(tile(it)));
-    requestAnimationFrame(applySpans);
+    // Every tile sets its own gridRowEnd inline; just unhide the grid.
+    // applySpans() isn't needed on first paint anymore.
+    grid.classList.add('is-ready');
   }
 
   // Recompute spans when the viewport crosses a column-count breakpoint.
@@ -436,6 +558,27 @@
     search.classList.remove('has-value');
     q.focus();
     update();
+  });
+
+  // --- Shuffle: discard the persisted order and re-randomise the wall.
+  // Useful when the user wants new tiles on top instead of waiting for
+  // the 1-hour TTL to expire. Clears localStorage so the new order
+  // becomes the next persisted snapshot.
+  const shuffleBtn = document.getElementById('shuffleBtn');
+  shuffleBtn.addEventListener('click', () => {
+    try { localStorage.removeItem(BROWSE_ORDER_KEY); } catch {}
+    randomOrder = null;
+    refreshSpots();
+    // refreshSpots writes the freshly-shuffled order back to localStorage.
+    // We also clear lastTilesKey so update() actually rebuilds the grid
+    // (otherwise the early-return would think nothing changed).
+    lastTilesKey = '';
+    update();
+    // Scroll back to the top so the first row of new tiles is visible.
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Brief spin so the user sees the action registered.
+    shuffleBtn.classList.add('is-spinning');
+    setTimeout(() => shuffleBtn.classList.remove('is-spinning'), 600);
   });
 
   // Re-paint hearts when fav state changes (e.g. cross-tab or from another tile)

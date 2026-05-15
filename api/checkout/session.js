@@ -182,6 +182,12 @@ async function handleGetSession(req, res, stripe) {
     access_url: `${origin}/api/checkout/access?t=${encodeURIComponent(token)}`,
     drive_url: DRIVE_URL,
     order_id: session.id,
+    // Returned so the success page can pass it as `eventID` to its
+    // client-side fbq("track","Purchase",...) call, matching the
+    // event_id the webhook uses for the CAPI Purchase event. Without
+    // this Meta counts the pixel + CAPI events separately (Events
+    // Manager 2026-05-15 showed 119 Purchase events for 54 buyers).
+    payment_intent: paymentIntent,
   });
 }
 
@@ -356,6 +362,14 @@ export default async function handler(req, res) {
   const refRaw = typeof body.r === "string" ? body.r.trim().toLowerCase() : "";
   const ref = /^[a-z0-9._-]{2,32}$/.test(refRaw) ? refRaw : "";
 
+  // Source-page slug: which landing variant the buyer paid from
+  // (`map`, `themap`, `map3`, `de_map`, `de_themap`, `de_map3`). The
+  // webhook forwards this to the Sheet's `source_page` column so we can
+  // attribute sales to specific A/B variants. Tight allowlist character
+  // set to avoid arbitrary strings polluting the column.
+  const sourcePageRaw = typeof body.source_page === "string" ? body.source_page.trim().toLowerCase() : "";
+  const sourcePage = /^[a-z0-9_]{1,40}$/.test(sourcePageRaw) ? sourcePageRaw : "";
+
   const origin = (req.headers.origin && /^https?:\/\//.test(req.headers.origin))
     ? req.headers.origin
     : "https://hikebeast.ch";
@@ -390,6 +404,8 @@ export default async function handler(req, res) {
         // Affiliate ref: ?r=<username> from the landing page, persisted
         // in localStorage on click. Empty string when no affiliate.
         r: ref,
+        // Which landing variant the buyer paid from. Sheet attribution.
+        source_page: sourcePage,
       },
       // Forwarded into the underlying PaymentIntent so the webhook can join
       // the same identifiers without re-hydrating the session object.

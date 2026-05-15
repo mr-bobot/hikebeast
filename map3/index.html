@@ -33,7 +33,7 @@
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Switzerland Map · 100+ Hidden Spots" />
 <meta property="og:description" content="The ultimate Swiss map." />
-<meta property="og:url" content="https://hikebeast.ch/map/" />
+<meta property="og:url" content="https://hikebeast.ch/map3/" />
 <meta property="og:image" content="https://hikebeast.ch/themap/img/og.jpg" />
 <meta property="og:image:width" content="1920" />
 <meta property="og:image:height" content="987" />
@@ -1978,6 +1978,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           utm_medium: utmMedium,
           utm_campaign: utmCampaign,
           r: readStoredRef(),
+          source_page: "map3",
         }),
       });
 
@@ -2031,14 +2032,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       container.innerHTML = "";
       container.classList.add("is-mounted");
       checkout.mount("#checkout");
-
-      // InitiateCheckout signal for Meta
-      if (typeof fbq === "function") {
-        fbq("track", "InitiateCheckout", {
-          value: 27.0,
-          currency: currentCurrency.toUpperCase(),
-        });
-      }
     } catch (err) {
       console.error("Checkout mount failed:", err);
       container.innerHTML =
@@ -2048,11 +2041,43 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     }
   }
 
+  // InitiateCheckout · fires ONCE per session when the buyer first
+  // interacts with the embedded checkout form (tap/click or focus
+  // into the Stripe iframe). Used to fire inside mountCheckout
+  // itself, which made every page view look like a checkout intent —
+  // Events Manager on 2026-05-15 showed 2.4K InitiateCheckout vs ~50
+  // actual buyers.
+  function attachInitiateCheckoutSignal() {
+    var container = document.getElementById("checkout");
+    if (!container) return;
+    var key = "hb:ic_fired";
+    try { if (sessionStorage.getItem(key) === "1") return; } catch (e) {}
+
+    function fire() {
+      container.removeEventListener("pointerdown", fire, true);
+      container.removeEventListener("focusin", fire, true);
+      try { sessionStorage.setItem(key, "1"); } catch (e) {}
+      if (typeof fbq !== "function") return;
+      try {
+        fbq("track", "InitiateCheckout", {
+          value: typeof currentAmount === "number" ? currentAmount : 27,
+          currency: (currentCurrency || "chf").toUpperCase(),
+        });
+      } catch (e) {}
+    }
+    container.addEventListener("pointerdown", fire, true);
+    container.addEventListener("focusin", fire, true);
+  }
+
   // Auto-mount checkout when the page is interactive
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mountCheckout);
-  } else {
+  function bootCheckout() {
     mountCheckout();
+    attachInitiateCheckoutSignal();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootCheckout);
+  } else {
+    bootCheckout();
   }
 
   // ---------- Page-visit ping for the funnel sheet ----------
@@ -2068,6 +2093,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
+        source_page: "map3",
         browser_language: navigator.language || "",
       }),
       keepalive: true,
@@ -2108,6 +2134,18 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   var triggers = document.querySelectorAll('[data-video-open]');
   var closers  = modal.querySelectorAll('[data-video-close]');
 
+  // Cohort identifiers from the URL (same source as the checkout-session
+  // call). Re-read here because this IIFE doesn't share scope with the
+  // checkout/visit IIFE earlier in the page. Empty for anonymous traffic.
+  var __vTok = '';
+  var __vSub = '';
+  try {
+    var __p = new URLSearchParams(window.location.search);
+    __vTok = __p.get('t') || '';
+    __vSub = __p.get('s') || '';
+  } catch (e) {}
+  var __videoPinged = false;
+
   function openModal () {
     modal.setAttribute('data-open', 'true');
     document.body.classList.add('video-modal-open');
@@ -2117,6 +2155,27 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     // (IG webview can reject if the user nav'd away mid-tap, etc.)
     var p = video.play();
     if (p && typeof p.catch === 'function') p.catch(function () {});
+
+    // First-tap-only beacon to /api/visit. Apps Script v12 writes the
+    // current ISO time into `video_clicked_at` when token/subscriber
+    // matches a row; anonymous taps are no-ops (tracked in Vercel
+    // Analytics instead, by design — same pattern as `scrolled`).
+    if (!__videoPinged) {
+      __videoPinged = true;
+      try {
+        fetch("/api/visit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            event: "video_clicked",
+            page: "map3",
+            token: __vTok,
+            subscriber_id: __vSub,
+          }),
+          keepalive: true,
+        }).catch(function () {});
+      } catch (e) { /* noop */ }
+    }
   }
 
   function closeModal () {
