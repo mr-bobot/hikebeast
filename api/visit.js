@@ -35,6 +35,13 @@ export default async function handler(req, res) {
   // conversion math can be done from the Sheet alone.
   const safeSourcePage = typeof source_page === "string" ? source_page.slice(0, 64) : "";
 
+  // IP-derived country from Vercel's geolocation header. ISO-3166-1 alpha-2
+  // (e.g. "DE", "CH", "US"). Server-side only · the page can't spoof it.
+  // Empty when the request lacks the header (local dev, non-Vercel envs).
+  const ipCountry = typeof req.headers["x-vercel-ip-country"] === "string"
+    ? req.headers["x-vercel-ip-country"].slice(0, 4)
+    : "";
+
   // For default landing pings we need at least one identifier so the row
   // can be matched to a person. Anonymous /guide visits (PDF-link traffic
   // with no params) hit Vercel Analytics only, never the sheet — filtered
@@ -72,6 +79,7 @@ export default async function handler(req, res) {
           utm_medium: safeUtmMedium,
           utm_campaign: safeUtmCampaign,
           source_page: safeSourcePage,
+          ip_country: ipCountry,
         }),
         signal: AbortSignal.timeout(5000),
       }).catch((err) => console.error("Visit log failed:", err)),

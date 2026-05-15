@@ -547,6 +547,7 @@ async function handleSessionCompleted({ stripe, event }) {
       utm_source: utmSource,
       utm_medium: utmMedium,
       utm_campaign: utmCampaign,
+      ip_country: ipCountry || "",
       provider: "stripe",
       session_id: full.id,
       email_sent: emailOk ? "1" : "0",
