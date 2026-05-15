@@ -27,10 +27,6 @@
   </a>
   <span class="crumb"><b id="visibleCount">0</b> photos</span>
   <div class="topbar-right">
-    <button type="button" class="pill hb-shuffle" id="shuffleBtn" aria-label="Shuffle the wall">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-      <span>Shuffle</span>
-    </button>
     <a class="pill" href="../index.html">Overview</a>
   </div>
 </div>
@@ -44,13 +40,19 @@
   </header>
 
   <div class="hb-filters">
-    <label class="hb-search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
-      <input id="q" type="search" placeholder="Search spots, regions, themes…" autocomplete="off" />
-      <button type="button" class="clear" id="clearQ" aria-label="Clear search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <div class="hb-search-row">
+      <label class="hb-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+        <input id="q" type="search" placeholder="Search spots, regions, themes…" autocomplete="off" />
+        <button type="button" class="clear" id="clearQ" aria-label="Clear search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </label>
+      <button type="button" class="hb-shuffle-btn" id="shuffleBtn" aria-label="Shuffle the wall">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        <span>Shuffle</span>
       </button>
-    </label>
+    </div>
     <div class="hb-chips" id="chips" data-axis="region"></div>
     <div class="hb-chips" id="propChips" data-axis="property"></div>
   </div>
