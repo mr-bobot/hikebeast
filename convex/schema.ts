@@ -107,6 +107,22 @@ export default defineSchema({
       // (restricted / forbidden) but is still worth showing in the
       // curated wildcamping list — Leon's discretion.
       featured:    v.optional(v.boolean()),
+      // Practical camping style for the wildcamping page sectioning:
+      //   tent     - designated tent area (Stellplatz, booked bivy zone)
+      //   both     - wildcamping above tree line, tent OR bivouac OK
+      //   bivouac  - no tent (legal: French zones; or practical:
+      //              exposed alpine ridge where pitching is silly)
+      // Optional because most yaml entries pre-date the classification;
+      // the page falls back to "both" when style is missing.
+      style:       v.optional(v.union(
+        v.literal("tent"),
+        v.literal("both"),
+        v.literal("bivouac"),
+      )),
+      // One-line pitching tip from Leon's spot-by-spot research
+      // (e.g. "Pitch on the moraine, not by the road"). Renders below
+      // the tile title on the wildcamping page.
+      tip:         v.optional(v.string()),
     })),
     updatedAt:  v.number(),
   }).index("by_spotKey",   ["spotKey"])
