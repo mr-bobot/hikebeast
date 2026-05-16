@@ -282,10 +282,14 @@ function renderOverviewStatsBar(spot) {
 // flipScriptFor swaps the route-specific values per click.
 function fmtElevationChange(gainM, descentM) {
   if (!gainM && !descentM) return null;
-  if (gainM && descentM && descentM !== gainM) {
-    return `+${gainM} <span class="unit">/</span> -${descentM}`;
-  }
-  return `+${gainM || descentM}`;
+  // Default descent to gain when descent is unset — most hikes are
+  // out-and-back, so a missing descent_m means "same as gain". Where a
+  // hike has explicit asymmetric descent (one-way ridge / traverse),
+  // descent_m is set explicitly. Always rendering both makes the cell
+  // self-explanatory.
+  const up = gainM || descentM;
+  const down = descentM != null ? descentM : gainM;
+  return `+${up}<span class="unit">m</span> <span class="unit">/</span> -${down}<span class="unit">m</span>`;
 }
 
 function renderRouteStatsBar(spot, route) {
@@ -299,7 +303,7 @@ function renderRouteStatsBar(spot, route) {
     : `<span class="missing" data-rd-dur>—</span><span class="unit" data-rd-dur-unit></span>`;
   const elevChange = fmtElevationChange(r.gain_m, r.descent_m);
   const elev = elevChange
-    ? `<span data-rd-elev-change>${elevChange}</span><span class="unit">m</span>`
+    ? `<span data-rd-elev-change>${elevChange}</span>`
     : `<span class="missing" data-rd-elev-change>—</span>`;
   const dist = r.distance_km
     ? `<span data-rd-dist>${r.distance_km}</span><span class="unit">km</span>`
@@ -530,7 +534,7 @@ function renderRouteDetailView(spot) {
 
     <div data-rd-hut hidden>
       <p class="hb-section-h">Mountain hut</p>
-      <div class="hb-detail-card"><div class="hb-detail-grid">
+      <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
         <div><span class="lbl">Name</span><span class="val" data-rd-hut-name>—</span></div>
         <div><span class="lbl">Cost</span><span class="val" data-rd-hut-cost>—</span></div>
         <div><span class="lbl">Open</span><span class="val" data-rd-hut-open>—</span></div>
@@ -540,11 +544,11 @@ function renderRouteDetailView(spot) {
 
     <div data-rd-cable hidden>
       <p class="hb-section-h">Cable car</p>
-      <div class="hb-detail-card"><div class="hb-detail-grid">
-        <div><span class="lbl">Line</span><span class="val" data-rd-cable-line>—</span></div>
+      <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
+        <div><span class="lbl">Name</span><span class="val" data-rd-cable-line>—</span></div>
         <div><span class="lbl">Cost</span><span class="val" data-rd-cable-cost>—</span></div>
         <div><span class="lbl">Open</span><span class="val" data-rd-cable-open>—</span></div>
-        <div><span class="lbl">Info</span><span class="val" data-rd-cable-info>—</span></div>
+        <div><span class="lbl">Website</span><span class="val" data-rd-cable-info>—</span></div>
       </div></div>
     </div>
 
@@ -648,10 +652,11 @@ function flipScriptFor(spot) {
 
   function fmtElevationChange(gainM, descentM) {
     if (!gainM && !descentM) return null;
-    if (gainM && descentM && descentM !== gainM) {
-      return '+' + gainM + ' / -' + descentM;
-    }
-    return '+' + (gainM || descentM);
+    // Default descent to gain (most hikes are out-and-back). Asymmetric
+    // routes set descent_m explicitly.
+    const up = gainM || descentM;
+    const down = descentM != null ? descentM : gainM;
+    return '+' + up + 'm / -' + down + 'm';
   }
 
   function setText(sel, txt) {
@@ -735,15 +740,19 @@ function flipScriptFor(spot) {
       }
     }
 
-    // Elevation change cell: "+gain" or "+gain / -loss" if both are known.
-    // The "m" unit suffix is fixed in the template; we just swap the number(s).
-    // Using split/join instead of a regex because the backslash inside a
-    // template literal gets stripped during string interpolation.
+    // Elevation change cell: always show "+up m / -down m". Wraps each
+    // "m" suffix + the "/" in unit-styled spans so they sit subtly in the
+    // value. Built by tokenizing the formatted string instead of a regex
+    // to avoid the template-literal escape pitfall.
     const elevEl = back.querySelector('[data-rd-elev-change]');
     if (elevEl) {
       const ec = fmtElevationChange(r.gain_m, r.descent_m);
       if (ec) {
-        elevEl.innerHTML = ec.split(' / ').join(' <span class="unit">/</span> ');
+        // ec looks like "+1075m / -2015m". Wrap each "m" and the "/" in unit spans.
+        const styled = ec
+          .replaceAll('m / ', '<span class="unit">m</span> <span class="unit">/</span> ')
+          .replace(/m$/, '<span class="unit">m</span>');
+        elevEl.innerHTML = styled;
         elevEl.classList.remove('missing');
       } else {
         elevEl.textContent = '—';
@@ -801,14 +810,17 @@ function flipScriptFor(spot) {
       toggle('[data-rd-hut]', false);
     }
 
-    // Cable car block · route-level
+    // Cable car block · route-level. Uses the canonical cable_cars.yaml
+    // entity shape (name, cost_chf_raw, open_raw, website) rather than the
+    // legacy embedded fields (line, info_url) which no longer exist on the
+    // resolved entity, so the cells would always read "—".
     if (r.cable_car) {
       toggle('[data-rd-cable]', true);
-      setText('[data-rd-cable-line]', r.cable_car.line || '—');
+      setText('[data-rd-cable-line]', r.cable_car.name || r.cable_car.line || '—');
       setText('[data-rd-cable-cost]', r.cable_car.cost_chf_raw || '—');
       setText('[data-rd-cable-open]', r.cable_car.open_raw || '—');
       setHTML('[data-rd-cable-info]',
-        r.cable_car.info_url ? ('<a href="' + escAttr(r.cable_car.info_url) + '" target="_blank" rel="noopener" style="color:var(--accent);">Visit ↗</a>') : '—');
+        r.cable_car.website ? ('<a href="' + escAttr(r.cable_car.website) + '" target="_blank" rel="noopener" style="color:var(--accent);">Visit ↗</a>') : '—');
     } else {
       toggle('[data-rd-cable]', false);
     }

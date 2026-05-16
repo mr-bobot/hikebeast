@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778919056468" />
+<link rel="stylesheet" href="../../preview.css?v=1778919542721" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -125,7 +125,7 @@
     <div class="hb-route-thumb"><img src="../../img/derivatives/tannhorn_p1/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
       <div class="hb-route-name">Full Brienzergrat traverse: Brienzer Rothorn to Harder Kulm </div>
-      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">12h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T5 · Expert</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1000 m gain</span></span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">12h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T5 · Expert</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1075 m gain</span></span></div>
       <div class="hb-route-operating">Cable car: Early June to late October</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
@@ -160,7 +160,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg></span>
-    <span class="value"><span data-rd-elev-change>+500 <span class="unit">/</span> -1600</span><span class="unit">m</span></span>
+    <span class="value"><span data-rd-elev-change>+500<span class="unit">m</span> <span class="unit">/</span> -1600<span class="unit">m</span></span></span>
     <span class="label">Elevation change</span>
   </div>
     <div class="hb-stats-cell">
@@ -177,7 +177,7 @@
 
     <div data-rd-hut hidden>
       <p class="hb-section-h">Mountain hut</p>
-      <div class="hb-detail-card"><div class="hb-detail-grid">
+      <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
         <div><span class="lbl">Name</span><span class="val" data-rd-hut-name>—</span></div>
         <div><span class="lbl">Cost</span><span class="val" data-rd-hut-cost>—</span></div>
         <div><span class="lbl">Open</span><span class="val" data-rd-hut-open>—</span></div>
@@ -187,11 +187,11 @@
 
     <div data-rd-cable hidden>
       <p class="hb-section-h">Cable car</p>
-      <div class="hb-detail-card"><div class="hb-detail-grid">
-        <div><span class="lbl">Line</span><span class="val" data-rd-cable-line>—</span></div>
+      <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
+        <div><span class="lbl">Name</span><span class="val" data-rd-cable-line>—</span></div>
         <div><span class="lbl">Cost</span><span class="val" data-rd-cable-cost>—</span></div>
         <div><span class="lbl">Open</span><span class="val" data-rd-cable-open>—</span></div>
-        <div><span class="lbl">Info</span><span class="val" data-rd-cable-info>—</span></div>
+        <div><span class="lbl">Website</span><span class="val" data-rd-cable-info>—</span></div>
       </div></div>
     </div>
 
@@ -226,7 +226,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"tannhorn-brienzergrat-segment","name":"Brienzergrat segment: Rothorn to Tannhorn to Planalp","start":"Brienzer Rothorn summit (top of Brienz cog railway)","transit":{"train":"Brienz BLS + Rothorn Bahn"},"duration_min":360,"gain_m":500,"distance_km":14,"sac_grade":"T5","effort_label":"Expert","description_extra":"Six-hour ridge segment from Brienzer Rothorn (top of the Brienz cog railway) along the Brienzergrat to Tannhorn and down to Planalp. About 600 m of cumulative climb against 1,600 m of descent. SAC's portal lists this section as T5 minus and describes the Tannhorn as crossed on exposed grass ridges, forming the most demanding passage of the entire Brienzergrat. Take the cog railway down from Planalp.","visits":["tannhorn","brienzer_rothorn","hardergrat_trail"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/tannhorn-1933/mountain-hiking/","https://en.wikipedia.org/wiki/Tannhorn"],"quickest_for":["hardergrat_trail","tannhorn"],"equipment_list":["Sturdy hiking boots","Poles","Helmet (rockfall sections)"],"cable_car_ids":["brienz-rothorn-bahn"],"descent_m":1600,"cable_cars":[{"id":"brienz-rothorn-bahn","name":"Brienz Rothorn Bahn","operator":"Brienz Rothorn Bahn AG","description":"Steam cog railway from Brienz village up to the summit at 2,244 m","open_raw":"Early June to late October","cost_chf_raw":"98 CHF return","website":"https://brienz-rothorn-bahn.ch/en/"}],"cable_car":{"id":"brienz-rothorn-bahn","name":"Brienz Rothorn Bahn","operator":"Brienz Rothorn Bahn AG","description":"Steam cog railway from Brienz village up to the summit at 2,244 m","open_raw":"Early June to late October","cost_chf_raw":"98 CHF return","website":"https://brienz-rothorn-bahn.ch/en/"},"quickest":true},{"id":"hardergrat_trail-rothorn-to-harder-kulm","name":"Full Brienzergrat traverse: Brienzer Rothorn to Harder Kulm","sac_grade":"T5","effort_label":"Expert","duration_min":720,"gain_m":1000,"descent_m":1900,"distance_km":24,"equipment_list":["Sturdy mountaineering boots","Poles","Helmet","Bivouac / emergency kit if splitting over two days"],"start":"Brienzer Rothorn summit station (2,244 m, top of Brienz Rothorn Bahn cog railway)","transit":{"train":"Brienz BLS","cable_car":"Brienz Rothorn Bahn (cog railway, June to October)"},"description_extra":"About 24 km from the Brienzer Rothorn summit station west along the Brienzergrat to Harder Kulm above Interlaken. Schweizer Wanderwege rates the route SAC T5 to T6 (sehr schwierig): a knife-edge grass ridge with steep drops on both sides, very few protective fixtures, and the Tannhorn passage in the middle as the most demanding section. Most parties do the traverse one-way starting at the cog railway summit and descending via the Harderbahn funicular at the Interlaken end. About 1,000 m of cumulative climb against 1,900 m of descent, 10 to 13 hours of walking. Sure-footedness, head for heights, and real alpine experience required. Skip in wet or windy weather. Trail runners do it in a single day; many hikers split it with a bivouac near Augstmatthorn or Tannhorn.","sources":["https://www.schweizer-wanderwege.ch/de/wandertipps/ausgesetzte-gratwanderung-ueber-den-hardergrat/","https://www.hardergrat.com/","https://www.brienzergrat.com/brienzergrat_to_hardergrat.html"],"cable_car_ids":["brienz-rothorn-bahn","harderbahn"],"visits":["hardergrat_trail","brienzer_rothorn","tannhorn","augstmatthorn"],"cable_cars":[{"id":"brienz-rothorn-bahn","name":"Brienz Rothorn Bahn","operator":"Brienz Rothorn Bahn AG","description":"Steam cog railway from Brienz village up to the summit at 2,244 m","open_raw":"Early June to late October","cost_chf_raw":"98 CHF return","website":"https://brienz-rothorn-bahn.ch/en/"},{"id":"harderbahn","operator":"Jungfraubahnen","description":"Funicular from Interlaken Ost up to Harder Kulm at 1,322 m","open_raw":"Early April to late November","cost_chf_raw":"44 CHF return","website":"https://www.harder-kulm.com/"}],"cable_car":{"id":"brienz-rothorn-bahn","name":"Brienz Rothorn Bahn","operator":"Brienz Rothorn Bahn AG","description":"Steam cog railway from Brienz village up to the summit at 2,244 m","open_raw":"Early June to late October","cost_chf_raw":"98 CHF return","website":"https://brienz-rothorn-bahn.ch/en/"},"quickest":false}];
+  const ROUTES = [{"id":"tannhorn-brienzergrat-segment","name":"Brienzergrat segment: Rothorn to Tannhorn to Planalp","start":"Brienzer Rothorn summit (top of Brienz cog railway)","transit":{"train":"Brienz BLS + Rothorn Bahn"},"duration_min":360,"gain_m":500,"distance_km":14,"sac_grade":"T5","effort_label":"Expert","description_extra":"Six-hour ridge segment from Brienzer Rothorn (top of the Brienz cog railway) along the Brienzergrat to Tannhorn and down to Planalp. About 600 m of cumulative climb against 1,600 m of descent. SAC's portal lists this section as T5 minus and describes the Tannhorn as crossed on exposed grass ridges, forming the most demanding passage of the entire Brienzergrat. Take the cog railway down from Planalp.","visits":["tannhorn","brienzer_rothorn","hardergrat_trail"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/tannhorn-1933/mountain-hiking/","https://en.wikipedia.org/wiki/Tannhorn"],"quickest_for":["hardergrat_trail","tannhorn"],"equipment_list":["Sturdy hiking boots","Poles","Helmet (rockfall sections)"],"cable_car_ids":["brienz-rothorn-bahn"],"descent_m":1600,"cable_cars":[{"id":"brienz-rothorn-bahn","name":"Brienz Rothorn Bahn","operator":"Brienz Rothorn Bahn AG","description":"Steam cog railway from Brienz village up to the summit at 2,244 m","open_raw":"Early June to late October","cost_chf_raw":"98 CHF return","website":"https://brienz-rothorn-bahn.ch/en/"}],"cable_car":{"id":"brienz-rothorn-bahn","name":"Brienz Rothorn Bahn","operator":"Brienz Rothorn Bahn AG","description":"Steam cog railway from Brienz village up to the summit at 2,244 m","open_raw":"Early June to late October","cost_chf_raw":"98 CHF return","website":"https://brienz-rothorn-bahn.ch/en/"},"quickest":true},{"id":"hardergrat_trail-rothorn-to-harder-kulm","name":"Full Brienzergrat traverse: Brienzer Rothorn to Harder Kulm","sac_grade":"T5","effort_label":"Expert","duration_min":720,"gain_m":1075,"descent_m":2015,"distance_km":24,"equipment_list":["Sturdy mountaineering boots","Poles","Helmet","Bivouac / emergency kit if splitting over two days"],"start":"Brienzer Rothorn summit station (2,244 m, top of Brienz Rothorn Bahn cog railway)","transit":{"train":"Brienz BLS","cable_car":"Brienz Rothorn Bahn (cog railway, June to October)"},"description_extra":"About 24 km from the Brienzer Rothorn summit station west along the Brienzergrat to Harder Kulm above Interlaken. Schweizer Wanderwege rates the route SAC T5 to T6 (sehr schwierig): a knife-edge grass ridge with steep drops on both sides, very few protective fixtures, and the Tannhorn passage in the middle as the most demanding section. Most parties do the traverse one-way starting at the cog railway summit and descending via the Harderbahn funicular at the Interlaken end. About 1,075 m of cumulative climb against 2,015 m of descent, 10 to 13 hours of walking. Sure-footedness, head for heights, and real alpine experience required. Skip in wet or windy weather. Trail runners do it in a single day; many hikers split it with a bivouac near Augstmatthorn or Tannhorn.","sources":["https://www.schweizer-wanderwege.ch/de/wandertipps/ausgesetzte-gratwanderung-ueber-den-hardergrat/","https://www.hardergrat.com/","https://www.brienzergrat.com/brienzergrat_to_hardergrat.html"],"cable_car_ids":["brienz-rothorn-bahn","harderbahn"],"visits":["hardergrat_trail","brienzer_rothorn","tannhorn","augstmatthorn"],"cable_cars":[{"id":"brienz-rothorn-bahn","name":"Brienz Rothorn Bahn","operator":"Brienz Rothorn Bahn AG","description":"Steam cog railway from Brienz village up to the summit at 2,244 m","open_raw":"Early June to late October","cost_chf_raw":"98 CHF return","website":"https://brienz-rothorn-bahn.ch/en/"},{"id":"harderbahn","operator":"Jungfraubahnen","description":"Funicular from Interlaken Ost up to Harder Kulm at 1,322 m","open_raw":"Early April to late November","cost_chf_raw":"44 CHF return","website":"https://www.harder-kulm.com/"}],"cable_car":{"id":"brienz-rothorn-bahn","name":"Brienz Rothorn Bahn","operator":"Brienz Rothorn Bahn AG","description":"Steam cog railway from Brienz village up to the summit at 2,244 m","open_raw":"Early June to late October","cost_chf_raw":"98 CHF return","website":"https://brienz-rothorn-bahn.ch/en/"},"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -244,10 +244,11 @@
 
   function fmtElevationChange(gainM, descentM) {
     if (!gainM && !descentM) return null;
-    if (gainM && descentM && descentM !== gainM) {
-      return '+' + gainM + ' / -' + descentM;
-    }
-    return '+' + (gainM || descentM);
+    // Default descent to gain (most hikes are out-and-back). Asymmetric
+    // routes set descent_m explicitly.
+    const up = gainM || descentM;
+    const down = descentM != null ? descentM : gainM;
+    return '+' + up + 'm / -' + down + 'm';
   }
 
   function setText(sel, txt) {
@@ -331,15 +332,19 @@
       }
     }
 
-    // Elevation change cell: "+gain" or "+gain / -loss" if both are known.
-    // The "m" unit suffix is fixed in the template; we just swap the number(s).
-    // Using split/join instead of a regex because the backslash inside a
-    // template literal gets stripped during string interpolation.
+    // Elevation change cell: always show "+up m / -down m". Wraps each
+    // "m" suffix + the "/" in unit-styled spans so they sit subtly in the
+    // value. Built by tokenizing the formatted string instead of a regex
+    // to avoid the template-literal escape pitfall.
     const elevEl = back.querySelector('[data-rd-elev-change]');
     if (elevEl) {
       const ec = fmtElevationChange(r.gain_m, r.descent_m);
       if (ec) {
-        elevEl.innerHTML = ec.split(' / ').join(' <span class="unit">/</span> ');
+        // ec looks like "+1075m / -2015m". Wrap each "m" and the "/" in unit spans.
+        const styled = ec
+          .replaceAll('m / ', '<span class="unit">m</span> <span class="unit">/</span> ')
+          .replace(/m$/, '<span class="unit">m</span>');
+        elevEl.innerHTML = styled;
         elevEl.classList.remove('missing');
       } else {
         elevEl.textContent = '—';
@@ -397,14 +402,17 @@
       toggle('[data-rd-hut]', false);
     }
 
-    // Cable car block · route-level
+    // Cable car block · route-level. Uses the canonical cable_cars.yaml
+    // entity shape (name, cost_chf_raw, open_raw, website) rather than the
+    // legacy embedded fields (line, info_url) which no longer exist on the
+    // resolved entity, so the cells would always read "—".
     if (r.cable_car) {
       toggle('[data-rd-cable]', true);
-      setText('[data-rd-cable-line]', r.cable_car.line || '—');
+      setText('[data-rd-cable-line]', r.cable_car.name || r.cable_car.line || '—');
       setText('[data-rd-cable-cost]', r.cable_car.cost_chf_raw || '—');
       setText('[data-rd-cable-open]', r.cable_car.open_raw || '—');
       setHTML('[data-rd-cable-info]',
-        r.cable_car.info_url ? ('<a href="' + escAttr(r.cable_car.info_url) + '" target="_blank" rel="noopener" style="color:var(--accent);">Visit ↗</a>') : '—');
+        r.cable_car.website ? ('<a href="' + escAttr(r.cable_car.website) + '" target="_blank" rel="noopener" style="color:var(--accent);">Visit ↗</a>') : '—');
     } else {
       toggle('[data-rd-cable]', false);
     }

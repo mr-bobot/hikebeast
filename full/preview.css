@@ -5527,6 +5527,10 @@ body.has-rail .topbar .hb-nav { display: none; }
 /* Overview bar (back of card): 3 cells, doesn't need to span full width.
    Capped + centered so it feels purposeful rather than sparse. */
 .hb-stats-bar--compact { grid-template-columns: repeat(3, 1fr); max-width: 480px; margin-left: auto; margin-right: auto; }
+/* Compact variant for the Cable car / Mountain hut info cards on the route
+   detail. The cards only carry 4 short labelled values; spanning the full
+   width leaves too much air. Cap + center to match the overview bar. */
+.hb-detail-card--compact { max-width: 600px; margin-left: auto; margin-right: auto; }
 .hb-stats-cell { padding: 14px 8px 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; border-left: 1px solid var(--hairline); text-align: center; min-width: 0; }
 .hb-stats-cell:first-child { border-left: 0; }
 .hb-stats-cell .icon { width: 22px; height: 22px; color: var(--muted); display: inline-flex; align-items: center; justify-content: center; }
