@@ -263,7 +263,7 @@ function renderOverviewStatsBar(spot) {
     access = `Drive-up`;
   }
 
-  return `<div class="hb-stats-bar">
+  return `<div class="hb-stats-bar hb-stats-bar--compact">
     ${statCell("Altitude", alt, ICON_ELEV)}
     ${statCell("Accessibility", access, ICON_DIFF)}
     ${statCell("Crowdedness", busyDotsHtml(tf.busyness), ICON_BUSY)}

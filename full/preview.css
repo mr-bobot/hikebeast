@@ -5524,6 +5524,9 @@ body.has-rail .topbar .hb-nav { display: none; }
 
 /* 5-cell stats dashboard */
 .hb-stats-bar { display: grid; grid-template-columns: repeat(5, 1fr); background: white; border: 1px solid var(--hairline); border-radius: 14px; overflow: hidden; }
+/* Overview bar (back of card): 3 cells, doesn't need to span full width.
+   Capped + centered so it feels purposeful rather than sparse. */
+.hb-stats-bar--compact { grid-template-columns: repeat(3, 1fr); max-width: 480px; margin-left: auto; margin-right: auto; }
 .hb-stats-cell { padding: 14px 8px 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; border-left: 1px solid var(--hairline); text-align: center; min-width: 0; }
 .hb-stats-cell:first-child { border-left: 0; }
 .hb-stats-cell .icon { width: 22px; height: 22px; color: var(--muted); display: inline-flex; align-items: center; justify-content: center; }
