@@ -5397,3 +5397,42 @@ body.has-rail .topbar .hb-nav { display: none; }
   .hb-shuffle-btn span { display: none; }
   .hb-shuffle-btn { padding: 0 12px; }
 }
+
+/* === Wildcamping sections (tent / both / bivouac) === */
+.hb-wc-section-head {
+  margin: 32px 0 14px;
+  /* On the first section we don't want the big top gap above; the page
+   * hero already provides separation. */
+}
+.hb-wc-section-head:first-child { margin-top: 16px; }
+.hb-wc-section-head h2 {
+  font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.hb-wc-count {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.hb-wc-section-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  max-width: 56ch;
+}
+.hb-saved-tile .hb-wc-tip {
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--soft);
+  letter-spacing: -0.005em;
+  margin-top: 4px;
+}

@@ -36,7 +36,7 @@
   <header class="hb-hero">
     <p class="kicker">Where you can sleep out</p>
     <h1>Wildcamping</h1>
-    <p>Spots in the guide where wildcamping is tolerated under Swiss rules. Above the tree line, outside protected reserves, no traces. Use the SAC bivouac etiquette: arrive late, leave early, pack everything out.</p>
+    <p>Spots in the guide where camping is tolerated under Swiss (and a few French) rules. Above the tree line, outside protected reserves, no traces. Use the SAC bivouac etiquette: arrive late, leave early, pack everything out.</p>
   </header>
 
   <div id="content"></div>
@@ -96,6 +96,7 @@
     const regionName = region ? region.name : spot.chapter_id;
     const kicker = window.HB.singularKicker(spot.kicker || '');
     const sub = kicker ? `${esc(kicker)} · ${esc(regionName)}` : esc(regionName);
+    const tip = (spot.wildCamping && spot.wildCamping.tip) || '';
     const attrs = window.HB.photoAttrs({
       photoId: spot.imagePhotoId, image: spot.image,
       width: 1000, prefix: '../',
@@ -109,9 +110,40 @@
       <div class="body">
         <div class="name">${esc(spot.title)}</div>
         <div class="meta">${sub}</div>
+        ${tip ? `<div class="hb-wc-tip">${esc(tip)}</div>` : ''}
       </div>
     `;
     return a;
+  }
+
+  // Sectioning by practical camping style:
+  //   tent     - designated tent area (Stellplatz, booked bivy zone)
+  //   both     - wildcamping above tree line, tent OR bivouac OK (most spots)
+  //   bivouac  - no tent (legal: French zones; or practical: exposed alpine ridge)
+  // Defaults: spots without an explicit style fall into "both" -- the most
+  // common case and the historical default for the page before this section
+  // refactor.
+  const SECTIONS = [
+    {
+      key: 'tent',
+      title: 'Tent area',
+      sub: 'Designated camping zones. Reservations may apply (e.g. Chéserys).',
+    },
+    {
+      key: 'both',
+      title: 'Tent or bivouac',
+      sub: 'Above the tree line, tolerated single-night. Pitch a tent or sleep out, either works.',
+    },
+    {
+      key: 'bivouac',
+      title: 'Bivouac only',
+      sub: 'No tent. Bring a sleeping bag and tarp. Either local rules require it (French zones) or the terrain does (exposed alpine ridges).',
+    },
+  ];
+
+  function sectionFor(spot) {
+    const s = spot.wildCamping && spot.wildCamping.style;
+    return (s === 'tent' || s === 'bivouac') ? s : 'both';
   }
 
   // Cache the rendered spot-keys so Convex's spots:list push doesn't
@@ -128,20 +160,32 @@
     empty.hidden = true;
     content.hidden = false;
 
-    // Flat 2-col grid — the wildcamping collection is intentionally
-    // small (a curated handful), so chapter separators add visual
-    // noise without aiding navigation. Sort by chapter so spots from
-    // the same region stay together visually, then render edge-to-edge.
+    // Sort by chapter within each section so geographic clusters stay
+    // together visually. The section order is intentional: tent first
+    // (most concrete / "you can definitely camp here"), both in the
+    // middle (the bulk of Swiss above-tree-line spots), bivouac last
+    // (highest bar — French regs or alpine terrain).
     SPOTS.sort((a, b) => (a.chapter || '').localeCompare(b.chapter || ''));
-    const spotsKey = SPOTS.map(s => s.imagePhotoId || s.image || s.id || '').join('|');
+    const spotsKey = SPOTS.map(s => `${sectionFor(s)}:${s.imagePhotoId || s.image || s.id || ''}`).join('|');
     if (spotsKey === lastSpotsKey) return;
     lastSpotsKey = spotsKey;
 
     content.innerHTML = '';
-    const grid = document.createElement('div');
-    grid.className = 'hb-saved-grid';
-    SPOTS.forEach(s => grid.appendChild(tile(s)));
-    content.appendChild(grid);
+    for (const section of SECTIONS) {
+      const inSection = SPOTS.filter(s => sectionFor(s) === section.key);
+      if (!inSection.length) continue;
+      const heading = document.createElement('div');
+      heading.className = 'hb-wc-section-head';
+      heading.innerHTML = `
+        <h2>${esc(section.title)} <span class="hb-wc-count">${inSection.length}</span></h2>
+        <p>${esc(section.sub)}</p>
+      `;
+      content.appendChild(heading);
+      const grid = document.createElement('div');
+      grid.className = 'hb-saved-grid';
+      inSection.forEach(s => grid.appendChild(tile(s)));
+      content.appendChild(grid);
+    }
   }
 
   // Re-render on Convex push (wildCamping verdicts may flip as Leon edits)
