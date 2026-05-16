@@ -91,13 +91,15 @@ hikes:
   effort_label: Easy
   duration_min: 80
   gain_m: 415
-  start: Triftbahn
+  start: Underi Trift (Triftbahn top station, 1,357 m)
   transit:
-    bus: Nessental, Triftbahn
+    train: Meiringen
+    bus: PostBus 161 to Nessental, Triftbahn
+    cable_car: KWO Triftbahn cable car (booking advised, ~26 CHF return)
   visits:
   - triftbrucke
-  description_extra: Reach the trailhead via the Triftbahn cable car (booking advised, around 26 CHF). From the top station, about 1h 20 on a T2 mountain trail with 415 m of gain to
-    the bridge. The Postbus stop is Nessental, Triftbahn. Continue past the bridge to the Windegghütte for an overnight (June to mid-October).
+  description_extra: From the Underi Trift top station, about 1h 20 on a T2 mountain trail with 415 m of gain to the bridge. Continue past the bridge to the Windegghütte for an overnight
+    (June to mid-October).
   sources:
   - https://www.windegghuette.ch/
   - https://www.grimselwelt.ch/en/sports/hiking/trift-bridge/
@@ -113,13 +115,14 @@ hikes:
   effort_label: Easy
   duration_min: 80
   gain_m: 415
-  start: Triftbahn
+  start: Underi Trift (Triftbahn top station, 1,357 m)
   transit:
-    bus: Nessental, Triftbahn
+    train: Meiringen
+    bus: PostBus 161 to Nessental, Triftbahn
+    cable_car: KWO Triftbahn cable car (booking advised, ~26 CHF return)
   visits:
   - triftsee
-  description_extra: Reached via the Triftbahn cable car (10-minute ride), then about 1 h 30 from the top station on the same trail as the Triftbrücke suspension bridge, T2 with around
-    400 m of gain. Camping not permitted.
+  description_extra: From the Underi Trift top station, about 1 h 30 on the same trail as the Triftbrücke suspension bridge, T2 with around 400 m of gain. Camping not permitted.
   sources:
   - https://www.grimselwelt.ch/en/sports/hiking/triftsee/
   quickest_for:
