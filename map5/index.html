@@ -440,8 +440,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.5;
   }
 
-  /* Extra breathing room between hero bullets and "What's inside" */
+  /* Extra breathing room above each major section. Same 24px gift on
+     "What's inside", reviews, and About me so the page reads as a
+     proper stack, not a tight scroll. */
   .inside-section { margin-top: 24px; }
+  .reviews { margin-top: 18px; }
+  .about-section { margin-top: 18px; }
+  #get-the-map { margin-top: 18px; }
 
   /* === Collection grid · full-bleed photo grid above the 6 cards === */
   .collection-wrap {
@@ -1283,8 +1288,17 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   };
   (function () {
     var keys = Object.keys(window.HB_HERO_VARIANTS);
-    var sid = '';
-    try { sid = new URLSearchParams(location.search).get('s') || ''; } catch (e) {}
+    var qs;
+    try { qs = new URLSearchParams(location.search); } catch (e) { qs = null; }
+    var sid = qs ? (qs.get('s') || '') : '';
+    // ?hv=01..08 forces a specific variant for this page load. Used for
+    // QA / Leon previewing specific images. Does NOT write to
+    // localStorage so the real bucket isn't polluted.
+    var override = qs ? (qs.get('hv') || '') : '';
+    if (override && window.HB_HERO_VARIANTS[override]) {
+      window.HB_HERO_VARIANT = override;
+      return;
+    }
     var stored = null;
     try { stored = localStorage.getItem('hb:hero_variant'); } catch (e) {}
     function pick() {
