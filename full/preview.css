@@ -5436,10 +5436,3 @@ body.has-rail .topbar .hb-nav { display: none; }
   letter-spacing: 0;
 }
 .hb-wc-chip.is-on .hb-wc-chip-count { color: rgba(255,255,255,0.7); }
-.hb-saved-tile .hb-wc-tip {
-  font-size: 12.5px;
-  line-height: 1.35;
-  color: var(--soft);
-  letter-spacing: -0.005em;
-  margin-top: 4px;
-}

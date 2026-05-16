@@ -96,13 +96,15 @@
     const regionName = region ? region.name : spot.chapter_id;
     const kicker = window.HB.singularKicker(spot.kicker || '');
     const sub = kicker ? `${esc(kicker)} · ${esc(regionName)}` : esc(regionName);
-    const tip = (spot.wildCamping && spot.wildCamping.tip) || '';
     const attrs = window.HB.photoAttrs({
       photoId: spot.imagePhotoId, image: spot.image,
       width: 1000, prefix: '../',
       sizes: '(min-width: 1200px) 25vw, (min-width: 600px) 33vw, 50vw',
     });
     const srcsetAttr = attrs.srcset ? ` srcset="${esc(attrs.srcset)}" sizes="${esc(attrs.sizes)}"` : '';
+    // Card stays minimal (name + meta only) per Leon's "don't change the
+    // design" — the wildCamping.tip text is preserved in yaml + Convex for
+    // future use (spot detail page, etc.) but doesn't render here.
     a.innerHTML = `
       <div class="photo">
         <img src="${esc(attrs.src)}"${srcsetAttr} alt="${esc(spot.title)}" loading="lazy" decoding="async" />
@@ -110,7 +112,6 @@
       <div class="body">
         <div class="name">${esc(spot.title)}</div>
         <div class="meta">${sub}</div>
-        ${tip ? `<div class="hb-wc-tip">${esc(tip)}</div>` : ''}
       </div>
     `;
     return a;
