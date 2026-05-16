@@ -4017,8 +4017,6 @@ spots:
   best_light: Sunset
   wildCamping:
     verdict: restricted
-    featured: true
-    style: tent
     reason: "Réserve Naturelle Nationale des Aiguilles Rouges. Since 2024 (prefectural order), bivouac is forbidden by default; only regulated zones around Lac des Chéserys are tolerated, and ONLY with prior online booking via the Chamonix app or bivouac.nature-haute-savoie.fr. Tents 19:00-09:00, one night."
     canton: France
   maps_url: https://www.google.com/maps/place/Lacs+des+Ch%C3%A9serys/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894cdf11eee317:0x3205ec87a48b021e!8m2!3d45.984858!4d6.90184!16s%2Fg%2F11fy_109py
@@ -4587,6 +4585,9 @@ spots:
   best_light: Sunset from Col de Balafrasse
   wildCamping:
     verdict: restricted
+    featured: true
+    style: bivouac
+    tip: "Bivouac (no tent) tolerated above the alpages, sundown to sunrise. Pitch on the ridge toward Col de Balafrasse for the Aravis sunset."
     reason: "Aravis range, France: outside any nature reserve at the lake; bivouac (no tent, sundown to sunrise) tolerated above the alpages. Below the alpages: private pasture, ask farmer."
     canton: France
   maps_url: https://www.google.com/maps/place/Lac+de+Peyre/@45.9907,6.4915,15z

@@ -116,76 +116,100 @@
     return a;
   }
 
-  // Sectioning by practical camping style:
+  // Practical camping style:
   //   tent     - designated tent area (Stellplatz, booked bivy zone)
   //   both     - wildcamping above tree line, tent OR bivouac OK (most spots)
   //   bivouac  - no tent (legal: French zones; or practical: exposed alpine ridge)
-  // Defaults: spots without an explicit style fall into "both" -- the most
-  // common case and the historical default for the page before this section
-  // refactor.
-  const SECTIONS = [
-    {
-      key: 'tent',
-      title: 'Tent area',
-      sub: 'Designated camping zones. Reservations may apply (e.g. Chéserys).',
-    },
-    {
-      key: 'both',
-      title: 'Tent or bivouac',
-      sub: 'Above the tree line, tolerated single-night. Pitch a tent or sleep out, either works.',
-    },
-    {
-      key: 'bivouac',
-      title: 'Bivouac only',
-      sub: 'No tent. Bring a sleeping bag and tarp. Either local rules require it (French zones) or the terrain does (exposed alpine ridges).',
-    },
-  ];
-
-  function sectionFor(spot) {
+  // Defaults: spots without an explicit style fall into "both" — the most
+  // common case and the historical default for the page.
+  function styleFor(spot) {
     const s = spot.wildCamping && spot.wildCamping.style;
     return (s === 'tent' || s === 'bivouac') ? s : 'both';
   }
 
+  // Pin Leon's classic spots to the top so the wildcamping page leads with
+  // the names regulars already know. Anything not in this list sorts by
+  // chapter after.
+  const PIN_ORDER = [
+    'eastern#klausenpass',
+    'central#fulberg',
+    'eastern#joriseen',
+    'eastern#pizol',
+  ];
+
+  function sortSpots(arr) {
+    return arr.sort((a, b) => {
+      const ai = PIN_ORDER.indexOf(a.spotKey);
+      const bi = PIN_ORDER.indexOf(b.spotKey);
+      if (ai !== -1 && bi !== -1) return ai - bi;
+      if (ai !== -1) return -1;
+      if (bi !== -1) return 1;
+      return (a.chapter || '').localeCompare(b.chapter || '');
+    });
+  }
+
+  // Filter chips ("All / Tent area / Tent + bivouac / Bivouac only").
+  // Active chip is held in `activeStyle`; null = show everything.
+  const CHIPS = [
+    { key: null,       label: 'All' },
+    { key: 'tent',     label: 'Tent area' },
+    { key: 'both',     label: 'Tent + bivouac' },
+    { key: 'bivouac',  label: 'Bivouac only' },
+  ];
+  let activeStyle = null;
+
   // Cache the rendered spot-keys so Convex's spots:list push doesn't
   // rebuild an identical grid and flicker every image.
-  let lastSpotsKey = '';
+  let lastRenderKey = '';
   function render() {
     counter.textContent = SPOTS.length;
     if (!SPOTS.length) {
       content.hidden = true;
       empty.hidden = false;
-      if (lastSpotsKey !== '') { content.innerHTML = ''; lastSpotsKey = ''; }
+      if (lastRenderKey !== '') { content.innerHTML = ''; lastRenderKey = ''; }
       return;
     }
     empty.hidden = true;
     content.hidden = false;
 
-    // Sort by chapter within each section so geographic clusters stay
-    // together visually. The section order is intentional: tent first
-    // (most concrete / "you can definitely camp here"), both in the
-    // middle (the bulk of Swiss above-tree-line spots), bivouac last
-    // (highest bar — French regs or alpine terrain).
-    SPOTS.sort((a, b) => (a.chapter || '').localeCompare(b.chapter || ''));
-    const spotsKey = SPOTS.map(s => `${sectionFor(s)}:${s.imagePhotoId || s.image || s.id || ''}`).join('|');
-    if (spotsKey === lastSpotsKey) return;
-    lastSpotsKey = spotsKey;
+    const filtered = activeStyle
+      ? SPOTS.filter(s => styleFor(s) === activeStyle)
+      : SPOTS.slice();
+    const visible = sortSpots(filtered);
+
+    const renderKey = `${activeStyle || 'all'}|` + visible.map(s => s.imagePhotoId || s.image || s.id || '').join('|');
+    if (renderKey === lastRenderKey) return;
+    lastRenderKey = renderKey;
 
     content.innerHTML = '';
-    for (const section of SECTIONS) {
-      const inSection = SPOTS.filter(s => sectionFor(s) === section.key);
-      if (!inSection.length) continue;
-      const heading = document.createElement('div');
-      heading.className = 'hb-wc-section-head';
-      heading.innerHTML = `
-        <h2>${esc(section.title)} <span class="hb-wc-count">${inSection.length}</span></h2>
-        <p>${esc(section.sub)}</p>
-      `;
-      content.appendChild(heading);
-      const grid = document.createElement('div');
-      grid.className = 'hb-saved-grid';
-      inSection.forEach(s => grid.appendChild(tile(s)));
-      content.appendChild(grid);
-    }
+
+    // Chip row at the top. Counts come from the unfiltered SPOTS list
+    // (not the filtered one) so users can see at a glance how many
+    // entries each tab will reveal.
+    const chipRow = document.createElement('div');
+    chipRow.className = 'hb-wc-chips';
+    CHIPS.forEach(chip => {
+      const count = chip.key === null
+        ? SPOTS.length
+        : SPOTS.filter(s => styleFor(s) === chip.key).length;
+      if (chip.key !== null && count === 0) return;  // hide empty buckets
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hb-wc-chip' + (chip.key === activeStyle ? ' is-on' : '');
+      btn.innerHTML = `<span>${esc(chip.label)}</span><span class="hb-wc-chip-count">${count}</span>`;
+      btn.addEventListener('click', () => {
+        activeStyle = chip.key;
+        lastRenderKey = '';  // force re-render
+        render();
+      });
+      chipRow.appendChild(btn);
+    });
+    content.appendChild(chipRow);
+
+    const grid = document.createElement('div');
+    grid.className = 'hb-saved-grid';
+    visible.forEach(s => grid.appendChild(tile(s)));
+    content.appendChild(grid);
   }
 
   // Re-render on Convex push (wildCamping verdicts may flip as Leon edits)
