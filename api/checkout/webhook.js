@@ -461,6 +461,10 @@ async function handleSessionCompleted({ stripe, event }) {
   // `source_page` column for A/B attribution (map / themap / map3 +
   // their de_ variants).
   const sourcePage = full.metadata?.source_page || "";
+  // v12 hero split-test bucket the buyer was assigned to. Empty if not
+  // in the test. Forwarded to the Sheet's `hero_variant` column to
+  // close the conversion loop per variant.
+  const heroVariant = full.metadata?.hero_variant || "";
 
   if (!email) {
     console.error("Session completed without email:", full.id);
@@ -538,6 +542,7 @@ async function handleSessionCompleted({ stripe, event }) {
       instagram_handle: buyerIg || "",
       referral_slug: refSlug || "",
       source_page: sourcePage || "",
+      hero_variant: heroVariant || "",
       provider: "stripe",
       session_id: full.id,
       email_sent: emailOk ? "1" : "0",

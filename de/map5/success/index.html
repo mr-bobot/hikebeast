@@ -1,0 +1,828 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<title>You're in · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+
+<!-- Meta Pixel: client-side Purchase. Webhook fires the same event with
+     event_id = payment_intent_id for dedup. -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1658000685240569');
+fbq('track', 'PageView');
+</script>
+
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html,body { margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f5f7;
+    --fg: #1d1d1f;
+    --muted: #6e6e73;
+    --hairline: rgba(0,0,0,0.08);
+    --accent: #0071e3;
+    --success: #34c759;
+    --radius-card: 18px;
+    --radius-btn: 999px;
+  }
+  body {
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 0 0 48px;
+  }
+
+  /* === Hero · cream gradient + transparent polaroid PNG.
+     Background is a CSS gradient (matches the Figma cream stops), the
+     PNG is just the photos with alpha. We let the PNG break out of
+     the hero box (overflow:visible) and bump its z-index above the
+     action card so the polaroids visually overlap the white card
+     below. Subtle but adds depth to the celebration moment. */
+  .hero {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    /* Linear cream gradient, top-left to bottom-right, matching the
+       Figma stops F4F1EC -> ECE6DC. */
+    background: linear-gradient(135deg, #F4F1EC 0%, #ECE6DC 100%);
+    margin: 16px 16px 0;
+    border-radius: 18px;
+    /* DO NOT clip · the polaroid PNG intentionally extends past the
+       hero's bottom edge to land on top of the action card. */
+    overflow: visible;
+  }
+  .hero img {
+    /* Absolute + z-index:3 puts the photos ABOVE the action card
+       (z-index:2). The PNG has plenty of transparent margin around
+       the polaroids, so contain-fit keeps proportions intact. */
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* === Action card · the celebration + the action.
+     Tick on top, heading + subhead, two buttons. Floats up over the
+     hero so it reads as the main content, not a footer. */
+  .action {
+    margin: -36px 16px 0;
+    background: #ffffff;
+    border-radius: var(--radius-card);
+    padding: 28px 22px 22px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+  .action-tick {
+    width: 56px; height: 56px;
+    border-radius: 999px;
+    background: var(--success);
+    display: grid;
+    place-items: center;
+    /* Pop on load -- the celebration moment. */
+    animation: pop 380ms cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3);
+    margin-bottom: 4px;
+  }
+  .action-tick svg { width: 28px; height: 28px; display: block; }
+  @keyframes pop {
+    0%   { transform: scale(0.4); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .action h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--fg);
+  }
+  .action-sub {
+    margin: -6px 0 8px;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  /* Buttons go full-width inside the card on mobile. */
+  .action .btn { width: 100%; }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 52px;
+    border-radius: var(--radius-btn);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition: transform 100ms ease, opacity 150ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary {
+    background: var(--fg);
+    color: #ffffff;
+  }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--fg);
+  }
+  .btn[aria-disabled="true"] {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .btn-icon {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+  }
+
+  /* Tiny status row below the buttons. Holds the loading state while we
+     fetch the token, and the order id once we have it. */
+  .status {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .status code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    word-break: break-all;
+    color: var(--muted);
+  }
+
+  /* === Personal note from Leon · the connection moment. */
+  .note {
+    margin: 28px 22px 0;
+    padding: 20px;
+    background: var(--surface);
+    border-radius: var(--radius-card);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .note-avatar {
+    width: 44px; height: 44px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #ddd;
+  }
+  .note-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: 70% 45%;
+    display: block;
+  }
+  .note-body {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--fg);
+  }
+  .note-body strong {
+    font-weight: 600;
+    color: var(--fg);
+  }
+  .note-body p {
+    margin: 0 0 6px;
+  }
+  .note-body p:last-child { margin-bottom: 0; }
+  .note-body a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .note-body a:hover { text-decoration: underline; }
+
+  /* === Next steps · concrete, tactical. Reduces overwhelm + gives
+     a sense of momentum right after purchase. */
+  .next {
+    margin: 22px 22px 0;
+  }
+  .next h2 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+  }
+  .next ol {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+  .next ol li {
+    counter-increment: step;
+    padding: 14px 0 14px 40px;
+    border-top: 1px solid var(--hairline);
+    position: relative;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  /* No bottom border on the last item -- the footer's top border picks
+     up the visual cap. Otherwise we'd render two parallel lines. */
+  .next ol li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0; top: 14px;
+    width: 26px; height: 26px;
+    border-radius: 999px;
+    background: var(--surface);
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  /* === Maps callout · the unsung product feature. The buyer also
+     paid for "all 122 pins on Google Maps as one shared list", so we
+     make it a visible action between the personal note and the
+     tactical next-steps. Card is full-width, soft surface bg, with
+     the multi-colour Drive-style maps mark to read distinct. */
+  .maps {
+    margin: 22px 22px 0;
+    padding: 18px 18px 18px 18px;
+    background: var(--surface);
+    border-radius: var(--radius-card);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--fg);
+    transition: transform 100ms ease, background 150ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .maps:active { transform: scale(0.99); }
+  .maps:hover { background: #ececef; }
+  .maps-icon {
+    width: 44px; height: 44px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #ffffff;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+  /* Standard Google-Maps style pin in the brand red. */
+  .maps-icon svg {
+    width: 26px; height: 26px;
+    display: block;
+  }
+  .maps-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .maps-body strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--fg);
+    line-height: 1.25;
+  }
+  .maps-body span {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+  .maps-arrow {
+    flex-shrink: 0;
+    color: var(--muted);
+  }
+
+  /* === Footer · receipt details, IG follow, imprint. */
+  .foot {
+    margin: 32px 22px 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--hairline);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.7;
+  }
+  .foot a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .foot a:hover { color: var(--fg); }
+  .foot-sep::before { content: " · "; }
+  .foot-order {
+    margin-top: 8px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    word-break: break-all;
+  }
+
+  /* === Onboarding · primary CTA between celebration and Download.
+     Collapsed-by-default <details> so the success page still feels like
+     a celebration, not a wall of inputs. The summary IS the primary
+     button; tapping it expands the inline form. */
+  .onboard {
+    width: 100%;
+    margin: 0;
+  }
+  .onboard[hidden] { display: none !important; }
+  .onboard-trigger {
+    list-style: none;
+    cursor: pointer;
+  }
+  .onboard-trigger::-webkit-details-marker { display: none; }
+  .onboard-trigger::marker { display: none; }
+  .onboard-trigger .onboard-icon {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+  }
+  /* Form expanded: Trigger wird vom "Primär-CTA" zum "Card Header"
+     herabgestuft, damit er nicht mit dem "Konto erstellen"-Submit
+     konkurriert (der einzige Primär-Button im offenen Zustand). */
+  .onboard[open] .onboard-trigger {
+    background: var(--surface);
+    color: var(--fg);
+    height: 44px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 14px 14px 0 0;
+  }
+  .onboard[open] .onboard-trigger:active { transform: none; }
+  .onboard[open] .onboard-icon { opacity: 0.5; }
+
+  .onboard-beta {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 8px;
+    margin-left: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .onboard[open] .onboard-beta {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--muted);
+  }
+
+  .action-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--hairline);
+    margin: 4px 0 0;
+    border: 0;
+  }
+  .onboard-form {
+    background: var(--surface);
+    border-radius: 0 0 14px 14px;
+    padding: 18px 18px 16px;
+    margin: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .onboard-pitch {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+    text-align: left;
+  }
+  .onboard-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .onboard-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .onboard-input {
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--hairline);
+    background: #ffffff;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .onboard-input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
+    border-color: transparent;
+  }
+  .onboard-input:disabled {
+    color: var(--muted);
+    background: #f0f0f3;
+    cursor: not-allowed;
+  }
+  .onboard-hint {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .onboard-submit {
+    margin-top: 4px;
+  }
+  .onboard-error {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 59, 48, 0.08);
+    color: #c4302b;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .onboard-existing {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .onboard-existing a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .onboard-existing a:hover { text-decoration: underline; }
+
+  /* === Desktop polish ·
+     Mobile-first column stays the same, but on wider viewports we add
+     top breathing room so the page isn't pinned to the navbar, and
+     widen the column slightly so it doesn't feel lost in the middle of
+     a 1440px screen. The action card is intentionally kept narrow --
+     more width would make the buttons feel oversized. */
+  @media (min-width: 720px) {
+    main {
+      max-width: 580px;
+      padding: 32px 0 64px;
+    }
+    .hero {
+      margin: 0 0 0;
+      border-radius: 22px;
+    }
+    .action {
+      margin: -44px 28px 0;
+      padding: 32px 28px 26px;
+    }
+    .note, .maps, .next {
+      margin-left: 28px;
+      margin-right: 28px;
+    }
+    .foot {
+      margin-left: 28px;
+      margin-right: 28px;
+    }
+  }
+</style>
+</head>
+<body>
+<main>
+  <!-- Hero · cream photo of three polaroids. No text overlay; copy lives
+       in the action card below. -->
+  <section class="hero">
+    <img src="/images/thanks-hero-transparent.png" alt="" />
+  </section>
+
+  <!-- Action card · celebration (tick + heading) and the two ways to get
+       the PDF. Floats up over the hero, so the buyer reads it first.
+       1. Direct download (Vercel Blob, HMAC-token gated, fetched on load).
+       2. Open in Google Drive (Leon-maintained customer-view folder). -->
+  <section class="action">
+    <div class="action-tick" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="5,12 10,17 19,7" />
+      </svg>
+    </div>
+    <h1 id="headline">Willkommen</h1>
+    <p class="action-sub" id="subheadline">Dein Guide ist jetzt bereit.</p>
+
+    <!-- Primärer Onboarding-CTA: erst sichtbar nachdem GET /api/checkout/session
+         bestätigt hat dass die Session bezahlt ist. Eingeklappt, ein Tap
+         expandiert das Formular. -->
+    <details class="onboard" id="onboardCard" hidden>
+      <summary class="btn btn-primary onboard-trigger">
+        <span>App öffnen</span>
+        <span class="onboard-beta" aria-label="beta">Beta</span>
+      </summary>
+      <form id="onboardForm" class="onboard-form" novalidate>
+        <p class="onboard-pitch">
+          Speichere deine Spots, sieh wo du schon warst, und mach auf jedem Gerät weiter.
+        </p>
+        <label class="onboard-field">
+          <span class="onboard-label">Email</span>
+          <input id="onboardEmail" class="onboard-input" type="email" disabled aria-readonly="true" autocomplete="email" />
+          <span class="onboard-hint">Lässt sich später in den Konto-Einstellungen ändern.</span>
+        </label>
+        <label class="onboard-field">
+          <span class="onboard-label">Benutzername</span>
+          <input id="onboardUsername" class="onboard-input" type="text"
+                 autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false"
+                 pattern="[a-z0-9._\-]{2,32}" required />
+          <span class="onboard-hint">Kleinbuchstaben, Zahlen, Punkte. Lässt sich später ändern.</span>
+        </label>
+        <label class="onboard-field">
+          <span class="onboard-label">Passwort</span>
+          <input id="onboardPassword" class="onboard-input" type="password"
+                 minlength="8" autocomplete="new-password" required />
+          <span class="onboard-hint">Mindestens 8 Zeichen.</span>
+        </label>
+        <button type="submit" class="btn btn-primary onboard-submit">
+          Konto erstellen &amp; App öffnen
+        </button>
+        <p class="onboard-error" id="onboardError" hidden></p>
+        <p class="onboard-existing">
+          Schon ein Konto? <a href="/login/" id="onboardLogin">Anmelden &rarr;</a>
+        </p>
+      </form>
+    </details>
+
+    <hr class="action-divider" />
+
+    <a id="downloadBtn" class="btn btn-secondary" href="#" aria-disabled="true" target="_blank" rel="noopener" download>
+      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3v12" />
+        <path d="m7 10 5 5 5-5" />
+        <path d="M5 21h14" />
+      </svg>
+      <span id="downloadLabel">Download vorbereiten</span>
+    </a>
+    <a id="driveBtn" class="btn btn-secondary" href="#" target="_blank" rel="noopener" hidden>
+      <svg class="btn-icon" viewBox="0 0 87.3 78" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <!-- Official Google Drive multi-colour mark. -->
+        <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3L27.5 53H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+        <path d="M43.65 25 29.9 1.2c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44C.4 49.9 0 51.45 0 53h27.5z" fill="#00ac47"/>
+        <path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5H59.8L65.65 65.3z" fill="#ea4335"/>
+        <path d="M43.65 25 57.4 1.2C56.05.4 54.5 0 52.9 0H34.4c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+        <path d="M59.8 53H27.5L13.75 76.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+        <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3L43.65 25l16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+      </svg>
+      <span>In Google Drive öffnen</span>
+    </a>
+    <p class="status" id="status">Eine Kopie ist auf deiner email gelandet.</p>
+  </section>
+
+  <!-- Personal note: face + signature. The connection moment. -->
+  <section class="note">
+    <div class="note-avatar"><img src="/images/avatar.jpg" alt="" /></div>
+    <div class="note-body">
+      <p><strong>Hey, Leon hier.</strong></p>
+      <p>Die 100+ Spots in diesem Guide haben mich 5 Jahre gekostet. Jetzt gehören sie dir.</p>
+      <p>Wenn du eine Frage hast oder mir ein Foto von deinem Trip schicken willst: antworte einfach auf die Bestätigungsmail oder schreib mir auf Instagram <a href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener">@leon.helg</a>.</p>
+    </div>
+  </section>
+
+  <!-- Maps callout · highlights the "all 122 pins on Google Maps"
+       feature as a tappable card. Sits between the personal note and
+       the tactical next-steps so it doesn't get buried in a list. -->
+  <a class="maps" href="https://www.google.com/maps/placelists/list/4A_3J2iHSzu6zl1rtFMQPQ" target="_blank" rel="noopener">
+    <div class="maps-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Google Maps pin: red drop with white inner circle. -->
+        <path d="M12 2C7.58 2 4 5.58 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.42-3.58-8-8-8z" fill="#EA4335" />
+        <circle cx="12" cy="10" r="3" fill="#ffffff" />
+      </svg>
+    </div>
+    <div class="maps-body">
+      <strong>Liste auf Google Maps öffnen</strong>
+      <span>Alle 122 Standorte direkt in deiner Maps App, auch offline.</span>
+    </div>
+    <svg class="maps-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="9,18 15,12 9,6" />
+    </svg>
+  </a>
+
+  <!-- Tactical next steps. Tells them what to do, kills overwhelm. -->
+  <section class="next">
+    <h2>So gehts weiter</h2>
+    <ol>
+      <li>Speichere das PDF auf deinem Handy.</li>
+      <li>Speichere die Google Maps Liste, damit alle 122 Standorte in deiner Maps App sind.</li>
+      <li>Such dir eine Region aus, die du noch nicht kennst.</li>
+      <li>Viel Spass!</li>
+    </ol>
+  </section>
+
+  <!-- Footer with receipt info. Saftladen GmbH lives in the imprint;
+       no need to repeat it on every page. -->
+  <footer class="foot">
+    <div>© Hikebeast</div>
+    <div>
+      <a href="/de/terms.html">AGB</a><span class="foot-sep"></span><a href="/de/imprint.html">Impressum</a><span class="foot-sep"></span><a href="/de/privacy.html">Privacy</a>
+    </div>
+    <div class="foot-order" id="receipt"></div>
+  </footer>
+</main>
+
+<script>
+  // Fetch the access token + order details for this Stripe session, then
+  // unlock the download button. Falls back to "check your email" if the
+  // session is unknown or not yet paid (race conditions on the redirect).
+  (function () {
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get("session_id");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const downloadLabel = document.getElementById("downloadLabel");
+    const driveBtn = document.getElementById("driveBtn");
+    const status = document.getElementById("status");
+    const receipt = document.getElementById("receipt");
+    const headline = document.getElementById("headline");
+
+    if (!sessionId) {
+      downloadLabel.textContent = "Check deine email";
+      status.textContent = "Öffne die Mail, die wir grad geschickt haben - der Download-Link ist drin.";
+      return;
+    }
+
+    // Onboarding form refs (added 2026-05-07: jeder zahlende Kunde landet
+    // ab jetzt in einem Convex-Account, damit Favoriten/Besucht/Swipes
+    // geräteübergreifend syncen). Versteckt bis GET paid:true zurückgibt.
+    const onboardCard     = document.getElementById("onboardCard");
+    const onboardForm     = document.getElementById("onboardForm");
+    const onboardEmail    = document.getElementById("onboardEmail");
+    const onboardUsername = document.getElementById("onboardUsername");
+    const onboardPassword = document.getElementById("onboardPassword");
+    const onboardError    = document.getElementById("onboardError");
+    const onboardLogin    = document.getElementById("onboardLogin");
+
+    fetch("/api/checkout/session?session_id=" + encodeURIComponent(sessionId))
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data || data.paid !== true) {
+          downloadLabel.textContent = "Check deine email";
+          status.textContent = "Gleich da. Öffne die Mail, die wir grad geschickt haben - der Download-Link ist drin.";
+          return;
+        }
+
+        // Personalise the headline if Stripe captured a first name.
+        if (data.first_name) {
+          headline.textContent = "Willkommen, " + data.first_name + ".";
+        }
+
+        // Onboarding-Form aufdecken + vorbefüllen. Username = <stem><3 digits>
+        // wo der Stamm der Vorname (kleingeschrieben) ist, fallback zur
+        // Email-Local-Part. Bei Kollision rollt der Server den Suffix neu.
+        if (data.email) {
+          onboardEmail.value = data.email;
+          var seedSrc = (data.first_name || data.email.split("@")[0] || "").toLowerCase();
+          var stem = seedSrc.replace(/[^a-z]/g, "").slice(0, 12) || "hiker";
+          var rand = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
+          onboardUsername.value = stem + rand;
+          onboardLogin.href = "/login/?email=" + encodeURIComponent(data.email);
+          onboardCard.hidden = false;
+        }
+
+        // Unlock the download + reveal the Drive folder link. Both
+        // start hidden, and the Drive URL itself only arrives in this
+        // API response (not baked into the static HTML), so view-source
+        // without a paid session never exposes the customer-view folder.
+        downloadBtn.href = data.download_url;
+        downloadBtn.removeAttribute("aria-disabled");
+        downloadLabel.textContent = "Guide (PDF) herunterladen";
+        if (driveBtn && data.drive_url) {
+          driveBtn.href = data.drive_url;
+          driveBtn.hidden = false;
+        }
+
+        const amount = (typeof data.amount_total === "number")
+          ? (data.amount_total / 100).toFixed(2) + " " + (data.currency || "")
+          : "";
+        if (amount) status.textContent = "Rechnung: " + amount + " · auch in deiner Mail.";
+
+        if (data.order_id) {
+          receipt.textContent = "Bestellung " + data.order_id;
+        }
+
+        // Client-side Purchase pixel (CAPI in webhook is the source of
+        // truth, this catches buyers who don't open the email).
+        if (window.fbq && typeof data.amount_total === "number") {
+          try {
+            fbq("track", "Purchase", {
+              value: Number((data.amount_total / 100).toFixed(2)),
+              currency: data.currency || "CHF",
+            });
+          } catch (e) {}
+        }
+      })
+      .catch(() => {
+        downloadLabel.textContent = "Check deine email";
+        status.textContent = "Download lädt grad nicht. Öffne stattdessen die Mail.";
+      });
+
+    // Onboarding-Formular: POST an /api/checkout/session. Lambda prüft die
+    // Stripe-Session ist wirklich bezahlt bevor sie Convex anspricht, also
+    // lässt sich das nicht durch Editieren der Anfrage tricksen. Bei Erfolg:
+    // hb_full_auth-Cookie kommt von der Antwort, sessionToken ins
+    // localStorage, Redirect auf /full/.
+    if (onboardForm) {
+      onboardForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        onboardError.hidden = true;
+        var submitBtn = onboardForm.querySelector(".onboard-submit");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Konto wird erstellt...";
+
+        try {
+          var res = await fetch("/api/checkout/session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              sessionId: sessionId,
+              username:  onboardUsername.value.trim().toLowerCase(),
+              password:  onboardPassword.value,
+            }),
+          });
+          var json = await res.json().catch(function () { return {}; });
+
+          // Idempotent Resubmit: das Konto wurde beim ersten Versuch
+          // angelegt, der zweite Submit wurde abgewiesen (Email belegt).
+          // Statt stumm zu /login zu redirecten zeigen wir das inline.
+          if (json && json.existing) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Konto erstellen & App öffnen";
+            onboardError.hidden = false;
+            var existingUsername = (json.username || "").trim();
+            var loginHref = "/login/?email=" + encodeURIComponent(onboardEmail.value);
+            onboardError.innerHTML = "Für diese Email existiert bereits ein Konto"
+              + (existingUsername ? " (Benutzername <strong>" + existingUsername + "</strong>)" : "")
+              + ". Melde dich mit dem Passwort an, das du beim ersten Mal gesetzt hast, oder antworte auf die Bestätigungsmail wenn du es vergessen hast. "
+              + "<a href=\"" + loginHref + "\" style=\"color:#0071e3;text-decoration:none;font-weight:500;\">Anmelden &rarr;</a>";
+            onboardLogin.href = loginHref;
+            return;
+          }
+
+          if (!res.ok || !json.ok) {
+            throw new Error((json && json.error) || "create_failed");
+          }
+
+          // Selbes Format wie /login/ (rohes Token, kein JSON).
+          if (json.sessionToken) {
+            try { localStorage.setItem("hb:session:v1", json.sessionToken); } catch (e) {}
+          }
+
+          window.location.href = json.redirect || "/full/";
+        } catch (err) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Konto erstellen & App öffnen";
+          onboardError.hidden = false;
+          var msg = (err && err.message) || "";
+          onboardError.textContent =
+            (msg.indexOf("password_too_short") >= 0)
+              ? "Das Passwort muss mindestens 8 Zeichen lang sein."
+            : (msg.indexOf("Username") >= 0 || msg.indexOf("username") >= 0)
+              ? "Der Benutzername hat nicht funktioniert. Probier einen anderen (Kleinbuchstaben, Zahlen, Punkte)."
+            : (msg.indexOf("session_not_paid") >= 0 || msg.indexOf("session_not_found") >= 0)
+              ? "Deine Kauf-Session ist abgelaufen. Öffne die Bestätigungsmail und klicke 'Swiss Gems App öffnen'."
+              : "Konto konnte nicht erstellt werden. Probier nochmal oder antworte auf die Bestätigungsmail.";
+        }
+      });
+    }
+  })();
+</script>
+</body>
+</html>
