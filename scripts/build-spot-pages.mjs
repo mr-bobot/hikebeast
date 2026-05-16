@@ -323,15 +323,18 @@ function renderRouteStatsBar(spot, route) {
 // route-specific). Each route's own detail panel will also have its own
 // SwissTopo button.
 function renderLinksRow(spot) {
-  const r = (spot.routes && spot.routes[0]) || {};
   const gmaps = spot.maps_url
     ? `<a class="hb-link-pill" href="${escapeHtml(spot.maps_url)}" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-gmaps"/></svg></span>Google Maps</a>`
     : "";
-  const topo = r.swisstopo_url
-    ? `<a class="hb-link-pill" href="${escapeHtml(r.swisstopo_url)}" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-swisstopo"/></svg></span>SwissTopo</a>`
-    : "";
   const apple = spot.maps_url
     ? `<a class="hb-link-pill" href="${escapeHtml(spot.maps_url.replace("google.com/maps", "maps.apple.com"))}" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-applemaps"/></svg></span>Apple Maps</a>`
+    : "";
+  // SwissTopo: search by spot title on map.geo.admin.ch. Skip for spots
+  // outside Switzerland (Chamonix / Aravis / Italian Val Ferret etc.) since
+  // SwissTopo only covers Swiss territory. We'll wire route-specific
+  // preloaded-line deeplinks later — this is just a static link to the spot.
+  const topo = (spot.chapter !== "beyond" && spot.title)
+    ? `<a class="hb-link-pill" href="https://map.geo.admin.ch/?lang=en&search=${encodeURIComponent(spot.title)}" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-swisstopo"/></svg></span>SwissTopo</a>`
     : "";
   if (!gmaps && !topo && !apple) return "";
   return `<div class="hb-links-row">${gmaps}${topo}${apple}</div>`;
