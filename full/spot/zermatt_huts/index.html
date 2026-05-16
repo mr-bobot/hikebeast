@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778925757528" />
+<link rel="stylesheet" href="../../preview.css?v=1778926108602" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -115,7 +115,7 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/zermatt_huts_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Up from Zermatt via Zum See and Furi <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Up from Zermatt toward Furi through the Walser hamlets <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h 15</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">290 m gain</span></span></div>
       
     </div>
@@ -217,7 +217,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"zermatt_huts-via-zum-see","name":"Up from Zermatt via Zum See and Furi","visits":["zermatt_huts"],"sac_grade":"T1","effort_label":"Easy","duration_min":75,"gain_m":290,"distance_km":4.2,"equipment_list":[],"start":"Zermatt village (end of Bahnhofstrasse, toward Winkelmatten)","transit":{"train":"Zermatt (MGB, Matterhorn Gotthard Bahn from Visp)"},"description_extra":"Walk to the south end of Zermatt, cross into Winkelmatten, and follow the marked Furi trail (signposted route No. 119 via Zum See). The path climbs along the Zmuttbach below the Gorner gorge through larch forest. Zum See sits roughly two-thirds of the way up: a small Walser hamlet of larch-wood barns and stone-roof chalets at about 1,760 m, with the Matterhorn rising behind through the trees. From there it is another 25 minutes up to Furi at 1,867 m, the cable car mid-station. Round trip is about 1h 15 one-way, or take the gondola back down from Furi. Trail is open year-round but the restaurants at Zum See close in winter.","sources":["https://www.zermatt.ch/en/Media/Planning-hikes-tours/Zermatt-Furi-via-Zum-See-Nr.-119","https://en.wikipedia.org/wiki/Zum_See"],"quickest_for":["zermatt_huts"],"quickest":true}];
+  const ROUTES = [{"id":"zermatt_huts-from-zermatt-toward-furi","name":"Up from Zermatt toward Furi through the Walser hamlets","visits":["zermatt_huts"],"sac_grade":"T1","effort_label":"Easy","duration_min":75,"gain_m":290,"distance_km":4.2,"equipment_list":[],"start":"Zermatt village (end of Bahnhofstrasse, toward Winkelmatten)","transit":{"train":"Zermatt (MGB, Matterhorn Gotthard Bahn from Visp)"},"description_extra":"Walk to the south end of Zermatt past Winkelmatten and pick up the marked footpath that climbs along the Zmuttbach toward the Furi cable car station. The trail passes through several Walser hamlets of larch-wood barns and stone-roof chalets between roughly 1,700 m and Furi at 1,867 m, with the Matterhorn rising behind them through the larch belt. About 1h 15 one-way, 290 m of gain, T1 throughout. The restaurants up there shut for winter, so the hamlets feel empty in the off-season. Take the gondola back down from Furi to save the knees.","sources":["https://www.zermatt.ch/en/hiking-tours","https://en.wikipedia.org/wiki/Zermatt"],"quickest_for":["zermatt_huts"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

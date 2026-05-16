@@ -3693,8 +3693,8 @@ hikes:
   - niederbauen-emmetten-cable-car
   quickest_for:
   - fulberg
-- id: zermatt_huts-via-zum-see
-  name: Up from Zermatt via Zum See and Furi
+- id: zermatt_huts-from-zermatt-toward-furi
+  name: Up from Zermatt toward Furi through the Walser hamlets
   visits:
   - zermatt_huts
   sac_grade: T1
@@ -3706,13 +3706,13 @@ hikes:
   start: Zermatt village (end of Bahnhofstrasse, toward Winkelmatten)
   transit:
     train: Zermatt (MGB, Matterhorn Gotthard Bahn from Visp)
-  description_extra: 'Walk to the south end of Zermatt, cross into Winkelmatten, and follow the marked Furi trail (signposted route No. 119 via Zum See). The path climbs along the Zmuttbach
-    below the Gorner gorge through larch forest. Zum See sits roughly two-thirds of the way up: a small Walser hamlet of larch-wood barns and stone-roof chalets at about 1,760 m, with
-    the Matterhorn rising behind through the trees. From there it is another 25 minutes up to Furi at 1,867 m, the cable car mid-station. Round trip is about 1h 15 one-way, or take the
-    gondola back down from Furi. Trail is open year-round but the restaurants at Zum See close in winter.'
+  description_extra: Walk to the south end of Zermatt past Winkelmatten and pick up the marked footpath that climbs along the Zmuttbach toward the Furi cable car station. The trail passes
+    through several Walser hamlets of larch-wood barns and stone-roof chalets between roughly 1,700 m and Furi at 1,867 m, with the Matterhorn rising behind them through the larch belt.
+    About 1h 15 one-way, 290 m of gain, T1 throughout. The restaurants up there shut for winter, so the hamlets feel empty in the off-season. Take the gondola back down from Furi to
+    save the knees.
   sources:
-  - https://www.zermatt.ch/en/Media/Planning-hikes-tours/Zermatt-Furi-via-Zum-See-Nr.-119
-  - https://en.wikipedia.org/wiki/Zum_See
+  - https://www.zermatt.ch/en/hiking-tours
+  - https://en.wikipedia.org/wiki/Zermatt
   quickest_for:
   - zermatt_huts
 - id: tine_de_conflens-from-la-sarraz
@@ -3761,8 +3761,6 @@ hikes:
   - https://www.j3l.ch/en/P33241/destinations/nature-sites/etang-de-la-gruere
   - https://www.parks.swiss/en/map/offer-detail/etang-de-la-gruere-1246
   - https://www.myswitzerland.com/en-ch/destinations/etang-de-la-gruere/
-  quickest_for:
-  - etang_de_la_gruere
 - id: gorges_du_dailley-from-salvan
   name: Salvan to Van d'en Bas through the gorge
   visits:
@@ -3788,3 +3786,24 @@ hikes:
   - https://www.valais.ch/en/explore/activities/natural-sites/geological-sites/dailley-gorge
   quickest_for:
   - gorges_du_dailley
+- id: etang_de_la_gruere-short-from-la-theurre
+  name: Short walk from La Theurre
+  visits:
+  - etang_de_la_gruere
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 10
+  gain_m: 0
+  distance_km: 0.4
+  equipment_list: []
+  start: La Theurre parking (north side of the pond)
+  transit:
+    train: Saignelégier (Chaux-de-Fonds-Glovelier line)
+    bus: PostBus 32 from Saignelégier toward Tramelan, stop La Theurre
+  description_extra: From the La Theurre parking, a 5 to 10 minute walk on the gravel path drops you at the pond's north shore where the boardwalk starts. T1, flat, family-friendly.
+    Plenty for a quick visit. For the full loop around the moor (2.6 km, 45 min) follow the boardwalk south from the shore.
+  sources:
+  - https://www.j3l.ch/en/P33241/destinations/nature-sites/etang-de-la-gruere
+  - https://www.parks.swiss/en/map/offer-detail/etang-de-la-gruere-1246
+  quickest_for:
+  - etang_de_la_gruere

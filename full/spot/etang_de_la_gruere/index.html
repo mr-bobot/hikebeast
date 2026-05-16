@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778925757546" />
+<link rel="stylesheet" href="../../preview.css?v=1778926108617" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -115,7 +115,15 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/etang_de_la_gruere_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Loop around the pond from La Theurre <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Short walk from La Theurre <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">10 min</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/etang_de_la_gruere_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Loop around the pond from La Theurre </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">45 min</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">20 m gain</span></span></div>
       
     </div>
@@ -146,17 +154,17 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-    <span class="value"><span data-rd-dur>45</span><span class="unit" data-rd-dur-unit>min</span></span>
+    <span class="value"><span data-rd-dur>10</span><span class="unit" data-rd-dur-unit>min</span></span>
     <span class="label">Duration</span>
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg></span>
-    <span class="value"><span data-rd-elev-change>+20<span class="unit">m</span> <span class="unit">/</span> -20<span class="unit">m</span></span></span>
+    <span class="value"><span class="missing" data-rd-elev-change>—</span></span>
     <span class="label">Elevation change</span>
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
-    <span class="value"><span data-rd-dist>2.6</span><span class="unit">km</span></span>
+    <span class="value"><span data-rd-dist>0.4</span><span class="unit">km</span></span>
     <span class="label">Distance</span>
   </div>
   </div>
@@ -217,7 +225,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"etang_de_la_gruere-pond-loop","name":"Loop around the pond from La Theurre","visits":["etang_de_la_gruere"],"sac_grade":"T1","effort_label":"Easy","duration_min":45,"gain_m":20,"descent_m":20,"distance_km":2.6,"equipment_list":[],"start":"La Theurre parking (north side of the pond)","transit":{"train":"Saignelégier (Chaux-de-Fonds-Glovelier line)","bus":"PostBus 32 from Saignelégier toward Tramelan, stop La Theurre"},"description_extra":"Étang de la Gruère is a moorland pond in the Franches-Montagnes, formed by an 18th-century mill dam and surrounded by raised bog. The loop around the water is 2.6 km on a flat boardwalk-and-gravel path, about 35 to 45 minutes, T1, family-friendly. Park at La Theurre on the north side (paid) or take PostBus 32 from Saignelégier station, three minutes from the bus stop. The whole moor is a federally protected site, so stay on the marked path and no swimming or drones. Sunrise mist and late golden hour both give a still reflection if there is no wind.","sources":["https://www.j3l.ch/en/P33241/destinations/nature-sites/etang-de-la-gruere","https://www.parks.swiss/en/map/offer-detail/etang-de-la-gruere-1246","https://www.myswitzerland.com/en-ch/destinations/etang-de-la-gruere/"],"quickest_for":["etang_de_la_gruere"],"quickest":true}];
+  const ROUTES = [{"id":"etang_de_la_gruere-short-from-la-theurre","name":"Short walk from La Theurre","visits":["etang_de_la_gruere"],"sac_grade":"T1","effort_label":"Easy","duration_min":10,"gain_m":0,"distance_km":0.4,"equipment_list":[],"start":"La Theurre parking (north side of the pond)","transit":{"train":"Saignelégier (Chaux-de-Fonds-Glovelier line)","bus":"PostBus 32 from Saignelégier toward Tramelan, stop La Theurre"},"description_extra":"From the La Theurre parking, a 5 to 10 minute walk on the gravel path drops you at the pond's north shore where the boardwalk starts. T1, flat, family-friendly. Plenty for a quick visit. For the full loop around the moor (2.6 km, 45 min) follow the boardwalk south from the shore.","sources":["https://www.j3l.ch/en/P33241/destinations/nature-sites/etang-de-la-gruere","https://www.parks.swiss/en/map/offer-detail/etang-de-la-gruere-1246"],"quickest_for":["etang_de_la_gruere"],"quickest":true},{"id":"etang_de_la_gruere-pond-loop","name":"Loop around the pond from La Theurre","visits":["etang_de_la_gruere"],"sac_grade":"T1","effort_label":"Easy","duration_min":45,"gain_m":20,"descent_m":20,"distance_km":2.6,"equipment_list":[],"start":"La Theurre parking (north side of the pond)","transit":{"train":"Saignelégier (Chaux-de-Fonds-Glovelier line)","bus":"PostBus 32 from Saignelégier toward Tramelan, stop La Theurre"},"description_extra":"Étang de la Gruère is a moorland pond in the Franches-Montagnes, formed by an 18th-century mill dam and surrounded by raised bog. The loop around the water is 2.6 km on a flat boardwalk-and-gravel path, about 35 to 45 minutes, T1, family-friendly. Park at La Theurre on the north side (paid) or take PostBus 32 from Saignelégier station, three minutes from the bus stop. The whole moor is a federally protected site, so stay on the marked path and no swimming or drones. Sunrise mist and late golden hour both give a still reflection if there is no wind.","sources":["https://www.j3l.ch/en/P33241/destinations/nature-sites/etang-de-la-gruere","https://www.parks.swiss/en/map/offer-detail/etang-de-la-gruere-1246","https://www.myswitzerland.com/en-ch/destinations/etang-de-la-gruere/"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
