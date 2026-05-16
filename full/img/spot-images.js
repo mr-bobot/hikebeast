@@ -49,6 +49,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/rosenlaui_p2/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/rosenlaui_p3/w1800.webp",
+      "credit": "@eluakidss"
     }
   ],
   "central#rosenlaui_public_waterfall": [
@@ -165,6 +169,14 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/hardergrat_trail_p3/w1800.webp",
       "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/hardergrat_trail_p4/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/hardergrat_trail_p5/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "central#tannhorn": [
@@ -175,6 +187,14 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/tannhorn_p1/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/tannhorn_p2/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/tannhorn_p3/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "central#augstmatthorn": [
@@ -192,6 +212,10 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/augstmatthorn_p3/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/augstmatthorn_p4/w1800.webp",
       "credit": "@leon.helg"
     }
   ],
@@ -217,6 +241,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/fronalpstock_p1/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/fronalpstock_p2/w1800.webp",
+      "credit": "@oliwear.j"
     }
   ],
   "central#fulberg": [
@@ -299,6 +327,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/schrattenfluh_p8/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/schrattenfluh_p9/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "central#heftihutte": [
@@ -313,6 +345,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/heftihutte_p2/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/heftihutte_p3/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "central#bachalpsee": [
@@ -407,6 +443,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/oeschinensee_p7/w1800.webp",
       "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/oeschinensee_p8/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "central#piz_gloria": [
@@ -473,6 +513,22 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/riffelsee_p5/w1800.webp",
       "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/riffelsee_p6/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/riffelsee_p7/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/riffelsee_p8/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/riffelsee_p9/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "valais#zermatt_village": [
@@ -497,6 +553,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/riffelalp_p1/w1800.webp",
       "credit": "zimydakid"
+    },
+    {
+      "src": "derivatives/riffelalp_p2/w1800.webp",
+      "credit": "@oliwear.j"
     }
   ],
   "valais#gorner_glacier": [
@@ -1259,6 +1319,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/seealpsee_p5/w1800.webp",
       "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/seealpsee_p6/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "eastern#ascher": [
@@ -1299,6 +1363,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/saxer_lucke_p5/w1800.webp",
       "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/saxer_lucke_p6/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "eastern#limmernsee": [
@@ -1321,6 +1389,14 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/limmernsee_p4/w1800.webp",
       "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/limmernsee_p5/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/limmernsee_p6/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "eastern#muttseehutte": [
@@ -1338,6 +1414,10 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/muttseehutte_p3/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/muttseehutte_p4/w1800.webp",
       "credit": "@leon.helg"
     }
   ],
@@ -1503,6 +1583,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/klontalersee_p3/w1800.webp",
       "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/klontalersee_p4/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "eastern#stoos_kapelle": [
@@ -1517,6 +1601,18 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/stoos_kapelle_p2/w1800.webp",
       "credit": "Claudio Schwarz"
+    },
+    {
+      "src": "derivatives/stoos_kapelle_p3/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/stoos_kapelle_p4/w1800.webp",
+      "credit": "@yannick_sutter"
+    },
+    {
+      "src": "derivatives/stoos_kapelle_p5/w1800.webp",
+      "credit": "@oliwear.j"
     }
   ],
   "eastern#pizol": [
@@ -1531,6 +1627,14 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/pizol_p2/w1800.webp",
       "credit": "Vasyl Dizhak"
+    },
+    {
+      "src": "derivatives/pizol_p3/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/pizol_p4/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "eastern#joriseen": [
@@ -1797,6 +1901,10 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/camping_in_cheserys_p1/w1800.webp",
       "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/camping_in_cheserys_p2/w1800.webp",
+      "credit": "@leon.helg"
     }
   ],
   "beyond#mont_blanc": [
@@ -1842,6 +1950,18 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/pic_de_jallouvre_p2/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/pic_de_jallouvre_p3/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/pic_de_jallouvre_p4/w1800.webp",
+      "credit": "@leon.helg"
+    },
+    {
+      "src": "derivatives/pic_de_jallouvre_p5/w1800.webp",
       "credit": "@leon.helg"
     }
   ],
