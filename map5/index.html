@@ -1283,8 +1283,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
      Bucketing is deterministic on subscriber_id (?s=) so returning
      visitors stay attributed to their original variant. */
   window.HB_HERO_VARIANTS = {
-    '01': '/map3/img/v13/hero.jpg',
-    '02': '/map3/img/v13/hero2.jpg'
+    '01': '/map3/img/v14/hero/hero1.jpg',
+    '02': '/map3/img/v14/hero/hero2.jpg',
+    '03': '/map3/img/v14/hero/hero3.jpg',
+    '04': '/map3/img/v14/hero/hero4.jpg'
   };
   (function () {
     var keys = Object.keys(window.HB_HERO_VARIANTS);
@@ -1337,10 +1339,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <!-- Slide 1 · split-test variant. Painted via document.write
                during initial parse so the chosen variant is the only
                image the browser ever fetches for this slot. -->
-          <script>document.write('<div class="slide"><img src="' + (window.HB_HERO_VARIANTS[window.HB_HERO_VARIANT] || '/map3/img/v13/hero.jpg') + '" alt="Swiss Gems Guide · The unforgettable Summer" loading="eager" fetchpriority="high" decoding="async" /></div>');</script>
-          <div class="slide"><img src="/map3/img/v13/mockup.jpg" alt="Spots tourists won't find" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="/map3/img/v13/grid.jpg" alt="A grid of eighteen hidden Swiss spots from the guide" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="/map3/img/v13/map.jpg" alt="141 spots, one map" loading="lazy" decoding="async" /></div>
+          <script>document.write('<div class="slide"><img src="' + (window.HB_HERO_VARIANTS[window.HB_HERO_VARIANT] || '/map3/img/v14/hero/hero1.jpg') + '" alt="Swiss Gems Guide · The unforgettable Summer" loading="eager" fetchpriority="high" decoding="async" /></div>');</script>
+          <div class="slide"><img src="/map3/img/v14/mockup.jpg" alt="Spots tourists won't find" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/v14/grid.jpg" alt="A grid of eighteen hidden Swiss spots from the guide" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/v14/map.jpg" alt="141 spots, one map" loading="lazy" decoding="async" /></div>
         </div>
         <!-- Hover-only nav arrows (desktop only · hidden on touch devices
              where the carousel relies on swipe). Click handlers wired in
@@ -1364,7 +1366,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
            — no sale strip, no strikethrough, just the offer terms in plain
            form. Reverts the map3 sale-card experiment. -->
       <div class="px product-card">
-        <h1 class="product-title">Swiss Gems 🇨🇭</h1>
+        <h1 class="product-title">Switzerland Map 🇨🇭</h1>
         <div class="product-price"><span class="price-display">CHF 27</span></div>
         <div class="product-rating">
           <span class="stars" aria-hidden="true">★★★★★</span>
