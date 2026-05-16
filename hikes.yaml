@@ -3668,3 +3668,28 @@ hikes:
   - https://en.wikipedia.org/wiki/Lake_Sils
   quickest_for:
   - silsersee
+- id: fulberg-from-niederbauen-cable-car
+  name: Niederbauen to Fulberg ridge
+  visits:
+  - fulberg
+  sac_grade: T3
+  effort_label: Demanding
+  duration_min: 75
+  gain_m: 340
+  distance_km: 2.5
+  equipment_list:
+  - Sturdy hiking boots
+  - Poles
+  start: Niederbauen Chulm cable car top station (1,587 m)
+  transit:
+    train: Beckenried (then bus 543 to Emmetten)
+    cable_car: Luftseilbahn Emmetten-Niederbauen to Niederbauen Chulm
+  description_extra: From the top of the Niederbauen cable car, follow the marked ridge trail east-southeast. About 75 minutes of steady climbing to Fulberg at 1,920 m, T3 throughout
+    with no technical sections but exposure to weather on the open ridge. The route is part of the longer ridge link toward Brisen. Descend the same way or continue along the ridge.
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/fulberg-2148/mountain-hiking/
+  - https://www.niederbauen.ch/
+  cable_car_ids:
+  - niederbauen-emmetten-cable-car
+  quickest_for:
+  - fulberg
