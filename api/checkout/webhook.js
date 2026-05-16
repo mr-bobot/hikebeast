@@ -467,6 +467,10 @@ async function handleSessionCompleted({ stripe, event }) {
   const utmSource = full.metadata?.utm_source || "";
   const utmMedium = full.metadata?.utm_medium || "";
   const utmCampaign = full.metadata?.utm_campaign || "";
+  // v12 hero split-test bucket the buyer was assigned to. Empty if not
+  // in the test. Forwarded to the Sheet's `hero_variant` column to
+  // close the conversion loop per variant.
+  const heroVariant = full.metadata?.hero_variant || "";
 
   if (!email) {
     console.error("Session completed without email:", full.id);
@@ -548,6 +552,7 @@ async function handleSessionCompleted({ stripe, event }) {
       utm_medium: utmMedium,
       utm_campaign: utmCampaign,
       ip_country: ipCountry || "",
+      hero_variant: heroVariant || "",
       provider: "stripe",
       session_id: full.id,
       email_sent: emailOk ? "1" : "0",

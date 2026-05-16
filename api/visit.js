@@ -15,11 +15,22 @@ export default async function handler(req, res) {
     utm_medium,
     utm_campaign,
     source_page,
+    hero_variant,
+    active_ms,
   } = req.body ?? {};
   // Whitelist of beacon event names. Anything else gets dropped before
   // hitting Apps Script so the column writers don't receive bogus values.
-  const ALLOWED_EVENTS = new Set(["scrolled", "video_clicked"]);
+  // `engaged` + `session_end` added 2026-05-16 for the v12 hero split test.
+  const ALLOWED_EVENTS = new Set(["scrolled", "video_clicked", "engaged", "session_end"]);
   const safeEvent = typeof event === "string" && ALLOWED_EVENTS.has(event) ? event : "";
+  // hero_variant is the v12 split-test bucket ID (e.g. "01"..."08"). Tight
+  // regex so a malformed client can't pollute the column.
+  const safeHeroVariant = typeof hero_variant === "string" && /^[a-z0-9_]{1,8}$/i.test(hero_variant)
+    ? hero_variant
+    : "";
+  const safeActiveMs = Number.isFinite(active_ms) && active_ms >= 0 && active_ms < 86_400_000
+    ? Math.round(active_ms)
+    : 0;
 
   // UTM passthrough · cap each at 100 chars so a hostile or malformed link
   // can't blow up the Sheet row. Empty string when missing so Apps Script
@@ -80,6 +91,8 @@ export default async function handler(req, res) {
           utm_campaign: safeUtmCampaign,
           source_page: safeSourcePage,
           ip_country: ipCountry,
+          hero_variant: safeHeroVariant,
+          active_ms: safeActiveMs,
         }),
         signal: AbortSignal.timeout(5000),
       }).catch((err) => console.error("Visit log failed:", err)),

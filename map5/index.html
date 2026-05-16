@@ -1,0 +1,2142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script>
+// Auto-redirect to German variant if the browser/device language is
+// German. Runs before any tracking script so Meta Pixel + Vercel
+// Analytics fire on the destination URL only, not both. Manual override
+// via localStorage 'hb_lang' set by the navbar EN/DE pill click below.
+(function () {
+  try {
+    if (localStorage.getItem('hb_lang') === 'en') return;
+    var lang = (navigator.language || '').toLowerCase();
+    if (!lang.startsWith('de')) return;
+    var target = location.pathname.replace(/^\/(map5|map4|map3|themap|map)\b/, '/de/$1');
+    if (target === location.pathname) return;
+    location.replace(target + location.search + location.hash);
+  } catch (e) {}
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Switzerland Map · 100+ Hidden Swiss Spots with GPS</title>
+<meta name="description" content="The Switzerland map with 100+ hidden gems. Exact GPS, hike difficulty and more." />
+<link rel="canonical" href="https://hikebeast.ch/map/" />
+<link rel="alternate" hreflang="en" href="https://hikebeast.ch/map/" />
+<link rel="alternate" hreflang="de" href="https://hikebeast.ch/de/map/" />
+<link rel="alternate" hreflang="x-default" href="https://hikebeast.ch/map/" />
+<link rel="icon" type="image/jpeg" href="../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../images/favicon.jpg" />
+<meta property="og:type" content="product" />
+<meta property="og:site_name" content="Hikebeast" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Switzerland Map · 100+ Hidden Spots" />
+<meta property="og:description" content="The ultimate Swiss map." />
+<meta property="og:url" content="https://hikebeast.ch/map5/" />
+<meta property="og:image" content="https://hikebeast.ch/map3/img/og.jpg" />
+<meta property="og:image:width" content="1920" />
+<meta property="og:image:height" content="987" />
+<meta property="og:image:alt" content="Switzerland Map · 100+ Hidden Spots" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Switzerland Map · 100+ Hidden Spots" />
+<meta name="twitter:description" content="100+ secret Swiss spots, exact GPS, lifetime updates." />
+<meta name="twitter:image" content="https://hikebeast.ch/map3/img/og.jpg" />
+
+<!-- Vercel Analytics -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1658000685240569');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {
+  content_name: 'Swiss Gems of Switzerland Map',
+  content_category: 'Map',
+  value: 27.00,
+  currency: 'CHF'
+});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
+/></noscript>
+
+<!-- Stripe.js -->
+<script src="https://js.stripe.com/v3/" defer></script>
+
+<!-- Schema.org Product -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Switzerland Map · Swiss Gems of Switzerland",
+  "description": "The Switzerland map with 100+ hidden gems. Exact GPS, hike difficulty and more.",
+  "image": "https://hikebeast.ch/map/img/hero-1-mockup.jpg",
+  "brand": { "@type": "Brand", "name": "Hikebeast" },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://hikebeast.ch/map/",
+    "priceCurrency": "CHF",
+    "price": "27.00",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html,body { margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f5f7;
+    --fg: #1d1d1f;
+    --muted: #6e6e73;
+    --hairline: rgba(0,0,0,0.08);
+    --accent: #0071e3;
+    --success: #34c759;
+    --warn: #ff9500;
+    --gold: #f5b400;
+    --radius-card: 18px;
+    --radius-btn: 980px;
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.47;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    padding: env(safe-area-inset-top) 0 calc(env(safe-area-inset-bottom) + 72px) 0;
+  }
+
+  /* === Navbar === */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.78);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--hairline);
+    padding: 10px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  }
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--fg);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .navbar-brand img {
+    width: 26px; height: 26px;
+    border-radius: 999px;
+    object-fit: cover;
+    object-position: 70% 45%;
+    display: block;
+  }
+  /* Language switcher · pill on the right side of the navbar.
+     Same style as the other multilingual pages on the site. */
+  .navbar-lang {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--hairline);
+    -webkit-tap-highlight-color: transparent;
+    transition: color 150ms ease, border-color 150ms ease;
+    letter-spacing: 0.04em;
+  }
+  .navbar-lang:hover {
+    color: var(--fg);
+    border-color: rgba(0,0,0,0.2);
+  }
+
+  /* === Layout ===
+     Mobile-first: main is just a max-width container, .page-main is the
+     flex column that holds the actual section stack. Sidebar is hidden
+     below the desktop breakpoint and replaced by the sticky bottom buy
+     bar. .page-grid does nothing on mobile (display: contents lets its
+     children flow as if the wrapper weren't there). */
+  main {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 0 0 32px;
+  }
+  .page-grid { display: contents; }
+  .page-main {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .page-side { display: none; }
+  .px { padding-left: 22px; padding-right: 22px; }
+
+  /* === Hero === */
+  /* Price label, used in the product card and the sticky buy button.
+     Bold so it stands out as the anchor. */
+  .price-display {
+    font-weight: 700;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+  }
+  h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 28px;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    margin: 0;
+    font-weight: 600;
+  }
+  .hero-sub {
+    margin: -2px 0 2px;
+    font-size: 17px;
+    line-height: 1.35;
+    color: var(--muted);
+    letter-spacing: -0.01em;
+  }
+  /* Product card · replaces the slim info-bar with a stacked layout
+     (rating · title · price) for a stronger product anchor below the
+     hero carousel. */
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .product-rating .stars {
+    color: var(--warn);
+    letter-spacing: 1px;
+    font-size: 14px;
+  }
+  .product-rating-count {
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .product-title {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 28px;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    margin: 0;
+    font-weight: 600;
+  }
+  .product-price {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+  ul.hero-bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+  }
+  ul.hero-bullets li {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  ul.hero-bullets li::before {
+    content: "";
+    display: block;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background-color: rgba(52, 199, 89, 0.15);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334c759' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
+    background-size: 13px 13px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .meta {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    align-items: center;
+    margin-top: 4px;
+  }
+  .meta .stars { color: var(--warn); letter-spacing: 1px; font-size: 13px; }
+  .meta .sep {
+    width: 1px; height: 12px;
+    background: var(--hairline);
+    display: inline-block;
+  }
+
+  .audiences {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    justify-content: flex-start;
+  }
+  .audiences span {
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--fg);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
+  /* === Carousel === */
+  .carousel-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+  }
+  /* Hover-only nav arrows · desktop pointers see them on hover, touch
+     devices never render them because the carousel snap-scrolls. */
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px; height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.92);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    color: var(--fg);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease, background 150ms ease;
+    z-index: 5;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .carousel-arrow svg { width: 18px; height: 18px; display: block; }
+  .carousel-arrow--prev { left: 12px; }
+  .carousel-arrow--next { right: 12px; }
+  .carousel-wrap:hover .carousel-arrow {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .carousel-arrow:hover { background: #ffffff; }
+  .carousel-arrow:active { background: #f5f5f7; }
+  /* Touch devices don't have hover · arrows would just sit there
+     half-implemented. Hide them entirely. */
+  @media (hover: none) {
+    .carousel-arrow { display: none; }
+  }
+  /* Full-bleed slides on mobile. Rounded top/bottom corners stay visible;
+     left/right corners clip into the viewport edge, which is fine. */
+  .carousel {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+    scrollbar-width: none;
+  }
+  .carousel::-webkit-scrollbar { display: none; }
+  /* Slides are raw photos — no frame, no bg, no rounded corners, no shadow.
+     Anything else creates a visible "card-on-page" feel that reads as a
+     border. The image is the slide. */
+  .carousel .slide {
+    flex: 0 0 100%;
+    aspect-ratio: 3 / 2;
+    scroll-snap-align: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .carousel .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding-top: 6px;
+  }
+  .dots span {
+    width: 6px; height: 6px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.15);
+    transition: background 150ms ease, transform 150ms ease;
+  }
+  .dots span.active {
+    background: var(--fg);
+    transform: scale(1.15);
+  }
+
+  /* === Section heads === */
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .section-head h2 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin: 0;
+    font-weight: 600;
+  }
+  .section-head p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Extra breathing room between hero bullets and "What's inside" */
+  .inside-section { margin-top: 24px; }
+
+  /* === Collection grid · full-bleed photo grid above the 6 cards === */
+  .collection-wrap {
+    padding-top: 10px;
+  }
+  .collection-grid {
+    width: 100%;
+    display: block;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    aspect-ratio: 1600 / 1080;
+    background-color: #ffffff;
+  }
+  .collection-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+
+  /* === What's inside (signature bullets) ·
+     Horizontal scroll-snap, 2 cards visible at once with a peek of the
+     third on the right. Mirrors the testimonials/hero carousel pattern. */
+  .inside {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 22px;
+    /* scroll-padding-inline-start so the first card snaps to align with
+       the padding edge (matches the heading's 22px), not to the
+       container's content edge (which made it look flush with viewport
+       left). */
+    scroll-padding-inline-start: 22px;
+    scrollbar-width: none;
+  }
+  .inside::-webkit-scrollbar { display: none; }
+  /* Photo cards · photo on top, caption below. Wider than the icon
+     variant so the photo has real estate: ~72% of viewport on mobile,
+     ~5/6 portrait aspect. Padding zero on the card itself so the photo
+     goes edge-to-edge; copy block has its own inner padding. */
+  .inside-card {
+    flex: 0 0 calc(58% - 12px);
+    scroll-snap-align: start;
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .inside-card .card-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    display: block;
+    background: #eaeaec;
+    overflow: hidden;
+  }
+  .inside-card .card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .inside-card .card-body {
+    padding: 12px 12px 14px;
+  }
+  .inside-card h3 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .inside-card p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
+  /* === About me · personal trust block between reviews and checkout.
+     20% tighter on mobile per Leon. */
+  .about-body {
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+  }
+  .about-photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 auto;
+  }
+  .about-body p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text, #1d1d1f);
+  }
+
+  /* === Embedded checkout === */
+  .checkout-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  /* Sticky navbar offset so the "Get the map" heading lands below it,
+     not behind it, when the buy CTAs scroll the page here. */
+  #get-the-map {
+    scroll-margin-top: 70px;
+  }
+  #checkout {
+    min-height: 480px;
+    border-radius: var(--radius-card);
+    background: var(--surface);
+    overflow: hidden;
+  }
+  /* Stripe injects its own iframe; clear our placeholder bg once mounted */
+  #checkout.is-mounted { background: transparent; }
+  .checkout-skeleton {
+    height: 480px;
+    background: linear-gradient(90deg, var(--surface) 0%, #ececef 50%, var(--surface) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+    border-radius: var(--radius-card);
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  .checkout-error {
+    padding: 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .checkout-error a { color: var(--accent); }
+
+  /* === Stripe-style mockup ·
+     Visual stand-in shown when STRIPE_SECRET_KEY isn't configured yet.
+     Looks like the real embedded Stripe Checkout iframe (express buttons +
+     email + card fields + pay button + powered-by-stripe footer) so the
+     page can be QA'd end-to-end without keys. The form is non-interactive;
+     a small "Preview" badge in the corner makes that visible. */
+  .checkout-mock {
+    background: #ffffff;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--hairline);
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+  }
+  .checkout-mock .mock-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 3px 8px;
+  }
+  .checkout-mock .mock-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .checkout-mock .mock-wallets {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .checkout-mock .mock-btn {
+    height: 44px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    user-select: none;
+  }
+  .checkout-mock .mock-btn.apple {
+    background: #000000;
+    color: #ffffff;
+  }
+  .checkout-mock .mock-btn.gpay {
+    background: #ffffff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    font-family: "Roboto", -apple-system, sans-serif;
+  }
+  .checkout-mock .mock-btn.twint {
+    background: #000000;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .checkout-mock .mock-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 12px;
+    margin: 4px 0 2px;
+  }
+  .checkout-mock .mock-divider::before,
+  .checkout-mock .mock-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hairline);
+  }
+  .checkout-mock .mock-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: -6px;
+    letter-spacing: -0.01em;
+  }
+  .checkout-mock .mock-input {
+    height: 42px;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 14px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+  }
+  .checkout-mock .mock-input.with-icons {
+    justify-content: space-between;
+  }
+  .checkout-mock .mock-card-icons {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .checkout-mock .mock-card-icons span {
+    width: 26px;
+    height: 16px;
+    border-radius: 3px;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    font-size: 8px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .checkout-mock .mock-pay {
+    height: 46px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #ffffff;
+    display: grid;
+    place-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 4px;
+    user-select: none;
+  }
+  .checkout-mock .mock-foot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    padding-top: 4px;
+  }
+  .checkout-mock .mock-foot strong {
+    color: #635bff;
+    font-weight: 700;
+  }
+
+  /* === Reviews · swipeable carousel === */
+  .reviews-carousel {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 22px;
+    scrollbar-width: none;
+  }
+  /* Desktop "Show more" affordance — mobile keeps all 12 in the peek-
+     scroll, desktop hides cards 7-12 by default and reveals them on
+     button click. */
+  .reviews-more-row {
+    display: none;
+  }
+  .reviews-more-btn {
+    background: none;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 10px 18px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg);
+    cursor: pointer;
+  }
+  .reviews-more-btn:hover { background: var(--surface); }
+  .reviews-carousel::-webkit-scrollbar { display: none; }
+  /* White card with hairline so reviews read as distinct from the
+     surface-grey "What's inside" cards above. */
+  .review-card {
+    flex: 0 0 calc(100% - 60px);
+    scroll-snap-align: center;
+    background: #ffffff;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-card);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .review-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .review-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    overflow: hidden;
+  }
+  .review-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* All review avatars now use real or placeholder photos via <img> · the
+     `.is-placeholder` colour fallbacks were removed. */
+  .review-id {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .review-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .review-handle {
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+  }
+  .review-handle:hover { text-decoration: underline; }
+  .review-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+  .review-meta .stars { color: var(--warn); letter-spacing: 1px; font-size: 13px; }
+  .review-quote {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--fg);
+    letter-spacing: -0.005em;
+  }
+  /* Creator response to a review · short blue-tinted block under the
+     quote, lets us address a flagged concern in line with the review. */
+  .creator-note {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: rgba(0, 113, 227, 0.06);
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+  .creator-note-label {
+    font-weight: 600;
+    color: var(--fg);
+    margin-right: 4px;
+  }
+  /* Collapsed-by-default state for long reviews. Clamps the quote to
+     2 lines and hides the creator-note until the user taps "Read more".
+     Keeps the carousel row from being dragged up by one tall card. */
+  .review-more-btn {
+    align-self: flex-start;
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--brand, #0071e3);
+    cursor: pointer;
+  }
+  .review-more-btn:hover { text-decoration: underline; }
+  .review-card--expandable:not(.is-open) .review-quote {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .review-card--expandable:not(.is-open) .creator-note { display: none; }
+
+  /* === FAQ === */
+  .faq details {
+    border-bottom: 1px solid var(--hairline);
+    padding: 14px 0;
+  }
+  .faq details:first-of-type { border-top: 1px solid var(--hairline); }
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+";
+    font-size: 20px;
+    line-height: 1;
+    color: var(--muted);
+    font-weight: 400;
+    transition: transform 150ms ease;
+  }
+  .faq details[open] summary::after {
+    content: "−";
+  }
+  .faq details p {
+    margin: 8px 0 0;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* === Trust + footer === */
+  .trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 4px;
+  }
+  .trust-row a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .trust-row a:hover { color: var(--fg); }
+  .trust-row .sep {
+    width: 1px; height: 12px;
+    background: var(--hairline);
+  }
+  .guarantee-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 0 16px 14px;
+  }
+  .guarantee-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #f5f5f7;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--fg);
+    line-height: 1.35;
+    max-width: 100%;
+  }
+  .guarantee-pill svg {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+    padding-top: 8px;
+  }
+  .footer a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  /* === Sticky bottom buy bar (mobile) === */
+  .sticky-buy {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,0.86);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-top: 1px solid var(--hairline);
+    transform: translateY(100%);
+    transition: transform 220ms ease;
+  }
+  .sticky-buy.is-visible { transform: translateY(0); }
+  .sticky-buy .buy-btn {
+    display: block;
+    width: 100%;
+    max-width: 412px;
+    margin: 0 auto;
+    padding: 14px 22px;
+    border-radius: var(--radius-btn);
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .sticky-buy .buy-btn:active { transform: scale(0.98); }
+
+  /* === Desktop · ≥ 720px ============================================
+     Mobile-first column expands into a real desktop layout. The big
+     wins versus the previous 560px column:
+     - Inside-cards stop being a peek-scroll carousel and become a
+       proper 3-column grid (no more half-cards bleeding off the left
+       edge on wide screens).
+     - Reviews do the same: 3 columns × 2 rows, no scroll.
+     - Hero carousel slide takes the full column width with rounded
+       corners, dots underneath. Same swipe affordance as mobile, just
+       framed instead of full-bleed.
+     - Stripe checkout stays in a narrower sub-column inside the wider
+       page so the iframe doesn't stretch into a banking-app feel.
+     - Trust-row and footer stay centered. */
+  @media (min-width: 720px) {
+    .sticky-buy { display: none; }
+    body { padding-bottom: env(safe-area-inset-bottom); }
+
+    main {
+      max-width: 920px;
+      padding: 32px 0 56px;
+    }
+    .page-main { gap: 48px; }
+    .px {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    /* Hero carousel: round the slides, add side padding so they read
+       as framed photos rather than viewport-edge bleed. */
+    .carousel {
+      padding: 0 32px;
+      gap: 16px;
+    }
+    .carousel .slide {
+      border-radius: var(--radius-card);
+    }
+    .dots { padding-top: 12px; }
+
+    /* Hero text + bullets get a touch more presence on desktop. */
+    h1 { font-size: 34px; }
+    ul.hero-bullets { font-size: 16px; gap: 12px; }
+
+    /* Section heads. */
+    .section-head h2 { font-size: 26px; }
+    .section-head p { font-size: 15px; }
+
+    /* === Inside cards · grid, not peek-scroll ===
+       Override the horizontal scroll-snap entirely. Display becomes a
+       3-column grid; cards stretch to fill their column, lose the
+       flex-basis hack and the snap-align. */
+    .inside {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      overflow: visible;
+      padding: 4px 32px;
+      scroll-snap-type: none;
+    }
+    .inside-card {
+      flex: initial;
+      scroll-snap-align: none;
+    }
+    .inside-card h3 { font-size: 16px; }
+    .inside-card p { font-size: 14px; }
+
+    /* === Reviews · grid, not peek-scroll ===
+       Same treatment. 6 reviews fit cleanly in 3 × 2. Cards 7-12 are
+       hidden until the user taps the "Show more" button below. */
+    .reviews-carousel {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      overflow: visible;
+      padding: 4px 32px;
+      scroll-snap-type: none;
+    }
+    .review-card {
+      flex: initial;
+      scroll-snap-align: none;
+      min-height: 180px;
+    }
+    .reviews-carousel:not(.is-expanded) .review-card--extra {
+      display: none;
+    }
+    .reviews-more-row {
+      display: flex;
+      justify-content: center;
+      padding: 18px 32px 4px;
+    }
+
+    /* === Checkout sub-column ===
+       Stripe's embedded iframe expands to its container. Without a
+       cap it stretches across the whole 920px page, which makes the
+       Pay button feel like a checkout app rather than a one-product
+       page. Cap it at the original mobile-friendly width and center. */
+    .checkout-wrap {
+      max-width: 460px;
+      margin: 0 auto;
+    }
+    .section-head {
+      max-width: 640px;
+    }
+
+    .collection-grid { border-radius: var(--radius-card); }
+
+    /* "Get the map" heading · sits above a centered checkout
+       sub-column (max-width 460px). Left-aligned heading + centered
+       widget reads disjointed, so we center the heading on desktop.
+       (Marked with .section-head--centered in the HTML so we don't
+       have to thread :has() selectors through the cascade.) */
+    .section-head--centered {
+      text-align: center;
+      align-items: center;
+    }
+
+    /* Trust row + footer breathe a bit more. */
+    .trust-row { gap: 12px 22px; padding-top: 12px; }
+    .footer { padding-top: 12px; }
+  }
+
+  /* === Buy card · Whop-style sticky sidebar ===
+     Defined unconditionally so devs can preview it via inspector even
+     on mobile, but the parent .page-side is display:none below 1024px
+     so it doesn't render. Card has zero padding + overflow:hidden so
+     the thumbnail sits edge-to-edge; .buy-content holds the rest. */
+  .buy-card {
+    background: #ffffff;
+    border: 1px solid var(--hairline);
+    border-radius: 18px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+  }
+  .buy-thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1600 / 1080;
+    background: #fafafa;
+  }
+  .buy-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .buy-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+  .buy-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .buy-rating .stars {
+    color: var(--warn);
+    letter-spacing: 1px;
+    font-size: 13px;
+  }
+  .buy-rating-num { color: var(--fg); font-weight: 600; }
+  .buy-name {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--fg);
+  }
+  .buy-price {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+    line-height: 1;
+  }
+  .buy-cta {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #ffffff;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: filter 150ms ease, transform 100ms ease;
+  }
+  .buy-cta:hover { filter: brightness(1.05); }
+  .buy-cta:active { transform: scale(0.98); }
+  .buy-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    padding: 12px 0 0;
+    border-top: 1px solid var(--hairline);
+    margin-top: 4px;
+  }
+  .buy-foot a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .buy-foot a:hover { color: var(--fg); text-decoration: underline; }
+
+  /* Larger desktops. Pad the navbar from the viewport edges so the
+     brand logo isn't pinned to the corner. */
+  @media (min-width: 1100px) {
+    .navbar { padding-left: 40px; padding-right: 40px; }
+  }
+
+  /* === Full-desktop · Whop-style 2-col with sticky buy sidebar ===
+     At >= 1024px the page becomes a 2-col grid: main content on the
+     left (sections still flow as a stack), sticky buy card on the
+     right that follows the buyer down the page. Below 1024 the
+     sidebar stays hidden and the in-flow Stripe iframe + the mobile
+     bottom sticky bar take over. */
+  @media (min-width: 1024px) {
+    main {
+      max-width: 1200px;
+      padding: 32px 32px 56px;
+    }
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      column-gap: 40px;
+      align-items: start;
+    }
+    .page-side {
+      display: block;
+      position: sticky;
+      top: 84px;
+    }
+    /* The collection grid is now the buy-card thumbnail · hide the
+       in-flow copy at this breakpoint so we don't show the same image
+       twice. The "What's inside" heading + 6 cards still anchor the
+       feature section. */
+    .collection-wrap { display: none; }
+    /* Slight top spacing fix · the carousel inside .page-main has 0
+       top margin so it lines up with the top of the buy-card to the
+       right (which inherits .page-grid's align-items: start). */
+    .page-main { gap: 48px; }
+
+    /* Reviews · 2 columns across the entire desktop range with the
+       sticky sidebar. 3-col looked cramped at every width we tested
+       because the sidebar always eats 360px from the page, leaving
+       the rightmost review pinned right against the buy-card. */
+    .reviews-carousel {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    /* Inside cards · keep 3-col but tighten gap so cards don't crash
+       into the sidebar at narrower 1024-1199 viewports. */
+    .inside { gap: 12px; }
+  }
+</style>
+<script>
+  /* === v12 hero split test — variant picker.
+     Runs in <head> so window.HB_HERO_VARIANT is set before the carousel
+     slide-1 markup is parsed. Each round, edit only the HERO_VARIANTS
+     object: swap the 2 culled keys for the next 2 from the queue.
+     Bucketing is deterministic on subscriber_id (?s=) so returning
+     visitors stay attributed to their original variant. */
+  window.HB_HERO_VARIANTS = {
+    '01': '/map3/img/v13/hero.jpg',
+    '02': '/map3/img/v13/hero2.jpg'
+  };
+  (function () {
+    var keys = Object.keys(window.HB_HERO_VARIANTS);
+    var sid = '';
+    try { sid = new URLSearchParams(location.search).get('s') || ''; } catch (e) {}
+    var stored = null;
+    try { stored = localStorage.getItem('hb:hero_variant'); } catch (e) {}
+    function pick() {
+      if (stored && window.HB_HERO_VARIANTS[stored]) return stored;
+      if (sid) {
+        var h = 0;
+        for (var i = 0; i < sid.length; i++) h = ((h * 31) + sid.charCodeAt(i)) | 0;
+        return keys[Math.abs(h) % keys.length];
+      }
+      return keys[Math.floor(Math.random() * keys.length)];
+    }
+    var v = pick();
+    try { localStorage.setItem('hb:hero_variant', v); } catch (e) {}
+    window.HB_HERO_VARIANT = v;
+  })();
+</script>
+</head>
+<body>
+  <header class="navbar">
+    <a class="navbar-brand" href="/">
+      <img src="../images/avatar.jpg" alt="" />
+      Hikebeast
+    </a>
+    <a class="navbar-lang" href="/de/map5/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">DE</a>
+  </header>
+
+  <main>
+   <div class="page-grid">
+    <div class="page-main">
+    <!-- Hero · carousel first, then text. The cover slide already shows the
+         product name "Gems of Switzerland" so the visual leads, the text confirms. -->
+    <section class="hero" style="display:flex;flex-direction:column;gap:12px;">
+      <!-- Carousel -->
+      <div class="carousel-wrap">
+        <div class="carousel" id="hero-carousel">
+          <!-- Slide 1 · split-test variant. Painted via document.write
+               during initial parse so the chosen variant is the only
+               image the browser ever fetches for this slot. -->
+          <script>document.write('<div class="slide"><img src="' + (window.HB_HERO_VARIANTS[window.HB_HERO_VARIANT] || '/map3/img/v13/hero.jpg') + '" alt="Swiss Gems Guide · The unforgettable Summer" loading="eager" fetchpriority="high" decoding="async" /></div>');</script>
+          <div class="slide"><img src="/map3/img/v13/mockup.jpg" alt="Spots tourists won't find" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/v13/grid.jpg" alt="A grid of eighteen hidden Swiss spots from the guide" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/v13/map.jpg" alt="141 spots, one map" loading="lazy" decoding="async" /></div>
+        </div>
+        <!-- Hover-only nav arrows (desktop only · hidden on touch devices
+             where the carousel relies on swipe). Click handlers wired in
+             the carousel JS block scroll the carousel by one slide. -->
+        <button type="button" class="carousel-arrow carousel-arrow--prev" id="hero-prev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15,6 9,12 15,18" />
+          </svg>
+        </button>
+        <button type="button" class="carousel-arrow carousel-arrow--next" id="hero-next" aria-label="Next slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9,6 15,12 9,18" />
+          </svg>
+        </button>
+        <div class="dots" id="hero-dots">
+          <span class="active"></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <!-- Product card · title, price, rating stacked. Ported from /themap/
+           — no sale strip, no strikethrough, just the offer terms in plain
+           form. Reverts the map3 sale-card experiment. -->
+      <div class="px product-card">
+        <h1 class="product-title">Swiss Gems 🇨🇭</h1>
+        <div class="product-price"><span class="price-display">CHF 27</span></div>
+        <div class="product-rating">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span>5.0 <span class="product-rating-count">(81)</span></span>
+        </div>
+      </div>
+
+      <div class="px hero-text">
+        <p class="hero-sub">Your guide to the best summer in Switzerland.</p>
+        <ul class="hero-bullets">
+          <li>141 Gems of Switzerland + How to Get There</li>
+          <li>Exact Location for every spot</li>
+          <li>Hiking &amp; Camping Information</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Feature cards · 6 cards summarising what's in the guide. The
+         "What's inside" heading sits above; on desktop with sidebar
+         the photo grid above is hidden, so the heading anchors the
+         section visually. -->
+    <section class="inside-section">
+      <div class="px section-head">
+        <h2>What's inside</h2>
+        <p>You won't find the best Swiss places with ChatGPT. They are in Whatsapp chats of Swiss photographers, in big books about the alps, and now, well structured, in this guide.</p>
+      </div>
+      <div class="inside">
+        <div class="inside-card">
+          <div class="card-photo"><img src="/map3/img/inside/wildcamping.jpg" alt="Sleeping bags on alpine grass at golden hour overlooking snowy peaks" loading="lazy" decoding="async" /></div>
+          <div class="card-body">
+            <h3>Wildcamping info</h3>
+            <p>Spots where you can stay the night without any cortisol spikes.</p>
+          </div>
+        </div>
+        <div class="inside-card">
+          <div class="card-photo"><img src="/map3/img/inside/spots.jpg" alt="Hiker overlooking misty alpine valleys" loading="lazy" decoding="async" /></div>
+          <div class="card-body">
+            <h3>141+ Spots</h3>
+            <p>The best gems of Switzerland. Some famous, most aren't.</p>
+          </div>
+        </div>
+        <div class="inside-card">
+          <div class="card-photo"><img src="/map3/img/inside/photo-info.jpg" alt="Hiker on a ridge at golden hour" loading="lazy" decoding="async" /></div>
+          <div class="card-body">
+            <h3>Photo info</h3>
+            <p>So what you capture feels just as beautiful as what you lived.</p>
+          </div>
+        </div>
+        <div class="inside-card">
+          <div class="card-photo"><img src="/map3/img/inside/exact-location.jpg" alt="Rowboat on a turquoise alpine lake" loading="lazy" decoding="async" /></div>
+          <div class="card-body">
+            <h3>Exact Location</h3>
+            <p>Coordinates that drop you on the exact spot.</p>
+          </div>
+        </div>
+        <div class="inside-card">
+          <div class="card-photo"><img src="/map3/img/inside/hike-info.jpg" alt="POV from a peak overlooking an alpine lake at sunset" loading="lazy" decoding="async" /></div>
+          <div class="card-body">
+            <h3>Hiking Info</h3>
+            <p>Trail and difficulty. So you know what you're walking into.</p>
+          </div>
+        </div>
+        <div class="inside-card">
+          <div class="card-photo"><img src="/map3/img/inside/webapp.jpg" alt="iPhone showing the Hikebeast webapp browsing 141 spots" loading="lazy" decoding="async" /></div>
+          <div class="card-body">
+            <h3>A Webapp</h3>
+            <p>An exciting way to plan your perfect itinerary.</p>
+          </div>
+        </div>
+        <div class="inside-card">
+          <div class="card-photo"><img src="/map3/img/inside/offline.jpg" alt="Hiker walking a sunset ridge alone" loading="lazy" decoding="async" /></div>
+          <div class="card-body">
+            <h3>Offline access</h3>
+            <p>A downloadable PDF works even without signal on the trail.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews · swipeable carousel · real testimonials collected from buyers
+         (avatars pulled from public IG og:image where available). -->
+    <section class="reviews">
+      <div class="px section-head">
+        <h2>What people say</h2>
+      </div>
+      <div class="reviews-carousel">
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/dimi_tt7.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Dimi</span>
+              <a class="review-handle" href="https://www.instagram.com/dimi_tt7" target="_blank" rel="noopener">@dimi_tt7</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"I saved so many locations for this summer."</p>
+        </div>
+        <div class="review-card review-card--expandable">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/lazyset_up.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Antonin</span>
+              <a class="review-handle" href="https://www.instagram.com/lazyset_up/" target="_blank" rel="noopener">@lazyset_up</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"Thanks a lot for all the dedication you put into this guide bro! Honestly, it's an amazing guide with so many incredible spots. I already know Switzerland pretty well, but I had no idea about some of these places. The information is super useful too and all the details, best timings, sunlight conditions, parking, access, everything. Really recommend it!!!"</p>
+          <button type="button" class="review-more-btn" data-more="Read more" data-less="Show less">Read more</button>
+        </div>
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/emirhansyz.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Emirhan</span>
+              <a class="review-handle" href="https://www.instagram.com/emirhansyz" target="_blank" rel="noopener">@emirhansyz</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"Überblick mit der Minimap usw so gut."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/alexis-dansereau.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Alexis</span>
+              <a class="review-handle" href="https://www.instagram.com/alexis.dansereau/" target="_blank" rel="noopener">@alexis.dansereau</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"I was in Switzerland for 14 days and went to 20 places from the list. Best holiday I EVER had."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/simon_ys32.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Simon</span>
+              <a class="review-handle" href="https://www.instagram.com/simon_ys32/" target="_blank" rel="noopener">@simon_ys32</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"hatte den besten wildcamping ausflug meines lebens!!"</p>
+        </div>
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/andres-soltermann.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Andrés</span>
+              <a class="review-handle" href="https://www.instagram.com/andres.soltermann/" target="_blank" rel="noopener">@andres.soltermann</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"I bought 2 other Switzerland guides before that and this is by far the best."</p>
+        </div>
+        <div class="review-card review-card--extra">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/oliwear_j.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Oli</span>
+              <a class="review-handle" href="https://www.instagram.com/oliwear.j/" target="_blank" rel="noopener">@oliwear.j</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"I showed Leon half the spots on this list but hey, it's a really good one 😄"</p>
+        </div>
+        <div class="review-card review-card--extra">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/clins_james.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">James</span>
+              <a class="review-handle" href="https://www.instagram.com/clins_james" target="_blank" rel="noopener">@clins_james</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"Didn't know there was a web version. Looks amazing"</p>
+        </div>
+        <div class="review-card review-card--extra">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/patrick_machler.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Patrick</span>
+              <a class="review-handle" href="https://www.instagram.com/patrick.machler" target="_blank" rel="noopener">@patrick.machler</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"everything worked out perfectly. I think it was money well spent. thanks for putting together this product 😄"</p>
+        </div>
+        <div class="review-card review-card--extra">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/dirk_thewanderer.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Dirk</span>
+              <a class="review-handle" href="https://www.instagram.com/dirk.thewanderer/" target="_blank" rel="noopener">@dirk.thewanderer</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"bin happy und hat alles geklappt"</p>
+        </div>
+        <div class="review-card review-card--extra">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/jay_kuja.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Jay</span>
+              <a class="review-handle" href="https://www.instagram.com/jay.kuja" target="_blank" rel="noopener">@jay.kuja</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"didnt have time to make an account for the website yet, but the pdf is awesome!"</p>
+        </div>
+        <div class="review-card review-card--extra">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/q_baroudeur.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Q</span>
+              <a class="review-handle" href="https://www.instagram.com/q_baroudeur/" target="_blank" rel="noopener">@q_baroudeur</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"The pdf is very helpful. the webapp is great especially the map"</p>
+        </div>
+        <div class="review-card review-card--extra review-card--expandable">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/mohamed_ahmed_abdel_aziz.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Mohamed</span>
+              <a class="review-handle" href="https://www.instagram.com/mohamed_ahmed_abdel_aziz" target="_blank" rel="noopener">@mohamed_ahmed_abdel_aziz</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"The guide is amazing and informative. My only recommendation is to highlight how to access the locations by public transportation if possible."</p>
+          <div class="creator-note"><span class="creator-note-label">Leon:</span>This feature is being rolled out as we speak.</div>
+          <button type="button" class="review-more-btn" data-more="Read more" data-less="Show less">Read more</button>
+        </div>
+      </div>
+      <div class="reviews-more-row">
+        <button type="button" class="reviews-more-btn" id="reviews-more-btn" data-more="Show more reviews" data-less="Show less">Show more reviews</button>
+      </div>
+    </section>
+
+    <!-- About me · the human behind the map, between social proof
+         and checkout. Short and personal, no marketing slop. -->
+    <section class="about-section">
+      <div class="px section-head">
+        <h2>About me</h2>
+      </div>
+      <div class="px about-body">
+        <img class="about-photo" src="/map3/img/about/leon.jpg" alt="Leon Helg" loading="lazy" decoding="async" />
+        <p>I'm Leon. As a photographer, I have spent many summers exploring the Swiss Alps. This map is the shortcut I wish I had when I started.</p>
+      </div>
+    </section>
+
+    <!-- Embedded Stripe Checkout -->
+    <section class="px" id="get-the-map">
+      <div class="section-head section-head--centered">
+        <h2>Get the map</h2>
+      </div>
+      <div class="guarantee-wrap">
+        <span class="guarantee-pill">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="10" cy="10" r="9" fill="#34c759"/>
+            <path d="M5.8 10.4l2.8 2.8 5.6-5.6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Less than 0.02% of buyers use our 30-day money-back guarantee!
+        </span>
+      </div>
+      <div class="checkout-wrap">
+        <div id="checkout">
+          <div class="checkout-skeleton"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust row · "30-day refund" is a small footer-pill repeat of
+         the guarantee above; links to /terms.html for the full text.
+         Saftladen GmbH lives in the imprint; no need to repeat it. -->
+    <div class="px trust-row">
+      <span>🔒 Secured by Stripe</span>
+      <span class="sep"></span>
+      <a href="/terms.html"><span>↩ 30-day refund</span></a>
+      <span class="sep"></span>
+      <span>🇨🇭 Made in Switzerland</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer px">
+      <div>© Hikebeast</div>
+      <div><a href="/terms.html">Terms</a> · <a href="/imprint.html">Imprint</a> · <a href="/privacy.html">Privacy</a></div>
+    </footer>
+    </div><!-- /.page-main -->
+
+    <!-- Sticky buy sidebar · Whop-style. Hidden below 1024px (mobile uses
+         the bottom sticky bar, tablet uses the in-flow Stripe iframe).
+         At >= 1024px this card stays parked on the right while the
+         buyer scrolls through the main content. The CTA scrolls smoothly
+         to the in-flow checkout iframe further down the page. -->
+    <aside class="page-side">
+      <div class="buy-card">
+        <!-- Thumbnail · the collection grid (6x3 photo collage) used to
+             live in the main column flow on desktop; now it's the
+             buy-card's hero image instead. Goes edge-to-edge inside
+             the card thanks to overflow:hidden + zero card padding. -->
+        <a href="#get-the-map" class="buy-thumb" aria-hidden="true">
+          <img src="/map3/img/collection.jpg" alt="" loading="lazy" decoding="async" />
+        </a>
+        <div class="buy-content">
+          <div class="buy-rating">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <span class="buy-rating-num">5.0</span>
+            <span class="buy-rating-count">(81)</span>
+          </div>
+          <div class="buy-name">Swiss Gems 🇨🇭</div>
+          <div class="buy-price">CHF 27</div>
+          <a href="#get-the-map" class="buy-cta">Get the map</a>
+          <div class="buy-foot">
+            <span>Apple Pay · TWINT · Card</span>
+            <a href="/terms.html#refunds">↩ 30-day refund</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+   </div><!-- /.page-grid -->
+  </main>
+
+  <!-- Sticky bottom buy bar (mobile) -->
+  <div class="sticky-buy" id="sticky-buy">
+    <a class="buy-btn" href="#get-the-map">Buy · <span class="price-display">CHF 27</span></a>
+  </div>
+
+<script>
+(function () {
+  // ---------- Currency state ----------
+  // For v1 default to CHF; user can cycle via the topbar toggle.
+  // IP-based default could be wired later via a small edge endpoint.
+  // Currency is decided server-side from the buyer's IP country. The
+  // page renders "CHF 27" as the static fallback (correct for Swiss
+  // visitors, which is most of our traffic), then once the checkout
+  // session is created the real currency + amount comes back in the
+  // response and we update the labels in place. The client never
+  // sends a currency · the user can't pick a cheaper region.
+  const CURRENCY_LABELS = { chf: "CHF", eur: "EUR", usd: "USD" };
+  let currentCurrency = "chf";
+  let currentAmount = 27;
+
+  function updatePriceLabels() {
+    const label = CURRENCY_LABELS[currentCurrency] || currentCurrency.toUpperCase();
+    document.querySelectorAll(".price-display").forEach((el) => {
+      el.textContent = `${label} ${currentAmount}`;
+    });
+    document.querySelectorAll(".buy-price").forEach((el) => {
+      el.textContent = `${label} ${currentAmount}`;
+    });
+  }
+
+  // Cohort tracking forwarded into Stripe session metadata
+  const params = new URLSearchParams(location.search);
+  const cohortToken = params.get("t") || "";
+  const cohortSubscriber = params.get("s") || "";
+  const utmSource = params.get("utm_source") || "";
+  const utmMedium = params.get("utm_medium") || "";
+  const utmCampaign = params.get("utm_campaign") || "";
+
+  // Affiliate ref. `?r=<username>` on this page → stash in localStorage
+  // with a 60-day TTL so a buyer who clicks now and pays later still
+  // attributes back to the affiliate. Read on every checkout-session
+  // POST below. Slug is lowercased; the webhook will match it against
+  // users.username (also lowercase) when the purchase completes.
+  const REF_KEY = "hb:r";
+  const REF_TTL_MS = 60 * 24 * 60 * 60 * 1000;
+  (function persistRefIfPresent() {
+    const raw = (params.get("r") || "").trim().toLowerCase();
+    if (!raw) return;
+    if (!/^[a-z0-9._-]{2,32}$/.test(raw)) return;
+    try {
+      localStorage.setItem(REF_KEY, JSON.stringify({ slug: raw, exp: Date.now() + REF_TTL_MS }));
+    } catch {}
+  })();
+  function readStoredRef() {
+    try {
+      const s = localStorage.getItem(REF_KEY);
+      if (!s) return "";
+      const obj = JSON.parse(s);
+      if (!obj || typeof obj.slug !== "string" || typeof obj.exp !== "number") return "";
+      if (obj.exp < Date.now()) { localStorage.removeItem(REF_KEY); return ""; }
+      return obj.slug;
+    } catch { return ""; }
+  }
+
+  // ---------- Carousel: dots + hover arrows ----------
+  const carousel = document.getElementById("hero-carousel");
+  const dotEls = document.querySelectorAll("#hero-dots span");
+  const prevBtn = document.getElementById("hero-prev");
+  const nextBtn = document.getElementById("hero-next");
+
+  if (carousel && dotEls.length && "IntersectionObserver" in window) {
+    const slides = carousel.querySelectorAll(".slide");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && e.intersectionRatio > 0.6) {
+            const idx = Array.prototype.indexOf.call(slides, e.target);
+            dotEls.forEach((d, i) => d.classList.toggle("active", i === idx));
+          }
+        });
+      },
+      { root: carousel, threshold: [0, 0.6, 1] }
+    );
+    slides.forEach((s) => io.observe(s));
+  }
+
+  /* Helper · width of one slide including the column-gap. Used by the
+     hover arrows and the autoplay loop below. */
+  const slideWidth = () => {
+    if (!carousel) return 0;
+    const slide = carousel.querySelector(".slide");
+    return slide ? slide.getBoundingClientRect().width + parseFloat(getComputedStyle(carousel).columnGap || 0) : 0;
+  };
+
+  /* Hover arrows · scroll the carousel one slide-width per click.
+     scrollBy with `behavior: smooth` plays well with scroll-snap so
+     the carousel naturally locks onto the next slide. */
+  if (carousel && prevBtn && nextBtn) {
+    prevBtn.addEventListener("click", () => {
+      carousel.scrollBy({ left: -slideWidth(), behavior: "smooth" });
+    });
+    nextBtn.addEventListener("click", () => {
+      carousel.scrollBy({ left: slideWidth(), behavior: "smooth" });
+    });
+  }
+
+  /* Autoplay · advance every 3s, loop back to the start at the end.
+     Stops permanently the moment the user touches the carousel
+     (swipe, tap on an arrow, mouse wheel scroll · whatever signals
+     they're driving). Their pace beats ours · this is purely a hint
+     for users who haven't noticed the carousel is interactive yet.
+     Respects prefers-reduced-motion. */
+  if (carousel && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let autoplayTimer = setInterval(() => {
+      const sw = slideWidth();
+      if (sw <= 0) return;
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      if (carousel.scrollLeft >= maxScroll - 4) {
+        carousel.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        carousel.scrollTo({ left: carousel.scrollLeft + sw, behavior: "smooth" });
+      }
+    }, 5000);
+
+    const stopAutoplay = () => {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    };
+
+    /* Pointer + touch events on the carousel itself catch real user
+       intent. We can't use 'scroll' as the trigger because our own
+       scrollTo above fires it. */
+    ["pointerdown", "touchstart", "wheel"].forEach((ev) => {
+      carousel.addEventListener(ev, stopAutoplay, { passive: true, once: true });
+    });
+    if (prevBtn) prevBtn.addEventListener("click", stopAutoplay, { once: true });
+    if (nextBtn) nextBtn.addEventListener("click", stopAutoplay, { once: true });
+  }
+
+  // ---------- Expandable reviews ("Read more") ----------
+  document.querySelectorAll(".review-more-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const card = btn.closest(".review-card");
+      const open = card.classList.toggle("is-open");
+      btn.textContent = open
+        ? (btn.dataset.less || "Show less")
+        : (btn.dataset.more || "Read more");
+    });
+  });
+
+  // ---------- Desktop "Show more reviews" ----------
+  const reviewsBtn = document.getElementById("reviews-more-btn");
+  if (reviewsBtn) {
+    reviewsBtn.addEventListener("click", () => {
+      const carousel = document.querySelector(".reviews-carousel");
+      const open = carousel.classList.toggle("is-expanded");
+      reviewsBtn.textContent = open
+        ? (reviewsBtn.dataset.less || "Show less")
+        : (reviewsBtn.dataset.more || "Show more reviews");
+    });
+  }
+
+  // ---------- Sticky buy bar visibility ----------
+  // Plain scroll math, no IntersectionObserver. We were seeing the
+  // bar fail to appear in Instagram's in-app browser, which has
+  // quirks around IO rootMargin percentages on some builds. Two
+  // signals:
+  //   - scrolled past the hero's bottom (heroPast)
+  //   - the checkout iframe is NOT yet within ~250px of the viewport
+  //     bottom (so the bar fades before covering the Pay button).
+  const stickyBuy = document.getElementById("sticky-buy");
+  if (stickyBuy) {
+    // Simple rule: show the bar the moment the user scrolls at all.
+    // Hide it only if they're all the way back at the top.
+    let lastVisible = false;
+    const update = () => {
+      const visible = window.scrollY > 10;
+      if (visible !== lastVisible) {
+        stickyBuy.classList.toggle("is-visible", visible);
+        lastVisible = visible;
+      }
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    update();
+  }
+
+  // ---------- Stripe embedded checkout ----------
+  let stripe = null;
+  let checkout = null;
+  let mountInFlight = false;
+
+  // Visual stand-in shown when STRIPE_SECRET_KEY isn't configured yet.
+  // Mirrors the layout of Stripe's real embedded iframe so the page can be
+  // QA'd without keys. Form fields are non-interactive.
+  function renderCheckoutMock(container) {
+    const label = CURRENCY_LABELS[currentCurrency] || "CHF";
+    container.classList.remove("is-mounted");
+    container.innerHTML = `
+      <div class="checkout-mock" aria-hidden="true">
+        <span class="mock-badge">Preview</span>
+        <div class="mock-wallets">
+          <div class="mock-btn apple">Apple Pay</div>
+          <div class="mock-btn twint">TWINT</div>
+          <div class="mock-btn gpay">G Pay</div>
+        </div>
+        <div class="mock-divider">Or pay with card</div>
+        <div class="mock-label">Email</div>
+        <div class="mock-input">you@example.com</div>
+        <div class="mock-label">Card information</div>
+        <div class="mock-input with-icons">
+          <span>1234 1234 1234 1234</span>
+          <span class="mock-card-icons">
+            <span>VISA</span><span>MC</span><span>AMEX</span>
+          </span>
+        </div>
+        <div class="mock-row">
+          <div class="mock-input">MM / YY</div>
+          <div class="mock-input">CVC</div>
+        </div>
+        <div class="mock-label">Country</div>
+        <div class="mock-input">Switzerland</div>
+        <div class="mock-pay">Pay ${label} 27</div>
+        <div class="mock-foot">Powered by <strong>stripe</strong> · Terms · Privacy</div>
+      </div>
+    `;
+  }
+
+  async function mountCheckout() {
+    if (mountInFlight) return;
+    mountInFlight = true;
+    const container = document.getElementById("checkout");
+    container.classList.remove("is-mounted");
+    container.innerHTML = '<div class="checkout-skeleton"></div>';
+
+    try {
+      const res = await fetch("/api/checkout/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        // No `currency` field · server picks it from the buyer's IP so
+        // they can't downgrade to a cheaper region by editing this POST.
+        body: JSON.stringify({
+          t: cohortToken,
+          s: cohortSubscriber,
+          utm_source: utmSource,
+          utm_medium: utmMedium,
+          utm_campaign: utmCampaign,
+          r: readStoredRef(),
+          source_page: "map5",
+          hero_variant: window.HB_HERO_VARIANT || "",
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        // Stripe keys missing or no Price for the chosen currency: fall back
+        // to the visual mockup so the page still looks complete during setup.
+        if (data.error === "stripe_not_configured" || data.error === "price_not_configured") {
+          renderCheckoutMock(container);
+          return;
+        }
+        container.innerHTML =
+          `<div class="checkout-error">Something went wrong on our side. Email <a href="mailto:leon@hikebeast.ch">leon@hikebeast.ch</a> and we'll sort it.</div>`;
+        return;
+      }
+
+      const data = await res.json();
+      const { client_secret: clientSecret, publishable_key: publishableKey } = data;
+      if (!clientSecret || !publishableKey) {
+        renderCheckoutMock(container);
+        return;
+      }
+
+      // Server told us which currency + amount to display (IP-based).
+      // Update the labels so the info-bar, buy-card, and sticky-buy
+      // bar all match what the Stripe iframe will charge.
+      if (typeof data.currency === "string") {
+        currentCurrency = data.currency.toLowerCase();
+      }
+      if (typeof data.amount === "number") {
+        currentAmount = data.amount;
+      }
+      updatePriceLabels();
+
+      // Wait for Stripe.js to load if it hasn't yet (script tag is `defer`).
+      if (typeof Stripe === "undefined") {
+        await new Promise((r) => {
+          const i = setInterval(() => {
+            if (typeof Stripe !== "undefined") { clearInterval(i); r(); }
+          }, 50);
+        });
+      }
+
+      if (!stripe) stripe = Stripe(publishableKey);
+      if (checkout) {
+        try { await checkout.destroy(); } catch (e) { /* noop */ }
+        checkout = null;
+      }
+
+      checkout = await stripe.initEmbeddedCheckout({ clientSecret });
+      container.innerHTML = "";
+      container.classList.add("is-mounted");
+      checkout.mount("#checkout");
+
+      // InitiateCheckout signal for Meta
+      if (typeof fbq === "function") {
+        fbq("track", "InitiateCheckout", {
+          value: 27.0,
+          currency: currentCurrency.toUpperCase(),
+        });
+      }
+    } catch (err) {
+      console.error("Checkout mount failed:", err);
+      container.innerHTML =
+        '<div class="checkout-error">Network error. Try again or email <a href="mailto:leon@hikebeast.ch">leon@hikebeast.ch</a>.</div>';
+    } finally {
+      mountInFlight = false;
+    }
+  }
+
+  // Auto-mount checkout when the page is interactive
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", mountCheckout);
+  } else {
+    mountCheckout();
+  }
+
+  // ---------- Page-visit ping for the funnel sheet ----------
+  // Reuses the existing /api/visit endpoint that the other landings use.
+  // Carries hero_variant so the v12 split test rows are tagged at landed time.
+  try {
+    fetch("/api/visit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        page: "map5",
+        token: cohortToken,
+        subscriber_id: cohortSubscriber,
+        utm_source: utmSource,
+        utm_medium: utmMedium,
+        utm_campaign: utmCampaign,
+        browser_language: navigator.language || "",
+        hero_variant: window.HB_HERO_VARIANT || "",
+      }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch (e) { /* noop */ }
+
+  // ---------- v12 split test · engagement + session-end events ----------
+  // Two extra beacons let us compute bounce and time-on-site per variant.
+  //   `engaged`  · fires once when the user scrolls past .inside-section
+  //                top OR reaches 15s of cumulative active visibility.
+  //   `session_end` · fires on every visibilitychange→hidden via
+  //                sendBeacon (regular fetch drops ~40% in IG WKWebView).
+  //                Payload carries cumulative active_ms so the last beacon
+  //                wins on the Sheet side.
+  (function setupSplitTestEvents() {
+    if (!cohortSubscriber && !cohortToken) return; // anon, nothing to attribute
+    var variant = window.HB_HERO_VARIANT || "";
+    var activeStart = performance.now();
+    var activeMs = 0;
+    var engagedFired = false;
+
+    function sendBeaconJson(payload) {
+      try {
+        var blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+        return navigator.sendBeacon && navigator.sendBeacon("/api/visit", blob);
+      } catch (e) { return false; }
+    }
+
+    function fireEngaged() {
+      if (engagedFired) return;
+      engagedFired = true;
+      try {
+        fetch("/api/visit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            event: "engaged",
+            page: "map5",
+            token: cohortToken,
+            subscriber_id: cohortSubscriber,
+            hero_variant: variant,
+          }),
+          keepalive: true,
+        }).catch(() => {});
+      } catch (e) { /* noop */ }
+    }
+
+    // Scroll trigger · once .inside-section's top enters the viewport
+    var insideSec = document.querySelector(".inside-section");
+    if (insideSec && "IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) { fireEngaged(); io.disconnect(); break; }
+        }
+      }, { threshold: 0 });
+      io.observe(insideSec);
+    }
+
+    // Time trigger · 15s of foreground time
+    setTimeout(function () {
+      if (!document.hidden) fireEngaged();
+    }, 15000);
+
+    // Track active visibility for time-on-site
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        activeMs += performance.now() - activeStart;
+        sendBeaconJson({
+          event: "session_end",
+          page: "map5",
+          token: cohortToken,
+          subscriber_id: cohortSubscriber,
+          hero_variant: variant,
+          active_ms: Math.round(activeMs),
+        });
+      } else {
+        activeStart = performance.now();
+      }
+    });
+    // pagehide as a last-gasp fallback for iOS bfcache evictions
+    window.addEventListener("pagehide", function () {
+      if (!document.hidden) activeMs += performance.now() - activeStart;
+      sendBeaconJson({
+        event: "session_end",
+        page: "map5",
+        token: cohortToken,
+        subscriber_id: cohortSubscriber,
+        hero_variant: variant,
+        active_ms: Math.round(activeMs),
+      });
+    });
+  })();
+})();
+</script>
+
+</body>
+</html>
