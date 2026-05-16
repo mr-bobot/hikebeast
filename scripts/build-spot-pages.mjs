@@ -737,11 +737,13 @@ function flipScriptFor(spot) {
 
     // Elevation change cell: "+gain" or "+gain / -loss" if both are known.
     // The "m" unit suffix is fixed in the template; we just swap the number(s).
+    // Using split/join instead of a regex because the backslash inside a
+    // template literal gets stripped during string interpolation.
     const elevEl = back.querySelector('[data-rd-elev-change]');
     if (elevEl) {
       const ec = fmtElevationChange(r.gain_m, r.descent_m);
       if (ec) {
-        elevEl.innerHTML = ec.replace(/\//g, '<span class="unit">/</span>');
+        elevEl.innerHTML = ec.split(' / ').join(' <span class="unit">/</span> ');
         elevEl.classList.remove('missing');
       } else {
         elevEl.textContent = '—';

@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778885948777" />
+<link rel="stylesheet" href="../../preview.css?v=1778916689827" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -332,11 +332,13 @@
 
     // Elevation change cell: "+gain" or "+gain / -loss" if both are known.
     // The "m" unit suffix is fixed in the template; we just swap the number(s).
+    // Using split/join instead of a regex because the backslash inside a
+    // template literal gets stripped during string interpolation.
     const elevEl = back.querySelector('[data-rd-elev-change]');
     if (elevEl) {
       const ec = fmtElevationChange(r.gain_m, r.descent_m);
       if (ec) {
-        elevEl.innerHTML = ec.replace(///g, '<span class="unit">/</span>');
+        elevEl.innerHTML = ec.split(' / ').join(' <span class="unit">/</span> ');
         elevEl.classList.remove('missing');
       } else {
         elevEl.textContent = '—';
