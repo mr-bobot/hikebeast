@@ -3693,3 +3693,98 @@ hikes:
   - niederbauen-emmetten-cable-car
   quickest_for:
   - fulberg
+- id: zermatt_huts-via-zum-see
+  name: Up from Zermatt via Zum See and Furi
+  visits:
+  - zermatt_huts
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 75
+  gain_m: 290
+  distance_km: 4.2
+  equipment_list: []
+  start: Zermatt village (end of Bahnhofstrasse, toward Winkelmatten)
+  transit:
+    train: Zermatt (MGB, Matterhorn Gotthard Bahn from Visp)
+  description_extra: 'Walk to the south end of Zermatt, cross into Winkelmatten, and follow the marked Furi trail (signposted route No. 119 via Zum See). The path climbs along the Zmuttbach
+    below the Gorner gorge through larch forest. Zum See sits roughly two-thirds of the way up: a small Walser hamlet of larch-wood barns and stone-roof chalets at about 1,760 m, with
+    the Matterhorn rising behind through the trees. From there it is another 25 minutes up to Furi at 1,867 m, the cable car mid-station. Round trip is about 1h 15 one-way, or take the
+    gondola back down from Furi. Trail is open year-round but the restaurants at Zum See close in winter.'
+  sources:
+  - https://www.zermatt.ch/en/Media/Planning-hikes-tours/Zermatt-Furi-via-Zum-See-Nr.-119
+  - https://en.wikipedia.org/wiki/Zum_See
+  quickest_for:
+  - zermatt_huts
+- id: tine_de_conflens-from-la-sarraz
+  name: Loop from La Sarraz via the Nozon gorge
+  visits:
+  - tine_de_conflens
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 105
+  gain_m: 150
+  descent_m: 150
+  distance_km: 6.1
+  equipment_list: []
+  start: La Sarraz village (Château de La Sarraz parking)
+  transit:
+    train: La Sarraz (CFF, on the Lausanne-Vallorbe line)
+  description_extra: The Tine de Conflens is the waterfall at the confluence of the Venoge and the Veyron, where the streams have cut a small limestone gorge. The signposted loop from
+    La Sarraz drops through forest down to the waterfall, follows the gorge, and climbs back via fields. About 6 km, 1h 45 walking, family-friendly. Park at the château or take the train
+    (the station is a 10-minute walk from the trailhead). For a shorter visit, you can also drive to a forest pull-out at 46.6549, 6.4921 and walk down to the falls in 15 minutes. Path
+    down to the waterfall stays wet for days after rain, bring grippy shoes.
+  sources:
+  - https://www.myswitzerland.com/en-ch/experiences/route/nozon-gorge-waterfalls-between-romainmotier-and-la-sarraz/
+  - https://www.komoot.com/smarttour/5472230
+  quickest_for:
+  - tine_de_conflens
+- id: etang_de_la_gruere-pond-loop
+  name: Loop around the pond from La Theurre
+  visits:
+  - etang_de_la_gruere
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 45
+  gain_m: 20
+  descent_m: 20
+  distance_km: 2.6
+  equipment_list: []
+  start: La Theurre parking (north side of the pond)
+  transit:
+    train: Saignelégier (Chaux-de-Fonds-Glovelier line)
+    bus: PostBus 32 from Saignelégier toward Tramelan, stop La Theurre
+  description_extra: Étang de la Gruère is a moorland pond in the Franches-Montagnes, formed by an 18th-century mill dam and surrounded by raised bog. The loop around the water is 2.6
+    km on a flat boardwalk-and-gravel path, about 35 to 45 minutes, T1, family-friendly. Park at La Theurre on the north side (paid) or take PostBus 32 from Saignelégier station, three
+    minutes from the bus stop. The whole moor is a federally protected site, so stay on the marked path and no swimming or drones. Sunrise mist and late golden hour both give a still
+    reflection if there is no wind.
+  sources:
+  - https://www.j3l.ch/en/P33241/destinations/nature-sites/etang-de-la-gruere
+  - https://www.parks.swiss/en/map/offer-detail/etang-de-la-gruere-1246
+  - https://www.myswitzerland.com/en-ch/destinations/etang-de-la-gruere/
+  quickest_for:
+  - etang_de_la_gruere
+- id: gorges_du_dailley-from-salvan
+  name: Salvan to Van d'en Bas through the gorge
+  visits:
+  - gorges_du_dailley
+  sac_grade: T2
+  effort_label: Moderate
+  duration_min: 150
+  gain_m: 380
+  descent_m: 380
+  distance_km: 5.5
+  equipment_list:
+  - Grippy hiking shoes
+  - Rain jacket for spray
+  start: Les Granges hamlet above Salvan
+  transit:
+    train: Salvan station (Mont-Blanc Express from Martigny), then 15-minute walk up to Les Granges trailhead
+  description_extra: The trail follows the Salanfe torrent from Les Granges up through the Dailley gorge. The path is fitted with footbridges, galleries and around 600 steps cut or bolted
+    into the rock, first built in 1895 and renovated since. Waterfalls stack one above the next for almost a kilometre, then the trail tops out near Van d'en Bas and loops back down
+    via the larch forest. About 5.5 km round trip, 380 m of gain, 2h to 2h 30, T2. The gorge is open June to October only, winter ice closes the staircases. Spray gets heavy in high-water
+    season, keep the camera covered. Best light is mid-morning when the sun filters down through the canopy.
+  sources:
+  - https://www.valleedutrient.ch/en/dailley-gorges-fp207
+  - https://www.valais.ch/en/explore/activities/natural-sites/geological-sites/dailley-gorge
+  quickest_for:
+  - gorges_du_dailley

@@ -1627,6 +1627,8 @@ spots:
   trip_facts:
     elevation_m: 1867
     busyness: 3
+  hike_ids:
+  - zermatt_huts-via-zum-see
 - id: aletsch_glacier
   chapter: valais
   kicker: SWITZERLAND'S LARGEST, FOR NOW
@@ -2337,6 +2339,8 @@ spots:
   trip_facts:
     elevation_m: 1066
     busyness: 2
+  hike_ids:
+  - gorges_du_dailley-from-salvan
 - id: nax_via_ferrata
   chapter: valais
   kicker: A SHORT VERTICAL WITH BIG CONSEQUENCE
@@ -2667,6 +2671,17 @@ spots:
   trip_facts:
     elevation_m: 1656
     busyness: 2
+  arrival:
+    by_car:
+      directions: From Jaun (Fribourg), follow the Euschelsstrasse mountain road five kilometres up toward the Euschels pass. Ritzli Alp sits near the top at 1,516 m, signposted from
+        the village.
+      parking: Restaurant Ritzli Alp lot at the trailhead, free.
+      walk_to_spot_min: 1
+    by_train_bus:
+      route: Bulle + PostBus toward Jaun, Dorf. From Jaun, walk up the Euschelspass trail to Ritzli Alp (about 1h 25, 500 m of gain, T1).
+      walk_from_stop_min: 85
+    best_time: Late afternoon and blue hour. The Gastlosen ridge sits west of the terrace, so the wall lights up at sunset and the sky stays deep blue for 30 minutes after.
+    operating: Open daily June to mid-September, weekends in shoulder season. Closed in winter, mountain road closes with snow.
 - id: la_tine_canyon
   chapter: fribourg
   kicker: GO WITH A GUIDE THE FIRST TIME
@@ -3174,6 +3189,8 @@ spots:
   trip_facts:
     elevation_m: 500
     busyness: 2
+  hike_ids:
+  - tine_de_conflens-from-la-sarraz
 - id: lac_de_taney
   chapter: western
   kicker: AN ALPINE LAKE ABOVE LÉMAN
@@ -3287,6 +3304,17 @@ spots:
   trip_facts:
     elevation_m: 377
     busyness: 3
+  arrival:
+    by_car:
+      directions: From Lausanne, take the A1 toward Geneva, exit Morges-Ouest, then follow signs to St-Prex. The Bain des Dames is signed off the Rue du Vieux-Collège on the western
+        side of the old town.
+      parking: Free roadside parking near Rue du Vieux-Collège, more capacity at Plage de Chaucy a few minutes east.
+      walk_to_spot_min: 3
+    by_train_bus:
+      route: Lausanne CFF + regional train to St-Prex, hourly, 17 minutes. From the station, walk west through the old town to the Sentier du Lac (about 1 km).
+      walk_from_stop_min: 12
+    best_time: Afternoon for sun on the water and warm light on the French Alps across the lake. Summer for swim temperature, water hits 22 to 24 C in July to August.
+    operating: Open access year-round, but the platform is a summer feature. Check depth before jumping.
 - id: marchairuz
   chapter: western
   kicker: WINTER WONDERLAND IN THE JURA
@@ -3437,6 +3465,8 @@ spots:
   trip_facts:
     elevation_m: 998
     busyness: 3
+  hike_ids:
+  - etang_de_la_gruere-pond-loop
 - id: le_doubs
   chapter: western
   kicker: RIVERS
@@ -3466,6 +3496,17 @@ spots:
   trip_facts:
     elevation_m: 830
     busyness: 2
+  arrival:
+    by_car:
+      directions: From La Chaux-de-Fonds, drive to Le Locle, then follow signs toward Les Planchettes and Les Roches de Moron. The road ends at Restaurant Les Roches de Moron above the
+        canyon.
+      parking: Restaurant Les Roches de Moron lot at the trailhead, free for diners, signed paid parking otherwise.
+      walk_to_spot_min: 5
+    by_train_bus:
+      route: Les Brenets (train from Le Locle on the regional line), then 45-minute climb up the cliff trail to the Roches de Moron viewpoint, or taxi from Le Locle.
+      walk_from_stop_min: 45
+    best_time: Late afternoon for sunset on the canyon walls. Overcast suits the Jura mood. Avoid windy days, the plateau is exposed.
+    operating: Trail open year-round. The restaurant has seasonal hours, check restroches.ch before counting on it for parking access.
 - id: western_extras
   chapter: western
   kind: extras
