@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778926108629" />
+<link rel="stylesheet" href="../../preview.css?v=1778927203534" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -91,7 +91,7 @@
       <button type="button" class="hb-back-flip-back" data-action="flip-front"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to photo</button>
       <p class="hb-back-title">Planning · <b>Lago di Saoseo</b></p>
     </div>
-    <div class="hb-links-row"><a class="hb-link-pill" href="https://www.google.com/maps/place/Lago+di+Saoseo/@46.2868,10.1029,15z" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-gmaps"/></svg></span>Google Maps</a><a class="hb-link-pill" href="https://map.geo.admin.ch/?lang=en&search=Lago%20di%20Saoseo" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-swisstopo"/></svg></span>SwissTopo</a><a class="hb-link-pill" href="https://www.maps.apple.com/place/Lago+di+Saoseo/@46.2868,10.1029,15z" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-applemaps"/></svg></span>Apple Maps</a></div>
+    <div class="hb-links-row"><a class="hb-link-pill" href="https://www.google.com/maps/place/Lago+di+Saoseo/@46.2868,10.1029,15z" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-gmaps"/></svg></span>Google Maps</a><a class="hb-link-pill" href="https://map.geo.admin.ch/?lang=en&zoom=10&crosshair=marker&E=2805289&N=1129640" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-swisstopo"/></svg></span>SwissTopo</a><a class="hb-link-pill" href="https://www.maps.apple.com/place/Lago+di+Saoseo/@46.2868,10.1029,15z" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-applemaps"/></svg></span>Apple Maps</a></div>
     <div class="hb-stats-bar hb-stats-bar--compact">
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 20l5-9 4 6 3-4 6 7"/></svg></span>
@@ -216,7 +216,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"lago_di_saoseo-sfazu-val-da-camp","visits":["lago_di_saoseo"],"sac_grade":"T2","effort_label":"Demanding","duration_min":420,"gain_m":657,"descent_m":662,"distance_km":15,"equipment_list":["Hiking boots","Rain layer","2 L water","Sun protection"],"start":"Sfazù bus stop (1,636 m) on the Bernina Pass road","transit":{"train":"Bernina Express or regional train to Poschiavo","bus":"PostBus toward the Bernina Pass to Sfazù; PubliCar shuttle from Sfazù up the valley to Alp Camp (May to mid-October, reservation required)","car":"Roadside parking at Sfazù. Private motor traffic is forbidden in Val da Camp"},"description_extra":"The official Graubünden Ferien route is a 15 km circular through Val da Camp from Sfazù, rated T2 with 657 m of ascent and 662 m of descent and a stated walking time of 7 hours. The trail follows the valley road up to Alp Camp, then a foot-only path to Lagh da Saoseo at 2,028 m, a clear lake 570 m long and up to 17 m deep, and continues on to Lagh da Viola at 2,159 m before looping back via Rifugio Saoseo. A small bus reduces the distance for hikers who want to reach the lakes only.","sources":["https://www.graubuenden.ch/en/tours/mountain-hike-to-lagh-da-saoseo","https://en.wikipedia.org/wiki/Lago_di_Saoseo"],"quickest_for":["lago_di_saoseo"],"quickest":true}];
+  const ROUTES = [{"id":"lago_di_saoseo-sfazu-val-da-camp","visits":["lago_di_saoseo"],"sac_grade":"T2","effort_label":"Demanding","duration_min":420,"gain_m":657,"descent_m":662,"distance_km":15,"equipment_list":["Hiking boots","Rain layer","2 L water","Sun protection"],"start":"Sfazù bus stop (1,636 m) on the Bernina Pass road","transit":{"train":"Bernina Express or regional train to Poschiavo","bus":"PostBus toward the Bernina Pass to Sfazù; PubliCar shuttle from Sfazù up the valley to Alp Camp (May to mid-October, reservation required)","car":"Roadside parking at Sfazù. Private motor traffic is forbidden in Val da Camp"},"description_extra":"The official Graubünden Ferien route is a 15 km circular through Val da Camp from Sfazù, rated T2 with 657 m of ascent and 662 m of descent and a stated walking time of 7 hours. The trail follows the valley road up to Alp Camp, then a foot-only path to Lagh da Saoseo at 2,028 m, and continues on to Lagh da Viola at 2,159 m before looping back via Rifugio Saoseo. A small bus reduces the distance for hikers who want to reach the lakes only. Private motor traffic is forbidden in Val da Camp.","sources":["https://www.graubuenden.ch/en/tours/mountain-hike-to-lagh-da-saoseo","https://en.wikipedia.org/wiki/Lago_di_Saoseo"],"quickest_for":["lago_di_saoseo"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

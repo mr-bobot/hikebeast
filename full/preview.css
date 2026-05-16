@@ -5524,11 +5524,11 @@ body.has-rail .topbar .hb-nav { display: none; }
 
 /* 5-cell stats dashboard */
 .hb-stats-bar { display: grid; grid-template-columns: repeat(5, 1fr); background: white; border: 1px solid var(--hairline); border-radius: 14px; overflow: hidden; }
-/* Overview bar (back of card): 3 cells, doesn't need to span full width.
-   Each cell stays the same physical width as a cell in the 5-cell route bar
-   (60% of the full bar). On narrow viewports the bar falls back to full
-   width so cells don't crush. */
-.hb-stats-bar--compact { grid-template-columns: repeat(3, 1fr); width: 60%; max-width: 600px; margin-left: auto; margin-right: auto; }
+/* Overview bar (back of card): 3 cells, left-aligned, doesn't need to
+   span full width. Each cell stays the same physical width as a cell in
+   the 5-cell route bar (60% of the full bar). On narrow viewports the bar
+   falls back to full width so cells don't crush. */
+.hb-stats-bar--compact { grid-template-columns: repeat(3, 1fr); width: 60%; max-width: 600px; margin-left: 0; margin-right: auto; }
 @media (max-width: 700px) { .hb-stats-bar--compact { width: 100%; max-width: none; } }
 /* Compact variant for the Cable car / Mountain hut info cards on the route
    detail. The cards only carry 4 short labelled values; spanning the full

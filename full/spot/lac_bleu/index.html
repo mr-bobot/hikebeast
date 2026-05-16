@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778926108628" />
+<link rel="stylesheet" href="../../preview.css?v=1778927203532" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -91,7 +91,7 @@
       <button type="button" class="hb-back-flip-back" data-action="flip-front"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to photo</button>
       <p class="hb-back-title">Planning · <b>Lac Bleu</b></p>
     </div>
-    <div class="hb-links-row"><a class="hb-link-pill" href="https://www.google.com/maps/place/Lac+Bleu/@46.050484,7.4800854,17z/data=!3m1!4b1!4m6!3m5!1s0x478f29661d9d8675:0x83e0a41c8432263a!8m2!3d46.050484!4d7.4800854" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-gmaps"/></svg></span>Google Maps</a><a class="hb-link-pill" href="https://map.geo.admin.ch/?lang=en&search=Lac%20Bleu" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-swisstopo"/></svg></span>SwissTopo</a><a class="hb-link-pill" href="https://www.maps.apple.com/place/Lac+Bleu/@46.050484,7.4800854,17z/data=!3m1!4b1!4m6!3m5!1s0x478f29661d9d8675:0x83e0a41c8432263a!8m2!3d46.050484!4d7.4800854" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-applemaps"/></svg></span>Apple Maps</a></div>
+    <div class="hb-links-row"><a class="hb-link-pill" href="https://www.google.com/maps/place/Lac+Bleu/@46.050484,7.4800854,17z/data=!3m1!4b1!4m6!3m5!1s0x478f29661d9d8675:0x83e0a41c8432263a!8m2!3d46.050484!4d7.4800854" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-gmaps"/></svg></span>Google Maps</a><a class="hb-link-pill" href="https://map.geo.admin.ch/?lang=en&zoom=10&crosshair=marker&E=2603207&N=1099884" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-swisstopo"/></svg></span>SwissTopo</a><a class="hb-link-pill" href="https://www.maps.apple.com/place/Lac+Bleu/@46.050484,7.4800854,17z/data=!3m1!4b1!4m6!3m5!1s0x478f29661d9d8675:0x83e0a41c8432263a!8m2!3d46.050484!4d7.4800854" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-applemaps"/></svg></span>Apple Maps</a></div>
     <div class="hb-stats-bar hb-stats-bar--compact">
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 20l5-9 4 6 3-4 6 7"/></svg></span>
@@ -216,7 +216,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"lac_bleu-la-gouille-direct","visits":["lac_bleu"],"sac_grade":"T2","effort_label":"Easy","duration_min":90,"gain_m":314,"distance_km":3.3,"equipment_list":["Hiking boots","Water"],"start":"La Gouille bus stop (1,776 m), Val d'Hérens","transit":{"bus":"PostBus 381 from Sion to La Gouille (hamlet between Les Haudères and Arolla)","car":"Roadside parking at La Gouille on the Arolla road"},"description_extra":"The trail leaves La Gouille and climbs through larch and rhododendron stands to the small turquoise pool of Lac Bleu at 2,090 m. The official Val d'Hérens route gives 1 h 30 min walking time, 3.26 km distance and 314 m of ascent. A signed extension links the lake to Arolla via Pramousse for a longer loop of around 4 hours. Swimming is tolerated but the lake is glacier-cold.","sources":["https://www.valdherens.ch/en/hike-to-arolla-s-blue-lake-lac-bleu-fp46146"],"quickest_for":["lac_bleu"],"quickest":true}];
+  const ROUTES = [{"id":"lac_bleu-la-gouille-direct","visits":["lac_bleu"],"sac_grade":"T2","effort_label":"Easy","duration_min":90,"gain_m":314,"distance_km":3.3,"equipment_list":["Hiking boots","Water"],"start":"La Gouille bus stop (1,776 m), Val d'Hérens","transit":{"bus":"PostBus 381 from Sion to La Gouille (hamlet between Les Haudères and Arolla)","car":"Roadside parking at La Gouille on the Arolla road"},"description_extra":"The trail leaves La Gouille and climbs through larch and rhododendron stands to the small turquoise pool of Lac Bleu at 2,090 m. The official Val d'Hérens route gives 1 h 30 walking time, 3.26 km distance and 314 m of ascent, T2. A signed extension links the lake to Arolla via Pramousse for a longer loop of around 4 hours.","sources":["https://www.valdherens.ch/en/hike-to-arolla-s-blue-lake-lac-bleu-fp46146"],"quickest_for":["lac_bleu"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

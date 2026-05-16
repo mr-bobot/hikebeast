@@ -322,6 +322,47 @@ function renderRouteStatsBar(spot, route) {
 // SwissTopo points at the quickest route's deeplink when one exists (which is
 // route-specific). Each route's own detail panel will also have its own
 // SwissTopo button.
+// Parse WGS84 lat/lon out of a Google Maps URL.
+// Google's URLs encode coordinates two different ways:
+//   1. !8m2!3d{lat}!4d{lon}  — the PLACE'S actual coordinates (preferred)
+//   2. @{lat},{lon},{zoom}    — the CAMERA / viewport position. Can be miles
+//                                from the actual place (sometimes default
+//                                view of Europe).
+// Always prefer (1); fall back to (2) only if absent (rare).
+// Short share URLs (maps.app.goo.gl) carry no coords inline.
+function extractLatLon(mapsUrl) {
+  if (!mapsUrl) return null;
+  const placeMatch = mapsUrl.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+  if (placeMatch) {
+    return { lat: parseFloat(placeMatch[1]), lon: parseFloat(placeMatch[2]) };
+  }
+  const camMatch = mapsUrl.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+  if (camMatch) {
+    return { lat: parseFloat(camMatch[1]), lon: parseFloat(camMatch[2]) };
+  }
+  return null;
+}
+
+// WGS84 -> CH1903+ / LV95 (the coordinate system map.geo.admin.ch uses).
+// Standard approximation formulas from swisstopo's navref. Accurate to
+// within ~1 m for our use case (centering the SwissTopo viewer on a spot).
+function wgs84ToLv95(lat, lon) {
+  const phi = (lat * 3600 - 169028.66) / 10000;   // latitude offset from Bern
+  const lam = (lon * 3600 - 26782.5) / 10000;     // longitude offset from Bern
+  const E = 2600072.37
+          + 211455.93 * lam
+          - 10938.51 * lam * phi
+          - 0.36 * lam * phi * phi
+          - 44.54 * lam * lam * lam;
+  const N = 1200147.07
+          + 308807.95 * phi
+          + 3745.25 * lam * lam
+          + 76.63 * phi * phi
+          - 194.56 * lam * lam * phi
+          + 119.79 * phi * phi * phi;
+  return { E: Math.round(E), N: Math.round(N) };
+}
+
 function renderLinksRow(spot) {
   const gmaps = spot.maps_url
     ? `<a class="hb-link-pill" href="${escapeHtml(spot.maps_url)}" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-gmaps"/></svg></span>Google Maps</a>`
@@ -329,12 +370,20 @@ function renderLinksRow(spot) {
   const apple = spot.maps_url
     ? `<a class="hb-link-pill" href="${escapeHtml(spot.maps_url.replace("google.com/maps", "maps.apple.com"))}" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-applemaps"/></svg></span>Apple Maps</a>`
     : "";
-  // SwissTopo: search by spot title on map.geo.admin.ch. Skip for spots
-  // outside Switzerland (Chamonix / Aravis / Italian Val Ferret etc.) since
-  // SwissTopo only covers Swiss territory. We'll wire route-specific
-  // preloaded-line deeplinks later — this is just a static link to the spot.
-  const topo = (spot.chapter !== "beyond" && spot.title)
-    ? `<a class="hb-link-pill" href="https://map.geo.admin.ch/?lang=en&search=${encodeURIComponent(spot.title)}" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-swisstopo"/></svg></span>SwissTopo</a>`
+  // SwissTopo: deeplink that actually centers on the spot. Parse lat/lon
+  // out of the maps_url, convert to CH1903+ (LV95), build a map.geo.admin.ch
+  // URL with E/N + a marker. Skip for `beyond` chapter spots (SwissTopo
+  // only covers Swiss territory) and spots without parseable coords.
+  let topoUrl = null;
+  if (spot.chapter !== "beyond" && spot.maps_url) {
+    const ll = extractLatLon(spot.maps_url);
+    if (ll) {
+      const { E, N } = wgs84ToLv95(ll.lat, ll.lon);
+      topoUrl = `https://map.geo.admin.ch/?lang=en&zoom=10&crosshair=marker&E=${E}&N=${N}`;
+    }
+  }
+  const topo = topoUrl
+    ? `<a class="hb-link-pill" href="${topoUrl}" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-swisstopo"/></svg></span>SwissTopo</a>`
     : "";
   if (!gmaps && !topo && !apple) return "";
   return `<div class="hb-links-row">${gmaps}${topo}${apple}</div>`;

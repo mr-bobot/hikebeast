@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1778926108602" />
+<link rel="stylesheet" href="../../preview.css?v=1778927203508" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -92,7 +92,7 @@
       <button type="button" class="hb-back-flip-back" data-action="flip-front"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to photo</button>
       <p class="hb-back-title">Planning · <b>Zermatt huts</b></p>
     </div>
-    <div class="hb-links-row"><a class="hb-link-pill" href="https://www.google.com/maps/place/46%C2%B000&#x27;23.3%22N+7%C2%B043&#x27;55.4%22E/@46.006481,7.732045,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.006481!4d7.732045" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-gmaps"/></svg></span>Google Maps</a><a class="hb-link-pill" href="https://map.geo.admin.ch/?lang=en&search=Zermatt%20huts" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-swisstopo"/></svg></span>SwissTopo</a><a class="hb-link-pill" href="https://www.maps.apple.com/place/46%C2%B000&#x27;23.3%22N+7%C2%B043&#x27;55.4%22E/@46.006481,7.732045,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.006481!4d7.732045" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-applemaps"/></svg></span>Apple Maps</a></div>
+    <div class="hb-links-row"><a class="hb-link-pill" href="https://www.google.com/maps/place/46%C2%B000&#x27;23.3%22N+7%C2%B043&#x27;55.4%22E/@46.006481,7.732045,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.006481!4d7.732045" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-gmaps"/></svg></span>Google Maps</a><a class="hb-link-pill" href="https://map.geo.admin.ch/?lang=en&zoom=10&crosshair=marker&E=2622728&N=1095034" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-swisstopo"/></svg></span>SwissTopo</a><a class="hb-link-pill" href="https://www.maps.apple.com/place/46%C2%B000&#x27;23.3%22N+7%C2%B043&#x27;55.4%22E/@46.006481,7.732045,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.006481!4d7.732045" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-applemaps"/></svg></span>Apple Maps</a></div>
     <div class="hb-stats-bar hb-stats-bar--compact">
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 20l5-9 4 6 3-4 6 7"/></svg></span>
@@ -217,7 +217,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"zermatt_huts-from-zermatt-toward-furi","name":"Up from Zermatt toward Furi through the Walser hamlets","visits":["zermatt_huts"],"sac_grade":"T1","effort_label":"Easy","duration_min":75,"gain_m":290,"distance_km":4.2,"equipment_list":[],"start":"Zermatt village (end of Bahnhofstrasse, toward Winkelmatten)","transit":{"train":"Zermatt (MGB, Matterhorn Gotthard Bahn from Visp)"},"description_extra":"Walk to the south end of Zermatt past Winkelmatten and pick up the marked footpath that climbs along the Zmuttbach toward the Furi cable car station. The trail passes through several Walser hamlets of larch-wood barns and stone-roof chalets between roughly 1,700 m and Furi at 1,867 m, with the Matterhorn rising behind them through the larch belt. About 1h 15 one-way, 290 m of gain, T1 throughout. The restaurants up there shut for winter, so the hamlets feel empty in the off-season. Take the gondola back down from Furi to save the knees.","sources":["https://www.zermatt.ch/en/hiking-tours","https://en.wikipedia.org/wiki/Zermatt"],"quickest_for":["zermatt_huts"],"quickest":true}];
+  const ROUTES = [{"id":"zermatt_huts-from-zermatt-toward-furi","name":"Up from Zermatt toward Furi through the Walser hamlets","visits":["zermatt_huts"],"sac_grade":"T1","effort_label":"Easy","duration_min":75,"gain_m":290,"distance_km":4.2,"equipment_list":[],"start":"Zermatt village (end of Bahnhofstrasse, toward Winkelmatten)","transit":{"train":"Zermatt (MGB, Matterhorn Gotthard Bahn from Visp)"},"description_extra":"Walk to the south end of Zermatt past Winkelmatten and pick up the marked footpath that climbs along the Zmuttbach toward the Furi cable car station. The trail passes through several Walser hamlets between roughly 1,700 m and Furi at 1,867 m. About 1h 15 one-way, 290 m of gain, T1 throughout. The restaurants up there shut for winter. Take the gondola back down from Furi to save the knees.","sources":["https://www.zermatt.ch/en/hiking-tours","https://en.wikipedia.org/wiki/Zermatt"],"quickest_for":["zermatt_huts"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
