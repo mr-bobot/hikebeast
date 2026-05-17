@@ -108,7 +108,7 @@ export default async function handler(req, res) {
           device_type: safeDeviceType,
           is_ig_webview: safeIsIgWebview,
         }),
-        signal: AbortSignal.timeout(5000),
+        signal: AbortSignal.timeout(15000),
       }).catch((err) => console.error("Visit log failed:", err)),
     );
   }
