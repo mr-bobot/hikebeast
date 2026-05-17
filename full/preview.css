@@ -3588,6 +3588,41 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
   object-fit: cover;
   display: block;
 }
+/* Dark-gradient region-SVG variant. Same visual recipe as
+ * .up-next-card.is-chapter .photo.cv-map but tuned for the rail's
+ * 28x28 circular thumb. The SVG silhouette sits ~70% width, centered,
+ * with a faint drop-shadow over a region-color tinted dark gradient.
+ * Drives the tint via the inline `--region-color` CSS variable set
+ * per chapter in renderChapter(). */
+.rail-chapter .rail-chapter-thumb.cv-map {
+  background:
+    radial-gradient(70% 60% at 22% 18%, rgba(var(--region-color, 200, 200, 200), 0.55) 0%, rgba(var(--region-color, 200, 200, 200), 0) 65%),
+    radial-gradient(60% 55% at 92% 95%, rgba(var(--region-color, 200, 200, 200), 0.32) 0%, rgba(var(--region-color, 200, 200, 200), 0) 70%),
+    linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
+  display: grid;
+  place-items: center;
+}
+.rail-chapter .rail-chapter-thumb.cv-map img {
+  width: 70%; height: auto; max-height: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+/* Same treatment for the mobile menu-sheet chapter rows. Scoped under
+ * .app-menu-sheet so the specificity beats `.app-menu-sheet .menu-row-thumb img`
+ * which would otherwise overrule the `object-fit: contain` we want here. */
+.app-menu-sheet .menu-row-thumb.cv-map {
+  background:
+    radial-gradient(70% 60% at 22% 18%, rgba(var(--region-color, 200, 200, 200), 0.55) 0%, rgba(var(--region-color, 200, 200, 200), 0) 65%),
+    radial-gradient(60% 55% at 92% 95%, rgba(var(--region-color, 200, 200, 200), 0.32) 0%, rgba(var(--region-color, 200, 200, 200), 0) 70%),
+    linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
+  display: grid;
+  place-items: center;
+}
+.app-menu-sheet .menu-row-thumb.cv-map img {
+  width: 70%; height: auto; max-height: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
 .rail-chapter .label {
   opacity: 0;
   transition: opacity 120ms ease 30ms;

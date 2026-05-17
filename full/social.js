@@ -1056,15 +1056,21 @@
   // Cover paths point at the build-image-derivatives output. Intro thumb
   // uses a WebP derivative built by scripts/build-front-matter-derivatives.mjs;
   // matches the sidebar thumb on every chapter page.
+  // The intro is the only entry that keeps a real photo thumb — it has
+  // no region SVG (it's the polaroid front-matter, not a chapter on the
+  // map). Every actual chapter uses its dark-gradient region-SVG icon
+  // (matches the wildcamping page tiles + chapter cover pages).
+  // `color` is the same RGB triplet used by CHAPTERS_META in
+  // /full/index.html and the chapter cover headers.
   const RAIL_INTRO_CHAPTER = { id: 'intro', label: 'Introduction', cover: 'front_matter/page_05-w192.webp' };
   const RAIL_CHAPTERS = [
-    { id: 'central',  label: 'Central',             cover: 'chapters/central/w400.webp' },
-    { id: 'valais',   label: 'Valais',              cover: 'chapters/valais/w400.webp' },
-    { id: 'fribourg', label: 'Fribourg',            cover: 'chapters/fribourg/w400.webp' },
-    { id: 'western',  label: 'Western',             cover: 'chapters/western/w400.webp' },
-    { id: 'eastern',  label: 'Eastern',             cover: 'chapters/eastern/w400.webp' },
-    { id: 'ticino',   label: 'Ticino',              cover: 'chapters/ticino/w400.webp' },
-    { id: 'beyond',   label: 'Outside Switzerland', cover: 'chapters/beyond/w400.webp' },
+    { id: 'central',  label: 'Central',             color: '175,165,122', mapSvg: 'img/region-central.svg' },
+    { id: 'valais',   label: 'Valais',              color: '234,183,191', mapSvg: 'img/region-valais.svg' },
+    { id: 'fribourg', label: 'Fribourg',            color: '216,216,209', mapSvg: 'img/region-fribourg.svg' },
+    { id: 'western',  label: 'Western',             color: '204,224,158', mapSvg: 'img/region-western.svg' },
+    { id: 'eastern',  label: 'Eastern',             color: '124,181,168', mapSvg: 'img/region-eastern.svg' },
+    { id: 'ticino',   label: 'Ticino',              color: '147,132,186', mapSvg: 'img/region-ticino.svg' },
+    { id: 'beyond',   label: 'Outside Switzerland', color: '89,89,89',    mapSvg: 'img/region-beyond.svg' },
   ];
 
   function injectRail() {
@@ -1092,12 +1098,21 @@
     const cur = (suffix) => here.endsWith(suffix) ? ' is-current' : '';
     const curCh = currentChapterId();
 
-    const renderChapter = (ch) => `
-      <a class="rail-chapter${curCh === ch.id ? ' is-current' : ''}" href="${REL}${ch.id}/" title="${ch.label}">
-        <span class="rail-chapter-thumb"><img src="${REL}img/${ch.cover}" alt="" /></span>
-        <span class="label">${ch.label}</span>
-      </a>
-    `;
+    const renderChapter = (ch) => {
+      // Chapter rows use the region-SVG-on-dark-gradient thumb (same
+      // recipe as the wildcamping tiles + chapter cover hero). Intro
+      // falls back to its polaroid cover photo since there's no map
+      // silhouette for it.
+      const thumb = ch.mapSvg
+        ? `<span class="rail-chapter-thumb cv-map" style="--region-color: ${ch.color};"><img src="${REL}${ch.mapSvg}" alt="" /></span>`
+        : `<span class="rail-chapter-thumb"><img src="${REL}img/${ch.cover}" alt="" /></span>`;
+      return `
+        <a class="rail-chapter${curCh === ch.id ? ' is-current' : ''}" href="${REL}${ch.id}/" title="${ch.label}">
+          ${thumb}
+          <span class="label">${ch.label}</span>
+        </a>
+      `;
+    };
     const introItem = renderChapter(RAIL_INTRO_CHAPTER);
     const chapterItems = RAIL_CHAPTERS.map(renderChapter).join('');
 
@@ -1294,7 +1309,7 @@
         </a>
         ${RAIL_CHAPTERS.map(ch => `
           <a class="menu-row${curCh === ch.id ? ' is-current' : ''}" href="${REL}${ch.id}/" data-close>
-            <span class="menu-row-thumb"><img src="${REL}img/${ch.cover}" alt="" /></span>
+            <span class="menu-row-thumb cv-map" style="--region-color: ${ch.color};"><img src="${REL}${ch.mapSvg}" alt="" /></span>
             <span class="menu-row-label">${ch.label}</span>
           </a>
         `).join('')}
@@ -1358,26 +1373,13 @@
       });
       topbar.insertBefore(burger, topbar.firstChild);
 
-      // Universal Account icon. Goes into the topbar's right-side cluster
-      // so every /full/* page has a consistent entry to /full/account/.
-      // Most pages have a `.topbar-right` slot; the home page uses
-      // `.home-topbar-actions`. We append to whichever we find. (The
-      // inline copy on the home page is hidden via CSS so we don't
-      // double up — the inline copy was added before this universal
-      // injection existed.)
-      // Hidden on mobile (the menu sheet has its own "Account" row);
-      // shown only on desktop where there's no menu sheet to host it.
-      const rightSlot = topbar.querySelector('.topbar-right, .home-topbar-actions');
-      if (rightSlot && !rightSlot.querySelector('[data-hb-cog]')) {
-        const cog = document.createElement('a');
-        cog.className = 'rail-burger rail-cog';   // reuse burger button styling
-        cog.setAttribute('href', `${REL}account/`);
-        cog.setAttribute('aria-label', 'Account');
-        cog.setAttribute('title', 'Account');
-        cog.dataset.hbCog = '';
-        cog.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
-        rightSlot.appendChild(cog);
-      }
+      // (Note: an earlier version injected a small account-cog icon into
+      // `.topbar-right` of every page. That predates the `.hb-account-fab`
+      // top-right pill — on desktop both rendered in the same corner and
+      // overlapped (the pill sat on top of the cog). The FAB already
+      // covers the same "tap to reach /full/account/" job plus shows the
+      // username + log-out, so the cog is now redundant and the
+      // injection was removed.)
     }
 
     // Toggle expand/collapse (desktop)
