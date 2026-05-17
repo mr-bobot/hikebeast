@@ -45,7 +45,7 @@ const FONT = "-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Ar
 // Cache-bust query string bumped when the file changes. Some email clients
 // aggressively cache previously-fetched URLs (Gmail proxy, Outlook image
 // cache); a new ?v= guarantees subscribers see the current artwork.
-const HERO_IMG = `${SITE}/images/thanks-email.jpg?v=2`;
+const HERO_IMG = `${SITE}/images/thanks-hero.jpg?v=1`;
 // Customer-view Drive folder. Latest version of the guide always lives
 // here so the URL stays stable across releases. Linked here as the
 // "view in browser" alternative to the direct download.
@@ -155,14 +155,14 @@ function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId, s
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Swiss Gems of Switzerland · Your guide is ready</title>
+<title>Swiss Gems · Your guide is ready</title>
 </head>
 <body style="margin:0;padding:0;background:#f5f5f7;">
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f5f5f7;padding:32px 16px;">
     <tr><td align="center">
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560" style="max-width:560px;background:#ffffff;border-radius:20px;overflow:hidden;">
         <tr><td>
-          <img src="${HERO_IMG}" alt="Swiss Gems of Switzerland" width="560" style="display:block;width:100%;max-width:560px;height:auto;border:0;" />
+          <img src="${HERO_IMG}" alt="Swiss Gems" width="560" style="display:block;width:100%;max-width:560px;height:auto;border:0;" />
         </td></tr>
         <tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
           <p style="margin:0 0 16px;font-size:16px;">${greeting}</p>
@@ -173,7 +173,7 @@ function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId, s
                + password) any time. The page re-verifies the Stripe session
                server-side before showing the form. -->
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
-            <td style="border-radius:999px;background:#1d1d1f;">
+            <td style="border-radius:999px;background:#0071e3;">
               <a href="${onboardingUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Open the Swiss Gems App</a>
             </td>
           </tr></table>
@@ -265,14 +265,14 @@ function purchaseEmailDeHtml({ firstName, downloadUrl, amountFormatted, orderId,
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Swiss Gems of Switzerland · Dein Guide ist bereit</title>
+<title>Swiss Gems · Dein Guide ist bereit</title>
 </head>
 <body style="margin:0;padding:0;background:#f5f5f7;">
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f5f5f7;padding:32px 16px;">
     <tr><td align="center">
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560" style="max-width:560px;background:#ffffff;border-radius:20px;overflow:hidden;">
         <tr><td>
-          <img src="${HERO_IMG}" alt="Swiss Gems of Switzerland" width="560" style="display:block;width:100%;max-width:560px;height:auto;border:0;" />
+          <img src="${HERO_IMG}" alt="Swiss Gems" width="560" style="display:block;width:100%;max-width:560px;height:auto;border:0;" />
         </td></tr>
         <tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
           <p style="margin:0 0 16px;font-size:16px;">${greeting}</p>
@@ -282,7 +282,7 @@ function purchaseEmailDeHtml({ firstName, downloadUrl, amountFormatted, orderId,
                Success-Page, damit du das Onboarding (Username + Passwort)
                jederzeit abschliessen kannst. -->
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 14px;"><tr>
-            <td style="border-radius:999px;background:#1d1d1f;">
+            <td style="border-radius:999px;background:#0071e3;">
               <a href="${onboardingUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Swiss Gems App öffnen</a>
             </td>
           </tr></table>
@@ -358,12 +358,12 @@ ${SITE}/de/terms.html · ${SITE}/de/imprint.html · ${SITE}/de/privacy.html
 // metadata. Falls back to EN if locale is missing or unknown.
 const EMAIL_COPY = {
   en: {
-    subject: "Swiss Gems of Switzerland · Your guide is ready",
+    subject: "Swiss Gems · Your guide is ready",
     html: purchaseEmailHtml,
     text: purchaseEmailText,
   },
   de: {
-    subject: "Swiss Gems of Switzerland · Dein Guide ist bereit",
+    subject: "Swiss Gems · Dein Guide ist bereit",
     html: purchaseEmailDeHtml,
     text: purchaseEmailDeText,
   },
