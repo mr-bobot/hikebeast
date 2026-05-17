@@ -5069,7 +5069,10 @@ body.has-rail .topbar .hb-nav { display: none; }
   position: fixed;
   top: 8px;
   right: 12px;
-  z-index: 60;
+  /* Sits above the home-topbar (z-index 80) so the user pill / log-out
+   * button stays visible. Pre-cog-removal this conflict was hidden by
+   * the cog being inside the topbar rather than above it. */
+  z-index: 90;
   display: inline-flex;
   align-items: center;
   pointer-events: none;
