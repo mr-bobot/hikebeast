@@ -3549,17 +3549,22 @@ spots:
     protections:
     - BLN landscape — Säntisgebiet
   maps_url: https://www.google.com/maps/place/F%C3%A4lensee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x479b25b13698a10f:0x45c9ba1c8a046627!8m2!3d47.2511404!4d9.4173218!16s%2Fm%2F02ptb4_
+  # 2026-05-17: swapped 06.jpg ↔ main.jpg on disk so Bö Benkö's photo
+  # is now the primary (was Leon's). The 06.jpg entry below is the old
+  # main.jpg, now demoted into the gallery. File-level swap (not just
+  # a Convex order change) keeps the sidecar in sync with Convex on
+  # first paint — no swap-flicker.
   image: spots/falensee/main.jpg
-  image_credit: leon.helg
+  image_credit: bo_benko_unsplash
+  image_source_type: unsplash
+  image_source_url: "https://unsplash.com/de/fotos/ein-gewasser-mit-bergen-im-rucken-WlJHg46JtUg"
   photos:
   - file: 02.jpg
     credit: Chris Henry
     source_type: unsplash
     source_url: "https://unsplash.com/photos/3cGpYqg3Nck"
   - file: 06.jpg
-    credit: bo_benko_unsplash
-    source_type: unsplash
-    source_url: "https://unsplash.com/de/fotos/ein-gewasser-mit-bergen-im-rucken-WlJHg46JtUg"
+    credit: leon.helg
   - file: 07.jpg
     credit: ilia_bronskyi_unsplash_2
     source_type: unsplash
