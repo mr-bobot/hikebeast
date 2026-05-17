@@ -3588,18 +3588,18 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
   object-fit: cover;
   display: block;
 }
-/* Solid-color chapter chip. The chapter's region color is the icon.
- * Region SVG silhouettes were unreadable at this size, and the color
- * alone is the identifier (matches the swatch on the map legend).
- * Faint highlight top-left + faint shadow bottom-right give it a
- * subtle pill / chip feel without losing the color as the focal point.
- * Driven by the inline `--region-color` CSS variable per chapter. */
+/* Chapter color chip — the chapter's region color mixed with black so
+ * it reads as a muted, dark-mode-friendly identifier rather than a
+ * bright candy circle. Recipe: near-black base, translucent color
+ * layer on top (so each region color is recognisable but desaturated),
+ * faint white highlight for a pill / chip feel. Driven by the inline
+ * `--region-color` CSS variable per chapter. */
 .rail-chapter .rail-chapter-thumb.chip-color,
 .app-menu-sheet .menu-row-thumb.chip-color {
   background:
-    radial-gradient(circle at 30% 25%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 55%),
-    radial-gradient(circle at 75% 80%, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0) 55%),
-    rgb(var(--region-color, 200, 200, 200));
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(135deg, rgba(var(--region-color, 200, 200, 200), 0.55) 0%, rgba(var(--region-color, 200, 200, 200), 0.32) 100%),
+    #15151a;
 }
 .rail-chapter .label {
   opacity: 0;
