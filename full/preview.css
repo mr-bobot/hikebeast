@@ -3588,6 +3588,19 @@ body.has-rail.rail-expanded .hb-random-overlay { left: 240px; }
   object-fit: cover;
   display: block;
 }
+/* Chapter color chip — the chapter's region color mixed with black so
+ * it reads as a muted, dark-mode-friendly identifier rather than a
+ * bright candy circle. Recipe: near-black base, translucent color
+ * layer on top (so each region color is recognisable but desaturated),
+ * faint white highlight for a pill / chip feel. Driven by the inline
+ * `--region-color` CSS variable per chapter. */
+.rail-chapter .rail-chapter-thumb.chip-color,
+.app-menu-sheet .menu-row-thumb.chip-color {
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(135deg, rgba(var(--region-color, 200, 200, 200), 0.55) 0%, rgba(var(--region-color, 200, 200, 200), 0.32) 100%),
+    #15151a;
+}
 .rail-chapter .label {
   opacity: 0;
   transition: opacity 120ms ease 30ms;
@@ -3711,6 +3724,13 @@ button.rail-item {
 .rail-item.has-count .rail-dot { display: block; }
 .app-rail.is-expanded .rail-item .rail-dot { display: none; }
 .rail-item-wrap { position: relative; }
+
+/* "What's new" rail-item dims itself so it doesn't compete with the
+ * primary nav. Same hit area + hover state, just muted text + smaller
+ * label. Sits below the chapters scroll, above the dark-mode toggle. */
+.rail-item.rail-item-subtle { color: var(--muted); }
+.rail-item.rail-item-subtle .label { font-size: 12.5px; font-weight: 500; }
+.rail-item.rail-item-subtle:hover { color: var(--fg); }
 
 /* Dark-mode toggle, sits just above the collapse/expand toggle at
  * the bottom of the rail. Reuses .rail-toggle's visual recipe so the
@@ -5049,7 +5069,10 @@ body.has-rail .topbar .hb-nav { display: none; }
   position: fixed;
   top: 8px;
   right: 12px;
-  z-index: 60;
+  /* Sits above the home-topbar (z-index 80) so the user pill / log-out
+   * button stays visible. Pre-cog-removal this conflict was hidden by
+   * the cog being inside the topbar rather than above it. */
+  z-index: 90;
   display: inline-flex;
   align-items: center;
   pointer-events: none;
