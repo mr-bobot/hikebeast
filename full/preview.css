@@ -3712,6 +3712,13 @@ button.rail-item {
 .app-rail.is-expanded .rail-item .rail-dot { display: none; }
 .rail-item-wrap { position: relative; }
 
+/* "What's new" rail-item dims itself so it doesn't compete with the
+ * primary nav. Same hit area + hover state, just muted text + smaller
+ * label. Sits below the chapters scroll, above the dark-mode toggle. */
+.rail-item.rail-item-subtle { color: var(--muted); }
+.rail-item.rail-item-subtle .label { font-size: 12.5px; font-weight: 500; }
+.rail-item.rail-item-subtle:hover { color: var(--fg); }
+
 /* Dark-mode toggle, sits just above the collapse/expand toggle at
  * the bottom of the rail. Reuses .rail-toggle's visual recipe so the
  * two bottom buttons match. Icon previews the destination theme:

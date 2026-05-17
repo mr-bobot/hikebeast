@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
+<title>What's new · Gems of Switzerland · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="manifest" href="../../manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Hikebeast" />
+<meta name="mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" href="../preview.css" />
+<link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
+<style>
+  /* Hand-maintained release log layout. Lives only on this page. Two
+     sections (Recently shipped + Working on now) rendered as plain
+     lists, no fancy widgets. Newest entries go to the top of each list.
+     Pure HTML — no Convex, no build step. */
+  .wn-page  { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+  .wn-group { margin-top: 40px; }
+  .wn-group:first-of-type { margin-top: 24px; }
+  .wn-h2 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 20px; font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0 0 16px;
+  }
+  .wn-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 20px; }
+  .wn-item {
+    padding: 18px 20px;
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+  }
+  .wn-item-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 6px;
+  }
+  .wn-item-title {
+    font-size: 15px; font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    line-height: 1.3;
+  }
+  .wn-item-date {
+    font-size: 12px; font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+    flex-shrink: 0;
+  }
+  .wn-item-body {
+    font-size: 13.5px; line-height: 1.5;
+    color: var(--muted);
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="../index.html">
+    <span>What's new</span>
+  </a>
+  <div class="topbar-right">
+    <a class="pill" href="../index.html">Overview</a>
+  </div>
+</div>
+
+<main class="hb-page wn-page">
+
+  <header class="hb-hero">
+    <p class="kicker">Recent + upcoming updates</p>
+    <h1>What's new</h1>
+    <p>Quick log of what just shipped and what we're working on right now.</p>
+  </header>
+
+  <!-- ===========================================================
+       SHIPPED · what landed on hikebeast.ch. Newest at the top.
+       To add an entry, copy a <li> and edit. Format:
+         <li class="wn-item">
+           <div class="wn-item-head">
+             <span class="wn-item-title">Title</span>
+             <span class="wn-item-date">Month dd</span>
+           </div>
+           <p class="wn-item-body">1-2 sentences.</p>
+         </li>
+  =========================================================== -->
+  <section class="wn-group">
+    <h2 class="wn-h2">Recently shipped</h2>
+    <ul class="wn-list">
+      <li class="wn-item">
+        <div class="wn-item-head">
+          <span class="wn-item-title">Wildcamping section redone</span>
+          <span class="wn-item-date">May 17</span>
+        </div>
+        <p class="wn-item-body">16 curated spots split by camping style (tent area, tent + bivouac, bivouac only) with a filter chip at the top. Fronalpstock, Moiry Glacier, Gastlosen, and others added.</p>
+      </li>
+      <li class="wn-item">
+        <div class="wn-item-head">
+          <span class="wn-item-title">Explore + Home remember where you were</span>
+          <span class="wn-item-date">May 15</span>
+        </div>
+        <p class="wn-item-body">For You row and the photo wall now stay put when you click into a spot and come back. Reshuffles after an hour, or hit the new Shuffle button on Explore.</p>
+      </li>
+      <li class="wn-item">
+        <div class="wn-item-head">
+          <span class="wn-item-title">Dark mode</span>
+          <span class="wn-item-date">May 13</span>
+        </div>
+        <p class="wn-item-body">Optional dark theme across the whole webapp. Toggle in the rail on desktop, or in the Settings section of the mobile menu.</p>
+      </li>
+      <li class="wn-item">
+        <div class="wn-item-head">
+          <span class="wn-item-title">Faster photos, no flicker</span>
+          <span class="wn-item-date">May 13</span>
+        </div>
+        <p class="wn-item-body">Image grid renders at its final size on first paint instead of reflowing once photos decode. Killed the "image reloads itself" flash on Home and Explore.</p>
+      </li>
+      <li class="wn-item">
+        <div class="wn-item-head">
+          <span class="wn-item-title">Submit your own photos</span>
+          <span class="wn-item-date">May 10</span>
+        </div>
+        <p class="wn-item-body">Any spot page has a button to upload your own shot. We review submissions and add the best ones to the gallery, with photo credit.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ===========================================================
+       WORKING ON · in-flight. No date stamp; remove when shipped
+       and add a new entry under "Recently shipped" with today's date.
+  =========================================================== -->
+  <section class="wn-group">
+    <h2 class="wn-h2">Working on now</h2>
+    <ul class="wn-list">
+      <li class="wn-item">
+        <div class="wn-item-head">
+          <span class="wn-item-title">Adding hikes</span>
+        </div>
+        <p class="wn-item-body">Over 100 hikes coming, directly integrated with SwissTopo so you can see the route on the map.</p>
+      </li>
+      <li class="wn-item">
+        <div class="wn-item-head">
+          <span class="wn-item-title">Adding public transport</span>
+        </div>
+        <p class="wn-item-body">Public-transport directions for each spot so you know the best train + bus combo to get there.</p>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="legal">
+  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  © Hikebeast
+</footer>
+
+<script src="../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
+<script src="../social.js"></script>
+
+</body>
+</html>

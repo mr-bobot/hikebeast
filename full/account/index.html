@@ -235,42 +235,6 @@
   }
   .state a { color: var(--accent); text-decoration: none; }
 
-  /* === What's new ===
-     Hand-maintained release log. Two lists ("Recently shipped" /
-     "Working on now"), each entry is a title + 1-2 sentences. Lives
-     low on the Account card on purpose: regulars who want to know
-     what changed will scroll for it, casual users won't notice. */
-  .changelog-group { margin-top: 16px; }
-  .changelog-group:first-child { margin-top: 4px; }
-  .changelog-sub {
-    font-size: 11px; font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.06em;
-    margin: 0 0 8px;
-  }
-  .changelog-list {
-    list-style: none; padding: 0; margin: 0;
-    display: flex; flex-direction: column; gap: 12px;
-  }
-  .changelog-item .changelog-title {
-    font-size: 13.5px; font-weight: 600;
-    letter-spacing: -0.005em;
-    color: var(--fg);
-    line-height: 1.3;
-  }
-  .changelog-item .changelog-date {
-    font-size: 11px; color: var(--muted);
-    margin-left: 6px;
-    font-weight: 500;
-    letter-spacing: 0;
-  }
-  .changelog-item .changelog-body {
-    font-size: 12.5px; line-height: 1.45;
-    color: var(--muted);
-    margin: 2px 0 0;
-    letter-spacing: -0.005em;
-  }
-
   /* === Dark mode overrides === */
 
   /* Blue-blob bg: drop alpha ~3x so it reads as haze, not Day-Glo. */
@@ -370,47 +334,6 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </span>
         </a>
-      </div>
-
-      <!-- What's new · hand-maintained release log. Two lists:
-           - "Recently shipped" — what just landed on hikebeast.ch
-           - "Working on now"  — what Leon is mid-flight on
-           Each entry: <strong> title + optional date span, then a
-           1-2 sentence <p>. To add an entry, copy a <li> and edit.
-           Newest entries go to the TOP of each list. -->
-      <div class="sec">
-        <p class="sec-label">What's new</p>
-
-        <div class="changelog-group">
-          <p class="changelog-sub">Recently shipped</p>
-          <ul class="changelog-list">
-            <li class="changelog-item">
-              <strong class="changelog-title">Wildcamping section redone</strong>
-              <span class="changelog-date">May 17</span>
-              <p class="changelog-body">16 curated spots split by camping style (tent area, tent + bivouac, bivouac only) with a filter chip at the top. Fronalpstock, Moiry Glacier, Gastlosen, and others added.</p>
-            </li>
-            <li class="changelog-item">
-              <strong class="changelog-title">Explore + Home remember where you were</strong>
-              <span class="changelog-date">May 15</span>
-              <p class="changelog-body">For You row and the photo wall now stay put when you click into a spot and come back. Reshuffles after an hour, or hit the new Shuffle button on Explore.</p>
-            </li>
-            <li class="changelog-item">
-              <strong class="changelog-title">Faster photos, no flicker</strong>
-              <span class="changelog-date">May 13</span>
-              <p class="changelog-body">Image grid renders at its final size on first paint instead of reflowing once photos decode. Killed the "image reloads itself" flash on Home and Explore.</p>
-            </li>
-          </ul>
-        </div>
-
-        <div class="changelog-group">
-          <p class="changelog-sub">Working on now</p>
-          <ul class="changelog-list">
-            <li class="changelog-item">
-              <strong class="changelog-title">Meta Conversions API</strong>
-              <p class="changelog-body">Server-side ad tracking so we stop losing ~half of conversions to browser blockers.</p>
-            </li>
-          </ul>
-        </div>
       </div>
 
       <!-- Log out — destructive action at the bottom. -->

@@ -1148,6 +1148,10 @@
         <div class="rail-divider rail-divider-tight"></div>
         ${chapterItems}
       </div>
+      <a class="rail-item rail-item-subtle${cur('/whats-new/')}" href="${REL}whats-new/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5z"/><path d="M19 14l.9 2.6L22 17.5l-2.1.9L19 21l-.9-2.6L16 17.5l2.1-.9z"/><path d="M5 16l.6 1.8L7 18.4l-1.4.6L5 21l-.6-2L3 18.4l1.4-.6z"/></svg>
+        <span class="label">What's new</span>
+      </a>
       <button type="button" class="rail-theme" data-hb-theme-toggle aria-label="Toggle dark mode">
         <span class="rail-theme-icon" data-hb-theme-icon>${SVG_MOON}</span><span class="label" data-hb-theme-label>Dark mode</span>
       </button>
@@ -1299,6 +1303,10 @@
           <span class="menu-row-icon" data-hb-theme-icon>${SVG_MOON}</span>
           <span class="menu-row-label" data-hb-theme-label>Dark mode</span>
         </button>
+        <a class="menu-row${cur('/whats-new/')}" href="${REL}whats-new/" data-close>
+          <span class="menu-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5z"/><path d="M19 14l.9 2.6L22 17.5l-2.1.9L19 21l-.9-2.6L16 17.5l2.1-.9z"/><path d="M5 16l.6 1.8L7 18.4l-1.4.6L5 21l-.6-2L3 18.4l1.4-.6z"/></svg></span>
+          <span class="menu-row-label">What's new</span>
+        </a>
         <div class="menu-sheet-account" data-hb-account></div>
       </div>
     `;
