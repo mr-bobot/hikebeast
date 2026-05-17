@@ -1339,7 +1339,7 @@ spots:
     - UNESCO World Heritage — Schweizer Alpen Jungfrau-Aletsch
   maps_url: https://www.google.com/maps/place/Aletschgletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f706358ba0c6b:0x814ab15289527d53!8m2!3d46.4887031!4d8.0530777!16zL20vMDFwcnZ6
   image: spots/aletsch_glacier/main.jpg
-  image_credit: louise_pipet_unsplash
+  image_credit: oliwear.j
   photos:
   - file: 02.jpg
     credit: "Ernst Bürki"
@@ -1353,6 +1353,10 @@ spots:
     credit: oliwear.j
     source_type: instagram
     source_url: "https://instagram.com/oliwear.j"
+  - file: 05.jpg
+    credit: louise_pipet_unsplash
+    source_type: unsplash
+    source_url: "https://unsplash.com/de/fotos/ein-gewasser-mit-bergen-im-hintergrund-ssS_SLIPzMM"
   - file: 06.jpg
     credit: zimydakid
     source_type: book
@@ -2088,12 +2092,6 @@ spots:
       lat: 46.3316
       lng: 7.28621
     maps_url: https://www.google.com/maps/place/Sanetsch+Pass/@46.3316,7.28621,17z/data=!3m1!4b1!4m6!3m5!1s0x478ee88d90bcaa87:0x1f0221b4b53a6a20!8m2!3d46.3316!4d7.28621
-  - heading: LAC DE DERBORENCE
-    text: Quiet alpine lake formed by an old rockslide. Late afternoon light catches the cliff face on the far shore.
-    gps:
-      lat: 46.2793244
-      lng: 7.2172313
-    maps_url: https://www.google.com/maps/place/Lac+de+Derborence/@46.2793244,7.2172313,17z/data=!3m1!4b1!4m6!3m5!1s0x478ec20dffda7db3:0x7a9df6822f6e8527!8m2!3d46.2793244!4d7.2172313
   image:
   image_credit: xxx
   maps_url:
@@ -2845,22 +2843,6 @@ spots:
   gps:
     lat: 47.091939
     lng: 6.751217
-- id: western_extras
-  chapter: western
-  kind: extras
-  kicker: WORTH A PIN, NOT YET A PAGE
-  title: One more from the West
-  deck: Pinned in my Google Maps but no proper photo for it yet. Worth the detour if you are in the area.
-  entries:
-  - heading: GORGES DU CHAUDERON
-    text: Limestone gorge above Montreux. Walkway runs along the rock face. Tight light, slow shutter, watch your step.
-    gps:
-      lat: 46.4368563
-      lng: 6.9250077
-    maps_url: https://www.google.com/maps/place/Gorges+du+Chauderon/@46.4368563,6.9250077,17z/data=!3m1!4b1!4m6!3m5!1s0x478e9bd02ed88279:0x5a702a06efcffa74!8m2!3d46.4368563!4d6.9250077
-  image:
-  image_credit: xxx
-  maps_url:
 - id: schafler
   chapter: eastern
   kicker: EASY CABLE CAR, BIG RIDGE
