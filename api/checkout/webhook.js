@@ -554,7 +554,7 @@ async function handleSessionCompleted({ stripe, event }) {
       email,
       amount: typeof full.amount_total === "number" ? (full.amount_total / 100).toFixed(2) : "",
       currency: (full.currency || "").toUpperCase(),
-      product: "Swiss Gems of Switzerland",
+      product: "Swiss Gems",
       product_id: "swiss-hidden-gems",
       plan_id: "",
       membership_id: "",
