@@ -586,7 +586,7 @@ window.HB_SPOT_IMAGES = {
   "valais#aletsch_glacier": [
     {
       "src": "derivatives/aletsch_glacier_p0/w1800.webp",
-      "credit": "Louise Pipet"
+      "credit": "@oliwear.j"
     },
     {
       "src": "derivatives/aletsch_glacier_p1/w1800.webp",
@@ -602,11 +602,11 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/aletsch_glacier_p4/w1800.webp",
-      "credit": "zimydakid"
+      "credit": "Louise Pipet"
     },
     {
       "src": "derivatives/aletsch_glacier_p5/w1800.webp",
-      "credit": null
+      "credit": "zimydakid"
     }
   ],
   "valais#arolla_ice_cave": [
