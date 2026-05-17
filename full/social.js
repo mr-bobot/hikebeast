@@ -1099,12 +1099,13 @@
     const curCh = currentChapterId();
 
     const renderChapter = (ch) => {
-      // Chapter rows use the region-SVG-on-dark-gradient thumb (same
-      // recipe as the wildcamping tiles + chapter cover hero). Intro
-      // falls back to its polaroid cover photo since there's no map
-      // silhouette for it.
-      const thumb = ch.mapSvg
-        ? `<span class="rail-chapter-thumb cv-map" style="--region-color: ${ch.color};"><img src="${REL}${ch.mapSvg}" alt="" /></span>`
+      // Chapter rows use a solid color chip in the chapter's map color
+      // (with a faint highlight/shadow for depth). Region SVG silhouettes
+      // are too small to be readable at 28px in the rail; the color
+      // alone is the identifier. Intro keeps its polaroid photo since
+      // there's no chapter color for it.
+      const thumb = ch.color
+        ? `<span class="rail-chapter-thumb chip-color" style="--region-color: ${ch.color};"></span>`
         : `<span class="rail-chapter-thumb"><img src="${REL}img/${ch.cover}" alt="" /></span>`;
       return `
         <a class="rail-chapter${curCh === ch.id ? ' is-current' : ''}" href="${REL}${ch.id}/" title="${ch.label}">
@@ -1309,7 +1310,7 @@
         </a>
         ${RAIL_CHAPTERS.map(ch => `
           <a class="menu-row${curCh === ch.id ? ' is-current' : ''}" href="${REL}${ch.id}/" data-close>
-            <span class="menu-row-thumb cv-map" style="--region-color: ${ch.color};"><img src="${REL}${ch.mapSvg}" alt="" /></span>
+            <span class="menu-row-thumb chip-color" style="--region-color: ${ch.color};"></span>
             <span class="menu-row-label">${ch.label}</span>
           </a>
         `).join('')}
