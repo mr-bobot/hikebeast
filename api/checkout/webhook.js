@@ -376,20 +376,38 @@ function pickEmailCopy(locale) {
 async function logPurchase(fields) {
   const url = process.env.SHEETS_WEBHOOK_URL;
   if (!url) return;
-  try {
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: "purchase",
-        secret: process.env.SHEETS_SECRET,
-        ...fields,
-      }),
-      signal: AbortSignal.timeout(5000),
-    });
-  } catch (err) {
-    console.error("Purchase log failed:", err);
+  // Two attempts with exponential backoff before giving up. Each attempt
+  // gets 15s instead of the previous 5s — Apps Script's findRowBySubscriber
+  // can take 2-4s on a 6000-row sheet, so 5s was too tight under load.
+  // 15s × 2 = 30s worst case; well within Stripe's webhook timeout window
+  // (Stripe waits ~30s before treating as failed and retrying its own
+  // delivery).
+  let lastErr = null;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "purchase",
+          secret: process.env.SHEETS_SECRET,
+          ...fields,
+        }),
+        signal: AbortSignal.timeout(15000),
+      });
+      if (res.ok) return;
+      lastErr = new Error(`HTTP ${res.status}`);
+    } catch (err) {
+      lastErr = err;
+    }
+    if (attempt < 2) await new Promise((r) => setTimeout(r, 2000));
   }
+  // Both attempts failed. Throw so the caller's catch can decide whether
+  // to return 5xx (and let Stripe retry the whole webhook delivery) vs
+  // log-and-continue. Today the caller still returns 200, but at least
+  // the failure is now propagated rather than silently swallowed.
+  console.error("Purchase log failed after 2 attempts:", lastErr);
+  throw lastErr;
 }
 
 function sha256Hex(s) {
