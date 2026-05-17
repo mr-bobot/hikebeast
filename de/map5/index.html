@@ -2046,6 +2046,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         utm_campaign: utmCampaign,
         browser_language: navigator.language || "",
         hero_variant: window.HB_HERO_VARIANT || "",
+        device_type: (function () {
+          var ua = navigator.userAgent || "";
+          if (/iPad|Android(?!.*Mobile)|Tablet/i.test(ua)) return "tablet";
+          if (/iPhone|iPod|Android.*Mobile|Mobile.*Android|BlackBerry|IEMobile/i.test(ua)) return "mobile";
+          return "desktop";
+        })(),
+        is_ig_webview: /Instagram/i.test(navigator.userAgent || "") ? "1" : "0",
       }),
       keepalive: true,
     }).catch(() => {});
