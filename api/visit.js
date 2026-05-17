@@ -17,6 +17,8 @@ export default async function handler(req, res) {
     source_page,
     hero_variant,
     active_ms,
+    device_type,
+    is_ig_webview,
   } = req.body ?? {};
   // Whitelist of beacon event names. Anything else gets dropped before
   // hitting Apps Script so the column writers don't receive bogus values.
@@ -31,6 +33,16 @@ export default async function handler(req, res) {
   const safeActiveMs = Number.isFinite(active_ms) && active_ms >= 0 && active_ms < 86_400_000
     ? Math.round(active_ms)
     : 0;
+  // device_type · `mobile` | `desktop` | `tablet`. Used to filter out
+  // desktop-tab-on-second-monitor sessions that inflate time_on_site_ms.
+  const safeDeviceType = typeof device_type === "string" && /^(mobile|desktop|tablet)$/.test(device_type)
+    ? device_type
+    : "";
+  // is_ig_webview · `1` when user-agent contains "Instagram", else `0`.
+  // Lets us isolate real IG-traffic engagement from QA/saved-URL visits.
+  const safeIsIgWebview = typeof is_ig_webview === "string" && /^[01]$/.test(is_ig_webview)
+    ? is_ig_webview
+    : "";
 
   // UTM passthrough · cap each at 100 chars so a hostile or malformed link
   // can't blow up the Sheet row. Empty string when missing so Apps Script
@@ -93,6 +105,8 @@ export default async function handler(req, res) {
           ip_country: ipCountry,
           hero_variant: safeHeroVariant,
           active_ms: safeActiveMs,
+          device_type: safeDeviceType,
+          is_ig_webview: safeIsIgWebview,
         }),
         signal: AbortSignal.timeout(5000),
       }).catch((err) => console.error("Visit log failed:", err)),
