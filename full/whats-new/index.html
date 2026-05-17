@@ -23,7 +23,8 @@
      sections (Recently shipped + Working on now) rendered as plain
      lists, no fancy widgets. Newest entries go to the top of each list.
      Pure HTML — no Convex, no build step. */
-  .wn-page  { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+  .wn-page  { max-width: 720px; margin: 0 auto; padding: 48px 20px 80px; }
+  @media (max-width: 700px) { .wn-page { padding-top: 32px; } }
   .wn-group { margin-top: 40px; }
   .wn-group:first-of-type { margin-top: 24px; }
   .wn-h2 {
