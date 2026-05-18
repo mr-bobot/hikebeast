@@ -5348,44 +5348,66 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-signin-submit:disabled { opacity: 0.6; cursor: default; filter: none; }
 
 /* ============================================================
-   FLIP CARD + PLANNING PANEL (trip-facts integration)
+   PLANNING PANEL (trip-facts integration) — crossfade swap
    ============================================================
    Spots with trip_facts/routes/hut/cable_car in content.yaml
-   render their .slide-spot inside a flip wrapper. The front
-   stays exactly as before, the back shows the planning data.
+   render their .slide-spot inside a wrapper that crossfades to
+   the planning panel when the user clicks "How to get there →".
+
+   History: this used to be a real 3D card flip (rotateY 180deg
+   with backface-visibility). Looked nice in isolation, but two
+   structural problems killed it:
+     1. Heart / Been-there / kebab pills injected by social.js
+        into the front's .sp-body bled through to the back on
+        some browsers (backface-visibility didn't fully isolate
+        the dynamically-appended absolute-positioned children).
+     2. The back was position:absolute inside the rotated parent,
+        so it was locked to the front's height. Long route lists
+        and the route-detail stats labels got cut off because
+        scroll-inside-fixed-height is undiscoverable.
+   Swapping to a crossfade where whichever face is active sits
+   in document flow (and therefore drives the wrapper's natural
+   height) fixes both: the back gets its own height, and the
+   front's children are simply opacity:0 + pointer-events:none.
    All selectors prefixed .hb-flip- or scoped under .hb-flip-card
-   so non-flip pages are untouched.
+   so non-planning pages are untouched.
    ============================================================ */
 .hb-flip-shell {
-  perspective: 1800px;
   position: relative;
-  /* Clip the front's overflow when the card shrinks to match the back's
-     height. Without this, the front (in document flow inside the card)
-     hangs below the visible card and renders mirrored because it inherits
-     the card's rotateY(180deg). Clipping on the shell rather than the card
-     itself keeps the 3D transform stacking context intact. */
-  overflow: hidden;
   border-radius: var(--radius-card);
 }
 .hb-flip-card {
   position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.7s cubic-bezier(0.5, 0, 0.2, 1);
+  display: grid;
+  /* Stack front + back in the same grid cell. The visible one
+     contributes its height; the other is the same width via the
+     grid (inset:0 not needed). */
+  grid-template-areas: "stack";
 }
-.hb-flip-card.is-flipped { transform: rotateY(180deg); }
 .hb-flip-card .slide-spot,
 .hb-flip-card .slide-spot-back {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  grid-area: stack;
+  transition: opacity 0.35s ease;
 }
-
+/* Default: front is in flow (drives height), back is invisible. */
 .hb-flip-card .slide-spot-back {
-  position: absolute;
-  inset: 0;
-  transform: rotateY(180deg);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
   background: var(--surface);
   border-radius: var(--radius-card);
   overflow: hidden;
+}
+/* Flipped: back is in flow (drives height), front is invisible. */
+.hb-flip-card.is-flipped .slide-spot {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+.hb-flip-card.is-flipped .slide-spot-back {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
 }
 
 /* Full-width "How to get there →" row at the bottom of .sp-body for
@@ -5419,67 +5441,48 @@ body.has-rail .topbar .hb-nav { display: none; }
   stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
 }
 
+/* The back panel hosts two stacked sub-views (overview + route-detail)
+   that slide horizontally between each other. Stacking them via grid
+   so the active one drives height, no fixed-height scroll trap. */
+.slide-spot-back { display: grid; grid-template-areas: "stack"; }
 .hb-flip-back-view {
-  position: absolute; inset: 0;
+  grid-area: stack;
   padding: 22px 30px 28px;
   display: flex; flex-direction: column; gap: 14px;
-  overflow-y: auto;
-  /* Force the scrollbar to render even on macOS / iOS where it defaults
-     to "overlay" and stays invisible until the user starts scrolling.
-     Without this, the back panel looks like it cuts content off and the
-     user doesn't realize they can scroll. Reported by Leon 2026-05-16
-     after multiple testers hit the same dead end on long route lists
-     and the route-detail stats labels. */
-  scrollbar-gutter: stable;
   transition: transform 0.45s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.25s ease;
 }
-/* Always-visible thin scrollbar on the back panel. Webkit-only but covers
-   Safari + Chrome which is 95+% of the audience. Firefox falls back to
-   `scrollbar-width: thin` via the second rule. */
-.hb-flip-back-view::-webkit-scrollbar { width: 8px; }
-.hb-flip-back-view::-webkit-scrollbar-track { background: transparent; }
-.hb-flip-back-view::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.18); border-radius: 4px; }
-.hb-flip-back-view::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.32); }
-.hb-flip-back-view { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.22) transparent; }
 .hb-flip-back-view-route { transform: translateX(100%); opacity: 0; pointer-events: none; background: var(--surface); }
 .slide-spot-back[data-view="route-detail"] .hb-flip-back-view-overview { transform: translateX(-12%); opacity: 0; pointer-events: none; }
 .slide-spot-back[data-view="route-detail"] .hb-flip-back-view-route { transform: translateX(0); opacity: 1; pointer-events: auto; }
 
 /* ============================================================
-   MOBILE · the flip doesn't work on a narrow screen. Stack the
-   planning panel below the spot card instead, no flip, no
-   "Back to photo" toggle.
+   MOBILE · planning panel sits below the spot card in natural
+   document flow. No crossfade, no "Back to photo" toggle —
+   both views always visible.
    ============================================================ */
 @media (max-width: 820px) {
-  .hb-flip-shell {
-    perspective: none;
-    overflow: visible;
-    border-radius: 0;
-  }
-  .hb-flip-card,
-  .hb-flip-card.is-flipped {
-    transform: none !important;
-    transform-style: flat;
+  .hb-flip-shell { border-radius: 0; }
+  /* Stack vertically instead of grid-stacking on top of each other. */
+  .hb-flip-card {
+    display: block;
   }
   .hb-flip-card .slide-spot,
-  .hb-flip-card .slide-spot-back {
-    position: relative !important;
-    inset: auto !important;
-    transform: none !important;
-    backface-visibility: visible !important;
-    -webkit-backface-visibility: visible !important;
+  .hb-flip-card .slide-spot-back,
+  .hb-flip-card.is-flipped .slide-spot,
+  .hb-flip-card.is-flipped .slide-spot-back {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    visibility: visible !important;
+    transition: none !important;
   }
   .hb-flip-card .slide-spot-back {
     margin-top: 14px;
     border-radius: var(--radius-card);
+    display: block;
   }
-  /* The planning panel needs natural height in document flow. */
   .hb-flip-back-view {
-    position: relative !important;
-    inset: auto !important;
     transform: none !important;
     transition: none;
-    overflow-y: visible;
   }
   /* Route-detail sub-view is hidden on mobile for now. The route row's
      own stats line already shows the key facts. Multi-route detail UI
