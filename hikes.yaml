@@ -998,7 +998,7 @@ hikes:
   - sanetschpass
   cable_car_ids:
   - sanetsch-cable-car
-  start_maps_url: https://www.google.com/maps/place/?q=46.37621,7.27971&z=16
+  start_maps_url: https://maps.app.goo.gl/aJvjPFHkYE1TVZo66
 - id: nax_via_ferrata-belvedere-via-ferrata
   name: Belvédère via ferrata
   start: Nax village
@@ -1152,43 +1152,6 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-broc-246/mountain-hiking/
   - https://en.wikipedia.org/wiki/Dent_de_Broc
   start_maps_url: https://www.google.com/maps/place/?q=46.604,7.099&z=16
-- id: schwarzsee-cable-car
-  name: Cable car from Zermatt via Furi
-  start: Zermatt cable car
-  transit:
-    train: Zermatt (Matterhorn Gotthard Bahn)
-  duration_min: 25
-  sac_grade: T1
-  effort_label: Cable car ride + viewing platform
-  description_extra: Reached directly by cable car from Zermatt via Furi, about 25 minutes total ride. From the top station a five-minute walk gets you to the lake's edge at 2,583 m.
-    T1. Also the starting point for hikers heading up to the Hörnli hut (3,260 m) for the Matterhorn approach.
-  visits:
-  - schwarzsee
-  sources:
-  - https://www.matterhornparadise.ch/en
-  quickest_for:
-  - schwarzsee
-  cable_car_ids:
-  - schwarzsee-cable-car
-  start_maps_url: https://www.google.com/maps/place/?q=46.01508,7.74264&z=16
-- id: schwarzsee-from-furi-via-stafelalp
-  name: From Furi via Stafelalp
-  start: Furi (mid-station)
-  transit:
-    train: Zermatt + cable car to Furi
-  duration_min: 240
-  gain_m: 800
-  sac_grade: T3
-  effort_label: Demanding
-  description_extra: Foot approach from Furi (mid-station of the cable car from Zermatt). The trail climbs through the Innere Wälder forest then heads southwest and south over Stafelalp
-    (2,199 m), traversing below the Matterhorn's north face on the way to Schwarzsee. About four hours and 800 m of cumulative gain, T3.
-  visits:
-  - schwarzsee
-  sources:
-  - https://www.sac-cas.ch/de/huetten-und-touren/sac-tourenportal/hoernlihuette-2147000136/berg-und-alpinwandern/von-zermatt-furi-via-stafelalp-261/
-  cable_car_ids:
-  - schwarzsee-cable-car
-  start_maps_url: https://www.google.com/maps/place/?q=46.00134,7.7323&z=16
 - id: dent_de_lys-les-paccots-circular
   name: Les Paccots loop via Lac des Joncs
   start: Les Paccots
@@ -1721,9 +1684,9 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.833,9.283&z=16
 - id: crestasee-short-staderas-conn
   name: Staderas → Caumasee → Conn
-  start: Flims Staderas
+  start: Laax Staderas
   transit:
-    train: Chur + Postbus to Flims Staderas
+    train: Chur + Postbus to Laax Staderas
   duration_min: 75
   distance_km: 4.6
   sac_grade: T1
@@ -1737,7 +1700,7 @@ hikes:
   - https://www.outdooractive.com/en/route/winter-hiking/flims-laax/staderas-sportzentrum-caumasee-conn/43396654/
   quickest_for:
   - crestasee
-  start_maps_url: https://www.google.com/maps/place/?q=46.82537,9.27469&z=16
+  start_maps_url: https://maps.app.goo.gl/u95QRUoQnMAFjZAx9
 - id: klontalersee-default
   description_extra: Postbus 506 from Glarus along the Klöntalstrasse to Klöntal-Vorauen. Around-the-lake loop is mostly flat on a marked path, T1, about 13 km. Campsites at Güntlenau
     and Vorauen, boat rental, and lakeshore swimming spots. Good base for harder routes up to the Glärnischhütte.
@@ -2248,7 +2211,7 @@ hikes:
   - https://www.valais.ch/en/activities/natural-sites/glaciers/zinal-glacier
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-du-mountet-cas-2147000184/mountain-hiking/
   equipment_list: []
-  start_maps_url: https://www.google.com/maps/place/?q=46.13629,7.6268&z=16
+  start_maps_url: https://maps.app.goo.gl/iFcJxr7tGeX8A7t89
 - id: ascher-from-schwende-on-foot
   visits:
   - ascher
@@ -3809,7 +3772,7 @@ hikes:
   gain_m: 290
   distance_km: 4.2
   equipment_list: []
-  start: Zermatt village (end of Bahnhofstrasse, toward Winkelmatten)
+  start: Zermatt train station
   transit:
     train: Zermatt (MGB, Matterhorn Gotthard Bahn from Visp)
   description_extra: Walk to the south end of Zermatt past Winkelmatten and pick up the marked footpath that climbs along the Zmuttbach toward the Furi cable car station. The trail passes
@@ -3820,7 +3783,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Zermatt
   quickest_for:
   - zermatt_huts
-  start_maps_url: https://www.google.com/maps/place/?q=46.01313,7.74521&z=16
+  start_maps_url: https://maps.app.goo.gl/6zYpoSMumbD5yEucA
 - id: tine_de_conflens-from-la-sarraz
   name: Loop from La Sarraz via the Nozon gorge
   visits:
@@ -3913,3 +3876,47 @@ hikes:
   quickest_for:
   - etang_de_la_gruere
   start_maps_url: https://www.google.com/maps/place/?q=47.24142,7.03806&z=16
+- id: schwarzsee-fr-lake-loop-from-gypsera
+  visits:
+  - schwarzsee
+  name: Lake loop from Gypsera
+  start: Schwarzsee, Gypsera
+  transit:
+    train: Fribourg (CFF)
+    bus: Postbus 121 Fribourg-Schwarzsee, stop Gypsera
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 75
+  distance_km: 4
+  gain_m: 50
+  descent_m: 50
+  equipment_list: []
+  description_extra: 4 km loop around the lake on a mix of meadow, lakeside path, gentle rises and forest sections. About 1 h 15 walking, only 50 m of cumulative gain, T1, family-friendly.
+    The lake sits at 1,046 m. Paid parking at Gypsera. Winter variant possible when the ice is thick enough.
+  sources:
+  - https://fribourg.ch/en/schwarzsee/hiking/schwarzsee-the-lake-path/
+  quickest_for:
+  - schwarzsee
+- id: schwarzsee-fr-hohenweg-from-riggisalp
+  visits:
+  - schwarzsee
+  name: 'Höhenweg traverse: Riggisalp to Schwyberg'
+  start: Riggisalp (top of Kaisereggbahnen from Gypsera)
+  transit:
+    train: Fribourg (CFF)
+    bus: Postbus 121 Fribourg-Schwarzsee, stop Gypsera
+    cable_car: Kaisereggbahnen chairlift Gypsera to Riggisalp
+  sac_grade: T2
+  effort_label: Moderate
+  duration_min: 380
+  distance_km: 18
+  gain_m: 853
+  descent_m: 1291
+  equipment_list: []
+  description_extra: From the Riggisalp top station (1,491 m), the Schwarzsee Höhenweg traverses east through the alpine pastures along the Sense and Gruyère district border, connecting
+    Jaun, Charmey, Cerniat, Plasselb and Plaffeien parishes before ending at the Schwyberg. About 18 km, 6 h 20 walking time, 853 m of cumulative climb against 1,291 m of descent. Moderate
+    difficulty.
+  sources:
+  - https://fribourg.ch/en/schwarzsee/hiking/schwarzsee-hohenweg/
+  cable_car_ids:
+  - kaisereggbahnen

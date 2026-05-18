@@ -66,12 +66,6 @@ cable_cars:
   description: Gondola from Crans-Montana up to the Plaine Morte glacier plateau at 2,927 m
   open_raw: Late June to early September
   website: https://www.mycma.ch/
-- id: schwarzsee-cable-car
-  name: Schwarzsee Cable Car
-  operator: Zermatt Bergbahnen
-  description: Zermatt to Furi to Schwarzsee, part of the Matterhorn Glacier Paradise system
-  open_raw: Late April to late September
-  website: https://www.matterhornparadise.ch/en/
 - id: moleson-funiculaire
   name: Funiculaire Moléson
   operator: Société des Téléphériques Moléson
@@ -243,3 +237,9 @@ cable_cars:
   open_raw: Year-round, brief maintenance breaks
   website: https://www.pilatus.ch/en/discover/panorama-gondolas
   top_station_maps_url: https://www.google.com/maps/place/?q=46.95556,8.27694&z=16
+- id: kaisereggbahnen
+  name: Kaisereggbahnen Riggisalp
+  operator: Kaisereggbahnen Schwarzsee AG
+  description: Chairlift from Schwarzsee Gypsera up to Riggisalp at about 1,491 m, gateway to the Schwarzsee Höhenweg and Kaiseregg summit area
+  open_raw: Late May to late October (summer), plus winter ski season
+  website: https://kaisereggbahnen-schwarzsee.ch/
