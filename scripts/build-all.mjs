@@ -32,6 +32,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const STEPS = [
   "lint-tracking-pipeline.mjs",
+  "audit-hike-start-coords.mjs",
   "build-image-derivatives.mjs",
   "build-intro-derivatives.mjs",
   "build-static-assets.mjs",
