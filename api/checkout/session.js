@@ -380,6 +380,33 @@ export default async function handler(req, res) {
     ? req.headers.origin
     : "https://hikebeast.ch";
 
+  // Stamped onto BOTH session.metadata and payment_intent_data.metadata.
+  // Stripe automatically copies PaymentIntent metadata to the resulting
+  // Charge, and the Payments CSV export pulls columns from Charge metadata.
+  // Before 2026-05-18 only `t, s, first_name, r` lived on PI metadata, so the
+  // export hid attribution (source_page, utm_*, locale, country, hero_variant)
+  // on 38 of 104 sales. Mirroring everything keeps the two sites in lockstep
+  // and surfaces the full attribution bag in any future Stripe export.
+  const checkoutMetadata = {
+    t,
+    s,
+    first_name: firstName,
+    utm_source: utmSource,
+    utm_medium: utmMedium,
+    utm_campaign: utmCampaign,
+    ip_country: typeof ipCountry === "string" ? ipCountry : "",
+    // Webhook reads `locale` back to pick the EN vs DE purchase email body.
+    locale: locale === "auto" ? "" : locale,
+    // Affiliate ref: ?r=<username> from the landing page, persisted in
+    // localStorage on click. Empty string when no affiliate.
+    r: ref,
+    // Which landing variant the buyer paid from (map / themap / map3 / ...).
+    source_page: sourcePage,
+    // v12 hero split-test bucket ID. Joined to the Sheet's `hero_variant`
+    // column by the webhook for per-variant conversion tracking.
+    hero_variant: heroVariant,
+  };
+
   try {
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded",
@@ -396,35 +423,9 @@ export default async function handler(req, res) {
       payment_method_types: undefined, // let Stripe show all enabled in dashboard
       allow_promotion_codes: true,
       customer_creation: "always",
-      metadata: {
-        t,
-        s,
-        first_name: firstName,
-        utm_source: utmSource,
-        utm_medium: utmMedium,
-        utm_campaign: utmCampaign,
-        ip_country: typeof ipCountry === "string" ? ipCountry : "",
-        // Locale of the page the buyer paid from. The webhook reads
-        // this back to pick the EN or DE purchase email body.
-        locale: locale === "auto" ? "" : locale,
-        // Affiliate ref: ?r=<username> from the landing page, persisted
-        // in localStorage on click. Empty string when no affiliate.
-        r: ref,
-        // Which landing variant the buyer paid from. Sheet attribution.
-        source_page: sourcePage,
-        // v12 split-test bucket ID. Joined to the Sheet's `hero_variant`
-        // column by the webhook for per-variant conversion tracking.
-        hero_variant: heroVariant,
-      },
-      // Forwarded into the underlying PaymentIntent so the webhook can join
-      // the same identifiers without re-hydrating the session object.
+      metadata: checkoutMetadata,
       payment_intent_data: {
-        metadata: {
-          t,
-          s,
-          first_name: firstName,
-          r: ref,
-        },
+        metadata: checkoutMetadata,
       },
       // After payment, Stripe loads the return URL inside the embedded
       // iframe; we read ?session_id= there to fetch the completed session
