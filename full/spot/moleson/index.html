@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779107937102" />
+<link rel="stylesheet" href="../../preview.css?v=1779108324096" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -188,7 +188,6 @@
       <p class="hb-section-h">Cable car</p>
       <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
         <div><span class="lbl">Name</span><span class="val" data-rd-cable-line>—</span></div>
-        <div><span class="lbl">Cost</span><span class="val" data-rd-cable-cost>—</span></div>
         <div><span class="lbl">Open</span><span class="val" data-rd-cable-open>—</span></div>
         <div><span class="lbl">Website</span><span class="val" data-rd-cable-info>—</span></div>
       </div></div>
@@ -225,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"moleson-plan-francey-summit","name":"Plan-Francey to summit and back","start":"Plan-Francey (mid-station of Moléson funicular)","transit":{"train":"Gruyères (TPF) + bus + funicular to Plan-Francey"},"duration_min":120,"gain_m":600,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Two-hour up-and-back from the mid-station of the Moléson funicular at Plan-Francey (1,517 m). The funicular saves the first stretch from Moléson-sur-Gruyères, leaving about 600 m of gain to the summit at 2,002 m. Trail climbs the north-west flank on a marked path, T2.","visits":["moleson"],"sources":["https://www.myswitzerland.com/en-us/experiences/moleson-a-popular-destination-in-the-fribourg-pre-alps/","https://en.wikipedia.org/wiki/Mol%C3%A9son"],"quickest_for":["moleson"],"cable_car_ids":["moleson-funiculaire"],"cable_cars":[{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","cost_chf_raw":"44 CHF return (combined funicular + cable car)","website":"https://www.moleson.ch/en/"}],"cable_car":{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","cost_chf_raw":"44 CHF return (combined funicular + cable car)","website":"https://www.moleson.ch/en/"},"quickest":true},{"id":"moleson-from-moleson-village","visits":["moleson"],"sac_grade":"T2","effort_label":"Demanding","duration_min":180,"gain_m":990,"equipment_list":[],"start":"Moléson-Village","transit":{"train":"Bulle","bus":"Bulle Bus 263 to Moléson-Village"},"description_extra":"Foot ascent from the village without using the funicular to Plan-Francey. The track climbs through the Pènî pasture to the Chalet des Petites-Clés, then heads up toward Petit-Plané and on through the mountain pastures to join the marked path to the summit at 2,002 m. About 3 hours of ascent, 990 m of cumulative gain, T2 on the SAC scale. Combine with the federal route 270 Sentier de la crête du Moléson on the descent from Plan-Francey for a circuit.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/le-moleson-7794/mountain-hiking/","https://www.moleson.ch/en/rando/sentier-botanique/"],"quickest":false}];
+  const ROUTES = [{"id":"moleson-plan-francey-summit","name":"Plan-Francey to summit and back","start":"Plan-Francey (mid-station of Moléson funicular)","transit":{"train":"Gruyères (TPF) + bus + funicular to Plan-Francey"},"duration_min":120,"gain_m":600,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Two-hour up-and-back from the mid-station of the Moléson funicular at Plan-Francey (1,517 m). The funicular saves the first stretch from Moléson-sur-Gruyères, leaving about 600 m of gain to the summit at 2,002 m. Trail climbs the north-west flank on a marked path, T2.","visits":["moleson"],"sources":["https://www.myswitzerland.com/en-us/experiences/moleson-a-popular-destination-in-the-fribourg-pre-alps/","https://en.wikipedia.org/wiki/Mol%C3%A9son"],"quickest_for":["moleson"],"cable_car_ids":["moleson-funiculaire"],"cable_cars":[{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","website":"https://www.moleson.ch/en/"}],"cable_car":{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","website":"https://www.moleson.ch/en/"},"quickest":true},{"id":"moleson-from-moleson-village","visits":["moleson"],"sac_grade":"T2","effort_label":"Demanding","duration_min":180,"gain_m":990,"equipment_list":[],"start":"Moléson-Village","transit":{"train":"Bulle","bus":"Bulle Bus 263 to Moléson-Village"},"description_extra":"Foot ascent from the village without using the funicular to Plan-Francey. The track climbs through the Pènî pasture to the Chalet des Petites-Clés, then heads up toward Petit-Plané and on through the mountain pastures to join the marked path to the summit at 2,002 m. About 3 hours of ascent, 990 m of cumulative gain, T2 on the SAC scale. Combine with the federal route 270 Sentier de la crête du Moléson on the descent from Plan-Francey for a circuit.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/le-moleson-7794/mountain-hiking/","https://www.moleson.ch/en/rando/sentier-botanique/"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -417,7 +416,6 @@
     if (r.cable_car) {
       toggle('[data-rd-cable]', true);
       setText('[data-rd-cable-line]', r.cable_car.name || r.cable_car.line || '—');
-      setText('[data-rd-cable-cost]', r.cable_car.cost_chf_raw || '—');
       setText('[data-rd-cable-open]', r.cable_car.open_raw || '—');
       setHTML('[data-rd-cable-info]',
         r.cable_car.website ? ('<a href="' + escAttr(r.cable_car.website) + '" target="_blank" rel="noopener" style="color:var(--accent);">Visit ↗</a>') : '—');

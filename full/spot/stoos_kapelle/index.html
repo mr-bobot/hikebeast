@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779107937111" />
+<link rel="stylesheet" href="../../preview.css?v=1779108324104" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -189,7 +189,6 @@
       <p class="hb-section-h">Cable car</p>
       <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
         <div><span class="lbl">Name</span><span class="val" data-rd-cable-line>—</span></div>
-        <div><span class="lbl">Cost</span><span class="val" data-rd-cable-cost>—</span></div>
         <div><span class="lbl">Open</span><span class="val" data-rd-cable-open>—</span></div>
         <div><span class="lbl">Website</span><span class="val" data-rd-cable-info>—</span></div>
       </div></div>
@@ -226,7 +225,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"stoos_kapelle-route-35","start":"Schwyz, Stoosbahn","description_extra":"Reach Stoos via the Stoosbahn funicular from Schwyz. From the upper Stoos station, the chapel is a 2-3 minute walk. T1. Combine with the ridge walk to Fronalpstock (cable car plus ridge) for a half-day.","visits":["stoos_kapelle"],"sources":["https://www.stoos.ch/"],"cable_car_ids":["stoosbahn"],"name":"Chapel walk from the Stoosbahn top","sac_grade":"T1","effort_label":"Easy","duration_min":3,"gain_m":0,"distance_km":0.2,"equipment_list":[],"transit":{"train":"Brunnen, then bus to Schwyz, Stoosbahn","cable_car":"Stoosbahn funicular (steepest funicular in the world)"},"quickest_for":["stoos_kapelle"],"cable_cars":[{"id":"stoosbahn","name":"Stoosbahn","operator":"Stoosbahnen AG","description":"Funicular from Schwyz-Schlattli up to Stoos, the steepest funicular in the world","cost_chf_raw":"56 CHF return","info_url":"https://stoos-muotatal.ch/webcams/","open_raw":"Year-round, brief maintenance closures in spring and autumn","website":"https://www.stoos.ch/en/"}],"cable_car":{"id":"stoosbahn","name":"Stoosbahn","operator":"Stoosbahnen AG","description":"Funicular from Schwyz-Schlattli up to Stoos, the steepest funicular in the world","cost_chf_raw":"56 CHF return","info_url":"https://stoos-muotatal.ch/webcams/","open_raw":"Year-round, brief maintenance closures in spring and autumn","website":"https://www.stoos.ch/en/"},"quickest":true},{"id":"stoos_kapelle-from-morschach-on-foot","visits":["stoos_kapelle"],"sac_grade":"T2","effort_label":"Moderate","duration_min":150,"gain_m":580,"distance_km":4.5,"equipment_list":[],"start":"Morschach, Talstation (Postbus from Brunnen)","transit":{"train":"Brunnen","bus":"Brunnen Bus 504 to Morschach, Luftseilbahn"},"description_extra":"Walk-up to the car-free village instead of riding the Stoosbahn funicular. From the Morschach cable car lower station at about 640 m, cross the parking and follow the path through pasture past Restaurant Nägelisgärtli, then on the forest road via Ried into the woods. At point 847 a marked path branches left and climbs through forest past the Wissenflue huts to the Stoos plateau at about 1,300 m, where the Stooskapelle Maria Hilf sits in the village. About 2 to 2.5 hours, around 580 m of gain, T2 on a forest road plus mountain path. Alternative to the funicular and the Morschach cable car.","sources":["https://swissholidaypark.ch/en/activities/surroundings/stoos"],"quickest":false}];
+  const ROUTES = [{"id":"stoos_kapelle-route-35","start":"Schwyz, Stoosbahn","description_extra":"Reach Stoos via the Stoosbahn funicular from Schwyz. From the upper Stoos station, the chapel is a 2-3 minute walk. T1. Combine with the ridge walk to Fronalpstock (cable car plus ridge) for a half-day.","visits":["stoos_kapelle"],"sources":["https://www.stoos.ch/"],"cable_car_ids":["stoosbahn"],"name":"Chapel walk from the Stoosbahn top","sac_grade":"T1","effort_label":"Easy","duration_min":3,"gain_m":0,"distance_km":0.2,"equipment_list":[],"transit":{"train":"Brunnen, then bus to Schwyz, Stoosbahn","cable_car":"Stoosbahn funicular (steepest funicular in the world)"},"quickest_for":["stoos_kapelle"],"cable_cars":[{"id":"stoosbahn","name":"Stoosbahn","operator":"Stoosbahnen AG","description":"Funicular from Schwyz-Schlattli up to Stoos, the steepest funicular in the world","info_url":"https://stoos-muotatal.ch/webcams/","open_raw":"Year-round, brief maintenance closures in spring and autumn","website":"https://www.stoos.ch/en/"}],"cable_car":{"id":"stoosbahn","name":"Stoosbahn","operator":"Stoosbahnen AG","description":"Funicular from Schwyz-Schlattli up to Stoos, the steepest funicular in the world","info_url":"https://stoos-muotatal.ch/webcams/","open_raw":"Year-round, brief maintenance closures in spring and autumn","website":"https://www.stoos.ch/en/"},"quickest":true},{"id":"stoos_kapelle-from-morschach-on-foot","visits":["stoos_kapelle"],"sac_grade":"T2","effort_label":"Moderate","duration_min":150,"gain_m":580,"distance_km":4.5,"equipment_list":[],"start":"Morschach, Talstation (Postbus from Brunnen)","transit":{"train":"Brunnen","bus":"Brunnen Bus 504 to Morschach, Luftseilbahn"},"description_extra":"Walk-up to the car-free village instead of riding the Stoosbahn funicular. From the Morschach cable car lower station at about 640 m, cross the parking and follow the path through pasture past Restaurant Nägelisgärtli, then on the forest road via Ried into the woods. At point 847 a marked path branches left and climbs through forest past the Wissenflue huts to the Stoos plateau at about 1,300 m, where the Stooskapelle Maria Hilf sits in the village. About 2 to 2.5 hours, around 580 m of gain, T2 on a forest road plus mountain path. Alternative to the funicular and the Morschach cable car.","sources":["https://swissholidaypark.ch/en/activities/surroundings/stoos"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -418,7 +417,6 @@
     if (r.cable_car) {
       toggle('[data-rd-cable]', true);
       setText('[data-rd-cable-line]', r.cable_car.name || r.cable_car.line || '—');
-      setText('[data-rd-cable-cost]', r.cable_car.cost_chf_raw || '—');
       setText('[data-rd-cable-open]', r.cable_car.open_raw || '—');
       setHTML('[data-rd-cable-info]',
         r.cable_car.website ? ('<a href="' + escAttr(r.cable_car.website) + '" target="_blank" rel="noopener" style="color:var(--accent);">Visit ↗</a>') : '—');

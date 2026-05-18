@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779107937092" />
+<link rel="stylesheet" href="../../preview.css?v=1779108324088" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -188,7 +188,6 @@
       <p class="hb-section-h">Cable car</p>
       <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
         <div><span class="lbl">Name</span><span class="val" data-rd-cable-line>—</span></div>
-        <div><span class="lbl">Cost</span><span class="val" data-rd-cable-cost>—</span></div>
         <div><span class="lbl">Open</span><span class="val" data-rd-cable-open>—</span></div>
         <div><span class="lbl">Website</span><span class="val" data-rd-cable-info>—</span></div>
       </div></div>
@@ -225,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"piz_gloria-cable-car-to-summit","name":"Cable car (Stechelberg → Schilthorn)","start":"Stechelberg cable car","transit":{"train":"Lauterbrunnen (BLS) + bus to Stechelberg"},"duration_min":30,"sac_grade":"T1","effort_label":"Cable car ride","description_extra":"Schilthornbahn cable car from Stechelberg up to the 2,970 m summit, in stages through Gimmelwald, Mürren, and Birg.","visits":["piz_gloria"],"sources":["https://en.wikipedia.org/wiki/Schilthorn","https://www.myswitzerland.com/en-us/experiences/schilthorn-1/"],"quickest_for":["piz_gloria"],"cable_car_ids":["schilthornbahn"],"cable_cars":[{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","cost_chf_raw":"115 CHF return","website":"https://schilthorn.ch/en/"}],"cable_car":{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","cost_chf_raw":"115 CHF return","website":"https://schilthorn.ch/en/"},"quickest":true},{"id":"piz_gloria-gimmelwald-on-foot","name":"From Gimmelwald on foot","start":"Gimmelwald","transit":{"train":"Lauterbrunnen + Stechelberg-Gimmelwald cable car"},"duration_min":300,"gain_m":1600,"sac_grade":"T3","effort_label":"Long, big vertical","description_extra":"Foot ascent from Gimmelwald (reached by cable car from Stechelberg) up to the Schilthorn summit at 2,970 m. About five hours and 1,600 m of gain for a fit walker. T3. The trail climbs steadily, crossing below the cable car line and passing through Mürren and Birg. Most people walk one direction and ride the cable car the other. Bring layers; the summit is regularly windy and significantly cooler than the valley.","visits":["piz_gloria"],"sources":["https://en.wikipedia.org/wiki/Schilthorn"],"quickest":false}];
+  const ROUTES = [{"id":"piz_gloria-cable-car-to-summit","name":"Cable car (Stechelberg → Schilthorn)","start":"Stechelberg cable car","transit":{"train":"Lauterbrunnen (BLS) + bus to Stechelberg"},"duration_min":30,"sac_grade":"T1","effort_label":"Cable car ride","description_extra":"Schilthornbahn cable car from Stechelberg up to the 2,970 m summit, in stages through Gimmelwald, Mürren, and Birg.","visits":["piz_gloria"],"sources":["https://en.wikipedia.org/wiki/Schilthorn","https://www.myswitzerland.com/en-us/experiences/schilthorn-1/"],"quickest_for":["piz_gloria"],"cable_car_ids":["schilthornbahn"],"cable_cars":[{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"}],"cable_car":{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"},"quickest":true},{"id":"piz_gloria-gimmelwald-on-foot","name":"From Gimmelwald on foot","start":"Gimmelwald","transit":{"train":"Lauterbrunnen + Stechelberg-Gimmelwald cable car"},"duration_min":300,"gain_m":1600,"sac_grade":"T3","effort_label":"Long, big vertical","description_extra":"Foot ascent from Gimmelwald (reached by cable car from Stechelberg) up to the Schilthorn summit at 2,970 m. About five hours and 1,600 m of gain for a fit walker. T3. The trail climbs steadily, crossing below the cable car line and passing through Mürren and Birg. Most people walk one direction and ride the cable car the other. Bring layers; the summit is regularly windy and significantly cooler than the valley.","visits":["piz_gloria"],"sources":["https://en.wikipedia.org/wiki/Schilthorn"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -417,7 +416,6 @@
     if (r.cable_car) {
       toggle('[data-rd-cable]', true);
       setText('[data-rd-cable-line]', r.cable_car.name || r.cable_car.line || '—');
-      setText('[data-rd-cable-cost]', r.cable_car.cost_chf_raw || '—');
       setText('[data-rd-cable-open]', r.cable_car.open_raw || '—');
       setHTML('[data-rd-cable-info]',
         r.cable_car.website ? ('<a href="' + escAttr(r.cable_car.website) + '" target="_blank" rel="noopener" style="color:var(--accent);">Visit ↗</a>') : '—');

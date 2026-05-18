@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779107937118" />
+<link rel="stylesheet" href="../../preview.css?v=1779108324111" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -179,7 +179,6 @@
       <p class="hb-section-h">Cable car</p>
       <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
         <div><span class="lbl">Name</span><span class="val" data-rd-cable-line>—</span></div>
-        <div><span class="lbl">Cost</span><span class="val" data-rd-cable-cost>—</span></div>
         <div><span class="lbl">Open</span><span class="val" data-rd-cable-open>—</span></div>
         <div><span class="lbl">Website</span><span class="val" data-rd-cable-info>—</span></div>
       </div></div>
@@ -216,7 +215,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"wildsee-pizol-5-seen-wanderung","visits":["wildsee"],"sac_grade":"T2","effort_label":"Demanding","duration_min":270,"gain_m":553,"descent_m":911,"distance_km":11.4,"equipment_list":["Hiking boots","Rain layer","1.5 L water","Sun protection"],"start":"Pizolhütte above Wangs","transit":{"train":"Bad Ragaz or Sargans, then bus to Wangs valley station","cable_car":"Wangs to Furt gondola, then Furt to Gaffia chairlift; short walk to Pizolhütte at the start. Last descent from Furt at 17:30 in summer"},"description_extra":"The classic 5-Seen-Wanderung runs from Pizolhütte over a high-alpine traverse past Wildsee, Schottensee, Schwarzsee, Baschalvasee and Wangsersee. The official pizol.com route lists 11.4 km, 4 h 30 walking time, 553 m of ascent and 911 m of descent, with three strenuous climbs and drops between cirques. T2. Camping and bivouac are forbidden along the marked sections and fines apply.","sources":["https://pizol.com/en/wanderwege/5-seen-wanderung/","https://www.myswitzerland.com/en/experiences/route/5-seen-wanderung-1/"],"cable_car_ids":["pizol-bergbahnen"],"quickest_for":["wildsee"],"cable_cars":[{"id":"pizol-bergbahnen","operator":"Pizolbahnen AG","description":"Gondola and chairlift chain from Wangs up to Pizolhütte, start of the 5-Seen-Wanderung","open_raw":"Late June to mid-October","cost_chf_raw":"54 CHF return","website":"https://pizol.com/","name":"Pizolbahnen"}],"cable_car":{"id":"pizol-bergbahnen","operator":"Pizolbahnen AG","description":"Gondola and chairlift chain from Wangs up to Pizolhütte, start of the 5-Seen-Wanderung","open_raw":"Late June to mid-October","cost_chf_raw":"54 CHF return","website":"https://pizol.com/","name":"Pizolbahnen"},"quickest":true}];
+  const ROUTES = [{"id":"wildsee-pizol-5-seen-wanderung","visits":["wildsee"],"sac_grade":"T2","effort_label":"Demanding","duration_min":270,"gain_m":553,"descent_m":911,"distance_km":11.4,"equipment_list":["Hiking boots","Rain layer","1.5 L water","Sun protection"],"start":"Pizolhütte above Wangs","transit":{"train":"Bad Ragaz or Sargans, then bus to Wangs valley station","cable_car":"Wangs to Furt gondola, then Furt to Gaffia chairlift; short walk to Pizolhütte at the start. Last descent from Furt at 17:30 in summer"},"description_extra":"The classic 5-Seen-Wanderung runs from Pizolhütte over a high-alpine traverse past Wildsee, Schottensee, Schwarzsee, Baschalvasee and Wangsersee. The official pizol.com route lists 11.4 km, 4 h 30 walking time, 553 m of ascent and 911 m of descent, with three strenuous climbs and drops between cirques. T2. Camping and bivouac are forbidden along the marked sections and fines apply.","sources":["https://pizol.com/en/wanderwege/5-seen-wanderung/","https://www.myswitzerland.com/en/experiences/route/5-seen-wanderung-1/"],"cable_car_ids":["pizol-bergbahnen"],"quickest_for":["wildsee"],"cable_cars":[{"id":"pizol-bergbahnen","operator":"Pizolbahnen AG","description":"Gondola and chairlift chain from Wangs up to Pizolhütte, start of the 5-Seen-Wanderung","open_raw":"Late June to mid-October","website":"https://pizol.com/","name":"Pizolbahnen"}],"cable_car":{"id":"pizol-bergbahnen","operator":"Pizolbahnen AG","description":"Gondola and chairlift chain from Wangs up to Pizolhütte, start of the 5-Seen-Wanderung","open_raw":"Late June to mid-October","website":"https://pizol.com/","name":"Pizolbahnen"},"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -408,7 +407,6 @@
     if (r.cable_car) {
       toggle('[data-rd-cable]', true);
       setText('[data-rd-cable-line]', r.cable_car.name || r.cable_car.line || '—');
-      setText('[data-rd-cable-cost]', r.cable_car.cost_chf_raw || '—');
       setText('[data-rd-cable-open]', r.cable_car.open_raw || '—');
       setHTML('[data-rd-cable-info]',
         r.cable_car.website ? ('<a href="' + escAttr(r.cable_car.website) + '" target="_blank" rel="noopener" style="color:var(--accent);">Visit ↗</a>') : '—');

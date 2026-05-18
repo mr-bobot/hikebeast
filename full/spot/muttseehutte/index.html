@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779107937108" />
+<link rel="stylesheet" href="../../preview.css?v=1779108324102" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -180,7 +180,6 @@
       <p class="hb-section-h">Cable car</p>
       <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
         <div><span class="lbl">Name</span><span class="val" data-rd-cable-line>—</span></div>
-        <div><span class="lbl">Cost</span><span class="val" data-rd-cable-cost>—</span></div>
         <div><span class="lbl">Open</span><span class="val" data-rd-cable-open>—</span></div>
         <div><span class="lbl">Website</span><span class="val" data-rd-cable-info>—</span></div>
       </div></div>
@@ -217,7 +216,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"muttseehutte-from-tierfehd-cable-car","name":"Tierfehd cable car + Chalchtrittli approach","start":"Tierfehd cable car (Linthal)","transit":{"train":"Linthal Braunwaldbahn (SBB) + cable car"},"duration_min":150,"gain_m":730,"sac_grade":"T3","effort_label":"Moderate","description_extra":"Standard approach using the Kraftwerke-Linth-Limmern industrial cable car from Tierfehd. From the top station at Chalktrittli (1,860 m) follow the marked trail through steep terrain via Chalchtrittli and Muttenwändli up to the high plateau and the hut at 2,501 m. About 2 h 30 and 730 m of gain, T3. Hut open mid-June to mid-September.","visits":["muttseehutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/muttseehuette-sac-2147000188/mountain-hiking/from-tierfed-via-cable-car-and-chalchtrittli-382/"],"quickest_for":["muttseehutte"],"cable_car_ids":["tierfehd-cable-car"],"hut_ids":["muttseehutte-sac"],"cable_cars":[{"id":"tierfehd-cable-car","name":"Kraftwerke-Linth-Limmern Cable Car","operator":"Kraftwerke Linth-Limmern AG","description":"Cable car from Tierfehd up to Kalktrittli, then 4 km tunnel to the dam","open_raw":"Mid-June to October","cost_chf_raw":"15 CHF return","website":"https://www.kraftwerkelinthlimmern.ch/"}],"cable_car":{"id":"tierfehd-cable-car","name":"Kraftwerke-Linth-Limmern Cable Car","operator":"Kraftwerke Linth-Limmern AG","description":"Cable car from Tierfehd up to Kalktrittli, then 4 km tunnel to the dam","open_raw":"Mid-June to October","cost_chf_raw":"15 CHF return","website":"https://www.kraftwerkelinthlimmern.ch/"},"huts":[{"id":"muttseehutte-sac","name":"Muttseehütte SAC","description":"Highest dam hut in Switzerland at 2,500 m, beside the Limmern reservoir","open_raw":"Closed for renovation until late June 2026, then limited day operation","cost_chf_raw":"From 79 CHF half-board (SAC members)","website":"https://www.muttseehuette.ch/"}],"hut":{"id":"muttseehutte-sac","name":"Muttseehütte SAC","description":"Highest dam hut in Switzerland at 2,500 m, beside the Limmern reservoir","open_raw":"Closed for renovation until late June 2026, then limited day operation","cost_chf_raw":"From 79 CHF half-board (SAC members)","website":"https://www.muttseehuette.ch/"},"quickest":true}];
+  const ROUTES = [{"id":"muttseehutte-from-tierfehd-cable-car","name":"Tierfehd cable car + Chalchtrittli approach","start":"Tierfehd cable car (Linthal)","transit":{"train":"Linthal Braunwaldbahn (SBB) + cable car"},"duration_min":150,"gain_m":730,"sac_grade":"T3","effort_label":"Moderate","description_extra":"Standard approach using the Kraftwerke-Linth-Limmern industrial cable car from Tierfehd. From the top station at Chalktrittli (1,860 m) follow the marked trail through steep terrain via Chalchtrittli and Muttenwändli up to the high plateau and the hut at 2,501 m. About 2 h 30 and 730 m of gain, T3. Hut open mid-June to mid-September.","visits":["muttseehutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/muttseehuette-sac-2147000188/mountain-hiking/from-tierfed-via-cable-car-and-chalchtrittli-382/"],"quickest_for":["muttseehutte"],"cable_car_ids":["tierfehd-cable-car"],"hut_ids":["muttseehutte-sac"],"cable_cars":[{"id":"tierfehd-cable-car","name":"Kraftwerke-Linth-Limmern Cable Car","operator":"Kraftwerke Linth-Limmern AG","description":"Cable car from Tierfehd up to Kalktrittli, then 4 km tunnel to the dam","open_raw":"Mid-June to October","website":"https://www.kraftwerkelinthlimmern.ch/"}],"cable_car":{"id":"tierfehd-cable-car","name":"Kraftwerke-Linth-Limmern Cable Car","operator":"Kraftwerke Linth-Limmern AG","description":"Cable car from Tierfehd up to Kalktrittli, then 4 km tunnel to the dam","open_raw":"Mid-June to October","website":"https://www.kraftwerkelinthlimmern.ch/"},"huts":[{"id":"muttseehutte-sac","name":"Muttseehütte SAC","description":"Highest dam hut in Switzerland at 2,500 m, beside the Limmern reservoir","open_raw":"Closed for renovation until late June 2026, then limited day operation","cost_chf_raw":"From 79 CHF half-board (SAC members)","website":"https://www.muttseehuette.ch/"}],"hut":{"id":"muttseehutte-sac","name":"Muttseehütte SAC","description":"Highest dam hut in Switzerland at 2,500 m, beside the Limmern reservoir","open_raw":"Closed for renovation until late June 2026, then limited day operation","cost_chf_raw":"From 79 CHF half-board (SAC members)","website":"https://www.muttseehuette.ch/"},"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -409,7 +408,6 @@
     if (r.cable_car) {
       toggle('[data-rd-cable]', true);
       setText('[data-rd-cable-line]', r.cable_car.name || r.cable_car.line || '—');
-      setText('[data-rd-cable-cost]', r.cable_car.cost_chf_raw || '—');
       setText('[data-rd-cable-open]', r.cable_car.open_raw || '—');
       setHTML('[data-rd-cable-info]',
         r.cable_car.website ? ('<a href="' + escAttr(r.cable_car.website) + '" target="_blank" rel="noopener" style="color:var(--accent);">Visit ↗</a>') : '—');
