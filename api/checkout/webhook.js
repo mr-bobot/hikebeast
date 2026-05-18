@@ -531,6 +531,11 @@ async function handleSessionCompleted({ stripe, event }) {
     // Stripe ever splits them, and so the contract of each template arg is
     // explicit about what URL parameter it ends up in.
     const tplArgs = { firstName, downloadUrl, amountFormatted, orderId: full.id, sessionId: full.id };
+    // Idempotency-Key dedupes within Resend's 24h window. Protects against
+    // Stripe webhook retries (which fire when the handler exceeds Stripe's
+    // 30s timeout — e.g. slow Apps Script Sheet writes) re-sending the
+    // same purchase email. Bug from 2026-05-17: Vicky received the
+    // confirmation 4× over 24h before this guard.
     const { error } = await resend.emails.send({
       from: FROM,
       to: email,
@@ -538,7 +543,7 @@ async function handleSessionCompleted({ stripe, event }) {
       subject: copy.subject,
       html: copy.html(tplArgs),
       text: copy.text(tplArgs),
-    });
+    }, { idempotencyKey: event.id });
     if (error) console.error("Resend purchase email error:", error);
     else emailOk = true;
   } catch (err) {
@@ -647,7 +652,7 @@ async function handleSessionCompleted({ stripe, event }) {
             subject: `You earned ${tplArgs.amountFormatted} on Hikebeast`,
             html:    affiliateEarnedHtml(tplArgs),
             text:    affiliateEarnedText(tplArgs),
-          });
+          }, { idempotencyKey: `${event.id}_affiliate` });
           if (error) console.error("Affiliate-earned email error:", error);
         } catch (err) {
           console.error("Affiliate-earned email threw:", err?.message || err);
