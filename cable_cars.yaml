@@ -148,6 +148,7 @@ cable_cars:
   open_raw: Early April to late October, with revision break late October to late November
   cost_chf_raw: 76 CHF return
   website: https://www.jungfrau.ch/en-gb/grindelwaldfirst/
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.66056,8.05361&z=16
 - id: engstligenalp-cable-car
   name: Unter dem Birg - Engstligenalp
   operator: Bergbahnen Engstligenalp AG
@@ -155,66 +156,82 @@ cable_cars:
   open_raw: Mid-June to mid-October
   cost_chf_raw: 37 CHF return
   website: https://engstligenalp.ch/
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.44941,7.56532&z=16
 - id: harderbahn
   operator: Jungfraubahnen
   description: Funicular from Interlaken Ost up to Harder Kulm at 1,322 m
   open_raw: Early April to late November
   cost_chf_raw: 44 CHF return
   website: https://www.harder-kulm.com/
+  name: Harderbahn
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.69822,7.85504&z=16
 - id: marbachegg-gondola
   operator: Sportbahnen Marbachegg
   description: Gondola from Marbach village up to Marbachegg in the UNESCO Entlebuch Biosphere
   open_raw: Late May to mid-October
   cost_chf_raw: 30 CHF return
   website: https://www.marbachegg.ch/
+  name: Gondelbahn Marbachegg
 - id: eggishorn-cable-car
   operator: Aletsch Bahnen
   description: Two-stage cable car from Fiesch via Fiescheralp up to Eggishorn at 2,927 m
   open_raw: Early June to late October
   cost_chf_raw: 52 CHF return
   website: https://www.aletscharena.ch/en/
+  name: Luftseilbahn Fiesch-Eggishorn
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.43139,8.09417&z=16
 - id: bettmerhorn-cable-car
   operator: Aletsch Bahnen
   description: Cable car from Bettmeralp up to the Bettmerhorn ridge at 2,647 m
   open_raw: Early June to late October
   cost_chf_raw: 52 CHF return from Betten valley (32 CHF return from Bettmeralp)
   website: https://www.aletscharena.ch/en/
+  name: Luftseilbahn Bettmeralp-Bettmerhorn
 - id: ebenalp-luftseilbahn
   operator: Luftseilbahn Wasserauen-Ebenalp AG
   description: Cable car from Wasserauen up to Ebenalp at 1,640 m, gateway to the Alpstein
   open_raw: Year-round, with revision closures in April and November to December
   cost_chf_raw: 36 CHF return
   website: https://www.ebenalp.ch/
+  name: Luftseilbahn Wasserauen-Ebenalp
+  top_station_maps_url: https://www.google.com/maps/place/?q=47.28417,9.41083&z=16
 - id: pizol-bergbahnen
   operator: Pizolbahnen AG
   description: Gondola and chairlift chain from Wangs up to Pizolhütte, start of the 5-Seen-Wanderung
   open_raw: Late June to mid-October
   cost_chf_raw: 54 CHF return
   website: https://pizol.com/
+  name: Pizolbahnen
 - id: hoher-kasten-bahn
   operator: Hoher Kasten Drehrestaurant und Seilbahn AG
   description: Cable car from Brülisau up to the Hoher Kasten summit at 1,795 m
   open_raw: Year-round, daily operation
   cost_chf_raw: 40 CHF return
   website: https://www.hoherkasten.ch/
+  name: Luftseilbahn Brülisau-Hoher Kasten
+  top_station_maps_url: https://www.google.com/maps/place/?q=47.28356,9.48539&z=16
 - id: niederrickenbach-cable-car
   operator: Luftseilbahn Dallenwil-Niederrickenbach AG
   description: Cable car from Dallenwil up to the mountain hamlet of Niederrickenbach at 1,156 m
   open_raw: Year-round, with revision break in April
   cost_chf_raw: 26.40 CHF return
   website: https://maria-rickenbach.ch/dallenwil-niederrickenbach/
+  name: Luftseilbahn Dallenwil-Niederrickenbach
 - id: haldigrat-chairlift
-  operator: Bergbahn Brisen-Haldigrat
+  operator: Haldigrat AG
   description: Small chairlift from Niederrickenbach up to the Haldigrat ridge around 1,940 m
   open_raw: Mid-June to early November daily, weekends only in winter
   cost_chf_raw: 20 CHF return
   website: https://www.haldigrat.ch/
+  name: Sesselbahn Haldigrat
 - id: monte-carasso-mornera-cable-car
   operator: Funivia Monte Carasso-Mornera
   description: Two-stage cable car from Monte Carasso via Curzútt up to Mornera at 1,400 m
   open_raw: Year-round, daily 06:30 to 21:30
   cost_chf_raw: 12 CHF return
   website: https://www.mornera.ch/
+  name: Funivia Monte Carasso-Mornera
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.20779,8.97982&z=16
 - id: niederbauen-emmetten-cable-car
   name: Luftseilbahn Emmetten-Niederbauen
   operator: Luftseilbahn Emmetten-Niederbauen AG
@@ -222,3 +239,40 @@ cable_cars:
   open_raw: Mid-May to late October
   cost_chf_raw: 30 CHF return
   website: https://www.niederbauen.ch/
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.94641,8.53472&z=16
+- id: jaun-gastlosen-express
+  name: Gastlosen-Express
+  operator: Jaun-Gastlosen Bergbahnen AG
+  description: 4-seater chairlift from Jaun village up to Musersbergli at 1,540 m, gateway to the Gastlosen hiking circuit
+  open_raw: Year-round (summer + winter operations)
+  website: https://www.jaun-bergbahnen.ch/
+- id: zinal-sorebois-cable-car
+  name: Télécabine Zinal-Sorebois
+  operator: Remontées Mécaniques Grimentz-Zinal SA
+  description: Gondola from Zinal village up to Sorebois at ~2,440 m, gateway to high-alpine traverses in the Val d'Anniviers
+  open_raw: Late June to mid-October, plus winter season
+  website: https://www.telegrimentzzinal.ch/
+- id: fluelen-eggberge-cable-car
+  name: Luftseilbahn Flüelen-Eggberge
+  operator: Luftseilbahn Flüelen-Eggberge AG
+  description: 15-passenger aerial cable car from Flüelen on Lake Uri up to Eggberge at 1,447 m, endpoint of the Schächentaler Höhenweg
+  website: https://www.eggberge.ch/
+- id: saas-grund-kreuzboden-cable-car
+  name: Gondelbahn Saas Grund-Kreuzboden
+  operator: Bergbahnen Hohsaas AG
+  description: 8-passenger gondola from Saas-Grund village up to Kreuzboden at ~2,400 m, base for Hohsaas summit and the Höhenweg
+  website: https://www.saas-fee.ch/en/services-informationen/prices-timetables-cable-cars/timetables-cable-cars
+- id: pilatusbahn-cogwheel
+  name: Pilatusbahn
+  operator: Pilatus-Bahnen AG
+  description: World's steepest cogwheel railway, from Alpnachstad up to Pilatus Kulm at 2,073 m, 48% max gradient
+  open_raw: Mid-May to mid-November (weather dependent)
+  website: https://www.pilatus.ch/en/discover/cogwheel-railway
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.95556,8.27694&z=16
+- id: pilatus-kriens-gondola
+  name: Panorama-Gondelbahn + Dragon Ride (Kriens-Fräkmüntegg-Pilatus Kulm)
+  operator: Pilatus-Bahnen AG
+  description: 'Two-stage aerial ride: panorama gondola from Kriens via Krienseregg to Fräkmüntegg (1,416 m), then the Dragon Ride aerial cableway up to Pilatus Kulm at 2,073 m'
+  open_raw: Year-round, brief maintenance breaks
+  website: https://www.pilatus.ch/en/discover/panorama-gondolas
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.95556,8.27694&z=16

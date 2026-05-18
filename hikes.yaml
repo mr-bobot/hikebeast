@@ -23,8 +23,6 @@ hikes:
   start: Meiringen train station
   transit:
     train: Meiringen (BLS)
-  duration_min: 90
-  gain_m: 500
   sac_grade: T2
   effort_label: Moderate
   description_extra: Walk up from Meiringen in the Haslital to the base of the Oltschibachfall. A footpath in the mountain forest leads up to viewpoints under the fall. About 1 h 30
@@ -660,6 +658,7 @@ hikes:
   - aletsch_glacier
   cable_car_ids:
   - eggishorn-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.43139,8.09417&z=16
 - id: aletsch_glacier-bettmerhorn-eggishorn-ridge
   name: Bettmerhorn → Eggishorn ridge traverse
   start: Bettmerhorn top station
@@ -1354,7 +1353,7 @@ hikes:
   effort_label: Easy
   duration_min: 60
   gain_m: 329
-  start: Luftseilbahn Wasserauen-Ebenalp
+  start: Wasserauen station
   transit:
     train: Wasserauen
   description_extra: 'Approach via the Ebenalp cable car from Wasserauen, then about 30 to 40 minutes along the ridge to the inn. T2: the ridge is narrow in places with some exposure.
@@ -1375,7 +1374,7 @@ hikes:
   effort_label: Easy
   duration_min: 60
   gain_m: 280
-  start: Wasserauen, Ebenalp
+  start: Wasserauen station
   visits:
   - seealpsee
   description_extra: Approach from Wasserauen station in about 1h 30. About 280 m of gain, T1. Berggasthaus Forelle on the west shore is the standard food stop. Camping at a designated
@@ -1386,7 +1385,7 @@ hikes:
   - seealpsee
   equipment_list: []
 - id: ascher-route-73
-  start: Luftseilbahn Wasserauen-Ebenalp
+  start: Wasserauen station
   transit:
     train: Wasserauen
   visits:
@@ -1415,7 +1414,7 @@ hikes:
   effort_label: Easy
   duration_min: 60
   gain_m: 157
-  start: Luftseilbahn Staubern
+  start: Frümsen valley station (Luftseilbahn Staubern)
   description_extra: From Brülisau, take the cable car to Staubern (1,830 m), then 1 hour on the ridge trail to the gap, T1, with about 157 m of cumulative gain. Berggasthaus Staubern
     is a working alpine restaurant. Combine with a descent through Fälensee for a longer day.
   visits:
@@ -2139,6 +2138,7 @@ hikes:
   equipment_list: []
   cable_car_ids:
   - monte-carasso-mornera-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.20779,8.97982&z=16
 - id: zinal_glacier-route-petit-mountet
   sac_grade: T2
   effort_label: Moderate
@@ -2301,6 +2301,8 @@ hikes:
   - https://en.wikipedia.org/wiki/Gastlosen
   quickest_for:
   - gastlosen
+  cable_car_ids:
+  - jaun-gastlosen-express
 - id: grammont-from-novel-via-col-des-crosses
   visits:
   - grammont
@@ -2601,6 +2603,8 @@ hikes:
   - https://www.petitmountet.ch/en/activities-and-places-of-interest/
   quickest_for:
   - zinal_glacier
+  cable_car_ids:
+  - zinal-sorebois-cable-car
 - id: augstmatthorn-from-harder-kulm
   visits:
   - augstmatthorn
@@ -2627,6 +2631,7 @@ hikes:
   cable_car_ids:
   - harderbahn
   name: Harder Kulm ridge approach
+  start_maps_url: https://www.google.com/maps/place/?q=46.69822,7.85504&z=16
 - id: brisen-from-niederrickenbach-direct
   visits:
   - brisen
@@ -2808,6 +2813,8 @@ hikes:
   - https://www.schaechentaler-hoehenweg.ch/wanderrouten
   quickest_for:
   - klausenpass
+  cable_car_ids:
+  - fluelen-eggberge-cable-car
 - id: lac_de_derborence-from-solalex
   visits:
   - lac_de_derborence
@@ -3283,6 +3290,8 @@ hikes:
   - https://www.off-the-trail.de/britanniahuette/
   hut_ids:
   - britanniahutte-sac
+  cable_car_ids:
+  - saas-grund-kreuzboden-cable-car
 - id: schafler-from-wasserauen-via-bommen
   visits:
   - schafler
@@ -3372,8 +3381,6 @@ hikes:
   name: Side trail to the Engstligenalp plateau
   sac_grade: T2
   effort_label: Moderate
-  duration_min: 70
-  gain_m: 395
   equipment_list: []
   start: Adelboden, Unter dem Birg (postbus stop)
   transit:
@@ -3412,6 +3419,8 @@ hikes:
   - https://www.myswitzerland.com/en-us/experiences/hiking-at-the-pilatus/
   - https://en.wikipedia.org/wiki/Pilatus_(mountain)
   - https://pilatus.ch/en/activities/hiking
+  cable_car_ids:
+  - pilatusbahn-cogwheel
 - id: mount_pilatus-fraekmuentegg-tomlishorn
   visits:
   - mount_pilatus
@@ -3435,6 +3444,10 @@ hikes:
   - https://pilatus.ch/en/activities/hiking
   quickest_for:
   - mount_pilatus
+  start_maps_url: https://www.google.com/maps/place/?q=46.95556,8.27694&z=16
+  cable_car_ids:
+  - pilatus-kriens-gondola
+  - pilatusbahn-cogwheel
 - id: wasserfall_finstersee-village-walk
   visits:
   - wasserfall_finstersee
@@ -3629,6 +3642,7 @@ hikes:
   - niederbauen-emmetten-cable-car
   quickest_for:
   - fulberg
+  start_maps_url: https://www.google.com/maps/place/?q=46.94641,8.53472&z=16
 - id: zermatt_huts-from-zermatt-toward-furi
   name: Up from Zermatt toward Furi through the Walser hamlets
   visits:
