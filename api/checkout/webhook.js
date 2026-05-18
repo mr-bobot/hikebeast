@@ -26,7 +26,7 @@ import Stripe from "stripe";
 import crypto from "node:crypto";
 import { Resend } from "resend";
 import { issueToken } from "../../lib/access-token.js";
-import { addTag, setEmail, getSubscriberIgUsername } from "../../lib/manychat.js";
+import { addTag, setEmail, setCustomField, getSubscriberIgUsername } from "../../lib/manychat.js";
 
 export const config = {
   api: { bodyParser: false },
@@ -590,6 +590,7 @@ async function handleSessionCompleted({ stripe, event }) {
   if (subscriberId) {
     sideEffects.push(addTag(subscriberId, "purchased"));
     sideEffects.push(setEmail(subscriberId, email));
+    sideEffects.push(setCustomField(subscriberId, "Bought Guide", true));
   }
 
   // 4. Affiliate referral row (if this purchase came in with ?r=<slug>).
