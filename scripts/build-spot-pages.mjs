@@ -835,8 +835,16 @@ function flipScriptFor(spot) {
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -845,9 +853,10 @@ function flipScriptFor(spot) {
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -881,7 +890,11 @@ function flipScriptFor(spot) {
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {

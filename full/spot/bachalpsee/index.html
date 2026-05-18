@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779095037814" />
+<link rel="stylesheet" href="../../preview.css?v=1779103087722" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -225,7 +225,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"bachalpsee-route-38","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":161,"start":"Berggasthaus First","transit":{"train":"Grindelwald"},"description_extra":"Standard Bachalpsee day from the First gondola top station. Wide gravel path heads east-northeast, climbing gradually through alpine pasture. About an hour each way at T1, almost no exposure. A smaller second lake sits a few minutes past the main one.","visits":["bachalpsee"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/faulhorn-597/mountain-hiking/","https://www.myswitzerland.com/en-us/experiences/bachalpsee-mountain-lake/"],"quickest_for":["bachalpsee"],"equipment_list":[],"cable_car_ids":["firstbahn"],"cable_cars":[{"id":"firstbahn","operator":"Jungfraubahnen","description":"Gondola from Grindelwald village up to First at 2,168 m","open_raw":"Early April to late October, with revision break late October to late November","cost_chf_raw":"76 CHF return","website":"https://www.jungfrau.ch/en-gb/grindelwaldfirst/"}],"cable_car":{"id":"firstbahn","operator":"Jungfraubahnen","description":"Gondola from Grindelwald village up to First at 2,168 m","open_raw":"Early April to late October, with revision break late October to late November","cost_chf_raw":"76 CHF return","website":"https://www.jungfrau.ch/en-gb/grindelwaldfirst/"},"quickest":true},{"id":"bachalpsee-bussalp-alternative","name":"From Bussalp","start":"Bussalp parking","transit":{"bus":"Bus 122 from Grindelwald"},"duration_min":100,"gain_m":470,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Quieter approach than the Firstbahn side. Drive or take bus 122 from Grindelwald to the Bussalp parking, then climb the meadow trail to the lake. About 1h 40 and 470 m of gain on grass paths. T2.","visits":["bachalpsee"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/faulhorn-597/mountain-hiking/","https://en.wikipedia.org/wiki/Bachalpsee"],"quickest":false}];
+  const ROUTES = [{"id":"bachalpsee-route-38","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":161,"start":"Berggasthaus First","transit":{"train":"Grindelwald"},"description_extra":"Standard Bachalpsee day from the First gondola top station. Wide gravel path heads east-northeast, climbing gradually through alpine pasture. About an hour each way at T1, almost no exposure. A smaller second lake sits a few minutes past the main one.","visits":["bachalpsee"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/faulhorn-597/mountain-hiking/","https://www.myswitzerland.com/en-us/experiences/bachalpsee-mountain-lake/"],"quickest_for":["bachalpsee"],"equipment_list":[],"cable_car_ids":["firstbahn"],"cable_cars":[{"id":"firstbahn","name":"Grindelwald - First","operator":"Jungfraubahnen","description":"Gondola from Grindelwald village up to First at 2,168 m","open_raw":"Early April to late October, with revision break late October to late November","cost_chf_raw":"76 CHF return","website":"https://www.jungfrau.ch/en-gb/grindelwaldfirst/"}],"cable_car":{"id":"firstbahn","name":"Grindelwald - First","operator":"Jungfraubahnen","description":"Gondola from Grindelwald village up to First at 2,168 m","open_raw":"Early April to late October, with revision break late October to late November","cost_chf_raw":"76 CHF return","website":"https://www.jungfrau.ch/en-gb/grindelwaldfirst/"},"quickest":true},{"id":"bachalpsee-bussalp-alternative","name":"From Bussalp","start":"Bussalp parking","transit":{"bus":"Bus 122 from Grindelwald"},"duration_min":100,"gain_m":470,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Quieter approach than the Firstbahn side. Drive or take bus 122 from Grindelwald to the Bussalp parking, then climb the meadow trail to the lake. About 1h 40 and 470 m of gain on grass paths. T2.","visits":["bachalpsee"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/faulhorn-597/mountain-hiking/","https://en.wikipedia.org/wiki/Bachalpsee"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -374,8 +374,16 @@
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -384,9 +392,10 @@
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -420,7 +429,11 @@
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {

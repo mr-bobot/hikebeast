@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779095037827" />
+<link rel="stylesheet" href="../../preview.css?v=1779103087737" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -123,7 +123,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/lac_de_taney_p1/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from St-Gingolph (374 m), on Lake Geneva </div>
+      <div class="hb-route-name">Hike from St-Gingolph, on Lake Geneva </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">6h 40</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1380 m gain</span></span></div>
       
     </div>
@@ -225,7 +225,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"lac_de_taney-route-50","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":374,"start":"Parking du Flon","transit":{"bus":"Le Flon, village"},"visits":["lac_de_taney"],"description_extra":"From Le Flon (drive or postbus), the trail climbs through forest and over the Col de Tanay to the lake in about 1 hour, 374 m of gain, T1. No camping at the lakeshore (federal landscape protection). Continue another 1.5 hours up to Le Grammont for a full day.","sources":["https://en.wikipedia.org/wiki/Lac_de_Tanay"],"quickest_for":["lac_de_taney"],"equipment_list":[],"quickest":true},{"id":"lac_de_taney-from-st-gingolph-via-col-de-la-croix","visits":["lac_de_taney"],"sac_grade":"T2","effort_label":"Demanding","duration_min":400,"gain_m":1380,"equipment_list":["Sturdy hiking boots","Poles"],"start":"St-Gingolph (374 m), on Lake Geneva","transit":{"train":"Direct train to St-Gingolph from Geneva or Lausanne"},"description_extra":"Long approach from lake level rather than from the road head at Le Flon. From St-Gingolph the path climbs through southern-facing forest via La Croix-des-Dames and Le Freney to Novel at 960 m, continues to L'Au de Morge and the Col de la Croix at 1,755 m, then drops to Lac de Taney at 1,408 m and out via Miex Le Flon. About 6 hours 40 minutes on the marked T2 line, 1,380 m of ascent and 1,170 m of descent. Overnight options at Novel or the lake make this a two-day option.","sources":["https://www.wandersite.ch/Tageswanderung/633_Wallis.html","https://schweizmobil.ch/en/hiking-in-switzerland/route-216","https://www.myswitzerland.com/en-us/experiences/lac-de-taney-mountain-lake-on-the-haute-savoie-border/"],"quickest":false}];
+  const ROUTES = [{"id":"lac_de_taney-route-50","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":374,"start":"Parking du Flon","transit":{"bus":"Le Flon, village"},"visits":["lac_de_taney"],"description_extra":"From Le Flon (drive or postbus), the trail climbs through forest and over the Col de Tanay to the lake in about 1 hour, 374 m of gain, T1. No camping at the lakeshore (federal landscape protection). Continue another 1.5 hours up to Le Grammont for a full day.","sources":["https://en.wikipedia.org/wiki/Lac_de_Tanay"],"quickest_for":["lac_de_taney"],"equipment_list":[],"quickest":true},{"id":"lac_de_taney-from-st-gingolph-via-col-de-la-croix","visits":["lac_de_taney"],"sac_grade":"T2","effort_label":"Demanding","duration_min":400,"gain_m":1380,"equipment_list":["Sturdy hiking boots","Poles"],"start":"St-Gingolph, on Lake Geneva","transit":{"train":"Direct train to St-Gingolph from Geneva or Lausanne"},"description_extra":"Long approach from lake level rather than from the road head at Le Flon. From St-Gingolph the path climbs through southern-facing forest via La Croix-des-Dames and Le Freney to Novel at 960 m, continues to L'Au de Morge and the Col de la Croix at 1,755 m, then drops to Lac de Taney at 1,408 m and out via Miex Le Flon. About 6 hours 40 minutes on the marked T2 line, 1,380 m of ascent and 1,170 m of descent. Overnight options at Novel or the lake make this a two-day option.","sources":["https://www.wandersite.ch/Tageswanderung/633_Wallis.html","https://schweizmobil.ch/en/hiking-in-switzerland/route-216","https://www.myswitzerland.com/en-us/experiences/lac-de-taney-mountain-lake-on-the-haute-savoie-border/"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -374,8 +374,16 @@
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -384,9 +392,10 @@
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -420,7 +429,11 @@
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {

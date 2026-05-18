@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779095037801" />
+<link rel="stylesheet" href="../../preview.css?v=1779103087714" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -123,7 +123,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/rosenlauifall_p1/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Grosse Scheidegg (Postbus from Grindelwald or Meiringen) </div>
+      <div class="hb-route-name">Hike from Grosse Scheidegg </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">3h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Moderate</span></span></div>
       
     </div>
@@ -225,7 +225,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"rosenlauifall-route-99","start":"Parkplatz Gletscherschlucht","transit":{"bus":"Rosenlaui, Gletscherschlucht"},"description_extra":"A five-minute trail from the Gletscherschlucht parking reaches the lower viewpoint. T1. Reached by Postbus to Rosenlaui, Gletscherschlucht.","visits":["rosenlauifall"],"name":"Drive-in from the Grosse Scheidegg road","sac_grade":"T1","effort_label":"Easy","duration_min":5,"gain_m":0,"distance_km":0.2,"equipment_list":[],"quickest_for":["rosenlauifall"],"quickest":true},{"id":"rosenlauifall-from-grosse-scheidegg","visits":["rosenlauifall"],"sac_grade":"T1","effort_label":"Moderate","duration_min":180,"gain_m":0,"distance_km":9,"equipment_list":[],"start":"Grosse Scheidegg (Postbus from Grindelwald or Meiringen)","transit":{"bus":"Grindelwald or Meiringen, then Grindelwaldbus to Grosse Scheidegg"},"description_extra":"Descent from the pass instead of a short loop from the parking. From Grosse Scheidegg at 1,962 m, follow the marked hiking trail down through the Rosenlauital, parallel to the road, past Schwarzwaldalp at 1,455 m and the historic Hotel Rosenlaui to the Gletscherschlucht parking at 1,328 m, where the lower Rosenlauifall viewpoint sits. About 9 km descending, roughly 3 hours, T1 throughout. Side trip into the Rosenlaui Glacier Gorge (200+ steps, 12 tunnels) costs separately and adds about an hour. Bus from Rosenlaui back to Meiringen.","sources":["https://wegwandern.ch/wanderung/wanderung-rosenlaui-gletscherschlucht-schwarzwaldalp-grosse-scheidegg-wandern/","https://www.interlaken.ch/en/experiences/tour/rosenlauital-von-der-schwarzwaldalp-zum-reichenbachfall"],"quickest":false}];
+  const ROUTES = [{"id":"rosenlauifall-route-99","start":"Parkplatz Gletscherschlucht","transit":{"bus":"Rosenlaui, Gletscherschlucht"},"description_extra":"A five-minute trail from the Gletscherschlucht parking reaches the lower viewpoint. T1. Reached by Postbus to Rosenlaui, Gletscherschlucht.","visits":["rosenlauifall"],"name":"Drive-in from the Grosse Scheidegg road","sac_grade":"T1","effort_label":"Easy","duration_min":5,"gain_m":0,"distance_km":0.2,"equipment_list":[],"quickest_for":["rosenlauifall"],"quickest":true},{"id":"rosenlauifall-from-grosse-scheidegg","visits":["rosenlauifall"],"sac_grade":"T1","effort_label":"Moderate","duration_min":180,"gain_m":0,"distance_km":9,"equipment_list":[],"start":"Grosse Scheidegg","start_maps_url":"https://maps.app.goo.gl/tySY4kjokaW5vWzdA","transit":{"bus":"Grindelwald or Meiringen, then Grindelwaldbus to Grosse Scheidegg"},"description_extra":"Descent from the pass instead of a short loop from the parking. From Grosse Scheidegg at 1,962 m, follow the marked hiking trail down through the Rosenlauital, parallel to the road, past Schwarzwaldalp at 1,455 m and the historic Hotel Rosenlaui to the Gletscherschlucht parking at 1,328 m, where the lower Rosenlauifall viewpoint sits. About 9 km descending, roughly 3 hours, T1 throughout. Side trip into the Rosenlaui Glacier Gorge (200+ steps, 12 tunnels) costs separately and adds about an hour. Bus from Rosenlaui back to Meiringen.","sources":["https://wegwandern.ch/wanderung/wanderung-rosenlaui-gletscherschlucht-schwarzwaldalp-grosse-scheidegg-wandern/","https://www.interlaken.ch/en/experiences/tour/rosenlauital-von-der-schwarzwaldalp-zum-reichenbachfall"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -374,8 +374,16 @@
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -384,9 +392,10 @@
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -420,7 +429,11 @@
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {

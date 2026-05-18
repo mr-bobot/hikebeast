@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779095037821" />
+<link rel="stylesheet" href="../../preview.css?v=1779103087730" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -225,7 +225,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"lac_de_derborence-default","description_extra":"Drive in from Aven via the narrow Lizerne valley road, then a short walk to the lake at 1,449 m. Loop around the lake is about 1.5 hours, T1. Refuge du Lac Derborence at the lake has rooms and food.","visits":["lac_de_derborence"],"sources":["https://www.refugederborence.ch/agenda-saison/","https://en.wikipedia.org/wiki/Lac_de_Derborence"],"hut_ids":["refuge-derborence"],"name":"Lakeshore loop from the road","sac_grade":"T1","effort_label":"Easy","duration_min":90,"gain_m":50,"distance_km":4,"equipment_list":[],"start":"Lac de Derborence parking (1,449 m)","transit":{"car":"Drive in from Aven via the narrow Lizerne valley road"},"quickest_for":["lac_de_derborence"],"huts":[{"id":"refuge-derborence","name":"Refuge du Lac Derborence","description":"Hut at the lakeshore, accessible by car","website":"https://www.refugederborence.ch/agenda-saison/","open_raw":"May to end of October","cost_chf_raw":"71 CHF half-board"}],"hut":{"id":"refuge-derborence","name":"Refuge du Lac Derborence","description":"Hut at the lakeshore, accessible by car","website":"https://www.refugederborence.ch/agenda-saison/","open_raw":"May to end of October","cost_chf_raw":"71 CHF half-board"},"quickest":true},{"id":"lac_de_derborence-from-solalex","visits":["lac_de_derborence"],"sac_grade":"T2","effort_label":"Moderate","duration_min":180,"gain_m":580,"distance_km":7.3,"equipment_list":[],"start":"Solalex, above Gryon (Vaud Alps)","transit":{"bus":"Bex, then Bex-Villars-Bretaye line to Gryon, then Postbus to Solalex (summer only)"},"description_extra":"Cross-cantonal approach from the Vaud side. From Solalex at about 1,470 m, the rocky trail climbs through larches to Anzeindaz at 1,876 m, then up to the Pas de Cheville at 2,038 m, the saddle between Vaud and Valais at the foot of the Diablerets. Drop down through pastures into the upper Lizerne valley to the lake at 1,449 m. About 7.3 km, 3 hours, 580 m of ascent and 580 m of descent, T2 on a marked Sanetsch-Muveran-Weg stage. Combine with a stop at the Anzeindaz hut for food.","sources":["https://www.alpesvaudoises.ch/en/V1390/from-solalex-to-derborence","https://www.lescoteauxdusoleil.ch/fr/derborence-cheville-anzeindaz-anzeinde-solalex-1176.html"],"quickest":false}];
+  const ROUTES = [{"id":"lac_de_derborence-default","description_extra":"Drive in from Aven via the narrow Lizerne valley road, then a short walk to the lake at 1,449 m. Loop around the lake is about 1.5 hours, T1. Refuge du Lac Derborence at the lake has rooms and food.","visits":["lac_de_derborence"],"sources":["https://www.refugederborence.ch/agenda-saison/","https://en.wikipedia.org/wiki/Lac_de_Derborence"],"hut_ids":["refuge-derborence"],"name":"Lakeshore loop from the road","sac_grade":"T1","effort_label":"Easy","duration_min":90,"gain_m":50,"distance_km":4,"equipment_list":[],"start":"Lac de Derborence parking","transit":{"car":"Drive in from Aven via the narrow Lizerne valley road"},"quickest_for":["lac_de_derborence"],"huts":[{"id":"refuge-derborence","name":"Refuge du Lac Derborence","description":"Hut at the lakeshore, accessible by car","website":"https://www.refugederborence.ch/agenda-saison/","open_raw":"May to end of October","cost_chf_raw":"71 CHF half-board"}],"hut":{"id":"refuge-derborence","name":"Refuge du Lac Derborence","description":"Hut at the lakeshore, accessible by car","website":"https://www.refugederborence.ch/agenda-saison/","open_raw":"May to end of October","cost_chf_raw":"71 CHF half-board"},"quickest":true},{"id":"lac_de_derborence-from-solalex","visits":["lac_de_derborence"],"sac_grade":"T2","effort_label":"Moderate","duration_min":180,"gain_m":580,"distance_km":7.3,"equipment_list":[],"start":"Solalex, above Gryon (Vaud Alps)","transit":{"bus":"Bex, then Bex-Villars-Bretaye line to Gryon, then Postbus to Solalex (summer only)"},"description_extra":"Cross-cantonal approach from the Vaud side. From Solalex at about 1,470 m, the rocky trail climbs through larches to Anzeindaz at 1,876 m, then up to the Pas de Cheville at 2,038 m, the saddle between Vaud and Valais at the foot of the Diablerets. Drop down through pastures into the upper Lizerne valley to the lake at 1,449 m. About 7.3 km, 3 hours, 580 m of ascent and 580 m of descent, T2 on a marked Sanetsch-Muveran-Weg stage. Combine with a stop at the Anzeindaz hut for food.","sources":["https://www.alpesvaudoises.ch/en/V1390/from-solalex-to-derborence","https://www.lescoteauxdusoleil.ch/fr/derborence-cheville-anzeindaz-anzeinde-solalex-1176.html"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -374,8 +374,16 @@
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -384,9 +392,10 @@
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -420,7 +429,11 @@
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {

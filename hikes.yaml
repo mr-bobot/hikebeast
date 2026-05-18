@@ -91,11 +91,11 @@ hikes:
   effort_label: Easy
   duration_min: 80
   gain_m: 415
-  start: Underi Trift (Triftbahn top station, 1,357 m)
+  start: Underi Trift (Triftbahn top station)
   transit:
     train: Meiringen
     bus: PostBus 161 to Nessental, Triftbahn
-    cable_car: KWO Triftbahn cable car (booking advised, ~26 CHF return)
+    cable_car: KWO Triftbahn cable car
   visits:
   - triftbrucke
   description_extra: From the Underi Trift top station, about 1h 20 on a T2 mountain trail with 415 m of gain to the bridge. Continue past the bridge to the Windegghütte for an overnight
@@ -115,11 +115,11 @@ hikes:
   effort_label: Easy
   duration_min: 80
   gain_m: 415
-  start: Underi Trift (Triftbahn top station, 1,357 m)
+  start: Underi Trift (Triftbahn top station)
   transit:
     train: Meiringen
     bus: PostBus 161 to Nessental, Triftbahn
-    cable_car: KWO Triftbahn cable car (booking advised, ~26 CHF return)
+    cable_car: KWO Triftbahn cable car
   visits:
   - triftsee
   description_extra: From the Underi Trift top station, about 1 h 30 on the same trail as the Triftbrücke suspension bridge, T2 with around 400 m of gain. Camping not permitted.
@@ -176,7 +176,7 @@ hikes:
   gain_m: 30
   distance_km: 0.4
   equipment_list: []
-  start: Brienzer Rothorn Bahn summit station (2,244 m)
+  start: Brienzer Rothorn Bahn summit station
   transit:
     train: Brienz
     cable_car: Brienz Rothorn Bahn (steam cog railway)
@@ -229,7 +229,7 @@ hikes:
   - Poles
   - Helmet
   - Bivouac / emergency kit if splitting over two days
-  start: Brienzer Rothorn summit station (2,244 m, top of Brienz Rothorn Bahn cog railway)
+  start: Brienzer Rothorn summit station (top of Brienz Rothorn Bahn cog railway)
   transit:
     train: Brienz BLS
     cable_car: Brienz Rothorn Bahn (cog railway, June to October)
@@ -551,7 +551,7 @@ hikes:
   descent_m: 58
   distance_km: 0.5
   equipment_list: []
-  start: Rotenboden station (2,815 m, Gornergratbahn from Zermatt)
+  start: Rotenboden station (Gornergratbahn from Zermatt)
   transit:
     train: Zermatt, then Gornergratbahn to Rotenboden
   quickest_for:
@@ -734,7 +734,7 @@ hikes:
   - arolla_ice_cave
 - id: cabane_becs_de_bosson-from-bendolla
   name: From Bendolla (top of Grimentz gondola)
-  start: Bendolla (2130 m)
+  start: Bendolla
   transit:
     train: Sierre (SBB) + bus to Grimentz + gondola to Bendolla
   duration_min: 165
@@ -847,7 +847,7 @@ hikes:
   - spielboden-laengfluh
 - id: barrhorn-from-turtmannhuette
   name: From Turtmannhütte via Schöllijoch
-  start: Turtmannhütte (2519 m)
+  start: Turtmannhütte
   transit:
     train: Visp (SBB) + bus + long approach to Turtmannhütte
   duration_min: 360
@@ -914,7 +914,7 @@ hikes:
   gain_m: 50
   distance_km: 4.0
   equipment_list: []
-  start: Lac de Derborence parking (1,449 m)
+  start: Lac de Derborence parking
   transit:
     car: Drive in from Aven via the narrow Lizerne valley road
   quickest_for:
@@ -1049,7 +1049,7 @@ hikes:
   equipment_list: []
 - id: salanfe_lake-from-van-d-en-haut
   name: From Van d'En Haut
-  start: Van d'En Haut campsite (1393 m)
+  start: Van d'En Haut campsite
   transit:
     train: Salvan (Mont-Blanc Express) + drive/walk
   duration_min: 150
@@ -1823,7 +1823,7 @@ hikes:
   - morteratsch_glacier
 - id: bovalhutte-from-morteratsch
   name: From Morteratsch station
-  start: Morteratsch railway station (1896 m)
+  start: Morteratsch railway station
   transit:
     train: Morteratsch (RhB)
   duration_min: 120
@@ -2033,7 +2033,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Bornes_Massif
 - id: dent_doche-from-bernex
   name: From Bernex via Fétiuère
-  start: Fétiuère parking (1206 m, above Bernex)
+  start: Fétiuère parking (above Bernex)
   transit:
     bus: From Évian, drive to Fétiuère
   duration_min: 180
@@ -2185,7 +2185,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: St. Niklaus railway station (1,127 m)
+  start: St. Niklaus railway station
   transit:
     train: Visp to St. Niklaus (Matterhorn Gotthard Bahn)
   description_extra: Approach from the Mattertal side, opposite valley from the Turtmann hut route. Day one climbs from St. Niklaus through Schwiedernen and forested switchbacks to the
@@ -2207,7 +2207,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Les Avants train station (968 m)
+  start: Les Avants train station
   transit:
     train: Montreux to Les Avants (MOB line)
   description_extra: 'Approach from the Lake Geneva side rather than from Allières. From Les Avants the path climbs to Col de Jaman, then traverses north along the Verraux ridge to Col
@@ -2227,7 +2227,7 @@ hikes:
   gain_m: 140
   distance_km: 4.5
   equipment_list: []
-  start: Ferme du Soliat (1,382 m)
+  start: Ferme du Soliat
   transit:
     car: St-Aubin-Sauges A5 exit, then via Montalchez and Provence to the Ferme du Soliat road
   description_extra: Approach from the south rim above Saint-Aubin and Couvet rather than from Noiraigue below. The paved road climbs to the Ferme du Soliat farm-restaurant at 1,382
@@ -2248,7 +2248,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Les Sciernes-d'Albeuve train station (880 m)
+  start: Les Sciernes-d'Albeuve train station
   transit:
     train: Bulle to Montbovon, change to MOB line, then to Les Sciernes-d'Albeuve
   description_extra: Approach from the Intyamon (east) side of the ridge rather than from Châtel-St-Denis / Les Paccots. The trail climbs from the village past Prés d'Albeuve and the
@@ -2266,10 +2266,12 @@ hikes:
   gain_m: 256
   distance_km: 3.0
   equipment_list: []
-  start: Engstligenalp top station (cable car from Unter dem Birg)
+  start: Engstligenalp top station
+  start_maps_url: https://maps.app.goo.gl/qusKe5KQ5Yw64M349
   transit:
     bus: Adelboden postbus to Unter dem Birg
-    cable_car: Engstligenbahn cable car to the Engstligenalp plateau
+  cable_car_ids:
+  - engstligenalp-cable-car
   description_extra: View the falls from the top edge of the plateau rather than from below. From the cable car top station a marked circular path drops onto the lip of the falls, then
     loops back across pasture. About 3 km, 1 h 10, 256 m of cumulative gain, rated medium by the cable car operator. From the top station, the upper waterfall is also visible without
     leaving the wheelchair-accessible part of the plateau. The Engstligenfälle II/III trails directly through the cliff are seasonally closed for rockfall, so the upper plateau loop
@@ -2286,7 +2288,7 @@ hikes:
   gain_m: 696
   distance_km: 12
   equipment_list: []
-  start: Musersbergli top station (Jaun chairlift, 1,479 m)
+  start: Musersbergli top station (Jaun chairlift)
   transit:
     bus: Bulle or Boltigen postbus to Jaun
     cable_car: Jaun chairlift to Musersbergli
@@ -2330,7 +2332,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Klausenpass (1,948 m, Uri side)
+  start: Klausenpass (Uri side)
   transit:
     bus: Flüelen to Klausenpass (postbus, summer only), or Linthal to Klausenpass via bus 408
   description_extra: Approach the Griesslisee (Clariden ice lake) from the high Klausen pass road rather than from Klöntalersee. From the Klausenpass parking the route follows the Clariden-Höhenweg
@@ -2351,7 +2353,7 @@ hikes:
   gain_m: 805
   distance_km: 12.2
   equipment_list: []
-  start: Berghaus Vereina (1,943 m, Klosters side)
+  start: Berghaus Vereina (Klosters side)
   transit:
     train: Klosters Platz, then Klosters-Vereina shuttle bus (reservation by phone)
   description_extra: Approach the Jöriseen from the Klosters / Prättigau side instead of from the Flüelapass road. From the Berghaus Vereina at 1,943 m, the trail climbs the Jörital
@@ -2370,7 +2372,7 @@ hikes:
   gain_m: 635
   distance_km: 15
   equipment_list: []
-  start: Champex-Lac (1,466 m)
+  start: Champex-Lac
   transit:
     train: Martigny to Orsières
     bus: Orsières postbus to Champex-Lac
@@ -2415,7 +2417,7 @@ hikes:
   - Sturdy hiking boots
   - Poles
   - Helmet (rockfall sections)
-  start: Col de la Colombière (1,607 m, France)
+  start: Col de la Colombière (France)
   transit:
     car: Cluses to Le Grand-Bornand via the D4 road to Col de la Colombière (open in summer)
   description_extra: Approach from the Le Reposoir side, opposite valley from Le Petit-Bornand. The loop climbs from the Col de la Colombière up the south flank to the Col du Rasoir,
@@ -2456,9 +2458,11 @@ hikes:
   distance_km: 12.55
   equipment_list: []
   start: First top station (above Grindelwald)
+  start_maps_url: https://maps.app.goo.gl/txPQnNimv9QKBYxM8
   transit:
     train: Interlaken Ost to Grindelwald
-    cable_car: Firstbahn from Grindelwald to First (2,166 m)
+  cable_car_ids:
+  - firstbahn
   description_extra: Approach Rosenlaui from the Grindelwald side over the Grosse Scheidegg pass instead of from the Meiringen road. ViaBerna stage 16 leaves the First cable car top
     station, traces a balcony path under the Schreckhorn and Wetterhorn to the Grosse Scheidegg at 1,962 m, then descends through Alp Alpiglen and Schwarzwaldalp to Hotel Rosenlaui and
     the public waterfall viewpoint at 1,328 m. About 12.5 km, 3 h 30, with the cable car saving the climb to First. Postbus continues from Rosenlaui down to Meiringen.
@@ -2466,8 +2470,6 @@ hikes:
   - https://www.thunersee.ch/en/experiences/tour/viaberna-stage-16-first-rosenlaui
   - https://schweizmobil.ch/de/wanderland/route-38/etappe-16
   - https://www.viaberna.ch/en/stages/first-rosenlaui
-  cable_car_ids:
-  - firstbahn
 - id: salanfe_lake-from-mex-via-col-du-jorat
   visits:
   - salanfe_lake
@@ -2543,7 +2545,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Plan-Francey mid-station (1,518 m)
+  start: Plan-Francey mid-station
   transit:
     train: Bulle to Gruyères
     bus: Gruyères postbus to Moléson-sur-Gruyères
@@ -2566,7 +2568,7 @@ hikes:
   gain_m: 329
   distance_km: 11.2
   equipment_list: []
-  start: Crans-Montana cable car station (1,490 m)
+  start: Crans-Montana cable car station
   transit:
     train: Sierre, then Sierre-Crans-Montana funicular
     bus: Crans-Montana local bus
@@ -2587,7 +2589,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Sorebois top station (2,438 m)
+  start: Sorebois top station
   transit:
     bus: Sierre to Zinal (postbus)
     cable_car: Sorebois cable car up from Zinal
@@ -2896,7 +2898,8 @@ hikes:
   gain_m: 0
   distance_km: 9
   equipment_list: []
-  start: Grosse Scheidegg (Postbus from Grindelwald or Meiringen)
+  start: Grosse Scheidegg
+  start_maps_url: https://maps.app.goo.gl/tySY4kjokaW5vWzdA
   transit:
     bus: Grindelwald or Meiringen, then Grindelwaldbus to Grosse Scheidegg
   description_extra: Descent from the pass instead of a short loop from the parking. From Grosse Scheidegg at 1,962 m, follow the marked hiking trail down through the Rosenlauital, parallel
@@ -3019,7 +3022,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Grimentz village (1,572 m)
+  start: Grimentz village
   transit:
     train: Sierre
     bus: PostBus 452 from Sierre to Grimentz
@@ -3041,7 +3044,7 @@ hikes:
   gain_m: 880
   distance_km: 10.6
   equipment_list: []
-  start: Les Avants station (970 m)
+  start: Les Avants station
   transit:
     train: Montreux, then MOB to Les Avants
   description_extra: Foot ascent without using the Rochers de Naye rack railway. From Les Avants, the path climbs through pasture to the Col de Jaman at 1,512 m, where the Cabane de
@@ -3080,7 +3083,7 @@ hikes:
   - Sturdy hiking boots
   - Poles
   - Helmet (rockfall sections)
-  start: Morschach cable car valley station (798 m)
+  start: Morschach cable car valley station
   transit:
     train: Brunnen
     bus: Brunnen Bus to Morschach
@@ -3099,7 +3102,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Iffigenalp (1,584 m), road end above Lenk
+  start: Iffigenalp, road end above Lenk
   transit:
     train: Lenk im Simmental
     bus: Lenk PostBus to Iffigenalp
@@ -3126,7 +3129,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Lombachalp (1,540 m), above Habkern
+  start: Lombachalp, above Habkern
   transit:
     train: Interlaken West
     bus: PostBus 105 from Interlaken West to Habkern, then summer Ruftaxi or 2 hours on foot to Lombachalp
@@ -3166,7 +3169,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: St-Gingolph (374 m), on Lake Geneva
+  start: St-Gingolph, on Lake Geneva
   transit:
     train: Direct train to St-Gingolph from Geneva or Lausanne
   description_extra: Long approach from lake level rather than from the road head at Le Flon. From St-Gingolph the path climbs through southern-facing forest via La Croix-des-Dames and
@@ -3184,7 +3187,7 @@ hikes:
   duration_min: 180
   gain_m: 990
   equipment_list: []
-  start: Moléson-Village (1,100 m)
+  start: Moléson-Village
   transit:
     train: Bulle
     bus: Bulle Bus 263 to Moléson-Village
@@ -3203,7 +3206,7 @@ hikes:
   gain_m: 140
   distance_km: 1.6
   equipment_list: []
-  start: Unterbach bei Meiringen (about 770 m)
+  start: Unterbach bei Meiringen
   transit:
     train: Meiringen
     bus: PostBus 151 from Meiringen to Unterbach, Dorf
@@ -3223,7 +3226,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Lac de Moiry / Moiry dam (2,250 m)
+  start: Lac de Moiry / Moiry dam
   transit:
     train: Sierre
     bus: PostBus to Grimentz, then summer bus to Moiry barrage
@@ -3242,10 +3245,12 @@ hikes:
   gain_m: 130
   distance_km: 11.7
   equipment_list: []
-  start: First (top of Grindelwald-First gondola, 2,168 m)
+  start: First top station
+  start_maps_url: https://maps.app.goo.gl/txPQnNimv9QKBYxM8
   transit:
     train: Grindelwald
-    cable_car: Firstbahn gondola from Grindelwald to First
+  cable_car_ids:
+  - firstbahn
   description_extra: Stage 16 of the federal ViaBerna long-distance route, reaching Rosenlaui from Grindelwald rather than from Meiringen. The path crosses alpine pasture from First,
     climbs gently to the Grosse Scheidegg pass at 1,962 m, then descends about 700 m through Schwarzwaldalp and along the Reichenbach river to Hotel Rosenlaui and the glacier gorge.
     About 11.7 km in 3 hours 50 minutes, T2.
@@ -3253,8 +3258,6 @@ hikes:
   - https://schweizmobil.ch/de/wanderland/route-38/etappe-16
   - https://www.viaberna.ch/en/stages/first-rosenlaui
   - https://wegwandern.ch/wanderung/wanderung-rosenlaui-gletscherschlucht-schwarzwaldalp-grosse-scheidegg-wandern/
-  cable_car_ids:
-  - firstbahn
 - id: saas_fee_glacier-britanniahuette-from-kreuzboden
   visits:
   - saas_fee_glacier
@@ -3265,7 +3268,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Kreuzboden (2,400 m, top of Saas-Grund cable car)
+  start: Kreuzboden (top of Saas-Grund cable car)
   transit:
     train: Visp
     bus: PostBus 511 from Visp to Saas-Grund
@@ -3290,7 +3293,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Wasserauen station (868 m)
+  start: Wasserauen station
   transit:
     train: Appenzell, then Appenzeller Bahn to Wasserauen
   description_extra: Foot ascent without using the Ebenalp cable car. From Wasserauen the path climbs through forest to Alp Bommen, then changes to a rough gravel track that doubles
@@ -3309,7 +3312,7 @@ hikes:
   duration_min: 210
   gain_m: 670
   equipment_list: []
-  start: Saas-Fee village (1,783 m)
+  start: Saas-Fee village
   transit:
     train: Visp
     bus: PostBus 511 from Visp to Saas-Fee
@@ -3329,7 +3332,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Underi Trift cable car top station (1,357 m)
+  start: Underi Trift cable car top station
   transit:
     train: Meiringen
     bus: PostBus 161 to Triftbahn
@@ -3397,7 +3400,7 @@ hikes:
   - Sturdy hiking boots
   - Rain layer
   - 1.5 L water
-  start: Alpnachstad station (440 m)
+  start: Alpnachstad station
   transit:
     train: Zentralbahn from Lucerne to Alpnachstad (about 17 min)
     cable_car: Pilatusbahn cog railway from Alpnachstad to Pilatus Kulm (for descent or alternative ascent)
@@ -3420,7 +3423,7 @@ hikes:
   equipment_list:
   - Hiking boots
   - Wind layer
-  start: Pilatus Kulm top station (2,073 m)
+  start: Pilatus Kulm top station
   transit:
     cable_car: From Kriens via gondola to Fräkmüntegg then the Dragon Ride aerial cableway to Pilatus Kulm; or cog railway from Alpnachstad
     car: Drive to Kriens or Alpnachstad valley stations
@@ -3462,7 +3465,7 @@ hikes:
   equipment_list:
   - Hiking boots
   - Water
-  start: La Gouille bus stop (1,776 m), Val d'Hérens
+  start: La Gouille bus stop, Val d'Hérens
   transit:
     bus: PostBus 381 from Sion to La Gouille (hamlet between Les Haudères and Arolla)
     car: Roadside parking at La Gouille on the Arolla road
@@ -3486,7 +3489,7 @@ hikes:
   - Rain layer
   - 1.5 L water
   - Sun protection
-  start: Pizolhütte (2,222 m) above Wangs
+  start: Pizolhütte above Wangs
   transit:
     train: Bad Ragaz or Sargans, then bus to Wangs valley station
     cable_car: Wangs to Furt gondola, then Furt to Gaffia chairlift; short walk to Pizolhütte at the start. Last descent from Furt at 17:30 in summer
@@ -3513,7 +3516,7 @@ hikes:
   - Wind layer
   - Water
   - Sun protection
-  start: La Flégère gondola top station (1,877 m), Aiguilles Rouges
+  start: La Flégère gondola top station, Aiguilles Rouges
   transit:
     train: Mont-Blanc Express to Les Praz de Chamonix
     cable_car: La Flégère gondola from Les Praz de Chamonix to the top station
@@ -3541,7 +3544,7 @@ hikes:
   - Hiking boots
   - Rain layer
   - Water
-  start: Col de la Colombière car park (1,613 m), Le Reposoir
+  start: Col de la Colombière car park, Le Reposoir
   transit:
     car: Drive over the Col de la Colombière (D4) from Le Grand-Bornand or Le Reposoir, large free car park at the col
     bus: Seasonal shuttle from Le Grand-Bornand to Col de la Colombière in summer
@@ -3567,7 +3570,7 @@ hikes:
   - Rain layer
   - 2 L water
   - Sun protection
-  start: Sfazù bus stop (1,636 m) on the Bernina Pass road
+  start: Sfazù bus stop on the Bernina Pass road
   transit:
     train: Bernina Express or regional train to Poschiavo
     bus: PostBus toward the Bernina Pass to Sfazù; PubliCar shuttle from Sfazù up the valley to Alp Camp (May to mid-October, reservation required)
@@ -3589,7 +3592,7 @@ hikes:
   gain_m: 50
   distance_km: 4.2
   equipment_list: []
-  start: Sils Maria village centre (1,802 m)
+  start: Sils Maria village centre
   transit:
     bus: PostBus 4 from St. Moritz to Sils Maria
     boat: Segl-Maria stop at Chastè in summer
@@ -3613,7 +3616,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Niederbauen Chulm cable car top station (1,587 m)
+  start: Niederbauen Chulm cable car top station
   transit:
     train: Beckenried (then bus 543 to Emmetten)
     cable_car: Luftseilbahn Emmetten-Niederbauen to Niederbauen Chulm

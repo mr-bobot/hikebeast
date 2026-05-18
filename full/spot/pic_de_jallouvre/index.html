@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779095037839" />
+<link rel="stylesheet" href="../../preview.css?v=1779103087748" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -124,7 +124,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/pic_de_jallouvre_p1/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Col de la Colombière (1,607 m, France) <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Hike from Col de la Colombière (France) <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">5h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T4 · Demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1200 m gain</span></span></div>
       
     </div>
@@ -226,7 +226,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"pic_de_jallouvre-from-petit-bornand","name":"From Le Petit-Bornand-les-Glières","start":"Le Petit-Bornand-les-Glières","duration_min":360,"gain_m":1300,"sac_grade":"T3","effort_label":"Long day","description_extra":"Six-hour summit day. From Le Petit-Bornand-les-Glières the trail climbs steadily through pastures and forest to the rocky upper section of the Pic de Jallouvre at 2,408 m. About 1,300 m of vertical gain, T3, with easy scrambling on the final section. Often done as part of a longer Bornes traverse between Le Grand-Bornand and Le Petit-Bornand.","visits":["pic_de_jallouvre"],"sources":["https://en.wikipedia.org/wiki/Pic_de_Jallouvre","https://en.wikipedia.org/wiki/Bornes_Massif"],"quickest":false},{"id":"pic_de_jallouvre-from-col-de-la-colombiere","visits":["pic_de_jallouvre"],"sac_grade":"T4","effort_label":"Demanding","duration_min":330,"gain_m":1200,"distance_km":10.4,"equipment_list":["Sturdy hiking boots","Poles","Helmet (rockfall sections)"],"start":"Col de la Colombière (1,607 m, France)","transit":{"car":"Cluses to Le Grand-Bornand via the D4 road to Col de la Colombière (open in summer)"},"description_extra":"Approach from the Le Reposoir side, opposite valley from Le Petit-Bornand. The loop climbs from the Col de la Colombière up the south flank to the Col du Rasoir, a narrow ridge passage, then traverses under the rock face of the Cravate to the summit at 2,408 m. Descent goes north past the Col de Sosay to the Lac de Lessy refuge and around the lake before returning to the col. About 10.4 km, 1,200 m of cumulative gain, 5 h 30. The Cravate passage exposes hikers to rockfall and must be free of late snow before the summit ridge is safe.","sources":["https://www.altituderando.com/Pic-de-Jallouvre-2408m-en-boucle-par-le-col-de-la-Colombiere-et-le-Lac-de-Lessy","https://www.altituderando.com/Pic-de-Jallouvre-2408m-versant-Cenise-par-les-Aiguilles-Vertes"],"quickest_for":["pic_de_jallouvre"],"quickest":true}];
+  const ROUTES = [{"id":"pic_de_jallouvre-from-petit-bornand","name":"From Le Petit-Bornand-les-Glières","start":"Le Petit-Bornand-les-Glières","duration_min":360,"gain_m":1300,"sac_grade":"T3","effort_label":"Long day","description_extra":"Six-hour summit day. From Le Petit-Bornand-les-Glières the trail climbs steadily through pastures and forest to the rocky upper section of the Pic de Jallouvre at 2,408 m. About 1,300 m of vertical gain, T3, with easy scrambling on the final section. Often done as part of a longer Bornes traverse between Le Grand-Bornand and Le Petit-Bornand.","visits":["pic_de_jallouvre"],"sources":["https://en.wikipedia.org/wiki/Pic_de_Jallouvre","https://en.wikipedia.org/wiki/Bornes_Massif"],"quickest":false},{"id":"pic_de_jallouvre-from-col-de-la-colombiere","visits":["pic_de_jallouvre"],"sac_grade":"T4","effort_label":"Demanding","duration_min":330,"gain_m":1200,"distance_km":10.4,"equipment_list":["Sturdy hiking boots","Poles","Helmet (rockfall sections)"],"start":"Col de la Colombière (France)","transit":{"car":"Cluses to Le Grand-Bornand via the D4 road to Col de la Colombière (open in summer)"},"description_extra":"Approach from the Le Reposoir side, opposite valley from Le Petit-Bornand. The loop climbs from the Col de la Colombière up the south flank to the Col du Rasoir, a narrow ridge passage, then traverses under the rock face of the Cravate to the summit at 2,408 m. Descent goes north past the Col de Sosay to the Lac de Lessy refuge and around the lake before returning to the col. About 10.4 km, 1,200 m of cumulative gain, 5 h 30. The Cravate passage exposes hikers to rockfall and must be free of late snow before the summit ridge is safe.","sources":["https://www.altituderando.com/Pic-de-Jallouvre-2408m-en-boucle-par-le-col-de-la-Colombiere-et-le-Lac-de-Lessy","https://www.altituderando.com/Pic-de-Jallouvre-2408m-versant-Cenise-par-les-Aiguilles-Vertes"],"quickest_for":["pic_de_jallouvre"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -375,8 +375,16 @@
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -385,9 +393,10 @@
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -421,7 +430,11 @@
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {

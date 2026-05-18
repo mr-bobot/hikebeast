@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779095037812" />
+<link rel="stylesheet" href="../../preview.css?v=1779103087721" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -124,7 +124,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/fronalpstock_p1/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Morschach cable car valley station (798 m) </div>
+      <div class="hb-route-name">Hike from Morschach cable car valley station </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">3h 15</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T4 · Demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1120 m gain</span></span></div>
       
     </div>
@@ -226,7 +226,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"fronalpstock-route-72","sac_grade":"T1","effort_label":"Easy","duration_min":120,"start":"Schwyz, Stoosbahn","description_extra":"Standard approach: funicular from Schwyz to Stoos, then short walk to the Klingenstock cable car. The ridge between the two summits is the actual walking, about two hours on grass and gravel paths. T2 with brief exposed sections. Designated camping spot on the summit with a small fee paid at the Fronalpstock Hotel.","visits":["fronalpstock"],"sources":["https://www.myswitzerland.com/en-us/destinations/stoos-fronalpstock/"],"quickest_for":["fronalpstock"],"equipment_list":[],"cable_car_ids":["stoosbahn"],"cable_cars":[{"id":"stoosbahn","name":"Stoosbahn","operator":"Stoosbahnen AG","description":"Funicular from Schwyz-Schlattli up to Stoos, the steepest funicular in the world","cost_chf_raw":"56 CHF return","info_url":"https://stoos-muotatal.ch/webcams/","open_raw":"Year-round, brief maintenance closures in spring and autumn","website":"https://www.stoos.ch/en/"}],"cable_car":{"id":"stoosbahn","name":"Stoosbahn","operator":"Stoosbahnen AG","description":"Funicular from Schwyz-Schlattli up to Stoos, the steepest funicular in the world","cost_chf_raw":"56 CHF return","info_url":"https://stoos-muotatal.ch/webcams/","open_raw":"Year-round, brief maintenance closures in spring and autumn","website":"https://www.stoos.ch/en/"},"quickest":true},{"id":"fronalpstock-from-morschach-via-chaelen","visits":["fronalpstock"],"sac_grade":"T4","effort_label":"Demanding","duration_min":195,"gain_m":1120,"equipment_list":["Sturdy hiking boots","Poles","Helmet (rockfall sections)"],"start":"Morschach cable car valley station (798 m)","transit":{"train":"Brunnen","bus":"Brunnen Bus to Morschach"},"description_extra":"Foot ascent from Morschach without the Stoosbahn funicular. The trail climbs through the Huseren forest, then up the Chälen rock couloir with fixed ropes and a small ladder over a roughly 100 m exposed section before reaching the summit at 1,906 m. About 3 hours 15 minutes, 1,120 m of gain, SAC grade T4 minus. The route is officially closed from late autumn to early summer when the safety equipment is removed; the shaded couloir is tricky with wet or old snow. Descend via cable car or the regular Stoos trail.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/fronalpstock-sz-684/mountain-hiking/from-morschach-via-chaelen-2400/"],"quickest":false}];
+  const ROUTES = [{"id":"fronalpstock-route-72","sac_grade":"T1","effort_label":"Easy","duration_min":120,"start":"Schwyz, Stoosbahn","description_extra":"Standard approach: funicular from Schwyz to Stoos, then short walk to the Klingenstock cable car. The ridge between the two summits is the actual walking, about two hours on grass and gravel paths. T2 with brief exposed sections. Designated camping spot on the summit with a small fee paid at the Fronalpstock Hotel.","visits":["fronalpstock"],"sources":["https://www.myswitzerland.com/en-us/destinations/stoos-fronalpstock/"],"quickest_for":["fronalpstock"],"equipment_list":[],"cable_car_ids":["stoosbahn"],"cable_cars":[{"id":"stoosbahn","name":"Stoosbahn","operator":"Stoosbahnen AG","description":"Funicular from Schwyz-Schlattli up to Stoos, the steepest funicular in the world","cost_chf_raw":"56 CHF return","info_url":"https://stoos-muotatal.ch/webcams/","open_raw":"Year-round, brief maintenance closures in spring and autumn","website":"https://www.stoos.ch/en/"}],"cable_car":{"id":"stoosbahn","name":"Stoosbahn","operator":"Stoosbahnen AG","description":"Funicular from Schwyz-Schlattli up to Stoos, the steepest funicular in the world","cost_chf_raw":"56 CHF return","info_url":"https://stoos-muotatal.ch/webcams/","open_raw":"Year-round, brief maintenance closures in spring and autumn","website":"https://www.stoos.ch/en/"},"quickest":true},{"id":"fronalpstock-from-morschach-via-chaelen","visits":["fronalpstock"],"sac_grade":"T4","effort_label":"Demanding","duration_min":195,"gain_m":1120,"equipment_list":["Sturdy hiking boots","Poles","Helmet (rockfall sections)"],"start":"Morschach cable car valley station","transit":{"train":"Brunnen","bus":"Brunnen Bus to Morschach"},"description_extra":"Foot ascent from Morschach without the Stoosbahn funicular. The trail climbs through the Huseren forest, then up the Chälen rock couloir with fixed ropes and a small ladder over a roughly 100 m exposed section before reaching the summit at 1,906 m. About 3 hours 15 minutes, 1,120 m of gain, SAC grade T4 minus. The route is officially closed from late autumn to early summer when the safety equipment is removed; the shaded couloir is tricky with wet or old snow. Descend via cable car or the regular Stoos trail.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/fronalpstock-sz-684/mountain-hiking/from-morschach-via-chaelen-2400/"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -375,8 +375,16 @@
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -385,9 +393,10 @@
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -421,7 +430,11 @@
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {

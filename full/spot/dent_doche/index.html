@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779095037839" />
+<link rel="stylesheet" href="../../preview.css?v=1779103087748" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -225,7 +225,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"dent_doche-from-bernex","name":"From Bernex via Fétiuère","start":"Fétiuère parking (1206 m, above Bernex)","transit":{"bus":"From Évian, drive to Fétiuère"},"duration_min":180,"gain_m":1015,"sac_grade":"T3","effort_label":"Moderate, brief chain sections","description_extra":"Three-hour climb from the Fétiuère parking above Bernex (1,206 m) up to the Refuge de la Dent d'Oche and on to the summit at 2,221 m. About 1,015 m of gain. Short rock sections near the refuge have chains; the final stretch to the summit traverses unsecured cliff sections. T3. The refuge serves food and has beds.","visits":["dent_doche"],"sources":["https://en.wikipedia.org/wiki/Dent_d%27Oche"],"quickest_for":["dent_doche"],"hut_ids":["refuge-dent-oche"],"huts":[{"id":"refuge-dent-oche","name":"Refuge de la Dent d'Oche","description":"Refuge below the summit, French Alps, food and beds","open_raw":"Early June to late September","cost_chf_raw":"From 58 € half-board","website":"https://refugeladentdoche.ffcam.fr/"}],"hut":{"id":"refuge-dent-oche","name":"Refuge de la Dent d'Oche","description":"Refuge below the summit, French Alps, food and beds","open_raw":"Early June to late September","cost_chf_raw":"From 58 € half-board","website":"https://refugeladentdoche.ffcam.fr/"},"quickest":true},{"id":"dent_doche-from-la-planche","visits":["dent_doche"],"sac_grade":"T3","effort_label":"Demanding","duration_min":270,"gain_m":1100,"equipment_list":["Sturdy hiking boots","Poles"],"start":"La Planche parking (above Novel, Haute-Savoie)","transit":{"car":"Drive from Saint-Gingolph or Évian via Novel to the La Planche parking. No regular bus."},"description_extra":"East-side approach over the Col de Rebollion instead of the standard west ridge from Bernex. From La Planche the trail climbs through forest to the Chalet de Trépertuis pasture, then traverses below the high cliffs of the Dent d'Oche to the Col de Trépertuis and skirts the north face via the Col de Rebollion before joining the refuge approach for the final summit pitch at 2,221 m. T3 with some unsecured cliff sections near the top, the same as the standard route. Combines well with a traverse, ascending from La Planche and descending to Bernex.","sources":["https://en.wikipedia.org/wiki/Dent_d'Oche","https://www.summitpost.org/oche-dent-d/151397"],"quickest":false}];
+  const ROUTES = [{"id":"dent_doche-from-bernex","name":"From Bernex via Fétiuère","start":"Fétiuère parking (above Bernex)","transit":{"bus":"From Évian, drive to Fétiuère"},"duration_min":180,"gain_m":1015,"sac_grade":"T3","effort_label":"Moderate, brief chain sections","description_extra":"Three-hour climb from the Fétiuère parking above Bernex (1,206 m) up to the Refuge de la Dent d'Oche and on to the summit at 2,221 m. About 1,015 m of gain. Short rock sections near the refuge have chains; the final stretch to the summit traverses unsecured cliff sections. T3. The refuge serves food and has beds.","visits":["dent_doche"],"sources":["https://en.wikipedia.org/wiki/Dent_d%27Oche"],"quickest_for":["dent_doche"],"hut_ids":["refuge-dent-oche"],"huts":[{"id":"refuge-dent-oche","name":"Refuge de la Dent d'Oche","description":"Refuge below the summit, French Alps, food and beds","open_raw":"Early June to late September","cost_chf_raw":"From 58 € half-board","website":"https://refugeladentdoche.ffcam.fr/"}],"hut":{"id":"refuge-dent-oche","name":"Refuge de la Dent d'Oche","description":"Refuge below the summit, French Alps, food and beds","open_raw":"Early June to late September","cost_chf_raw":"From 58 € half-board","website":"https://refugeladentdoche.ffcam.fr/"},"quickest":true},{"id":"dent_doche-from-la-planche","visits":["dent_doche"],"sac_grade":"T3","effort_label":"Demanding","duration_min":270,"gain_m":1100,"equipment_list":["Sturdy hiking boots","Poles"],"start":"La Planche parking (above Novel, Haute-Savoie)","transit":{"car":"Drive from Saint-Gingolph or Évian via Novel to the La Planche parking. No regular bus."},"description_extra":"East-side approach over the Col de Rebollion instead of the standard west ridge from Bernex. From La Planche the trail climbs through forest to the Chalet de Trépertuis pasture, then traverses below the high cliffs of the Dent d'Oche to the Col de Trépertuis and skirts the north face via the Col de Rebollion before joining the refuge approach for the final summit pitch at 2,221 m. T3 with some unsecured cliff sections near the top, the same as the standard route. Combines well with a traverse, ascending from La Planche and descending to Bernex.","sources":["https://en.wikipedia.org/wiki/Dent_d'Oche","https://www.summitpost.org/oche-dent-d/151397"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -374,8 +374,16 @@
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -384,9 +392,10 @@
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -420,7 +429,11 @@
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {

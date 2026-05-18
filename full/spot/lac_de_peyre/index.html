@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779095037842" />
+<link rel="stylesheet" href="../../preview.css?v=1779103087752" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -115,7 +115,7 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/lac_de_peyre_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Col de la Colombière car park (1,613 m), Le Reposoir <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Hike from Col de la Colombière car park, Le Reposoir <span class="hb-route-badge">Quickest</span></div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">550 m gain</span></span></div>
       
     </div>
@@ -217,7 +217,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"lac_de_peyre-colombiere","visits":["lac_de_peyre"],"sac_grade":"T2","effort_label":"Moderate","duration_min":90,"gain_m":550,"distance_km":6,"equipment_list":["Hiking boots","Rain layer","Water"],"start":"Col de la Colombière car park (1,613 m), Le Reposoir","transit":{"car":"Drive over the Col de la Colombière (D4) from Le Grand-Bornand or Le Reposoir, large free car park at the col","bus":"Seasonal shuttle from Le Grand-Bornand to Col de la Colombière in summer"},"description_extra":"From the Col de la Colombière the trail passes the bar-restaurant and leads north on a pastoral track to the Chalet de la Colombière at 1,746 m. From there alternating flats and climbs reach Lac de Peyre at 2,108 m. Randos-MontBlanc gives 550 m of ascent for the lake, with a possible extension to Col de Balafrasse (2,246 m) adding roughly another 170 m of climb. T2. The route can stay snow-bound into late June.","sources":["https://www.randos-montblanc.com/en/intermediate-hikes/peyre.html","https://www.altituderando.com/Lac-de-Peyre-Pointe-de-Balafrasse-2296m"],"quickest_for":["lac_de_peyre"],"quickest":true}];
+  const ROUTES = [{"id":"lac_de_peyre-colombiere","visits":["lac_de_peyre"],"sac_grade":"T2","effort_label":"Moderate","duration_min":90,"gain_m":550,"distance_km":6,"equipment_list":["Hiking boots","Rain layer","Water"],"start":"Col de la Colombière car park, Le Reposoir","transit":{"car":"Drive over the Col de la Colombière (D4) from Le Grand-Bornand or Le Reposoir, large free car park at the col","bus":"Seasonal shuttle from Le Grand-Bornand to Col de la Colombière in summer"},"description_extra":"From the Col de la Colombière the trail passes the bar-restaurant and leads north on a pastoral track to the Chalet de la Colombière at 1,746 m. From there alternating flats and climbs reach Lac de Peyre at 2,108 m. Randos-MontBlanc gives 550 m of ascent for the lake, with a possible extension to Col de Balafrasse (2,246 m) adding roughly another 170 m of climb. T2. The route can stay snow-bound into late June.","sources":["https://www.randos-montblanc.com/en/intermediate-hikes/peyre.html","https://www.altituderando.com/Lac-de-Peyre-Pointe-de-Balafrasse-2296m"],"quickest_for":["lac_de_peyre"],"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -366,8 +366,16 @@
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -376,9 +384,10 @@
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -412,7 +421,11 @@
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {

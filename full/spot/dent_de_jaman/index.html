@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779095037826" />
+<link rel="stylesheet" href="../../preview.css?v=1779103087736" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -123,7 +123,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/dent_de_jaman_p1/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Les Avants station (970 m) </div>
+      <div class="hb-route-name">Hike from Les Avants station </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">4h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">880 m gain</span></span></div>
       
     </div>
@@ -225,7 +225,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"dent_de_jaman-route-87","duration_min":30,"gain_m":141,"start":"Jaman Train Station","transit":{"train":"Jaman"},"description_extra":"Take the MOB train from Montreux or Les Avants to Jaman station, then a short climb to the summit at 1,875 m (around 30 minutes, roughly 140 m of gain), T2. Longer alternatives start from Les Avants or Col de Jaman. The final approach is the steepest part of the day.","visits":["dent_de_jaman"],"sources":["https://en.wikipedia.org/wiki/Dent_de_Jaman"],"quickest_for":["dent_de_jaman"],"equipment_list":[],"name":"Direct ascent from Jaman station","sac_grade":"T2","effort_label":"Moderate","quickest":true},{"id":"dent_de_jaman-from-les-avants","visits":["dent_de_jaman"],"sac_grade":"T2","effort_label":"Moderate","duration_min":240,"gain_m":880,"distance_km":10.6,"equipment_list":[],"start":"Les Avants station (970 m)","transit":{"train":"Montreux, then MOB to Les Avants"},"description_extra":"Foot ascent without using the Rochers de Naye rack railway. From Les Avants, the path climbs through pasture to the Col de Jaman at 1,512 m, where the Cabane de Jaman sits in the meadows. From the col, the final 360 m up the north flank reaches the summit at 1,875 m. About 4 hours round trip, 880 m of cumulative gain, T2. The col itself is on the Vaud-Fribourg boundary and connects Montreux to Montbovon.","sources":["https://en.wikipedia.org/wiki/Col_de_Jaman","https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-jaman-959/"],"quickest":false}];
+  const ROUTES = [{"id":"dent_de_jaman-route-87","duration_min":30,"gain_m":141,"start":"Jaman Train Station","transit":{"train":"Jaman"},"description_extra":"Take the MOB train from Montreux or Les Avants to Jaman station, then a short climb to the summit at 1,875 m (around 30 minutes, roughly 140 m of gain), T2. Longer alternatives start from Les Avants or Col de Jaman. The final approach is the steepest part of the day.","visits":["dent_de_jaman"],"sources":["https://en.wikipedia.org/wiki/Dent_de_Jaman"],"quickest_for":["dent_de_jaman"],"equipment_list":[],"name":"Direct ascent from Jaman station","sac_grade":"T2","effort_label":"Moderate","quickest":true},{"id":"dent_de_jaman-from-les-avants","visits":["dent_de_jaman"],"sac_grade":"T2","effort_label":"Moderate","duration_min":240,"gain_m":880,"distance_km":10.6,"equipment_list":[],"start":"Les Avants station","transit":{"train":"Montreux, then MOB to Les Avants"},"description_extra":"Foot ascent without using the Rochers de Naye rack railway. From Les Avants, the path climbs through pasture to the Col de Jaman at 1,512 m, where the Cabane de Jaman sits in the meadows. From the col, the final 360 m up the north flank reaches the summit at 1,875 m. About 4 hours round trip, 880 m of cumulative gain, T2. The col itself is on the Vaud-Fribourg boundary and connects Montreux to Montbovon.","sources":["https://en.wikipedia.org/wiki/Col_de_Jaman","https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-jaman-959/"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -374,8 +374,16 @@
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -384,9 +392,10 @@
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -420,7 +429,11 @@
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {

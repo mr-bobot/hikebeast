@@ -142,12 +142,14 @@ cable_cars:
   open_raw: Mid-June to mid-October
   website: https://grimselwelt.ch/bahnen/gelmerbahn/
 - id: firstbahn
+  name: Grindelwald - First
   operator: Jungfraubahnen
   description: Gondola from Grindelwald village up to First at 2,168 m
   open_raw: Early April to late October, with revision break late October to late November
   cost_chf_raw: 76 CHF return
   website: https://www.jungfrau.ch/en-gb/grindelwaldfirst/
 - id: engstligenalp-cable-car
+  name: Unter dem Birg - Engstligenalp
   operator: Bergbahnen Engstligenalp AG
   description: Cable car from Unter dem Birg above Adelboden up to the Engstligenalp plateau
   open_raw: Mid-June to mid-October

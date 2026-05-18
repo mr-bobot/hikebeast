@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779095037823" />
+<link rel="stylesheet" href="../../preview.css?v=1779103087732" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -123,7 +123,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/tseuzier_lake_p1/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Crans-Montana cable car station (1,490 m) </div>
+      <div class="hb-route-name">Hike from Crans-Montana cable car station </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">3h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">329 m gain</span></span></div>
       
     </div>
@@ -225,7 +225,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"tseuzier_lake-route-23","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":117,"start":"Anzère, Barrage de Tseuzier","transit":{"bus":"Anzère, Barrage de Tseuzier"},"description_extra":"Drive or postbus from Sion to Anzère, Barrage de Tseuzier stop. The lake at 1,777 m is directly accessible: no hike required. A marked path loops the reservoir, about an hour each way, 117 m of cumulative gain, T1.","visits":["tseuzier_lake"],"sources":["https://en.wikipedia.org/wiki/Lac_de_Tseuzier"],"quickest_for":["tseuzier_lake"],"equipment_list":[],"quickest":true},{"id":"tseuzier_lake-bisse-du-ro-from-crans-montana","visits":["tseuzier_lake"],"sac_grade":"T3","effort_label":"Demanding","duration_min":180,"gain_m":329,"distance_km":11.2,"equipment_list":[],"start":"Crans-Montana cable car station (1,490 m)","transit":{"train":"Sierre, then Sierre-Crans-Montana funicular","bus":"Crans-Montana local bus"},"description_extra":"Reach Lac de Tseuzier on foot along the Bisse du Ro suonen path from Crans-Montana rather than driving up to the dam. 11.2 km traverse with 329 m of climb and 625 m of descent, about 3 h walking. The historic Bisse du Ro is cut into the cliff face with narrow wooden boardwalks and railings; the route requires a head for heights. End at the Rawil postbus stop at the dam, then bus or post back to Sion or Crans-Montana. Open roughly May to October.","sources":["https://travelita-blog.com/bisse-du-ro-abenteuerliche-suonenwanderung/","https://www.novo-monde.com/en/crans-montana-bisse-ro/"],"quickest":false}];
+  const ROUTES = [{"id":"tseuzier_lake-route-23","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":117,"start":"Anzère, Barrage de Tseuzier","transit":{"bus":"Anzère, Barrage de Tseuzier"},"description_extra":"Drive or postbus from Sion to Anzère, Barrage de Tseuzier stop. The lake at 1,777 m is directly accessible: no hike required. A marked path loops the reservoir, about an hour each way, 117 m of cumulative gain, T1.","visits":["tseuzier_lake"],"sources":["https://en.wikipedia.org/wiki/Lac_de_Tseuzier"],"quickest_for":["tseuzier_lake"],"equipment_list":[],"quickest":true},{"id":"tseuzier_lake-bisse-du-ro-from-crans-montana","visits":["tseuzier_lake"],"sac_grade":"T3","effort_label":"Demanding","duration_min":180,"gain_m":329,"distance_km":11.2,"equipment_list":[],"start":"Crans-Montana cable car station","transit":{"train":"Sierre, then Sierre-Crans-Montana funicular","bus":"Crans-Montana local bus"},"description_extra":"Reach Lac de Tseuzier on foot along the Bisse du Ro suonen path from Crans-Montana rather than driving up to the dam. 11.2 km traverse with 329 m of climb and 625 m of descent, about 3 h walking. The historic Bisse du Ro is cut into the cliff face with narrow wooden boardwalks and railings; the route requires a head for heights. End at the Rawil postbus stop at the dam, then bus or post back to Sion or Crans-Montana. Open roughly May to October.","sources":["https://travelita-blog.com/bisse-du-ro-abenteuerliche-suonenwanderung/","https://www.novo-monde.com/en/crans-montana-bisse-ro/"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -374,8 +374,16 @@
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -384,9 +392,10 @@
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -420,7 +429,11 @@
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {

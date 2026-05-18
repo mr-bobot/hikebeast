@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779095037824" />
+<link rel="stylesheet" href="../../preview.css?v=1779103087733" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -123,7 +123,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/pointe_du_tsate_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Lac de Moiry / Moiry dam (2,250 m) </div>
+      <div class="hb-route-name">Hike from Lac de Moiry / Moiry dam </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">5h 30</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Demanding</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">960 m gain</span></span></div>
       
     </div>
@@ -225,7 +225,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"pointe_du_tsate-from-la-forclaz","name":"From La Forclaz via Lac du Tsaté","start":"La Forclaz (Évolène)","transit":{"bus":"Postbus to La Forclaz"},"duration_min":300,"gain_m":1200,"sac_grade":"T3","effort_label":"Long day, sparsely marked","description_extra":"Five-hour summit day from La Forclaz (postbus from Évolène) above the Val d'Hérens. Trail climbs through pasture to Lac du Tsaté, then up scree-covered slopes to the summit at 3,078 m. 1,200 m of cumulative gain, T3. The upper section has loose terrain; surefootedness essential.","visits":["pointe_du_tsate"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/","https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9"],"quickest_for":["pointe_du_tsate"],"quickest":true},{"id":"pointe_du_tsate-from-moiry-via-col-du-tsate","visits":["pointe_du_tsate"],"sac_grade":"T3","effort_label":"Demanding","duration_min":330,"gain_m":960,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Lac de Moiry / Moiry dam (2,250 m)","transit":{"train":"Sierre","bus":"PostBus to Grimentz, then summer bus to Moiry barrage"},"description_extra":"Approach from the Val d'Anniviers side, opposite valley from La Forclaz. The path leaves the Moiry dam at 2,250 m and climbs to the Col du Tsaté at about 2,868 m on the ridge between the Moiry and Hérens valleys, then takes the south flank and south ridge to the summit at 3,077 m. SAC grades the route T3, 3 h 15 ascent, 960 m of cumulative gain, 1,580 m of descent if combined with the La Forclaz exit. A good path leads to the summit.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/","https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9"],"quickest":false}];
+  const ROUTES = [{"id":"pointe_du_tsate-from-la-forclaz","name":"From La Forclaz via Lac du Tsaté","start":"La Forclaz (Évolène)","transit":{"bus":"Postbus to La Forclaz"},"duration_min":300,"gain_m":1200,"sac_grade":"T3","effort_label":"Long day, sparsely marked","description_extra":"Five-hour summit day from La Forclaz (postbus from Évolène) above the Val d'Hérens. Trail climbs through pasture to Lac du Tsaté, then up scree-covered slopes to the summit at 3,078 m. 1,200 m of cumulative gain, T3. The upper section has loose terrain; surefootedness essential.","visits":["pointe_du_tsate"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/","https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9"],"quickest_for":["pointe_du_tsate"],"quickest":true},{"id":"pointe_du_tsate-from-moiry-via-col-du-tsate","visits":["pointe_du_tsate"],"sac_grade":"T3","effort_label":"Demanding","duration_min":330,"gain_m":960,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Lac de Moiry / Moiry dam","transit":{"train":"Sierre","bus":"PostBus to Grimentz, then summer bus to Moiry barrage"},"description_extra":"Approach from the Val d'Anniviers side, opposite valley from La Forclaz. The path leaves the Moiry dam at 2,250 m and climbs to the Col du Tsaté at about 2,868 m on the ridge between the Moiry and Hérens valleys, then takes the south flank and south ridge to the summit at 3,077 m. SAC grades the route T3, 3 h 15 ascent, 960 m of cumulative gain, 1,580 m of descent if combined with the La Forclaz exit. A good path leads to the summit.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/","https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -374,8 +374,16 @@
     }
 
     if (r.start) {
+      // Prefer an explicit start_maps_url (deep-link to the exact start
+      // point, set per-hike in hikes.yaml). Falls back to a generic
+      // Google Maps search of the start string — only good when the
+      // string is unambiguous, so explicit URLs are encouraged for
+      // anything ambiguous (cable car top stations, alpine hamlets).
+      const startUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start));
       setHTML('[data-rd-start]',
-        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.start) +
+        '<a href="' + escAttr(startUrl) +
         '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;display:inline-flex;gap:5px;align-items:center;">' +
         r.start +
         ' <svg viewBox="0 0 24 24" style="width:12px;height:12px;" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>');
@@ -384,9 +392,10 @@
     }
 
     const tParts = [];
-    if (r.transit && r.transit.train) tParts.push('Train: ' + r.transit.train);
-    if (r.transit && r.transit.bus)   tParts.push('Bus: ' + r.transit.bus);
-    if (r.transit && r.transit.ferry) tParts.push('Ferry: ' + r.transit.ferry);
+    if (r.transit && r.transit.train)     tParts.push('Train: ' + r.transit.train);
+    if (r.transit && r.transit.bus)       tParts.push('Bus: ' + r.transit.bus);
+    if (r.transit && r.transit.cable_car) tParts.push('Cable car: ' + r.transit.cable_car);
+    if (r.transit && r.transit.ferry)     tParts.push('Ferry: ' + r.transit.ferry);
     setHTML('[data-rd-transit]', tParts.length ? tParts.join('<br>') : '—');
 
     // Hut block · route-level
@@ -420,7 +429,11 @@
     const acts = [];
     if (r.start) {
       const q = encodeURIComponent(r.start);
-      acts.push('<a class="hb-link-pill" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
+      // Honor explicit deep-link if provided; falls back to query search.
+      const gmapsUrl = r.start_maps_url
+        ? r.start_maps_url
+        : ('https://www.google.com/maps/search/?api=1&query=' + q);
+      acts.push('<a class="hb-link-pill" href="' + escAttr(gmapsUrl) + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.gmaps + '</span>Google Maps</a>');
       acts.push('<a class="hb-link-pill" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener"><span class="hb-brand-icon">' + SPRITE.apple + '</span>Apple Maps</a>');
     }
     if (r.swisstopo_url) {
