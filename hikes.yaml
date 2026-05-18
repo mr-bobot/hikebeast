@@ -772,7 +772,7 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.18063,7.55796&z=16
 - id: moiry_glacier-bus-to-moiry-barrage
   name: Bus to Moiry dam + walk to hut
-  start: Moiry barrage bus stop
+  start: Lac de Moiry / Moiry dam
   transit:
     bus: Postbus from Grimentz to Moiry, barrage
   duration_min: 150
@@ -1117,14 +1117,14 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.08984,7.52262&z=16
 - id: gastlosen-gastlosen-circular
   name: Gastlosen circular (Jaun → Chalet du Soldat → Jaun)
-  start: Jaun-Chalet
+  start: Jaun, Dorf
   transit:
-    bus: Postbus to Jaun, Chalet
+    bus: PostBus to Jaun, Dorf
   duration_min: 360
   gain_m: 1099
   sac_grade: T2
   effort_label: Long day
-  description_extra: Loop around the Gastlosen limestone range from Jaun-Chalet. The route covers about 14.4 km in 6h 25 and roughly 975 m of cumulative gain, climbing through the Wols
+  description_extra: Loop around the Gastlosen limestone range from Jaun, Dorf. The route covers about 14.4 km in 6h 25 and roughly 975 m of cumulative gain, climbing through the Wols
     Ort col, passing under the ridge to the Chalet du Soldat, then descending back to Jaun. T2. The Chalet du Soldat at 1,752 m is a working alpine restaurant in summer.
   visits:
   - gastlosen
@@ -1134,6 +1134,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Gastlosen
   hut_ids:
   - chalet-du-soldat
+  start_maps_url: https://maps.app.goo.gl/NQLU3GDcCnHYtTvw8
 - id: dent_de_broc-from-broc
   name: From Broc via Col des Combes
   start: Broc (TPF station)
@@ -1209,7 +1210,7 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.52222,6.94806&z=16
 - id: moleson-plan-francey-summit
   name: Plan-Francey to summit and back
-  start: Plan-Francey (mid-station of Moléson funicular)
+  start: Plan-Francey mid-station
   transit:
     train: Gruyères (TPF) + bus + funicular to Plan-Francey
   duration_min: 120
@@ -1559,7 +1560,7 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=47.10714,9.34516&z=16
 - id: klausenpass-urnerboden-to-altdorf
   name: Urnerboden → Klausenpass → Altdorf
-  start: Urnerboden
+  start: Urnerboden village
   transit:
     bus: Postbus to Urnerboden
   duration_min: 480
@@ -1782,7 +1783,7 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.99124,8.67339&z=16
 - id: pizol-5-lakes-hike
   name: 5-Lakes hike (Pizolhütte → Wildsee → Schottensee → Schwarzsee → Baschalvasee → Gaffia)
-  start: Pizolhütte (top of Wangs gondola + chair lifts)
+  start: Pizolhütte above Wangs
   transit:
     train: Sargans (SBB) + Bus to Wangs + Pizolbahn gondola + chairlift to Gaffia
   duration_min: 270
@@ -1879,7 +1880,7 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.45072,9.94041&z=16
 - id: morteratsch_glacier-short-glacier-tongue
   name: Short walk to glacier tongue
-  start: Morteratsch station
+  start: Morteratsch railway station
   duration_min: 30
   gain_m: 0
   sac_grade: T1
@@ -1955,7 +1956,7 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.35031,8.78633&z=16
 - id: valle_verzasca-sonogno-to-lavertezzo
   name: Sentiero Verzasca · Sonogno → Lavertezzo
-  start: Sonogno (last village in the valley)
+  start: Sonogno village
   transit:
     bus: Postbus from Locarno via Tenero to Sonogno
   duration_min: 210
@@ -2046,7 +2047,7 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=45.99563,6.92917&z=16
 - id: les_cheserys-flegere-shortcut
   name: Flégère cable car shortcut
-  start: Flégère top station
+  start: La Flégère gondola top station
   transit:
     train: Les Praz de Chamonix + Flégère cable car
   duration_min: 110
@@ -2387,7 +2388,7 @@ hikes:
   transit:
     bus: Bulle or Boltigen postbus to Jaun
     cable_car: Jaun chairlift to Musersbergli
-  description_extra: Loop the range from the top of the Jaun chairlift rather than starting at Jaun-Chalet. SchweizMobil route 262 (Gastlosen Tour) leaves Musersbergli at 1,479 m, traverses
+  description_extra: Loop the range from the top of the Jaun chairlift rather than starting at Jaun, Dorf. SchweizMobil route 262 (Gastlosen Tour) leaves Musersbergli at 1,479 m, traverses
     the cliff faces and reaches its high point at Wolfsort, 1,921 m, before descending through pasture back to the start. 12 km, 5 h, 696 m of gain and the same loss, graded moderately
     difficult. The cable car saves the 700 m climb from the valley floor. The Chalet du Soldat on the south side is the standard food stop.
   sources:
@@ -2609,7 +2610,7 @@ hikes:
   - Sturdy hiking boots
   - Poles
   - Gloves (limestone karst)
-  start: Sörenberg, Hirsegg (postbus stop)
+  start: Hirsegg (bus stop)
   transit:
     train: Lucerne to Schüpfheim
     bus: Schüpfheim bus 214 to Sörenberg, Hirsegg
@@ -2631,7 +2632,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Weisstannen (postbus)
+  start: Weisstannen
   transit:
     train: Sargans to Mels
     bus: Mels postbus to Weisstannen
@@ -2795,17 +2796,19 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Groins d'en Haut, Motélon valley (narrow road from Charmey)
+  start: Pinte du Pralet parking, end of the Motélon valley road (above Charmey)
   transit:
-    car: Drive from Charmey up the Motélon valley to the Groins d'en Haut parking. No regular public transport.
-  description_extra: Back-side approach via the Motélon valley rather than the standard Broc trail. From Groins d'en Haut the path climbs to the Col des Combes at 1,668 m, the saddle
-    between Dent de Broc and Dent du Chamois, then turns right and zigzags up under the summit cliff to the cross at 1,829 m. T4 on the upper section. Much shorter than the Broc-Fabrique
-    climb because you start higher, but the access road is narrow and slow. The summit can also be combined with Dent du Chamois and Dent du Bourgo on a T5 ridge traverse.
+    car: Drive from Charmey up the Motélon valley about 6 km to the parking just after the Pinte du Pralet restaurant where the asphalt road ends. No regular public transport.
+  description_extra: Back-side approach via the Motélon valley rather than the standard Broc trail. From the Pinte du Pralet parking at the end of the asphalt road, the trail climbs
+    through the alp pastures of Groins-du-Milieu, Groins-Dessus, and Les Matseru the path climbs to the Col des Combes at 1,668 m, the saddle between Dent de Broc and Dent du Chamois,
+    then turns right and zigzags up under the summit cliff to the cross at 1,829 m. T4 on the upper section. Much shorter than the Broc-Fabrique climb because you start higher, but the
+    access road is narrow and slow. The summit can also be combined with Dent du Chamois and Dent du Bourgo on a T5 ridge traverse.
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-broc-246/mountain-hiking/
   - https://www.noth.ch/en/randos/dent-de-broc.html
   quickest_for:
   - dent_de_broc
+  start_maps_url: https://www.google.com/maps/place/?q=46.5856,7.16279&z=16
 - id: dent_doche-from-la-planche
   visits:
   - dent_doche
@@ -2835,7 +2838,7 @@ hikes:
   duration_min: 240
   gain_m: 600
   equipment_list: []
-  start: Brülisau (Postbus from Appenzell)
+  start: Brülisau
   transit:
     bus: Appenzell, then Postbus to Brülisau
   description_extra: Valley-floor approach without the Hoher Kasten cable car. From Brülisau at 922 m, the trail climbs through forest along the Brüelbach to Plattenbödeli (1,279 m),
@@ -2897,7 +2900,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Lauenensee (Postbus from Gstaad)
+  start: Lauenensee
   transit:
     bus: Gstaad, then Postbus to Lauenen, Lauenensee
   description_extra: Cross-valley approach from Gstaad side rather than up from Lenk. From the Lauenensee at 1,380 m, a steep forested climb leads to the Tungelpass at 2,084 m, then
@@ -3006,7 +3009,7 @@ hikes:
   gain_m: 540
   distance_km: 4.3
   equipment_list: []
-  start: Riffelalp (Gornergratbahn station above Zermatt)
+  start: Riffelalp station
   transit:
     train: Zermatt, then Gornergratbahn to Riffelalp
   description_extra: Lower-station approach. From Riffelalp at 2,211 m, follow the Mark Twain Weg up through the alpine pasture toward Riffelberg, then continue past Riffelberg on the
@@ -3046,7 +3049,7 @@ hikes:
   duration_min: 240
   gain_m: 800
   equipment_list: []
-  start: Brülisau (Postbus from Appenzell)
+  start: Brülisau
   transit:
     bus: Appenzell, then Postbus to Brülisau
   description_extra: Bottom-up approach via the valley and Fälensee, no cable car. From Brülisau at 922 m, the trail climbs through forest to Plattenbödeli, drops gently to the Sämtisersee,
@@ -3068,7 +3071,7 @@ hikes:
   gain_m: 1100
   distance_km: 17
   equipment_list: []
-  start: Brülisau (Postbus from Appenzell)
+  start: Brülisau
   transit:
     bus: Appenzell, then Postbus to Brülisau
   description_extra: Three-lakes crossing from the back of the Alpstein. From Brülisau at 922 m, climb to Plattenbödeli, drop to Sämtisersee, then continue north to the Bollenwees inn
@@ -3135,7 +3138,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Klausenpass (Postbus from Linthal or Altdorf)
+  start: Klausenpass (Uri side)
   transit:
     bus: Linthal or Flüelen, then Postbus over the Klausenpass road (summer only, mid-June to mid-September)
   description_extra: Ridge traverse high above the valley floor instead of the easy loop on the alp. The Clariden Höhenweg (Schweizmobil route 588) leaves the Klausenpass at 1,948 m,
@@ -3179,7 +3182,7 @@ hikes:
   gain_m: 880
   distance_km: 10.6
   equipment_list: []
-  start: Les Avants station
+  start: Les Avants train station
   transit:
     train: Montreux, then MOB to Les Avants
   description_extra: Foot ascent without using the Rochers de Naye rack railway. From Les Avants, the path climbs through pasture to the Col de Jaman at 1,512 m, where the Cabane de
