@@ -18,6 +18,7 @@ hikes:
   distance_km: 1.5
   quickest_for:
   - engstligen_falls
+  start_maps_url: https://www.google.com/maps/place/?q=46.45933,7.5664&z=16
 - id: oltschibachfall-from-meiringen
   name: From Meiringen
   start: Meiringen train station
@@ -32,6 +33,7 @@ hikes:
   sources:
   - https://www.outdooractive.com/en/poi/bernese-oberland/oltschibachfall-meiringen/8649167/
   - https://de.wikipedia.org/wiki/Oltschibachfall
+  start_maps_url: https://www.google.com/maps/place/?q=46.7273,8.1842&z=16
 - id: rosenlaui-route-99
   start: Parkplatz Gletscherschlucht
   transit:
@@ -51,6 +53,7 @@ hikes:
   equipment_list: []
   quickest_for:
   - rosenlaui
+  start_maps_url: https://www.google.com/maps/place/?q=46.6133,8.04808&z=16
 - id: rosenlaui_public_waterfall-route-99
   start: Parkplatz Gletscherschlucht
   transit:
@@ -68,6 +71,7 @@ hikes:
   equipment_list: []
   quickest_for:
   - rosenlaui_public_waterfall
+  start_maps_url: https://www.google.com/maps/place/?q=46.6133,8.04808&z=16
 - id: rosenlauifall-route-99
   start: Parkplatz Gletscherschlucht
   transit:
@@ -84,6 +88,7 @@ hikes:
   equipment_list: []
   quickest_for:
   - rosenlauifall
+  start_maps_url: https://www.google.com/maps/place/?q=46.6133,8.04808&z=16
 - id: triftbrucke-route-40
   sac_grade: T2
   effort_label: Easy
@@ -108,6 +113,7 @@ hikes:
   - triftbahn-cable-car
   hut_ids:
   - windegghutte-sac
+  start_maps_url: https://maps.app.goo.gl/A84sfrwU7EV3Sko5A
 - id: triftsee-route-40
   sac_grade: T2
   effort_label: Easy
@@ -130,6 +136,7 @@ hikes:
   - triftbahn-cable-car
   hut_ids:
   - windegghutte-sac
+  start_maps_url: https://maps.app.goo.gl/A84sfrwU7EV3Sko5A
 - id: gelmersee-default
   description_extra: Accessed via the Gelmerbahn funicular from the valley, with a maximum gradient of 106 percent. The funicular runs roughly June to October. From the top, a flat 1
     to 1.5 hour walk loops the reservoir at 1,850 m. T1 once you're up. The Gelmerhütte SAC sits at the far end of the lake for those continuing further.
@@ -154,32 +161,7 @@ hikes:
     cable_car: Gelmerbahn funicular up to the reservoir
   quickest_for:
   - gelmersee
-- id: brienzer_rothorn-default
-  visits:
-  - brienzer_rothorn
-  description_extra: The historic Brienz Rothorn Bahn rack railway runs from Brienz to the summit station at 2,244 m, mostly with steam locomotives, in about an hour. Typical operating
-    season is June to October. From the top, easy ridge walks to the west open up the Brienzergrat for stronger parties. A cable car from Sörenberg reaches the summit area from the north
-    side.
-  sources:
-  - https://en.wikipedia.org/wiki/Brienzer_Rothorn
-  - https://en.wikipedia.org/wiki/Brienz_Rothorn_Bahn
-  hut_ids:
-  - berghaus-rothorn
-  cable_car_ids:
-  - brienz-rothorn-bahn
-  name: Brienzer Rothorn summit overview
-  sac_grade: T1
-  effort_label: Easy
-  duration_min: 10
-  gain_m: 30
-  distance_km: 0.4
-  equipment_list: []
-  start: Brienzer Rothorn Bahn summit station
-  transit:
-    train: Brienz
-    cable_car: Brienz Rothorn Bahn (steam cog railway)
-  quickest_for:
-  - brienzer_rothorn
+  start_maps_url: https://maps.app.goo.gl/ch4evbP8FmAELXwj9
 - id: brienzer_rothorn-cog-railway
   name: Cog railway from Brienz
   start: Brienz station
@@ -197,6 +179,9 @@ hikes:
   - https://en.wikipedia.org/wiki/Brienzer_Rothorn
   cable_car_ids:
   - brienz-rothorn-bahn
+  start_maps_url: https://maps.app.goo.gl/Xb34hKwo5WWFsqmb9
+  quickest_for:
+  - brienzer_rothorn
 - id: brienzer_rothorn-brienz-via-planalp
   name: Foot ascent from Brienz via Planalp
   start: Brienz station
@@ -214,6 +199,7 @@ hikes:
   sources:
   - https://www.outdooractive.com/en/route/hiking-trail/holiday-region-interlaken/hike-to-the-brienzer-rothorn/23490971/
   - https://en.wikipedia.org/wiki/Brienzer_Rothorn
+  start_maps_url: https://maps.app.goo.gl/Xb34hKwo5WWFsqmb9
 - id: hardergrat_trail-rothorn-to-harder-kulm
   name: 'Full Brienzergrat traverse: Brienzer Rothorn to Harder Kulm'
   sac_grade: T5
@@ -248,6 +234,7 @@ hikes:
   - brienzer_rothorn
   - tannhorn
   - augstmatthorn
+  start_maps_url: https://maps.app.goo.gl/kGusxAUtXnSJ8tvT7
 - id: tannhorn-brienzergrat-segment
   name: 'Brienzergrat segment: Rothorn to Tannhorn to Planalp'
   start: Brienzer Rothorn summit (top of Brienz cog railway)
@@ -278,6 +265,7 @@ hikes:
   cable_car_ids:
   - brienz-rothorn-bahn
   descent_m: 1600
+  start_maps_url: https://maps.app.goo.gl/kGusxAUtXnSJ8tvT7
 - id: augstmatthorn-route-85
   sac_grade: T3
   effort_label: Mid
@@ -294,6 +282,10 @@ hikes:
   - augstmatthorn
   equipment_list: []
   name: Lombachalp short ascent
+  start_maps_url: https://maps.app.goo.gl/iinY4mbLdEm8JK3H9
+  transit:
+    train: Interlaken West
+    bus: PostBus 105 from Interlaken West to Habkern, then summer Ruftaxi or 2 hours on foot to Lombachalp
 - id: fronalpstock-route-72
   sac_grade: T1
   effort_label: Easy
@@ -310,6 +302,7 @@ hikes:
   equipment_list: []
   cable_car_ids:
   - stoosbahn
+  start_maps_url: https://maps.app.goo.gl/N5QPSUYwzKXvf6bN7
 - id: iffigfalle-lenk-to-iffigenalp
   name: Lenk → Iffigfall → Iffigenalp
   start: Lenk train station
@@ -329,6 +322,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Iffigsee
   quickest_for:
   - iffigfalle
+  start_maps_url: https://maps.app.goo.gl/3qwMiM5sM6wNLPdz9
 - id: schrattenfluh-schratteflue-crossing
   name: Schratteflue crossing (advanced)
   start: Sörenberg or Bumbach
@@ -354,6 +348,7 @@ hikes:
   - Gloves (limestone karst)
   cable_car_ids:
   - marbachegg-gondola
+  start_maps_url: https://www.google.com/maps/place/?q=46.82217,8.03493&z=16
 - id: heftihutte-from-hirsegg
   name: From Hirsegg bus stop
   start: Hirsegg (bus stop)
@@ -373,6 +368,7 @@ hikes:
   - heftihutte
   hut_ids:
   - heftihuette
+  start_maps_url: https://www.google.com/maps/place/?q=46.83878,8.01238&z=16
 - id: heftihutte-from-fluehli
   name: From Flühli LU
   start: Flühli
@@ -389,6 +385,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/
   - https://de.wikipedia.org/wiki/Heftih%C3%BCtte
+  start_maps_url: https://www.google.com/maps/place/?q=46.883,8.017&z=16
 - id: bachalpsee-route-38
   sac_grade: T1
   effort_label: Easy
@@ -409,6 +406,7 @@ hikes:
   equipment_list: []
   cable_car_ids:
   - firstbahn
+  start_maps_url: https://www.google.com/maps/place/?q=46.65941,8.05369&z=16
 - id: bachalpsee-bussalp-alternative
   name: From Bussalp
   start: Bussalp parking
@@ -425,6 +423,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/faulhorn-597/mountain-hiking/
   - https://en.wikipedia.org/wiki/Bachalpsee
+  start_maps_url: https://www.google.com/maps/place/?q=46.65045,7.99104&z=16
 - id: iseltwald-default
   description_extra: Drive in, or take the summer steamship from Interlaken (April to October), or Postbus 103 from Interlaken Ost. The pier is a few minutes from village parking. T1.
   visits:
@@ -444,6 +443,7 @@ hikes:
     boat: Lake Brienz steamship from Interlaken or Brienz (April to October)
   quickest_for:
   - iseltwald
+  start_maps_url: https://www.google.com/maps/place/?q=46.71179,7.96396&z=16
 - id: oeschinensee-kandersteg-foot
   name: From Kandersteg on foot
   start: Kandersteg train station
@@ -461,6 +461,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/oeschinensee-7848/mountain-hiking/
   - https://www.myswitzerland.com/en-us/experiences/gondola-to-lake-oeschinen/
   - https://en.wikipedia.org/wiki/Oeschinen_Lake
+  start_maps_url: https://www.google.com/maps/place/?q=46.49519,7.67148&z=16
 - id: oeschinensee-cable-car
   name: Cable car from Kandersteg + short walk
   start: Kandersteg cable car valley station
@@ -482,6 +483,7 @@ hikes:
   - oeschinensee
   cable_car_ids:
   - oeschinensee-bergbahn
+  start_maps_url: https://www.google.com/maps/place/?q=46.47659,7.66356&z=16
 - id: oeschinensee-hohturli-extension
   name: Continuation to Hohtürli + Griesalp
   start: Oeschinensee
@@ -499,6 +501,7 @@ hikes:
   - https://www.outdooractive.com/en/route/mountain-hike/kandersteg/kandersteg-oeschinensee-hohtuerli-griesalp/51641556/
   cable_car_ids:
   - oeschinensee-bergbahn
+  start_maps_url: https://www.google.com/maps/place/?q=46.49833,7.72694&z=16
 - id: piz_gloria-cable-car-to-summit
   name: Cable car (Stechelberg → Schilthorn)
   start: Stechelberg cable car
@@ -517,6 +520,7 @@ hikes:
   - piz_gloria
   cable_car_ids:
   - schilthornbahn
+  start_maps_url: https://www.google.com/maps/place/?q=46.55545,7.90141&z=16
 - id: piz_gloria-gimmelwald-on-foot
   name: From Gimmelwald on foot
   start: Gimmelwald
@@ -533,6 +537,7 @@ hikes:
   - piz_gloria
   sources:
   - https://en.wikipedia.org/wiki/Schilthorn
+  start_maps_url: https://www.google.com/maps/place/?q=46.533,7.883&z=16
 - id: riffelsee-default
   description_extra: Reached from Rotenboden station (2,815 m) on the Gornergrat railway from Zermatt, then a short walk down (the station sits about 58 m above the lake). T1, about
     10 minutes on an easy path. The Kulmhotel Gornergrat and Riffelhaus 1853 are walking distance along the ridge.
@@ -554,6 +559,7 @@ hikes:
     train: Zermatt, then Gornergratbahn to Rotenboden
   quickest_for:
   - riffelsee
+  start_maps_url: https://www.google.com/maps/place/?q=45.9844,7.7653&z=16
 - id: riffelalp-easy-round-trip
   name: Riffelalp short loop via Grünsee
   start: Riffelalp station
@@ -573,6 +579,7 @@ hikes:
   - riffelalp
   cable_car_ids:
   - gornergrat-bahn
+  start_maps_url: https://www.google.com/maps/place/?q=46.00198,7.75094&z=16
 - id: riffelalp-findeln-loop
   name: Riffelalp to Findeln via Sunnegga
   start: Riffelalp station
@@ -590,6 +597,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/zermatt-matterhorn/riffelalp-gruensee-findeln-tiefmatten-zermatt/225130785/
   cable_car_ids:
   - gornergrat-bahn
+  start_maps_url: https://www.google.com/maps/place/?q=46.00198,7.75094&z=16
 - id: gorner_glacier-gornergrat-railway
   name: Gornergrat railway + Sunshine Trail
   start: Zermatt train station
@@ -609,6 +617,7 @@ hikes:
   - gorner_glacier
   cable_car_ids:
   - gornergrat-bahn
+  start_maps_url: https://www.google.com/maps/place/?q=46.02457,7.74813&z=16
 - id: gorner_glacier-path-of-silence
   name: Path of Silence to Riffelalp
   start: Gornergrat top station
@@ -625,6 +634,7 @@ hikes:
   - gorner_glacier
   sources:
   - https://www.outdooractive.com/en/route/hiking-trail/zermatt/the-path-of-silence-from-the-gornergrat-to-riffelalp/56111172/
+  start_maps_url: https://www.google.com/maps/place/?q=45.9833,7.7822&z=16
 - id: gorner_glacier-descent-via-riffelsee
   name: Gornergrat to Zermatt via Riffelsee
   start: Gornergrat top station
@@ -638,6 +648,7 @@ hikes:
   - gorner_glacier
   sources:
   - https://www.outdooractive.com/en/route/mountain-hike/valais-alps/vom-gornergrat-ueber-den-riffelsee-nach-zermatt/19172801/
+  start_maps_url: https://www.google.com/maps/place/?q=45.9833,7.7822&z=16
 - id: aletsch_glacier-eggishorn-circular
   name: Eggishorn circular trail
   start: Eggishorn top station
@@ -678,6 +689,7 @@ hikes:
   cable_car_ids:
   - bettmerhorn-cable-car
   - eggishorn-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.41158,8.07558&z=16
 - id: aletsch_glacier-aletsch-panoramaweg
   name: Aletsch Panoramaweg
   start: Bettmerhorn
@@ -696,6 +708,7 @@ hikes:
   - https://www.outdooractive.com/en/route/mountain-hike/aletsch-arena/aletsch-panorama-circuit/802297583/
   cable_car_ids:
   - bettmerhorn-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.41,8.07667&z=16
 - id: arolla_ice_cave-arolla-glacier-trail
   name: Arolla glacier trail (14 km loop)
   start: Arolla village
@@ -713,6 +726,7 @@ hikes:
   sources:
   - https://www.myswitzerland.com/en-ch/experiences/arolla-glacier-trail/
   - https://en.wikipedia.org/wiki/Arolla_Glacier
+  start_maps_url: https://www.google.com/maps/place/?q=46.017,7.483&z=16
 - id: arolla_ice_cave-arolla-pas-de-chevres
   name: Pas de Chèvres climb
   start: Arolla village
@@ -731,6 +745,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-des-dix-cas-2147000078/mountain-hiking/from-arolla-via-pas-de-chevres-550/
   quickest_for:
   - arolla_ice_cave
+  start_maps_url: https://www.google.com/maps/place/?q=46.017,7.483&z=16
 - id: cabane_becs_de_bosson-from-bendolla
   name: From Bendolla (top of Grimentz gondola)
   start: Bendolla
@@ -754,6 +769,7 @@ hikes:
   - grimentz-bendolla
   hut_ids:
   - cabane-becs-de-bosson
+  start_maps_url: https://www.google.com/maps/place/?q=46.18063,7.55796&z=16
 - id: moiry_glacier-bus-to-moiry-barrage
   name: Bus to Moiry dam + walk to hut
   start: Moiry barrage bus stop
@@ -775,6 +791,7 @@ hikes:
   - moiry_glacier
   hut_ids:
   - cabane-moiry-cas
+  start_maps_url: https://www.google.com/maps/place/?q=46.13761,7.57255&z=16
 - id: moiry_glacier-from-grimentz-on-foot
   name: From Grimentz on foot
   start: Grimentz village
@@ -789,6 +806,7 @@ hikes:
   - moiry_glacier
   sources:
   - https://www.outdooractive.com/en/route/hiking-route/switzerland/grimentz-to-moiry-hut/66408873/
+  start_maps_url: https://www.google.com/maps/place/?q=46.18029,7.57383&z=16
 - id: ferpecle_glacier-easy-glacier-trail
   name: Barrage de Ferpècle → glacier foot
   start: Barrage de Ferpècle
@@ -808,6 +826,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Ferp%C3%A8cle
   quickest_for:
   - ferpecle_glacier
+  start_maps_url: https://www.google.com/maps/place/?q=46.05832,7.55019&z=16
 - id: ferpecle_glacier-les-salays-to-bricola
   name: Les Salays → Bricola → Roc Noir
   start: Les Salays (Ferpècle)
@@ -823,6 +842,7 @@ hikes:
   - ferpecle_glacier
   sources:
   - https://www.sac-cas.ch/fr/cabanes-et-courses/portail-des-courses-du-cas/cabane-de-la-dent-blanche-cas-2147000073/randonnee-en-montagne/depuis-ferpecle-les-salays-par-bricola-et-le-roc-noir-248/
+  start_maps_url: https://www.google.com/maps/place/?q=46.0657,7.54377&z=16
 - id: spielboden-laengfluh-glacier-trail
   name: Längfluh → Spielboden → Saas-Fee
   start: Längfluh cable car top station
@@ -844,6 +864,7 @@ hikes:
   - spielboden
   cable_car_ids:
   - spielboden-laengfluh
+  start_maps_url: https://www.google.com/maps/place/?q=46.09199,7.89936&z=16
 - id: barrhorn-from-turtmannhuette
   name: From Turtmannhütte via Schöllijoch
   start: Turtmannhütte
@@ -866,6 +887,7 @@ hikes:
   equipment_list: []
   hut_ids:
   - turtmannhutte-sac
+  start_maps_url: https://www.google.com/maps/place/?q=46.16013,7.69948&z=16
 - id: saas_fee_glacier-glacier-trail-felskinn
   name: Glacier Trail via Britanniahütte
   start: Felskinn top station
@@ -896,6 +918,7 @@ hikes:
   - alpin-express
   hut_ids:
   - britanniahutte-sac
+  start_maps_url: https://www.google.com/maps/place/?q=46.06887,7.91616&z=16
 - id: lac_de_derborence-default
   description_extra: Drive in from Aven via the narrow Lizerne valley road, then a short walk to the lake at 1,449 m. Loop around the lake is about 1.5 hours, T1. Refuge du Lac Derborence
     at the lake has rooms and food.
@@ -918,6 +941,7 @@ hikes:
     car: Drive in from Aven via the narrow Lizerne valley road
   quickest_for:
   - lac_de_derborence
+  start_maps_url: https://www.google.com/maps/place/?q=46.27908,7.21695&z=16
 - id: la_fouly-tmb-arnuva-la-fouly
   name: Tour du Mont Blanc · Arnuva → Grand Col Ferret → La Fouly
   start: Arnuva (Italian Val Ferret)
@@ -935,6 +959,7 @@ hikes:
   sources:
   - https://en.wikipedia.org/wiki/Tour_du_Mont_Blanc
   - https://www.outdooractive.com/en/route/hiking-trail/mont-blanc-and-la-thuile/arnuva-to-la-fouly/57379300/
+  start_maps_url: https://www.google.com/maps/place/?q=45.87371,7.05273&z=16
 - id: sanetschpass-from-gsteig-on-foot
   name: From Gsteig on foot
   start: Gsteig bei Gstaad
@@ -952,6 +977,7 @@ hikes:
   sources:
   - https://www.myswitzerland.com/en-us/experiences/sanetsch-between-bern-and-valais/
   - https://en.wikipedia.org/wiki/Sanetschpass
+  start_maps_url: https://www.google.com/maps/place/?q=46.383,7.267&z=16
 - id: sanetschpass-cable-car-shortcut
   name: Sanetsch cable car + walk to lake
   start: Gsteig cable car valley station
@@ -972,6 +998,7 @@ hikes:
   - sanetschpass
   cable_car_ids:
   - sanetsch-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.37621,7.27971&z=16
 - id: nax_via_ferrata-belvedere-via-ferrata
   name: Belvédère via ferrata
   start: Nax village
@@ -994,6 +1021,7 @@ hikes:
   - Via ferrata set (helmet, harness, lanyard with energy absorber)
   - Gloves
   - Sturdy boots
+  start_maps_url: https://www.google.com/maps/place/?q=46.233,7.433&z=16
 - id: crans_montana-bisse-du-ro
   name: Bisse du Ro
   start: Crans-Montana centre
@@ -1010,6 +1038,7 @@ hikes:
   - crans_montana
   sources:
   - https://www.outdooractive.com/en/route/hiking-trail/crans-montana/grand-bisse-de-lens/26640979/
+  start_maps_url: https://www.google.com/maps/place/?q=46.31288,7.48929&z=16
 - id: crans_montana-plaine-morte-glacier
   name: Plaine Morte glacial plateau
   start: Top of Pointe de la Plaine Morte cable car
@@ -1029,6 +1058,7 @@ hikes:
   - crans_montana
   cable_car_ids:
   - plaine-morte-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.36994,7.48897&z=16
 - id: tseuzier_lake-route-23
   sac_grade: T1
   effort_label: Easy
@@ -1046,6 +1076,7 @@ hikes:
   quickest_for:
   - tseuzier_lake
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=46.34638,7.43516&z=16
 - id: salanfe_lake-from-van-d-en-haut
   name: From Van d'En Haut
   start: Van d'En Haut campsite
@@ -1064,6 +1095,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Lac_de_Salanfe
   quickest_for:
   - salanfe_lake
+  start_maps_url: https://www.google.com/maps/place/?q=46.14006,6.99303&z=16
 - id: pointe_du_tsate-from-la-forclaz
   name: From La Forclaz via Lac du Tsaté
   start: La Forclaz (Évolène)
@@ -1082,6 +1114,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9
   quickest_for:
   - pointe_du_tsate
+  start_maps_url: https://www.google.com/maps/place/?q=46.08984,7.52262&z=16
 - id: gastlosen-gastlosen-circular
   name: Gastlosen circular (Jaun → Chalet du Soldat → Jaun)
   start: Jaun-Chalet
@@ -1117,6 +1150,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-broc-246/mountain-hiking/
   - https://en.wikipedia.org/wiki/Dent_de_Broc
+  start_maps_url: https://www.google.com/maps/place/?q=46.604,7.099&z=16
 - id: schwarzsee-cable-car
   name: Cable car from Zermatt via Furi
   start: Zermatt cable car
@@ -1135,6 +1169,7 @@ hikes:
   - schwarzsee
   cable_car_ids:
   - schwarzsee-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.01508,7.74264&z=16
 - id: schwarzsee-from-furi-via-stafelalp
   name: From Furi via Stafelalp
   start: Furi (mid-station)
@@ -1152,6 +1187,7 @@ hikes:
   - https://www.sac-cas.ch/de/huetten-und-touren/sac-tourenportal/hoernlihuette-2147000136/berg-und-alpinwandern/von-zermatt-furi-via-stafelalp-261/
   cable_car_ids:
   - schwarzsee-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.00134,7.7323&z=16
 - id: dent_de_lys-les-paccots-circular
   name: Les Paccots loop via Lac des Joncs
   start: Les Paccots
@@ -1170,6 +1206,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Les_Paccots
   quickest_for:
   - dent_de_lys
+  start_maps_url: https://www.google.com/maps/place/?q=46.52222,6.94806&z=16
 - id: moleson-plan-francey-summit
   name: Plan-Francey to summit and back
   start: Plan-Francey (mid-station of Moléson funicular)
@@ -1190,6 +1227,7 @@ hikes:
   - moleson
   cable_car_ids:
   - moleson-funiculaire
+  start_maps_url: https://www.google.com/maps/place/?q=46.55582,7.02387&z=16
 - id: teysachaux-les-paccots-to-moleson
   name: Les Paccots → Téysachaux → Moléson
   start: Les Paccots
@@ -1210,6 +1248,7 @@ hikes:
   - teysachaux
   cable_car_ids:
   - moleson-funiculaire
+  start_maps_url: https://www.google.com/maps/place/?q=46.52222,6.94806&z=16
 - id: cap_au_moine-from-allieres
   name: Allières → Cape au Moine
   start: Allières
@@ -1224,6 +1263,7 @@ hikes:
   - cap_au_moine
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cape-au-moine-vd-300/mountain-hiking/
+  start_maps_url: https://www.google.com/maps/place/?q=46.46982,7.00789&z=16
 - id: dent_de_jaman-route-87
   duration_min: 30
   gain_m: 141
@@ -1242,6 +1282,7 @@ hikes:
   name: Direct ascent from Jaman station
   sac_grade: T2
   effort_label: Moderate
+  start_maps_url: https://www.google.com/maps/place/?q=46.44134,6.9768&z=16
 - id: creux_du_van-noiraigue-14-bends
   name: Sentier des 14 contours (from Noiraigue)
   start: Noiraigue train station
@@ -1261,6 +1302,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/switzerland/a-mighty-arena-the-creux-du-van/8483375/
   - https://www.myswitzerland.com/en-ch/experiences/route/creux-du-van-round-trip-in-the-val-de-travers/
   - https://en.wikipedia.org/wiki/Creux_du_Van
+  start_maps_url: https://www.google.com/maps/place/?q=46.95492,6.7218&z=16
 - id: lac_de_taney-route-50
   sac_grade: T1
   effort_label: Easy
@@ -1278,6 +1320,7 @@ hikes:
   quickest_for:
   - lac_de_taney
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=46.33749,6.85606&z=16
 - id: grammont-route-154
   sac_grade: T2
   effort_label: Mid
@@ -1293,6 +1336,7 @@ hikes:
   sources:
   - https://en.wikipedia.org/wiki/Grammont_(mountain)
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=46.33749,6.85606&z=16
 - id: marchairuz-mollendruz-mont-tendre-marchairuz
   name: Col du Mollendruz → Mont Tendre → Col du Marchairuz
   start: Col du Mollendruz
@@ -1312,6 +1356,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Mont_Tendre
   quickest_for:
   - marchairuz
+  start_maps_url: https://www.google.com/maps/place/?q=46.65051,6.36456&z=16
 - id: geltenschuss-lauenensee-geltenhuette
   name: Lauenensee → Geltenhütte → Lauenensee
   start: Lauenensee
@@ -1330,6 +1375,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/geltenhuette-sac-2147000113/mountain-hiking/from-lauenen-louwenesee-geltenschuss-418/
   hut_ids:
   - geltenhutte-sac
+  start_maps_url: https://www.google.com/maps/place/?q=46.395,7.33222&z=16
 - id: lavaux_vineyards-terrasses-de-lavaux
   name: Terrasses de Lavaux (St-Saphorin → Lutry)
   start: St-Saphorin train station
@@ -1348,6 +1394,7 @@ hikes:
   - https://www.myswitzerland.com/en-ch/experiences/route/lavaux-vineyard-terraces-the-swiss-wine-route/
   - https://schweizmobil.ch/en/hiking-in-switzerland/route-113
   - https://en.wikipedia.org/wiki/Lavaux
+  start_maps_url: https://www.google.com/maps/place/?q=46.47259,6.79702&z=16
 - id: schafler-route-42
   sac_grade: T1
   effort_label: Easy
@@ -1369,6 +1416,7 @@ hikes:
   - berggasthaus-schafler
   cable_car_ids:
   - ebenalp-luftseilbahn
+  start_maps_url: https://www.google.com/maps/place/?q=47.28581,9.42856&z=16
 - id: seealpsee-route-43
   sac_grade: T1
   effort_label: Easy
@@ -1384,6 +1432,7 @@ hikes:
   quickest_for:
   - seealpsee
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=47.28581,9.42856&z=16
 - id: ascher-route-73
   start: Wasserauen station
   transit:
@@ -1409,6 +1458,7 @@ hikes:
   equipment_list: []
   quickest_for:
   - ascher
+  start_maps_url: https://www.google.com/maps/place/?q=47.28581,9.42856&z=16
 - id: saxer_lucke-route-71
   sac_grade: T1
   effort_label: Easy
@@ -1429,6 +1479,7 @@ hikes:
   - staubern-luftseilbahn
   hut_ids:
   - berggasthaus-staubern
+  start_maps_url: https://www.google.com/maps/place/?q=47.24763,9.47025&z=16
 - id: limmernsee-tierfehd-cable-car
   name: Tierfehd cable car + Pantenbrücke trail
   start: Tierfehd cable car (Linthal)
@@ -1449,6 +1500,7 @@ hikes:
   - limmernsee
   cable_car_ids:
   - tierfehd-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.8783,8.98521&z=16
 - id: limmernsee-linthal-on-foot
   name: From Linthal on foot
   start: Linthal train station
@@ -1464,6 +1516,7 @@ hikes:
   - limmernsee
   sources:
   - https://en.wikipedia.org/wiki/Limmernsee
+  start_maps_url: https://www.google.com/maps/place/?q=46.92529,8.99808&z=16
 - id: muttseehutte-from-tierfehd-cable-car
   name: Tierfehd cable car + Chalchtrittli approach
   start: Tierfehd cable car (Linthal)
@@ -1485,6 +1538,7 @@ hikes:
   - tierfehd-cable-car
   hut_ids:
   - muttseehutte-sac
+  start_maps_url: https://www.google.com/maps/place/?q=46.8783,8.98521&z=16
 - id: berschnerfall-route-44
   sac_grade: T1
   effort_label: Easy
@@ -1502,6 +1556,7 @@ hikes:
   quickest_for:
   - berschnerfall
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=47.10714,9.34516&z=16
 - id: klausenpass-urnerboden-to-altdorf
   name: Urnerboden → Klausenpass → Altdorf
   start: Urnerboden
@@ -1519,6 +1574,7 @@ hikes:
   sources:
   - https://en.wikipedia.org/wiki/Klausen_Pass
   - https://schweizmobil.ch/en/hiking-in-switzerland/route-1/stage-7
+  start_maps_url: https://www.google.com/maps/place/?q=46.89,8.90056&z=16
 - id: barglistuber-route-14
   start: Parkplatz Wasserfall Berglistüber
   transit:
@@ -1538,6 +1594,7 @@ hikes:
   gain_m: 0
   distance_km: 0.2
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=46.909,8.97919&z=16
 - id: urnerboden-panorama-walk
   name: Panorama walk around the alpine valley
   start: Urnerboden village
@@ -1556,6 +1613,7 @@ hikes:
   - https://www.myswitzerland.com/en-ch/destinations/urnerboden/
   quickest_for:
   - urnerboden
+  start_maps_url: https://www.google.com/maps/place/?q=46.89,8.90056&z=16
 - id: ice_lake_griesslisee-kloental-via-chaeseren
   name: Klöntal → Chäseren → Glärnischhütte
   start: Plätz (head of Klöntalersee)
@@ -1574,6 +1632,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Gl%C3%A4rnisch
   hut_ids:
   - glarnischhutte-sac
+  start_maps_url: https://www.google.com/maps/place/?q=47.02526,8.94039&z=16
 - id: gigerwaldsee-calfeisental-round
   name: Calfeisental round (Gigerwald → Sardona → Gigerwald)
   start: Gigerwald reservoir
@@ -1592,6 +1651,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/sardonahuette-sac-2147000234/mountain-hiking/from-the-gigerwald-dam-via-alp-sardona-216/
   - https://www.myswitzerland.com/en/experiences/route/mountain-hike-in-calfeisen-valley/
+  start_maps_url: https://www.google.com/maps/place/?q=46.9155,9.37092&z=16
 - id: gigerwaldsee-st-martin-to-sardona
   name: St. Martin → Alp Sardona
   start: St. Martin (Walser village)
@@ -1608,6 +1668,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hikes/ferienregion-heidiland/route-of-amazement-calfeisental/23430458/
   quickest_for:
   - gigerwaldsee
+  start_maps_url: https://www.google.com/maps/place/?q=46.92058,9.35556&z=16
 - id: ruinaulta-versam-circular
   name: Versam circular through the gorge
   start: Versam station
@@ -1624,6 +1685,7 @@ hikes:
   sources:
   - https://www.outdooractive.com/en/route/hiking-route/surselva/rheinschlucht-rundwanderung-versam/23438257/
   - https://en.wikipedia.org/wiki/Ruinaulta
+  start_maps_url: https://www.google.com/maps/place/?q=46.80738,9.3103&z=16
 - id: ruinaulta-flims-out-and-back
   name: From Flims Waldhaus
   start: Flims Waldhaus
@@ -1640,6 +1702,7 @@ hikes:
   - https://www.myswitzerland.com/en-us/experiences/ruinaulta-switzerlands-grand-canyon/
   quickest_for:
   - ruinaulta
+  start_maps_url: https://www.google.com/maps/place/?q=46.82572,9.2888&z=16
 - id: crestasee-four-lakes-hike
   name: Senda quatter lags da Flem (Four Lakes Hike)
   start: Flims
@@ -1654,6 +1717,7 @@ hikes:
   - crestasee
   sources:
   - https://www.myswitzerland.com/en-us/experiences/route/senda-quatter-lags-da-flem/
+  start_maps_url: https://www.google.com/maps/place/?q=46.833,9.283&z=16
 - id: crestasee-short-staderas-conn
   name: Staderas → Caumasee → Conn
   start: Flims Staderas
@@ -1672,6 +1736,7 @@ hikes:
   - https://www.outdooractive.com/en/route/winter-hiking/flims-laax/staderas-sportzentrum-caumasee-conn/43396654/
   quickest_for:
   - crestasee
+  start_maps_url: https://www.google.com/maps/place/?q=46.82537,9.27469&z=16
 - id: klontalersee-default
   description_extra: Postbus 506 from Glarus along the Klöntalstrasse to Klöntal-Vorauen. Around-the-lake loop is mostly flat on a marked path, T1, about 13 km. Campsites at Güntlenau
     and Vorauen, boat rental, and lakeshore swimming spots. Good base for harder routes up to the Glärnischhütte.
@@ -1691,6 +1756,7 @@ hikes:
   start: Klöntal-Vorauen (Postbus 506 from Glarus)
   transit:
     bus: Glarus, then Postbus 506 along the Klöntalstrasse to Klöntal-Vorauen
+  start_maps_url: https://www.google.com/maps/place/?q=47.02428,8.94545&z=16
 - id: stoos_kapelle-route-35
   start: Schwyz, Stoosbahn
   description_extra: Reach Stoos via the Stoosbahn funicular from Schwyz. From the upper Stoos station, the chapel is a 2-3 minute walk. T1. Combine with the ridge walk to Fronalpstock
@@ -1713,6 +1779,7 @@ hikes:
     cable_car: Stoosbahn funicular (steepest funicular in the world)
   quickest_for:
   - stoos_kapelle
+  start_maps_url: https://www.google.com/maps/place/?q=46.99124,8.67339&z=16
 - id: pizol-5-lakes-hike
   name: 5-Lakes hike (Pizolhütte → Wildsee → Schottensee → Schwarzsee → Baschalvasee → Gaffia)
   start: Pizolhütte (top of Wangs gondola + chair lifts)
@@ -1736,6 +1803,7 @@ hikes:
   - pizol
   cable_car_ids:
   - pizol-bergbahnen
+  start_maps_url: https://www.google.com/maps/place/?q=46.97923,9.41704&z=16
 - id: joriseen-route-126
   sac_grade: T2
   effort_label: Easy
@@ -1753,6 +1821,7 @@ hikes:
   quickest_for:
   - joriseen
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=46.75028,9.9475&z=16
 - id: falensee-route-69
   sac_grade: T1
   effort_label: Easy
@@ -1773,6 +1842,7 @@ hikes:
   - berggasthaus-bollenwees
   cable_car_ids:
   - hoher-kasten-bahn
+  start_maps_url: https://www.google.com/maps/place/?q=47.29645,9.4568&z=16
 - id: batoni_wasserfallarena-route-125
   sac_grade: T2
   effort_label: Easy
@@ -1789,6 +1859,7 @@ hikes:
   quickest_for:
   - batoni_wasserfallarena
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=46.99056,9.34444&z=16
 - id: morteratsch_glacier-aussichtsweg-glacier-trail
   name: Glacier theme trail (Aussichtsweg)
   start: Morteratsch railway station
@@ -1805,6 +1876,7 @@ hikes:
   sources:
   - https://www.schweizmobil.ch/en/hiking-in-switzerland/route-806
   - https://www.myswitzerland.com/en/experiences/route/gletscheraussichten-morteratsch/
+  start_maps_url: https://www.google.com/maps/place/?q=46.45072,9.94041&z=16
 - id: morteratsch_glacier-short-glacier-tongue
   name: Short walk to glacier tongue
   start: Morteratsch station
@@ -1820,6 +1892,7 @@ hikes:
   - https://www.schweizmobil.ch/en/hiking-in-switzerland/route-806
   quickest_for:
   - morteratsch_glacier
+  start_maps_url: https://www.google.com/maps/place/?q=46.45072,9.94041&z=16
 - id: bovalhutte-from-morteratsch
   name: From Morteratsch station
   start: Morteratsch railway station
@@ -1839,6 +1912,7 @@ hikes:
   - bovalhutte
   hut_ids:
   - chamanna-da-boval-cas
+  start_maps_url: https://www.google.com/maps/place/?q=46.45072,9.94041&z=16
 - id: spitzmeilenhutte-from-maschgenkamm
   name: From Maschgenkamm cable car
   start: Maschgenkamm top station (Flumserberg)
@@ -1860,6 +1934,7 @@ hikes:
   - flumserberg-maschgenkamm
   hut_ids:
   - spitzmeilenhutte-sac
+  start_maps_url: https://www.google.com/maps/place/?q=47.0694,9.25321&z=16
 - id: cascata_la_froda-from-sonogno-village
   name: From Sonogno (short walk to base)
   start: Sonogno village
@@ -1877,6 +1952,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/ascona-locarno/sonogno-corte-sonogno/43228411/
   quickest_for:
   - cascata_la_froda
+  start_maps_url: https://www.google.com/maps/place/?q=46.35031,8.78633&z=16
 - id: valle_verzasca-sonogno-to-lavertezzo
   name: Sentiero Verzasca · Sonogno → Lavertezzo
   start: Sonogno (last village in the valley)
@@ -1894,6 +1970,7 @@ hikes:
   sources:
   - https://schweizmobil.ch/en/hiking-in-switzerland/route-74/stage-1
   - https://www.myswitzerland.com/en-us/experiences/route/sentiero-verzasca/
+  start_maps_url: https://www.google.com/maps/place/?q=46.35031,8.78633&z=16
 - id: cascata_di_foroglio-default
   description_extra: 'Drive or postbus from Cevio into Foroglio. The waterfall is visible from the village square: a short five-minute walk on a paved path brings you to the base. T1,
     suitable for anyone.'
@@ -1913,6 +1990,7 @@ hikes:
     bus: Postbus from Cevio to Val Bavona, San Carlo line
   quickest_for:
   - cascata_di_foroglio
+  start_maps_url: https://www.google.com/maps/place/?q=46.3739,8.54744&z=16
 - id: mer_de_glace-montenvers-train
   name: Montenvers rack train + walk to ice cave
   start: Chamonix Montenvers train station
@@ -1931,6 +2009,7 @@ hikes:
   - mer_de_glace
   cable_car_ids:
   - montenvers-railway
+  start_maps_url: https://www.google.com/maps/place/?q=45.9225,6.8753&z=16
 - id: mer_de_glace-chamonix-on-foot
   name: From Chamonix on foot
   start: Chamonix town
@@ -1945,6 +2024,7 @@ hikes:
   - mer_de_glace
   sources:
   - https://www.outdooractive.com/en/route/hiking-route/chamonix/chamonix-dayhike-mer-de-glace-to-aiguille-du-midi/803341313/
+  start_maps_url: https://www.google.com/maps/place/?q=45.9231,6.8697&z=16
 - id: les_cheserys-tre-le-champ-to-lac-blanc
   name: Tré-le-Champ → Cheserys → Lac Blanc
   start: Tré-le-Champ (Argentière)
@@ -1963,6 +2043,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-route/rhone-alpes/tre-le-champ-argentiere-to-planpraz-via-lac-blanc-and-le-flegere/23203675/
   - https://en.wikipedia.org/wiki/Lac_Blanc_(Chamonix)
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=45.99563,6.92917&z=16
 - id: les_cheserys-flegere-shortcut
   name: Flégère cable car shortcut
   start: Flégère top station
@@ -1982,6 +2063,7 @@ hikes:
   - les_cheserys
   cable_car_ids:
   - flegere-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=45.95105,6.88616&z=16
 - id: glacier_des_bossons-chairlift-to-chalet
   name: Chairlift to Chalet du Glacier
   start: Les Bossons (bus stop)
@@ -2000,6 +2082,7 @@ hikes:
   - glacier_des_bossons
   cable_car_ids:
   - glacier-bossons-chairlift
+  start_maps_url: https://www.google.com/maps/place/?q=45.90715,6.84205&z=16
 - id: glacier_des_bossons-chalet-to-la-jonction
   name: Chalet → Chalet des Pyramides → La Jonction
   start: Chalet du Glacier des Bossons
@@ -2016,6 +2099,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Bossons_Glacier
   cable_car_ids:
   - glacier-bossons-chairlift
+  start_maps_url: https://www.google.com/maps/place/?q=45.894,6.84951&z=16
 - id: pic_de_jallouvre-from-petit-bornand
   name: From Le Petit-Bornand-les-Glières
   start: Le Petit-Bornand-les-Glières
@@ -2030,6 +2114,7 @@ hikes:
   sources:
   - https://en.wikipedia.org/wiki/Pic_de_Jallouvre
   - https://en.wikipedia.org/wiki/Bornes_Massif
+  start_maps_url: https://www.google.com/maps/place/?q=46.00168,6.39609&z=16
 - id: dent_doche-from-bernex
   name: From Bernex via Fétiuère
   start: Fétiuère parking (above Bernex)
@@ -2049,6 +2134,7 @@ hikes:
   - dent_doche
   hut_ids:
   - refuge-dent-oche
+  start_maps_url: https://www.google.com/maps/place/?q=46.3462,6.70783&z=16
 - id: brisen-route-via-haldigrat
   sac_grade: T3
   effort_label: Difficult
@@ -2073,6 +2159,7 @@ hikes:
   cable_car_ids:
   - niederrickenbach-cable-car
   - haldigrat-chairlift
+  start_maps_url: https://www.google.com/maps/place/?q=46.90275,8.44006&z=16
 - id: engstlensee-route-lakeshore-loop
   sac_grade: T1
   effort_label: Easy
@@ -2094,6 +2181,7 @@ hikes:
   quickest_for:
   - engstlensee
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=46.77611,8.34458&z=16
 - id: grappelensee-route-from-laui
   sac_grade: T1
   effort_label: Easy
@@ -2114,6 +2202,7 @@ hikes:
   quickest_for:
   - grappelensee
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=47.217,9.31561&z=16
 - id: ponte_tibetano-route-from-mornera
   sac_grade: T2
   effort_label: Moderate
@@ -2158,6 +2247,7 @@ hikes:
   - https://www.valais.ch/en/activities/natural-sites/glaciers/zinal-glacier
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-du-mountet-cas-2147000184/mountain-hiking/
   equipment_list: []
+  start_maps_url: https://www.google.com/maps/place/?q=46.13629,7.6268&z=16
 - id: ascher-from-schwende-on-foot
   visits:
   - ascher
@@ -2175,6 +2265,7 @@ hikes:
   sources:
   - https://www.appenzell.ch/en/alpstein/hiking/hiking-tour-suggestions.html
   - https://www.alltrails.com/en-gb/trail/switzerland/outer-rhodes/schwende-berggasthaus-ascher-wildkirchli
+  start_maps_url: https://www.google.com/maps/place/?q=47.30007,9.43555&z=16
 - id: barrhorn-from-st-niklaus-via-topalihuette
   visits:
   - barrhorn
@@ -2196,6 +2287,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/topalihuette-sac-2147000271/mountain-hiking/from-st-niklaus-258/
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/uessers-barrhorn-145/mountain-hiking/
   - https://de.wikipedia.org/wiki/Topalih%C3%BCtte
+  start_maps_url: https://www.google.com/maps/place/?q=46.177,7.802&z=16
 - id: cap_au_moine-from-les-avants-via-col-de-jaman
   visits:
   - cap_au_moine
@@ -2218,6 +2310,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Cape_au_Moine
   quickest_for:
   - cap_au_moine
+  start_maps_url: https://www.google.com/maps/place/?q=46.45381,6.94332&z=16
 - id: creux_du_van-from-le-soliat
   visits:
   - creux_du_van
@@ -2238,6 +2331,7 @@ hikes:
   - https://www.sac-cas.ch/fr/les-alpes/le-creux-du-van-pour-le-bonheur-de-tous-16390/
   quickest_for:
   - creux_du_van
+  start_maps_url: https://www.google.com/maps/place/?q=46.93619,6.71584&z=16
 - id: dent_de_lys-from-les-sciernes-dalbeuve
   visits:
   - dent_de_lys
@@ -2257,6 +2351,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/de/huetten-und-touren/sac-tourenportal/dent-de-lys-1086/berg-und-alpinwandern/les-paccots-dent-de-lys-les-sciernes-dalbeuve-139/
   - https://en.wikipedia.org/wiki/Dent_de_Lys
+  start_maps_url: https://www.google.com/maps/place/?q=46.49146,7.03422&z=16
 - id: engstligen_falls-from-above-via-cable-car
   visits:
   - engstligen_falls
@@ -2303,6 +2398,7 @@ hikes:
   - gastlosen
   cable_car_ids:
   - jaun-gastlosen-express
+  start_maps_url: https://www.google.com/maps/place/?q=46.59578,7.28305&z=16
 - id: grammont-from-novel-via-col-des-crosses
   visits:
   - grammont
@@ -2324,6 +2420,7 @@ hikes:
   - https://www.wandersite.ch/Tageswanderung/633_Wallis.html
   quickest_for:
   - grammont
+  start_maps_url: https://www.google.com/maps/place/?q=46.36878,6.78856&z=16
 - id: ice_lake_griesslisee-from-klausenpass
   visits:
   - ice_lake_griesslisee
@@ -2346,6 +2443,7 @@ hikes:
   - https://switzerlandbylocals.com/en/lake-clariden-the-secret-glacial-lake-at-the-klausen-pass/
   quickest_for:
   - ice_lake_griesslisee
+  start_maps_url: https://www.google.com/maps/place/?q=46.86855,8.85589&z=16
 - id: joriseen-from-klosters-via-berghaus-vereina
   visits:
   - joriseen
@@ -2365,6 +2463,7 @@ hikes:
   - https://travelita-blog.com/hike-joriseen/
   - https://reisememo.ch/schweiz/joeriseen-rundwanderung-flueelapass-vereina
   - https://www.berghausvereina.com/wanderungen/
+  start_maps_url: https://www.google.com/maps/place/?q=46.81419,9.98271&z=16
 - id: la_fouly-tmb-champex-to-la-fouly
   visits:
   - la_fouly
@@ -2387,6 +2486,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/mont-blanc-massif/la-fouly-to-champex/57383925/
   quickest_for:
   - la_fouly
+  start_maps_url: https://www.google.com/maps/place/?q=46.03058,7.11682&z=16
 - id: lavaux_vineyards-from-chexbres-via-dezaley
   visits:
   - lavaux_vineyards
@@ -2407,6 +2507,7 @@ hikes:
   - https://www.myswitzerland.com/en-us/experiences/route/lavaux-vineyard-terraces-the-swiss-wine-route/
   quickest_for:
   - lavaux_vineyards
+  start_maps_url: https://www.google.com/maps/place/?q=46.48106,6.77855&z=16
 - id: pic_de_jallouvre-from-col-de-la-colombiere
   visits:
   - pic_de_jallouvre
@@ -2431,6 +2532,7 @@ hikes:
   - https://www.altituderando.com/Pic-de-Jallouvre-2408m-versant-Cenise-par-les-Aiguilles-Vertes
   quickest_for:
   - pic_de_jallouvre
+  start_maps_url: https://www.google.com/maps/place/?q=45.99224,6.47584&z=16
 - id: ponte_tibetano-from-sementina-on-foot
   visits:
   - ponte_tibetano
@@ -2450,6 +2552,7 @@ hikes:
   sources:
   - https://www.curzutt.ch/en/attractions/carasc-tibetan-bridge/
   - https://www.ticino.ch/en/commons/details/Tibetan-bridge-Carasc-/137557.html
+  start_maps_url: https://www.google.com/maps/place/?q=46.18275,8.99256&z=16
 - id: rosenlaui_public_waterfall-from-grindelwald-via-grosse-scheidegg
   visits:
   - rosenlaui_public_waterfall
@@ -2493,6 +2596,7 @@ hikes:
   - https://www.visorando.com/en/walk-auberge-de-salanfe-mex/
   - https://www.dentsdumidi.ch/en/our-tour/salanfe-susanfe-2/
   - https://salanfe.ch/en/day-trips/
+  start_maps_url: https://www.google.com/maps/place/?q=46.185,6.99995&z=16
 - id: schrattenfluh-from-hirsegg
   visits:
   - schrattenfluh
@@ -2515,6 +2619,7 @@ hikes:
   sources:
   - https://www.soerenberg.ch/en/tour/hirsegg-schrattenfluh-rossweid-soerenberg
   - https://www.biosphaere.ch/en/tour/hirsegg-schrattenfluh-rossweid-soerenberg
+  start_maps_url: https://www.google.com/maps/place/?q=46.83878,8.01238&z=16
 - id: spitzmeilenhutte-from-weisstannen
   visits:
   - spitzmeilenhutte
@@ -2537,6 +2642,7 @@ hikes:
   - https://www.spitzmeilenhuette.ch/zustiege
   - https://wegwandern.ch/wanderung/3-etappe-sardona-welterbe-weg-spitzmeilenhuette-weisstannen-wanderung-wandern/
   - https://www.bewandernswert.de/sardona-welterbe-weg-etappe-3/
+  start_maps_url: https://www.google.com/maps/place/?q=46.99056,9.34444&z=16
 - id: teysachaux-loop-from-plan-francey
   visits:
   - teysachaux
@@ -2561,6 +2667,7 @@ hikes:
   - https://www.moleson.ch/en/rando/tour-de-moleson-2/
   cable_car_ids:
   - moleson-funiculaire
+  start_maps_url: https://www.google.com/maps/place/?q=46.55582,7.02387&z=16
 - id: tseuzier_lake-bisse-du-ro-from-crans-montana
   visits:
   - tseuzier_lake
@@ -2580,6 +2687,7 @@ hikes:
   sources:
   - https://travelita-blog.com/bisse-du-ro-abenteuerliche-suonenwanderung/
   - https://www.novo-monde.com/en/crans-montana-bisse-ro/
+  start_maps_url: https://www.google.com/maps/place/?q=46.31288,7.48929&z=16
 - id: zinal_glacier-from-sorebois-cable-car
   visits:
   - zinal_glacier
@@ -2605,6 +2713,7 @@ hikes:
   - zinal_glacier
   cable_car_ids:
   - zinal-sorebois-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.14445,7.60369&z=16
 - id: augstmatthorn-from-harder-kulm
   visits:
   - augstmatthorn
@@ -2631,7 +2740,7 @@ hikes:
   cable_car_ids:
   - harderbahn
   name: Harder Kulm ridge approach
-  start_maps_url: https://www.google.com/maps/place/?q=46.69822,7.85504&z=16
+  start_maps_url: https://maps.app.goo.gl/6DdPc2JDiDCZZ7377
 - id: brisen-from-niederrickenbach-direct
   visits:
   - brisen
@@ -2656,6 +2765,7 @@ hikes:
   - https://wegwandern.ch/wanderung/haldigrat-niederrickenbach-brisen-brisenhaus-klewenalp-wandern/
   cable_car_ids:
   - niederrickenbach-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.92969,8.42697&z=16
 - id: cascata_di_foroglio-from-bignasco
   visits:
   - cascata_di_foroglio
@@ -2674,6 +2784,7 @@ hikes:
   sources:
   - https://www.ascona-locarno.com/en/hike/details/Val-Bavona-Foroglio-San-Carlo/67018087
   - https://www.ticino.ch/en/commons/details/From-Bignasco-to-Foroglio-A-waterfall-full-of-emotions/42469.html
+  start_maps_url: https://www.google.com/maps/place/?q=46.33973,8.60856&z=16
 - id: dent_de_broc-from-motelon
   visits:
   - dent_de_broc
@@ -2715,6 +2826,7 @@ hikes:
   sources:
   - https://en.wikipedia.org/wiki/Dent_d'Oche
   - https://www.summitpost.org/oche-dent-d/151397
+  start_maps_url: https://www.google.com/maps/place/?q=46.36458,6.77011&z=16
 - id: falensee-from-brulisau-via-samtisersee
   visits:
   - falensee
@@ -2734,6 +2846,7 @@ hikes:
   - https://www.bollenwees.ch/aktivitaeten/wandern.html
   hut_ids:
   - berggasthaus-bollenwees
+  start_maps_url: https://www.google.com/maps/place/?q=47.29645,9.4568&z=16
 - id: gelmersee-from-handegg-on-foot
   visits:
   - gelmersee
@@ -2753,6 +2866,7 @@ hikes:
   - https://www.travelhackergirl.com/gelmersee-hike-how-to-visit-the-lake-for-free/
   hut_ids:
   - gelmerhutte
+  start_maps_url: https://maps.app.goo.gl/LRR6dQEkUozBqBZj8
 - id: grappelensee-from-alt-st-johann
   visits:
   - grappelensee
@@ -2762,14 +2876,16 @@ hikes:
   gain_m: 565
   distance_km: 11.4
   equipment_list: []
-  start: Alt St. Johann village (train station)
+  start: Alt St. Johann village
   transit:
-    train: Wattwil to Alt St. Johann on the Toggenburg line
+    train: Nesslau-Neu St. Johann (Toggenburg line, end of line)
+    bus: PostBus from Nesslau-Neu St. Johann to Alt St. Johann
   description_extra: North-side approach instead of climbing up from Unterwasser. From Alt St. Johann at about 890 m, the trail climbs through forest and the Schwandernrot area, contouring
     at the foot of the Mittelberg at 1,483 m before dropping to the Gräppelensee at 1,307 m. About 4 to 4.5 hours for the loop, around 565 m of cumulative gain, T2, partly paved. Loop
     back via Halden and Berg keeps the route varied.
   sources:
   - https://www.verlagshaus-schwellbrunn.ch/toggenburg/wanderparadies-toggenburg/detail/news/alt-stjohann-halden-graeppelensee-berg.html
+  start_maps_url: https://www.google.com/maps/place/?q=47.1931,9.28126&z=16
 - id: iffigfalle-from-lauenen-via-tungelpass
   visits:
   - iffigfalle
@@ -2791,6 +2907,7 @@ hikes:
   sources:
   - https://wegwandern.ch/wanderung/lauenensee-iffigenalp-wanderungen-wandern-berner-oberland/
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/wildhornhuette-sac-2147000293/mountain-hiking/
+  start_maps_url: https://www.google.com/maps/place/?q=46.395,7.33222&z=16
 - id: klausenpass-schaechentaler-hoehenweg
   visits:
   - klausenpass
@@ -2815,6 +2932,7 @@ hikes:
   - klausenpass
   cable_car_ids:
   - fluelen-eggberge-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.90147,8.64492&z=16
 - id: lac_de_derborence-from-solalex
   visits:
   - lac_de_derborence
@@ -2833,6 +2951,7 @@ hikes:
   sources:
   - https://www.alpesvaudoises.ch/en/V1390/from-solalex-to-derborence
   - https://www.lescoteauxdusoleil.ch/fr/derborence-cheville-anzeindaz-anzeinde-solalex-1176.html
+  start_maps_url: https://www.google.com/maps/place/?q=46.28842,7.13703&z=16
 - id: marchairuz-from-saint-cergue
   visits:
   - marchairuz
@@ -2852,6 +2971,7 @@ hikes:
   sources:
   - https://activityworkshop.net/hiking/jura/coldemarchairuz-stcergue.html
   - https://www.parks.swiss/en/visit-the-parks/summer-activities/offer-detail/col-du-marchairuz-saint-cergue-24361
+  start_maps_url: https://www.google.com/maps/place/?q=46.44849,6.16017&z=16
 - id: pizol-from-bad-ragaz-bettlerweg
   visits:
   - pizol
@@ -2876,6 +2996,7 @@ hikes:
   - https://pizol.com/en/hiking-trails/circular-hike-beggar-s-path-2-lakes-hike/
   cable_car_ids:
   - pizol-bergbahnen
+  start_maps_url: https://www.google.com/maps/place/?q=46.97965,9.43635&z=16
 - id: riffelsee-from-riffelalp
   visits:
   - riffelsee
@@ -2896,6 +3017,7 @@ hikes:
   - https://www.moonhoneytravel.com/gornergrat-hike-zermatt/
   cable_car_ids:
   - gornergrat-bahn
+  start_maps_url: https://www.google.com/maps/place/?q=46.00198,7.75094&z=16
 - id: rosenlauifall-from-grosse-scheidegg
   visits:
   - rosenlauifall
@@ -2936,6 +3058,7 @@ hikes:
   - https://www.bollenwees.ch/aktivitaeten/wandern.html
   hut_ids:
   - berggasthaus-bollenwees
+  start_maps_url: https://www.google.com/maps/place/?q=47.29645,9.4568&z=16
 - id: seealpsee-from-brulisau-via-meglisalp
   visits:
   - seealpsee
@@ -2957,6 +3080,7 @@ hikes:
   - https://www.bollenwees.ch/aktivitaeten/wandern.html
   hut_ids:
   - berggasthaus-bollenwees
+  start_maps_url: https://www.google.com/maps/place/?q=47.29645,9.4568&z=16
 - id: stoos_kapelle-from-morschach-on-foot
   visits:
   - stoos_kapelle
@@ -2976,6 +3100,7 @@ hikes:
     mountain path. Alternative to the funicular and the Morschach cable car.
   sources:
   - https://swissholidaypark.ch/en/activities/surroundings/stoos
+  start_maps_url: https://www.google.com/maps/place/?q=46.98066,8.66269&z=16
 - id: triftbrucke-from-nessental-via-erggeli
   visits:
   - triftbrucke
@@ -2998,6 +3123,7 @@ hikes:
   - https://swissfamilyfun.com/trift-suspension-bridge/
   hut_ids:
   - windegghutte-sac
+  start_maps_url: https://maps.app.goo.gl/xssn4uHtwYmtTfEh9
 - id: urnerboden-clariden-hoehenweg
   visits:
   - urnerboden
@@ -3018,6 +3144,7 @@ hikes:
   sources:
   - https://www.travelita.ch/clariden-hoehenweg-wanderung-klausenpass-fisetengrat/
   - https://swissfamilyfun.com/klausen-pass-clariden-hohenweg-hike/
+  start_maps_url: https://www.google.com/maps/place/?q=46.86807,8.85471&z=16
 - id: cabane_becs_de_bosson-from-grimentz-via-roc-orzival
   visits:
   - cabane_becs_de_bosson
@@ -3042,6 +3169,7 @@ hikes:
   - https://www.valdherens.ch/en/mountain-hut-des-becs-de-bosson-fp32246
   hut_ids:
   - cabane-becs-de-bosson
+  start_maps_url: https://www.google.com/maps/place/?q=46.18029,7.57383&z=16
 - id: dent_de_jaman-from-les-avants
   visits:
   - dent_de_jaman
@@ -3060,6 +3188,7 @@ hikes:
   sources:
   - https://en.wikipedia.org/wiki/Col_de_Jaman
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-jaman-959/
+  start_maps_url: https://www.google.com/maps/place/?q=46.45381,6.94332&z=16
 - id: engstlensee-from-engelberg-via-jochpass
   visits:
   - engstlensee
@@ -3079,6 +3208,7 @@ hikes:
   sources:
   - https://www.engelberg.ch/en/summer/hiking/4-lakes-trail/
   - https://schweizmobil.ch/en/hiking-in-switzerland/routes
+  start_maps_url: https://www.google.com/maps/place/?q=46.79391,8.39905&z=16
 - id: fronalpstock-from-morschach-via-chaelen
   visits:
   - fronalpstock
@@ -3099,6 +3229,7 @@ hikes:
     late autumn to early summer when the safety equipment is removed; the shaded couloir is tricky with wet or old snow. Descend via cable car or the regular Stoos trail.
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/fronalpstock-sz-684/mountain-hiking/from-morschach-via-chaelen-2400/
+  start_maps_url: https://maps.app.goo.gl/7m8qUzPxyuPe5WRz8
 - id: geltenschuss-from-iffigenalp-via-wildhornhuette
   visits:
   - geltenschuss
@@ -3124,6 +3255,7 @@ hikes:
   - geltenhutte-sac
   quickest_for:
   - geltenschuss
+  start_maps_url: https://www.google.com/maps/place/?q=46.39983,7.44147&z=16
 - id: hardergrat_trail-augstmatthorn-from-lombachalp
   visits:
   - hardergrat_trail
@@ -3136,7 +3268,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Lombachalp, above Habkern
+  start: Lombachalp
   transit:
     train: Interlaken West
     bus: PostBus 105 from Interlaken West to Habkern, then summer Ruftaxi or 2 hours on foot to Lombachalp
@@ -3146,6 +3278,7 @@ hikes:
   sources:
   - https://www.hardergrat.com/
   name: Lombachalp ridge variant
+  start_maps_url: https://maps.app.goo.gl/iinY4mbLdEm8JK3H9
 - id: iseltwald-from-boenigen-uferweg
   visits:
   - iseltwald
@@ -3166,6 +3299,7 @@ hikes:
   - https://schweizmobil.ch/de/wanderland/route-360/etappe-1
   - https://www.brienzersee.ch/reiseziele/brienzersee/boenigen-iseltwald
   - https://www.myswitzerland.com/en-us/experiences/route/brienzersee-drei-wasserfaelleweg-360_01/
+  start_maps_url: https://www.google.com/maps/place/?q=46.68933,7.89803&z=16
 - id: lac_de_taney-from-st-gingolph-via-col-de-la-croix
   visits:
   - lac_de_taney
@@ -3186,6 +3320,7 @@ hikes:
   - https://www.wandersite.ch/Tageswanderung/633_Wallis.html
   - https://schweizmobil.ch/en/hiking-in-switzerland/route-216
   - https://www.myswitzerland.com/en-us/experiences/lac-de-taney-mountain-lake-on-the-haute-savoie-border/
+  start_maps_url: https://www.google.com/maps/place/?q=46.39217,6.80589&z=16
 - id: moleson-from-moleson-village
   visits:
   - moleson
@@ -3204,6 +3339,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/le-moleson-7794/mountain-hiking/
   - https://www.moleson.ch/en/rando/sentier-botanique/
+  start_maps_url: https://www.google.com/maps/place/?q=46.56681,7.03725&z=16
 - id: oltschibachfall-from-unterbach
   visits:
   - oltschibachfall
@@ -3223,6 +3359,7 @@ hikes:
   - https://www.europeanwaterfalls.com/waterfalls/oltschibachfall/
   quickest_for:
   - oltschibachfall
+  start_maps_url: https://www.google.com/maps/place/?q=46.73906,8.11301&z=16
 - id: pointe_du_tsate-from-moiry-via-col-du-tsate
   visits:
   - pointe_du_tsate
@@ -3243,6 +3380,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/
   - https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9
+  start_maps_url: https://www.google.com/maps/place/?q=46.13761,7.57255&z=16
 - id: rosenlaui-from-grindelwald-first-via-grosse-scheidegg
   visits:
   - rosenlaui
@@ -3292,6 +3430,7 @@ hikes:
   - britanniahutte-sac
   cable_car_ids:
   - saas-grund-kreuzboden-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.13827,7.96402&z=16
 - id: schafler-from-wasserauen-via-bommen
   visits:
   - schafler
@@ -3313,6 +3452,7 @@ hikes:
   - https://www.verlagshaus-schwellbrunn.ch/appenzellerland/wanderparadies-appenzellerland/detail/617-erstboehl-schaefler-aescher-bommen.html
   hut_ids:
   - berggasthaus-schafler
+  start_maps_url: https://www.google.com/maps/place/?q=47.28581,9.42856&z=16
 - id: spielboden-ascent-from-saas-fee-village
   visits:
   - spielboden
@@ -3331,6 +3471,7 @@ hikes:
   sources:
   - https://hiking-switzerland.ch/kantons/wallis/hannigalp-spielboden/
   - https://www.bergfex.com/sommer/wallis/touren/wanderung/602774,laengfluh--saas-fee
+  start_maps_url: https://www.google.com/maps/place/?q=46.10734,7.92471&z=16
 - id: triftsee-from-underi-trift-via-windegghuette
   visits:
   - triftsee
@@ -3341,7 +3482,7 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
-  start: Underi Trift cable car top station
+  start: Underi Trift (Triftbahn top station)
   transit:
     train: Meiringen
     bus: PostBus 161 to Triftbahn
@@ -3357,6 +3498,8 @@ hikes:
   - triftbahn-cable-car
   hut_ids:
   - windegghutte-sac
+  start_maps_url: https://maps.app.goo.gl/A84sfrwU7EV3Sko5A
+  name: Higher viewpoint via Windegghütte
 - id: valle_verzasca-lavertezzo-to-brione
   visits:
   - valle_verzasca
@@ -3377,6 +3520,7 @@ hikes:
   - https://www.bergfex.com/sommer/tessin/touren/fernwanderweg/2065768,sentiero-verzasca-svizzeramobile-74/
   quickest_for:
   - valle_verzasca
+  start_maps_url: https://www.google.com/maps/place/?q=46.26001,8.83592&z=16
 - id: engstligen_falls-side-trail-to-plateau
   name: Side trail to the Engstligenalp plateau
   sac_grade: T2
@@ -3395,6 +3539,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Engstligenfall
   cable_car_ids:
   - engstligenalp-cable-car
+  start_maps_url: https://www.google.com/maps/place/?q=46.45933,7.5664&z=16
 - id: mount_pilatus-alpnachstad-aemsigen-kulm
   visits:
   - mount_pilatus
@@ -3421,6 +3566,7 @@ hikes:
   - https://pilatus.ch/en/activities/hiking
   cable_car_ids:
   - pilatusbahn-cogwheel
+  start_maps_url: https://www.google.com/maps/place/?q=46.95502,8.27775&z=16
 - id: mount_pilatus-fraekmuentegg-tomlishorn
   visits:
   - mount_pilatus
@@ -3467,6 +3613,7 @@ hikes:
   - https://www.aegerital-sattel.ch/attraktionen/wasserfall-finstersee-ab525f2dda
   quickest_for:
   - wasserfall_finstersee
+  start_maps_url: https://www.google.com/maps/place/?q=47.1672,8.62961&z=16
 - id: lac_bleu-la-gouille-direct
   visits:
   - lac_bleu
@@ -3488,6 +3635,7 @@ hikes:
   - https://www.valdherens.ch/en/hike-to-arolla-s-blue-lake-lac-bleu-fp46146
   quickest_for:
   - lac_bleu
+  start_maps_url: https://www.google.com/maps/place/?q=46.05371,7.49043&z=16
 - id: wildsee-pizol-5-seen-wanderung
   visits:
   - wildsee
@@ -3516,6 +3664,7 @@ hikes:
   - pizol-bergbahnen
   quickest_for:
   - wildsee
+  start_maps_url: https://www.google.com/maps/place/?q=46.97923,9.41704&z=16
 - id: refuge_du_lac_blanc-flegere
   visits:
   - refuge_du_lac_blanc
@@ -3545,6 +3694,7 @@ hikes:
   - flegere-cable-car
   quickest_for:
   - refuge_du_lac_blanc
+  start_maps_url: https://www.google.com/maps/place/?q=45.95105,6.88616&z=16
 - id: lac_de_peyre-colombiere
   visits:
   - lac_de_peyre
@@ -3569,6 +3719,7 @@ hikes:
   - https://www.altituderando.com/Lac-de-Peyre-Pointe-de-Balafrasse-2296m
   quickest_for:
   - lac_de_peyre
+  start_maps_url: https://www.google.com/maps/place/?q=45.99224,6.47584&z=16
 - id: lago_di_saoseo-sfazu-val-da-camp
   visits:
   - lago_di_saoseo
@@ -3596,6 +3747,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Lago_di_Saoseo
   quickest_for:
   - lago_di_saoseo
+  start_maps_url: https://www.google.com/maps/place/?q=46.38957,10.07944&z=16
 - id: silsersee-chaste-peninsula
   visits:
   - silsersee
@@ -3617,6 +3769,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Lake_Sils
   quickest_for:
   - silsersee
+  start_maps_url: https://www.google.com/maps/place/?q=46.42893,9.76338&z=16
 - id: fulberg-from-niederbauen-cable-car
   name: Niederbauen to Fulberg ridge
   visits:
@@ -3664,6 +3817,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Zermatt
   quickest_for:
   - zermatt_huts
+  start_maps_url: https://www.google.com/maps/place/?q=46.01313,7.74521&z=16
 - id: tine_de_conflens-from-la-sarraz
   name: Loop from La Sarraz via the Nozon gorge
   visits:
@@ -3686,6 +3840,7 @@ hikes:
   - https://www.komoot.com/smarttour/5472230
   quickest_for:
   - tine_de_conflens
+  start_maps_url: https://www.google.com/maps/place/?q=46.66037,6.51426&z=16
 - id: etang_de_la_gruere-pond-loop
   name: Loop around the pond from La Theurre
   visits:
@@ -3707,6 +3862,7 @@ hikes:
   - https://www.j3l.ch/en/P33241/destinations/nature-sites/etang-de-la-gruere
   - https://www.parks.swiss/en/map/offer-detail/etang-de-la-gruere-1246
   - https://www.myswitzerland.com/en-ch/destinations/etang-de-la-gruere/
+  start_maps_url: https://www.google.com/maps/place/?q=47.24142,7.03806&z=16
 - id: gorges_du_dailley-from-salvan
   name: Salvan to Van d'en Bas through the gorge
   visits:
@@ -3731,6 +3887,7 @@ hikes:
   - https://www.valais.ch/en/explore/activities/natural-sites/geological-sites/dailley-gorge
   quickest_for:
   - gorges_du_dailley
+  start_maps_url: https://www.google.com/maps/place/?q=46.12833,7.02206&z=16
 - id: etang_de_la_gruere-short-from-la-theurre
   name: Short walk from La Theurre
   visits:
@@ -3752,3 +3909,4 @@ hikes:
   - https://www.parks.swiss/en/map/offer-detail/etang-de-la-gruere-1246
   quickest_for:
   - etang_de_la_gruere
+  start_maps_url: https://www.google.com/maps/place/?q=47.24142,7.03806&z=16

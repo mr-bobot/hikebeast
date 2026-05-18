@@ -285,7 +285,7 @@ spots:
     lat: 46.6795746
     lng: 8.1548593
   trip_facts:
-    busyness: 5
+    busyness: 3
     best_season: June - October
     elevation_m: 1330
   hike_ids:
@@ -322,7 +322,7 @@ spots:
     lat: 46.6795746
     lng: 8.1548593
   trip_facts:
-    busyness: 5
+    busyness: 3
     best_season: June - October
     elevation_m: 1330
   hike_ids:
@@ -357,7 +357,7 @@ spots:
     lat: 46.6800759
     lng: 8.1509677
   trip_facts:
-    busyness: 5
+    busyness: 2
     best_season: June - October
     elevation_m: 1330
   hike_ids:
@@ -638,7 +638,6 @@ spots:
     busyness: 4
     best_season: June - October
   hike_ids:
-  - brienzer_rothorn-default
   - brienzer_rothorn-cog-railway
   - brienzer_rothorn-brienz-via-planalp
   - hardergrat_trail-rothorn-to-harder-kulm
@@ -834,8 +833,9 @@ spots:
     verdict: forbidden
     featured: true
     style: tent
-    tip: "Designated tent area at the Fronalpstock Hotel. Book through the hotel."
-    reason: Wild bivouacking is not permitted on Fronalpstock or anywhere in the Stoos-Muotatal region. Only the designated tent area near the Fronalpstock Hotel is legal — book through the hotel.
+    tip: Designated tent area at the Fronalpstock Hotel. Book through the hotel.
+    reason: Wild bivouacking is not permitted on Fronalpstock or anywhere in the Stoos-Muotatal region. Only the designated tent area near the Fronalpstock Hotel is legal — book through
+      the hotel.
     canton: Schwyz (SZ)
     protections:
     - BLN landscape — Vierwaldstättersee mit Kernwald, Bürgenstock und Rigi
@@ -877,7 +877,7 @@ spots:
     verdict: restricted
     featured: true
     style: both
-    reason: "Klewenalp area (NW): tolerated single-night above tree line."
+    reason: 'Klewenalp area (NW): tolerated single-night above tree line.'
     canton: Nidwalden (NW)
     protections:
     - BLN landscape — Vierwaldstättersee mit Kernwald, Bürgenstock und Rigi
@@ -970,7 +970,7 @@ spots:
     verdict: restricted
     featured: true
     style: both
-    reason: "UNESCO Biosphäre Entlebuch: park rules — tolerated above tree line, single night, no fire."
+    reason: 'UNESCO Biosphäre Entlebuch: park rules — tolerated above tree line, single night, no fire.'
     canton: Lucerne (LU)
     protections:
     - BLN landscape — Schratteflue
@@ -1671,11 +1671,11 @@ spots:
   - file: 04.jpeg
     credit: oliwear.j
     source_type: instagram
-    source_url: "https://instagram.com/oliwear.j"
+    source_url: https://instagram.com/oliwear.j
   - file: 05.jpg
     credit: louise_pipet_unsplash
     source_type: unsplash
-    source_url: "https://unsplash.com/de/fotos/ein-gewasser-mit-bergen-im-hintergrund-ssS_SLIPzMM"
+    source_url: https://unsplash.com/de/fotos/ein-gewasser-mit-bergen-im-hintergrund-ssS_SLIPzMM
   - file: 06.jpg
     credit: zimydakid
     source_type: book
@@ -2633,7 +2633,7 @@ spots:
     featured: true
     style: both
     tip: Only above the tree line, outside the Gruyère regional-park core.
-    reason: "Parc naturel régional Gruyère Pays-d'Enhaut: tolerated above tree line, single night, no fire. Stay clear of the climbing approaches."
+    reason: 'Parc naturel régional Gruyère Pays-d''Enhaut: tolerated above tree line, single night, no fire. Stay clear of the climbing approaches.'
     canton: Bern (BE)
     protections:
     - National / regional park — Parc naturel régional Gruyère Pays-d’Enhaut
@@ -2916,7 +2916,7 @@ spots:
     featured: true
     style: both
     tip: Single night above the tree line. Pitch clear of the dry-meadow nature reserve at the summit.
-    reason: "Parc Gruyère Pays-d'Enhaut. Tolerated above tree line, single night, no fire."
+    reason: Parc Gruyère Pays-d'Enhaut. Tolerated above tree line, single night, no fire.
     canton: Fribourg (FR)
   maps_url: https://www.google.com/maps/place/Teysachaux/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8f532d477db9:0x408922a3b47b674f!8m2!3d46.5340397!4d6.9963444!16s%2Fm%2F0kfxz5y
   image: spots/teysachaux/main.jpg
@@ -3876,7 +3876,7 @@ spots:
     verdict: restricted
     featured: true
     style: both
-    reason: "Pass on UR/GL border: UR side tolerates single-night above tree line; GL side tightening enforcement (2024+). Pitch on UR side."
+    reason: 'Pass on UR/GL border: UR side tolerates single-night above tree line; GL side tightening enforcement (2024+). Pitch on UR side.'
     canton: Uri (UR)
   maps_url: https://www.google.com/maps/place/Klausenpass/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47853eb3eda525dd:0x843273b067c9c5d8!8m2!3d46.8682419!4d8.8553908!16s%2Fg%2F1yg57xhq8
   image: spots/klausenpass/main.jpg
@@ -4291,7 +4291,7 @@ spots:
     verdict: restricted
     featured: true
     style: both
-    reason: "Inside the Pizol federal game reserve: wild camping banned. Tolerated only outside the reserve boundary; check the BAFU map (jagdbanngebiete) before pitching."
+    reason: 'Inside the Pizol federal game reserve: wild camping banned. Tolerated only outside the reserve boundary; check the BAFU map (jagdbanngebiete) before pitching.'
     canton: St. Gallen (SG)
     protections:
     - Federal hunting reserve — Graue Hörner
@@ -4339,7 +4339,8 @@ spots:
     verdict: forbidden
     featured: true
     style: both
-    reason: Wild camping is not allowed in Davos Klosters — the local police issue fines. Jöriseen is also inside BLN Silvretta-Vereina with sensitive alpine flora at the lake shores. Use the Davos campsite at Rinerhorn or pitches at Lake Davos.
+    reason: Wild camping is not allowed in Davos Klosters — the local police issue fines. Jöriseen is also inside BLN Silvretta-Vereina with sensitive alpine flora at the lake shores.
+      Use the Davos campsite at Rinerhorn or pitches at Lake Davos.
     canton: Grisons (GR)
     protections:
     - BLN landscape — Silvretta – Vereina
@@ -4982,7 +4983,8 @@ spots:
   best_light: Sunset
   wildCamping:
     verdict: restricted
-    reason: "Réserve Naturelle Nationale des Aiguilles Rouges. Since 2024 (prefectural order), bivouac is forbidden by default; only regulated zones around Lac des Chéserys are tolerated, and ONLY with prior online booking via the Chamonix app or bivouac.nature-haute-savoie.fr. Tents 19:00-09:00, one night."
+    reason: Réserve Naturelle Nationale des Aiguilles Rouges. Since 2024 (prefectural order), bivouac is forbidden by default; only regulated zones around Lac des Chéserys are tolerated,
+      and ONLY with prior online booking via the Chamonix app or bivouac.nature-haute-savoie.fr. Tents 19:00-09:00, one night.
     canton: France
   maps_url: https://www.google.com/maps/place/Lacs+des+Ch%C3%A9serys/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894cdf11eee317:0x3205ec87a48b021e!8m2!3d45.984858!4d6.90184!16s%2Fg%2F11fy_109py
   image: spots/les_cheserys/main.jpg
@@ -5028,8 +5030,9 @@ spots:
     verdict: tolerated
     featured: true
     style: tent
-    tip: "Reservation required via the Chamonix app. Tent up 19:00, down by 09:00, one night."
-    reason: "Bivouac zone around Lac Blanc / Lac des Chéserys inside the Aiguilles Rouges Réserve Naturelle. Online reservation mandatory via Chamonix app or bivouac.nature-haute-savoie.fr. Tent up at 19:00, taken down by 09:00, no fire, one night."
+    tip: Reservation required via the Chamonix app. Tent up 19:00, down by 09:00, one night.
+    reason: Bivouac zone around Lac Blanc / Lac des Chéserys inside the Aiguilles Rouges Réserve Naturelle. Online reservation mandatory via Chamonix app or bivouac.nature-haute-savoie.fr.
+      Tent up at 19:00, taken down by 09:00, no fire, one night.
     canton: France
   maps_url: https://www.google.com/maps/place/Lacs+des+Ch%C3%A9serys/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894cdf11eee317:0x3205ec87a48b021e!8m2!3d45.984858!4d6.90184!16s%2Fg%2F11fy_109py
   image: spots/camping_in_cheserys/main.jpg
@@ -5136,7 +5139,8 @@ spots:
     verdict: restricted
     featured: true
     style: bivouac
-    reason: "Aravis range, France: outside any nature reserve at the summit ridge — bivouac (no tent, sundown to sunrise) tolerated above the alpages. Below the alpages: private pasture, ask farmer."
+    reason: 'Aravis range, France: outside any nature reserve at the summit ridge — bivouac (no tent, sundown to sunrise) tolerated above the alpages. Below the alpages: private pasture,
+      ask farmer.'
     canton: France
   maps_url: https://www.google.com/maps/place/Pic+de+Jallouvre/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478bf65328e39ee7:0xc6c8697aa884f7bb!8m2!3d45.9964141!4d6.453518!16s%2Fm%2F0czf6zz
   image: spots/pic_de_jallouvre/main.jpg
@@ -5180,7 +5184,8 @@ spots:
     featured: true
     style: both
     tip: Pitch near the Refuge de la Dent d'Oche or toward Col de Planchamp. The summit ridge is too exposed.
-    reason: "Chablais (Haute-Savoie), France: bivouac (no tent, sundown to sunrise) tolerated above tree line outside the Réserve Naturelle de la Dent d'Oche/Cornettes de Bise. The summit refuge offers paid lodging."
+    reason: 'Chablais (Haute-Savoie), France: bivouac (no tent, sundown to sunrise) tolerated above tree line outside the Réserve Naturelle de la Dent d''Oche/Cornettes de Bise. The
+      summit refuge offers paid lodging.'
     canton: France
   maps_url: https://www.google.com/maps/place/Dent+d'Oche/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478c20596c41be3f:0x8fa3019f16f7527c!8m2!3d46.353057!4d6.731264!16s%2Fm%2F0crfz_4
   image: spots/dent_doche/main.jpg
@@ -5712,8 +5717,9 @@ spots:
     verdict: restricted
     featured: true
     style: bivouac
-    tip: "Bivouac (no tent) tolerated above the alpages, sundown to sunrise. Pitch on the ridge toward Col de Balafrasse for the Aravis sunset."
-    reason: "Aravis range, France: outside any nature reserve at the lake; bivouac (no tent, sundown to sunrise) tolerated above the alpages. Below the alpages: private pasture, ask farmer."
+    tip: Bivouac (no tent) tolerated above the alpages, sundown to sunrise. Pitch on the ridge toward Col de Balafrasse for the Aravis sunset.
+    reason: 'Aravis range, France: outside any nature reserve at the lake; bivouac (no tent, sundown to sunrise) tolerated above the alpages. Below the alpages: private pasture, ask
+      farmer.'
     canton: France
   maps_url: https://www.google.com/maps/place/Lac+de+Peyre/@45.9907,6.4915,15z
   image: spots/lac_de_peyre/main.jpg
