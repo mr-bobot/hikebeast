@@ -370,6 +370,12 @@ export default async function handler(req, res) {
   const sourcePageRaw = typeof body.source_page === "string" ? body.source_page.trim().toLowerCase() : "";
   const sourcePage = /^[a-z0-9_]{1,40}$/.test(sourcePageRaw) ? sourcePageRaw : "";
 
+  // v12 hero split-test bucket the buyer was assigned to ("01".."08"). The
+  // webhook forwards this to the Sheet's `hero_variant` column for paid_at
+  // attribution per variant. Empty if the buyer wasn't in the test.
+  const heroVariantRaw = typeof body.hero_variant === "string" ? body.hero_variant.trim() : "";
+  const heroVariant = /^[a-z0-9_]{1,8}$/i.test(heroVariantRaw) ? heroVariantRaw : "";
+
   const origin = (req.headers.origin && /^https?:\/\//.test(req.headers.origin))
     ? req.headers.origin
     : "https://hikebeast.ch";
@@ -406,6 +412,9 @@ export default async function handler(req, res) {
         r: ref,
         // Which landing variant the buyer paid from. Sheet attribution.
         source_page: sourcePage,
+        // v12 split-test bucket ID. Joined to the Sheet's `hero_variant`
+        // column by the webhook for per-variant conversion tracking.
+        hero_variant: heroVariant,
       },
       // Forwarded into the underlying PaymentIntent so the webhook can join
       // the same identifiers without re-hydrating the session object.

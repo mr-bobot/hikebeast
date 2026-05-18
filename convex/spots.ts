@@ -87,6 +87,13 @@ const spotArg = v.object({
     protections: v.optional(v.array(v.string())),
     // Editorial pin for the /full/wildcamping/ collection — see schema.ts
     featured:    v.optional(v.boolean()),
+    // Practical camping-style classification + per-spot tip — see schema.ts
+    style:       v.optional(v.union(
+      v.literal("tent"),
+      v.literal("both"),
+      v.literal("bivouac"),
+    )),
+    tip:         v.optional(v.string()),
   })),
 });
 

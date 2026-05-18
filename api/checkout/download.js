@@ -44,7 +44,7 @@ async function logDownload(fields) {
         secret: process.env.SHEETS_SECRET,
         ...fields,
       }),
-      signal: AbortSignal.timeout(5000),
+      signal: AbortSignal.timeout(15000),
     });
   } catch (err) {
     console.error("Paid download log failed:", err);
