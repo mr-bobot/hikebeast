@@ -138,7 +138,7 @@ hikes:
   hut_ids:
   - windegghutte-sac
   start_maps_url: https://maps.app.goo.gl/A84sfrwU7EV3Sko5A
-  distance_km: 6.0
+  distance_km: 3.0
 - id: gelmersee-default
   description_extra: Accessed via the Gelmerbahn funicular from the valley, with a maximum gradient of 106 percent. The funicular runs roughly June to October. From the top, a flat 1
     to 1.5 hour walk loops the reservoir at 1,850 m. T1 once you're up. The Gelmerhütte SAC sits at the far end of the lake for those continuing further.
@@ -279,7 +279,7 @@ hikes:
   visits:
   - augstmatthorn
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/augstmatthorn-1928/mountain-hiking/
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/augstmatthorn-106/mountain-hiking/
   - https://en.wikipedia.org/wiki/Augstmatthorn
   quickest_for:
   - augstmatthorn
@@ -289,7 +289,7 @@ hikes:
   transit:
     train: Interlaken West
     bus: PostBus 105 from Interlaken West to Habkern, then summer Ruftaxi or 2 hours on foot to Lombachalp
-  distance_km: 6.3
+  distance_km: 3.2
 - id: fronalpstock-route-72
   sac_grade: T1
   effort_label: Easy
@@ -793,7 +793,7 @@ hikes:
   hut_ids:
   - cabane-becs-de-bosson
   start_maps_url: https://www.google.com/maps/place/?q=46.18063,7.55796&z=16
-  distance_km: 14.5
+  distance_km: 7.2
 - id: moiry_glacier-bus-to-moiry-barrage
   name: Bus to Moiry dam + walk to hut
   start: Lac de Moiry / Moiry dam
@@ -1110,7 +1110,7 @@ hikes:
   - tseuzier_lake
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.34638,7.43516&z=16
-  distance_km: 4.9
+  distance_km: 2.5
 - id: salanfe_lake-from-van-d-en-haut
   name: From Van d'En Haut
   start: Van d'En Haut campsite
@@ -1150,7 +1150,7 @@ hikes:
   quickest_for:
   - pointe_du_tsate
   start_maps_url: https://www.google.com/maps/place/?q=46.08984,7.52262&z=16
-  distance_km: 10.9
+  distance_km: 5.5
 - id: gastlosen-gastlosen-circular
   name: Gastlosen circular (Jaun → Chalet du Soldat → Jaun)
   start: Jaun, Dorf
@@ -1189,7 +1189,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-broc-246/mountain-hiking/
   - https://en.wikipedia.org/wiki/Dent_de_Broc
   start_maps_url: https://www.google.com/maps/place/?q=46.604,7.099&z=16
-  distance_km: 10.1
+  distance_km: 5.0
 - id: dent_de_lys-les-paccots-circular
   name: Les Paccots loop via Lac des Joncs
   start: Les Paccots
@@ -1230,7 +1230,7 @@ hikes:
   cable_car_ids:
   - moleson-funiculaire
   start_maps_url: https://www.google.com/maps/place/?q=46.55582,7.02387&z=16
-  distance_km: 4.3
+  distance_km: 2.2
 - id: teysachaux-les-paccots-to-moleson
   name: Les Paccots → Téysachaux → Moléson
   start: Les Paccots
@@ -1326,7 +1326,7 @@ hikes:
   - lac_de_taney
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.33749,6.85606&z=16
-  distance_km: 9.0
+  distance_km: 4.5
 - id: grammont-route-154
   sac_grade: T2
   effort_label: Mid
@@ -1343,7 +1343,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Grammont_(mountain)
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.33749,6.85606&z=16
-  distance_km: 13.9
+  distance_km: 7.0
 - id: marchairuz-mollendruz-mont-tendre-marchairuz
   name: Col du Mollendruz → Mont Tendre → Col du Marchairuz
   start: Col du Mollendruz
@@ -1572,7 +1572,7 @@ hikes:
   - berschnerfall
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=47.10714,9.34516&z=16
-  distance_km: 3.6
+  distance_km: 1.8
 - id: klausenpass-urnerboden-to-altdorf
   name: Urnerboden → Klausenpass → Altdorf
   start: Urnerboden village
@@ -1674,7 +1674,7 @@ hikes:
   start: St. Martin (Walser village)
   transit:
     train: Sargans + Postbus to St. Martin
-  duration_min: 315
+  duration_min: 158
   sac_grade: T2
   effort_label: Moderate
   description_extra: Shorter alternative from the Walser village of St. Martin into the upper Calfeisental, around 5 h 15 of walking. Follow the alp access road into the valley, then
@@ -1686,7 +1686,7 @@ hikes:
   quickest_for:
   - gigerwaldsee
   start_maps_url: https://www.google.com/maps/place/?q=46.92058,9.35556&z=16
-  distance_km: 14.2
+  distance_km: 7.1
 - id: ruinaulta-versam-circular
   name: Versam circular through the gorge
   start: Versam station
@@ -1709,7 +1709,7 @@ hikes:
   start: Flims Waldhaus
   transit:
     bus: Postbus to Flims Waldhaus
-  duration_min: 120
+  duration_min: 60
   sac_grade: T1
   effort_label: Easy
   description_extra: Two-hour out-and-back from Flims Waldhaus down to the Rhine gorge. Trail descends through forest past Caumasee to Conn and the Il Spir viewing platform, then climbs
@@ -1721,7 +1721,7 @@ hikes:
   quickest_for:
   - ruinaulta
   start_maps_url: https://www.google.com/maps/place/?q=46.82572,9.2888&z=16
-  distance_km: 7.4
+  distance_km: 3.7
 - id: crestasee-four-lakes-hike
   name: Senda quatter lags da Flem (Four Lakes Hike)
   start: Flims
@@ -1842,7 +1842,7 @@ hikes:
   - joriseen
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.75028,9.9475&z=16
-  distance_km: 12.0
+  distance_km: 6.0
 - id: falensee-route-69
   sac_grade: T1
   effort_label: Easy
@@ -1881,7 +1881,7 @@ hikes:
   - batoni_wasserfallarena
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.99056,9.34444&z=16
-  distance_km: 10.3
+  distance_km: 5.2
 - id: morteratsch_glacier-aussichtsweg-glacier-trail
   name: Glacier theme trail (Aussichtsweg)
   start: Morteratsch railway station
@@ -1899,7 +1899,7 @@ hikes:
   - https://www.schweizmobil.ch/en/hiking-in-switzerland/route-806
   - https://www.myswitzerland.com/en/experiences/route/gletscheraussichten-morteratsch/
   start_maps_url: https://www.google.com/maps/place/?q=46.45072,9.94041&z=16
-  distance_km: 5.8
+  distance_km: 2.9
 - id: morteratsch_glacier-short-glacier-tongue
   name: Short walk to glacier tongue
   start: Morteratsch railway station
@@ -2092,7 +2092,7 @@ hikes:
   cable_car_ids:
   - flegere-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=45.95105,6.88616&z=16
-  distance_km: 8.2
+  distance_km: 4.1
 - id: glacier_des_bossons-chairlift-to-chalet
   name: Chairlift to Chalet du Glacier
   start: Les Bossons (bus stop)
@@ -2129,7 +2129,7 @@ hikes:
   cable_car_ids:
   - glacier-bossons-chairlift
   start_maps_url: https://www.google.com/maps/place/?q=45.894,6.84951&z=16
-  distance_km: 11.5
+  distance_km: 5.8
 - id: pic_de_jallouvre-from-petit-bornand
   name: From Le Petit-Bornand-les-Glières
   start: Le Petit-Bornand-les-Glières
@@ -2145,7 +2145,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Pic_de_Jallouvre
   - https://en.wikipedia.org/wiki/Bornes_Massif
   start_maps_url: https://www.google.com/maps/place/?q=46.00168,6.39609&z=16
-  distance_km: 9.8
+  distance_km: 5.0
 - id: dent_doche-from-bernex
   name: From Bernex via Fétiuère
   start: Fétiuère parking (above Bernex)
@@ -2166,11 +2166,11 @@ hikes:
   hut_ids:
   - refuge-dent-oche
   start_maps_url: https://www.google.com/maps/place/?q=46.3462,6.70783&z=16
-  distance_km: 6.2
+  distance_km: 3.1
 - id: brisen-route-via-haldigrat
   sac_grade: T3
   effort_label: Difficult
-  duration_min: 270
+  duration_min: 135
   gain_m: 460
   start: Haldigrat chairlift upper station, above Niederrickenbach
   transit:
@@ -2192,7 +2192,7 @@ hikes:
   - niederrickenbach-cable-car
   - haldigrat-chairlift
   start_maps_url: https://www.google.com/maps/place/?q=46.90275,8.44006&z=16
-  distance_km: 9.5
+  distance_km: 4.75
 - id: engstlensee-route-lakeshore-loop
   sac_grade: T1
   effort_label: Easy
@@ -2237,7 +2237,7 @@ hikes:
   - grappelensee
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=47.217,9.31561&z=16
-  distance_km: 6.4
+  distance_km: 3.2
 - id: ponte_tibetano-route-from-mornera
   sac_grade: T2
   effort_label: Moderate
@@ -2267,7 +2267,7 @@ hikes:
 - id: zinal_glacier-route-petit-mountet
   sac_grade: T2
   effort_label: Moderate
-  duration_min: 210
+  duration_min: 120
   gain_m: 500
   start: Zinal village, south end parking near the Navisence river
   transit:
@@ -2459,13 +2459,13 @@ hikes:
   quickest_for:
   - grammont
   start_maps_url: https://www.google.com/maps/place/?q=46.36878,6.78856&z=16
-  distance_km: 18.6
+  distance_km: 9.3
 - id: ice_lake_griesslisee-from-klausenpass
   visits:
   - ice_lake_griesslisee
   sac_grade: T3
   effort_label: Demanding
-  duration_min: 240
+  duration_min: 120
   gain_m: 700
   equipment_list:
   - Sturdy hiking boots
@@ -2483,7 +2483,7 @@ hikes:
   quickest_for:
   - ice_lake_griesslisee
   start_maps_url: https://www.google.com/maps/place/?q=46.86855,8.85589&z=16
-  distance_km: 7.5
+  distance_km: 3.75
 - id: joriseen-from-klosters-via-berghaus-vereina
   visits:
   - joriseen
@@ -2789,7 +2789,7 @@ hikes:
   effort_label: Demanding
   duration_min: 360
   gain_m: 1250
-  distance_km: 13
+  distance_km: 6.5
   equipment_list:
   - Sturdy hiking boots
   - Poles
@@ -2870,13 +2870,13 @@ hikes:
   - https://en.wikipedia.org/wiki/Dent_d'Oche
   - https://www.summitpost.org/oche-dent-d/151397
   start_maps_url: https://www.google.com/maps/place/?q=46.36458,6.77011&z=16
-  distance_km: 11.4
+  distance_km: 5.7
 - id: falensee-from-brulisau-via-samtisersee
   visits:
   - falensee
   sac_grade: T2
   effort_label: Moderate
-  duration_min: 240
+  duration_min: 135
   gain_m: 600
   equipment_list: []
   start: Brülisau
@@ -2891,7 +2891,7 @@ hikes:
   hut_ids:
   - berggasthaus-bollenwees
   start_maps_url: https://www.google.com/maps/place/?q=47.29645,9.4568&z=16
-  distance_km: 16.0
+  distance_km: 8.0
 - id: gelmersee-from-handegg-on-foot
   visits:
   - gelmersee
@@ -3220,9 +3220,9 @@ hikes:
   - dent_de_jaman
   sac_grade: T2
   effort_label: Moderate
-  duration_min: 240
+  duration_min: 120
   gain_m: 880
-  distance_km: 10.6
+  distance_km: 5.3
   equipment_list: []
   start: Les Avants train station
   transit:
@@ -3275,7 +3275,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/fronalpstock-sz-684/mountain-hiking/from-morschach-via-chaelen-2400/
   start_maps_url: https://maps.app.goo.gl/7m8qUzPxyuPe5WRz8
-  distance_km: 10.0
+  distance_km: 7.3
 - id: geltenschuss-from-iffigenalp-via-wildhornhuette
   visits:
   - geltenschuss
@@ -3753,7 +3753,7 @@ hikes:
   effort_label: Moderate
   duration_min: 90
   gain_m: 550
-  distance_km: 6.0
+  distance_km: 2.5
   equipment_list:
   - Hiking boots
   - Rain layer
@@ -3840,7 +3840,6 @@ hikes:
   description_extra: From the top of the Niederbauen cable car, follow the marked ridge trail east-southeast. About 75 minutes of steady climbing to Fulberg at 1,920 m, T3 throughout
     with no technical sections but exposure to weather on the open ridge. The route is part of the longer ridge link toward Brisen. Descend the same way or continue along the ridge.
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/fulberg-2148/mountain-hiking/
   - https://www.niederbauen.ch/
   cable_car_ids:
   - niederbauen-emmetten-cable-car

@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779187596007" />
+<link rel="stylesheet" href="../../preview.css?v=1779200469428" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -164,7 +164,7 @@
   </div>
     <div class="hb-stats-cell" data-stat-cell="dist">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
-    <span class="value"><span data-rd-dist>5.8</span><span class="unit">km</span></span>
+    <span class="value"><span data-rd-dist>2.9</span><span class="unit">km</span></span>
     <span class="label">Distance</span>
   </div>
   </div>
@@ -224,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"morteratsch_glacier-aussichtsweg-glacier-trail","name":"Glacier theme trail (Aussichtsweg)","start":"Morteratsch railway station","transit":{"train":"Morteratsch (RhB)"},"duration_min":50,"sac_grade":"T1","effort_label":"Easy","description_extra":"Glacier theme trail (Aussichtsweg) from Morteratsch railway station toward the glacier tongue. Interpretive stations along a good dirt path explain how far the ice has retreated since 1850, with the historical positions marked along the trail. About 50 minutes one way, T1, family-friendly. Round trip with the stations takes about two hours. Direct ice access has been off-limits since May 2024 due to rockfall risk; the trail to the tongue is officially closed, yellow signs lead to viewpoints along the moraine.","visits":["morteratsch_glacier"],"sources":["https://www.schweizmobil.ch/en/hiking-in-switzerland/route-806","https://www.myswitzerland.com/en/experiences/route/gletscheraussichten-morteratsch/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.45072,9.94041&z=16","distance_km":5.8,"quickest":false},{"id":"morteratsch_glacier-short-glacier-tongue","name":"Short walk to glacier tongue","start":"Morteratsch railway station","duration_min":30,"gain_m":0,"sac_grade":"T1","effort_label":"Trivial","description_extra":"Half-hour walk on a flat dirt track from Morteratsch railway station to the glacier foreland. T1, stroller-passable. Pair with the longer Aussichtsweg theme trail for context on glacier retreat.","visits":["morteratsch_glacier"],"sources":["https://www.schweizmobil.ch/en/hiking-in-switzerland/route-806"],"quickest_for":["morteratsch_glacier"],"start_maps_url":"https://www.google.com/maps/place/?q=46.45072,9.94041&z=16","quickest":true}];
+  const ROUTES = [{"id":"morteratsch_glacier-aussichtsweg-glacier-trail","name":"Glacier theme trail (Aussichtsweg)","start":"Morteratsch railway station","transit":{"train":"Morteratsch (RhB)"},"duration_min":50,"sac_grade":"T1","effort_label":"Easy","description_extra":"Glacier theme trail (Aussichtsweg) from Morteratsch railway station toward the glacier tongue. Interpretive stations along a good dirt path explain how far the ice has retreated since 1850, with the historical positions marked along the trail. About 50 minutes one way, T1, family-friendly. Round trip with the stations takes about two hours. Direct ice access has been off-limits since May 2024 due to rockfall risk; the trail to the tongue is officially closed, yellow signs lead to viewpoints along the moraine.","visits":["morteratsch_glacier"],"sources":["https://www.schweizmobil.ch/en/hiking-in-switzerland/route-806","https://www.myswitzerland.com/en/experiences/route/gletscheraussichten-morteratsch/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.45072,9.94041&z=16","distance_km":2.9,"quickest":false},{"id":"morteratsch_glacier-short-glacier-tongue","name":"Short walk to glacier tongue","start":"Morteratsch railway station","duration_min":30,"gain_m":0,"sac_grade":"T1","effort_label":"Trivial","description_extra":"Half-hour walk on a flat dirt track from Morteratsch railway station to the glacier foreland. T1, stroller-passable. Pair with the longer Aussichtsweg theme trail for context on glacier retreat.","visits":["morteratsch_glacier"],"sources":["https://www.schweizmobil.ch/en/hiking-in-switzerland/route-806"],"quickest_for":["morteratsch_glacier"],"start_maps_url":"https://www.google.com/maps/place/?q=46.45072,9.94041&z=16","quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
