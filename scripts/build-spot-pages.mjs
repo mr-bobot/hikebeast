@@ -227,10 +227,19 @@ function busyDotsHtml(n) {
   return out + `</span>`;
 }
 
-function statCell(label, valueHtml, iconSvg) {
-  return `<div class="hb-stats-cell">
+function statCell(label, valueHtml, iconSvg, opts) {
+  // .is-empty (CSS display:none) hides the whole cell when no data,
+  // collapsing the 5-column grid down to whatever cells have data.
+  // Caller passes opts.empty=true to hide; runtime JS toggles the
+  // class on subsequent route swaps via the opts.hideKey selector.
+  const isEmpty = opts?.empty || !valueHtml;
+  const attrs = [
+    `class="hb-stats-cell${isEmpty ? " is-empty" : ""}"`,
+    opts?.hideKey ? `data-stat-cell="${opts.hideKey}"` : "",
+  ].filter(Boolean).join(" ");
+  return `<div ${attrs}>
     <span class="icon">${iconSvg}</span>
-    <span class="value">${valueHtml}</span>
+    <span class="value">${valueHtml || ""}</span>
     <span class="label">${label}</span>
   </div>`;
 }
@@ -275,21 +284,25 @@ function renderOverviewStatsBar(spot) {
 // route-specific. Crowdedness is NOT shown here — it's a spot attribute,
 // not a route attribute.
 //
-// Elevation change cell shows "+gain" when only ascent is known, or
-// "+gain / -loss" when descent_m differs. Distance shows "—" when unknown.
+// Elevation change cell: show ONLY what's explicitly set on the hike.
+// No auto-mirroring of gain → descent. The other times/distances refer
+// to one-way effort for an out-and-back hike, so showing "+395 / -395"
+// for a hike where only the up-direction is documented is misleading.
+//
+// Rules:
+//   - only gain set  → "+395m"
+//   - only descent set → "-1200m"  (rare — typically a downhill traverse)
+//   - both set  → "+1075m / -2015m"  (asymmetric traverse OR loop)
+//   - neither   → null (cell hidden)
 //
 // Called server-side once with the first route as a placeholder; the JS in
 // flipScriptFor swaps the route-specific values per click.
 function fmtElevationChange(gainM, descentM) {
   if (!gainM && !descentM) return null;
-  // Default descent to gain when descent is unset — most hikes are
-  // out-and-back, so a missing descent_m means "same as gain". Where a
-  // hike has explicit asymmetric descent (one-way ridge / traverse),
-  // descent_m is set explicitly. Always rendering both makes the cell
-  // self-explanatory.
-  const up = gainM || descentM;
-  const down = descentM != null ? descentM : gainM;
-  return `+${up}<span class="unit">m</span> <span class="unit">/</span> -${down}<span class="unit">m</span>`;
+  const parts = [];
+  if (gainM)    parts.push(`+${gainM}<span class="unit">m</span>`);
+  if (descentM) parts.push(`-${descentM}<span class="unit">m</span>`);
+  return parts.join(` <span class="unit">/</span> `);
 }
 
 function renderRouteStatsBar(spot, route) {
@@ -302,19 +315,20 @@ function renderRouteStatsBar(spot, route) {
     ? `<span data-rd-dur>${t.value}</span>${t.unit ? `<span class="unit" data-rd-dur-unit>${t.unit}</span>` : `<span class="unit" data-rd-dur-unit></span>`}`
     : `<span class="missing" data-rd-dur>—</span><span class="unit" data-rd-dur-unit></span>`;
   const elevChange = fmtElevationChange(r.gain_m, r.descent_m);
-  const elev = elevChange
-    ? `<span data-rd-elev-change>${elevChange}</span>`
-    : `<span class="missing" data-rd-elev-change>—</span>`;
-  const dist = r.distance_km
-    ? `<span data-rd-dist>${r.distance_km}</span><span class="unit">km</span>`
-    : `<span class="missing" data-rd-dist>—</span>`;
+  // Always render the value span (so runtime JS can find it when
+  // swapping per-route); hide the WHOLE cell via .is-empty on the parent
+  // when the placeholder route has no data. Same pattern for distance.
+  const elev = `<span data-rd-elev-change>${elevChange || ""}</span>`;
+  const dist = `<span data-rd-dist>${r.distance_km || ""}</span><span class="unit">km</span>`;
+  const elevEmpty = elevChange ? "" : "is-empty";
+  const distEmpty = r.distance_km ? "" : "is-empty";
 
   return `<div class="hb-stats-bar">
     ${statCell("Altitude", alt, ICON_ELEV)}
     ${statCell("Difficulty", sac, ICON_DIFF)}
     ${statCell("Duration", time, ICON_TIME)}
-    ${statCell("Elevation change", elev, ICON_GAIN)}
-    ${statCell("Distance", dist, ICON_DIST)}
+    ${statCell("Elevation change", elev, ICON_GAIN, { hideKey: "elev", empty: !elevChange })}
+    ${statCell("Distance", dist, ICON_DIST, { hideKey: "dist", empty: !r.distance_km })}
   </div>`;
 }
 
@@ -703,11 +717,12 @@ function flipScriptFor(spot) {
 
   function fmtElevationChange(gainM, descentM) {
     if (!gainM && !descentM) return null;
-    // Default descent to gain (most hikes are out-and-back). Asymmetric
-    // routes set descent_m explicitly.
-    const up = gainM || descentM;
-    const down = descentM != null ? descentM : gainM;
-    return '+' + up + 'm / -' + down + 'm';
+    // Show only what's set. No auto-mirroring (the route description's
+    // duration / distance refers to one-way effort for out-and-back hikes).
+    const parts = [];
+    if (gainM)    parts.push('+' + gainM + 'm');
+    if (descentM) parts.push('-' + descentM + 'm');
+    return parts.join(' / ');
   }
 
   function setText(sel, txt) {
@@ -791,36 +806,35 @@ function flipScriptFor(spot) {
       }
     }
 
-    // Elevation change cell: always show "+up m / -down m". Wraps each
-    // "m" suffix + the "/" in unit-styled spans so they sit subtly in the
-    // value. Built by tokenizing the formatted string instead of a regex
-    // to avoid the template-literal escape pitfall.
+    // Elevation change cell. When the hike has neither gain_m nor
+    // descent_m, hide the whole stat cell (CSS .is-empty → display:none).
+    // Otherwise: "+395m" / "-1200m" / "+1075m / -2015m" depending on what
+    // data we have.
+    const elevCell = back.querySelector('[data-stat-cell="elev"]');
     const elevEl = back.querySelector('[data-rd-elev-change]');
-    if (elevEl) {
-      const ec = fmtElevationChange(r.gain_m, r.descent_m);
-      if (ec) {
-        // ec looks like "+1075m / -2015m". Wrap each "m" and the "/" in unit spans.
-        const styled = ec
-          .replaceAll('m / ', '<span class="unit">m</span> <span class="unit">/</span> ')
-          .replace(/m$/, '<span class="unit">m</span>');
-        elevEl.innerHTML = styled;
-        elevEl.classList.remove('missing');
-      } else {
-        elevEl.textContent = '—';
-        elevEl.classList.add('missing');
-      }
+    const ec = fmtElevationChange(r.gain_m, r.descent_m);
+    if (ec) {
+      const styled = ec
+        .replaceAll('m / ', '<span class="unit">m</span> <span class="unit">/</span> ')
+        .replace(/m$/, '<span class="unit">m</span>');
+      if (elevEl) elevEl.innerHTML = styled;
+      if (elevCell) elevCell.classList.remove('is-empty');
+    } else {
+      if (elevCell) elevCell.classList.add('is-empty');
     }
 
-    // Distance cell
+    // Distance cell — hide whole cell when no value (per user policy:
+    // "lieber steht nichts (bzw keine box), als das es falsche Infos sind").
+    // The "km" unit is a sibling span baked in at server-render time,
+    // so we only update the value here; toggling .is-empty on the
+    // parent cell hides both spans together.
+    const distCell = back.querySelector('[data-stat-cell="dist"]');
     const distEl = back.querySelector('[data-rd-dist]');
-    if (distEl) {
-      if (r.distance_km) {
-        distEl.textContent = r.distance_km;
-        distEl.classList.remove('missing');
-      } else {
-        distEl.textContent = '—';
-        distEl.classList.add('missing');
-      }
+    if (r.distance_km) {
+      if (distEl) distEl.textContent = r.distance_km;
+      if (distCell) distCell.classList.remove('is-empty');
+    } else {
+      if (distCell) distCell.classList.add('is-empty');
     }
     // Prefer the concrete equipment_list (array of items). Fall back to the
     // legacy boolean for any hikes that haven't been migrated yet. Empty array

@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779130985888" />
+<link rel="stylesheet" href="../../preview.css?v=1779180857975" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -157,14 +157,14 @@
     <span class="value"><span data-rd-dur>4h 30</span><span class="unit" data-rd-dur-unit></span></span>
     <span class="label">Duration</span>
   </div>
-    <div class="hb-stats-cell">
+    <div class="hb-stats-cell" data-stat-cell="elev">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg></span>
-    <span class="value"><span data-rd-elev-change>+460<span class="unit">m</span> <span class="unit">/</span> -460<span class="unit">m</span></span></span>
+    <span class="value"><span data-rd-elev-change>+460<span class="unit">m</span></span></span>
     <span class="label">Elevation change</span>
   </div>
-    <div class="hb-stats-cell">
+    <div class="hb-stats-cell is-empty" data-stat-cell="dist">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
-    <span class="value"><span class="missing" data-rd-dist>—</span></span>
+    <span class="value"><span data-rd-dist></span><span class="unit">km</span></span>
     <span class="label">Distance</span>
   </div>
   </div>
@@ -242,11 +242,12 @@
 
   function fmtElevationChange(gainM, descentM) {
     if (!gainM && !descentM) return null;
-    // Default descent to gain (most hikes are out-and-back). Asymmetric
-    // routes set descent_m explicitly.
-    const up = gainM || descentM;
-    const down = descentM != null ? descentM : gainM;
-    return '+' + up + 'm / -' + down + 'm';
+    // Show only what's set. No auto-mirroring (the route description's
+    // duration / distance refers to one-way effort for out-and-back hikes).
+    const parts = [];
+    if (gainM)    parts.push('+' + gainM + 'm');
+    if (descentM) parts.push('-' + descentM + 'm');
+    return parts.join(' / ');
   }
 
   function setText(sel, txt) {
@@ -330,36 +331,35 @@
       }
     }
 
-    // Elevation change cell: always show "+up m / -down m". Wraps each
-    // "m" suffix + the "/" in unit-styled spans so they sit subtly in the
-    // value. Built by tokenizing the formatted string instead of a regex
-    // to avoid the template-literal escape pitfall.
+    // Elevation change cell. When the hike has neither gain_m nor
+    // descent_m, hide the whole stat cell (CSS .is-empty → display:none).
+    // Otherwise: "+395m" / "-1200m" / "+1075m / -2015m" depending on what
+    // data we have.
+    const elevCell = back.querySelector('[data-stat-cell="elev"]');
     const elevEl = back.querySelector('[data-rd-elev-change]');
-    if (elevEl) {
-      const ec = fmtElevationChange(r.gain_m, r.descent_m);
-      if (ec) {
-        // ec looks like "+1075m / -2015m". Wrap each "m" and the "/" in unit spans.
-        const styled = ec
-          .replaceAll('m / ', '<span class="unit">m</span> <span class="unit">/</span> ')
-          .replace(/m$/, '<span class="unit">m</span>');
-        elevEl.innerHTML = styled;
-        elevEl.classList.remove('missing');
-      } else {
-        elevEl.textContent = '—';
-        elevEl.classList.add('missing');
-      }
+    const ec = fmtElevationChange(r.gain_m, r.descent_m);
+    if (ec) {
+      const styled = ec
+        .replaceAll('m / ', '<span class="unit">m</span> <span class="unit">/</span> ')
+        .replace(/m$/, '<span class="unit">m</span>');
+      if (elevEl) elevEl.innerHTML = styled;
+      if (elevCell) elevCell.classList.remove('is-empty');
+    } else {
+      if (elevCell) elevCell.classList.add('is-empty');
     }
 
-    // Distance cell
+    // Distance cell — hide whole cell when no value (per user policy:
+    // "lieber steht nichts (bzw keine box), als das es falsche Infos sind").
+    // The "km" unit is a sibling span baked in at server-render time,
+    // so we only update the value here; toggling .is-empty on the
+    // parent cell hides both spans together.
+    const distCell = back.querySelector('[data-stat-cell="dist"]');
     const distEl = back.querySelector('[data-rd-dist]');
-    if (distEl) {
-      if (r.distance_km) {
-        distEl.textContent = r.distance_km;
-        distEl.classList.remove('missing');
-      } else {
-        distEl.textContent = '—';
-        distEl.classList.add('missing');
-      }
+    if (r.distance_km) {
+      if (distEl) distEl.textContent = r.distance_km;
+      if (distCell) distCell.classList.remove('is-empty');
+    } else {
+      if (distCell) distCell.classList.add('is-empty');
     }
     // Prefer the concrete equipment_list (array of items). Fall back to the
     // legacy boolean for any hikes that haven't been migrated yet. Empty array
