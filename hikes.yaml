@@ -34,6 +34,8 @@ hikes:
   - https://www.outdooractive.com/en/poi/bernese-oberland/oltschibachfall-meiringen/8649167/
   - https://de.wikipedia.org/wiki/Oltschibachfall
   start_maps_url: https://www.google.com/maps/place/?q=46.7273,8.1842&z=16
+  duration_min: 90
+  gain_m: 500
 - id: rosenlaui-route-99
   start: Parkplatz Gletscherschlucht
   transit:
@@ -3591,6 +3593,8 @@ hikes:
   cable_car_ids:
   - engstligenalp-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.45933,7.5664&z=16
+  duration_min: 70
+  gain_m: 395
 - id: mount_pilatus-alpnachstad-aemsigen-kulm
   visits:
   - mount_pilatus

@@ -550,7 +550,11 @@ function renderAccessSection(spot) {
   const cardHtml = blocks.length
     ? `<div class="hb-access-card">${blocks.join("")}</div>`
     : "";
-  return `<p class="hb-section-h">How to get there</p>${summaryHtml}${cardHtml}`;
+  // No section header — the whole back panel IS the "how to get there"
+  // page (the front-side CTA opens this). A "How to get there" heading
+  // inside it is redundant. Reported by user 2026-05-18 (round 2 of the
+  // same feedback).
+  return `${summaryHtml}${cardHtml}`;
 }
 
 function renderBackOverview(spot) {
