@@ -189,11 +189,14 @@ const BRAND_SPRITES = `<svg width="0" height="0" style="position:absolute" aria-
 
 // ─── Helpers for the planning panel ─────────────────────────────────────
 
-// Show the "How to get there →" CTA + planning panel when the spot has
-// either real route data OR an `access` block (drive-up / boat / transit
-// instructions for spots without a hike). Either is enough to flip.
+// Show the "How to get there →" CTA + planning panel only when the spot
+// has actual hikes / routes. For drive-up-only spots (arrival data only),
+// we suppress the back panel entirely: the front already has the Open in
+// Maps link, the spec grid (Access: Drive-up), and the body text — that's
+// enough for a "just park and walk a few minutes" spot. Reported by user
+// 2026-05-18: a "How to get there" page for a spot that only needs Google
+// Maps directions adds nothing.
 function hasPlanningData(spot) {
-  if (hasAccessData(spot)) return true;
   if (!Array.isArray(spot.routes) || spot.routes.length === 0) return false;
   return spot.routes.some(r =>
     r.sac_grade || r.duration_min || r.start || r.transit || r.swisstopo_url
