@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779181994143" />
+<link rel="stylesheet" href="../../preview.css?v=1779187595995" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -162,9 +162,9 @@
     <span class="value"><span data-rd-elev-change>+1200<span class="unit">m</span></span></span>
     <span class="label">Elevation change</span>
   </div>
-    <div class="hb-stats-cell is-empty" data-stat-cell="dist">
+    <div class="hb-stats-cell" data-stat-cell="dist">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
-    <span class="value"><span data-rd-dist></span><span class="unit">km</span></span>
+    <span class="value"><span data-rd-dist>10.9</span><span class="unit">km</span></span>
     <span class="label">Distance</span>
   </div>
   </div>
@@ -224,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"pointe_du_tsate-from-la-forclaz","name":"From La Forclaz via Lac du Tsaté","start":"La Forclaz (Évolène)","transit":{"bus":"Postbus to La Forclaz"},"duration_min":300,"gain_m":1200,"sac_grade":"T3","effort_label":"Long day, sparsely marked","description_extra":"Five-hour summit day from La Forclaz (postbus from Évolène) above the Val d'Hérens. Trail climbs through pasture to Lac du Tsaté, then up scree-covered slopes to the summit at 3,078 m. 1,200 m of cumulative gain, T3. The upper section has loose terrain; surefootedness essential.","visits":["pointe_du_tsate"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/","https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9"],"quickest_for":["pointe_du_tsate"],"start_maps_url":"https://www.google.com/maps/place/?q=46.08984,7.52262&z=16","quickest":true},{"id":"pointe_du_tsate-from-moiry-via-col-du-tsate","visits":["pointe_du_tsate"],"sac_grade":"T3","effort_label":"Demanding","duration_min":330,"gain_m":960,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Lac de Moiry / Moiry dam","transit":{"train":"Sierre","bus":"PostBus to Grimentz, then summer bus to Moiry barrage"},"description_extra":"Approach from the Val d'Anniviers side, opposite valley from La Forclaz. The path leaves the Moiry dam at 2,250 m and climbs to the Col du Tsaté at about 2,868 m on the ridge between the Moiry and Hérens valleys, then takes the south flank and south ridge to the summit at 3,077 m. SAC grades the route T3, 3 h 15 ascent, 960 m of cumulative gain, 1,580 m of descent if combined with the La Forclaz exit. A good path leads to the summit.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/","https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9"],"start_maps_url":"https://www.google.com/maps/place/?q=46.13761,7.57255&z=16","quickest":false}];
+  const ROUTES = [{"id":"pointe_du_tsate-from-la-forclaz","name":"From La Forclaz via Lac du Tsaté","start":"La Forclaz (Évolène)","transit":{"bus":"Postbus to La Forclaz"},"duration_min":300,"gain_m":1200,"sac_grade":"T3","effort_label":"Long day, sparsely marked","description_extra":"Five-hour summit day from La Forclaz (postbus from Évolène) above the Val d'Hérens. Trail climbs through pasture to Lac du Tsaté, then up scree-covered slopes to the summit at 3,078 m. 1,200 m of cumulative gain, T3. The upper section has loose terrain; surefootedness essential.","visits":["pointe_du_tsate"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/","https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9"],"quickest_for":["pointe_du_tsate"],"start_maps_url":"https://www.google.com/maps/place/?q=46.08984,7.52262&z=16","distance_km":10.9,"quickest":true},{"id":"pointe_du_tsate-from-moiry-via-col-du-tsate","visits":["pointe_du_tsate"],"sac_grade":"T3","effort_label":"Demanding","duration_min":330,"gain_m":960,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Lac de Moiry / Moiry dam","transit":{"train":"Sierre","bus":"PostBus to Grimentz, then summer bus to Moiry barrage"},"description_extra":"Approach from the Val d'Anniviers side, opposite valley from La Forclaz. The path leaves the Moiry dam at 2,250 m and climbs to the Col du Tsaté at about 2,868 m on the ridge between the Moiry and Hérens valleys, then takes the south flank and south ridge to the summit at 3,077 m. SAC grades the route T3, 3 h 15 ascent, 960 m of cumulative gain, 1,580 m of descent if combined with the La Forclaz exit. A good path leads to the summit.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/","https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9"],"start_maps_url":"https://www.google.com/maps/place/?q=46.13761,7.57255&z=16","quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

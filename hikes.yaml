@@ -394,6 +394,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/
   - https://de.wikipedia.org/wiki/Heftih%C3%BCtte
   start_maps_url: https://www.google.com/maps/place/?q=46.883,8.017&z=16
+  distance_km: 7.0
 - id: bachalpsee-route-38
   sac_grade: T1
   effort_label: Easy
@@ -433,6 +434,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/faulhorn-597/mountain-hiking/
   - https://en.wikipedia.org/wiki/Bachalpsee
   start_maps_url: https://www.google.com/maps/place/?q=46.65045,7.99104&z=16
+  distance_km: 5.0
 - id: iseltwald-default
   description_extra: Drive in, or take the summer steamship from Interlaken (April to October), or Postbus 103 from Interlaken Ost. The pier is a few minutes from village parking. T1.
   visits:
@@ -632,6 +634,7 @@ hikes:
   cable_car_ids:
   - gornergrat-bahn
   start_maps_url: https://www.google.com/maps/place/?q=46.02457,7.74813&z=16
+  distance_km: 3.1
 - id: gorner_glacier-path-of-silence
   name: Path of Silence to Riffelalp
   start: Gornergrat top station
@@ -765,6 +768,7 @@ hikes:
   quickest_for:
   - arolla_ice_cave
   start_maps_url: https://www.google.com/maps/place/?q=46.017,7.483&z=16
+  distance_km: 5.4
 - id: cabane_becs_de_bosson-from-bendolla
   name: From Bendolla (top of Grimentz gondola)
   start: Bendolla
@@ -865,6 +869,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/fr/cabanes-et-courses/portail-des-courses-du-cas/cabane-de-la-dent-blanche-cas-2147000073/randonnee-en-montagne/depuis-ferpecle-les-salays-par-bricola-et-le-roc-noir-248/
   start_maps_url: https://www.google.com/maps/place/?q=46.0657,7.54377&z=16
+  distance_km: 3.0
 - id: spielboden-laengfluh-glacier-trail
   name: Längfluh → Spielboden → Saas-Fee
   start: Längfluh cable car top station
@@ -911,6 +916,7 @@ hikes:
   hut_ids:
   - turtmannhutte-sac
   start_maps_url: https://www.google.com/maps/place/?q=46.16013,7.69948&z=16
+  distance_km: 9.3
 - id: saas_fee_glacier-glacier-trail-felskinn
   name: Glacier Trail via Britanniahütte
   start: Felskinn top station
@@ -1002,6 +1008,7 @@ hikes:
   - https://www.myswitzerland.com/en-us/experiences/sanetsch-between-bern-and-valais/
   - https://en.wikipedia.org/wiki/Sanetschpass
   start_maps_url: https://www.google.com/maps/place/?q=46.383,7.267&z=16
+  distance_km: 12.6
 - id: sanetschpass-cable-car-shortcut
   name: Sanetsch cable car + walk to lake
   start: Gsteig cable car valley station
@@ -1023,6 +1030,7 @@ hikes:
   cable_car_ids:
   - sanetsch-cable-car
   start_maps_url: https://maps.app.goo.gl/aJvjPFHkYE1TVZo66
+  distance_km: 4.8
 - id: nax_via_ferrata-belvedere-via-ferrata
   name: Belvédère via ferrata
   start: Nax village
@@ -1102,6 +1110,7 @@ hikes:
   - tseuzier_lake
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.34638,7.43516&z=16
+  distance_km: 4.9
 - id: salanfe_lake-from-van-d-en-haut
   name: From Van d'En Haut
   start: Van d'En Haut campsite
@@ -1141,6 +1150,7 @@ hikes:
   quickest_for:
   - pointe_du_tsate
   start_maps_url: https://www.google.com/maps/place/?q=46.08984,7.52262&z=16
+  distance_km: 10.9
 - id: gastlosen-gastlosen-circular
   name: Gastlosen circular (Jaun → Chalet du Soldat → Jaun)
   start: Jaun, Dorf
@@ -1179,6 +1189,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-broc-246/mountain-hiking/
   - https://en.wikipedia.org/wiki/Dent_de_Broc
   start_maps_url: https://www.google.com/maps/place/?q=46.604,7.099&z=16
+  distance_km: 10.1
 - id: dent_de_lys-les-paccots-circular
   name: Les Paccots loop via Lac des Joncs
   start: Les Paccots
@@ -1241,6 +1252,7 @@ hikes:
   cable_car_ids:
   - moleson-funiculaire
   start_maps_url: https://www.google.com/maps/place/?q=46.52222,6.94806&z=16
+  distance_km: 10.8
 - id: cap_au_moine-from-allieres
   name: Allières → Cape au Moine
   start: Allières
@@ -1256,6 +1268,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cape-au-moine-vd-300/mountain-hiking/
   start_maps_url: https://www.google.com/maps/place/?q=46.46982,7.00789&z=16
+  distance_km: 7.2
 - id: dent_de_jaman-route-87
   duration_min: 30
   gain_m: 141
@@ -1313,6 +1326,7 @@ hikes:
   - lac_de_taney
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.33749,6.85606&z=16
+  distance_km: 9.0
 - id: grammont-route-154
   sac_grade: T2
   effort_label: Mid
@@ -1329,6 +1343,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Grammont_(mountain)
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.33749,6.85606&z=16
+  distance_km: 13.9
 - id: marchairuz-mollendruz-mont-tendre-marchairuz
   name: Col du Mollendruz → Mont Tendre → Col du Marchairuz
   start: Col du Mollendruz
@@ -1498,6 +1513,7 @@ hikes:
   cable_car_ids:
   - tierfehd-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.8783,8.98521&z=16
+  distance_km: 3.0
 - id: limmernsee-linthal-on-foot
   name: From Linthal on foot
   start: Linthal train station
@@ -1514,6 +1530,7 @@ hikes:
   sources:
   - https://en.wikipedia.org/wiki/Limmernsee
   start_maps_url: https://www.google.com/maps/place/?q=46.92529,8.99808&z=16
+  distance_km: 7.0
 - id: muttseehutte-from-tierfehd-cable-car
   name: Tierfehd cable car + Chalchtrittli approach
   start: Tierfehd cable car (Linthal)
@@ -1574,6 +1591,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Klausen_Pass
   - https://schweizmobil.ch/en/hiking-in-switzerland/route-1/stage-7
   start_maps_url: https://www.google.com/maps/place/?q=46.89,8.90056&z=16
+  distance_km: 27.4
 - id: barglistuber-route-14
   start: Parkplatz Wasserfall Berglistüber
   transit:
@@ -1668,6 +1686,7 @@ hikes:
   quickest_for:
   - gigerwaldsee
   start_maps_url: https://www.google.com/maps/place/?q=46.92058,9.35556&z=16
+  distance_km: 14.2
 - id: ruinaulta-versam-circular
   name: Versam circular through the gorge
   start: Versam station
@@ -1702,6 +1721,7 @@ hikes:
   quickest_for:
   - ruinaulta
   start_maps_url: https://www.google.com/maps/place/?q=46.82572,9.2888&z=16
+  distance_km: 7.4
 - id: crestasee-four-lakes-hike
   name: Senda quatter lags da Flem (Four Lakes Hike)
   start: Flims
@@ -1861,6 +1881,7 @@ hikes:
   - batoni_wasserfallarena
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.99056,9.34444&z=16
+  distance_km: 10.3
 - id: morteratsch_glacier-aussichtsweg-glacier-trail
   name: Glacier theme trail (Aussichtsweg)
   start: Morteratsch railway station
@@ -1878,6 +1899,7 @@ hikes:
   - https://www.schweizmobil.ch/en/hiking-in-switzerland/route-806
   - https://www.myswitzerland.com/en/experiences/route/gletscheraussichten-morteratsch/
   start_maps_url: https://www.google.com/maps/place/?q=46.45072,9.94041&z=16
+  distance_km: 5.8
 - id: morteratsch_glacier-short-glacier-tongue
   name: Short walk to glacier tongue
   start: Morteratsch railway station
@@ -1937,6 +1959,7 @@ hikes:
   hut_ids:
   - spitzmeilenhutte-sac
   start_maps_url: https://www.google.com/maps/place/?q=47.0694,9.25321&z=16
+  distance_km: 7.2
 - id: cascata_la_froda-from-sonogno-village
   name: From Sonogno (short walk to base)
   start: Sonogno village
@@ -2122,6 +2145,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Pic_de_Jallouvre
   - https://en.wikipedia.org/wiki/Bornes_Massif
   start_maps_url: https://www.google.com/maps/place/?q=46.00168,6.39609&z=16
+  distance_km: 9.8
 - id: dent_doche-from-bernex
   name: From Bernex via Fétiuère
   start: Fétiuère parking (above Bernex)
@@ -2168,6 +2192,7 @@ hikes:
   - niederrickenbach-cable-car
   - haldigrat-chairlift
   start_maps_url: https://www.google.com/maps/place/?q=46.90275,8.44006&z=16
+  distance_km: 9.5
 - id: engstlensee-route-lakeshore-loop
   sac_grade: T1
   effort_label: Easy
@@ -2190,6 +2215,7 @@ hikes:
   - engstlensee
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.77611,8.34458&z=16
+  distance_km: 4.5
 - id: grappelensee-route-from-laui
   sac_grade: T1
   effort_label: Easy
@@ -2237,6 +2263,7 @@ hikes:
   cable_car_ids:
   - monte-carasso-mornera-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.20779,8.97982&z=16
+  distance_km: 5.0
 - id: zinal_glacier-route-petit-mountet
   sac_grade: T2
   effort_label: Moderate
@@ -2432,6 +2459,7 @@ hikes:
   quickest_for:
   - grammont
   start_maps_url: https://www.google.com/maps/place/?q=46.36878,6.78856&z=16
+  distance_km: 18.6
 - id: ice_lake_griesslisee-from-klausenpass
   visits:
   - ice_lake_griesslisee
@@ -3247,6 +3275,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/fronalpstock-sz-684/mountain-hiking/from-morschach-via-chaelen-2400/
   start_maps_url: https://maps.app.goo.gl/7m8qUzPxyuPe5WRz8
+  distance_km: 10.0
 - id: geltenschuss-from-iffigenalp-via-wildhornhuette
   visits:
   - geltenschuss
@@ -3472,6 +3501,7 @@ hikes:
   hut_ids:
   - berggasthaus-schafler
   start_maps_url: https://www.google.com/maps/place/?q=47.28581,9.42856&z=16
+  distance_km: 7.5
 - id: spielboden-ascent-from-saas-fee-village
   visits:
   - spielboden

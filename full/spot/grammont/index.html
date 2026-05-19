@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779181994147" />
+<link rel="stylesheet" href="../../preview.css?v=1779187595998" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -162,9 +162,9 @@
     <span class="value"><span data-rd-elev-change>+1131<span class="unit">m</span></span></span>
     <span class="label">Elevation change</span>
   </div>
-    <div class="hb-stats-cell is-empty" data-stat-cell="dist">
+    <div class="hb-stats-cell" data-stat-cell="dist">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
-    <span class="value"><span data-rd-dist></span><span class="unit">km</span></span>
+    <span class="value"><span data-rd-dist>13.9</span><span class="unit">km</span></span>
     <span class="label">Distance</span>
   </div>
   </div>
@@ -224,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"grammont-route-154","sac_grade":"T2","effort_label":"Mid","duration_min":210,"gain_m":1131,"start":"Parking du Flon","transit":{"bus":"Le Flon, village"},"visits":["grammont"],"description_extra":"Approach from Miex or Tannay above Vouvry, drive to the Flon de Tanay parking, then 3 to 4 hour climb to the summit at 2,172 m. About 1,130 m of vertical. T2 mountain trail with one exposed section near the top.","sources":["https://en.wikipedia.org/wiki/Grammont_(mountain)"],"equipment_list":[],"start_maps_url":"https://www.google.com/maps/place/?q=46.33749,6.85606&z=16","quickest":false},{"id":"grammont-from-novel-via-col-des-crosses","visits":["grammont"],"sac_grade":"T4","effort_label":"Demanding","duration_min":180,"gain_m":1200,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Novel (France, near St-Gingolph)","transit":{"car":"From St-Gingolph or Bouveret via Novel"},"description_extra":"Approach from the French side and the Col des Crosses rather than from the Vouvry / Le Flon parking. The route climbs from the village of Novel (about 960 m) past L'Au de Morge and the Col de la Croix, then north along the Verraux flank to the Col des Crosses at 1,991 m, on the SE ridge of Grammont. SAC grades the SE ridge route T4 with 1,200 m of gain in 2 h 45 to 3 h from the col area.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/col-des-crosses-2546/mountain-hiking/","https://www.wandersite.ch/Tageswanderung/633_Wallis.html"],"quickest_for":["grammont"],"start_maps_url":"https://www.google.com/maps/place/?q=46.36878,6.78856&z=16","quickest":true}];
+  const ROUTES = [{"id":"grammont-route-154","sac_grade":"T2","effort_label":"Mid","duration_min":210,"gain_m":1131,"start":"Parking du Flon","transit":{"bus":"Le Flon, village"},"visits":["grammont"],"description_extra":"Approach from Miex or Tannay above Vouvry, drive to the Flon de Tanay parking, then 3 to 4 hour climb to the summit at 2,172 m. About 1,130 m of vertical. T2 mountain trail with one exposed section near the top.","sources":["https://en.wikipedia.org/wiki/Grammont_(mountain)"],"equipment_list":[],"start_maps_url":"https://www.google.com/maps/place/?q=46.33749,6.85606&z=16","distance_km":13.9,"quickest":false},{"id":"grammont-from-novel-via-col-des-crosses","visits":["grammont"],"sac_grade":"T4","effort_label":"Demanding","duration_min":180,"gain_m":1200,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Novel (France, near St-Gingolph)","transit":{"car":"From St-Gingolph or Bouveret via Novel"},"description_extra":"Approach from the French side and the Col des Crosses rather than from the Vouvry / Le Flon parking. The route climbs from the village of Novel (about 960 m) past L'Au de Morge and the Col de la Croix, then north along the Verraux flank to the Col des Crosses at 1,991 m, on the SE ridge of Grammont. SAC grades the SE ridge route T4 with 1,200 m of gain in 2 h 45 to 3 h from the col area.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/col-des-crosses-2546/mountain-hiking/","https://www.wandersite.ch/Tageswanderung/633_Wallis.html"],"quickest_for":["grammont"],"start_maps_url":"https://www.google.com/maps/place/?q=46.36878,6.78856&z=16","distance_km":18.6,"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
