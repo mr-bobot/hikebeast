@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779180857956" />
+<link rel="stylesheet" href="../../preview.css?v=1779181994134" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -162,9 +162,9 @@
     <span class="value"><span data-rd-elev-change>+600<span class="unit">m</span></span></span>
     <span class="label">Elevation change</span>
   </div>
-    <div class="hb-stats-cell is-empty" data-stat-cell="dist">
+    <div class="hb-stats-cell" data-stat-cell="dist">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
-    <span class="value"><span data-rd-dist></span><span class="unit">km</span></span>
+    <span class="value"><span data-rd-dist>4.2</span><span class="unit">km</span></span>
     <span class="label">Distance</span>
   </div>
   </div>
@@ -224,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"heftihutte-from-hirsegg","name":"From Hirsegg bus stop","start":"Hirsegg (bus stop)","transit":{"bus":"Postbus to Hirsegg"},"duration_min":180,"gain_m":600,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Standard approach from the Hirsegg bus stop. Trail climbs via Kaiserschwand, Bodenhütten, Heftiboden to the hut at 1,904 m. About three hours and 600 m of gain, T2. The hut is open in summer with dinner and breakfast; partial emergency shelter the rest of the year. Bring cash.","visits":["heftihutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/"],"quickest_for":["heftihutte"],"hut_ids":["heftihuette"],"start_maps_url":"https://www.google.com/maps/place/?q=46.83878,8.01238&z=16","huts":[{"id":"heftihuette","name":"Heftihütte","open_raw":"Year-round, self-service, key with hut warden","cost_chf_raw":"Self-service, contact SAC Emmental for rates","website":"https://www.sac-emmental.ch/huetten/heftihuette"}],"hut":{"id":"heftihuette","name":"Heftihütte","open_raw":"Year-round, self-service, key with hut warden","cost_chf_raw":"Self-service, contact SAC Emmental for rates","website":"https://www.sac-emmental.ch/huetten/heftihuette"},"quickest":true},{"id":"heftihutte-from-fluehli","name":"From Flühli LU","start":"Flühli","transit":{"bus":"Postbus to Flühli"},"duration_min":240,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Longer approach via Flühli (bus from Schüpfheim). About four hours of mountain trail with views over the Entlebuch valley. SAC's portal grades the route from Flühli at T3, 3 h 30, and roughly 1,050 m of gain. The ridge section above is the scenic highlight with the Schrattenfluh across the valley. Hut sits at 1,904 m. Note: the hut is currently closed with key-depot access only.","visits":["heftihutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/","https://de.wikipedia.org/wiki/Heftih%C3%BCtte"],"start_maps_url":"https://www.google.com/maps/place/?q=46.883,8.017&z=16","quickest":false}];
+  const ROUTES = [{"id":"heftihutte-from-hirsegg","name":"From Hirsegg bus stop","start":"Hirsegg (bus stop)","transit":{"bus":"Postbus to Hirsegg"},"duration_min":180,"gain_m":600,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Standard approach from the Hirsegg bus stop. Trail climbs via Kaiserschwand, Bodenhütten, Heftiboden to the hut at 1,904 m. About three hours and 600 m of gain, T2. The hut is open in summer with dinner and breakfast; partial emergency shelter the rest of the year. Bring cash.","visits":["heftihutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/"],"quickest_for":["heftihutte"],"hut_ids":["heftihuette"],"start_maps_url":"https://www.google.com/maps/place/?q=46.83878,8.01238&z=16","distance_km":4.2,"huts":[{"id":"heftihuette","name":"Heftihütte","open_raw":"Year-round, self-service, key with hut warden","cost_chf_raw":"Self-service, contact SAC Emmental for rates","website":"https://www.sac-emmental.ch/huetten/heftihuette"}],"hut":{"id":"heftihuette","name":"Heftihütte","open_raw":"Year-round, self-service, key with hut warden","cost_chf_raw":"Self-service, contact SAC Emmental for rates","website":"https://www.sac-emmental.ch/huetten/heftihuette"},"quickest":true},{"id":"heftihutte-from-fluehli","name":"From Flühli LU","start":"Flühli","transit":{"bus":"Postbus to Flühli"},"duration_min":240,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Longer approach via Flühli (bus from Schüpfheim). About four hours of mountain trail with views over the Entlebuch valley. SAC's portal grades the route from Flühli at T3, 3 h 30, and roughly 1,050 m of gain. The ridge section above is the scenic highlight with the Schrattenfluh across the valley. Hut sits at 1,904 m. Note: the hut is currently closed with key-depot access only.","visits":["heftihutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/","https://de.wikipedia.org/wiki/Heftih%C3%BCtte"],"start_maps_url":"https://www.google.com/maps/place/?q=46.883,8.017&z=16","quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

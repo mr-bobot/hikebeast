@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779180857972" />
+<link rel="stylesheet" href="../../preview.css?v=1779181994153" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -154,9 +154,9 @@
     <span class="value"><span data-rd-elev-change>+50<span class="unit">m</span></span></span>
     <span class="label">Elevation change</span>
   </div>
-    <div class="hb-stats-cell is-empty" data-stat-cell="dist">
+    <div class="hb-stats-cell" data-stat-cell="dist">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
-    <span class="value"><span data-rd-dist></span><span class="unit">km</span></span>
+    <span class="value"><span data-rd-dist>1.3</span><span class="unit">km</span></span>
     <span class="label">Distance</span>
   </div>
   </div>
@@ -216,7 +216,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"cascata_la_froda-from-sonogno-village","name":"From Sonogno (short walk to base)","start":"Sonogno village","transit":{"bus":"Postbus from Locarno via Tenero to Sonogno"},"duration_min":15,"gain_m":50,"sac_grade":"T1","effort_label":"Easy, short walk","description_extra":"Short walk from Sonogno to the base of the falls. Cross the bridge by the sports field and follow the Redorta stream on the opposite bank, about 15 minutes on an easy path. T1. Continue along the Costa della Valegia to Corte for a longer loop, about 1 hour 40 minutes round trip.","visits":["cascata_la_froda"],"sources":["https://www.outdooractive.com/en/route/hiking-trail/ascona-locarno/sonogno-corte-sonogno/43228411/"],"quickest_for":["cascata_la_froda"],"start_maps_url":"https://www.google.com/maps/place/?q=46.35031,8.78633&z=16","quickest":true}];
+  const ROUTES = [{"id":"cascata_la_froda-from-sonogno-village","name":"From Sonogno (short walk to base)","start":"Sonogno village","transit":{"bus":"Postbus from Locarno via Tenero to Sonogno"},"duration_min":15,"gain_m":50,"sac_grade":"T1","effort_label":"Easy, short walk","description_extra":"Short walk from Sonogno to the base of the falls. Cross the bridge by the sports field and follow the Redorta stream on the opposite bank, about 15 minutes on an easy path. T1. Continue along the Costa della Valegia to Corte for a longer loop, about 1 hour 40 minutes round trip.","visits":["cascata_la_froda"],"sources":["https://www.outdooractive.com/en/route/hiking-trail/ascona-locarno/sonogno-corte-sonogno/43228411/"],"quickest_for":["cascata_la_froda"],"start_maps_url":"https://www.google.com/maps/place/?q=46.35031,8.78633&z=16","distance_km":1.3,"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

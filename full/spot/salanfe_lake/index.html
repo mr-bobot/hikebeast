@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779180857963" />
+<link rel="stylesheet" href="../../preview.css?v=1779181994143" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -162,9 +162,9 @@
     <span class="value"><span data-rd-elev-change>+516<span class="unit">m</span></span></span>
     <span class="label">Elevation change</span>
   </div>
-    <div class="hb-stats-cell is-empty" data-stat-cell="dist">
+    <div class="hb-stats-cell" data-stat-cell="dist">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
-    <span class="value"><span data-rd-dist></span><span class="unit">km</span></span>
+    <span class="value"><span data-rd-dist>3.4</span><span class="unit">km</span></span>
     <span class="label">Distance</span>
   </div>
   </div>
@@ -224,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"salanfe_lake-from-van-d-en-haut","name":"From Van d'En Haut","start":"Van d'En Haut campsite","transit":{"train":"Salvan (Mont-Blanc Express) + drive/walk"},"duration_min":150,"gain_m":516,"sac_grade":"T2","effort_label":"Moderate, steep approach","description_extra":"Steep 2.5-hour climb from the Van d'En Haut campsite (1,393 m) up to the Lac de Salanfe reservoir at 1,909 m. About 516 m of gain, T2. Starts at the end of the public road in the Vallon de Van and climbs through the upper valley to the dam. Auberge de Salanfe at the dam serves food and has rooms.","visits":["salanfe_lake"],"sources":["https://www.outdooractive.com/en/route/hiking-route/valais/sentier-de-salanfe/27185718/","https://en.wikipedia.org/wiki/Lac_de_Salanfe"],"quickest_for":["salanfe_lake"],"start_maps_url":"https://www.google.com/maps/place/?q=46.14006,6.99303&z=16","quickest":true},{"id":"salanfe_lake-from-mex-via-col-du-jorat","visits":["salanfe_lake"],"sac_grade":"T2","effort_label":"Demanding","duration_min":265,"gain_m":1100,"distance_km":9.58,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Mex village","transit":{"bus":"St-Maurice to Mex (postbus)"},"description_extra":"Stage 4 of the Tour des Dents-du-Midi from Mex over the Col du Jorat at 2,213 m down to the Lac de Salanfe reservoir at 1,909 m. About 9.6 km, 4 h 25, gaining roughly 1,100 m up to the col before descending 300 m on the other side. The trail crosses pastures along the Torrent de Saint-Barthélemy, then narrows across scree below the col. No water on the route, so carry enough. The Auberge de Salanfe at the dam serves food and has rooms.","sources":["https://www.visorando.com/en/walk-auberge-de-salanfe-mex/","https://www.dentsdumidi.ch/en/our-tour/salanfe-susanfe-2/","https://salanfe.ch/en/day-trips/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.185,6.99995&z=16","quickest":false}];
+  const ROUTES = [{"id":"salanfe_lake-from-van-d-en-haut","name":"From Van d'En Haut","start":"Van d'En Haut campsite","transit":{"train":"Salvan (Mont-Blanc Express) + drive/walk"},"duration_min":150,"gain_m":516,"sac_grade":"T2","effort_label":"Moderate, steep approach","description_extra":"Steep 2.5-hour climb from the Van d'En Haut campsite (1,393 m) up to the Lac de Salanfe reservoir at 1,909 m. About 516 m of gain, T2. Starts at the end of the public road in the Vallon de Van and climbs through the upper valley to the dam. Auberge de Salanfe at the dam serves food and has rooms.","visits":["salanfe_lake"],"sources":["https://www.outdooractive.com/en/route/hiking-route/valais/sentier-de-salanfe/27185718/","https://en.wikipedia.org/wiki/Lac_de_Salanfe"],"quickest_for":["salanfe_lake"],"start_maps_url":"https://www.google.com/maps/place/?q=46.14006,6.99303&z=16","distance_km":3.4,"quickest":true},{"id":"salanfe_lake-from-mex-via-col-du-jorat","visits":["salanfe_lake"],"sac_grade":"T2","effort_label":"Demanding","duration_min":265,"gain_m":1100,"distance_km":9.58,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Mex village","transit":{"bus":"St-Maurice to Mex (postbus)"},"description_extra":"Stage 4 of the Tour des Dents-du-Midi from Mex over the Col du Jorat at 2,213 m down to the Lac de Salanfe reservoir at 1,909 m. About 9.6 km, 4 h 25, gaining roughly 1,100 m up to the col before descending 300 m on the other side. The trail crosses pastures along the Torrent de Saint-Barthélemy, then narrows across scree below the col. No water on the route, so carry enough. The Auberge de Salanfe at the dam serves food and has rooms.","sources":["https://www.visorando.com/en/walk-auberge-de-salanfe-mex/","https://www.dentsdumidi.ch/en/our-tour/salanfe-susanfe-2/","https://salanfe.ch/en/day-trips/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.185,6.99995&z=16","quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

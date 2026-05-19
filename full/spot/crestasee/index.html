@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779180857971" />
+<link rel="stylesheet" href="../../preview.css?v=1779181994152" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -162,9 +162,9 @@
     <span class="value"><span data-rd-elev-change></span></span>
     <span class="label">Elevation change</span>
   </div>
-    <div class="hb-stats-cell is-empty" data-stat-cell="dist">
+    <div class="hb-stats-cell" data-stat-cell="dist">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
-    <span class="value"><span data-rd-dist></span><span class="unit">km</span></span>
+    <span class="value"><span data-rd-dist>12.9</span><span class="unit">km</span></span>
     <span class="label">Distance</span>
   </div>
   </div>
@@ -224,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"crestasee-four-lakes-hike","name":"Senda quatter lags da Flem (Four Lakes Hike)","start":"Flims","transit":{"train":"Chur (SBB) + Postbus to Flims"},"duration_min":240,"sac_grade":"T1","effort_label":"Easy","description_extra":"Four-hour Senda quatter lags da Flem (Romansh for Four Lakes Hike) from Flims. The loop passes Lag Prau Pulté, Lag Prau Tuleritg, Caumasee, and Crestasee, with the Il Spir viewing platform above the Rhine gorge near Conn. T1 throughout, flat to gently rolling through forest and along lakeshores.","visits":["crestasee"],"sources":["https://www.myswitzerland.com/en-us/experiences/route/senda-quatter-lags-da-flem/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.833,9.283&z=16","quickest":false},{"id":"crestasee-short-staderas-conn","name":"Staderas → Caumasee → Conn","start":"Laax Staderas","transit":{"train":"Chur + Postbus to Laax Staderas"},"duration_min":75,"distance_km":4.6,"sac_grade":"T1","effort_label":"Easy","description_extra":"Short walk through the Flims forest, from Staderas past Caumasee to the Il Spir viewing platform over the Rhine Gorge. About 4.6 km and 75 minutes one way, descending around 180 m with minor ups. T1, family-friendly, most of the route under tree cover, so it works as a rainy-day option. Restaurant Conn is on the way (closed off-season). Postbus connects back to Flims.","visits":["crestasee"],"sources":["https://www.outdooractive.com/en/route/winter-hiking/flims-laax/staderas-sportzentrum-caumasee-conn/43396654/"],"quickest_for":["crestasee"],"start_maps_url":"https://maps.app.goo.gl/u95QRUoQnMAFjZAx9","quickest":true}];
+  const ROUTES = [{"id":"crestasee-four-lakes-hike","name":"Senda quatter lags da Flem (Four Lakes Hike)","start":"Flims","transit":{"train":"Chur (SBB) + Postbus to Flims"},"duration_min":240,"sac_grade":"T1","effort_label":"Easy","description_extra":"Four-hour Senda quatter lags da Flem (Romansh for Four Lakes Hike) from Flims. The loop passes Lag Prau Pulté, Lag Prau Tuleritg, Caumasee, and Crestasee, with the Il Spir viewing platform above the Rhine gorge near Conn. T1 throughout, flat to gently rolling through forest and along lakeshores.","visits":["crestasee"],"sources":["https://www.myswitzerland.com/en-us/experiences/route/senda-quatter-lags-da-flem/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.833,9.283&z=16","distance_km":12.9,"quickest":false},{"id":"crestasee-short-staderas-conn","name":"Staderas → Caumasee → Conn","start":"Laax Staderas","transit":{"train":"Chur + Postbus to Laax Staderas"},"duration_min":75,"distance_km":4.6,"sac_grade":"T1","effort_label":"Easy","description_extra":"Short walk through the Flims forest, from Staderas past Caumasee to the Il Spir viewing platform over the Rhine Gorge. About 4.6 km and 75 minutes one way, descending around 180 m with minor ups. T1, family-friendly, most of the route under tree cover, so it works as a rainy-day option. Restaurant Conn is on the way (closed off-season). Postbus connects back to Flims.","visits":["crestasee"],"sources":["https://www.outdooractive.com/en/route/winter-hiking/flims-laax/staderas-sportzentrum-caumasee-conn/43396654/"],"quickest_for":["crestasee"],"start_maps_url":"https://maps.app.goo.gl/u95QRUoQnMAFjZAx9","quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
