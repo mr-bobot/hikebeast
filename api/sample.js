@@ -1,6 +1,12 @@
 import { Resend } from "resend";
 import crypto from "node:crypto";
 import { addTag, setEmail } from "../lib/manychat.js";
+import {
+  fireCapi,
+  buildUserData,
+  clientIpFromHeaders,
+  clientUserAgentFromHeaders,
+} from "../lib/capi.js";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -125,47 +131,29 @@ async function logSignup({ email, firstName, subscriberId, token, sentAt, funnel
 
 // Server-side Meta CAPI `Lead` event. Mirrors `fireCapiPurchase` in
 // `api/checkout/webhook.js`. event_id = the per-signup `token` so a
-// client-side fbq("track","Lead",...) on /free/ (if/when added) dedups
-// against this server-side event. Closes the long-open Meta CAPI TODO
-// from 2026-04-23 -- ad-blockers / iOS privacy were eating ~40-50% of
-// Lead pixel fires; this restores them.
-function sha256Hex(s) {
-  return crypto.createHash("sha256").update(String(s).trim().toLowerCase()).digest("hex");
-}
-
-async function fireCapiLead({ eventId, email, firstName, ipCountry, sourceUrl }) {
-  const pixelId = process.env.META_PIXEL_ID;
-  const accessToken = process.env.META_CAPI_TOKEN;
-  if (!pixelId || !accessToken) return;
-
-  const payload = {
-    data: [{
-      event_name:       "Lead",
-      event_time:       Math.floor(Date.now() / 1000),
-      event_id:         eventId,
-      action_source:    "website",
-      event_source_url: sourceUrl || `${SITE}/free/`,
-      user_data: {
-        em:      email ? [sha256Hex(email)] : undefined,
-        fn:      firstName ? [sha256Hex(firstName)] : undefined,
-        country: ipCountry ? [sha256Hex(ipCountry)] : undefined,
-      },
-    }],
-  };
-
-  try {
-    await fetch(
-      `https://graph.facebook.com/v18.0/${encodeURIComponent(pixelId)}/events?access_token=${encodeURIComponent(accessToken)}`,
-      {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify(payload),
-        signal:  AbortSignal.timeout(5000),
-      },
-    );
-  } catch (err) {
-    console.error("Meta CAPI Lead failed:", err);
-  }
+// client-side fbq("track","Lead",...) on /free/ dedups against this
+// server-side event. Originally closed the long-open Meta CAPI TODO
+// from 2026-04-23 (ad-blockers / iOS privacy were eating ~40-50% of
+// Lead pixel fires); upgraded 2026-05-20 to include fbc/fbp/ip/ua
+// for higher EMQ ahead of the first paid-ad campaign.
+async function fireCapiLead({
+  eventId, email, firstName, ipCountry,
+  fbc, fbp, clientIp, clientUserAgent, sourceUrl,
+}) {
+  return fireCapi({
+    eventName: "Lead",
+    eventId,
+    userData: buildUserData({
+      email: email || undefined,
+      firstName: firstName || undefined,
+      country: ipCountry || undefined,
+      fbc: fbc || undefined,
+      fbp: fbp || undefined,
+      clientIp: clientIp || undefined,
+      clientUserAgent: clientUserAgent || undefined,
+    }),
+    sourceUrl: sourceUrl || `${SITE}/free/`,
+  });
 }
 
 async function createResendContact(email) {
@@ -191,11 +179,16 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { email, first_name, subscriber_id, funnel, utm_source, utm_medium, utm_campaign } = req.body ?? {};
+  const { email, first_name, subscriber_id, funnel, utm_source, utm_medium, utm_campaign, fbc, fbp } = req.body ?? {};
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: "Invalid email" });
   }
   const firstName = typeof first_name === "string" ? first_name.trim().slice(0, 60) : "";
+  // Meta CAPI identity signals from the buyer's browser. Sent by the
+  // /free/ + /sample/ landing pages via window.HBMeta.getCookies()
+  // (defined in /lib/meta-cookies.js). Truncated for safety.
+  const safeFbc = typeof fbc === "string" ? fbc.slice(0, 200) : "";
+  const safeFbp = typeof fbp === "string" ? fbp.slice(0, 100) : "";
 
   const utm = {
     source: utm_source || "",
@@ -233,10 +226,14 @@ export default async function handler(req, res) {
       logSignup({ email, firstName, subscriberId: subscriber_id, token, sentAt, funnel: funnel || "", utm }),
       createResendContact(email),
       fireCapiLead({
-        eventId:   token,         // dedupes with client-side fbq("track","Lead") if added later
+        eventId:   token,         // dedupes with client-side fbq("track","Lead") on /free/
         email,
         firstName,
         ipCountry,
+        fbc: safeFbc,
+        fbp: safeFbp,
+        clientIp: clientIpFromHeaders(req.headers),
+        clientUserAgent: clientUserAgentFromHeaders(req.headers),
         sourceUrl: referer || `${SITE}/free/`,
       }),
     ];
@@ -247,7 +244,12 @@ export default async function handler(req, res) {
       );
     }
     await Promise.all(sideEffects);
-    return res.status(200).json({ ok: true });
+    // `lead_event_id` returned so the browser fbq("track","Lead") on
+    // /free/ can pass it as `eventID`, matching the CAPI Lead event we
+    // just fired (event_id = token). Without this Meta double-counts
+    // every signup as a separate pixel + CAPI event, same class of bug
+    // the Purchase dedup fix addressed on 2026-05-15.
+    return res.status(200).json({ ok: true, lead_event_id: token });
   } catch (err) {
     console.error("Handler error:", err);
     return res.status(500).json({ error: "Server error" });

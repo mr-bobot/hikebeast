@@ -51,6 +51,9 @@ fbq('track', 'ViewContent', {
   content_category: 'Guide'
 });
 </script>
+<!-- meta-cookies: capture ?fbclid= into _fbc cookie, expose
+     window.HBMeta.getCookies() for fbc + fbp pass-through. -->
+<script src="/lib/meta-cookies.js"></script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 /></noscript>
@@ -856,6 +859,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     const sId = subscriberInput.value || null;
 
     try {
+      let leadEventId = "";
       if (isProd) {
         const res = await fetch(unlockForm.action, {
           method: "POST",
@@ -867,9 +871,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             utm_source: utmSource,
             utm_medium: utmMedium,
             utm_campaign: utmCampaign,
+            fbc: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbc : "") || "",
+            fbp: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbp : "") || "",
           }),
         });
         if (!res.ok) throw new Error("bad response");
+        const leadJson = await res.json().catch(() => ({}));
+        if (typeof leadJson.lead_event_id === "string") leadEventId = leadJson.lead_event_id;
       } else {
         await new Promise((r) => setTimeout(r, 500));
         console.info("[preview] /api/sample bypassed; success simulated.");
@@ -879,10 +887,21 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       preview.classList.add("unlocked");
       showSuccess();
 
-      if (window.fbq) fbq("track", "Lead", {
-        content_name: "Swiss Gems of Switzerland Free Sample",
-        content_category: "Guide"
-      });
+      // eventID matches CAPI Lead event_id (the per-signup token) so
+      // Meta dedupes pixel + server events into one Lead.
+      if (window.fbq) {
+        if (leadEventId) {
+          fbq("track", "Lead", {
+            content_name: "Swiss Gems of Switzerland Free Sample",
+            content_category: "Guide"
+          }, { eventID: leadEventId });
+        } else {
+          fbq("track", "Lead", {
+            content_name: "Swiss Gems of Switzerland Free Sample",
+            content_category: "Guide"
+          });
+        }
+      }
     } catch {
       setBtnLoading(false);
       unlockBtn.textContent = "Try again";

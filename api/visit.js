@@ -1,4 +1,10 @@
 import { addTag } from "../lib/manychat.js";
+import {
+  fireCapi,
+  buildUserData,
+  clientIpFromHeaders,
+  clientUserAgentFromHeaders,
+} from "../lib/capi.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -19,11 +25,23 @@ export default async function handler(req, res) {
     active_ms,
     device_type,
     is_ig_webview,
+    // Meta CAPI InitiateCheckout signal · sent by landing pages when
+    // the buyer first interacts with the embedded Stripe form.
+    // session_id is the Stripe Checkout Session id (also used as the
+    // `eventID` the browser pixel passes), so server + pixel events
+    // match and Meta dedupes.
+    session_id,
+    value,
+    currency,
+    fbc,
+    fbp,
   } = req.body ?? {};
   // Whitelist of beacon event names. Anything else gets dropped before
   // hitting Apps Script so the column writers don't receive bogus values.
   // `engaged` + `session_end` added 2026-05-16 for the v12 hero split test.
-  const ALLOWED_EVENTS = new Set(["scrolled", "video_clicked", "engaged", "session_end"]);
+  // `initiate_checkout` added 2026-05-20 to mirror the pixel IC event
+  // via Meta CAPI for better ad-optimization signal.
+  const ALLOWED_EVENTS = new Set(["scrolled", "video_clicked", "engaged", "session_end", "initiate_checkout"]);
   const safeEvent = typeof event === "string" && ALLOWED_EVENTS.has(event) ? event : "";
   // hero_variant is the v12 split-test bucket ID (e.g. "01"..."08"). Tight
   // regex so a malformed client can't pollute the column.
@@ -110,6 +128,36 @@ export default async function handler(req, res) {
         }),
         signal: AbortSignal.timeout(15000),
       }).catch((err) => console.error("Visit log failed:", err)),
+    );
+  }
+
+  // Meta CAPI InitiateCheckout fire · only when the browser sends the
+  // beacon after a real user interaction with #checkout. session_id is
+  // the dedup key the browser pixel also passes as eventID.
+  if (safeEvent === "initiate_checkout" && typeof session_id === "string" && session_id.startsWith("cs_")) {
+    const safeFbc = typeof fbc === "string" ? fbc.slice(0, 200) : "";
+    const safeFbp = typeof fbp === "string" ? fbp.slice(0, 100) : "";
+    const safeValue = Number.isFinite(value) && value > 0 && value < 10_000 ? Number(value) : undefined;
+    const safeCurrency = typeof currency === "string" && /^[A-Za-z]{3}$/.test(currency)
+      ? currency.toUpperCase()
+      : undefined;
+    tasks.push(
+      fireCapi({
+        eventName: "InitiateCheckout",
+        eventId: session_id,
+        userData: buildUserData({
+          country: ipCountry || undefined,
+          fbc: safeFbc || undefined,
+          fbp: safeFbp || undefined,
+          clientIp: clientIpFromHeaders(req.headers) || undefined,
+          clientUserAgent: clientUserAgentFromHeaders(req.headers) || undefined,
+        }),
+        customData: {
+          value: safeValue,
+          currency: safeCurrency,
+        },
+        sourceUrl: typeof req.headers?.referer === "string" ? req.headers.referer : undefined,
+      }).catch(() => {}),
     );
   }
 

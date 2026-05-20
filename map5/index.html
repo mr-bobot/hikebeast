@@ -66,6 +66,11 @@ fbq('track', 'ViewContent', {
   currency: 'CHF'
 });
 </script>
+<!-- meta-cookies: capture ?fbclid= into _fbc cookie, expose
+     window.HBMeta.getCookies() for fbc + fbp pass-through. Loaded
+     after the Meta Pixel init so _fbp is set by the SDK before we
+     read it. Best-effort: failures are silent. -->
+<script src="/lib/meta-cookies.js"></script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 /></noscript>
@@ -1908,6 +1913,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   let stripe = null;
   let checkout = null;
   let mountInFlight = false;
+  // Stripe Checkout Session id from /api/checkout/session response, used
+  // as the eventID for the InitiateCheckout pixel + CAPI dedup.
+  let currentSessionId = null;
 
   // Visual stand-in shown when STRIPE_SECRET_KEY isn't configured yet.
   // Mirrors the layout of Stripe's real embedded iframe so the page can be
@@ -1964,6 +1972,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           utm_source: utmSource,
           utm_medium: utmMedium,
           utm_campaign: utmCampaign,
+          fbc: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbc : "") || "",
+          fbp: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbp : "") || "",
           r: readStoredRef(),
           source_page: "map5",
           hero_variant: window.HB_HERO_VARIANT || "",
@@ -1995,6 +2005,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       // bar all match what the Stripe iframe will charge.
       if (typeof data.currency === "string") {
         currentCurrency = data.currency.toLowerCase();
+      }
+      if (typeof data.session_id === "string") {
+        currentSessionId = data.session_id;
       }
       if (typeof data.amount === "number") {
         currentAmount = data.amount;
@@ -2044,13 +2057,41 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       container.removeEventListener("pointerdown", fire, true);
       container.removeEventListener("focusin", fire, true);
       try { sessionStorage.setItem(key, "1"); } catch (e) {}
-      if (typeof fbq !== "function") return;
-      try {
-        fbq("track", "InitiateCheckout", {
-          value: typeof currentAmount === "number" ? currentAmount : 27,
-          currency: (currentCurrency || "chf").toUpperCase(),
-        });
-      } catch (e) {}
+      var icValue = typeof currentAmount === "number" ? currentAmount : 27;
+      var icCurrency = (currentCurrency || "chf").toUpperCase();
+      // Browser pixel · eventID = Stripe session id so the CAPI mirror
+      // (fired below via /api/visit beacon) dedupes against this.
+      if (typeof fbq === "function") {
+        try {
+          if (currentSessionId) {
+            fbq("track", "InitiateCheckout", { value: icValue, currency: icCurrency }, { eventID: currentSessionId });
+          } else {
+            fbq("track", "InitiateCheckout", { value: icValue, currency: icCurrency });
+          }
+        } catch (e) {}
+      }
+      // Server-side CAPI mirror · /api/visit forwards to Meta CAPI with
+      // event_id = session_id, matching the eventID above so Meta dedupes
+      // the pair into one InitiateCheckout event. Carries fbc/fbp from
+      // the buyer's browser so EMQ stays high.
+      if (currentSessionId) {
+        try {
+          var mc = (window.HBMeta && window.HBMeta.getCookies) ? window.HBMeta.getCookies() : { fbc: "", fbp: "" };
+          fetch("/api/visit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              event: "initiate_checkout",
+              session_id: currentSessionId,
+              value: icValue,
+              currency: icCurrency,
+              fbc: mc.fbc || "",
+              fbp: mc.fbp || "",
+            }),
+            keepalive: true,
+          }).catch(function () {});
+        } catch (e) {}
+      }
     }
     container.addEventListener("pointerdown", fire, true);
     container.addEventListener("focusin", fire, true);

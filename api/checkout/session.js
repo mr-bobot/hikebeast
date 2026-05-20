@@ -28,6 +28,10 @@
 import Stripe from "stripe";
 import crypto from "node:crypto";
 import { issueToken } from "../../lib/access-token.js";
+import {
+  clientIpFromHeaders,
+  clientUserAgentFromHeaders,
+} from "../../lib/capi.js";
 
 // ── /full/ session cookie helpers ──────────────────────────────────────────
 // Mirrors api/login.js so that paid-buyer onboarding sets the same
@@ -376,6 +380,19 @@ export default async function handler(req, res) {
   const heroVariantRaw = typeof body.hero_variant === "string" ? body.hero_variant.trim() : "";
   const heroVariant = /^[a-z0-9_]{1,8}$/i.test(heroVariantRaw) ? heroVariantRaw : "";
 
+  // ── Meta CAPI identity signals ──────────────────────────────────────────
+  // Captured here so they flow through Stripe metadata to the webhook,
+  // which fires the Purchase CAPI event with matching event_id. fbc/fbp
+  // come from the buyer's browser cookies (set by /lib/meta-cookies.js
+  // + Meta's own pixel SDK respectively). client_ip + user_agent come
+  // from this request's headers — Vercel-set, trustworthy enough.
+  //
+  // Truncated to fit Stripe metadata limits (500 chars per value).
+  const fbc = typeof body.fbc === "string" ? body.fbc.slice(0, 200) : "";
+  const fbp = typeof body.fbp === "string" ? body.fbp.slice(0, 100) : "";
+  const clientIp = clientIpFromHeaders(req.headers);
+  const clientUa = clientUserAgentFromHeaders(req.headers);
+
   const origin = (req.headers.origin && /^https?:\/\//.test(req.headers.origin))
     ? req.headers.origin
     : "https://hikebeast.ch";
@@ -415,6 +432,13 @@ export default async function handler(req, res) {
         // v12 split-test bucket ID. Joined to the Sheet's `hero_variant`
         // column by the webhook for per-variant conversion tracking.
         hero_variant: heroVariant,
+        // Meta CAPI identity signals · forwarded to the webhook so the
+        // Purchase event can include fbc/fbp/ip/ua. Stripe metadata caps
+        // values at 500 chars, already truncated above.
+        fbc,
+        fbp,
+        client_ip: clientIp,
+        client_ua: clientUa,
       },
       // Forwarded into the underlying PaymentIntent so the webhook can join
       // the same identifiers without re-hydrating the session object.
@@ -435,6 +459,16 @@ export default async function handler(req, res) {
         ? `${origin}/de/map/success?session_id={CHECKOUT_SESSION_ID}`
         : `${origin}/map/success?session_id={CHECKOUT_SESSION_ID}`,
     });
+
+    // NOTE on CAPI InitiateCheckout: we do NOT fire here. Meta wants
+    // server events to mirror pixel events, and the pixel only fires
+    // on real user interaction (pointerdown/focusin on #checkout,
+    // see attachInitiateCheckoutSignal in the landing pages). Firing
+    // CAPI on session-create would inflate the IC count to ~page
+    // views again. The browser fires a beacon to /api/visit with
+    // event="initiate_checkout" when the user actually engages, and
+    // /api/visit fires the CAPI event with event_id = session.id —
+    // same event_id the browser passes to fbq, so Meta dedupes.
 
     res.setHeader("Cache-Control", "no-store");
     return res.status(200).json({

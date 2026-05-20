@@ -27,6 +27,7 @@ import crypto from "node:crypto";
 import { Resend } from "resend";
 import { issueToken } from "../../lib/access-token.js";
 import { addTag, setEmail, setCustomField, getSubscriberIgUsername } from "../../lib/manychat.js";
+import { fireCapi, buildUserData, splitName } from "../../lib/capi.js";
 
 export const config = {
   api: { bodyParser: false },
@@ -410,44 +411,39 @@ async function logPurchase(fields) {
   throw lastErr;
 }
 
-function sha256Hex(s) {
-  return crypto.createHash("sha256").update(String(s).trim().toLowerCase()).digest("hex");
-}
-
-async function fireCapiPurchase({ eventId, email, firstName, amount, currency, ipCountry, sourceUrl }) {
-  const pixelId = process.env.META_PIXEL_ID;
-  const token = process.env.META_CAPI_TOKEN;
-  if (!pixelId || !token) return;
-
-  const payload = {
-    data: [{
-      event_name: "Purchase",
-      event_time: Math.floor(Date.now() / 1000),
-      event_id: eventId,
-      action_source: "website",
-      event_source_url: sourceUrl || `${SITE}/map/`,
-      user_data: {
-        em: email ? [sha256Hex(email)] : undefined,
-        fn: firstName ? [sha256Hex(firstName)] : undefined,
-        country: ipCountry ? [sha256Hex(ipCountry)] : undefined,
-      },
-      custom_data: {
-        currency: (currency || "").toUpperCase() || undefined,
-        value: typeof amount === "number" ? Number((amount / 100).toFixed(2)) : undefined,
-      },
-    }],
-  };
-
-  try {
-    await fetch(`https://graph.facebook.com/v18.0/${encodeURIComponent(pixelId)}/events?access_token=${encodeURIComponent(token)}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      signal: AbortSignal.timeout(5000),
-    });
-  } catch (err) {
-    console.error("Meta CAPI Purchase failed:", err);
-  }
+// Fire the Purchase CAPI event with the maximum identity signal Stripe
+// gives us back: email + first/last name + city + zip + country, plus
+// fbc/fbp/ip/ua piped through Stripe metadata from the landing page.
+// More fields = higher EMQ = lower ad CPA. See lib/capi.js for the
+// per-field semantics and which ones get SHA-256 hashed.
+//
+// `eventId` MUST match the `eventID` the browser pixel passes on the
+// success page (currently the Stripe paymentIntent id) so Meta dedupes.
+async function fireCapiPurchase({
+  eventId, email, firstName, lastName, city, zip, country, amount, currency,
+  fbc, fbp, clientIp, clientUserAgent, sourceUrl,
+}) {
+  return fireCapi({
+    eventName: "Purchase",
+    eventId,
+    userData: buildUserData({
+      email: email || undefined,
+      firstName: firstName || undefined,
+      lastName: lastName || undefined,
+      city: city || undefined,
+      zip: zip || undefined,
+      country: country || undefined,
+      fbc: fbc || undefined,
+      fbp: fbp || undefined,
+      clientIp: clientIp || undefined,
+      clientUserAgent: clientUserAgent || undefined,
+    }),
+    customData: {
+      currency: (currency || "").toUpperCase() || undefined,
+      value: typeof amount === "number" ? Number((amount / 100).toFixed(2)) : undefined,
+    },
+    sourceUrl: sourceUrl || `${SITE}/map/`,
+  });
 }
 
 function formatAmount(amountTotal, currency) {
@@ -489,6 +485,29 @@ async function handleSessionCompleted({ stripe, event }) {
   // in the test. Forwarded to the Sheet's `hero_variant` column to
   // close the conversion loop per variant.
   const heroVariant = full.metadata?.hero_variant || "";
+  // Meta CAPI identity signals · stamped into Stripe metadata by
+  // api/checkout/session.js when the buyer first hit the page. Read
+  // back here so fireCapiPurchase can include them in user_data and
+  // Meta's EMQ score goes up. fbc + fbp = ad attribution; client_ip
+  // and client_ua = browser-fingerprint signals Meta uses when the
+  // hashed PII has weak coverage.
+  const metaFbc = full.metadata?.fbc || "";
+  const metaFbp = full.metadata?.fbp || "";
+  const metaClientIp = full.metadata?.client_ip || "";
+  const metaClientUa = full.metadata?.client_ua || "";
+
+  // Address fields Stripe collects in the embedded form. The buyer's
+  // name is one string ("Hans Müller") that we split into first/last;
+  // city + zip live on customer_details.address. Each adds match-bits
+  // for Meta's user lookup.
+  const fullName = full.customer_details?.name || "";
+  const [, lastNameFromStripe] = splitName(fullName);
+  // Prefer the metadata first_name (collected pre-checkout) over the
+  // Stripe-collected one to avoid casing/normalisation drift between
+  // what the buyer typed in our pre-form and what they typed in Stripe.
+  const firstNameForCapi = firstName || splitName(fullName)[0] || "";
+  const city = full.customer_details?.address?.city || "";
+  const zip = full.customer_details?.address?.postal_code || "";
 
   if (!email) {
     console.error("Session completed without email:", full.id);
@@ -583,10 +602,17 @@ async function handleSessionCompleted({ stripe, event }) {
     fireCapiPurchase({
       eventId: paymentIntent, // dedupes with client-side fbq using same event_id
       email,
-      firstName,
+      firstName: firstNameForCapi,
+      lastName: lastNameFromStripe,
+      city,
+      zip,
+      country: ipCountry,
       amount: full.amount_total,
       currency: full.currency,
-      ipCountry,
+      fbc: metaFbc,
+      fbp: metaFbp,
+      clientIp: metaClientIp,
+      clientUserAgent: metaClientUa,
       sourceUrl: `${SITE}/map/`,
     }),
   ];

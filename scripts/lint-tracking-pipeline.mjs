@@ -190,6 +190,31 @@ for (const htmlPath of indexes) {
       metaErrors.push(`Meta intent: ${rel} fires fbq("track","InitiateCheckout",...) on a page that also auto-mounts Stripe Checkout. Without attachInitiateCheckoutSignal() the event fires on every page paint, not on real buyer intent — inflates Meta's IC count and degrades ad optimization. Pattern lives in map/index.html since 2026-05-15.`);
     }
   }
+
+  // Check 3 · Lead pixel must include eventID *when the page also posts
+  // to /api/sample*. api/sample.js fires CAPI Lead with event_id = token
+  // and returns it as `lead_event_id` so the pixel can dedupe against
+  // it. Pages that fire fbq("track","Lead",…) without posting to
+  // /api/sample (e.g. /free/download/, /de/free/download/) trigger no
+  // CAPI Lead and so are standalone pixel events — no dedup needed.
+  //
+  // We allow multiple Lead pixel calls per file as long as AT LEAST
+  // ONE in the same conditional block carries eventID — the typical
+  // shape is `if (leadEventId) fbq(..., { eventID }) else fbq(...)`
+  // for graceful degradation when the server didn't return the token.
+  const postsToSample = /fetch\s*\(\s*["'][^"']*\/api\/sample[^"']*["']|action\s*=\s*["'][^"']*\/api\/sample[^"']*["']/.test(content);
+  if (postsToSample) {
+    const hasLeadPixel = /fbq\s*\(\s*["']track["']\s*,\s*["']Lead["']/.test(content);
+    if (hasLeadPixel) {
+      metaCheckedCalls++;
+      // Require at least one Lead pixel call with eventID. The fallback
+      // (no-eventID) branch is allowed for graceful degradation.
+      const hasEventIdLead = /fbq\s*\(\s*["']track["']\s*,\s*["']Lead["'][\s\S]{0,800}?eventID\s*:/.test(content);
+      if (!hasEventIdLead) {
+        metaErrors.push(`Meta dedup: ${rel} fires fbq("track","Lead",...) on a page that posts to /api/sample (which fires CAPI Lead). Without { eventID: leadEventId } on at least one branch Meta counts pixel + CAPI as separate events. Pass the lead_event_id returned by api/sample.js.`);
+      }
+    }
+  }
 }
 
 if (errors.length || metaErrors.length) {
