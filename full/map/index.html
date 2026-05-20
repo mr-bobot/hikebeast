@@ -736,7 +736,14 @@
     timers.push(startTimer);
     revealCleanup = () => {
       timers.forEach(clearTimeout);
-      document.body.classList.remove('markers-animating');
+      // Intentionally NOT removing 'markers-animating' here. Cleanup
+      // only fires when playCardReveal is being called again (Convex
+      // catch-up restart or a toggle); that caller adds the class back
+      // immediately after, but the one-frame gap between remove and
+      // add was painting every marker for ~16 ms — read as "the
+      // cascade restarted from zero". The natural endTimer above is
+      // the only place that removes it; staying hidden across the
+      // restart is what we want.
       markers.forEach(m => m.classList.remove('is-revealed'));
     };
   }
