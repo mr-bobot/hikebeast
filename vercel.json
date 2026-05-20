@@ -425,6 +425,46 @@
       "source": "/friendsandfamily",
       "destination": "/friendsandfamily/",
       "permanent": true
+    },
+    {
+      "source": "/free",
+      "destination": "/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/free/",
+      "destination": "/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/de/free",
+      "destination": "/de/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/de/free/",
+      "destination": "/de/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/sample",
+      "destination": "/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/sample/",
+      "destination": "/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/read",
+      "destination": "/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/read/",
+      "destination": "/map7/",
+      "permanent": true
     }
   ]
 }
