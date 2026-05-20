@@ -381,7 +381,7 @@
   }
 </style>
 </head>
-<body>
+<body class="markers-animating">
 
 <div class="topbar">
   <a class="brand" href="../index.html">
@@ -576,10 +576,26 @@
   }
   buildMarkers();
 
-  // Initial paint shows markers immediately — no entrance animation.
-  // The reveal cascade (playCardReveal below) only fires when the user
-  // flips the Dots ↔ Cards toggle. We used to play it on first load too,
-  // but the 1s delay + 2.5s cascade made the map feel slow to come up.
+  // Initial-load reveal: poll for markers to be rendered to the DOM
+  // (Leaflet renders on next frame after addLayer; Convex may rebuild
+  // a few hundred ms in). Once we find them, kick the animation
+  // exactly once, then stop polling. Hard cap at 5s so we don't loop
+  // forever if buildMarkers never produces anything.
+  // <body class="markers-animating"> in the HTML keeps markers hidden
+  // from first paint so there's no flash-of-visible-then-hidden
+  // before the cascade starts.
+  let initialRevealStarted = false;
+  function tryInitialReveal() {
+    if (initialRevealStarted) return true;
+    if (!document.querySelectorAll('.spot-marker').length) return false;
+    initialRevealStarted = true;
+    playCardReveal();
+    return true;
+  }
+  const initialRevealPoll = setInterval(() => {
+    if (tryInitialReveal()) clearInterval(initialRevealPoll);
+  }, 80);
+  setTimeout(() => clearInterval(initialRevealPoll), 5000);
 
   // One-shot rebuild on the first Convex push so the missing spots (no
   // GPS or recently added) and derivative thumbnails appear without a
@@ -592,9 +608,11 @@
     SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
     buildMarkers();
     if (typeof applyFavFilter === 'function') applyFavFilter();
-    // Markers replaced silently — body has no `markers-animating` class
-    // outside of a user-initiated toggle, so the new DOM nodes paint
-    // in place.
+    // Convex catch-up rebuilt the markers — kick the entrance
+    // animation now (or no-op if it's already started). Wraps in
+    // requestAnimationFrame so Leaflet has a chance to paint the
+    // new DOM nodes before we query them.
+    requestAnimationFrame(tryInitialReveal);
   });
 
   // === Marker scale grows with zoom so spot thumbnails are legible up close
