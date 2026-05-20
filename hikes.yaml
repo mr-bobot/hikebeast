@@ -1295,7 +1295,7 @@ hikes:
   quickest_for:
   - lac_de_taney
   equipment_list: []
-  start_maps_url: https://www.google.com/maps/place/?q=46.33749,6.85606&z=16
+  start_maps_url: https://maps.app.goo.gl/JNYuYgWpRCrmPhbu6
   distance_km: 4.5
 - id: grammont-route-154
   sac_grade: T2
@@ -1554,7 +1554,7 @@ hikes:
   visits:
   - klausenpass
   sources:
-  - https://schweizmobil.ch/en/hiking-in-switzerland/route-1/stage-7
+  - https://schweizmobil.ch/en/hiking-in-switzerland/route-1/stage-6
   start_maps_url: https://www.google.com/maps/place/?q=46.89,8.90056&z=16
   distance_km: 27.4
 - id: barglistuber-route-14
@@ -1582,12 +1582,11 @@ hikes:
   start: Urnerboden village
   transit:
     bus: Postbus to Urnerboden
-  duration_min: 180
-  gain_m: 200
   sac_grade: T1
   effort_label: Easy
-  description_extra: Easy panoramic loop around Urnerboden. Trails are mostly flat on grass and gravel. About three hours and 200 m of cumulative gain. T1, family-friendly. Access via
-    the Klausen Pass road (open summer only, Postbus serves the valley). Pair with a stop at one of the working alpine dairies.
+  description_extra: Urnerboden alp is a flat valley floor accessible by car or PostBus. From the village there are several short walks across the pasture and along the Fätschbach, plus
+    the federal Schächentaler Höhenweg climbing south above the valley (separate route). For an unstructured wander on the alp, allow ~1–2 hours. Trails are mostly flat on grass and
+    gravel. Access via the Klausen Pass road (open summer only, PostBus serves the valley). Pair with a stop at one of the working alpine dairies.
   visits:
   - urnerboden
   sources:
@@ -1836,7 +1835,7 @@ hikes:
   - batoni_wasserfallarena
   description_extra: Park in Weisstannen or take the postbus from Mels, then 3 to 4 hours up the valley to the arena. T2 throughout, with around 660 m of gain.
   sources:
-  - https://www.komoot.com/smarttour/2521292
+  - https://www.outdooractive.com/en/route/hiking-trail/heidiland/route-of-amazement-weisstannental/23430516/
   quickest_for:
   - batoni_wasserfallarena
   equipment_list: []
@@ -1902,8 +1901,8 @@ hikes:
   start: Maschgenkamm top station (Flumserberg)
   transit:
     train: Unterterzen (SBB) + Flumserberg cable cars
-  duration_min: 180
-  gain_m: 250
+  duration_min: 120
+  gain_m: 350
   sac_grade: T2
   effort_label: Moderate
   description_extra: Approach from the top of the Maschgenkamm cable car (Flumserberg Tannenboden line). From 2,008 m the route descends past the Panüöl area, then traverses southwest
@@ -2900,7 +2899,7 @@ hikes:
   effort_label: Moderate
   duration_min: 360
   gain_m: 700
-  distance_km: 15
+  distance_km: 22.0
   equipment_list: []
   start: Eggberge (top station of the Flüelen-Eggberge cable car)
   transit:
@@ -2913,8 +2912,6 @@ hikes:
   sources:
   - https://www.schweizmobil.ch/de/wanderland/routen/route-0595.html
   - https://www.schaechentaler-hoehenweg.ch/wanderrouten
-  quickest_for:
-  - klausenpass
   cable_car_ids:
   - fluelen-eggberge-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.90147,8.64492&z=16
@@ -3933,3 +3930,22 @@ hikes:
   - https://fribourg.ch/en/schwarzsee/hiking/schwarzsee-hohenweg/
   cable_car_ids:
   - kaisereggbahnen
+- id: klausenpass-drive-up
+  name: Drive up
+  visits:
+  - klausenpass
+  start: Klausenpass parking
+  start_maps_url: https://www.google.com/maps/place/?q=46.86824,8.85539&z=15
+  sac_grade: T1
+  effort_label: No hike
+  equipment_list: []
+  transit:
+    bus: PostBus Klausenpass-Linie (Flüelen–Klausenpass–Linthal), runs June–October
+  description_extra: Klausenpass sits at 1,948 m on the Glarus–Uri border, reached directly by car or PostBus over the Klausen Pass road. Road open roughly June to October (closed by
+    snow the rest of the year). PostBus from Flüelen or Linthal stops at Klausenpasshöhe. Park at the Hotel Klausenpasshöhe lot or at one of the roadside pull-outs along the pass. No
+    hike required to reach the spot itself.
+  sources:
+  - https://alpen-paesse.ch/en/alpenpaesse/klausenpass/
+  - https://www.postauto.ch/en/excursion-tips/klausen-pass-route
+  quickest_for:
+  - klausenpass
