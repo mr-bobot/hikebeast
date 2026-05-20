@@ -402,8 +402,8 @@
       <span class="fav-count" id="favToggleCount" hidden>0</span>
     </button>
   </div>
-  <label class="marker-mode-switch" title="Show photo cards instead of dots">
-    <span class="label">Cards</span>
+  <label class="marker-mode-switch" title="Show photos instead of dots">
+    <span class="label">Photos</span>
     <span class="switch">
       <input type="checkbox" id="markerModeToggle" />
       <span class="track" aria-hidden="true"></span>
@@ -608,11 +608,22 @@
     SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
     buildMarkers();
     if (typeof applyFavFilter === 'function') applyFavFilter();
-    // Convex catch-up rebuilt the markers — kick the entrance
-    // animation now (or no-op if it's already started). Wraps in
-    // requestAnimationFrame so Leaflet has a chance to paint the
-    // new DOM nodes before we query them.
-    requestAnimationFrame(tryInitialReveal);
+    // Convex catch-up REPLACES every marker DOM node, which detaches
+    // any in-flight cascade timers from the visible nodes (they fire
+    // on the now-removed sidecar markers, so the user sees nothing
+    // until the cleanup timer at +4s pops the whole batch in at once).
+    // Force a fresh playCardReveal on the new nodes so the cascade
+    // is what they actually see. rAF gives Leaflet a paint frame to
+    // attach the new DOM before the cascade queries .spot-marker.
+    requestAnimationFrame(() => {
+      if (initialRevealStarted) {
+        // First cascade was already kicked on stale markers — restart
+        // playCardReveal so the timers target the fresh DOM nodes.
+        playCardReveal();
+      } else {
+        tryInitialReveal();
+      }
+    });
   });
 
   // === Marker scale grows with zoom so spot thumbnails are legible up close
