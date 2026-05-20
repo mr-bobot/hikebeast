@@ -576,22 +576,31 @@
   }
   buildMarkers();
 
-  // Initial-load reveal: poll for markers to be rendered to the DOM
-  // (Leaflet renders on next frame after addLayer; Convex may rebuild
-  // a few hundred ms in). Once we find them, kick the animation
-  // exactly once, then stop polling. Hard cap at 5s so we don't loop
-  // forever if buildMarkers never produces anything.
-  // <body class="markers-animating"> in the HTML keeps markers hidden
-  // from first paint so there's no flash-of-visible-then-hidden
-  // before the cascade starts.
+  // Initial-load reveal: <body class="markers-animating"> in the HTML
+  // keeps every marker hidden from first paint — no flash-of-visible-
+  // then-hidden before the cascade starts. We then GATE the cascade
+  // behind Convex catch-up so it fires exactly once, on the final
+  // marker set. Earlier versions kicked the cascade from a poll as
+  // soon as sidecar markers were rendered; Convex catch-up a few
+  // hundred ms later then tore those markers down and forced a
+  // restart, which the user saw as the cascade reloading from zero
+  // halfway through.
+  //
+  // readyToReveal:        Convex (or the fallback timer) has settled
+  //                       on the canonical marker set; safe to play.
+  // initialRevealStarted: playCardReveal has been called; idempotent.
+  let readyToReveal = false;
   let initialRevealStarted = false;
   function tryInitialReveal() {
     if (initialRevealStarted) return true;
+    if (!readyToReveal) return false;
     if (!document.querySelectorAll('.spot-marker').length) return false;
     initialRevealStarted = true;
     playCardReveal();
     return true;
   }
+  // Poll picks up the marker DOM nodes after Leaflet paints them. The
+  // gate (readyToReveal) keeps this a no-op until Convex confirms.
   const initialRevealPoll = setInterval(() => {
     if (tryInitialReveal()) clearInterval(initialRevealPoll);
   }, 80);
@@ -608,23 +617,23 @@
     SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
     buildMarkers();
     if (typeof applyFavFilter === 'function') applyFavFilter();
-    // Convex catch-up REPLACES every marker DOM node, which detaches
-    // any in-flight cascade timers from the visible nodes (they fire
-    // on the now-removed sidecar markers, so the user sees nothing
-    // until the cleanup timer at +4s pops the whole batch in at once).
-    // Force a fresh playCardReveal on the new nodes so the cascade
-    // is what they actually see. rAF gives Leaflet a paint frame to
-    // attach the new DOM before the cascade queries .spot-marker.
-    requestAnimationFrame(() => {
-      if (initialRevealStarted) {
-        // First cascade was already kicked on stale markers — restart
-        // playCardReveal so the timers target the fresh DOM nodes.
-        playCardReveal();
-      } else {
-        tryInitialReveal();
-      }
-    });
+    // Markers are now the final canonical set. Green-light the
+    // cascade and try to fire immediately (the poll catches it on
+    // the next tick if Leaflet hasn't painted yet).
+    readyToReveal = true;
+    requestAnimationFrame(tryInitialReveal);
   });
+
+  // Fallback: if Convex doesn't arrive within 1.5 s (offline, blocked,
+  // slow WebSocket), play the cascade on the sidecar markers so the
+  // map doesn't stay blank. Typical Convex round-trip is 200-500 ms,
+  // so this only fires for degraded networks.
+  setTimeout(() => {
+    if (!readyToReveal) {
+      readyToReveal = true;
+      tryInitialReveal();
+    }
+  }, 1500);
 
   // === Marker scale grows with zoom so spot thumbnails are legible up close
   // without crowding the low-zoom country view. Computed once per zoom and
