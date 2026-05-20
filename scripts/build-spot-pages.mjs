@@ -189,14 +189,11 @@ const BRAND_SPRITES = `<svg width="0" height="0" style="position:absolute" aria-
 
 // ─── Helpers for the planning panel ─────────────────────────────────────
 
-// Show the "How to get there →" CTA + planning panel only when the spot
-// has actual hikes / routes. For drive-up-only spots (arrival data only),
-// we suppress the back panel entirely: the front already has the Open in
-// Maps link, the spec grid (Access: Drive-up), and the body text — that's
-// enough for a "just park and walk a few minutes" spot. Reported by user
-// 2026-05-18: a "How to get there" page for a spot that only needs Google
-// Maps directions adds nothing.
+// Show the "How to get there →" CTA + planning panel when the spot has
+// either real route data OR an `access` block (drive-up / boat / transit
+// instructions for spots without a hike). Either is enough to flip.
 function hasPlanningData(spot) {
+  if (hasAccessData(spot)) return true;
   if (!Array.isArray(spot.routes) || spot.routes.length === 0) return false;
   return spot.routes.some(r =>
     r.sac_grade || r.duration_min || r.start || r.transit || r.swisstopo_url
@@ -547,17 +544,17 @@ function renderAccessSection(spot) {
     </div>`);
   }
 
-  const summaryHtml = accessSummary
-    ? `<p class="hb-access-summary">${escapeHtml(accessSummary)}</p>`
-    : "";
+  // No accessSummary banner — it was the short "By car" / "Drive-up"
+  // label rendered above the detailed access card. Redundant with the
+  // detailed BY CAR / BY TRAIN+BUS rows below, and looked like an
+  // orphan box. Reported by user 2026-05-20.
+  // No section header either — the whole back panel IS the "how to
+  // get there" page (the front-side CTA opens this), so a header
+  // inside it is redundant.
   const cardHtml = blocks.length
     ? `<div class="hb-access-card">${blocks.join("")}</div>`
     : "";
-  // No section header — the whole back panel IS the "how to get there"
-  // page (the front-side CTA opens this). A "How to get there" heading
-  // inside it is redundant. Reported by user 2026-05-18 (round 2 of the
-  // same feedback).
-  return `${summaryHtml}${cardHtml}`;
+  return cardHtml;
 }
 
 function renderBackOverview(spot) {
