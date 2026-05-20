@@ -5478,22 +5478,28 @@ body.has-rail .topbar .hb-nav { display: none; }
   .hb-flip-card .slide-spot-back {
     margin-top: 14px;
     border-radius: var(--radius-card);
+    /* Mobile: route-detail and overview don't share a grid cell — they
+       swap by display:none / display:flex driven by data-view. */
     display: block;
   }
   .hb-flip-back-view {
     transform: none !important;
     transition: none;
   }
-  /* Route-detail sub-view is hidden on mobile for now. The route row's
-     own stats line already shows the key facts. Multi-route detail UI
-     is a follow-up for mobile. */
+  /* Default state: overview visible, route-detail hidden. JS toggles
+     data-view="route-detail" on .slide-spot-back when a route is tapped,
+     which swaps which view is shown. Previously route-detail was
+     unconditionally display:none on mobile — tapping a route hid the
+     overview but the route-detail never appeared, leaving the panel
+     blank (Leon's iPhone screenshot 2026-05-20). */
   .hb-flip-back-view-route { display: none; }
-  /* The "How to get there →" row on the front stays visible on mobile —
-     tapping it scrolls the planning panel into view (JS-handled). The
-     "Back to photo" / "Routes" buttons inside the panel are desktop-only
-     and have no meaning when the panel is already in document flow. */
-  [data-action="flip-front"],
-  [data-action="flip-overview"] { display: none !important; }
+  .slide-spot-back[data-view="route-detail"] .hb-flip-back-view-overview { display: none; }
+  .slide-spot-back[data-view="route-detail"] .hb-flip-back-view-route { display: flex; }
+  /* The "Back to photo" button is irrelevant on mobile (no flip — the
+     panel sits below the photo in flow). The "Routes" back button stays
+     visible — it's how the user navigates from route-detail back to the
+     overview on mobile. */
+  [data-action="flip-front"] { display: none !important; }
 }
 
 /* Topbar */
@@ -5501,7 +5507,7 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-back-flip-back, .hb-back-route-btn {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 13px; font-weight: 500; color: var(--muted);
-  background: white;
+  background: var(--paper);
   padding: 7px 12px; border-radius: var(--radius-btn);
   border: 1px solid var(--hairline-strong);
   cursor: pointer; font-family: inherit;
@@ -5514,10 +5520,10 @@ body.has-rail .topbar .hb-nav { display: none; }
 
 /* Paraphrased description block */
 .hb-spot-description {
-  font-size: 15px; line-height: 1.55; color: #1c1c1e;
+  font-size: 15px; line-height: 1.55; color: var(--fg);
   margin: 0;
   padding: 12px 16px;
-  background: white;
+  background: var(--paper);
   border: 1px solid var(--hairline);
   border-radius: 12px;
 }
@@ -5528,7 +5534,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   display: inline-flex; align-items: center; gap: 10px;
   padding: 7px 16px 7px 7px;
   border-radius: var(--radius-btn);
-  background: white; border: 1px solid var(--hairline-strong);
+  background: var(--paper); border: 1px solid var(--hairline-strong);
   text-decoration: none; color: var(--fg);
   font-size: 13.5px; font-weight: 500; letter-spacing: -0.005em;
   cursor: pointer; font-family: inherit;
@@ -5537,11 +5543,12 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-link-pill:hover { background: var(--surface-2); border-color: var(--muted); }
 .hb-link-pill:active { transform: scale(0.98); }
 .hb-link-pill.is-flag { background: #fff7e6; border-color: #f6c453; color: #8a6300; }
+:root[data-theme="dark"] .hb-link-pill.is-flag { background: rgba(255, 159, 10, 0.10); border-color: rgba(255, 159, 10, 0.32); color: #ffd28a; }
 .hb-brand-icon { width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; flex: 0 0 28px; overflow: hidden; }
 .hb-brand-icon svg { width: 100%; height: 100%; display: block; }
 
 /* 5-cell stats dashboard */
-.hb-stats-bar { display: flex; background: white; border: 1px solid var(--hairline); border-radius: 14px; overflow: hidden; }
+.hb-stats-bar { display: flex; background: var(--paper); border: 1px solid var(--hairline); border-radius: 14px; overflow: hidden; }
 .hb-stats-bar > .hb-stats-cell { flex: 1 1 0; }
 /* Overview bar (back of card): 3 cells, left-aligned, doesn't need to
    span full width. Each cell stays the same physical width as a cell in
@@ -5578,8 +5585,8 @@ body.has-rail .topbar .hb-nav { display: none; }
 
 /* Routes section */
 .hb-section-h { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 4px 0 6px 4px; }
-.hb-routes-list { display: flex; flex-direction: column; border: 1px solid var(--hairline); border-radius: 14px; overflow: hidden; background: white; }
-.hb-route-row { display: grid; grid-template-columns: 110px 1fr auto; gap: 16px; align-items: center; padding: 14px 16px; background: white; border: 0; border-top: 1px solid var(--hairline); cursor: pointer; text-align: left; font-family: inherit; transition: background 0.15s ease; width: 100%; }
+.hb-routes-list { display: flex; flex-direction: column; border: 1px solid var(--hairline); border-radius: 14px; overflow: hidden; background: var(--paper); }
+.hb-route-row { display: grid; grid-template-columns: 110px 1fr auto; gap: 16px; align-items: center; padding: 14px 16px; background: var(--paper); border: 0; border-top: 1px solid var(--hairline); cursor: pointer; text-align: left; font-family: inherit; transition: background 0.15s ease; width: 100%; }
 .hb-route-thumb {
   width: 110px; min-width: 110px; max-width: 110px;
   height: 82px;
@@ -5607,7 +5614,7 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-route-row:hover .hb-route-chev { color: var(--accent); }
 
 /* Hut + Cable car cards */
-.hb-detail-card { background: white; border: 1px solid var(--hairline); border-radius: 14px; padding: 14px 18px; }
+.hb-detail-card { background: var(--paper); border: 1px solid var(--hairline); border-radius: 14px; padding: 14px 18px; }
 .hb-detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 18px; }
 @media (max-width: 700px) { .hb-detail-grid { grid-template-columns: 1fr; } }
 .hb-detail-grid > div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
@@ -5633,6 +5640,15 @@ body.has-rail .topbar .hb-nav { display: none; }
   text-transform: uppercase; color: #8a6300;
   margin-bottom: 4px;
 }
+/* Dark mode: amber surface needs to be darker + less saturated so it
+   reads as "warning note" instead of a glowing yellow on dark bg. */
+:root[data-theme="dark"] .hb-wildcamping-note {
+  background: rgba(255, 159, 10, 0.10);
+  border-color: rgba(255, 159, 10, 0.32);
+}
+:root[data-theme="dark"] .hb-wildcamping-note::before {
+  color: #ffd28a;
+}
 
 /* Route detail sub-view */
 .hb-rd-head { display: flex; flex-direction: column; gap: 2px; padding: 6px 4px 4px; }
@@ -5642,7 +5658,7 @@ body.has-rail .topbar .hb-nav { display: none; }
 
 /* === Access section · drive-up / transit instructions when no hike === */
 .hb-access-card {
-  background: white;
+  background: var(--paper);
   border: 1px solid var(--hairline);
   border-radius: 14px;
   padding: 14px 18px;

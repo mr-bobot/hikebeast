@@ -1840,7 +1840,7 @@ spots:
   wildCamping:
     verdict: restricted
     reason: Zinal Glacier ice cave; above tree line in BLN. Tolerated single-night on rocky terrain; never camp on or beside the glacier ice cave (collapse hazard).
-  maps_url: null
+  maps_url: https://www.google.com/maps/place/?q=46.07156,7.63271&z=15
   image: spots/the_ice_cave/main.jpg
   image_credit: isleifureli
   photos:
@@ -1881,6 +1881,9 @@ spots:
       walk_from_stop_min: 0
     best_time: Midday in summer when the cave's blue ice catches indirect light.
     operating: Cable cars run mid-June to early October.
+  gps:
+    lat: 46.07156
+    lng: 7.63271
 - id: ferpecle_glacier
   chapter: valais
   kicker: A GLACIER YOU CAN STILL REACH ON FOOT
@@ -1935,7 +1938,7 @@ spots:
   wildCamping:
     verdict: restricted
     reason: Val d'Hérens braided meltwater downstream of Ferpècle Glacier. Above tree line tolerated single-night; avoid the river braid itself (sensitive habitat).
-  maps_url: null
+  maps_url: https://www.google.com/maps/place/?q=46.04,7.555&z=15
   image: spots/ferpecle_river/main.jpg
   image_credit: oliwvair
   photos:
@@ -1949,6 +1952,9 @@ spots:
   trip_facts:
     elevation_m: 1770
     busyness: 2
+  gps:
+    lat: 46.04
+    lng: 7.555
 - id: spielboden
   chapter: valais
   kicker: THE EASIEST MARMOTS IN SWITZERLAND
@@ -2313,6 +2319,18 @@ spots:
   trip_facts:
     elevation_m: 613
     busyness: 3
+  arrival:
+    by_car:
+      directions: From Martigny take the Martigny-Croix motorway exit, follow signs for Grand-St-Bernard at the roundabout, then after about 2 km turn right into Les Valettes (Bovernier)
+        and follow signs for Champex-Lac. Roughly five minutes from Martigny.
+      parking: Free parking lot at the gorge / on-site restaurant in Les Valettes (Route de Champex 16, 1932 Les Valettes). Limited capacity, especially for coaches.
+      walk_to_spot_min: 2
+    by_train_bus:
+      route: Martigny-Orsières line (TMR/RegionAlps) to Bovernier station, then walk uphill to Les Valettes following signs toward Champex-Lac
+      walk_from_stop_min: 20
+    best_time: Late spring to early autumn while the gorge is open and water flow is strong; midweek mornings avoid family crowds.
+    operating: 'Paid entry, open daily May 1 to October 31 (weather permitting). Hours: Sun-Wed 09:00-18:00, Thu-Sat 09:00-23:00. Admission CHF 9 adults, CHF 5 children 6-15, free under
+      6, CHF 8 students/AVS. About 1h round trip on the boardwalk with 330 steps and a 200 m climb.'
 - id: gorges_du_dailley
   chapter: valais
   kicker: NARROWER, OLDER, LESS KNOWN
@@ -2726,6 +2744,15 @@ spots:
   trip_facts:
     elevation_m: 870
     busyness: 2
+  arrival:
+    by_car:
+      directions: From Bulle (FR) head south on the H189 toward Château-d'Oex via Montbovon; just past Montbovon, turn off into the La Tine hamlet (commune of Rossinière). Coming from
+        Vaud, drive up from Vevey/Montreux via Les Avants and Les Moulins to Rossinière, then continue west toward Montbovon to La Tine.
+    by_train_bus:
+      route: MOB GoldenPass regional train (Montreux-Zweisimmen line) to La Tine station, which sits in the hamlet directly above the Sarine gorge
+    best_time: Late spring through early autumn when water is high and the Sarine gorge is most photogenic; for canyoning, the operators run May to October.
+    operating: Free public-land access on foot; the canyon descent itself requires a guided canyoning trip with a local outfitter (Guide Concept, Rivières Aventures and others). Best
+      between May and October.
 - id: dent_de_broc
   chapter: fribourg
   kicker: A DISTANT PEAK, A LONG LENS
@@ -3063,6 +3090,19 @@ spots:
   trip_facts:
     elevation_m: 460
     busyness: 2
+  arrival:
+    by_car:
+      directions: From the Montreux lakefront, drive up into Les Planches (the old town just east of central Montreux). The gorge entrance is reached from the streets behind St-Vincent
+        church.
+      parking: Small paid lot between Les Planches old town and the church of St-Vincent in Montreux. Limited capacity.
+      walk_to_spot_min: 5
+    by_train_bus:
+      route: Train to Montreux SBB, then walk uphill through Les Planches (about 15 minutes through town to the trailhead). The Les Avants-Sonloup funicular and MOB train via Les Avants
+        can be used to do the gorge as a one-way descent or loop.
+      walk_from_stop_min: 15
+    best_time: 'Summer mornings: the canyon stays naturally cool on hot days. Avoid right after heavy rain when stone steps and wooden bridges get slick.'
+    operating: Free public access, no entrance fee, no fixed hours. The trail is in places affected by rockfall and section closures, check Montreux Riviera Tourisme or SwitzerlandMobility
+      for the current status before going.
 - id: pisse_chevre
   chapter: western
   kicker: A REMOTE VAUD WATERFALL
@@ -3092,6 +3132,14 @@ spots:
   trip_facts:
     elevation_m: 1100
     busyness: 1
+  arrival:
+    by_car:
+      directions: From Lavey-les-Bains (south of Bex, Vaud) take the narrow mountain road that climbs in 29 switchbacks toward Morcles village. The waterfall is on the Avançon stream
+        alongside this road as it climbs above the Rhône valley.
+      parking: Small roadside pull-out at the foot of the waterfall on the Route de Morcles, free.
+      walk_to_spot_min: 1
+    best_time: Snowmelt period (late spring) for maximum flow; the waterfall narrows by late summer.
+    operating: Free public access, year-round, but the Route de Morcles is steep, narrow and closed by snow in winter. Best between late spring and autumn.
 - id: route_de_morcles
   chapter: western
   kicker: LEADING LINES ABOVE THE RHÔNE
@@ -3121,6 +3169,14 @@ spots:
   trip_facts:
     elevation_m: 1100
     busyness: 2
+  arrival:
+    by_car:
+      directions: From Lavey-les-Bains (reached from the A9 motorway exit at Saint-Maurice / Lavey), follow signs for Morcles. The road climbs in 29 numbered switchbacks roughly 800
+        m up the south flank of the Rhône valley to Morcles village.
+      parking: Free roadside pull-outs at several switchbacks and viewpoints; small lot in Morcles village at the top.
+      walk_to_spot_min: 0
+    best_time: 'Golden hour: late afternoon light sweeps across the Rhône valley toward the Dents du Midi. Best from late spring to October before the upper road can be closed by snow.'
+    operating: Free public road, narrow with tight hairpins, normally open roughly May to October. Closed or impassable in winter; check Lavey-Morcles commune for road status.
 - id: creux_du_van
   chapter: western
   kicker: HUGE CLIFFS IN THE JURA
@@ -3313,7 +3369,7 @@ spots:
   wildCamping:
     verdict: forbidden
     reason: Léman shoreline in St-Prex village; private property and intensive tourism. Wild camping not allowed. Use a campsite on the lake.
-  maps_url: null
+  maps_url: https://www.google.com/maps/place/?q=46.47843,6.45643&z=15
   image: spots/st_prex/main.jpg
   image_credit: oliwvair1
   photos:
@@ -3338,6 +3394,9 @@ spots:
       walk_from_stop_min: 12
     best_time: Afternoon for sun on the water and warm light on the French Alps across the lake. Summer for swim temperature, water hits 22 to 24 C in July to August.
     operating: Open access year-round, but the platform is a summer feature. Check depth before jumping.
+  gps:
+    lat: 46.47843
+    lng: 6.45643
 - id: marchairuz
   chapter: western
   kicker: WINTER WONDERLAND IN THE JURA
@@ -3354,7 +3413,7 @@ spots:
     verdict: restricted
     reason: Inside Parc naturel régional Jura vaudois. Park rules tolerate single-night bivouac outside reserves; below ~1300 m discouraged. Pine-forested pass — winter sites buried
       by snow.
-  maps_url: null
+  maps_url: https://www.google.com/maps/place/?q=46.55274,6.25024&z=15
   image: spots/marchairuz/main.jpg
   image_credit: jenniferesseiva
   photos:
@@ -3376,6 +3435,9 @@ spots:
   hike_ids:
   - marchairuz-mollendruz-mont-tendre-marchairuz
   - marchairuz-from-saint-cergue
+  gps:
+    lat: 46.55274
+    lng: 6.25024
 - id: geltenschuss
   chapter: western
   kicker: A LONG HIKE TO A BIG WATERFALL
@@ -5048,6 +5110,21 @@ spots:
   trip_facts:
     elevation_m: 2100
     busyness: 2
+  arrival:
+    by_car:
+      directions: From Chamonix drive 8 km up the valley on the D1506 toward the Col des Montets / Vallorcine, parking either at Tré-le-Champ (cheaper, longer hike) or at Les Praz for
+        the La Flégère cable car (shorter hike but lift ticket).
+      parking: Free or very cheap roadside parking at Tré-le-Champ and at Col des Montets pulloffs; paid lot at Les Praz next to the La Flégère telepherique.
+      walk_to_spot_min: 180
+    by_train_bus:
+      route: Mont-Blanc Express (TER / SNCF) Chamonix-Vallorcine line to Montroc-Le-Planet station, then a 10-15 minute walk into Tré-le-Champ to pick up the marked trail. Alternatively,
+        Chamonix Bus line 2 along the valley to Les Praz, then the La Flégère cable car.
+      walk_from_stop_min: 180
+    best_time: Mid-June to mid-September when the bivouac authorisation window is open and the lakes are ice-free. Sunset and sunrise reflections of the Mont Blanc massif in the lakes
+      are the iconic shot.
+    operating: 'Reservation MANDATORY June to September via https://bivouac.nature-haute-savoie.fr (Aiguilles Rouges nature reserve regulation, prefectural order). Tents may be pitched
+      only between 19:00 and 09:00, one night maximum, fixed quota of spots. Swimming in Lac Blanc and the Chéserys lakes is forbidden by prefectural order. La Flégère cable car: approx.
+      EUR 23 return; combined La Flégère + L''Index pass approx. EUR 39.50.'
 - id: mont_blanc
   chapter: beyond
   kicker: WESTERN EUROPE'S HIGHEST. WITH A TELE
@@ -5835,6 +5912,10 @@ spots:
     best_time: The greatest colour intensity of the Engadin larches falls around mid-October. Needles begin to turn from the first week of October and drop in the first half of November.
       Warm afternoon light intensifies the colour; early morning or evening gives the cleanest skies.
     operating: All access roads stay open through October. The Maloja Pass road and the Engadin valley road are kept clear year-round.
+  gps:
+    lat: 46.49611
+    lng: 9.86861
+  maps_url: https://www.google.com/maps/place/?q=46.49611,9.86861&z=15
 back_matter:
   thanks:
     kicker: Thank you
