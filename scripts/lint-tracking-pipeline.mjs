@@ -133,10 +133,71 @@ for (const htmlPath of indexes) {
   }
 }
 
-if (errors.length) {
-  console.error(`Tracking pipeline lint FAILED · ${errors.length} issue(s) found across ${indexes.length} pages, ${checkedCalls} fetch sites, ${checkedFields} field references:`);
+// ──────────────────────────────────────────────────────────────────────────
+// Meta pixel dedup wiring checks.
+//
+// Two regressions caught by hand on 2026-05-15 and 2026-05-20 that this
+// lint now catches automatically:
+//
+// 1. Every browser-side `fbq("track","Purchase",...)` call must pass an
+//    `eventID` parameter matching the CAPI event_id from
+//    api/checkout/webhook.js. Without it Meta double-counts pixel + CAPI
+//    as separate events (3.3x inflation observed on 2026-05-20: 387 Meta
+//    Purchase events for 117 actual paid).
+//
+// 2. Every landing page that mounts an embedded Stripe Checkout
+//    (`mountCheckout` pattern) and fires InitiateCheckout must do so via
+//    the `attachInitiateCheckoutSignal()` pointerdown/focusin listener,
+//    NOT inside the mount itself. Firing it on auto-mount turns every
+//    page paint into a "checkout intent" signal (2.4K InitiateCheckout
+//    events for ~50 buyers on 2026-05-15).
+//
+// Both regressions happened when new /map*/ pages were spun up by
+// copying an older template that predated the fix.
+let metaCheckedFiles = 0;
+let metaCheckedCalls = 0;
+const metaErrors = [];
+
+for (const htmlPath of indexes) {
+  const rel = relative(repoRoot, htmlPath);
+  const content = readFileSync(htmlPath, "utf8");
+  metaCheckedFiles++;
+
+  // Check 1 · Purchase pixel must include eventID. Applies repo-wide:
+  // any fbq("track","Purchase",...) without an eventID is broken dedup,
+  // not just on /map*/success/ pages.
+  const purchaseRe = /fbq\s*\(\s*["']track["']\s*,\s*["']Purchase["']/g;
+  let pm;
+  while ((pm = purchaseRe.exec(content)) !== null) {
+    metaCheckedCalls++;
+    // Look at the ~800 chars after the call opening. The eventID parameter
+    // is the 4th positional arg, typically within ~300 chars but we allow
+    // headroom for multi-line custom_data objects.
+    const slice = content.slice(pm.index, pm.index + 800);
+    if (!/eventID\s*:/.test(slice)) {
+      metaErrors.push(`Meta dedup: ${rel} fires fbq("track","Purchase",...) without an eventID parameter. Meta will count pixel + CAPI as separate events. Pass { eventID: data.payment_intent } as the 4th arg to fbq, matching the event_id sent by api/checkout/webhook.js.`);
+    }
+  }
+
+  // Check 2 · mountCheckout + InitiateCheckout must use the intent
+  // pattern. /guide/, /free/, /sample/, /read/ fire InitiateCheckout
+  // from click handlers (correct), so we gate on mountCheckout being
+  // present — that's the Stripe-embedded auto-load pattern that needs
+  // the workaround.
+  if (/\bmountCheckout\b/.test(content) && /fbq\s*\(\s*["']track["']\s*,\s*["']InitiateCheckout["']/.test(content)) {
+    metaCheckedCalls++;
+    if (!/attachInitiateCheckoutSignal/.test(content)) {
+      metaErrors.push(`Meta intent: ${rel} fires fbq("track","InitiateCheckout",...) on a page that also auto-mounts Stripe Checkout. Without attachInitiateCheckoutSignal() the event fires on every page paint, not on real buyer intent — inflates Meta's IC count and degrades ad optimization. Pattern lives in map/index.html since 2026-05-15.`);
+    }
+  }
+}
+
+if (errors.length || metaErrors.length) {
+  const total = errors.length + metaErrors.length;
+  console.error(`Tracking pipeline lint FAILED · ${total} issue(s) found across ${indexes.length} pages, ${checkedCalls} fetch sites, ${checkedFields} field references, ${metaCheckedCalls} Meta pixel calls:`);
   for (const e of errors) console.error(`  - ${e}`);
+  for (const e of metaErrors) console.error(`  - ${e}`);
   process.exit(1);
 }
 
-console.log(`Tracking pipeline OK · ${indexes.length} pages, ${checkedCalls} fetch sites, ${checkedFields} field references all wired through.`);
+console.log(`Tracking pipeline OK · ${indexes.length} pages, ${checkedCalls} fetch sites, ${checkedFields} field references, ${metaCheckedCalls} Meta pixel calls all wired through.`);
