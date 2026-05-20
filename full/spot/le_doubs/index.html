@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779300426007" />
+<link rel="stylesheet" href="../../preview.css?v=1779302707739" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -101,7 +101,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value">Drive-up</span>
+    <span class="value">T1<span class="unit">· Drive-up</span></span>
     <span class="label">Accessibility</span>
   </div>
     <div class="hb-stats-cell">
@@ -110,20 +110,17 @@
     <span class="label">Crowdedness</span>
   </div>
   </div>
-    <div class="hb-access-card"><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚗</span>By car</p>
-      <div class="hb-access-body"><p>From La Chaux-de-Fonds, drive to Le Locle, then follow signs toward Les Planchettes and Les Roches de Moron. The road ends at Restaurant Les Roches de Moron above the canyon.</p><p><span class="hb-access-detail">Parking</span> Restaurant Les Roches de Moron lot at the trailhead, free for diners, signed paid parking otherwise.</p><p><span class="hb-access-detail">Walk to spot</span> 5 min</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚆</span>By train + bus</p>
-      <div class="hb-access-body"><p>Les Brenets (train from Le Locle on the regional line), then 45-minute climb up the cliff trail to the Roches de Moron viewpoint, or taxi from Le Locle.</p><p><span class="hb-access-detail">Walk from stop</span> 45 min</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🕒</span>When to go</p>
-      <div class="hb-access-body"><p>Late afternoon for sunset on the canyon walls. Overcast suits the Jura mood. Avoid windy days, the plateau is exposed.</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">📅</span>Hours / season</p>
-      <div class="hb-access-body"><p>Trail open year-round. The restaurant has seasonal hours, check restroches.ch before counting on it for parking access.</p></div>
-    </div></div>
     
+    <p class="hb-section-h">Routes</p>
+  <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/le_doubs_p0/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Drive to Les Roches de Moron <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Drive-up</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button></div>
     
   </div>
     <div class="hb-flip-back-view hb-flip-back-view-route">
@@ -144,7 +141,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value"><span class="missing" data-rd-sac>—</span><span class="unit" data-rd-sac-tail></span></span>
+    <span class="value"><span data-rd-sac>T1</span><span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>Drive-up</span></span></span>
     <span class="label">Difficulty</span>
   </div>
     <div class="hb-stats-cell">
@@ -219,7 +216,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [];
+  const ROUTES = [{"id":"le_doubs-drive-up","visits":["le_doubs"],"name":"Drive to Les Roches de Moron","start":"Restaurant Les Roches de Moron parking","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"train":"Le Locle + regional line to Les Brenets, then 45 min climb up the cliff trail to the viewpoint"},"description_extra":"From La Chaux-de-Fonds drive to Le Locle, then follow signs toward Les Planchettes and Les Roches de Moron. The road ends at the restaurant. Free parking for diners, paid otherwise. 5-min walk to the cliff edge above the Doubs canyon. Year-round access.","sources":["https://www.restroches.ch/","https://www.j3l.ch/en"],"quickest_for":["le_doubs"],"start_maps_url":"https://www.google.com/maps/place/47%C2%B005'31.0%22N+6%C2%B045'04.4%22E/@47.091939,6.7486421,17z/data=!3m1!4b1!4m4!3m3!8m2!3d47.091939!4d6.751217","quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

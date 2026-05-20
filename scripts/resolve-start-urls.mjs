@@ -35,7 +35,10 @@ for (const u of shortUrls) {
   console.log(`Resolving ${u} ...`);
   try {
     const final = execSync(`curl -sI -o /dev/null -w '%{url_effective}' -L "${u}"`, { encoding: "utf8" }).trim();
-    const m = final.match(/!3d(-?\d+\.?\d*)!4d(-?\d+\.?\d*)/);
+    // Try the !3d/!4d "place" pattern first (most common), then fall back
+    // to the /search/LAT,+LON form Google uses for raw coordinate queries.
+    let m = final.match(/!3d(-?\d+\.?\d*)!4d(-?\d+\.?\d*)/);
+    if (!m) m = final.match(/\/search\/(-?\d+\.?\d*),\+?(-?\d+\.?\d*)/);
     if (!m) {
       console.warn(`  ⚠ no !3d!4d pattern in resolved URL: ${final.slice(0, 120)}...`);
       continue;

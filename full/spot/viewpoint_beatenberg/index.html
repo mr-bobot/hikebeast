@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779300425992" />
+<link rel="stylesheet" href="../../preview.css?v=1779302707728" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -101,7 +101,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value">Drive-up</span>
+    <span class="value">T1<span class="unit">· Drive-up</span></span>
     <span class="label">Accessibility</span>
   </div>
     <div class="hb-stats-cell">
@@ -110,20 +110,17 @@
     <span class="label">Crowdedness</span>
   </div>
   </div>
-    <div class="hb-access-card"><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚗</span>By car</p>
-      <div class="hb-access-body"><p>Drive up the road from Interlaken to Beatenberg, then to the Niederhorn cable car station.</p><p><span class="hb-access-detail">Parking</span> Lot at the Niederhorn valley station, 5 CHF per day.</p><p><span class="hb-access-detail">Walk to spot</span> 5 min</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚆</span>By train + bus</p>
-      <div class="hb-access-body"><p>Interlaken West + Postbus 21 to Beatenberg</p><p><span class="hb-access-detail">Walk from stop</span> 5 min</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🕒</span>When to go</p>
-      <div class="hb-access-body"><p>Clear winter mornings for the inversion fog floating over Lake Thun below.</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">📅</span>Hours / season</p>
-      <div class="hb-access-body"><p>Drive-up year-round. Niederhorn cable car runs late May to mid-October and December to March.</p></div>
-    </div></div>
     
+    <p class="hb-section-h">Routes</p>
+  <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/viewpoint_beatenberg_p0/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Drive to the Niederhorn valley station <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Drive-up</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button></div>
     
   </div>
     <div class="hb-flip-back-view hb-flip-back-view-route">
@@ -144,7 +141,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value"><span class="missing" data-rd-sac>—</span><span class="unit" data-rd-sac-tail></span></span>
+    <span class="value"><span data-rd-sac>T1</span><span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>Drive-up</span></span></span>
     <span class="label">Difficulty</span>
   </div>
     <div class="hb-stats-cell">
@@ -219,7 +216,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [];
+  const ROUTES = [{"id":"viewpoint_beatenberg-drive-up","visits":["viewpoint_beatenberg"],"name":"Drive to the Niederhorn valley station","start":"Beatenberg, Niederhorn valley station parking","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"bus":"Interlaken West + PostBus 21 to Beatenberg, Station"},"description_extra":"Drive up from Interlaken to Beatenberg and continue to the Niederhorn cable car station. Park (5 CHF/day) and walk 5 min to the viewpoint over Lake Thun. Year-round drive-up access.","sources":["https://niederhorn.swiss/en/","https://www.postauto.ch/en/timetable-network"],"quickest_for":["viewpoint_beatenberg"],"start_maps_url":"https://www.google.com/maps/place/Aussichtspunkt+Beatenberg/@46.6856162,7.7879934,16z/data=!4m6!3m5!1s0x478fa531263af7f1:0x367113202ab7c1b!8m2!3d46.6856162!4d7.7879934!16s%2Fg%2F11f62f_5v5","quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

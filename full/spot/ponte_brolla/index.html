@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779300426012" />
+<link rel="stylesheet" href="../../preview.css?v=1779302707745" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -101,7 +101,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value">Drive-up</span>
+    <span class="value">T1<span class="unit">· Drive-up</span></span>
     <span class="label">Accessibility</span>
   </div>
     <div class="hb-stats-cell">
@@ -110,17 +110,17 @@
     <span class="label">Crowdedness</span>
   </div>
   </div>
-    <div class="hb-access-card"><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚗</span>By car</p>
-      <div class="hb-access-body"><p>Drive from Locarno toward Centovalli. Ponte Brolla is the first hamlet after the gorge.</p><p><span class="hb-access-detail">Parking</span> Roadside spots near the bridge, free.</p><p><span class="hb-access-detail">Walk to spot</span> 2 min</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚆</span>By train + bus</p>
-      <div class="hb-access-body"><p>Locarno (FFS) + Centovalli train to Ponte Brolla</p><p><span class="hb-access-detail">Walk from stop</span> 1 min</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🕒</span>When to go</p>
-      <div class="hb-access-body"><p>Year-round but most photogenic in autumn when the gorge walls show colour.</p></div>
-    </div></div>
     
+    <p class="hb-section-h">Routes</p>
+  <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/ponte_brolla_p0/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Drive or train to Ponte Brolla <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Drive-up</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button></div>
     
   </div>
     <div class="hb-flip-back-view hb-flip-back-view-route">
@@ -141,7 +141,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value"><span class="missing" data-rd-sac>—</span><span class="unit" data-rd-sac-tail></span></span>
+    <span class="value"><span data-rd-sac>T1</span><span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>Drive-up</span></span></span>
     <span class="label">Difficulty</span>
   </div>
     <div class="hb-stats-cell">
@@ -216,7 +216,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [];
+  const ROUTES = [{"id":"ponte_brolla-drive-up","visits":["ponte_brolla"],"name":"Drive or train to Ponte Brolla","start":"Ponte Brolla bridge (roadside)","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"train":"Locarno FFS + Centovalli train to Ponte Brolla (every 30-60 min)"},"description_extra":"Drive from Locarno toward Centovalli; Ponte Brolla is the first hamlet after the gorge. Free roadside parking near the bridge. 2-min walk down to the river-gorge swimming holes. Year-round access; warm summer water for cliff jumps.","sources":["https://www.ascona-locarno.com/en/i/ponte-brolla","https://www.centovalli.ch/en/"],"quickest_for":["ponte_brolla"],"start_maps_url":"https://www.google.com/maps/place/Ponte+Brolla,+6652+Locarno/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b80184d77ff9:0x8085ee1850e504a9!8m2!3d46.1853!4d8.75278!16s%2Fg%2F120jqlmp","quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

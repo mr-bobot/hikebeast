@@ -506,6 +506,8 @@ spots:
     best_time: Book in advance — the funicular sells out on summer weekends. Round-trip around 36 CHF.
     operating: Funicular runs mid-June to mid-October. Steepest section is 106% gradient.
   cable_car_id: gelmerbahn-funicular
+  hike_ids:
+  - gelmerbahn-drive-up
 - id: guttannen_valley
   chapter: central
   kicker: CAMPER SPOTS
@@ -549,6 +551,8 @@ spots:
       walk_from_stop_min: 1
     best_time: Late summer when the Grimsel road is fully open and the valley is in full green.
     operating: Grimsel road usually open June to October.
+  hike_ids:
+  - guttannen_valley-drive-up
 - id: aare_gorge
   chapter: central
   kicker: GORGES
@@ -600,6 +604,8 @@ spots:
       walk_from_stop_min: 2
     best_time: Bright overcast for the most even light inside the gorge. Sunny days cause harsh contrast through the slit.
     operating: Boardwalk open April to early November. Entry fee around 12 CHF adult.
+  hike_ids:
+  - aare_gorge-drive-up
 - id: brienzer_rothorn
   chapter: central
   kicker: SUMMITS
@@ -952,6 +958,7 @@ spots:
     best_season: Late June – October
     busyness: 2
   hike_ids:
+  - iffigfalle-drive-up
   - iffigfalle-lenk-to-iffigenalp
   - iffigfalle-from-lauenen-via-tungelpass
 - id: schrattenfluh
@@ -1152,6 +1159,8 @@ spots:
       walk_from_stop_min: 1
     best_time: Spring sunset when the late light catches the Eiger north face. April-May for wildflowers in the meadows.
     operating: Year-round.
+  hike_ids:
+  - grindelwald-drive-up
 - id: iseltwald
   chapter: central
   kicker: VILLAGES
@@ -1243,6 +1252,8 @@ spots:
       walk_from_stop_min: 5
     best_time: Clear winter mornings for the inversion fog floating over Lake Thun below.
     operating: Drive-up year-round. Niederhorn cable car runs late May to mid-October and December to March.
+  hike_ids:
+  - viewpoint_beatenberg-drive-up
 - id: oeschinensee
   chapter: central
   kicker: LAKES
@@ -1400,6 +1411,8 @@ spots:
       walk_from_stop_min: 2
     best_time: First light on the Staubbach Falls before tour buses arrive at 9.
     operating: Year-round drive-up. Lauterbrunnen waterfalls flow strongest May-July.
+  hike_ids:
+  - lauterbrunnen-drive-up
 - id: central_extras
   chapter: central
   kind: extras
@@ -1521,6 +1534,8 @@ spots:
       walk_from_stop_min: 1
     best_time: Sunrise from anywhere up the valley. Pre-dawn light on the Matterhorn is the photographer's window.
     operating: Year-round, but the village empties out between ski season and summer hiking season.
+  hike_ids:
+  - zermatt_village-drive-up
 - id: riffelalp
   chapter: valais
   kicker: VIEWPOINTS
@@ -1556,6 +1571,7 @@ spots:
     best_season: Late June – October
     busyness: 4
   hike_ids:
+  - riffelalp-drive-up
   - riffelalp-easy-round-trip
   - riffelalp-findeln-loop
 - id: gorner_glacier
@@ -1955,6 +1971,8 @@ spots:
   gps:
     lat: 46.04
     lng: 7.555
+  hike_ids:
+  - ferpecle_river-drive-up
 - id: spielboden
   chapter: valais
   kicker: THE EASIEST MARMOTS IN SWITZERLAND
@@ -1990,6 +2008,7 @@ spots:
     best_season: Late June – Late September
     busyness: 4
   hike_ids:
+  - spielboden-drive-up
   - spielboden-laengfluh-glacier-trail
   - spielboden-ascent-from-saas-fee-village
 - id: goms_bridge
@@ -2137,6 +2156,7 @@ spots:
     best_season: July – mid-September
     busyness: 3
   hike_ids:
+  - saas_fee_glacier-drive-up
   - saas_fee_glacier-glacier-trail-felskinn
   - saas_fee_glacier-britanniahuette-from-kreuzboden
 - id: lac_de_derborence
@@ -2172,6 +2192,7 @@ spots:
     busyness: 3
     best_season: Late October
   hike_ids:
+  - lac_de_derborence-drive-up
   - lac_de_derborence-default
   - lac_de_derborence-from-solalex
   arrival:
@@ -2237,6 +2258,7 @@ spots:
     best_season: Late June – Late September
     busyness: 2
   hike_ids:
+  - la_fouly-drive-up
   - la_fouly-tmb-arnuva-la-fouly
   - la_fouly-tmb-champex-to-la-fouly
 - id: sanetschpass
@@ -2279,6 +2301,7 @@ spots:
     best_season: June – October
     busyness: 2
   hike_ids:
+  - sanetschpass-drive-up
   - sanetschpass-from-gsteig-on-foot
   - sanetschpass-cable-car-shortcut
 - id: gorges_du_durnand
@@ -2331,6 +2354,8 @@ spots:
     best_time: Late spring to early autumn while the gorge is open and water flow is strong; midweek mornings avoid family crowds.
     operating: 'Paid entry, open daily May 1 to October 31 (weather permitting). Hours: Sun-Wed 09:00-18:00, Thu-Sat 09:00-23:00. Admission CHF 9 adults, CHF 5 children 6-15, free under
       6, CHF 8 students/AVS. About 1h round trip on the boardwalk with 330 steps and a 200 m climb.'
+  hike_ids:
+  - gorges_du_durnand-drive-up
 - id: gorges_du_dailley
   chapter: valais
   kicker: NARROWER, OLDER, LESS KNOWN
@@ -2444,6 +2469,7 @@ spots:
     best_season: Late May – October
     busyness: 3
   hike_ids:
+  - crans_montana-drive-up
   - crans_montana-bisse-du-ro
   - crans_montana-plaine-morte-glacier
 - id: tseuzier_lake
@@ -2488,6 +2514,7 @@ spots:
     busyness: 3
     best_season: June - October
   hike_ids:
+  - tseuzier_lake-drive-up
   - tseuzier_lake-route-23
   - tseuzier_lake-bisse-du-ro-from-crans-montana
 - id: salanfe_lake
@@ -2569,6 +2596,8 @@ spots:
       walk_from_stop_min: 2
     best_time: Summer for the trail networks above; winter for the Savoleyres ski connection to Verbier.
     operating: Cable cars run June to October and December to April.
+  hike_ids:
+  - la_tzoumaz-drive-up
 - id: pointe_du_tsate
   chapter: valais
   kicker: SUMMITS
@@ -2718,6 +2747,8 @@ spots:
       walk_from_stop_min: 85
     best_time: Late afternoon and blue hour. The Gastlosen ridge sits west of the terrace, so the wall lights up at sunset and the sky stays deep blue for 30 minutes after.
     operating: Open daily June to mid-September, weekends in shoulder season. Closed in winter, mountain road closes with snow.
+  hike_ids:
+  - ritzli_alp-drive-up
 - id: la_tine_canyon
   chapter: fribourg
   kicker: GO WITH A GUIDE THE FIRST TIME
@@ -2753,6 +2784,8 @@ spots:
     best_time: Late spring through early autumn when water is high and the Sarine gorge is most photogenic; for canyoning, the operators run May to October.
     operating: Free public-land access on foot; the canyon descent itself requires a guided canyoning trip with a local outfitter (Guide Concept, Rivières Aventures and others). Best
       between May and October.
+  hike_ids:
+  - la_tine_canyon-drive-up
 - id: dent_de_broc
   chapter: fribourg
   kicker: A DISTANT PEAK, A LONG LENS
@@ -2795,6 +2828,7 @@ spots:
     best_season: Late May – October
     busyness: 3
   hike_ids:
+  - dent_de_broc-drive-up
   - dent_de_broc-from-broc
   - dent_de_broc-from-motelon
 - id: schwarzsee
@@ -2836,6 +2870,7 @@ spots:
     best_season: Mid-June – October
     busyness: 4
   hike_ids:
+  - schwarzsee-drive-up
   - schwarzsee-fr-lake-loop-from-gypsera
   - schwarzsee-fr-hohenweg-from-riggisalp
 - id: dent_de_lys
@@ -2923,6 +2958,7 @@ spots:
     best_season: Late May – October
     busyness: 4
   hike_ids:
+  - moleson-drive-up
   - moleson-plan-francey-summit
   - moleson-from-moleson-village
 - id: teysachaux
@@ -3103,6 +3139,8 @@ spots:
     best_time: 'Summer mornings: the canyon stays naturally cool on hot days. Avoid right after heavy rain when stone steps and wooden bridges get slick.'
     operating: Free public access, no entrance fee, no fixed hours. The trail is in places affected by rockfall and section closures, check Montreux Riviera Tourisme or SwitzerlandMobility
       for the current status before going.
+  hike_ids:
+  - gorges_du_chauderon-drive-up
 - id: pisse_chevre
   chapter: western
   kicker: A REMOTE VAUD WATERFALL
@@ -3140,6 +3178,8 @@ spots:
       walk_to_spot_min: 1
     best_time: Snowmelt period (late spring) for maximum flow; the waterfall narrows by late summer.
     operating: Free public access, year-round, but the Route de Morcles is steep, narrow and closed by snow in winter. Best between late spring and autumn.
+  hike_ids:
+  - pisse_chevre-drive-up
 - id: route_de_morcles
   chapter: western
   kicker: LEADING LINES ABOVE THE RHÔNE
@@ -3177,6 +3217,8 @@ spots:
       walk_to_spot_min: 0
     best_time: 'Golden hour: late afternoon light sweeps across the Rhône valley toward the Dents du Midi. Best from late spring to October before the upper road can be closed by snow.'
     operating: Free public road, narrow with tight hairpins, normally open roughly May to October. Closed or impassable in winter; check Lavey-Morcles commune for road status.
+  hike_ids:
+  - route_de_morcles-drive-up
 - id: creux_du_van
   chapter: western
   kicker: HUGE CLIFFS IN THE JURA
@@ -3234,6 +3276,7 @@ spots:
     best_season: May – October
     busyness: 4
   hike_ids:
+  - creux_du_van-drive-up
   - creux_du_van-noiraigue-14-bends
   - creux_du_van-from-le-soliat
 - id: tine_de_conflens
@@ -3267,6 +3310,7 @@ spots:
     elevation_m: 500
     busyness: 2
   hike_ids:
+  - tine_de_conflens-drive-up
   - tine_de_conflens-from-la-sarraz
 - id: lac_de_taney
   chapter: western
@@ -3397,6 +3441,8 @@ spots:
   gps:
     lat: 46.47843
     lng: 6.45643
+  hike_ids:
+  - st_prex-drive-up
 - id: marchairuz
   chapter: western
   kicker: WINTER WONDERLAND IN THE JURA
@@ -3433,6 +3479,7 @@ spots:
     best_season: May – October
     busyness: 2
   hike_ids:
+  - marchairuz-drive-up
   - marchairuz-mollendruz-mont-tendre-marchairuz
   - marchairuz-from-saint-cergue
   gps:
@@ -3505,6 +3552,7 @@ spots:
     best_season: April – October (vintage in September)
     busyness: 4
   hike_ids:
+  - lavaux_vineyards-drive-up
   - lavaux_vineyards-terrasses-de-lavaux
   - lavaux_vineyards-from-chexbres-via-dezaley
 - id: etang_de_la_gruere
@@ -3593,6 +3641,8 @@ spots:
       walk_from_stop_min: 45
     best_time: Late afternoon for sunset on the canyon walls. Overcast suits the Jura mood. Avoid windy days, the plateau is exposed.
     operating: Trail open year-round. The restaurant has seasonal hours, check restroches.ch before counting on it for parking access.
+  hike_ids:
+  - le_doubs-drive-up
 - id: western_extras
   chapter: western
   kind: extras
@@ -4111,6 +4161,7 @@ spots:
     best_season: June – October
     busyness: 2
   hike_ids:
+  - gigerwaldsee-drive-up
   - gigerwaldsee-calfeisental-round
   - gigerwaldsee-st-martin-to-sardona
 - id: caumasee
@@ -4164,6 +4215,8 @@ spots:
       walk_from_stop_min: 10
     best_time: Early morning before 9 or after 17:00. The lake's deepest blue is mid-morning when the sun is high.
     operating: Lake is accessible year-round on foot. The funicular down to the shore runs May to October.
+  hike_ids:
+  - caumasee-drive-up
 - id: ruinaulta
   chapter: eastern
   kicker: A DEEP CANYON IN THE EAST
@@ -4240,6 +4293,7 @@ spots:
     best_season: May – October
     busyness: 4
   hike_ids:
+  - crestasee-drive-up
   - crestasee-four-lakes-hike
   - crestasee-short-staderas-conn
 - id: klontalersee
@@ -4282,6 +4336,7 @@ spots:
     busyness: 4
     best_season: April - October
   hike_ids:
+  - klontalersee-drive-up
   - klontalersee-default
   arrival:
     by_car:
@@ -4556,6 +4611,7 @@ spots:
     best_season: Late May – October
     busyness: 4
   hike_ids:
+  - morteratsch_glacier-drive-up
   - morteratsch_glacier-aussichtsweg-glacier-trail
   - morteratsch_glacier-short-glacier-tongue
 - id: bovalhutte
@@ -4729,6 +4785,8 @@ spots:
       walk_from_stop_min: 2
     best_time: Sunrise on the bridge with the morning fog above the river. By 10 the parking is full.
     operating: Bridge accessible year-round.
+  hike_ids:
+  - ponte_dei_salti-drive-up
 - id: valle_verzasca
   chapter: ticino
   kicker: THE WHOLE VALLEY IS THE SPOT
@@ -4777,6 +4835,7 @@ spots:
     best_season: April – October
     busyness: 4
   hike_ids:
+  - valle_verzasca-drive-up
   - valle_verzasca-sonogno-to-lavertezzo
   - valle_verzasca-lavertezzo-to-brione
 - id: lavertezzo
@@ -4821,6 +4880,8 @@ spots:
       walk_from_stop_min: 1
     best_time: Early morning before swimmers arrive, or stormy weather when the water turns greener.
     operating: Year-round. The road is plowed but icy sections in winter.
+  hike_ids:
+  - lavertezzo-drive-up
 - id: ponte_brolla
   chapter: ticino
   kicker: RIVERS
@@ -4866,6 +4927,8 @@ spots:
       route: Locarno (FFS) + Centovalli train to Ponte Brolla
       walk_from_stop_min: 1
     best_time: Year-round but most photogenic in autumn when the gorge walls show colour.
+  hike_ids:
+  - ponte_brolla-drive-up
 - id: cascata_di_foroglio
   chapter: ticino
   kicker: WATERFALLS
@@ -4999,6 +5062,8 @@ spots:
   trip_facts:
     elevation_m: 1913
     busyness: 4
+  hike_ids:
+  - les_drus-drive-up
 - id: aiguille_du_grepon
   chapter: beyond
   kicker: A POINTED NEEDLE IN THE RANGE
@@ -5029,6 +5094,8 @@ spots:
   trip_facts:
     elevation_m: 1913
     busyness: 4
+  hike_ids:
+  - aiguille_du_grepon-drive-up
 - id: les_cheserys
   chapter: beyond
   kicker: THE BEST VIEW OF MONT BLANC
@@ -5371,6 +5438,7 @@ spots:
     best_season: June - October
     elevation_m: 1850
   hike_ids:
+  - engstlensee-drive-up
   - engstlensee-route-lakeshore-loop
   - engstlensee-from-engelberg-via-jochpass
   arrival:
@@ -5432,6 +5500,8 @@ spots:
       route: Sils Maria to Maloja passenger boat across Lake Sils. Four runs per day from late June to late September.
     best_time: Sunrise for warm light on Piz da la Margna and the Sils basin. Larches turn gold in early October, also the busiest week of the year.
     operating: Road open year-round, occasionally closed for hours after heavy snow. Boat service late June to late September.
+  hike_ids:
+  - maloja_pass-drive-up
 - id: ponte_tibetano
   chapter: ticino
   kicker: A LONG SUSPENSION BRIDGE OVER THE GORGE
@@ -5592,6 +5662,7 @@ spots:
     best_time: Early morning trips give the clearest views before the midday haze. Sunset on the summit can be photographed by staying at Pilatus-Kulm Hotels.
     operating: Cog railway from Alpnachstad runs roughly mid-May to late November. The Kriens cable car runs year-round.
   hike_ids:
+  - mount_pilatus-drive-up
   - mount_pilatus-alpnachstad-aemsigen-kulm
   - mount_pilatus-fraekmuentegg-tomlishorn
 - id: wasserfall_finstersee
@@ -5744,6 +5815,8 @@ spots:
       route: PostBus 184 runs over the pass between St. Moritz and Chur via Tiefencastel. Stops at Julier Hospiz on the summit.
     best_time: Autumn for the larches around the lower flanks toward Engadin, and winter at dawn or dusk for snow silhouettes.
     operating: Open year-round, one of the few high alpine roads in Switzerland kept open through winter. Snow chains may be required in heavy weather.
+  hike_ids:
+  - julier_pass-drive-up
 - id: refuge_du_lac_blanc
   chapter: beyond
   kicker: A HUT ABOVE CHAMONIX WITH A MONT BLANC VIEW
@@ -5875,6 +5948,7 @@ spots:
     best_time: Calm mornings give the mirror reflection of Piz Corvatsch and Piz da la Margna. The first half of October peaks for the larches around the lake.
     operating: Lakeshore footpath is open year-round; the boat runs end of June through end of September.
   hike_ids:
+  - silsersee-drive-up
   - silsersee-chaste-peninsula
 - id: engadin_autumn
   chapter: eastern
@@ -5917,6 +5991,8 @@ spots:
     lat: 46.49611
     lng: 9.86861
   maps_url: https://www.google.com/maps/place/?q=46.49611,9.86861&z=15
+  hike_ids:
+  - engadin_autumn-drive-up
 back_matter:
   thanks:
     kicker: Thank you

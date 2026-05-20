@@ -292,7 +292,7 @@ hikes:
     bus: PostBus 105 from Interlaken West to Habkern, then summer Ruftaxi or 2 hours on foot to Lombachalp
   distance_km: 3.2
 - id: fronalpstock-route-72
-  sac_grade: T1
+  sac_grade: T2
   effort_label: Easy
   duration_min: 120
   start: Schwyz, Stoosbahn
@@ -325,8 +325,6 @@ hikes:
   - iffigfalle
   sources:
   - https://www.myswitzerland.com/en-us/experiences/route/iffigfall-trail-1/
-  quickest_for:
-  - iffigfalle
   start_maps_url: https://maps.app.goo.gl/3qwMiM5sM6wNLPdz9
   distance_km: 10.0
 - id: schrattenfluh-schratteflue-crossing
@@ -334,7 +332,7 @@ hikes:
   start: Sörenberg or Bumbach
   transit:
     bus: Postbus to Sörenberg
-  duration_min: 360
+  duration_min: 465
   sac_grade: T5
   effort_label: Expert
   description_extra: 'The full ridge runs about 6 km with four prominent peaks: Schibegütsch, Hängst, Hächle, and Strick. T5 with II scrambling. About 16 km and 7 h 45 in total; the
@@ -380,8 +378,8 @@ hikes:
   start: Flühli
   transit:
     bus: Postbus to Flühli
-  duration_min: 240
-  sac_grade: T2
+  duration_min: 210
+  sac_grade: T3
   effort_label: Moderate
   description_extra: 'Longer approach via Flühli (bus from Schüpfheim). About four hours of mountain trail with views over the Entlebuch valley. SAC''s portal grades the route from Flühli
     at T3, 3 h 30, and roughly 1,050 m of gain. The ridge section above is the scenic highlight with the Schrattenfluh across the valley. Hut sits at 1,904 m. Note: the hut is currently
@@ -392,6 +390,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/
   start_maps_url: https://www.google.com/maps/place/?q=46.883,8.017&z=16
   distance_km: 7.0
+  gain_m: 1050
 - id: bachalpsee-route-38
   sac_grade: T1
   effort_label: Easy
@@ -580,8 +579,6 @@ hikes:
   - riffelalp
   sources:
   - https://www.outdooractive.com/en/route/hiking-trail/zermatt/easy-round-trip-hike-on-riffelalp/43157089/
-  quickest_for:
-  - riffelalp
   cable_car_ids:
   - gornergrat-bahn
   start_maps_url: https://www.google.com/maps/place/?q=46.00198,7.75094&z=16
@@ -604,6 +601,7 @@ hikes:
   - gornergrat-bahn
   start_maps_url: https://www.google.com/maps/place/?q=46.00198,7.75094&z=16
   distance_km: 10.7
+  descent_m: 750
 - id: gorner_glacier-gornergrat-railway
   name: Gornergrat railway + Sunshine Trail
   start: Zermatt train station
@@ -642,6 +640,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/zermatt/the-path-of-silence-from-the-gornergrat-to-riffelalp/56111172/
   start_maps_url: https://www.google.com/maps/place/?q=45.9833,7.7822&z=16
   distance_km: 7.9
+  descent_m: 887
 - id: gorner_glacier-descent-via-riffelsee
   name: Gornergrat to Zermatt via Riffelsee
   start: Gornergrat top station
@@ -657,6 +656,7 @@ hikes:
   - https://www.outdooractive.com/en/route/mountain-hike/valais-alps/vom-gornergrat-ueber-den-riffelsee-nach-zermatt/19172801/
   start_maps_url: https://www.google.com/maps/place/?q=45.9833,7.7822&z=16
   distance_km: 12.6
+  descent_m: 1475
 - id: aletsch_glacier-eggishorn-circular
   name: Eggishorn circular trail
   start: Eggishorn top station
@@ -871,12 +871,11 @@ hikes:
   sources:
   - https://www.outdooractive.com/en/route/hiking-trail/saas-fee-saastal/laengfluh-saas-fee/47620698/
   - https://www.myswitzerland.com/en-ch/planning/offers/cable-car-ride-to-laengfluh-saas-fee/
-  quickest_for:
-  - spielboden
   cable_car_ids:
   - spielboden-laengfluh
   start_maps_url: https://www.google.com/maps/place/?q=46.09199,7.89936&z=16
   distance_km: 6.4
+  descent_m: 1120
 - id: barrhorn-from-turtmannhuette
   name: From Turtmannhütte via Schöllijoch
   start: Turtmannhütte
@@ -917,8 +916,6 @@ hikes:
   - saas_fee_glacier
   sources:
   - https://www.outdooractive.com/en/route/hiking-route/saas-fee/glacier-trail/23425972/
-  quickest_for:
-  - saas_fee_glacier
   equipment_list:
   - Crampons
   - Ice axe
@@ -949,8 +946,6 @@ hikes:
   start: Lac de Derborence parking
   transit:
     car: Drive in from Aven via the narrow Lizerne valley road
-  quickest_for:
-  - lac_de_derborence
   start_maps_url: https://www.google.com/maps/place/?q=46.27908,7.21695&z=16
 - id: la_fouly-tmb-arnuva-la-fouly
   name: Tour du Mont Blanc · Arnuva → Grand Col Ferret → La Fouly
@@ -970,6 +965,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/mont-blanc-and-la-thuile/arnuva-to-la-fouly/57379300/
   start_maps_url: https://www.google.com/maps/place/?q=45.87371,7.05273&z=16
   distance_km: 14.5
+  descent_m: 1000
 - id: sanetschpass-from-gsteig-on-foot
   name: From Gsteig on foot
   start: Gsteig bei Gstaad
@@ -1004,8 +1000,6 @@ hikes:
   - sanetschpass
   sources:
   - https://www.myswitzerland.com/en-us/experiences/sanetsch-between-bern-and-valais/
-  quickest_for:
-  - sanetschpass
   cable_car_ids:
   - sanetsch-cable-car
   start_maps_url: https://maps.app.goo.gl/aJvjPFHkYE1TVZo66
@@ -1065,8 +1059,6 @@ hikes:
   - crans_montana
   sources:
   - https://www.myswitzerland.com/en-us/experiences/plaine-morte-glacial-plateau/
-  quickest_for:
-  - crans_montana
   cable_car_ids:
   - plaine-morte-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.36994,7.48897&z=16
@@ -1084,8 +1076,6 @@ hikes:
   - tseuzier_lake
   sources:
   - https://www.komoot.com/smarttour/1806717
-  quickest_for:
-  - tseuzier_lake
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.34638,7.43516&z=16
   distance_km: 2.5
@@ -1196,8 +1186,6 @@ hikes:
   - moleson
   sources:
   - https://www.myswitzerland.com/en-us/experiences/moleson-a-popular-destination-in-the-fribourg-pre-alps/
-  quickest_for:
-  - moleson
   cable_car_ids:
   - moleson-funiculaire
   start_maps_url: https://www.google.com/maps/place/?q=46.55582,7.02387&z=16
@@ -1330,8 +1318,6 @@ hikes:
   - marchairuz
   sources:
   - https://www.myswitzerland.com/en/experiences/route/mont-tendre-from-mollendruz-to-marchairuz/
-  quickest_for:
-  - marchairuz
   start_maps_url: https://www.google.com/maps/place/?q=46.65051,6.36456&z=16
   distance_km: 16.0
 - id: geltenschuss-lauenensee-geltenhuette
@@ -1372,10 +1358,12 @@ hikes:
   - https://www.myswitzerland.com/en-ch/experiences/route/lavaux-vineyard-terraces-the-swiss-wine-route/
   - https://schweizmobil.ch/en/hiking-in-switzerland/route-113
   start_maps_url: https://www.google.com/maps/place/?q=46.47259,6.79702&z=16
+  gain_m: 440
+  descent_m: 420
 - id: schafler-route-42
-  sac_grade: T1
+  sac_grade: T2
   effort_label: Easy
-  duration_min: 60
+  duration_min: 35
   gain_m: 329
   start: Wasserauen station
   transit:
@@ -1398,7 +1386,7 @@ hikes:
 - id: seealpsee-route-43
   sac_grade: T1
   effort_label: Easy
-  duration_min: 60
+  duration_min: 90
   gain_m: 280
   start: Wasserauen station
   visits:
@@ -1599,7 +1587,7 @@ hikes:
   start: Plätz (head of Klöntalersee)
   transit:
     bus: Postbus from Glarus to Klöntal-Vorauen
-  duration_min: 270
+  duration_min: 210
   gain_m: 1100
   sac_grade: T3
   effort_label: Moderate, steep
@@ -1645,8 +1633,6 @@ hikes:
   - gigerwaldsee
   sources:
   - https://www.outdooractive.com/en/route/hikes/ferienregion-heidiland/route-of-amazement-calfeisental/23430458/
-  quickest_for:
-  - gigerwaldsee
   start_maps_url: https://www.google.com/maps/place/?q=46.92058,9.35556&z=16
   distance_km: 7.1
 - id: ruinaulta-versam-circular
@@ -1715,8 +1701,6 @@ hikes:
   - crestasee
   sources:
   - https://www.outdooractive.com/en/route/winter-hiking/flims-laax/staderas-sportzentrum-caumasee-conn/43396654/
-  quickest_for:
-  - crestasee
   start_maps_url: https://maps.app.goo.gl/u95QRUoQnMAFjZAx9
 - id: klontalersee-default
   description_extra: Postbus 506 from Glarus along the Klöntalstrasse to Klöntal-Vorauen. Around-the-lake loop is mostly flat on a marked path, T1, about 13 km. Campsites at Güntlenau
@@ -1725,8 +1709,6 @@ hikes:
   - klontalersee
   sources:
   - https://www.komoot.com/smarttour/4187290
-  quickest_for:
-  - klontalersee
   name: Lakeshore loop on the marked path
   sac_grade: T1
   effort_label: Easy
@@ -1804,7 +1786,7 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.75028,9.9475&z=16
   distance_km: 11.0
 - id: falensee-route-69
-  sac_grade: T1
+  sac_grade: T2
   effort_label: Easy
   duration_min: 210
   gain_m: 834
@@ -1872,8 +1854,6 @@ hikes:
   - morteratsch_glacier
   sources:
   - https://www.schweizmobil.ch/en/hiking-in-switzerland/route-806
-  quickest_for:
-  - morteratsch_glacier
   start_maps_url: https://www.google.com/maps/place/?q=46.45072,9.94041&z=16
 - id: bovalhutte-from-morteratsch
   name: From Morteratsch station
@@ -2163,8 +2143,6 @@ hikes:
     hotel reception. Pair with a climb up to Joch Pass for a bigger day.
   sources:
   - https://jungfrauregion.swiss/en/map/detail/engstlensee-493643c7-eba3-42dd-bf3c-652909b97fe9.html
-  quickest_for:
-  - engstlensee
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.77611,8.34458&z=16
   distance_km: 4.5
@@ -2274,6 +2252,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/uessers-barrhorn-145/mountain-hiking/
   start_maps_url: https://www.google.com/maps/place/?q=46.177,7.802&z=16
   distance_km: 8.0
+  descent_m: 2000
 - id: cap_au_moine-from-les-avants-via-col-de-jaman
   visits:
   - cap_au_moine
@@ -2313,15 +2292,13 @@ hikes:
     visitors who cannot do the steep climb from Noiraigue.
   sources:
   - https://www.sac-cas.ch/fr/les-alpes/le-creux-du-van-pour-le-bonheur-de-tous-16390/
-  quickest_for:
-  - creux_du_van
   start_maps_url: https://www.google.com/maps/place/?q=46.93619,6.71584&z=16
 - id: dent_de_lys-from-les-sciernes-dalbeuve
   visits:
   - dent_de_lys
   sac_grade: T4
   effort_label: Demanding
-  duration_min: 330
+  duration_min: 255
   gain_m: 1130
   equipment_list:
   - Sturdy hiking boots
@@ -2448,13 +2425,14 @@ hikes:
   - https://reisememo.ch/schweiz/joeriseen-rundwanderung-flueelapass-vereina
   - https://www.berghausvereina.com/wanderungen/
   start_maps_url: https://www.google.com/maps/place/?q=46.81419,9.98271&z=16
+  descent_m: 1076
 - id: la_fouly-tmb-champex-to-la-fouly
   visits:
   - la_fouly
   sac_grade: T2
   effort_label: Moderate
   duration_min: 330
-  gain_m: 635
+  gain_m: 420
   distance_km: 15
   equipment_list: []
   start: Champex-Lac
@@ -2468,9 +2446,8 @@ hikes:
   sources:
   - https://tourdumontblanchike.com/tour-du-mont-blanc-stage-7/
   - https://www.outdooractive.com/en/route/hiking-trail/mont-blanc-massif/la-fouly-to-champex/57383925/
-  quickest_for:
-  - la_fouly
   start_maps_url: https://www.google.com/maps/place/?q=46.03058,7.11682&z=16
+  descent_m: 565
 - id: lavaux_vineyards-from-chexbres-via-dezaley
   visits:
   - lavaux_vineyards
@@ -2489,8 +2466,6 @@ hikes:
   sources:
   - https://www.komoot.com/guide/55943/hiking-around-saint-saphorin-lavaux
   - https://www.myswitzerland.com/en-us/experiences/route/lavaux-vineyard-terraces-the-swiss-wine-route/
-  quickest_for:
-  - lavaux_vineyards
   start_maps_url: https://www.google.com/maps/place/?q=46.48106,6.77855&z=16
 - id: pic_de_jallouvre-from-col-de-la-colombiere
   visits:
@@ -2671,6 +2646,7 @@ hikes:
   - https://travelita-blog.com/bisse-du-ro-abenteuerliche-suonenwanderung/
   - https://www.novo-monde.com/en/crans-montana-bisse-ro/
   start_maps_url: https://www.google.com/maps/place/?q=46.31288,7.48929&z=16
+  descent_m: 625
 - id: zinal_glacier-from-sorebois-cable-car
   visits:
   - zinal_glacier
@@ -2697,6 +2673,7 @@ hikes:
   cable_car_ids:
   - zinal-sorebois-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.14445,7.60369&z=16
+  descent_m: 1167
 - id: augstmatthorn-from-harder-kulm
   visits:
   - augstmatthorn
@@ -2786,8 +2763,6 @@ hikes:
     access road is narrow and slow. The summit can also be combined with Dent du Chamois and Dent du Bourgo on a T5 ridge traverse.
   sources:
   - https://www.noth.ch/en/randos/dent-de-broc.html
-  quickest_for:
-  - dent_de_broc
   start_maps_url: https://www.google.com/maps/place/?q=46.5856,7.16279&z=16
 - id: dent_doche-from-la-planche
   visits:
@@ -2934,6 +2909,7 @@ hikes:
   - https://www.alpesvaudoises.ch/en/V1390/from-solalex-to-derborence
   - https://www.lescoteauxdusoleil.ch/fr/derborence-cheville-anzeindaz-anzeinde-solalex-1176.html
   start_maps_url: https://www.google.com/maps/place/?q=46.28842,7.13703&z=16
+  descent_m: 580
 - id: marchairuz-from-saint-cergue
   visits:
   - marchairuz
@@ -3237,6 +3213,7 @@ hikes:
   - geltenschuss
   start_maps_url: https://www.google.com/maps/place/?q=46.39983,7.44147&z=16
   distance_km: 14.4
+  descent_m: 1200
 - id: hardergrat_trail-augstmatthorn-from-lombachalp
   visits:
   - hardergrat_trail
@@ -3260,6 +3237,7 @@ hikes:
   - https://www.hardergrat.com/
   name: Lombachalp ridge variant
   start_maps_url: https://maps.app.goo.gl/iinY4mbLdEm8JK3H9
+  descent_m: 1300
 - id: iseltwald-from-boenigen-uferweg
   visits:
   - iseltwald
@@ -3303,6 +3281,7 @@ hikes:
   - https://www.myswitzerland.com/en-us/experiences/lac-de-taney-mountain-lake-on-the-haute-savoie-border/
   start_maps_url: https://www.google.com/maps/place/?q=46.39217,6.80589&z=16
   distance_km: 8.6
+  descent_m: 1170
 - id: moleson-from-moleson-village
   visits:
   - moleson
@@ -3347,7 +3326,7 @@ hikes:
   - pointe_du_tsate
   sac_grade: T3
   effort_label: Demanding
-  duration_min: 330
+  duration_min: 195
   gain_m: 960
   equipment_list:
   - Sturdy hiking boots
@@ -3362,6 +3341,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/
   start_maps_url: https://www.google.com/maps/place/?q=46.13761,7.57255&z=16
+  descent_m: 1580
 - id: rosenlaui-from-grindelwald-first-via-grosse-scheidegg
   visits:
   - rosenlaui
@@ -3502,8 +3482,6 @@ hikes:
   sources:
   - https://schweizmobil.ch/en/hiking-in-switzerland/route-74
   - https://www.bergfex.com/sommer/tessin/touren/fernwanderweg/2065768,sentiero-verzasca-svizzeramobile-74/
-  quickest_for:
-  - valle_verzasca
   start_maps_url: https://www.google.com/maps/place/?q=46.26001,8.83592&z=16
 - id: engstligen_falls-side-trail-to-plateau
   name: Side trail to the Engstligenalp plateau
@@ -3571,8 +3549,6 @@ hikes:
     km to Tomlishorn at 2,128 m, the highest point. T2.
   sources:
   - https://pilatus.ch/en/activities/hiking
-  quickest_for:
-  - mount_pilatus
   start_maps_url: https://www.google.com/maps/place/?q=46.95556,8.27694&z=16
   cable_car_ids:
   - pilatus-kriens-gondola
@@ -3748,8 +3724,6 @@ hikes:
     hour of walking and minor ascent. The path stays close to the shore through larch and Arolla pine.
   sources:
   - https://www.sils.ch/en/your-stay/discover-sils/lake-sils.html
-  quickest_for:
-  - silsersee
   start_maps_url: https://www.google.com/maps/place/?q=46.42893,9.76338&z=16
 - id: fulberg-from-niederbauen-cable-car
   name: Niederbauen to Fulberg ridge
@@ -3815,8 +3789,6 @@ hikes:
     down to the falls in 15 minutes. Path down to the waterfall stays wet for days after rain, bring grippy shoes.
   sources:
   - https://www.myswitzerland.com/en-ch/experiences/route/nozon-gorge-waterfalls-between-romainmotier-and-la-sarraz/
-  quickest_for:
-  - tine_de_conflens
   start_maps_url: https://www.google.com/maps/place/?q=46.66037,6.51426&z=16
 - id: etang_de_la_gruere-pond-loop
   name: Loop around the pond from La Theurre
@@ -3904,8 +3876,6 @@ hikes:
     The lake sits at 1,046 m. Paid parking at Gypsera. Winter variant possible when the ice is thick enough.
   sources:
   - https://fribourg.ch/en/schwarzsee/hiking/schwarzsee-the-lake-path/
-  quickest_for:
-  - schwarzsee
 - id: schwarzsee-fr-hohenweg-from-riggisalp
   visits:
   - schwarzsee
@@ -3949,3 +3919,908 @@ hikes:
   - https://www.postauto.ch/en/excursion-tips/klausen-pass-route
   quickest_for:
   - klausenpass
+- id: gelmerbahn-drive-up
+  visits:
+  - gelmerbahn
+  name: Drive to the funicular base
+  start: Gelmerbahn valley station (Handegg)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: PostBus 161 from Meiringen to Handegg / Gelmerbahn (summer only)
+    train: Meiringen station (Zentralbahn from Lucerne / Interlaken) then PostBus 161
+  description_extra: Drive over the Grimsel Pass road from Innertkirchen; the Gelmerbahn valley station is signposted. Roadside parking is free. Book the funicular in advance, round-trip
+    about 36 CHF, runs mid-June to mid-October.
+  sources:
+  - https://grimselwelt.ch/bahnen/gelmerbahn/
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - gelmerbahn
+  start_maps_url: https://www.google.com/maps/place/Gelmerbahn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f875bae1b82fb:0xece15aab211b8f11!8m2!3d46.6136385!4d8.3085363!16s%2Fm%2F0nbtnrh
+- id: guttannen_valley-drive-up
+  visits:
+  - guttannen_valley
+  name: Drive through the valley
+  start: Guttannen village (Grimselstrasse)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: PostBus 161 Meiringen - Grimsel to Guttannen, Dorf
+    train: Meiringen (Zentralbahn) + PostBus 161
+  description_extra: Drive over the Grimsel Pass road from Innertkirchen toward Handegg; Guttannen is partway up. Roadside parking is free and there are plenty of pull-outs along the
+    valley for camper-van overnights. Road open June to October.
+  sources:
+  - https://www.haslital.swiss/en/guttannen
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - guttannen_valley
+  start_maps_url: https://www.google.com/maps/place/3864+Guttannen/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f866862eefd51:0x6187a636359a2900!8m2!3d46.6552082!4d8.2892297!16zL20vMGRqY2wx
+- id: aare_gorge-drive-up
+  visits:
+  - aare_gorge
+  name: Drive to either entrance
+  start: Aareschlucht East (Innertkirchen) or West (Meiringen) entrance
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Meiringen + PostBus 161 to Aareschlucht, West Eingang or Innertkirchen, Aareschlucht Ost
+    train: Meiringen (Zentralbahn from Lucerne / Interlaken)
+  description_extra: Paid lots at both entrances (5 CHF). Two-minute walk from the lot to the boardwalk entrance. Boardwalk open April to early November, entry around 12 CHF.
+  sources:
+  - https://aareschlucht.ch/en/
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - aare_gorge
+  start_maps_url: https://www.google.com/maps/place/Aareschlucht/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f8f018625b21f:0x6bc0f90b56e9ba0e!8m2!3d46.7192366!4d8.2122009!16s%2Fm%2F0h3xs_f
+- id: iffigfalle-drive-up
+  visits:
+  - iffigfalle
+  name: Drive to Iffigenalp
+  start: Iffigenalp parking, end of the toll road above Lenk
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: PostBus 251 Lenk i.S., Bahnhof to Iffigenalp (summer only, several runs daily)
+  description_extra: From Lenk im Simmental drive up the toll road to Iffigenalp (end of road). The waterfall is 10-15 min walk from the parking. Road open early June to mid-October;
+    CHF 15 toll, parking included.
+  sources:
+  - https://www.iffigenalp.ch/en/anreise
+  - https://lenk-simmental.ch/en/summer/getting-there
+  quickest_for:
+  - iffigfalle
+  start_maps_url: https://www.google.com/maps/place/Iffigf%C3%A4lle/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee33f74c09235:0xaedf674a739c34dd!8m2!3d46.4118!4d7.44306!16s%2Fg%2F121_hshp
+- id: grindelwald-drive-up
+  visits:
+  - grindelwald
+  name: Drive or train to Grindelwald
+  start: Grindelwald village (BOB station)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Interlaken Ost + Berner Oberland Bahn (BOB) to Grindelwald (every 30 min)
+  description_extra: Drive from Interlaken via Wilderswil and Zweilütschinen up to Grindelwald village. Multiple village lots, 5-10 CHF/day. Year-round access; classic photo spots are
+    within a short walk of the village or station.
+  sources:
+  - https://www.grindelwald.swiss/en/getting-there
+  - https://www.jungfrau.ch/en-gb/jungfrau-bahnen/bob/
+  quickest_for:
+  - grindelwald
+  start_maps_url: https://www.google.com/maps/place/Grindelwald/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9eab18c79217:0xbfaa5c0f42972f65!8m2!3d46.624164!4d8.0413962!16zL20vMDJ3bHA3
+- id: viewpoint_beatenberg-drive-up
+  visits:
+  - viewpoint_beatenberg
+  name: Drive to the Niederhorn valley station
+  start: Beatenberg, Niederhorn valley station parking
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Interlaken West + PostBus 21 to Beatenberg, Station
+  description_extra: Drive up from Interlaken to Beatenberg and continue to the Niederhorn cable car station. Park (5 CHF/day) and walk 5 min to the viewpoint over Lake Thun. Year-round
+    drive-up access.
+  sources:
+  - https://niederhorn.swiss/en/
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - viewpoint_beatenberg
+  start_maps_url: https://www.google.com/maps/place/Aussichtspunkt+Beatenberg/@46.6856162,7.7879934,16z/data=!4m6!3m5!1s0x478fa531263af7f1:0x367113202ab7c1b!8m2!3d46.6856162!4d7.7879934!16s%2Fg%2F11f62f_5v5
+- id: lauterbrunnen-drive-up
+  visits:
+  - lauterbrunnen
+  name: Drive or train to Lauterbrunnen
+  start: Lauterbrunnen village (BLS station)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Interlaken Ost + BLS train to Lauterbrunnen (every 30 min)
+  description_extra: Drive from Interlaken via Wilderswil. Multiple paid lots in the village, 8 CHF/day in summer. Year-round drive-up access; Staubbach Falls and the village viewpoints
+    are 5 min walk from the lots and station.
+  sources:
+  - https://www.lauterbrunnen.swiss/en/getting-here
+  - https://www.bls.ch/en
+  quickest_for:
+  - lauterbrunnen
+  start_maps_url: https://www.google.com/maps/place/Lauterbrunnen/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fa0073b1165c7:0x5392dbb55902c31!8m2!3d46.5935058!4d7.9090981!16zL20vMDFxamwz
+- id: zermatt_village-drive-up
+  visits:
+  - zermatt_village
+  name: Train to Zermatt (park in Taesch)
+  start: Zermatt station (Matterhorn Gotthard Bahn)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: 'Visp (SBB) + Matterhorn Gotthard Bahn to Zermatt. From Taesch (cars park here): 12-min shuttle train to Zermatt every 20 min.'
+  description_extra: Zermatt is car-free. Park at the Matterhorn Terminal Taesch garage (around 16 CHF/day) and take the 12-min shuttle train into Zermatt. From the station the village
+    viewpoints are a 1-2 min walk. Year-round.
+  sources:
+  - https://www.zermatt.ch/en/Media/Planning-tips/Arrival-by-car
+  - https://www.matterhorngotthardbahn.ch/en
+  quickest_for:
+  - zermatt_village
+  start_maps_url: https://www.google.com/maps/place/3920+Zermatt/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f35a2292ee5cd:0x400ff8840196f70!8m2!3d46.0207133!4d7.749117!16zL20vMDI1Z3Rj
+- id: riffelalp-drive-up
+  visits:
+  - riffelalp
+  name: Train + short walk from Riffelalp station
+  start: Riffelalp station (Gornergratbahn from Zermatt)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Zermatt + Gornergratbahn to Riffelalp (about 25 min from Zermatt)
+  description_extra: Take the Gornergratbahn cog railway from Zermatt. Get off at Riffelalp (the first big stop). 10-15 min on the trail brings you to the quieter viewpoint above the
+    larch forest. Bahn runs year-round.
+  sources:
+  - https://www.gornergrat.ch/en/
+  - https://www.matterhornparadise.ch/en
+  quickest_for:
+  - riffelalp
+  start_maps_url: https://www.google.com/maps/place/Riffelalp,+3920+Zermatt/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f35945b81adcb:0x4273cbd81622c1db!8m2!3d46.0010288!4d7.7503289!16s%2Fm%2F0r8l1xx
+- id: ferpecle_river-drive-up
+  visits:
+  - ferpecle_river
+  name: Drive into the Ferpècle valley
+  start: Roadside between Salay and Barrage de Ferpècle
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: PostBus 381 from Sion to Les Haudères, then 384 to Ferpècle (limited summer service)
+  description_extra: Drive up the Val d'Hérens from Sion via Les Haudères to Ferpècle. The river flats spread out along the valley floor on the approach to the dam; pull over at the
+    gravel braid sections for the drone-launch view. Road open year-round but icy in winter.
+  sources:
+  - https://www.evolene-region.ch/en/discover/villages/ferpecle
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - ferpecle_river
+  start_maps_url: https://www.google.com/maps/place/?q=46.04,7.555&z=15
+- id: spielboden-drive-up
+  visits:
+  - spielboden
+  name: Cable car from Saas Fee
+  start: Spielboden gondola top station (Saas Fee)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Brig + PostBus 511 to Saas Fee (car-free village)
+    cable_car: Saas Fee gondola Spielboden runs continuously in summer
+  description_extra: From Saas Fee village (car-free; park at the village entrance lots, around 16 CHF/day) take the Spielboden gondola up to 2,452m. From the station the marmot meadow
+    is right there; walk 10 min toward the Hannig trail intersection for the Allalinhorn backdrop. Gondola runs late June to mid-October.
+  sources:
+  - https://www.saas-fee.ch/en/cable-cars/spielboden
+  - https://www.saas-fee.ch/en/arrival
+  quickest_for:
+  - spielboden
+  start_maps_url: https://www.google.com/maps/place/Spielboden,+3906+Saas-Fee/@46.1034607,7.9264445,17z/data=!3m1!4b1!4m6!3m5!1s0x478f4599f1a2d2cb:0xf03fe149d6ccbcea!8m2!3d46.1034607!4d7.9264445!16s%2Fg%2F1tfnxhfr
+- id: saas_fee_glacier-drive-up
+  visits:
+  - saas_fee_glacier
+  name: Cable car + Metro Alpin to Mittelallalin
+  start: Saas Fee village (Alpin Express valley station)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Brig + PostBus 511 to Saas Fee
+    cable_car: Alpin Express to Felskinn, then Metro Alpin funicular inside the mountain to Mittelallalin (3,500m)
+  description_extra: From the car-free Saas Fee village, take the Alpin Express to Felskinn (cable car) then the underground Metro Alpin funicular to Mittelallalin. The terrace looks
+    straight onto the glacier and the Mischabel peaks. Open winter ski season + summer (roughly July to mid-October).
+  sources:
+  - https://www.saas-fee.ch/en/cable-cars/mittelallalin
+  - https://www.saas-fee.ch/en/arrival
+  quickest_for:
+  - saas_fee_glacier
+  start_maps_url: https://www.google.com/maps/place/Feegletscher/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f48b22fff0bbd:0x8122bd2e0fc14d22!8m2!3d46.0796!4d7.8788!16s%2Fm%2F04n00rz
+- id: lac_de_derborence-drive-up
+  visits:
+  - lac_de_derborence
+  name: Drive to the lake
+  start: Lac de Derborence parking, near Refuge du Lac
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Sion (SBB) + PostBus 343 to Derborence (limited summer service)
+  description_extra: Drive up the narrow single road from Aven via the Sanetschstrasse turnoff. The last 15 km is single-lane with passing places. Lakeside parking free. Road open June
+    to October only.
+  sources:
+  - https://www.derborence.ch/
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - lac_de_derborence
+  start_maps_url: https://www.google.com/maps/place/Lac+de+Derborence/@46.2791132,7.2124191,1263m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478ec20dffda7db3:0x7a9df6822f6e8527!8m2!3d46.2793244!4d7.2172313!16s%2Fm%2F0283s7l
+- id: la_fouly-drive-up
+  visits:
+  - la_fouly
+  name: Drive up Val Ferret to La Fouly
+  start: La Fouly village
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Orsières (SBB) + PostBus 233 / 234 to La Fouly, Village (summer service)
+    train: Martigny + Mont-Blanc Express (TMR) to Orsières + PostBus
+  description_extra: Drive up the Val Ferret from Orsières. La Fouly sits under Mont Dolent and Tour Noir. Village parking is free. For the moraine view, walk 15 min out of the village
+    toward the glacier. Road open year-round; ski lifts run winter + summer.
+  sources:
+  - https://www.saint-bernard.ch/en/la-fouly/
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - la_fouly
+  start_maps_url: https://www.google.com/maps/place/La+Fouly,+1944+Orsi%C3%A8res/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4789346ce514895d:0x507e2e9599bb7d3c!8m2!3d45.933198!4d7.0986502!16s%2Fm%2F06zl36r
+- id: sanetschpass-drive-up
+  visits:
+  - sanetschpass
+  name: Drive up from the Sion side
+  start: Sanetschpass parking (top of the toll road from Conthey)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Sion (SBB) + PostBus 343 toward Derborence; no direct service to the pass top, drive or taxi
+  description_extra: Drive up from Sion through Conthey to the pass at 2,252m. The road is paved but narrow; parking at the top near the restaurant and reservoir. Open roughly late May
+    through October. From the parking it's a flat walk to the dam and the cable car.
+  sources:
+  - https://www.valais.ch/en/activities/road-trips-routes/passes/col-du-sanetsch
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - sanetschpass
+  start_maps_url: https://www.google.com/maps/place/Sanetschpass/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee88d90bcaa87:0x1f0221b4b53a6a20!8m2!3d46.3316!4d7.28621!16s%2Fm%2F04y7ghf
+- id: gorges_du_durnand-drive-up
+  visits:
+  - gorges_du_durnand
+  name: Drive to Les Valettes
+  start: Gorges du Durnand parking, Les Valettes (Bovernier)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Martigny + bus to Les Valettes, Gorges du Durnand
+    train: Martigny-Orsières line (TMR/RegionAlps) to Bovernier, then 20 min walk uphill
+  description_extra: From Martigny take the Martigny-Croix motorway exit, follow signs for Grand-St-Bernard, then turn right into Les Valettes (Bovernier) after about 2 km. Free parking
+    at the gorge entrance / on-site restaurant. Paid entry to boardwalk (9 CHF adult), open daily May 1 to October 31. About 1h round trip on the boardwalk.
+  sources:
+  - https://www.gorgesdudurnand.ch/
+  - https://www.regionalps.ch/en/
+  quickest_for:
+  - gorges_du_durnand
+  start_maps_url: https://www.google.com/maps/place/Gorges+du+Durnand/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ec9f23d4dd66b:0x629e8be22ad8eb5e!8m2!3d46.069739!4d7.071399!16s%2Fg%2F1txc5yx5
+- id: crans_montana-drive-up
+  visits:
+  - crans_montana
+  name: Drive or funicular to Crans-Montana
+  start: Crans-Montana village centre
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Sierre (SBB) + funicular SMC (Sierre-Montana-Crans) to Crans-Montana, then local bus to centre
+  description_extra: Drive up from Sierre via the winding mountain road to Crans-Montana. Multiple paid lots in the village. Funicular from Sierre runs every 30 min. From the centre,
+    summer cable cars (Cry d'Er, Bella Lui, Plaine Morte) climb to the upper slopes; the village viewpoints themselves are walking distance.
+  sources:
+  - https://www.crans-montana.ch/en/get-here
+  - https://www.cie-sierre-montana.ch/
+  quickest_for:
+  - crans_montana
+  start_maps_url: https://www.google.com/maps/place/Crans-Montana/@42.9672329,-5.3731519,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee033b13cf443:0x7775de3b89e62096!8m2!3d46.3126581!4d7.4805924!16s%2Fg%2F11bc598bvt
+- id: tseuzier_lake-drive-up
+  visits:
+  - tseuzier_lake
+  name: Drive up to the dam
+  start: Barrage de Tseuzier parking
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Sion (SBB) + PostBus to Ayent / Anzère, then no direct service, drive recommended
+  description_extra: Drive up the Rawyl road from Ayent / Anzère. Park at the Barrage de Tseuzier (free roadside spots at the dam). Lake view is from the dam itself, 1-min walk. Road
+    open mid-May to October.
+  sources:
+  - https://www.crans-montana.ch/en/p/tseuzier-lake
+  - https://www.swisstopo.admin.ch/
+  quickest_for:
+  - tseuzier_lake
+  start_maps_url: https://www.google.com/maps/place/Lac+de+Tseuzier/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee161ec5fc7b1:0x2bde8895194d52a8!8m2!3d46.3508905!4d7.4301043!16s%2Fm%2F02x6gzq
+- id: la_tzoumaz-drive-up
+  visits:
+  - la_tzoumaz
+  name: Drive to La Tzoumaz
+  start: La Tzoumaz village
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Riddes (SBB) + PostBus 393 to La Tzoumaz
+    train: Riddes on the Brig-Lausanne main line
+  description_extra: Drive from Riddes (Rhone valley) up the winding road to La Tzoumaz. Village parking free outside ski season. From the village walk up toward the treeline for the
+    frozen pine shots, any direction works.
+  sources:
+  - https://www.latzoumaz.ch/en
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - la_tzoumaz
+  start_maps_url: https://www.google.com/maps/place/La+Tzoumaz,+1918+Riddes/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ec568cef83837:0x5960e7fe8f54afb0!8m2!3d46.1451509!4d7.2330688!16s%2Fm%2F02pp5wy
+- id: ritzli_alp-drive-up
+  visits:
+  - ritzli_alp
+  name: Drive up to Ritzli Alp
+  start: Restaurant Ritzli Alp parking
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Bulle + PostBus toward Jaun, Dorf. From Jaun, walk up the Euschelspass trail to Ritzli Alp (about 1h25, T1).
+  description_extra: From Jaun follow the Euschelsstrasse mountain road 5 km up toward the Euschels pass. Ritzli Alp sits at 1,516 m and is signposted. Free parking at the restaurant.
+    Open daily June to mid-September, weekends in shoulder season. Mountain road closes with snow.
+  sources:
+  - https://www.ritzli-alp.ch/
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - ritzli_alp
+  start_maps_url: https://www.google.com/maps/place/Ritzli+Alp/@45.1662212,2.7371613,7z/data=!3m1!5s0x478e5f297051167b:0xcf8dc4fee4431c02!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5f297044c507:0xc94cdffdd5313e7a!8m2!3d46.6295236!4d7.2828498!16s%2Fg%2F1td2yck1
+- id: la_tine_canyon-drive-up
+  visits:
+  - la_tine_canyon
+  name: Drive or train to La Tine hamlet
+  start: La Tine hamlet (Rossinière)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: MOB GoldenPass regional train (Montreux-Zweisimmen line) to La Tine station, which sits in the hamlet directly above the Sarine gorge
+  description_extra: From Bulle (FR) head south on the H189 toward Château-d'Oex via Montbovon, then turn off into the La Tine hamlet. Public-land access on foot from the hamlet for
+    the gorge viewpoints from above. The canyon descent itself requires a guided canyoning trip with a local outfitter.
+  sources:
+  - https://www.gruyere-escapade.ch/canyoning.html
+  - https://www.gstaad.ch/en/getting-here/by-train.html
+  quickest_for:
+  - la_tine_canyon
+  start_maps_url: https://www.google.com/maps/place/1669+Montbovon/@46.4880077,7.0028709,10080m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478e8e4fff86dfeb:0x7f1aab823b11e665!8m2!3d46.4879565!4d7.0439846!16s%2Fg%2F120lw7t5
+- id: dent_de_broc-drive-up
+  visits:
+  - dent_de_broc
+  name: Roadside stop on the way to Moléson
+  start: Roadside pull-out below Moléson, near Broc
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Bulle + TPF bus 260 to Moléson-Village; Broc is on the regional train line (TPF S60)
+  description_extra: On the way up to Moléson from the Broc area, pull over at the roadside (around 46.554424, 7.032846). The peak pops above the foreground meadow perfectly from this
+    angle. Free roadside parking; year-round.
+  sources:
+  - https://www.la-gruyere.ch/en/discovery/main-sights/dent-de-broc/
+  - https://www.tpf.ch/
+  quickest_for:
+  - dent_de_broc
+  start_maps_url: https://www.google.com/maps/place/Dent+de+Broc/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8a68b17bfb5f:0x54cb7fef51106fb8!8m2!3d46.5885728!4d7.1277314!16s%2Fm%2F0kmv4z5
+- id: schwarzsee-drive-up
+  visits:
+  - schwarzsee
+  name: Drive to Gypsera
+  start: Schwarzsee, Gypsera (lakeside parking)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Fribourg + TPF bus 122 to Schwarzsee, Gypsera (year-round)
+  description_extra: Drive from Fribourg via Plaffeien to Schwarzsee. Park at Gypsera at the south end of the lake (paid lots). The lake is right there. Year-round access; cable cars
+    to Kaiseregg run summer + winter.
+  sources:
+  - https://www.schwarzsee.ch/en/getting-here
+  - https://www.tpf.ch/
+  quickest_for:
+  - schwarzsee
+  start_maps_url: https://www.google.com/maps/place/Schwarzsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5ea475c88195:0xbbdcb38663da2f0a!8m2!3d46.6659091!4d7.2807275!16s%2Fm%2F02831lc
+- id: moleson-drive-up
+  visits:
+  - moleson
+  name: Cable car to Moléson summit
+  start: Moléson summit station (Vol-au-Vent funicular from Plan-Francey)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Bulle + TPF bus 260 to Moléson-Village
+    cable_car: Moléson-Village to Plan-Francey gondola, then Moléson summit funicular
+  description_extra: From Moléson-Village, take the gondola to Plan-Francey then the Vol-au-Vent summit funicular. The terrace gives you the panorama; walk 5 min along the ridge to escape
+    the café crowd. Lifts run roughly mid-May to October and during the ski season.
+  sources:
+  - https://www.moleson.ch/en/
+  - https://www.la-gruyere.ch/en/getting-here/
+  quickest_for:
+  - moleson
+  start_maps_url: https://www.google.com/maps/place/Mol%C3%A9son/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e88c0e8a4ac17:0x5d0474d4b36c0767!8m2!3d46.5487879!4d7.0171018!16s%2Fm%2F04cykhw
+- id: gorges_du_chauderon-drive-up
+  visits:
+  - gorges_du_chauderon
+  name: Drive to Les Planches
+  start: Les Planches old town, Montreux
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Montreux SBB + 15 min walk uphill through Les Planches
+  description_extra: From the Montreux lakefront drive up into Les Planches (the old town east of central Montreux). Small paid lot between Les Planches and the church of St-Vincent
+    (limited capacity). Trailhead 5 min walk from the lot. Free public access; check Montreux Riviera Tourisme for closures.
+  sources:
+  - https://www.montreuxriviera.com/en
+  - https://www.cff.ch/en.html
+  quickest_for:
+  - gorges_du_chauderon
+  start_maps_url: https://www.google.com/maps/place/Gorges+du+Chauderon/@46.4367906,6.9229226,485m/data=!3m1!1e3!4m6!3m5!1s0x478e9bd02ed88279:0x5a702a06efcffa74!8m2!3d46.4368563!4d6.9250077!16s%2Fg%2F11f652tll2
+- id: pisse_chevre-drive-up
+  visits:
+  - pisse_chevre
+  name: Roadside stop on Route de Morcles
+  start: Route de Morcles roadside pull-out at the falls
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  description_extra: From Lavey-les-Bains (south of Bex) take the narrow mountain road that climbs in 29 switchbacks toward Morcles village. Small roadside pull-out at the foot of the
+    waterfall. Free. Road closed by snow in winter; best late spring to autumn for flow.
+  sources:
+  - https://www.morcles.ch/
+  - https://map.geo.admin.ch/
+  quickest_for:
+  - pisse_chevre
+  start_maps_url: https://www.google.com/maps/place/Pissechevre/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478eb91116b7f2b1:0xaf936736e1645bd7!8m2!3d46.198!4d7.02769!16s%2Fg%2F1tdw2cpw
+- id: route_de_morcles-drive-up
+  visits:
+  - route_de_morcles
+  name: Drive up the switchbacks
+  start: Route de Morcles (above Lavey-les-Bains)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  description_extra: From Lavey-les-Bains (A9 exit Saint-Maurice / Lavey) follow signs for Morcles. The road climbs in 29 numbered switchbacks roughly 800 m up the south flank of the
+    Rhône valley. Free roadside pull-outs at several switchbacks. Normally open May to October; closed by snow in winter.
+  sources:
+  - https://www.morcles.ch/
+  - https://map.geo.admin.ch/
+  quickest_for:
+  - route_de_morcles
+  start_maps_url: https://www.google.com/maps/place/46%C2%B011'55.8%22N+7%C2%B001'52.3%22E/@46.1985069,7.0222498,2175m/data=!3m1!1e3!4m4!3m3!8m2!3d46.19882!4d7.031182
+- id: creux_du_van-drive-up
+  visits:
+  - creux_du_van
+  name: Drive to Le Soliat
+  start: Ferme du Soliat parking
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: No direct service; nearest stop is Noiraigue station for the 'Sentier des 14 contours' hike
+  description_extra: Drive from Yverdon or Neuchâtel side via Couvet up the small road to Ferme du Soliat. Free parking at the restaurant. The rim is a 5-min walk; the drop is severe
+    with no railing in most places, so stay back. Best clear summer mornings or any overcast morning for mist in the bowl.
+  sources:
+  - https://www.creux-du-van.com/
+  - https://www.j3l.ch/en
+  quickest_for:
+  - creux_du_van
+  start_maps_url: https://www.google.com/maps/place/Creux+du+Van/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478de7f8240bcb23:0xc04d997cfd4ad4a8!8m2!3d46.9309929!4d6.7234511!16s%2Fm%2F08097wh
+- id: tine_de_conflens-drive-up
+  visits:
+  - tine_de_conflens
+  name: Drive to the roadside trailhead
+  start: Roadside parking above the Nozon gorge (near La Sarraz)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: La Sarraz (regional rail) + 30 min walk along the marked path
+  description_extra: Park at the roadside trailhead above the Tine de Conflens (around 46.654948, 6.492129). Short downhill walk to the falls, good for families. Free parking, free access.
+  sources:
+  - https://www.region-du-leman.ch/en/P9183/tine-de-conflens
+  - https://map.geo.admin.ch/
+  quickest_for:
+  - tine_de_conflens
+  start_maps_url: https://www.google.com/maps/place/La+Tine+de+Conflens/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478dcb0a9141171b:0xcf6c1e11b5285bf5!8m2!3d46.6557956!4d6.4939321!16s%2Fg%2F11jp59nc8b
+- id: st_prex-drive-up
+  visits:
+  - st_prex
+  name: Train or drive to St-Prex
+  start: St-Prex village, Rue du Vieux-Collège
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Lausanne CFF + regional train to St-Prex, hourly, 17 min
+  description_extra: From Lausanne take the A1 toward Geneva, exit Morges-Ouest, then follow signs to St-Prex. The Bain des Dames swim platform is signed off the Rue du Vieux-Collège
+    on the western side of the old town. Free roadside parking; more capacity at Plage de Chaucy. Summer water 22-24 C in July-August.
+  sources:
+  - https://www.st-prex.ch/
+  - https://www.cff.ch/en.html
+  quickest_for:
+  - st_prex
+  start_maps_url: https://www.google.com/maps/place/?q=46.47843,6.45643&z=15
+- id: marchairuz-drive-up
+  visits:
+  - marchairuz
+  name: Drive over the Col du Marchairuz
+  start: Col du Marchairuz (Hotel du Marchairuz)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: St-Cergue + TPN seasonal mountain bus to Col du Marchairuz (limited service)
+  description_extra: Drive up from Bière (Vaud side) or from St-Cergue (Nyon side) over the Col du Marchairuz at 1,447m. Free roadside parking near the hotel at the col. The forest viewpoint
+    (around 46.564254, 6.239464) is 2-3 min walk from the road. Best the morning after a snowstorm. Road usually plowed but may close briefly in heavy snow.
+  sources:
+  - https://www.parcjuravaudois.ch/en/
+  - https://www.geneve-terroir.ch/en/hike/jura-vaudois-park/
+  quickest_for:
+  - marchairuz
+  start_maps_url: https://www.google.com/maps/place/?q=46.55274,6.25024&z=15
+- id: lavaux_vineyards-drive-up
+  visits:
+  - lavaux_vineyards
+  name: Train or drive to a Lavaux village
+  start: Cully, St-Saphorin or Chexbres-Village station
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Lausanne CFF + regional train (S6 / S7) to Cully, Epesses, Rivaz, St-Saphorin or Chexbres-Village
+  description_extra: Park in any Lavaux village or take the regional train along the lakeside / Train des Vignes line. From the station the terrace paths between the vines are 2-5 min
+    walk. The autumn vine colour peaks early to mid-October. Free public access.
+  sources:
+  - https://www.lavaux-unesco.swiss/en/
+  - https://www.cff.ch/en.html
+  quickest_for:
+  - lavaux_vineyards
+  start_maps_url: https://www.google.com/maps/place/Lavaux-Oron/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478c33d447645687:0x96990902d3a94b53!8m2!3d46.5100372!4d6.7531955!16s%2Fm%2F04f4h85
+- id: le_doubs-drive-up
+  visits:
+  - le_doubs
+  name: Drive to Les Roches de Moron
+  start: Restaurant Les Roches de Moron parking
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Le Locle + regional line to Les Brenets, then 45 min climb up the cliff trail to the viewpoint
+  description_extra: From La Chaux-de-Fonds drive to Le Locle, then follow signs toward Les Planchettes and Les Roches de Moron. The road ends at the restaurant. Free parking for diners,
+    paid otherwise. 5-min walk to the cliff edge above the Doubs canyon. Year-round access.
+  sources:
+  - https://www.restroches.ch/
+  - https://www.j3l.ch/en
+  quickest_for:
+  - le_doubs
+  start_maps_url: https://www.google.com/maps/place/47%C2%B005'31.0%22N+6%C2%B045'04.4%22E/@47.091939,6.7486421,17z/data=!3m1!4b1!4m4!3m3!8m2!3d47.091939!4d6.751217
+- id: gigerwaldsee-drive-up
+  visits:
+  - gigerwaldsee
+  name: Drive to the Gigerwald reservoir
+  start: Gigerwald reservoir parking, end of the Calfeisental road
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  description_extra: From Vättis drive up the toll road into the Calfeisental valley to the end at the Gigerwald reservoir (CHF 5 toll). Free parking at the dam. Lake view is right from
+    the road, with the trail to the cross viewpoint a 20-min uphill walk. Road open May to October.
+  sources:
+  - https://www.heidiland.com/en/discover/details/gigerwaldsee-reservoir-and-dam-vaettis
+  - https://www.swisstopo.admin.ch/
+  quickest_for:
+  - gigerwaldsee
+  start_maps_url: https://www.google.com/maps/place/Gigerwaldsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784cffda003869d:0x455bdb0c4710be00!8m2!3d46.9145345!4d9.374917!16s%2Fm%2F02x6g66
+- id: caumasee-drive-up
+  visits:
+  - caumasee
+  name: Drive to Flims
+  start: Caumasee Parkplatz, Flims Waldhaus
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Chur (SBB) + PostBus 81 to Flims Waldhaus
+  description_extra: Drive to Flims Waldhaus. Park at the dedicated Caumasee lot (around 5 CHF/day during the season). 5-min walk to the lake from the lot. Funicular down to the shore
+    runs May to October; lake itself accessible year-round on foot.
+  sources:
+  - https://www.flimslaax.com/en/regions/flims/caumasee
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - caumasee
+  start_maps_url: https://www.google.com/maps/place/Caumasee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784dc8a4cda502d:0xc173a8c95685f33d!8m2!3d46.8199879!4d9.2959134!16s%2Fm%2F02r8d7d
+- id: crestasee-drive-up
+  visits:
+  - crestasee
+  name: Drive to Crestasee parking
+  start: Crestasee parking (Trin Mulin)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Chur (SBB) + PostBus 81 to Trin, Mulin
+  description_extra: Drive from Chur to Trin/Mulin and park at the small lot near Crestasee. 5-10 min walk through the pine forest to the lake. Open year-round (the lake is a local swim
+    spot in summer; quieter in spring and autumn).
+  sources:
+  - https://www.flimslaax.com/en/regions/flims/crestasee
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - crestasee
+  start_maps_url: https://www.google.com/maps/place/Crestasee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784dca1c5bb3897:0xe974b259040ce2f0!8m2!3d46.8316413!4d9.3213848!16s%2Fm%2F03cp4l6
+- id: klontalersee-drive-up
+  visits:
+  - klontalersee
+  name: Drive along the lakeshore road
+  start: Kloental lakeshore (Glarus side or Vorauen end)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Glarus (SBB) + PostBus 506 to Klöntal-Vorauen
+  description_extra: Drive from Glarus along the Klöntalstrasse to the lake. Multiple free roadside parking spots along the shore. For a longer stay, Camping Vorauen sits at the head
+    of the lake. Road open year-round.
+  sources:
+  - https://www.glarnerland.ch/en/regions/kloental
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - klontalersee
+  start_maps_url: https://www.google.com/maps/place/Kl%C3%B6ntalersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785322defece941:0xbd18b8fa9cca9c41!8m2!3d47.0224341!4d8.9596699!16s%2Fm%2F027jp8q
+- id: morteratsch_glacier-drive-up
+  visits:
+  - morteratsch_glacier
+  name: Train or drive to Morteratsch station
+  start: Morteratsch railway station
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Pontresina + Bernina Bahn (RhB line) to Morteratsch (every hour)
+  description_extra: Take the Bernina Bahn UNESCO line to Morteratsch station (one stop south of Pontresina). Free roadside parking next to the station for cars. From the platform yellow
+    signs lead to viewpoints along the moraine; the closest one is 10 min walk. Year-round access.
+  sources:
+  - https://www.rhb.ch/en/panoramic-routes/bernina-line
+  - https://www.engadin.com/en
+  quickest_for:
+  - morteratsch_glacier
+  start_maps_url: https://www.google.com/maps/place/Morteratschgletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4783787d4d1dde9d:0x47de9c833d269654!8m2!3d46.400919!4d9.9272488!16s%2Fm%2F027rmn1
+- id: ponte_dei_salti-drive-up
+  visits:
+  - ponte_dei_salti
+  name: Drive to Lavertezzo
+  start: Lavertezzo village paid parking
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Locarno FFS + PostBus 321 to Lavertezzo, Paese
+  description_extra: Drive up Val Verzasca from Locarno. Lavertezzo village paid lots (15 CHF/day in summer). 3-min walk from the upper lot to the iconic Roman-style stone bridge. Year-round
+    access. By 10 the parking is full in summer.
+  sources:
+  - https://www.ascona-locarno.com/en/i/ponte-dei-salti-lavertezzo
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - ponte_dei_salti
+  start_maps_url: https://www.google.com/maps/place/Ponte+dei+Salti+(17.+Jahrhundert)/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b131b37ac893:0xb8b55f11feae7d93!8m2!3d46.2600705!4d8.8359918!16s%2Fg%2F121_43f8
+- id: valle_verzasca-drive-up
+  visits:
+  - valle_verzasca
+  name: Drive the valley
+  start: Val Verzasca road (Tenero to Sonogno)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Tenero (FFS) + PostBus 321 the full length of the valley to Sonogno
+  description_extra: Drive up the valley from Tenero (45 min from the Locarno autostrada) all the way to Sonogno at the head. Roadside parking and natural swimming pools along the river.
+    Year-round access but icy in winter. River current is serious, never jump into water you haven't scouted.
+  sources:
+  - https://www.ascona-locarno.com/en/discover/valley/valle-verzasca
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - valle_verzasca
+  start_maps_url: https://www.google.com/maps/place/Verzaska+Valley/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b6d28e572447:0x60f583d58bb40b36!8m2!3d46.25!4d8.8333333!16s%2Fm%2F03c3mrg
+- id: lavertezzo-drive-up
+  visits:
+  - lavertezzo
+  name: Drive to Lavertezzo village
+  start: Lavertezzo village (paid lots)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Locarno FFS + PostBus 321 to Lavertezzo, Paese
+  description_extra: Drive up Val Verzasca from Locarno-Tenero (about 45 min from the autostrada). Two paid lots in the village; 15 CHF/day for the upper lot in summer. 1-3 min walk
+    to the village's slate-roofed lanes and chapels. Year-round.
+  sources:
+  - https://www.ascona-locarno.com/en/i/lavertezzo
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - lavertezzo
+  start_maps_url: https://www.google.com/maps/place/Ponte+dei+Salti+(17.+Jahrhundert)/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b131b37ac893:0xb8b55f11feae7d93!8m2!3d46.2600705!4d8.8359918!16s%2Fg%2F121_43f8
+- id: ponte_brolla-drive-up
+  visits:
+  - ponte_brolla
+  name: Drive or train to Ponte Brolla
+  start: Ponte Brolla bridge (roadside)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Locarno FFS + Centovalli train to Ponte Brolla (every 30-60 min)
+  description_extra: Drive from Locarno toward Centovalli; Ponte Brolla is the first hamlet after the gorge. Free roadside parking near the bridge. 2-min walk down to the river-gorge
+    swimming holes. Year-round access; warm summer water for cliff jumps.
+  sources:
+  - https://www.ascona-locarno.com/en/i/ponte-brolla
+  - https://www.centovalli.ch/en/
+  quickest_for:
+  - ponte_brolla
+  start_maps_url: https://www.google.com/maps/place/Ponte+Brolla,+6652+Locarno/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b80184d77ff9:0x8085ee1850e504a9!8m2!3d46.1853!4d8.75278!16s%2Fg%2F120jqlmp
+- id: les_drus-drive-up
+  visits:
+  - les_drus
+  name: Montenvers train from Chamonix
+  start: Chamonix Montenvers train station
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Chamonix Sud + Montenvers rack railway to Mer de Glace upper station
+  description_extra: Same access as Mer de Glace. Take the Montenvers rack train from central Chamonix to the upper station (about 30 min one way). Les Drus is visible from the Mer de
+    Glace platform and along the moraine trail. Train runs year-round, more frequent in summer.
+  sources:
+  - https://www.montenvers.com/en/
+  - https://www.chamonix.com/montenvers-mer-de-glace,46,en.html
+  quickest_for:
+  - les_drus
+  start_maps_url: https://www.google.com/maps/place/Aiguille+du+Dru/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894bc255dfbe21:0xc70ae60e6164cffe!8m2!3d45.932945!4d6.9558754!16s%2Fm%2F02855l2
+- id: aiguille_du_grepon-drive-up
+  visits:
+  - aiguille_du_grepon
+  name: Montenvers train from Chamonix
+  start: Chamonix Montenvers train station
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Chamonix Sud + Montenvers rack railway to Mer de Glace upper station
+  description_extra: Same access as Mer de Glace. Take the Montenvers rack train from central Chamonix. The Aiguille du Grépon is visible from the upper station and along the Mer de
+    Glace moraine trail. Train runs year-round.
+  sources:
+  - https://www.montenvers.com/en/
+  - https://www.chamonix.com/montenvers-mer-de-glace,46,en.html
+  quickest_for:
+  - aiguille_du_grepon
+  start_maps_url: https://www.google.com/maps/place/Aiguille+du+Gr%C3%A9pon/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894ec98e061181:0x7753a53db26fea54!8m2!3d45.902811!4d6.918926!16s%2Fm%2F0czdw5h
+- id: engstlensee-drive-up
+  visits:
+  - engstlensee
+  name: Drive or PostBus to Engstlenalp
+  start: Engstlenalp end-of-road parking (Hotel Engstlenalp)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Meiringen + PostBus 161 to Innertkirchen, change for PostAuto to Engstlenalp (terminus)
+  description_extra: From Innertkirchen take the Gentalstrasse toward Sustenpass then the private toll road through the Gental up to Engstlenalp (CHF 8 cash at the gate). End-of-road
+    parking next to Hotel Engstlenalp. 5-min walk to the lake. Toll road and PostAuto run early May to mid-October.
+  sources:
+  - https://engstlenalp.ch/anreise/
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - engstlensee
+  start_maps_url: https://maps.app.goo.gl/cHFf2Xag4jrtEowH6
+- id: maloja_pass-drive-up
+  visits:
+  - maloja_pass
+  name: Drive to the pass viewpoint
+  start: Maloja Orden parking (Belvedere)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: St. Moritz + PostBus 4 (line St. Moritz-Maloja-Chiavenna) to Maloja Poschta
+  description_extra: From St. Moritz follow road 27 southwest along the Engadin lakes to the top of the pass. The Belvedere viewpoint sits at the start of the hairpins on the Bregaglia
+    side. Maloja Orden parking is free, around 20 spaces, fills fast on autumn weekends. 5-min walk to the lip overlooking the switchbacks. Road open year-round.
+  sources:
+  - https://www.engadin.com/en/journey-detail/maloja-pass
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - maloja_pass
+  start_maps_url: https://maps.app.goo.gl/1X7in51rPakADN2B6
+- id: mount_pilatus-drive-up
+  visits:
+  - mount_pilatus
+  name: Cog railway (Alpnachstad) or cable car (Kriens)
+  start: Pilatus Kulm summit station
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Lucerne + S5 train to Alpnachstad (17 min) then the world's steepest cog railway (48% gradient)
+    cable_car: Lucerne + bus 1 to Kriens Linde then the panoramic gondola via Krienseregg and Fraekmuentegg
+    bus: Lake Lucerne steamer Lucerne to Alpnachstad pier connects directly with the cog railway in summer
+  description_extra: Two ways up. Cog railway from Alpnachstad (May to mid-November, about 30 min one way). Kriens panoramic gondola (year-round, about 40 min including changes). The
+    summit terrace is right at the top station. Cog railway around CHF 78 return.
+  sources:
+  - https://www.pilatus.ch/en
+  - https://www.cff.ch/en.html
+  quickest_for:
+  - mount_pilatus
+  start_maps_url: https://www.google.com/maps/place/Mount+Pilatus/@46.9795,8.2548,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.9795!4d8.2548
+- id: julier_pass-drive-up
+  visits:
+  - julier_pass
+  name: Drive over the Julier Pass
+  start: Pass dal Guglia / Julierpass summit (Hospiz)
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: PostBus 184 St. Moritz - Chur via Tiefencastel runs over the pass year-round; stops at Julier Hospiz on the summit
+  description_extra: Drive over the pass on H3 between Tiefencastel / Bivio on the Surses side and Silvaplana on the Engadin side. Several small lay-bys near the summit at 2,284m. Free
+    parking. One of the few high alpine roads in Switzerland kept open through winter; snow chains may be required in heavy weather.
+  sources:
+  - https://www.graubuenden.ch/en/passes/julier
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - julier_pass
+  start_maps_url: https://www.google.com/maps/place/Julier+Pass/@46.4701639,9.7177092,17z/data=!3m1!4b1!4m6!3m5!1s0x47848149d54cdb2f:0x796a0f271166c816!8m2!3d46.4701639!4d9.7177092
+- id: silsersee-drive-up
+  visits:
+  - silsersee
+  name: Drive along the Engadin road
+  start: Sils Maria, Sils Baselgia or Plaun da Lej lakeside lots
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: St. Moritz + PostBus 4 toward Maloja stops at Sils Maria, Sils Baselgia, Plaun da Lej and Maloja Posta along the lakeshore
+    train: St. Moritz (Albula line) + PostBus 4
+  description_extra: Drive along the Engadin road (H27) from St. Moritz or over the Maloja Pass. Public lots at Sils Maria, Sils Baselgia and Plaun da Lej, all roadside-free or paid.
+    Lakeshore footpath open year-round; lake-crossing boat runs late June to late September.
+  sources:
+  - https://www.engadin.com/en/journey-detail/silsersee
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - silsersee
+  start_maps_url: https://maps.app.goo.gl/Tk4g2EPBM4i1C6s57
+- id: engadin_autumn-drive-up
+  visits:
+  - engadin_autumn
+  name: Drive the Engadin valley
+  start: Engadin road (H27) between St. Moritz and Maloja
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: PostBus 4 covers the lake belt from St. Moritz to Maloja
+    train: St. Moritz on the Albula line; Pontresina and Celerina also serve the Stazerwald
+  description_extra: Drive between St. Moritz, Silvaplana, Sils-Maria and Maloja along the Engadin road for the lake belt and larch slopes. Roads stay open through October. Peak colour
+    around mid-October; warm afternoon light intensifies the gold. Multiple lakeside lots, mostly free.
+  sources:
+  - https://www.engadin.com/en/journey/winter-summer-autumn-in-the-engadin
+  - https://www.postauto.ch/en/timetable-network
+  quickest_for:
+  - engadin_autumn
+  start_maps_url: https://www.google.com/maps/place/?q=46.49611,9.86861&z=15

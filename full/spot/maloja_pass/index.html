@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779300426015" />
+<link rel="stylesheet" href="../../preview.css?v=1779302707747" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -101,7 +101,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value">Drive-up</span>
+    <span class="value">T1<span class="unit">· Drive-up</span></span>
     <span class="label">Accessibility</span>
   </div>
     <div class="hb-stats-cell">
@@ -110,23 +110,17 @@
     <span class="label">Crowdedness</span>
   </div>
   </div>
-    <div class="hb-access-card"><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚗</span>By car</p>
-      <div class="hb-access-body"><p>From St. Moritz follow road 27 southwest along the Engadin lakes (Silvaplana, Sils) to the top of the pass. The viewpoint sits at the start of the hairpins on the Bregaglia side, signed Belvedere.</p><p><span class="hb-access-detail">Parking</span> Maloja Orden parking, free, on the right roughly 100 m after the turn-off. Around 20 spaces, fills fast on autumn weekends.</p><p><span class="hb-access-detail">Walk to spot</span> 5 min</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚆</span>By train + bus</p>
-      <div class="hb-access-body"><p>Train to St. Moritz, then PostAuto line 4 (St. Moritz, Maloja, Chiavenna) to the Maloja Poschta stop.</p><p><span class="hb-access-detail">Walk from stop</span> 15 min</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">⛴</span>By boat</p>
-      <div class="hb-access-body"><p>Sils Maria to Maloja passenger boat across Lake Sils. Four runs per day from late June to late September.</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🕒</span>When to go</p>
-      <div class="hb-access-body"><p>Sunrise for warm light on Piz da la Margna and the Sils basin. Larches turn gold in early October, also the busiest week of the year.</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">📅</span>Hours / season</p>
-      <div class="hb-access-body"><p>Road open year-round, occasionally closed for hours after heavy snow. Boat service late June to late September.</p></div>
-    </div></div>
     
+    <p class="hb-section-h">Routes</p>
+  <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/maloja_pass_p0/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Drive to the pass viewpoint <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Drive-up</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button></div>
     
   </div>
     <div class="hb-flip-back-view hb-flip-back-view-route">
@@ -147,7 +141,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value"><span class="missing" data-rd-sac>—</span><span class="unit" data-rd-sac-tail></span></span>
+    <span class="value"><span data-rd-sac>T1</span><span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>Drive-up</span></span></span>
     <span class="label">Difficulty</span>
   </div>
     <div class="hb-stats-cell">
@@ -222,7 +216,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [];
+  const ROUTES = [{"id":"maloja_pass-drive-up","visits":["maloja_pass"],"name":"Drive to the pass viewpoint","start":"Maloja Orden parking (Belvedere)","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"bus":"St. Moritz + PostBus 4 (line St. Moritz-Maloja-Chiavenna) to Maloja Poschta"},"description_extra":"From St. Moritz follow road 27 southwest along the Engadin lakes to the top of the pass. The Belvedere viewpoint sits at the start of the hairpins on the Bregaglia side. Maloja Orden parking is free, around 20 spaces, fills fast on autumn weekends. 5-min walk to the lip overlooking the switchbacks. Road open year-round.","sources":["https://www.engadin.com/en/journey-detail/maloja-pass","https://www.postauto.ch/en/timetable-network"],"quickest_for":["maloja_pass"],"start_maps_url":"https://maps.app.goo.gl/1X7in51rPakADN2B6","quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

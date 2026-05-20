@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779300426016" />
+<link rel="stylesheet" href="../../preview.css?v=1779302707748" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -100,7 +100,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value">Drive-up</span>
+    <span class="value">T1<span class="unit">· Drive-up</span></span>
     <span class="label">Accessibility</span>
   </div>
     <div class="hb-stats-cell">
@@ -109,20 +109,17 @@
     <span class="label">Crowdedness</span>
   </div>
   </div>
-    <div class="hb-access-card"><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚗</span>By car</p>
-      <div class="hb-access-body"><p>Drive over the pass on H3 between Tiefencastel / Bivio on the Surses side and Silvaplana on the Engadin side. Several small lay-bys near the summit.</p><p><span class="hb-access-detail">Parking</span> Pass dal Güglia / Julierpass, between Bivio (GR) and Silvaplana (GR)</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚆</span>By train + bus</p>
-      <div class="hb-access-body"><p>PostBus 184 runs over the pass between St. Moritz and Chur via Tiefencastel. Stops at Julier Hospiz on the summit.</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🕒</span>When to go</p>
-      <div class="hb-access-body"><p>Autumn for the larches around the lower flanks toward Engadin, and winter at dawn or dusk for snow silhouettes.</p></div>
-    </div><div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">📅</span>Hours / season</p>
-      <div class="hb-access-body"><p>Open year-round, one of the few high alpine roads in Switzerland kept open through winter. Snow chains may be required in heavy weather.</p></div>
-    </div></div>
     
+    <p class="hb-section-h">Routes</p>
+  <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/julier_pass_p0/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Drive over the Julier Pass <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Drive-up</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button></div>
     
   </div>
     <div class="hb-flip-back-view hb-flip-back-view-route">
@@ -143,7 +140,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value"><span class="missing" data-rd-sac>—</span><span class="unit" data-rd-sac-tail></span></span>
+    <span class="value"><span data-rd-sac>T1</span><span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>Drive-up</span></span></span>
     <span class="label">Difficulty</span>
   </div>
     <div class="hb-stats-cell">
@@ -218,7 +215,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [];
+  const ROUTES = [{"id":"julier_pass-drive-up","visits":["julier_pass"],"name":"Drive over the Julier Pass","start":"Pass dal Guglia / Julierpass summit (Hospiz)","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"bus":"PostBus 184 St. Moritz - Chur via Tiefencastel runs over the pass year-round; stops at Julier Hospiz on the summit"},"description_extra":"Drive over the pass on H3 between Tiefencastel / Bivio on the Surses side and Silvaplana on the Engadin side. Several small lay-bys near the summit at 2,284m. Free parking. One of the few high alpine roads in Switzerland kept open through winter; snow chains may be required in heavy weather.","sources":["https://www.graubuenden.ch/en/passes/julier","https://www.postauto.ch/en/timetable-network"],"quickest_for":["julier_pass"],"start_maps_url":"https://www.google.com/maps/place/Julier+Pass/@46.4701639,9.7177092,17z/data=!3m1!4b1!4m6!3m5!1s0x47848149d54cdb2f:0x796a0f271166c816!8m2!3d46.4701639!4d9.7177092","quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
