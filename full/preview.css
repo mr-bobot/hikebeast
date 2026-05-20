@@ -5550,6 +5550,26 @@ body.has-rail .topbar .hb-nav { display: none; }
 /* 5-cell stats dashboard */
 .hb-stats-bar { display: flex; background: var(--paper); border: 1px solid var(--hairline); border-radius: 14px; overflow: hidden; }
 .hb-stats-bar > .hb-stats-cell { flex: 1 1 0; }
+/* Mobile: 5 cells in one row at iPhone width crams text to two lines
+   ("T1 ·" + "Easy", "+329" + "m"). Wrap to a 3+2 layout instead. The
+   3 hideable scenarios all behave correctly because the optional cells
+   (Elevation, Distance) sit at positions 4 + 5. Reported by Leon
+   2026-05-20 from an iPhone screenshot. */
+@media (max-width: 600px) {
+  .hb-stats-bar { flex-wrap: wrap; }
+  .hb-stats-bar > .hb-stats-cell {
+    flex: 1 1 33%;
+    min-width: 33%;
+  }
+  /* Cells 4 and 5 start a new row — give them a top border and
+     remove the left border on cell 4 (the first cell of row 2). */
+  .hb-stats-bar > .hb-stats-cell:nth-child(n+4) {
+    border-top: 1px solid var(--hairline);
+  }
+  .hb-stats-bar > .hb-stats-cell:nth-child(4) {
+    border-left: 0;
+  }
+}
 /* Overview bar (back of card): 3 cells, left-aligned, doesn't need to
    span full width. Each cell stays the same physical width as a cell in
    the 5-cell route bar (60% of the full bar). On narrow viewports the bar
