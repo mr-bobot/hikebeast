@@ -160,14 +160,21 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   .hero-cta:active { transform: translateY(0); }
   .hero-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-  /* Tiny lang switch · top-right, deliberately subtle so it doesn't compete
-     with the title. Auto-redirect handles most German visitors; this is for
-     manual override. */
-  .lang-switch {
+  /* Top-right pill row · login + lang switch. Deliberately subtle so they
+     don't compete with the title. Auto-redirect handles most German
+     visitors; the lang switch is for manual override. Login lives next to
+     it for returning buyers (who already have the guide and just want to
+     get back to /full/). */
+  .topnav {
     position: absolute;
     top: clamp(16px, 3vh, 28px);
     right: clamp(16px, 4vw, 32px);
     z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topnav a {
     color: rgba(255,255,255,0.85);
     text-decoration: none;
     font-family: 'Inter', sans-serif;
@@ -182,12 +189,17 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     -webkit-tap-highlight-color: transparent;
     transition: background 150ms ease;
   }
-  .lang-switch:hover { background: rgba(0,0,0,0.32); }
+  .topnav a:hover { background: rgba(0,0,0,0.32); }
+  /* Word labels need tighter tracking than the 2-letter lang code. */
+  .topnav .login-link { letter-spacing: 0.04em; }
 </style>
 </head>
 <body>
 <main class="hero">
-  <a class="lang-switch" href="/de/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">DE</a>
+  <nav class="topnav" aria-label="Site">
+    <a class="login-link" href="/login/">Log in</a>
+    <a class="lang-switch" href="/de/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">DE</a>
+  </nav>
 
   <h1 class="hero-title">Swiss Gems</h1>
 
