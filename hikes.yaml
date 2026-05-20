@@ -330,7 +330,7 @@ hikes:
   quickest_for:
   - iffigfalle
   start_maps_url: https://maps.app.goo.gl/3qwMiM5sM6wNLPdz9
-  distance_km: 5.5
+  distance_km: 10.0
 - id: schrattenfluh-schratteflue-crossing
   name: Schratteflue crossing (advanced)
   start: Sörenberg or Bumbach
@@ -378,7 +378,6 @@ hikes:
   hut_ids:
   - heftihuette
   start_maps_url: https://www.google.com/maps/place/?q=46.83878,8.01238&z=16
-  distance_km: 4.2
 - id: heftihutte-from-fluehli
   name: From Flühli LU
   start: Flühli
@@ -436,7 +435,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/faulhorn-597/mountain-hiking/
   - https://en.wikipedia.org/wiki/Bachalpsee
   start_maps_url: https://www.google.com/maps/place/?q=46.65045,7.99104&z=16
-  distance_km: 5.0
+  distance_km: 4.0
 - id: iseltwald-default
   description_extra: Drive in, or take the summer steamship from Interlaken (April to October), or Postbus 103 from Interlaken Ost. The pier is a few minutes from village parking. T1.
   visits:
@@ -475,7 +474,7 @@ hikes:
   - https://www.myswitzerland.com/en-us/experiences/gondola-to-lake-oeschinen/
   - https://en.wikipedia.org/wiki/Oeschinen_Lake
   start_maps_url: https://www.google.com/maps/place/?q=46.49519,7.67148&z=16
-  distance_km: 3.0
+  distance_km: 4.5
 - id: oeschinensee-cable-car
   name: Cable car from Kandersteg + short walk
   start: Kandersteg cable car valley station
@@ -1232,7 +1231,7 @@ hikes:
   cable_car_ids:
   - moleson-funiculaire
   start_maps_url: https://www.google.com/maps/place/?q=46.55582,7.02387&z=16
-  distance_km: 2.2
+  distance_km: 4.3
 - id: teysachaux-les-paccots-to-moleson
   name: Les Paccots → Téysachaux → Moléson
   start: Les Paccots
@@ -1555,7 +1554,7 @@ hikes:
   hut_ids:
   - muttseehutte-sac
   start_maps_url: https://www.google.com/maps/place/?q=46.8783,8.98521&z=16
-  distance_km: 5.8
+  distance_km: 4.7
 - id: berschnerfall-route-44
   sac_grade: T1
   effort_label: Easy
@@ -1844,7 +1843,7 @@ hikes:
   - joriseen
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.75028,9.9475&z=16
-  distance_km: 6.0
+  distance_km: 11.0
 - id: falensee-route-69
   sac_grade: T1
   effort_label: Easy
@@ -2094,7 +2093,7 @@ hikes:
   cable_car_ids:
   - flegere-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=45.95105,6.88616&z=16
-  distance_km: 4.1
+  distance_km: 8.0
 - id: glacier_des_bossons-chairlift-to-chalet
   name: Chairlift to Chalet du Glacier
   start: Les Bossons (bus stop)
@@ -2147,7 +2146,7 @@ hikes:
   - https://en.wikipedia.org/wiki/Pic_de_Jallouvre
   - https://en.wikipedia.org/wiki/Bornes_Massif
   start_maps_url: https://www.google.com/maps/place/?q=46.00168,6.39609&z=16
-  distance_km: 5.0
+  distance_km: 9.8
 - id: dent_doche-from-bernex
   name: From Bernex via Fétiuère
   start: Fétiuère parking (above Bernex)
@@ -2194,7 +2193,7 @@ hikes:
   - niederrickenbach-cable-car
   - haldigrat-chairlift
   start_maps_url: https://www.google.com/maps/place/?q=46.90275,8.44006&z=16
-  distance_km: 4.75
+  distance_km: 2.0
 - id: engstlensee-route-lakeshore-loop
   sac_grade: T1
   effort_label: Easy
