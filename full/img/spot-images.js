@@ -1666,7 +1666,7 @@ window.HB_SPOT_IMAGES = {
   "eastern#falensee": [
     {
       "src": "derivatives/falensee_p0/w1800.webp",
-      "credit": "@leon.helg"
+      "credit": "Bö Benkö"
     },
     {
       "src": "derivatives/falensee_p1/w1800.webp",

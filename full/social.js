@@ -64,6 +64,44 @@
     return null;
   }
 
+  // --- Hidden URL filter: ?by=<handle>[,<handle>...] keeps only photos
+  // credited to one of those handles (case-insensitive, with or without
+  // leading "@"). Originally added to Explore for screen-record demos
+  // ("every Leon shot in the guide"); promoted here so every screen —
+  // spot detail, chapter scroll, map, saved, swipe, home rows — applies
+  // the same view. Spots with zero matching photos drop from listings;
+  // navigation links are rewritten in boot() so the filter sticks across
+  // page hops.
+  const BY_RAW = (() => {
+    try { return new URLSearchParams(location.search).get('by') || null; }
+    catch { return null; }
+  })();
+  const BY_HANDLES = (() => {
+    if (!BY_RAW) return null;
+    const h = BY_RAW.split(',')
+      .map(s => s.trim().toLowerCase().replace(/^@/, ''))
+      .filter(Boolean);
+    return h.length ? new Set(h) : null;
+  })();
+  function matchesByCredit(credit) {
+    if (!BY_HANDLES) return true;
+    if (!credit) return false;
+    return BY_HANDLES.has(String(credit).toLowerCase().replace(/^@/, ''));
+  }
+  // Append ?by=<raw> to a same-origin URL (preserving any existing
+  // query / hash). Returns the input unchanged when the filter isn't
+  // active or the URL is external/anchor/script.
+  function withBy(href) {
+    if (!BY_RAW || !href) return href;
+    if (/^(https?:|mailto:|tel:|data:|blob:|javascript:)/i.test(href)) return href;
+    if (href === '#' || href.startsWith('#')) return href;
+    if (/[?&]by=/.test(href)) return href;
+    const [base, hash] = href.split('#');
+    const sep = base.includes('?') ? '&' : '?';
+    const param = 'by=' + encodeURIComponent(BY_RAW);
+    return base + sep + param + (hash ? '#' + hash : '');
+  }
+
   // ── Shared Convex client ──────────────────────────────────────────────
   // One ConvexClient (= one websocket) shared by spots, session, favorites,
   // and swipes. Returns null if Convex isn't configured on the page.
@@ -969,9 +1007,39 @@
       }
     }
 
+    // When the hidden ?by= URL filter is active, project each spot down to
+    // photos credited to one of the handles. Spots with zero matching
+    // photos are dropped; the rest get their `image`/`imagePhotoId` cover
+    // swapped to the first matching photo so tile renderings on every
+    // listing page show the filtered set without per-page changes.
+    function viewSpot(spot) {
+      if (!spot) return null;
+      if (!BY_HANDLES) return spot;
+      const photos = (spot.photos || []).filter(p => matchesByCredit(p.credit));
+      if (photos.length === 0) return null;
+      const primary = photos[0];
+      return {
+        ...spot,
+        photos,
+        image:        primary.src     || spot.image,
+        imagePhotoId: primary.photoId || spot.imagePhotoId,
+        imageWidth:   primary.width  != null ? primary.width  : null,
+        imageHeight: primary.height != null ? primary.height : null,
+      };
+    }
+
     return {
-      all() { return arr; },
-      get(spotKey) { return byKey.get(spotKey) || null; },
+      all() {
+        if (!BY_HANDLES) return arr;
+        return arr.map(viewSpot).filter(Boolean);
+      },
+      get(spotKey) {
+        const raw = byKey.get(spotKey) || null;
+        return viewSpot(raw);
+      },
+      // Unfiltered raw spot for the chapter-page card filter, which needs
+      // the full photos[] to know which baked slides to prune.
+      rawGet(spotKey) { return byKey.get(spotKey) || null; },
       subscribe(fn) { subs.add(fn); return () => subs.delete(fn); },
       init,
     };
@@ -2660,6 +2728,98 @@
     });
   }
 
+  // When the hidden ?by= URL filter is active, prune the baked chapter
+  // Reader cards (.cl-card .cl-photos) down to slides credited to one of
+  // the handles. Cards with zero matching photos are hidden outright;
+  // surviving cards have their non-matching <img.hb-slide> + dot pairs
+  // removed, the counter + credit-pill rewritten, and (when only one
+  // slide remains) demoted to single-photo by dropping .hb-multi plus
+  // the arrows / dots / counter. Runs BEFORE wireBakedCarousels so the
+  // carousel handlers only see the surviving slides.
+  function applyByFilterToChapterCards() {
+    if (!BY_HANDLES) return;
+    const ch = currentChapterId();
+    if (!ch) return;
+    // Chapter pages ship the photo sidecar (HB_SPOT_IMAGES) but NOT the
+    // SPOTS sidecar, so the spots store's byKey is empty until Convex
+    // hydrates. Fall back to the photos sidecar so the filter resolves
+    // credits on the first synchronous paint.
+    const photosSidecar = W.HB_SPOT_IMAGES || {};
+    document.querySelectorAll('.cl-card[id]').forEach(card => {
+      const key = `${ch}#${card.id}`;
+      const spot = W.HB.spots.rawGet(key);
+      const allPhotos = (spot && spot.photos && spot.photos.length)
+        ? spot.photos
+        : (photosSidecar[key] || []);
+      const matchIndices = allPhotos
+        .map((p, i) => (matchesByCredit(p.credit) ? i : -1))
+        .filter(i => i >= 0);
+      if (matchIndices.length === 0) {
+        card.style.display = 'none';
+        return;
+      }
+      const photosEl = card.querySelector('.cl-photos');
+      if (!photosEl) return;
+      const slides = Array.from(photosEl.querySelectorAll('img.hb-slide'));
+      const dotsEl = photosEl.querySelector('.hb-dots');
+      const dotEls = dotsEl ? Array.from(dotsEl.children) : [];
+      // Walk slides in original order, removing the ones whose photo
+      // credit doesn't match. Pair-removes each slide with its dot so the
+      // remaining indices stay aligned.
+      slides.forEach((slide, i) => {
+        const matches = matchesByCredit(allPhotos[i]?.credit);
+        if (!matches) {
+          slide.remove();
+          if (dotEls[i]) dotEls[i].remove();
+        }
+      });
+      const remainingSlides = Array.from(photosEl.querySelectorAll('img.hb-slide'));
+      remainingSlides.forEach((s, i) => {
+        s.classList.toggle('is-current', i === 0);
+        // First slide is now the visible one; promote eager-load so it
+        // paints without waiting for IntersectionObserver.
+        if (i === 0) s.loading = 'eager';
+      });
+      const remainingDots = dotsEl ? Array.from(dotsEl.children) : [];
+      remainingDots.forEach((d, i) => d.classList.toggle('is-on', i === 0));
+      const counter = photosEl.querySelector('.hb-counter');
+      if (counter) counter.textContent = `1 / ${remainingSlides.length}`;
+      const credit = photosEl.querySelector('.credit-pill');
+      if (credit) {
+        const c = allPhotos[matchIndices[0]]?.credit;
+        if (c) credit.textContent = `Photo · ${c}`;
+      }
+      // Only one surviving slide → drop the multi-image affordances so
+      // the card reads as a single photo (no counter, no arrows, no dots).
+      if (remainingSlides.length < 2) {
+        photosEl.classList.remove('hb-multi');
+        photosEl.querySelectorAll('.hb-arrow').forEach(b => b.remove());
+        if (dotsEl) dotsEl.remove();
+        if (counter) counter.remove();
+      }
+    });
+  }
+
+  // When the hidden ?by= URL filter is active, rewrite every internal
+  // <a href> and [data-href] on the page so navigating from one screen
+  // to the next carries the filter. Skips external schemes, hash-only
+  // anchors, and links that already have the param. Runs early in boot()
+  // so it lands BEFORE wireCardLinks captures data-href at wire-time.
+  function rewriteInternalLinksForByFilter(root) {
+    if (!BY_RAW) return;
+    const r = root || document;
+    r.querySelectorAll('a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      const next = withBy(href);
+      if (next !== href) a.setAttribute('href', next);
+    });
+    r.querySelectorAll('[data-href]').forEach(el => {
+      const href = el.getAttribute('data-href');
+      const next = withBy(href);
+      if (next !== href) el.setAttribute('data-href', next);
+    });
+  }
+
   // --- Wire pre-baked chapter Reader card carousels (.cl-card .cl-photos).
   // The chapter HTML ships every photo as a stacked <img class="hb-slide">
   // plus dots + counter + chevron arrows. We just attach the click / swipe /
@@ -3014,12 +3174,15 @@
     // without copy or photos), so keep them pointing at the chapter
     // scroll where they render as a small "extras" grid item.
     if (spot.kind === 'extras_entry') {
-      return `${pre}${(spot.href || '').replace(/^\.\.\//, '')}`;
+      return withBy(`${pre}${(spot.href || '').replace(/^\.\.\//, '')}`);
     }
     const anchor = (spot.href || '').split('#')[1] || '';
-    if (anchor) return `${pre}spot/${anchor}/`;
-    return `${pre}${(spot.href || '').replace(/^\.\.\//, '')}`;
+    if (anchor) return withBy(`${pre}spot/${anchor}/`);
+    return withBy(`${pre}${(spot.href || '').replace(/^\.\.\//, '')}`);
   };
+  W.HB.byActive = !!BY_HANDLES;
+  W.HB.withBy = withBy;
+  W.HB.matchesByCredit = matchesByCredit;
   W.HB.singularKicker = singularKicker;
   W.HB.propertiesOf = propertiesOf;
   W.HB.buildPropertyIndex = buildPropertyIndex;
@@ -3150,7 +3313,16 @@
     visited._reattach();
     swipes._reattach();
     injectRail();
+    // Propagate the hidden ?by= filter through every <a href> and
+    // [data-href] on the page. Must run BEFORE wireCardLinks, which
+    // captures data-href at wire-time, and AFTER injectRail so the rail
+    // nav items are included.
+    rewriteInternalLinksForByFilter();
     wireBackButtons();
+    // Prune chapter Reader cards down to matching photos BEFORE
+    // wireBakedCarousels so the carousel handlers only see surviving
+    // slides. No-op on non-chapter pages.
+    applyByFilterToChapterCards();
     wireBakedCarousels();
     wireCardLinks();
     injectHearts();

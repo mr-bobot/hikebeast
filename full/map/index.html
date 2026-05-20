@@ -381,7 +381,7 @@
   }
 </style>
 </head>
-<body>
+<body class="markers-animating">
 
 <div class="topbar">
   <a class="brand" href="../index.html">
@@ -402,8 +402,8 @@
       <span class="fav-count" id="favToggleCount" hidden>0</span>
     </button>
   </div>
-  <label class="marker-mode-switch" title="Show photo cards instead of dots">
-    <span class="label">Cards</span>
+  <label class="marker-mode-switch" title="Show photos instead of dots">
+    <span class="label">Photos</span>
     <span class="switch">
       <input type="checkbox" id="markerModeToggle" />
       <span class="track" aria-hidden="true"></span>
@@ -417,6 +417,7 @@
 
 <script src="../lib/leaflet/leaflet.js"></script>
 <script src="spots-data.js"></script>
+<script src="../img/spot-images.js"></script>
 <script src="../lib/convex.js"></script>
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script src="../social.js"></script>
@@ -575,10 +576,35 @@
   }
   buildMarkers();
 
-  // Initial paint shows markers immediately — no entrance animation.
-  // The reveal cascade (playCardReveal below) only fires when the user
-  // flips the Dots ↔ Cards toggle. We used to play it on first load too,
-  // but the 1s delay + 2.5s cascade made the map feel slow to come up.
+  // Initial-load reveal: <body class="markers-animating"> in the HTML
+  // keeps every marker hidden from first paint — no flash-of-visible-
+  // then-hidden before the cascade starts. We then GATE the cascade
+  // behind Convex catch-up so it fires exactly once, on the final
+  // marker set. Earlier versions kicked the cascade from a poll as
+  // soon as sidecar markers were rendered; Convex catch-up a few
+  // hundred ms later then tore those markers down and forced a
+  // restart, which the user saw as the cascade reloading from zero
+  // halfway through.
+  //
+  // readyToReveal:        Convex (or the fallback timer) has settled
+  //                       on the canonical marker set; safe to play.
+  // initialRevealStarted: playCardReveal has been called; idempotent.
+  let readyToReveal = false;
+  let initialRevealStarted = false;
+  function tryInitialReveal() {
+    if (initialRevealStarted) return true;
+    if (!readyToReveal) return false;
+    if (!document.querySelectorAll('.spot-marker').length) return false;
+    initialRevealStarted = true;
+    playCardReveal();
+    return true;
+  }
+  // Poll picks up the marker DOM nodes after Leaflet paints them. The
+  // gate (readyToReveal) keeps this a no-op until Convex confirms.
+  const initialRevealPoll = setInterval(() => {
+    if (tryInitialReveal()) clearInterval(initialRevealPoll);
+  }, 80);
+  setTimeout(() => clearInterval(initialRevealPoll), 5000);
 
   // One-shot rebuild on the first Convex push so the missing spots (no
   // GPS or recently added) and derivative thumbnails appear without a
@@ -591,10 +617,23 @@
     SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
     buildMarkers();
     if (typeof applyFavFilter === 'function') applyFavFilter();
-    // Markers replaced silently — body has no `markers-animating` class
-    // outside of a user-initiated toggle, so the new DOM nodes paint
-    // in place.
+    // Markers are now the final canonical set. Green-light the
+    // cascade and try to fire immediately (the poll catches it on
+    // the next tick if Leaflet hasn't painted yet).
+    readyToReveal = true;
+    requestAnimationFrame(tryInitialReveal);
   });
+
+  // Fallback: if Convex doesn't arrive within 1.5 s (offline, blocked,
+  // slow WebSocket), play the cascade on the sidecar markers so the
+  // map doesn't stay blank. Typical Convex round-trip is 200-500 ms,
+  // so this only fires for degraded networks.
+  setTimeout(() => {
+    if (!readyToReveal) {
+      readyToReveal = true;
+      tryInitialReveal();
+    }
+  }, 1500);
 
   // === Marker scale grows with zoom so spot thumbnails are legible up close
   // without crowding the low-zoom country view. Computed once per zoom and
@@ -674,7 +713,12 @@
   // an accelerating cadence (early cards spaced out, late cards land
   // in a flurry). Total card-to-last-card duration ≈ 2.5s; the
   // sqrt(i/N) curve gives the acceleration.
-  const REVEAL_DELAY_MS = 1000;
+  // How long markers stay fully hidden before the first one starts
+  // fading in. Was 1000 ms when only the toggle triggered the cascade
+  // (the pause separated "I clicked" from "stuff happens"). Now that
+  // initial load also runs the cascade, the user is already staring
+  // at a blank map waiting — shorten it so the first dot lands quickly.
+  const REVEAL_DELAY_MS = 200;
   const REVEAL_DURATION_MS = 2500;
   let revealCleanup = null;
   function playCardReveal() {
@@ -701,7 +745,14 @@
     timers.push(startTimer);
     revealCleanup = () => {
       timers.forEach(clearTimeout);
-      document.body.classList.remove('markers-animating');
+      // Intentionally NOT removing 'markers-animating' here. Cleanup
+      // only fires when playCardReveal is being called again (Convex
+      // catch-up restart or a toggle); that caller adds the class back
+      // immediately after, but the one-frame gap between remove and
+      // add was painting every marker for ~16 ms — read as "the
+      // cascade restarted from zero". The natural endTimer above is
+      // the only place that removes it; staying hidden across the
+      // restart is what we want.
       markers.forEach(m => m.classList.remove('is-revealed'));
     };
   }
