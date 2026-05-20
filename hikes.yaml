@@ -12,7 +12,6 @@ hikes:
   description_extra: Park at Unter dem Birg, or take the Adelboden postbus, then follow the wide gravel path 20 minutes to the foot of the lower fall. T1, family-friendly.
   sources:
   - https://www.myswitzerland.com/en-us/destinations/engstligen-falls/
-  - https://en.wikipedia.org/wiki/Engstligenfall
   equipment_list: []
   name: Lower-viewpoint walk from Unter dem Birg
   distance_km: 1.5
@@ -32,7 +31,6 @@ hikes:
   - oltschibachfall
   sources:
   - https://www.outdooractive.com/en/poi/bernese-oberland/oltschibachfall-meiringen/8649167/
-  - https://de.wikipedia.org/wiki/Oltschibachfall
   start_maps_url: https://www.google.com/maps/place/?q=46.7273,8.1842&z=16
   duration_min: 90
   gain_m: 500
@@ -45,7 +43,7 @@ hikes:
   visits:
   - rosenlaui
   sources:
-  - https://en.wikipedia.org/wiki/Rosenlaui
+  - https://www.komoot.com/smarttour/731377
   name: Drive-in from the Grosse Scheidegg road
   sac_grade: T1
   effort_label: Easy
@@ -147,7 +145,7 @@ hikes:
   visits:
   - gelmersee
   sources:
-  - https://en.wikipedia.org/wiki/Gelmersee
+  - https://www.komoot.com/smarttour/28272195
   hut_ids:
   - gelmerhutte
   cable_car_ids:
@@ -179,8 +177,7 @@ hikes:
   visits:
   - brienzer_rothorn
   sources:
-  - https://en.wikipedia.org/wiki/Brienz_Rothorn_Bahn
-  - https://en.wikipedia.org/wiki/Brienzer_Rothorn
+  - https://www.komoot.com/highlight/3428206
   cable_car_ids:
   - brienz-rothorn-bahn
   start_maps_url: https://maps.app.goo.gl/Xb34hKwo5WWFsqmb9
@@ -202,7 +199,6 @@ hikes:
   - brienzer_rothorn
   sources:
   - https://www.outdooractive.com/en/route/hiking-trail/holiday-region-interlaken/hike-to-the-brienzer-rothorn/23490971/
-  - https://en.wikipedia.org/wiki/Brienzer_Rothorn
   start_maps_url: https://maps.app.goo.gl/Xb34hKwo5WWFsqmb9
   distance_km: 9.8
 - id: hardergrat_trail-rothorn-to-harder-kulm
@@ -259,7 +255,6 @@ hikes:
   - hardergrat_trail
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/tannhorn-1933/mountain-hiking/
-  - https://en.wikipedia.org/wiki/Tannhorn
   quickest_for:
   - hardergrat_trail
   - tannhorn
@@ -281,8 +276,7 @@ hikes:
   visits:
   - augstmatthorn
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/augstmatthorn-106/mountain-hiking/
-  - https://en.wikipedia.org/wiki/Augstmatthorn
+  - https://www.komoot.com/smarttour/1220383
   quickest_for:
   - augstmatthorn
   equipment_list: []
@@ -326,7 +320,6 @@ hikes:
   - iffigfalle
   sources:
   - https://www.myswitzerland.com/en-us/experiences/route/iffigfall-trail-1/
-  - https://en.wikipedia.org/wiki/Iffigsee
   quickest_for:
   - iffigfalle
   start_maps_url: https://maps.app.goo.gl/3qwMiM5sM6wNLPdz9
@@ -346,7 +339,6 @@ hikes:
   - schrattenfluh
   sources:
   - https://www.outdooractive.com/en/route/mountain-hike/district-entlebuch/schratteflue-crossing-for-advanced-hikers/801971278/
-  - https://en.wikipedia.org/wiki/Schrattenfluh
   quickest_for:
   - schrattenfluh
   equipment_list:
@@ -393,7 +385,6 @@ hikes:
   - heftihutte
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/
-  - https://de.wikipedia.org/wiki/Heftih%C3%BCtte
   start_maps_url: https://www.google.com/maps/place/?q=46.883,8.017&z=16
   distance_km: 7.0
 - id: bachalpsee-route-38
@@ -409,7 +400,6 @@ hikes:
   visits:
   - bachalpsee
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/faulhorn-597/mountain-hiking/
   - https://www.myswitzerland.com/en-us/experiences/bachalpsee-mountain-lake/
   quickest_for:
   - bachalpsee
@@ -433,7 +423,6 @@ hikes:
   - bachalpsee
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/faulhorn-597/mountain-hiking/
-  - https://en.wikipedia.org/wiki/Bachalpsee
   start_maps_url: https://www.google.com/maps/place/?q=46.65045,7.99104&z=16
   distance_km: 4.0
 - id: iseltwald-default
@@ -441,7 +430,7 @@ hikes:
   visits:
   - iseltwald
   sources:
-  - https://en.wikipedia.org/wiki/Iseltwald
+  - https://www.komoot.com/smarttour/8042167
   name: Pier walk from village parking
   sac_grade: T1
   effort_label: Easy
@@ -470,9 +459,7 @@ hikes:
   visits:
   - oeschinensee
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/oeschinensee-7848/mountain-hiking/
   - https://www.myswitzerland.com/en-us/experiences/gondola-to-lake-oeschinen/
-  - https://en.wikipedia.org/wiki/Oeschinen_Lake
   start_maps_url: https://www.google.com/maps/place/?q=46.49519,7.67148&z=16
   distance_km: 4.5
 - id: oeschinensee-cable-car
@@ -512,7 +499,6 @@ hikes:
   - oeschinensee
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/fruendenhuette-sac-2147000102/mountain-hiking/from-oeschinensee-or-kandersteg-closed-474/
-  - https://www.outdooractive.com/en/route/mountain-hike/kandersteg/kandersteg-oeschinensee-hohtuerli-griesalp/51641556/
   cable_car_ids:
   - oeschinensee-bergbahn
   start_maps_url: https://www.google.com/maps/place/?q=46.49833,7.72694&z=16
@@ -529,7 +515,6 @@ hikes:
   visits:
   - piz_gloria
   sources:
-  - https://en.wikipedia.org/wiki/Schilthorn
   - https://www.myswitzerland.com/en-us/experiences/schilthorn-1/
   quickest_for:
   - piz_gloria
@@ -551,7 +536,7 @@ hikes:
   visits:
   - piz_gloria
   sources:
-  - https://en.wikipedia.org/wiki/Schilthorn
+  - https://www.komoot.com/smarttour/1805932
   start_maps_url: https://www.google.com/maps/place/?q=46.533,7.883&z=16
   distance_km: 8.0
 - id: riffelsee-default
@@ -561,7 +546,6 @@ hikes:
   - riffelsee
   sources:
   - https://www.gornergrat.ch/
-  - https://en.wikipedia.org/wiki/Riffelsee
   name: Short walk from Rotenboden station
   sac_grade: T1
   effort_label: Easy
@@ -610,7 +594,7 @@ hikes:
   visits:
   - riffelalp
   sources:
-  - https://www.outdooractive.com/en/route/hiking-trail/zermatt-matterhorn/riffelalp-gruensee-findeln-tiefmatten-zermatt/225130785/
+  - https://www.komoot.com/smarttour/5435259
   cable_car_ids:
   - gornergrat-bahn
   start_maps_url: https://www.google.com/maps/place/?q=46.00198,7.75094&z=16
@@ -628,7 +612,6 @@ hikes:
   visits:
   - gorner_glacier
   sources:
-  - https://en.wikipedia.org/wiki/Gornergrat
   - https://www.myswitzerland.com/en-se/experiences/route/descent-from-gornergrat-via-lake-riffel/
   quickest_for:
   - gorner_glacier
@@ -727,7 +710,6 @@ hikes:
   - aletsch_glacier
   sources:
   - https://www.myswitzerland.com/en-us/experiences/route/aletsch-panoramaweg-the-swiss-glacier-trail/
-  - https://www.outdooractive.com/en/route/mountain-hike/aletsch-arena/aletsch-panorama-circuit/802297583/
   cable_car_ids:
   - bettmerhorn-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.41,8.07667&z=16
@@ -748,7 +730,6 @@ hikes:
   - arolla_ice_cave
   sources:
   - https://www.myswitzerland.com/en-ch/experiences/arolla-glacier-trail/
-  - https://en.wikipedia.org/wiki/Arolla_Glacier
   start_maps_url: https://www.google.com/maps/place/?q=46.017,7.483&z=16
 - id: arolla_ice_cave-arolla-pas-de-chevres
   name: Pas de Chèvres climb
@@ -765,7 +746,7 @@ hikes:
   visits:
   - arolla_ice_cave
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-des-dix-cas-2147000078/mountain-hiking/from-arolla-via-pas-de-chevres-550/
+  - https://www.komoot.com/smarttour/e1383075924/cabane-des-dix-depuis-arolla
   quickest_for:
   - arolla_ice_cave
   start_maps_url: https://www.google.com/maps/place/?q=46.017,7.483&z=16
@@ -786,7 +767,6 @@ hikes:
   - cabane_becs_de_bosson
   sources:
   - https://www.outdooractive.com/en/route/hiking-route/sierre-anniviers-vercorin/grimentz-dayhike-becs-de-bosson/66024866/
-  - https://en.wikipedia.org/wiki/Becs_de_Bosson
   quickest_for:
   - cabane_becs_de_bosson
   cable_car_ids:
@@ -810,7 +790,6 @@ hikes:
   visits:
   - moiry_glacier
   sources:
-  - https://www.outdooractive.com/en/route/hiking-route/switzerland/grimentz-to-moiry-hut/66408873/
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-de-moiry-cas-2147000177/mountain-hiking/
   quickest_for:
   - moiry_glacier
@@ -850,7 +829,6 @@ hikes:
   - ferpecle_glacier
   sources:
   - https://www.outdooractive.com/en/route/hiking-trail/val-d-herens/ferpecle-mont-mine-glacier-easy-bike-ride-or-easy-hike/165975796/
-  - https://en.wikipedia.org/wiki/Ferp%C3%A8cle
   quickest_for:
   - ferpecle_glacier
   start_maps_url: https://www.google.com/maps/place/?q=46.05832,7.55019&z=16
@@ -868,7 +846,7 @@ hikes:
   visits:
   - ferpecle_glacier
   sources:
-  - https://www.sac-cas.ch/fr/cabanes-et-courses/portail-des-courses-du-cas/cabane-de-la-dent-blanche-cas-2147000073/randonnee-en-montagne/depuis-ferpecle-les-salays-par-bricola-et-le-roc-noir-248/
+  - https://www.komoot.com/smarttour/e1385019885/bricola-von-ferpecle
   start_maps_url: https://www.google.com/maps/place/?q=46.0657,7.54377&z=16
   distance_km: 3.0
 - id: spielboden-laengfluh-glacier-trail
@@ -909,7 +887,6 @@ hikes:
   visits:
   - barrhorn
   sources:
-  - https://en.wikipedia.org/wiki/Barrhorn
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/uessers-barrhorn-145/mountain-hiking/
   quickest_for:
   - barrhorn
@@ -935,7 +912,6 @@ hikes:
   - saas_fee_glacier
   sources:
   - https://www.outdooractive.com/en/route/hiking-route/saas-fee/glacier-trail/23425972/
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/britanniahuette-sac-2147000046/
   quickest_for:
   - saas_fee_glacier
   equipment_list:
@@ -956,7 +932,6 @@ hikes:
   - lac_de_derborence
   sources:
   - https://www.refugederborence.ch/agenda-saison/
-  - https://en.wikipedia.org/wiki/Lac_de_Derborence
   hut_ids:
   - refuge-derborence
   name: Lakeshore loop from the road
@@ -987,7 +962,6 @@ hikes:
   visits:
   - la_fouly
   sources:
-  - https://en.wikipedia.org/wiki/Tour_du_Mont_Blanc
   - https://www.outdooractive.com/en/route/hiking-trail/mont-blanc-and-la-thuile/arnuva-to-la-fouly/57379300/
   start_maps_url: https://www.google.com/maps/place/?q=45.87371,7.05273&z=16
   distance_km: 14.5
@@ -1007,7 +981,6 @@ hikes:
   - sanetschpass
   sources:
   - https://www.myswitzerland.com/en-us/experiences/sanetsch-between-bern-and-valais/
-  - https://en.wikipedia.org/wiki/Sanetschpass
   start_maps_url: https://www.google.com/maps/place/?q=46.383,7.267&z=16
   distance_km: 12.6
 - id: sanetschpass-cable-car-shortcut
@@ -1046,7 +1019,6 @@ hikes:
   visits:
   - nax_via_ferrata
   sources:
-  - https://www.outdooractive.com/en/route/via-ferrata/nax/belvedere-via-ferrata/20116980/
   - https://www.myswitzerland.com/en-ch/experiences/belvedere-via-ferrata/
   quickest_for:
   - nax_via_ferrata
@@ -1106,7 +1078,7 @@ hikes:
   visits:
   - tseuzier_lake
   sources:
-  - https://en.wikipedia.org/wiki/Lac_de_Tseuzier
+  - https://www.komoot.com/smarttour/1806717
   quickest_for:
   - tseuzier_lake
   equipment_list: []
@@ -1127,7 +1099,6 @@ hikes:
   - salanfe_lake
   sources:
   - https://www.outdooractive.com/en/route/hiking-route/valais/sentier-de-salanfe/27185718/
-  - https://en.wikipedia.org/wiki/Lac_de_Salanfe
   quickest_for:
   - salanfe_lake
   start_maps_url: https://www.google.com/maps/place/?q=46.14006,6.99303&z=16
@@ -1147,7 +1118,6 @@ hikes:
   - pointe_du_tsate
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/
-  - https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9
   quickest_for:
   - pointe_du_tsate
   start_maps_url: https://www.google.com/maps/place/?q=46.08984,7.52262&z=16
@@ -1167,8 +1137,6 @@ hikes:
   - gastlosen
   sources:
   - https://www.outdooractive.com/en/mountaineering-routes/fribourg/mountaineering-in-fribourg/5884930/
-  - https://schweizmobil.ch/en/hiking-in-switzerland/route-3/stage-21
-  - https://en.wikipedia.org/wiki/Gastlosen
   hut_ids:
   - chalet-du-soldat
   start_maps_url: https://maps.app.goo.gl/NQLU3GDcCnHYtTvw8
@@ -1188,7 +1156,6 @@ hikes:
   - dent_de_broc
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-broc-246/mountain-hiking/
-  - https://en.wikipedia.org/wiki/Dent_de_Broc
   start_maps_url: https://www.google.com/maps/place/?q=46.604,7.099&z=16
   distance_km: 5.0
 - id: dent_de_lys-les-paccots-circular
@@ -1205,8 +1172,7 @@ hikes:
   visits:
   - dent_de_lys
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-lys-1086/mountain-hiking/les-paccots-dent-de-lys-les-sciernes-dalbeuve-139/
-  - https://en.wikipedia.org/wiki/Les_Paccots
+  - https://www.komoot.com/smarttour/26745734
   quickest_for:
   - dent_de_lys
   start_maps_url: https://www.google.com/maps/place/?q=46.52222,6.94806&z=16
@@ -1225,7 +1191,6 @@ hikes:
   - moleson
   sources:
   - https://www.myswitzerland.com/en-us/experiences/moleson-a-popular-destination-in-the-fribourg-pre-alps/
-  - https://en.wikipedia.org/wiki/Mol%C3%A9son
   quickest_for:
   - moleson
   cable_car_ids:
@@ -1267,7 +1232,7 @@ hikes:
   visits:
   - cap_au_moine
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cape-au-moine-vd-300/mountain-hiking/
+  - https://www.komoot.com/smarttour/e1407400930/cape-au-moine-boucle
   start_maps_url: https://www.google.com/maps/place/?q=46.46982,7.00789&z=16
   distance_km: 7.2
 - id: dent_de_jaman-route-87
@@ -1281,7 +1246,7 @@ hikes:
   visits:
   - dent_de_jaman
   sources:
-  - https://en.wikipedia.org/wiki/Dent_de_Jaman
+  - https://www.komoot.com/smarttour/e1985671518/dent-de-jaman
   quickest_for:
   - dent_de_jaman
   equipment_list: []
@@ -1307,7 +1272,6 @@ hikes:
   sources:
   - https://www.outdooractive.com/en/route/hiking-trail/switzerland/a-mighty-arena-the-creux-du-van/8483375/
   - https://www.myswitzerland.com/en-ch/experiences/route/creux-du-van-round-trip-in-the-val-de-travers/
-  - https://en.wikipedia.org/wiki/Creux_du_Van
   start_maps_url: https://www.google.com/maps/place/?q=46.95492,6.7218&z=16
 - id: lac_de_taney-route-50
   sac_grade: T1
@@ -1322,7 +1286,7 @@ hikes:
   description_extra: From Le Flon (drive or postbus), the trail climbs through forest and over the Col de Tanay to the lake in about 1 hour, 374 m of gain, T1. No camping at the lakeshore
     (federal landscape protection). Continue another 1.5 hours up to Le Grammont for a full day.
   sources:
-  - https://en.wikipedia.org/wiki/Lac_de_Tanay
+  - https://www.komoot.com/smarttour/28710571
   quickest_for:
   - lac_de_taney
   equipment_list: []
@@ -1341,7 +1305,7 @@ hikes:
   description_extra: Approach from Miex or Tannay above Vouvry, drive to the Flon de Tanay parking, then 3 to 4 hour climb to the summit at 2,172 m. About 1,130 m of vertical. T2 mountain
     trail with one exposed section near the top.
   sources:
-  - https://en.wikipedia.org/wiki/Grammont_(mountain)
+  - https://www.komoot.com/smarttour/1505762
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=46.33749,6.85606&z=16
   distance_km: 7.0
@@ -1361,7 +1325,6 @@ hikes:
   - marchairuz
   sources:
   - https://www.myswitzerland.com/en/experiences/route/mont-tendre-from-mollendruz-to-marchairuz/
-  - https://en.wikipedia.org/wiki/Mont_Tendre
   quickest_for:
   - marchairuz
   start_maps_url: https://www.google.com/maps/place/?q=46.65051,6.36456&z=16
@@ -1403,7 +1366,6 @@ hikes:
   sources:
   - https://www.myswitzerland.com/en-ch/experiences/route/lavaux-vineyard-terraces-the-swiss-wine-route/
   - https://schweizmobil.ch/en/hiking-in-switzerland/route-113
-  - https://en.wikipedia.org/wiki/Lavaux
   start_maps_url: https://www.google.com/maps/place/?q=46.47259,6.79702&z=16
 - id: schafler-route-42
   sac_grade: T1
@@ -1439,7 +1401,7 @@ hikes:
   description_extra: Approach from Wasserauen station in about 1h 30. About 280 m of gain, T1. Berggasthaus Forelle on the west shore is the standard food stop. Camping at a designated
     spot at the upper end of the lake is typically tolerated for a small fee paid to the farmer. Often combined with Ebenalp or Schäfler in a circular day.
   sources:
-  - https://en.wikipedia.org/wiki/Seealpsee
+  - https://www.komoot.com/smarttour/26851815
   quickest_for:
   - seealpsee
   equipment_list: []
@@ -1455,7 +1417,6 @@ hikes:
     Wasserauen. From Aescher you can continue along the Alpstein ridge toward Schäfler. Ebenalp station opens daily from late May through October.
   sources:
   - https://aescher.ch/
-  - https://en.wikipedia.org/wiki/%C3%84scher
   hut_ids:
   - aescher-gasthaus
   cable_car_ids:
@@ -1483,7 +1444,6 @@ hikes:
   - saxer_lucke
   sources:
   - https://www.staubern.ch/
-  - https://en.wikipedia.org/wiki/Saxer_L%C3%BCcke
   quickest_for:
   - saxer_lucke
   equipment_list: []
@@ -1507,7 +1467,6 @@ hikes:
   visits:
   - limmernsee
   sources:
-  - https://en.wikipedia.org/wiki/Limmernsee
   - https://www.myswitzerland.com/en-us/experiences/summer-autumn/hiking/hiking-to-suspension-bridges/
   quickest_for:
   - limmernsee
@@ -1529,7 +1488,7 @@ hikes:
   visits:
   - limmernsee
   sources:
-  - https://en.wikipedia.org/wiki/Limmernsee
+  - https://www.komoot.com/smarttour/1809597
   start_maps_url: https://www.google.com/maps/place/?q=46.92529,8.99808&z=16
   distance_km: 7.0
 - id: muttseehutte-from-tierfehd-cable-car
@@ -1568,7 +1527,8 @@ hikes:
   description_extra: Postbus or drive to Berschis, Unterdorf, then about 40 minutes up to the falls through deciduous forest. 200 m of gain, T1. Water volume is highest in late spring
     and early summer.
   sources:
-  - https://www.outdooractive.com/en/route/hiking-trail/heidiland/berschnerfall/23426193/
+  - https://www.komoot.com/smarttour/17172861
+  - https://www.graubuenden.ch/en/tours/hike-from-berschis-to-the-berschner-falls
   quickest_for:
   - berschnerfall
   equipment_list: []
@@ -1589,7 +1549,6 @@ hikes:
   visits:
   - klausenpass
   sources:
-  - https://en.wikipedia.org/wiki/Klausen_Pass
   - https://schweizmobil.ch/en/hiking-in-switzerland/route-1/stage-7
   start_maps_url: https://www.google.com/maps/place/?q=46.89,8.90056&z=16
   distance_km: 27.4
@@ -1627,7 +1586,6 @@ hikes:
   visits:
   - urnerboden
   sources:
-  - https://en.wikipedia.org/wiki/Urnerboden
   - https://www.myswitzerland.com/en-ch/destinations/urnerboden/
   quickest_for:
   - urnerboden
@@ -1647,7 +1605,6 @@ hikes:
   - ice_lake_griesslisee
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/glaernischhuette-sac-2147000116/mountain-hiking/from-kloental-via-chaeseren-406/
-  - https://en.wikipedia.org/wiki/Gl%C3%A4rnisch
   hut_ids:
   - glarnischhutte-sac
   start_maps_url: https://www.google.com/maps/place/?q=47.02526,8.94039&z=16
@@ -1702,8 +1659,7 @@ hikes:
   visits:
   - ruinaulta
   sources:
-  - https://www.outdooractive.com/en/route/hiking-route/surselva/rheinschlucht-rundwanderung-versam/23438257/
-  - https://en.wikipedia.org/wiki/Ruinaulta
+  - https://www.komoot.com/smarttour/e1143279249/rheinschlucht-ruinaulta-valendas-versam
   start_maps_url: https://www.google.com/maps/place/?q=46.80738,9.3103&z=16
 - id: ruinaulta-flims-out-and-back
   name: From Flims Waldhaus
@@ -1764,7 +1720,7 @@ hikes:
   visits:
   - klontalersee
   sources:
-  - https://en.wikipedia.org/wiki/Kl%C3%B6ntalersee
+  - https://www.komoot.com/smarttour/4187290
   quickest_for:
   - klontalersee
   name: Lakeshore loop on the marked path
@@ -1819,7 +1775,6 @@ hikes:
   sources:
   - https://www.outdooractive.com/en/hiking-trail/buendner-herrschaft/5-lake-hike/23429843/
   - https://www.myswitzerland.com/en-us/experiences/pizol-single-summit-and-five-lakes/
-  - https://en.wikipedia.org/wiki/Pizol
   quickest_for:
   - pizol
   cable_car_ids:
@@ -1838,7 +1793,7 @@ hikes:
   description_extra: Approach from the Flüelapass road (postbus from Davos to Flüela, Ospiz or Wägerhuus) over the Winterlücke or Jöriflüelafurgga. T2, about four hours and 880 m of
     gain to the lakes. Best in July and August once the snowfields melt out.
   sources:
-  - https://www.outdooractive.com/en/route/hiking-trail/davos-klosters/joeriseen-hike/27179027/
+  - https://www.komoot.com/smarttour/e733355515/joeriseen-rundweg
   quickest_for:
   - joriseen
   equipment_list: []
@@ -1855,7 +1810,6 @@ hikes:
   description_extra: From the Brülisau cable car to Hoher Kasten, traverse the Saxer Lücke ridge and drop down to the lake at 1,446 m. Berggasthaus Bollenwees at the north end of the
     lake has dorm beds and food. Return via the Sämtisersee valley to Brülisau for a 7 to 8 hour day. T2 throughout.
   sources:
-  - https://en.wikipedia.org/wiki/F%C3%A4lensee
   - https://www.bollenwees.ch/
   quickest_for:
   - falensee
@@ -1877,7 +1831,7 @@ hikes:
   - batoni_wasserfallarena
   description_extra: Park in Weisstannen or take the postbus from Mels, then 3 to 4 hours up the valley to the arena. T2 throughout, with around 660 m of gain.
   sources:
-  - https://www.outdooractive.com/en/route/hiking-trail/heidiland/wasserfall-arena-baetoeni/23429637/
+  - https://www.komoot.com/smarttour/2521292
   quickest_for:
   - batoni_wasserfallarena
   equipment_list: []
@@ -1975,7 +1929,7 @@ hikes:
   visits:
   - cascata_la_froda
   sources:
-  - https://www.outdooractive.com/en/route/hiking-trail/ascona-locarno/sonogno-corte-sonogno/43228411/
+  - https://www.komoot.com/highlight/147660
   quickest_for:
   - cascata_la_froda
   start_maps_url: https://www.google.com/maps/place/?q=46.35031,8.78633&z=16
@@ -2004,7 +1958,7 @@ hikes:
   visits:
   - cascata_di_foroglio
   sources:
-  - https://en.wikipedia.org/wiki/Foroglio
+  - https://www.komoot.com/highlight/246289
   name: Village walk from Foroglio parking
   sac_grade: T1
   effort_label: Easy
@@ -2030,8 +1984,7 @@ hikes:
   visits:
   - mer_de_glace
   sources:
-  - https://en.wikipedia.org/wiki/Mer_de_Glace
-  - https://en.wikipedia.org/wiki/Chemin_de_fer_du_Montenvers
+  - https://www.komoot.com/highlight/511154
   quickest_for:
   - mer_de_glace
   cable_car_ids:
@@ -2050,7 +2003,7 @@ hikes:
   visits:
   - mer_de_glace
   sources:
-  - https://www.outdooractive.com/en/route/hiking-route/chamonix/chamonix-dayhike-mer-de-glace-to-aiguille-du-midi/803341313/
+  - https://www.komoot.com/smarttour/7900917
   start_maps_url: https://www.google.com/maps/place/?q=45.9231,6.8697&z=16
   distance_km: 6.7
 - id: les_cheserys-tre-le-champ-to-lac-blanc
@@ -2068,8 +2021,7 @@ hikes:
   visits:
   - les_cheserys
   sources:
-  - https://www.outdooractive.com/en/route/hiking-route/rhone-alpes/tre-le-champ-argentiere-to-planpraz-via-lac-blanc-and-le-flegere/23203675/
-  - https://en.wikipedia.org/wiki/Lac_Blanc_(Chamonix)
+  - https://www.komoot.com/smarttour/1592713
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=45.99563,6.92917&z=16
   distance_km: 11.7
@@ -2087,7 +2039,7 @@ hikes:
   visits:
   - les_cheserys
   sources:
-  - https://www.outdooractive.com/en/route/hiking-route/rhone-alpes/tre-le-champ-argentiere-to-planpraz-via-lac-blanc-and-le-flegere/23203675/
+  - https://www.komoot.com/smarttour/4110709
   quickest_for:
   - les_cheserys
   cable_car_ids:
@@ -2107,7 +2059,7 @@ hikes:
   visits:
   - glacier_des_bossons
   sources:
-  - https://www.outdooractive.com/en/route/hiking-route/mont-blanc-massif/chamonix-dayhike-les-bossons-to-la-jonction/64789199/
+  - https://en.chamonix.com/spring-hikes/hike-to-the-chalet-du-glacier-des-bossons
   quickest_for:
   - glacier_des_bossons
   cable_car_ids:
@@ -2125,8 +2077,7 @@ hikes:
   visits:
   - glacier_des_bossons
   sources:
-  - https://www.outdooractive.com/en/route/hiking-route/mont-blanc-massif/chamonix-dayhike-les-bossons-to-la-jonction/64789199/
-  - https://en.wikipedia.org/wiki/Bossons_Glacier
+  - https://www.komoot.com/smarttour/994294
   cable_car_ids:
   - glacier-bossons-chairlift
   start_maps_url: https://www.google.com/maps/place/?q=45.894,6.84951&z=16
@@ -2143,8 +2094,7 @@ hikes:
   visits:
   - pic_de_jallouvre
   sources:
-  - https://en.wikipedia.org/wiki/Pic_de_Jallouvre
-  - https://en.wikipedia.org/wiki/Bornes_Massif
+  - https://www.altituderando.com/Pic-de-Jallouvre-2408m-par-Cenise
   start_maps_url: https://www.google.com/maps/place/?q=46.00168,6.39609&z=16
   distance_km: 9.8
 - id: dent_doche-from-bernex
@@ -2161,7 +2111,7 @@ hikes:
   visits:
   - dent_doche
   sources:
-  - https://en.wikipedia.org/wiki/Dent_d%27Oche
+  - https://www.komoot.com/smarttour/1504936
   quickest_for:
   - dent_doche
   hut_ids:
@@ -2183,8 +2133,6 @@ hikes:
     drops you onto the western Haldigrat ridge at around 1,940 m, the easiest way up the mountain. From there it is a 2-hour ridge walk east to the Brisen summit at 2,404 m, T3 with
     exposed sections. Counting the chairlift access you gain about 460 m. Descend the way you came, or continue down to Niederrickenbach via the Brisenhaus, roughly 4.5 hours total.
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/brisen-242/mountain-hiking/
-  - https://en.wikipedia.org/wiki/Brisen
   - https://www.nidwalden.com/en/tour/brisen-tour
   quickest_for:
   - brisen
@@ -2210,7 +2158,6 @@ hikes:
     hour with maybe 50 m of cumulative up-and-down, basically flat. Water level can shift through the season as the lake doubles as a hydropower reservoir. Boats can be hired at the
     hotel reception. Pair with a climb up to Joch Pass for a bigger day.
   sources:
-  - https://en.wikipedia.org/wiki/Engstlensee
   - https://jungfrauregion.swiss/en/map/detail/engstlensee-493643c7-eba3-42dd-bf3c-652909b97fe9.html
   quickest_for:
   - engstlensee
@@ -2280,9 +2227,7 @@ hikes:
     side of the Navisence, climbing through larch forest and pasture. Roughly 5 km and 500 m of climbing one way, about 2 hours up and 90 minutes down, total 3.5 hours round trip. The
     hut at 2,142 m sits on an old lateral moraine looking up at the Zinal glacier tongue. T2 throughout, no exposure. Snow can linger on the upper track into early July.
   sources:
-  - https://en.wikipedia.org/wiki/Zinal_Glacier
   - https://www.valais.ch/en/activities/natural-sites/glaciers/zinal-glacier
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/cabane-du-mountet-cas-2147000184/mountain-hiking/
   equipment_list: []
   start_maps_url: https://maps.app.goo.gl/iFcJxr7tGeX8A7t89
   distance_km: 5.0
@@ -2322,9 +2267,7 @@ hikes:
     a short ladder-and-cable section up the Schöllijoch before traversing to the Inneres and Üssers Barrhorn summits, T5 above the hut. The traverse Topalihütte to Turtmannhütte over
     both Barrhörner is documented by the SAC at 3 h 30, 1,150 m of ascent and 2,000 m of descent.
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/topalihuette-sac-2147000271/mountain-hiking/from-st-niklaus-258/
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/uessers-barrhorn-145/mountain-hiking/
-  - https://de.wikipedia.org/wiki/Topalih%C3%BCtte
   start_maps_url: https://www.google.com/maps/place/?q=46.177,7.802&z=16
   distance_km: 8.0
 - id: cap_au_moine-from-les-avants-via-col-de-jaman
@@ -2346,7 +2289,6 @@ hikes:
     The summit ridge between Pierra Perchia and Cape au Moine is the crux: narrow, slippery when wet, no protection. Return via Col de Soladier and Molard for a loop.'
   sources:
   - https://sommets.ch/excursions/details/cape_au_moine/
-  - https://en.wikipedia.org/wiki/Cape_au_Moine
   quickest_for:
   - cap_au_moine
   start_maps_url: https://www.google.com/maps/place/?q=46.45381,6.94332&z=16
@@ -2366,7 +2308,6 @@ hikes:
     m, a few minutes from the cirque edge. From there a 4.5 km loop follows the dry-stone wall along the 160 m cliff edge. About 1 h 25, only 140 m of cumulative gain, T1. Suitable for
     visitors who cannot do the steep climb from Noiraigue.
   sources:
-  - https://en.wikipedia.org/wiki/Creux_du_Van
   - https://www.sac-cas.ch/fr/les-alpes/le-creux-du-van-pour-le-bonheur-de-tous-16390/
   quickest_for:
   - creux_du_van
@@ -2389,7 +2330,6 @@ hikes:
     re-ascent gives access to the exposed final ridge and the summit cross at 2,013 m. SAC grades the route T4 with about 1,130 m of ascent in 4 h 15.
   sources:
   - https://www.sac-cas.ch/de/huetten-und-touren/sac-tourenportal/dent-de-lys-1086/berg-und-alpinwandern/les-paccots-dent-de-lys-les-sciernes-dalbeuve-139/
-  - https://en.wikipedia.org/wiki/Dent_de_Lys
   start_maps_url: https://www.google.com/maps/place/?q=46.49146,7.03422&z=16
 - id: engstligen_falls-from-above-via-cable-car
   visits:
@@ -2432,7 +2372,6 @@ hikes:
   sources:
   - https://fribourg.ch/en/la-gruyere/hiking/the-gastlosen-tour-in-jaun/
   - https://schweizmobil.ch/en/hiking-in-switzerland/route-262
-  - https://en.wikipedia.org/wiki/Gastlosen
   quickest_for:
   - gastlosen
   cable_car_ids:
@@ -2614,7 +2553,6 @@ hikes:
     the public waterfall viewpoint at 1,328 m. About 12.5 km, 3 h 30, with the cable car saving the climb to First. Postbus continues from Rosenlaui down to Meiringen.
   sources:
   - https://www.thunersee.ch/en/experiences/tour/viaberna-stage-16-first-rosenlaui
-  - https://schweizmobil.ch/de/wanderland/route-38/etappe-16
   - https://www.viaberna.ch/en/stages/first-rosenlaui
 - id: salanfe_lake-from-mex-via-col-du-jorat
   visits:
@@ -2704,7 +2642,6 @@ hikes:
     Le Moléson at 2,002 m and return to Plan-Francey on the cable car or the marked descent. About 5 h, roughly 700 m of cumulative gain, T3 mostly with an exposed grass-and-rock crux
     on the summit ridge.
   sources:
-  - https://www.sac-cas.ch/de/huetten-und-touren/sac-tourenportal/teysachaux-1963/berg-und-alpinwandern/les-paccots-teysachaux-le-moleson-bulle-1617/
   - https://www.moleson.ch/en/rando/tour-de-moleson-2/
   cable_car_ids:
   - moleson-funiculaire
@@ -2803,7 +2740,6 @@ hikes:
     trail (T3 from the Peterslücke onward, exposed sections) to the Brisen summit at 2,404 m. Roughly 6 hours up, descend the same way for a long day. Brisenhaus has a terrace and food
     in season.
   sources:
-  - https://www.sac-cas.ch/de/huetten-und-touren/sac-tourenportal/brisenhaus-2147000044/berg-und-alpinwandern/von-niederrickenbach-764/
   - https://wegwandern.ch/wanderung/haldigrat-niederrickenbach-brisen-brisenhaus-klewenalp-wandern/
   cable_car_ids:
   - niederrickenbach-cable-car
@@ -2845,7 +2781,6 @@ hikes:
     then turns right and zigzags up under the summit cliff to the cross at 1,829 m. T4 on the upper section. Much shorter than the Broc-Fabrique climb because you start higher, but the
     access road is narrow and slow. The summit can also be combined with Dent du Chamois and Dent du Bourgo on a T5 ridge traverse.
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-broc-246/mountain-hiking/
   - https://www.noth.ch/en/randos/dent-de-broc.html
   quickest_for:
   - dent_de_broc
@@ -2868,7 +2803,6 @@ hikes:
     the final summit pitch at 2,221 m. T3 with some unsecured cliff sections near the top, the same as the standard route. Combines well with a traverse, ascending from La Planche and
     descending to Bernex.
   sources:
-  - https://en.wikipedia.org/wiki/Dent_d'Oche
   - https://www.summitpost.org/oche-dent-d/151397
   start_maps_url: https://www.google.com/maps/place/?q=46.36458,6.77011&z=16
   distance_km: 5.7
@@ -3165,7 +3099,6 @@ hikes:
     over the Triftwasser through the shady Trift up to the suspension bridge at 1,716 m. About 3.5 hours up, around 1,080 m of cumulative gain, T2 throughout. Continue past the bridge
     to the Windegghütte for an overnight.
   sources:
-  - https://www.outdooractive.com/en/route/hiking-trail/bernese-oberland/magnificent-mountain-arena-at-the-trift/63229639/
   - https://swissfamilyfun.com/trift-suspension-bridge/
   hut_ids:
   - windegghutte-sac
@@ -3232,7 +3165,6 @@ hikes:
     Jaman sits in the meadows. From the col, the final 360 m up the north flank reaches the summit at 1,875 m. About 4 hours round trip, 880 m of cumulative gain, T2. The col itself
     is on the Vaud-Fribourg boundary and connects Montreux to Montbovon.
   sources:
-  - https://en.wikipedia.org/wiki/Col_de_Jaman
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-jaman-959/
   start_maps_url: https://www.google.com/maps/place/?q=46.45381,6.94332&z=16
 - id: engstlensee-from-engelberg-via-jochpass
@@ -3297,7 +3229,6 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/geltenhuette-sac-2147000113/mountain-hiking/
   - https://www.tourduwildhorn.ch/index.php/de/die-routen/etappe-2
-  - https://www.outdooractive.com/en/route/long-distance-hiking/gstaad-region/f3-tour-du-wildhorn-stage-2-geltenhuette-iffigenalp-via-wildhornhuette-/802899244/
   hut_ids:
   - geltenhutte-sac
   quickest_for:
@@ -3428,7 +3359,6 @@ hikes:
     gain, 1,580 m of descent if combined with the La Forclaz exit. A good path leads to the summit.
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/
-  - https://en.wikipedia.org/wiki/Pointe_du_Tsat%C3%A9
   start_maps_url: https://www.google.com/maps/place/?q=46.13761,7.57255&z=16
 - id: rosenlaui-from-grindelwald-first-via-grosse-scheidegg
   visits:
@@ -3588,7 +3518,6 @@ hikes:
     closed for rockfall, so check the operator's site before starting. From the top, descend by cable car or continue the plateau walk.
   sources:
   - https://engstligenalp.ch/en/summer/experience/plateau-engstligen-falls/
-  - https://en.wikipedia.org/wiki/Engstligenfall
   cable_car_ids:
   - engstligenalp-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.45933,7.5664&z=16
@@ -3616,7 +3545,6 @@ hikes:
     rates the route as medium and gives about 4.5 hours of walking time. Many hikers descend by cog railway or cable car after summiting.
   sources:
   - https://www.myswitzerland.com/en-us/experiences/hiking-at-the-pilatus/
-  - https://en.wikipedia.org/wiki/Pilatus_(mountain)
   - https://pilatus.ch/en/activities/hiking
   cable_car_ids:
   - pilatusbahn-cogwheel
@@ -3640,7 +3568,6 @@ hikes:
     short summit loop. The Oberhaupt is reached by a stepped trail directly above the station; Esel sits a few minutes east. From Pilatus Kulm, a marked balcony path runs roughly 1.3
     km to Tomlishorn at 2,128 m, the highest point. T2.
   sources:
-  - https://en.wikipedia.org/wiki/Pilatus_(mountain)
   - https://pilatus.ch/en/activities/hiking
   quickest_for:
   - mount_pilatus
@@ -3798,7 +3725,6 @@ hikes:
     back via Rifugio Saoseo. A small bus reduces the distance for hikers who want to reach the lakes only. Private motor traffic is forbidden in Val da Camp.
   sources:
   - https://www.graubuenden.ch/en/tours/mountain-hike-to-lagh-da-saoseo
-  - https://en.wikipedia.org/wiki/Lago_di_Saoseo
   quickest_for:
   - lago_di_saoseo
   start_maps_url: https://www.google.com/maps/place/?q=46.38957,10.07944&z=16
@@ -3820,7 +3746,6 @@ hikes:
     hour of walking and minor ascent. The path stays close to the shore through larch and Arolla pine.
   sources:
   - https://www.sils.ch/en/your-stay/discover-sils/lake-sils.html
-  - https://en.wikipedia.org/wiki/Lake_Sils
   quickest_for:
   - silsersee
   start_maps_url: https://www.google.com/maps/place/?q=46.42893,9.76338&z=16
@@ -3867,7 +3792,6 @@ hikes:
     gondola back down from Furi to save the knees.
   sources:
   - https://www.zermatt.ch/en/hiking-tours
-  - https://en.wikipedia.org/wiki/Zermatt
   quickest_for:
   - zermatt_huts
   start_maps_url: https://maps.app.goo.gl/6zYpoSMumbD5yEucA
@@ -3889,7 +3813,6 @@ hikes:
     down to the falls in 15 minutes. Path down to the waterfall stays wet for days after rain, bring grippy shoes.
   sources:
   - https://www.myswitzerland.com/en-ch/experiences/route/nozon-gorge-waterfalls-between-romainmotier-and-la-sarraz/
-  - https://www.komoot.com/smarttour/5472230
   quickest_for:
   - tine_de_conflens
   start_maps_url: https://www.google.com/maps/place/?q=46.66037,6.51426&z=16
