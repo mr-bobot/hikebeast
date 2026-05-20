@@ -72,6 +72,9 @@ hikes:
   quickest_for:
   - rosenlaui_public_waterfall
   start_maps_url: https://www.google.com/maps/place/?q=46.6133,8.04808&z=16
+  sources:
+  - https://en.rosenlauischlucht.ch/
+  - https://www.alltrails.com/trail/switzerland/bern/gletscherschlucht-rosenlaui
 - id: rosenlauifall-route-99
   start: Parkplatz Gletscherschlucht
   transit:
@@ -89,6 +92,8 @@ hikes:
   quickest_for:
   - rosenlauifall
   start_maps_url: https://www.google.com/maps/place/?q=46.6133,8.04808&z=16
+  sources:
+  - https://www.alltrails.com/trail/switzerland/bern/gletscherschlucht-rosenlaui
 - id: triftbrucke-route-40
   sac_grade: T2
   effort_label: Easy
