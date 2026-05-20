@@ -704,7 +704,12 @@
   // an accelerating cadence (early cards spaced out, late cards land
   // in a flurry). Total card-to-last-card duration ≈ 2.5s; the
   // sqrt(i/N) curve gives the acceleration.
-  const REVEAL_DELAY_MS = 1000;
+  // How long markers stay fully hidden before the first one starts
+  // fading in. Was 1000 ms when only the toggle triggered the cascade
+  // (the pause separated "I clicked" from "stuff happens"). Now that
+  // initial load also runs the cascade, the user is already staring
+  // at a blank map waiting — shorten it so the first dot lands quickly.
+  const REVEAL_DELAY_MS = 200;
   const REVEAL_DURATION_MS = 2500;
   let revealCleanup = null;
   function playCardReveal() {
