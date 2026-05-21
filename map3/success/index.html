@@ -762,6 +762,17 @@ fbq('track', 'PageView');
           try { alreadyFired = sessionStorage.getItem(purchaseKey) === "1"; } catch (e) {}
           if (!alreadyFired) {
             try {
+              // Advanced Matching · re-init the pixel with the buyer's
+              // email + first name so Meta can match this Purchase to
+              // a Facebook account directly (boosts pixel-side EMQ).
+              // Meta auto-hashes plain-text PII when it doesn't already
+              // look like a 64-char hex string, so we pass raw values.
+              var amData = {};
+              if (typeof data.email === "string" && data.email) amData.em = data.email;
+              if (typeof data.first_name === "string" && data.first_name) amData.fn = data.first_name;
+              if (Object.keys(amData).length) {
+                try { fbq("init", "1658000685240569", amData); } catch (e) {}
+              }
               fbq("track", "Purchase", {
                 value: Number((data.amount_total / 100).toFixed(2)),
                 currency: data.currency || "CHF",
