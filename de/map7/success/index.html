@@ -757,7 +757,14 @@ fbq('track', 'PageView');
               // Meta auto-hashes plain-text PII when it doesn't already
               // look like a 64-char hex string, so we pass raw values.
               var amData = {};
-              if (typeof data.email === "string" && data.email) amData.em = data.email;
+              if (typeof data.email === "string" && data.email) {
+                amData.em = data.email;
+                // external_id mirrors what api/checkout/webhook.js sends as
+                // user_data.external_id (defaults to the hashed email).
+                // Passing the same value here = a second dedup signal that
+                // Meta can match between pixel + CAPI when fbc/fbp are weak.
+                amData.external_id = data.email;
+              }
               if (typeof data.first_name === "string" && data.first_name) amData.fn = data.first_name;
               if (Object.keys(amData).length) {
                 try { fbq("init", "1658000685240569", amData); } catch (e) {}
