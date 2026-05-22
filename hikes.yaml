@@ -174,7 +174,6 @@ hikes:
   start: Brienz station
   transit:
     train: Brienz (BLS)
-  duration_min: 60
   sac_grade: T1
   effort_label: Cog railway ride
   description_extra: Steam rack railway from Brienz at lake level up to the Rothorn at 2,350 m. About 50 minutes each way on a 7.6 km line with a maximum 25 percent gradient, operating
@@ -391,6 +390,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.883,8.017&z=16
   distance_km: 7.0
   gain_m: 1050
+  hut_ids:
+  - heftihuette
 - id: bachalpsee-route-38
   sac_grade: T1
   effort_label: Easy
@@ -512,7 +513,6 @@ hikes:
   start: Stechelberg cable car
   transit:
     train: Lauterbrunnen (BLS) + bus to Stechelberg
-  duration_min: 30
   sac_grade: T1
   effort_label: Cable car ride
   description_extra: Schilthornbahn cable car from Stechelberg up to the 2,970 m summit, in stages through Gimmelwald, Mürren, and Birg.
@@ -543,6 +543,8 @@ hikes:
   - https://www.komoot.com/smarttour/1805932
   start_maps_url: https://www.google.com/maps/place/?q=46.533,7.883&z=16
   distance_km: 8.0
+  cable_car_ids:
+  - schilthornbahn
 - id: riffelsee-default
   description_extra: Reached from Rotenboden station (2,815 m) on the Gornergrat railway from Zermatt, then a short walk down (the station sits about 58 m above the lake). T1, about
     10 minutes on an easy path. The Kulmhotel Gornergrat and Riffelhaus 1853 are walking distance along the ridge.
@@ -564,6 +566,8 @@ hikes:
   quickest_for:
   - riffelsee
   start_maps_url: https://www.google.com/maps/place/?q=45.9844,7.7653&z=16
+  cable_car_ids:
+  - gornergrat-bahn
 - id: riffelalp-easy-round-trip
   name: Riffelalp short loop via Grünsee
   start: Riffelalp station
@@ -641,6 +645,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=45.9833,7.7822&z=16
   distance_km: 7.9
   descent_m: 887
+  cable_car_ids:
+  - gornergrat-bahn
 - id: gorner_glacier-descent-via-riffelsee
   name: Gornergrat to Zermatt via Riffelsee
   start: Gornergrat top station
@@ -684,12 +690,11 @@ hikes:
   start: Bettmerhorn top station
   transit:
     train: Betten + Bettmeralp cable car + Bettmerhorn lift
-  duration_min: 240
-  gain_m: 600
+  duration_min: 100
   sac_grade: T3
   effort_label: Moderate, light scrambling
   description_extra: Ridge traverse between Bettmerhorn and Eggishorn. Access by cable car from Betten (Bettmeralp, then the Bettmerhorn lift). The route involves light scrambling on
-    rock blocks, and exposed sections are well secured. T3, about four hours, around 600 m of gain. Descend via the Eggishorn cable car to Fiesch.
+    rock blocks, and exposed sections are well secured. T3, about 1h 40, with 110 m of descent. Descend via the Eggishorn cable car to Fiesch.
   visits:
   - aletsch_glacier
   sources:
@@ -699,7 +704,8 @@ hikes:
   - bettmerhorn-cable-car
   - eggishorn-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.41158,8.07558&z=16
-  distance_km: 18.0
+  distance_km: 2.8
+  descent_m: 110
 - id: aletsch_glacier-aletsch-panoramaweg
   name: Aletsch Panoramaweg
   start: Bettmerhorn
@@ -818,6 +824,8 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-route/switzerland/grimentz-to-moiry-hut/66408873/
   start_maps_url: https://www.google.com/maps/place/?q=46.18029,7.57383&z=16
   distance_km: 13.2
+  hut_ids:
+  - cabane-moiry-cas
 - id: ferpecle_glacier-easy-glacier-trail
   name: Barrage de Ferpècle → glacier foot
   start: Barrage de Ferpècle
@@ -921,7 +929,6 @@ hikes:
   - Ice axe
   - Rope
   - Harness
-  - Roped travel as a team
   cable_car_ids:
   - alpin-express
   hut_ids:
@@ -1062,23 +1069,6 @@ hikes:
   cable_car_ids:
   - plaine-morte-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.36994,7.48897&z=16
-- id: tseuzier_lake-route-23
-  sac_grade: T1
-  effort_label: Easy
-  duration_min: 60
-  gain_m: 117
-  start: Anzère, Barrage de Tseuzier
-  transit:
-    bus: Anzère, Barrage de Tseuzier
-  description_extra: 'Drive or postbus from Sion to Anzère, Barrage de Tseuzier stop. The lake at 1,777 m is directly accessible: no hike required. A marked path loops the reservoir,
-    about an hour each way, 117 m of cumulative gain, T1.'
-  visits:
-  - tseuzier_lake
-  sources:
-  - https://www.komoot.com/smarttour/1806717
-  equipment_list: []
-  start_maps_url: https://www.google.com/maps/place/?q=46.34638,7.43516&z=16
-  distance_km: 2.5
 - id: salanfe_lake-from-van-d-en-haut
   name: From Van d'En Haut
   start: Van d'En Haut campsite
@@ -1115,7 +1105,7 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/pointe-du-tsate-2044/mountain-hiking/
   quickest_for:
   - pointe_du_tsate
-  start_maps_url: https://www.google.com/maps/place/?q=46.08984,7.52262&z=16
+  start_maps_url: https://maps.app.goo.gl/BZK1Vzbu8USyZ6tV7
   distance_km: 5.5
 - id: gastlosen-gastlosen-circular
   name: Gastlosen circular (Jaun → Chalet du Soldat → Jaun)
@@ -1141,12 +1131,12 @@ hikes:
   start: Broc (TPF station)
   transit:
     train: Broc-Fabrique (TPF)
-  duration_min: 300
+  duration_min: 240
   gain_m: 1100
   sac_grade: T4
   effort_label: Exposed summit ridge
   description_extra: 'From the Broc-Fabrique TPF station the trail climbs through pasture and forest to the Col des Combes (1,668 m), then follows the ridge to the summit cross at 1,829
-    m. T4 on the upper section. About five hours and 1,100 m of gain. Surefootedness and a head for heights required: not a route for everyone in the group if anyone is unsure.'
+    m. T4 on the upper section. About four hours and 1,100 m of gain. Surefootedness and a head for heights required: not a route for everyone in the group if anyone is unsure.'
   visits:
   - dent_de_broc
   sources:
@@ -1959,7 +1949,7 @@ hikes:
 - id: mer_de_glace-montenvers-train
   name: Montenvers rack train + walk to ice cave
   start: Chamonix Montenvers train station
-  duration_min: 30
+  duration_min: 60
   sac_grade: T1
   effort_label: Tourist walk
   description_extra: Tourist approach using the historic Chemin de fer du Montenvers rack railway from Chamonix to Montenvers at 1,913 m. 5.1 km of track, 871 m of vertical, about 20
@@ -2009,6 +1999,8 @@ hikes:
   equipment_list: []
   start_maps_url: https://www.google.com/maps/place/?q=45.99563,6.92917&z=16
   distance_km: 11.7
+  cable_car_ids:
+  - flegere-cable-car
 - id: les_cheserys-flegere-shortcut
   name: Flégère cable car shortcut
   start: La Flégère gondola top station
@@ -2035,11 +2027,10 @@ hikes:
   start: Les Bossons (bus stop)
   transit:
     bus: Chamonix bus line 2 to Glacier des Bossons stop
-  duration_min: 15
   sac_grade: T1
   effort_label: Trivial (chairlift)
   description_extra: Chairlift from Les Bossons (Chamonix bus line 2) up to the Chalet du Glacier des Bossons. Skips about 1,000 feet of forest climb. The chalet has a restaurant with
-    views down onto the glacier and an interpretive walk explaining glacier features. 9 euros one way, 13.20 euros return. Open 8:30 to 18:30 in season.
+    views down onto the glacier and an interpretive walk explaining glacier features. Open 8:30 to 18:30 in season.
   visits:
   - glacier_des_bossons
   sources:
@@ -2231,6 +2222,8 @@ hikes:
   - https://www.appenzell.ch/en/alpstein/hiking/hiking-tour-suggestions.html
   - https://www.alltrails.com/en-gb/trail/switzerland/outer-rhodes/schwende-berggasthaus-ascher-wildkirchli
   start_maps_url: https://www.google.com/maps/place/?q=47.30007,9.43555&z=16
+  hut_ids:
+  - aescher-gasthaus
 - id: barrhorn-from-st-niklaus-via-topalihuette
   visits:
   - barrhorn
@@ -2253,6 +2246,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.177,7.802&z=16
   distance_km: 8.0
   descent_m: 2000
+  hut_ids:
+  - turtmannhutte-sac
 - id: cap_au_moine-from-les-avants-via-col-de-jaman
   visits:
   - cap_au_moine
@@ -2358,6 +2353,8 @@ hikes:
   cable_car_ids:
   - jaun-gastlosen-express
   start_maps_url: https://www.google.com/maps/place/?q=46.59578,7.28305&z=16
+  hut_ids:
+  - chalet-du-soldat
 - id: grammont-from-novel-via-col-des-crosses
   visits:
   - grammont
@@ -2601,6 +2598,8 @@ hikes:
   - https://wegwandern.ch/wanderung/3-etappe-sardona-welterbe-weg-spitzmeilenhuette-weisstannen-wanderung-wandern/
   - https://www.bewandernswert.de/sardona-welterbe-weg-etappe-3/
   start_maps_url: https://www.google.com/maps/place/?q=46.99056,9.34444&z=16
+  hut_ids:
+  - spitzmeilenhutte-sac
 - id: teysachaux-loop-from-plan-francey
   visits:
   - teysachaux
@@ -2645,7 +2644,7 @@ hikes:
   sources:
   - https://travelita-blog.com/bisse-du-ro-abenteuerliche-suonenwanderung/
   - https://www.novo-monde.com/en/crans-montana-bisse-ro/
-  start_maps_url: https://www.google.com/maps/place/?q=46.31288,7.48929&z=16
+  start_maps_url: https://maps.app.goo.gl/jHTk7ptyTQghBo1P7
   descent_m: 625
 - id: zinal_glacier-from-sorebois-cable-car
   visits:
@@ -2749,7 +2748,7 @@ hikes:
   - dent_de_broc
   sac_grade: T4
   effort_label: Demanding
-  duration_min: 240
+  duration_min: 150
   gain_m: 800
   equipment_list:
   - Sturdy hiking boots
@@ -2762,8 +2761,9 @@ hikes:
     then turns right and zigzags up under the summit cliff to the cross at 1,829 m. T4 on the upper section. Much shorter than the Broc-Fabrique climb because you start higher, but the
     access road is narrow and slow. The summit can also be combined with Dent du Chamois and Dent du Bourgo on a T5 ridge traverse.
   sources:
-  - https://www.noth.ch/en/randos/dent-de-broc.html
+  - https://www.komoot.com/
   start_maps_url: https://www.google.com/maps/place/?q=46.5856,7.16279&z=16
+  distance_km: 5.6
 - id: dent_doche-from-la-planche
   visits:
   - dent_doche
@@ -3364,34 +3364,6 @@ hikes:
   - https://schweizmobil.ch/de/wanderland/route-38/etappe-16
   - https://www.viaberna.ch/en/stages/first-rosenlaui
   - https://wegwandern.ch/wanderung/wanderung-rosenlaui-gletscherschlucht-schwarzwaldalp-grosse-scheidegg-wandern/
-- id: saas_fee_glacier-britanniahuette-from-kreuzboden
-  visits:
-  - saas_fee_glacier
-  sac_grade: T3
-  effort_label: Demanding
-  duration_min: 360
-  gain_m: 700
-  equipment_list:
-  - Sturdy hiking boots
-  - Poles
-  start: Kreuzboden (top of Saas-Grund cable car)
-  transit:
-    train: Visp
-    bus: PostBus 511 from Visp to Saas-Grund
-    cable_car: Saas-Grund cable car to Kreuzboden
-  description_extra: Approach to the Britanniahütte from the Saas-Grund side via the Almageller Höhenweg rather than via Felskinn above Saas-Fee. From Kreuzboden the high path traverses
-    the east flank of the Mischabel group with views to the Mattmark reservoir, reaches the Almagellerhütte at 2,894 m, then continues over exposed sections, including a short glacier
-    crossing, past Klein Allalin to the Britanniahütte at 3,030 m. Typically split into two days, sleeping at Almagellerhütte. T3 on the high path, harder where the glacier and exposed
-    steps are involved. Onward travel onto the Hohlaub and Allalin glaciers from the hut requires rope, ice axe skills and current closure information.
-  sources:
-  - https://britannia.ch/tours/?lang=en
-  - https://www.off-the-trail.de/almagellerhuette/
-  - https://www.off-the-trail.de/britanniahuette/
-  hut_ids:
-  - britanniahutte-sac
-  cable_car_ids:
-  - saas-grund-kreuzboden-cable-car
-  start_maps_url: https://www.google.com/maps/place/?q=46.13827,7.96402&z=16
 - id: schafler-from-wasserauen-via-bommen
   visits:
   - schafler
@@ -3514,7 +3486,6 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Rain layer
-  - 1.5 L water
   start: Alpnachstad station
   transit:
     train: Zentralbahn from Lucerne to Alpnachstad (about 17 min)
@@ -3583,7 +3554,6 @@ hikes:
   distance_km: 3.3
   equipment_list:
   - Hiking boots
-  - Water
   start: La Gouille bus stop, Val d'Hérens
   transit:
     bus: PostBus 381 from Sion to La Gouille (hamlet between Les Haudères and Arolla)
@@ -3607,7 +3577,6 @@ hikes:
   equipment_list:
   - Hiking boots
   - Rain layer
-  - 1.5 L water
   - Sun protection
   start: Pizolhütte above Wangs
   transit:
@@ -3635,7 +3604,6 @@ hikes:
   equipment_list:
   - Hiking boots
   - Wind layer
-  - Water
   - Sun protection
   start: La Flégère gondola top station, Aiguilles Rouges
   transit:
@@ -3665,7 +3633,6 @@ hikes:
   equipment_list:
   - Hiking boots
   - Rain layer
-  - Water
   start: Col de la Colombière car park, Le Reposoir
   transit:
     car: Drive over the Col de la Colombière (D4) from Le Grand-Bornand or Le Reposoir, large free car park at the col
@@ -3691,7 +3658,6 @@ hikes:
   equipment_list:
   - Hiking boots
   - Rain layer
-  - 2 L water
   - Sun protection
   start: Sfazù bus stop on the Bernina Pass road
   transit:
@@ -3835,28 +3801,6 @@ hikes:
   quickest_for:
   - gorges_du_dailley
   start_maps_url: https://www.google.com/maps/place/?q=46.12833,7.02206&z=16
-- id: etang_de_la_gruere-short-from-la-theurre
-  name: Short walk from La Theurre
-  visits:
-  - etang_de_la_gruere
-  sac_grade: T1
-  effort_label: Easy
-  duration_min: 10
-  gain_m: 0
-  distance_km: 0.4
-  equipment_list: []
-  start: La Theurre parking (north side of the pond)
-  transit:
-    train: Saignelégier (Chaux-de-Fonds-Glovelier line)
-    bus: PostBus 32 from Saignelégier toward Tramelan, stop La Theurre
-  description_extra: From the La Theurre parking, a 5 to 10 minute walk on the gravel path drops you at the pond's north shore where the boardwalk starts. T1, flat, family-friendly.
-    For the full loop around the moor (2.6 km, 45 min) follow the boardwalk south from the shore.
-  sources:
-  - https://www.j3l.ch/en/P33241/destinations/nature-sites/etang-de-la-gruere
-  - https://www.parks.swiss/en/map/offer-detail/etang-de-la-gruere-1246
-  quickest_for:
-  - etang_de_la_gruere
-  start_maps_url: https://www.google.com/maps/place/?q=47.24142,7.03806&z=16
 - id: schwarzsee-fr-lake-loop-from-gypsera
   visits:
   - schwarzsee
@@ -3930,14 +3874,16 @@ hikes:
   transit:
     bus: PostBus 161 from Meiringen to Handegg / Gelmerbahn (summer only)
     train: Meiringen station (Zentralbahn from Lucerne / Interlaken) then PostBus 161
-  description_extra: Drive over the Grimsel Pass road from Innertkirchen; the Gelmerbahn valley station is signposted. Roadside parking is free. Book the funicular in advance, round-trip
-    about 36 CHF, runs mid-June to mid-October.
+  description_extra: Drive over the Grimsel Pass road from Innertkirchen; the Gelmerbahn valley station is signposted. Roadside parking is free. Book the funicular in advance runs mid-June
+    to mid-October.
   sources:
   - https://grimselwelt.ch/bahnen/gelmerbahn/
   - https://www.postauto.ch/en/timetable-network
   quickest_for:
   - gelmerbahn
   start_maps_url: https://www.google.com/maps/place/Gelmerbahn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f875bae1b82fb:0xece15aab211b8f11!8m2!3d46.6136385!4d8.3085363!16s%2Fm%2F0nbtnrh
+  cable_car_ids:
+  - gelmerbahn-funicular
 - id: guttannen_valley-drive-up
   visits:
   - guttannen_valley
@@ -3974,25 +3920,7 @@ hikes:
   - https://www.postauto.ch/en/timetable-network
   quickest_for:
   - aare_gorge
-  start_maps_url: https://www.google.com/maps/place/Aareschlucht/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f8f018625b21f:0x6bc0f90b56e9ba0e!8m2!3d46.7192366!4d8.2122009!16s%2Fm%2F0h3xs_f
-- id: iffigfalle-drive-up
-  visits:
-  - iffigfalle
-  name: Drive to Iffigenalp
-  start: Iffigenalp parking, end of the toll road above Lenk
-  sac_grade: T1
-  effort_label: Drive-up
-  equipment_list: []
-  transit:
-    bus: PostBus 251 Lenk i.S., Bahnhof to Iffigenalp (summer only, several runs daily)
-  description_extra: From Lenk im Simmental drive up the toll road to Iffigenalp (end of road). The waterfall is 10-15 min walk from the parking. Road open early June to mid-October;
-    CHF 15 toll, parking included.
-  sources:
-  - https://www.iffigenalp.ch/en/anreise
-  - https://lenk-simmental.ch/en/summer/getting-there
-  quickest_for:
-  - iffigfalle
-  start_maps_url: https://www.google.com/maps/place/Iffigf%C3%A4lle/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee33f74c09235:0xaedf674a739c34dd!8m2!3d46.4118!4d7.44306!16s%2Fg%2F121_hshp
+  start_maps_url: https://www.google.com/maps/place/?q=46.7120,8.2179&z=16
 - id: grindelwald-drive-up
   visits:
   - grindelwald
@@ -4028,7 +3956,7 @@ hikes:
   - https://www.postauto.ch/en/timetable-network
   quickest_for:
   - viewpoint_beatenberg
-  start_maps_url: https://www.google.com/maps/place/Aussichtspunkt+Beatenberg/@46.6856162,7.7879934,16z/data=!4m6!3m5!1s0x478fa531263af7f1:0x367113202ab7c1b!8m2!3d46.6856162!4d7.7879934!16s%2Fg%2F11f62f_5v5
+  start_maps_url: https://maps.app.goo.gl/x1UwZkNML1QuSHoB6
 - id: lauterbrunnen-drive-up
   visits:
   - lauterbrunnen
@@ -4065,24 +3993,6 @@ hikes:
   quickest_for:
   - zermatt_village
   start_maps_url: https://www.google.com/maps/place/3920+Zermatt/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f35a2292ee5cd:0x400ff8840196f70!8m2!3d46.0207133!4d7.749117!16zL20vMDI1Z3Rj
-- id: riffelalp-drive-up
-  visits:
-  - riffelalp
-  name: Train + short walk from Riffelalp station
-  start: Riffelalp station (Gornergratbahn from Zermatt)
-  sac_grade: T1
-  effort_label: Drive-up
-  equipment_list: []
-  transit:
-    train: Zermatt + Gornergratbahn to Riffelalp (about 25 min from Zermatt)
-  description_extra: Take the Gornergratbahn cog railway from Zermatt. Get off at Riffelalp (the first big stop). 10-15 min on the trail brings you to the quieter viewpoint above the
-    larch forest. Bahn runs year-round.
-  sources:
-  - https://www.gornergrat.ch/en/
-  - https://www.matterhornparadise.ch/en
-  quickest_for:
-  - riffelalp
-  start_maps_url: https://www.google.com/maps/place/Riffelalp,+3920+Zermatt/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f35945b81adcb:0x4273cbd81622c1db!8m2!3d46.0010288!4d7.7503289!16s%2Fm%2F0r8l1xx
 - id: ferpecle_river-drive-up
   visits:
   - ferpecle_river
@@ -4120,6 +4030,8 @@ hikes:
   quickest_for:
   - spielboden
   start_maps_url: https://www.google.com/maps/place/Spielboden,+3906+Saas-Fee/@46.1034607,7.9264445,17z/data=!3m1!4b1!4m6!3m5!1s0x478f4599f1a2d2cb:0xf03fe149d6ccbcea!8m2!3d46.1034607!4d7.9264445!16s%2Fg%2F1tfnxhfr
+  cable_car_ids:
+  - spielboden-laengfluh
 - id: saas_fee_glacier-drive-up
   visits:
   - saas_fee_glacier
@@ -4138,7 +4050,9 @@ hikes:
   - https://www.saas-fee.ch/en/arrival
   quickest_for:
   - saas_fee_glacier
-  start_maps_url: https://www.google.com/maps/place/Feegletscher/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f48b22fff0bbd:0x8122bd2e0fc14d22!8m2!3d46.0796!4d7.8788!16s%2Fm%2F04n00rz
+  start_maps_url: https://www.google.com/maps/place/?q=46.1097,7.9312&z=16
+  cable_car_ids:
+  - alpin-express
 - id: lac_de_derborence-drive-up
   visits:
   - lac_de_derborence
@@ -4157,25 +4071,6 @@ hikes:
   quickest_for:
   - lac_de_derborence
   start_maps_url: https://www.google.com/maps/place/Lac+de+Derborence/@46.2791132,7.2124191,1263m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478ec20dffda7db3:0x7a9df6822f6e8527!8m2!3d46.2793244!4d7.2172313!16s%2Fm%2F0283s7l
-- id: la_fouly-drive-up
-  visits:
-  - la_fouly
-  name: Drive up Val Ferret to La Fouly
-  start: La Fouly village
-  sac_grade: T1
-  effort_label: Drive-up
-  equipment_list: []
-  transit:
-    bus: Orsières (SBB) + PostBus 233 / 234 to La Fouly, Village (summer service)
-    train: Martigny + Mont-Blanc Express (TMR) to Orsières + PostBus
-  description_extra: Drive up the Val Ferret from Orsières. La Fouly sits under Mont Dolent and Tour Noir. Village parking is free. For the moraine view, walk 15 min out of the village
-    toward the glacier. Road open year-round; ski lifts run winter + summer.
-  sources:
-  - https://www.saint-bernard.ch/en/la-fouly/
-  - https://www.postauto.ch/en/timetable-network
-  quickest_for:
-  - la_fouly
-  start_maps_url: https://www.google.com/maps/place/La+Fouly,+1944+Orsi%C3%A8res/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4789346ce514895d:0x507e2e9599bb7d3c!8m2!3d45.933198!4d7.0986502!16s%2Fm%2F06zl36r
 - id: sanetschpass-drive-up
   visits:
   - sanetschpass
@@ -4248,7 +4143,7 @@ hikes:
   - https://www.swisstopo.admin.ch/
   quickest_for:
   - tseuzier_lake
-  start_maps_url: https://www.google.com/maps/place/Lac+de+Tseuzier/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee161ec5fc7b1:0x2bde8895194d52a8!8m2!3d46.3508905!4d7.4301043!16s%2Fm%2F02x6gzq
+  start_maps_url: https://maps.app.goo.gl/ivhWPBBiuQUdUH3ZA
 - id: la_tzoumaz-drive-up
   visits:
   - la_tzoumaz
@@ -4303,7 +4198,7 @@ hikes:
   - https://www.gstaad.ch/en/getting-here/by-train.html
   quickest_for:
   - la_tine_canyon
-  start_maps_url: https://www.google.com/maps/place/1669+Montbovon/@46.4880077,7.0028709,10080m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478e8e4fff86dfeb:0x7f1aab823b11e665!8m2!3d46.4879565!4d7.0439846!16s%2Fg%2F120lw7t5
+  start_maps_url: https://www.google.com/maps/place/?q=46.4672,7.0463&z=16
 - id: dent_de_broc-drive-up
   visits:
   - dent_de_broc
@@ -4358,7 +4253,9 @@ hikes:
   - https://www.la-gruyere.ch/en/getting-here/
   quickest_for:
   - moleson
-  start_maps_url: https://www.google.com/maps/place/Mol%C3%A9son/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e88c0e8a4ac17:0x5d0474d4b36c0767!8m2!3d46.5487879!4d7.0171018!16s%2Fm%2F04cykhw
+  start_maps_url: https://www.google.com/maps/place/?q=46.5601,7.0383&z=16
+  cable_car_ids:
+  - moleson-funiculaire
 - id: gorges_du_chauderon-drive-up
   visits:
   - gorges_du_chauderon
@@ -4376,7 +4273,7 @@ hikes:
   - https://www.cff.ch/en.html
   quickest_for:
   - gorges_du_chauderon
-  start_maps_url: https://www.google.com/maps/place/Gorges+du+Chauderon/@46.4367906,6.9229226,485m/data=!3m1!1e3!4m6!3m5!1s0x478e9bd02ed88279:0x5a702a06efcffa74!8m2!3d46.4368563!4d6.9250077!16s%2Fg%2F11f652tll2
+  start_maps_url: https://www.google.com/maps/place/?q=46.4328,6.9168&z=16
 - id: pisse_chevre-drive-up
   visits:
   - pisse_chevre
@@ -4497,7 +4394,7 @@ hikes:
   - https://www.cff.ch/en.html
   quickest_for:
   - lavaux_vineyards
-  start_maps_url: https://www.google.com/maps/place/Lavaux-Oron/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478c33d447645687:0x96990902d3a94b53!8m2!3d46.5100372!4d6.7531955!16s%2Fm%2F04f4h85
+  start_maps_url: https://www.google.com/maps/place/?q=46.4887,6.7267&z=16
 - id: le_doubs-drive-up
   visits:
   - le_doubs
@@ -4515,7 +4412,7 @@ hikes:
   - https://www.j3l.ch/en
   quickest_for:
   - le_doubs
-  start_maps_url: https://www.google.com/maps/place/47%C2%B005'31.0%22N+6%C2%B045'04.4%22E/@47.091939,6.7486421,17z/data=!3m1!4b1!4m4!3m3!8m2!3d47.091939!4d6.751217
+  start_maps_url: https://www.google.com/maps/place/?q=47.1000,6.7546&z=16
 - id: gigerwaldsee-drive-up
   visits:
   - gigerwaldsee
@@ -4603,7 +4500,7 @@ hikes:
   - https://www.engadin.com/en
   quickest_for:
   - morteratsch_glacier
-  start_maps_url: https://www.google.com/maps/place/Morteratschgletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4783787d4d1dde9d:0x47de9c833d269654!8m2!3d46.400919!4d9.9272488!16s%2Fm%2F027rmn1
+  start_maps_url: https://www.google.com/maps/place/?q=46.4507,9.9404&z=16
 - id: ponte_dei_salti-drive-up
   visits:
   - ponte_dei_salti
@@ -4693,7 +4590,9 @@ hikes:
   - https://www.chamonix.com/montenvers-mer-de-glace,46,en.html
   quickest_for:
   - les_drus
-  start_maps_url: https://www.google.com/maps/place/Aiguille+du+Dru/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894bc255dfbe21:0xc70ae60e6164cffe!8m2!3d45.932945!4d6.9558754!16s%2Fm%2F02855l2
+  start_maps_url: https://www.google.com/maps/place/?q=45.9228,6.8753&z=16
+  cable_car_ids:
+  - montenvers-railway
 - id: aiguille_du_grepon-drive-up
   visits:
   - aiguille_du_grepon
@@ -4711,7 +4610,9 @@ hikes:
   - https://www.chamonix.com/montenvers-mer-de-glace,46,en.html
   quickest_for:
   - aiguille_du_grepon
-  start_maps_url: https://www.google.com/maps/place/Aiguille+du+Gr%C3%A9pon/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894ec98e061181:0x7753a53db26fea54!8m2!3d45.902811!4d6.918926!16s%2Fm%2F0czdw5h
+  start_maps_url: https://www.google.com/maps/place/?q=45.9228,6.8753&z=16
+  cable_car_ids:
+  - montenvers-railway
 - id: engstlensee-drive-up
   visits:
   - engstlensee
@@ -4748,26 +4649,6 @@ hikes:
   quickest_for:
   - maloja_pass
   start_maps_url: https://maps.app.goo.gl/1X7in51rPakADN2B6
-- id: mount_pilatus-drive-up
-  visits:
-  - mount_pilatus
-  name: Cog railway (Alpnachstad) or cable car (Kriens)
-  start: Pilatus Kulm summit station
-  sac_grade: T1
-  effort_label: Drive-up
-  equipment_list: []
-  transit:
-    train: Lucerne + S5 train to Alpnachstad (17 min) then the world's steepest cog railway (48% gradient)
-    cable_car: Lucerne + bus 1 to Kriens Linde then the panoramic gondola via Krienseregg and Fraekmuentegg
-    bus: Lake Lucerne steamer Lucerne to Alpnachstad pier connects directly with the cog railway in summer
-  description_extra: Two ways up. Cog railway from Alpnachstad (May to mid-November, about 30 min one way). Kriens panoramic gondola (year-round, about 40 min including changes). The
-    summit terrace is right at the top station. Cog railway around CHF 78 return.
-  sources:
-  - https://www.pilatus.ch/en
-  - https://www.cff.ch/en.html
-  quickest_for:
-  - mount_pilatus
-  start_maps_url: https://www.google.com/maps/place/Mount+Pilatus/@46.9795,8.2548,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.9795!4d8.2548
 - id: julier_pass-drive-up
   visits:
   - julier_pass
@@ -4824,3 +4705,40 @@ hikes:
   quickest_for:
   - engadin_autumn
   start_maps_url: https://www.google.com/maps/place/?q=46.49611,9.86861&z=15
+- id: mount_pilatus-cogwheel-from-alpnachstad
+  visits:
+  - mount_pilatus
+  name: Cog railway from Alpnachstad
+  start: Alpnachstad Pilatusbahn talstation
+  start_maps_url: https://maps.app.goo.gl/NWQeL2s1Tf6eeewo7
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Alpnachstad (Zentralbahn from Lucerne)
+    bus: Lake Lucerne ferry from Lucerne to Alpnachstad
+  description_extra: World's steepest cogwheel railway (48% max gradient) climbs from Alpnachstad on Lake Alpnach up to Pilatus Kulm at 2,073 m. Free roadside parking at Alpnachstad;
+    the railway runs mid-May to mid-November (weather dependent). Cogwheel arrives at the summit station; from there the Tomlishorn balcony path leads 1.3 km to the highest point.
+  sources:
+  - https://www.pilatus.ch/en/discover/cogwheel-railway
+  cable_car_ids:
+  - pilatusbahn-cogwheel
+  quickest_for:
+  - mount_pilatus
+- id: mount_pilatus-cable-car-from-kriens
+  visits:
+  - mount_pilatus
+  name: Cable car from Kriens
+  start: Kriens Pilatusbahn talstation
+  start_maps_url: https://maps.app.goo.gl/m2GThrrswkKoqZK4A
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    train: Lucerne + bus 1 to Kriens, Linde then short walk
+  description_extra: 'Two-stage aerial ride from Kriens: panorama gondola via Krienseregg to Fräkmüntegg (1,416 m), then the Dragon Ride aerial cableway up to Pilatus Kulm at 2,073 m.
+    Operates year-round (brief maintenance breaks). Paid parking garage at Kriens valley station.'
+  sources:
+  - https://www.pilatus.ch/en/discover/panorama-gondolas
+  cable_car_ids:
+  - pilatus-kriens-gondola

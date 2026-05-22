@@ -958,7 +958,6 @@ spots:
     best_season: Late June – October
     busyness: 2
   hike_ids:
-  - iffigfalle-drive-up
   - iffigfalle-lenk-to-iffigenalp
   - iffigfalle-from-lauenen-via-tungelpass
 - id: schrattenfluh
@@ -1571,7 +1570,6 @@ spots:
     best_season: Late June – October
     busyness: 4
   hike_ids:
-  - riffelalp-drive-up
   - riffelalp-easy-round-trip
   - riffelalp-findeln-loop
 - id: gorner_glacier
@@ -2158,7 +2156,6 @@ spots:
   hike_ids:
   - saas_fee_glacier-drive-up
   - saas_fee_glacier-glacier-trail-felskinn
-  - saas_fee_glacier-britanniahuette-from-kreuzboden
 - id: lac_de_derborence
   chapter: valais
   kicker: DROWNED TREES, STILL STANDING
@@ -2258,7 +2255,6 @@ spots:
     best_season: Late June – Late September
     busyness: 2
   hike_ids:
-  - la_fouly-drive-up
   - la_fouly-tmb-arnuva-la-fouly
   - la_fouly-tmb-champex-to-la-fouly
 - id: sanetschpass
@@ -2515,7 +2511,6 @@ spots:
     best_season: June - October
   hike_ids:
   - tseuzier_lake-drive-up
-  - tseuzier_lake-route-23
   - tseuzier_lake-bisse-du-ro-from-crans-montana
 - id: salanfe_lake
   chapter: valais
@@ -3599,7 +3594,6 @@ spots:
     elevation_m: 998
     busyness: 3
   hike_ids:
-  - etang_de_la_gruere-short-from-la-theurre
   - etang_de_la_gruere-pond-loop
 - id: le_doubs
   chapter: western
@@ -5662,7 +5656,8 @@ spots:
     best_time: Early morning trips give the clearest views before the midday haze. Sunset on the summit can be photographed by staying at Pilatus-Kulm Hotels.
     operating: Cog railway from Alpnachstad runs roughly mid-May to late November. The Kriens cable car runs year-round.
   hike_ids:
-  - mount_pilatus-drive-up
+  - mount_pilatus-cogwheel-from-alpnachstad
+  - mount_pilatus-cable-car-from-kriens
   - mount_pilatus-alpnachstad-aemsigen-kulm
   - mount_pilatus-fraekmuentegg-tomlishorn
 - id: wasserfall_finstersee

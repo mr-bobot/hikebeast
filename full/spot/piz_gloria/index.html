@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779302707728" />
+<link rel="stylesheet" href="../../preview.css?v=1779447013015" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -116,7 +116,7 @@
     <div class="hb-route-thumb"><img src="../../img/derivatives/piz_gloria_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
       <div class="hb-route-name">Cable car (Stechelberg → Schilthorn) <span class="hb-route-badge">Quickest</span></div>
-      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">30 min</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Cable car ride</span></span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Cable car ride</span></span></div>
       <div class="hb-route-operating">Cable car: Year-round, brief maintenance closures in May and October</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
@@ -125,7 +125,7 @@
     <div class="hb-route-meta">
       <div class="hb-route-name">From Gimmelwald on foot </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">5h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Long, big vertical</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">1600 m gain</span></span></div>
-      
+      <div class="hb-route-operating">Cable car: Year-round, brief maintenance closures in May and October</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
   </button></div>
@@ -154,7 +154,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-    <span class="value"><span data-rd-dur>30</span><span class="unit" data-rd-dur-unit>min</span></span>
+    <span class="value"><span class="missing" data-rd-dur>—</span><span class="unit" data-rd-dur-unit></span></span>
     <span class="label">Duration</span>
   </div>
     <div class="hb-stats-cell is-empty" data-stat-cell="elev">
@@ -224,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"piz_gloria-cable-car-to-summit","name":"Cable car (Stechelberg → Schilthorn)","start":"Stechelberg cable car","transit":{"train":"Lauterbrunnen (BLS) + bus to Stechelberg"},"duration_min":30,"sac_grade":"T1","effort_label":"Cable car ride","description_extra":"Schilthornbahn cable car from Stechelberg up to the 2,970 m summit, in stages through Gimmelwald, Mürren, and Birg.","visits":["piz_gloria"],"sources":["https://www.myswitzerland.com/en-us/experiences/schilthorn-1/"],"quickest_for":["piz_gloria"],"cable_car_ids":["schilthornbahn"],"start_maps_url":"https://www.google.com/maps/place/?q=46.55545,7.90141&z=16","cable_cars":[{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"}],"cable_car":{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"},"quickest":true},{"id":"piz_gloria-gimmelwald-on-foot","name":"From Gimmelwald on foot","start":"Gimmelwald","transit":{"train":"Lauterbrunnen + Stechelberg-Gimmelwald cable car"},"duration_min":300,"gain_m":1600,"sac_grade":"T3","effort_label":"Long, big vertical","description_extra":"Foot ascent from Gimmelwald (reached by cable car from Stechelberg) up to the Schilthorn summit at 2,970 m. About five hours and 1,600 m of gain for a fit walker. T3. The trail climbs steadily, crossing below the cable car line and passing through Mürren and Birg. Most people walk one direction and ride the cable car the other. Bring layers; the summit is regularly windy and significantly cooler than the valley.","visits":["piz_gloria"],"sources":["https://www.komoot.com/smarttour/1805932"],"start_maps_url":"https://www.google.com/maps/place/?q=46.533,7.883&z=16","distance_km":8,"quickest":false}];
+  const ROUTES = [{"id":"piz_gloria-cable-car-to-summit","name":"Cable car (Stechelberg → Schilthorn)","start":"Stechelberg cable car","transit":{"train":"Lauterbrunnen (BLS) + bus to Stechelberg"},"sac_grade":"T1","effort_label":"Cable car ride","description_extra":"Schilthornbahn cable car from Stechelberg up to the 2,970 m summit, in stages through Gimmelwald, Mürren, and Birg.","visits":["piz_gloria"],"sources":["https://www.myswitzerland.com/en-us/experiences/schilthorn-1/"],"quickest_for":["piz_gloria"],"cable_car_ids":["schilthornbahn"],"start_maps_url":"https://www.google.com/maps/place/?q=46.55545,7.90141&z=16","cable_cars":[{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"}],"cable_car":{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"},"quickest":true},{"id":"piz_gloria-gimmelwald-on-foot","name":"From Gimmelwald on foot","start":"Gimmelwald","transit":{"train":"Lauterbrunnen + Stechelberg-Gimmelwald cable car"},"duration_min":300,"gain_m":1600,"sac_grade":"T3","effort_label":"Long, big vertical","description_extra":"Foot ascent from Gimmelwald (reached by cable car from Stechelberg) up to the Schilthorn summit at 2,970 m. About five hours and 1,600 m of gain for a fit walker. T3. The trail climbs steadily, crossing below the cable car line and passing through Mürren and Birg. Most people walk one direction and ride the cable car the other. Bring layers; the summit is regularly windy and significantly cooler than the valley.","visits":["piz_gloria"],"sources":["https://www.komoot.com/smarttour/1805932"],"start_maps_url":"https://www.google.com/maps/place/?q=46.533,7.883&z=16","distance_km":8,"cable_car_ids":["schilthornbahn"],"cable_cars":[{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"}],"cable_car":{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"},"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
