@@ -3996,17 +3996,17 @@ hikes:
 - id: viewpoint_beatenberg-drive-up
   visits:
   - viewpoint_beatenberg
-  name: Drive to the Niederhorn valley station
-  start: Beatenberg, Niederhorn valley station parking
+  name: Drive to the Aussichtspunkt parking
+  start: Parking St. Beatus Höhlen (Beatenberg)
   sac_grade: T1
   effort_label: Drive-up
   equipment_list: []
   transit:
-    bus: Interlaken West + PostBus 101 to Beatenberg, Station
-  description_extra: Drive up from Interlaken to Beatenberg and continue to the Niederhorn cable car station. Park (around 9 CHF/24h at the station lot, or 5 CHF/12h at the Lood lot
-    2 km away) and walk 5 min to the viewpoint over Lake Thun. Year-round drive-up access.
+    bus: Interlaken West + PostBus 101 toward Beatenberg
+  description_extra: Drive up from Interlaken toward Beatenberg and park at the signed lot near the St. Beatus Höhlen trail. Walk a few minutes through the forest to the railing
+    above Lake Thun. Year-round drive-up access.
   sources:
-  - https://niederhorn.swiss/en/
+  - https://www.beatenberg-tourismus.ch/
   - https://www.postauto.ch/en/timetable-network
   quickest_for:
   - viewpoint_beatenberg
@@ -4107,6 +4107,33 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.1097,7.9312&z=16
   cable_car_ids:
   - alpin-express
+- id: randa_bridge-from-randa-village
+  visits:
+  - randa_bridge
+  name: Hike up from Randa village
+  start: Parkplatz Hängebrücke Randa (church lot)
+  start_maps_url: https://www.google.com/maps/place/?q=46.1004814,7.7836964&z=16
+  sac_grade: T2
+  effort_label: Moderate
+  duration_min: 105
+  gain_m: 640
+  distance_km: 4.3
+  equipment_list:
+  - Sturdy hiking shoes
+  - 1-2 L water (no fountain on trail)
+  - Sun protection
+  transit:
+    train: Visp + Matterhorn Gotthard Bahn to Randa, then 5 min walk to the church lot
+  description_extra: From the church parking in Randa village at around 1,440 m, follow the signposted Hängebrücke trail uphill through forest to the Charles Kuonen suspension bridge
+    at around 2,080 m on the Europaweg. About 640 m of gain over 4.3 km on a marked T2 path, sure-footedness required, no exposure on the approach itself. The 494 m bridge crossing
+    takes around 10 minutes. Bridge open roughly late May / early June through mid-to-late October, closed in winter and high wind. Return via the same trail, or continue the
+    full Europaweg loop No. 69 (8.6 km, around 4 h round trip).
+  sources:
+  - https://www.outdooractive.com/en/route/hiking/zermatt-matterhorn/circular-path-suspension-bridge-randa-no.-69-/23753811/
+  - https://www.europaweg.ch/en/the-charles-kuonen-suspension-bridge-on-the-europaweg/
+  - https://www.randa.ch/en/parking-in-randa/
+  quickest_for:
+  - randa_bridge
 - id: lac_de_derborence-drive-up
   visits:
   - lac_de_derborence
@@ -4315,21 +4342,21 @@ hikes:
 - id: gorges_du_chauderon-drive-up
   visits:
   - gorges_du_chauderon
-  name: Drive to Les Planches
-  start: Les Planches old town, Montreux
+  name: Drive to Parking Donner
+  start: Parking Donner (above Montreux)
   sac_grade: T1
   effort_label: Drive-up
   equipment_list: []
   transit:
-    train: Montreux SBB + 15 min walk uphill through Les Planches
-  description_extra: From the Montreux lakefront drive up into Les Planches (the old town east of central Montreux). Small paid lot between Les Planches and the church of St-Vincent
-    (limited capacity). Trailhead 5 min walk from the lot. Free public access; check Montreux Riviera Tourisme for closures.
+    train: Montreux SBB + MOB train or local bus uphill, then short walk to Parking Donner
+  description_extra: Drive up from Montreux toward Glion / Les Avants and park at the signed Parking Donner. The trail into the gorge starts a few minutes' walk from the lot. Free
+    public access; check Montreux Riviera Tourisme for closures.
   sources:
   - https://www.montreuxriviera.com/en
   - https://www.cff.ch/en.html
   quickest_for:
   - gorges_du_chauderon
-  start_maps_url: https://www.google.com/maps/place/?q=46.4328,6.9168&z=16
+  start_maps_url: https://maps.app.goo.gl/GW8Xp92ACU27hRkBA
 - id: pisse_chevre-drive-up
   visits:
   - pisse_chevre
