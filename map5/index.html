@@ -3,34 +3,25 @@
 <head>
 <meta charset="utf-8" />
 <script>
-// Auto-redirect to German variant if browser is German. Runs before any
-// tracking script so Meta Pixel + Vercel Analytics fire on the destination
-// URL only. Manual override via localStorage 'hb_lang' set by the navbar
-// EN/DE pill click. Self-deriving target — there is no hardcoded page-slug
-// list to fall out of sync when a new landing ships (the /map7/ bug class,
-// caught by scripts/lint-tracking-pipeline.mjs since 2026-05-21).
+// Auto-redirect to German variant if the browser/device language is
+// German. Runs before any tracking script so Meta Pixel + Vercel
+// Analytics fire on the destination URL only, not both. Manual override
+// via localStorage 'hb_lang' set by the navbar EN/DE pill click below.
 (function () {
   try {
-    if (location.pathname.startsWith('/de/')) return;
-    var pref = null;
-    try { pref = localStorage.getItem('hb_lang'); } catch (e) {}
-    if (pref === 'en') return;
-    var langs = (navigator.languages && navigator.languages.length)
-      ? navigator.languages
-      : (navigator.language ? [navigator.language] : []);
-    var hasDE = false;
-    for (var i = 0; i < langs.length; i++) {
-      if ((langs[i] || '').toLowerCase().indexOf('de') === 0) { hasDE = true; break; }
-    }
-    if (pref !== 'de' && !hasDE) return;
-    location.replace('/de' + location.pathname + location.search + location.hash);
+    if (localStorage.getItem('hb_lang') === 'en') return;
+    var lang = (navigator.language || '').toLowerCase();
+    if (!lang.startsWith('de')) return;
+    var target = location.pathname.replace(/^\/(map5|map4|map3|themap|map)\b/, '/de/$1');
+    if (target === location.pathname) return;
+    location.replace(target + location.search + location.hash);
   } catch (e) {}
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
 <title>Switzerland Map · 100+ Hidden Swiss Spots with GPS</title>
-<meta name="description" content="Swiss Gems · 141 hidden spots in Switzerland for hiking and wildcamping. GPS, routes, and photo info for every spot." />
+<meta name="description" content="The Switzerland map with 100+ hidden gems. Exact GPS, hike difficulty and more." />
 <link rel="canonical" href="https://hikebeast.ch/map/" />
 <link rel="alternate" hreflang="en" href="https://hikebeast.ch/map/" />
 <link rel="alternate" hreflang="de" href="https://hikebeast.ch/de/map/" />
@@ -41,7 +32,7 @@
 <meta property="og:site_name" content="Hikebeast" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Switzerland Map · 100+ Hidden Spots" />
-<meta property="og:description" content="Swiss Gems · 141 hidden spots in Switzerland for hiking and wildcamping. Each spot contains GPS, routes, and photo infos. Hand-mapped by Leon Helg over five years of scouting the Swiss Alps." />
+<meta property="og:description" content="The ultimate Swiss map." />
 <meta property="og:url" content="https://hikebeast.ch/map5/" />
 <meta property="og:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 <meta property="og:image:width" content="1920" />
@@ -75,11 +66,6 @@ fbq('track', 'ViewContent', {
   currency: 'CHF'
 });
 </script>
-<!-- meta-cookies: capture ?fbclid= into _fbc cookie, expose
-     window.HBMeta.getCookies() for fbc + fbp pass-through. Loaded
-     after the Meta Pixel init so _fbp is set by the SDK before we
-     read it. Best-effort: failures are silent. -->
-<script src="/lib/meta-cookies.js"></script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 /></noscript>
@@ -1922,9 +1908,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   let stripe = null;
   let checkout = null;
   let mountInFlight = false;
-  // Stripe Checkout Session id from /api/checkout/session response, used
-  // as the eventID for the InitiateCheckout pixel + CAPI dedup.
-  let currentSessionId = null;
 
   // Visual stand-in shown when STRIPE_SECRET_KEY isn't configured yet.
   // Mirrors the layout of Stripe's real embedded iframe so the page can be
@@ -1981,8 +1964,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           utm_source: utmSource,
           utm_medium: utmMedium,
           utm_campaign: utmCampaign,
-          fbc: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbc : "") || "",
-          fbp: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbp : "") || "",
           r: readStoredRef(),
           source_page: "map5",
           hero_variant: window.HB_HERO_VARIANT || "",
@@ -2015,9 +1996,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       if (typeof data.currency === "string") {
         currentCurrency = data.currency.toLowerCase();
       }
-      if (typeof data.session_id === "string") {
-        currentSessionId = data.session_id;
-      }
       if (typeof data.amount === "number") {
         currentAmount = data.amount;
       }
@@ -2042,6 +2020,14 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       container.innerHTML = "";
       container.classList.add("is-mounted");
       checkout.mount("#checkout");
+
+      // InitiateCheckout signal for Meta
+      if (typeof fbq === "function") {
+        fbq("track", "InitiateCheckout", {
+          value: 27.0,
+          currency: currentCurrency.toUpperCase(),
+        });
+      }
     } catch (err) {
       console.error("Checkout mount failed:", err);
       container.innerHTML =
@@ -2051,70 +2037,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     }
   }
 
-  // InitiateCheckout · fires ONCE per session when the buyer first
-  // interacts with the embedded checkout form (tap/click or focus
-  // into the Stripe iframe). /map5/ was added 2026-05-16 from an
-  // older template and missed the 2026-05-15 fix that moved this
-  // out of mountCheckout — backfilled 2026-05-20.
-  function attachInitiateCheckoutSignal() {
-    var container = document.getElementById("checkout");
-    if (!container) return;
-    var key = "hb:ic_fired";
-    try { if (sessionStorage.getItem(key) === "1") return; } catch (e) {}
-
-    function fire() {
-      container.removeEventListener("pointerdown", fire, true);
-      container.removeEventListener("focusin", fire, true);
-      try { sessionStorage.setItem(key, "1"); } catch (e) {}
-      var icValue = typeof currentAmount === "number" ? currentAmount : 27;
-      var icCurrency = (currentCurrency || "chf").toUpperCase();
-      // Browser pixel · eventID = Stripe session id so the CAPI mirror
-      // (fired below via /api/visit beacon) dedupes against this.
-      if (typeof fbq === "function") {
-        try {
-          if (currentSessionId) {
-            fbq("track", "InitiateCheckout", { value: icValue, currency: icCurrency }, { eventID: currentSessionId });
-          } else {
-            fbq("track", "InitiateCheckout", { value: icValue, currency: icCurrency });
-          }
-        } catch (e) {}
-      }
-      // Server-side CAPI mirror · /api/visit forwards to Meta CAPI with
-      // event_id = session_id, matching the eventID above so Meta dedupes
-      // the pair into one InitiateCheckout event. Carries fbc/fbp from
-      // the buyer's browser so EMQ stays high.
-      if (currentSessionId) {
-        try {
-          var mc = (window.HBMeta && window.HBMeta.getCookies) ? window.HBMeta.getCookies() : { fbc: "", fbp: "" };
-          fetch("/api/visit", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              event: "initiate_checkout",
-              session_id: currentSessionId,
-              value: icValue,
-              currency: icCurrency,
-              fbc: mc.fbc || "",
-              fbp: mc.fbp || "",
-            }),
-            keepalive: true,
-          }).catch(function () {});
-        } catch (e) {}
-      }
-    }
-    container.addEventListener("pointerdown", fire, true);
-    container.addEventListener("focusin", fire, true);
-  }
-
   // Auto-mount checkout when the page is interactive
-  function bootCheckout() {
-    mountCheckout();
-    attachInitiateCheckoutSignal();
-  }
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bootCheckout);
+    document.addEventListener("DOMContentLoaded", mountCheckout);
   } else {
-    bootCheckout();
+    mountCheckout();
   }
 
   // ---------- Page-visit ping for the funnel sheet ----------
