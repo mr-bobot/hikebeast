@@ -1898,6 +1898,8 @@ spots:
   gps:
     lat: 46.07156
     lng: 7.63271
+  hike_ids:
+  - the_ice_cave-winter-approach
 - id: ferpecle_glacier
   chapter: valais
   kicker: A GLACIER YOU CAN STILL REACH ON FOOT
@@ -2049,6 +2051,8 @@ spots:
       walk_from_stop_min: 15
     best_time: Late afternoon when the sun lights the bridge from the south side.
     operating: Bridge open year-round, but the access trail may be snow-covered in winter.
+  hike_ids:
+  - goms_bridge-from-bellwald-or-fuergangen
 - id: randa_bridge
   chapter: valais
   kicker: BRIDGES
@@ -2354,6 +2358,7 @@ spots:
       6, CHF 8 students/AVS. About 1h round trip on the boardwalk with 330 steps and a 200 m climb.'
   hike_ids:
   - gorges_du_durnand-drive-up
+  - gorges_du_durnand-walkway-loop
 - id: gorges_du_dailley
   chapter: valais
   kicker: NARROWER, OLDER, LESS KNOWN
@@ -2740,12 +2745,13 @@ spots:
       parking: Restaurant Ritzli Alp lot at the trailhead, free.
       walk_to_spot_min: 1
     by_train_bus:
-      route: Bulle + PostBus toward Jaun, Dorf. From Jaun, walk up the Euschelspass trail to Ritzli Alp (about 1h 25, 500 m of gain, T1).
-      walk_from_stop_min: 85
+      route: Bulle + PostBus toward Jaun, Dorf. From Jaun, walk up the Euschelspass trail to Ritzli Alp (about 2h 45, 500 m of gain, T1).
+      walk_from_stop_min: 165
     best_time: Late afternoon and blue hour. The Gastlosen ridge sits west of the terrace, so the wall lights up at sunset and the sky stays deep blue for 30 minutes after.
     operating: Open daily June to mid-September, weekends in shoulder season. Closed in winter, mountain road closes with snow.
   hike_ids:
   - ritzli_alp-drive-up
+  - ritzli_alp-from-jaun
 - id: la_tine_canyon
   chapter: fribourg
   kicker: GO WITH A GUIDE THE FIRST TIME
@@ -3639,6 +3645,7 @@ spots:
     operating: Trail open year-round. The restaurant has seasonal hours, check restroches.ch before counting on it for parking access.
   hike_ids:
   - le_doubs-drive-up
+  - le_doubs-from-les-brenets
 - id: western_extras
   chapter: western
   kind: extras
