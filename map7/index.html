@@ -12,7 +12,7 @@
     if (localStorage.getItem('hb_lang') === 'en') return;
     var lang = (navigator.language || '').toLowerCase();
     if (!lang.startsWith('de')) return;
-    var target = location.pathname.replace(/^\/(map5|map4|map3|themap|map)\b/, '/de/$1');
+    var target = location.pathname.replace(/^\/(map7|map6|map5|map4|map3|themap|map)\b/, '/de/$1');
     if (target === location.pathname) return;
     location.replace(target + location.search + location.hash);
   } catch (e) {}
