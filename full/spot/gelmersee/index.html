@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779447013009" />
+<link rel="stylesheet" href="../../preview.css?v=1779448599566" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -101,7 +101,7 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value">T1<span class="unit">· Easy</span></span>
+    <span class="value">T2<span class="unit">· Moderate</span></span>
     <span class="label">Accessibility</span>
   </div>
     <div class="hb-stats-cell">
@@ -116,7 +116,7 @@
     <div class="hb-route-thumb"><img src="../../img/derivatives/gelmersee_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
       <div class="hb-route-name">Lakeshore loop from the funicular top <span class="hb-route-badge">Quickest</span></div>
-      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h 15</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">2h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T3 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">170 m gain</span></span></div>
       <div class="hb-route-operating">Cable car: Mid-June to mid-October · Hut: Mid June - Mid Oct</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
@@ -149,22 +149,22 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
-    <span class="value"><span data-rd-sac>T1</span><span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>Easy</span></span></span>
+    <span class="value"><span data-rd-sac>T3</span><span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>Moderate</span></span></span>
     <span class="label">Difficulty</span>
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-    <span class="value"><span data-rd-dur>1h 15</span><span class="unit" data-rd-dur-unit></span></span>
+    <span class="value"><span data-rd-dur>2h</span><span class="unit" data-rd-dur-unit></span></span>
     <span class="label">Duration</span>
   </div>
-    <div class="hb-stats-cell is-empty" data-stat-cell="elev">
+    <div class="hb-stats-cell" data-stat-cell="elev">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg></span>
-    <span class="value"><span data-rd-elev-change></span></span>
+    <span class="value"><span data-rd-elev-change>+170<span class="unit">m</span></span></span>
     <span class="label">Elevation change</span>
   </div>
     <div class="hb-stats-cell" data-stat-cell="dist">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
-    <span class="value"><span data-rd-dist>3.5</span><span class="unit">km</span></span>
+    <span class="value"><span data-rd-dist>4.7</span><span class="unit">km</span></span>
     <span class="label">Distance</span>
   </div>
   </div>
@@ -224,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"gelmersee-default","description_extra":"Accessed via the Gelmerbahn funicular from the valley, with a maximum gradient of 106 percent. The funicular runs roughly June to October. From the top, a flat 1 to 1.5 hour walk loops the reservoir at 1,850 m. T1 once you're up. The Gelmerhütte SAC sits at the far end of the lake for those continuing further.","visits":["gelmersee"],"sources":["https://www.komoot.com/smarttour/28272195"],"hut_ids":["gelmerhutte"],"cable_car_ids":["gelmerbahn-funicular"],"name":"Lakeshore loop from the funicular top","sac_grade":"T1","effort_label":"Easy","duration_min":75,"gain_m":0,"distance_km":3.5,"equipment_list":[],"start":"Gelmersee top station (Gelmerbahn from the Grimsel road)","transit":{"bus":"Postbus from Meiringen toward Grimsel Hospiz, stop Handegg, Kunzentännlein","cable_car":"Gelmerbahn funicular up to the reservoir"},"quickest_for":["gelmersee"],"start_maps_url":"https://maps.app.goo.gl/ch4evbP8FmAELXwj9","cable_cars":[{"id":"gelmerbahn-funicular","name":"Gelmerbahn","operator":"Grimselwelt / KWO","description":"Open funicular from the Grimsel pass road up to Gelmersee, 106 percent gradient on the steepest section","open_raw":"Mid-June to mid-October","website":"https://grimselwelt.ch/bahnen/gelmerbahn/"}],"cable_car":{"id":"gelmerbahn-funicular","name":"Gelmerbahn","operator":"Grimselwelt / KWO","description":"Open funicular from the Grimsel pass road up to Gelmersee, 106 percent gradient on the steepest section","open_raw":"Mid-June to mid-October","website":"https://grimselwelt.ch/bahnen/gelmerbahn/"},"huts":[{"id":"gelmerhutte","name":"Gelmerhütte","description":"Privately run hut above Gelmersee, dorm beds and meals","cost_chf_raw":"45 CHF","open_raw":"Mid June - Mid Oct","website":"https://www.gelmerhuette.ch/"}],"hut":{"id":"gelmerhutte","name":"Gelmerhütte","description":"Privately run hut above Gelmersee, dorm beds and meals","cost_chf_raw":"45 CHF","open_raw":"Mid June - Mid Oct","website":"https://www.gelmerhuette.ch/"},"quickest":true},{"id":"gelmersee-from-handegg-on-foot","visits":["gelmersee"],"sac_grade":"T2","effort_label":"Moderate","duration_min":90,"gain_m":450,"distance_km":1.6,"equipment_list":[],"start":"Handegg, Kunzentännlein (Postbus stop on the Grimsel road)","transit":{"bus":"Meiringen, then Postbus 171 toward Grimsel Hospiz, stop Handegg, Kunzentännlein"},"description_extra":"Walk-up instead of riding the funicular. From the Handegg parking / bus stop at about 1,400 m, follow the old mule track up to the Gelmersee dam, gaining roughly 450 m over 1.6 km. About 1h 30 up on a steep but well-maintained path, T2. Once at the lake the flat 1 to 1.5 hour loop around the reservoir at 1,850 m is the same as from the funicular. Useful when the Gelmerbahn is fully booked or closed (it runs roughly June to October). Descent via the same path is about 45 minutes.","sources":["https://www.travelhackergirl.com/gelmersee-hike-how-to-visit-the-lake-for-free/"],"hut_ids":["gelmerhutte"],"start_maps_url":"https://maps.app.goo.gl/LRR6dQEkUozBqBZj8","huts":[{"id":"gelmerhutte","name":"Gelmerhütte","description":"Privately run hut above Gelmersee, dorm beds and meals","cost_chf_raw":"45 CHF","open_raw":"Mid June - Mid Oct","website":"https://www.gelmerhuette.ch/"}],"hut":{"id":"gelmerhutte","name":"Gelmerhütte","description":"Privately run hut above Gelmersee, dorm beds and meals","cost_chf_raw":"45 CHF","open_raw":"Mid June - Mid Oct","website":"https://www.gelmerhuette.ch/"},"quickest":false}];
+  const ROUTES = [{"id":"gelmersee-default","description_extra":"Accessed via the Gelmerbahn funicular from the valley. The funicular runs roughly June to October. From the top station, a marked lakeshore loop circles the reservoir at 1,850 m — about 2 hours, around 170 m of cumulative climb and descent. The path on the north shore is carved into the rock face with exposed sections, rated T3 — sure-footedness and a head for heights required. The Gelmerhütte SAC sits at the far end of the lake for those continuing further.","visits":["gelmersee"],"sources":["https://www.grimselwelt.ch/en/experiences/gelmersee-circular-hike/","https://www.alltrails.com/trail/switzerland/bern/gelmersee-rundweg"],"hut_ids":["gelmerhutte"],"cable_car_ids":["gelmerbahn-funicular"],"name":"Lakeshore loop from the funicular top","sac_grade":"T3","effort_label":"Moderate","duration_min":120,"gain_m":170,"distance_km":4.7,"equipment_list":["Sturdy hiking shoes","Trekking poles (recommended on rocky north-shore section)"],"start":"Gelmersee top station (Gelmerbahn from the Grimsel road)","transit":{"bus":"Postbus from Meiringen toward Grimsel Hospiz, stop Handegg, Kunzentännlein","cable_car":"Gelmerbahn funicular up to the reservoir"},"quickest_for":["gelmersee"],"start_maps_url":"https://maps.app.goo.gl/ch4evbP8FmAELXwj9","cable_cars":[{"id":"gelmerbahn-funicular","name":"Gelmerbahn","operator":"Grimselwelt / KWO","description":"Open funicular from the Grimsel pass road up to Gelmersee, 106 percent gradient on the steepest section","open_raw":"Mid-June to mid-October","website":"https://grimselwelt.ch/bahnen/gelmerbahn/"}],"cable_car":{"id":"gelmerbahn-funicular","name":"Gelmerbahn","operator":"Grimselwelt / KWO","description":"Open funicular from the Grimsel pass road up to Gelmersee, 106 percent gradient on the steepest section","open_raw":"Mid-June to mid-October","website":"https://grimselwelt.ch/bahnen/gelmerbahn/"},"huts":[{"id":"gelmerhutte","name":"Gelmerhütte","description":"Privately run hut above Gelmersee, dorm beds and meals","cost_chf_raw":"45 CHF","open_raw":"Mid June - Mid Oct","website":"https://www.gelmerhuette.ch/"}],"hut":{"id":"gelmerhutte","name":"Gelmerhütte","description":"Privately run hut above Gelmersee, dorm beds and meals","cost_chf_raw":"45 CHF","open_raw":"Mid June - Mid Oct","website":"https://www.gelmerhuette.ch/"},"quickest":true},{"id":"gelmersee-from-handegg-on-foot","visits":["gelmersee"],"sac_grade":"T2","effort_label":"Moderate","duration_min":90,"gain_m":450,"distance_km":1.6,"equipment_list":[],"start":"Handegg, Kunzentännlein (Postbus stop on the Grimsel road)","transit":{"bus":"Meiringen, then Postbus 171 toward Grimsel Hospiz, stop Handegg, Kunzentännlein"},"description_extra":"Walk-up instead of riding the funicular. From the Handegg parking / bus stop at about 1,400 m, follow the old mule track up to the Gelmersee dam, gaining roughly 450 m over 1.6 km. About 1h 30 up on a steep but well-maintained path, T2. Once at the lake the flat 1 to 1.5 hour loop around the reservoir at 1,850 m is the same as from the funicular. Useful when the Gelmerbahn is fully booked or closed (it runs roughly June to October). Descent via the same path is about 45 minutes.","sources":["https://www.grimselwelt.ch/en/locations/gelmersee/","https://www.komoot.com/de-de/smarttour/166"],"hut_ids":["gelmerhutte"],"start_maps_url":"https://maps.app.goo.gl/LRR6dQEkUozBqBZj8","huts":[{"id":"gelmerhutte","name":"Gelmerhütte","description":"Privately run hut above Gelmersee, dorm beds and meals","cost_chf_raw":"45 CHF","open_raw":"Mid June - Mid Oct","website":"https://www.gelmerhuette.ch/"}],"hut":{"id":"gelmerhutte","name":"Gelmerhütte","description":"Privately run hut above Gelmersee, dorm beds and meals","cost_chf_raw":"45 CHF","open_raw":"Mid June - Mid Oct","website":"https://www.gelmerhuette.ch/"},"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

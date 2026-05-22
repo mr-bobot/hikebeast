@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779447013038" />
+<link rel="stylesheet" href="../../preview.css?v=1779448599589" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -116,7 +116,7 @@
     <div class="hb-route-thumb"><img src="../../img/derivatives/ruinaulta_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
       <div class="hb-route-name">Versam circular through the gorge </div>
-      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">4h</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">400 m gain</span></span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T2 · Moderate</span></span></div>
       
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
@@ -154,12 +154,12 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-    <span class="value"><span data-rd-dur>4h</span><span class="unit" data-rd-dur-unit></span></span>
+    <span class="value"><span class="missing" data-rd-dur>—</span><span class="unit" data-rd-dur-unit></span></span>
     <span class="label">Duration</span>
   </div>
-    <div class="hb-stats-cell" data-stat-cell="elev">
+    <div class="hb-stats-cell is-empty" data-stat-cell="elev">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg></span>
-    <span class="value"><span data-rd-elev-change>+400<span class="unit">m</span></span></span>
+    <span class="value"><span data-rd-elev-change></span></span>
     <span class="label">Elevation change</span>
   </div>
     <div class="hb-stats-cell is-empty" data-stat-cell="dist">
@@ -224,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"ruinaulta-versam-circular","name":"Versam circular through the gorge","start":"Versam station","transit":{"train":"Versam-Safien (RhB)"},"duration_min":240,"gain_m":400,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Circular hike on the rim of the Rhine gorge from Versam-Safien station. The route winds mostly through deciduous woodland with viewing platforms over the white cliffs and the milky-green Rhine. T2, around 400 m of gain over four hours.","visits":["ruinaulta"],"sources":["https://www.komoot.com/smarttour/e1143279249/rheinschlucht-ruinaulta-valendas-versam"],"start_maps_url":"https://www.google.com/maps/place/?q=46.80738,9.3103&z=16","quickest":false},{"id":"ruinaulta-flims-out-and-back","name":"From Flims Waldhaus","start":"Flims Waldhaus","transit":{"bus":"Postbus to Flims Waldhaus"},"duration_min":60,"sac_grade":"T1","effort_label":"Easy","description_extra":"Two-hour out-and-back from Flims Waldhaus down to the Rhine gorge. Trail descends through forest past Caumasee to Conn and the Il Spir viewing platform, then climbs back. Mostly easy, T1, family-friendly.","visits":["ruinaulta"],"sources":["https://www.myswitzerland.com/en-us/experiences/ruinaulta-switzerlands-grand-canyon/"],"quickest_for":["ruinaulta"],"start_maps_url":"https://www.google.com/maps/place/?q=46.82572,9.2888&z=16","distance_km":3.7,"quickest":true}];
+  const ROUTES = [{"id":"ruinaulta-versam-circular","name":"Versam circular through the gorge","start":"Versam station","transit":{"train":"Versam-Safien (RhB)"},"sac_grade":"T2","effort_label":"Moderate","description_extra":"Circular hike on the rim of the Rhine gorge from Versam-Safien station. The route winds mostly through deciduous woodland with viewing platforms over the white cliffs and the milky-green Rhine. T2. Source verification pending.","visits":["ruinaulta"],"sources":[],"start_maps_url":"https://www.google.com/maps/place/?q=46.80738,9.3103&z=16","quickest":false},{"id":"ruinaulta-flims-out-and-back","name":"From Flims Waldhaus","start":"Flims Waldhaus","transit":{"bus":"Postbus to Flims Waldhaus"},"duration_min":60,"sac_grade":"T1","effort_label":"Easy","description_extra":"About one hour one-way from Flims Waldhaus down to the Rhine gorge, two hours round trip. Trail descends through forest past Caumasee to Conn and the Il Spir viewing platform, then climbs back. Mostly easy, T1, family-friendly.","visits":["ruinaulta"],"sources":["https://www.myswitzerland.com/en-us/experiences/ruinaulta-switzerlands-grand-canyon/"],"quickest_for":["ruinaulta"],"start_maps_url":"https://www.google.com/maps/place/?q=46.82572,9.2888&z=16","distance_km":3.7,"quickest":true}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {

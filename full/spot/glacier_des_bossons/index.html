@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779447013044" />
+<link rel="stylesheet" href="../../preview.css?v=1779448599595" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -116,7 +116,7 @@
     <div class="hb-route-thumb"><img src="../../img/derivatives/glacier_des_bossons_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
       <div class="hb-route-name">Chairlift to Chalet du Glacier <span class="hb-route-badge">Quickest</span></div>
-      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Trivial (chairlift)</span></span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">1h 20</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Trivial (chairlift)</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">268 m gain</span></span></div>
       <div class="hb-route-operating">Cable car: Mid-June to mid-September</div>
     </div>
     <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
@@ -154,17 +154,17 @@
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-    <span class="value"><span class="missing" data-rd-dur>—</span><span class="unit" data-rd-dur-unit></span></span>
+    <span class="value"><span data-rd-dur>1h 20</span><span class="unit" data-rd-dur-unit></span></span>
     <span class="label">Duration</span>
   </div>
-    <div class="hb-stats-cell is-empty" data-stat-cell="elev">
+    <div class="hb-stats-cell" data-stat-cell="elev">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg></span>
-    <span class="value"><span data-rd-elev-change></span></span>
+    <span class="value"><span data-rd-elev-change>+268<span class="unit">m</span></span></span>
     <span class="label">Elevation change</span>
   </div>
-    <div class="hb-stats-cell is-empty" data-stat-cell="dist">
+    <div class="hb-stats-cell" data-stat-cell="dist">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
-    <span class="value"><span data-rd-dist></span><span class="unit">km</span></span>
+    <span class="value"><span data-rd-dist>2.6</span><span class="unit">km</span></span>
     <span class="label">Distance</span>
   </div>
   </div>
@@ -224,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"glacier_des_bossons-chairlift-to-chalet","name":"Chairlift to Chalet du Glacier","start":"Les Bossons (bus stop)","transit":{"bus":"Chamonix bus line 2 to Glacier des Bossons stop"},"sac_grade":"T1","effort_label":"Trivial (chairlift)","description_extra":"Chairlift from Les Bossons (Chamonix bus line 2) up to the Chalet du Glacier des Bossons. Skips about 1,000 feet of forest climb. The chalet has a restaurant with views down onto the glacier and an interpretive walk explaining glacier features. Open 8:30 to 18:30 in season.","visits":["glacier_des_bossons"],"sources":["https://en.chamonix.com/spring-hikes/hike-to-the-chalet-du-glacier-des-bossons"],"quickest_for":["glacier_des_bossons"],"cable_car_ids":["glacier-bossons-chairlift"],"start_maps_url":"https://www.google.com/maps/place/?q=45.90715,6.84205&z=16","cable_cars":[{"id":"glacier-bossons-chairlift","name":"Télésiège du Glacier des Bossons","operator":"Mont-Blanc Natural Resort","description":"Chairlift from Chamonix valley up to the Chalet des Bossons at 1,410 m","open_raw":"Mid-June to mid-September","website":"https://www.montblancnaturalresort.com/en/"}],"cable_car":{"id":"glacier-bossons-chairlift","name":"Télésiège du Glacier des Bossons","operator":"Mont-Blanc Natural Resort","description":"Chairlift from Chamonix valley up to the Chalet des Bossons at 1,410 m","open_raw":"Mid-June to mid-September","website":"https://www.montblancnaturalresort.com/en/"},"quickest":true},{"id":"glacier_des_bossons-chalet-to-la-jonction","name":"Chalet → Chalet des Pyramides → La Jonction","start":"Chalet du Glacier des Bossons","duration_min":240,"gain_m":800,"sac_grade":"T2","effort_label":"Moderate, steep zigzag","description_extra":"Climb from the Chalet du Glacier des Bossons up to La Jonction, the point where the Bossons and Taconnaz glaciers split. About four hours, around 800 m of gain. The route is a steady zig-zag ascent through woods to steep meadows, with rocky stretches and cables and metal steps near the top. T2. Too steep and exposed to do in rain.","visits":["glacier_des_bossons"],"sources":["https://www.komoot.com/smarttour/994294"],"cable_car_ids":["glacier-bossons-chairlift"],"start_maps_url":"https://www.google.com/maps/place/?q=45.894,6.84951&z=16","distance_km":5.8,"cable_cars":[{"id":"glacier-bossons-chairlift","name":"Télésiège du Glacier des Bossons","operator":"Mont-Blanc Natural Resort","description":"Chairlift from Chamonix valley up to the Chalet des Bossons at 1,410 m","open_raw":"Mid-June to mid-September","website":"https://www.montblancnaturalresort.com/en/"}],"cable_car":{"id":"glacier-bossons-chairlift","name":"Télésiège du Glacier des Bossons","operator":"Mont-Blanc Natural Resort","description":"Chairlift from Chamonix valley up to the Chalet des Bossons at 1,410 m","open_raw":"Mid-June to mid-September","website":"https://www.montblancnaturalresort.com/en/"},"quickest":false}];
+  const ROUTES = [{"id":"glacier_des_bossons-chairlift-to-chalet","name":"Chairlift to Chalet du Glacier","start":"Les Bossons (bus stop)","transit":{"bus":"Chamonix bus line 2 to Glacier des Bossons stop"},"sac_grade":"T1","effort_label":"Trivial (chairlift)","description_extra":"Chairlift from Les Bossons (Chamonix bus line 2) up to the Chalet du Glacier des Bossons. Skips about 1,000 feet of forest climb. The chalet has a restaurant with views down onto the glacier and an interpretive walk explaining glacier features. Open 8:30 to 18:30 in season.","visits":["glacier_des_bossons"],"sources":["https://en.chamonix.com/spring-hikes/hike-to-the-chalet-du-glacier-des-bossons"],"quickest_for":["glacier_des_bossons"],"cable_car_ids":["glacier-bossons-chairlift"],"start_maps_url":"https://www.google.com/maps/place/?q=45.90715,6.84205&z=16","duration_min":80,"distance_km":2.6,"gain_m":268,"cable_cars":[{"id":"glacier-bossons-chairlift","name":"Télésiège du Glacier des Bossons","operator":"Mont-Blanc Natural Resort","description":"Chairlift from Chamonix valley up to the Chalet des Bossons at 1,410 m","open_raw":"Mid-June to mid-September","website":"https://www.montblancnaturalresort.com/en/"}],"cable_car":{"id":"glacier-bossons-chairlift","name":"Télésiège du Glacier des Bossons","operator":"Mont-Blanc Natural Resort","description":"Chairlift from Chamonix valley up to the Chalet des Bossons at 1,410 m","open_raw":"Mid-June to mid-September","website":"https://www.montblancnaturalresort.com/en/"},"quickest":true},{"id":"glacier_des_bossons-chalet-to-la-jonction","name":"Chalet → Chalet des Pyramides → La Jonction","start":"Chalet du Glacier des Bossons","duration_min":240,"gain_m":800,"sac_grade":"T2","effort_label":"Moderate, steep zigzag","description_extra":"Climb from the Chalet du Glacier des Bossons up to La Jonction, the point where the Bossons and Taconnaz glaciers split. About four hours, around 800 m of gain. The route is a steady zig-zag ascent through woods to steep meadows, with rocky stretches and cables and metal steps near the top. T2. Too steep and exposed to do in rain.","visits":["glacier_des_bossons"],"sources":["https://www.camptocamp.org/routes/53827/fr/mont-blanc-la-jonction-depuis-le-glacier-des-bossons"],"cable_car_ids":["glacier-bossons-chairlift"],"start_maps_url":"https://www.google.com/maps/place/?q=45.894,6.84951&z=16","distance_km":5.8,"cable_cars":[{"id":"glacier-bossons-chairlift","name":"Télésiège du Glacier des Bossons","operator":"Mont-Blanc Natural Resort","description":"Chairlift from Chamonix valley up to the Chalet des Bossons at 1,410 m","open_raw":"Mid-June to mid-September","website":"https://www.montblancnaturalresort.com/en/"}],"cable_car":{"id":"glacier-bossons-chairlift","name":"Télésiège du Glacier des Bossons","operator":"Mont-Blanc Natural Resort","description":"Chairlift from Chamonix valley up to the Chalet des Bossons at 1,410 m","open_raw":"Mid-June to mid-September","website":"https://www.montblancnaturalresort.com/en/"},"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
