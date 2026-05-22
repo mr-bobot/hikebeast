@@ -539,6 +539,47 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.5;
     color: var(--text, #1d1d1f);
   }
+  /* Kleiner "Ansehen" Pill-Button unter dem About-me Absatz.
+     Gleicher dark-glass look wie der /map3/ collection-play pill, damit
+     der Play-Affordance als brand signature CTA gelesen wird. */
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+  .about-video-btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.78);
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .about-video-btn:hover { background: rgba(0, 0, 0, 0.86); }
+  .about-video-btn:active { transform: scale(0.97); background: rgba(0, 0, 0, 0.9); }
+  .about-video-btn svg { width: 11px; height: 11px; flex: 0 0 auto; }
+  .about-video-btn-sep { opacity: 0.55; margin: 0 1px; }
+  .about-video {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    background: #000;
+    display: block;
+  }
+  .about-video[hidden] { display: none; }
 
   /* === Embedded checkout === */
   .checkout-wrap {
@@ -1601,8 +1642,38 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
       <div class="px about-body">
         <img class="about-photo" src="/map3/img/about/leon.jpg" alt="Leon Helg" loading="lazy" decoding="async" />
-        <p>Ich bin Leon. Als Fotograf war ich viele Sommer in den Schweizer Alpen unterwegs auf der Suche nach den schönsten Locations.</p>
+        <div class="about-text">
+          <p>Ich bin Leon. Als Fotograf war ich viele Sommer in den Schweizer Alpen unterwegs auf der Suche nach den schönsten Locations.</p>
+          <button type="button" class="about-video-btn" id="about-video-btn" data-src="/de/map7/swissgems_intro_de_v1.mov" data-poster="/map3/img/about/leon.jpg">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
+            <span>Ansehen</span>
+            <span class="about-video-btn-sep" aria-hidden="true">·</span>
+            <span>0:56</span>
+          </button>
+        </div>
       </div>
+      <script>
+        // Video-Element wird erst beim Klick erzeugt. Kein <video src> im
+        // initial-HTML = keine Möglichkeit für Safari/Chrome irgendwelche
+        // Metadata- oder Range-Requests beim Pageload abzusetzen. Der
+        // erste Byte des Videos lädt frühestens wenn der User auf den
+        // Pill drückt.
+        (function () {
+          var btn = document.getElementById("about-video-btn");
+          if (!btn) return;
+          btn.addEventListener("click", function () {
+            var vid = document.createElement("video");
+            vid.className = "about-video";
+            vid.src = btn.dataset.src;
+            vid.poster = btn.dataset.poster;
+            vid.playsInline = true;
+            vid.controls = true;
+            vid.autoplay = true;
+            btn.replaceWith(vid);
+            vid.play().catch(function () {});
+          }, { once: true });
+        })();
+      </script>
     </section>
 
     <!-- Embedded Stripe Checkout -->
