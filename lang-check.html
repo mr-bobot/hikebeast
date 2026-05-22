@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Lang Check</title>
+<style>
+  body { font: 16px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro", Helvetica, Arial, sans-serif; max-width: 640px; margin: 0 auto; padding: 24px; background: #fff; color: #111; }
+  h1 { font-size: 20px; margin: 0 0 16px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  td { padding: 8px 0; border-bottom: 1px solid #eee; vertical-align: top; }
+  td:first-child { font-weight: 600; width: 42%; padding-right: 12px; }
+  td:last-child { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 14px; word-break: break-all; }
+  .verdict { padding: 12px 16px; margin: 16px 0; border-radius: 8px; font-weight: 600; font-size: 17px; }
+  .verdict.yes { background: #e6f7ec; color: #0a6b35; }
+  .verdict.no  { background: #ffe5e5; color: #a30000; }
+  .note { color: #666; font-size: 13px; margin-top: 24px; }
+</style>
+</head>
+<body>
+<h1>Hikebeast · Lang Check</h1>
+<p>What does this browser tell the EN→DE redirect script?</p>
+<table id="t"></table>
+<div id="verdict" class="verdict"></div>
+<p class="note">Screenshot this page and send it back. No data leaves the browser.</p>
+<script>
+function safeGet(fn) {
+  try { return fn(); } catch (e) { return "(threw: " + (e && e.message ? e.message : "?") + ")"; }
+}
+var navLang = navigator.language || "(undefined)";
+var navLangsRaw = navigator.languages;
+var navLangs = navLangsRaw && navLangsRaw.length ? Array.prototype.join.call(navLangsRaw, ", ") : "(empty or undefined)";
+var hbLang = safeGet(function () { return localStorage.getItem("hb_lang"); });
+hbLang = hbLang === null ? "(null — never set)" : JSON.stringify(hbLang);
+
+// Same detection logic as the live redirect.
+var langs = (navigator.languages && navigator.languages.length)
+  ? navigator.languages
+  : (navigator.language ? [navigator.language] : []);
+var hasDE = false;
+var matchedAt = -1;
+for (var i = 0; i < langs.length; i++) {
+  if ((langs[i] || "").toLowerCase().indexOf("de") === 0) { hasDE = true; matchedAt = i; break; }
+}
+var prefRaw = safeGet(function () { return localStorage.getItem("hb_lang"); });
+var prefIsDE = prefRaw === "de";
+var prefIsEN = prefRaw === "en";
+var willRedirect = !prefIsEN && (prefIsDE || hasDE);
+
+var rows = [
+  ["URL", location.href],
+  ["pathname", location.pathname],
+  ["navigator.language", navLang],
+  ["navigator.languages", navLangs],
+  ["localStorage hb_lang", hbLang],
+  ["hasDE (any de-* in list)", hasDE + (matchedAt >= 0 ? " (langs[" + matchedAt + "])" : "")],
+  ["pref === 'de'", prefIsDE],
+  ["pref === 'en'", prefIsEN],
+  ["userAgent", navigator.userAgent]
+];
+var t = document.getElementById("t");
+for (var k = 0; k < rows.length; k++) {
+  var tr = document.createElement("tr");
+  var td1 = document.createElement("td"); td1.textContent = rows[k][0];
+  var td2 = document.createElement("td"); td2.textContent = String(rows[k][1]);
+  tr.appendChild(td1); tr.appendChild(td2); t.appendChild(tr);
+}
+var v = document.getElementById("verdict");
+if (willRedirect) {
+  v.className = "verdict yes";
+  v.textContent = "✓ Detection says: redirect to /de/ (German)";
+} else {
+  v.className = "verdict no";
+  v.textContent = "✗ Detection says: stay on /en/ (no DE signal found)";
+}
+</script>
+</body>
+</html>
