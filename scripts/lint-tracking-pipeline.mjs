@@ -217,12 +217,54 @@ for (const htmlPath of indexes) {
   }
 }
 
-if (errors.length || metaErrors.length) {
-  const total = errors.length + metaErrors.length;
-  console.error(`Tracking pipeline lint FAILED · ${total} issue(s) found across ${indexes.length} pages, ${checkedCalls} fetch sites, ${checkedFields} field references, ${metaCheckedCalls} Meta pixel calls:`);
+// ─── Lang-redirect check ─────────────────────────────────────────────────
+//
+// Catches the "page added to the family but missing from the EN→DE
+// auto-redirect" bug class. Background: 2026-05-21 /map7/ shipped as the
+// new bio-link target, but the head-script's redirect regex still listed
+// only `(map5|map4|map3|themap|map)` so DE-language visitors landing on
+// /map7/ stayed stuck on the English page. Zero clicks on /de/map7/ until
+// caught by Leon.
+//
+// The fix is structural: every EN page that auto-redirects DE traffic now
+// self-derives the target path as `/de` + location.pathname instead of
+// matching a hardcoded slug list. This lint forbids re-introducing the
+// brittle pattern.
+//
+// Allowed shape:
+//   location.replace('/de' + location.pathname + location.search + location.hash);
+//
+// Forbidden shape:
+//   var target = location.pathname.replace(/^\/(slug1|slug2|...)\b/, '/de/$1');
+//
+// We fingerprint the brittle pattern by looking for any `location.pathname
+// .replace(/^\/(...)\b/...)` with an alternation containing multiple
+// slugs. Pages on the DE side don't redirect, so we skip them.
+let langCheckedPages = 0;
+const langErrors = [];
+for (const htmlPath of indexes) {
+  const rel = relative(repoRoot, htmlPath);
+  if (rel.startsWith("de/")) continue;
+  const content = readFileSync(htmlPath, "utf8");
+  if (!/localStorage\.getItem\(['"]hb_lang['"]\)/.test(content)) continue;
+  langCheckedPages++;
+  // Detect the hardcoded-slug redirect pattern: a regex applied to
+  // location.pathname containing an alternation of page slugs.
+  const hardcoded = content.match(
+    /location\.pathname\.replace\s*\(\s*\/\^\\\/\([^)]*\|[^)]*\)\\b\/[\s\S]{0,40}?['"]\/de\//
+  );
+  if (hardcoded) {
+    langErrors.push(`Lang redirect: ${rel} hardcodes page slugs in the EN→DE redirect regex. Use \`location.replace('/de' + location.pathname + ...)\` instead so new pages can't fall out of sync. Pattern caught 2026-05-21 after /map7/ shipped without itself in the alternation and got zero DE traffic.`);
+  }
+}
+
+if (errors.length || metaErrors.length || langErrors.length) {
+  const total = errors.length + metaErrors.length + langErrors.length;
+  console.error(`Tracking pipeline lint FAILED · ${total} issue(s) found across ${indexes.length} pages, ${checkedCalls} fetch sites, ${checkedFields} field references, ${metaCheckedCalls} Meta pixel calls, ${langCheckedPages} lang redirects:`);
   for (const e of errors) console.error(`  - ${e}`);
   for (const e of metaErrors) console.error(`  - ${e}`);
+  for (const e of langErrors) console.error(`  - ${e}`);
   process.exit(1);
 }
 
-console.log(`Tracking pipeline OK · ${indexes.length} pages, ${checkedCalls} fetch sites, ${checkedFields} field references, ${metaCheckedCalls} Meta pixel calls all wired through.`);
+console.log(`Tracking pipeline OK · ${indexes.length} pages, ${checkedCalls} fetch sites, ${checkedFields} field references, ${metaCheckedCalls} Meta pixel calls, ${langCheckedPages} lang redirects all wired through.`);
