@@ -219,27 +219,27 @@ for (const htmlPath of indexes) {
 
 // ─── Lang-redirect check ─────────────────────────────────────────────────
 //
-// Catches the "page added to the family but missing from the EN→DE
-// auto-redirect" bug class. Background: 2026-05-21 /map7/ shipped as the
-// new bio-link target, but the head-script's redirect regex still listed
-// only `(map5|map4|map3|themap|map)` so DE-language visitors landing on
-// /map7/ stayed stuck on the English page. Zero clicks on /de/map7/ until
-// caught by Leon.
+// Catches the "page added to the family but missing from its OWN EN→DE
+// auto-redirect regex" bug class. Background:
 //
-// The fix is structural: every EN page that auto-redirects DE traffic now
-// self-derives the target path as `/de` + location.pathname instead of
-// matching a hardcoded slug list. This lint forbids re-introducing the
-// brittle pattern.
+//   2026-05-21: /map7/ shipped as the new bio-link target but its
+//     head-script regex still listed only `(map5|map4|map3|themap|map)`,
+//     missing `map7` itself. DE-language visitors stayed stuck on the
+//     English page. Zero clicks on /de/map7/ until Leon noticed.
 //
-// Allowed shape:
-//   location.replace('/de' + location.pathname + location.search + location.hash);
+//   2026-05-22: I tried to fix this structurally by refactoring all 7 EN
+//     map pages to a self-deriving form (`'/de' + location.pathname`).
+//     Empirically broke Instagram in-app browser compatibility — verified
+//     by Leon's girlfriend on a real DE iPhone in IAB (PR #78 diagnostic).
+//     IAB honors the regex form but not the concat form, for reasons we
+//     don't fully understand but no longer need to.
 //
-// Forbidden shape:
-//   var target = location.pathname.replace(/^\/(slug1|slug2|...)\b/, '/de/$1');
+// So the canonical form IS the regex-with-alternation. This lint enforces
+// that each EN landing page's regex alternation includes the page's own
+// slug. Adding a new page = add its slug to its own regex. Forgetting it
+// fails the build instead of silently losing DE traffic.
 //
-// We fingerprint the brittle pattern by looking for any `location.pathname
-// .replace(/^\/(...)\b/...)` with an alternation containing multiple
-// slugs. Pages on the DE side don't redirect, so we skip them.
+// DE pages don't have an auto-redirect script and are skipped.
 let langCheckedPages = 0;
 const langErrors = [];
 for (const htmlPath of indexes) {
@@ -248,13 +248,23 @@ for (const htmlPath of indexes) {
   const content = readFileSync(htmlPath, "utf8");
   if (!/localStorage\.getItem\(['"]hb_lang['"]\)/.test(content)) continue;
   langCheckedPages++;
-  // Detect the hardcoded-slug redirect pattern: a regex applied to
-  // location.pathname containing an alternation of page slugs.
-  const hardcoded = content.match(
-    /location\.pathname\.replace\s*\(\s*\/\^\\\/\([^)]*\|[^)]*\)\\b\/[\s\S]{0,40}?['"]\/de\//
+  // Skip the root index.html — its redirect form is different
+  // (no slug alternation, just "/" → "/de/").
+  if (rel === "index.html") continue;
+  // Extract the page slug from the path: "map5/index.html" → "map5".
+  const ownSlug = rel.replace(/\/index\.html$/, "");
+  // Find the regex alternation in the redirect script:
+  // `location.pathname.replace(/^\/(slug1|slug2|...)\b/, '/de/$1')`
+  const m = content.match(
+    /location\.pathname\.replace\s*\(\s*\/\^\\\/\(([^)]+)\)\\b\/[\s\S]{0,40}?['"]\/de\//
   );
-  if (hardcoded) {
-    langErrors.push(`Lang redirect: ${rel} hardcodes page slugs in the EN→DE redirect regex. Use \`location.replace('/de' + location.pathname + ...)\` instead so new pages can't fall out of sync. Pattern caught 2026-05-21 after /map7/ shipped without itself in the alternation and got zero DE traffic.`);
+  if (!m) {
+    langErrors.push(`Lang redirect: ${rel} has the EN→DE redirect script but the regex alternation could not be parsed. Expected shape: \`location.pathname.replace(/^\\/(${ownSlug}|...)\\b/, '/de/$1')\`. Self-deriving forms like '/de' + pathname were tried 2026-05-22 and broke Instagram in-app browser — stick with the regex.`);
+    continue;
+  }
+  const slugs = m[1].split("|").map(s => s.trim());
+  if (!slugs.includes(ownSlug)) {
+    langErrors.push(`Lang redirect: ${rel} regex alternation is (${m[1]}) but the page's own slug "${ownSlug}" is missing. DE visitors landing here will not be redirected to /de/${ownSlug}/. Add "${ownSlug}" to the alternation.`);
   }
 }
 

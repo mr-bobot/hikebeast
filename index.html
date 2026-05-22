@@ -7,19 +7,11 @@
 // so analytics fires on the destination only.
 (function () {
   try {
+    if (localStorage.getItem('hb_lang') === 'en') return;
+    var lang = (navigator.language || '').toLowerCase();
+    if (!lang.startsWith('de')) return;
     if (location.pathname.startsWith('/de/')) return;
-    var pref = null;
-    try { pref = localStorage.getItem('hb_lang'); } catch (e) {}
-    if (pref === 'en') return;
-    var langs = (navigator.languages && navigator.languages.length)
-      ? navigator.languages
-      : (navigator.language ? [navigator.language] : []);
-    var hasDE = false;
-    for (var i = 0; i < langs.length; i++) {
-      if ((langs[i] || '').toLowerCase().indexOf('de') === 0) { hasDE = true; break; }
-    }
-    if (pref !== 'de' && !hasDE) return;
-    location.replace('/de' + location.pathname + location.search + location.hash);
+    location.replace('/de/' + location.search + location.hash);
   } catch (e) {}
 })();
 </script>

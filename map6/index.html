@@ -3,27 +3,24 @@
 <head>
 <meta charset="utf-8" />
 <script>
-// Auto-redirect to German variant if browser is German. Runs before any
-// tracking script so Meta Pixel + Vercel Analytics fire on the destination
-// URL only. Manual override via localStorage 'hb_lang' set by the navbar
-// EN/DE pill click. Self-deriving target — there is no hardcoded page-slug
-// list to fall out of sync when a new landing ships (the /map7/ bug class,
-// caught by scripts/lint-tracking-pipeline.mjs since 2026-05-21).
+// Auto-redirect to German variant if the browser/device language is
+// German. Runs before any tracking script so Meta Pixel + Vercel
+// Analytics fire on the destination URL only, not both. Manual override
+// via localStorage 'hb_lang' set by the navbar EN/DE pill click below.
+//
+// IMPORTANT — when adding a new map page, add its slug to the regex
+// alternation below. The simpler self-deriving form (`/de` + pathname)
+// is NOT IAB-compatible — empirically verified on Instagram's in-app
+// browser 2026-05-22, PR #78. The lint at scripts/lint-tracking-pipeline.mjs
+// enforces that every page's own slug is in its alternation.
 (function () {
   try {
-    if (location.pathname.startsWith('/de/')) return;
-    var pref = null;
-    try { pref = localStorage.getItem('hb_lang'); } catch (e) {}
-    if (pref === 'en') return;
-    var langs = (navigator.languages && navigator.languages.length)
-      ? navigator.languages
-      : (navigator.language ? [navigator.language] : []);
-    var hasDE = false;
-    for (var i = 0; i < langs.length; i++) {
-      if ((langs[i] || '').toLowerCase().indexOf('de') === 0) { hasDE = true; break; }
-    }
-    if (pref !== 'de' && !hasDE) return;
-    location.replace('/de' + location.pathname + location.search + location.hash);
+    if (localStorage.getItem('hb_lang') === 'en') return;
+    var lang = (navigator.language || '').toLowerCase();
+    if (!lang.startsWith('de')) return;
+    var target = location.pathname.replace(/^\/(map6|map5|map4|map3|themap|map)\b/, '/de/$1');
+    if (target === location.pathname) return;
+    location.replace(target + location.search + location.hash);
   } catch (e) {}
 })();
 </script>
