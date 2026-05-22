@@ -492,7 +492,7 @@ hikes:
   start: Kandersteg cable car valley station
   transit:
     train: Kandersteg (SBB), then 10 min walk or shuttle to Bergbahnen
-  duration_min: 15
+  duration_min: 25
   gain_m: 30
   sac_grade: T1
   effort_label: Trivial
@@ -715,7 +715,7 @@ hikes:
   start: Bettmerhorn top station
   transit:
     train: Betten + Bettmeralp cable car + Bettmerhorn lift
-  duration_min: 165
+  duration_min: 100
   sac_grade: T3
   effort_label: Moderate, light scrambling
   description_extra: Ridge traverse between Bettmerhorn and Eggishorn. Access by cable car from Betten (Bettmeralp, then the Bettmerhorn lift). The route involves light scrambling on
@@ -730,7 +730,7 @@ hikes:
   - eggishorn-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.41158,8.07558&z=16
   distance_km: 3.8
-  descent_m: 350
+  descent_m: 110
   gain_m: 250
 - id: aletsch_glacier-aletsch-panoramaweg
   name: Aletsch Panoramaweg
@@ -1025,7 +1025,7 @@ hikes:
   start: Gsteig cable car valley station
   transit:
     bus: Postbus to Gsteig + 25 min walk to cable car
-  duration_min: 30
+  duration_min: 12
   gain_m: 50
   sac_grade: T1
   effort_label: Easy
@@ -1198,7 +1198,7 @@ hikes:
   transit:
     train: Gruyères (TPF) + bus + funicular to Plan-Francey
   duration_min: 120
-  gain_m: 485
+  gain_m: 600
   sac_grade: T2
   effort_label: Moderate
   description_extra: Two-hour up-and-back from the mid-station of the Moléson funicular at Plan-Francey (1,517 m). The funicular saves the first stretch from Moléson-sur-Gruyères, leaving
@@ -1293,7 +1293,7 @@ hikes:
   sac_grade: T1
   effort_label: Easy
   duration_min: 60
-  gain_m: 60
+  gain_m: 374
   start: Parking du Flon
   transit:
     bus: Le Flon, village
@@ -1481,7 +1481,7 @@ hikes:
   start: Tierfehd cable car (Linthal)
   transit:
     train: Linthal Braunwaldbahn (SBB) + cable car
-  duration_min: 60
+  duration_min: 40
   gain_m: 100
   sac_grade: T1
   effort_label: Easy
@@ -2643,7 +2643,7 @@ hikes:
   - teysachaux
   sac_grade: T3
   effort_label: Demanding
-  duration_min: 225
+  duration_min: 300
   gain_m: 700
   equipment_list:
   - Sturdy hiking boots
@@ -2806,7 +2806,7 @@ hikes:
 - id: dent_doche-from-la-planche
   visits:
   - dent_doche
-  sac_grade: T4
+  sac_grade: T3
   effort_label: Demanding
   duration_min: 270
   gain_m: 1100
@@ -3271,7 +3271,7 @@ hikes:
   visits:
   - hardergrat_trail
   - augstmatthorn
-  sac_grade: T3
+  sac_grade: T4
   effort_label: Demanding
   duration_min: 270
   gain_m: 700
@@ -3486,7 +3486,7 @@ hikes:
   - windegghutte-sac
   start_maps_url: https://maps.app.goo.gl/A84sfrwU7EV3Sko5A
   name: Higher viewpoint via Windegghütte
-  distance_km: 6.6
+  distance_km: 4.3
   descent_m: 780
 - id: valle_verzasca-lavertezzo-to-brione
   visits:
@@ -3651,7 +3651,7 @@ hikes:
   - refuge_du_lac_blanc
   sac_grade: T2
   effort_label: Moderate
-  duration_min: 120
+  duration_min: 90
   gain_m: 500
   distance_km: 3.5
   equipment_list:
