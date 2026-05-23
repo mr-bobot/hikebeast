@@ -457,6 +457,18 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   .inside-section { margin-top: 24px; }
   .reviews { margin-top: 18px; }
   .about-section { margin-top: 18px; }
+  /* Emotional shot between About-me and checkout. 3:2 image,
+     rounded corners, sits in the .px content rhythm. */
+  .emotion-shot {
+    margin-top: 18px;
+  }
+  .emotion-shot img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+  }
   #get-the-map { margin-top: 18px; }
 
   /* === Collection grid · full-bleed photo grid above the 6 cards === */
@@ -1755,6 +1767,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           }, { once: true });
         })();
       </script>
+    </section>
+
+    <!-- Emotional shot · personal photo between About-me and the checkout
+         as a final visual pause before the buy. -->
+    <section class="px emotion-shot" aria-hidden="true">
+      <img src="/map3/img/about/riffelsee.jpg" alt="" loading="lazy" decoding="async" width="1400" height="933" />
     </section>
 
     <!-- Embedded Stripe Checkout -->
