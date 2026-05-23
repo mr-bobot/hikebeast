@@ -619,15 +619,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   .about-video-btn:active { transform: scale(0.97); background: rgba(0, 0, 0, 0.9); }
   .about-video-btn svg { width: 11px; height: 11px; flex: 0 0 auto; }
   .about-video-btn-sep { opacity: 0.55; margin: 0 1px; }
+  .about-video-wrap {
+    margin-top: 14px;
+  }
   .about-video {
     width: 100%;
-    max-width: 360px;
     aspect-ratio: 16 / 9;
-    border-radius: 10px;
+    border-radius: 12px;
     background: #000;
     display: block;
   }
-  .about-video[hidden] { display: none; }
 
   /* === Embedded checkout === */
   .checkout-wrap {
@@ -1727,8 +1728,20 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             vid.src = btn.dataset.src;
             vid.poster = btn.dataset.poster;
             vid.controls = true;
-            btn.replaceWith(vid);
 
+            // Insert as sibling AFTER the .about-body (photo + text + actions)
+            // so the player gets full padded width, not the narrow column
+            // next to the portrait photo.
+            var body = btn.closest(".about-body");
+            var wrap = document.createElement("div");
+            wrap.className = "px about-video-wrap";
+            wrap.appendChild(vid);
+            body.parentNode.insertBefore(wrap, body.nextSibling);
+            btn.style.display = "none";
+
+            // Try fullscreen. iOS Safari standalone honors this; the
+            // in-app browsers (Instagram, WhatsApp, Facebook) silently
+            // refuse — the inline player above is the fallback.
             var req = vid.requestFullscreen
                    || vid.webkitRequestFullscreen
                    || vid.webkitEnterFullscreen;
