@@ -18,7 +18,7 @@
 <meta property="og:locale:alternate" content="en_US" />
 <meta property="og:title" content="Schweizer Karte🇨🇭 · Gems of Switzerland" />
 <meta property="og:description" content="Swiss Gems · 141 versteckte Spots in der Schweiz zum Wandern und Wildcampen. Mit GPS, Routen und Fotos zu jedem Spot. In fünf Jahren von Leon Helg in den Schweizer Alpen handvermessen." />
-<meta property="og:url" content="https://hikebeast.ch/de/map7/" />
+<meta property="og:url" content="https://hikebeast.ch/de/map8/" />
 <meta property="og:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 <meta property="og:image:width" content="1920" />
 <meta property="og:image:height" content="987" />
@@ -527,17 +527,86 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     align-items: flex-start;
   }
   .about-photo {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
+    width: 100px;
+    aspect-ratio: 4 / 5;
+    border-radius: 12px;
     object-fit: cover;
     flex: 0 0 auto;
+    display: block;
+  }
+  /* Row holding the Watch-video pill + Instagram/TikTok app icons.
+     Pill on the left, app icons next, wraps on narrow viewports. */
+  .about-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .about-social {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 120ms ease;
+  }
+  .about-social:active { transform: scale(0.94); }
+  .about-social svg { width: 17px; height: 17px; fill: #fff; }
+  .about-social--ig {
+    background: linear-gradient(45deg, #FED576 0%, #F47133 25%, #BC3081 50%, #4C63D2 100%);
+  }
+  .about-social--tt {
+    background: #000;
   }
   .about-body p {
     margin: 0;
     font-size: 14px;
     line-height: 1.5;
     color: var(--text, #1d1d1f);
+  }
+  /* Kleiner "Ansehen" Pill-Button unter dem About-me Absatz.
+     Gleicher dark-glass look wie der /map3/ collection-play pill, damit
+     der Play-Affordance als brand signature CTA gelesen wird. */
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+  .about-video-btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.78);
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .about-video-btn:hover { background: rgba(0, 0, 0, 0.86); }
+  .about-video-btn:active { transform: scale(0.97); background: rgba(0, 0, 0, 0.9); }
+  .about-video-btn svg { width: 11px; height: 11px; flex: 0 0 auto; }
+  .about-video-btn-sep { opacity: 0.55; margin: 0 1px; }
+  .about-video-wrap {
+    margin-top: 14px;
+  }
+  .about-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    background: #000;
+    display: block;
   }
 
   /* === Embedded checkout === */
@@ -1266,12 +1335,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
 </style>
 <script>
-  /* === /de/map7/ · production variant 04 only (cloned from /de/map5/).
+  /* === /de/map8/ · production variant 04 only (cloned from /de/map5/).
      Built 2026-05-20. Used for bio link + value-first funnel where we
      want the winning hero (Variant 04) without polluting the active
      A/B split test running on /de/map5/. No variant picker, no localStorage,
      no random pick. Same engagement-tracking beacons fire so we still
-     get conversion data, just attributed under source_page=de_map7. */
+     get conversion data, just attributed under source_page=de_map8. */
   window.HB_HERO_VARIANTS = {
     '04': '/map3/img/v14/hero/hero4_DE.jpg'
   };
@@ -1286,7 +1355,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <img src="/images/avatar.jpg" alt="" />
       Hikebeast
     </a>
-    <a class="navbar-lang" href="/map7/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
+    <a class="navbar-lang" href="/map8/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
   </header>
 
   <main>
@@ -1600,9 +1669,71 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         <h2>Über mich</h2>
       </div>
       <div class="px about-body">
-        <img class="about-photo" src="/map3/img/about/leon.jpg" alt="Leon Helg" loading="lazy" decoding="async" />
-        <p>Ich bin Leon. Als Fotograf war ich viele Sommer in den Schweizer Alpen unterwegs auf der Suche nach den schönsten Locations.</p>
+        <img class="about-photo" src="/map3/img/about/leon_v2.jpg" alt="Leon Helg" loading="lazy" decoding="async" width="100" height="125" />
+        <div class="about-text">
+          <p>Ich bin Leon. Als Fotograf war ich viele Sommer in den Schweizer Alpen unterwegs auf der Suche nach den schönsten Locations.</p>
+          <div class="about-actions">
+            <button type="button" class="about-video-btn" id="about-video-btn" data-src="/de/map8/swissgems_intro_de_v2.mov" data-poster="/map3/img/about/leon.jpg">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
+            <span>Ansehen</span>
+            <span class="about-video-btn-sep" aria-hidden="true">·</span>
+            <span>0:56</span>
+          </button>
+            <a class="about-social about-social--ig" href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a class="about-social about-social--tt" href="https://www.tiktok.com/@leon.helg" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.8 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
+      <script>
+        // Video-Element wird erst beim Klick erzeugt. Kein <video src> im
+        // initial-HTML = keine Möglichkeit für Safari/Chrome irgendwelche
+        // Metadata- oder Range-Requests beim Pageload abzusetzen.
+        //
+        // Fullscreen-Verhalten:
+        //   iOS Safari · ohne `playsinline` öffnet `play()` automatisch
+        //     den nativen iOS Vollbild-Player.
+        //   Desktop · `requestFullscreen()` direkt aus dem click handler
+        //     öffnet Browser-Fullscreen (im user-gesture-context erlaubt).
+        (function () {
+          var btn = document.getElementById("about-video-btn");
+          if (!btn) return;
+          btn.addEventListener("click", function () {
+            var vid = document.createElement("video");
+            vid.className = "about-video";
+            vid.src = btn.dataset.src;
+            vid.poster = btn.dataset.poster;
+            vid.controls = true;
+
+            // Insert as sibling AFTER the .about-body (photo + text + actions)
+            // so the player gets full padded width, not the narrow column
+            // next to the portrait photo.
+            var body = btn.closest(".about-body");
+            var wrap = document.createElement("div");
+            wrap.className = "px about-video-wrap";
+            wrap.appendChild(vid);
+            body.parentNode.insertBefore(wrap, body.nextSibling);
+            btn.style.display = "none";
+
+            // Try fullscreen. iOS Safari standalone honors this; the
+            // in-app browsers (Instagram, WhatsApp, Facebook) silently
+            // refuse — the inline player above is the fallback.
+            var req = vid.requestFullscreen
+                   || vid.webkitRequestFullscreen
+                   || vid.webkitEnterFullscreen;
+            if (req) {
+              try {
+                var p = req.call(vid);
+                if (p && p.catch) p.catch(function () {});
+              } catch (e) {}
+            }
+            vid.play().catch(function () {});
+          }, { once: true });
+        })();
+      </script>
     </section>
 
     <!-- Embedded Stripe Checkout -->
@@ -1933,7 +2064,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           fbc: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbc : "") || "",
           fbp: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbp : "") || "",
           r: readStoredRef(),
-          source_page: "de_map7",
+          source_page: "de_map8",
           hero_variant: window.HB_HERO_VARIANT || "",
         }),
       });
@@ -2074,13 +2205,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        page: "map7",
+        page: "map8",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
-        source_page: "de_map7",
+        source_page: "de_map8",
         browser_language: navigator.language || "",
         hero_variant: window.HB_HERO_VARIANT || "",
         device_type: (function () {
@@ -2119,7 +2250,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             event: "engaged",
-            page: "map7",
+            page: "map8",
             token: cohortToken,
             subscriber_id: cohortSubscriber,
             hero_variant: variant,
@@ -2148,7 +2279,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         activeMs += performance.now() - activeStart;
         sendBeaconJson({
           event: "session_end",
-          page: "map7",
+          page: "map8",
           token: cohortToken,
           subscriber_id: cohortSubscriber,
           hero_variant: variant,
@@ -2162,7 +2293,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       if (!document.hidden) activeMs += performance.now() - activeStart;
       sendBeaconJson({
         event: "session_end",
-        page: "map7",
+        page: "map8",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
         hero_variant: variant,
