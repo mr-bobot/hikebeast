@@ -109,7 +109,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.47;
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
-    padding: env(safe-area-inset-top) 0 calc(env(safe-area-inset-bottom) + 72px) 0;
+    padding: 0 0 calc(env(safe-area-inset-bottom) + 72px) 0;
   }
 
   /* === Navbar === */
@@ -118,10 +118,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     top: 0;
     z-index: 100;
     background: rgba(255,255,255,0.78);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    backdrop-filter: saturate(140%) blur(10px);
     border-bottom: 1px solid var(--hairline);
-    padding: 10px 22px;
+    padding: calc(10px + env(safe-area-inset-top)) 22px 10px 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -546,7 +546,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     flex-direction: column;
     gap: 14px;
   }
-  /* Sticky navbar offset so the "Hol dir die Karte" heading lands below
+  /* Sticky navbar offset so the "Hol dir den Guide" heading lands below
      it, not behind it, when the buy CTAs scroll the page here. */
   #get-the-map {
     scroll-margin-top: 70px;
@@ -974,8 +974,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     z-index: 90;
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
     background: rgba(255,255,255,0.86);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    backdrop-filter: saturate(140%) blur(10px);
     border-top: 1px solid var(--hairline);
     transform: translateY(100%);
     transition: transform 220ms ease;
@@ -1304,7 +1304,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <script>document.write('<div class="slide"><img src="' + (window.HB_HERO_VARIANTS[window.HB_HERO_VARIANT] || '/map3/img/v14/hero/hero1_DE.jpg') + '" alt="Swiss Gems Guide · Der Sommer deines Lebens" loading="eager" fetchpriority="high" decoding="async" /></div>');</script>
           <div class="slide"><img src="/map3/img/v14/mockup_DE.jpg" alt="Spots, die Touristen nie finden" loading="lazy" decoding="async" /></div>
           <div class="slide"><img src="/map3/img/v14/grid.jpg" alt="Ein Grid mit achtzehn versteckten Schweizer Spots vom Guide" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="/map3/img/v14/map_DE.jpg" alt="141 Spots, eine Karte" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/v14/map_DE_v2.jpg" alt="141 Spots, eine Karte" loading="lazy" decoding="async" /></div>
         </div>
         <!-- Hover-only nav arrows (desktop only · hidden on touch devices
              where the carousel relies on swipe). Click handlers wired in
@@ -1392,7 +1392,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           </div>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/webapp.jpg" alt="iPhone mit der Hikebeast Webapp, 141 Spots auf einen Blick" loading="lazy" decoding="async" /></div>
+          <div class="card-photo"><img src="/map3/img/inside/webapp_v2.jpg" alt="iPhone mit der Hikebeast Webapp, 141 Spots auf einen Blick" loading="lazy" decoding="async" /></div>
           <div class="card-body">
             <h3>Eine Webapp</h3>
             <p>Eine App mit der sogar das Planen Spass macht.</p>
@@ -1426,7 +1426,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
               <span class="stars">★★★★★</span>
             </div>
           </div>
-          <p class="review-quote">"Thanks a lot for all the dedication you put into this guide bro! Honestly, it's an amazing guide with so many incredible spots. I already know Switzerland pretty well, but I had no idea about some of these places. The information is super useful too and all the details, best timings, sunlight conditions, parking, access, everything. Really recommend it!!!"</p>
+          <p class="review-quote">"Honestly, it's an amazing guide with so many incredible spots. I already know Switzerland pretty well, but I had no idea about some of these places. The information is super useful too and all the details, best timings, sunlight conditions, parking, access, everything. Really recommend it!!!<br><br>Thanks a lot for all the dedication you put into this guide bro!"</p>
           <button type="button" class="review-more-btn" data-more="Mehr anzeigen" data-less="Weniger">Mehr anzeigen</button>
         </div>
         <div class="review-card">
@@ -1608,7 +1608,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <!-- Embedded Stripe Checkout -->
     <section class="px" id="get-the-map">
       <div class="section-head section-head--centered">
-        <h2>Hol dir die Karte</h2>
+        <h2>Hol dir den Guide</h2>
       </div>
       <div class="guarantee-wrap">
         <span class="guarantee-pill">
@@ -1616,7 +1616,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <circle cx="10" cy="10" r="9" fill="#34c759"/>
             <path d="M5.8 10.4l2.8 2.8 5.6-5.6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Weniger als 0.02% der Käufer nutzen unsere 30-Tage-Geld-zurück-Garantie!
+          Es macht mich stolz, dass weniger als 0.02% der Käufer unsere 30-Tage-Geld-zurück-Garantie genutzt haben!
         </span>
       </div>
       <div class="checkout-wrap">
@@ -1666,7 +1666,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           </div>
           <div class="buy-name">Swiss Gems 🇨🇭</div>
           <div class="buy-price">CHF 27</div>
-          <a href="#get-the-map" class="buy-cta">Hol dir die Karte</a>
+          <a href="#get-the-map" class="buy-cta">Hol dir den Guide</a>
           <div class="buy-foot">
             <span>Apple Pay · TWINT · Card</span>
             <a href="/de/terms.html#refunds">↩ 30-day refund</a>

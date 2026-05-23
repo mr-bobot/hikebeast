@@ -109,7 +109,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.47;
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
-    padding: env(safe-area-inset-top) 0 calc(env(safe-area-inset-bottom) + 72px) 0;
+    padding: 0 0 calc(env(safe-area-inset-bottom) + 72px) 0;
   }
 
   /* === Navbar === */
@@ -118,10 +118,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     top: 0;
     z-index: 100;
     background: rgba(255,255,255,0.78);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    backdrop-filter: saturate(140%) blur(10px);
     border-bottom: 1px solid var(--hairline);
-    padding: 10px 22px;
+    padding: calc(10px + env(safe-area-inset-top)) 22px 10px 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -888,8 +888,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     z-index: 90;
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
     background: rgba(255,255,255,0.86);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    backdrop-filter: saturate(140%) blur(10px);
     border-top: 1px solid var(--hairline);
     transform: translateY(100%);
     transition: transform 220ms ease;

@@ -422,6 +422,26 @@
       "permanent": true
     },
     {
+      "source": "/gems",
+      "destination": "/gems/",
+      "permanent": true
+    },
+    {
+      "source": "/de/gems",
+      "destination": "/de/gems/",
+      "permanent": true
+    },
+    {
+      "source": "/map8",
+      "destination": "/map8/",
+      "permanent": true
+    },
+    {
+      "source": "/de/map8",
+      "destination": "/de/map8/",
+      "permanent": true
+    },
+    {
       "source": "/friendsandfamily",
       "destination": "/friendsandfamily/",
       "permanent": true
