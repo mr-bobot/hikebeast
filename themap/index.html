@@ -15,9 +15,23 @@
 // enforces that every page's own slug is in its alternation.
 (function () {
   try {
-    if (localStorage.getItem('hb_lang') === 'en') return;
-    var lang = (navigator.language || '').toLowerCase();
-    if (!lang.startsWith('de')) return;
+    var pref = null;
+    try { pref = localStorage.getItem('hb_lang'); } catch (e) {}
+    if (pref === 'en') return;
+    // Wants-DE signals (any one triggers):
+    //   (a) explicit hb_lang='de' from a prior DE-pill click
+    //   (b) primary navigator.language starts with 'de'
+    //   (c) any entry in navigator.languages starts with 'de' — catches
+    //       Safari users whose iOS Preferred Languages has en-US first
+    //       but de-* second, where the primary-only check missed.
+    var wantsDE = pref === 'de';
+    if (!wantsDE && (navigator.language || '').toLowerCase().indexOf('de') === 0) wantsDE = true;
+    if (!wantsDE && navigator.languages) {
+      for (var i = 0; i < navigator.languages.length; i++) {
+        if ((navigator.languages[i] || '').toLowerCase().indexOf('de') === 0) { wantsDE = true; break; }
+      }
+    }
+    if (!wantsDE) return;
     var target = location.pathname.replace(/^\/(themap|map)\b/, '/de/$1');
     if (target === location.pathname) return;
     location.replace(target + location.search + location.hash);
