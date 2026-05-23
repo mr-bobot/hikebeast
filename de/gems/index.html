@@ -18,7 +18,7 @@
 <meta property="og:locale:alternate" content="en_US" />
 <meta property="og:title" content="Schweizer Karte🇨🇭 · Gems of Switzerland" />
 <meta property="og:description" content="Swiss Gems · 141 versteckte Spots in der Schweiz zum Wandern und Wildcampen. Mit GPS, Routen und Fotos zu jedem Spot. In fünf Jahren von Leon Helg in den Schweizer Alpen handvermessen." />
-<meta property="og:url" content="https://hikebeast.ch/de/map8/" />
+<meta property="og:url" content="https://hikebeast.ch/de/gems/" />
 <meta property="og:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 <meta property="og:image:width" content="1920" />
 <meta property="og:image:height" content="987" />
@@ -1372,12 +1372,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
 </style>
 <script>
-  /* === /de/map8/ · production variant 04 only (cloned from /de/map5/).
+  /* === /de/gems/ · production variant 04 only (cloned from /de/map5/).
      Built 2026-05-20. Used for bio link + value-first funnel where we
      want the winning hero (Variant 04) without polluting the active
      A/B split test running on /de/map5/. No variant picker, no localStorage,
      no random pick. Same engagement-tracking beacons fire so we still
-     get conversion data, just attributed under source_page=de_map8. */
+     get conversion data, just attributed under source_page=de_gems. */
   window.HB_HERO_VARIANTS = {
     '04': '/map3/img/v14/hero/hero4_DE.jpg'
   };
@@ -1392,7 +1392,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <img src="/images/avatar.jpg" alt="" />
       Hikebeast
     </a>
-    <a class="navbar-lang" href="/map8/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
+    <a class="navbar-lang" href="/gems/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
   </header>
 
   <main>
@@ -1710,7 +1710,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         <div class="about-text">
           <p>Ich bin Leon. Als Fotograf war ich viele Sommer in den Schweizer Alpen unterwegs auf der Suche nach den schönsten Locations.</p>
           <div class="about-actions">
-            <button type="button" class="about-video-btn" id="about-video-btn" data-src="/de/map8/swissgems_intro_de_v2.mov" data-poster="/map3/img/about/leon.jpg">
+            <button type="button" class="about-video-btn" id="about-video-btn" data-src="/de/gems/swissgems_intro_de_v2.mov" data-poster="/map3/img/about/leon.jpg">
             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
             <span>Ansehen</span>
             <span class="about-video-btn-sep" aria-hidden="true">·</span>
@@ -2107,7 +2107,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           fbc: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbc : "") || "",
           fbp: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbp : "") || "",
           r: readStoredRef(),
-          source_page: "de_map8",
+          source_page: "de_gems",
           hero_variant: window.HB_HERO_VARIANT || "",
         }),
       });
@@ -2248,13 +2248,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        page: "map8",
+        page: "gems",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
-        source_page: "de_map8",
+        source_page: "de_gems",
         browser_language: navigator.language || "",
         hero_variant: window.HB_HERO_VARIANT || "",
         device_type: (function () {
@@ -2293,7 +2293,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             event: "engaged",
-            page: "map8",
+            page: "gems",
             token: cohortToken,
             subscriber_id: cohortSubscriber,
             hero_variant: variant,
@@ -2322,7 +2322,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         activeMs += performance.now() - activeStart;
         sendBeaconJson({
           event: "session_end",
-          page: "map8",
+          page: "gems",
           token: cohortToken,
           subscriber_id: cohortSubscriber,
           hero_variant: variant,
@@ -2336,7 +2336,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       if (!document.hidden) activeMs += performance.now() - activeStart;
       sendBeaconJson({
         event: "session_end",
-        page: "map8",
+        page: "gems",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
         hero_variant: variant,

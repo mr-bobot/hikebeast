@@ -18,7 +18,7 @@
     if (localStorage.getItem('hb_lang') === 'en') return;
     var lang = (navigator.language || '').toLowerCase();
     if (!lang.startsWith('de')) return;
-    var target = location.pathname.replace(/^\/(map8|map7|map6|map5|map4|map3|themap|map)\b/, '/de/$1');
+    var target = location.pathname.replace(/^\/(gems|map7|map6|map5|map4|map3|themap|map)\b/, '/de/$1');
     if (target === location.pathname) return;
     location.replace(target + location.search + location.hash);
   } catch (e) {}
@@ -39,7 +39,7 @@
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Switzerland Map · 100+ Hidden Spots" />
 <meta property="og:description" content="Swiss Gems · 141 hidden spots in Switzerland for hiking and wildcamping. Each spot contains GPS, routes, and photo infos. Hand-mapped by Leon Helg over five years of scouting the Swiss Alps." />
-<meta property="og:url" content="https://hikebeast.ch/map8/" />
+<meta property="og:url" content="https://hikebeast.ch/gems/" />
 <meta property="og:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 <meta property="og:image:width" content="1920" />
 <meta property="og:image:height" content="987" />
@@ -1393,12 +1393,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
 </style>
 <script>
-  /* === /map8/ · production variant 04 only (cloned from /map5/).
+  /* === /gems/ · production variant 04 only (cloned from /map5/).
      Built 2026-05-20. Used for bio link + value-first funnel where we
      want the winning hero (Variant 04) without polluting the active
-     A/B split test running on /map5/. Replaces /map7/ as the experimental surface. No variant picker, no localStorage,
+     A/B split test running on /map5/. Replaces /map7/ as the experimental surface (renamed from /map8/ to use the brand term). No variant picker, no localStorage,
      no random pick. Same engagement-tracking beacons fire so we still
-     get conversion data, just attributed under source_page=map8. */
+     get conversion data, just attributed under source_page=gems. */
   window.HB_HERO_VARIANTS = {
     '04': '/map3/img/v14/hero/hero4.jpg'
   };
@@ -1413,7 +1413,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <img src="../images/avatar.jpg" alt="" />
       Hikebeast
     </a>
-    <a class="navbar-lang" href="/de/map8/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">🇩🇪 DE</a>
+    <a class="navbar-lang" href="/de/gems/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">🇩🇪 DE</a>
   </header>
 
   <main>
@@ -1731,7 +1731,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         <div class="about-text">
           <p>I'm Leon. As a photographer, I have spent many summers exploring the Swiss Alps. This map is the shortcut I wish I had when I started.</p>
           <div class="about-actions">
-            <button type="button" class="about-video-btn" id="about-video-btn" data-src="/map8/swissgems_intro_en_v1.mov" data-poster="/map3/img/about/leon.jpg">
+            <button type="button" class="about-video-btn" id="about-video-btn" data-src="/gems/swissgems_intro_en_v1.mov" data-poster="/map3/img/about/leon.jpg">
             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
             <span>Watch</span>
             <span class="about-video-btn-sep" aria-hidden="true">·</span>
@@ -2127,7 +2127,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           fbc: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbc : "") || "",
           fbp: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbp : "") || "",
           r: readStoredRef(),
-          source_page: "map8",
+          source_page: "gems",
           hero_variant: window.HB_HERO_VARIANT || "",
         }),
       });
@@ -2268,13 +2268,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        page: "map8",
+        page: "gems",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
-        source_page: "map8",
+        source_page: "gems",
         browser_language: navigator.language || "",
         hero_variant: window.HB_HERO_VARIANT || "",
         device_type: (function () {
@@ -2320,7 +2320,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             event: "engaged",
-            page: "map8",
+            page: "gems",
             token: cohortToken,
             subscriber_id: cohortSubscriber,
             hero_variant: variant,
@@ -2352,7 +2352,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         activeMs += performance.now() - activeStart;
         sendBeaconJson({
           event: "session_end",
-          page: "map8",
+          page: "gems",
           token: cohortToken,
           subscriber_id: cohortSubscriber,
           hero_variant: variant,
@@ -2367,7 +2367,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       if (!document.hidden) activeMs += performance.now() - activeStart;
       sendBeaconJson({
         event: "session_end",
-        page: "map8",
+        page: "gems",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
         hero_variant: variant,
