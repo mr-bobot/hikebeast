@@ -351,16 +351,14 @@ hikes:
   - Sturdy hiking shoes
 - id: schrattenfluh-schratteflue-crossing
   name: Schratteflue crossing (advanced)
-  start: Hirsegg (or Sörenberg Post for a longer start)
-  transit:
-    bus: Postbus to Sörenberg
+  start: Hirsegg parking (Marbachegg side)
   duration_min: 465
   sac_grade: T5
   effort_label: Expert
-  description_extra: 'Start at the Hirsegg parking (Marbachegg side) or take the Postbus to Sörenberg, Salwiden, then walk in to Hirsegg. The full Schrattenfluh ridge runs about 6 km
-    with four prominent peaks: Schibegütsch, Hängst, Hächle, and Strick. T5 with II scrambling. About 16 km and 7 h 45 in total, with ~1,050 m of cumulative climb and the same descent;
-    the two end peaks (Hächle and Strick) are the more demanding sections. The plateau holds one of the largest karst fields in Switzerland with deep potholes off the marked line, so
-    staying on the trail matters. Sure-footedness, a head for heights, and good visibility required. Postbus to Sörenberg, then on to Hirsegg.'
+  description_extra: 'Start at the Hirsegg parking on the Marbachegg side. The full Schrattenfluh ridge runs about 6 km with four prominent peaks: Schibegütsch, Hängst, Hächle, and Strick.
+    T5 with II scrambling. About 16 km and 7 h 45 in total, with ~1,050 m of cumulative climb and the same descent; the two end peaks (Hächle and Strick) are the more demanding sections.
+    The plateau holds one of the largest karst fields in Switzerland with deep potholes off the marked line, so staying on the trail matters. Sure-footedness, a head for heights, and
+    good visibility required.'
   visits:
   - schrattenfluh
   sources:
@@ -373,7 +371,7 @@ hikes:
   - Helmet (rockfall sections)
   - Gloves (limestone karst)
   cable_car_ids: []
-  start_maps_url: https://www.google.com/maps/place/?q=46.82217,8.03493&z=16
+  start_maps_url: https://maps.app.goo.gl/vcBFopqwf8okoKEz5
   distance_km: 16.1
   gain_m: 1050
   descent_m: 1050
@@ -609,7 +607,7 @@ hikes:
   - gornergrat-bahn
 - id: riffelalp-easy-round-trip
   name: Riffelalp short loop via Grünsee
-  start: Riffelalp station
+  start: Riffelalp Bahnhof (Gornergrat Bahn stop)
   transit:
     train: Zermatt + Gornergrat Bahn to Riffelalp
   duration_min: 90
@@ -625,11 +623,11 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/zermatt/easy-round-trip-hike-on-riffelalp/43157089/
   cable_car_ids:
   - gornergrat-bahn
-  start_maps_url: https://www.google.com/maps/place/?q=46.00198,7.75094&z=16
+  start_maps_url: https://maps.app.goo.gl/boRnt7kxG8go82qn7
   gain_m: 72
 - id: riffelalp-findeln-loop
   name: Riffelalp to Findeln via Sunnegga
-  start: Riffelalp station
+  start: Riffelalp Bahnhof (Gornergrat Bahn stop)
   transit:
     train: Zermatt + Gornergrat Bahn to Riffelalp
   duration_min: 240
@@ -645,7 +643,7 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-route/zermatt/4-lakes-hike-from-sunnegga-2-288m-to-riffelalp-2-211m-/41289327/
   cable_car_ids:
   - gornergrat-bahn
-  start_maps_url: https://www.google.com/maps/place/?q=46.00198,7.75094&z=16
+  start_maps_url: https://maps.app.goo.gl/boRnt7kxG8go82qn7
   distance_km: 10.7
   descent_m: 750
   equipment_list:
@@ -916,17 +914,19 @@ hikes:
   transit:
     bus: Postbus to Les Haudères + Ferpècle
   duration_min: 150
-  gain_m: 540
+  gain_m: 650
   sac_grade: T3
   effort_label: Moderate, ravined path
-  description_extra: Two-and-a-half-hour climb from Les Salays in the small Ferpècle hamlet up to Bricola at 2,416 m. About 540 m of vertical, steep in places. T3. The path is part of
-    the long approach to the Cabane de la Dent Blanche and is also used by climbers heading for the Dent Blanche normal route. Vegetation thins to scree and rock above 2,000 m.
+  description_extra: Two-and-a-half-hour climb from Les Salays in the small Ferpècle hamlet up to Bricola at 2,416 m. About 4.8 km one-way and 650 m of vertical, steep in places. T3.
+    The path is part of the long approach to the Cabane de la Dent Blanche and is also used by climbers heading for the Dent Blanche normal route. Vegetation thins to scree and rock
+    above 2,000 m.
   visits:
   - ferpecle_glacier
   sources:
   - https://www.komoot.com/smarttour/e1385019885/bricola-von-ferpecle
+  - https://www.hikingwalking.com/destinations/sw/sw_valais/les_hauderes/bricola/bricola_detail
   start_maps_url: https://www.google.com/maps/place/?q=46.0657,7.54377&z=16
-  distance_km: 3.0
+  distance_km: 4.8
   equipment_list:
   - Sturdy hiking shoes
 - id: spielboden-laengfluh-glacier-trail
@@ -1032,7 +1032,7 @@ hikes:
   start: Arnuva (Italian Val Ferret)
   transit:
     bus: Bus from Courmayeur to Arnuva
-  duration_min: 360
+  duration_min: 330
   gain_m: 800
   sac_grade: T2
   effort_label: Long day
@@ -1090,7 +1090,7 @@ hikes:
   distance_km: 4.8
 - id: nax_via_ferrata-belvedere-via-ferrata
   name: Belvédère via ferrata
-  start: Nax village
+  start: Belvédère via ferrata parking (above Nax)
   transit:
     bus: Postbus from Sion to Nax
   duration_min: 120
@@ -1109,7 +1109,7 @@ hikes:
   - Via ferrata set (helmet, harness, lanyard with energy absorber)
   - Gloves
   - Sturdy boots
-  start_maps_url: https://www.google.com/maps/place/?q=46.233,7.433&z=16
+  start_maps_url: https://maps.app.goo.gl/iWMrqZtJbTa9jr148
   distance_km: 1.7
 - id: crans_montana-bisse-du-ro
   name: Bisse du Ro
@@ -1234,27 +1234,6 @@ hikes:
   equipment_list:
   - Sturdy mountaineering boots
   - Trekking poles
-- id: dent_de_lys-les-paccots-circular
-  name: Les Paccots loop via Lac des Joncs
-  start: Les Paccots
-  transit:
-    train: Châtel-St-Denis (TPF) + bus to Les Paccots
-  duration_min: 295
-  gain_m: 810
-  sac_grade: T2
-  effort_label: Moderate, brief T3 scramble
-  description_extra: 'Four-hour circular hike from Les Paccots (bus from Châtel-St-Denis). The trail loops via Lac des Joncs and Les Sciernes-d''Albeuve back to the start. Mostly T2
-    mountain trail with one harder section near the summit: a roughly 50 m schrofen downclimb where chains are placed for safety.'
-  visits:
-  - dent_de_lys
-  sources:
-  - https://www.komoot.com/smarttour/26745734
-  quickest_for:
-  - dent_de_lys
-  start_maps_url: https://www.google.com/maps/place/?q=46.52222,6.94806&z=16
-  distance_km: 11.0
-  equipment_list:
-  - Sturdy hiking shoes
 - id: moleson-plan-francey-summit
   name: Plan-Francey to summit and back
   start: Plan-Francey mid-station
@@ -2204,7 +2183,7 @@ hikes:
   - Sturdy hiking shoes
 - id: pic_de_jallouvre-from-petit-bornand
   name: From Le Petit-Bornand-les-Glières
-  start: Chalet de Cenise parking (above Le Petit-Bornand-les-Glières)
+  start: Le Petit-Bornand-les-Glières (village parking)
   duration_min: 300
   gain_m: 900
   sac_grade: T3
@@ -2216,7 +2195,7 @@ hikes:
   - pic_de_jallouvre
   sources:
   - https://www.altituderando.com/Pic-de-Jallouvre-2408m-par-Cenise
-  start_maps_url: https://www.google.com/maps/place/?q=46.04662,6.42897&z=16
+  start_maps_url: https://maps.app.goo.gl/kgT6yZpNF6KDJZAKA
   distance_km: 9.8
   equipment_list:
   - Sturdy hiking shoes
@@ -2743,6 +2722,8 @@ hikes:
   - https://www.soerenberg.ch/en/tour/hirsegg-schrattenfluh-rossweid-soerenberg
   - https://www.biosphaere.ch/en/tour/hirsegg-schrattenfluh-rossweid-soerenberg
   start_maps_url: https://www.google.com/maps/place/?q=46.83878,8.01238&z=16
+  name: Hirsegg → Schibegütsch → Sörenberg (biosphere tour)
+  descent_m: 1112
 - id: spitzmeilenhutte-from-weisstannen
   visits:
   - spitzmeilenhutte
@@ -3585,29 +3566,6 @@ hikes:
   - berggasthaus-schafler
   start_maps_url: https://www.google.com/maps/place/?q=47.28581,9.42856&z=16
   distance_km: 7.5
-- id: spielboden-ascent-from-saas-fee-village
-  visits:
-  - spielboden
-  sac_grade: T2
-  effort_label: Moderate
-  duration_min: 210
-  gain_m: 670
-  equipment_list:
-  - Sturdy hiking shoes
-  start: Saas-Fee village
-  transit:
-    train: Visp
-    bus: PostBus 511 from Visp to Saas-Fee
-  description_extra: Ascent on foot to Spielboden from the village, the reverse of the existing Längfluh descent. The path climbs alpine meadows to the Gletschergrotte at 1,998 m, looking
-    over the Gletschersee, then a steeper section over the Gletscheralp leads up to Spielboden at 2,447 m. About 3 h 30 of ascent, roughly 670 m of cumulative gain, T2. Continue another
-    420 m up the Längfluhweg zigzags to Längfluh, or descend the same way.
-  sources:
-  - https://hiking-switzerland.ch/kantons/wallis/hannigalp-spielboden/
-  - https://www.bergfex.com/sommer/wallis/touren/wanderung/602774,laengfluh--saas-fee
-  start_maps_url: https://www.google.com/maps/place/?q=46.10734,7.92471&z=16
-  distance_km: 3.9
-  cable_car_ids:
-  - spielboden-laengfluh
 - id: triftsee-from-underi-trift-via-windegghuette
   visits:
   - triftsee
@@ -3762,8 +3720,8 @@ hikes:
   transit:
     bus: PostBus 381 from Sion to La Gouille (hamlet between Les Haudères and Arolla)
     car: Roadside parking at La Gouille on the Arolla road
-  description_extra: The trail leaves La Gouille and climbs through larch and rhododendron stands to the small turquoise pool of Lac Bleu at 2,090 m. The official Val d'Hérens route
-    gives 1 h 30 walking time, 3.26 km distance and 314 m of ascent, T2. A signed extension links the lake to Arolla via Pramousse for a longer loop of around 4 hours.
+  description_extra: The trail leaves La Gouille and climbs steadily through larch and rhododendron stands to the small turquoise pool of Lac Bleu at 2,090 m. 1.6 km one-way (3.26 km
+    round-trip), 314 m of ascent, 45 minutes up and roughly the same down, T2. A signed extension links the lake to Arolla via Pramousse for a longer loop of around 4 hours.
   sources:
   - https://www.valdherens.ch/en/hike-to-arolla-s-blue-lake-lac-bleu-fp46146
   quickest_for:
@@ -3794,8 +3752,6 @@ hikes:
   - https://www.myswitzerland.com/en/experiences/route/5-seen-wanderung-1/
   cable_car_ids:
   - pizol-bergbahnen
-  quickest_for:
-  - wildsee
   start_maps_url: https://www.google.com/maps/place/?q=46.97923,9.41704&z=16
 - id: refuge_du_lac_blanc-flegere
   visits:
@@ -4108,24 +4064,42 @@ hikes:
   quickest_for:
   - guttannen_valley
   start_maps_url: https://www.google.com/maps/place/3864+Guttannen/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f866862eefd51:0x6187a636359a2900!8m2!3d46.6552082!4d8.2892297!16zL20vMGRqY2wx
-- id: aare_gorge-drive-up
+- id: aare_gorge-east-innertkirchen
   visits:
   - aare_gorge
-  name: Drive to either entrance
-  start: Aareschlucht East (Innertkirchen) or West (Meiringen) entrance
+  name: Drive to the East entrance (Innertkirchen)
+  start: Aareschlucht East entrance (Innertkirchen)
+  start_maps_url: https://maps.app.goo.gl/qsjgB5wFCrsbfAQd8
   sac_grade: T1
   effort_label: Drive-up
   equipment_list: []
   transit:
-    bus: Meiringen + PostBus 161 to Aareschlucht, West Eingang or Innertkirchen, Aareschlucht Ost
+    bus: Meiringen + PostBus 161 to Innertkirchen, Aareschlucht Ost
     train: Meiringen (Zentralbahn from Lucerne / Interlaken)
-  description_extra: Free parking at both entrances. Two-minute walk from the lot to the boardwalk entrance. Boardwalk open April to early November, entry around 10 CHF.
+  description_extra: Free parking at the Innertkirchen (East) entrance. Two-minute walk from the lot to the boardwalk. Boardwalk open April to early November, entry around 10 CHF. The
+    full one-way gorge walk is about 1.4 km / 45 min between East and West entrances.
   sources:
   - https://aareschlucht.ch/en/welcome/
   - https://www.postauto.ch/en/timetables
   quickest_for:
   - aare_gorge
-  start_maps_url: https://www.google.com/maps/place/?q=46.7120,8.2179&z=16
+- id: aare_gorge-west-meiringen
+  visits:
+  - aare_gorge
+  name: Drive to the West entrance (Meiringen)
+  start: Aareschlucht West entrance (Meiringen)
+  start_maps_url: https://maps.app.goo.gl/YtZfdFf2NKYvaAg48
+  sac_grade: T1
+  effort_label: Drive-up
+  equipment_list: []
+  transit:
+    bus: Meiringen + PostBus 161 to Aareschlucht, West Eingang
+    train: Meiringen (Zentralbahn from Lucerne / Interlaken)
+  description_extra: Free parking at the Meiringen (West) entrance. Two-minute walk from the lot to the boardwalk. Boardwalk open April to early November, entry around 10 CHF. The full
+    one-way gorge walk is about 1.4 km / 45 min between East and West entrances.
+  sources:
+  - https://aareschlucht.ch/en/welcome/
+  - https://www.postauto.ch/en/timetables
 - id: grindelwald-drive-up
   visits:
   - grindelwald
@@ -4202,7 +4176,7 @@ hikes:
   visits:
   - ferpecle_river
   name: Drive into the Ferpècle valley
-  start: Roadside between Salay and Barrage de Ferpècle
+  start: End of road into Ferpècle valley (no further driving past here)
   sac_grade: T1
   effort_label: Drive-up
   equipment_list: []
@@ -4215,28 +4189,7 @@ hikes:
   - https://www.postauto.ch/en/timetable-and-network
   quickest_for:
   - ferpecle_river
-  start_maps_url: https://www.google.com/maps/place/?q=46.04,7.555&z=15
-- id: spielboden-drive-up
-  visits:
-  - spielboden
-  name: Cable car from Saas Fee
-  start: Spielboden gondola top station (Saas Fee)
-  sac_grade: T1
-  effort_label: Drive-up
-  equipment_list: []
-  transit:
-    bus: Brig + PostBus 511 to Saas Fee (car-free village)
-    cable_car: Saas Fee gondola Spielboden runs continuously in summer
-  description_extra: From Saas Fee village (car-free; park at the village entrance lots, around 16 CHF/day) take the Spielboden gondola up to about 2,450m. From the station the marmot
-    meadow is right there; walk 10 min toward the Hannig trail intersection for the Allalinhorn backdrop. Gondola runs late June to mid-October.
-  sources:
-  - https://www.saas-fee.ch/en/cable-cars/spielboden
-  - https://www.saas-fee.ch/en/arrival
-  quickest_for:
-  - spielboden
-  start_maps_url: https://www.google.com/maps/place/Spielboden,+3906+Saas-Fee/@46.1034607,7.9264445,17z/data=!3m1!4b1!4m6!3m5!1s0x478f4599f1a2d2cb:0xf03fe149d6ccbcea!8m2!3d46.1034607!4d7.9264445!16s%2Fg%2F1tfnxhfr
-  cable_car_ids:
-  - spielboden-laengfluh
+  start_maps_url: https://maps.app.goo.gl/CRaALuVsczr4tmoDA
 - id: saas_fee_glacier-drive-up
   visits:
   - saas_fee_glacier
@@ -4635,6 +4588,7 @@ hikes:
     paid otherwise. 5-min walk to the cliff edge above the Doubs canyon. Year-round access.
   sources:
   - https://www.j3l.ch/en
+  - https://www.myswitzerland.com/en-ch/destinations/les-brenets/
   quickest_for:
   - le_doubs
   start_maps_url: https://www.google.com/maps/place/?q=47.1000,6.7546&z=16
@@ -5012,31 +4966,51 @@ hikes:
   - zinal-sorebois-cable-car
   quickest_for:
   - the_ice_cave
-- id: goms_bridge-from-bellwald-or-fuergangen
+- id: goms_bridge-from-fuergangen-station
   visits:
   - goms_bridge
-  name: Short walk from Fürgangen or down from Bellwald
+  name: Short flat walk from Fürgangen station
   start: Fürgangen-Bellwald station (Matterhorn Gotthard Bahn)
   start_maps_url: https://www.google.com/maps/place/?q=46.410532,8.1509586&z=16
   sac_grade: T1
   effort_label: Easy
-  duration_min: 25
-  gain_m: 30
-  distance_km: 1.2
+  duration_min: 10
+  gain_m: 5
+  distance_km: 0.5
   equipment_list:
   - Walking shoes (anything grippy)
   transit:
     train: Brig + Matterhorn Gotthard Bahn to Fürgangen-Bellwald (the train stops at the bridge approach)
-  description_extra: The Hängebrücke Fürgangen-Mühlebach (Goms Bridge) is 280 m long and hangs 92 m above the Rhone gorge between Fürgangen and Mühlebach. From the Fürgangen-Bellwald
-    train station the bridge is only a few minutes away on foot via the underpass under the cantonal road — under 10 minutes one way. From Mühlebach village parking it is also a short
-    flat walk. Coming down from Bellwald (the cable car mountain station above Fürgangen) it is about 1h 30 down to the bridge, but the easy variant is to drive or take the train to
-    valley level and walk in. Bridge is 1.4 m wide, barrier-free, open year-round. T1 throughout. Free to cross.
+  description_extra: From the Fürgangen-Bellwald train station the Hängebrücke Fürgangen-Mühlebach (280 m long, 92 m above the Rhone) is just under 10 minutes away on foot via the underpass
+    below the cantonal road. From the Mühlebach village parking on the other side it is also a short flat walk. Bridge is 1.4 m wide, barrier-free, open year-round. T1 throughout. Free
+    to cross.
   sources:
   - https://www.haengebruecken-aletsch-goms.ch/en/suspension-bridges/goms-bridge
   - https://www.aletscharena.ch/en/about-the-region/poi/goms-suspension-bridge
-  - https://www.komoot.com/highlight/252769
   quickest_for:
   - goms_bridge
+- id: goms_bridge-from-bellwald
+  visits:
+  - goms_bridge
+  name: Descend from Bellwald village to the bridge
+  start: Bellwald village (cable-car top from Fürgangen)
+  start_maps_url: https://www.google.com/maps/place/?q=46.4434,8.1645&z=16
+  sac_grade: T2
+  effort_label: Moderate (descent)
+  duration_min: 90
+  gain_m: 0
+  descent_m: 540
+  distance_km: 4.5
+  equipment_list:
+  - Sturdy hiking shoes
+  - Trekking poles (recommended on steep forest descent)
+  transit:
+    cable_car: Bellwaldbahn from Fürgangen-Bellwald station up to Bellwald village
+  description_extra: 'Descent variant: ride the Bellwaldbahn from Fürgangen-Bellwald station up to Bellwald village (1,560 m), then walk down through the forest to the Hängebrücke Fürgangen-Mühlebach
+    at 1,020 m. About 4.5 km and 540 m of descent on a marked forest trail, around 1h 30. T2 because of the steady gradient. Cross the bridge, then catch the train back from Fürgangen.'
+  sources:
+  - https://www.haengebruecken-aletsch-goms.ch/en/suspension-bridges/goms-bridge
+  - https://www.aletscharena.ch/en/about-the-region/poi/goms-suspension-bridge
 - id: gorges_du_durnand-walkway-loop
   visits:
   - gorges_du_durnand
@@ -5180,7 +5154,7 @@ hikes:
   - la_fouly
   name: Village stroll to the A Neuve moraine viewpoint
   start: La Fouly village parking (postbus stop, by the chairlift base)
-  start_maps_url: https://www.google.com/maps/place/?q=45.932,7.0979&z=16
+  start_maps_url: https://maps.app.goo.gl/1VNVvuRzfFiNBZ4c7
   sac_grade: T1
   effort_label: Easy
   duration_min: 30
@@ -5225,3 +5199,86 @@ hikes:
   - https://www.bergfex.com/sommer/genferseegebiet-waadtland/touren/wanderung/3866447,montreux--cabane-de-jaman--cape-au-moine--le-coucou/
   quickest_for:
   - cap_au_moine
+- id: spielboden-from-saas-fee-village
+  visits:
+  - spielboden
+  name: Walking ascent from Saas-Fee village
+  start: Saas-Fee Busterminal (cable-car valley station)
+  start_maps_url: https://www.google.com/maps/place/?q=46.10810,7.92927&z=16
+  sac_grade: T2
+  effort_label: Moderate
+  duration_min: 180
+  gain_m: 729
+  descent_m: 81
+  distance_km: 5.0
+  equipment_list:
+  - Sturdy hiking shoes
+  - 1-2 L water
+  - Sun protection
+  transit:
+    train: Visp
+    bus: PostBus 511 from Visp to Saas-Fee (car-free village; park at the village entrance lots, around 16 CHF/day)
+  description_extra: Walking ascent on foot from the car-free Saas-Fee village (Busterminal at 1,800 m) up the signposted Wanderweg via Gletschersee and Gletschergrotte to Spielboden
+    at 2,448 m. About 5 km, 729 m of cumulative ascent and 81 m of descent across the meadow-and-larch terrain below the Fee glacier. SAC grades it T2, up to 3 h walking. Best between
+    June and October. Reverse the route or descend by the Spielboden gondola.
+  sources:
+  - https://ch-wandern.ch/wanderungen-kantone/wallis/saas-fee-spielboden-wanderung/
+  - https://www.saas-fee.ch/de/erlebniswelten/spielboden-im-sommer
+  cable_car_ids:
+  - spielboden-laengfluh
+- id: spielboden-cable-car-from-saas-fee
+  visits:
+  - spielboden
+  name: Cable car from Saas-Fee
+  start: Saas-Fee Busterminal (Spielboden gondola valley station)
+  start_maps_url: https://www.google.com/maps/place/?q=46.10810,7.92927&z=16
+  sac_grade: T1
+  effort_label: Drive-up
+  duration_min: 10
+  gain_m: 0
+  distance_km: 0
+  equipment_list: []
+  transit:
+    train: Visp
+    bus: PostBus 511 from Visp to Saas-Fee (car-free village; park at the village entrance lots, around 16 CHF/day)
+    cable_car: Saas-Fee Spielboden gondola runs continuously in summer, late June through mid-October
+  description_extra: From the car-free Saas-Fee village (1,800 m) take the Spielboden gondola to the mid-station at 2,448 m. The marmot meadow is right at the station; walk 10 min toward
+    the Hannig trail intersection for the Allalinhorn backdrop. Gondola runs late June to mid-October. Continue one section higher to Längfluh (2,869 m) for the glacier viewpoint, or
+    hike back down to the village.
+  sources:
+  - https://www.saas-fee.ch/de/erlebniswelten/spielboden-im-sommer
+  - https://www.saas-fee.ch/en/arrival
+  quickest_for:
+  - spielboden
+  cable_car_ids:
+  - spielboden-laengfluh
+- id: wildsee-from-pizolhuette-cable-car
+  visits:
+  - wildsee
+  name: Pizolhütte to Wildsee via the Wildseelücke
+  start: Pizolhütte
+  start_maps_url: https://www.google.com/maps/place/?q=46.97923,9.41704&z=16
+  sac_grade: T2
+  effort_label: Easy-moderate
+  duration_min: 60
+  gain_m: 298
+  descent_m: 39
+  distance_km: 2.55
+  equipment_list:
+  - Hiking boots
+  - Rain layer
+  - Sun protection
+  transit:
+    train: Bad Ragaz or Sargans, then bus to Wangs valley station
+    cable_car: Wangs to Furt gondola, then Furt to Gaffia chairlift; short walk down to Pizolhütte at the start. Last descent from Furt at 17:30 in summer
+  description_extra: Short ascent on the marked Wanderweg from Pizolhütte at 2,227 m up to the Wildseelücke pass at 2,493 m, then a few steps down to the turquoise Wildsee shore at around
+    2,485 m. Wegwandern.ch gives the ascent as "ca. 1 Stunde" (about 1 hour) over 2.5 km of trail, with the Pizol glacier and summit dominating the backdrop from the pass. Cumulative
+    298 m of gain and 39 m of descent on T2 terrain. The shortest way to stand at Wildsee without committing to the full 5-Seen-Wanderung. Reverse the same trail back to Pizolhütte for
+    the return.
+  sources:
+  - https://wegwandern.ch/wanderung/pizol-5-seen-wanderung/
+  - https://pizol.com/en/hiking-trails/5-lakes-hiking/
+  cable_car_ids:
+  - pizol-bergbahnen
+  quickest_for:
+  - wildsee

@@ -605,7 +605,8 @@ spots:
     best_time: Bright overcast for the most even light inside the gorge. Sunny days cause harsh contrast through the slit.
     operating: Boardwalk open April to early November. Entry fee around 12 CHF adult.
   hike_ids:
-  - aare_gorge-drive-up
+  - aare_gorge-east-innertkirchen
+  - aare_gorge-west-meiringen
 - id: brienzer_rothorn
   chapter: central
   kicker: SUMMITS
@@ -1994,7 +1995,7 @@ spots:
     reason: Spielboden is a Saas Fee cable-car viewpoint — same Saas Fee no-camping policy as the rest of the resort village. Wild camping not allowed near the cable-car infrastructure.
       Saas Fee/Grächen ski-area private land applies.
     canton: Valais (VS)
-  maps_url: https://www.google.com/maps/place/Spielboden,+3906+Saas-Fee/@46.1034607,7.9264445,17z/data=!3m1!4b1!4m6!3m5!1s0x478f4599f1a2d2cb:0xf03fe149d6ccbcea!8m2!3d46.1034607!4d7.9264445!16s%2Fg%2F1tfnxhfr
+  maps_url: https://maps.app.goo.gl/zb7nHkPHuqTauVvd9
   image: spots/spielboden/main.jpg
   image_credit: babooshka_pl
   photos:
@@ -2003,16 +2004,16 @@ spots:
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/ein-paar-kleine-vogel-die-auf-einer-uppig-grunen-wiese-stehen-JzPbTv95YPQ
   gps:
-    lat: 46.1034607
-    lng: 7.9264445
+    lat: 46.091989
+    lng: 7.89968
   trip_facts:
     elevation_m: 2452
     best_season: Late June – Late September
     busyness: 4
   hike_ids:
-  - spielboden-drive-up
+  - spielboden-cable-car-from-saas-fee
+  - spielboden-from-saas-fee-village
   - spielboden-laengfluh-glacier-trail
-  - spielboden-ascent-from-saas-fee-village
 - id: goms_bridge
   chapter: valais
   kicker: BRIDGES
@@ -2054,7 +2055,8 @@ spots:
     best_time: Late afternoon when the sun lights the bridge from the south side.
     operating: Bridge open year-round, but the access trail may be snow-covered in winter.
   hike_ids:
-  - goms_bridge-from-bellwald-or-fuergangen
+  - goms_bridge-from-fuergangen-station
+  - goms_bridge-from-bellwald
 - id: randa_bridge
   chapter: valais
   kicker: BRIDGES
@@ -2411,8 +2413,8 @@ spots:
   title: Nax Via Ferrata
   deck: A bolted climbing route above Nax village. Not long, not super technical. But genuinely exposed.
   body:
-  - Park at 46.200456, 7.031477 and walk to the route start. You need a full via ferrata kit (harness, Y-lanyard with energy absorber, helmet, gloves) and some climbing experience. It
-    is rated around K3. Not a beginner's route, but doable for a confident scrambler.
+  - Park at 46.2233, 7.4199 and walk to the route start. You need a full via ferrata kit (harness, Y-lanyard with energy absorber, helmet, gloves) and some climbing experience. It is
+    rated around K3. Not a beginner's route, but doable for a confident scrambler.
   - The view from the top traverses the Rhone valley. For photos, a drone captures the route and the climbers against the drop; from the ground, shoot from below with a wide lens to
     emphasize the exposure. Go early. Afternoon thunderstorms are common in summer.
   region: Nax
@@ -2921,7 +2923,6 @@ spots:
     best_season: June – October
     busyness: 2
   hike_ids:
-  - dent_de_lys-les-paccots-circular
   - dent_de_lys-from-les-sciernes-dalbeuve
 - id: moleson
   chapter: fribourg
@@ -5777,6 +5778,7 @@ spots:
     best_season: July - October
     elevation_m: 2493
   hike_ids:
+  - wildsee-from-pizolhuette-cable-car
   - wildsee-pizol-5-seen-wanderung
 - id: julier_pass
   chapter: eastern

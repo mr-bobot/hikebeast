@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1779523494227" />
+<link rel="stylesheet" href="../../preview.css?v=1779526823052" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -115,7 +115,15 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/aare_gorge_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Drive to either entrance <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Drive to the East entrance (Innertkirchen) <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Drive-up</span></span></div>
+      
+    </div>
+    <span class="hb-route-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+  </button><button type="button" class="hb-route-row" data-route-idx="1">
+    <div class="hb-route-thumb"><img src="../../img/derivatives/aare_gorge_p1/w1800.webp" alt="" loading="lazy" /></div>
+    <div class="hb-route-meta">
+      <div class="hb-route-name">Drive to the West entrance (Meiringen) </div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Drive-up</span></span></div>
       
     </div>
@@ -216,7 +224,7 @@
   const card = document.querySelector('[data-hb-flip-card]');
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
-  const ROUTES = [{"id":"aare_gorge-drive-up","visits":["aare_gorge"],"name":"Drive to either entrance","start":"Aareschlucht East (Innertkirchen) or West (Meiringen) entrance","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"bus":"Meiringen + PostBus 161 to Aareschlucht, West Eingang or Innertkirchen, Aareschlucht Ost","train":"Meiringen (Zentralbahn from Lucerne / Interlaken)"},"description_extra":"Free parking at both entrances. Two-minute walk from the lot to the boardwalk entrance. Boardwalk open April to early November, entry around 10 CHF.","sources":["https://aareschlucht.ch/en/welcome/","https://www.postauto.ch/en/timetables"],"quickest_for":["aare_gorge"],"start_maps_url":"https://www.google.com/maps/place/?q=46.7120,8.2179&z=16","quickest":true}];
+  const ROUTES = [{"id":"aare_gorge-east-innertkirchen","visits":["aare_gorge"],"name":"Drive to the East entrance (Innertkirchen)","start":"Aareschlucht East entrance (Innertkirchen)","start_maps_url":"https://maps.app.goo.gl/qsjgB5wFCrsbfAQd8","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"bus":"Meiringen + PostBus 161 to Innertkirchen, Aareschlucht Ost","train":"Meiringen (Zentralbahn from Lucerne / Interlaken)"},"description_extra":"Free parking at the Innertkirchen (East) entrance. Two-minute walk from the lot to the boardwalk. Boardwalk open April to early November, entry around 10 CHF. The full one-way gorge walk is about 1.4 km / 45 min between East and West entrances.","sources":["https://aareschlucht.ch/en/welcome/","https://www.postauto.ch/en/timetables"],"quickest_for":["aare_gorge"],"quickest":true},{"id":"aare_gorge-west-meiringen","visits":["aare_gorge"],"name":"Drive to the West entrance (Meiringen)","start":"Aareschlucht West entrance (Meiringen)","start_maps_url":"https://maps.app.goo.gl/YtZfdFf2NKYvaAg48","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"bus":"Meiringen + PostBus 161 to Aareschlucht, West Eingang","train":"Meiringen (Zentralbahn from Lucerne / Interlaken)"},"description_extra":"Free parking at the Meiringen (West) entrance. Two-minute walk from the lot to the boardwalk. Boardwalk open April to early November, entry around 10 CHF. The full one-way gorge walk is about 1.4 km / 45 min between East and West entrances.","sources":["https://aareschlucht.ch/en/welcome/","https://www.postauto.ch/en/timetables"],"quickest":false}];
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
