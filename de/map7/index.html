@@ -109,7 +109,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.47;
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
-    padding: env(safe-area-inset-top) 0 calc(env(safe-area-inset-bottom) + 72px) 0;
+    padding: 0 0 calc(env(safe-area-inset-bottom) + 72px) 0;
   }
 
   /* === Navbar === */
@@ -121,7 +121,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     -webkit-backdrop-filter: saturate(140%) blur(10px);
     backdrop-filter: saturate(140%) blur(10px);
     border-bottom: 1px solid var(--hairline);
-    padding: 10px 22px;
+    padding: calc(10px + env(safe-area-inset-top)) 22px 10px 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1655,9 +1655,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <script>
         // Video-Element wird erst beim Klick erzeugt. Kein <video src> im
         // initial-HTML = keine Möglichkeit für Safari/Chrome irgendwelche
-        // Metadata- oder Range-Requests beim Pageload abzusetzen. Der
-        // erste Byte des Videos lädt frühestens wenn der User auf den
-        // Pill drückt.
+        // Metadata- oder Range-Requests beim Pageload abzusetzen.
+        //
+        // Fullscreen-Verhalten:
+        //   iOS Safari · ohne `playsinline` öffnet `play()` automatisch
+        //     den nativen iOS Vollbild-Player.
+        //   Desktop · `requestFullscreen()` direkt aus dem click handler
+        //     öffnet Browser-Fullscreen (im user-gesture-context erlaubt).
         (function () {
           var btn = document.getElementById("about-video-btn");
           if (!btn) return;
@@ -1666,10 +1670,19 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             vid.className = "about-video";
             vid.src = btn.dataset.src;
             vid.poster = btn.dataset.poster;
-            vid.playsInline = true;
             vid.controls = true;
-            vid.autoplay = true;
+            // Kein playsInline = iOS macht native fullscreen via play()
             btn.replaceWith(vid);
+
+            var req = vid.requestFullscreen
+                   || vid.webkitRequestFullscreen
+                   || vid.webkitEnterFullscreen;
+            if (req) {
+              try {
+                var p = req.call(vid);
+                if (p && p.catch) p.catch(function () {});
+              } catch (e) {}
+            }
             vid.play().catch(function () {});
           }, { once: true });
         })();
