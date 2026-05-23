@@ -116,7 +116,8 @@ hikes:
   - https://www.windegghuette.ch/
   quickest_for:
   - triftbrucke
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   cable_car_ids:
   - triftbahn-cable-car
   hut_ids:
@@ -141,7 +142,8 @@ hikes:
   - https://www.grimselwelt.ch/en/hiking-around-the-reichbach-falls/
   quickest_for:
   - triftsee
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   cable_car_ids:
   - triftbahn-cable-car
   hut_ids:
@@ -214,6 +216,8 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/holiday-region-interlaken/hike-to-the-brienzer-rothorn/23490971/
   start_maps_url: https://maps.app.goo.gl/Xb34hKwo5WWFsqmb9
   distance_km: 9.8
+  equipment_list:
+  - Sturdy hiking shoes
 - id: hardergrat_trail-rothorn-to-harder-kulm
   name: 'Full Brienzergrat traverse: Brienzer Rothorn to Harder Kulm'
   sac_grade: T5
@@ -292,7 +296,8 @@ hikes:
   - https://www.balmers.com/augstmatthorn-hike/
   quickest_for:
   - augstmatthorn
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   name: Lombachalp short ascent
   start_maps_url: https://maps.app.goo.gl/iinY4mbLdEm8JK3H9
   transit:
@@ -315,11 +320,10 @@ hikes:
   - https://swissfamilyfun.com/stoos-ridgeline-hike/
   quickest_for:
   - fronalpstock
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   cable_car_ids:
   - stoosbahn
-  - klingenstockbahn
-  - fronalpstockbahn
   start_maps_url: https://maps.app.goo.gl/N5QPSUYwzKXvf6bN7
   distance_km: 4.5
   gain_m: 470
@@ -343,6 +347,8 @@ hikes:
   - https://lenk-simmental.ch/erlebnisse-touren/tour/detail/nr-3-lenk-iffigenalp-lenk
   start_maps_url: https://maps.app.goo.gl/3qwMiM5sM6wNLPdz9
   distance_km: 8.8
+  equipment_list:
+  - Sturdy hiking shoes
 - id: schrattenfluh-schratteflue-crossing
   name: Schratteflue crossing (advanced)
   start: Hirsegg (or Sörenberg Post for a longer start)
@@ -391,6 +397,8 @@ hikes:
   hut_ids:
   - heftihuette
   start_maps_url: https://www.google.com/maps/place/?q=46.83878,8.01238&z=16
+  equipment_list:
+  - Sturdy hiking shoes
 - id: heftihutte-from-fluehli
   name: From Flühli LU
   start: Flühli
@@ -410,6 +418,8 @@ hikes:
   gain_m: 1050
   hut_ids:
   - heftihuette
+  equipment_list:
+  - Sturdy hiking shoes
 - id: bachalpsee-route-38
   sac_grade: T1
   effort_label: Easy
@@ -450,6 +460,8 @@ hikes:
   - https://www.alltrails.com/trail/switzerland/bern/first-bussalp-uber-faulhorn
   start_maps_url: https://www.google.com/maps/place/?q=46.65045,7.99104&z=16
   distance_km: 4.0
+  equipment_list:
+  - Sturdy hiking shoes
 - id: iseltwald-default
   description_extra: Drive in, or take the summer steamship from Interlaken (April to October), or Postbus 103 from Interlaken Ost. Two parking lots sit above the village; cars cannot
     enter, so you walk down a few minutes to the lakefront and pier. The famous pier (Crash Landing on You filming location) charges a CHF 5 entrance fee. T1.
@@ -530,6 +542,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.49833,7.72694&z=16
   distance_km: 12.5
   descent_m: 1370
+  equipment_list:
+  - Sturdy hiking shoes
 - id: piz_gloria-cable-car-to-summit
   name: Cable car (Stechelberg → Schilthorn)
   start: Stechelberg cable car
@@ -567,6 +581,8 @@ hikes:
   distance_km: 8.0
   cable_car_ids:
   - schilthornbahn
+  equipment_list:
+  - Sturdy hiking shoes
 - id: riffelsee-default
   description_extra: Reached from Rotenboden station (2,815 m) on the Gornergrat railway from Zermatt, then a short walk down (the station sits about 58 m above the lake). T1, about
     10 minutes on an easy path. The Kulmhotel Gornergrat and Riffelhaus 1853 are walking distance along the ridge.
@@ -632,6 +648,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.00198,7.75094&z=16
   distance_km: 10.7
   descent_m: 750
+  equipment_list:
+  - Sturdy hiking shoes
 - id: gorner_glacier-gornergrat-railway
   name: Gornergrat railway + Sunshine Trail
   start: Zermatt train station
@@ -673,6 +691,8 @@ hikes:
   descent_m: 887
   cable_car_ids:
   - gornergrat-bahn
+  equipment_list:
+  - Sturdy hiking shoes
 - id: gorner_glacier-descent-via-riffelsee
   name: Gornergrat to Zermatt via Riffelsee
   start: Gornergrat top station
@@ -689,6 +709,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=45.9833,7.7822&z=16
   distance_km: 12.6
   descent_m: 1475
+  equipment_list:
+  - Sturdy hiking shoes
 - id: aletsch_glacier-eggishorn-circular
   name: Eggishorn circular trail
   start: Eggishorn top station
@@ -733,6 +755,8 @@ hikes:
   distance_km: 3.8
   descent_m: 110
   gain_m: 250
+  equipment_list:
+  - Sturdy hiking shoes
 - id: aletsch_glacier-aletsch-panoramaweg
   name: Aletsch Panoramaweg
   start: Bettmerhorn
@@ -753,6 +777,8 @@ hikes:
   - bettmerhorn-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.41,8.07667&z=16
   distance_km: 12.0
+  equipment_list:
+  - Sturdy hiking shoes
 - id: arolla_ice_cave-arolla-glacier-trail
   name: Arolla glacier trail (14 km loop)
   start: Arolla village
@@ -770,6 +796,8 @@ hikes:
   sources:
   - https://www.myswitzerland.com/en-ch/experiences/arolla-glacier-trail/
   start_maps_url: https://www.google.com/maps/place/?q=46.017,7.483&z=16
+  equipment_list:
+  - Sturdy hiking shoes
 - id: arolla_ice_cave-arolla-pas-de-chevres
   name: Pas de Chèvres climb
   start: Arolla village
@@ -790,6 +818,8 @@ hikes:
   - arolla_ice_cave
   start_maps_url: https://www.google.com/maps/place/?q=46.017,7.483&z=16
   distance_km: 5.1
+  equipment_list:
+  - Sturdy hiking shoes
 - id: cabane_becs_de_bosson-from-bendolla
   name: From Bendolla (top of Grimentz gondola)
   start: Bendolla
@@ -814,6 +844,8 @@ hikes:
   - cabane-becs-de-bosson
   start_maps_url: https://www.google.com/maps/place/?q=46.18063,7.55796&z=16
   distance_km: 7.2
+  equipment_list:
+  - Sturdy hiking shoes
 - id: moiry_glacier-bus-to-moiry-barrage
   name: Bus to Moiry dam + walk to hut
   start: Lac de Moiry / Moiry dam
@@ -837,6 +869,8 @@ hikes:
   - cabane-moiry-cas
   start_maps_url: https://www.google.com/maps/place/?q=46.13761,7.57255&z=16
   distance_km: 8.2
+  equipment_list:
+  - Sturdy hiking shoes
 - id: moiry_glacier-from-grimentz-on-foot
   name: From Grimentz on foot
   start: Grimentz village
@@ -855,6 +889,8 @@ hikes:
   distance_km: 13.2
   hut_ids:
   - cabane-moiry-cas
+  equipment_list:
+  - Sturdy hiking shoes
 - id: ferpecle_glacier-easy-glacier-trail
   name: Barrage de Ferpècle → glacier foot
   start: Barrage de Ferpècle
@@ -891,6 +927,8 @@ hikes:
   - https://www.komoot.com/smarttour/e1385019885/bricola-von-ferpecle
   start_maps_url: https://www.google.com/maps/place/?q=46.0657,7.54377&z=16
   distance_km: 3.0
+  equipment_list:
+  - Sturdy hiking shoes
 - id: spielboden-laengfluh-glacier-trail
   name: Längfluh → Spielboden → Saas-Fee
   start: Längfluh cable car top station
@@ -913,6 +951,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.09199,7.89936&z=16
   distance_km: 6.4
   descent_m: 1120
+  equipment_list:
+  - Sturdy hiking shoes
 - id: barrhorn-from-turtmannhuette
   name: From Turtmannhütte via Schöllijoch
   start: Turtmannhütte
@@ -931,7 +971,9 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/uessers-barrhorn-145/mountain-hiking/
   quickest_for:
   - barrhorn
-  equipment_list: []
+  equipment_list:
+  - Sturdy mountaineering boots
+  - Trekking poles
   hut_ids:
   - turtmannhutte-sac
   start_maps_url: https://www.google.com/maps/place/?q=46.16013,7.69948&z=16
@@ -958,6 +1000,7 @@ hikes:
   - Ice axe
   - Rope
   - Harness
+  - Helmet
   cable_car_ids:
   - alpin-express
   hut_ids:
@@ -1003,6 +1046,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=45.87371,7.05273&z=16
   distance_km: 14.5
   descent_m: 1000
+  equipment_list:
+  - Sturdy hiking shoes
 - id: sanetschpass-from-gsteig-on-foot
   name: From Gsteig on foot
   start: Gsteig bei Gstaad
@@ -1021,6 +1066,8 @@ hikes:
   - https://www.myswitzerland.com/en-us/experiences/sanetsch-between-bern-and-valais/
   start_maps_url: https://www.google.com/maps/place/?q=46.383,7.267&z=16
   distance_km: 12.6
+  equipment_list:
+  - Sturdy hiking shoes
 - id: sanetschpass-cable-car-shortcut
   name: Sanetsch cable car + walk to lake
   start: Gsteig cable car valley station
@@ -1080,6 +1127,8 @@ hikes:
   - crans_montana
   sources: []
   start_maps_url: https://www.google.com/maps/place/?q=46.31288,7.48929&z=16
+  equipment_list:
+  - Sturdy hiking shoes
 - id: crans_montana-plaine-morte-glacier
   name: Plaine Morte glacial plateau
   start: Top of Pointe de la Plaine Morte cable car
@@ -1098,6 +1147,8 @@ hikes:
   cable_car_ids:
   - plaine-morte-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.36994,7.48897&z=16
+  equipment_list:
+  - Sturdy hiking shoes
 - id: salanfe_lake-from-van-d-en-haut
   name: From Van d'En Haut
   start: Van d'En Haut campsite
@@ -1117,6 +1168,8 @@ hikes:
   - salanfe_lake
   start_maps_url: https://www.google.com/maps/place/?q=46.14006,6.99303&z=16
   distance_km: 3.4
+  equipment_list:
+  - Sturdy hiking shoes
 - id: pointe_du_tsate-from-la-forclaz
   name: From La Forclaz via Lac du Tsaté
   start: La Forclaz (Évolène)
@@ -1136,6 +1189,8 @@ hikes:
   - pointe_du_tsate
   start_maps_url: https://maps.app.goo.gl/BZK1Vzbu8USyZ6tV7
   distance_km: 5.5
+  equipment_list:
+  - Sturdy hiking shoes
 - id: gastlosen-gastlosen-circular
   name: Gastlosen circular (Jaun → Chalet du Soldat → Jaun)
   start: Jaun, Dorf
@@ -1155,6 +1210,8 @@ hikes:
   - chalet-du-soldat
   start_maps_url: https://maps.app.goo.gl/NQLU3GDcCnHYtTvw8
   distance_km: 14.4
+  equipment_list:
+  - Sturdy hiking shoes
 - id: dent_de_broc-from-broc
   name: Broc → Dent de Broc → Gruyères (traverse)
   start: Broc (TPF station)
@@ -1174,6 +1231,9 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.604,7.099&z=16
   distance_km: 5.0
   descent_m: 1200
+  equipment_list:
+  - Sturdy mountaineering boots
+  - Trekking poles
 - id: dent_de_lys-les-paccots-circular
   name: Les Paccots loop via Lac des Joncs
   start: Les Paccots
@@ -1193,6 +1253,8 @@ hikes:
   - dent_de_lys
   start_maps_url: https://www.google.com/maps/place/?q=46.52222,6.94806&z=16
   distance_km: 11.0
+  equipment_list:
+  - Sturdy hiking shoes
 - id: moleson-plan-francey-summit
   name: Plan-Francey to summit and back
   start: Plan-Francey mid-station
@@ -1212,6 +1274,8 @@ hikes:
   - moleson-funiculaire
   start_maps_url: https://www.google.com/maps/place/?q=46.55582,7.02387&z=16
   distance_km: 4.3
+  equipment_list:
+  - Sturdy hiking shoes
 - id: teysachaux-les-paccots-to-moleson
   name: Les Paccots → Téysachaux → Moléson
   start: Les Paccots
@@ -1234,6 +1298,8 @@ hikes:
   - moleson-funiculaire
   start_maps_url: https://www.google.com/maps/place/?q=46.52222,6.94806&z=16
   distance_km: 10.8
+  equipment_list:
+  - Sturdy hiking shoes
 - id: cap_au_moine-from-allieres
   name: Allières → Cape au Moine
   start: Allières
@@ -1251,6 +1317,9 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.46982,7.00789&z=16
   distance_km: 7.2
   gain_m: 950
+  equipment_list:
+  - Sturdy mountaineering boots
+  - Trekking poles
 - id: dent_de_jaman-route-87
   duration_min: 30
   gain_m: 141
@@ -1265,7 +1334,8 @@ hikes:
   - https://www.outdooractive.com/en/search/?q=dent-de-jaman-from-col-de-jaman
   quickest_for:
   - dent_de_jaman
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   name: Direct ascent from Jaman station
   sac_grade: T2
   effort_label: Moderate
@@ -1290,6 +1360,8 @@ hikes:
   - https://www.myswitzerland.com/en-ch/experiences/route/creux-du-van-round-trip-in-the-val-de-travers/
   start_maps_url: https://www.google.com/maps/place/?q=46.95492,6.7218&z=16
   descent_m: 780
+  equipment_list:
+  - Sturdy hiking shoes
 - id: lac_de_taney-route-50
   sac_grade: T1
   effort_label: Easy
@@ -1324,7 +1396,8 @@ hikes:
     trail with one exposed section near the top.
   sources:
   - https://www.schweizmobil.ch/en/wandern/grammont
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start_maps_url: https://www.google.com/maps/place/?q=46.33749,6.85606&z=16
   distance_km: 7.0
 - id: marchairuz-mollendruz-mont-tendre-marchairuz
@@ -1346,6 +1419,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.65051,6.36456&z=16
   distance_km: 16.0
   descent_m: 411
+  equipment_list:
+  - Sturdy hiking shoes
 - id: geltenschuss-lauenensee-geltenhuette
   name: Lauenensee → Geltenhütte → Lauenensee
   start: Lauenensee
@@ -1367,6 +1442,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.395,7.33222&z=16
   distance_km: 16.5
   descent_m: 1100
+  equipment_list:
+  - Sturdy hiking shoes
 - id: lavaux_vineyards-terrasses-de-lavaux
   name: Terrasses de Lavaux (St-Saphorin → Lutry)
   start: St-Saphorin train station
@@ -1403,7 +1480,8 @@ hikes:
   - https://www.alpstein.ch/de/wandern/wanderung/ebenalp-schaefler.html
   quickest_for:
   - schafler
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   hut_ids:
   - berggasthaus-schafler
   cable_car_ids:
@@ -1450,7 +1528,8 @@ hikes:
   gain_m: 0
   descent_m: 185
   distance_km: 0.8
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   quickest_for:
   - ascher
   start_maps_url: https://www.google.com/maps/place/?q=47.29024,9.40417&z=16
@@ -1539,6 +1618,8 @@ hikes:
   - muttseehutte-sac
   start_maps_url: https://www.google.com/maps/place/?q=46.8783,8.98521&z=16
   distance_km: 4.7
+  equipment_list:
+  - Sturdy hiking shoes
 - id: berschnerfall-route-44
   sac_grade: T1
   effort_label: Easy
@@ -1579,6 +1660,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.89,8.90056&z=16
   distance_km: 27.4
   descent_m: 1500
+  equipment_list:
+  - Sturdy hiking shoes
 - id: barglistuber-route-14
   start: Parkplatz Wasserfall Berglistüber
   transit:
@@ -1638,6 +1721,8 @@ hikes:
   hut_ids:
   - glarnischhutte-sac
   start_maps_url: https://www.google.com/maps/place/?q=47.02526,8.94039&z=16
+  equipment_list:
+  - Sturdy hiking shoes
 - id: gigerwaldsee-calfeisental-round
   name: Calfeisental round (Gigerwald → Sardona → Gigerwald)
   start: Gigerwald reservoir
@@ -1657,6 +1742,8 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/sardonahuette-sac-2147000234/mountain-hiking/from-the-gigerwald-dam-via-alp-sardona-216/
   - https://www.outdooractive.com/en/route/hiking-trail/east-switzerland/sardonahuette/9116181/
   start_maps_url: https://www.google.com/maps/place/?q=46.9155,9.37092&z=16
+  equipment_list:
+  - Sturdy hiking shoes
 - id: gigerwaldsee-st-martin-to-sardona
   name: St. Martin → Alp Sardona
   start: St. Martin (Walser village)
@@ -1670,6 +1757,8 @@ hikes:
   - gigerwaldsee
   sources: []
   start_maps_url: https://www.google.com/maps/place/?q=46.92058,9.35556&z=16
+  equipment_list:
+  - Sturdy hiking shoes
 - id: ruinaulta-versam-circular
   name: Versam circular through the gorge
   start: Versam station
@@ -1683,6 +1772,8 @@ hikes:
   - ruinaulta
   sources: []
   start_maps_url: https://www.google.com/maps/place/?q=46.80738,9.3103&z=16
+  equipment_list:
+  - Sturdy hiking shoes
 - id: ruinaulta-flims-out-and-back
   name: From Flims Waldhaus
   start: Flims Waldhaus
@@ -1794,6 +1885,8 @@ hikes:
   - pizol-bergbahnen
   start_maps_url: https://www.google.com/maps/place/?q=46.97923,9.41704&z=16
   descent_m: 911
+  equipment_list:
+  - Sturdy hiking shoes
 - id: joriseen-route-126
   sac_grade: T3
   effort_label: Moderate to hard
@@ -1810,7 +1903,8 @@ hikes:
   - https://www.komoot.com/smarttour/e733355515/joeriseen-rundweg
   quickest_for:
   - joriseen
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start_maps_url: https://www.google.com/maps/place/?q=46.75028,9.9475&z=16
   distance_km: 11.1
 - id: falensee-route-69
@@ -1824,7 +1918,8 @@ hikes:
   sources: []
   quickest_for:
   - falensee
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   hut_ids:
   - berggasthaus-bollenwees
   cable_car_ids:
@@ -1846,7 +1941,8 @@ hikes:
   - https://www.outdooractive.com/en/route/hiking-trail/heidiland/route-of-amazement-weisstannental/23430516/
   quickest_for:
   - batoni_wasserfallarena
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start_maps_url: https://www.google.com/maps/place/?q=46.99056,9.34444&z=16
   distance_km: 4.2
 - id: morteratsch_glacier-aussichtsweg-glacier-trail
@@ -1899,6 +1995,8 @@ hikes:
   - chamanna-da-boval-cas
   start_maps_url: https://www.google.com/maps/place/?q=46.45072,9.94041&z=16
   distance_km: 5.0
+  equipment_list:
+  - Sturdy hiking shoes
 - id: spitzmeilenhutte-from-maschgenkamm
   name: From Maschgenkamm cable car
   start: Maschgenkamm top station (Flumserberg)
@@ -1923,6 +2021,8 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=47.0694,9.25321&z=16
   distance_km: 7.2
   descent_m: 270
+  equipment_list:
+  - Sturdy hiking shoes
 - id: cascata_la_froda-from-sonogno-village
   name: From Sonogno (short walk to base)
   start: Sonogno village
@@ -2010,6 +2110,10 @@ hikes:
   - mer_de_glace
   sources: []
   start_maps_url: https://www.google.com/maps/place/?q=45.9231,6.8697&z=16
+  equipment_list:
+  - Sturdy hiking shoes
+  cable_car_ids:
+  - montenvers-railway
 - id: les_cheserys-tre-le-champ-to-lac-blanc
   name: Tré-le-Champ → Cheserys → Lac Blanc
   start: Tré-le-Champ (Argentière)
@@ -2028,7 +2132,8 @@ hikes:
   - mont_blanc
   sources:
   - https://www.komoot.com/smarttour/1592713
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start_maps_url: https://www.google.com/maps/place/?q=45.99563,6.92917&z=16
   distance_km: 10.4
   cable_car_ids:
@@ -2055,6 +2160,8 @@ hikes:
   - flegere-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=45.95105,6.88616&z=16
   distance_km: 8.0
+  equipment_list:
+  - Sturdy hiking shoes
 - id: glacier_des_bossons-chairlift-to-chalet
   name: Chairlift to Chalet du Glacier
   start: Les Bossons (bus stop)
@@ -2093,6 +2200,8 @@ hikes:
   - glacier-bossons-chairlift
   start_maps_url: https://www.google.com/maps/place/?q=45.894,6.84951&z=16
   distance_km: 5.8
+  equipment_list:
+  - Sturdy hiking shoes
 - id: pic_de_jallouvre-from-petit-bornand
   name: From Le Petit-Bornand-les-Glières
   start: Chalet de Cenise parking (above Le Petit-Bornand-les-Glières)
@@ -2109,6 +2218,8 @@ hikes:
   - https://www.altituderando.com/Pic-de-Jallouvre-2408m-par-Cenise
   start_maps_url: https://www.google.com/maps/place/?q=46.04662,6.42897&z=16
   distance_km: 9.8
+  equipment_list:
+  - Sturdy hiking shoes
 - id: dent_doche-from-bernex
   name: From Bernex via Fétiuère
   start: Fétiuère parking (above Bernex)
@@ -2130,6 +2241,8 @@ hikes:
   - refuge-dent-oche
   start_maps_url: https://www.google.com/maps/place/?q=46.3462,6.70783&z=16
   distance_km: 5.5
+  equipment_list:
+  - Sturdy hiking shoes
 - id: brisen-route-via-haldigrat
   sac_grade: T3
   effort_label: Difficult
@@ -2149,7 +2262,8 @@ hikes:
   - https://www.schweizmobil.ch/en/hiking-in-switzerland/services/places/ort-0144.html
   quickest_for:
   - brisen
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   cable_car_ids:
   - niederrickenbach-cable-car
   - haldigrat-chairlift
@@ -2219,7 +2333,8 @@ hikes:
   - https://www.ticino.ch/en/commons/details/Tibetan-bridge-Carasc-/137557.html
   quickest_for:
   - ponte_tibetano
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   cable_car_ids:
   - monte-carasso-mornera-cable-car
   start_maps_url: https://www.google.com/maps/place/?q=46.20779,8.97982&z=16
@@ -2241,7 +2356,8 @@ hikes:
   sources:
   - https://www.valais.ch/en/activities/natural-sites/glaciers/zinal-glacier
   - https://www.camptocamp.org/routes/53842/fr/cabane-du-petit-mountet-depuis-zinal
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start_maps_url: https://maps.app.goo.gl/iFcJxr7tGeX8A7t89
   distance_km: 5.0
 - id: ascher-from-schwende-on-foot
@@ -2252,7 +2368,8 @@ hikes:
   duration_min: 150
   gain_m: 823
   distance_km: 4.35
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Schwende railway station (Appenzell)
   transit:
     train: Appenzell to Schwende (Appenzeller Bahnen line to Wasserauen, get off one stop earlier)
@@ -2274,6 +2391,10 @@ hikes:
   equipment_list:
   - Sturdy hiking boots
   - Poles
+  - Crampons
+  - Helmet
+  - Glacier rope
+  - Harness
   start: St. Niklaus railway station
   transit:
     train: Visp to St. Niklaus (Matterhorn Gotthard Bahn)
@@ -2287,7 +2408,6 @@ hikes:
   distance_km: 12
   descent_m: 2000
   hut_ids:
-  - topalihutte-sac
   - turtmannhutte-sac
 - id: cap_au_moine-from-les-avants-via-col-de-jaman
   visits:
@@ -2357,7 +2477,8 @@ hikes:
   duration_min: 70
   gain_m: 256
   distance_km: 3.0
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Engstligenalp top station
   start_maps_url: https://maps.app.goo.gl/qusKe5KQ5Yw64M349
   transit:
@@ -2379,7 +2500,8 @@ hikes:
   duration_min: 300
   gain_m: 696
   distance_km: 12
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Musersbergli top station (Jaun chairlift)
   transit:
     bus: Bulle or Boltigen postbus to Jaun
@@ -2451,7 +2573,8 @@ hikes:
   duration_min: 285
   gain_m: 805
   distance_km: 12.2
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Berghaus Vereina (Klosters side)
   transit:
     train: Klosters Platz, then Klosters-Vereina shuttle bus (reservation by phone)
@@ -2472,7 +2595,8 @@ hikes:
   duration_min: 330
   gain_m: 420
   distance_km: 15
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Champex-Lac
   transit:
     train: Martigny to Orsières
@@ -2538,7 +2662,8 @@ hikes:
   duration_min: 150
   gain_m: 754
   distance_km: 5
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Sementina village (valley floor)
   transit:
     bus: Bellinzona to Sementina (local bus), or train to Bellinzona then on foot
@@ -2558,7 +2683,8 @@ hikes:
   duration_min: 210
   gain_m: 160
   distance_km: 12.55
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: First top station (above Grindelwald)
   start_maps_url: https://maps.app.goo.gl/txPQnNimv9QKBYxM8
   transit:
@@ -2675,7 +2801,8 @@ hikes:
   duration_min: 180
   gain_m: 329
   distance_km: 11.2
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Crans-Montana cable car station
   transit:
     train: Sierre, then Sierre-Crans-Montana funicular
@@ -2836,7 +2963,8 @@ hikes:
   effort_label: Moderate
   duration_min: 135
   gain_m: 600
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Brülisau
   transit:
     bus: Appenzell, then Postbus to Brülisau
@@ -2858,7 +2986,8 @@ hikes:
   duration_min: 90
   gain_m: 450
   distance_km: 1.6
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Handegg, Kunzentännlein (Postbus stop on the Grimsel road)
   transit:
     bus: Meiringen, then Postbus 171 toward Grimsel Hospiz, stop Handegg, Kunzentännlein
@@ -2878,7 +3007,8 @@ hikes:
   duration_min: 240
   gain_m: 565
   distance_km: 11.4
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Alt St. Johann village
   transit:
     train: Nesslau-Neu St. Johann (Toggenburg line, end of line)
@@ -2920,7 +3050,8 @@ hikes:
   duration_min: 375
   gain_m: 1250
   distance_km: 22.0
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Eggberge (top station of the Flüelen-Eggberge cable car)
   transit:
     train: Flüelen
@@ -2944,7 +3075,8 @@ hikes:
   duration_min: 180
   gain_m: 580
   distance_km: 7.3
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Solalex, above Gryon (Vaud Alps)
   transit:
     bus: Bex, then Bex-Villars-Bretaye line to Gryon, then Postbus to Solalex (summer only)
@@ -2964,7 +3096,8 @@ hikes:
   duration_min: 330
   gain_m: 860
   distance_km: 17
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Saint-Cergue (train station on the Nyon-Saint-Cergue-La Cure line)
   transit:
     train: Nyon, then NStCM line to Saint-Cergue
@@ -3010,7 +3143,8 @@ hikes:
   duration_min: 135
   gain_m: 540
   distance_km: 4.1
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Riffelalp station
   transit:
     train: Zermatt, then Gornergratbahn to Riffelalp
@@ -3051,7 +3185,8 @@ hikes:
   effort_label: Moderate
   duration_min: 270
   gain_m: 800
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Brülisau
   transit:
     bus: Appenzell, then Postbus to Brülisau
@@ -3066,6 +3201,8 @@ hikes:
   - berggasthaus-bollenwees
   start_maps_url: https://www.google.com/maps/place/?q=47.29645,9.4568&z=16
   distance_km: 14.4
+  cable_car_ids:
+  - hoher-kasten-bahn
 - id: seealpsee-from-brulisau-via-meglisalp
   visits:
   - seealpsee
@@ -3074,7 +3211,8 @@ hikes:
   duration_min: 390
   gain_m: 1100
   distance_km: 17.3
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Brülisau
   transit:
     bus: Appenzell, then Postbus to Brülisau
@@ -3097,7 +3235,8 @@ hikes:
   duration_min: 150
   gain_m: 660
   distance_km: 4.9
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Morschach, Talstation (Postbus from Brunnen)
   transit:
     train: Brunnen
@@ -3207,7 +3346,8 @@ hikes:
   duration_min: 180
   gain_m: 430
   distance_km: 5.5
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Trübsee (top of Titlis Xpress from Engelberg)
   transit:
     train: Engelberg
@@ -3347,7 +3487,8 @@ hikes:
   effort_label: Demanding
   duration_min: 180
   gain_m: 990
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Moléson-Village
   transit:
     train: Bulle
@@ -3363,7 +3504,8 @@ hikes:
   - oltschibachfall
   sac_grade: T2
   effort_label: Easy
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Unterbach bei Meiringen
   transit:
     train: Meiringen
@@ -3404,7 +3546,8 @@ hikes:
   duration_min: 235
   gain_m: 130
   distance_km: 11.7
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: First top station
   start_maps_url: https://maps.app.goo.gl/txPQnNimv9QKBYxM8
   transit:
@@ -3449,7 +3592,8 @@ hikes:
   effort_label: Moderate
   duration_min: 210
   gain_m: 670
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Saas-Fee village
   transit:
     train: Visp
@@ -3462,6 +3606,8 @@ hikes:
   - https://www.bergfex.com/sommer/wallis/touren/wanderung/602774,laengfluh--saas-fee
   start_maps_url: https://www.google.com/maps/place/?q=46.10734,7.92471&z=16
   distance_km: 3.9
+  cable_car_ids:
+  - spielboden-laengfluh
 - id: triftsee-from-underi-trift-via-windegghuette
   visits:
   - triftsee
@@ -3515,7 +3661,8 @@ hikes:
   name: Side trail to the Engstligenalp plateau
   sac_grade: T2
   effort_label: Moderate
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   start: Adelboden, Unter dem Birg (postbus stop)
   transit:
     bus: Adelboden postbus to Unter dem Birg
@@ -3893,7 +4040,8 @@ hikes:
   distance_km: 18
   gain_m: 853
   descent_m: 1291
-  equipment_list: []
+  equipment_list:
+  - Sturdy hiking shoes
   description_extra: From the Riggisalp top station (1,491 m), the Schwarzsee Höhenweg traverses east through the alpine pastures along the Sense and Gruyère district border, connecting
     Jaun, Charmey, Cerniat, Plasselb and Plaffeien parishes before ending at the Schwyberg. About 18 km, 6 h 20 walking time, 853 m of cumulative climb against 1,291 m of descent. Moderate
     difficulty.
@@ -4835,7 +4983,7 @@ hikes:
   start_maps_url: https://www.google.com/maps/place/?q=46.12784,7.629728&z=16
   sac_grade: T4
   effort_label: Expert (deep winter only)
-  duration_min: 180
+  duration_min: 270
   gain_m: 500
   distance_km: 11
   equipment_list:
@@ -4846,14 +4994,16 @@ hikes:
   - Tripod (it is darker than it looks)
   - Warm layers, waterproof shell, gloves, hat
   - 1.5-2 L water, food
+  - Sturdy mountaineering / alpine boots
+  - Trekking poles
   transit:
     bus: Sierre (SBB) + PostBus 452 up Val d'Anniviers to Zinal, end of line
   description_extra: 'Winter-only approach up the Glacier de Zinal from the Plats de la Lée parking at the end of the road (about 1,675 m) to the seasonal ice caves that form in the
-    glacier tongue around 2,150 m. Around 11 km return on foot with roughly 500 m of cumulative gain, 4-5 hours total in snowshoes. Caves are ephemeral and only exist from about December
-    through March, and only after a sustained cold period — they collapse the moment temperatures rise. The Val d''Anniviers tourist office is explicit: do not go alone, never after
-    warm days or fresh snow, and access without a guide is officially discouraged because of crevasse, avalanche, and collapse hazard. People die in alpine ice caves every year. Check
-    the avalanche bulletin (slf.ch), tell someone your plan, turn back if anything feels off. Hire a local mountain guide for the actual cave entry — independent visits are at your own
-    risk. Graded T4 / ski-tour-equivalent: no technical climbing, but the consequences of getting it wrong are fatal.'
+    glacier tongue around 2,150 m. Around 11 km return on foot with roughly 500 m of cumulative gain, 4-5 hours total in snowshoes (about 4h 30 with stops). Caves are ephemeral and only
+    exist from about December through March, and only after a sustained cold period — they collapse the moment temperatures rise. The Val d''Anniviers tourist office is explicit: do
+    not go alone, never after warm days or fresh snow, and access without a guide is officially discouraged because of crevasse, avalanche, and collapse hazard. People die in alpine
+    ice caves every year. Check the avalanche bulletin (slf.ch), tell someone your plan, turn back if anything feels off. Hire a local mountain guide for the actual cave entry — independent
+    visits are at your own risk. Graded T4 / ski-tour-equivalent: no technical climbing, but the consequences of getting it wrong are fatal.'
   sources:
   - https://www.valdanniviers.ch/en/Z32755/caves-of-the-zinal-glacier
   - https://www.valdanniviers.ch/en/P123878/guided-hike-to-the-zinal-glacier-caves
@@ -4905,9 +5055,9 @@ hikes:
   transit:
     train: Martigny-Orsières line (TMR/RegionAlps) to Bovernier station, then 20 min walk uphill to Les Valettes
   description_extra: Paid walkway loop through a narrow gorge with 14 waterfalls and 330 steps on suspended wooden staircases and boardwalks bolted into the rock. About 200 m of vertical
-    gain on the way up, then down by a forest path on the other side — roughly 45-60 min round trip. T1 throughout but the boards get slick from the spray, grippy shoes matter. Admission
-    CHF 9 adults, CHF 5 children 6-15, free under 6, CHF 8 students/AVS. Open daily May 1 to October 31 (weather permitting), Sun-Wed 09:00-18:00, Thu-Sat 09:00-23:00. From Bovernier
-    station the entrance is a 20-min uphill walk; from the valley parking right at the entrance it is just 2 minutes to the ticket booth.
+    gain on the way up, then down by a forest path on the other side — roughly 45-60 min round trip. T1 throughout but the boards get slick from the spray, grippy shoes matter. Open
+    daily from May 1 to October 31 (weather permitting); check the official site for current opening hours and admission prices. From Bovernier station the entrance is a 20-min uphill
+    walk; from the valley parking right at the entrance it is just 2 minutes to the ticket booth.
   sources:
   - https://www.gorgesdudurnand.ch/en/
   quickest_for:
@@ -4931,9 +5081,9 @@ hikes:
     bus: Bulle (SBB) + PostBus 260 toward Jaun, Dorf
   description_extra: Walking route from Jaun village (about 1,020 m) up the Euschels valley to Ritzli Alp at 1,509 m. Roughly 7.5 km and 500 m of gain on a marked T1 path, about 2h 45
     to 3 h up at a relaxed pace. The trail leaves Jaun past the village waterfall and cemetery, climbs through alpine meadows, then follows the Euschelsstrasse toward the Euschels pass
-    before reaching the alp restaurant on its sunny terrace. Ritzli Alp opens daily from June to mid-September with reduced weekend hours in shoulder season, and sits directly under
-    the Gastlosen ridge — the wall lights up at sunset and the terrace stays warm into blue hour. Descend the same way (faster, around 1h 30) or continue over the pass to Schwarzsee
-    on the Alpenpanoramaweg.
+    before reaching the alp restaurant on its sunny terrace. Ritzli Alp opens daily from May through October with reduced weekend hours in shoulder season, and sits directly under the
+    Gastlosen ridge — the wall lights up at sunset and the terrace stays warm into blue hour. Descend the same way (faster, around 1h 30) or continue over the pass to Schwarzsee on the
+    Alpenpanoramaweg.
   sources:
   - https://www.outdooractive.com/de/route/wanderung/jaun-ritzli-alp/802756162/
   - https://www.outdooractive.com/de/hut/freiburger-alpen/ritzli-alp/59991054/
@@ -4949,15 +5099,15 @@ hikes:
   sac_grade: T2
   effort_label: Moderate
   duration_min: 75
-  gain_m: 300
+  gain_m: 250
   distance_km: 4.5
   equipment_list:
   - Walking shoes with grip (sections are rocky and exposed)
   - Light wind layer (the plateau is windy)
   transit:
     train: Le Locle (SBB) + TransN regional line to Les Brenets
-  description_extra: Cliff-trail climb from Les Brenets station at about 820 m up to the Roches de Moron viewpoint above the Doubs canyon at around 1,130 m. Roughly 4-5 km and 300 m
-    of gain, around 45-75 minutes up depending on pace, T2 with a few rocky exposed sections that need sure footing. The trail leaves the village heading north-west, crosses the Sentier
+  description_extra: Cliff-trail climb from Les Brenets station at about 820 m up to the Roches de Moron viewpoint above the Doubs canyon at around 1,080 m. Roughly 4-5 km and 250 m
+    of gain, around 45-75 minutes up depending on pace, T2 with a few rocky exposed sections that need sure footing. The trail leaves the village heading south-west, crosses the Sentier
     Pillichody above the lake, and tops out at the Restaurant Les Roches de Moron and the viewpoint over the dammed lake and the river bend below. Many hikers combine this with a boat
     across Lac des Brenets to the Saut du Doubs waterfall (full loop around 17 km, 600 m gain, 5 h). Trail open year-round; Jura mood is windier and moodier than the alpine spots, overcast
     and sunset both suit it.
@@ -4967,3 +5117,111 @@ hikes:
   - https://tophikes.ch/rundwanderung-les-brenets-saut-du-doubs-les-roches-de-moron/
   quickest_for:
   - le_doubs
+- id: tannhorn-from-rothorn-segment
+  visits:
+  - tannhorn
+  name: Cog up to Rothorn, ridge out-and-back to Tannhorn
+  start: Brienzer Rothorn cog railway top station (Rothorn Kulm)
+  start_maps_url: https://www.google.com/maps/place/?q=46.7872,8.0444&z=16
+  sac_grade: T5
+  effort_label: Demanding
+  duration_min: 300
+  gain_m: 600
+  descent_m: 600
+  distance_km: 10
+  equipment_list:
+  - Sturdy hiking boots
+  - Poles
+  - Helmet (rockfall sections)
+  transit:
+    train: Brienz BLS
+    cable_car: Brienz Rothorn Bahn (cog railway, early June to late October)
+  description_extra: Shortest variant for reaching Tannhorn. Cog railway up from Brienz to Rothorn Kulm at the summit station (2,244 m), then west along the Brienzergrat to Tannhorn
+    at 2,221 m. SAC grades the Rothorn-Tannhorn first part of the Brienzergrat traverse T5 minus and lists 2 h 30 to 3 h 30 of walking for the ascent direction (around 600 m of cumulative
+    climb). Crossed on exposed grass ridges, which SAC calls the most demanding passage of the entire Brienzergrat. The shortest day-trip framing is to return the same way to Rothorn
+    Kulm and take the cog down rather than continuing the full T5 traverse down to Planalp. Sure-footedness and a head for heights required. Skip in wet or windy weather.
+  sources:
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/tannhorn-1933/mountain-hiking/
+  - https://www.brienzergrat.com/brienzergrat_to_hardergrat.html
+  cable_car_ids:
+  - brienz-rothorn-bahn
+  quickest_for:
+  - tannhorn
+- id: schrattenfluh-from-marbachegg-cable-car
+  visits:
+  - schrattenfluh
+  name: Cable car to Marbachegg, traverse toward the Schrattenfluh ridge
+  start: Marbachegg gondola top station
+  start_maps_url: https://www.google.com/maps/place/?q=46.8352,7.9064&z=16
+  sac_grade: T3
+  effort_label: Moderate
+  duration_min: 180
+  gain_m: 700
+  distance_km: 7.5
+  equipment_list:
+  - Sturdy hiking boots
+  - Poles
+  - Gloves (limestone karst)
+  transit:
+    train: Lucerne to Wolhusen, then S7 to Marbach LU
+    bus: Postbus to Marbach, Talstation Marbachegg
+    cable_car: Marbachegg gondola from Marbach village
+  description_extra: From Marbach village take the Marbachegg gondola (late May to mid-October) up to the panoramic top station at 1,484 m. From there follow the marked trail east via
+    Alp Imbrig (1,460 m), then climb the steep mountain trail up to the Hängst ridge at 2,092 m, the highest point on the Schrattenfluh. About 3 hours and roughly 700 m of net cumulative
+    gain from the gondola. T3 on the marked trail, with the upper section steep and rocky on limestone karst. The plateau holds deep potholes off the trail, so visibility matters. Return
+    via the same path, or continue along the ridge and down toward Hirsegg / Sörenberg as a long traverse.
+  sources:
+  - https://swissfamilyfun.com/schrattenfluh-hike/
+  - https://www.komoot.com/smarttour/21332540
+  cable_car_ids:
+  - marbachegg-gondola
+- id: la_fouly-village-and-moraine-walk
+  visits:
+  - la_fouly
+  name: Village stroll to the A Neuve moraine viewpoint
+  start: La Fouly village parking (postbus stop, by the chairlift base)
+  start_maps_url: https://www.google.com/maps/place/?q=45.932,7.0979&z=16
+  sac_grade: T1
+  effort_label: Easy
+  duration_min: 30
+  gain_m: 40
+  distance_km: 1.3
+  equipment_list: []
+  transit:
+    train: Martigny to Orsières (TMR / RegionAlps)
+    bus: Orsières PostBus 113 to La Fouly, Telesiege
+  description_extra: From the postbus stop and chairlift base in La Fouly village, walk south along the Dranse de Ferret on the marked footpath through the Glaciers campsite and out
+    to the open meadow facing the A Neuve glacier. About 15 minutes one-way to the moraine viewpoint, give or take, on a flat T1 path; round-trip is well under an hour. The frame is
+    the Dolent, the Tour Noir, and the A Neuve hanging glacier across the valley, best photographed about 20 minutes before sunset in the alpenglow window.
+  sources:
+  - https://www.terrenature.ch/balades/autour-du-petit-village-de-la-fouly/
+  - https://www.saint-bernard.ch/en/destination/la-fouly-val-ferret-14274/
+  quickest_for:
+  - la_fouly
+- id: cap_au_moine-from-col-de-jaman
+  visits:
+  - cap_au_moine
+  name: Direct ascent from Col de Jaman
+  start: Col de Jaman parking (above Les Avants)
+  start_maps_url: https://www.google.com/maps/place/?q=46.4517,6.9772&z=16
+  sac_grade: T4
+  effort_label: Demanding
+  duration_min: 165
+  gain_m: 460
+  descent_m: 460
+  distance_km: 5.8
+  equipment_list:
+  - Sturdy hiking boots
+  - Poles
+  transit:
+    train: MOB Montreux-Zweisimmen line to Les Avants, then steep walk up to Col de Jaman (about 1 h)
+    car: Drive up from Les Avants to the Col de Jaman parking
+  description_extra: Canonical short variant. From Col de Jaman at 1,510 m the path traverses the mountainside northeast for about an hour, climbs to Col de Pierra Perchia at 1,842 m,
+    and finishes along a narrow grass-and-rock summit ridge to Cape au Moine. Visorando logs 5.79 km round trip with about 460 m of cumulative gain, around 3 hours total walking. T4
+    on the summit ridge, which is exposed with steep drops on the east side - sure-footedness and a head for heights required, skip in wet or windy weather. Return the same way.
+  sources:
+  - https://www.visorando.com/randonnee-cape-au-moine-a-partir-du-col-de-jaman/
+  - https://uncailloudanslachaussure.ch/col-de-jaman-cape-au-moine/
+  - https://www.bergfex.com/sommer/genferseegebiet-waadtland/touren/wanderung/3866447,montreux--cabane-de-jaman--cape-au-moine--le-coucou/
+  quickest_for:
+  - cap_au_moine

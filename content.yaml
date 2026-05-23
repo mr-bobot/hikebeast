@@ -190,7 +190,7 @@ spots:
     - BLN landscape — Engstligenalp und Entschligefäll
   maps_url: https://www.google.com/maps/place/Engstligenf%C3%A4lle+Adelboden/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f0223cdd45025:0x8dd2572eba113b9e!8m2!3d46.4539395!4d7.5607365!16zL20vMGZfZDM5
   image: spots/engstligen_falls/main.jpg
-  image_credit: anthony_gomez_unsplash_2
+  image_credit: anthony_gomez
   photos:
   - file: 04.jpg
     credit: zimydakid
@@ -315,7 +315,7 @@ spots:
   image_credit: leon.helg
   photos:
   - file: 06.jpg
-    credit: jkphotos_unsplash
+    credit: jkphotos
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/ein-fluss-der-durch-eine-enge-felsige-schlucht-fliesst-MVkm8mqaQg0
   gps:
@@ -446,7 +446,7 @@ spots:
     - BLN landscape — Berner Hochalpen und Aletsch-Bietschhorn-Gebiet (nördlicher Teil)
   maps_url: https://www.google.com/maps/place/Gelmersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47857df2744e7e09:0xeb6bf0e43466b46f!8m2!3d46.615792!4d8.3302012!16s%2Fm%2F02qw9z3
   image: spots/gelmersee/main.jpg
-  image_credit: dario_bronnimann_unsplash
+  image_credit: dario_bronnimann
   photos:
   - file: 02.jpg
     credit: Simon Infanger
@@ -487,7 +487,7 @@ spots:
     canton: Bern (BE)
   maps_url: https://www.google.com/maps/place/Gelmerbahn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f875bae1b82fb:0xece15aab211b8f11!8m2!3d46.6136385!4d8.3085363!16s%2Fm%2F0nbtnrh
   image: spots/gelmerbahn/main.jpg
-  image_credit: simon_infanger_unsplash
+  image_credit: simon_infanger
   gps:
     lat: 46.6136385
     lng: 8.3085363
@@ -573,7 +573,7 @@ spots:
     - BLN landscape — Aareschlucht zwischen Innertkirchen und Meiringen
   maps_url: https://www.google.com/maps/place/Aareschlucht/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f8f018625b21f:0x6bc0f90b56e9ba0e!8m2!3d46.7192366!4d8.2122009!16s%2Fm%2F0h3xs_f
   image: spots/aare_gorge/main.jpg
-  image_credit: thiva_unsplash
+  image_credit: thiva
   photos:
   - file: 02.jpg
     credit: Peter Burdon
@@ -737,6 +737,7 @@ spots:
   hike_ids:
   - tannhorn-brienzergrat-segment
   - hardergrat_trail-rothorn-to-harder-kulm
+  - tannhorn-from-rothorn-segment
 - id: augstmatthorn
   chapter: central
   kicker: RIDGES
@@ -759,14 +760,14 @@ spots:
     note: Not allowed on the ridge. The line is an ibex sanctuary and the car park below is watched.
   maps_url: https://www.google.com/maps/place/Augstmatthorn/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd01d3aab78b:0x80ca6ccdfe2dbfad!8m2!3d46.7422263!4d7.9286089!16s%2Fm%2F04mym9q
   image: spots/augstmatthorn/main.jpg
-  image_credit: cedric_streit_unsplash
+  image_credit: cedric_streit
   photos:
   - file: 06.jpg
-    credit: gian_porsius_unsplash
+    credit: gian_porsius
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/brauner-berg-unter-blauem-himmel-tagsuber-ng4e-ibXH2o
   - file: 07.jpg
-    credit: jana_leu_unsplash
+    credit: jana_leu
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/brauner-rocky-mountain-tagsuber-unter-blauem-himmel-Wg8iqWXw8KY
   - file: 08.jpg
@@ -807,7 +808,7 @@ spots:
     - BLN landscape — Vierwaldstättersee mit Kernwald, Bürgenstock und Rigi
   maps_url: https://www.google.com/maps/place/Vierwaldst%C3%A4ttersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47855823936105cf:0xa60b34b5c10b1570!8m2!3d47.0136401!4d8.4371598!16zL20vMDFka2M1
   image: spots/lake_lucerne/main.jpg
-  image_credit: daniel_cox_unsplash
+  image_credit: daniel_cox
   photos:
   - file: 02.jpg
     credit: Marco Steiger
@@ -984,7 +985,7 @@ spots:
     - UNESCO biosphere reserve
   maps_url: https://www.google.com/maps/place/Schrattenfluh/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbfec06cad435:0x110b561e70bae1e2!8m2!3d46.8433333!4d7.9855556!16s%2Fm%2F04n29_0
   image: spots/schrattenfluh/main.jpg
-  image_credit: cyprien_da_silva_unsplash
+  image_credit: cyprien_da_silva
   photos:
   - file: 02.jpg
     credit: xxx
@@ -1020,6 +1021,7 @@ spots:
   hike_ids:
   - schrattenfluh-schratteflue-crossing
   - schrattenfluh-from-hirsegg
+  - schrattenfluh-from-marbachegg-cable-car
 - id: schrattenfluh_ridge_line_spread
   chapter: central
   kind: spread
@@ -1091,7 +1093,7 @@ spots:
     note: Signed as no-camping. People still bivouac through summer regardless.
   maps_url: https://www.google.com/maps/place/Bachalpsee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f99a2dab57f55:0x2fe44c469bb38461!8m2!3d46.669444!4d8.023333!16s%2Fm%2F027xf5b
   image: spots/bachalpsee/main.jpg
-  image_credit: rowell_heria_unsplash
+  image_credit: rowell_heria
   photos:
   - file: 02.jpg
     credit: Valerie Calabro
@@ -1129,7 +1131,7 @@ spots:
     canton: Bern (BE)
   maps_url: https://www.google.com/maps/place/Grindelwald/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9eab18c79217:0xbfaa5c0f42972f65!8m2!3d46.624164!4d8.0413962!16zL20vMDJ3bHA3
   image: spots/grindelwald/main.jpg
-  image_credit: anna_hu_unsplash
+  image_credit: anna_hu
   photos:
   - file: 02.jpg
     credit: Ruth Georgiev
@@ -1179,7 +1181,7 @@ spots:
     canton: Bern (BE)
   maps_url: https://www.google.com/maps/place/3807+Iseltwald/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd541724c75b:0xdafefc9fa4a5f96a!8m2!3d46.7115858!4d7.9642999!16zL20vMDMwaDZz
   image: spots/iseltwald/main.jpg
-  image_credit: yasintha_perera_unsplash
+  image_credit: yasintha_perera
   photos:
   - file: 02.jpg
     credit: Yasintha Perera
@@ -1230,7 +1232,7 @@ spots:
     canton: Bern (BE)
   maps_url: https://www.google.com/maps/place/Aussichtspunkt+Beatenberg/@46.6856162,7.7879934,16z/data=!4m6!3m5!1s0x478fa531263af7f1:0x367113202ab7c1b!8m2!3d46.6856162!4d7.7879934!16s%2Fg%2F11f62f_5v5
   image: spots/viewpoint_beatenberg/main.jpg
-  image_credit: jairph_unsplash
+  image_credit: jairph
   photos:
   - file: 03.jpg
     credit: zimydakid
@@ -1282,23 +1284,23 @@ spots:
     credit: zimydakid
     source_type: book
   - file: 06.jpg
-    credit: peter_elijah_unsplash
+    credit: peter_elijah
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/ein-gewasser-mit-bergen-im-hintergrund-nj8WzIbV9Tw
   - file: 07.jpg
-    credit: dennis_h_unsplash
+    credit: dennis_h
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/ein-see-umgeben-von-bergen-aXxA2q-k0ko
   - file: 08.jpg
-    credit: pascal_debrunner_unsplash
+    credit: pascal_debrunner
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/blick-auf-eine-bergkette-mit-einem-see-im-vordergrund-Ap53G_567Dc
   - file: 09.jpg
-    credit: manca_cadez_unsplash
+    credit: manca_cadez
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/bergweg-mit-blick-auf-einen-turkisfarbenen-see-und-schneebedeckte-gipfel-fm4hsFvKLdY
   - file: 10.jpg
-    credit: gabriel_cirelli_unsplash
+    credit: gabriel_cirelli
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/turkiser-see-eingebettet-zwischen-majestatischen-bergen-und-kiefern-qTkMs5FataM
   - file: 11.jpg
@@ -1336,7 +1338,7 @@ spots:
     canton: Bern (BE)
   maps_url: https://www.google.com/maps/place/Schilthorn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fa0aa046345b1:0xe0ac87e82a107f2!8m2!3d46.5574809!4d7.8352793!16zL20vMDMxMnk2
   image: spots/piz_gloria/main.jpg
-  image_credit: anthony_gomez_unsplash_3
+  image_credit: anthony_gomez
   photos:
   - file: 02.jpg
     credit: Dimitri Karastelev
@@ -1378,7 +1380,7 @@ spots:
     canton: Bern (BE)
   maps_url: https://www.google.com/maps/place/Lauterbrunnen/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fa0073b1165c7:0x5392dbb55902c31!8m2!3d46.5935058!4d7.9090981!16zL20vMDFxamwz
   image: spots/lauterbrunnen/main.jpg
-  image_credit: omid_visuals_unsplash
+  image_credit: omid_visuals
   photos:
   - file: 02.jpg
     credit: Maximilian Jaenicke
@@ -1462,11 +1464,11 @@ spots:
     credit: zimydakid
     source_type: book
   - file: 06.jpg
-    credit: lukas_konvica_unsplash
+    credit: lukas_konvica
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/ein-berg-mit-einem-see-davor-2fDlpki7Hx0
   - file: 07.jpg
-    credit: ilia_bronskyi_unsplash_3
+    credit: ilia_bronskyi
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/eine-bergkette-mit-einem-see-im-vordergrund-tGuQ2Xh5XN8
   - file: 08.jpg
@@ -1514,7 +1516,7 @@ spots:
     credit: zimydakid
     source_type: book
   - file: 06.jpg
-    credit: daniel_cox_unsplash_2
+    credit: daniel_cox
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/braune-hauser-mit-blick-auf-die-berge-unter-blauem-und-weissem-himmel-wahrend-des-tages-UzCh9tp1VLs
   gps:
@@ -1594,7 +1596,7 @@ spots:
     - BLN landscape — Dent Blanche – Matterhorn – Monte Rosa
   maps_url: https://www.google.com/maps/place/Gornergletscher/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f4aedf5eed477:0xdc91cbcef20adfe!8m2!3d45.9668437!4d7.7969322!16zL20vMGRsNWNz
   image: spots/gorner_glacier/main.jpg
-  image_credit: thomas_lipke_unsplash
+  image_credit: thomas_lipke
   photos:
   - file: 02.jpg
     credit: Agata Bres
@@ -1687,7 +1689,7 @@ spots:
     source_type: instagram
     source_url: https://instagram.com/oliwear.j
   - file: 05.jpg
-    credit: louise_pipet_unsplash
+    credit: louise_pipet
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/ein-gewasser-mit-bergen-im-hintergrund-ssS_SLIPzMM
   - file: 06.jpg
@@ -2029,7 +2031,7 @@ spots:
     canton: Valais (VS)
   maps_url: https://www.google.com/maps/place/H%C3%A4ngebr%C3%BCcke+F%C3%BCrgangen+-+M%C3%BChlebach/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f7b707288dca1:0xe90a07a384bb80ee!8m2!3d46.410532!4d8.1509586!16s%2Fg%2F11c1tr0sc1
   image: spots/goms_bridge/main.jpg
-  image_credit: adrien_olichon_unsplash
+  image_credit: adrien_olichon
   photos:
   - file: 02.jpg
     credit: Adrien Olichon
@@ -2116,7 +2118,7 @@ spots:
     - National / regional park — Naturpark Pfyn-Finges
   maps_url: https://www.google.com/maps/place/Barrhorn/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f3911ab831787:0xf4027acd7df4c95f!8m2!3d46.1497222!4d7.7369444!16s%2Fm%2F0421pgz
   image: spots/barrhorn/main.jpg
-  image_credit: szocs_zoltan_unsplash
+  image_credit: szocs_zoltan
   gps:
     lat: 46.1497222
     lng: 7.7369444
@@ -2263,6 +2265,7 @@ spots:
   hike_ids:
   - la_fouly-tmb-arnuva-la-fouly
   - la_fouly-tmb-champex-to-la-fouly
+  - la_fouly-village-and-moraine-walk
 - id: sanetschpass
   chapter: valais
   kicker: A PASS WITH A LAKE ON TOP
@@ -2459,7 +2462,7 @@ spots:
     canton: Valais (VS)
   maps_url: https://www.google.com/maps/place/Crans-Montana/@42.9672329,-5.3731519,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee033b13cf443:0x7775de3b89e62096!8m2!3d46.3126581!4d7.4805924!16s%2Fg%2F11bc598bvt
   image: spots/crans_montana/main.jpg
-  image_credit: artiom_vallat_unsplash
+  image_credit: artiom_vallat
   photos:
   - file: 03.jpg
     credit: zimydakid
@@ -2688,7 +2691,7 @@ spots:
     - National / regional park — Parc naturel régional Gruyère Pays-d’Enhaut
   maps_url: https://www.google.com/maps/place/Gastlosen/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ef608c34c253f:0xd3cebdc12fa45b76!8m2!3d46.5822!4d7.28208!16s%2Fm%2F0rpg9m7
   image: spots/gastlosen/main.jpg
-  image_credit: frdm_unsplash
+  image_credit: frdm
   photos:
   - file: 02.jpg
     credit: Xavier von Erlach
@@ -3054,6 +3057,7 @@ spots:
   hike_ids:
   - cap_au_moine-from-allieres
   - cap_au_moine-from-les-avants-via-col-de-jaman
+  - cap_au_moine-from-col-de-jaman
 - id: dent_de_jaman
   chapter: western
   kicker: THE MOST PHOTOGRAPHED PEAK ABOVE MONTREUX
@@ -3074,7 +3078,7 @@ spots:
     - National / regional park — Parc naturel régional Gruyère Pays-d’Enhaut
   maps_url: https://www.google.com/maps/place/Dent+de+Jaman/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e900ef472dc75:0xa9ea15a1ea677bef!8m2!3d46.445!4d6.9748!16s%2Fm%2F04q2b_b
   image: spots/dent_de_jaman/main.jpg
-  image_credit: xavier_von_erlach_unsplash
+  image_credit: xavier_von_erlach
   photos:
   - file: 02.jpg
     credit: guidos.tours
@@ -3243,7 +3247,7 @@ spots:
     - BLN landscape — Creux du Van et Gorges de l’Areuse
   maps_url: https://www.google.com/maps/place/Creux+du+Van/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478de7f8240bcb23:0xc04d997cfd4ad4a8!8m2!3d46.9309929!4d6.7234511!16s%2Fm%2F08097wh
   image: spots/creux_du_van/main.jpg
-  image_credit: daniel_r_unsplash
+  image_credit: daniel_r
   photos:
   - file: 02.jpg
     credit: visitsuisse
@@ -3541,7 +3545,7 @@ spots:
     canton: Vaud (VD)
   maps_url: https://www.google.com/maps/place/Lavaux-Oron/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478c33d447645687:0x96990902d3a94b53!8m2!3d46.5100372!4d6.7531955!16s%2Fm%2F04f4h85
   image: spots/lavaux_vineyards/main.jpg
-  image_credit: razvan_sassu_unsplash
+  image_credit: razvan_sassu
   photos:
   - file: 02.jpg
     credit: patrykbieganski
@@ -3671,7 +3675,7 @@ spots:
   - Take the cable car to Ebenalp, then hike up to Schäfler. Moderate pace, obvious trail. There's a chalet at the top where you can sleep. Book ahead.
   - Sunset is why you come here. The Alpstein ridges light up and the mist in the valleys to the north goes pink. If you stay the night, sunrise is equally strong.
   region: Alpstein, Appenzell
-  access: Cable car + 2 hr hike
+  access: Cable car + 50-60 min hike
   effort: Moderate
   best_light: Sunset or sunrise
   wildCamping:
@@ -3734,11 +3738,11 @@ spots:
     credit: zimydakid
     source_type: book
   - file: 06.jpg
-    credit: ilia_bronskyi_unsplash_4
+    credit: ilia_bronskyi
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/ein-gewasser-umgeben-von-bergen-und-baumen-Cw2ep-lvSjE
   - file: 07.jpg
-    credit: simon_spring_unsplash
+    credit: simon_spring
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/ein-fluss-der-durch-ein-tal-zwischen-bergen-fliesst-tO4bB3T22Xw
   - file: 08.jpg
@@ -3777,7 +3781,7 @@ spots:
     - BLN landscape — Säntisgebiet
   maps_url: https://www.google.com/maps/place/Aescher+-+Gasthaus+am+Berg/@46.3126581,2.6026627,7z/data=!4m9!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m4!1s0x479b24115605fa13:0xd55fdbc28cf47289!8m2!3d47.2833786!4d9.414359
   image: spots/ascher/main.jpg
-  image_credit: ilia_bronskyi_unsplash
+  image_credit: ilia_bronskyi
   photos:
   - file: 02.jpg
     credit: Niklas Tidbury
@@ -4242,7 +4246,7 @@ spots:
     - National / regional park — Naturpark Beverin
   maps_url: https://www.google.com/maps/place/Rheinschlucht/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784dc635ed9a4eb:0xe9df845b022d9136!8m2!3d46.8057143!4d9.3163204!16zL20vMDYyXzVk
   image: spots/ruinaulta/main.jpg
-  image_credit: jan_huber_unsplash
+  image_credit: jan_huber
   photos:
   - file: 03.jpg
     credit: zimydakid
@@ -4324,7 +4328,7 @@ spots:
     credit: zimydakid
     source_type: book
   - file: 06.jpg
-    credit: gabriel_herter_unsplash
+    credit: gabriel_herter
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/eine-gruppe-von-booten-die-auf-einem-see-schwimmen-ZUJTc3vlFnI
   - file: 07.jpg
@@ -4373,11 +4377,11 @@ spots:
   image_credit: leon.helg
   photos:
   - file: 06.jpg
-    credit: max_burgi_unsplash
+    credit: max_burgi
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/eine-kirche-auf-einem-grasbewachsenen-hugel-mit-bergen-im-hintergrund-B8crKzSwydM
   - file: 07.jpg
-    credit: claudio_schwarz_unsplash_2
+    credit: claudio_schwarz
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/braune-holzkirche-auf-schneebedecktem-boden-3pDedVXRIzI
   - file: 08.jpg
@@ -4422,11 +4426,11 @@ spots:
   image_credit: leon.helg
   photos:
   - file: 06.jpg
-    credit: boris_baldinger_unsplash
+    credit: boris_baldinger
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/gewasser-umgeben-von-felsigen-bergen-k7Hn0GBiN-o
   - file: 07.jpg
-    credit: vasyl_dizhak_unsplash
+    credit: vasyl_dizhak
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/ein-blauer-see-umgeben-von-bergen-und-felsen-pGrfTUCCmzg
   - file: 08.jpg
@@ -4518,11 +4522,11 @@ spots:
     source_type: unsplash
     source_url: https://unsplash.com/photos/3cGpYqg3Nck
   - file: 06.jpg
-    credit: bo_benko_unsplash
+    credit: bo_benko
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/ein-gewasser-mit-bergen-im-rucken-WlJHg46JtUg
   - file: 07.jpg
-    credit: ilia_bronskyi_unsplash_2
+    credit: ilia_bronskyi
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/blick-auf-eine-bergkette-mit-einem-see-im-vordergrund-QZC52e262do
   gps:
@@ -4762,7 +4766,7 @@ spots:
     - BLN landscape — Val Verzasca
   maps_url: https://www.google.com/maps/place/Ponte+dei+Salti+(17.+Jahrhundert)/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b131b37ac893:0xb8b55f11feae7d93!8m2!3d46.2600705!4d8.8359918!16s%2Fg%2F121_43f8
   image: spots/ponte_dei_salti/main.jpg
-  image_credit: claudio_schwarz_unsplash
+  image_credit: claudio_schwarz
   photos:
   - file: 02.jpg
     credit: Tom Moser
@@ -4811,7 +4815,7 @@ spots:
     - BLN landscape — Val Verzasca
   maps_url: https://www.google.com/maps/place/Verzaska+Valley/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b6d28e572447:0x60f583d58bb40b36!8m2!3d46.25!4d8.8333333!16s%2Fm%2F03c3mrg
   image: spots/valle_verzasca/main.jpg
-  image_credit: artiom_vallat_unsplash_2
+  image_credit: artiom_vallat
   photos:
   - file: 02.jpg
     credit: Nadine Marfurt
@@ -4952,7 +4956,7 @@ spots:
     - BLN landscape — Val Bavona
   maps_url: https://www.google.com/maps/place/Foroglio+Wasserfall/@46.3126581,2.6026627,7z/data=!4m9!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m4!1s0x4785999344465ff1:0x1557b60aa4c642b!8m2!3d46.371303!4d8.5453161
   image: spots/cascata_di_foroglio/main.jpg
-  image_credit: kuno_schweizer_unsplash
+  image_credit: kuno_schweizer
   gps:
     lat: 46.371303
     lng: 8.5453161
@@ -4995,7 +4999,7 @@ spots:
     canton: France
   maps_url: https://www.google.com/maps/place/Mer+de+Glace/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47894eab1fba5965:0x41ece26799b55955!8m2!3d45.9203829!4d6.9279647!16zL20vMDFyd2tj
   image: spots/mer_de_glace/main.jpg
-  image_credit: simon_fitall_unsplash
+  image_credit: simon_fitall
   photos:
   - file: 02.jpg
     credit: lerefugedusapi
@@ -5005,7 +5009,7 @@ spots:
     credit: zimydakid
     source_type: book
   - file: 05.jpg
-    credit: martin_masson_unsplash
+    credit: martin_masson
   - file: 06.jpg
     credit: Ricardo Frantz
     source_type: unsplash
@@ -5215,7 +5219,7 @@ spots:
       range itself is in Chamonix municipality where camping is prohibited throughout territory since 1992 — only high-altitude bivouac (sundown to sunrise, no tent) tolerated.'
   maps_url: null
   image: spots/mont_blanc/main.jpg
-  image_credit: andrea_caramello_unsplash
+  image_credit: andrea_caramello
   photos:
   - file: 02.jpg
     credit: Nicolas Weldingh
@@ -5476,7 +5480,7 @@ spots:
   image_credit: oliwear.j
   photos:
   - file: 02.jpg
-    credit: johannes_hofmann_unsplash
+    credit: johannes_hofmann
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/luftaufnahme-der-zickzackstrasse-auf-dem-berg-gW3ddTAKTJg
   - file: 03.jpg
@@ -5604,11 +5608,11 @@ spots:
   image_credit: oliwear.j
   photos:
   - file: 02.jpg
-    credit: ivan_louis_unsplash
+    credit: ivan_louis
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/see-in-der-nahe-des-schneebedeckten-berges-unter-bewolktem-himmel-tagsuber-rZSu8DB46Gk
   - file: 03.jpg
-    credit: janosch_diggelmann_unsplash
+    credit: janosch_diggelmann
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/grune-baume-in-der-nahe-von-see-und-berg-tagsuber-unter-blauem-himmel-KIUv0rYG8H4
   gps:
@@ -5637,14 +5641,14 @@ spots:
     canton: Obwalden (OW) / Nidwalden (NW)
   maps_url: https://www.google.com/maps/place/Mount+Pilatus/@46.9795,8.2548,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.9795!4d8.2548
   image: spots/mount_pilatus/main.jpg
-  image_credit: emanuel_kionke_unsplash
+  image_credit: emanuel_kionke
   photos:
   - file: 02.jpg
-    credit: razvan_sassu_unsplash_2
+    credit: razvan_sassu
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/schwarze-seilbahn-ODFhnzEUXHA
   - file: 03.jpg
-    credit: emanuel_kionke_unsplash_2
+    credit: emanuel_kionke
     source_type: unsplash
     source_url: https://unsplash.com/de/fotos/luftaufnahme-der-stadt-bei-nacht-B4PLUutWPoU
   gps:
@@ -5755,7 +5759,7 @@ spots:
     - Federal hunting reserve — Graue Hörner
   maps_url: https://www.google.com/maps/place/Wildsee/@46.9705369,9.3946907,17z/data=!3m1!4b1!4m6!3m5!1s0x4784ce1c2192eb89:0x3eb211fd6596844b!8m2!3d46.9705369!4d9.3946907
   image: spots/wildsee/main.jpg
-  image_credit: claudio_schwarz_unsplash_3
+  image_credit: claudio_schwarz
   photos:
   - file: 02.jpg
     credit: upsidenomads
@@ -5790,7 +5794,7 @@ spots:
     canton: Grisons (GR)
   maps_url: https://www.google.com/maps/place/Julier+Pass/@46.4701639,9.7177092,17z/data=!3m1!4b1!4m6!3m5!1s0x47848149d54cdb2f:0x796a0f271166c816!8m2!3d46.4701639!4d9.7177092
   image: spots/julier_pass/main.jpg
-  image_credit: sepp_rutz_unsplash
+  image_credit: sepp_rutz
   photos:
   - file: 02.jpg
     credit: conquerthecols
