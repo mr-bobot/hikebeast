@@ -625,9 +625,33 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     cursor: pointer;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
     -webkit-tap-highlight-color: transparent;
+    /* Subtle breathing pulse so the user notices the pill is tappable.
+       Long cycle + tiny scale + halo that fades out reads as ambient
+       motion, not a flashing CTA. Stops on :active and respects
+       prefers-reduced-motion. */
+    animation: about-video-btn-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes about-video-btn-pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18),
+                  0 0 0 0 rgba(0, 0, 0, 0.22);
+    }
+    50% {
+      transform: scale(1.035);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22),
+                  0 0 0 6px rgba(0, 0, 0, 0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about-video-btn { animation: none; }
   }
   .about-video-btn:hover { background: rgba(0, 0, 0, 0.86); }
-  .about-video-btn:active { transform: scale(0.97); background: rgba(0, 0, 0, 0.9); }
+  .about-video-btn:active {
+    animation-play-state: paused;
+    transform: scale(0.97);
+    background: rgba(0, 0, 0, 0.9);
+  }
   .about-video-btn svg { width: 11px; height: 11px; flex: 0 0 auto; }
   .about-video-btn-sep { opacity: 0.55; margin: 0 1px; }
   .about-video-wrap {
