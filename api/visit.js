@@ -25,11 +25,16 @@ export default async function handler(req, res) {
     active_ms,
     device_type,
     is_ig_webview,
+    // visitor_id · client-generated UUID, sticky in localStorage.
+    // Added 2026-05-24 for the AllVisits tracking sheet · the only
+    // identifier that's present even for anonymous Linktree / ad
+    // traffic that has no ManyChat subscriber_id.
+    visitor_id,
+    // referrer · document.referrer at landed time. Lets us trace
+    // traffic source for AllVisits rows that lack utm_*.
+    referrer,
     // Meta CAPI InitiateCheckout signal · sent by landing pages when
     // the buyer first interacts with the embedded Stripe form.
-    // session_id is the Stripe Checkout Session id (also used as the
-    // `eventID` the browser pixel passes), so server + pixel events
-    // match and Meta dedupes.
     session_id,
     value,
     currency,
@@ -83,14 +88,20 @@ export default async function handler(req, res) {
     ? req.headers["x-vercel-ip-country"].slice(0, 4)
     : "";
 
-  // For default landing pings we need at least one identifier so the row
-  // can be matched to a person. Anonymous /guide visits (PDF-link traffic
-  // with no params) hit Vercel Analytics only, never the sheet — filtered
-  // out client-side. Anonymous beacon events (`safeEvent`) are allowed:
-  // Apps Script handleVisit treats them as match-only and no-ops when no
-  // row matches, so the lambda just no-ops gracefully.
-  if (!subscriber_id && !token && !safeEvent) {
-    return res.status(400).json({ error: "subscriber_id or token required" });
+  // Identifiers for Signups attribution · subscriber_id (ManyChat),
+  // token (legacy email funnel), safeEvent (beacon update on existing
+  // row). Default-landed pings without ANY of these used to be 400'd ·
+  // since 2026-05-24 anonymous landed beacons are accepted because we
+  // now log them to AllVisits (separate spreadsheet) via visitor_id.
+  // The Signups-side handleVisit is no-op'd in that case (no row
+  // append without subscriber_id) so the change is purely additive.
+  const safeVisitorId = typeof visitor_id === "string"
+    ? visitor_id.slice(0, 64)
+    : "";
+  const safeReferrer = typeof referrer === "string" ? referrer.slice(0, 500) : "";
+  const hasAnyId = !!(subscriber_id || token || safeEvent || safeVisitorId);
+  if (!hasAnyId) {
+    return res.status(400).json({ error: "subscriber_id, token, event, or visitor_id required" });
   }
 
   const tasks = [];
@@ -102,7 +113,13 @@ export default async function handler(req, res) {
   }
 
   const url = process.env.SHEETS_WEBHOOK_URL;
-  if (url) {
+  const safeBrowserLang = typeof browser_language === "string" ? browser_language.slice(0, 20) : "";
+
+  // Signups-side log · only fire when there's a ManyChat/token identifier
+  // to match against. Apps Script handleVisit either appends a fresh
+  // row (subscriber_id case) or no-ops (anonymous beacon). Direct/
+  // Linktree/ad traffic skips this entirely and lives in AllVisits.
+  if (url && (subscriber_id || token || safeEvent)) {
     tasks.push(
       fetch(url, {
         method: "POST",
@@ -115,7 +132,7 @@ export default async function handler(req, res) {
           page: page || "landing",
           event: safeEvent,
           visited_at: new Date().toISOString(),
-          browser_language: typeof browser_language === "string" ? browser_language.slice(0, 20) : "",
+          browser_language: safeBrowserLang,
           utm_source: safeUtmSource,
           utm_medium: safeUtmMedium,
           utm_campaign: safeUtmCampaign,
@@ -128,6 +145,40 @@ export default async function handler(req, res) {
         }),
         signal: AbortSignal.timeout(15000),
       }).catch((err) => console.error("Visit log failed:", err)),
+    );
+  }
+
+  // AllVisits-side log · fires for EVERY visit regardless of
+  // subscriber_id. Routes to a separate Apps Script action (log_visit)
+  // that appends to the dedicated "Hikebeast All Visits" spreadsheet.
+  // Added 2026-05-24 so Linktree-in-bio + Facebook-ads + direct
+  // traffic finally show up alongside ManyChat-funnel visitors.
+  if (url) {
+    const allEvent = safeEvent || "landed";
+    tasks.push(
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "log_visit",
+          secret: process.env.SHEETS_SECRET,
+          event_type: allEvent,
+          source_page: safeSourcePage,
+          visitor_id: safeVisitorId,
+          hero_variant: safeHeroVariant,
+          subscriber_id: subscriber_id || "",
+          referrer: safeReferrer,
+          utm_source: safeUtmSource,
+          utm_medium: safeUtmMedium,
+          utm_campaign: safeUtmCampaign,
+          browser_language: safeBrowserLang,
+          device_type: safeDeviceType,
+          is_ig_webview: safeIsIgWebview,
+          ip_country: ipCountry,
+          time_on_site_ms: safeActiveMs || undefined,
+        }),
+        signal: AbortSignal.timeout(15000),
+      }).catch((err) => console.error("AllVisits log failed:", err)),
     );
   }
 
