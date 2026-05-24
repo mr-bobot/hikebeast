@@ -129,7 +129,7 @@ function renderSpotPage(spot) {
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css" />
+<link rel="stylesheet" href="../../preview.css?v=20260524a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -160,11 +160,11 @@ ${renderSpotCard(spot)}
   © Hikebeast
 </footer>
 
-<script src="../../preview.js"></script>
+<script src="../../preview.js?v=20260524a"></script>
 <script src="../../img/spot-images.js"></script>
 <script src="../../lib/convex.js"></script>
 <script>window.HB_CONVEX_URL = "${CONVEX_URL}";</script>
-<script src="../../social.js"></script>
+<script src="../../social.js?v=20260524a"></script>
 </body>
 </html>
 `;
