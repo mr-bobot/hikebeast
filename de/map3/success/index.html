@@ -743,11 +743,11 @@ fbq('track', 'PageView');
         // sets event_id = payment_intent_id). Without matching IDs Meta
         // counts pixel + CAPI as separate events — Events Manager on
         // 2026-05-15 showed 119 Purchase events for 54 buyers. The
-        // sessionStorage guard is defense-in-depth against tab refresh.
+        // localStorage guard survives across tabs and refreshes — buyers re-opening the Stripe receipt link in a new tab was re-firing Purchase with the same payment_intent (2026-05-24).
         if (window.fbq && typeof data.amount_total === "number" && data.payment_intent) {
           var purchaseKey = "hb:purchase_fired:" + data.payment_intent;
           var alreadyFired = false;
-          try { alreadyFired = sessionStorage.getItem(purchaseKey) === "1"; } catch (e) {}
+          try { alreadyFired = localStorage.getItem(purchaseKey) === "1"; } catch (e) {}
           if (!alreadyFired) {
             try {
               // Advanced Matching · re-init the pixel with the buyer's
@@ -772,7 +772,7 @@ fbq('track', 'PageView');
                 value: Number((data.amount_total / 100).toFixed(2)),
                 currency: data.currency || "CHF",
               }, { eventID: data.payment_intent });
-              try { sessionStorage.setItem(purchaseKey, "1"); } catch (e) {}
+              try { localStorage.setItem(purchaseKey, "1"); } catch (e) {}
             } catch (e) {}
           }
         }

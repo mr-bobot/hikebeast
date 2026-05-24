@@ -215,6 +215,23 @@ for (const htmlPath of indexes) {
       }
     }
   }
+
+  // Check 4 · Purchase guard must use localStorage, not sessionStorage.
+  // sessionStorage is scoped per-tab, so when buyers re-opened the Stripe
+  // receipt email link in a new tab the guard didn't see the prior fire
+  // and the Purchase pixel re-fired with the same payment_intent — Events
+  // Manager's dedup diagnostic on 2026-05-24 showed 2-5 browser events
+  // per single purchase. localStorage survives across tabs / windows /
+  // refreshes, which is what we actually want for "did this buyer's
+  // Purchase pixel already fire?". This check is scoped to pages that
+  // touch hb:purchase_fired (the existing guard key) so it doesn't
+  // false-positive on unrelated sessionStorage usage elsewhere.
+  if (/hb:purchase_fired/.test(content)) {
+    metaCheckedCalls++;
+    if (/sessionStorage\.(getItem|setItem)\(\s*purchaseKey/.test(content)) {
+      metaErrors.push(`Meta dedup: ${rel} uses sessionStorage for the hb:purchase_fired guard. sessionStorage is per-tab — when buyers re-open the Stripe receipt link in a new tab the Purchase pixel re-fires for the same payment_intent. Use localStorage.getItem / localStorage.setItem instead. Fixed across all 18 success pages on 2026-05-24.`);
+    }
+  }
 }
 
 // ─── Lang-redirect check ─────────────────────────────────────────────────
