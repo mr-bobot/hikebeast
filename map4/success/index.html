@@ -241,6 +241,25 @@ fbq('track', 'PageView');
     word-break: break-all;
   }
 
+  /* === No-session-id fallback · "Sign in" CTA shown when the buyer
+     hits this URL without a session_id. Same width as the onboard
+     card. Primary Sign-in button + a small secondary line for the
+     rare just-bought-but-lost-session_id edge. */
+  .signin-fallback {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .signin-fallback[hidden] { display: none !important; }
+  .signin-fallback-sub {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.5;
+  }
+
   /* === Onboarding · the only action on this page since 2026-05-24.
      Expanded-by-default since the collapsed <details> trigger was
      hiding the form and buyers were missing the webapp entirely.
@@ -461,6 +480,23 @@ fbq('track', 'PageView');
       </form>
     </div>
 
+    <!-- No-session-id fallback · revealed when the buyer hits this URL
+         without a session_id query param. Real Stripe purchases always
+         include it, so this only fires for: refreshed-old-tab, copied
+         URL-without-querystring, bookmark from a stale session, or
+         someone typing the URL. We assume those people are returning
+         buyers (already have an account) and offer Sign in directly;
+         the secondary text covers the rare "I literally just bought
+         and the session_id is gone" edge with the receipt-email
+         pointer. Never told as the primary action so we don't break
+         the journey for the 99% case. -->
+    <div class="signin-fallback" id="signinFallback" hidden>
+      <a href="/login/" class="btn btn-primary">Sign in to your account</a>
+      <p class="signin-fallback-sub">
+        Just bought and don't see your account? Open the link in your receipt email to finish setup.
+      </p>
+    </div>
+
     <p class="status" id="status">Receipt also sent to your email.</p>
   </section>
 
@@ -508,12 +544,17 @@ fbq('track', 'PageView');
     const subheadline = document.getElementById("subheadline");
 
     if (!sessionId) {
-      // No session_id query · usually means the buyer typed the URL or
-      // came via a stale link. Without the session we can't verify
-      // paid status so we can't unlock the onboarding form. Point them
-      // at the receipt email; the email contains a link back here
-      // with the correct session_id.
-      subheadline.textContent = "Open the receipt email we just sent and tap 'Open the Swiss Gems App' to finish setup.";
+      // No session_id query · usually means a returning buyer hit a
+      // bookmark, a refresh stripped the querystring, or someone
+      // copied the URL without the query. Stripe redirects ALWAYS
+      // include session_id, so the with-session-id flow handles 99%
+      // of real buyers. For this fallback we show a Sign-in CTA
+      // (primary path · they already have an account) plus a small
+      // pointer at the receipt-email link for the rare "I just paid
+      // and the session_id is gone" edge.
+      subheadline.textContent = "Sign in to open your guide.";
+      var signinFallback = document.getElementById("signinFallback");
+      if (signinFallback) signinFallback.hidden = false;
       return;
     }
 
@@ -533,7 +574,14 @@ fbq('track', 'PageView');
       .then((r) => r.json())
       .then((data) => {
         if (!data || data.paid !== true) {
-          subheadline.textContent = "Almost there · open the receipt email we just sent and tap 'Open the Swiss Gems App' to finish setup.";
+          // Session unknown / not-yet-paid race condition. Surface the
+          // Sign-in fallback rather than push the buyer to their email
+          // · most of these are returning buyers whose original session
+          // expired (Stripe sessions are short-lived for the cookie
+          // path; the account is permanent).
+          subheadline.textContent = "Sign in to open your guide.";
+          var signinFallback = document.getElementById("signinFallback");
+          if (signinFallback) signinFallback.hidden = false;
           return;
         }
 
@@ -619,7 +667,9 @@ fbq('track', 'PageView');
         }
       })
       .catch(() => {
-        subheadline.textContent = "Couldn't load your account setup right now. Open the receipt email instead and tap 'Open the Swiss Gems App'.";
+        subheadline.textContent = "Sign in to open your guide.";
+        var signinFallback = document.getElementById("signinFallback");
+        if (signinFallback) signinFallback.hidden = false;
       });
 
     // Onboarding form submit. POST { sessionId, password, username } back to
