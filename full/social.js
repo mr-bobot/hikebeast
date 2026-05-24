@@ -1216,13 +1216,13 @@
         <div class="rail-divider rail-divider-tight"></div>
         ${chapterItems}
       </div>
+      <button type="button" class="rail-theme" data-hb-theme-toggle aria-label="Toggle dark mode">
+        <span class="rail-theme-icon" data-hb-theme-icon>${SVG_MOON}</span><span class="label" data-hb-theme-label>Dark mode</span>
+      </button>
       <a class="rail-item rail-item-more${cur('/more/')}" href="${REL}more/">
         <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
         <span class="label">More</span>
       </a>
-      <button type="button" class="rail-theme" data-hb-theme-toggle aria-label="Toggle dark mode">
-        <span class="rail-theme-icon" data-hb-theme-icon>${SVG_MOON}</span><span class="label" data-hb-theme-label>Dark mode</span>
-      </button>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="Toggle navigation labels">
         ${SVG_CHEVRONS}<span class="label">Collapse</span>
       </button>
@@ -1367,14 +1367,14 @@
           </a>
         `).join('')}
         <div class="menu-section-head">Settings</div>
-        <a class="menu-row${cur('/more/')}" href="${REL}more/" data-close>
-          <span class="menu-row-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></span>
-          <span class="menu-row-label">More</span>
-        </a>
         <button type="button" class="menu-row" data-hb-theme-toggle aria-label="Toggle dark mode">
           <span class="menu-row-icon" data-hb-theme-icon>${SVG_MOON}</span>
           <span class="menu-row-label" data-hb-theme-label>Dark mode</span>
         </button>
+        <a class="menu-row${cur('/more/')}" href="${REL}more/" data-close>
+          <span class="menu-row-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></span>
+          <span class="menu-row-label">More</span>
+        </a>
         <div class="menu-sheet-account" data-hb-account></div>
       </div>
     `;
