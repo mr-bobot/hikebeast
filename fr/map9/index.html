@@ -149,24 +149,79 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     object-position: 70% 45%;
     display: block;
   }
-  /* Language switcher · pill on the right side of the navbar.
-     Same style as the other multilingual pages on the site. */
-  .navbar-lang {
+  /* Language switcher · single dropdown on the right side of the
+     navbar. The trigger pill shows the CURRENT language so the user
+     knows where they are; click drops the other locales below it.
+     Replaces the 3-pill row (2026-05-24) · with 4 languages the row
+     was spreading edge-to-edge on desktop, this collapses it. */
+  .navbar-lang-wrap {
+    position: relative;
     font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  }
+  .navbar-lang-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    font-family: inherit;
     font-size: 13px;
     font-weight: 500;
     color: var(--muted);
-    text-decoration: none;
     padding: 6px 10px;
     border-radius: 999px;
     border: 1px solid var(--hairline);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     -webkit-tap-highlight-color: transparent;
     transition: color 150ms ease, border-color 150ms ease;
     letter-spacing: 0.04em;
   }
-  .navbar-lang:hover {
+  .navbar-lang-btn:hover,
+  .navbar-lang-btn[aria-expanded="true"] {
     color: var(--fg);
     border-color: rgba(0,0,0,0.2);
+  }
+  .navbar-lang-btn .chev {
+    width: 10px;
+    height: 10px;
+    transition: transform 150ms ease;
+  }
+  .navbar-lang-btn[aria-expanded="true"] .chev {
+    transform: rotate(180deg);
+  }
+  .navbar-lang-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 100%;
+    margin: 0;
+    padding: 4px;
+    list-style: none;
+    background: var(--bg);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 10;
+  }
+  .navbar-lang-menu[hidden] { display: none; }
+  .navbar-lang-menu a {
+    display: block;
+    padding: 8px 14px;
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 8px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .navbar-lang-menu a:hover {
+    background: var(--surface);
   }
 
   /* === Layout ===
@@ -1437,9 +1492,17 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <img src="../images/avatar.jpg" alt="" />
       Hikebeast
     </a>
-    <a class="navbar-lang" href="/map9/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">🇬🇧 EN</a>
-    <a class="navbar-lang" href="/de/map9/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">🇩🇪 DE</a>
-    <a class="navbar-lang" href="/it/map9/" hreflang="it" onclick="try{localStorage.setItem('hb_lang','it')}catch(e){}" aria-label="Versione italiana">🇮🇹 IT</a>
+    <div class="navbar-lang-wrap" id="lang-wrap">
+      <button type="button" class="navbar-lang-btn" id="lang-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-menu">
+        🇫🇷 FR
+        <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3,5 6,8 9,5"/></svg>
+      </button>
+      <ul class="navbar-lang-menu" id="lang-menu" role="listbox" hidden>
+        <li role="option"><a href="/map9/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">🇬🇧 EN</a></li>
+        <li role="option"><a href="/de/map9/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">🇩🇪 DE</a></li>
+        <li role="option"><a href="/it/map9/" hreflang="it" onclick="try{localStorage.setItem('hb_lang','it')}catch(e){}" aria-label="Versione italiana">🇮🇹 IT</a></li>
+      </ul>
+    </div>
   </header>
 
   <main>
@@ -1490,7 +1553,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
 
       <div class="px hero-text">
-        <p class="hero-sub">Photographe suisse, j'ai passé 5 ans à cartographier les 141 plus beaux spots photo de Suisse.</p>
+        <p class="hero-sub">Ton guide pour le meilleur été en Suisse.</p>
         <ul class="hero-bullets">
           <li>141 spots secrets avec l'itinéraire pour y aller</li>
           <li>Coordonnées GPS précises pour chaque spot</li>
@@ -1755,7 +1818,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <div class="px about-body">
         <img class="about-photo" src="/map3/img/about/leon_v3.jpg" alt="Leon Helg" loading="lazy" decoding="async" width="100" height="125" />
         <div class="about-text">
-          <p>Je suis Leon. Comme photographe, j'ai passé de nombreux étés à explorer les Alpes suisses. Cette carte, c'est le raccourci que j'aurais aimé avoir quand j'ai commencé.</p>
+          <p>Je suis Leon. Comme photographe suisse, j'ai passé de nombreux étés à explorer les Alpes. Cette carte, c'est le raccourci que j'aurais aimé avoir quand j'ai commencé.</p>
           <div class="about-actions">
             <button type="button" class="about-video-btn" id="about-video-btn" data-src="/gems/swissgems_intro_en_v1.mov" data-poster="/map3/img/about/leon.jpg">
             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
@@ -1902,6 +1965,31 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   <div class="sticky-buy" id="sticky-buy">
     <a class="buy-btn" href="#get-the-map">Acheter · <span class="price-display">CHF 27</span></a>
   </div>
+
+<script>
+  /* Navbar language dropdown · click trigger toggles the menu, outside
+     click or Escape closes it. Keyboard-accessible via aria-expanded. */
+  (function () {
+    var btn = document.getElementById("lang-btn");
+    var menu = document.getElementById("lang-menu");
+    if (!btn || !menu) return;
+    function setOpen(open) {
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      if (open) menu.removeAttribute("hidden");
+      else menu.setAttribute("hidden", "");
+    }
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      setOpen(btn.getAttribute("aria-expanded") !== "true");
+    });
+    document.addEventListener("click", function (e) {
+      if (!menu.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setOpen(false);
+    });
+  })();
+</script>
 
 <script>
 (function () {
