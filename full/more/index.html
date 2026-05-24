@@ -313,6 +313,16 @@
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
 <script>
   (function () {
+    // Dev convenience · on localhost (no Convex auth, no sessionToken)
+    // just unhide the affiliate section so the layout is reviewable
+    // without flipping a real isAffiliate flag in Convex prod. The
+    // hostname check is per-environment, never reaches users.
+    const isLocal = /^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/.test(location.hostname);
+    if (isLocal) {
+      const section = document.getElementById('affiliateSection');
+      if (section) section.hidden = false;
+      return;
+    }
     const SESSION_KEY = 'hb:session:v1';
     let token = null;
     try { token = localStorage.getItem(SESSION_KEY); } catch (_) {}
