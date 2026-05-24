@@ -1417,17 +1417,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 </style>
 <script>
   /* === /map9/ · A/B split test surface, 2026-05-24.
-     Built to re-run the hero-image experiment (originally /map5/) plus
-     a new copy axis · the .hero-sub subheading swaps per variant so we
-     can test the "As a Swiss photographer" framing alongside the
-     control. Each variant is sticky · first roll wins (localStorage
-     'hb:hero_variant') so a returning visitor keeps their attribution.
-     ?hv=01..04 force-overrides for QA without writing to localStorage. */
+     Re-runs the hero-image experiment from /map5/. ONLY the first
+     hero image varies per variant · subhead is constant on the page
+     (with the "Swiss photographer" framing baked into the static
+     copy, not the test). Sticky per-visitor · first roll wins via
+     localStorage 'hb:hero_variant'. ?hv=01..04 force-overrides for QA. */
   window.HB_HERO_VARIANTS = {
-    '01': { img: '/map3/img/v14/hero/hero1.jpg', sub: 'Your guide to the best summer in Switzerland.' },
-    '02': { img: '/map3/img/v14/hero/hero2.jpg', sub: 'As a Swiss photographer · 141 spots I almost kept to myself.' },
-    '03': { img: '/map3/img/v14/hero/hero3.jpg', sub: "I'm Swiss. These are the 141 spots most tourists never see." },
-    '04': { img: '/map3/img/v14/hero/hero4.jpg', sub: 'Five years of Swiss scouting · 141 hidden spots, one map.' },
+    '01': { img: '/map3/img/v14/hero/hero1.jpg' },
+    '02': { img: '/map3/img/v14/hero/hero2.jpg' },
+    '03': { img: '/map3/img/v14/hero/hero3.jpg' },
+    '04': { img: '/map3/img/v14/hero/hero4.jpg' },
   };
   (function () {
     var keys = Object.keys(window.HB_HERO_VARIANTS);
@@ -1517,13 +1516,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
 
       <div class="px hero-text">
-        <!-- Subhead text swaps per hero variant · default is V01 copy
-             (control). JS inline below this element rewrites it once
-             HB_HERO_VARIANT is resolved. We render V01 here so the
-             first paint isn't blank if JS hangs or localStorage I/O
-             throws. -->
-        <p class="hero-sub" data-hb-hero-sub>Your guide to the best summer in Switzerland.</p>
-        <script>(function(){var v=window.HB_HERO_VARIANTS&&window.HB_HERO_VARIANT&&window.HB_HERO_VARIANTS[window.HB_HERO_VARIANT];if(!v||!v.sub)return;var el=document.currentScript.previousElementSibling;if(el&&el.dataset&&el.dataset.hbHeroSub!==undefined){el.textContent=v.sub;}})();</script>
+        <p class="hero-sub">As a Swiss photographer, I've spent 5 years mapping Switzerland's 141 best photo spots.</p>
         <ul class="hero-bullets">
           <li>141 Gems of Switzerland + How to Get There</li>
           <li>Exact Location for every spot</li>

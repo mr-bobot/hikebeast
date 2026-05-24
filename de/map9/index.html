@@ -1375,17 +1375,17 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
 </style>
 <script>
-  /* === /de/map9/ · A/B split test 4 hero variants × 4 subhead copies,
-     2026-05-24. Mirror of /map9/'s EN test, German copy throughout.
+  /* === /de/map9/ · A/B split test 4 hero IMAGES only, 2026-05-24.
+     Mirror of /map9/'s EN test, German copy is constant on the page.
      hero2 + hero3 don't have DE photo variants on disk yet · they
-     reuse the EN images (no text overlay change). Sticky variant via
-     localStorage 'hb:hero_variant' (shared key with EN so a visitor
-     who lands DE-first then re-routes to EN keeps the same bucket). */
+     reuse the EN images. Sticky variant via localStorage
+     'hb:hero_variant' (shared key with EN so a visitor who lands
+     DE-first then re-routes to EN keeps the same bucket). */
   window.HB_HERO_VARIANTS = {
-    '01': { img: '/map3/img/v14/hero/hero1_DE.jpg', sub: 'Dein Guide für den besten Sommer in der Schweiz.' },
-    '02': { img: '/map3/img/v14/hero/hero2.jpg',    sub: 'Als Schweizer Fotograf · 141 Spots, die ich kaum teile.' },
-    '03': { img: '/map3/img/v14/hero/hero3.jpg',    sub: 'Ich bin Schweizer. Hier sind die 141 Spots, die Touristen nie sehen.' },
-    '04': { img: '/map3/img/v14/hero/hero4_DE.jpg', sub: 'Fünf Jahre Schweizer Spurensuche · 141 versteckte Spots auf einer Karte.' },
+    '01': { img: '/map3/img/v14/hero/hero1_DE.jpg' },
+    '02': { img: '/map3/img/v14/hero/hero2.jpg' },
+    '03': { img: '/map3/img/v14/hero/hero3.jpg' },
+    '04': { img: '/map3/img/v14/hero/hero4_DE.jpg' },
   };
   (function () {
     var keys = Object.keys(window.HB_HERO_VARIANTS);
@@ -1471,9 +1471,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
 
       <div class="px hero-text">
-        <!-- Subhead text swaps per hero variant · default is V01 copy. -->
-        <p class="hero-sub" data-hb-hero-sub>Dein Guide für den besten Sommer in der Schweiz.</p>
-        <script>(function(){var v=window.HB_HERO_VARIANTS&&window.HB_HERO_VARIANT&&window.HB_HERO_VARIANTS[window.HB_HERO_VARIANT];if(!v||!v.sub)return;var el=document.currentScript.previousElementSibling;if(el&&el.dataset&&el.dataset.hbHeroSub!==undefined){el.textContent=v.sub;}})();</script>
+        <p class="hero-sub">Als Schweizer Fotograf habe ich 5 Jahre lang die 141 schönsten Fotospots der Schweiz kartiert.</p>
         <ul class="hero-bullets">
           <li>141 Geheimtipps mit Wegbeschreibung</li>
           <li>Genaue Koordinaten zu jedem Spot</li>
