@@ -92,30 +92,24 @@
   .legal-foot .sep { margin: 0 6px; }
   .legal-foot .copy { display: block; }
 
-  .card {
-    background: var(--glass);
-    backdrop-filter: blur(20px) saturate(1.5);
-    -webkit-backdrop-filter: blur(20px) saturate(1.5);
-    border-radius: 24px;
-    border: 1px solid var(--hairline);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-    padding: 8px 24px 24px;
-  }
+  /* No outer glass card · 2026-05-24 Leon called the previous "box
+     within a box" (resource tiles inside a parent .card) cluttered.
+     The resource rows themselves are the cards now; everything else
+     (brand, section labels, footer) sits directly on the page wash. */
 
   .brand {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 16px 0 12px;
+    padding: 0 0 14px;
   }
   .brand img { width: 32px; height: 32px; border-radius: 999px; flex-shrink: 0; }
-  .brand b { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+  .brand b { font-size: 20px; font-weight: 600; letter-spacing: -0.015em; }
 
   .sec {
-    padding: 16px 0;
-    border-top: 1px solid var(--hairline);
+    padding: 18px 0 8px;
   }
-  .sec.first { border-top: 0; padding-top: 0; }
+  .sec.first { padding-top: 8px; }
   .sec-label {
     margin: 0 0 12px;
     font-size: 11px;
@@ -240,7 +234,7 @@
 <main class="mat-page">
  <div class="card-wrap">
   <a class="back" href="../">← Back</a>
-  <div class="card">
+
     <div class="brand">
       <img src="/images/avatar.jpg" alt="" />
       <b>Affiliate materials</b>
@@ -321,7 +315,6 @@
       </label>
     </div>
 
-  </div>
   <footer class="legal-foot">
     <a href="../../../terms.html">Terms</a><span class="sep">·</span><a href="../../../imprint.html">Imprint</a><span class="sep">·</span><a href="../../../privacy.html">Privacy</a>
     <span class="copy">© Hikebeast</span>

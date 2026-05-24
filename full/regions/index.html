@@ -18,12 +18,29 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" href="../preview.css" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
+<style>
+  /* Regions grid · reuses Home's .up-next-card.is-chapter recipe so the
+     covers are the dark-gradient + region-colour-glow + white SVG
+     silhouette treatment (the look Leon explicitly asked for). 2-col
+     on mobile, 3-col tablet, 4-col desktop. 2026-05-24. */
+  .regions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 0 0 40px;
+  }
+  @media (min-width: 600px) {
+    .regions-grid { gap: 14px; }
+  }
+  @media (min-width: 1000px) {
+    .regions-grid { grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  }
+  @media (min-width: 1400px) {
+    .regions-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  }
+</style>
 </head>
-<!-- data-chapter-view="grid" unhides .chapter-grid-inner. The CSS
-     defaults it to display:none because chapter pages have a reader↔grid
-     toggle; this overview has no toggle, it's always-grid. Caught this
-     2026-05-24 after the page rendered as just the hero + empty space. -->
-<body data-chapter-view="grid">
+<body>
 
 <div class="topbar">
   <a class="brand" href="../index.html">
@@ -43,107 +60,85 @@
     <p>Pick a region and dive in. Each one has its own character · alpine drama in Central, vineyards + glaciers in Valais, the soft greens of Fribourg, raw ridges in Eastern.</p>
   </header>
 
-  <!-- 7-region grid · same .chapter-grid + .ch-tile recipe used on chapter
-       pages so the look stays consistent. Intro is intentionally NOT in
-       this overview · it's a single Introduction page rather than a
-       region (still reachable from the chapter rail / home). Region
-       order matches RAIL_CHAPTERS in full/social.js · keep both in sync
-       if a new region is ever added. -->
-  <div class="chapter-grid">
-    <div class="chapter-grid-inner">
+  <!-- Region overview · same .up-next-card.is-chapter pattern Home uses
+       for its chapter rail. The .photo.cv-map element paints the dark
+       gradient + region-colour glow behind the white SVG silhouette,
+       driven by inline --region-color (RGB triplet, matches Home's
+       CHAPTERS_META). Region SVGs live at /full/img/region-<id>.svg.
+       Introduction is intentionally NOT here · it's a front-matter
+       intro page, not a region. -->
+  <div class="regions-grid">
 
-      <a class="ch-tile" href="../central/" title="Central">
-        <div class="ch-tile-photo">
-          <img src="../img/chapters/central/w1000.webp"
-               srcset="../img/chapters/central/w400.webp 400w, ../img/chapters/central/w1000.webp 1000w, ../img/chapters/central/w1800.webp 1800w"
-               sizes="(min-width: 900px) 320px, 45vw"
-               alt="Central" loading="lazy" />
-        </div>
-        <div class="ch-tile-meta">
-          <p class="ch-tile-kicker">REGION</p>
-          <h3 class="ch-tile-title">Central</h3>
-        </div>
-      </a>
+    <a class="up-next-card is-chapter" href="../central/">
+      <span class="photo cv-map" style="--region-color: 175,165,122">
+        <img src="../img/region-central.svg" alt="" loading="lazy" />
+      </span>
+      <span class="body">
+        <span class="name">Central Switzerland</span>
+        <span class="meta">Waterfalls, ridges, glacier lakes.</span>
+      </span>
+    </a>
 
-      <a class="ch-tile" href="../valais/" title="Valais">
-        <div class="ch-tile-photo">
-          <img src="../img/chapters/valais/w1000.webp"
-               srcset="../img/chapters/valais/w400.webp 400w, ../img/chapters/valais/w1000.webp 1000w, ../img/chapters/valais/w1800.webp 1800w"
-               sizes="(min-width: 900px) 320px, 45vw"
-               alt="Valais" loading="lazy" />
-        </div>
-        <div class="ch-tile-meta">
-          <p class="ch-tile-kicker">REGION</p>
-          <h3 class="ch-tile-title">Valais</h3>
-        </div>
-      </a>
+    <a class="up-next-card is-chapter" href="../valais/">
+      <span class="photo cv-map" style="--region-color: 234,183,191">
+        <img src="../img/region-valais.svg" alt="" loading="lazy" />
+      </span>
+      <span class="body">
+        <span class="name">Valais</span>
+        <span class="meta">Matterhorn country. Glaciers, ice caves, high passes.</span>
+      </span>
+    </a>
 
-      <a class="ch-tile" href="../fribourg/" title="Fribourg">
-        <div class="ch-tile-photo">
-          <img src="../img/chapters/fribourg/w1000.webp"
-               srcset="../img/chapters/fribourg/w400.webp 400w, ../img/chapters/fribourg/w1000.webp 1000w, ../img/chapters/fribourg/w1800.webp 1800w"
-               sizes="(min-width: 900px) 320px, 45vw"
-               alt="Fribourg" loading="lazy" />
-        </div>
-        <div class="ch-tile-meta">
-          <p class="ch-tile-kicker">REGION</p>
-          <h3 class="ch-tile-title">Fribourg</h3>
-        </div>
-      </a>
+    <a class="up-next-card is-chapter" href="../fribourg/">
+      <span class="photo cv-map" style="--region-color: 216,216,209">
+        <img src="../img/region-fribourg.svg" alt="" loading="lazy" />
+      </span>
+      <span class="body">
+        <span class="name">Fribourg</span>
+        <span class="meta">Pre-alpine lakes and the Gastlosen wall.</span>
+      </span>
+    </a>
 
-      <a class="ch-tile" href="../western/" title="Western">
-        <div class="ch-tile-photo">
-          <img src="../img/chapters/western/w1000.webp"
-               srcset="../img/chapters/western/w400.webp 400w, ../img/chapters/western/w1000.webp 1000w, ../img/chapters/western/w1800.webp 1800w"
-               sizes="(min-width: 900px) 320px, 45vw"
-               alt="Western" loading="lazy" />
-        </div>
-        <div class="ch-tile-meta">
-          <p class="ch-tile-kicker">REGION</p>
-          <h3 class="ch-tile-title">Western</h3>
-        </div>
-      </a>
+    <a class="up-next-card is-chapter" href="../western/">
+      <span class="photo cv-map" style="--region-color: 204,224,158">
+        <img src="../img/region-western.svg" alt="" loading="lazy" />
+      </span>
+      <span class="body">
+        <span class="name">Western Switzerland</span>
+        <span class="meta">Lake Léman, the Lavaux, smaller crowds.</span>
+      </span>
+    </a>
 
-      <a class="ch-tile" href="../eastern/" title="Eastern">
-        <div class="ch-tile-photo">
-          <img src="../img/chapters/eastern/w1000.webp"
-               srcset="../img/chapters/eastern/w400.webp 400w, ../img/chapters/eastern/w1000.webp 1000w, ../img/chapters/eastern/w1800.webp 1800w"
-               sizes="(min-width: 900px) 320px, 45vw"
-               alt="Eastern" loading="lazy" />
-        </div>
-        <div class="ch-tile-meta">
-          <p class="ch-tile-kicker">REGION</p>
-          <h3 class="ch-tile-title">Eastern</h3>
-        </div>
-      </a>
+    <a class="up-next-card is-chapter" href="../eastern/">
+      <span class="photo cv-map" style="--region-color: 124,181,168">
+        <img src="../img/region-eastern.svg" alt="" loading="lazy" />
+      </span>
+      <span class="body">
+        <span class="name">Eastern Switzerland</span>
+        <span class="meta">Appenzell, Säntis, lesser-known summits.</span>
+      </span>
+    </a>
 
-      <a class="ch-tile" href="../ticino/" title="Ticino">
-        <div class="ch-tile-photo">
-          <img src="../img/chapters/ticino/w1000.webp"
-               srcset="../img/chapters/ticino/w400.webp 400w, ../img/chapters/ticino/w1000.webp 1000w, ../img/chapters/ticino/w1800.webp 1800w"
-               sizes="(min-width: 900px) 320px, 45vw"
-               alt="Ticino" loading="lazy" />
-        </div>
-        <div class="ch-tile-meta">
-          <p class="ch-tile-kicker">REGION</p>
-          <h3 class="ch-tile-title">Ticino</h3>
-        </div>
-      </a>
+    <a class="up-next-card is-chapter" href="../ticino/">
+      <span class="photo cv-map" style="--region-color: 147,132,186">
+        <img src="../img/region-ticino.svg" alt="" loading="lazy" />
+      </span>
+      <span class="body">
+        <span class="name">Ticino</span>
+        <span class="meta">Italian-Swiss country. Lakes, rivers, granite valleys.</span>
+      </span>
+    </a>
 
-      <a class="ch-tile" href="../beyond/" title="Outside Switzerland">
-        <div class="ch-tile-photo">
-          <img src="../img/chapters/beyond/w1000.webp"
-               srcset="../img/chapters/beyond/w400.webp 400w, ../img/chapters/beyond/w1000.webp 1000w, ../img/chapters/beyond/w1800.webp 1800w"
-               sizes="(min-width: 900px) 320px, 45vw"
-               alt="Outside Switzerland" loading="lazy" />
-        </div>
-        <div class="ch-tile-meta">
-          <p class="ch-tile-kicker">BEYOND</p>
-          <h3 class="ch-tile-title">Outside Switzerland</h3>
-        </div>
-      </a>
+    <a class="up-next-card is-chapter" href="../beyond/">
+      <span class="photo cv-map" style="--region-color: 89,89,89">
+        <img src="../img/region-beyond.svg" alt="" loading="lazy" />
+      </span>
+      <span class="body">
+        <span class="name">Beyond the Border</span>
+        <span class="meta">Chamonix, Mont Blanc, one French slice of Léman.</span>
+      </span>
+    </a>
 
-    </div>
   </div>
 
 </main>
