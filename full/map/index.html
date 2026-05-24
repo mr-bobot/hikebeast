@@ -427,10 +427,23 @@
   const isMobile = window.matchMedia('(max-width: 700px)').matches;
   const map = L.map('map', {
     zoomControl: true, attributionControl: false,
-    minZoom: 7, maxZoom: 13,
+    // minZoom lowered from 7 → 6 on 2026-05-24 so the auto-fit below
+    // can actually fit Switzerland on a 375px-wide phone (full-country
+    // fit requires zoom ~6 on that viewport; 7 was clipping the east
+    // and west edges).
+    minZoom: 6, maxZoom: 13,
     preferCanvas: true,
     tap: false,           // skip Leaflet's tap-delay on touch devices
-  }).setView([46.82, 8.22], 8);
+  });
+
+  // Fit the whole Swiss bounding box on first paint instead of a
+  // hardcoded zoom 8 / centre point that only framed central
+  // Switzerland on mobile. Same UX on desktop (just looks slightly
+  // wider). The padding ensures markers near the edge aren't sitting
+  // on the viewport's literal edge.
+  // Bounds: SW corner (Geneva area) → NE corner (Graubünden tip).
+  const SWISS_BOUNDS = L.latLngBounds([45.82, 5.96], [47.81, 10.49]);
+  map.fitBounds(SWISS_BOUNDS, { padding: [20, 20] });
 
   // social.js injects the left rail AFTER page parse, which shifts the
   // body's padding-left and shrinks .map-shell width. Without this,
