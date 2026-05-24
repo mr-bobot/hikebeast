@@ -1326,7 +1326,21 @@
     menuSheet.innerHTML = `
       <div class="menu-sheet-backdrop" data-close></div>
       <div class="menu-sheet-card">
-        <div class="menu-sheet-grabber" aria-hidden="true"></div>
+        <!-- Header strip · grabber (cosmetic) + a real Close button.
+             Leon called out 2026-05-24 that the grabber's swipe-down
+             affordance wasn't wired, so users tapping outside the sheet
+             was the only way to dismiss · added the X button as the
+             explicit close path and wired swipe-down to honour the
+             grabber's promise (handlers below the markup). -->
+        <div class="menu-sheet-header" data-hb-sheet-header>
+          <div class="menu-sheet-grabber" aria-hidden="true"></div>
+          <button type="button" class="menu-sheet-close" data-close aria-label="Close menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="6" y1="6" x2="18" y2="18"/>
+              <line x1="18" y1="6" x2="6" y2="18"/>
+            </svg>
+          </button>
+        </div>
         <button type="button" class="menu-row" data-hb-random data-close>
           <span class="menu-row-icon">${SVG_DICE}</span>
           <span class="menu-row-label">Surprise me</span>
@@ -1392,6 +1406,47 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && menuSheet.classList.contains('is-open')) closeMenuSheet();
     });
+
+    // Swipe-down-to-close on the header strip. Honours the grabber bar's
+    // implicit promise (Leon 2026-05-24: "small bar on top of the menu
+    // indicates that you can swipe it down but you actually can't").
+    // Tracks only the header so internal menu rows stay clickable + a
+    // future scrollable menu body wouldn't fight the gesture. Drags the
+    // card along during the swipe for affordance feedback; commits to
+    // close at >80px or velocity >0.5 px/ms.
+    const sheetCard = menuSheet.querySelector('.menu-sheet-card');
+    const sheetHeader = menuSheet.querySelector('[data-hb-sheet-header]');
+    let dragStart = null;
+    let lastY = 0;
+    let lastT = 0;
+    sheetHeader.addEventListener('pointerdown', (e) => {
+      // Skip when the user is actually pressing the close button.
+      if (e.target.closest('[data-close]')) return;
+      dragStart = { y: e.clientY, t: e.timeStamp };
+      lastY = e.clientY;
+      lastT = e.timeStamp;
+      sheetCard.style.transition = 'none';
+      try { sheetHeader.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    sheetHeader.addEventListener('pointermove', (e) => {
+      if (!dragStart) return;
+      const dy = Math.max(0, e.clientY - dragStart.y);
+      sheetCard.style.transform = `translateY(${dy}px)`;
+      lastY = e.clientY;
+      lastT = e.timeStamp;
+    });
+    function endDrag(e) {
+      if (!dragStart) return;
+      const dy = lastY - dragStart.y;
+      const dt = Math.max(1, lastT - dragStart.t);
+      const velocity = dy / dt; // px/ms
+      sheetCard.style.transform = '';
+      sheetCard.style.transition = '';
+      dragStart = null;
+      if (dy > 80 || velocity > 0.5) closeMenuSheet();
+    }
+    sheetHeader.addEventListener('pointerup', endDrag);
+    sheetHeader.addEventListener('pointercancel', endDrag);
 
     // Backdrop for mobile drawer
     const backdrop = document.createElement('div');

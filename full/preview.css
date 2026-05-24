@@ -4021,12 +4021,48 @@ body.has-rail .topbar .hb-nav { display: none; }
   .app-menu-sheet.is-open { pointer-events: auto; }
   .app-menu-sheet.is-open .menu-sheet-backdrop { opacity: 1; pointer-events: auto; }
   .app-menu-sheet.is-open .menu-sheet-card { transform: translateY(0); }
+  /* Header strip · grabber centred on top, close button pinned right.
+     The header is also the gesture target for swipe-down-to-close
+     (handler in social.js). 2026-05-24. */
+  .app-menu-sheet .menu-sheet-header {
+    position: relative;
+    height: 44px;
+    flex-shrink: 0;
+    touch-action: none;  /* let pointermove/end run cleanly */
+  }
   .app-menu-sheet .menu-sheet-grabber {
     width: 36px;
     height: 4px;
     border-radius: 999px;
     background: rgba(0, 0, 0, 0.18);
-    margin: 6px auto 12px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .app-menu-sheet .menu-sheet-close {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--fg);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .app-menu-sheet .menu-sheet-close svg { width: 18px; height: 18px; }
+  .app-menu-sheet .menu-sheet-close:active { transform: scale(0.94); }
+  :root[data-theme="dark"] .app-menu-sheet .menu-sheet-close {
+    background: rgba(255, 255, 255, 0.10);
+  }
+  :root[data-theme="dark"] .app-menu-sheet .menu-sheet-grabber {
+    background: rgba(255, 255, 255, 0.22);
   }
   .app-menu-sheet .menu-section-head {
     font-size: 11px;
