@@ -1207,7 +1207,7 @@
           ${SVG_TENT}<span class="label">Wildcamping</span>
         </a>
         <a class="rail-item${cur('/regions/')}" href="${REL}regions/">
-          ${SVG_MAP}<span class="label">All Regions</span>
+          <svg viewBox="0 0 24 10.5" fill="currentColor" stroke="none" aria-hidden="true"><path d="M15.1 3.1L13.4 3.2L12.8 2.2L13.1 1.3L13.8 1.4L14.6 0.9L15.3 1.3L16.0 2.4Z M6.7 7.8L7.1 6.5L7.2 5.3L6.6 4.7L5.9 3.8L5.6 3.2L7.3 2.7L7.5 3.3L7.7 3.6L8.8 3.4L9.4 2.9L10.1 4.0L10.6 5.4L12.9 5.5L12.6 6.6L10.4 7.0L8.2 7.6Z M6.8 6.6L5.0 6.8L4.5 6.4L5.2 5.4L5.6 4.9L6.3 4.3L7.3 4.8L7.5 5.9Z M8.5 2.6L8.7 2.0L9.5 2.5L10.8 2.1L9.4 2.9L8.7 3.5L7.8 3.6L7.5 3.3Z M17.4 4.7L16.5 3.6L15.9 2.7L16.2 1.7L17.8 1.6L18.4 1.6L18.9 3.0L18.4 4.9Z M14.4 6.5L15.1 5.6L16.7 5.1L18.6 4.7L20.0 4.0L21.5 4.8L23.0 4.5L23.7 5.3L23.9 6.7L22.3 6.3L21.8 7.3L22.3 8.2L21.0 7.6L19.4 8.0L18.2 7.0L17.7 7.8L16.5 8.1L16.2 6.8L15.2 6.5Z M9.9 2.9L10.5 1.8L9.8 1.3L11.8 1.1L12.7 1.6L13.2 2.5L12.6 3.3L11.8 2.9L9.9 3.0Z M13.3 6.8L15.6 6.5L16.3 7.0L16.6 8.4L16.2 9.6L15.9 10.4L15.2 9.3L13.6 8.5L13.2 7.1Z M4.6 7.3L0.6 7.3L2.2 5.7L4.1 4.8L5.1 5.1L5.3 5.4L4.5 6.2L4.8 6.9L6.6 6.7L6.6 8.0L4.9 7.7Z M12.8 7.2L11.5 7.9L11.0 9.1L9.5 9.9L7.6 10.0L5.9 10.1L4.9 9.0L4.5 7.8L5.7 8.5L7.5 7.6L9.3 7.3L11.5 6.7L13.0 6.5Z"/></svg><span class="label">All Regions</span>
         </a>
       </div>
       <button type="button" class="rail-theme" data-hb-theme-toggle aria-label="Toggle dark mode">
@@ -1355,7 +1355,7 @@
           <span class="menu-row-label">Wildcamping</span>
         </a>
         <a class="menu-row${cur('/regions/')}" href="${REL}regions/" data-close>
-          <span class="menu-row-icon">${SVG_MAP}</span>
+          <span class="menu-row-icon"><svg viewBox="0 0 24 10.5" fill="currentColor" stroke="none" aria-hidden="true"><path d="M15.1 3.1L13.4 3.2L12.8 2.2L13.1 1.3L13.8 1.4L14.6 0.9L15.3 1.3L16.0 2.4Z M6.7 7.8L7.1 6.5L7.2 5.3L6.6 4.7L5.9 3.8L5.6 3.2L7.3 2.7L7.5 3.3L7.7 3.6L8.8 3.4L9.4 2.9L10.1 4.0L10.6 5.4L12.9 5.5L12.6 6.6L10.4 7.0L8.2 7.6Z M6.8 6.6L5.0 6.8L4.5 6.4L5.2 5.4L5.6 4.9L6.3 4.3L7.3 4.8L7.5 5.9Z M8.5 2.6L8.7 2.0L9.5 2.5L10.8 2.1L9.4 2.9L8.7 3.5L7.8 3.6L7.5 3.3Z M17.4 4.7L16.5 3.6L15.9 2.7L16.2 1.7L17.8 1.6L18.4 1.6L18.9 3.0L18.4 4.9Z M14.4 6.5L15.1 5.6L16.7 5.1L18.6 4.7L20.0 4.0L21.5 4.8L23.0 4.5L23.7 5.3L23.9 6.7L22.3 6.3L21.8 7.3L22.3 8.2L21.0 7.6L19.4 8.0L18.2 7.0L17.7 7.8L16.5 8.1L16.2 6.8L15.2 6.5Z M9.9 2.9L10.5 1.8L9.8 1.3L11.8 1.1L12.7 1.6L13.2 2.5L12.6 3.3L11.8 2.9L9.9 3.0Z M13.3 6.8L15.6 6.5L16.3 7.0L16.6 8.4L16.2 9.6L15.9 10.4L15.2 9.3L13.6 8.5L13.2 7.1Z M4.6 7.3L0.6 7.3L2.2 5.7L4.1 4.8L5.1 5.1L5.3 5.4L4.5 6.2L4.8 6.9L6.6 6.7L6.6 8.0L4.9 7.7Z M12.8 7.2L11.5 7.9L11.0 9.1L9.5 9.9L7.6 10.0L5.9 10.1L4.9 9.0L4.5 7.8L5.7 8.5L7.5 7.6L9.3 7.3L11.5 6.7L13.0 6.5Z"/></svg></span>
           <span class="menu-row-label">All Regions</span>
         </a>
         <div class="menu-section-head">Settings</div>
