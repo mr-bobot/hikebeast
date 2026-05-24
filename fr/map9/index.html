@@ -1438,6 +1438,52 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
        into the sidebar at narrower 1024-1199 viewports. */
     .inside { gap: 12px; }
   }
+
+  /* ============================================================
+     Dark mode · honors the system color-scheme. See /map9/index.html
+     for the full design rationale. Added 2026-05-24. */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --surface: #1c1c1e;
+      --fg: #f5f5f7;
+      --muted: #98989d;
+      --hairline: rgba(255, 255, 255, 0.12);
+    }
+    .navbar {
+      background: rgba(0, 0, 0, 0.72);
+      border-bottom-color: rgba(255, 255, 255, 0.10);
+    }
+    .sticky-buy {
+      background: rgba(20, 20, 20, 0.86);
+      border-top-color: rgba(255, 255, 255, 0.10);
+    }
+    .carousel-arrow {
+      background: rgba(40, 40, 42, 0.86);
+      color: var(--fg);
+    }
+    .carousel-arrow:hover { background: #2c2c2e; }
+    .carousel-arrow:active { background: #1c1c1e; }
+    .product-card,
+    .inside-card,
+    .review-card,
+    .creator-note,
+    .checkout-mock,
+    .buy-card,
+    .collection-grid,
+    .emotion-shot {
+      background: #1c1c1e;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    .buy-thumb { background: #2c2c2e; }
+    .guarantee-pill {
+      background: #1c1c1e;
+      color: var(--fg);
+    }
+    .review-meta { border-top-color: rgba(255, 255, 255, 0.10); }
+    .about-photo { border: 1px solid rgba(255, 255, 255, 0.10); }
+    .checkout-mock { border-color: rgba(255, 255, 255, 0.10); }
+  }
 </style>
 <script>
   /* === /fr/map9/ · A/B split test surface, 2026-05-24.

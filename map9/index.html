@@ -1475,6 +1475,75 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
        into the sidebar at narrower 1024-1199 viewports. */
     .inside { gap: 12px; }
   }
+
+  /* ============================================================
+     Dark mode · honors the system color-scheme. Triggered by
+     prefers-color-scheme: dark, which works in modern iOS WKWebView
+     (incl. Instagram in-app browser on iOS 13+) and Android WebView
+     on Android 10+. Older Android IG that forces light mode just
+     keeps the existing light UI · no regression there.
+
+     Strategy · re-map :root color vars so anything that uses var()
+     auto-flips (text, hairlines, muted dots, body bg). Then a small
+     set of selector-specific overrides for the white-on-light
+     surfaces that hard-code their color (product card, review card,
+     inside cards, checkout mock, buy card, sticky bar, navbar
+     translucent bg, carousel arrows, guarantee pill).
+     Added 2026-05-24. */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --surface: #1c1c1e;
+      --fg: #f5f5f7;
+      --muted: #98989d;
+      --hairline: rgba(255, 255, 255, 0.12);
+    }
+    /* Translucent navbar · same blur, dark base. */
+    .navbar {
+      background: rgba(0, 0, 0, 0.72);
+      border-bottom-color: rgba(255, 255, 255, 0.10);
+    }
+    /* Translucent sticky buy bar (mobile). */
+    .sticky-buy {
+      background: rgba(20, 20, 20, 0.86);
+      border-top-color: rgba(255, 255, 255, 0.10);
+    }
+    /* Carousel hover arrows · invert to dark with light icon. */
+    .carousel-arrow {
+      background: rgba(40, 40, 42, 0.86);
+      color: var(--fg);
+    }
+    .carousel-arrow:hover { background: #2c2c2e; }
+    .carousel-arrow:active { background: #1c1c1e; }
+    /* Card surfaces · pure-white in light mode → elevated dark. */
+    .product-card,
+    .inside-card,
+    .review-card,
+    .creator-note,
+    .checkout-mock,
+    .buy-card,
+    .collection-grid,
+    .emotion-shot {
+      background: #1c1c1e;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    /* Buy-card thumb · was light gray, give it depth in dark. */
+    .buy-thumb { background: #2c2c2e; }
+    /* Guarantee pill · light-gray bg → dark surface. */
+    .guarantee-pill {
+      background: #1c1c1e;
+      color: var(--fg);
+    }
+    /* Review meta hairline · was rgba(0,0,0,0.06), need brighter. */
+    .review-meta { border-top-color: rgba(255, 255, 255, 0.10); }
+    /* About photo border · had a faint dark outline that disappears. */
+    .about-photo { border: 1px solid rgba(255, 255, 255, 0.10); }
+    /* Stripe-mock buttons stay branded (black "Pay" / white "Apple Pay")
+       even in dark mode · they're meant to look like the real Stripe
+       payment buttons, so we don't invert them. The mock card border
+       gets tweaked so it doesn't blend into the surface though. */
+    .checkout-mock { border-color: rgba(255, 255, 255, 0.10); }
+  }
 </style>
 <script>
   /* === /map9/ · A/B split test surface, 2026-05-24.
