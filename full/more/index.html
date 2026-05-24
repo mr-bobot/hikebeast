@@ -326,8 +326,14 @@
     const SESSION_KEY = 'hb:session:v1';
     let token = null;
     try { token = localStorage.getItem(SESSION_KEY); } catch (_) {}
-    if (!token || !window.ConvexHttpClient || !window.HB_CONVEX_URL) return;
-    const client = new window.ConvexHttpClient(window.HB_CONVEX_URL);
+    // full/lib/convex.js is the vendored UMD bundle · exposes
+    // `window.convex.ConvexHttpClient` (lowercase namespace, capital
+    // class), NOT a bare `window.ConvexHttpClient`. The wrong global
+    // name silently early-returned and the affiliate section never
+    // unhid for anyone · spotted 2026-05-24 after Leon reported "I see
+    // no affiliate section on mobile" with isAffiliate=true.
+    if (!token || !window.convex || !window.HB_CONVEX_URL) return;
+    const client = new window.convex.ConvexHttpClient(window.HB_CONVEX_URL);
     client.query('auth:currentUser', { sessionToken: token })
       .then((u) => {
         if (u && u.isAffiliate) {
