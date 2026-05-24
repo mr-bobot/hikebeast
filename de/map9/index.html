@@ -1454,17 +1454,18 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     }
     .carousel-arrow:hover { background: #2c2c2e; }
     .carousel-arrow:active { background: #1c1c1e; }
-    .product-card,
+    /* .product-card and .emotion-shot deliberately excluded · they
+       have no light-mode bg and adding one shows as a gray block. */
     .inside-card,
     .review-card,
     .creator-note,
     .checkout-mock,
     .buy-card,
-    .collection-grid,
-    .emotion-shot {
+    .collection-grid {
       background: #1c1c1e;
       border-color: rgba(255, 255, 255, 0.08);
     }
+    .about-body p { color: var(--fg); }
     .buy-thumb { background: #2c2c2e; }
     .guarantee-pill {
       background: #1c1c1e;
