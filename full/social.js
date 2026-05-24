@@ -1158,16 +1158,12 @@
 
     const here = location.pathname.replace(/index\.html$/, '');
     const cur = (suffix) => here.endsWith(suffix) ? ' is-current' : '';
-    const curCh = currentChapterId();
-
-    const renderChapter = (ch) => `
-      <a class="rail-chapter${curCh === ch.id ? ' is-current' : ''}" href="${REL}${ch.id}/" title="${ch.label}">
-        <span class="rail-chapter-thumb"><img src="${REL}img/${ch.cover}" alt="" /></span>
-        <span class="label">${ch.label}</span>
-      </a>
-    `;
-    const introItem = renderChapter(RAIL_INTRO_CHAPTER);
-    const chapterItems = RAIL_CHAPTERS.map(renderChapter).join('');
+    // currentChapterId() and the RAIL_CHAPTERS / RAIL_INTRO_CHAPTER
+    // constants are still referenced elsewhere in social.js (e.g. for
+    // chapter-aware kicker rewriting on spot pages), so keep them
+    // declared even though the rail / menu sheet no longer renders a
+    // Chapters section · the new "All Regions" entry in Collections
+    // (links to /full/regions/) replaces that surface. 2026-05-24.
 
     rail.innerHTML = `
       <a class="rail-brand" href="${REL}index.html" title="Gems of Switzerland home">
@@ -1210,11 +1206,9 @@
         <a class="rail-item${cur('/wildcamping/')}" href="${REL}wildcamping/">
           ${SVG_TENT}<span class="label">Wildcamping</span>
         </a>
-        <div class="rail-divider"></div>
-        <div class="rail-section-head"><span class="label">Chapters</span></div>
-        ${introItem}
-        <div class="rail-divider rail-divider-tight"></div>
-        ${chapterItems}
+        <a class="rail-item${cur('/regions/')}" href="${REL}regions/">
+          ${SVG_MAP}<span class="label">All Regions</span>
+        </a>
       </div>
       <button type="button" class="rail-theme" data-hb-theme-toggle aria-label="Toggle dark mode">
         <span class="rail-theme-icon" data-hb-theme-icon>${SVG_MOON}</span><span class="label" data-hb-theme-label>Dark mode</span>
@@ -1242,9 +1236,14 @@
     // data-hb-theme-toggle + child data-hb-theme-icon / -label spans.
     // Menu sheet markup gets appended later (below), so we bind handlers
     // via event delegation on <body> instead of direct addEventListener.
+    // Dark-by-default since 2026-05-24 · the inline bootstrap in every
+    // <head> defaults to dark when localStorage is unset (or anything
+    // other than 'light'). This reader must mirror that or the toggle
+    // button shows the wrong icon/label for fresh visitors (we'd render
+    // a moon "Dark mode" button on a page that's already in dark).
     function getTheme() {
-      try { return localStorage.getItem('hb-theme') === 'dark' ? 'dark' : 'light'; }
-      catch (_e) { return 'light'; }
+      try { return localStorage.getItem('hb-theme') === 'light' ? 'light' : 'dark'; }
+      catch (_e) { return 'dark'; }
     }
     function syncThemeBtns() {
       const t = getTheme();
@@ -1355,17 +1354,10 @@
           <span class="menu-row-icon">${SVG_TENT}</span>
           <span class="menu-row-label">Wildcamping</span>
         </a>
-        <div class="menu-section-head">Chapters</div>
-        <a class="menu-row${curCh === 'intro' ? ' is-current' : ''}" href="${REL}intro/" data-close>
-          <span class="menu-row-thumb"><img src="${REL}img/${RAIL_INTRO_CHAPTER.cover}" alt="" /></span>
-          <span class="menu-row-label">${RAIL_INTRO_CHAPTER.label}</span>
+        <a class="menu-row${cur('/regions/')}" href="${REL}regions/" data-close>
+          <span class="menu-row-icon">${SVG_MAP}</span>
+          <span class="menu-row-label">All Regions</span>
         </a>
-        ${RAIL_CHAPTERS.map(ch => `
-          <a class="menu-row${curCh === ch.id ? ' is-current' : ''}" href="${REL}${ch.id}/" data-close>
-            <span class="menu-row-thumb"><img src="${REL}img/${ch.cover}" alt="" /></span>
-            <span class="menu-row-label">${ch.label}</span>
-          </a>
-        `).join('')}
         <div class="menu-section-head">Settings</div>
         <button type="button" class="menu-row" data-hb-theme-toggle aria-label="Toggle dark mode">
           <span class="menu-row-icon" data-hb-theme-icon>${SVG_MOON}</span>
