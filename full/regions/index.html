@@ -19,7 +19,11 @@
 <link rel="stylesheet" href="../preview.css" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
-<body>
+<!-- data-chapter-view="grid" unhides .chapter-grid-inner. The CSS
+     defaults it to display:none because chapter pages have a reader↔grid
+     toggle; this overview has no toggle, it's always-grid. Caught this
+     2026-05-24 after the page rendered as just the hero + empty space. -->
+<body data-chapter-view="grid">
 
 <div class="topbar">
   <a class="brand" href="../index.html">
