@@ -32,7 +32,8 @@
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>
-  /* Engagement tracking helper · see /map9/index.html for rationale. */
+  /* Engagement tracking helper · see /map9/index.html for rationale.
+     Two intent signals: about_video_played + reached_checkout. */
   window.HB_SOURCE_PAGE = "de_map9";
   window.hbTrack = function (name, extra) {
     try {
@@ -2200,27 +2201,18 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     if (nextBtn) nextBtn.addEventListener("click", stopAutoplay, { once: true });
   }
 
-  // ---------- Engagement tracking · see /map9/ for rationale ----------
-  if (carousel) {
-    ["pointerdown", "touchstart"].forEach((ev) => {
-      carousel.addEventListener(ev, function () {
-        if (window.hbTrack) window.hbTrack("hero_swiped");
-      }, { passive: true });
-    });
-  }
-  if (prevBtn) prevBtn.addEventListener("click", function () {
-    if (window.hbTrack) window.hbTrack("hero_swiped");
-  });
-  if (nextBtn) nextBtn.addEventListener("click", function () {
-    if (window.hbTrack) window.hbTrack("hero_swiped");
-  });
-  const reviewsEl = document.querySelector(".reviews-carousel");
-  if (reviewsEl) {
-    ["pointerdown", "touchstart"].forEach((ev) => {
-      reviewsEl.addEventListener(ev, function () {
-        if (window.hbTrack) window.hbTrack("review_swiped");
-      }, { passive: true });
-    });
+  // ---------- Engagement tracking · reached_checkout · see /map9/ ----------
+  const checkoutEl = document.getElementById("get-the-map");
+  if (checkoutEl && "IntersectionObserver" in window) {
+    const co = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (window.hbTrack) window.hbTrack("reached_checkout");
+          co.disconnect();
+        }
+      });
+    }, { threshold: 0.1 });
+    co.observe(checkoutEl);
   }
 
   // ---------- Expandable reviews ("Mehr anzeigen") ----------
@@ -2231,7 +2223,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       btn.textContent = open
         ? (btn.dataset.less || "Weniger")
         : (btn.dataset.more || "Mehr anzeigen");
-      if (open && window.hbTrack) window.hbTrack("review_expanded");
     });
   });
 

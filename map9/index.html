@@ -76,8 +76,15 @@
   /* Engagement tracking helper · dedups by event name per page load,
      forwards to Vercel Analytics with the page's source_page tag.
      Aggregate-only, no PII, runs through the same va() pipe as
-     'hero_seen'. Used by hero swipe + review swipe/expand + about
-     video-play hooks below. */
+     'hero_seen'. Drives two intent signals:
+       - about_video_played · user tapped the About-me Watch button
+       - reached_checkout   · #get-the-map entered viewport (scroll
+                              depth = saw the buy area)
+     Earlier iteration also tracked hero_swiped, review_swiped, and
+     review_expanded · dropped 2026-05-25 because Hikebeast traffic
+     is too small to action engagement metrics that can't be
+     cross-referenced with the buy event, and pointerdown is closer
+     to "touched" than "swiped" semantically. */
   window.HB_SOURCE_PAGE = "map9";
   window.hbTrack = function (name, extra) {
     try {
@@ -2299,32 +2306,22 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     if (nextBtn) nextBtn.addEventListener("click", stopAutoplay, { once: true });
   }
 
-  // ---------- Engagement tracking · hero + reviews ----------
-  // Fires Vercel Analytics custom events once per page-load (helper
-  // dedups by event name). "hero_swiped" = user touched the hero
-  // carousel or clicked an arrow · "review_swiped" = user touched
-  // the reviews-carousel · "review_expanded" = user clicked
-  // "Read more" on at least one review card. All aggregate-only.
-  if (carousel) {
-    ["pointerdown", "touchstart"].forEach((ev) => {
-      carousel.addEventListener(ev, function () {
-        if (window.hbTrack) window.hbTrack("hero_swiped");
-      }, { passive: true });
-    });
-  }
-  if (prevBtn) prevBtn.addEventListener("click", function () {
-    if (window.hbTrack) window.hbTrack("hero_swiped");
-  });
-  if (nextBtn) nextBtn.addEventListener("click", function () {
-    if (window.hbTrack) window.hbTrack("hero_swiped");
-  });
-  const reviewsEl = document.querySelector(".reviews-carousel");
-  if (reviewsEl) {
-    ["pointerdown", "touchstart"].forEach((ev) => {
-      reviewsEl.addEventListener(ev, function () {
-        if (window.hbTrack) window.hbTrack("review_swiped");
-      }, { passive: true });
-    });
+  // ---------- Engagement tracking · reached_checkout ----------
+  // Fires once when the #get-the-map section (the actual buy area)
+  // enters the viewport. Useful as a scroll-depth proxy · "did the
+  // visitor get far enough down the page to see the price + CTA?"
+  // about_video_played is wired inside the About-section script.
+  const checkoutEl = document.getElementById("get-the-map");
+  if (checkoutEl && "IntersectionObserver" in window) {
+    const co = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (window.hbTrack) window.hbTrack("reached_checkout");
+          co.disconnect();
+        }
+      });
+    }, { threshold: 0.1 });
+    co.observe(checkoutEl);
   }
 
   // ---------- Expandable reviews ("Read more") ----------
@@ -2335,7 +2332,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       btn.textContent = open
         ? (btn.dataset.less || "Show less")
         : (btn.dataset.more || "Read more");
-      if (open && window.hbTrack) window.hbTrack("review_expanded");
     });
   });
 
