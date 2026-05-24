@@ -1242,9 +1242,14 @@
     // data-hb-theme-toggle + child data-hb-theme-icon / -label spans.
     // Menu sheet markup gets appended later (below), so we bind handlers
     // via event delegation on <body> instead of direct addEventListener.
+    // Dark-by-default since 2026-05-24 · the inline bootstrap in every
+    // <head> defaults to dark when localStorage is unset (or anything
+    // other than 'light'). This reader must mirror that or the toggle
+    // button shows the wrong icon/label for fresh visitors (we'd render
+    // a moon "Dark mode" button on a page that's already in dark).
     function getTheme() {
-      try { return localStorage.getItem('hb-theme') === 'dark' ? 'dark' : 'light'; }
-      catch (_e) { return 'light'; }
+      try { return localStorage.getItem('hb-theme') === 'light' ? 'light' : 'dark'; }
+      catch (_e) { return 'dark'; }
     }
     function syncThemeBtns() {
       const t = getTheme();

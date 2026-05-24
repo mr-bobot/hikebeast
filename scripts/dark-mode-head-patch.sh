@@ -28,7 +28,7 @@ echo "Patching $COUNT files…"
 # attribute selector keeps clean double quotes without HTML escape
 # headaches.
 perl -i -0pe '
-  s{<meta name="theme-color" content="#ffffff" media="\(prefers-color-scheme: light\)" />\n<meta name="theme-color" content="#0b0d10" media="\(prefers-color-scheme: dark\)" />\n<meta name="color-scheme" content="light dark" />\n<script>\(function\(\)\{try\{var t=localStorage\.getItem\("hb-theme"\)\|\|"auto";document\.documentElement\.setAttribute\("data-theme",t\);\}catch\(e\)\{\}\}\)\(\);</script>}{<meta name="theme-color" content="#ffffff" />\n<script>(function(){try{if(localStorage.getItem(\x27hb-theme\x27)===\x27dark\x27){document.documentElement.setAttribute(\x27data-theme\x27,\x27dark\x27);var m=document.querySelector(\x27meta[name="theme-color"]\x27);if(m)m.setAttribute(\x27content\x27,\x27#0b0d10\x27);}}catch(e){}})();</script>}g
+  s{<meta name="theme-color" content="#ffffff" media="\(prefers-color-scheme: light\)" />\n<meta name="theme-color" content="#0b0d10" media="\(prefers-color-scheme: dark\)" />\n<meta name="color-scheme" content="light dark" />\n<script>\(function\(\)\{try\{var t=localStorage\.getItem\("hb-theme"\)\|\|"auto";document\.documentElement\.setAttribute\("data-theme",t\);\}catch\(e\)\{\}\}\)\(\);</script>}{<meta name="theme-color" content="#ffffff" />\n<script>(function(){try{if(localStorage.getItem(\x27hb-theme\x27)!==\x27light\x27){document.documentElement.setAttribute(\x27data-theme\x27,\x27dark\x27);var m=document.querySelector(\x27meta[name="theme-color"]\x27);if(m)m.setAttribute(\x27content\x27,\x27#0b0d10\x27);}}catch(e){}})();</script>}g
 ' $FILES
 
 # Pass B: pristine pages (theme-color meta but no bootstrap script on
@@ -36,7 +36,7 @@ perl -i -0pe '
 # pages already patched. -0pe = slurp whole file so the next-line
 # check works.
 perl -i -0pe '
-  s{<meta name="theme-color" content="#ffffff" />\n(?!<script>\(function\(\)\{try\{if\(localStorage)}{<meta name="theme-color" content="#ffffff" />\n<script>(function(){try{if(localStorage.getItem(\x27hb-theme\x27)===\x27dark\x27){document.documentElement.setAttribute(\x27data-theme\x27,\x27dark\x27);var m=document.querySelector(\x27meta[name="theme-color"]\x27);if(m)m.setAttribute(\x27content\x27,\x27#0b0d10\x27);}}catch(e){}})();</script>\n}g
+  s{<meta name="theme-color" content="#ffffff" />\n(?!<script>\(function\(\)\{try\{if\(localStorage)}{<meta name="theme-color" content="#ffffff" />\n<script>(function(){try{if(localStorage.getItem(\x27hb-theme\x27)!==\x27light\x27){document.documentElement.setAttribute(\x27data-theme\x27,\x27dark\x27);var m=document.querySelector(\x27meta[name="theme-color"]\x27);if(m)m.setAttribute(\x27content\x27,\x27#0b0d10\x27);}}catch(e){}})();</script>\n}g
 ' $FILES
 
 echo "Done."
