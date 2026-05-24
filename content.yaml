@@ -310,7 +310,7 @@ spots:
     canton: Bern (BE)
     protections:
     - Federal hunting reserve — Schwarzhorn
-  maps_url: https://www.google.com/maps/place/Rosenlaui,+3860+Schattenhalb/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f854e2f14adf3:0x75e02d334586fdf8!8m2!3d46.6795746!4d8.1548593!16s%2Fg%2F1tmqq876
+  maps_url: https://maps.app.goo.gl/MPQm7Tq1dB1L9UWg8
   image: spots/rosenlaui_public_waterfall/main.jpg
   image_credit: leon.helg
   photos:
@@ -711,7 +711,7 @@ spots:
   - If you shoot it at sunset, you cannot make the last cable car back. Plan to bivy on the ridge or carry on through the dark to Harder Kulm. Either way, pack for cold.
   region: Brienz, Central Switzerland
   access: Cable car to Rothorn + 2-3h hike
-  effort: Challenging
+  effort: Hard - exposed T5
   best_light: Sunset
   wildCamping:
     verdict: forbidden
@@ -834,7 +834,7 @@ spots:
   - Aim for sunset. The sun drops right behind Mount Pilatus and the light catches the full length of the lake. In winter the snow cover pushes the contrast even further.
   - Wide first, then swap to a longer lens for the compressed version of Pilatus and the Vierwaldstättersee fingers.
   region: Morschach, Central Switzerland
-  access: Cable car + chairlift + 10 min walk
+  access: Cable car + ridge hike
   effort: Easy
   best_light: Sunset
   wildCamping:
@@ -933,7 +933,7 @@ spots:
   - The waterfall is close to the road but the best angle requires a quick hike above the parking area. May and June is peak water time - if you come later, plan for smaller volume.
   - Overcast light works well here. The falls freeze in winter but are less dramatic without the snowmelt pressure.
   region: Lenk, Central Switzerland
-  access: Drive + short walk
+  access: Drive + 30-min walk (longer routes from Adelboden / Lenk)
   effort: Easy
   best_light: May to June
   wildCamping:
@@ -1745,7 +1745,6 @@ spots:
     busyness: 1
   hike_ids:
   - arolla_ice_cave-arolla-glacier-trail
-  - arolla_ice_cave-arolla-pas-de-chevres
 - id: cabane_becs_de_bosson
   chapter: valais
   kicker: SLEEP HIGH, EAT WELL
@@ -1914,7 +1913,7 @@ spots:
   - Bring a drone if you have one. The glacier and the surrounding Dent Blanche massif are best read from a bit of altitude. On the ground, look for the ice caves that form in the terminal
     face in late winter.
   region: Val d'Hérens
-  access: Drive + 2 hr walk
+  access: Drive + 30-min easy trail (or longer 150-min T3 to moraine)
   effort: Easy to moderate
   best_light: Anytime clear
   wildCamping:
@@ -1957,7 +1956,7 @@ spots:
   wildCamping:
     verdict: restricted
     reason: Val d'Hérens braided meltwater downstream of Ferpècle Glacier. Above tree line tolerated single-night; avoid the river braid itself (sensitive habitat).
-  maps_url: https://www.google.com/maps/place/?q=46.04,7.555&z=15
+  maps_url: https://maps.app.goo.gl/CRaALuVsczr4tmoDA
   image: spots/ferpecle_river/main.jpg
   image_credit: oliwvair
   photos:
@@ -1972,8 +1971,8 @@ spots:
     elevation_m: 1770
     busyness: 2
   gps:
-    lat: 46.04
-    lng: 7.555
+    lat: 46.0584
+    lng: 7.5496
   hike_ids:
   - ferpecle_river-drive-up
 - id: spielboden
@@ -2109,7 +2108,7 @@ spots:
   - This is a proper day hike with serious altitude gain. The views from the top sweep across the Valais and into the Monte Rosa massif. Start early and watch the weather.
   - Bring plenty of water. The upper slopes are exposed and the descent is as demanding as the ascent.
   region: Turtmanntal, Valais
-  access: Drive to trailhead
+  access: Drive + 6-8h T5 summit day
   effort: Hard - full day
   best_light: Clear weather
   wildCamping:
@@ -2418,7 +2417,7 @@ spots:
   - The view from the top traverses the Rhone valley. For photos, a drone captures the route and the climbers against the drop; from the ground, shoot from below with a wide lens to
     emphasize the exposure. Go early. Afternoon thunderstorms are common in summer.
   region: Nax
-  access: Drive to parking
+  access: Drive + K4 via ferrata (1-2 h climbing)
   effort: Hard / technical
   best_light: Morning
   wildCamping:
@@ -2679,7 +2678,7 @@ spots:
     than in the evening.
   - Drone works well up here. If the sky is clear, handheld is fine too. Bring a telephoto to compress the ridge line into that postcard silhouette.
   region: Gruyère, Fribourg
-  access: Drive + short hike
+  access: Drive + half-day hike
   effort: Easy
   best_light: Sunrise with inversion
   wildCamping:
@@ -3023,7 +3022,7 @@ spots:
     that a fall would be fatal.
   - Sunrise is the spot. Sunset works too, and you'll often get better colour over the lake then. Either way, give yourself margin to get up and down in daylight.
   region: Riviera vaudoise
-  access: Drive + 1 hr hike
+  access: Drive + ~1h ascent (round trip ~2h 45)
   effort: Moderate. Exposed
   best_light: Sunrise or sunset
   wildCamping:
@@ -3032,7 +3031,7 @@ spots:
     canton: Vaud (VD)
     protections:
     - National / regional park — Parc naturel régional Gruyère Pays-d’Enhaut
-  maps_url: https://www.google.com/maps/place/Col+de+Pierra-Perchia/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8ff955d5366f:0x6655f219c803eba7!8m2!3d46.4723534!4d6.9779693!16s%2Fg%2F11gjp70sz0
+  maps_url: https://maps.app.goo.gl/M69D6oka7K86BfTi8
   image: spots/cap_au_moine/main.jpg
   image_credit: danslafosse.medias
   photos:
@@ -4061,7 +4060,7 @@ spots:
   - Park along the pass road and walk up a short ridge. The peaks above the Urnerboden valley have the kind of jagged limestone that looks lifted from the Dolomites, with zero crowd.
   - Sunrise or moody overcast both deliver. Blue-sky blue-hour days are actually the weakest here. The rock lacks contrast against a clean sky.
   region: Urnerboden, Uri
-  access: Pass road + short hike
+  access: Drive + 90-min panorama walk
   effort: Easy
   best_light: Sunrise or moody
   wildCamping:
@@ -4814,7 +4813,7 @@ spots:
     canton: Ticino (TI)
     protections:
     - BLN landscape — Val Verzasca
-  maps_url: https://www.google.com/maps/place/Verzaska+Valley/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b6d28e572447:0x60f583d58bb40b36!8m2!3d46.25!4d8.8333333!16s%2Fm%2F03c3mrg
+  maps_url: https://maps.app.goo.gl/PF49vNJacNYkbuZx5
   image: spots/valle_verzasca/main.jpg
   image_credit: artiom_vallat
   photos:
@@ -4836,8 +4835,8 @@ spots:
     source_type: book
   _was_legacy_placeholder: true
   gps:
-    lat: 46.25
-    lng: 8.8333333
+    lat: 46.255272
+    lng: 8.840861
   trip_facts:
     elevation_m: 480
     best_season: April – October
