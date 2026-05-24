@@ -268,6 +268,34 @@
         </span>
       </a>
     </div>
+
+    <!-- Affiliate · only visible to users with isAffiliate=true.
+         Convex auth check below toggles this section. Moved here
+         from /full/account/ on 2026-05-24 · the account page is now
+         strictly account-management, all utilities + the affiliate
+         entry live on More. -->
+    <div class="sec" id="affiliateSection" hidden>
+      <p class="sec-label">Affiliate</p>
+      <a class="row-link" href="../affiliate/">
+        <span class="row-link-icon" aria-hidden="true">
+          <!-- Share-nodes icon · three circles connected by lines.
+               Same SVG as the old account-page affiliate teaser
+               (and Lucide's "share-2" / Heroicons "share"). -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+        </span>
+        <span class="row-link-body">
+          <span class="row-link-title">Affiliate dashboard</span>
+          <span class="row-link-sub">Your link and your referrals</span>
+        </span>
+        <span class="row-link-chev">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </a>
+    </div>
   </div>
   <footer class="legal-foot">
     <a href="../../terms.html">Terms</a><span class="sep">·</span><a href="../../imprint.html">Imprint</a><span class="sep">·</span><a href="../../privacy.html">Privacy</a>
@@ -275,6 +303,31 @@
   </footer>
  </div>
 </main>
+
+<!-- Convex query · gate the affiliate row on isAffiliate=true.
+     Same shape as the old /full/account/ teaser logic, just on the
+     new home. Failed reads (sessionToken missing, network blip, etc.)
+     silently leave the section hidden · this is a discoverability
+     surface, not a critical one. -->
+<script src="../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
+<script>
+  (function () {
+    const SESSION_KEY = 'hb:session:v1';
+    let token = null;
+    try { token = localStorage.getItem(SESSION_KEY); } catch (_) {}
+    if (!token || !window.ConvexHttpClient || !window.HB_CONVEX_URL) return;
+    const client = new window.ConvexHttpClient(window.HB_CONVEX_URL);
+    client.query('auth:currentUser', { sessionToken: token })
+      .then((u) => {
+        if (u && u.isAffiliate) {
+          const section = document.getElementById('affiliateSection');
+          if (section) section.hidden = false;
+        }
+      })
+      .catch(() => { /* silent · row stays hidden */ });
+  })();
+</script>
 
 </body>
 </html>
