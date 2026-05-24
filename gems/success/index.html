@@ -756,12 +756,12 @@ fbq('track', 'PageView');
         // the 2026-05-15 dedup fix and missed the same wiring;
         // backfilled 2026-05-20. Without matching IDs Meta counts the
         // pixel + CAPI as separate events (3.3x inflation observed in
-        // Events Manager on 2026-05-20). The sessionStorage guard is
+        // Events Manager on 2026-05-20). The localStorage guard is
         // defense-in-depth against tab refresh.
         if (window.fbq && typeof data.amount_total === "number" && data.payment_intent) {
           var purchaseKey = "hb:purchase_fired:" + data.payment_intent;
           var alreadyFired = false;
-          try { alreadyFired = sessionStorage.getItem(purchaseKey) === "1"; } catch (e) {}
+          try { alreadyFired = localStorage.getItem(purchaseKey) === "1"; } catch (e) {}
           if (!alreadyFired) {
             try {
               // Advanced Matching · re-init the pixel with the buyer's
@@ -786,7 +786,7 @@ fbq('track', 'PageView');
                 value: Number((data.amount_total / 100).toFixed(2)),
                 currency: data.currency || "CHF",
               }, { eventID: data.payment_intent });
-              try { sessionStorage.setItem(purchaseKey, "1"); } catch (e) {}
+              try { localStorage.setItem(purchaseKey, "1"); } catch (e) {}
             } catch (e) {}
           }
         }

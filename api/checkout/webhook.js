@@ -31,6 +31,18 @@ import { fireCapi, buildUserData, splitName } from "../../lib/capi.js";
 
 export const config = {
   api: { bodyParser: false },
+  // Vercel Hobby default lambda timeout is 10s. The webhook awaits Stripe
+  // retrieve + Resend send + Apps Script Sheet write + Meta CAPI POST in
+  // sequence; any one slow third-party (Resend image fetch, Apps Script
+  // cold-start) could push the total past 10s. When that happened, Vercel
+  // killed the lambda mid-Promise.all, Meta CAPI never fired, and Stripe
+  // retried the webhook hours later with a fresh `event_time` that Meta's
+  // dedup window couldn't reconcile against the original eventID, causing
+  // both 0-server-event misses and 3-server-event overfires in Events
+  // Manager's deduplication diagnostic (2026-05-24). Bumping to 30s
+  // matches Stripe's own webhook timeout, which is the upper bound that
+  // matters here. Hobby plan caps maxDuration at 60s, so 30 is allowed.
+  maxDuration: 30,
 };
 
 const TOKEN_VERSION = "v1";
@@ -420,12 +432,18 @@ async function logPurchase(fields) {
 // `eventId` MUST match the `eventID` the browser pixel passes on the
 // success page (currently the Stripe paymentIntent id) so Meta dedupes.
 async function fireCapiPurchase({
-  eventId, email, firstName, lastName, city, zip, country, amount, currency,
+  eventId, eventTime, email, firstName, lastName, city, zip, country, amount, currency,
   fbc, fbp, clientIp, clientUserAgent, sourceUrl,
 }) {
   return fireCapi({
     eventName: "Purchase",
     eventId,
+    // Stable event_time tied to the Stripe event, not Date.now(). If Stripe
+    // retries the same webhook hours later, the eventID is the same but
+    // Date.now() would shift; Meta's dedup window only collapses events
+    // when (event_id, event_name, event_time) align closely. Anchoring to
+    // event.created keeps retries collapsible. (2026-05-24)
+    eventTime,
     userData: buildUserData({
       email: email || undefined,
       firstName: firstName || undefined,
@@ -536,6 +554,37 @@ async function handleSessionCompleted({ stripe, event }) {
     catch (err) { console.error("getSubscriberIgUsername failed:", err?.message || err); }
   }
 
+  // 0. Fire Meta CAPI Purchase FIRST, awaited synchronously, before any
+  // slower side effect. fireCapi self-times-out at 5s; the surrounding
+  // lambda was raised to maxDuration: 30 (see top of file). If Vercel
+  // later kills the lambda mid-Resend or mid-Sheet on a slow third-party,
+  // the Purchase event has already landed at Meta and Stripe-retry will
+  // just dedupe via stable eventID + event_time (anchored to event.created).
+  // This was reordered on 2026-05-24 after Events Manager's dedup
+  // diagnostic showed 0-server-event misses on ~40% of purchases —
+  // Resend/Apps Script being slow was eating CAPI's slot in Promise.all.
+  try {
+    await fireCapiPurchase({
+      eventId: paymentIntent, // dedupes with client-side fbq using same event_id
+      eventTime: typeof event.created === "number" ? event.created : Math.floor(Date.now() / 1000),
+      email,
+      firstName: firstNameForCapi,
+      lastName: lastNameFromStripe,
+      city,
+      zip,
+      country: ipCountry,
+      amount: full.amount_total,
+      currency: full.currency,
+      fbc: metaFbc,
+      fbp: metaFbp,
+      clientIp: metaClientIp,
+      clientUserAgent: metaClientUa,
+      sourceUrl: `${SITE}/map/`,
+    });
+  } catch (err) {
+    console.error("fireCapiPurchase threw (continuing):", err?.message || err);
+  }
+
   // 1. Send purchase email (Resend). One CTA: Download the guide.
   // (The access-token cookie flow for /full/ webapp is still wired, but
   // not surfaced in the email until the webapp is opened to paid customers.
@@ -573,6 +622,9 @@ async function handleSessionCompleted({ stripe, event }) {
   // `instagram_handle` is set when the buyer came in via the ManyChat IG
   // funnel; the Apps Script `handlePurchase` writes it back to the row
   // matched by metadata_s. Empty string for direct-web buyers.
+  // fireCapiPurchase was moved above (step 0) so it runs synchronously
+  // before Resend/Sheet — see the 2026-05-24 comment block. Don't add it
+  // back here; doing so would re-introduce the double-fire.
   const sideEffects = [
     logPurchase({
       email,
@@ -598,22 +650,6 @@ async function handleSessionCompleted({ stripe, event }) {
       provider: "stripe",
       session_id: full.id,
       email_sent: emailOk ? "1" : "0",
-    }),
-    fireCapiPurchase({
-      eventId: paymentIntent, // dedupes with client-side fbq using same event_id
-      email,
-      firstName: firstNameForCapi,
-      lastName: lastNameFromStripe,
-      city,
-      zip,
-      country: ipCountry,
-      amount: full.amount_total,
-      currency: full.currency,
-      fbc: metaFbc,
-      fbp: metaFbp,
-      clientIp: metaClientIp,
-      clientUserAgent: metaClientUa,
-      sourceUrl: `${SITE}/map/`,
     }),
   ];
 
