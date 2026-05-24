@@ -17,7 +17,13 @@
   try {
     var pref = null;
     try { pref = localStorage.getItem('hb_lang'); } catch (e) {}
-    if (pref === 'en') return;
+    // Respect ANY explicit non-DE preference · the navbar lang picker
+    // now offers EN/DE/FR/IT, so a user who clicked FR or IT shouldn't
+    // get auto-redirected to /de/ on their next /map9/ visit just
+    // because their browser language happens to be German. The only
+    // case that should hit the DE-redirect path is no-pref + DE
+    // browser (still does), or explicit hb_lang='de'.
+    if (pref && pref !== 'de') return;
     // Wants-DE signals (any one triggers):
     //   (a) explicit hb_lang='de' from a prior DE-pill click
     //   (b) primary navigator.language starts with 'de'
@@ -1466,6 +1472,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       Hikebeast
     </a>
     <a class="navbar-lang" href="/de/map9/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">🇩🇪 DE</a>
+    <a class="navbar-lang" href="/fr/map9/" hreflang="fr" onclick="try{localStorage.setItem('hb_lang','fr')}catch(e){}" aria-label="Version française">🇫🇷 FR</a>
+    <a class="navbar-lang" href="/it/map9/" hreflang="it" onclick="try{localStorage.setItem('hb_lang','it')}catch(e){}" aria-label="Versione italiana">🇮🇹 IT</a>
   </header>
 
   <main>
