@@ -72,6 +72,25 @@
 <!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<script>
+  /* Engagement tracking helper · dedups by event name per page load,
+     forwards to Vercel Analytics with the page's source_page tag.
+     Aggregate-only, no PII, runs through the same va() pipe as
+     'hero_seen'. Used by hero swipe + review swipe/expand + about
+     video-play hooks below. */
+  window.HB_SOURCE_PAGE = "map9";
+  window.hbTrack = function (name, extra) {
+    try {
+      var k = "_hbf_" + name;
+      if (window[k]) return;
+      window[k] = true;
+      if (typeof window.va !== "function") return;
+      var props = { name: name, source_page: window.HB_SOURCE_PAGE };
+      if (extra) for (var p in extra) if (Object.prototype.hasOwnProperty.call(extra, p)) props[p] = extra[p];
+      window.va("event", props);
+    } catch (e) { /* noop */ }
+  };
+</script>
 
 <!-- Meta Pixel -->
 <script>
@@ -1551,6 +1570,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
        invisible against the dark body. Flip to translucent white.
        Active dot already uses var(--fg) so it stays correct. */
     .dots span { background: rgba(255, 255, 255, 0.25); }
+    /* TikTok pill · light-mode has black bg + white icon, which
+       disappears against the black dark-mode body. TikTok's brand
+       guideline allows inverted (white bg, black icon) so we flip
+       it cleanly in dark. Instagram tile keeps its gradient · it
+       reads fine on dark already. */
+    .about-social--tt { background: #ffffff; }
+    .about-social--tt svg { fill: #000000; }
     /* About photo border · had a faint dark outline that disappears. */
     .about-photo { border: 1px solid rgba(255, 255, 255, 0.10); }
     /* Stripe-mock buttons stay branded (black "Pay" / white "Apple Pay")
@@ -1969,6 +1995,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           var btn = document.getElementById("about-video-btn");
           if (!btn) return;
           btn.addEventListener("click", function () {
+            /* Track once per page-load (helper dedups). */
+            if (window.hbTrack) window.hbTrack("about_video_played");
             var vid = document.createElement("video");
             vid.className = "about-video";
             vid.src = btn.dataset.src;
@@ -2271,6 +2299,34 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     if (nextBtn) nextBtn.addEventListener("click", stopAutoplay, { once: true });
   }
 
+  // ---------- Engagement tracking · hero + reviews ----------
+  // Fires Vercel Analytics custom events once per page-load (helper
+  // dedups by event name). "hero_swiped" = user touched the hero
+  // carousel or clicked an arrow · "review_swiped" = user touched
+  // the reviews-carousel · "review_expanded" = user clicked
+  // "Read more" on at least one review card. All aggregate-only.
+  if (carousel) {
+    ["pointerdown", "touchstart"].forEach((ev) => {
+      carousel.addEventListener(ev, function () {
+        if (window.hbTrack) window.hbTrack("hero_swiped");
+      }, { passive: true });
+    });
+  }
+  if (prevBtn) prevBtn.addEventListener("click", function () {
+    if (window.hbTrack) window.hbTrack("hero_swiped");
+  });
+  if (nextBtn) nextBtn.addEventListener("click", function () {
+    if (window.hbTrack) window.hbTrack("hero_swiped");
+  });
+  const reviewsEl = document.querySelector(".reviews-carousel");
+  if (reviewsEl) {
+    ["pointerdown", "touchstart"].forEach((ev) => {
+      reviewsEl.addEventListener(ev, function () {
+        if (window.hbTrack) window.hbTrack("review_swiped");
+      }, { passive: true });
+    });
+  }
+
   // ---------- Expandable reviews ("Read more") ----------
   document.querySelectorAll(".review-more-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -2279,6 +2335,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       btn.textContent = open
         ? (btn.dataset.less || "Show less")
         : (btn.dataset.more || "Read more");
+      if (open && window.hbTrack) window.hbTrack("review_expanded");
     });
   });
 

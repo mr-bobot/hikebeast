@@ -34,6 +34,21 @@
 <!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<script>
+  /* Engagement tracking helper · see /map9/index.html for rationale. */
+  window.HB_SOURCE_PAGE = "it_map9";
+  window.hbTrack = function (name, extra) {
+    try {
+      var k = "_hbf_" + name;
+      if (window[k]) return;
+      window[k] = true;
+      if (typeof window.va !== "function") return;
+      var props = { name: name, source_page: window.HB_SOURCE_PAGE };
+      if (extra) for (var p in extra) if (Object.prototype.hasOwnProperty.call(extra, p)) props[p] = extra[p];
+      window.va("event", props);
+    } catch (e) { /* noop */ }
+  };
+</script>
 
 <!-- Meta Pixel -->
 <script>
@@ -1483,6 +1498,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     }
     .review-meta { border-top-color: rgba(255, 255, 255, 0.10); }
     .dots span { background: rgba(255, 255, 255, 0.25); }
+    .about-social--tt { background: #ffffff; }
+    .about-social--tt svg { fill: #000000; }
     .about-photo { border: 1px solid rgba(255, 255, 255, 0.10); }
     .checkout-mock { border-color: rgba(255, 255, 255, 0.10); }
   }
@@ -1897,6 +1914,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           var btn = document.getElementById("about-video-btn");
           if (!btn) return;
           btn.addEventListener("click", function () {
+            if (window.hbTrack) window.hbTrack("about_video_played");
             var vid = document.createElement("video");
             vid.className = "about-video";
             vid.src = btn.dataset.src;
@@ -2199,14 +2217,38 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     if (nextBtn) nextBtn.addEventListener("click", stopAutoplay, { once: true });
   }
 
-  // ---------- Expandable reviews ("Read more") ----------
+  // ---------- Engagement tracking · see /map9/ for rationale ----------
+  if (carousel) {
+    ["pointerdown", "touchstart"].forEach((ev) => {
+      carousel.addEventListener(ev, function () {
+        if (window.hbTrack) window.hbTrack("hero_swiped");
+      }, { passive: true });
+    });
+  }
+  if (prevBtn) prevBtn.addEventListener("click", function () {
+    if (window.hbTrack) window.hbTrack("hero_swiped");
+  });
+  if (nextBtn) nextBtn.addEventListener("click", function () {
+    if (window.hbTrack) window.hbTrack("hero_swiped");
+  });
+  const reviewsEl = document.querySelector(".reviews-carousel");
+  if (reviewsEl) {
+    ["pointerdown", "touchstart"].forEach((ev) => {
+      reviewsEl.addEventListener(ev, function () {
+        if (window.hbTrack) window.hbTrack("review_swiped");
+      }, { passive: true });
+    });
+  }
+
+  // ---------- Expandable reviews ("Mostra di più") ----------
   document.querySelectorAll(".review-more-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const card = btn.closest(".review-card");
       const open = card.classList.toggle("is-open");
       btn.textContent = open
-        ? (btn.dataset.less || "Show less")
-        : (btn.dataset.more || "Read more");
+        ? (btn.dataset.less || "Mostra di meno")
+        : (btn.dataset.more || "Mostra di più");
+      if (open && window.hbTrack) window.hbTrack("review_expanded");
     });
   });
 
