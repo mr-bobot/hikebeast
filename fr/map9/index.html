@@ -894,7 +894,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   /* === Reviews · swipeable carousel === */
   .reviews-carousel {
     display: flex;
-    align-items: stretch;
+    /* `start` so each card sizes to its own content · see /map9/. */
+    align-items: start;
     gap: 12px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -1482,6 +1483,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       color: var(--fg);
     }
     .review-meta { border-top-color: rgba(255, 255, 255, 0.10); }
+    .dots span { background: rgba(255, 255, 255, 0.25); }
     .about-photo { border: 1px solid rgba(255, 255, 255, 0.10); }
     .checkout-mock { border-color: rgba(255, 255, 255, 0.10); }
   }

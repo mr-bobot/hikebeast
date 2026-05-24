@@ -931,7 +931,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   /* === Reviews · swipeable carousel === */
   .reviews-carousel {
     display: flex;
-    align-items: stretch;
+    /* `start` so each card sizes to its own content · with stretch
+       a short card (one-line review) would inflate to match the
+       tallest card in view, leaving visible empty space inside its
+       own frame. Mirrors the desktop grid behaviour below. */
+    align-items: start;
     gap: 12px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -1543,6 +1547,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     }
     /* Review meta hairline · was rgba(0,0,0,0.06), need brighter. */
     .review-meta { border-top-color: rgba(255, 255, 255, 0.10); }
+    /* Carousel dots · light-mode bg is rgba(0,0,0,0.15) which is
+       invisible against the dark body. Flip to translucent white.
+       Active dot already uses var(--fg) so it stays correct. */
+    .dots span { background: rgba(255, 255, 255, 0.25); }
     /* About photo border · had a faint dark outline that disappears. */
     .about-photo { border: 1px solid rgba(255, 255, 255, 0.10); }
     /* Stripe-mock buttons stay branded (black "Pay" / white "Apple Pay")
