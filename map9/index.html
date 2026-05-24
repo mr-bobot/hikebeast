@@ -1427,12 +1427,14 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
      hero image varies per variant · subhead is constant on the page
      (with the "Swiss photographer" framing baked into the static
      copy, not the test). Sticky per-visitor · first roll wins via
-     localStorage 'hb:hero_variant'. ?hv=01..04 force-overrides for QA. */
+     localStorage 'hb:hero_variant'. ?hv=01..05 force-overrides for QA.
+     hero5 added 2026-05-24 · 5th variant, language-neutral. */
   window.HB_HERO_VARIANTS = {
     '01': { img: '/map3/img/v14/hero/hero1.jpg' },
     '02': { img: '/map3/img/v14/hero/hero2.jpg' },
     '03': { img: '/map3/img/v14/hero/hero3.jpg' },
     '04': { img: '/map3/img/v14/hero/hero4.jpg' },
+    '05': { img: '/map3/img/v14/hero/hero5.jpg' },
   };
   (function () {
     var keys = Object.keys(window.HB_HERO_VARIANTS);
@@ -2355,9 +2357,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         page: "map9",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
-        // visitor_id + referrer · drive the AllVisits row even when
-        // there's no subscriber_id / token (anonymous Linktree, ads,
-        // direct). The lambda forks to log_visit on every call.
+        // visitor_id + referrer · accepted by the lambda but no longer
+        // forked to AllVisits since 2026-05-24. The anon-traffic
+        // impression count now flows through Vercel Analytics via the
+        // va('event') call below.
         visitor_id: visitorId,
         referrer: pageReferrer,
         utm_source: utmSource,
@@ -2376,6 +2379,23 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       }),
       keepalive: true,
     }).catch(() => {});
+  } catch (e) { /* noop */ }
+
+  // ---------- Vercel Analytics · hero variant impression ----------
+  // Fires one custom event per page load so the dashboard shows
+  // visitors-per-variant aggregated across ALL traffic sources
+  // (ManyChat funnel + Linktree-in-bio + Facebook ads + organic +
+  // direct). Aggregate-only · no stable cross-session identifier, no
+  // PII, no extra payload to a Google Sheet. The va() shim is in
+  // <head> · this call queues until /_vercel/insights/script.js loads.
+  try {
+    if (typeof window.va === "function") {
+      window.va("event", {
+        name: "hero_seen",
+        hero_variant: window.HB_HERO_VARIANT || "",
+        source_page: "map9",
+      });
+    }
   } catch (e) { /* noop */ }
 
   // ---------- v12 split test · engagement + session-end events ----------

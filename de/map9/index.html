@@ -1378,14 +1378,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   /* === /de/map9/ · A/B split test 4 hero IMAGES only, 2026-05-24.
      Mirror of /map9/'s EN test, German copy is constant on the page.
      hero2 + hero3 don't have DE photo variants on disk yet · they
-     reuse the EN images. Sticky variant via localStorage
-     'hb:hero_variant' (shared key with EN so a visitor who lands
-     DE-first then re-routes to EN keeps the same bucket). */
+     reuse the EN images. hero5 is language-neutral (no text in
+     image). Sticky variant via localStorage 'hb:hero_variant'
+     (shared key with EN so a visitor who lands DE-first then
+     re-routes to EN keeps the same bucket). hero5 added 2026-05-24. */
   window.HB_HERO_VARIANTS = {
     '01': { img: '/map3/img/v14/hero/hero1_DE.jpg' },
     '02': { img: '/map3/img/v14/hero/hero2.jpg' },
     '03': { img: '/map3/img/v14/hero/hero3.jpg' },
     '04': { img: '/map3/img/v14/hero/hero4_DE.jpg' },
+    '05': { img: '/map3/img/v14/hero/hero5.jpg' },
   };
   (function () {
     var keys = Object.keys(window.HB_HERO_VARIANTS);
@@ -2320,6 +2322,22 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       }),
       keepalive: true,
     }).catch(() => {});
+  } catch (e) { /* noop */ }
+
+  // ---------- Vercel Analytics · hero variant impression ----------
+  // Custom event for variant-impression count across ALL traffic
+  // sources (ManyChat funnel + Linktree + ads + organic + direct).
+  // Aggregate-only, no PII, no extra Sheets fetch. See /map9/index.html
+  // for the rationale. The va() shim is in <head> · this call queues
+  // until /_vercel/insights/script.js loads.
+  try {
+    if (typeof window.va === "function") {
+      window.va("event", {
+        name: "hero_seen",
+        hero_variant: window.HB_HERO_VARIANT || "",
+        source_page: "de_map9",
+      });
+    }
   } catch (e) { /* noop */ }
 
   // ---------- v12 split test · engagement + session-end events ----------

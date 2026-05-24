@@ -148,39 +148,17 @@ export default async function handler(req, res) {
     );
   }
 
-  // AllVisits-side log · fires for EVERY visit regardless of
-  // subscriber_id. Routes to a separate Apps Script action (log_visit)
-  // that appends to the dedicated "Hikebeast All Visits" spreadsheet.
-  // Added 2026-05-24 so Linktree-in-bio + Facebook-ads + direct
-  // traffic finally show up alongside ManyChat-funnel visitors.
-  if (url) {
-    const allEvent = safeEvent || "landed";
-    tasks.push(
-      fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "log_visit",
-          secret: process.env.SHEETS_SECRET,
-          event_type: allEvent,
-          source_page: safeSourcePage,
-          visitor_id: safeVisitorId,
-          hero_variant: safeHeroVariant,
-          subscriber_id: subscriber_id || "",
-          referrer: safeReferrer,
-          utm_source: safeUtmSource,
-          utm_medium: safeUtmMedium,
-          utm_campaign: safeUtmCampaign,
-          browser_language: safeBrowserLang,
-          device_type: safeDeviceType,
-          is_ig_webview: safeIsIgWebview,
-          ip_country: ipCountry,
-          time_on_site_ms: safeActiveMs || undefined,
-        }),
-        signal: AbortSignal.timeout(15000),
-      }).catch((err) => console.error("AllVisits log failed:", err)),
-    );
-  }
+  // AllVisits sheet · REMOVED 2026-05-24. The page-side va('event',
+  // {name: 'hero_seen', ...}) call hits Vercel Analytics directly with
+  // hero_variant + source_page as custom-event properties. Aggregate
+  // counts (variant impressions, buy rate per variant via UTM funnel)
+  // are computed in the Vercel dashboard. Removed the second Apps
+  // Script fetch because (a) it doubled lambda outbound calls for zero
+  // user-visible benefit, (b) the va() approach is GDPR-aggregate by
+  // design with no stable cross-session identifier, and (c) Vercel
+  // Analytics is already wired on every /map9/ page header. visitor_id
+  // and referrer are still accepted in the request body for the
+  // Signups-side path's hasAnyId gate, but the AllVisits fork is gone.
 
   // Meta CAPI InitiateCheckout fire · only when the browser sends the
   // beacon after a real user interaction with #checkout. session_id is

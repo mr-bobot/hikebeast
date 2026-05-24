@@ -1389,12 +1389,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
      hero image varies per variant · subhead is constant on the page
      (with the "Swiss photographer" framing baked into the static
      copy, not the test). Sticky per-visitor · first roll wins via
-     localStorage 'hb:hero_variant'. ?hv=01..04 force-overrides for QA. */
+     localStorage 'hb:hero_variant'. ?hv=01..05 force-overrides for QA.
+     hero5 added 2026-05-24 · language-neutral, no text in image.
+     hero1/hero4 use IT localizations (text overlay translated). */
   window.HB_HERO_VARIANTS = {
-    '01': { img: '/map3/img/v14/hero/hero1.jpg' },
+    '01': { img: '/map3/img/v14/hero/hero1_IT.jpg' },
     '02': { img: '/map3/img/v14/hero/hero2.jpg' },
     '03': { img: '/map3/img/v14/hero/hero3.jpg' },
-    '04': { img: '/map3/img/v14/hero/hero4.jpg' },
+    '04': { img: '/map3/img/v14/hero/hero4_IT.jpg' },
+    '05': { img: '/map3/img/v14/hero/hero5.jpg' },
   };
   (function () {
     var keys = Object.keys(window.HB_HERO_VARIANTS);
@@ -1451,9 +1454,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
                during initial parse so the chosen variant is the only
                image the browser ever fetches for this slot. -->
           <script>document.write('<div class="slide"><img src="' + ((window.HB_HERO_VARIANTS[window.HB_HERO_VARIANT] || window.HB_HERO_VARIANTS['01']).img) + '" alt="Swiss Gems Guide · L\'estate indimenticabile" loading="eager" fetchpriority="high" decoding="async" /></div>');</script>
-          <div class="slide"><img src="/map3/img/v14/mockup.jpg" alt="Spot che i turisti non trovano" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/v14/mockup_IT.jpg" alt="Spot che i turisti non trovano" loading="lazy" decoding="async" /></div>
           <div class="slide"><img src="/map3/img/v14/grid.jpg" alt="Una griglia con diciotto spot segreti della Svizzera dalla guida" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="/map3/img/v14/map.jpg" alt="141 spot, una mappa" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/v14/map_IT.jpg" alt="141 spot, una mappa" loading="lazy" decoding="async" /></div>
         </div>
         <!-- Hover-only nav arrows (desktop only · hidden on touch devices
              where the carousel relies on swipe). Click handlers wired in
@@ -2317,9 +2320,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         page: "map9",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
-        // visitor_id + referrer · drive the AllVisits row even when
-        // there's no subscriber_id / token (anonymous Linktree, ads,
-        // direct). The lambda forks to log_visit on every call.
+        // visitor_id + referrer · accepted by the lambda but no longer
+        // forked to AllVisits since 2026-05-24. The anon-traffic
+        // impression count now flows through Vercel Analytics via the
+        // va('event') call below.
         visitor_id: visitorId,
         referrer: pageReferrer,
         utm_source: utmSource,
@@ -2338,6 +2342,20 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       }),
       keepalive: true,
     }).catch(() => {});
+  } catch (e) { /* noop */ }
+
+  // ---------- Vercel Analytics · hero variant impression ----------
+  // Custom event for variant-impression count across ALL traffic
+  // sources. Aggregate-only, no PII, no extra Sheets fetch. See
+  // /map9/index.html for the rationale.
+  try {
+    if (typeof window.va === "function") {
+      window.va("event", {
+        name: "hero_seen",
+        hero_variant: window.HB_HERO_VARIANT || "",
+        source_page: "it_map9",
+      });
+    }
   } catch (e) { /* noop */ }
 
   // ---------- v12 split test · engagement + session-end events ----------
