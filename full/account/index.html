@@ -227,6 +227,26 @@
   .aff-link-sub   { font-size: 12px; color: var(--muted); }
   .aff-link-chev  { color: var(--muted); flex-shrink: 0; }
 
+  /* Guide section · stacks the PDF + Google Maps rows with a tiny gap
+     so they read as two distinct affordances, not one merged block. */
+  .guide-rows { display: flex; flex-direction: column; gap: 8px; }
+  /* PDF-fallback pill · shown when localStorage doesn't carry a fresh
+     download URL (returning user on a new device etc.). Same surface as
+     the .msg pill but neutral grey rather than red/green. */
+  .guide-fallback {
+    margin: 0;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  :root[data-theme="dark"] .guide-fallback {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
   /* Loading / signed-out states inside the card. */
   .state {
     padding: 32px 28px;
@@ -318,6 +338,61 @@
           </div>
           <p class="msg" id="emailMsg" hidden></p>
         </form>
+      </div>
+
+      <!-- Your guide ─────────────────────────────────────────────────
+           Two tappable rows: PDF download and Google Maps placelist.
+           The PDF URL is stashed in localStorage[hb:guide_pdf_url:v1]
+           by /map/success/ at signup time. For returning users without
+           the stash (e.g. signed in from a different device, cleared
+           localStorage, etc.), we show a small fallback pill pointing
+           them at the receipt email. The Google Maps row is
+           unconditional — the placelist URL is public-safe (it lives
+           inline in the email and the old success page already). -->
+      <div class="sec" id="guideSection">
+        <p class="sec-label">Your guide</p>
+        <div class="guide-rows">
+          <a class="aff-link" id="guidePdfLink" href="#" target="_blank" rel="noopener" hidden>
+            <span class="aff-link-icon">
+              <!-- Document with down-arrow · same stroke weight as the
+                   other section icons so they read as a set. -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="12" y1="18" x2="12" y2="12"/>
+                <polyline points="9 15 12 12 15 15"/>
+              </svg>
+            </span>
+            <span class="aff-link-body">
+              <span class="aff-link-title">Download the PDF</span>
+              <span class="aff-link-sub">100+ spots · offline-ready</span>
+            </span>
+            <span class="aff-link-chev">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </a>
+          <p class="guide-fallback" id="guidePdfFallback" hidden>
+            The PDF download link is in your receipt email. If you can't find it, reply to that email and Leon will resend.
+          </p>
+          <a class="aff-link" href="https://www.google.com/maps/placelists/list/4A_3J2iHSzu6zl1rtFMQPQ" target="_blank" rel="noopener">
+            <span class="aff-link-icon" style="background: rgba(234, 67, 53, 0.12); color: #ea4335;">
+              <!-- Google Maps pin · solid red drop with white inner
+                   circle. Inline because we want the brand colour, not
+                   the section's --accent. -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2C7.58 2 4 5.58 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.42-3.58-8-8-8z" fill="#EA4335"/>
+                <circle cx="12" cy="10" r="3" fill="#ffffff"/>
+              </svg>
+            </span>
+            <span class="aff-link-body">
+              <span class="aff-link-title">Open list in Google Maps</span>
+              <span class="aff-link-sub">All pins ready for your Maps app</span>
+            </span>
+            <span class="aff-link-chev">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </a>
+        </div>
       </div>
 
       <!-- Affiliate dashboard link, only for users with isAffiliate=true. -->
@@ -425,6 +500,26 @@
         if (u.isAffiliate) {
           const teaser = document.getElementById('affiliateTeaser');
           if (teaser) teaser.hidden = false;
+        }
+        // Your guide section · the PDF link is stashed in localStorage
+        // by /map/success/ at signup time (so we don't need a Convex
+        // field for the per-customer download token, which would need
+        // a backfill for the existing ~168 buyers). If the stash is
+        // missing OR the URL doesn't look like a real URL, we show the
+        // fallback pill pointing the user at their receipt email.
+        try {
+          const stashedPdf = localStorage.getItem('hb:guide_pdf_url:v1');
+          const pdfLink = document.getElementById('guidePdfLink');
+          const pdfFallback = document.getElementById('guidePdfFallback');
+          if (stashedPdf && /^https?:\/\//.test(stashedPdf)) {
+            pdfLink.href = stashedPdf;
+            pdfLink.hidden = false;
+          } else {
+            pdfFallback.hidden = false;
+          }
+        } catch (e) {
+          const pdfFallback = document.getElementById('guidePdfFallback');
+          if (pdfFallback) pdfFallback.hidden = false;
         }
         accLoading.hidden = true;
         accContent.hidden = false;
