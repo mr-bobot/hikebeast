@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
+<title>More · Gems of Switzerland · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../images/favicon.jpg" />
+<link rel="manifest" href="../../manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Hikebeast" />
+<meta name="mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" href="../preview.css" />
+<style>
+  /* More · holds utilities that don't fit the main /full/ nav (PDF
+     download, shared Google Maps list, future preview-mode toggle and
+     other settings). Modelled after /full/account/ + /full/affiliate/ ·
+     same login-style centred card on the blue-blob gradient. The page
+     started as a "Your guide" section inside /full/account/ but buyers
+     weren't finding it there, so 2026-05-24 promoted it to its own
+     menu item · see the in-conversation feedback that triggered this. */
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--fg);
+    position: relative;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -120px;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(460px 420px at 18% 22%, rgba(0, 113, 227, 0.45) 0%, transparent 70%),
+      radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.38) 0%, transparent 72%),
+      radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.40) 0%, transparent 70%),
+      radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.55) 0%, transparent 75%);
+    filter: blur(70px) saturate(1.1);
+    opacity: 0.9;
+  }
+
+  .more-page {
+    position: relative; z-index: 1;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 20px;
+  }
+  .card-wrap { margin: auto; width: 100%; max-width: 460px; }
+
+  .back {
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--fg);
+    font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    margin-bottom: 14px;
+    transition: border-color 150ms ease, transform 100ms ease;
+  }
+  .back:hover { border-color: var(--hairline-strong); }
+  .back:active { transform: scale(0.98); }
+
+  .legal-foot {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .legal-foot a { color: var(--muted); text-decoration: none; }
+  .legal-foot a:hover { color: var(--fg); }
+  .legal-foot .sep { margin: 0 6px; }
+  .legal-foot .copy { display: block; }
+
+  /* Single glass card · same recipe as /full/affiliate, /full/account. */
+  .card {
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    border-radius: 24px;
+    border: 1px solid var(--hairline);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+    padding: 8px 24px 24px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0 12px;
+  }
+  .brand img { width: 32px; height: 32px; border-radius: 999px; flex-shrink: 0; }
+  .brand b { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+
+  /* Sections · same hairline-separated layout as /full/account/. */
+  .sec {
+    padding: 16px 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .sec.first { border-top: 0; padding-top: 0; }
+  .sec-label {
+    margin: 0 0 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Row link · whole-row tappable card. Same shape as /full/account/'s
+     affiliate teaser so the visual language is consistent. */
+  .row-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--fg);
+    padding: 4px 0;
+  }
+  .row-link + .row-link { margin-top: 8px; }
+  .row-link:hover .row-link-title { text-decoration: underline; }
+  .row-link-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .row-link-body { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .row-link-title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .row-link-sub   { font-size: 12px; color: var(--muted); }
+  .row-link-chev  { color: var(--muted); flex-shrink: 0; }
+
+  /* Dark-mode polish · the section dividers + icon-tile borders pick
+     up the dark hairline tokens automatically via var(--hairline);
+     only the icon-tile background needs an alpha bump because the
+     paper token gets close to the page bg. */
+  :root[data-theme="dark"] .row-link-icon {
+    background: rgba(255, 255, 255, 0.04);
+  }
+</style>
+</head>
+<body>
+
+<main class="more-page">
+ <div class="card-wrap">
+  <a class="back" href="../">← Back</a>
+  <div class="card">
+    <div class="brand">
+      <img src="/images/avatar.jpg" alt="" />
+      <b>Hikebeast · More</b>
+    </div>
+
+    <!-- Your guide ────────────────────────────────────────────────
+         Two tappable rows: PDF (shared Google Drive folder · same URL
+         that's in the receipt email + the /map/success/ session
+         response) and Google Maps placelist (122 pins, public-safe).
+         Both links are hardcoded (not gated by Convex sessionToken) ·
+         the whole /full/* tree sits behind the hb_full_auth cookie
+         middleware, so anyone reading view-source here has already
+         paid. -->
+    <div class="sec first">
+      <p class="sec-label">Your guide</p>
+
+      <a class="row-link"
+         href="https://drive.google.com/drive/folders/182_BdFNwF9jptpp9ax7G8sHNYb01nCa0?usp=share_link"
+         target="_blank" rel="noopener">
+        <span class="row-link-icon" aria-hidden="true">
+          <!-- Official Google Drive multi-colour mark (same SVG paths
+               as the receipt email + /map/success/ buttons used). -->
+          <svg width="22" height="22" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+            <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3L27.5 53H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+            <path d="M43.65 25 29.9 1.2c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44C.4 49.9 0 51.45 0 53h27.5z" fill="#00ac47"/>
+            <path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5H59.8L65.65 65.3z" fill="#ea4335"/>
+            <path d="M43.65 25 57.4 1.2C56.05.4 54.5 0 52.9 0H34.4c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+            <path d="M59.8 53H27.5L13.75 76.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+            <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3L43.65 25l16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+          </svg>
+        </span>
+        <span class="row-link-body">
+          <span class="row-link-title">Download the PDF</span>
+          <span class="row-link-sub">Opens the guide in Google Drive</span>
+        </span>
+        <span class="row-link-chev">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </a>
+
+      <a class="row-link"
+         href="https://www.google.com/maps/placelists/list/4A_3J2iHSzu6zl1rtFMQPQ"
+         target="_blank" rel="noopener">
+        <span class="row-link-icon" aria-hidden="true">
+          <!-- Google Maps brand pin · same red drop + white inner
+               circle as the official Maps app icon. The double-curve
+               shadow gives it the 3D depth that distinguishes it from
+               a generic pin glyph. -->
+          <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C7.58 2 4 5.58 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.42-3.58-8-8-8z" fill="#EA4335"/>
+            <path d="M12 2c-1.32 0-2.55.32-3.65.9C10.07 3.86 11 5.81 11 8c0 3.31-2.5 5.5-5.5 8.5C7 19.5 12 22 12 22s8-6.5 8-12c0-4.42-3.58-8-8-8z" fill="#D33B2C"/>
+            <circle cx="12" cy="10" r="3" fill="#ffffff"/>
+          </svg>
+        </span>
+        <span class="row-link-body">
+          <span class="row-link-title">Open list in Google Maps</span>
+          <span class="row-link-sub">All 122 pins live in your Maps app</span>
+        </span>
+        <span class="row-link-chev">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <!-- Updates ──────────────────────────────────────────────────
+         Single row to /full/whats-new/ · the hand-maintained release
+         log (originally PR #63 on the release-log branch, which sat
+         open for a week without landing because nothing in the main
+         nav surfaced it). The whats-new page itself lives in this
+         worktree on /full/whats-new/index.html · brought in from
+         release-log on 2026-05-24. -->
+    <div class="sec">
+      <p class="sec-label">Updates</p>
+      <a class="row-link" href="../whats-new/">
+        <span class="row-link-icon" aria-hidden="true">
+          <!-- Spark / sparkles icon · the canonical "new / what's new"
+               affordance across Apple HIG and Material. Blue accent
+               to flag novelty without competing with the brand-red
+               Maps pin above. -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>
+            <circle cx="12" cy="12" r="3.2" fill="#0071e3" stroke="none"/>
+          </svg>
+        </span>
+        <span class="row-link-body">
+          <span class="row-link-title">What's new</span>
+          <span class="row-link-sub">Recent shipped + what's being worked on</span>
+        </span>
+        <span class="row-link-chev">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+  <footer class="legal-foot">
+    <a href="../../terms.html">Terms</a><span class="sep">·</span><a href="../../imprint.html">Imprint</a><span class="sep">·</span><a href="../../privacy.html">Privacy</a>
+    <span class="copy">© Hikebeast</span>
+  </footer>
+ </div>
+</main>
+
+</body>
+</html>

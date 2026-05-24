@@ -295,7 +295,7 @@
       <div class="sec first">
         <p class="sec-label">English</p>
         <div class="share-controls">
-          <span class="share-url" id="linkEn">hikebeast.ch/map?r=…</span>
+          <span class="share-url" id="linkEn">hikebeast.ch/map8?r=…</span>
           <button type="button" class="btn-copy" data-target="linkEn">Copy</button>
         </div>
       </div>
@@ -303,7 +303,7 @@
       <div class="sec">
         <p class="sec-label">Deutsch</p>
         <div class="share-controls">
-          <span class="share-url" id="linkDe">hikebeast.ch/de/map?r=…</span>
+          <span class="share-url" id="linkDe">hikebeast.ch/de/map8?r=…</span>
           <button type="button" class="btn-copy" data-target="linkDe">Copy</button>
         </div>
       </div>
@@ -410,10 +410,16 @@
       return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
 
+    // Default affiliate landing · /map8/ since 2026-05-24. Was /map/ when
+    // the affiliate dashboard launched; switched to map8 because map8 is
+    // the current best-performing variant and the one Leon's promoting in
+    // the latest IG creatives. /map/ still serves the same product page +
+    // checkout flow, so old links keep working — this only changes what
+    // affiliates see/copy in the dashboard.
     function paintShareLinks(username) {
       const enc = encodeURIComponent(username);
-      const enUrl = 'https://hikebeast.ch/map?r=' + enc;
-      const deUrl = 'https://hikebeast.ch/de/map?r=' + enc;
+      const enUrl = 'https://hikebeast.ch/map8?r=' + enc;
+      const deUrl = 'https://hikebeast.ch/de/map8?r=' + enc;
       elLinkEn.textContent = enUrl; elLinkEn.dataset.url = enUrl;
       elLinkDe.textContent = deUrl; elLinkDe.dataset.url = deUrl;
     }
