@@ -345,6 +345,16 @@
     box-shadow: var(--shadow-soft) !important;
   }
 
+  /* Popup body in dark mode · Leaflet's default
+     .leaflet-popup-content-wrapper background stays white in dark,
+     and .spot-popup h3 uses var(--fg) which flips to near-white ·
+     net result was white title on white card. Flip the wrapper to
+     --paper so it picks up the dark surface color, and bump the
+     box-shadow on dark for separation against the dark page. */
+  :root[data-theme="dark"] .leaflet-popup-content-wrapper {
+    background: var(--paper);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.30);
+  }
   /* Popup "Read" CTA: var(--fg) becomes near-white in dark, white
      text on white is invisible. Deep navy keeps the heavy-button feel. */
   :root[data-theme="dark"] .spot-popup .read { background: #003162; color: #fff; }
