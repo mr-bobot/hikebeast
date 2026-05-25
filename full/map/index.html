@@ -469,6 +469,25 @@
     new ResizeObserver(() => map.invalidateSize()).observe(shellEl);
   }
 
+  // Double-right-click → zoom out. Mirrors Leaflet's default double-left-
+  // click-to-zoom-in, gives mouse users a one-handed way to zoom out
+  // without reaching for the +/- buttons or scroll wheel. Two right-clicks
+  // within 400 ms trigger the zoom; the first one is a no-op (Leaflet
+  // suppresses the browser context menu when no menu is wired). On touch
+  // devices contextmenu fires on long-press and the 400ms window won't
+  // realistically trigger, so the gesture stays mouse-only without an
+  // explicit isMobile guard.
+  let __lastRightClickTs = 0;
+  map.on('contextmenu', () => {
+    const now = Date.now();
+    if (now - __lastRightClickTs < 400) {
+      map.zoomOut();
+      __lastRightClickTs = 0;
+    } else {
+      __lastRightClickTs = now;
+    }
+  });
+
   // Sourced through HB.spots. Sidecar-seeded synchronously so the initial
   // forEach has data even before Convex's WebSocket connects. The first
   // Convex push then triggers a one-shot rebuild so the new spots (and
