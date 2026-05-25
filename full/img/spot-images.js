@@ -1781,16 +1781,6 @@ window.HB_SPOT_IMAGES = {
       "credit": "zimydakid"
     }
   ],
-  "ticino#lavertezzo": [
-    {
-      "src": "derivatives/lavertezzo_p0/w1800.webp",
-      "credit": "@oliwear.j"
-    },
-    {
-      "src": "derivatives/lavertezzo_p1/w1800.webp",
-      "credit": "zimydakid"
-    }
-  ],
   "ticino#ponte_brolla": [
     {
       "src": "derivatives/ponte_brolla_p0/w1800.webp",
@@ -2167,6 +2157,16 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/engadin_autumn_p3/w1800.webp",
       "credit": "@leon.helg"
+    }
+  ],
+  "ticino#lavertezzo": [
+    {
+      "src": "derivatives/lavertezzo_p0/w1800.webp",
+      "credit": "@oliwear.j"
+    },
+    {
+      "src": "derivatives/lavertezzo_p1/w1800.webp",
+      "credit": "zimydakid"
     }
   ]
 };
