@@ -28,10 +28,12 @@
 <meta name="twitter:description" content="129 versteckte Schweizer Spots, gesammelt von Leon Helg." />
 <meta name="twitter:image" content="https://hikebeast.ch/themap/img/og.jpg" />
 
-<!-- Inter for the editorial title + button. Bold weights only. -->
+<!-- Inter for the editorial title + button. Bold weights only.
+     Non-blocking load · see index.html for rationale. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" /></noscript>
 
 <!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
