@@ -109,7 +109,26 @@
   // chapter / browse / swipe content (safe default · keeps the
   // pre-curation state unambiguously "nothing to record yet").
   const PREVIEW_ALLOWED_SPOTS = new Set([
-    // 21 slugs go here · paste below (e.g. 'aletsch_glacier', ...).
+    'tannhorn',
+    'augstmatthorn',
+    'fulberg',
+    'les_cheserys',
+    'viewpoint_beatenberg',
+    'riffelsee',
+    'schafler',
+    'falensee',
+    'saxer_lucke',
+    'bachalpsee',
+    'oeschinensee',
+    'seealpsee',
+    'hardergrat_trail',
+    'joriseen',
+    'limmernsee',
+    'triftbrucke',
+    'morteratsch_glacier',
+    'gelmersee',
+    'pic_de_jallouvre',
+    'batoni_wasserfallarena',
   ]);
   function previewSpotAllowed(slug) {
     if (!PREVIEW_MODE) return true;
