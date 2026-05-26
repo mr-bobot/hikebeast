@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<title>You're in · Hikebeast</title>
+<title>Willkommen · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
 
@@ -87,8 +87,10 @@ fbq('track', 'PageView');
   }
 
   /* === Action card · the celebration + the action.
-     Tick on top, heading + subhead, two buttons. Floats up over the
-     hero so it reads as the main content, not a footer. */
+     Tick on top, heading + subhead, the onboarding card (which contains
+     the only CTA on the page since the 2026-05-24 webapp-mandatory
+     refactor). Floats up over the hero so it reads as the main
+     content, not a footer. */
   .action {
     margin: -36px 16px 0;
     background: #ffffff;
@@ -142,34 +144,35 @@ fbq('track', 'PageView');
     justify-content: center;
     gap: 8px;
     height: 52px;
+    /* border:0 + appearance:none kills the default <button> chrome
+       (UA-default outline / shadow) that was bleeding through as a
+       dark hairline around the primary submit. Spotted 2026-05-24
+       on the local preview before launch. */
+    border: 0;
+    appearance: none;
+    -webkit-appearance: none;
     border-radius: var(--radius-btn);
+    font-family: inherit;
     font-size: 16px;
     font-weight: 600;
     letter-spacing: -0.01em;
     text-decoration: none;
+    cursor: pointer;
     transition: transform 100ms ease, opacity 150ms ease;
     -webkit-tap-highlight-color: transparent;
   }
   .btn:active { transform: scale(0.98); }
+  .btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
   .btn-primary {
     background: var(--accent);
     color: #ffffff;
   }
-  .btn-secondary {
-    background: var(--surface);
-    color: var(--fg);
-  }
-  .btn[aria-disabled="true"] {
-    opacity: 0.55;
-    pointer-events: none;
-  }
-  .btn-icon {
-    width: 18px; height: 18px;
-    flex-shrink: 0;
-  }
 
-  /* Tiny status row below the buttons. Holds the loading state while we
-     fetch the token, and the order id once we have it. */
+  /* Tiny status row below the form. Holds the receipt summary once we
+     have it (set by JS from the session GET response). */
   .status {
     margin: 4px 0 0;
     font-size: 12px;
@@ -228,106 +231,6 @@ fbq('track', 'PageView');
   }
   .note-body a:hover { text-decoration: underline; }
 
-  /* === Next steps · concrete, tactical. Reduces overwhelm + gives
-     a sense of momentum right after purchase. */
-  .next {
-    margin: 22px 22px 0;
-  }
-  .next h2 {
-    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin: 0 0 12px;
-  }
-  .next ol {
-    margin: 0;
-    padding-left: 0;
-    list-style: none;
-    counter-reset: step;
-  }
-  .next ol li {
-    counter-increment: step;
-    padding: 14px 0 14px 40px;
-    border-top: 1px solid var(--hairline);
-    position: relative;
-    font-size: 15px;
-    line-height: 1.5;
-  }
-  /* No bottom border on the last item -- the footer's top border picks
-     up the visual cap. Otherwise we'd render two parallel lines. */
-  .next ol li::before {
-    content: counter(step);
-    position: absolute;
-    left: 0; top: 14px;
-    width: 26px; height: 26px;
-    border-radius: 999px;
-    background: var(--surface);
-    display: grid;
-    place-items: center;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--fg);
-  }
-
-  /* === Maps callout · the unsung product feature. The buyer also
-     paid for "all 122 pins on Google Maps as one shared list", so we
-     make it a visible action between the personal note and the
-     tactical next-steps. Card is full-width, soft surface bg, with
-     the multi-colour Drive-style maps mark to read distinct. */
-  .maps {
-    margin: 22px 22px 0;
-    padding: 18px 18px 18px 18px;
-    background: var(--surface);
-    border-radius: var(--radius-card);
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-decoration: none;
-    color: var(--fg);
-    transition: transform 100ms ease, background 150ms ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .maps:active { transform: scale(0.99); }
-  .maps:hover { background: #ececef; }
-  .maps-icon {
-    width: 44px; height: 44px;
-    flex-shrink: 0;
-    border-radius: 12px;
-    background: #ffffff;
-    display: grid;
-    place-items: center;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
-  }
-  /* Standard Google-Maps style pin in the brand red. */
-  .maps-icon svg {
-    width: 26px; height: 26px;
-    display: block;
-  }
-  .maps-body {
-    flex: 1;
-    min-width: 0;
-  }
-  .maps-body strong {
-    display: block;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    color: var(--fg);
-    line-height: 1.25;
-  }
-  .maps-body span {
-    display: block;
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.4;
-    margin-top: 2px;
-  }
-  .maps-arrow {
-    flex-shrink: 0;
-    color: var(--muted);
-  }
-
   /* === Footer · receipt details, IG follow, imprint. */
   .foot {
     margin: 32px 22px 0;
@@ -351,81 +254,77 @@ fbq('track', 'PageView');
     word-break: break-all;
   }
 
-  /* === Onboarding · primary CTA between celebration and Download.
-     Collapsed-by-default <details> so the success page still feels like
-     a celebration, not a wall of inputs. The summary IS the primary
-     button; tapping it expands the inline form. */
+  /* === Email-recovery fallback · shown only when no session_id in
+     URL or localStorage (rare; localStorage stash catches refresh +
+     bookmark cases). Same width as the onboard card. Primary body
+     text directs the buyer back to their receipt email · brand new
+     buyers have no password yet so "Sign in" can't be the primary
+     CTA. The Sign-in link below is small secondary text for the
+     genuine returning-buyer case (already has account, lost cookie). */
+  .email-fallback {
+    width: 100%;
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 16px 18px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .email-fallback[hidden] { display: none !important; }
+  .email-fallback-body {
+    margin: 0;
+    font-size: 14px;
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  .email-fallback-signin {
+    margin: 0;
+    padding-top: 8px;
+    border-top: 1px solid var(--hairline);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .email-fallback-signin a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .email-fallback-signin a:hover { text-decoration: underline; }
+
+  /* === Onboarding · the only action on this page since 2026-05-24.
+     Expanded-by-default since the collapsed <details> trigger was
+     hiding the form and buyers were missing the webapp entirely.
+     Surface-grey container with a small header pill on top + the form
+     inline below. */
   .onboard {
     width: 100%;
     margin: 0;
+    background: var(--surface);
+    border-radius: 14px;
   }
   .onboard[hidden] { display: none !important; }
-  .onboard-trigger {
-    list-style: none;
-    cursor: pointer;
-  }
-  .onboard-trigger::-webkit-details-marker { display: none; }
-  .onboard-trigger::marker { display: none; }
-  .onboard-trigger .onboard-icon {
-    width: 18px; height: 18px;
-    flex-shrink: 0;
-  }
-  /* Form expanded: Trigger wird vom "Primär-CTA" zum "Card Header"
-     herabgestuft, damit er nicht mit dem "Konto erstellen"-Submit
-     konkurriert (der einzige Primär-Button im offenen Zustand). */
-  .onboard[open] .onboard-trigger {
-    background: var(--surface);
+  .onboard-header {
+    margin: 0;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--hairline);
     color: var(--fg);
-    height: 44px;
     font-size: 14px;
     font-weight: 600;
-    border-radius: 14px 14px 0 0;
-  }
-  .onboard[open] .onboard-trigger:active { transform: none; }
-  .onboard[open] .onboard-icon { opacity: 0.5; }
-
-  .onboard-beta {
-    display: inline-flex;
-    align-items: center;
-    height: 20px;
-    padding: 0 8px;
-    margin-left: 8px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
-    color: #ffffff;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .onboard[open] .onboard-beta {
-    background: rgba(0, 0, 0, 0.06);
-    color: var(--muted);
+    letter-spacing: -0.01em;
+    text-align: left;
   }
 
-  .action-divider {
-    width: 100%;
-    height: 1px;
-    background: var(--hairline);
-    margin: 4px 0 0;
-    border: 0;
-  }
   .onboard-form {
     background: var(--surface);
     border-radius: 0 0 14px 14px;
-    padding: 18px 18px 16px;
+    padding: 16px 18px 18px;
     margin: 0;
     text-align: left;
     display: flex;
     flex-direction: column;
     gap: 12px;
-  }
-  .onboard-pitch {
-    margin: 0 0 4px;
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.5;
-    text-align: left;
   }
   .onboard-field {
     display: flex;
@@ -438,6 +337,15 @@ fbq('track', 'PageView');
     font-weight: 500;
     letter-spacing: 0;
   }
+  /* "(optional)" tag · sits inline next to the field label so it's
+     immediately clear which field is skippable. Same grey + smaller
+     weight as the rest of the label so it reads as a tag, not a
+     parenthetical sentence. */
+  .onboard-optional {
+    font-weight: 400;
+    color: var(--muted);
+    margin-left: 4px;
+  }
   .onboard-input {
     height: 44px;
     padding: 0 14px;
@@ -445,7 +353,7 @@ fbq('track', 'PageView');
     background: #ffffff;
     border-radius: 12px;
     font: inherit;
-    font-size: 16px;
+    font-size: 16px;       /* 16px stops iOS Safari zoom-on-focus */
     letter-spacing: -0.01em;
     color: var(--fg);
     width: 100%;
@@ -468,6 +376,33 @@ fbq('track', 'PageView');
   }
   .onboard-submit {
     margin-top: 4px;
+  }
+  /* Loading state during the ~5 s round-trip between form submit and
+     the /full/?login=<token> redirect. The browser disables the button
+     (in the submit handler below) and the text changes to "Creating
+     account…" · we add a left-to-right shimmer streak so the visual
+     feedback isn't just static text. */
+  .onboard-submit:disabled {
+    position: relative;
+    overflow: hidden;
+    cursor: progress;
+    opacity: 1;
+  }
+  .onboard-submit:disabled::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: onboard-shimmer 1.4s linear infinite;
+  }
+  @keyframes onboard-shimmer {
+    to { transform: translateX(100%); }
   }
   .onboard-error {
     margin: 0;
@@ -510,7 +445,7 @@ fbq('track', 'PageView');
       margin: -44px 28px 0;
       padding: 32px 28px 26px;
     }
-    .note, .maps, .next {
+    .note {
       margin-left: 28px;
       margin-right: 28px;
     }
@@ -529,42 +464,49 @@ fbq('track', 'PageView');
     <img src="/images/thanks-hero-transparent.png" alt="" />
   </section>
 
-  <!-- Action card · celebration (tick + heading) and the two ways to get
-       the PDF. Floats up over the hero, so the buyer reads it first.
-       1. Direct download (Vercel Blob, HMAC-token gated, fetched on load).
-       2. Open in Google Drive (Leon-maintained customer-view folder). -->
+  <!-- Action card · celebration (tick + heading) and the ONLY path
+       forward: account creation. Webapp-first since 2026-05-24 -- the
+       PDF download + Drive + Google Maps callout that used to live here
+       were splitting buyer attention three ways and many people never
+       discovered the app. The PDF link is stashed to localStorage at
+       form-submit-time and surfaced in /full/account/ post-signup, plus
+       it's in the receipt email as a permanent fallback. -->
   <section class="action">
     <div class="action-tick" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="5,12 10,17 19,7" />
       </svg>
     </div>
-    <h1 id="headline">Willkommen</h1>
-    <p class="action-sub" id="subheadline">Dein Guide ist jetzt bereit.</p>
+    <h1 id="headline">Willkommen.</h1>
+    <p class="action-sub" id="subheadline">Noch ein Schritt, bevor du den Guide öffnen kannst.</p>
 
-    <!-- Primärer Onboarding-CTA: erst sichtbar nachdem GET /api/checkout/session
-         bestätigt hat dass die Session bezahlt ist. Eingeklappt, ein Tap
-         expandiert das Formular. -->
-    <details class="onboard" id="onboardCard" hidden>
-      <summary class="btn btn-primary onboard-trigger">
-        <span>App öffnen</span>
-        <span class="onboard-beta" aria-label="beta">Beta</span>
-      </summary>
+    <!-- Onboarding card · revealed once the GET /api/checkout/session
+         response confirms the session is paid. Expanded-by-default
+         (previously collapsed-<details>) so the buyer can't miss that
+         account creation is the path · was the single biggest reason
+         buyers were ending up on the PDF without ever finding the app.
+         The form is inline so they never leave this page. -->
+    <div class="onboard" id="onboardCard" hidden>
+      <p class="onboard-header">
+        <span>Konto erstellen</span>
+      </p>
       <form id="onboardForm" class="onboard-form" novalidate>
-        <p class="onboard-pitch">
-          Speichere deine Spots, sieh wo du schon warst, und mach auf jedem Gerät weiter.
-        </p>
         <label class="onboard-field">
           <span class="onboard-label">Email</span>
           <input id="onboardEmail" class="onboard-input" type="email" disabled aria-readonly="true" autocomplete="email" />
-          <span class="onboard-hint">Lässt sich später in den Konto-Einstellungen ändern.</span>
         </label>
         <label class="onboard-field">
           <span class="onboard-label">Benutzername</span>
           <input id="onboardUsername" class="onboard-input" type="text"
                  autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false"
                  pattern="[a-z0-9._\-]{2,32}" required />
-          <span class="onboard-hint">Kleinbuchstaben, Zahlen, Punkte. Lässt sich später ändern.</span>
+        </label>
+        <label class="onboard-field">
+          <span class="onboard-label">Instagram Handle <span class="onboard-optional">(optional)</span></span>
+          <input id="onboardInstagram" class="onboard-input" type="text"
+                 autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                 maxlength="40" placeholder="@dein.handle" />
+          <span class="onboard-hint">Damit Leon deine Nachrichten sieht, falls du Hilfe brauchst.</span>
         </label>
         <label class="onboard-field">
           <span class="onboard-label">Passwort</span>
@@ -580,80 +522,52 @@ fbq('track', 'PageView');
           Schon ein Konto? <a href="/login/" id="onboardLogin">Anmelden &rarr;</a>
         </p>
       </form>
-    </details>
+    </div>
 
-    <hr class="action-divider" />
+    <!-- Email-recovery fallback · revealed only when there's no
+         session_id in the URL AND none in localStorage (we stash it on
+         every paid load below). For brand-new buyers this means they
+         truly need the receipt-email link to recover · we never tell
+         them to "sign in" because they don't have a password yet at
+         this point in the journey. The Sign-in link below is small
+         secondary text for the rare case of a returning buyer who's
+         already created an account and somehow lost their /full/
+         auth cookie. -->
+    <div class="email-fallback" id="emailFallback" hidden>
+      <p class="email-fallback-body">
+        Deine Bestätigungs-E-Mail hat einen "Swiss Gems App öffnen" Button. Tipp drauf, um mit dem richtigen Link zurückzukommen.
+      </p>
+      <p class="email-fallback-signin">
+        Schon ein Konto? <a href="/login/">Anmelden &rarr;</a>
+      </p>
+    </div>
 
-    <a id="downloadBtn" class="btn btn-secondary" href="#" aria-disabled="true" target="_blank" rel="noopener" download>
-      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 3v12" />
-        <path d="m7 10 5 5 5-5" />
-        <path d="M5 21h14" />
-      </svg>
-      <span id="downloadLabel">Download vorbereiten</span>
-    </a>
-    <a id="driveBtn" class="btn btn-secondary" href="#" target="_blank" rel="noopener" hidden>
-      <svg class="btn-icon" viewBox="0 0 87.3 78" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-        <!-- Official Google Drive multi-colour mark. -->
-        <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3L27.5 53H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
-        <path d="M43.65 25 29.9 1.2c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44C.4 49.9 0 51.45 0 53h27.5z" fill="#00ac47"/>
-        <path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5H59.8L65.65 65.3z" fill="#ea4335"/>
-        <path d="M43.65 25 57.4 1.2C56.05.4 54.5 0 52.9 0H34.4c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
-        <path d="M59.8 53H27.5L13.75 76.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
-        <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3L43.65 25l16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
-      </svg>
-      <span>In Google Drive öffnen</span>
-    </a>
-    <p class="status" id="status">Eine Kopie ist auf deiner email gelandet.</p>
+    <p class="status" id="status">Quittung auch an deine E-Mail gesendet.</p>
   </section>
 
   <!-- Personal note: face + signature. The connection moment. -->
   <section class="note">
     <div class="note-avatar"><img src="/images/avatar.jpg" alt="" /></div>
     <div class="note-body">
-      <p><strong>Hey, Leon hier.</strong></p>
-      <p>Die 100+ Spots in diesem Guide haben mich 5 Jahre gekostet. Jetzt gehören sie dir.</p>
-      <p>Wenn du eine Frage hast oder mir ein Foto von deinem Trip schicken willst: antworte einfach auf die Bestätigungsmail oder schreib mir auf Instagram <a href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener">@leon.helg</a>.</p>
+      <p><strong>Hey, hier ist Leon.</strong></p>
+      <p>Die 100+ Spots in diesem Guide waren 5 Jahre Arbeit. Jetzt gehören sie dir.</p>
+      <p>Wenn du eine Frage hast oder mir ein Foto von deinem Trip schicken willst: antworte einfach auf die Bestätigungs-E-Mail oder schreib mir auf Instagram <a href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener">@leon.helg</a>.</p>
     </div>
   </section>
 
-  <!-- Maps callout · highlights the "all 122 pins on Google Maps"
-       feature as a tappable card. Sits between the personal note and
-       the tactical next-steps so it doesn't get buried in a list. -->
-  <a class="maps" href="https://www.google.com/maps/placelists/list/4A_3J2iHSzu6zl1rtFMQPQ" target="_blank" rel="noopener">
-    <div class="maps-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Google Maps pin: red drop with white inner circle. -->
-        <path d="M12 2C7.58 2 4 5.58 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.42-3.58-8-8-8z" fill="#EA4335" />
-        <circle cx="12" cy="10" r="3" fill="#ffffff" />
-      </svg>
-    </div>
-    <div class="maps-body">
-      <strong>Liste auf Google Maps öffnen</strong>
-      <span>Alle 122 Standorte direkt in deiner Maps App, auch offline.</span>
-    </div>
-    <svg class="maps-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <polyline points="9,18 15,12 9,6" />
-    </svg>
-  </a>
-
-  <!-- Tactical next steps. Tells them what to do, kills overwhelm. -->
-  <section class="next">
-    <h2>So gehts weiter</h2>
-    <ol>
-      <li>Speichere das PDF auf deinem Handy.</li>
-      <li>Speichere die Google Maps Liste, damit alle 122 Standorte in deiner Maps App sind.</li>
-      <li>Such dir eine Region aus, die du noch nicht kennst.</li>
-      <li>Viel Spass!</li>
-    </ol>
-  </section>
+  <!-- Maps callout, "What's next" steps, and Drive/PDF buttons used to
+       live here. All moved into the webapp (/full/account/) as of
+       2026-05-24 so the success page has exactly one job: get the
+       buyer into the app. PDF + Google Maps list are surfaced inside
+       the app once they're signed in, and are also in the receipt
+       email as a permanent fallback. -->
 
   <!-- Footer with receipt info. Saftladen GmbH lives in the imprint;
        no need to repeat it on every page. -->
   <footer class="foot">
     <div>© Hikebeast</div>
     <div>
-      <a href="/de/terms.html">AGB</a><span class="foot-sep"></span><a href="/de/imprint.html">Impressum</a><span class="foot-sep"></span><a href="/de/privacy.html">Privacy</a>
+      <a href="/terms.html">AGB</a><span class="foot-sep"></span><a href="/imprint.html">Impressum</a><span class="foot-sep"></span><a href="/privacy.html">Datenschutz</a>
     </div>
     <div class="foot-order" id="receipt"></div>
   </footer>
@@ -661,27 +575,48 @@ fbq('track', 'PageView');
 
 <script>
   // Fetch the access token + order details for this Stripe session, then
-  // unlock the download button. Falls back to "check your email" if the
-  // session is unknown or not yet paid (race conditions on the redirect).
+  // reveal the onboarding form pre-filled with the buyer's email and a
+  // suggested username. Falls back to "check your email" if the session is
+  // unknown or not yet paid (race conditions on the redirect). Also
+  // stashes the PDF download URL to localStorage so /full/account/ can
+  // surface it post-signup without us needing a Convex-side backfill.
   (function () {
     const params = new URLSearchParams(location.search);
-    const sessionId = params.get("session_id");
-    const downloadBtn = document.getElementById("downloadBtn");
-    const downloadLabel = document.getElementById("downloadLabel");
-    const driveBtn = document.getElementById("driveBtn");
     const status = document.getElementById("status");
     const receipt = document.getElementById("receipt");
     const headline = document.getElementById("headline");
+    const subheadline = document.getElementById("subheadline");
+
+    // session_id sourcing · primary is the Stripe redirect querystring,
+    // fallback is a localStorage stash we set on every paid load below.
+    // The stash catches the case where the buyer refreshes the page
+    // and the browser drops the querystring, or comes back via a
+    // bookmark without the query. Without the stash, every refresh
+    // would dump the buyer to the email-recovery fallback even though
+    // we already verified their session 5 seconds ago.
+    var SESSION_KEY = "hb:last_session_id:v1";
+    var sessionId = params.get("session_id");
+    if (!sessionId) {
+      try { sessionId = localStorage.getItem(SESSION_KEY); } catch (e) {}
+    }
 
     if (!sessionId) {
-      downloadLabel.textContent = "Check deine email";
-      status.textContent = "Öffne die Mail, die wir grad geschickt haben - der Download-Link ist drin.";
+      // Genuinely no session_id anywhere · the buyer truly needs to
+      // get back to their receipt email to recover the link. Brand
+      // new buyers have no account yet, so a Sign-in CTA would be
+      // misleading (we offer it as small secondary text for the case
+      // where the buyer is actually a returning user who lost their
+      // /full/ cookie).
+      subheadline.textContent = "Öffne den Link in deiner Bestätigungs-E-Mail, um die Einrichtung abzuschließen.";
+      var emailFallback = document.getElementById("emailFallback");
+      if (emailFallback) emailFallback.hidden = false;
       return;
     }
 
-    // Onboarding form refs (added 2026-05-07: jeder zahlende Kunde landet
-    // ab jetzt in einem Convex-Account, damit Favoriten/Besucht/Swipes
-    // geräteübergreifend syncen). Versteckt bis GET paid:true zurückgibt.
+    // Onboarding form refs (added 2026-05-07: every paying customer should
+    // end up with a Convex account so favorites/visited/swipes sync across
+    // devices, replacing the manual `scripts/create-user.mjs` step). The
+    // card stays hidden until the GET below confirms paid:true.
     const onboardCard     = document.getElementById("onboardCard");
     const onboardForm     = document.getElementById("onboardForm");
     const onboardEmail    = document.getElementById("onboardEmail");
@@ -694,19 +629,33 @@ fbq('track', 'PageView');
       .then((r) => r.json())
       .then((data) => {
         if (!data || data.paid !== true) {
-          downloadLabel.textContent = "Check deine email";
-          status.textContent = "Gleich da. Öffne die Mail, die wir grad geschickt haben - der Download-Link ist drin.";
+          // Session unknown / not-yet-paid race condition. Could be
+          // a stale localStorage stash that no longer maps to a paid
+          // session · clear it so the next load doesn't re-try the
+          // same dead session. The buyer's path forward is the
+          // receipt-email link with a fresh session_id.
+          try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
+          subheadline.textContent = "Öffne den Link in deiner Bestätigungs-E-Mail, um die Einrichtung abzuschließen.";
+          var emailFallback = document.getElementById("emailFallback");
+          if (emailFallback) emailFallback.hidden = false;
           return;
         }
 
+        // Stash the verified-paid session_id so a refresh or bookmark
+        // without the querystring still lands the buyer back here on
+        // the working form, not the email fallback. Only stash AFTER
+        // we confirmed paid · we don't want to cache failed sessions.
+        try { localStorage.setItem(SESSION_KEY, sessionId); } catch (e) {}
+
         // Personalise the headline if Stripe captured a first name.
         if (data.first_name) {
-          headline.textContent = "Willkommen, " + data.first_name + ".";
+          headline.textContent = "You're in, " + data.first_name + ".";
         }
 
-        // Onboarding-Form aufdecken + vorbefüllen. Username = <stem><3 digits>
-        // wo der Stamm der Vorname (kleingeschrieben) ist, fallback zur
-        // Email-Local-Part. Bei Kollision rollt der Server den Suffix neu.
+        // Reveal + pre-fill the onboarding form. Username = <stem><3 digits>
+        // where the stem is firstName-lowercased, falling back to the email
+        // local-part. The server re-rolls the suffix on collision -- this
+        // pre-fill is just to give the buyer something nice to keep or edit.
         if (data.email) {
           onboardEmail.value = data.email;
           var seedSrc = (data.first_name || data.email.split("@")[0] || "").toLowerCase();
@@ -717,34 +666,36 @@ fbq('track', 'PageView');
           onboardCard.hidden = false;
         }
 
-        // Unlock the download + reveal the Drive folder link. Both
-        // start hidden, and the Drive URL itself only arrives in this
-        // API response (not baked into the static HTML), so view-source
-        // without a paid session never exposes the customer-view folder.
-        downloadBtn.href = data.download_url;
-        downloadBtn.removeAttribute("aria-disabled");
-        downloadLabel.textContent = "Guide (PDF) herunterladen";
-        if (driveBtn && data.drive_url) {
-          driveBtn.href = data.drive_url;
-          driveBtn.hidden = false;
+        // Stash the per-customer PDF download URL so the webapp can
+        // surface it post-signup in /full/account/. The URL is a
+        // session-scoped HMAC-signed redirect that 302s to the Vercel
+        // Blob the PDF lives in; valid for 7 days from issuance.
+        // Stashing here rather than at form-submit-time means the URL
+        // is available even if the buyer creates the account, hits the
+        // back button, and returns -- the localStorage write survives
+        // navigation. We don't gate this on the form being submitted;
+        // any time a paid buyer hits this URL with a valid session,
+        // they get the stash.
+        if (data.download_url) {
+          try { localStorage.setItem("hb:guide_pdf_url:v1", data.download_url); } catch (e) {}
         }
 
         const amount = (typeof data.amount_total === "number")
           ? (data.amount_total / 100).toFixed(2) + " " + (data.currency || "")
           : "";
-        if (amount) status.textContent = "Rechnung: " + amount + " · auch in deiner Mail.";
+        if (amount) status.textContent = "Receipt: " + amount + " · also sent to your email.";
 
         if (data.order_id) {
-          receipt.textContent = "Bestellung " + data.order_id;
+          receipt.textContent = "Order " + data.order_id;
         }
 
         // Client-side Purchase pixel · MUST use the same eventID as the
         // CAPI Purchase event fired by api/checkout/webhook.js (which
-        // sets event_id = payment_intent_id). /de/map5/ was added
-        // after the 2026-05-15 dedup fix and missed the same wiring;
+        // sets event_id = payment_intent_id). /map5/ was added after
+        // the 2026-05-15 dedup fix and missed the same wiring;
         // backfilled 2026-05-20. Without matching IDs Meta counts the
-        // pixel + CAPI as separate events. The localStorage guard is
-        // defense-in-depth against tab refresh.
+        // pixel + CAPI as separate events (3.3x inflation observed in
+        // Events Manager on 2026-05-20). The localStorage guard survives across tabs and refreshes — buyers re-opening the Stripe receipt link in a new tab was re-firing Purchase with the same payment_intent (2026-05-24).
         if (window.fbq && typeof data.amount_total === "number" && data.payment_intent) {
           var purchaseKey = "hb:purchase_fired:" + data.payment_intent;
           var alreadyFired = false;
@@ -779,15 +730,16 @@ fbq('track', 'PageView');
         }
       })
       .catch(() => {
-        downloadLabel.textContent = "Check deine email";
-        status.textContent = "Download lädt grad nicht. Öffne stattdessen die Mail.";
+        subheadline.textContent = "Server nicht erreichbar. Öffne den Link in deiner Bestätigungs-E-Mail, um die Einrichtung abzuschließen.";
+        var emailFallback = document.getElementById("emailFallback");
+        if (emailFallback) emailFallback.hidden = false;
       });
 
-    // Onboarding-Formular: POST an /api/checkout/session. Lambda prüft die
-    // Stripe-Session ist wirklich bezahlt bevor sie Convex anspricht, also
-    // lässt sich das nicht durch Editieren der Anfrage tricksen. Bei Erfolg:
-    // hb_full_auth-Cookie kommt von der Antwort, sessionToken ins
-    // localStorage, Redirect auf /full/.
+    // Onboarding form submit. POST { sessionId, password, username } back to
+    // /api/checkout/session. The lambda re-verifies the Stripe session is
+    // paid before talking to Convex, so this can't be tricked by editing
+    // the request body. On success: hb_full_auth cookie is set by the
+    // response, sessionToken goes into localStorage, redirect to /full/.
     if (onboardForm) {
       onboardForm.addEventListener("submit", async function (e) {
         e.preventDefault();
@@ -795,6 +747,12 @@ fbq('track', 'PageView');
         var submitBtn = onboardForm.querySelector(".onboard-submit");
         submitBtn.disabled = true;
         submitBtn.textContent = "Konto wird erstellt...";
+
+        // Instagram handle · optional. Normalise · strip leading "@",
+        // any whitespace, and lowercase the rest. Empty string when the
+        // buyer skipped the field; the API treats falsy as "no update".
+        var igRaw = (document.getElementById("onboardInstagram") || {}).value || "";
+        var igHandle = String(igRaw).trim().replace(/^@+/, "").toLowerCase();
 
         try {
           var res = await fetch("/api/checkout/session", {
@@ -804,23 +762,32 @@ fbq('track', 'PageView');
               sessionId: sessionId,
               username:  onboardUsername.value.trim().toLowerCase(),
               password:  onboardPassword.value,
+              instagram_handle: igHandle,
             }),
           });
           var json = await res.json().catch(function () { return {}; });
 
-          // Idempotent Resubmit: das Konto wurde beim ersten Versuch
-          // angelegt, der zweite Submit wurde abgewiesen (Email belegt).
-          // Statt stumm zu /login zu redirecten zeigen wir das inline.
+          // Returning customer: idempotent re-submit, the second-attempt
+          // credentials were NOT applied (the original account still owns
+          // the email). Show that inline -- silently redirecting to /login
+          // makes buyers think "the new password I just typed should work"
+          // and then login fails for reasons they can't see.
           if (json && json.existing) {
             submitBtn.disabled = false;
-            submitBtn.textContent = "Konto erstellen & App öffnen";
+            submitBtn.textContent = "Create account & open app";
             onboardError.hidden = false;
             var existingUsername = (json.username || "").trim();
             var loginHref = "/login/?email=" + encodeURIComponent(onboardEmail.value);
-            onboardError.innerHTML = "Für diese Email existiert bereits ein Konto"
+            // innerHTML over textContent because we want a clickable link;
+            // both inputs are server-controlled / known-safe (username comes
+            // from Convex, email from the email-typed input).
+            onboardError.innerHTML = "Für diese E-Mail existiert bereits ein Konto"
               + (existingUsername ? " (Benutzername <strong>" + existingUsername + "</strong>)" : "")
-              + ". Melde dich mit dem Passwort an, das du beim ersten Mal gesetzt hast, oder antworte auf die Bestätigungsmail wenn du es vergessen hast. "
+              + ". Melde dich mit dem Passwort an, das du beim ersten Mal gesetzt hast, oder antworte auf die Bestätigungs-E-Mail, falls du es vergessen hast. "
               + "<a href=\"" + loginHref + "\" style=\"color:#0071e3;text-decoration:none;font-weight:500;\">Anmelden &rarr;</a>";
+            // Also point the existing "Sign in →" footer link at /login
+            // with the email pre-filled, in case the buyer scrolls past
+            // the error to use that link instead.
             onboardLogin.href = loginHref;
             return;
           }
@@ -829,25 +796,28 @@ fbq('track', 'PageView');
             throw new Error((json && json.error) || "create_failed");
           }
 
-          // Selbes Format wie /login/ (rohes Token, kein JSON).
+          // Same key + format /login/ writes (raw token string, NOT JSON).
+          // social.js reads localStorage[hb:session:v1] as the raw token on
+          // /full/ paint and subscribes to auth:currentUser with it.
           if (json.sessionToken) {
             try { localStorage.setItem("hb:session:v1", json.sessionToken); } catch (e) {}
           }
 
+          // hb_full_auth cookie is already set by the response. Off we go.
           window.location.href = json.redirect || "/full/";
         } catch (err) {
           submitBtn.disabled = false;
-          submitBtn.textContent = "Konto erstellen & App öffnen";
+          submitBtn.textContent = "Create account & open app";
           onboardError.hidden = false;
           var msg = (err && err.message) || "";
           onboardError.textContent =
             (msg.indexOf("password_too_short") >= 0)
-              ? "Das Passwort muss mindestens 8 Zeichen lang sein."
+              ? "Password must be at least 8 characters."
             : (msg.indexOf("Username") >= 0 || msg.indexOf("username") >= 0)
-              ? "Der Benutzername hat nicht funktioniert. Probier einen anderen (Kleinbuchstaben, Zahlen, Punkte)."
+              ? "That username didn't work. Try a different one (lowercase letters, numbers, dots)."
             : (msg.indexOf("session_not_paid") >= 0 || msg.indexOf("session_not_found") >= 0)
-              ? "Deine Kauf-Session ist abgelaufen. Öffne die Bestätigungsmail und klicke 'Swiss Gems App öffnen'."
-              : "Konto konnte nicht erstellt werden. Probier nochmal oder antworte auf die Bestätigungsmail.";
+              ? "Your purchase session expired. Open the receipt email and click 'Open the Swiss Gems App' to retry."
+              : "Couldn't create the account. Try again or reply to the receipt email.";
         }
       });
     }
