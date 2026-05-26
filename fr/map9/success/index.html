@@ -377,6 +377,29 @@ fbq('track', 'PageView');
   .onboard-submit {
     margin-top: 4px;
   }
+  /* Loading state shimmer · see /map9/success/index.html for rationale. */
+  .onboard-submit:disabled {
+    position: relative;
+    overflow: hidden;
+    cursor: progress;
+    opacity: 1;
+  }
+  .onboard-submit:disabled::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: onboard-shimmer 1.4s linear infinite;
+  }
+  @keyframes onboard-shimmer {
+    to { transform: translateX(100%); }
+  }
   .onboard-error {
     margin: 0;
     padding: 10px 12px;
@@ -451,7 +474,7 @@ fbq('track', 'PageView');
       </svg>
     </div>
     <h1 id="headline">Bienvenue.</h1>
-    <p class="action-sub" id="subheadline">Ton guide est prêt.</p>
+    <p class="action-sub" id="subheadline">Une dernière étape avant d'accéder au guide.</p>
 
     <!-- Onboarding card · revealed once the GET /api/checkout/session
          response confirms the session is paid. Expanded-by-default
@@ -461,23 +484,21 @@ fbq('track', 'PageView');
          The form is inline so they never leave this page. -->
     <div class="onboard" id="onboardCard" hidden>
       <p class="onboard-header">
-        <span>Crée un compte pour voir le guide</span>
+        <span>Crée un compte</span>
       </p>
       <form id="onboardForm" class="onboard-form" novalidate>
         <label class="onboard-field">
           <span class="onboard-label">Email</span>
           <input id="onboardEmail" class="onboard-input" type="email" disabled aria-readonly="true" autocomplete="email" />
-          <span class="onboard-hint">Modifiable plus tard dans les paramètres du compte.</span>
         </label>
         <label class="onboard-field">
-          <span class="onboard-label">Nom d'utilisateur Swiss Gems</span>
+          <span class="onboard-label">Nom d'utilisateur</span>
           <input id="onboardUsername" class="onboard-input" type="text"
                  autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false"
                  pattern="[a-z0-9._\-]{2,32}" required />
-          <span class="onboard-hint">Lettres minuscules, chiffres, points. Modifiable plus tard.</span>
         </label>
         <label class="onboard-field">
-          <span class="onboard-label">Identifiant Instagram <span class="onboard-optional">(facultatif)</span></span>
+          <span class="onboard-label">Instagram Handle <span class="onboard-optional">(facultatif)</span></span>
           <input id="onboardInstagram" class="onboard-input" type="text"
                  autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
                  maxlength="40" placeholder="@ton.compte" />

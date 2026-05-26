@@ -377,6 +377,33 @@ fbq('track', 'PageView');
   .onboard-submit {
     margin-top: 4px;
   }
+  /* Loading state during the ~5 s round-trip between form submit and
+     the /full/?login=<token> redirect. The browser disables the button
+     (in the submit handler below) and the text changes to "Creating
+     account…" · we add a left-to-right shimmer streak so the visual
+     feedback isn't just static text. */
+  .onboard-submit:disabled {
+    position: relative;
+    overflow: hidden;
+    cursor: progress;
+    opacity: 1;
+  }
+  .onboard-submit:disabled::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: onboard-shimmer 1.4s linear infinite;
+  }
+  @keyframes onboard-shimmer {
+    to { transform: translateX(100%); }
+  }
   .onboard-error {
     margin: 0;
     padding: 10px 12px;
@@ -451,7 +478,7 @@ fbq('track', 'PageView');
       </svg>
     </div>
     <h1 id="headline">You're in.</h1>
-    <p class="action-sub" id="subheadline">Your guide is ready right now.</p>
+    <p class="action-sub" id="subheadline">One last step before you can access the guide.</p>
 
     <!-- Onboarding card · revealed once the GET /api/checkout/session
          response confirms the session is paid. Expanded-by-default
@@ -461,23 +488,21 @@ fbq('track', 'PageView');
          The form is inline so they never leave this page. -->
     <div class="onboard" id="onboardCard" hidden>
       <p class="onboard-header">
-        <span>Create an Account to see the Guide</span>
+        <span>Create an Account</span>
       </p>
       <form id="onboardForm" class="onboard-form" novalidate>
         <label class="onboard-field">
           <span class="onboard-label">Email</span>
           <input id="onboardEmail" class="onboard-input" type="email" disabled aria-readonly="true" autocomplete="email" />
-          <span class="onboard-hint">Change later in account settings.</span>
         </label>
         <label class="onboard-field">
-          <span class="onboard-label">Swiss Gems Username</span>
+          <span class="onboard-label">Username</span>
           <input id="onboardUsername" class="onboard-input" type="text"
                  autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false"
                  pattern="[a-z0-9._\-]{2,32}" required />
-          <span class="onboard-hint">Lowercase letters, numbers, dots. Change later.</span>
         </label>
         <label class="onboard-field">
-          <span class="onboard-label">Instagram Username <span class="onboard-optional">(optional)</span></span>
+          <span class="onboard-label">Instagram Handle <span class="onboard-optional">(optional)</span></span>
           <input id="onboardInstagram" class="onboard-input" type="text"
                  autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
                  maxlength="40" placeholder="@your.handle" />
