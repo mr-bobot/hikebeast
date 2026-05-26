@@ -469,6 +469,29 @@ fbq('track', 'PageView');
   .onboard-submit {
     margin-top: 4px;
   }
+  /* Loading state shimmer · see /map9/success/index.html for rationale. */
+  .onboard-submit:disabled {
+    position: relative;
+    overflow: hidden;
+    cursor: progress;
+    opacity: 1;
+  }
+  .onboard-submit:disabled::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: onboard-shimmer 1.4s linear infinite;
+  }
+  @keyframes onboard-shimmer {
+    to { transform: translateX(100%); }
+  }
   .onboard-error {
     margin: 0;
     padding: 10px 12px;
@@ -540,7 +563,7 @@ fbq('track', 'PageView');
       </svg>
     </div>
     <h1 id="headline">Willkommen</h1>
-    <p class="action-sub" id="subheadline">Dein Guide ist jetzt bereit.</p>
+    <p class="action-sub" id="subheadline">Noch ein Schritt, bevor du den Guide öffnen kannst.</p>
 
     <!-- Primärer Onboarding-CTA: erst sichtbar nachdem GET /api/checkout/session
          bestätigt hat dass die Session bezahlt ist. Eingeklappt, ein Tap
@@ -557,14 +580,12 @@ fbq('track', 'PageView');
         <label class="onboard-field">
           <span class="onboard-label">Email</span>
           <input id="onboardEmail" class="onboard-input" type="email" disabled aria-readonly="true" autocomplete="email" />
-          <span class="onboard-hint">Lässt sich später in den Konto-Einstellungen ändern.</span>
         </label>
         <label class="onboard-field">
           <span class="onboard-label">Benutzername</span>
           <input id="onboardUsername" class="onboard-input" type="text"
                  autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false"
                  pattern="[a-z0-9._\-]{2,32}" required />
-          <span class="onboard-hint">Kleinbuchstaben, Zahlen, Punkte. Lässt sich später ändern.</span>
         </label>
         <label class="onboard-field">
           <span class="onboard-label">Passwort</span>
