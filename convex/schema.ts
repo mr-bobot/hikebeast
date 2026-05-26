@@ -139,6 +139,12 @@ export default defineSchema({
     email:           v.optional(v.string()),        // optional, kept for later magic-link / Stripe match
     passwordPhc:     v.string(),                    // pbkdf2$iters$salt$hash
     handle:          v.optional(v.string()),        // display name, separate from username
+    // Instagram handle (lowercased, no leading @, ≤40 chars). Captured
+    // on the /map9/success/ onboarding form for non-ManyChat buyers
+    // (Linktree, ads, organic) so Leon's support pipeline can DM them
+    // back. Also written to the Signups sheet via attach_instagram +
+    // to Stripe customer metadata in the same lambda call. Added 2026-05-26.
+    instagramHandle: v.optional(v.string()),
     avatarStorageId: v.optional(v.id("_storage")),
     whopLicenseKey:  v.optional(v.string()),        // future: Stripe / Whop license linkage
     isAdmin:         v.optional(v.boolean()),

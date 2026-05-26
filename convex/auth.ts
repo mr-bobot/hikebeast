@@ -720,8 +720,13 @@ export const createPaidUser = mutation({
     paymentIntentId:  v.string(),     // stored in users.whopLicenseKey for now
     username:         v.optional(v.string()),
     password:         v.string(),
+    // Optional · IG handle collected on the /map9/success/ onboarding
+    // form. Already normalized lambda-side (trim, strip leading @,
+    // lowercase, 40-char cap). Pass-through into users.instagramHandle.
+    // Missing or empty → field stays undefined.
+    instagramHandle:  v.optional(v.string()),
   },
-  handler: async (ctx, { email, firstName, paymentIntentId, username, password }) => {
+  handler: async (ctx, { email, firstName, paymentIntentId, username, password, instagramHandle }) => {
     if (password.length < 8) throw new Error("Password must be at least 8 characters");
 
     const lower = email.trim().toLowerCase();
@@ -776,14 +781,16 @@ export const createPaidUser = mutation({
     const now = Date.now();
     const handle = (firstName && firstName.trim()) ? firstName.trim().slice(0, 60) : candidate;
 
+    const trimmedIg = instagramHandle ? instagramHandle.trim() : "";
     const userId = await ctx.db.insert("users", {
-      username:       candidate,
-      email:          lower,
-      passwordPhc:    phc,
+      username:        candidate,
+      email:           lower,
+      passwordPhc:     phc,
       handle,
-      whopLicenseKey: paymentIntentId,   // re-purpose: stripe payment_intent_id
-      createdAt:      now,
-      lastSeenAt:     now,
+      instagramHandle: trimmedIg || undefined,
+      whopLicenseKey:  paymentIntentId,  // re-purpose: stripe payment_intent_id
+      createdAt:       now,
+      lastSeenAt:      now,
     });
 
     const rawToken = newSessionToken();

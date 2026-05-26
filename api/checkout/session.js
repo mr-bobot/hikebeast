@@ -264,6 +264,11 @@ async function handleOnboardingPost(req, res, stripe, body) {
       paymentIntentId: paymentIntent,
       username: username || undefined,
       password,
+      // IG handle fan-out · stored on the users row so the webapp can
+      // surface it on /full/account/ and so future support-ping flows
+      // can DM the buyer back. Empty string → field stays undefined
+      // on the Convex side (the mutation no-ops). 2026-05-26.
+      instagramHandle: igHandle || undefined,
     });
   } catch (err) {
     console.error("createPaidUser failed:", err?.message || err);
@@ -290,6 +295,26 @@ async function handleOnboardingPost(req, res, stripe, body) {
   if (!result?.sessionToken) {
     console.error("createPaidUser returned no sessionToken:", result);
     return res.status(500).json({ error: "create_failed" });
+  }
+
+  // Fire-and-forget IG-handle write to the Stripe customer's metadata.
+  // session.customer is the customer ID (set because we use
+  // customer_creation: "always" in the checkout-session create call).
+  // Writing to metadata.instagram_handle puts the handle next to the
+  // buyer's name/email in the Stripe dashboard, so manual support
+  // lookups stay all-in-one-place. Best-effort · we never block the
+  // success redirect on a Stripe update.
+  if (igHandle) {
+    const customerId = typeof session.customer === "string"
+      ? session.customer
+      : session.customer?.id;
+    if (customerId) {
+      stripe.customers.update(customerId, {
+        metadata: { instagram_handle: igHandle },
+      }).catch((err) => {
+        console.error("Stripe customer instagram_handle update failed:", err?.message || err);
+      });
+    }
   }
 
   // Fire-and-forget IG-handle write to the Signups sheet. Best-effort ·
