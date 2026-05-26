@@ -490,12 +490,31 @@ export default async function handler(req, res) {
       },
       // After payment, Stripe loads the return URL inside the embedded
       // iframe; we read ?session_id= there to fetch the completed session
-      // and render the success state. German buyers (locale === "de")
-      // get redirected to /de/map/success/ so the post-purchase page
-      // matches the language they checked out in.
-      return_url: locale === "de"
-        ? `${origin}/de/map/success?session_id={CHECKOUT_SESSION_ID}`
-        : `${origin}/map/success?session_id={CHECKOUT_SESSION_ID}`,
+      // and render the success state.
+      //
+      // Routing per source_page (since 2026-05-26 · /map9/ launch):
+      //   - source_page=map9              → /map9/success
+      //   - source_page=de_map9           → /de/map9/success
+      //   - source_page=fr_map9           → /fr/map9/success
+      //   - source_page=it_map9           → /it/map9/success
+      //   - any other source_page · DE    → /de/map/success
+      //   - any other source_page · else  → /map/success
+      //
+      // The fall-through path mirrors the historical behaviour every
+      // /map[3-8]/ + /themap/ checkout has used since the dawn of the
+      // funnel · they all redirect to /map/success/. Only /map9/ has
+      // its own per-locale success siblings wired up so we don't
+      // accidentally route an older sales page to a success page that's
+      // missing fields.
+      return_url: (function () {
+        var path;
+        if (sourcePage === "map9") path = "/map9/success";
+        else if (sourcePage === "de_map9") path = "/de/map9/success";
+        else if (sourcePage === "fr_map9") path = "/fr/map9/success";
+        else if (sourcePage === "it_map9") path = "/it/map9/success";
+        else path = locale === "de" ? "/de/map/success" : "/map/success";
+        return `${origin}${path}?session_id={CHECKOUT_SESSION_ID}`;
+      })(),
     });
 
     // NOTE on CAPI InitiateCheckout: we do NOT fire here. Meta wants
