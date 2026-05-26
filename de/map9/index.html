@@ -36,15 +36,20 @@
      Two intent signals: about_video_played + reached_checkout. */
   window.HB_SOURCE_PAGE = "de_map9";
   window.HB_SOURCE = (function () {
+    /* Classify the CURRENT page-load. "_ads" is only used when we have
+       a Meta-ads-specific signal (?fbclid=). utm_source=ig alone could
+       just be an organic IG share with a manual utm tag (affiliate
+       posts use this pattern), so we call it "instagram" / "facebook"
+       without the _ads suffix unless fbclid confirms paid traffic. */
     try {
       var p = new URLSearchParams(location.search);
       if (p.get("s")) return "manychat";
       var utm = (p.get("utm_source") || "").toLowerCase();
       if (utm === "affiliate") return "affiliate";
       if (utm === "linktree" || utm === "linktr.ee") return "linktree";
-      if (utm === "facebook" || utm === "fb") return "facebook_ads";
-      if (utm === "instagram" || utm === "ig") return "instagram_ads";
       if (p.get("fbclid")) return "facebook_ads";
+      if (utm === "facebook" || utm === "fb") return "facebook";
+      if (utm === "instagram" || utm === "ig") return "instagram";
       if (utm) return utm.slice(0, 24);
       var ref = (document.referrer || "");
       if (ref) {
@@ -55,7 +60,25 @@
       return "direct";
     } catch (e) { return "unknown"; }
   })();
-  try { localStorage.setItem("hb:last_source:v1", window.HB_SOURCE); } catch (e) {}
+  /* First-touch attribution · the user might land on /map9/ from
+     linktree (strong signal), navigate to /de/map9/, then click back
+     to /map9/. The second /map9/ load has no URL params and an
+     internal hikebeast referrer · the classifier above returns
+     "direct" which loses the original linktree attribution. Prefer
+     the stashed strong source when the current calc is weak, and
+     only overwrite the stash when the new value is strong. */
+  (function () {
+    var WEAK = { direct: 1, unknown: 1, referral: 1 };
+    try {
+      var stashed = localStorage.getItem("hb:last_source:v1") || "";
+      if (stashed && !WEAK[stashed] && WEAK[window.HB_SOURCE]) {
+        window.HB_SOURCE = stashed;  // prefer prior strong attribution
+      }
+      if (!stashed || !WEAK[window.HB_SOURCE]) {
+        localStorage.setItem("hb:last_source:v1", window.HB_SOURCE);
+      }
+    } catch (e) {}
+  })();
   /* Color scheme · derived once at page load via prefers-color-scheme.
      Lets the dashboard ask "do dark-mode users convert at a different
      rate?" since /map9/ supports both via media query (no toggle, no
