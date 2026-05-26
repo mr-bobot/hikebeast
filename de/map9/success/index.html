@@ -810,14 +810,21 @@ fbq('track', 'PageView');
               window.va("event", purchaseProps);
               try { localStorage.setItem(vaKey, "1"); } catch (e) {}
             } catch (e) {}
-        /* AllVisits sheet · purchased event_type beacon. Joinable to
-           the visit beacons by visitor_id. Hoisted into a top-level
-           function above the outer fetch so the tracking-pipeline lint
-           sees this as a sibling fetch site rather than nested-inside
-           /api/checkout/session (regex limitation, 2026-05-26). */
-        if (data.payment_intent) fireAllVisitsPurchase(data, "de_map9");
           }
         }
+        /* AllVisits sheet · purchased event_type beacon. Joinable to
+           visit beacons by visitor_id. MUST stay OUTSIDE the Vercel
+           Analytics block above · earlier nesting (PR #99 initial
+           wire-up) meant iOS webviews / ad-blocked clients where
+           window.va isn't loaded never sent the purchase to AllVisits
+           even though Stripe confirmed paid · AND any buyer who
+           re-opened the success page (bookmark, receipt email link)
+           hit the !vaAlreadyFired guard and silently skipped too.
+           The function's own localStorage dedup (hb:allvisits_purchase_
+           fired:<payment_intent>) handles re-open safety on this path.
+           Function hoist above is for the lint regex that scans
+           fetch sites · separate concern from gating. */
+        if (data.payment_intent) fireAllVisitsPurchase(data, "de_map9");
       })
       .catch(() => {
         subheadline.textContent = "Server nicht erreichbar. Öffne den Link in deiner Bestätigungs-E-Mail, um die Einrichtung abzuschließen.";
