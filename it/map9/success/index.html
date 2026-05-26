@@ -735,12 +735,15 @@ fbq('track', 'PageView');
             try { heroVariant = localStorage.getItem("hb:hero_variant") || ""; } catch (e) {}
             var trafficSource = "";
             try { trafficSource = localStorage.getItem("hb:last_source:v1") || ""; } catch (e) {}
+            var theme = "";
+            try { theme = localStorage.getItem("hb:last_theme:v1") || ""; } catch (e) {}
             try {
               window.va("event", {
                 name: "purchase",
                 source_page: "it_map9",
                 hero_variant: heroVariant,
                 source: trafficSource,
+                theme: theme,
               });
               try { localStorage.setItem(vaKey, "1"); } catch (e) {}
             } catch (e) {}
