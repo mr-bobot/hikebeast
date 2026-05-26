@@ -621,6 +621,55 @@ fbq('track', 'PageView');
     const onboardError    = document.getElementById("onboardError");
     const onboardLogin    = document.getElementById("onboardLogin");
 
+    /* AllVisits purchased-beacon · pulled into a named function so
+       the lint regex doesn't confuse this inner fetch's body fields
+       with the outer /api/checkout/session GET above. Dedup'd by
+       payment_intent via its own localStorage key. */
+    function fireAllVisitsPurchase(data, sourcePage) {
+      if (!data || !data.payment_intent) return;
+      var allKey = "hb:allvisits_purchase_fired:" + data.payment_intent;
+      var allAlreadyFired = false;
+      try { allAlreadyFired = localStorage.getItem(allKey) === "1"; } catch (e) {}
+      if (allAlreadyFired) return;
+      var visitorId = "";
+      try { visitorId = localStorage.getItem("hb:visitor_id") || ""; } catch (e) {}
+      var heroVariant2 = "";
+      try { heroVariant2 = localStorage.getItem("hb:hero_variant") || ""; } catch (e) {}
+      var source2 = "";
+      try { source2 = localStorage.getItem("hb:last_source:v1") || ""; } catch (e) {}
+      var theme2 = "";
+      try { theme2 = localStorage.getItem("hb:last_theme:v1") || ""; } catch (e) {}
+      var affRef2 = "";
+      try {
+        var s2 = localStorage.getItem("hb:r");
+        if (s2) {
+          var o2 = JSON.parse(s2);
+          if (o2 && o2.slug && o2.exp && o2.exp > Date.now()) affRef2 = o2.slug;
+        }
+      } catch (e) {}
+      try {
+        fetch("/api/visit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            event: "purchased",
+            page: "guide",
+            source_page: sourcePage,
+            visitor_id: visitorId,
+            hero_variant: heroVariant2,
+            source: source2,
+            theme: theme2,
+            affiliate_ref: affRef2,
+            product: "swiss-hidden-gems",
+            paid_at: new Date().toISOString(),
+          }),
+          keepalive: true,
+        }).then(function () {
+          try { localStorage.setItem(allKey, "1"); } catch (e) {}
+        }).catch(function () {});
+      } catch (e) {}
+    }
+
     fetch("/api/checkout/session?session_id=" + encodeURIComponent(sessionId))
       .then((r) => r.json())
       .then((data) => {
@@ -757,6 +806,12 @@ fbq('track', 'PageView');
               window.va("event", purchaseProps);
               try { localStorage.setItem(vaKey, "1"); } catch (e) {}
             } catch (e) {}
+        /* AllVisits sheet · purchased event_type beacon. Joinable to
+           the visit beacons by visitor_id. Hoisted into a top-level
+           function above the outer fetch so the tracking-pipeline lint
+           sees this as a sibling fetch site rather than nested-inside
+           /api/checkout/session (regex limitation, 2026-05-26). */
+        if (data.payment_intent) fireAllVisitsPurchase(data, "it_map9");
           }
         }
       })
