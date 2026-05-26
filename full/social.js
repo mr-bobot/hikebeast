@@ -1217,6 +1217,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
         <span class="label">More</span>
       </a>
+      <div class="rail-account" data-hb-account></div>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="Toggle navigation labels">
         ${SVG_CHEVRONS}<span class="label">Collapse</span>
       </button>
@@ -1473,26 +1474,10 @@
       });
       topbar.insertBefore(burger, topbar.firstChild);
 
-      // Universal Account icon. Goes into the topbar's right-side cluster
-      // so every /full/* page has a consistent entry to /full/account/.
-      // Most pages have a `.topbar-right` slot; the home page uses
-      // `.home-topbar-actions`. We append to whichever we find. (The
-      // inline copy on the home page is hidden via CSS so we don't
-      // double up — the inline copy was added before this universal
-      // injection existed.)
-      // Hidden on mobile (the menu sheet has its own "Account" row);
-      // shown only on desktop where there's no menu sheet to host it.
-      const rightSlot = topbar.querySelector('.topbar-right, .home-topbar-actions');
-      if (rightSlot && !rightSlot.querySelector('[data-hb-cog]')) {
-        const cog = document.createElement('a');
-        cog.className = 'rail-burger rail-cog';   // reuse burger button styling
-        cog.setAttribute('href', `${REL}account/`);
-        cog.setAttribute('aria-label', 'Account');
-        cog.setAttribute('title', 'Account');
-        cog.dataset.hbCog = '';
-        cog.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
-        rightSlot.appendChild(cog);
-      }
+      // Account entry · removed from the topbar 2026-05-26. The single
+      // canonical entry is now the [data-hb-account] slot in the rail
+      // between "More" and "Collapse", rendered by paintAccount(). One
+      // place on every page, never in the top bar.
     }
 
     // Toggle expand/collapse (desktop)

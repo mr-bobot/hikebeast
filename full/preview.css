@@ -3820,22 +3820,10 @@ body.has-rail .topbar .hb-nav { display: none; }
 }
 .rail-burger svg { width: 18px; height: 18px; }
 
-/* Settings cog injected into every /full/* topbar's right slot by
-   social.js. Re-uses .rail-burger's pill chrome (border, white bg,
-   round shape) but inverts visibility: shown only on desktop, hidden
-   on mobile. Mobile users reach /full/account/ via the menu sheet's
-   "Account settings" row instead. */
-.rail-cog {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: var(--muted);
-}
-.rail-cog:hover { color: var(--fg); }
-@media (max-width: 700px) {
-  .rail-cog { display: none !important; }
-}
+/* .rail-cog removed 2026-05-26 · the topbar account icon was killed
+   in favor of a single canonical account slot inside the rail
+   sidebar (between More and Collapse). The class itself was only
+   ever applied to a JS-injected anchor that no longer renders. */
 
 /* Mobile bottom tab bar — replaces the burger drawer as the primary
  * navigation on phones. Hidden above 700px (rail takes over on

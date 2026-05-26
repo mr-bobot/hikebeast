@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../preview.css?v=20260524a" />
+<link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <link rel="stylesheet" href="../lib/leaflet/leaflet.css" />
 <style>
@@ -345,6 +345,16 @@
     box-shadow: var(--shadow-soft) !important;
   }
 
+  /* Popup body in dark mode · Leaflet's default
+     .leaflet-popup-content-wrapper background stays white in dark,
+     and .spot-popup h3 uses var(--fg) which flips to near-white ·
+     net result was white title on white card. Flip the wrapper to
+     --paper so it picks up the dark surface color, and bump the
+     box-shadow on dark for separation against the dark page. */
+  :root[data-theme="dark"] .leaflet-popup-content-wrapper {
+    background: var(--paper);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.30);
+  }
   /* Popup "Read" CTA: var(--fg) becomes near-white in dark, white
      text on white is invisible. Deep navy keeps the heavy-button feel. */
   :root[data-theme="dark"] .spot-popup .read { background: #003162; color: #fff; }
@@ -420,7 +430,7 @@
 <script src="../img/spot-images.js"></script>
 <script src="../lib/convex.js"></script>
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
-<script src="../social.js?v=20260524a"></script>
+<script src="../social.js?v=20260526a"></script>
 <script>
   // preferCanvas + smaller-touch-handler: Canvas vector renderer is
   // dramatically faster than SVG/DOM for many markers, esp. on mobile.
@@ -458,6 +468,25 @@
   if (shellEl && window.ResizeObserver) {
     new ResizeObserver(() => map.invalidateSize()).observe(shellEl);
   }
+
+  // Double-right-click → zoom out. Mirrors Leaflet's default double-left-
+  // click-to-zoom-in, gives mouse users a one-handed way to zoom out
+  // without reaching for the +/- buttons or scroll wheel. Two right-clicks
+  // within 400 ms trigger the zoom; the first one is a no-op (Leaflet
+  // suppresses the browser context menu when no menu is wired). On touch
+  // devices contextmenu fires on long-press and the 400ms window won't
+  // realistically trigger, so the gesture stays mouse-only without an
+  // explicit isMobile guard.
+  let __lastRightClickTs = 0;
+  map.on('contextmenu', () => {
+    const now = Date.now();
+    if (now - __lastRightClickTs < 400) {
+      map.zoomOut();
+      __lastRightClickTs = 0;
+    } else {
+      __lastRightClickTs = now;
+    }
+  });
 
   // Sourced through HB.spots. Sidecar-seeded synchronously so the initial
   // forEach has data even before Convex's WebSocket connects. The first

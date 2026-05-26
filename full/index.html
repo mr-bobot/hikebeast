@@ -20,7 +20,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="preview.css?v=20260524a" />
+<link rel="stylesheet" href="preview.css?v=20260526a" />
 <!-- Convex's wss handshake is the second slowest thing on first paint after
      the hero image; preconnect lets the browser get DNS + TCP + TLS out of
      the way in parallel with HTML/CSS parse. inject-convex-url.mjs swaps
@@ -42,10 +42,9 @@
     <svg class="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
   </label>
   <div class="home-topbar-actions">
-    <!-- Settings cog is injected universally by social.js into every
-         /full/* topbar's right-slot, so the home page picks it up too
-         without inline duplication. Random + Liked used to live here
-         on mobile; they're reachable from Swipe and the Menu sheet, so
+    <!-- Empty by design · the account entry lives in the rail
+         sidebar between More and Collapse (see social.js paintAccount).
+         Random + Liked are reachable from Swipe and the Menu sheet, so
          the topbar stays clean. -->
   </div>
 </header>
@@ -124,7 +123,7 @@
 <script src="img/thumbs/dimensions.js"></script>
 <script src="lib/convex.js"></script>
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
-<script src="social.js?v=20260524a"></script>
+<script src="social.js?v=20260526a"></script>
 <script>
 (() => {
   // Read the catalog through the unified HB.spots store. Sidecar-seeded
