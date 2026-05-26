@@ -1269,8 +1269,8 @@ hikes:
   duration_min: 135
   sac_grade: T4
   effort_label: Moderate, brief exposure
-  description_extra: Direct ascent from Allières station (MOB line, 1,006 m) up to Cape au Moine at 1,941 m. About 4 km one-way and 940 m of cumulative gain, around 2 h 15 of walking. T4
-    with one short exposed scrambling passage on the summit ridge — narrow, slippery when wet, no protection. Return via the same trail.
+  description_extra: Direct ascent from Allières station (MOB line, 1,006 m) up to Cape au Moine at 1,941 m. About 4 km one-way and 940 m of cumulative gain, around 2 h 15 of walking.
+    T4 with one short exposed scrambling passage on the summit ridge — narrow, slippery when wet, no protection. Return via the same trail.
   visits:
   - cap_au_moine
   sources:
@@ -1708,7 +1708,7 @@ hikes:
   sources:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/sardonahuette-sac-2147000234/mountain-hiking/from-the-gigerwald-dam-via-alp-sardona-216/
   - https://www.outdooractive.com/en/route/hiking-trail/east-switzerland/sardonahuette/9116181/
-  start_maps_url: https://www.google.com/maps/place/?q=46.9155,9.37092&z=16
+  start_maps_url: https://maps.app.goo.gl/qshCPSWQGpqmcjQm7
   equipment_list:
   - Sturdy hiking shoes
 - id: gigerwaldsee-st-martin-to-sardona
@@ -1719,10 +1719,12 @@ hikes:
   sac_grade: T2
   effort_label: Moderate
   description_extra: Shorter alternative from the Walser village of St. Martin into the upper Calfeisental. Follow the alp access road into the valley, then turn onto the marked trail
-    at Stübliwald and climb to Gamserälpli Untersäss and Obersäss. T2. Returns the same way. Source verification pending.
+    at Stübliwald and climb to Gamserälpli Untersäss and Obersäss. T2. Returns the same way.
   visits:
   - gigerwaldsee
-  sources: []
+  sources:
+  - https://www.bergfex.com/sommer/ostschweiz/touren/wanderung/131455,st-martin--alp-sardona--st-martin/
+  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/sardonahuette-sac-2147000234/
   start_maps_url: https://www.google.com/maps/place/?q=46.92058,9.35556&z=16
   equipment_list:
   - Sturdy hiking shoes
@@ -1734,10 +1736,12 @@ hikes:
   sac_grade: T2
   effort_label: Moderate
   description_extra: Circular hike on the rim of the Rhine gorge from Versam-Safien station. The route winds mostly through deciduous woodland with viewing platforms over the white cliffs
-    and the milky-green Rhine. T2. Source verification pending.
+    and the milky-green Rhine. T2.
   visits:
   - ruinaulta
-  sources: []
+  sources:
+  - https://www.2coinstravel.ch/wanderung-ruinaulta-rheinschlucht-caumasee/
+  - https://trin-verkehrsverein.ch/wanderwege-in-der-rheinschlucht/
   start_maps_url: https://www.google.com/maps/place/?q=46.80738,9.3103&z=16
   equipment_list:
   - Sturdy hiking shoes
@@ -1793,10 +1797,12 @@ hikes:
   start_maps_url: https://maps.app.goo.gl/u95QRUoQnMAFjZAx9
 - id: klontalersee-default
   description_extra: Postbus 506 from Glarus along the Klöntalstrasse to Klöntal-Vorauen. Around-the-lake loop on a marked path, T1. Campsites at Güntlenau and Vorauen, boat rental,
-    and lakeshore swimming spots. Good base for harder routes up to the Glärnischhütte. Source verification pending.
+    and lakeshore swimming spots. Good base for harder routes up to the Glärnischhütte.
   visits:
   - klontalersee
-  sources: []
+  sources:
+  - https://www.2coinstravel.ch/wanderung-kloentalersee-glarus/
+  - https://www.wandersite.ch/Tageswanderung/512a_Glarus.html
   name: Lakeshore loop on the marked path
   sac_grade: T1
   effort_label: Easy
@@ -1804,7 +1810,7 @@ hikes:
   start: Klöntal-Vorauen (Postbus 506 from Glarus)
   transit:
     bus: Glarus, then Postbus 506 along the Klöntalstrasse to Klöntal-Vorauen
-  start_maps_url: https://www.google.com/maps/place/?q=47.02428,8.94545&z=16
+  start_maps_url: https://maps.app.goo.gl/GRz1SKRDopKnrprF8
 - id: stoos_kapelle-route-35
   start: Schwyz, Stoosbahn
   description_extra: Reach Stoos via the Stoosbahn funicular from Schwyz. From the upper Stoos station, the chapel is a 2-3 minute walk. T1. Combine with the ridge walk to Fronalpstock
@@ -1881,8 +1887,10 @@ hikes:
   visits:
   - falensee
   description_extra: From the Brülisau cable car to Hoher Kasten, traverse the Saxer Lücke ridge and drop down to the lake at 1,446 m. Berggasthaus Bollenwees at the north end of the
-    lake has dorm beds and food. Return via the Sämtisersee valley to Brülisau, plan a full day. T2 throughout. Source verification pending.
-  sources: []
+    lake has dorm beds and food. Return via the Sämtisersee valley to Brülisau, plan a full day. T2 throughout.
+  sources:
+  - https://www.off-the-trail.de/saxer-luecke/
+  - https://mountainmoments.de/atemberaubende-wanderung-zur-saxer-luecke-und-zum-faehlensee/
   quickest_for:
   - falensee
   equipment_list:
@@ -1892,6 +1900,7 @@ hikes:
   cable_car_ids:
   - hoher-kasten-bahn
   start_maps_url: https://www.google.com/maps/place/?q=47.29645,9.4568&z=16
+  name: From Brülisau via Hoher Kasten cable car (Saxer Lücke loop)
 - id: batoni_wasserfallarena-route-125
   sac_grade: T2
   effort_label: Easy
@@ -2149,7 +2158,7 @@ hikes:
   - glacier_des_bossons
   cable_car_ids:
   - glacier-bossons-chairlift
-  start_maps_url: https://www.google.com/maps/place/?q=45.90715,6.84205&z=16
+  start_maps_url: https://maps.app.goo.gl/DCjyDjQNbKgn5bY68
   duration_min: 80
   distance_km: 2.6
   gain_m: 268
@@ -2928,7 +2937,7 @@ hikes:
   sources:
   - https://www.visorando.com/en/walk-dent-d-oche/
   - https://www.altituderando.com/spip.php?article2375
-  start_maps_url: https://www.google.com/maps/place/?q=46.36458,6.77011&z=16
+  start_maps_url: https://maps.app.goo.gl/MaG3Dyj8oht85Udx6
   distance_km: 5.7
 - id: falensee-from-brulisau-via-samtisersee
   visits:
@@ -2952,6 +2961,7 @@ hikes:
   - berggasthaus-bollenwees
   start_maps_url: https://www.google.com/maps/place/?q=47.29645,9.4568&z=16
   distance_km: 8.0
+  name: Valley walk from Brülisau via Sämtisersee
 - id: gelmersee-from-handegg-on-foot
   visits:
   - gelmersee
@@ -3760,7 +3770,7 @@ hikes:
   - flegere-cable-car
   quickest_for:
   - refuge_du_lac_blanc
-  start_maps_url: https://www.google.com/maps/place/?q=45.964,6.888&z=16
+  start_maps_url: https://maps.app.goo.gl/DtePWQPBnrB6MFSH7
 - id: lac_de_peyre-colombiere
   visits:
   - lac_de_peyre
@@ -3891,10 +3901,10 @@ hikes:
   transit:
     train: La Sarraz (CFF, on the Lausanne-Vallorbe line)
   description_extra: The signposted loop from La Sarraz drops through forest down to the waterfall, follows the gorge, and climbs back via fields. About 6 km, 1 h 45 walking, T1, family-friendly.
-    Park at the château or take the train (the station is a 10-minute walk from the trailhead). For a shorter visit, you can also drive to a forest pull-out at 46.6549, 6.4921 and walk
-    down to the falls in 15 minutes. Path down to the waterfall stays wet for days after rain, bring grippy shoes.
+    Park at the château or take the train (the station is a 10-minute walk from the trailhead). Path down to the waterfall stays wet for days after rain, bring grippy shoes.
   sources:
-  - https://www.myswitzerland.com/en-ch/experiences/route/nozon-gorge-waterfalls-between-romainmotier-and-la-sarraz/
+  - https://www.suisse-rando.ch/fr/propositions-de-randonnees/863/Des-lieux-charges-d-histoire-au-pied-du-Jura-VD
+  - https://balades.ch/balade/autour-de-la-sarraz/1699
   start_maps_url: https://www.google.com/maps/place/?q=46.66037,6.51426&z=16
 - id: etang_de_la_gruere-pond-loop
   name: Loop around the pond from La Theurre
@@ -3915,7 +3925,7 @@ hikes:
   sources:
   - https://www.j3l.ch/en/P33241/destinations/nature-sites/etang-de-la-gruere
   - https://www.myswitzerland.com/en-ch/destinations/etang-de-la-gruere/
-  start_maps_url: https://www.google.com/maps/place/?q=47.24142,7.03806&z=16
+  start_maps_url: https://maps.app.goo.gl/4UFG8i1mAbxtLiYQ7
 - id: gorges_du_dailley-from-salvan
   name: Salvan to Van d'en Bas through the gorge
   visits:
@@ -4500,7 +4510,7 @@ hikes:
   - https://map.geo.admin.ch/
   quickest_for:
   - tine_de_conflens
-  start_maps_url: https://www.google.com/maps/place/La+Tine+de+Conflens/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478dcb0a9141171b:0xcf6c1e11b5285bf5!8m2!3d46.6557956!4d6.4939321!16s%2Fg%2F11jp59nc8b
+  start_maps_url: https://maps.app.goo.gl/WvMBHyuDSSZkpQ238
 - id: st_prex-drive-up
   visits:
   - st_prex
@@ -4518,7 +4528,7 @@ hikes:
   - https://www.sbb.ch/en
   quickest_for:
   - st_prex
-  start_maps_url: https://www.google.com/maps/place/?q=46.47843,6.45643&z=15
+  start_maps_url: https://maps.app.goo.gl/ojYbjSEFdnK7ojH68
 - id: marchairuz-drive-up
   visits:
   - marchairuz
@@ -4586,7 +4596,7 @@ hikes:
   - https://www.heidiland.com/
   quickest_for:
   - gigerwaldsee
-  start_maps_url: https://www.google.com/maps/place/Gigerwaldsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784cffda003869d:0x455bdb0c4710be00!8m2!3d46.9145345!4d9.374917!16s%2Fm%2F02x6g66
+  start_maps_url: https://maps.app.goo.gl/qshCPSWQGpqmcjQm7
 - id: caumasee-drive-up
   visits:
   - caumasee
