@@ -137,6 +137,17 @@
     } catch (e) { return "unknown"; }
   })();
   try { localStorage.setItem("hb:last_source:v1", window.HB_SOURCE); } catch (e) {}
+  /* Color scheme · derived once at page load via prefers-color-scheme.
+     Lets the dashboard ask "do dark-mode users convert at a different
+     rate?" since /map9/ supports both via media query (no toggle, no
+     persisted opt-in · purely system-driven). Stashed for the success
+     page to read back like source. */
+  window.HB_THEME = (function () {
+    try {
+      return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+    } catch (e) { return "unknown"; }
+  })();
+  try { localStorage.setItem("hb:last_theme:v1", window.HB_THEME); } catch (e) {}
   window.hbTrack = function (name, extra) {
     try {
       var k = "_hbf_" + name;
@@ -147,6 +158,7 @@
         name: name,
         source_page: window.HB_SOURCE_PAGE,
         source: window.HB_SOURCE,
+        theme: window.HB_THEME,
       };
       /* hero_variant set by the split-test script in <head> on
          landing pages. Auto-attach so every event is sliceable
