@@ -38,13 +38,39 @@
   /* Engagement tracking helper · see /map9/index.html for rationale.
      Two intent signals: about_video_played + reached_checkout. */
   window.HB_SOURCE_PAGE = "it_map9";
+  window.HB_SOURCE = (function () {
+    try {
+      var p = new URLSearchParams(location.search);
+      if (p.get("s")) return "manychat";
+      var utm = (p.get("utm_source") || "").toLowerCase();
+      if (utm === "affiliate") return "affiliate";
+      if (utm === "linktree" || utm === "linktr.ee") return "linktree";
+      if (utm === "facebook" || utm === "fb") return "facebook_ads";
+      if (utm === "instagram" || utm === "ig") return "instagram_ads";
+      if (p.get("fbclid")) return "facebook_ads";
+      if (utm) return utm.slice(0, 24);
+      var ref = (document.referrer || "");
+      if (ref) {
+        var h = "";
+        try { h = new URL(ref).hostname; } catch (e) {}
+        if (h && h.indexOf("hikebeast") === -1) return "referral";
+      }
+      return "direct";
+    } catch (e) { return "unknown"; }
+  })();
+  try { localStorage.setItem("hb:last_source:v1", window.HB_SOURCE); } catch (e) {}
   window.hbTrack = function (name, extra) {
     try {
       var k = "_hbf_" + name;
       if (window[k]) return;
       window[k] = true;
       if (typeof window.va !== "function") return;
-      var props = { name: name, source_page: window.HB_SOURCE_PAGE };
+      var props = {
+        name: name,
+        source_page: window.HB_SOURCE_PAGE,
+        source: window.HB_SOURCE,
+      };
+      if (window.HB_HERO_VARIANT) props.hero_variant = window.HB_HERO_VARIANT;
       if (extra) for (var p in extra) if (Object.prototype.hasOwnProperty.call(extra, p)) props[p] = extra[p];
       window.va("event", props);
     } catch (e) { /* noop */ }
@@ -2604,6 +2630,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           hero_variant: variant,
           active_ms: Math.round(activeMs),
         });
+        if (window.hbTrack) window.hbTrack("session_end", { time_on_site_ms: Math.round(activeMs) });
       } else {
         activeStart = performance.now();
       }
@@ -2621,6 +2648,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         hero_variant: variant,
         active_ms: Math.round(activeMs),
       });
+      if (window.hbTrack) window.hbTrack("session_end", { time_on_site_ms: Math.round(activeMs) });
     });
   })();
 })();
