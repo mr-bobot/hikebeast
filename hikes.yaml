@@ -34,7 +34,7 @@ hikes:
   sources:
   - https://trustyideas.ch/kanton-bern/oltschibachfall-meiringen/
   - https://www.alltrails.com/trail/switzerland/bern/unterbach-oltschibachfall-wasserfall
-  start_maps_url: https://www.google.com/maps/place/?q=46.7398,8.1146&z=16
+  start_maps_url: https://maps.app.goo.gl/1SXDFq6eM2X43GB5A
   duration_min: 15
   gain_m: 40
   distance_km: 0.8
@@ -479,7 +479,7 @@ hikes:
     boat: Lake Brienz steamship from Interlaken or Brienz (April to October)
   quickest_for:
   - iseltwald
-  start_maps_url: https://www.google.com/maps/place/?q=46.71179,7.96396&z=16
+  start_maps_url: https://maps.app.goo.gl/Dmfr6mUsmuhjB3Z8A
 - id: oeschinensee-kandersteg-foot
   name: From Kandersteg on foot
   start: Kandersteg train station
@@ -1008,7 +1008,7 @@ hikes:
   start: Lac de Derborence parking
   transit:
     car: Drive in from Aven via the narrow Lizerne valley road
-  start_maps_url: https://www.google.com/maps/place/?q=46.27908,7.21695&z=16
+  start_maps_url: https://maps.app.goo.gl/2SHPYYXsPaDbesB39
 - id: la_fouly-tmb-arnuva-la-fouly
   name: Tour du Mont Blanc · Arnuva → Grand Col Ferret → La Fouly
   start: Arnuva (Italian Val Ferret)
@@ -1269,15 +1269,16 @@ hikes:
   duration_min: 135
   sac_grade: T4
   effort_label: Moderate, brief exposure
-  description_extra: Direct ascent from Allières station (MOB line) up to Cape au Moine at 1,941 m. About 4 km one-way and 850 m of cumulative gain, around 2 h 15 of walking. T4 with
-    one short exposed scrambling passage on the summit ridge — narrow, slippery when wet, no protection. Return via the same trail.
+  description_extra: Direct ascent from Allières station (MOB line, 1,006 m) up to Cape au Moine at 1,941 m. About 4 km one-way and 940 m of cumulative gain, around 2 h 15 of walking. T4
+    with one short exposed scrambling passage on the summit ridge — narrow, slippery when wet, no protection. Return via the same trail.
   visits:
   - cap_au_moine
   sources:
-  - https://sommets.ch/excursions/details/cape_au_moine/
+  - https://www.camptocamp.org/routes/47543/fr/cape-au-moine-des-verraux-depuis-allieres
+  - https://www.visinand.ch/Sommets/Cape_au_Moine/2019_06/Cape_au_Moine.htm
   start_maps_url: https://www.google.com/maps/place/?q=46.46982,7.00789&z=16
   distance_km: 4.0
-  gain_m: 850
+  gain_m: 940
   equipment_list:
   - Sturdy mountaineering boots
   - Trekking poles
@@ -1508,7 +1509,8 @@ hikes:
   visits:
   - saxer_lucke
   sources:
-  - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/saxer-lucke-mountain-pass-1989/mountain-hiking/staubern-saxer-luecke-bollenwees-2015/
+  - https://schweizmobil.ch/en/tour/2146129216
+  - https://swissfamilyfun.com/saxer-lucke-hike/
   quickest_for:
   - saxer_lucke
   equipment_list: []
@@ -3474,24 +3476,6 @@ hikes:
   - https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/le-moleson-7794/mountain-hiking/
   - https://www.moleson.ch/en/rando/sentier-botanique/
   start_maps_url: https://www.google.com/maps/place/?q=46.56681,7.03725&z=16
-- id: oltschibachfall-from-unterbach
-  visits:
-  - oltschibachfall
-  sac_grade: T2
-  effort_label: Easy
-  equipment_list:
-  - Sturdy hiking shoes
-  start: Unterbach bei Meiringen
-  transit:
-    train: Meiringen
-    bus: PostBus 151 from Meiringen to Unterbach, Dorf
-  description_extra: Short access from the Hasliberg side of the Oltschibach gorge rather than walking the full ascent from Meiringen. From Unterbach a marked path descends through forest
-    to viewpoints below the upper falls. Water is at its fullest in late spring snowmelt.
-  sources:
-  - https://www.europeanwaterfalls.com/waterfalls/oltschibachfall/
-  quickest_for:
-  - oltschibachfall
-  start_maps_url: https://www.google.com/maps/place/?q=46.73906,8.11301&z=16
 - id: pointe_du_tsate-from-moiry-via-col-du-tsate
   visits:
   - pointe_du_tsate
@@ -4148,7 +4132,7 @@ hikes:
   - https://lauterbrunnen.swiss/en/destination/arrival.html
   quickest_for:
   - lauterbrunnen
-  start_maps_url: https://www.google.com/maps/place/Lauterbrunnen/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fa0073b1165c7:0x5392dbb55902c31!8m2!3d46.5935058!4d7.9090981!16zL20vMDFxamwz
+  start_maps_url: https://maps.app.goo.gl/rGB7DqX8Jm2isriz8
 - id: zermatt_village-drive-up
   visits:
   - zermatt_village
@@ -4251,7 +4235,7 @@ hikes:
   - https://www.postauto.ch/en/timetable-and-network
   quickest_for:
   - lac_de_derborence
-  start_maps_url: https://www.google.com/maps/place/Lac+de+Derborence/@46.2791132,7.2124191,1263m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478ec20dffda7db3:0x7a9df6822f6e8527!8m2!3d46.2793244!4d7.2172313!16s%2Fm%2F0283s7l
+  start_maps_url: https://maps.app.goo.gl/2SHPYYXsPaDbesB39
 - id: sanetschpass-drive-up
   visits:
   - sanetschpass
@@ -4419,7 +4403,7 @@ hikes:
   visits:
   - moleson
   name: Cable car to Moléson summit
-  start: Moléson summit station (Vol-au-Vent funicular from Plan-Francey)
+  start: Moléson-Village (gondola valley station)
   sac_grade: T1
   effort_label: Drive-up
   equipment_list: []
@@ -4433,7 +4417,7 @@ hikes:
   - https://www.la-gruyere.ch/en/getting-here/
   quickest_for:
   - moleson
-  start_maps_url: https://www.google.com/maps/place/?q=46.5462,7.0258&z=16
+  start_maps_url: https://maps.app.goo.gl/ggVDEAZvzKD5aw6ZA
   cable_car_ids:
   - moleson-funiculaire
 - id: gorges_du_chauderon-drive-up
