@@ -39,18 +39,19 @@
      Two intent signals: about_video_played + reached_checkout. */
   window.HB_SOURCE_PAGE = "it_map9";
   window.HB_SOURCE = (function () {
-    /* Classify the CURRENT page-load. "_ads" is only used when we have
-       a Meta-ads-specific signal (?fbclid=). utm_source=ig alone could
-       just be an organic IG share with a manual utm tag (affiliate
-       posts use this pattern), so we call it "instagram" / "facebook"
-       without the _ads suffix unless fbclid confirms paid traffic. */
+    /* Classify the CURRENT page-load via advertiser-set utm_source.
+       fbclid is intentionally ignored · Instagram's l.instagram.com
+       outbound redirector appends fbclid to ORGANIC IG link clicks
+       too (verified 2026-05-26 with dimi's affiliate IG traffic which
+       had utm=ig + fbclid + organic IG referrer · was being mislabeled
+       "facebook_ads"). For paid Meta later we'll match utm_medium=cpc
+       / paid_social, set explicitly by the advertiser in Ads Manager. */
     try {
       var p = new URLSearchParams(location.search);
       if (p.get("s")) return "manychat";
       var utm = (p.get("utm_source") || "").toLowerCase();
       if (utm === "affiliate") return "affiliate";
       if (utm === "linktree" || utm === "linktr.ee") return "linktree";
-      if (p.get("fbclid")) return "facebook_ads";
       if (utm === "facebook" || utm === "fb") return "facebook";
       if (utm === "instagram" || utm === "ig") return "instagram";
       if (utm) return utm.slice(0, 24);
@@ -72,8 +73,16 @@
      only overwrite the stash when the new value is strong. */
   (function () {
     var WEAK = { direct: 1, unknown: 1, referral: 1 };
+    /* 2026-05-26 migration · pre-fix classifier mislabeled organic
+       IG outbound (utm=ig + Meta-appended fbclid) as "facebook_ads".
+       Clear that stash so returning users don't keep getting wrong
+       attribution on direct re-visits. Same for "instagram_ads"
+       (older classifier produced it from utm=ig). New classifier
+       never returns these values, so anything stashed is stale. */
+    var STALE_VALUES = { facebook_ads: 1, instagram_ads: 1 };
     try {
       var stashed = localStorage.getItem("hb:last_source:v1") || "";
+      if (stashed && STALE_VALUES[stashed]) stashed = "";
       if (stashed && !WEAK[stashed] && WEAK[window.HB_SOURCE]) {
         window.HB_SOURCE = stashed;  // prefer prior strong attribution
       }
