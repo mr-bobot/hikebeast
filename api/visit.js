@@ -26,13 +26,28 @@ export default async function handler(req, res) {
     device_type,
     is_ig_webview,
     // visitor_id · client-generated UUID, sticky in localStorage.
-    // Added 2026-05-24 for the AllVisits tracking sheet · the only
-    // identifier that's present even for anonymous Linktree / ad
-    // traffic that has no ManyChat subscriber_id.
+    // Re-enabled 2026-05-26 for the revived AllVisits tracking sheet ·
+    // the only identifier that's present even for anonymous Linktree /
+    // ad traffic that has no ManyChat subscriber_id.
     visitor_id,
     // referrer · document.referrer at landed time. Lets us trace
     // traffic source for AllVisits rows that lack utm_*.
     referrer,
+    // Classified traffic source · "manychat" | "affiliate" | "linktree"
+    // | "facebook_ads" | "instagram_ads" | "referral" | "direct" |
+    // "unknown". Computed client-side at page-load by HB_SOURCE, mirror
+    // of the Vercel Analytics property of the same name.
+    source,
+    // Color scheme at page-load · "dark" | "light" | "unknown".
+    // Derived via prefers-color-scheme media query.
+    theme,
+    // Affiliate slug from ?r=<username> (sticky 60-day localStorage
+    // stash on the landing page). Lets the AllVisits sheet answer
+    // "how much traffic did each affiliate bring".
+    affiliate_ref,
+    // Purchase-side fields, only on `purchased` event from success page.
+    product,
+    paid_at,
     // Meta CAPI InitiateCheckout signal · sent by landing pages when
     // the buyer first interacts with the embedded Stripe form.
     session_id,
@@ -46,7 +61,10 @@ export default async function handler(req, res) {
   // `engaged` + `session_end` added 2026-05-16 for the v12 hero split test.
   // `initiate_checkout` added 2026-05-20 to mirror the pixel IC event
   // via Meta CAPI for better ad-optimization signal.
-  const ALLOWED_EVENTS = new Set(["scrolled", "video_clicked", "engaged", "session_end", "initiate_checkout"]);
+  // `purchased` added 2026-05-26 · fired from the success page after
+  // /api/checkout/session confirms paid:true so the AllVisits sheet
+  // gets a row joinable to the visit beacons by visitor_id.
+  const ALLOWED_EVENTS = new Set(["scrolled", "video_clicked", "engaged", "session_end", "initiate_checkout", "purchased"]);
   const safeEvent = typeof event === "string" && ALLOWED_EVENTS.has(event) ? event : "";
   // hero_variant is the v12 split-test bucket ID (e.g. "01"..."08"). Tight
   // regex so a malformed client can't pollute the column.
@@ -99,6 +117,19 @@ export default async function handler(req, res) {
     ? visitor_id.slice(0, 64)
     : "";
   const safeReferrer = typeof referrer === "string" ? referrer.slice(0, 500) : "";
+  // source / theme · 24-char cap, enum-ish so a hostile client can't
+  // pollute the column with arbitrary strings. The classifier produces
+  // values up to ~16 chars ("instagram_ads"), 24 is plenty of margin.
+  const safeSource = typeof source === "string" ? source.slice(0, 24) : "";
+  const safeTheme = typeof theme === "string" && /^(dark|light|unknown)$/.test(theme) ? theme : "";
+  // affiliate_ref · same regex as the Sheet attribution path
+  // (a-z0-9._-, 2-32 chars). Sticky from ?r=<slug> on landing.
+  const safeAffiliateRef = typeof affiliate_ref === "string" && /^[a-z0-9._-]{2,32}$/.test(affiliate_ref)
+    ? affiliate_ref
+    : "";
+  // purchase-only fields
+  const safeProduct = typeof product === "string" ? product.slice(0, 64) : "";
+  const safePaidAt = typeof paid_at === "string" ? paid_at.slice(0, 64) : "";
   const hasAnyId = !!(subscriber_id || token || safeEvent || safeVisitorId);
   if (!hasAnyId) {
     return res.status(400).json({ error: "subscriber_id, token, event, or visitor_id required" });
@@ -148,17 +179,46 @@ export default async function handler(req, res) {
     );
   }
 
-  // AllVisits sheet · REMOVED 2026-05-24. The page-side va('event',
-  // {name: 'hero_seen', ...}) call hits Vercel Analytics directly with
-  // hero_variant + source_page as custom-event properties. Aggregate
-  // counts (variant impressions, buy rate per variant via UTM funnel)
-  // are computed in the Vercel dashboard. Removed the second Apps
-  // Script fetch because (a) it doubled lambda outbound calls for zero
-  // user-visible benefit, (b) the va() approach is GDPR-aggregate by
-  // design with no stable cross-session identifier, and (c) Vercel
-  // Analytics is already wired on every /map9/ page header. visitor_id
-  // and referrer are still accepted in the request body for the
-  // Signups-side path's hasAnyId gate, but the AllVisits fork is gone.
+  // AllVisits sheet · re-enabled 2026-05-26. Fires for EVERY visit
+  // regardless of subscriber_id so Linktree + Facebook-ads + direct
+  // traffic finally show up alongside ManyChat-funnel visitors. The
+  // Vercel Analytics dashboard couldn't do property-level aggregation
+  // (no cross-tab UI for hero_variant × source × theme) so we fan
+  // back to Apps Script · queryable via the existing get_snapshot
+  // pattern. Vercel events stay for live aggregate dashboards.
+  if (url) {
+    const allEvent = safeEvent || "landed";
+    tasks.push(
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "log_visit",
+          secret: process.env.SHEETS_SECRET,
+          event_type: allEvent,
+          source_page: safeSourcePage,
+          visitor_id: safeVisitorId,
+          hero_variant: safeHeroVariant,
+          subscriber_id: subscriber_id || "",
+          referrer: safeReferrer,
+          utm_source: safeUtmSource,
+          utm_medium: safeUtmMedium,
+          utm_campaign: safeUtmCampaign,
+          browser_language: safeBrowserLang,
+          device_type: safeDeviceType,
+          is_ig_webview: safeIsIgWebview,
+          ip_country: ipCountry,
+          time_on_site_ms: safeActiveMs || undefined,
+          source: safeSource,
+          theme: safeTheme,
+          affiliate_ref: safeAffiliateRef,
+          product: safeProduct,
+          paid_at: safePaidAt,
+        }),
+        signal: AbortSignal.timeout(15000),
+      }).catch((err) => console.error("AllVisits log failed:", err)),
+    );
+  }
 
   // Meta CAPI InitiateCheckout fire · only when the browser sends the
   // beacon after a real user interaction with #checkout. session_id is

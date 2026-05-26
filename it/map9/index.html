@@ -70,6 +70,19 @@
     } catch (e) { return "unknown"; }
   })();
   try { localStorage.setItem("hb:last_theme:v1", window.HB_THEME); } catch (e) {}
+  /* Affiliate ref · read fresh from `hb:r` on each call rather than
+     cache at init, because persistRefIfPresent in the body IIFE writes
+     to `hb:r` AFTER this <head> script runs · the very first page-load
+     with ?r= in URL doesn't have the stash yet at init time. Use this
+     wherever the lambda body needs the slug. */
+  window.hbAffiliateRef = function () {
+    try {
+      var s = localStorage.getItem("hb:r");
+      if (!s) return "";
+      var o = JSON.parse(s);
+      return (o && o.slug && o.exp && o.exp > Date.now()) ? o.slug : "";
+    } catch (e) { return ""; }
+  };
   window.hbTrack = function (name, extra) {
     try {
       var k = "_hbf_" + name;
@@ -2553,6 +2566,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
         source_page: "it_map9",
+        affiliate_ref: window.hbAffiliateRef(),
+        source: window.HB_SOURCE || "",
+        theme: window.HB_THEME || "",
         browser_language: navigator.language || "",
         hero_variant: window.HB_HERO_VARIANT || "",
         device_type: (function () {
@@ -2577,6 +2593,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         name: "hero_seen",
         hero_variant: window.HB_HERO_VARIANT || "",
         source_page: "it_map9",
+        affiliate_ref: window.hbAffiliateRef(),
+        source: window.HB_SOURCE || "",
+        theme: window.HB_THEME || "",
       });
     }
   } catch (e) { /* noop */ }
@@ -2620,6 +2639,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             subscriber_id: cohortSubscriber,
             visitor_id: visitorId,
             source_page: "it_map9",
+            affiliate_ref: window.hbAffiliateRef(),
+            source: window.HB_SOURCE || "",
+            theme: window.HB_THEME || "",
             hero_variant: variant,
           }),
           keepalive: true,
@@ -2654,6 +2676,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           subscriber_id: cohortSubscriber,
           visitor_id: visitorId,
           source_page: "it_map9",
+          affiliate_ref: window.hbAffiliateRef(),
+          source: window.HB_SOURCE || "",
+          theme: window.HB_THEME || "",
           hero_variant: variant,
           active_ms: Math.round(activeMs),
         });
@@ -2672,6 +2697,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         subscriber_id: cohortSubscriber,
         visitor_id: visitorId,
         source_page: "it_map9",
+        affiliate_ref: window.hbAffiliateRef(),
+        source: window.HB_SOURCE || "",
+        theme: window.HB_THEME || "",
         hero_variant: variant,
         active_ms: Math.round(activeMs),
       });
