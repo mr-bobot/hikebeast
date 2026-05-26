@@ -17,30 +17,54 @@
   try {
     var pref = null;
     try { pref = localStorage.getItem('hb_lang'); } catch (e) {}
-    // Respect ANY explicit non-DE preference · the navbar lang picker
-    // now offers EN/DE/FR/IT, so a user who clicked FR or IT shouldn't
-    // get auto-redirected to /de/ on their next /map9/ visit just
-    // because their browser language happens to be German. The only
-    // case that should hit the DE-redirect path is no-pref + DE
-    // browser (still does), or explicit hb_lang='de'.
-    if (pref && pref !== 'de') return;
-    // Wants-DE signals (any one triggers):
-    //   (a) explicit hb_lang='de' from a prior DE-pill click
-    //   (b) primary navigator.language starts with 'de'
-    //   (c) any entry in navigator.languages starts with 'de' — catches
-    //       Safari users whose iOS Preferred Languages has en-US first
-    //       but de-* second, where the primary-only check missed.
-    var wantsDE = pref === 'de';
-    if (!wantsDE && (navigator.language || '').toLowerCase().indexOf('de') === 0) wantsDE = true;
-    if (!wantsDE && navigator.languages) {
-      for (var i = 0; i < navigator.languages.length; i++) {
-        if ((navigator.languages[i] || '').toLowerCase().indexOf('de') === 0) { wantsDE = true; break; }
+    // Helper · check if any browser-language signal starts with the
+    // given 2-letter code. Catches primary navigator.language plus
+    // every entry in navigator.languages, which matters for Safari
+    // users whose iOS Preferred Languages array has en-US first but
+    // de-CH / fr-CH / it-CH second.
+    function browserWants(code) {
+      if ((navigator.language || '').toLowerCase().indexOf(code) === 0) return true;
+      if (navigator.languages) {
+        for (var i = 0; i < navigator.languages.length; i++) {
+          if ((navigator.languages[i] || '').toLowerCase().indexOf(code) === 0) return true;
+        }
+      }
+      return false;
+    }
+    // DE redirect · own-slug-in-alternation regex form (mandatory per
+    // PR #78/#79, lint-enforced). Alternation covers every legacy
+    // /map[3-8]/ + /themap/ + /map/ so this same block can be copied
+    // verbatim into those pages too.
+    if (!pref || pref === 'de') {
+      if (pref === 'de' || browserWants('de')) {
+        var deTarget = location.pathname.replace(/^\/(map9|map8|map7|map6|map5|map4|map3|themap|map)\b/, '/de/$1');
+        if (deTarget !== location.pathname) {
+          location.replace(deTarget + location.search + location.hash);
+          return;
+        }
       }
     }
-    if (!wantsDE) return;
-    var target = location.pathname.replace(/^\/(map9|map8|map7|map6|map5|map4|map3|themap|map)\b/, '/de/$1');
-    if (target === location.pathname) return;
-    location.replace(target + location.search + location.hash);
+    // FR redirect · /fr/map9/ is the only French sales page, so the
+    // alternation is narrow. No /fr/map8/, /fr/themap/ etc. exist.
+    if (!pref || pref === 'fr') {
+      if (pref === 'fr' || browserWants('fr')) {
+        var frTarget = location.pathname.replace(/^\/(map9)\b/, '/fr/$1');
+        if (frTarget !== location.pathname) {
+          location.replace(frTarget + location.search + location.hash);
+          return;
+        }
+      }
+    }
+    // IT redirect · same shape as FR.
+    if (!pref || pref === 'it') {
+      if (pref === 'it' || browserWants('it')) {
+        var itTarget = location.pathname.replace(/^\/(map9)\b/, '/it/$1');
+        if (itTarget !== location.pathname) {
+          location.replace(itTarget + location.search + location.hash);
+          return;
+        }
+      }
+    }
   } catch (e) {}
 })();
 </script>
