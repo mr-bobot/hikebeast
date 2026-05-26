@@ -191,13 +191,15 @@ export default async function handler(req, res) {
   }
 
   // AllVisits sheet · re-enabled 2026-05-26. Fires for EVERY visit
-  // regardless of subscriber_id so Linktree + Facebook-ads + direct
-  // traffic finally show up alongside ManyChat-funnel visitors. The
-  // Vercel Analytics dashboard couldn't do property-level aggregation
-  // (no cross-tab UI for hero_variant × source × theme) so we fan
-  // back to Apps Script · queryable via the existing get_snapshot
-  // pattern. Vercel events stay for live aggregate dashboards.
-  if (url) {
+  // that carries either a source_page (landed beacons from any landing
+  // page) OR a visitor_id (engagement / session_end / purchased events
+  // that update an existing row). initiate_checkout beacons (no
+  // source_page, no visitor_id · only event + session_id + value +
+  // currency + fbc + fbp) used to slip through here and Apps Script's
+  // log_visit append-path would create useless empty rows · 2026-05-26
+  // post-PR-#113 cleanup. The Meta CAPI fork below still fires for
+  // initiate_checkout · those signals just don't belong in AllVisits.
+  if (url && (safeSourcePage || safeVisitorId)) {
     const allEvent = safeEvent || "landed";
     tasks.push(
       fetch(url, {
