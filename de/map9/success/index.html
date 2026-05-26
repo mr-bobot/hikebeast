@@ -741,14 +741,24 @@ fbq('track', 'PageView');
             try { trafficSource = localStorage.getItem("hb:last_source:v1") || ""; } catch (e) {}
             var theme = "";
             try { theme = localStorage.getItem("hb:last_theme:v1") || ""; } catch (e) {}
+            var affiliateRef = "";
             try {
-              window.va("event", {
-                name: "purchase",
-                source_page: "de_map9",
-                hero_variant: heroVariant,
-                source: trafficSource,
-                theme: theme,
-              });
+              var __r = localStorage.getItem("hb:r");
+              if (__r) {
+                var __ro = JSON.parse(__r);
+                if (__ro && __ro.slug && __ro.exp && __ro.exp > Date.now()) affiliateRef = __ro.slug;
+              }
+            } catch (e) {}
+            var purchaseProps = {
+              name: "purchase",
+              source_page: "de_map9",
+              hero_variant: heroVariant,
+              source: trafficSource,
+              theme: theme,
+            };
+            if (affiliateRef) purchaseProps.affiliate_ref = affiliateRef;
+            try {
+              window.va("event", purchaseProps);
               try { localStorage.setItem(vaKey, "1"); } catch (e) {}
             } catch (e) {}
           }
