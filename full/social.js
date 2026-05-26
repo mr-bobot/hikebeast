@@ -83,7 +83,85 @@
       .filter(Boolean);
     return h.length ? new Set(h) : null;
   })();
+  // ── Preview mode (recording-safe view for affiliates) ───────────────
+  // Toggle persisted by /full/affiliate/materials/ to
+  // localStorage['hb:preview_mode:v1'] = '1'. When on, the webapp
+  // shows a redacted "demo" view so creators can record screen
+  // captures without exposing all paid spots / un-released photos.
+  //
+  // Rule set, per Leon (2026-05-26):
+  //   - chapter card list · only spots in PREVIEW_ALLOWED_SPOTS survive
+  //   - browse + swipe photos · keep only credit === '@leon.helg'
+  //     (single-creator hero so recordings look consistent)
+  //   - spot-detail photos · keep '@leon.helg', '@oliwear.j', and
+  //     Unsplash photographers (FirstName-LastName style credits ·
+  //     they read as "guest photography" rather than competing-creator
+  //     IG handles which we don't want visible in promo recordings)
+  //
+  // The filter composes with the existing ?by=<handle> URL filter ·
+  // both have to pass for a photo to be visible.
+  const PREVIEW_MODE = (() => {
+    try { return localStorage.getItem('hb:preview_mode:v1') === '1'; }
+    catch { return false; }
+  })();
+  // Curated list of recording-safe spot slugs. Leon populates this ·
+  // until then the set is empty, which means preview mode hides ALL
+  // chapter / browse / swipe content (safe default · keeps the
+  // pre-curation state unambiguously "nothing to record yet").
+  const PREVIEW_ALLOWED_SPOTS = new Set([
+    'tannhorn',
+    'augstmatthorn',
+    'fulberg',
+    'les_cheserys',
+    'viewpoint_beatenberg',
+    'riffelsee',
+    'schafler',
+    'falensee',
+    'saxer_lucke',
+    'bachalpsee',
+    'oeschinensee',
+    'seealpsee',
+    'hardergrat_trail',
+    'joriseen',
+    'limmernsee',
+    'triftbrucke',
+    'morteratsch_glacier',
+    'gelmersee',
+    'pic_de_jallouvre',
+    'batoni_wasserfallarena',
+  ]);
+  function previewSpotAllowed(slug) {
+    if (!PREVIEW_MODE) return true;
+    if (!slug) return false;
+    return PREVIEW_ALLOWED_SPOTS.has(String(slug));
+  }
+  function previewCreditMode() {
+    // 'strict' on browse / swipe (single-creator), 'lenient' on
+    // spot-detail (Leon + Oliver + Unsplash), 'off' elsewhere.
+    const p = location.pathname || '';
+    if (/\/(browse|swipe)\//.test(p)) return 'strict';
+    if (/\/spot\//.test(p))           return 'lenient';
+    return 'off';
+  }
+  function previewCreditAllowed(credit) {
+    if (!PREVIEW_MODE) return true;
+    const mode = previewCreditMode();
+    if (mode === 'off') return true;
+    if (!credit) return false;
+    const c = String(credit);
+    if (mode === 'strict') return c === '@leon.helg';
+    // 'lenient' · Leon, Oliver, or Unsplash. Unsplash credits are
+    // FirstName-LastName format · always start with a capital letter
+    // and never carry the @ prefix that IG handles do. zimydakid is
+    // lowercase + no @ → fails the capital check, correctly excluded.
+    if (c === '@leon.helg' || c === '@oliwear.j') return true;
+    return /^[A-Z]/.test(c);
+  }
+
   function matchesByCredit(credit) {
+    // Preview mode tightens the photo filter further · runs first so
+    // we drop the credit before the ?by= filter even looks at it.
+    if (!previewCreditAllowed(credit)) return false;
     if (!BY_HANDLES) return true;
     if (!credit) return false;
     return BY_HANDLES.has(String(credit).toLowerCase().replace(/^@/, ''));
@@ -1014,7 +1092,13 @@
     // listing page show the filtered set without per-page changes.
     function viewSpot(spot) {
       if (!spot) return null;
-      if (!BY_HANDLES) return spot;
+      // Preview mode · drop spots whose slug isn't on Leon's curated
+      // recording-safe list. Anchor lives at spotKey's right half.
+      if (PREVIEW_MODE) {
+        const anchor = (spot.spotKey || '').split('#')[1] || null;
+        if (!previewSpotAllowed(anchor)) return null;
+      }
+      if (!BY_HANDLES && !PREVIEW_MODE) return spot;
       const photos = (spot.photos || []).filter(p => matchesByCredit(p.credit));
       if (photos.length === 0) return null;
       const primary = photos[0];
@@ -1030,7 +1114,7 @@
 
     return {
       all() {
-        if (!BY_HANDLES) return arr;
+        if (!BY_HANDLES && !PREVIEW_MODE) return arr;
         return arr.map(viewSpot).filter(Boolean);
       },
       get(spotKey) {
@@ -2777,7 +2861,7 @@
   // the arrows / dots / counter. Runs BEFORE wireBakedCarousels so the
   // carousel handlers only see the surviving slides.
   function applyByFilterToChapterCards() {
-    if (!BY_HANDLES) return;
+    if (!BY_HANDLES && !PREVIEW_MODE) return;
     const ch = currentChapterId();
     if (!ch) return;
     // Chapter pages ship the photo sidecar (HB_SPOT_IMAGES) but NOT the
@@ -2786,6 +2870,13 @@
     // credits on the first synchronous paint.
     const photosSidecar = W.HB_SPOT_IMAGES || {};
     document.querySelectorAll('.cl-card[id]').forEach(card => {
+      // Preview mode · hide cards whose slug isn't on the curated list
+      // before bothering with photo-credit walking. Runs in addition to
+      // the BY_HANDLES per-photo filter below, so both have to pass.
+      if (PREVIEW_MODE && !previewSpotAllowed(card.id)) {
+        card.style.display = 'none';
+        return;
+      }
       const key = `${ch}#${card.id}`;
       const spot = W.HB.spots.rawGet(key);
       const allPhotos = (spot && spot.photos && spot.photos.length)
