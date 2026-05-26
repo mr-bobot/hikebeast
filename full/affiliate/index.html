@@ -293,19 +293,12 @@
       </div>
 
       <div class="sec first">
-        <p class="sec-label">English</p>
+        <p class="sec-label">Share link</p>
         <div class="share-controls">
           <span class="share-url" id="linkEn">hikebeast.ch/map9?r=…</span>
           <button type="button" class="btn-copy" data-target="linkEn">Copy</button>
         </div>
-      </div>
-
-      <div class="sec">
-        <p class="sec-label">Deutsch</p>
-        <div class="share-controls">
-          <span class="share-url" id="linkDe">hikebeast.ch/de/map9?r=…</span>
-          <button type="button" class="btn-copy" data-target="linkDe">Copy</button>
-        </div>
+        <p class="sec-hint">DE / FR / IT visitors are auto-redirected to their language on /map9/ · share this one link everywhere.</p>
       </div>
 
       <div class="sec">
@@ -359,7 +352,6 @@
     const elNotEligible  = document.getElementById('affNotEligible');
     const elContent      = document.getElementById('affContent');
     const elLinkEn    = document.getElementById('linkEn');
-    const elLinkDe    = document.getElementById('linkDe');
     const elStatTotal = document.getElementById('statTotal');
     const elStatCount = document.getElementById('statCount');
     const elList      = document.getElementById('affList');
@@ -430,10 +422,8 @@
     function paintShareLinks(username) {
       const enc = encodeURIComponent(username);
       const utm = 'utm_source=affiliate&utm_medium=referral&utm_campaign=' + enc;
-      const enUrl = 'https://hikebeast.ch/map9?r=' + enc + '&' + utm;
-      const deUrl = 'https://hikebeast.ch/de/map9?r=' + enc + '&' + utm;
-      elLinkEn.textContent = enUrl; elLinkEn.dataset.url = enUrl;
-      elLinkDe.textContent = deUrl; elLinkDe.dataset.url = deUrl;
+      const url = 'https://hikebeast.ch/map9?r=' + enc + '&' + utm;
+      elLinkEn.textContent = url; elLinkEn.dataset.url = url;
     }
 
     // One handler for all `[data-target="<linkId>"]` Copy buttons. Reads
