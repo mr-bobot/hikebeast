@@ -376,6 +376,36 @@ export const adminMintClaimLink = mutation({
   },
 });
 
+// Backfill an existing user's instagramHandle. Used by the one-shot
+// scripts/backfill-instagram-to-convex-stripe.mjs (2026-05-26) to
+// mirror ManyChat-sourced IG handles from the Signups sheet into
+// Convex + Stripe customer metadata. setIfEmpty semantics · won't
+// clobber a manually-set value (e.g. one a buyer typed into the
+// success-page form post-purchase). Admin-token gated.
+export const adminSetInstagramHandle = mutation({
+  args: {
+    email:           v.string(),
+    instagramHandle: v.string(),
+    adminToken:      v.string(),
+  },
+  handler: async (ctx, { email, instagramHandle, adminToken }) => {
+    await requireAdmin(adminToken);
+    const lower = email.trim().toLowerCase();
+    const handle = instagramHandle.trim().toLowerCase().replace(/^@+/, "");
+    if (!handle) return { ok: false, reason: "empty_handle" };
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_email", q => q.eq("email", lower))
+      .unique();
+    if (!user) return { ok: false, reason: "user_not_found", email: lower };
+    if (user.instagramHandle && user.instagramHandle.trim()) {
+      return { ok: true, skipped: "already_set", existing: user.instagramHandle };
+    }
+    await ctx.db.patch(user._id, { instagramHandle: handle });
+    return { ok: true, updated: true, username: user.username };
+  },
+});
+
 // Flip the affiliate flag on an existing user. Useful for promoting
 // someone to influencer / affiliate status after the fact, or revoking
 // it. Admin-token gated, same as adminCreateUser.
