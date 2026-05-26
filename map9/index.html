@@ -15,6 +15,30 @@
 // enforces that every page's own slug is in its alternation.
 (function () {
   try {
+    /* Stash the current document.referrer to localStorage if it's
+       external (not hikebeast.ch or *.vercel.app). The DE/FR/IT
+       redirect below may navigate away from this page before any
+       body script runs · without stashing first, the destination
+       page would see document.referrer = the internal /map9/ URL
+       instead of the real external source (instagram / linktree /
+       etc.). 5-minute TTL via timestamp · fresh visits a few days
+       later get a fresh document.referrer reading. */
+    try {
+      var __ref = (document.referrer || "").slice(0, 500);
+      if (__ref) {
+        var __isInternal = false;
+        try {
+          var __h = new URL(__ref).hostname.toLowerCase();
+          if (__h === "hikebeast.ch" || __h.indexOf(".hikebeast.ch") !== -1) __isInternal = true;
+          if (__h.indexOf(".vercel.app") !== -1) __isInternal = true;
+        } catch (e) {}
+        if (!__isInternal) {
+          try {
+            localStorage.setItem("hb:last_external_referrer:v1", JSON.stringify({ ref: __ref, ts: Date.now() }));
+          } catch (e) {}
+        }
+      }
+    } catch (e) {}
     var pref = null;
     try { pref = localStorage.getItem('hb_lang'); } catch (e) {}
     // Helper · check if any browser-language signal starts with the
@@ -2298,8 +2322,31 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     try { localStorage.setItem(VISITOR_KEY, visitorId); } catch (e) {}
   }
   const pageReferrer = (function () {
-    try { return (document.referrer || "").slice(0, 500); }
-    catch (e) { return ""; }
+    /* Prefer the stash written by the <head> redirect IIFE, falling
+       back to document.referrer-if-external. Strips internal hops
+       (hikebeast.ch, *.vercel.app) which were polluting the AllVisits
+       referrer column with `/map9/` after auto-redirects to
+       /de/map9/. 5-minute TTL on stash keeps stale values from
+       contaminating fresh visits days later. */
+    try {
+      var __s = localStorage.getItem("hb:last_external_referrer:v1");
+      if (__s) {
+        var __o = JSON.parse(__s);
+        if (__o && __o.ref && __o.ts && (Date.now() - __o.ts < 5 * 60 * 1000)) {
+          return String(__o.ref).slice(0, 500);
+        }
+      }
+    } catch (e) {}
+    try {
+      var ref = (document.referrer || "");
+      if (!ref) return "";
+      try {
+        var h = new URL(ref).hostname.toLowerCase();
+        if (h === "hikebeast.ch" || h.indexOf(".hikebeast.ch") !== -1) return "";
+        if (h.indexOf(".vercel.app") !== -1) return "";
+      } catch (e) { /* malformed URL · let it through */ }
+      return ref.slice(0, 500);
+    } catch (e) { return ""; }
   })();
 
   // Affiliate ref. `?r=<username>` on this page → stash in localStorage

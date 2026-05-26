@@ -2178,8 +2178,31 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     try { localStorage.setItem(VISITOR_KEY, visitorId); } catch (e) {}
   }
   const pageReferrer = (function () {
-    try { return (document.referrer || "").slice(0, 500); }
-    catch (e) { return ""; }
+    /* See /map9/index.html for the full rationale · /de/map9/,
+       /fr/map9/, /it/map9/ are redirect destinations, so
+       document.referrer often points at the internal /map9/ hop
+       instead of the real external referrer. The /map9/ head-script
+       stashed the true external referrer to localStorage before
+       redirecting; read it back here with a 5-min TTL. */
+    try {
+      var __s = localStorage.getItem("hb:last_external_referrer:v1");
+      if (__s) {
+        var __o = JSON.parse(__s);
+        if (__o && __o.ref && __o.ts && (Date.now() - __o.ts < 5 * 60 * 1000)) {
+          return String(__o.ref).slice(0, 500);
+        }
+      }
+    } catch (e) {}
+    try {
+      var ref = (document.referrer || "");
+      if (!ref) return "";
+      try {
+        var h = new URL(ref).hostname.toLowerCase();
+        if (h === "hikebeast.ch" || h.indexOf(".hikebeast.ch") !== -1) return "";
+        if (h.indexOf(".vercel.app") !== -1) return "";
+      } catch (e) {}
+      return ref.slice(0, 500);
+    } catch (e) { return ""; }
   })();
 
   // Affiliate ref. `?r=<username>` on this page → stash in localStorage
