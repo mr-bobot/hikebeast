@@ -416,10 +416,19 @@
     // the latest IG creatives. /map/ still serves the same product page +
     // checkout flow, so old links keep working — this only changes what
     // affiliates see/copy in the dashboard.
+    //
+    // UTM tagging · added 2026-05-24. Every affiliate-issued URL carries
+    // utm_source=affiliate, utm_medium=referral, utm_campaign=<username>.
+    // Lets Vercel Analytics split affiliate traffic out of overall pageviews
+    // (filter on `utm_source=affiliate`) and slice per-affiliate
+    // (`utm_campaign=<name>`). The Sheet's own attribution still keys off
+    // ?r=<username> · these utm params are purely for analytics, no
+    // double-counting downstream.
     function paintShareLinks(username) {
       const enc = encodeURIComponent(username);
-      const enUrl = 'https://hikebeast.ch/map8?r=' + enc;
-      const deUrl = 'https://hikebeast.ch/de/map8?r=' + enc;
+      const utm = 'utm_source=affiliate&utm_medium=referral&utm_campaign=' + enc;
+      const enUrl = 'https://hikebeast.ch/map8?r=' + enc + '&' + utm;
+      const deUrl = 'https://hikebeast.ch/de/map8?r=' + enc + '&' + utm;
       elLinkEn.textContent = enUrl; elLinkEn.dataset.url = enUrl;
       elLinkDe.textContent = deUrl; elLinkDe.dataset.url = deUrl;
     }

@@ -41,10 +41,16 @@
 <meta name="twitter:description" content="129 hidden Swiss spots, curated by Leon Helg." />
 <meta name="twitter:image" content="https://hikebeast.ch/themap/img/og.jpg" />
 
-<!-- Inter for the editorial title + button. Bold weights only. -->
+<!-- Inter for the editorial title + button. Bold weights only.
+     Non-blocking load · `media="print"` makes the browser treat the
+     stylesheet as non-render-blocking, then `onload` flips it back to
+     `all` once it has arrived. `<noscript>` keeps the no-JS path
+     working. With `display=swap` already in the URL, the system
+     fallback paints immediately and Inter swaps in when ready. */ -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" /></noscript>
 
 <!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
