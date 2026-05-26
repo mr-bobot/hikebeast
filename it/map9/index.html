@@ -82,6 +82,21 @@
         source: window.HB_SOURCE,
         theme: window.HB_THEME,
       };
+      /* affiliate_ref · read `hb:r` (60-day-TTL stash written by the
+         persistRefIfPresent IIFE further down the page) at call time
+         rather than init time, because hbTrack is defined in <head>
+         before the body IIFE runs · the stash isn't there yet for
+         the very first page-load with ?r= in URL. Attached only when
+         present + unexpired, so non-affiliate visits stay clean. */
+      try {
+        var __r = localStorage.getItem("hb:r");
+        if (__r) {
+          var __ro = JSON.parse(__r);
+          if (__ro && __ro.slug && __ro.exp && __ro.exp > Date.now()) {
+            props.affiliate_ref = __ro.slug;
+          }
+        }
+      } catch (e) {}
       if (window.HB_HERO_VARIANT) props.hero_variant = window.HB_HERO_VARIANT;
       if (extra) for (var p in extra) if (Object.prototype.hasOwnProperty.call(extra, p)) props[p] = extra[p];
       window.va("event", props);
