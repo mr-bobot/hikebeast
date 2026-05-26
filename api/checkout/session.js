@@ -206,6 +206,15 @@ async function handleOnboardingPost(req, res, stripe, body) {
   const sessionId = String(body.sessionId || "");
   const password  = String(body.password || "");
   const username  = typeof body.username === "string" ? body.username.trim().slice(0, 32) : "";
+  // Instagram handle · optional capture from the success-page form,
+  // 2026-05-24. Used for Leon's manual outreach when a buyer DMs IG
+  // for support · the handle is written to the Signups sheet's
+  // instagram_handle column (setIfEmpty) so existing ManyChat-sourced
+  // handles win on conflict. Empty string or missing field → no-op
+  // downstream. We normalise + length-cap here so the downstream call
+  // doesn't have to guard.
+  const igRaw     = typeof body.instagram_handle === "string" ? body.instagram_handle : "";
+  const igHandle  = igRaw.trim().toLowerCase().replace(/^@+/, "").slice(0, 40);
 
   if (!sessionId || !sessionId.startsWith("cs_")) {
     return res.status(400).json({ error: "invalid_session_id" });
@@ -281,6 +290,35 @@ async function handleOnboardingPost(req, res, stripe, body) {
   if (!result?.sessionToken) {
     console.error("createPaidUser returned no sessionToken:", result);
     return res.status(500).json({ error: "create_failed" });
+  }
+
+  // Fire-and-forget IG-handle write to the Signups sheet. Best-effort ·
+  // we never block account creation on this. The Apps Script
+  // attach_instagram action does setIfEmpty so existing ManyChat-sourced
+  // handles win on conflict and idempotent re-tries (e.g. buyer
+  // re-opens the success page later, re-submits) are safe.
+  if (igHandle && process.env.SHEETS_WEBHOOK_URL && process.env.SHEETS_SECRET) {
+    try {
+      await fetch(process.env.SHEETS_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "attach_instagram",
+          secret: process.env.SHEETS_SECRET,
+          email,
+          payment_intent: paymentIntent,
+          instagram_handle: igHandle,
+        }),
+        signal: AbortSignal.timeout(5000),
+      });
+    } catch (err) {
+      console.error("attach_instagram sheet write failed:", err?.message || err);
+      // Don't fail the account creation · the buyer can still log in
+      // and Leon can see their email match in the Sheet without the
+      // IG handle. Worst case Leon has to ask "what's your IG?" in
+      // the support DM, which is the same situation as before this
+      // field existed.
+    }
   }
 
   // Set the same cookie /api/login sets so middleware lets us into /full/.
