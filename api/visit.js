@@ -130,9 +130,20 @@ export default async function handler(req, res) {
   // purchase-only fields
   const safeProduct = typeof product === "string" ? product.slice(0, 64) : "";
   const safePaidAt = typeof paid_at === "string" ? paid_at.slice(0, 64) : "";
-  const hasAnyId = !!(subscriber_id || token || safeEvent || safeVisitorId);
+  // 2026-05-26 · relaxed gate. Anonymous traffic on older landing pages
+  // (/map3-8/, /map/, /themap/, /gems/, /de/map*/, /sample/, /free/,
+  // /read/, /guide/) doesn't send visitor_id (only /map9/ does), and
+  // anonymous visitors have no subscriber_id/token from ManyChat ·
+  // those were 400'd before this change, which made the bulk of real
+  // traffic invisible to AllVisits. Now any request with at least a
+  // source_page passes the gate · the row lands in AllVisits with an
+  // empty visitor_id (impression-only, no per-event join possible, but
+  // the count is what we actually need for those legacy pages). Pure
+  // empty bodies (no subscriber_id / token / event / visitor_id /
+  // source_page) still 400 so we filter out broken or hostile calls.
+  const hasAnyId = !!(subscriber_id || token || safeEvent || safeVisitorId || safeSourcePage);
   if (!hasAnyId) {
-    return res.status(400).json({ error: "subscriber_id, token, event, or visitor_id required" });
+    return res.status(400).json({ error: "subscriber_id, token, event, visitor_id, or source_page required" });
   }
 
   const tasks = [];
