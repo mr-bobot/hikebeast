@@ -2,53 +2,108 @@
 <html lang="de">
 <head>
 <meta charset="utf-8" />
-<script>
-// Affiliate ref capture · 2026-05-27 · mirrors the IIFE in /index.html.
-// Catches the case where a visitor lands directly on /de/?r=influencer
-// (rather than coming through the / → /de/ redirect, which already
-// preserves the slug). 7-day TTL matches /map9/.
-(function () {
-  try {
-    var raw = "";
-    try { raw = (new URLSearchParams(location.search).get("r") || "").trim().toLowerCase(); } catch (e) {}
-    if (!raw) return;
-    if (!/^[a-z0-9._-]{2,32}$/.test(raw)) return;
-    localStorage.setItem("hb:r", JSON.stringify({ slug: raw, exp: Date.now() + 7 * 24 * 60 * 60 * 1000 }));
-  } catch (e) {}
-})();
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#000000" />
-<title>Swiss Gems · Hikebeast</title>
-<meta name="description" content="129 versteckte Schweizer Spots, gesammelt von Leon Helg." />
+<meta name="theme-color" content="#0c0c0d" />
+<title>Hikebeast · 141 von Hand gesammelte Spots in den Schweizer Alpen</title>
+<meta name="description" content="Ein Guide für 141 versteckte Wander-, Wildcamping- und Fotospots in den Schweizer Alpen. In fünf Jahren von Leon Helg kartiert. GPS, Routen, beste Tageszeit, Wildcamping-Legalität pro Spot." />
 <link rel="canonical" href="https://hikebeast.ch/de/" />
 <link rel="alternate" hreflang="en" href="https://hikebeast.ch/" />
 <link rel="alternate" hreflang="de" href="https://hikebeast.ch/de/" />
 <link rel="alternate" hreflang="x-default" href="https://hikebeast.ch/" />
 <link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
 <link rel="apple-touch-icon" href="/images/favicon.jpg" />
-<meta property="og:type" content="product" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:type" content="website" />
 <meta property="og:site_name" content="Hikebeast" />
 <meta property="og:locale" content="de_CH" />
 <meta property="og:locale:alternate" content="en_US" />
-<meta property="og:title" content="Swiss Gems · Hikebeast" />
-<meta property="og:description" content="129 versteckte Schweizer Spots, gesammelt von Leon Helg." />
+<meta property="og:title" content="Hikebeast · 141 von Hand gesammelte Spots in den Schweizer Alpen" />
+<meta property="og:description" content="Ein Guide für 141 versteckte Wander-, Wildcamping- und Fotospots in den Schweizer Alpen. In fünf Jahren von Leon Helg kartiert." />
 <meta property="og:url" content="https://hikebeast.ch/de/" />
-<meta property="og:image" content="https://hikebeast.ch/themap/img/og.jpg" />
-<meta property="og:image:width" content="1920" />
-<meta property="og:image:height" content="987" />
-<meta property="og:image:alt" content="Swiss Gems · Hikebeast" />
+<meta property="og:image" content="https://hikebeast.ch/images/og-home.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Die Schweizer Alpen bei Sonnenaufgang von einem Grat oberhalb der Waldgrenze." />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Swiss Gems · Hikebeast" />
-<meta name="twitter:description" content="129 versteckte Schweizer Spots, gesammelt von Leon Helg." />
-<meta name="twitter:image" content="https://hikebeast.ch/themap/img/og.jpg" />
+<meta name="twitter:title" content="Hikebeast · 141 von Hand gesammelte Spots in den Schweizer Alpen" />
+<meta name="twitter:description" content="Ein Guide für 141 versteckte Wander-, Wildcamping- und Fotospots in den Schweizer Alpen." />
+<meta name="twitter:image" content="https://hikebeast.ch/images/og-home.jpg" />
 
-<!-- Inter for the editorial title + button. Bold weights only.
-     Non-blocking load · see index.html for rationale. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" /></noscript>
+<link rel="preload" as="image" href="/images/home-hero-tannhorn.jpg" fetchpriority="high" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+
+<!-- JSON-LD: Organization, Person, Product, WebSite. Identisch zum EN-Graph mit @id cross-references. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://hikebeast.ch/#org",
+      "name": "Hikebeast",
+      "url": "https://hikebeast.ch",
+      "logo": "https://hikebeast.ch/images/favicon.jpg",
+      "sameAs": [
+        "https://instagram.com/leon.helg",
+        "https://tiktok.com/@leon.helg"
+      ],
+      "founder": { "@id": "https://hikebeast.ch/#leon" },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Saftladen GmbH",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Birkenstrasse 47",
+          "postalCode": "6343",
+          "addressLocality": "Rotkreuz",
+          "addressCountry": "CH"
+        }
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://hikebeast.ch/#leon",
+      "name": "Leon Helg",
+      "url": "https://hikebeast.ch/de/",
+      "image": "https://hikebeast.ch/images/leon-portrait.jpg",
+      "jobTitle": "Outdoor-Fotograf und Routen-Kartograf",
+      "knowsAbout": ["Schweizer Alpen", "Wildcampen Schweiz", "Landschaftsfotografie", "Wanderrouten Schweiz"],
+      "sameAs": [
+        "https://instagram.com/leon.helg",
+        "https://tiktok.com/@leon.helg"
+      ],
+      "worksFor": { "@id": "https://hikebeast.ch/#org" }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://hikebeast.ch/#product",
+      "name": "Swiss Gems · 141 versteckte Spots in der Schweiz",
+      "description": "Ein digitaler Guide für 141 versteckte Spots in der Schweiz für Wandern, Wildcampen und Landschaftsfotografie. GPS, Routen, empfohlene Tageszeit, Wildcamping-Legalität pro Spot. PDF und interaktive Webapp. Lifetime-Updates.",
+      "brand": { "@id": "https://hikebeast.ch/#org" },
+      "category": "Reise-Guide",
+      "offers": {
+        "@type": "Offer",
+        "price": "27",
+        "priceCurrency": "CHF",
+        "availability": "https://schema.org/InStock",
+        "url": "https://hikebeast.ch/de/map7/"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://hikebeast.ch/#website",
+      "url": "https://hikebeast.ch/",
+      "name": "Hikebeast",
+      "publisher": { "@id": "https://hikebeast.ch/#org" },
+      "inLanguage": ["en", "de"]
+    }
+  ]
+}
+</script>
 
 <!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -72,155 +127,484 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 /></noscript>
 
 <style>
-  *,*::before,*::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  html { -webkit-text-size-adjust: 100%; }
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    --bg: #0c0c0d;
+    --bg-soft: #141417;
+    --bg-card: #15151a;
+    --border: #2a2a30;
+    --border-soft: #1f1f24;
+    --text: #ececec;
+    --text-muted: #9a9a92;
+    --text-dim: #5a5a55;
+    --accent: #e8743c;
+    --accent-soft: rgba(232, 116, 60, 0.12);
+    --accent-line: rgba(232, 116, 60, 0.35);
+  }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
   body {
-    margin: 0;
-    min-height: 100dvh;
-    background: #0c0c0d;
-    color: #fff;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    font-feature-settings: 'ss01', 'cv11';
     -webkit-font-smoothing: antialiased;
-    overflow: hidden;
+    text-rendering: optimizeLegibility;
   }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+  ::selection { background: var(--accent); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
 
-  .hero {
-    position: relative;
-    width: 100vw;
-    height: 100dvh;
-    background-image: url('/images/home-hero-tannhorn.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: auto 0 0 0;
-    height: 60%;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 100%);
-    pointer-events: none;
-  }
+  .skip { position: absolute; left: -9999px; top: 0; background: var(--accent); color: var(--bg); padding: 10px 16px; font-weight: 700; z-index: 100; }
+  .skip:focus { left: 12px; top: 12px; }
 
-  .hero-title {
-    position: absolute;
-    bottom: clamp(24px, 5vh, 56px);
-    left: clamp(20px, 5vw, 56px);
-    margin: 0;
-    z-index: 2;
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    /* On narrow mobiles the title shares the bottom row with the CTA pill,
-       so cap small-viewport size to leave room. Goes huge on tablet+. */
-    font-size: clamp(32px, 8.5vw, 132px);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    color: rgba(255,255,255,0.88);
-    /* Soft diffuse halo · multiple high-blur shadows stacked to create
-       a wide, gentle glow around the title, like the reference. The
-       white text is slightly translucent so the photo shows through
-       just enough to feel embedded in the image. */
-    text-shadow:
-      0 0 24px rgba(0,0,0,0.35),
-      0 6px 32px rgba(0,0,0,0.40),
-      0 24px 72px rgba(0,0,0,0.35),
-      0 48px 120px rgba(0,0,0,0.20);
-    pointer-events: none;
-    user-select: none;
-  }
+  .shell { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 700px) { .shell { padding: 0 20px; } }
 
-  .hero-cta {
-    position: absolute;
-    bottom: clamp(24px, 5vh, 56px);
-    right: clamp(20px, 5vw, 56px);
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 18px;
-    background: #fff;
-    color: #0c0c0d;
-    border-radius: 999px;
-    text-decoration: none;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: clamp(13px, 1.6vw, 17px);
-    letter-spacing: -0.005em;
-    box-shadow:
-      0 4px 18px rgba(0,0,0,0.20),
-      0 12px 40px rgba(0,0,0,0.15);
-    transition: transform 150ms ease, box-shadow 200ms ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .hero-cta:hover {
-    transform: translateY(-1px);
-    box-shadow:
-      0 6px 24px rgba(0,0,0,0.25),
-      0 16px 48px rgba(0,0,0,0.18);
-  }
-  .hero-cta:active { transform: translateY(0); }
-  .hero-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .topnav { position: absolute; top: 0; left: 0; right: 0; z-index: 5; padding: clamp(18px, 3vh, 28px) clamp(20px, 4vw, 40px); display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .topnav .brand { font-weight: 800; letter-spacing: -0.01em; font-size: 16px; color: rgba(255,255,255,0.96); text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+  .topnav .topnav-right { display: flex; gap: 8px; }
+  .topnav a.pill { color: rgba(255,255,255,0.9); font-weight: 600; font-size: 12px; letter-spacing: 0.06em; padding: 7px 12px; border-radius: 999px; background: rgba(0,0,0,0.32); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: background 150ms ease; }
+  .topnav a.pill:hover { background: rgba(0,0,0,0.5); }
+  .topnav a.pill.lang { letter-spacing: 0.1em; }
 
-  /* Top-right pill row · login + lang switch. Subtle so they don't
-     compete with the title. Login is for returning buyers who already
-     have the guide. */
-  .topnav {
-    position: absolute;
-    top: clamp(16px, 3vh, 28px);
-    right: clamp(16px, 4vw, 32px);
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .topnav a {
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    padding: 6px 10px;
-    border-radius: 999px;
-    background: rgba(0,0,0,0.20);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    -webkit-tap-highlight-color: transparent;
-    transition: background 150ms ease;
-  }
-  .topnav a:hover { background: rgba(0,0,0,0.32); }
-  .topnav .login-link { letter-spacing: 0.04em; }
+  .hero { position: relative; width: 100%; height: 100dvh; min-height: 600px; overflow: hidden; background: #08080a; }
+  .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .hero::after { content: ''; position: absolute; inset: auto 0 0 0; height: 70%; background: linear-gradient(to bottom, transparent 0%, rgba(8,8,10,0.4) 60%, rgba(8,8,10,0.85) 100%); pointer-events: none; }
+  .hero-inner { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(28px, 6vh, 64px) clamp(20px, 5vw, 56px); z-index: 2; }
+  .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; color: rgba(232, 116, 60, 0.95); text-transform: uppercase; margin-bottom: clamp(12px, 2vh, 18px); text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+  .hero h1 { margin: 0 0 clamp(14px, 2.5vh, 22px); font-weight: 800; letter-spacing: -0.035em; line-height: 0.96; font-size: clamp(40px, 8vw, 108px); color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,0.4), 0 12px 56px rgba(0,0,0,0.35); max-width: 18ch; }
+  .hero .sub { margin: 0 0 clamp(22px, 4vh, 36px); font-size: clamp(16px, 2.2vw, 22px); font-weight: 500; line-height: 1.35; letter-spacing: -0.005em; color: rgba(255,255,255,0.94); text-shadow: 0 2px 16px rgba(0,0,0,0.5); max-width: 42ch; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .cta { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; background: #fff; color: #0c0c0d; border-radius: 999px; font-weight: 700; font-size: 15.5px; letter-spacing: -0.005em; box-shadow: 0 4px 18px rgba(0,0,0,0.25), 0 16px 48px rgba(0,0,0,0.18); transition: transform 150ms ease, box-shadow 200ms ease; -webkit-tap-highlight-color: transparent; }
+  .cta:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(0,0,0,0.3), 0 20px 56px rgba(0,0,0,0.22); }
+  .cta:active { transform: translateY(0); }
+  .cta svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .cta-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); box-shadow: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .cta-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); box-shadow: none; }
+
+  .scroll-hint { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.55); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; pointer-events: none; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .scroll-hint .arrow { width: 1px; height: 22px; background: rgba(255,255,255,0.45); animation: scrollBlink 2.4s ease-in-out infinite; }
+  @keyframes scrollBlink { 0%, 100% { opacity: 0.2; transform: translateY(-4px); } 50% { opacity: 1; transform: translateY(4px); } }
+  @media (max-width: 700px) { .scroll-hint { display: none; } }
+
+  .trust { padding: 26px 0; border-bottom: 1px solid var(--border-soft); background: var(--bg); }
+  .trust-row { display: flex; justify-content: center; gap: 28px 56px; flex-wrap: wrap; align-items: center; text-align: center; }
+  .trust-item { display: flex; flex-direction: column; gap: 2px; }
+  .trust-item .n { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+  .trust-item .l { font-size: 12px; color: var(--text-muted); letter-spacing: 0.02em; }
+  .trust-item .stars { color: var(--accent); letter-spacing: 0.04em; }
+
+  section.row { padding: clamp(56px, 9vh, 96px) 0; border-bottom: 1px solid var(--border-soft); }
+  section.row:last-of-type { border-bottom: none; }
+  .section-head { display: flex; flex-direction: column; gap: 8px; margin-bottom: clamp(28px, 5vh, 48px); max-width: 720px; }
+  .kicker { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: var(--accent); text-transform: uppercase; }
+  h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; margin: 0; }
+  .section-lede { font-size: 17px; color: var(--text-muted); line-height: 1.55; margin: 0; max-width: 60ch; }
+
+  .grid-spots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 900px) { .grid-spots { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .grid-spots { grid-template-columns: 1fr; gap: 10px; } }
+  .spot { position: relative; aspect-ratio: 4 / 5; border-radius: 12px; overflow: hidden; background: var(--bg-soft); transition: transform 280ms ease; margin: 0; }
+  .spot img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms cubic-bezier(0.2, 0.6, 0.2, 1), filter 400ms ease; }
+  .spot:hover img { transform: scale(1.04); filter: brightness(1.06); }
+  .spot::after { content: ''; position: absolute; inset: auto 0 0 0; height: 60%; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.78) 100%); pointer-events: none; }
+  .spot-meta { position: absolute; inset: auto 0 0 0; padding: 16px 18px; color: #fff; z-index: 2; margin: 0; }
+  .spot-meta .region { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: rgba(232, 116, 60, 0.95); text-transform: uppercase; margin-bottom: 4px; }
+  .spot-meta .name { font-size: 20px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.1; margin: 0; }
+  .spot-meta .deck { font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.5; margin: 6px 0 0; }
+  .grid-cta { margin-top: 28px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 15px; color: var(--text-muted); }
+  .grid-cta b { color: var(--text); font-weight: 700; }
+  .grid-cta a { color: var(--accent); font-weight: 600; border-bottom: 1px solid var(--accent-line); }
+  .grid-cta a:hover { border-color: var(--accent); }
+
+  .hub-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .hub-pill { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 999px; font-size: 14.5px; font-weight: 600; color: var(--text); transition: border-color 200ms ease, background 200ms ease, transform 150ms ease; }
+  .hub-pill:hover { border-color: var(--accent-line); background: var(--bg-card); transform: translateY(-1px); }
+  .hub-pill .arrow { color: var(--accent); transition: transform 180ms ease; }
+  .hub-pill:hover .arrow { transform: translateX(3px); }
+
+  .founder { display: grid; grid-template-columns: 360px 1fr; gap: 56px; align-items: center; }
+  @media (max-width: 800px) { .founder { grid-template-columns: 1fr; gap: 32px; } }
+  .founder-photo { aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; background: var(--bg-soft); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+  .founder-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .founder-text h3 { margin: 0 0 14px; font-size: clamp(22px, 3vw, 30px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+  .founder-text p { margin: 0 0 14px; font-size: 16px; color: var(--text-muted); line-height: 1.65; }
+  .founder-text p:last-of-type { margin-bottom: 22px; }
+  .founder-text p strong { color: var(--text); font-weight: 600; }
+  .social-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .social-link { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--text); transition: border-color 200ms ease; }
+  .social-link:hover { border-color: var(--accent-line); }
+  .social-link svg { width: 15px; height: 15px; }
+
+  .faq-list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--border-soft); }
+  .faq-item { border-bottom: 1px solid var(--border-soft); }
+  .faq-item summary { padding: 22px 0; list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 17px; font-weight: 600; letter-spacing: -0.005em; color: var(--text); transition: color 200ms ease; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary:hover { color: var(--accent); }
+  .faq-item .icon { flex-shrink: 0; width: 14px; height: 14px; color: var(--text-dim); transition: transform 260ms ease, color 200ms ease; }
+  .faq-item[open] .icon { transform: rotate(45deg); color: var(--accent); }
+  .faq-item .answer { padding: 0 0 22px; font-size: 15px; color: var(--text-muted); line-height: 1.65; max-width: 72ch; }
+  .faq-item .answer a { color: var(--accent); border-bottom: 1px solid var(--accent-line); }
+  .faq-item .answer b { color: var(--text); font-weight: 600; }
+  .faq-item .answer ul { padding-left: 20px; margin: 8px 0; }
+  .faq-item .answer li { padding: 3px 0; }
+
+  .cta-block { margin-top: clamp(40px, 6vh, 64px); padding: 32px; background: linear-gradient(140deg, var(--accent-soft) 0%, transparent 65%), var(--bg-soft); border: 1px solid var(--accent-line); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .cta-block h3 { margin: 0 0 6px; font-size: 22px; font-weight: 700; letter-spacing: -0.015em; }
+  .cta-block p { margin: 0; color: var(--text-muted); font-size: 14.5px; }
+  .cta-block .cta { background: var(--accent); color: #fff; box-shadow: 0 4px 20px rgba(232, 116, 60, 0.35); }
+  .cta-block .cta:hover { box-shadow: 0 8px 28px rgba(232, 116, 60, 0.45); }
+
+  footer { padding: 48px 0 64px; border-top: 1px solid var(--border-soft); font-size: 13px; color: var(--text-dim); }
+  footer .foot { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  footer .foot a { color: var(--text-muted); transition: color 150ms ease; }
+  footer .foot a:hover { color: var(--text); }
+  footer .foot .sep { color: var(--text-dim); margin: 0 8px; }
+  footer .credits { color: var(--text-dim); }
 </style>
 </head>
 <body>
-<main class="hero">
-  <nav class="topnav" aria-label="Site">
-    <a class="login-link" href="/login/">Login</a>
-    <a class="lang-switch" href="/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
-  </nav>
 
-  <h1 class="hero-title">Swiss Gems</h1>
+<a class="skip" href="#main">Zum Inhalt springen</a>
 
-  <a class="hero-cta" href="/de/map9/" data-forward-params data-fbq-event="ViewContent" data-fbq-params='{"content_name":"Swiss Gems of Switzerland Map","content_category":"Map","value":27.00,"currency":"CHF"}'>
-    <span>Hol dir den Guide</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
-  </a>
+<header class="topnav" aria-label="Navigation">
+  <span class="brand">Hikebeast</span>
+  <div class="topnav-right">
+    <a class="pill" href="/login/">Login</a>
+    <a class="pill lang" href="/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-label="Hikebeast Intro">
+    <img class="hero-img" src="/images/home-hero-tannhorn.jpg" alt="" fetchpriority="high" decoding="async" />
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Swiss Gems · Ein Guide von Leon Helg</div>
+      <h1>141 Spots in den Schweizer Alpen.<br>In fünf Jahren kartiert.</h1>
+      <p class="sub">GPS, Routen, beste Tageszeit, Wildcamping-Legalität. Als PDF und interaktive Karte. Lifetime-Updates.</p>
+      <div class="cta-row">
+        <a class="cta" href="/de/map7/"
+           data-fbq-event="ViewContent"
+           data-fbq-params='{"content_name":"Swiss Gems of Switzerland Map","content_category":"Map","value":27.00,"currency":"CHF"}'>
+          <span>Hol dir den Guide · CHF 27</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </a>
+        <a class="cta cta-ghost" href="#famous">Spots anschauen</a>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><span class="arrow"></span></div>
+  </section>
+
+  <section class="trust" aria-label="Vertrauen">
+    <div class="shell">
+      <div class="trust-row">
+        <div class="trust-item"><span class="n">141</span><span class="l">verifizierte Spots</span></div>
+        <div class="trust-item"><span class="n">131 <span class="stars">★★★★★</span></span><span class="l">Käufer · 5.0 Durchschnitt</span></div>
+        <div class="trust-item"><span class="n">5 Jahre</span><span class="l">Solo-Recherche</span></div>
+        <div class="trust-item"><span class="n">PDF + Webapp</span><span class="l">Lifetime-Updates</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="famous">
+    <div class="shell">
+      <div class="section-head">
+        <span class="kicker">Einige kennst du wahrscheinlich</span>
+        <h2>Die berühmten Spots.<br>Sechs der 141, die du wahrscheinlich schon gesehen hast.</h2>
+        <p class="section-lede">Diese sechs sind nicht die versteckten. Das sind die Postkarten. Die anderen 135 liegen abseits, auf eigenen Wegen, und nur im Guide.</p>
+      </div>
+
+      <div class="grid-spots">
+
+        <figure class="spot">
+          <img src="/images/famous/oeschinensee.jpg" alt="Oeschinensee, ein türkiser Bergsee oberhalb von Kandersteg im Berner Oberland." loading="lazy" decoding="async" />
+          <figcaption class="spot-meta">
+            <div class="region">Berner Oberland · See</div>
+            <h3 class="name">Oeschinensee</h3>
+            <p class="deck">Der türkise See über Kandersteg. Geh am Aussichtspunkt vorbei, dann wird es ruhig.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="spot">
+          <img src="/images/famous/riffelsee.jpg" alt="Riffelsee mit dem Matterhorn gespiegelt im stillen Wasser bei Sonnenaufgang." loading="lazy" decoding="async" />
+          <figcaption class="spot-meta">
+            <div class="region">Wallis · See</div>
+            <h3 class="name">Riffelsee</h3>
+            <p class="deck">Das Matterhorn doppelt. Sei vor Sonnenaufgang da. Fünf Minuten Rot auf der Spitze.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="spot">
+          <img src="/images/famous/schafler.jpg" alt="Schäfler Grat oberhalb von Ebenalp in Appenzell zur goldenen Stunde mit Tälern im Dunst." loading="lazy" decoding="async" />
+          <figcaption class="spot-meta">
+            <div class="region">Alpstein, Appenzell · Grat</div>
+            <h3 class="name">Schäfler</h3>
+            <p class="deck">Zwei Stunden ab Ebenalp zu einem Grat mit Chalet. Im Voraus buchen, übernachten.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="spot">
+          <img src="/images/famous/seealpsee.jpg" alt="Seealpsee, ein spiegelglatter Bergsee unter dem Säntis mit grünen Wiesen am Ufer." loading="lazy" decoding="async" />
+          <figcaption class="spot-meta">
+            <div class="region">Alpstein, Appenzell · See</div>
+            <h3 class="name">Seealpsee</h3>
+            <p class="deck">Spiegelglatt unter dem Säntis. Boot mieten für fünf Franken, von der Mitte fotografieren.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="spot">
+          <img src="/images/famous/saxer_lucke.jpg" alt="Saxer Lücke, ein dramatischer Spalt zwischen zwei Gipfeln im Alpstein mit Licht das durchkommt." loading="lazy" decoding="async" />
+          <figcaption class="spot-meta">
+            <div class="region">Alpstein · Pass</div>
+            <h3 class="name">Saxer Lücke</h3>
+            <p class="deck">Ein Spalt zwischen zwei Gipfeln. Das Sonnenuntergangslicht kommt durch und macht alles golden.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="spot">
+          <img src="/images/famous/falensee.jpg" alt="Fälensee, ein schmaler See zwischen steilen Wänden unterhalb der Saxer Lücke." loading="lazy" decoding="async" />
+          <figcaption class="spot-meta">
+            <div class="region">Alpstein · See</div>
+            <h3 class="name">Fälensee</h3>
+            <p class="deck">Bei der Saxer Lücke ist es voll. Steig runter und du findest einen schmalen See ohne Menschen.</p>
+          </figcaption>
+        </figure>
+
+      </div>
+
+      <p class="grid-cta">
+        <b>135 weitere Spots</b> liegen abseits der Hauptwege und stehen nur im Guide.
+        <a href="/de/map7/">Was im Guide steht →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="row" aria-label="Themen">
+    <div class="shell">
+      <div class="section-head">
+        <span class="kicker">Was Leute hier suchen</span>
+        <h2>Vier Antworten, die stimmen müssen.</h2>
+        <p class="section-lede">Hikebeast deckt vier Themen ab. Jedes davon googelt jemand vor einer Reise. Hier steht, was der Guide dazu sagt, mit einem Klick pro Thema.</p>
+      </div>
+      <div class="hub-pills">
+        <a class="hub-pill" href="#faq-wildcamping">Wildcampen in der Schweiz <span class="arrow">→</span></a>
+        <a class="hub-pill" href="#faq-spots">Versteckte Wanderungen &amp; Fotospots <span class="arrow">→</span></a>
+        <a class="hub-pill" href="#faq-format">Was im Guide steht <span class="arrow">→</span></a>
+        <a class="hub-pill" href="#faq-leon">Wer dahinter steht <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" aria-label="Über den Macher">
+    <div class="shell">
+      <div class="founder">
+        <div class="founder-photo">
+          <img src="/images/leon-portrait.jpg" alt="Leon Helg, Gründer von Hikebeast, beim Campen in den Schweizer Alpen." loading="lazy" decoding="async" />
+        </div>
+        <div class="founder-text">
+          <span class="kicker">Wer dahinter steht</span>
+          <h3>Ich bin Leon. Seit fünf Jahren finde ich Spots in den Schweizer Alpen, die nicht auf der Touristenkarte stehen.</h3>
+          <p>Manche sind berühmt, wie die sechs oben. <strong>Die meisten nicht.</strong> Wenn ein Spot im Guide steht, war ich dort. Ich habe ihn fotografiert. Ich weiss, wo man parkt, wann das Licht stimmt, und ob man eine Nacht ohne Probleme bleiben kann.</p>
+          <p>Ich poste auf Instagram und TikTok als <strong>@leon.helg</strong>. Der Guide ist die ausführliche Version von dem, was ich dort teile. Mit allem was ich einem Freund sagen würde, der zu Besuch kommt.</p>
+          <div class="social-row">
+            <a class="social-link" href="https://instagram.com/leon.helg" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.81-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.81-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.81.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.67 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.67-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13C21.32 1.35 20.65.94 19.86.63 19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84Zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4Zm6.4-11.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44Z"/></svg>
+              Instagram
+            </a>
+            <a class="social-link" href="https://tiktok.com/@leon.helg" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.71a8.16 8.16 0 0 0 4.77 1.52V6.78a4.85 4.85 0 0 1-1.84-.09Z"/></svg>
+              TikTok
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="faq" aria-label="Häufige Fragen">
+    <div class="shell">
+      <div class="section-head">
+        <span class="kicker">Fragen</span>
+        <h2>Häufige Fragen, direkte Antworten.</h2>
+      </div>
+
+      <div class="faq-list">
+
+        <details class="faq-item" id="faq-format" open>
+          <summary>Was steht im Guide?
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="answer">
+            141 Spots in den Schweizer Alpen, nach Region sortiert. Pro Spot:
+            <ul>
+              <li>Genaue GPS für Spot und Parkplatz</li>
+              <li>Wegzeit, Schwierigkeit, Routen-Notizen</li>
+              <li>Beste Tageszeit und beste Saison fürs Foto</li>
+              <li>Wildcamping-Status mit Quelle</li>
+              <li>Fotos vom Spot bei richtigem Licht</li>
+            </ul>
+            Geliefert als PDF und interaktive Webapp für Handy oder Laptop. Lifetime-Updates inklusive.
+          </div>
+        </details>
+
+        <details class="faq-item" id="faq-wildcamping">
+          <summary>Ist Wildcampen in der Schweiz erlaubt?
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="answer">
+            Es gibt kein einheitliches Bundesgesetz. Der Schweizer Alpen-Club (SAC) toleriert ein einzelnes Biwak oberhalb der Waldgrenze, mit Einverständnis des Grundeigentümers und mindestens 50 Meter Abstand von Gewässern. Verboten ist es im Schweizerischen Nationalpark, in den 43 Eidgenössischen Jagdbanngebieten, in Wildruhezonen und in kantonalen Naturschutzgebieten. Unterhalb der Waldgrenze variieren die Regeln nach Kanton und Gemeinde. Im Swiss Gems Guide steht der aktuelle Status pro Spot. Verifiziere den Status für den konkreten Spot bevor du dort zeltest.
+          </div>
+        </details>
+
+        <details class="faq-item" id="faq-spots">
+          <summary>Wie wählst du die Spots aus?
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="answer">
+            Fünf Jahre Solo-Recherche. Ein Spot kommt in den Guide wenn drei Sachen stimmen: ich war persönlich dort, das Foto ist den Weg wert, und die Route ist machbar für jemanden mit normaler Fitness. Die meisten Spots sind 30 bis 90 Minuten vom Parkplatz. Etwa ein Drittel ist wildcamping-tauglich. Die sechs berühmten oben sind für die Vollständigkeit dabei. Die anderen 135 sind der Grund warum Leute den Guide kaufen.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Wie lange ist der Weg zu einem typischen Spot?
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="answer">
+            Die meisten Spots sind unter 90 Minuten einfacher Fussweg vom Parkplatz. Etwa 20 sind direkt anfahrbar ohne Wanderung. Eine Handvoll sind Tages- oder Mehrtagestouren. Jeder Spot hat Wegzeit, Höhenmeter und Schwierigkeitsgrad angegeben, damit du nach Tagesform wählen kannst.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Wann ist die beste Zeit für die Schweizer Alpen?
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="answer">
+            Ende Juli bis Mitte September für hoch-alpine Routen über 2000 Metern: schneefrei, Hütten offen, Seen taufrei. Juni für Wasserfälle und tiefere Täler. Ende September bis Mitte Oktober für die Lärchen-Färbung im Engadin und Bergell. Im Guide steht das beste Fenster pro Spot.
+          </div>
+        </details>
+
+        <details class="faq-item" id="faq-leon">
+          <summary>Wer ist Leon Helg?
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="answer">
+            Schweizer Outdoor-Fotograf und Filmemacher. Lebt seit 26 Jahren in der Schweiz, die letzten fünf damit verbracht Alpen-Spots zu kartieren die nicht auf Touristenkarten stehen. Postet als @leon.helg auf <a href="https://instagram.com/leon.helg" target="_blank" rel="noopener">Instagram</a> und <a href="https://tiktok.com/@leon.helg" target="_blank" rel="noopener">TikTok</a>. Hikebeast läuft unter der Saftladen GmbH, Rotkreuz.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Was kostet der Guide? Gibt es Updates?
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="answer">
+            Einmalig <b>CHF 27</b>. Lifetime-Updates inklusive: neue Spots kommen jeden Frühling und Herbst dazu, bestehende werden aktualisiert wenn sich was ändert. Kein Abo, kein Upsell.
+          </div>
+        </details>
+
+      </div>
+
+      <div class="cta-block">
+        <div>
+          <h3>Hol dir den Swiss Gems Guide</h3>
+          <p>141 Spots, GPS, Foto-Timing, Wildcamping-Legalität. CHF 27, Lifetime-Updates.</p>
+        </div>
+        <a class="cta" href="/de/map7/"
+           data-fbq-event="ViewContent"
+           data-fbq-params='{"content_name":"Swiss Gems of Switzerland Map","content_category":"Map","value":27.00,"currency":"CHF"}'>
+          <span>Hol dir den Guide · CHF 27</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<script>
-  // Forward URL params on hero CTA · 2026-05-27 · same recipe as
-  // /index.html so /de/?r=foo → click "Hol dir den Guide" lands on
-  // /de/map9/?r=foo, where the slug gets captured into localStorage.
-  (function () {
-    if (!location.search) return;
-    document.querySelectorAll('a[data-forward-params]').forEach(function (a) {
-      var href = a.getAttribute('href') || '';
-      if (!href || href.indexOf('?') !== -1) return;
-      a.setAttribute('href', href + location.search);
-    });
-  })();
+<footer>
+  <div class="shell">
+    <div class="foot">
+      <div class="credits">
+        Hikebeast wird betrieben von der Saftladen GmbH, Birkenstrasse 47, 6343 Rotkreuz, Schweiz.<br>
+        Fotos von Leon Helg und der Hikebeast-Community.
+      </div>
+      <div>
+        <a href="/de/imprint.html">Impressum</a><span class="sep">·</span>
+        <a href="/de/privacy.html">Datenschutz</a><span class="sep">·</span>
+        <a href="/de/terms.html">AGB</a><span class="sep">·</span>
+        <a href="/" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}">English</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
+<!-- FAQPage Schema (DE) · GEO-Signal für AI-Suche. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "de",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was steht im Hikebeast Swiss Gems Guide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "141 Spots in den Schweizer Alpen mit genauer GPS, Wegzeit und Schwierigkeit, empfohlener Tageszeit, Wildcamping-Status, und Routen-Notizen. Geliefert als PDF und interaktive Webapp für Handy oder Laptop. Lifetime-Updates inklusive."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ist Wildcampen in der Schweiz erlaubt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Es gibt kein einheitliches Bundesgesetz. Der Schweizer Alpen-Club toleriert ein einzelnes Biwak oberhalb der Waldgrenze, mit Einverständnis des Grundeigentümers und mindestens 50 Meter Abstand von Gewässern. Verboten ist es im Schweizerischen Nationalpark, in den 43 Eidgenössischen Jagdbanngebieten, in Wildruhezonen und in kantonalen Naturschutzgebieten. Unterhalb der Waldgrenze variieren die Regeln nach Kanton und Gemeinde. Im Hikebeast Swiss Gems Guide steht der aktuelle Status pro Spot."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie werden die Spots ausgewählt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fünf Jahre Solo-Recherche von Leon Helg. Ein Spot kommt nur in den Guide nach persönlicher Verifikation, fotografischem Wert und realistischer Route für normale Fitness. Die meisten Spots sind 30 bis 90 Minuten vom Parkplatz. Etwa ein Drittel ist wildcamping-tauglich."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wann ist die beste Zeit für die Schweizer Alpen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ende Juli bis Mitte September für hoch-alpine Routen über 2000 Metern: schneefrei, Hütten offen, Seen taufrei. Juni für Wasserfälle und tiefere Täler. Ende September bis Mitte Oktober für die Lärchen-Färbung im Engadin und Bergell."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was kostet der Hikebeast Swiss Gems Guide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Einmalige Zahlung von CHF 27 (auch in EUR oder USD bezahlbar). Lifetime-Updates sind inklusive. Kein Abo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wer ist Leon Helg?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Leon Helg ist ein Schweizer Outdoor-Fotograf und Filmemacher. Er lebt seit 26 Jahren in der Schweiz und hat die letzten fünf damit verbracht, Alpen-Spots zu kartieren, die nicht auf Touristenkarten stehen. Er postet als @leon.helg auf Instagram und TikTok. Hikebeast läuft unter der Saftladen GmbH, Rotkreuz, Schweiz."
+      }
+    }
+  ]
+}
+</script>
+
+<script>
+  // Meta Pixel forwarding for CTA clicks.
   document.querySelectorAll('[data-fbq-event]').forEach((el) => {
     el.addEventListener('click', () => {
       if (!window.fbq) return;

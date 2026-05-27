@@ -1,39 +1,49 @@
 # Hikebeast
 
-> Schweizer Brand von Fotograf und Filmemacher Leon Helg. Guides, Filter und Color Grades für Menschen, die in den Schweizer Alpen fotografieren, wandern oder wildcampen.
+> Swiss Gems · 141 von Hand gesammelte Spots in den Schweizer Alpen für Wandern, Wildcampen und Fotografie. In fünf Jahren von Leon Helg kartiert.
 
 Quellseite: https://hikebeast.ch/de/
-Englische Version: https://hikebeast.ch/index.md
+Englische Version: https://hikebeast.ch/
 
 ## Über
 
-Praxiserprobte Werkzeuge für Alpin-Kreative. Schweizer Guides, Filter und Grades für Fotografen und Filmemacher, denen die Details wichtig sind.
+Hikebeast ist die Arbeit einer Person, Leon Helg. Er fotografiert und kartiert die weniger bekannten Orte der Schweiz: Bergseen, Gratwanderungen, anfahrbare Aussichtspunkte, Flussbade-Plätze, Wildcamping-Lager. Fünf Jahre Solo-Recherche, Fotografie und Routenverifikation in den Schweizer Alpen. Publiziert unter der Saftladen GmbH, Rotkreuz.
 
-## Produkte
+## Produkt
 
-### Swiss Gems of Switzerland, Gratis-Probe
+### Swiss Gems · 141 versteckte Spots in der Schweiz
 
-15 handverlesene Spots aus dem vollständigen Guide, direkt in dein Postfach.
+Einmalig CHF 27, Lifetime-Updates. PDF und interaktive Webapp für Handy oder Laptop. 141 Spots nach Region sortiert. Pro Spot: genaue GPS für Spot und Parkplatz, Wegzeit und Schwierigkeit, empfohlene Tageszeit, Saison-Fenster, Wildcamping-Status, und Fotos bei richtigem Licht. 5.0 Sterne von 131 verifizierten Käufern.
 
-Seite: https://hikebeast.ch/de/free.md
+- Sales Page (Deutsch): https://hikebeast.ch/de/map7/
+- Sales Page (Englisch): https://hikebeast.ch/map7/
+- Gratis-Probe: https://hikebeast.ch/de/free/
 
-### Swiss Gems of Switzerland, vollständiger Guide
+## Themen
 
-49 USD, Lifetime-Zugang. 100+ geheime Orte mit exakten GPS-Koordinaten, Foto-Timing und Wildcamp-Regeln.
+### Wildcampen in der Schweiz
 
-Seite: https://whop.com/gorped/hidden-gems-switzerland-e8/
+Es gibt kein einheitliches Bundesgesetz. Der Schweizer Alpen-Club (SAC) toleriert ein einzelnes Biwak oberhalb der Waldgrenze, mit Einverständnis des Grundeigentümers und mindestens 50 Meter Abstand von Gewässern. Verboten im Schweizerischen Nationalpark, in den 43 Eidgenössischen Jagdbanngebieten, in Wildruhezonen und in kantonalen Naturschutzgebieten. Unterhalb der Waldgrenze variieren die Regeln nach Kanton und Gemeinde. Der Swiss Gems Guide zeigt den aktuellen Status pro Spot.
 
-### iPhone-Filter
+### Beste Zeit für die Schweizer Alpen
 
-Bald verfügbar. Ein Preset-Pack für die iPhone-Kamera, kalibriert auf alpines Licht.
+Ende Juli bis Mitte September für hoch-alpine Routen über 2000 Metern. Juni für Wasserfälle und tiefere Täler. Ende September bis Mitte Oktober für die Lärchen-Färbung im Engadin und Bergell.
 
-### DaVinci Powergrade
+### Drohnenflüge in der Schweiz
 
-Bald verfügbar. Ein Node-Baum für DaVinci Resolve, kinoreife Looks sofort einsatzbereit.
+Geregelt durch das BAZL. Drohnen ab 250 Gramm müssen registriert werden. Haftpflichtversicherung über 1 Million CHF erforderlich. Maximale Flughöhe 120 Meter. Überflug von Schutzgebieten verboten.
+
+## Gründer
+
+Leon Helg, Schweizer Outdoor-Fotograf und Filmemacher. Lebt seit 26 Jahren in der Schweiz, die letzten fünf damit verbracht Spots zu kartieren, die nicht auf Touristenkarten stehen.
+
+- Instagram: https://instagram.com/leon.helg
+- TikTok: https://tiktok.com/@leon.helg
 
 ## Rechtliches
 
 Saftladen GmbH, Birkenstrasse 47, 6343 Rotkreuz, Schweiz. Kontakt: leon@hikebeast.ch.
 
-- Impressum: https://hikebeast.ch/de/imprint.md
-- Datenschutz: https://hikebeast.ch/de/privacy.md
+- Impressum: https://hikebeast.ch/de/imprint.html
+- Datenschutz: https://hikebeast.ch/de/privacy.html
+- AGB: https://hikebeast.ch/de/terms.html
