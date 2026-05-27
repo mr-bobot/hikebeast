@@ -1094,12 +1094,17 @@
       if (!spot) return null;
       // Preview mode · drop spots whose slug isn't on Leon's curated
       // recording-safe list. Anchor lives at spotKey's right half.
-      // EXCEPTION · the map page (/full/map/) shows all spots even in
-      // preview mode so recordings can pan across a full Switzerland
-      // (the discovery surface is itself the selling point). Spot
-      // detail pages stay reachable by direct URL · navigation from
-      // chapter / browse / swipe surfaces still respects the allowlist.
-      if (PREVIEW_MODE && !/\/full\/map\//.test(location.pathname || '')) {
+      // EXCEPTIONS · show ALL spots on the discovery surfaces that
+      // affiliate recordings naturally pan across:
+      //   - /full/map/           full Switzerland with all pins
+      //   - /full/wildcamping/   complete wildcamping landscape
+      //   - /full/hidden-gems/   the "look at all these gems" grid
+      // The spot detail page is still reachable by direct URL (the
+      // spot card on those exempt pages clicks through), so we rely
+      // on the photo-credit filter there to keep the recording safe.
+      // Chapter / browse / swipe surfaces still respect the 20-spot
+      // allowlist · they're the curated narrative path for promos.
+      if (PREVIEW_MODE && !/\/full\/(map|wildcamping|hidden-gems)\//.test(location.pathname || '')) {
         const anchor = (spot.spotKey || '').split('#')[1] || null;
         if (!previewSpotAllowed(anchor)) return null;
       }
@@ -3433,6 +3438,19 @@
 
   // --- Boot
   function boot() {
+    // Preview mode body classes · CSS in preview.css reads these to
+    // hide spot names on wildcamping + hidden-gems (Leon's directive
+    // 2026-05-27 · those two pages show all spots in preview mode
+    // but should not reveal individual spot titles in promo
+    // recordings). The base 'preview-mode' class is also handy as a
+    // hook for future preview-only styling tweaks.
+    if (PREVIEW_MODE) {
+      document.body.classList.add('preview-mode');
+      const p = location.pathname || '';
+      if (/\/full\/(wildcamping|hidden-gems)\//.test(p)) {
+        document.body.classList.add('preview-hide-spot-names');
+      }
+    }
     // Wipe any inline margin set on .viewer by an earlier social.js
     // revision that pinned the viewer via JS. CSS now handles centering;
     // stale inline values would otherwise beat the CSS rule until a hard

@@ -5460,3 +5460,19 @@ body.has-rail .topbar .hb-nav { display: none; }
   letter-spacing: 0;
 }
 .hb-wc-chip.is-on .hb-wc-chip-count { color: rgba(255,255,255,0.7); }
+
+
+/* Preview mode · spot-name hiding on /full/wildcamping/ and
+   /full/hidden-gems/. social.js sets `preview-hide-spot-names` on
+   <body> when PREVIEW_MODE is on and the user is on one of those
+   two pages. Affiliates recording promo videos see all spots tiled
+   with their photos but the title text is blanked out · `visibility:
+   hidden` keeps the tile layout identical to non-preview mode so
+   the recording reads as "intentional clean cards" rather than
+   "missing data". The title= and alt= attributes on the tile <a>
+   and <img> still carry the spot name in source · acceptable since
+   they don't render visually unless explicitly hovered, and screen
+   recordings rarely surface tooltips. */
+body.preview-hide-spot-names .name {
+  visibility: hidden;
+}
