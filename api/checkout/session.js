@@ -317,6 +317,24 @@ async function handleOnboardingPost(req, res, stripe, body) {
     }
   }
 
+  // Debug logging · 2026-05-27 Leon flagged that 0/11 recent buyers
+  // have an instagram_handle in the sheet despite the form being
+  // wired correctly across all locales. Trying to distinguish:
+  //   (a) users genuinely skipping the optional field
+  //   (b) Apps Script attach_instagram returning row_not_found (race
+  //       with the Stripe webhook that writes the buyer row)
+  //   (c) attach_instagram fetch timing out / failing silently
+  // The single-line log is filterable from Vercel logs by "[ig]".
+  // Keep the prefix tight so we can grep it cleanly.
+  const igRawType = typeof body.instagram_handle;
+  console.log("[ig]", JSON.stringify({
+    email,
+    has_field: igRawType === "string",
+    raw_type: igRawType,
+    handle_len: igHandle.length,
+    will_attempt: !!igHandle,
+  }));
+
   // Fire-and-forget IG-handle write to the Signups sheet. Best-effort ·
   // we never block account creation on this. The Apps Script
   // attach_instagram action does setIfEmpty so existing ManyChat-sourced
@@ -324,7 +342,7 @@ async function handleOnboardingPost(req, res, stripe, body) {
   // re-opens the success page later, re-submits) are safe.
   if (igHandle && process.env.SHEETS_WEBHOOK_URL && process.env.SHEETS_SECRET) {
     try {
-      await fetch(process.env.SHEETS_WEBHOOK_URL, {
+      const igRes = await fetch(process.env.SHEETS_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -336,8 +354,17 @@ async function handleOnboardingPost(req, res, stripe, body) {
         }),
         signal: AbortSignal.timeout(5000),
       });
+      // Read the Apps Script response · we used to fire-and-forget but
+      // that hid the row_not_found / setIfEmpty no-op cases. Now we
+      // log the outcome so the [ig] traces tell the full story.
+      const igResult = await igRes.json().catch(() => null);
+      if (igResult && igResult.ok === false) {
+        console.error("[ig] attach_instagram returned error:", JSON.stringify(igResult));
+      } else {
+        console.log("[ig] attach_instagram OK:", JSON.stringify(igResult));
+      }
     } catch (err) {
-      console.error("attach_instagram sheet write failed:", err?.message || err);
+      console.error("[ig] attach_instagram fetch failed:", err?.message || err);
       // Don't fail the account creation · the buyer can still log in
       // and Leon can see their email match in the Sheet without the
       // IG handle. Worst case Leon has to ask "what's your IG?" in
