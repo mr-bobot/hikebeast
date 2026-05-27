@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0c0c0d" />
+<meta name="theme-color" content="#ffffff" />
 <title>Hikebeast · 141 von Hand gesammelte Spots in den Schweizer Alpen</title>
 <meta name="description" content="Ein Guide für 141 versteckte Wander-, Wildcamping- und Fotospots in den Schweizer Alpen. In fünf Jahren von Leon Helg kartiert. GPS, Routen, beste Tageszeit, Wildcamping-Legalität pro Spot." />
 <link rel="canonical" href="https://hikebeast.ch/de/" />
@@ -24,19 +24,13 @@
 <meta property="og:image" content="https://hikebeast.ch/images/og-home.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Die Schweizer Alpen bei Sonnenaufgang von einem Grat oberhalb der Waldgrenze." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Hikebeast · 141 von Hand gesammelte Spots in den Schweizer Alpen" />
 <meta name="twitter:description" content="Ein Guide für 141 versteckte Wander-, Wildcamping- und Fotospots in den Schweizer Alpen." />
 <meta name="twitter:image" content="https://hikebeast.ch/images/og-home.jpg" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preload" as="image" href="/images/home-hero-tannhorn.jpg" fetchpriority="high" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
 
-<!-- JSON-LD: Organization, Person, Product, WebSite. Identisch zum EN-Graph mit @id cross-references. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -47,10 +41,7 @@
       "name": "Hikebeast",
       "url": "https://hikebeast.ch",
       "logo": "https://hikebeast.ch/images/favicon.jpg",
-      "sameAs": [
-        "https://instagram.com/leon.helg",
-        "https://tiktok.com/@leon.helg"
-      ],
+      "sameAs": ["https://instagram.com/leon.helg", "https://tiktok.com/@leon.helg"],
       "founder": { "@id": "https://hikebeast.ch/#leon" },
       "parentOrganization": {
         "@type": "Organization",
@@ -72,10 +63,7 @@
       "image": "https://hikebeast.ch/images/leon-portrait.jpg",
       "jobTitle": "Outdoor-Fotograf und Routen-Kartograf",
       "knowsAbout": ["Schweizer Alpen", "Wildcampen Schweiz", "Landschaftsfotografie", "Wanderrouten Schweiz"],
-      "sameAs": [
-        "https://instagram.com/leon.helg",
-        "https://tiktok.com/@leon.helg"
-      ],
+      "sameAs": ["https://instagram.com/leon.helg", "https://tiktok.com/@leon.helg"],
       "worksFor": { "@id": "https://hikebeast.ch/#org" }
     },
     {
@@ -105,11 +93,9 @@
 }
 </script>
 
-<!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 
-<!-- Meta Pixel -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -129,157 +115,158 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   :root {
-    --bg: #0c0c0d;
-    --bg-soft: #141417;
-    --bg-card: #15151a;
-    --border: #2a2a30;
-    --border-soft: #1f1f24;
-    --text: #ececec;
-    --text-muted: #9a9a92;
-    --text-dim: #5a5a55;
-    --accent: #e8743c;
-    --accent-soft: rgba(232, 116, 60, 0.12);
-    --accent-line: rgba(232, 116, 60, 0.35);
+    --bg: #ffffff; --surface: #f5f5f7; --fg: #1d1d1f; --muted: #6e6e73; --dim: #86868b;
+    --hairline: rgba(0,0,0,0.08);
+    --accent: #0071e3; --accent-hover: #0077ed;
+    --warn: #ff9500;
+    --radius-card: 18px; --radius-btn: 980px;
   }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); }
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    font-feature-settings: 'ss01', 'cv11';
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+    font-size: 17px; line-height: 1.47; letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
-  ::selection { background: var(--accent); color: var(--bg); }
+  ::selection { background: var(--accent); color: #fff; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; height: auto; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
 
-  .skip { position: absolute; left: -9999px; top: 0; background: var(--accent); color: var(--bg); padding: 10px 16px; font-weight: 700; z-index: 100; }
+  .skip { position: absolute; left: -9999px; top: 0; background: var(--accent); color: #fff; padding: 10px 16px; font-weight: 600; z-index: 100; border-radius: 6px; }
   .skip:focus { left: 12px; top: 12px; }
 
-  .shell { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
-  @media (max-width: 700px) { .shell { padding: 0 20px; } }
+  .shell { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 700px) { .shell { padding: 0 22px; } }
 
-  .topnav { position: absolute; top: 0; left: 0; right: 0; z-index: 5; padding: clamp(18px, 3vh, 28px) clamp(20px, 4vw, 40px); display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-  .topnav .brand { font-weight: 800; letter-spacing: -0.01em; font-size: 16px; color: rgba(255,255,255,0.96); text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
-  .topnav .topnav-right { display: flex; gap: 8px; }
-  .topnav a.pill { color: rgba(255,255,255,0.9); font-weight: 600; font-size: 12px; letter-spacing: 0.06em; padding: 7px 12px; border-radius: 999px; background: rgba(0,0,0,0.32); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: background 150ms ease; }
-  .topnav a.pill:hover { background: rgba(0,0,0,0.5); }
-  .topnav a.pill.lang { letter-spacing: 0.1em; }
+  .navbar { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.78); -webkit-backdrop-filter: saturate(140%) blur(12px); backdrop-filter: saturate(140%) blur(12px); border-bottom: 1px solid var(--hairline); padding: 10px 22px; display: flex; align-items: center; justify-content: space-between; }
+  .navbar.over-hero { background: rgba(255,255,255,0); border-bottom-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .navbar.over-hero .navbar-brand, .navbar.over-hero .navbar-link { color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+  .navbar.over-hero .navbar-link { border-color: rgba(255,255,255,0.4); background: rgba(0,0,0,0.18); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .navbar-brand { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--fg); transition: color 200ms ease; }
+  .navbar-right { display: flex; gap: 8px; }
+  .navbar-link { font-size: 13px; font-weight: 500; color: var(--muted); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--hairline); letter-spacing: 0.02em; transition: color 150ms ease, border-color 150ms ease, background 150ms ease; }
+  .navbar-link:hover { color: var(--fg); border-color: rgba(0,0,0,0.2); }
+  .navbar.over-hero .navbar-link:hover { background: rgba(0,0,0,0.32); border-color: rgba(255,255,255,0.7); }
 
-  .hero { position: relative; width: 100%; height: 100dvh; min-height: 600px; overflow: hidden; background: #08080a; }
+  .hero { position: relative; width: 100%; height: 100dvh; min-height: 600px; margin-top: -52px; overflow: hidden; background: #08080a; }
   .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-  .hero::after { content: ''; position: absolute; inset: auto 0 0 0; height: 70%; background: linear-gradient(to bottom, transparent 0%, rgba(8,8,10,0.4) 60%, rgba(8,8,10,0.85) 100%); pointer-events: none; }
-  .hero-inner { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(28px, 6vh, 64px) clamp(20px, 5vw, 56px); z-index: 2; }
-  .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; color: rgba(232, 116, 60, 0.95); text-transform: uppercase; margin-bottom: clamp(12px, 2vh, 18px); text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
-  .hero h1 { margin: 0 0 clamp(14px, 2.5vh, 22px); font-weight: 800; letter-spacing: -0.035em; line-height: 0.96; font-size: clamp(40px, 8vw, 108px); color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,0.4), 0 12px 56px rgba(0,0,0,0.35); max-width: 18ch; }
-  .hero .sub { margin: 0 0 clamp(22px, 4vh, 36px); font-size: clamp(16px, 2.2vw, 22px); font-weight: 500; line-height: 1.35; letter-spacing: -0.005em; color: rgba(255,255,255,0.94); text-shadow: 0 2px 16px rgba(0,0,0,0.5); max-width: 42ch; }
-  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-  .cta { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; background: #fff; color: #0c0c0d; border-radius: 999px; font-weight: 700; font-size: 15.5px; letter-spacing: -0.005em; box-shadow: 0 4px 18px rgba(0,0,0,0.25), 0 16px 48px rgba(0,0,0,0.18); transition: transform 150ms ease, box-shadow 200ms ease; -webkit-tap-highlight-color: transparent; }
-  .cta:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(0,0,0,0.3), 0 20px 56px rgba(0,0,0,0.22); }
-  .cta:active { transform: translateY(0); }
-  .cta svg { width: 16px; height: 16px; flex-shrink: 0; }
-  .cta-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); box-shadow: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-  .cta-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); box-shadow: none; }
+  .hero::after { content: ''; position: absolute; inset: auto 0 0 0; height: 60%; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 100%); pointer-events: none; }
+  .hero-inner { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(28px, 6vh, 64px) clamp(22px, 5vw, 56px); z-index: 2; max-width: 1080px; margin: 0 auto; width: 100%; }
+  .hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; color: rgba(255,255,255,0.92); text-transform: uppercase; margin-bottom: clamp(12px, 2vh, 18px); text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+  .hero h1 { margin: 0 0 clamp(14px, 2.5vh, 20px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.04; font-size: clamp(36px, 6vw, 76px); color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,0.35); max-width: 20ch; }
+  .hero .sub { margin: 0 0 clamp(22px, 4vh, 32px); font-size: clamp(16px, 2vw, 21px); font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; color: rgba(255,255,255,0.92); text-shadow: 0 2px 14px rgba(0,0,0,0.5); max-width: 46ch; }
+  .cta-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 
-  .scroll-hint { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.55); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; pointer-events: none; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-  .scroll-hint .arrow { width: 1px; height: 22px; background: rgba(255,255,255,0.45); animation: scrollBlink 2.4s ease-in-out infinite; }
-  @keyframes scrollBlink { 0%, 100% { opacity: 0.2; transform: translateY(-4px); } 50% { opacity: 1; transform: translateY(4px); } }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: var(--radius-btn); font-size: 15px; font-weight: 500; letter-spacing: -0.005em; transition: background 150ms ease, transform 100ms ease, box-shadow 200ms ease; -webkit-tap-highlight-color: transparent; border: 1px solid transparent; cursor: pointer; }
+  .btn:active { transform: translateY(0.5px); }
+  .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-hero-primary { background: #fff; color: var(--fg); box-shadow: 0 2px 12px rgba(0,0,0,0.18), 0 8px 32px rgba(0,0,0,0.18); padding: 13px 22px; font-weight: 600; }
+  .btn-hero-primary:hover { background: #f5f5f7; box-shadow: 0 4px 18px rgba(0,0,0,0.22), 0 12px 40px rgba(0,0,0,0.22); }
+  .btn-ghost-light { background: rgba(0,0,0,0.22); color: #fff; border-color: rgba(255,255,255,0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); padding: 12px 22px; font-weight: 500; }
+  .btn-ghost-light:hover { background: rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.7); }
+
+  .scroll-hint { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500; pointer-events: none; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .scroll-hint .arrow { width: 1px; height: 18px; background: rgba(255,255,255,0.5); animation: scrollBlink 2.4s ease-in-out infinite; }
+  @keyframes scrollBlink { 0%, 100% { opacity: 0.25; transform: translateY(-3px); } 50% { opacity: 1; transform: translateY(3px); } }
   @media (max-width: 700px) { .scroll-hint { display: none; } }
 
-  .trust { padding: 26px 0; border-bottom: 1px solid var(--border-soft); background: var(--bg); }
-  .trust-row { display: flex; justify-content: center; gap: 28px 56px; flex-wrap: wrap; align-items: center; text-align: center; }
+  .trust { background: var(--surface); padding: 26px 0; border-bottom: 1px solid var(--hairline); }
+  .trust-row { display: flex; justify-content: center; gap: 24px 48px; flex-wrap: wrap; align-items: center; text-align: center; }
   .trust-item { display: flex; flex-direction: column; gap: 2px; }
-  .trust-item .n { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
-  .trust-item .l { font-size: 12px; color: var(--text-muted); letter-spacing: 0.02em; }
-  .trust-item .stars { color: var(--accent); letter-spacing: 0.04em; }
+  .trust-item .n { font-size: 20px; font-weight: 600; color: var(--fg); letter-spacing: -0.02em; }
+  .trust-item .l { font-size: 12.5px; color: var(--muted); }
+  .trust-item .stars { color: var(--warn); letter-spacing: 1px; }
 
-  section.row { padding: clamp(56px, 9vh, 96px) 0; border-bottom: 1px solid var(--border-soft); }
-  section.row:last-of-type { border-bottom: none; }
-  .section-head { display: flex; flex-direction: column; gap: 8px; margin-bottom: clamp(28px, 5vh, 48px); max-width: 720px; }
-  .kicker { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: var(--accent); text-transform: uppercase; }
-  h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; margin: 0; }
-  .section-lede { font-size: 17px; color: var(--text-muted); line-height: 1.55; margin: 0; max-width: 60ch; }
+  section.row { padding: clamp(56px, 9vh, 96px) 0; }
+  section.row.alt { background: var(--surface); }
+  section.row + section.row:not(.alt) { border-top: 1px solid var(--hairline); }
+  .section-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: clamp(28px, 5vh, 48px); max-width: 720px; }
+  .kicker { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; color: var(--accent); text-transform: uppercase; }
+  h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.08; margin: 0; color: var(--fg); }
+  .section-lede { font-size: 18px; color: var(--muted); line-height: 1.5; margin: 0; max-width: 60ch; letter-spacing: -0.01em; }
 
   .grid-spots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   @media (max-width: 900px) { .grid-spots { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 540px) { .grid-spots { grid-template-columns: 1fr; gap: 10px; } }
-  .spot { position: relative; aspect-ratio: 4 / 5; border-radius: 12px; overflow: hidden; background: var(--bg-soft); transition: transform 280ms ease; margin: 0; }
-  .spot img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms cubic-bezier(0.2, 0.6, 0.2, 1), filter 400ms ease; }
-  .spot:hover img { transform: scale(1.04); filter: brightness(1.06); }
-  .spot::after { content: ''; position: absolute; inset: auto 0 0 0; height: 60%; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.78) 100%); pointer-events: none; }
+  .spot { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-card); overflow: hidden; background: var(--surface); transition: transform 280ms ease, box-shadow 280ms ease; margin: 0; }
+  .spot img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms cubic-bezier(0.2, 0.6, 0.2, 1); }
+  .spot:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+  .spot:hover img { transform: scale(1.04); }
+  .spot::after { content: ''; position: absolute; inset: auto 0 0 0; height: 55%; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.72) 100%); pointer-events: none; }
   .spot-meta { position: absolute; inset: auto 0 0 0; padding: 16px 18px; color: #fff; z-index: 2; margin: 0; }
-  .spot-meta .region { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: rgba(232, 116, 60, 0.95); text-transform: uppercase; margin-bottom: 4px; }
-  .spot-meta .name { font-size: 20px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.1; margin: 0; }
-  .spot-meta .deck { font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.5; margin: 6px 0 0; }
-  .grid-cta { margin-top: 28px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 15px; color: var(--text-muted); }
-  .grid-cta b { color: var(--text); font-weight: 700; }
-  .grid-cta a { color: var(--accent); font-weight: 600; border-bottom: 1px solid var(--accent-line); }
-  .grid-cta a:hover { border-color: var(--accent); }
+  .spot-meta .region { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; color: rgba(255,255,255,0.92); text-transform: uppercase; margin-bottom: 4px; }
+  .spot-meta .name { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin: 0; }
+  .spot-meta .deck { font-size: 13.5px; color: rgba(255,255,255,0.82); line-height: 1.5; margin: 6px 0 0; letter-spacing: -0.005em; }
+  .grid-cta { margin-top: 28px; font-size: 16px; color: var(--muted); }
+  .grid-cta b { color: var(--fg); font-weight: 600; }
+  .grid-cta a { color: var(--accent); font-weight: 500; }
+  .grid-cta a:hover { color: var(--accent-hover); }
 
   .hub-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
-  .hub-pill { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 999px; font-size: 14.5px; font-weight: 600; color: var(--text); transition: border-color 200ms ease, background 200ms ease, transform 150ms ease; }
-  .hub-pill:hover { border-color: var(--accent-line); background: var(--bg-card); transform: translateY(-1px); }
-  .hub-pill .arrow { color: var(--accent); transition: transform 180ms ease; }
-  .hub-pill:hover .arrow { transform: translateX(3px); }
+  .hub-pill { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--bg); border: 1px solid var(--hairline); border-radius: 999px; font-size: 15px; font-weight: 500; color: var(--fg); transition: border-color 200ms ease, background 200ms ease, transform 150ms ease; }
+  .hub-pill:hover { border-color: rgba(0,113,227,0.4); transform: translateY(-1px); }
+  .hub-pill .arrow { color: var(--accent); font-weight: 500; transition: transform 180ms ease; }
+  .hub-pill:hover .arrow { transform: translateX(2px); }
 
-  .founder { display: grid; grid-template-columns: 360px 1fr; gap: 56px; align-items: center; }
-  @media (max-width: 800px) { .founder { grid-template-columns: 1fr; gap: 32px; } }
-  .founder-photo { aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; background: var(--bg-soft); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+  .founder { display: grid; grid-template-columns: 340px 1fr; gap: 56px; align-items: center; }
+  @media (max-width: 800px) { .founder { grid-template-columns: 1fr; gap: 28px; } }
+  .founder-photo { aspect-ratio: 4 / 5; border-radius: var(--radius-card); overflow: hidden; background: var(--surface); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
   .founder-photo img { width: 100%; height: 100%; object-fit: cover; }
-  .founder-text h3 { margin: 0 0 14px; font-size: clamp(22px, 3vw, 30px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
-  .founder-text p { margin: 0 0 14px; font-size: 16px; color: var(--text-muted); line-height: 1.65; }
+  .founder-text h3 { margin: 0 0 14px; font-size: clamp(22px, 3vw, 30px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.18; }
+  .founder-text p { margin: 0 0 14px; font-size: 17px; color: var(--muted); line-height: 1.55; letter-spacing: -0.005em; }
   .founder-text p:last-of-type { margin-bottom: 22px; }
-  .founder-text p strong { color: var(--text); font-weight: 600; }
+  .founder-text p strong { color: var(--fg); font-weight: 600; }
   .social-row { display: flex; gap: 10px; flex-wrap: wrap; }
-  .social-link { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--text); transition: border-color 200ms ease; }
-  .social-link:hover { border-color: var(--accent-line); }
+  .social-link { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; background: var(--bg); border: 1px solid var(--hairline); border-radius: 999px; font-size: 13.5px; font-weight: 500; color: var(--fg); transition: border-color 200ms ease; }
+  .social-link:hover { border-color: rgba(0,113,227,0.4); }
   .social-link svg { width: 15px; height: 15px; }
 
-  .faq-list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--border-soft); }
-  .faq-item { border-bottom: 1px solid var(--border-soft); }
-  .faq-item summary { padding: 22px 0; list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 17px; font-weight: 600; letter-spacing: -0.005em; color: var(--text); transition: color 200ms ease; }
+  .faq-list { display: flex; flex-direction: column; gap: 0; }
+  .faq-item { border-bottom: 1px solid var(--hairline); }
+  .faq-item:first-of-type { border-top: 1px solid var(--hairline); }
+  .faq-item summary { padding: 22px 0; list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 17px; font-weight: 500; letter-spacing: -0.01em; color: var(--fg); transition: color 200ms ease; }
   .faq-item summary::-webkit-details-marker { display: none; }
   .faq-item summary:hover { color: var(--accent); }
-  .faq-item .icon { flex-shrink: 0; width: 14px; height: 14px; color: var(--text-dim); transition: transform 260ms ease, color 200ms ease; }
+  .faq-item .icon { flex-shrink: 0; width: 14px; height: 14px; color: var(--dim); transition: transform 260ms ease, color 200ms ease; }
   .faq-item[open] .icon { transform: rotate(45deg); color: var(--accent); }
-  .faq-item .answer { padding: 0 0 22px; font-size: 15px; color: var(--text-muted); line-height: 1.65; max-width: 72ch; }
-  .faq-item .answer a { color: var(--accent); border-bottom: 1px solid var(--accent-line); }
-  .faq-item .answer b { color: var(--text); font-weight: 600; }
-  .faq-item .answer ul { padding-left: 20px; margin: 8px 0; }
+  .faq-item .answer { padding: 0 0 22px; font-size: 16px; color: var(--muted); line-height: 1.55; max-width: 72ch; letter-spacing: -0.005em; }
+  .faq-item .answer a { color: var(--accent); }
+  .faq-item .answer a:hover { color: var(--accent-hover); }
+  .faq-item .answer b { color: var(--fg); font-weight: 600; }
+  .faq-item .answer ul { padding-left: 22px; margin: 8px 0; }
   .faq-item .answer li { padding: 3px 0; }
 
-  .cta-block { margin-top: clamp(40px, 6vh, 64px); padding: 32px; background: linear-gradient(140deg, var(--accent-soft) 0%, transparent 65%), var(--bg-soft); border: 1px solid var(--accent-line); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-  .cta-block h3 { margin: 0 0 6px; font-size: 22px; font-weight: 700; letter-spacing: -0.015em; }
-  .cta-block p { margin: 0; color: var(--text-muted); font-size: 14.5px; }
-  .cta-block .cta { background: var(--accent); color: #fff; box-shadow: 0 4px 20px rgba(232, 116, 60, 0.35); }
-  .cta-block .cta:hover { box-shadow: 0 8px 28px rgba(232, 116, 60, 0.45); }
+  .cta-block { margin-top: clamp(40px, 6vh, 64px); padding: 36px; background: var(--accent); border-radius: var(--radius-card); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; color: #fff; }
+  .cta-block h3 { margin: 0 0 6px; font-size: 24px; font-weight: 600; letter-spacing: -0.02em; color: #fff; }
+  .cta-block p { margin: 0; color: rgba(255,255,255,0.86); font-size: 15px; letter-spacing: -0.005em; }
+  .cta-block .btn-hero-primary { box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
 
-  footer { padding: 48px 0 64px; border-top: 1px solid var(--border-soft); font-size: 13px; color: var(--text-dim); }
+  footer { padding: 48px 0 64px; border-top: 1px solid var(--hairline); background: var(--surface); font-size: 13.5px; color: var(--muted); }
   footer .foot { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-  footer .foot a { color: var(--text-muted); transition: color 150ms ease; }
-  footer .foot a:hover { color: var(--text); }
-  footer .foot .sep { color: var(--text-dim); margin: 0 8px; }
-  footer .credits { color: var(--text-dim); }
+  footer .foot a { color: var(--muted); transition: color 150ms ease; }
+  footer .foot a:hover { color: var(--fg); }
+  footer .foot .sep { color: var(--dim); margin: 0 8px; }
+  footer .credits { color: var(--muted); }
 </style>
 </head>
 <body>
 
 <a class="skip" href="#main">Zum Inhalt springen</a>
 
-<header class="topnav" aria-label="Navigation">
-  <span class="brand">Hikebeast</span>
-  <div class="topnav-right">
-    <a class="pill" href="/login/">Login</a>
-    <a class="pill lang" href="/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
+<nav class="navbar over-hero" id="navbar" aria-label="Navigation">
+  <a class="navbar-brand" href="/de/">Hikebeast</a>
+  <div class="navbar-right">
+    <a class="navbar-link" href="/login/">Login</a>
+    <a class="navbar-link" href="/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
   </div>
-</header>
+</nav>
 
 <main id="main">
 
@@ -287,16 +274,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <img class="hero-img" src="/images/home-hero-tannhorn.jpg" alt="" fetchpriority="high" decoding="async" />
     <div class="hero-inner">
       <div class="hero-eyebrow">Swiss Gems · Ein Guide von Leon Helg</div>
-      <h1>141 Spots in den Schweizer Alpen.<br>In fünf Jahren kartiert.</h1>
+      <h1>141 Spots in den Schweizer Alpen. In fünf Jahren kartiert.</h1>
       <p class="sub">GPS, Routen, beste Tageszeit, Wildcamping-Legalität. Als PDF und interaktive Karte. Lifetime-Updates.</p>
       <div class="cta-row">
-        <a class="cta" href="/de/map7/"
+        <a class="btn btn-hero-primary" href="/de/map7/"
            data-fbq-event="ViewContent"
            data-fbq-params='{"content_name":"Swiss Gems of Switzerland Map","content_category":"Map","value":27.00,"currency":"CHF"}'>
-          <span>Hol dir den Guide · CHF 27</span>
+          Hol dir den Guide · CHF 27
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
         </a>
-        <a class="cta cta-ghost" href="#famous">Spots anschauen</a>
+        <a class="btn btn-ghost-light" href="#famous">Spots anschauen</a>
       </div>
     </div>
     <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><span class="arrow"></span></div>
@@ -317,12 +304,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <div class="shell">
       <div class="section-head">
         <span class="kicker">Einige kennst du wahrscheinlich</span>
-        <h2>Die berühmten Spots.<br>Sechs der 141, die du wahrscheinlich schon gesehen hast.</h2>
+        <h2>Die berühmten Spots. Sechs der 141, die du wahrscheinlich schon gesehen hast.</h2>
         <p class="section-lede">Diese sechs sind nicht die versteckten. Das sind die Postkarten. Die anderen 135 liegen abseits, auf eigenen Wegen, und nur im Guide.</p>
       </div>
 
       <div class="grid-spots">
-
         <figure class="spot">
           <img src="/images/famous/oeschinensee.jpg" alt="Oeschinensee, ein türkiser Bergsee oberhalb von Kandersteg im Berner Oberland." loading="lazy" decoding="async" />
           <figcaption class="spot-meta">
@@ -333,7 +319,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </figure>
 
         <figure class="spot">
-          <img src="/images/famous/riffelsee.jpg" alt="Riffelsee mit dem Matterhorn gespiegelt im stillen Wasser bei Sonnenaufgang." loading="lazy" decoding="async" />
+          <img src="/images/famous/riffelsee.jpg" alt="Riffelsee mit dem Matterhorn unter dem Nachthimmel." loading="lazy" decoding="async" />
           <figcaption class="spot-meta">
             <div class="region">Wallis · See</div>
             <h3 class="name">Riffelsee</h3>
@@ -376,17 +362,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <p class="deck">Bei der Saxer Lücke ist es voll. Steig runter und du findest einen schmalen See ohne Menschen.</p>
           </figcaption>
         </figure>
-
       </div>
 
       <p class="grid-cta">
         <b>135 weitere Spots</b> liegen abseits der Hauptwege und stehen nur im Guide.
-        <a href="/de/map7/">Was im Guide steht →</a>
+        &nbsp;<a href="/de/map7/">Was im Guide steht ›</a>
       </p>
     </div>
   </section>
 
-  <section class="row" aria-label="Themen">
+  <section class="row alt" aria-label="Themen">
     <div class="shell">
       <div class="section-head">
         <span class="kicker">Was Leute hier suchen</span>
@@ -394,10 +379,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         <p class="section-lede">Hikebeast deckt vier Themen ab. Jedes davon googelt jemand vor einer Reise. Hier steht, was der Guide dazu sagt, mit einem Klick pro Thema.</p>
       </div>
       <div class="hub-pills">
-        <a class="hub-pill" href="#faq-wildcamping">Wildcampen in der Schweiz <span class="arrow">→</span></a>
-        <a class="hub-pill" href="#faq-spots">Versteckte Wanderungen &amp; Fotospots <span class="arrow">→</span></a>
-        <a class="hub-pill" href="#faq-format">Was im Guide steht <span class="arrow">→</span></a>
-        <a class="hub-pill" href="#faq-leon">Wer dahinter steht <span class="arrow">→</span></a>
+        <a class="hub-pill" href="#faq-wildcamping">Wildcampen in der Schweiz <span class="arrow">›</span></a>
+        <a class="hub-pill" href="#faq-spots">Versteckte Wanderungen &amp; Fotospots <span class="arrow">›</span></a>
+        <a class="hub-pill" href="#faq-format">Was im Guide steht <span class="arrow">›</span></a>
+        <a class="hub-pill" href="#faq-leon">Wer dahinter steht <span class="arrow">›</span></a>
       </div>
     </div>
   </section>
@@ -428,7 +413,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     </div>
   </section>
 
-  <section class="row" id="faq" aria-label="Häufige Fragen">
+  <section class="row alt" id="faq" aria-label="Häufige Fragen">
     <div class="shell">
       <div class="section-head">
         <span class="kicker">Fragen</span>
@@ -459,7 +444,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </summary>
           <div class="answer">
-            Es gibt kein einheitliches Bundesgesetz. Der Schweizer Alpen-Club (SAC) toleriert ein einzelnes Biwak oberhalb der Waldgrenze, mit Einverständnis des Grundeigentümers und mindestens 50 Meter Abstand von Gewässern. Verboten ist es im Schweizerischen Nationalpark, in den 43 Eidgenössischen Jagdbanngebieten, in Wildruhezonen und in kantonalen Naturschutzgebieten. Unterhalb der Waldgrenze variieren die Regeln nach Kanton und Gemeinde. Im Swiss Gems Guide steht der aktuelle Status pro Spot. Verifiziere den Status für den konkreten Spot bevor du dort zeltest.
+            Es gibt kein einheitliches Bundesgesetz. Der Schweizer Alpen-Club (SAC) toleriert ein einzelnes Biwak oberhalb der Waldgrenze, mit Einverständnis des Grundeigentümers und mindestens 50 Meter Abstand von Gewässern. Verboten ist es im Schweizerischen Nationalpark, in den 43 Eidgenössischen Jagdbanngebieten, in Wildruhezonen und in kantonalen Naturschutzgebieten. Unterhalb der Waldgrenze variieren die Regeln nach Kanton und Gemeinde. Im Swiss Gems Guide steht der aktuelle Status pro Spot.
           </div>
         </details>
 
@@ -477,7 +462,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </summary>
           <div class="answer">
-            Die meisten Spots sind unter 90 Minuten einfacher Fussweg vom Parkplatz. Etwa 20 sind direkt anfahrbar ohne Wanderung. Eine Handvoll sind Tages- oder Mehrtagestouren. Jeder Spot hat Wegzeit, Höhenmeter und Schwierigkeitsgrad angegeben, damit du nach Tagesform wählen kannst.
+            Die meisten Spots sind unter 90 Minuten einfacher Fussweg vom Parkplatz. Etwa 20 sind direkt anfahrbar ohne Wanderung. Eine Handvoll sind Tages- oder Mehrtagestouren. Jeder Spot hat Wegzeit, Höhenmeter und Schwierigkeitsgrad angegeben.
           </div>
         </details>
 
@@ -515,10 +500,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <h3>Hol dir den Swiss Gems Guide</h3>
           <p>141 Spots, GPS, Foto-Timing, Wildcamping-Legalität. CHF 27, Lifetime-Updates.</p>
         </div>
-        <a class="cta" href="/de/map7/"
+        <a class="btn btn-hero-primary" href="/de/map7/"
            data-fbq-event="ViewContent"
            data-fbq-params='{"content_name":"Swiss Gems of Switzerland Map","content_category":"Map","value":27.00,"currency":"CHF"}'>
-          <span>Hol dir den Guide · CHF 27</span>
+          Hol dir den Guide · CHF 27
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
         </a>
       </div>
@@ -544,73 +529,43 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   </div>
 </footer>
 
-<!-- FAQPage Schema (DE) · GEO-Signal für AI-Suche. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "inLanguage": "de",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Was steht im Hikebeast Swiss Gems Guide?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "141 Spots in den Schweizer Alpen mit genauer GPS, Wegzeit und Schwierigkeit, empfohlener Tageszeit, Wildcamping-Status, und Routen-Notizen. Geliefert als PDF und interaktive Webapp für Handy oder Laptop. Lifetime-Updates inklusive."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Ist Wildcampen in der Schweiz erlaubt?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Es gibt kein einheitliches Bundesgesetz. Der Schweizer Alpen-Club toleriert ein einzelnes Biwak oberhalb der Waldgrenze, mit Einverständnis des Grundeigentümers und mindestens 50 Meter Abstand von Gewässern. Verboten ist es im Schweizerischen Nationalpark, in den 43 Eidgenössischen Jagdbanngebieten, in Wildruhezonen und in kantonalen Naturschutzgebieten. Unterhalb der Waldgrenze variieren die Regeln nach Kanton und Gemeinde. Im Hikebeast Swiss Gems Guide steht der aktuelle Status pro Spot."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wie werden die Spots ausgewählt?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Fünf Jahre Solo-Recherche von Leon Helg. Ein Spot kommt nur in den Guide nach persönlicher Verifikation, fotografischem Wert und realistischer Route für normale Fitness. Die meisten Spots sind 30 bis 90 Minuten vom Parkplatz. Etwa ein Drittel ist wildcamping-tauglich."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wann ist die beste Zeit für die Schweizer Alpen?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ende Juli bis Mitte September für hoch-alpine Routen über 2000 Metern: schneefrei, Hütten offen, Seen taufrei. Juni für Wasserfälle und tiefere Täler. Ende September bis Mitte Oktober für die Lärchen-Färbung im Engadin und Bergell."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Was kostet der Hikebeast Swiss Gems Guide?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Einmalige Zahlung von CHF 27 (auch in EUR oder USD bezahlbar). Lifetime-Updates sind inklusive. Kein Abo."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wer ist Leon Helg?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Leon Helg ist ein Schweizer Outdoor-Fotograf und Filmemacher. Er lebt seit 26 Jahren in der Schweiz und hat die letzten fünf damit verbracht, Alpen-Spots zu kartieren, die nicht auf Touristenkarten stehen. Er postet als @leon.helg auf Instagram und TikTok. Hikebeast läuft unter der Saftladen GmbH, Rotkreuz, Schweiz."
-      }
-    }
+    { "@type": "Question", "name": "Was steht im Hikebeast Swiss Gems Guide?", "acceptedAnswer": { "@type": "Answer", "text": "141 Spots in den Schweizer Alpen mit genauer GPS, Wegzeit und Schwierigkeit, empfohlener Tageszeit, Wildcamping-Status, und Routen-Notizen. Geliefert als PDF und interaktive Webapp für Handy oder Laptop. Lifetime-Updates inklusive." } },
+    { "@type": "Question", "name": "Ist Wildcampen in der Schweiz erlaubt?", "acceptedAnswer": { "@type": "Answer", "text": "Es gibt kein einheitliches Bundesgesetz. Der Schweizer Alpen-Club toleriert ein einzelnes Biwak oberhalb der Waldgrenze, mit Einverständnis des Grundeigentümers und mindestens 50 Meter Abstand von Gewässern. Verboten ist es im Schweizerischen Nationalpark, in den 43 Eidgenössischen Jagdbanngebieten, in Wildruhezonen und in kantonalen Naturschutzgebieten. Unterhalb der Waldgrenze variieren die Regeln nach Kanton und Gemeinde. Im Hikebeast Swiss Gems Guide steht der aktuelle Status pro Spot." } },
+    { "@type": "Question", "name": "Wie werden die Spots ausgewählt?", "acceptedAnswer": { "@type": "Answer", "text": "Fünf Jahre Solo-Recherche von Leon Helg. Ein Spot kommt nur in den Guide nach persönlicher Verifikation, fotografischem Wert und realistischer Route für normale Fitness. Die meisten Spots sind 30 bis 90 Minuten vom Parkplatz. Etwa ein Drittel ist wildcamping-tauglich." } },
+    { "@type": "Question", "name": "Wann ist die beste Zeit für die Schweizer Alpen?", "acceptedAnswer": { "@type": "Answer", "text": "Ende Juli bis Mitte September für hoch-alpine Routen über 2000 Metern: schneefrei, Hütten offen, Seen taufrei. Juni für Wasserfälle und tiefere Täler. Ende September bis Mitte Oktober für die Lärchen-Färbung im Engadin und Bergell." } },
+    { "@type": "Question", "name": "Was kostet der Hikebeast Swiss Gems Guide?", "acceptedAnswer": { "@type": "Answer", "text": "Einmalige Zahlung von CHF 27 (auch in EUR oder USD bezahlbar). Lifetime-Updates sind inklusive. Kein Abo." } },
+    { "@type": "Question", "name": "Wer ist Leon Helg?", "acceptedAnswer": { "@type": "Answer", "text": "Leon Helg ist ein Schweizer Outdoor-Fotograf und Filmemacher. Er lebt seit 26 Jahren in der Schweiz und hat die letzten fünf damit verbracht, Alpen-Spots zu kartieren, die nicht auf Touristenkarten stehen. Er postet als @leon.helg auf Instagram und TikTok. Hikebeast läuft unter der Saftladen GmbH, Rotkreuz, Schweiz." } }
   ]
 }
 </script>
 
 <script>
-  // Meta Pixel forwarding for CTA clicks.
-  document.querySelectorAll('[data-fbq-event]').forEach((el) => {
-    el.addEventListener('click', () => {
+  (function() {
+    var nav = document.getElementById('navbar');
+    var hero = document.querySelector('.hero');
+    if (!nav || !hero) return;
+    var threshold = function() { return hero.offsetHeight - 80; };
+    var update = function() {
+      if (window.scrollY < threshold()) nav.classList.add('over-hero');
+      else nav.classList.remove('over-hero');
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  document.querySelectorAll('[data-fbq-event]').forEach(function(el) {
+    el.addEventListener('click', function() {
       if (!window.fbq) return;
-      const event = el.dataset.fbqEvent;
-      let params = {};
-      try { params = JSON.parse(el.dataset.fbqParams || '{}'); } catch {}
+      var event = el.dataset.fbqEvent;
+      var params = {};
+      try { params = JSON.parse(el.dataset.fbqParams || '{}'); } catch (e) {}
       fbq('track', event, params);
     });
   });
