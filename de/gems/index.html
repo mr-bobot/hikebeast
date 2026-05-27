@@ -31,6 +31,82 @@
 <!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<script>
+  /* Tracking infrastructure · ported from /map9/ 2026-05-27 so /de/gems/
+     visits land in AllVisits properly (visitor_id + classified source +
+     affiliate_ref). Dark mode intentionally NOT ported · /gems/ stays
+     light-only per Leon's preference. */
+  window.HB_SOURCE_PAGE = "de_gems";
+  window.HB_SOURCE = (function () {
+    try {
+      var p = new URLSearchParams(location.search);
+      if (p.get("s")) return "manychat";
+      var utm = (p.get("utm_source") || "").toLowerCase();
+      if (utm === "affiliate") return "affiliate";
+      if (utm === "linktree" || utm === "linktr.ee") return "linktree";
+      if (utm === "facebook" || utm === "fb") return "facebook";
+      if (utm === "instagram" || utm === "ig") return "instagram";
+      if (utm) return utm.slice(0, 24);
+      var ref = (document.referrer || "");
+      if (ref) {
+        var h = "";
+        try { h = new URL(ref).hostname; } catch (e) {}
+        if (h && h.indexOf("hikebeast") === -1) return "referral";
+      }
+      return "direct";
+    } catch (e) { return "unknown"; }
+  })();
+  (function () {
+    var WEAK = { direct: 1, unknown: 1, referral: 1 };
+    var STALE_VALUES = { facebook_ads: 1, instagram_ads: 1 };
+    try {
+      var stashed = localStorage.getItem("hb:last_source:v1") || "";
+      if (stashed && STALE_VALUES[stashed]) stashed = "";
+      if (stashed && !WEAK[stashed] && WEAK[window.HB_SOURCE]) {
+        window.HB_SOURCE = stashed;
+      }
+      if (!stashed || !WEAK[window.HB_SOURCE]) {
+        localStorage.setItem("hb:last_source:v1", window.HB_SOURCE);
+      }
+    } catch (e) {}
+  })();
+  window.HB_THEME = "light";
+  try { localStorage.setItem("hb:last_theme:v1", "light"); } catch (e) {}
+  window.hbAffiliateRef = function () {
+    try {
+      var s = localStorage.getItem("hb:r");
+      if (!s) return "";
+      var o = JSON.parse(s);
+      return (o && o.slug && o.exp && o.exp > Date.now()) ? o.slug : "";
+    } catch (e) { return ""; }
+  };
+  window.hbTrack = function (name, extra) {
+    try {
+      var k = "_hbf_" + name;
+      if (window[k]) return;
+      window[k] = true;
+      if (typeof window.va !== "function") return;
+      var props = {
+        name: name,
+        source_page: window.HB_SOURCE_PAGE,
+        source: window.HB_SOURCE,
+        theme: window.HB_THEME,
+      };
+      try {
+        var __r = localStorage.getItem("hb:r");
+        if (__r) {
+          var __ro = JSON.parse(__r);
+          if (__ro && __ro.slug && __ro.exp && __ro.exp > Date.now()) {
+            props.affiliate_ref = __ro.slug;
+          }
+        }
+      } catch (e) {}
+      if (window.HB_HERO_VARIANT) props.hero_variant = window.HB_HERO_VARIANT;
+      if (extra) for (var p in extra) if (Object.prototype.hasOwnProperty.call(extra, p)) props[p] = extra[p];
+      window.va("event", props);
+    } catch (e) {}
+  };
+</script>
 
 <!-- Meta Pixel -->
 <script>
@@ -2240,9 +2316,46 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     bootCheckout();
   }
 
+  // visitor_id · ported from /map9/ 2026-05-27. See gems/index.html
+  // for the full rationale; anonymous traffic was previously invisible
+  // to AllVisits without this.
+  const VISITOR_KEY = "hb:visitor_id";
+  let visitorId = "";
+  try { visitorId = localStorage.getItem(VISITOR_KEY) || ""; } catch (e) {}
+  if (!visitorId) {
+    if (window.crypto && typeof crypto.randomUUID === "function") {
+      visitorId = crypto.randomUUID();
+    } else {
+      visitorId = "v" + Date.now().toString(36) +
+                  Math.random().toString(36).slice(2, 10) +
+                  Math.random().toString(36).slice(2, 10);
+    }
+    try { localStorage.setItem(VISITOR_KEY, visitorId); } catch (e) {}
+  }
+  const pageReferrer = (function () {
+    try {
+      var __s = localStorage.getItem("hb:last_external_referrer:v1");
+      if (__s) {
+        var __o = JSON.parse(__s);
+        if (__o && __o.ref && __o.ts && (Date.now() - __o.ts < 5 * 60 * 1000)) {
+          return String(__o.ref).slice(0, 500);
+        }
+      }
+    } catch (e) {}
+    try {
+      var ref = (document.referrer || "");
+      if (!ref) return "";
+      try {
+        var h = new URL(ref).hostname.toLowerCase();
+        if (h.indexOf("hikebeast") !== -1 || h.indexOf("vercel.app") !== -1) return "";
+      } catch (e) {}
+      return ref.slice(0, 500);
+    } catch (e) { return ""; }
+  })();
+
   // ---------- Page-visit ping for the funnel sheet ----------
-  // Reuses the existing /api/visit endpoint that the other landings use.
-  // Carries hero_variant so the v12 split test rows are tagged at landed time.
+  // Carries visitor_id + classified source so AllVisits captures
+  // direct/Linktree/affiliate traffic alongside the ManyChat funnel.
   try {
     fetch("/api/visit", {
       method: "POST",
@@ -2251,10 +2364,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         page: "gems",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
+        visitor_id: visitorId,
+        referrer: pageReferrer,
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
         source_page: "de_gems",
+        affiliate_ref: window.hbAffiliateRef(),
+        source: window.HB_SOURCE || "",
+        theme: window.HB_THEME || "",
         browser_language: navigator.language || "",
         hero_variant: window.HB_HERO_VARIANT || "",
         device_type: (function () {
@@ -2269,9 +2387,25 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     }).catch(() => {});
   } catch (e) { /* noop */ }
 
-  // ---------- v12 split test · engagement + session-end events ----------
+  // Vercel Analytics · hero variant impression
+  try {
+    if (typeof window.va === "function") {
+      window.va("event", {
+        name: "hero_seen",
+        hero_variant: window.HB_HERO_VARIANT || "",
+        source_page: "de_gems",
+        affiliate_ref: window.hbAffiliateRef(),
+        source: window.HB_SOURCE || "",
+        theme: window.HB_THEME || "",
+      });
+    }
+  } catch (e) { /* noop */ }
+
+  // ---------- engagement + session-end events ----------
   (function setupSplitTestEvents() {
-    if (!cohortSubscriber && !cohortToken) return;
+    // Anonymous visitors are tracked too via visitor_id. The pre-2026-05-27
+    // `if (!cohortSubscriber && !cohortToken) return;` gate was removed
+    // when tracking was ported from /map9/.
     var variant = window.HB_HERO_VARIANT || "";
     var activeStart = performance.now();
     var activeMs = 0;
@@ -2296,11 +2430,17 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             page: "gems",
             token: cohortToken,
             subscriber_id: cohortSubscriber,
+            visitor_id: visitorId,
+            source_page: "de_gems",
+            affiliate_ref: window.hbAffiliateRef(),
+            source: window.HB_SOURCE || "",
+            theme: window.HB_THEME || "",
             hero_variant: variant,
           }),
           keepalive: true,
         }).catch(() => {});
       } catch (e) { /* noop */ }
+      if (window.hbTrack) window.hbTrack("engaged");
     }
 
     var insideSec = document.querySelector(".inside-section");
@@ -2325,9 +2465,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           page: "gems",
           token: cohortToken,
           subscriber_id: cohortSubscriber,
+          visitor_id: visitorId,
+          source_page: "de_gems",
+          affiliate_ref: window.hbAffiliateRef(),
+          source: window.HB_SOURCE || "",
+          theme: window.HB_THEME || "",
           hero_variant: variant,
           active_ms: Math.round(activeMs),
         });
+        if (window.hbTrack) window.hbTrack("session_end", { time_on_site_ms: Math.round(activeMs) });
       } else {
         activeStart = performance.now();
       }
@@ -2339,9 +2485,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         page: "gems",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
+        visitor_id: visitorId,
+        source_page: "de_gems",
+        affiliate_ref: window.hbAffiliateRef(),
+        source: window.HB_SOURCE || "",
+        theme: window.HB_THEME || "",
         hero_variant: variant,
         active_ms: Math.round(activeMs),
       });
+      if (window.hbTrack) window.hbTrack("session_end", { time_on_site_ms: Math.round(activeMs) });
     });
   })();
 })();
