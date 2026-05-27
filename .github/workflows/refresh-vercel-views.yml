@@ -1,0 +1,88 @@
+name: Refresh Vercel views in Buyer tab
+
+# Pulls top-pages devices from Vercel Web Analytics and pushes them
+# to the Apps Script `pull_vercel_views` action, which writes
+# Buyer!Q3:Q43 in the Hikebeast Email List sheet.
+#
+# Architecture: Apps Script can't call UrlFetchApp without an OAuth
+# scope that requires user-driven editor authorization, so the fetch
+# lives here. Apps Script is a passive receiver. See
+# brain/03-funnel/clasp/pull_vercel_views.js for the receiver side.
+#
+# Endpoint detail: uses the undocumented internal endpoint that
+# powers the Vercel dashboard's Top Pages panel
+# (vercel.com/api/web-analytics/stats?type=path). Verified matches
+# the CSV export on 2026-05-27.
+
+on:
+  schedule:
+    # Hourly at minute 5. Avoid :00 because GH Actions delays crons
+    # heavily when traffic spikes at the top of the hour.
+    - cron: '5 * * * *'
+  # Manual trigger for ad-hoc refresh + verification runs.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: refresh-vercel-views
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch Vercel + push to Apps Script
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          APPS_SCRIPT_URL: ${{ secrets.APPS_SCRIPT_URL }}
+          APPS_SCRIPT_SECRET: ${{ secrets.APPS_SCRIPT_SECRET }}
+        run: |
+          python3 <<'PY'
+          import json, os, sys
+          import urllib.request, urllib.error
+          from datetime import datetime, timedelta, timezone
+
+          VERCEL_PROJECT_ID = "prj_EFoTeUOZ2rej58RZwOG91UVgRpqJ"
+          VERCEL_TEAM_ID = "team_alYbeJUJDGocxwQs3LFFaqqf"
+
+          token = os.environ["VERCEL_TOKEN"]
+          apps_url = os.environ["APPS_SCRIPT_URL"]
+          apps_secret = os.environ["APPS_SCRIPT_SECRET"]
+
+          now = datetime.now(timezone.utc)
+          frm = (now - timedelta(days=30)).strftime("%Y-%m-%d")
+          to = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+          vercel_url = (
+              "https://vercel.com/api/web-analytics/stats"
+              f"?projectId={VERCEL_PROJECT_ID}&teamId={VERCEL_TEAM_ID}"
+              f"&from={frm}&to={to}&type=path&limit=200"
+          )
+          req = urllib.request.Request(vercel_url, headers={"Authorization": f"Bearer {token}"})
+          with urllib.request.urlopen(req, timeout=30) as r:
+              data = json.loads(r.read())
+          rows = data.get("data") or []
+          pages = {row["key"]: int(row.get("devices") or 0) for row in rows}
+          print(f"Fetched {len(pages)} paths from Vercel", file=sys.stderr)
+
+          body = {"secret": apps_secret, "action": "pull_vercel_views", "pages": pages}
+          req = urllib.request.Request(
+              apps_url,
+              data=json.dumps(body).encode(),
+              method="POST",
+              headers={"Content-Type": "application/json"},
+          )
+          try:
+              with urllib.request.urlopen(req, timeout=60) as r:
+                  result = json.loads(r.read())
+          except urllib.error.HTTPError as e:
+              print(f"Apps Script HTTP {e.code}: {e.read(800).decode(errors='replace')}", file=sys.stderr)
+              sys.exit(2)
+
+          print(json.dumps(result, ensure_ascii=False))
+          if not result.get("ok"):
+              sys.exit(2)
+          print(f"::notice::Wrote {result.get('rows_written')} rows, skipped {result.get('rows_skipped_no_data')} (no data)", file=sys.stderr)
+          PY
