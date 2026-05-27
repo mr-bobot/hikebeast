@@ -5,17 +5,32 @@
 //
 // Idempotency: Stripe retries on non-2xx, and may also redeliver after
 // transient connection issues. We guard every side effect with the event id
-// or the payment_intent id and rely on downstream services (Sheet, Resend,
-// Meta CAPI) being themselves idempotent on the event_id we forward.
+// or the payment_intent id and rely on downstream services (Resend, Meta
+// CAPI, Convex action) being themselves idempotent on the event_id we
+// forward.
 //
-// Side effects on success:
-//   1. Issue a per-customer access token (HMAC).
-//   2. Send the purchase email via Resend with the access link + download link.
-//   3. Log the purchase row to the Sheet via Apps Script (same shape as the
-//      Whop webhook so the existing reporting keeps working).
-//   4. Fire Meta CAPI Purchase event server-side (closes the cap-api TODO
-//      that's been open since 2026-04-23, see brain).
-//   5. Add `purchased` tag on the originating ManyChat subscriber, if known.
+// Side effects on success (in execution order):
+//   1. Issue a per-customer access token (HMAC) and download link.
+//   2. Fire Meta CAPI Purchase event server-side. Awaited because Meta's
+//      CAPI is fast (<2s) and this is the load-bearing ad-attribution
+//      signal — must land before any slower call can starve the lambda.
+//   3. Send the purchase email via Resend with the download link. Awaited
+//      because the buyer is on the success page waiting for it.
+//   4. Schedule slow side effects (Apps Script Sheet log + ManyChat IG
+//      handle lookup + ManyChat tags + affiliate referral row + affiliate
+//      Resend email) via the Convex action
+//      `webhookHandlers:scheduleWebhookSideEffects`. Convex runs that work
+//      in its own runtime, decoupled from the Vercel lambda budget.
+//
+// History:
+//   - PR #86 (2026-05-24): reordered to fire CAPI FIRST + plumbed
+//     event.created as stable eventTime for retry dedup.
+//   - This PR (2026-05-27): split slow side effects out of the lambda
+//     into Convex after Stripe Dashboard showed 41% webhook timeout rate.
+//     Apps Script Sheet writes were observed at 30-80+ seconds, blowing
+//     past Vercel Hobby's 30s lambda budget. Convex's scheduler-based
+//     async runner has its own (5-min) timeout budget and isn't tied to
+//     the webhook lambda's lifetime.
 //
 // Side effects on refund:
 //   - Append payment_intent_id to a deny-list (env var DENIED_PAYMENT_IDS for
@@ -26,7 +41,9 @@ import Stripe from "stripe";
 import crypto from "node:crypto";
 import { Resend } from "resend";
 import { issueToken } from "../../lib/access-token.js";
-import { addTag, setEmail, setCustomField, getSubscriberIgUsername } from "../../lib/manychat.js";
+// ManyChat helpers (addTag, setEmail, setCustomField, getSubscriberIgUsername)
+// were moved to convex/webhookHandlers.ts on 2026-05-27. They run there
+// inside the async side-effects action instead of inline in this lambda.
 import { fireCapi, buildUserData, splitName } from "../../lib/capi.js";
 
 export const config = {
@@ -103,58 +120,10 @@ function downloadLink(token) {
   return `${SITE}/api/checkout/download?t=${encodeURIComponent(token)}`;
 }
 
-// Affiliate "you earned X" notification. Plain, minimal — the affiliate
-// already knows the rules; the email is just a nudge to check the
-// dashboard. Same FONT + greeting style as the buyer purchase email so
-// it feels like the same sender.
-function affiliateEarnedHtml({ firstName, buyerIg, amountFormatted, dashboardUrl }) {
-  const greeting = firstName ? `Hey ${firstName},` : "Hey,";
-  const buyerLine = buyerIg
-    ? `<a href="https://instagram.com/${buyerIg}" style="color:#0071e3;text-decoration:none;">@${buyerIg}</a> just bought Swiss Gems through your link.`
-    : `Someone just bought Swiss Gems through your link.`;
-  return `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>You earned ${amountFormatted}</title>
-</head>
-<body style="margin:0;padding:0;background:#f5f5f7;">
-  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f5f5f7;padding:32px 16px;">
-    <tr><td align="center">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="480" style="max-width:480px;background:#ffffff;border-radius:20px;">
-        <tr><td style="padding:32px;font-family:${FONT};color:#1d1d1f;line-height:1.5;letter-spacing:-0.01em;">
-          <p style="margin:0 0 16px;font-size:16px;">${greeting}</p>
-          <p style="margin:0 0 24px;font-size:16px;">${buyerLine} You earned ${amountFormatted}.</p>
-          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 8px;"><tr>
-            <td style="border-radius:999px;background:#1d1d1f;">
-              <a href="${dashboardUrl}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-family:${FONT};font-size:16px;font-weight:600;letter-spacing:-0.01em;">Open your dashboard</a>
-            </td>
-          </tr></table>
-          <p style="margin:24px 0 0;font-size:16px;">Leon</p>
-        </td></tr>
-      </table>
-    </td></tr>
-  </table>
-</body>
-</html>`;
-}
-
-function affiliateEarnedText({ firstName, buyerIg, amountFormatted, dashboardUrl }) {
-  const greeting = firstName ? `Hey ${firstName},` : "Hey,";
-  const buyerLine = buyerIg
-    ? `@${buyerIg} just bought Swiss Gems through your link.`
-    : `Someone just bought Swiss Gems through your link.`;
-  return `${greeting}
-
-${buyerLine} You earned ${amountFormatted}.
-
-Open your dashboard:
-${dashboardUrl}
-
-Leon
-`;
-}
+// Affiliate "you earned X" notification template was moved to
+// convex/webhookHandlers.ts on 2026-05-27 (it's only used by the
+// affiliate Resend send, which now lives in the Convex side-effects
+// action). If the email copy changes, edit it there.
 
 function purchaseEmailHtml({ firstName, downloadUrl, amountFormatted, orderId, sessionId }) {
   const greeting = firstName ? `Hey ${firstName},` : "Hey,";
@@ -386,42 +355,17 @@ function pickEmailCopy(locale) {
   return EMAIL_COPY[String(locale || "").toLowerCase()] || EMAIL_COPY.en;
 }
 
-async function logPurchase(fields) {
-  const url = process.env.SHEETS_WEBHOOK_URL;
-  if (!url) return;
-  // Two attempts with exponential backoff before giving up. Each attempt
-  // gets 15s instead of the previous 5s — Apps Script's findRowBySubscriber
-  // can take 2-4s on a 6000-row sheet, so 5s was too tight under load.
-  // 15s × 2 = 30s worst case; well within Stripe's webhook timeout window
-  // (Stripe waits ~30s before treating as failed and retrying its own
-  // delivery).
-  let lastErr = null;
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "purchase",
-          secret: process.env.SHEETS_SECRET,
-          ...fields,
-        }),
-        signal: AbortSignal.timeout(15000),
-      });
-      if (res.ok) return;
-      lastErr = new Error(`HTTP ${res.status}`);
-    } catch (err) {
-      lastErr = err;
-    }
-    if (attempt < 2) await new Promise((r) => setTimeout(r, 2000));
-  }
-  // Both attempts failed. Throw so the caller's catch can decide whether
-  // to return 5xx (and let Stripe retry the whole webhook delivery) vs
-  // log-and-continue. Today the caller still returns 200, but at least
-  // the failure is now propagated rather than silently swallowed.
-  console.error("Purchase log failed after 2 attempts:", lastErr);
-  throw lastErr;
-}
+// logPurchase (Apps Script Sheet write for purchases) was moved to
+// convex/webhookHandlers.ts on 2026-05-27. The Apps Script call was the
+// dominant blocker for the Vercel lambda — observed at 30-80+ seconds
+// under prod lock contention, blowing past maxDuration:30 and causing
+// Stripe to retry (41% timeout rate in the Stripe Webhooks dashboard,
+// which then caused CAPI overfire on the retry-succeeded path AND CAPI
+// underfire on the all-retries-failed path).
+//
+// The Sheet refund logger below stays here because refund volume is low
+// and the refund handler doesn't have other slow side effects to
+// compound with.
 
 // Fire the Purchase CAPI event with the maximum identity signal Stripe
 // gives us back: email + first/last name + city + zip + country, plus
@@ -544,25 +488,21 @@ async function handleSessionCompleted({ stripe, event }) {
   const downloadUrl = downloadLink(accessToken);
   const amountFormatted = formatAmount(full.amount_total, full.currency);
 
-  // Buyer's IG handle, if this purchase came in via the ManyChat IG funnel
-  // (subscriberId stamped on the Stripe session). Looked up once here so
-  // both the Sheet log and the affiliate referral row can include it
-  // without duplicating the API call. Direct-web buyers leave this null.
-  let buyerIg = null;
-  if (subscriberId) {
-    try { buyerIg = await getSubscriberIgUsername(subscriberId); }
-    catch (err) { console.error("getSubscriberIgUsername failed:", err?.message || err); }
-  }
+  // buyerIg lookup moved to convex/webhookHandlers.ts (2026-05-27). It used
+  // to be inline here, but the ManyChat GET adds ~1-3s to the lambda
+  // budget and the only consumers (Sheet log row + affiliate referral row
+  // + affiliate email) are now all in the Convex side-effects action
+  // anyway. One lookup, three uses, all in the same async runtime.
 
   // 0. Fire Meta CAPI Purchase FIRST, awaited synchronously, before any
-  // slower side effect. fireCapi self-times-out at 5s; the surrounding
-  // lambda was raised to maxDuration: 30 (see top of file). If Vercel
-  // later kills the lambda mid-Resend or mid-Sheet on a slow third-party,
-  // the Purchase event has already landed at Meta and Stripe-retry will
-  // just dedupe via stable eventID + event_time (anchored to event.created).
-  // This was reordered on 2026-05-24 after Events Manager's dedup
-  // diagnostic showed 0-server-event misses on ~40% of purchases —
-  // Resend/Apps Script being slow was eating CAPI's slot in Promise.all.
+  // slower side effect. fireCapi self-times-out at 5s. Stripe-retry
+  // dedupes via stable eventID + event_time (anchored to event.created).
+  // This was reordered on 2026-05-24 (PR #86) after Events Manager's dedup
+  // diagnostic showed 0-server-event misses on ~40% of purchases. The
+  // 2026-05-27 cut to Convex (this comment) further reduced lambda
+  // duration by moving the slow side-effects out entirely — CAPI fire is
+  // still here because it's the load-bearing ad-attribution signal and
+  // Meta's CAPI endpoint is itself fast (consistently <2s).
   try {
     await fireCapiPurchase({
       eventId: paymentIntent, // dedupes with client-side fbq using same event_id
@@ -618,120 +558,64 @@ async function handleSessionCompleted({ stripe, event }) {
     console.error("Resend purchase email threw:", err?.message || err);
   }
 
-  // 2. Log to Sheet (same shape as Whop webhook for cohort math).
-  // `instagram_handle` is set when the buyer came in via the ManyChat IG
-  // funnel; the Apps Script `handlePurchase` writes it back to the row
-  // matched by metadata_s. Empty string for direct-web buyers.
-  // fireCapiPurchase was moved above (step 0) so it runs synchronously
-  // before Resend/Sheet — see the 2026-05-24 comment block. Don't add it
-  // back here; doing so would re-introduce the double-fire.
-  const sideEffects = [
-    logPurchase({
-      email,
-      amount: typeof full.amount_total === "number" ? (full.amount_total / 100).toFixed(2) : "",
-      currency: (full.currency || "").toUpperCase(),
-      product: "Swiss Gems",
-      product_id: "swiss-hidden-gems",
-      plan_id: "",
-      membership_id: "",
-      payment_id: paymentIntent,
-      event_id: event.id,
-      paid_at: new Date(event.created * 1000).toISOString(),
-      metadata_t: cohortToken,
-      metadata_s: subscriberId,
-      instagram_handle: buyerIg || "",
-      referral_slug: refSlug || "",
-      source_page: sourcePage || "",
-      utm_source: utmSource,
-      utm_medium: utmMedium,
-      utm_campaign: utmCampaign,
-      ip_country: ipCountry || "",
-      hero_variant: heroVariant || "",
-      provider: "stripe",
-      session_id: full.id,
-      email_sent: emailOk ? "1" : "0",
-    }),
-  ];
-
-  // 3. ManyChat tagging on the originating subscriber, if any.
-  if (subscriberId) {
-    sideEffects.push(addTag(subscriberId, "purchased"));
-    sideEffects.push(setEmail(subscriberId, email));
-    sideEffects.push(setCustomField(subscriberId, "Bought Guide", true));
-  }
-
-  // 4. Affiliate referral row (if this purchase came in with ?r=<slug>).
-  // Idempotent on stripeSessionId, so webhook redeliveries won't
-  // double-credit. We swallow errors deliberately: a Convex blip
-  // shouldn't surface as a 5xx here (Stripe would retry the whole
-  // event, which would re-send the email + log the Sheet row again).
-  // `buyerIg` is hoisted above (looked up once, reused here + in the
-  // Sheet logPurchase payload).
+  // 2. Schedule the slow side effects (Sheet log + ManyChat IG lookup +
+  // ManyChat tag writes + affiliate referral row + affiliate "you earned"
+  // email) via the Convex action `webhookHandlers:scheduleWebhookSideEffects`.
   //
-  // The mutation also returns `notify: { email, firstName } | null`
-  // when the slug matched an isAffiliate=true user with an email on
-  // file. We fire a "you earned X" email to that address. Affiliates
-  // without an email skip silently (they'll see the row in their
-  // dashboard regardless).
-  if (refSlug) {
-    const convexUrl = process.env.CONVEX_URL;
-    if (convexUrl) {
-      sideEffects.push((async () => {
-        let result;
-        try {
-          result = await convexMutation(convexUrl, "referrals:recordPurchase", {
-            refSlug,
-            stripeSessionId:       full.id,
-            stripePaymentIntentId: paymentIntent,
-            buyerEmail:            email,
-            buyerIg:               buyerIg || undefined,
-            purchaseAmountCents:   typeof full.amount_total === "number" ? full.amount_total : 0,
-            currency:              (full.currency || "").toLowerCase(),
-            // Hikebeast has one product today (the Hidden Gems guide
-            // shipped from /map9/). Hard-code the key so referrals.ts
-            // can enforce "one commission per buyer-product pair"
-            // against the by_buyerEmail_product index. Forward a
-            // different key here when a second product launches.
-            productKey:            "hidden_gems",
-          });
-        } catch (err) {
-          console.error("referrals:recordPurchase failed:", err?.message || err);
-          return;
-        }
-        // Don't notify on a deduped (Stripe redelivery) write — the
-        // affiliate already got the email on the original delivery.
-        if (!result || result.deduped || !result.notify) return;
-        const dashboardUrl = `${SITE}/full/affiliate/`;
-        const tplArgs = {
-          firstName:       result.notify.firstName,
-          buyerIg:         buyerIg,
-          amountFormatted: formatAmount(
-            Math.floor((typeof full.amount_total === "number" ? full.amount_total : 0) / 2),
-            full.currency,
-          ),
-          dashboardUrl,
-        };
-        try {
-          const resend = new Resend(process.env.RESEND_API_KEY);
-          const { error } = await resend.emails.send({
-            from:    FROM,
-            to:      result.notify.email,
-            replyTo: REPLY_TO,
-            subject: `You earned ${tplArgs.amountFormatted} on Hikebeast`,
-            html:    affiliateEarnedHtml(tplArgs),
-            text:    affiliateEarnedText(tplArgs),
-          }, { idempotencyKey: `${event.id}_affiliate` });
-          if (error) console.error("Affiliate-earned email error:", error);
-        } catch (err) {
-          console.error("Affiliate-earned email threw:", err?.message || err);
-        }
-      })());
-    } else {
-      console.error("CONVEX_URL not set; skipping affiliate referral record");
+  // Why this is a single Convex call instead of inline Promise.all:
+  // ---------------------------------------------------------------
+  // Apps Script's logPurchase write was observed at 30-80+ seconds
+  // (execution log 2026-05-27 morning: 82.7s, 69.9s, 51.4s, 49.8s in one
+  // hour). Combined with the ManyChat writes and the affiliate flow, the
+  // Vercel lambda routinely blew past its 30s budget. Stripe Dashboard
+  // showed 41% webhook timeout rate; retries caused CAPI Purchase
+  // overfire AND missed CAPI on the "all retries timed out" cases (Event
+  // Dedup sample on 2026-05-27 showed both patterns: 0 server_events for
+  // some pi, 3 server_events for others).
+  //
+  // Convex's scheduler runs `processWebhookSideEffects` in Convex's own
+  // runtime, decoupled from the Vercel lambda. The HTTP call below
+  // returns in ~100ms (mutation just schedules and returns), so the
+  // Vercel webhook finishes in ~10s total instead of timing out at 30s.
+  // The actual Apps Script + ManyChat + affiliate work then takes
+  // whatever time it takes in Convex (default 5min budget, plenty of
+  // headroom for Apps Script's worst case).
+  //
+  // If the Convex scheduling call itself fails (network blip), the
+  // Purchase event has already been registered with Meta CAPI above and
+  // the buyer has the Resend confirmation email — we lose the Sheet row
+  // and ManyChat tags for that one purchase, recoverable from Stripe
+  // truth via the get_snapshot endpoint.
+  const convexUrl = process.env.CONVEX_URL;
+  if (convexUrl) {
+    try {
+      await convexMutation(convexUrl, "webhookHandlers:scheduleWebhookSideEffects", {
+        sessionId:     full.id,
+        paymentIntent,
+        eventId:       event.id,
+        email,
+        firstName:     firstName || undefined,
+        subscriberId:  subscriberId || undefined,
+        cohortToken:   cohortToken || undefined,
+        refSlug:       refSlug || undefined,
+        amountCents:   typeof full.amount_total === "number" ? full.amount_total : 0,
+        currency:      (full.currency || "").toLowerCase(),
+        paidAt:        new Date(event.created * 1000).toISOString(),
+        sourcePage:    sourcePage || undefined,
+        utmSource:     utmSource || undefined,
+        utmMedium:     utmMedium || undefined,
+        utmCampaign:   utmCampaign || undefined,
+        heroVariant:   heroVariant || undefined,
+        ipCountry:     ipCountry || undefined,
+        locale:        localeHint || undefined,
+        emailOk,
+      });
+    } catch (err) {
+      console.error("scheduleWebhookSideEffects failed (Sheet/ManyChat/affiliate will be missing for this purchase):", err?.message || err);
     }
+  } else {
+    console.error("CONVEX_URL not set; cannot schedule webhook side effects");
   }
-
-  await Promise.all(sideEffects);
 }
 
 async function handleChargeRefunded({ event }) {
