@@ -1784,7 +1784,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <div class="px about-body">
         <img class="about-photo" src="/map3/img/about/leon_v3.jpg" alt="Leon Helg" loading="lazy" decoding="async" width="100" height="125" />
         <div class="about-text">
-          <p>Ich bin Leon. Als Fotograf war ich viele Sommer in den Schweizer Alpen unterwegs auf der Suche nach den schönsten Locations.</p>
+          <p>Ich bin Leon. Als Schweizer Fotograf war ich viele Sommer in den Alpen unterwegs auf der Suche nach den schönsten Locations.</p>
           <div class="about-actions">
             <button type="button" class="about-video-btn" id="about-video-btn" data-src="/de/gems/swissgems_intro_de_v2.mov" data-poster="/map3/img/about/leon.jpg">
             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
@@ -1882,7 +1882,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <div class="px trust-row">
       <span>🔒 Secured by Stripe</span>
       <span class="sep"></span>
-      <a href="/de/terms.html"><span>↩ 30-day refund</span></a>
+      <a href="/de/terms.html" data-forward-params><span>↩ 30-day refund</span></a>
       <span class="sep"></span>
       <span>🇨🇭 Made in Switzerland</span>
     </div>
@@ -1890,7 +1890,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <!-- Footer -->
     <footer class="footer px">
       <div>© Hikebeast</div>
-      <div><a href="/de/terms.html">Nutzungsbedingungen</a> · <a href="/de/imprint.html">Impressum</a> · <a href="/de/privacy.html">Datenschutz</a></div>
+      <div><a href="/de/terms.html" data-forward-params>Nutzungsbedingungen</a> · <a href="/de/imprint.html" data-forward-params>Impressum</a> · <a href="/de/privacy.html" data-forward-params>Datenschutz</a></div>
     </footer>
     </div><!-- /.page-main -->
 
@@ -1919,7 +1919,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <a href="#get-the-map" class="buy-cta">Hol dir den Guide</a>
           <div class="buy-foot">
             <span>Apple Pay · TWINT · Card</span>
-            <a href="/de/terms.html#refunds">↩ 30-day refund</a>
+            <a href="/de/terms.html#refunds" data-forward-params>↩ 30-day refund</a>
           </div>
         </div>
       </div>
@@ -1990,6 +1990,27 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       return obj.slug;
     } catch { return ""; }
   }
+
+  /* Forward URL params on tagged off-page links · 2026-05-27.
+     Why: an Instagram visitor on /de/gems/?r=foo who clicks 🇬🇧 EN
+     jumps to /gems/ (no slug). If they then tap "Open in Safari"
+     from there, Safari loses the attribution. By patching the lang-
+     switcher hrefs to /gems/?r=foo upfront, the slug survives the
+     Safari handoff. Also applied to /de/terms.html etc. so a buyer
+     who opens Terms then switches browser keeps attribution.
+     Hash-aware (preserves /de/terms.html#refunds). Skips anchors
+     that already have a query string. Ported from /map9/. */
+  (function forwardParamsOnTaggedLinks() {
+    if (!location.search) return;
+    document.querySelectorAll("a[data-forward-params]").forEach(function (a) {
+      const href = a.getAttribute("href") || "";
+      if (!href || href.indexOf("?") !== -1) return;
+      const hashIdx = href.indexOf("#");
+      const base = hashIdx === -1 ? href : href.slice(0, hashIdx);
+      const hash = hashIdx === -1 ? "" : href.slice(hashIdx);
+      a.setAttribute("href", base + location.search + hash);
+    });
+  })();
 
   // ---------- Carousel: dots + hover arrows ----------
   const carousel = document.getElementById("hero-carousel");
@@ -2066,6 +2087,23 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     });
     if (prevBtn) prevBtn.addEventListener("click", stopAutoplay, { once: true });
     if (nextBtn) nextBtn.addEventListener("click", stopAutoplay, { once: true });
+  }
+
+  // ---------- Engagement tracking · reached_checkout · see /map9/ ----------
+  // Fires once when the #get-the-map section (the actual buy area)
+  // enters the viewport. Scroll-depth proxy · "did the visitor get
+  // far enough down the page to see the price + CTA?".
+  const checkoutEl = document.getElementById("get-the-map");
+  if (checkoutEl && "IntersectionObserver" in window) {
+    const co = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (window.hbTrack) window.hbTrack("reached_checkout");
+          co.disconnect();
+        }
+      });
+    }, { threshold: 0.1 });
+    co.observe(checkoutEl);
   }
 
   // ---------- Expandable reviews ("Mehr anzeigen") ----------
