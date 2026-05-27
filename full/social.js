@@ -1301,7 +1301,7 @@
           ${SVG_TENT}<span class="label">Wildcamping</span>
         </a>
         <a class="rail-item${cur('/regions/')}" href="${REL}regions/">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3.7 13.7L1.0 15.3L2.0 14.2L1.5 13.9L1.7 13.1L6.3 9.5L5.5 9.4L6.0 8.7L7.3 9.1L9.2 8.2L13.2 8.3L14.0 7.9L12.9 7.8L13.7 7.2L19.0 8.9L18.1 10.8L20.0 11.0L21.1 11.9L22.5 11.1L23.0 11.4L22.5 12.6L22.9 13.3L21.8 12.9L20.8 13.3L21.3 14.8L20.4 14.1L18.4 14.5L18.0 13.5L17.1 13.5L17.0 14.8L15.8 15.8L15.9 16.8L14.7 16.0L15.1 15.6L13.1 14.7L13.1 13.7L11.3 14.7L11.7 15.2L10.3 16.3L8.8 16.0L7.0 16.6L5.1 15.3L5.2 13.9L3.7 13.7Z"/></svg><span class="label">All Regions</span>
+          <svg viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 8 L3 5 L6 3 L10 2.5 L14 3 L17 3.5 L19 4.5 L20 6 L21 7.5 L20 9 L18 10 L16 11 L14 12 L13 13 L11 12 L8 11 L5 10.5 L3 9 Z"/></svg><span class="label">All Regions</span>
         </a>
       </div>
       <button type="button" class="rail-theme" data-hb-theme-toggle aria-label="Toggle dark mode">
@@ -1464,7 +1464,7 @@
           <span class="menu-row-label">Wildcamping</span>
         </a>
         <a class="menu-row${cur('/regions/')}" href="${REL}regions/" data-close>
-          <span class="menu-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3.7 13.7L1.0 15.3L2.0 14.2L1.5 13.9L1.7 13.1L6.3 9.5L5.5 9.4L6.0 8.7L7.3 9.1L9.2 8.2L13.2 8.3L14.0 7.9L12.9 7.8L13.7 7.2L19.0 8.9L18.1 10.8L20.0 11.0L21.1 11.9L22.5 11.1L23.0 11.4L22.5 12.6L22.9 13.3L21.8 12.9L20.8 13.3L21.3 14.8L20.4 14.1L18.4 14.5L18.0 13.5L17.1 13.5L17.0 14.8L15.8 15.8L15.9 16.8L14.7 16.0L15.1 15.6L13.1 14.7L13.1 13.7L11.3 14.7L11.7 15.2L10.3 16.3L8.8 16.0L7.0 16.6L5.1 15.3L5.2 13.9L3.7 13.7Z"/></svg></span>
+          <span class="menu-row-icon"><svg viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 8 L3 5 L6 3 L10 2.5 L14 3 L17 3.5 L19 4.5 L20 6 L21 7.5 L20 9 L18 10 L16 11 L14 12 L13 13 L11 12 L8 11 L5 10.5 L3 9 Z"/></svg></span>
           <span class="menu-row-label">All Regions</span>
         </a>
         <div class="menu-section-head">Settings</div>
@@ -1760,8 +1760,23 @@
     if (t) { e.preventDefault(); openSignIn(); }
   });
 
+  // Count favorites / visited keys whose anchor is on the preview
+  // allowlist · matches what /full/saved/ + /full/visited/ actually
+  // render in preview mode. Used by the rail badges so the bubble
+  // number doesn't disagree with the page content. Falls back to the
+  // raw count when preview mode is off. 2026-05-27 per Leon.
+  function previewFilteredCount(list) {
+    if (!PREVIEW_MODE) return list.length;
+    let n = 0;
+    for (const key of list) {
+      const anchor = (key || '').split('#')[1];
+      if (anchor && previewSpotAllowed(anchor)) n++;
+    }
+    return n;
+  }
+
   function refreshFavCount() {
-    const n = favorites.count();
+    const n = previewFilteredCount(favorites.list());
     document.querySelectorAll('[data-hb-fav-count]').forEach(el => {
       if (n > 0) {
         el.textContent = String(n);
@@ -1780,7 +1795,7 @@
   // [data-hb-visited-count] painter (the menu sheet row's badge today;
   // future surfaces wire up automatically).
   function refreshVisitedCount() {
-    const n = visited.count();
+    const n = previewFilteredCount(visited.list());
     document.querySelectorAll('[data-hb-visited-count]').forEach(el => {
       if (n > 0) {
         el.textContent = String(n);
