@@ -2,6 +2,21 @@
 <html lang="de">
 <head>
 <meta charset="utf-8" />
+<script>
+// Affiliate ref capture · 2026-05-27 · mirrors the IIFE in /index.html.
+// Catches the case where a visitor lands directly on /de/?r=influencer
+// (rather than coming through the / → /de/ redirect, which already
+// preserves the slug). 7-day TTL matches /map9/.
+(function () {
+  try {
+    var raw = "";
+    try { raw = (new URLSearchParams(location.search).get("r") || "").trim().toLowerCase(); } catch (e) {}
+    if (!raw) return;
+    if (!/^[a-z0-9._-]{2,32}$/.test(raw)) return;
+    localStorage.setItem("hb:r", JSON.stringify({ slug: raw, exp: Date.now() + 7 * 24 * 60 * 60 * 1000 }));
+  } catch (e) {}
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
 <title>Swiss Gems · Hikebeast</title>
@@ -187,13 +202,25 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
   <h1 class="hero-title">Swiss Gems</h1>
 
-  <a class="hero-cta" href="/de/map9/" data-fbq-event="ViewContent" data-fbq-params='{"content_name":"Swiss Gems of Switzerland Map","content_category":"Map","value":27.00,"currency":"CHF"}'>
+  <a class="hero-cta" href="/de/map9/" data-forward-params data-fbq-event="ViewContent" data-fbq-params='{"content_name":"Swiss Gems of Switzerland Map","content_category":"Map","value":27.00,"currency":"CHF"}'>
     <span>Hol dir den Guide</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
   </a>
 </main>
 
 <script>
+  // Forward URL params on hero CTA · 2026-05-27 · same recipe as
+  // /index.html so /de/?r=foo → click "Hol dir den Guide" lands on
+  // /de/map9/?r=foo, where the slug gets captured into localStorage.
+  (function () {
+    if (!location.search) return;
+    document.querySelectorAll('a[data-forward-params]').forEach(function (a) {
+      var href = a.getAttribute('href') || '';
+      if (!href || href.indexOf('?') !== -1) return;
+      a.setAttribute('href', href + location.search);
+    });
+  })();
+
   document.querySelectorAll('[data-fbq-event]').forEach((el) => {
     el.addEventListener('click', () => {
       if (!window.fbq) return;

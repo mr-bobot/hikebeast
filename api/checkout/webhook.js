@@ -687,6 +687,12 @@ async function handleSessionCompleted({ stripe, event }) {
             buyerIg:               buyerIg || undefined,
             purchaseAmountCents:   typeof full.amount_total === "number" ? full.amount_total : 0,
             currency:              (full.currency || "").toLowerCase(),
+            // Hikebeast has one product today (the Hidden Gems guide
+            // shipped from /map9/). Hard-code the key so referrals.ts
+            // can enforce "one commission per buyer-product pair"
+            // against the by_buyerEmail_product index. Forward a
+            // different key here when a second product launches.
+            productKey:            "hidden_gems",
           });
         } catch (err) {
           console.error("referrals:recordPurchase failed:", err?.message || err);

@@ -269,15 +269,14 @@
       </a>
     </div>
 
-    <!-- Affiliate · only visible to users with isAffiliate=true.
-         Two rows side-by-side under one section heading: the dashboard
+    <!-- Affiliate · visible to every signed-in /full/ user since
+         2026-05-27 (program opened to all paid buyers + admin/test
+         accounts). Two rows under one section heading: the dashboard
          (link + referrals + stats) and the materials hub (Drive folders
-         of promo assets + the preview-mode toggle). Both go to
-         dedicated pages; the materials row used to live one level
-         deeper on /full/affiliate/ but Leon called for surfacing it on
-         the same level as the dashboard so affiliates see both upfront.
-         Convex auth check below toggles the whole .sec. -->
-    <div class="sec" id="affiliateSection" hidden>
+         of promo assets + the preview-mode toggle). No Convex gate ·
+         middleware.js already gates /full/* on hb_full_auth, and every
+         user past that point has isAffiliate=true by default. -->
+    <div class="sec" id="affiliateSection">
       <p class="sec-label">Affiliate</p>
       <a class="row-link" href="../affiliate/">
         <span class="row-link-icon" aria-hidden="true">
@@ -320,47 +319,6 @@
   </footer>
  </div>
 </main>
-
-<!-- Convex query · gate the affiliate row on isAffiliate=true.
-     Same shape as the old /full/account/ teaser logic, just on the
-     new home. Failed reads (sessionToken missing, network blip, etc.)
-     silently leave the section hidden · this is a discoverability
-     surface, not a critical one. -->
-<script src="../lib/convex.js"></script>
-<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
-<script>
-  (function () {
-    // Dev convenience · on localhost (no Convex auth, no sessionToken)
-    // just unhide the affiliate section so the layout is reviewable
-    // without flipping a real isAffiliate flag in Convex prod. The
-    // hostname check is per-environment, never reaches users.
-    const isLocal = /^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/.test(location.hostname);
-    if (isLocal) {
-      const section = document.getElementById('affiliateSection');
-      if (section) section.hidden = false;
-      return;
-    }
-    const SESSION_KEY = 'hb:session:v1';
-    let token = null;
-    try { token = localStorage.getItem(SESSION_KEY); } catch (_) {}
-    // full/lib/convex.js is the vendored UMD bundle · exposes
-    // `window.convex.ConvexHttpClient` (lowercase namespace, capital
-    // class), NOT a bare `window.ConvexHttpClient`. The wrong global
-    // name silently early-returned and the affiliate section never
-    // unhid for anyone · spotted 2026-05-24 after Leon reported "I see
-    // no affiliate section on mobile" with isAffiliate=true.
-    if (!token || !window.convex || !window.HB_CONVEX_URL) return;
-    const client = new window.convex.ConvexHttpClient(window.HB_CONVEX_URL);
-    client.query('auth:currentUser', { sessionToken: token })
-      .then((u) => {
-        if (u && u.isAffiliate) {
-          const section = document.getElementById('affiliateSection');
-          if (section) section.hidden = false;
-        }
-      })
-      .catch(() => { /* silent · row stays hidden */ });
-  })();
-</script>
 
 </body>
 </html>

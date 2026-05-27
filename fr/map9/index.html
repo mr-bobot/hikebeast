@@ -1663,9 +1663,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3,5 6,8 9,5"/></svg>
       </button>
       <ul class="navbar-lang-menu" id="lang-menu" role="listbox" hidden>
-        <li role="option"><a href="/map9/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">🇬🇧 EN</a></li>
-        <li role="option"><a href="/de/map9/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">🇩🇪 DE</a></li>
-        <li role="option"><a href="/it/map9/" hreflang="it" onclick="try{localStorage.setItem('hb_lang','it')}catch(e){}" aria-label="Versione italiana">🇮🇹 IT</a></li>
+        <li role="option"><a href="/map9/" data-forward-params hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">🇬🇧 EN</a></li>
+        <li role="option"><a href="/de/map9/" data-forward-params hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">🇩🇪 DE</a></li>
+        <li role="option"><a href="/it/map9/" data-forward-params hreflang="it" onclick="try{localStorage.setItem('hb_lang','it')}catch(e){}" aria-label="Versione italiana">🇮🇹 IT</a></li>
       </ul>
     </div>
   </header>
@@ -2243,7 +2243,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   // POST below. Slug is lowercased; the webhook will match it against
   // users.username (also lowercase) when the purchase completes.
   const REF_KEY = "hb:r";
-  const REF_TTL_MS = 60 * 24 * 60 * 60 * 1000;
+  const REF_TTL_MS = 7 * 24 * 60 * 60 * 1000;
   (function persistRefIfPresent() {
     const raw = (params.get("r") || "").trim().toLowerCase();
     if (!raw) return;
@@ -2262,6 +2262,22 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       return obj.slug;
     } catch { return ""; }
   }
+
+  /* Forward URL params on tagged off-page links · 2026-05-27.
+     Mirrors the recipe on /map9/. Ensures the affiliate slug
+     survives clicks on the EN/DE/IT language switchers and a
+     subsequent "Open in Safari" handoff. Hash-aware. */
+  (function forwardParamsOnTaggedLinks() {
+    if (!location.search) return;
+    document.querySelectorAll("a[data-forward-params]").forEach(function (a) {
+      const href = a.getAttribute("href") || "";
+      if (!href || href.indexOf("?") !== -1) return;
+      const hashIdx = href.indexOf("#");
+      const base = hashIdx === -1 ? href : href.slice(0, hashIdx);
+      const hash = hashIdx === -1 ? "" : href.slice(hashIdx);
+      a.setAttribute("href", base + location.search + hash);
+    });
+  })();
 
   // ---------- Carousel: dots + hover arrows ----------
   const carousel = document.getElementById("hero-carousel");
