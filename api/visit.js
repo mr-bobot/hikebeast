@@ -6,6 +6,19 @@ import {
   clientUserAgentFromHeaders,
 } from "../lib/capi.js";
 
+export const config = {
+  // Vercel Hobby default lambda timeout is 10s. /api/visit does up to 4
+  // parallel network calls (ManyChat tag, Signups Sheet write, AllVisits
+  // Sheet write, Meta CAPI IC). Apps Script's 15s per-call timeout means
+  // a single slow Sheet write can push past 10s and kill the lambda
+  // mid-Promise.all, which dropped the CAPI IC POST silently. Observed
+  // 2026-05-26: only 2 InitiateCheckout events landed at Meta for 1340
+  // landing-page-views. Bumping to 30s matches the webhook config and
+  // pairs with the reorder below (CAPI fires first + awaited) so CAPI
+  // IC always completes before slower tasks can starve the lambda.
+  maxDuration: 30,
+};
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -146,6 +159,44 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "subscriber_id, token, event, visitor_id, or source_page required" });
   }
 
+  // ── Meta CAPI InitiateCheckout · fires FIRST and AWAITED ──────────────
+  // 2026-05-27 reorder: previously this was just one of many parallel tasks
+  // inside Promise.all([appsScript, manychat, capi]). Apps Script's slow
+  // 15s timeout was killing the lambda before CAPI could complete its own
+  // 5s POST, dropping the IC signal at Meta. Same root cause as the
+  // webhook fix in PR #86. Now CAPI runs first, awaited; the slower
+  // Sheet/ManyChat tasks come after in a Promise.all that can take the
+  // remaining lambda budget (maxDuration: 30 above) without endangering
+  // the CAPI delivery.
+  if (safeEvent === "initiate_checkout" && typeof session_id === "string" && session_id.startsWith("cs_")) {
+    const safeFbc = typeof fbc === "string" ? fbc.slice(0, 200) : "";
+    const safeFbp = typeof fbp === "string" ? fbp.slice(0, 100) : "";
+    const safeValue = Number.isFinite(value) && value > 0 && value < 10_000 ? Number(value) : undefined;
+    const safeCurrency = typeof currency === "string" && /^[A-Za-z]{3}$/.test(currency)
+      ? currency.toUpperCase()
+      : undefined;
+    try {
+      await fireCapi({
+        eventName: "InitiateCheckout",
+        eventId: session_id,
+        userData: buildUserData({
+          country: ipCountry || undefined,
+          fbc: safeFbc || undefined,
+          fbp: safeFbp || undefined,
+          clientIp: clientIpFromHeaders(req.headers) || undefined,
+          clientUserAgent: clientUserAgentFromHeaders(req.headers) || undefined,
+        }),
+        customData: {
+          value: safeValue,
+          currency: safeCurrency,
+        },
+        sourceUrl: typeof req.headers?.referer === "string" ? req.headers.referer : undefined,
+      });
+    } catch (err) {
+      console.error("Meta CAPI IC failed (continuing):", err?.message || err);
+    }
+  }
+
   const tasks = [];
   if (subscriber_id && !safeEvent) {
     // Page-specific ManyChat tag so flows can branch on guide-visit signal.
@@ -233,35 +284,9 @@ export default async function handler(req, res) {
     );
   }
 
-  // Meta CAPI InitiateCheckout fire · only when the browser sends the
-  // beacon after a real user interaction with #checkout. session_id is
-  // the dedup key the browser pixel also passes as eventID.
-  if (safeEvent === "initiate_checkout" && typeof session_id === "string" && session_id.startsWith("cs_")) {
-    const safeFbc = typeof fbc === "string" ? fbc.slice(0, 200) : "";
-    const safeFbp = typeof fbp === "string" ? fbp.slice(0, 100) : "";
-    const safeValue = Number.isFinite(value) && value > 0 && value < 10_000 ? Number(value) : undefined;
-    const safeCurrency = typeof currency === "string" && /^[A-Za-z]{3}$/.test(currency)
-      ? currency.toUpperCase()
-      : undefined;
-    tasks.push(
-      fireCapi({
-        eventName: "InitiateCheckout",
-        eventId: session_id,
-        userData: buildUserData({
-          country: ipCountry || undefined,
-          fbc: safeFbc || undefined,
-          fbp: safeFbp || undefined,
-          clientIp: clientIpFromHeaders(req.headers) || undefined,
-          clientUserAgent: clientUserAgentFromHeaders(req.headers) || undefined,
-        }),
-        customData: {
-          value: safeValue,
-          currency: safeCurrency,
-        },
-        sourceUrl: typeof req.headers?.referer === "string" ? req.headers.referer : undefined,
-      }).catch(() => {}),
-    );
-  }
+  // (CAPI InitiateCheckout was moved ABOVE this block — see the 2026-05-27
+  // comment block. Don't re-add it here; doing so would re-introduce the
+  // parallel-with-AppsScript timeout problem we just fixed.)
 
   await Promise.all(tasks);
 
