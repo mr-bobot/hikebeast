@@ -15,8 +15,8 @@ Hikebeast ist die Arbeit einer Person, Leon Helg. Er fotografiert und kartiert d
 
 Einmalig CHF 27, Lifetime-Updates. PDF und interaktive Webapp für Handy oder Laptop. 141 Spots nach Region sortiert. Pro Spot: genaue GPS für Spot und Parkplatz, Wegzeit und Schwierigkeit, empfohlene Tageszeit, Saison-Fenster, Wildcamping-Status, und Fotos bei richtigem Licht. 5.0 Sterne von 131 verifizierten Käufern.
 
-- Sales Page (Deutsch): https://hikebeast.ch/de/map7/
-- Sales Page (Englisch): https://hikebeast.ch/map7/
+- Sales Page (Deutsch): https://hikebeast.ch/de/map9/
+- Sales Page (Englisch): https://hikebeast.ch/map9/
 - Gratis-Probe: https://hikebeast.ch/de/free/
 
 ## Themen
