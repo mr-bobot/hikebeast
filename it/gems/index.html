@@ -1,99 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
 <head>
 <meta charset="utf-8" />
-<script>
-// Auto-redirect to localized variant (DE/FR/IT) if the browser/device
-// language matches. Runs before any tracking script so Meta Pixel +
-// Vercel Analytics fire on the destination URL only, not both. Manual
-// override via localStorage 'hb_lang' set by the navbar pill click.
-//
-// IMPORTANT — when adding a new map page, add its slug to the regex
-// alternation below. The simpler self-deriving form (`/de` + pathname)
-// is NOT IAB-compatible — empirically verified on Instagram's in-app
-// browser 2026-05-22, PR #78. The lint at scripts/lint-tracking-pipeline.mjs
-// enforces that every page's own slug is in its alternation.
-(function () {
-  try {
-    /* Stash the current document.referrer to localStorage if it's
-       external (not hikebeast.ch or *.vercel.app). The DE/FR/IT
-       redirect below may navigate away from this page before any
-       body script runs · without stashing first, the destination
-       page would see document.referrer = the internal /gems/ URL
-       instead of the real external source (instagram / linktree /
-       etc.). 5-minute TTL via timestamp · fresh visits a few days
-       later get a fresh document.referrer reading. */
-    try {
-      var __ref = (document.referrer || "").slice(0, 500);
-      if (__ref) {
-        var __isInternal = false;
-        try {
-          var __h = new URL(__ref).hostname.toLowerCase();
-          if (__h === "hikebeast.ch" || __h.indexOf(".hikebeast.ch") !== -1) __isInternal = true;
-          if (__h.indexOf(".vercel.app") !== -1) __isInternal = true;
-        } catch (e) {}
-        if (!__isInternal) {
-          try {
-            localStorage.setItem("hb:last_external_referrer:v1", JSON.stringify({ ref: __ref, ts: Date.now() }));
-          } catch (e) {}
-        }
-      }
-    } catch (e) {}
-    var pref = null;
-    try { pref = localStorage.getItem('hb_lang'); } catch (e) {}
-    // Helper · check if any browser-language signal starts with the
-    // given 2-letter code. Catches primary navigator.language plus
-    // every entry in navigator.languages, which matters for Safari
-    // users whose iOS Preferred Languages array has en-US first but
-    // de-CH / fr-CH / it-CH second.
-    function browserWants(code) {
-      if ((navigator.language || '').toLowerCase().indexOf(code) === 0) return true;
-      if (navigator.languages) {
-        for (var i = 0; i < navigator.languages.length; i++) {
-          if ((navigator.languages[i] || '').toLowerCase().indexOf(code) === 0) return true;
-        }
-      }
-      return false;
-    }
-    // DE redirect · own-slug-in-alternation regex form (mandatory per
-    // PR #78/#79, lint-enforced).
-    if (!pref || pref === 'de') {
-      if (pref === 'de' || browserWants('de')) {
-        var deTarget = location.pathname.replace(/^\/(gems|map7|map6|map5|map4|map3|themap|map)\b/, '/de/$1');
-        if (deTarget !== location.pathname) {
-          location.replace(deTarget + location.search + location.hash);
-          return;
-        }
-      }
-    }
-    // FR redirect · /fr/gems/ is the only French Gems page, so the
-    // alternation is narrow.
-    if (!pref || pref === 'fr') {
-      if (pref === 'fr' || browserWants('fr')) {
-        var frTarget = location.pathname.replace(/^\/(gems)\b/, '/fr/$1');
-        if (frTarget !== location.pathname) {
-          location.replace(frTarget + location.search + location.hash);
-          return;
-        }
-      }
-    }
-    // IT redirect · same shape as FR.
-    if (!pref || pref === 'it') {
-      if (pref === 'it' || browserWants('it')) {
-        var itTarget = location.pathname.replace(/^\/(gems)\b/, '/it/$1');
-        if (itTarget !== location.pathname) {
-          location.replace(itTarget + location.search + location.hash);
-          return;
-        }
-      }
-    }
-  } catch (e) {}
-})();
-</script>
+<!-- Auto-redirect script intentionally absent · this is a locale
+     page (IT), not the EN entry point. Leon explicitly said
+     "DO NOT yet autoredirect" so /fr/* and /it/* never redirect.
+     2026-05-24. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>Switzerland Map · 100+ Hidden Swiss Spots with GPS</title>
-<meta name="description" content="Swiss Gems · 141 hidden spots in Switzerland for hiking and wildcamping. GPS, routes, and photo info for every spot." />
+<title>Mappa della Svizzera 🇨🇭 · Gems of Switzerland</title>
+<meta name="description" content="Swiss Gems · 141 spot segreti in Svizzera per trekking e campeggio libero. GPS, percorsi e info fotografiche per ogni spot." />
 <link rel="canonical" href="https://hikebeast.ch/map/" />
 <link rel="alternate" hreflang="en" href="https://hikebeast.ch/map/" />
 <link rel="alternate" hreflang="de" href="https://hikebeast.ch/de/map/" />
@@ -102,34 +18,34 @@
 <link rel="apple-touch-icon" href="../images/favicon.jpg" />
 <meta property="og:type" content="product" />
 <meta property="og:site_name" content="Hikebeast" />
-<meta property="og:locale" content="en_US" />
-<meta property="og:title" content="Switzerland Map · 100+ Hidden Spots" />
-<meta property="og:description" content="Swiss Gems · 141 hidden spots in Switzerland for hiking and wildcamping. Each spot contains GPS, routes, and photo infos. Hand-mapped by Leon Helg over five years of scouting the Swiss Alps." />
-<meta property="og:url" content="https://hikebeast.ch/gems/" />
+<meta property="og:locale" content="it_IT" />
+<meta property="og:title" content="Mappa della Svizzera 🇨🇭 · Gems of Switzerland" />
+<meta property="og:description" content="Swiss Gems · 141 spot segreti in Svizzera per trekking e campeggio libero. Per ogni spot trovi GPS, percorsi e info fotografiche. Mappa creata a mano da Leon Helg in cinque anni di esplorazione delle Alpi Svizzere." />
+<meta property="og:url" content="https://hikebeast.ch/it/gems/" />
 <meta property="og:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 <meta property="og:image:width" content="1920" />
 <meta property="og:image:height" content="987" />
-<meta property="og:image:alt" content="Switzerland Map · 100+ Hidden Spots" />
+<meta property="og:image:alt" content="Mappa della Svizzera 🇨🇭 · Gems of Switzerland" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Switzerland Map · 100+ Hidden Spots" />
-<meta name="twitter:description" content="100+ secret Swiss spots, exact GPS, lifetime updates." />
+<meta name="twitter:title" content="Mappa della Svizzera 🇨🇭 · Gems of Switzerland" />
+<meta name="twitter:description" content="La mappa definitiva della Svizzera." />
 <meta name="twitter:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 
 <!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>
-  /* Tracking infrastructure · ported from /map9/ 2026-05-27 so /gems/
-     visits land in AllVisits properly (visitor_id + classified source +
-     affiliate_ref). Dark mode intentionally NOT ported · /gems/ stays
-     light-only per Leon's preference.
-     Same hbTrack pipeline · dedups by event name per page load, forwards
-     to Vercel Analytics with source_page + source + theme + affiliate_ref. */
-  window.HB_SOURCE_PAGE = "gems";
+  /* Engagement tracking helper · see /map9/index.html for rationale.
+     Two intent signals: about_video_played + reached_checkout. */
+  window.HB_SOURCE_PAGE = "it_gems";
   window.HB_SOURCE = (function () {
     /* Classify the CURRENT page-load via advertiser-set utm_source.
        fbclid is intentionally ignored · Instagram's l.instagram.com
-       outbound redirector appends fbclid to ORGANIC IG link clicks too. */
+       outbound redirector appends fbclid to ORGANIC IG link clicks
+       too (verified 2026-05-26 with dimi's affiliate IG traffic which
+       had utm=ig + fbclid + organic IG referrer · was being mislabeled
+       "facebook_ads"). For paid Meta later we'll match utm_medium=cpc
+       / paid_social, set explicitly by the advertiser in Ads Manager. */
     try {
       var p = new URLSearchParams(location.search);
       if (p.get("s")) return "manychat";
@@ -148,29 +64,49 @@
       return "direct";
     } catch (e) { return "unknown"; }
   })();
-  /* First-touch attribution · prefer the stashed strong source when the
-     current calc is weak, only overwrite the stash when the new value
-     is strong. Also clears stale "facebook_ads" / "instagram_ads" values
-     that the pre-PR-#114 classifier wrote (now invalid · cleared on next
-     visit). */
+  /* First-touch attribution · the user might land on /map9/ from
+     linktree (strong signal), navigate to /de/map9/, then click back
+     to /map9/. The second /map9/ load has no URL params and an
+     internal hikebeast referrer · the classifier above returns
+     "direct" which loses the original linktree attribution. Prefer
+     the stashed strong source when the current calc is weak, and
+     only overwrite the stash when the new value is strong. */
   (function () {
     var WEAK = { direct: 1, unknown: 1, referral: 1 };
+    /* 2026-05-26 migration · pre-fix classifier mislabeled organic
+       IG outbound (utm=ig + Meta-appended fbclid) as "facebook_ads".
+       Clear that stash so returning users don't keep getting wrong
+       attribution on direct re-visits. Same for "instagram_ads"
+       (older classifier produced it from utm=ig). New classifier
+       never returns these values, so anything stashed is stale. */
     var STALE_VALUES = { facebook_ads: 1, instagram_ads: 1 };
     try {
       var stashed = localStorage.getItem("hb:last_source:v1") || "";
       if (stashed && STALE_VALUES[stashed]) stashed = "";
       if (stashed && !WEAK[stashed] && WEAK[window.HB_SOURCE]) {
-        window.HB_SOURCE = stashed;
+        window.HB_SOURCE = stashed;  // prefer prior strong attribution
       }
       if (!stashed || !WEAK[window.HB_SOURCE]) {
         localStorage.setItem("hb:last_source:v1", window.HB_SOURCE);
       }
     } catch (e) {}
   })();
-  /* /gems/ is light-only · hardcode theme so the dashboard can still
-     slice events by theme without surfacing a misleading "unknown". */
-  window.HB_THEME = "light";
-  try { localStorage.setItem("hb:last_theme:v1", "light"); } catch (e) {}
+  /* Color scheme · derived once at page load via prefers-color-scheme.
+     Lets the dashboard ask "do dark-mode users convert at a different
+     rate?" since /map9/ supports both via media query (no toggle, no
+     persisted opt-in · purely system-driven). Stashed for the success
+     page to read back like source. */
+  window.HB_THEME = (function () {
+    try {
+      return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+    } catch (e) { return "unknown"; }
+  })();
+  try { localStorage.setItem("hb:last_theme:v1", window.HB_THEME); } catch (e) {}
+  /* Affiliate ref · read fresh from `hb:r` on each call rather than
+     cache at init, because persistRefIfPresent in the body IIFE writes
+     to `hb:r` AFTER this <head> script runs · the very first page-load
+     with ?r= in URL doesn't have the stash yet at init time. Use this
+     wherever the lambda body needs the slug. */
   window.hbAffiliateRef = function () {
     try {
       var s = localStorage.getItem("hb:r");
@@ -191,6 +127,12 @@
         source: window.HB_SOURCE,
         theme: window.HB_THEME,
       };
+      /* affiliate_ref · read `hb:r` (60-day-TTL stash written by the
+         persistRefIfPresent IIFE further down the page) at call time
+         rather than init time, because hbTrack is defined in <head>
+         before the body IIFE runs · the stash isn't there yet for
+         the very first page-load with ?r= in URL. Attached only when
+         present + unexpired, so non-affiliate visits stay clean. */
       try {
         var __r = localStorage.getItem("hb:r");
         if (__r) {
@@ -203,7 +145,7 @@
       if (window.HB_HERO_VARIANT) props.hero_variant = window.HB_HERO_VARIANT;
       if (extra) for (var p in extra) if (Object.prototype.hasOwnProperty.call(extra, p)) props[p] = extra[p];
       window.va("event", props);
-    } catch (e) {}
+    } catch (e) { /* noop */ }
   };
 </script>
 
@@ -323,7 +265,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   /* Language switcher · single dropdown on the right side of the
      navbar. The trigger pill shows the CURRENT language so the user
      knows where they are; click drops the other locales below it.
-     4-language version (2026-05-27) · matches /map9/ pattern. */
+     Replaces the 3-pill row (2026-05-24) · with 4 languages the row
+     was spreading edge-to-edge on desktop, this collapses it. */
   .navbar-lang-wrap {
     position: relative;
     font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
@@ -1064,7 +1007,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   /* === Reviews · swipeable carousel === */
   .reviews-carousel {
     display: flex;
-    align-items: stretch;
+    /* `start` so each card sizes to its own content · see /map9/. */
+    align-items: start;
     gap: 12px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -1409,6 +1353,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       overflow: visible;
       padding: 4px 32px;
       scroll-snap-type: none;
+      /* Stop a single expanded review card from stretching its
+         row-siblings to its full height · without this, opening one
+         review made the two cards beside it grow into giant empty
+         boxes (Leon called it out 2026-05-24). With `align-items:
+         start` each card sizes to its own content; the row's
+         intrinsic height still tracks the tallest card, but the
+         shorter neighbours sit at the top and leave whitespace
+         below instead of stretching. */
+      align-items: start;
     }
     .review-card {
       flex: initial;
@@ -1599,16 +1552,66 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
        into the sidebar at narrower 1024-1199 viewports. */
     .inside { gap: 12px; }
   }
+
+  /* ============================================================
+     Dark mode · honors the system color-scheme. See /map9/index.html
+     for the full design rationale. Added 2026-05-24. */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --surface: #1c1c1e;
+      --fg: #f5f5f7;
+      --muted: #98989d;
+      --hairline: rgba(255, 255, 255, 0.12);
+    }
+    .navbar {
+      background: rgba(0, 0, 0, 0.72);
+      border-bottom-color: rgba(255, 255, 255, 0.10);
+    }
+    .sticky-buy {
+      background: rgba(20, 20, 20, 0.86);
+      border-top-color: rgba(255, 255, 255, 0.10);
+    }
+    .carousel-arrow {
+      background: rgba(40, 40, 42, 0.86);
+      color: var(--fg);
+    }
+    .carousel-arrow:hover { background: #2c2c2e; }
+    .carousel-arrow:active { background: #1c1c1e; }
+    /* .product-card and .emotion-shot deliberately excluded · they
+       have no light-mode bg and adding one shows as a gray block. */
+    .inside-card,
+    .review-card,
+    .creator-note,
+    .checkout-mock,
+    .buy-card,
+    .collection-grid {
+      background: #1c1c1e;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    .about-body p { color: var(--fg); }
+    .buy-thumb { background: #2c2c2e; }
+    .guarantee-pill {
+      background: #1c1c1e;
+      color: var(--fg);
+    }
+    .review-meta { border-top-color: rgba(255, 255, 255, 0.10); }
+    .dots span { background: rgba(255, 255, 255, 0.25); }
+    .about-social--tt { background: #ffffff; }
+    .about-social--tt svg { fill: #000000; }
+    .about-photo { border: 1px solid rgba(255, 255, 255, 0.10); }
+    .checkout-mock { border-color: rgba(255, 255, 255, 0.10); }
+  }
 </style>
 <script>
-  /* === /gems/ · production variant 04 only (cloned from /map5/).
-     Built 2026-05-20. Used for bio link + value-first funnel where we
-     want the winning hero (Variant 04) without polluting the active
-     A/B split test running on /map5/. Replaces /map7/ as the experimental surface (renamed from /map8/ to use the brand term). No variant picker, no localStorage,
-     no random pick. Same engagement-tracking beacons fire so we still
-     get conversion data, just attributed under source_page=gems. */
+  /* === /it/gems/ · A/B split test surface, 2026-05-24.
+     Re-runs the hero-image experiment from /map5/. ONLY the first
+     /gems/ keeps the winning hero fixed (variant 04, IT localization)
+     · no A/B testing here per Leon. Same image object shape as the
+     /map9/ A/B picker so document.write's `.img` accessor works
+     unchanged. */
   window.HB_HERO_VARIANTS = {
-    '04': '/map3/img/v14/hero/hero4.jpg'
+    '04': { img: '/map3/img/v14/hero/hero4_IT.jpg' }
   };
   (function () {
     window.HB_HERO_VARIANT = '04';
@@ -1618,18 +1621,18 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 <body>
   <header class="navbar">
     <a class="navbar-brand" href="/">
-      <img src="../images/avatar.jpg" alt="" />
+      <img src="/images/avatar.jpg" alt="" />
       Hikebeast
     </a>
     <div class="navbar-lang-wrap" id="lang-wrap">
       <button type="button" class="navbar-lang-btn" id="lang-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-menu">
-        🇬🇧 EN
+        🇮🇹 IT
         <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3,5 6,8 9,5"/></svg>
       </button>
       <ul class="navbar-lang-menu" id="lang-menu" role="listbox" hidden>
+        <li role="option"><a href="/gems/" data-forward-params hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">🇬🇧 EN</a></li>
         <li role="option"><a href="/de/gems/" data-forward-params hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">🇩🇪 DE</a></li>
         <li role="option"><a href="/fr/gems/" data-forward-params hreflang="fr" onclick="try{localStorage.setItem('hb_lang','fr')}catch(e){}" aria-label="Version française">🇫🇷 FR</a></li>
-        <li role="option"><a href="/it/gems/" data-forward-params hreflang="it" onclick="try{localStorage.setItem('hb_lang','it')}catch(e){}" aria-label="Versione italiana">🇮🇹 IT</a></li>
       </ul>
     </div>
   </header>
@@ -1646,10 +1649,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <!-- Slide 1 · split-test variant. Painted via document.write
                during initial parse so the chosen variant is the only
                image the browser ever fetches for this slot. -->
-          <script>document.write('<div class="slide"><img src="' + (window.HB_HERO_VARIANTS[window.HB_HERO_VARIANT] || '/map3/img/v14/hero/hero1.jpg') + '" alt="Swiss Gems Guide · The unforgettable Summer" loading="eager" fetchpriority="high" decoding="async" /></div>');</script>
-          <div class="slide"><img src="/map3/img/v14/mockup.jpg" alt="Spots tourists won't find" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="/map3/img/v14/grid.jpg" alt="A grid of eighteen hidden Swiss spots from the guide" loading="lazy" decoding="async" /></div>
-          <div class="slide"><img src="/map3/img/v14/map.jpg" alt="141 spots, one map" loading="lazy" decoding="async" /></div>
+          <script>document.write('<div class="slide"><img src="' + ((window.HB_HERO_VARIANTS[window.HB_HERO_VARIANT] || window.HB_HERO_VARIANTS['01']).img) + '" alt="Swiss Gems Guide · L\'estate indimenticabile" loading="eager" fetchpriority="high" decoding="async" /></div>');</script>
+          <div class="slide"><img src="/map3/img/v14/mockup_IT.jpg" alt="Spot che i turisti non trovano" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/v14/grid.jpg" alt="Una griglia con diciotto spot segreti della Svizzera dalla guida" loading="lazy" decoding="async" /></div>
+          <div class="slide"><img src="/map3/img/v14/map_IT.jpg" alt="141 spot, una mappa" loading="lazy" decoding="async" /></div>
         </div>
         <!-- Hover-only nav arrows (desktop only · hidden on touch devices
              where the carousel relies on swipe). Click handlers wired in
@@ -1673,7 +1676,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
            — no sale strip, no strikethrough, just the offer terms in plain
            form. Reverts the map3 sale-card experiment. -->
       <div class="px product-card">
-        <h1 class="product-title">Switzerland Map 🇨🇭</h1>
+        <h1 class="product-title">Mappa della Svizzera 🇨🇭</h1>
         <div class="product-price"><span class="price-display">CHF 27</span></div>
         <div class="product-rating">
           <span class="stars" aria-hidden="true">★★★★★</span>
@@ -1682,11 +1685,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
 
       <div class="px hero-text">
-        <p class="hero-sub">Your guide to the best summer in Switzerland.</p>
+        <p class="hero-sub">La tua guida per la migliore estate in Svizzera.</p>
         <ul class="hero-bullets">
-          <li>141 Gems of Switzerland + How to Get There</li>
-          <li>Exact Location for every spot</li>
-          <li>Hiking &amp; Camping Information</li>
+          <li>141 spot segreti con indicazioni</li>
+          <li>Coordinate esatte per ogni spot</li>
+          <li>Info su trekking e campeggio</li>
         </ul>
       </div>
     </section>
@@ -1697,57 +1700,57 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
          section visually. -->
     <section class="inside-section">
       <div class="px section-head">
-        <h2>What's inside</h2>
-        <p>You won't find the best Swiss places with ChatGPT. They are in Whatsapp chats of Swiss photographers, in big books about the alps, and now, well structured, in this guide.</p>
+        <h2>Cosa trovi dentro</h2>
+        <p>I posti più belli della Svizzera non li trovi con ChatGPT. Sono nelle chat WhatsApp dei fotografi svizzeri, nei grandi libri sulle Alpi e ora, ben organizzati, in questa guida.</p>
       </div>
       <div class="inside">
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/wildcamping.jpg" alt="Sleeping bags on alpine grass at golden hour overlooking snowy peaks" loading="lazy" decoding="async" /></div>
+          <div class="card-photo"><img src="/map3/img/inside/wildcamping.jpg" alt="Sacchi a pelo sull'erba alpina nell'ora dorata, con vista sulle vette innevate" loading="lazy" decoding="async" /></div>
           <div class="card-body">
-            <h3>Wildcamping info</h3>
-            <p>Spots where you can stay the night without any cortisol spikes.</p>
+            <h3>Info campeggio libero</h3>
+            <p>Posti dove puoi passare la notte senza preoccupazioni.</p>
           </div>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/spots.jpg" alt="Hiker overlooking misty alpine valleys" loading="lazy" decoding="async" /></div>
+          <div class="card-photo"><img src="/map3/img/inside/spots.jpg" alt="Escursionista con vista su valli alpine nella nebbia" loading="lazy" decoding="async" /></div>
           <div class="card-body">
-            <h3>141+ Spots</h3>
-            <p>The best gems of Switzerland. Some famous, most aren't.</p>
+            <h3>141+ spot</h3>
+            <p>I posti più belli della Svizzera. Alcuni famosi, la maggior parte no.</p>
           </div>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/photo-info.jpg" alt="Hiker on a ridge at golden hour" loading="lazy" decoding="async" /></div>
+          <div class="card-photo"><img src="/map3/img/inside/photo-info.jpg" alt="Escursionista su una cresta nell'ora dorata" loading="lazy" decoding="async" /></div>
           <div class="card-body">
-            <h3>Photo info</h3>
-            <p>So what you capture feels just as beautiful as what you lived.</p>
+            <h3>Info fotografiche</h3>
+            <p>Così le tue foto saranno belle quanto i ricordi.</p>
           </div>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/exact-location.jpg" alt="Rowboat on a turquoise alpine lake" loading="lazy" decoding="async" /></div>
+          <div class="card-photo"><img src="/map3/img/inside/exact-location.jpg" alt="Barca a remi su un lago alpino color turchese" loading="lazy" decoding="async" /></div>
           <div class="card-body">
-            <h3>Exact Location</h3>
-            <p>Coordinates that drop you on the exact spot.</p>
+            <h3>Posizione esatta</h3>
+            <p>Coordinate che ti portano allo spot.</p>
           </div>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/hike-info.jpg" alt="POV from a peak overlooking an alpine lake at sunset" loading="lazy" decoding="async" /></div>
+          <div class="card-photo"><img src="/map3/img/inside/hike-info.jpg" alt="Vista dalla cima su un lago alpino al tramonto" loading="lazy" decoding="async" /></div>
           <div class="card-body">
-            <h3>Hiking Info</h3>
-            <p>Trail and difficulty. So you know what you're walking into.</p>
+            <h3>Info trekking</h3>
+            <p>Percorso e difficoltà. Così sai cosa ti aspetta.</p>
           </div>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/webapp_v2.jpg" alt="iPhone showing the Hikebeast webapp browsing 141 spots" loading="lazy" decoding="async" /></div>
+          <div class="card-photo"><img src="/map3/img/inside/webapp_v2.jpg" alt="iPhone che mostra la webapp Hikebeast con i 141 spot" loading="lazy" decoding="async" /></div>
           <div class="card-body">
-            <h3>A Webapp</h3>
-            <p>An exciting way to plan your perfect itinerary.</p>
+            <h3>Una webapp</h3>
+            <p>Pianificare l'itinerario perfetto è anche divertente.</p>
           </div>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/offline.jpg" alt="Hiker walking a sunset ridge alone" loading="lazy" decoding="async" /></div>
+          <div class="card-photo"><img src="/map3/img/inside/offline.jpg" alt="Escursionista in solitaria su una cresta al tramonto" loading="lazy" decoding="async" /></div>
           <div class="card-body">
-            <h3>Offline access</h3>
-            <p>A downloadable PDF works even without signal on the trail.</p>
+            <h3>Accesso offline</h3>
+            <p>Il PDF scaricabile funziona anche senza segnale sul sentiero.</p>
           </div>
         </div>
       </div>
@@ -1757,7 +1760,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
          (avatars pulled from public IG og:image where available). -->
     <section class="reviews">
       <div class="px section-head">
-        <h2>What people say</h2>
+        <h2>Recensioni</h2>
       </div>
       <div class="reviews-carousel">
         <div class="review-card review-card--expandable">
@@ -1772,7 +1775,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             </div>
           </div>
           <p class="review-quote">"Honestly, it's an amazing guide with so many incredible spots. I already know Switzerland pretty well, but I had no idea about some of these places. The information is super useful too and all the details, best timings, sunlight conditions, parking, access, everything. Really recommend it!!!<br><br>Thanks a lot for all the dedication you put into this guide bro!"</p>
-          <button type="button" class="review-more-btn" data-more="Read more" data-less="Show less">Read more</button>
+          <button type="button" class="review-more-btn" data-more="Mostra di più" data-less="Mostra di meno">Mostra di più</button>
         </div>
         <div class="review-card">
           <div class="review-head">
@@ -1929,12 +1932,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             </div>
           </div>
           <p class="review-quote">"The guide is amazing and informative. My only recommendation is to highlight how to access the locations by public transportation if possible."</p>
-          <div class="creator-note"><span class="creator-note-label">Leon:</span>This feature is being rolled out as we speak.</div>
-          <button type="button" class="review-more-btn" data-more="Read more" data-less="Show less">Read more</button>
+          <div class="creator-note"><span class="creator-note-label">Leon:</span>Questa funzionalità è in arrivo, ci stiamo lavorando.</div>
+          <button type="button" class="review-more-btn" data-more="Mostra di più" data-less="Mostra di meno">Mostra di più</button>
         </div>
       </div>
       <div class="reviews-more-row">
-        <button type="button" class="reviews-more-btn" id="reviews-more-btn" data-more="Show more reviews" data-less="Show less">Show more reviews</button>
+        <button type="button" class="reviews-more-btn" id="reviews-more-btn" data-more="Altre recensioni" data-less="Mostra meno">Altre recensioni</button>
       </div>
     </section>
 
@@ -1942,16 +1945,16 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
          and checkout. Short and personal, no marketing slop. -->
     <section class="about-section">
       <div class="px section-head">
-        <h2>About me</h2>
+        <h2>Su di me</h2>
       </div>
       <div class="px about-body">
         <img class="about-photo" src="/map3/img/about/leon_v3.jpg" alt="Leon Helg" loading="lazy" decoding="async" width="100" height="125" />
         <div class="about-text">
-          <p>I'm Leon. As a photographer, I have spent many summers exploring the Swiss Alps. This map is the shortcut I wish I had when I started.</p>
+          <p>Sono Leon. Come fotografo svizzero, ho passato molte estati a esplorare le Alpi. Questa mappa è la scorciatoia che avrei voluto avere quando ho iniziato.</p>
           <div class="about-actions">
             <button type="button" class="about-video-btn" id="about-video-btn" data-src="/gems/swissgems_intro_en_v1.mov" data-poster="/map3/img/about/leon.jpg">
             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
-            <span>Watch</span>
+            <span>Guarda</span>
             <span class="about-video-btn-sep" aria-hidden="true">·</span>
             <span>0:56</span>
           </button>
@@ -1978,6 +1981,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           var btn = document.getElementById("about-video-btn");
           if (!btn) return;
           btn.addEventListener("click", function () {
+            if (window.hbTrack) window.hbTrack("about_video_played");
             var vid = document.createElement("video");
             vid.className = "about-video";
             vid.src = btn.dataset.src;
@@ -2021,7 +2025,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <!-- Embedded Stripe Checkout -->
     <section class="px" id="get-the-map">
       <div class="section-head section-head--centered">
-        <h2>Get the guide</h2>
+        <h2>Acquista la guida</h2>
       </div>
       <div class="guarantee-wrap">
         <span class="guarantee-pill">
@@ -2029,7 +2033,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <circle cx="10" cy="10" r="9" fill="#34c759"/>
             <path d="M5.8 10.4l2.8 2.8 5.6-5.6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          I'm proud to say that less than 0.02% of buyers have used our 30-day money-back guarantee!
+          Sono fiero che meno dello 0,02% degli acquirenti abbia usato la nostra garanzia soddisfatti o rimborsati di 30 giorni!
         </span>
       </div>
       <div class="checkout-wrap">
@@ -2053,7 +2057,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <!-- Footer -->
     <footer class="footer px">
       <div>© Hikebeast</div>
-      <div><a href="/terms.html">Terms</a> · <a href="/imprint.html">Imprint</a> · <a href="/privacy.html">Privacy</a></div>
+      <div><a href="/terms.html">Termini</a> · <a href="/imprint.html">Note legali</a> · <a href="/privacy.html">Privacy</a></div>
     </footer>
     </div><!-- /.page-main -->
 
@@ -2079,7 +2083,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           </div>
           <div class="buy-name">Swiss Gems 🇨🇭</div>
           <div class="buy-price">CHF 27</div>
-          <a href="#get-the-map" class="buy-cta">Get the guide</a>
+          <a href="#get-the-map" class="buy-cta">Acquista la guida</a>
           <div class="buy-foot">
             <span>Apple Pay · TWINT · Card</span>
             <a href="/terms.html#refunds">↩ 30-day refund</a>
@@ -2092,7 +2096,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
   <!-- Sticky bottom buy bar (mobile) -->
   <div class="sticky-buy" id="sticky-buy">
-    <a class="buy-btn" href="#get-the-map">Buy · <span class="price-display">CHF 27</span></a>
+    <a class="buy-btn" href="#get-the-map">Acquista · <span class="price-display">CHF 27</span></a>
   </div>
 
 <script>
@@ -2153,6 +2157,53 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   const utmMedium = params.get("utm_medium") || "";
   const utmCampaign = params.get("utm_campaign") || "";
 
+  // visitor_id · client-generated stable UUID so anonymous traffic
+  // (Linktree, ads, direct typing) gets a stable row identity on the
+  // AllVisits sheet. Persisted in localStorage so a returning visitor
+  // doesn't show up as a new visitor. Falls back to a Math.random-
+  // derived id if crypto.randomUUID isn't available (very old browsers).
+  // Added 2026-05-24 with the AllVisits tracking rollout.
+  const VISITOR_KEY = "hb:visitor_id";
+  let visitorId = "";
+  try { visitorId = localStorage.getItem(VISITOR_KEY) || ""; } catch (e) {}
+  if (!visitorId) {
+    if (window.crypto && typeof crypto.randomUUID === "function") {
+      visitorId = crypto.randomUUID();
+    } else {
+      visitorId = "v" + Date.now().toString(36) +
+                  Math.random().toString(36).slice(2, 10) +
+                  Math.random().toString(36).slice(2, 10);
+    }
+    try { localStorage.setItem(VISITOR_KEY, visitorId); } catch (e) {}
+  }
+  const pageReferrer = (function () {
+    /* See /map9/index.html for the full rationale · /de/map9/,
+       /fr/map9/, /it/map9/ are redirect destinations, so
+       document.referrer often points at the internal /map9/ hop
+       instead of the real external referrer. The /map9/ head-script
+       stashed the true external referrer to localStorage before
+       redirecting; read it back here with a 5-min TTL. */
+    try {
+      var __s = localStorage.getItem("hb:last_external_referrer:v1");
+      if (__s) {
+        var __o = JSON.parse(__s);
+        if (__o && __o.ref && __o.ts && (Date.now() - __o.ts < 5 * 60 * 1000)) {
+          return String(__o.ref).slice(0, 500);
+        }
+      }
+    } catch (e) {}
+    try {
+      var ref = (document.referrer || "");
+      if (!ref) return "";
+      try {
+        var h = new URL(ref).hostname.toLowerCase();
+        if (h === "hikebeast.ch" || h.indexOf(".hikebeast.ch") !== -1) return "";
+        if (h.indexOf(".vercel.app") !== -1) return "";
+      } catch (e) {}
+      return ref.slice(0, 500);
+    } catch (e) { return ""; }
+  })();
+
   // Affiliate ref. `?r=<username>` on this page → stash in localStorage
   // with a 60-day TTL so a buyer who clicks now and pays later still
   // attributes back to the affiliate. Read on every checkout-session
@@ -2178,6 +2229,22 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       return obj.slug;
     } catch { return ""; }
   }
+
+  /* Forward URL params on tagged off-page links · 2026-05-27.
+     Mirrors the recipe on /map9/. Ensures the affiliate slug
+     survives clicks on the EN/DE/FR language switchers and a
+     subsequent "Open in Safari" handoff. Hash-aware. */
+  (function forwardParamsOnTaggedLinks() {
+    if (!location.search) return;
+    document.querySelectorAll("a[data-forward-params]").forEach(function (a) {
+      const href = a.getAttribute("href") || "";
+      if (!href || href.indexOf("?") !== -1) return;
+      const hashIdx = href.indexOf("#");
+      const base = hashIdx === -1 ? href : href.slice(0, hashIdx);
+      const hash = hashIdx === -1 ? "" : href.slice(hashIdx);
+      a.setAttribute("href", base + location.search + hash);
+    });
+  })();
 
   // ---------- Carousel: dots + hover arrows ----------
   const carousel = document.getElementById("hero-carousel");
@@ -2256,14 +2323,28 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     if (nextBtn) nextBtn.addEventListener("click", stopAutoplay, { once: true });
   }
 
-  // ---------- Expandable reviews ("Read more") ----------
+  // ---------- Engagement tracking · reached_checkout · see /map9/ ----------
+  const checkoutEl = document.getElementById("get-the-map");
+  if (checkoutEl && "IntersectionObserver" in window) {
+    const co = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (window.hbTrack) window.hbTrack("reached_checkout");
+          co.disconnect();
+        }
+      });
+    }, { threshold: 0.1 });
+    co.observe(checkoutEl);
+  }
+
+  // ---------- Expandable reviews ("Mostra di più") ----------
   document.querySelectorAll(".review-more-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const card = btn.closest(".review-card");
       const open = card.classList.toggle("is-open");
       btn.textContent = open
-        ? (btn.dataset.less || "Show less")
-        : (btn.dataset.more || "Read more");
+        ? (btn.dataset.less || "Mostra di meno")
+        : (btn.dataset.more || "Mostra di più");
     });
   });
 
@@ -2370,7 +2451,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           fbc: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbc : "") || "",
           fbp: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbp : "") || "",
           r: readStoredRef(),
-          source_page: "gems",
+          source_page: "it_gems",
           hero_variant: window.HB_HERO_VARIANT || "",
         }),
       });
@@ -2444,19 +2525,13 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   // out of mountCheckout — backfilled 2026-05-20.
   function attachInitiateCheckoutSignal() {
     var container = document.getElementById("checkout");
-    var stickyBuy = document.getElementById("sticky-buy");
-    if (!container && !stickyBuy) return;
+    if (!container) return;
     var key = "hb:ic_fired";
     try { if (sessionStorage.getItem(key) === "1") return; } catch (e) {}
 
     function fire() {
-      if (container) {
-        container.removeEventListener("pointerdown", fire, true);
-        container.removeEventListener("focusin", fire, true);
-      }
-      if (stickyBuy) {
-        stickyBuy.removeEventListener("click", fire, true);
-      }
+      container.removeEventListener("pointerdown", fire, true);
+      container.removeEventListener("focusin", fire, true);
       try { sessionStorage.setItem(key, "1"); } catch (e) {}
       var icValue = typeof currentAmount === "number" ? currentAmount : 27;
       var icCurrency = (currentCurrency || "chf").toUpperCase();
@@ -2494,21 +2569,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         } catch (e) {}
       }
     }
-    if (container) {
-      container.addEventListener("pointerdown", fire, true);
-      container.addEventListener("focusin", fire, true);
-    }
-    if (stickyBuy) {
-      // Sticky mobile buy button click = clearest intent signal outside
-      // the iframe. Stripe Embedded Checkout is cross-origin sandboxed so
-      // pointerdown/focusin on #checkout above only catches taps on the
-      // wrapper, not inside the iframe (which is where real interaction
-      // happens). The sticky button is rendered by us, so we can listen
-      // freely. Capture phase fires this BEFORE the anchor scroll to
-      // #checkout. 2026-05-27 addition · before this, IC events landed
-      // at Meta in only 2 of 1340 landing-page-views (Events Manager).
-      stickyBuy.addEventListener("click", fire, true);
-    }
+    container.addEventListener("pointerdown", fire, true);
+    container.addEventListener("focusin", fire, true);
   }
 
   // Auto-mount checkout when the page is interactive
@@ -2522,67 +2584,27 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     bootCheckout();
   }
 
-  // visitor_id · client-generated stable UUID, sticky in localStorage.
-  // Ported from /map9/ 2026-05-27 so anonymous /gems/ traffic (Linktree
-  // / affiliate / direct / paid ads) is captured by AllVisits alongside
-  // the ManyChat funnel. Without this the lambda gate dropped anonymous
-  // visits entirely.
-  const VISITOR_KEY = "hb:visitor_id";
-  let visitorId = "";
-  try { visitorId = localStorage.getItem(VISITOR_KEY) || ""; } catch (e) {}
-  if (!visitorId) {
-    if (window.crypto && typeof crypto.randomUUID === "function") {
-      visitorId = crypto.randomUUID();
-    } else {
-      visitorId = "v" + Date.now().toString(36) +
-                  Math.random().toString(36).slice(2, 10) +
-                  Math.random().toString(36).slice(2, 10);
-    }
-    try { localStorage.setItem(VISITOR_KEY, visitorId); } catch (e) {}
-  }
-  // pageReferrer · prefer the stash written by the <head> redirect IIFE
-  // (5min TTL, external-only), falling back to document.referrer when
-  // it's not from our own domain. Strips internal hops (hikebeast.ch,
-  // vercel.app) that pollute AllVisits referrer column.
-  const pageReferrer = (function () {
-    try {
-      var __s = localStorage.getItem("hb:last_external_referrer:v1");
-      if (__s) {
-        var __o = JSON.parse(__s);
-        if (__o && __o.ref && __o.ts && (Date.now() - __o.ts < 5 * 60 * 1000)) {
-          return String(__o.ref).slice(0, 500);
-        }
-      }
-    } catch (e) {}
-    try {
-      var ref = (document.referrer || "");
-      if (!ref) return "";
-      try {
-        var h = new URL(ref).hostname.toLowerCase();
-        if (h.indexOf("hikebeast") !== -1 || h.indexOf("vercel.app") !== -1) return "";
-      } catch (e) {}
-      return ref.slice(0, 500);
-    } catch (e) { return ""; }
-  })();
-
   // ---------- Page-visit ping for the funnel sheet ----------
   // Reuses the existing /api/visit endpoint that the other landings use.
-  // Carries hero_variant + visitor_id + classified source so AllVisits
-  // captures direct/Linktree/affiliate traffic alongside ManyChat funnel.
+  // Carries hero_variant so the v12 split test rows are tagged at landed time.
   try {
     fetch("/api/visit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        page: "gems",
+        page: "map9",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
+        // visitor_id + referrer · accepted by the lambda but no longer
+        // forked to AllVisits since 2026-05-24. The anon-traffic
+        // impression count now flows through Vercel Analytics via the
+        // va('event') call below.
         visitor_id: visitorId,
         referrer: pageReferrer,
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
-        source_page: "gems",
+        source_page: "it_gems",
         affiliate_ref: window.hbAffiliateRef(),
         source: window.HB_SOURCE || "",
         theme: window.HB_THEME || "",
@@ -2601,15 +2623,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   } catch (e) { /* noop */ }
 
   // ---------- Vercel Analytics · hero variant impression ----------
-  // Fires one custom event per page load so the dashboard shows
-  // visitors-per-variant aggregated across ALL traffic sources, not
-  // just the ManyChat funnel that the Sheet captures.
+  // Custom event for variant-impression count across ALL traffic
+  // sources. Aggregate-only, no PII, no extra Sheets fetch. See
+  // /map9/index.html for the rationale.
   try {
     if (typeof window.va === "function") {
       window.va("event", {
         name: "hero_seen",
         hero_variant: window.HB_HERO_VARIANT || "",
-        source_page: "gems",
+        source_page: "it_gems",
         affiliate_ref: window.hbAffiliateRef(),
         source: window.HB_SOURCE || "",
         theme: window.HB_THEME || "",
@@ -2626,11 +2648,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   //                Payload carries cumulative active_ms so the last beacon
   //                wins on the Sheet side.
   (function setupSplitTestEvents() {
-    // Anonymous visitors are tracked too · the visitor_id beacon above
-    // landed them in AllVisits, so engaged/session_end can join via
-    // visitor_id even without a ManyChat subscriber_id/token. The old
-    // `if (!cohortSubscriber && !cohortToken) return;` gate was removed
-    // 2026-05-27 when tracking was ported from /map9/.
+    // 2026-05-24 · anonymous visitors are now tracked too (via
+    // visitor_id on the AllVisits sheet). The Signups-side fire path
+    // is gated lambda-side on subscriber_id/token, so anon beacons
+    // route only to AllVisits · safe to fire unconditionally here.
     var variant = window.HB_HERO_VARIANT || "";
     var activeStart = performance.now();
     var activeMs = 0;
@@ -2652,11 +2673,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             event: "engaged",
-            page: "gems",
+            page: "map9",
             token: cohortToken,
             subscriber_id: cohortSubscriber,
             visitor_id: visitorId,
-            source_page: "gems",
+            source_page: "it_gems",
             affiliate_ref: window.hbAffiliateRef(),
             source: window.HB_SOURCE || "",
             theme: window.HB_THEME || "",
@@ -2665,7 +2686,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           keepalive: true,
         }).catch(() => {});
       } catch (e) { /* noop */ }
-      if (window.hbTrack) window.hbTrack("engaged");
     }
 
     // Scroll trigger · once .inside-section's top enters the viewport
@@ -2690,11 +2710,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         activeMs += performance.now() - activeStart;
         sendBeaconJson({
           event: "session_end",
-          page: "gems",
+          page: "map9",
           token: cohortToken,
           subscriber_id: cohortSubscriber,
           visitor_id: visitorId,
-          source_page: "gems",
+          source_page: "it_gems",
           affiliate_ref: window.hbAffiliateRef(),
           source: window.HB_SOURCE || "",
           theme: window.HB_THEME || "",
@@ -2711,11 +2731,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       if (!document.hidden) activeMs += performance.now() - activeStart;
       sendBeaconJson({
         event: "session_end",
-        page: "gems",
+        page: "map9",
         token: cohortToken,
         subscriber_id: cohortSubscriber,
         visitor_id: visitorId,
-        source_page: "gems",
+        source_page: "it_gems",
         affiliate_ref: window.hbAffiliateRef(),
         source: window.HB_SOURCE || "",
         theme: window.HB_THEME || "",
