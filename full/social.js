@@ -1311,7 +1311,6 @@
         <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
         <span class="label">More</span>
       </a>
-      <div class="rail-account" data-hb-account></div>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="Toggle navigation labels">
         ${SVG_CHEVRONS}<span class="label">Collapse</span>
       </button>
@@ -1369,13 +1368,12 @@
     // picks up both buttons.
     syncThemeBtns();
 
-    // Account FAB lives top-right of the viewport, regardless of page,
-    // so it's reachable without scrolling the rail. paintAccount() below
-    // targets the [data-hb-account] slot on this fab.
-    const accountFab = document.createElement('div');
-    accountFab.className = 'hb-account-fab';
-    accountFab.dataset.hbAccount = '';
-    document.body.appendChild(accountFab);
+    // Top-right Account FAB removed 2026-05-27. The desktop entry point
+    // is now /full/more/ → Account row → /full/account/. Mobile still
+    // gets a direct slot inside the menu sheet via [data-hb-account]
+    // (see menu-sheet HTML below), so phone users keep their two-tap
+    // path. paintAccount() iterates all remaining [data-hb-account]
+    // slots so this is a pure removal · no other wiring needed.
 
     // Mobile bottom tab bar. Hidden above 700px via CSS. Replaces the
     // burger drawer as the primary mobile nav so people actually
