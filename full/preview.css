@@ -4989,6 +4989,37 @@ body.has-rail .topbar .hb-nav { display: none; }
   font-size: 12px;
   color: var(--muted);
 }
+/* Region cards on /full/regions/ · vertical .hb-saved-tile carrier
+   with the dark-gradient + region-colour-glow + white SVG silhouette
+   inside the square .photo. Same recipe as .up-next-card.is-chapter
+   on the home rail, adapted for the 1:1 .hb-saved-tile geometry.
+   Drives the region tint via inline `--region-color`. 2026-05-27. */
+.hb-saved-tile.is-region .photo.cv-map {
+  background:
+    radial-gradient(70% 60% at 22% 18%, rgba(var(--region-color, 200,200,200), 0.55) 0%, rgba(var(--region-color, 200,200,200), 0) 65%),
+    radial-gradient(60% 55% at 92% 95%, rgba(var(--region-color, 200,200,200), 0.32) 0%, rgba(var(--region-color, 200,200,200), 0) 70%),
+    linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
+  display: grid;
+  place-items: center;
+}
+.hb-saved-tile.is-region .photo.cv-map::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+}
+.hb-saved-tile.is-region .photo.cv-map img {
+  /* Override the default `.hb-saved-tile .photo img { object-fit: cover }`
+     · we want the SVG centred and contained, not stretched. The hover
+     scale that .hb-saved-tile applies to spot photos also looks weird
+     on a flat silhouette so we suppress it. */
+  width: 78%; height: auto; max-height: 78%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
+  transition: none;
+}
+.hb-saved-tile.is-region:hover .photo.cv-map img { transform: none; }
 .hb-saved-tile .hb-fav {
   position: absolute;
   top: 10px;

@@ -19,25 +19,14 @@
 <link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <style>
-  /* Regions grid · reuses Home's .up-next-card.is-chapter recipe so the
-     covers are the dark-gradient + region-colour-glow + white SVG
-     silhouette treatment (the look Leon explicitly asked for). 2-col
-     on mobile, 3-col tablet, 4-col desktop. 2026-05-24. */
-  .regions-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin: 0 0 40px;
-  }
-  @media (min-width: 600px) {
-    .regions-grid { gap: 14px; }
-  }
-  @media (min-width: 1000px) {
-    .regions-grid { grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-  }
-  @media (min-width: 1400px) {
-    .regions-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
-  }
+  /* Regions grid · uses the shared .hb-saved-grid + .hb-saved-tile
+     pattern from /full/wildcamping/ + /full/hidden-gems/ + /full/famous-
+     gems/ so the cards read as the same family (big 1:1 photo on top,
+     title + meta below). The region SVG silhouette + dark-gradient
+     treatment moves to .hb-saved-tile.is-region .photo.cv-map (in
+     preview.css). 2026-05-27 per Leon · was the horizontal
+     .up-next-card.is-chapter layout before. */
+  .hb-saved-grid { margin: 0 0 40px; }
 </style>
 </head>
 <body>
@@ -60,16 +49,18 @@
     <p>Pick a region and dive in. Each one has its own character · alpine drama in Central, vineyards + glaciers in Valais, the soft greens of Fribourg, raw ridges in Eastern.</p>
   </header>
 
-  <!-- Region overview · same .up-next-card.is-chapter pattern Home uses
-       for its chapter rail. The .photo.cv-map element paints the dark
-       gradient + region-colour glow behind the white SVG silhouette,
-       driven by inline --region-color (RGB triplet, matches Home's
+  <!-- Region overview · uses the shared .hb-saved-tile.is-region card
+       pattern that matches /full/hidden-gems/, /full/famous-gems/, and
+       /full/wildcamping/ (big 1:1 photo on top, title + meta below).
+       The .photo.cv-map element still paints the dark gradient +
+       region-colour glow behind the white SVG silhouette, driven by
+       inline --region-color (RGB triplet, matches Home's
        CHAPTERS_META). Region SVGs live at /full/img/region-<id>.svg.
        Introduction is intentionally NOT here · it's a front-matter
        intro page, not a region. -->
-  <div class="regions-grid">
+  <div class="hb-saved-grid">
 
-    <a class="up-next-card is-chapter" href="../central/">
+    <a class="hb-saved-tile is-region" href="../central/">
       <span class="photo cv-map" style="--region-color: 175,165,122">
         <img src="../img/region-central.svg" alt="" loading="lazy" />
       </span>
@@ -79,7 +70,7 @@
       </span>
     </a>
 
-    <a class="up-next-card is-chapter" href="../valais/">
+    <a class="hb-saved-tile is-region" href="../valais/">
       <span class="photo cv-map" style="--region-color: 234,183,191">
         <img src="../img/region-valais.svg" alt="" loading="lazy" />
       </span>
@@ -89,7 +80,7 @@
       </span>
     </a>
 
-    <a class="up-next-card is-chapter" href="../fribourg/">
+    <a class="hb-saved-tile is-region" href="../fribourg/">
       <span class="photo cv-map" style="--region-color: 216,216,209">
         <img src="../img/region-fribourg.svg" alt="" loading="lazy" />
       </span>
@@ -99,7 +90,7 @@
       </span>
     </a>
 
-    <a class="up-next-card is-chapter" href="../western/">
+    <a class="hb-saved-tile is-region" href="../western/">
       <span class="photo cv-map" style="--region-color: 204,224,158">
         <img src="../img/region-western.svg" alt="" loading="lazy" />
       </span>
@@ -109,7 +100,7 @@
       </span>
     </a>
 
-    <a class="up-next-card is-chapter" href="../eastern/">
+    <a class="hb-saved-tile is-region" href="../eastern/">
       <span class="photo cv-map" style="--region-color: 124,181,168">
         <img src="../img/region-eastern.svg" alt="" loading="lazy" />
       </span>
@@ -119,7 +110,7 @@
       </span>
     </a>
 
-    <a class="up-next-card is-chapter" href="../ticino/">
+    <a class="hb-saved-tile is-region" href="../ticino/">
       <span class="photo cv-map" style="--region-color: 147,132,186">
         <img src="../img/region-ticino.svg" alt="" loading="lazy" />
       </span>
@@ -129,7 +120,7 @@
       </span>
     </a>
 
-    <a class="up-next-card is-chapter" href="../beyond/">
+    <a class="hb-saved-tile is-region" href="../beyond/">
       <span class="photo cv-map" style="--region-color: 89,89,89">
         <img src="../img/region-beyond.svg" alt="" loading="lazy" />
       </span>
