@@ -220,6 +220,60 @@
   }
   .stat-value.is-empty { color: var(--muted); font-weight: 500; }
 
+  /* Info-icon button + popover · used on the Earned and Referrals
+     stat labels to explain what they count. Click/tap toggles the
+     tooltip; click outside dismisses. No hover-only path so touch
+     devices get the same affordance as desktop. */
+  .info-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px;
+    margin-left: 4px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 999px;
+    vertical-align: -2px;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .info-btn:hover, .info-btn:focus-visible { color: var(--fg); }
+  .info-btn:focus-visible { outline: 2px solid #0071e3; outline-offset: 2px; }
+  .info-btn svg { width: 12px; height: 12px; display: block; }
+
+  .info-tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    max-width: calc(100vw - 32px);
+    padding: 8px 12px;
+    background: var(--fg);
+    color: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 12px; font-weight: 400;
+    letter-spacing: 0; text-transform: none;
+    line-height: 1.4; text-align: center;
+    border-radius: 8px;
+    white-space: normal;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms ease;
+  }
+  .info-tooltip.is-visible { opacity: 1; }
+  .info-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--fg);
+  }
+
   /* Activity list. No external glass — the parent card is the surface. */
   .activity { margin: 0; padding: 0; list-style: none; }
   .activity li {
@@ -320,11 +374,11 @@
       <div class="sec">
         <div class="stats">
           <div>
-            <p class="sec-label">Total</p>
+            <p class="sec-label">Earned<button type="button" class="info-btn" data-tooltip="Paid + pending commission, summed per currency. Refunded sales are excluded." aria-label="What does Earned mean?"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none"/></svg></button></p>
             <p class="stat-value is-empty" id="statTotal">0</p>
           </div>
           <div>
-            <p class="sec-label">Referrals</p>
+            <p class="sec-label">Referrals<button type="button" class="info-btn" data-tooltip="Number of sales attributed to your link. Includes pending, paid, and refunded." aria-label="What does Referrals mean?"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none"/></svg></button></p>
             <p class="stat-value is-empty" id="statCount">0</p>
           </div>
         </div>
@@ -565,6 +619,39 @@
         elLoading.hidden = true;
         elSignedOut.hidden = false;
       });
+  })();
+
+  /* Tooltip behaviour · click/tap toggles, click anywhere else closes.
+     Same trigger on mouse and touch · no hover-only path so phone users
+     get the same affordance as desktop. The tooltip element is created
+     once per [data-tooltip] button and appended inside the button so
+     it inherits the button's position (relative). Stop-propagation on
+     the button click prevents the document-level click handler from
+     immediately re-closing the tooltip we just opened. */
+  (function setupTooltips() {
+    const tips = [];
+    document.querySelectorAll('[data-tooltip]').forEach(btn => {
+      const tip = document.createElement('span');
+      tip.className = 'info-tooltip';
+      tip.textContent = btn.getAttribute('data-tooltip');
+      btn.appendChild(tip);
+      tips.push(tip);
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const wasOpen = tip.classList.contains('is-visible');
+        tips.forEach(t => t.classList.remove('is-visible'));
+        if (!wasOpen) tip.classList.add('is-visible');
+      });
+    });
+    document.addEventListener('click', () => {
+      tips.forEach(t => t.classList.remove('is-visible'));
+    });
+    // Close on Escape so keyboard users (rare on this page but cheap to
+    // support) can dismiss without clicking back into nothing.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') tips.forEach(t => t.classList.remove('is-visible'));
+    });
   })();
 </script>
 </body>
