@@ -1094,7 +1094,12 @@
       if (!spot) return null;
       // Preview mode · drop spots whose slug isn't on Leon's curated
       // recording-safe list. Anchor lives at spotKey's right half.
-      if (PREVIEW_MODE) {
+      // EXCEPTION · the map page (/full/map/) shows all spots even in
+      // preview mode so recordings can pan across a full Switzerland
+      // (the discovery surface is itself the selling point). Spot
+      // detail pages stay reachable by direct URL · navigation from
+      // chapter / browse / swipe surfaces still respects the allowlist.
+      if (PREVIEW_MODE && !/\/full\/map\//.test(location.pathname || '')) {
         const anchor = (spot.spotKey || '').split('#')[1] || null;
         if (!previewSpotAllowed(anchor)) return null;
       }

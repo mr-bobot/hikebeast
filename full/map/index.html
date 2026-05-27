@@ -446,17 +446,18 @@
     tap: false,           // skip Leaflet's tap-delay on touch devices
   });
 
-  // Fit the Swiss bounding box, then bump zoom by 1 step so Switzerland
-  // actually fills the viewport instead of swimming in vertical empty
-  // space. Plain fitBounds picks the zoom that lets the whole country
-  // fit, but on a portrait phone that ends up showing all of Switzerland
-  // sitting tiny in the middle with huge top/bottom margins ·  Leon
-  // 2026-05-24 called it "fully zoomed out", wants the second-most-out
-  // state (one notch tighter). +1 zoom level gets that.
+  // Fit the Swiss bounding box. The +1 zoom bump that lived here from
+  // 2026-05-24 → 2026-05-26 made Switzerland fill the viewport tightly,
+  // but Leon (2026-05-26) now wants more breathing room around the
+  // country so neighbouring regions are visible in the default view
+  // (better discovery feel · also the canonical look in affiliate
+  // recordings). Larger padding pulls the fit-bounds zoom one notch
+  // out without touching minZoom · gives ~5° of border around CH on
+  // desktop, less on mobile (where padding is the same ratio of a
+  // smaller viewport).
   // Bounds: SW corner (Geneva area) → NE corner (Graubünden tip).
   const SWISS_BOUNDS = L.latLngBounds([45.82, 5.96], [47.81, 10.49]);
-  map.fitBounds(SWISS_BOUNDS, { padding: [20, 20] });
-  map.setZoom(map.getZoom() + 1);
+  map.fitBounds(SWISS_BOUNDS, { padding: [60, 60] });
 
   // social.js injects the left rail AFTER page parse, which shifts the
   // body's padding-left and shrinks .map-shell width. Without this,
