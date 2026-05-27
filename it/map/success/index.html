@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<title>Benvenuto · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+
+<!-- Meta Pixel: client-side Purchase. Webhook fires the same event with
+     event_id = payment_intent_id for dedup. -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1658000685240569');
+fbq('track', 'PageView');
+</script>
+
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html,body { margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f5f7;
+    --fg: #1d1d1f;
+    --muted: #6e6e73;
+    --hairline: rgba(0,0,0,0.08);
+    --accent: #0071e3;
+    --success: #34c759;
+    --radius-card: 18px;
+    --radius-btn: 999px;
+  }
+  body {
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 0 0 48px;
+  }
+
+  /* === Hero · cream gradient + transparent polaroid PNG.
+     Background is a CSS gradient (matches the Figma cream stops), the
+     PNG is just the photos with alpha. We let the PNG break out of
+     the hero box (overflow:visible) and bump its z-index above the
+     action card so the polaroids visually overlap the white card
+     below. Subtle but adds depth to the celebration moment. */
+  .hero {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    /* Linear cream gradient, top-left to bottom-right, matching the
+       Figma stops F4F1EC -> ECE6DC. */
+    background: linear-gradient(135deg, #F4F1EC 0%, #ECE6DC 100%);
+    margin: 16px 16px 0;
+    border-radius: 18px;
+    /* DO NOT clip · the polaroid PNG intentionally extends past the
+       hero's bottom edge to land on top of the action card. */
+    overflow: visible;
+  }
+  .hero img {
+    /* Absolute + z-index:3 puts the photos ABOVE the action card
+       (z-index:2). The PNG has plenty of transparent margin around
+       the polaroids, so contain-fit keeps proportions intact. */
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* === Action card · the celebration + the action.
+     Tick on top, heading + subhead, the onboarding card (which contains
+     the only CTA on the page since the 2026-05-24 webapp-mandatory
+     refactor). Floats up over the hero so it reads as the main
+     content, not a footer. */
+  .action {
+    margin: -36px 16px 0;
+    background: #ffffff;
+    border-radius: var(--radius-card);
+    padding: 28px 22px 22px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+  .action-tick {
+    width: 56px; height: 56px;
+    border-radius: 999px;
+    background: var(--success);
+    display: grid;
+    place-items: center;
+    /* Pop on load -- the celebration moment. */
+    animation: pop 380ms cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3);
+    margin-bottom: 4px;
+  }
+  .action-tick svg { width: 28px; height: 28px; display: block; }
+  @keyframes pop {
+    0%   { transform: scale(0.4); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .action h1 {
+    font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--fg);
+  }
+  .action-sub {
+    margin: -6px 0 8px;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  /* Buttons go full-width inside the card on mobile. */
+  .action .btn { width: 100%; }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 52px;
+    /* border:0 + appearance:none kills the default <button> chrome
+       (UA-default outline / shadow) that was bleeding through as a
+       dark hairline around the primary submit. Spotted 2026-05-24
+       on the local preview before launch. */
+    border: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: var(--radius-btn);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 100ms ease, opacity 150ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #ffffff;
+  }
+
+  /* Tiny status row below the form. Holds the receipt summary once we
+     have it (set by JS from the session GET response). */
+  .status {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .status code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    word-break: break-all;
+    color: var(--muted);
+  }
+
+  /* === Personal note from Leon · the connection moment. */
+  .note {
+    margin: 28px 22px 0;
+    padding: 20px;
+    background: var(--surface);
+    border-radius: var(--radius-card);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .note-avatar {
+    width: 44px; height: 44px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #ddd;
+  }
+  .note-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: 70% 45%;
+    display: block;
+  }
+  .note-body {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--fg);
+  }
+  .note-body strong {
+    font-weight: 600;
+    color: var(--fg);
+  }
+  .note-body p {
+    margin: 0 0 6px;
+  }
+  .note-body p:last-child { margin-bottom: 0; }
+  .note-body a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .note-body a:hover { text-decoration: underline; }
+
+  /* === Footer · receipt details, IG follow, imprint. */
+  .foot {
+    margin: 32px 22px 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--hairline);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.7;
+  }
+  .foot a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .foot a:hover { color: var(--fg); }
+  .foot-sep::before { content: " · "; }
+  .foot-order {
+    margin-top: 8px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    word-break: break-all;
+  }
+
+  /* === Email-recovery fallback · shown only when no session_id in
+     URL or localStorage (rare; localStorage stash catches refresh +
+     bookmark cases). Same width as the onboard card. Primary body
+     text directs the buyer back to their receipt email · brand new
+     buyers have no password yet so "Sign in" can't be the primary
+     CTA. The Sign-in link below is small secondary text for the
+     genuine returning-buyer case (already has account, lost cookie). */
+  .email-fallback {
+    width: 100%;
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 16px 18px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .email-fallback[hidden] { display: none !important; }
+  .email-fallback-body {
+    margin: 0;
+    font-size: 14px;
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  .email-fallback-signin {
+    margin: 0;
+    padding-top: 8px;
+    border-top: 1px solid var(--hairline);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .email-fallback-signin a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .email-fallback-signin a:hover { text-decoration: underline; }
+
+  /* === Onboarding · the only action on this page since 2026-05-24.
+     Expanded-by-default since the collapsed <details> trigger was
+     hiding the form and buyers were missing the webapp entirely.
+     Surface-grey container with a small header pill on top + the form
+     inline below. */
+  .onboard {
+    width: 100%;
+    margin: 0;
+    background: var(--surface);
+    border-radius: 14px;
+  }
+  .onboard[hidden] { display: none !important; }
+  .onboard-header {
+    margin: 0;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--hairline);
+    color: var(--fg);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-align: left;
+  }
+
+  .onboard-form {
+    background: var(--surface);
+    border-radius: 0 0 14px 14px;
+    padding: 16px 18px 18px;
+    margin: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .onboard-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .onboard-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  /* "(optional)" tag · sits inline next to the field label so it's
+     immediately clear which field is skippable. Same grey + smaller
+     weight as the rest of the label so it reads as a tag, not a
+     parenthetical sentence. */
+  .onboard-optional {
+    font-weight: 400;
+    color: var(--muted);
+    margin-left: 4px;
+  }
+  .onboard-input {
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--hairline);
+    background: #ffffff;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 16px;       /* 16px stops iOS Safari zoom-on-focus */
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .onboard-input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
+    border-color: transparent;
+  }
+  .onboard-input:disabled {
+    color: var(--muted);
+    background: #f0f0f3;
+    cursor: not-allowed;
+  }
+  .onboard-hint {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .onboard-submit {
+    margin-top: 4px;
+  }
+  /* Loading state shimmer · see /map9/success/index.html for rationale. */
+  .onboard-submit:disabled {
+    position: relative;
+    overflow: hidden;
+    cursor: progress;
+    opacity: 1;
+  }
+  .onboard-submit:disabled::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: onboard-shimmer 1.4s linear infinite;
+  }
+  @keyframes onboard-shimmer {
+    to { transform: translateX(100%); }
+  }
+  .onboard-error {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 59, 48, 0.08);
+    color: #c4302b;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .onboard-existing {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .onboard-existing a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .onboard-existing a:hover { text-decoration: underline; }
+
+  /* === Desktop polish ·
+     Mobile-first column stays the same, but on wider viewports we add
+     top breathing room so the page isn't pinned to the navbar, and
+     widen the column slightly so it doesn't feel lost in the middle of
+     a 1440px screen. The action card is intentionally kept narrow --
+     more width would make the buttons feel oversized. */
+  @media (min-width: 720px) {
+    main {
+      max-width: 580px;
+      padding: 32px 0 64px;
+    }
+    .hero {
+      margin: 0 0 0;
+      border-radius: 22px;
+    }
+    .action {
+      margin: -44px 28px 0;
+      padding: 32px 28px 26px;
+    }
+    .note {
+      margin-left: 28px;
+      margin-right: 28px;
+    }
+    .foot {
+      margin-left: 28px;
+      margin-right: 28px;
+    }
+  }
+</style>
+</head>
+<body>
+<main>
+  <!-- Hero · cream photo of three polaroids. No text overlay; copy lives
+       in the action card below. -->
+  <section class="hero">
+    <img src="/images/thanks-hero-transparent.png" alt="" />
+  </section>
+
+  <!-- Action card · celebration (tick + heading) and the ONLY path
+       forward: account creation. Webapp-first since 2026-05-24 -- the
+       PDF download + Drive + Google Maps callout that used to live here
+       were splitting buyer attention three ways and many people never
+       discovered the app. The PDF link is stashed to localStorage at
+       form-submit-time and surfaced in /full/account/ post-signup, plus
+       it's in the receipt email as a permanent fallback. -->
+  <section class="action">
+    <div class="action-tick" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="5,12 10,17 19,7" />
+      </svg>
+    </div>
+    <h1 id="headline">Benvenuto.</h1>
+    <p class="action-sub" id="subheadline">Un ultimo passo prima di accedere alla guida.</p>
+
+    <!-- Onboarding card · revealed once the GET /api/checkout/session
+         response confirms the session is paid. Expanded-by-default
+         (previously collapsed-<details>) so the buyer can't miss that
+         account creation is the path · was the single biggest reason
+         buyers were ending up on the PDF without ever finding the app.
+         The form is inline so they never leave this page. -->
+    <div class="onboard" id="onboardCard" hidden>
+      <p class="onboard-header">
+        <span>Crea un account</span>
+      </p>
+      <form id="onboardForm" class="onboard-form" novalidate>
+        <label class="onboard-field">
+          <span class="onboard-label">Email</span>
+          <input id="onboardEmail" class="onboard-input" type="email" disabled aria-readonly="true" autocomplete="email" />
+        </label>
+        <label class="onboard-field">
+          <span class="onboard-label">Username</span>
+          <input id="onboardUsername" class="onboard-input" type="text"
+                 autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false"
+                 pattern="[a-z0-9._\-]{2,32}" required />
+        </label>
+        <label class="onboard-field">
+          <span class="onboard-label">Instagram Handle <span class="onboard-optional">(opzionale)</span></span>
+          <input id="onboardInstagram" class="onboard-input" type="text"
+                 autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                 maxlength="40" placeholder="@tuo.username" />
+          <span class="onboard-hint">Così Leon vede i tuoi messaggi se ti serve assistenza.</span>
+        </label>
+        <label class="onboard-field">
+          <span class="onboard-label">Password</span>
+          <input id="onboardPassword" class="onboard-input" type="password"
+                 minlength="8" autocomplete="new-password" required />
+          <span class="onboard-hint">Minimo 8 caratteri.</span>
+        </label>
+        <button type="submit" class="btn btn-primary onboard-submit">
+          Crea account e apri l'app
+        </button>
+        <p class="onboard-error" id="onboardError" hidden></p>
+        <p class="onboard-existing">
+          Hai già un account? <a href="/login/" id="onboardLogin">Accedi &rarr;</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- Email-recovery fallback · revealed only when there's no
+         session_id in the URL AND none in localStorage (we stash it on
+         every paid load below). For brand-new buyers this means they
+         truly need the receipt-email link to recover · we never tell
+         them to "sign in" because they don't have a password yet at
+         this point in the journey. The Sign-in link below is small
+         secondary text for the rare case of a returning buyer who's
+         already created an account and somehow lost their /full/
+         auth cookie. -->
+    <div class="email-fallback" id="emailFallback" hidden>
+      <p class="email-fallback-body">
+        Nella mail di conferma trovi un pulsante "Apri la Swiss Gems App". Toccalo per tornare qui con il link giusto.
+      </p>
+      <p class="email-fallback-signin">
+        Hai già un account? <a href="/login/">Accedi &rarr;</a>
+      </p>
+    </div>
+
+    <p class="status" id="status">Ricevuta inviata anche alla tua email.</p>
+  </section>
+
+  <!-- Personal note: face + signature. The connection moment. -->
+  <section class="note">
+    <div class="note-avatar"><img src="/images/avatar.jpg" alt="" /></div>
+    <div class="note-body">
+      <p><strong>Ciao, sono Leon.</strong></p>
+      <p>I 100+ spot di questa guida mi sono costati 5 anni. Adesso sono tuoi.</p>
+      <p>Se hai una domanda o vuoi mandarmi una foto del tuo viaggio: rispondi alla mail di conferma o scrivimi su Instagram a <a href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener">@leon.helg</a>.</p>
+    </div>
+  </section>
+
+  <!-- Maps callout, "What's next" steps, and Drive/PDF buttons used to
+       live here. All moved into the webapp (/full/account/) as of
+       2026-05-24 so the success page has exactly one job: get the
+       buyer into the app. PDF + Google Maps list are surfaced inside
+       the app once they're signed in, and are also in the receipt
+       email as a permanent fallback. -->
+
+  <!-- Footer with receipt info. Saftladen GmbH lives in the imprint;
+       no need to repeat it on every page. -->
+  <footer class="foot">
+    <div>© Hikebeast</div>
+    <div>
+      <a href="/terms.html">Termini</a><span class="foot-sep"></span><a href="/imprint.html">Note legali</a><span class="foot-sep"></span><a href="/privacy.html">Privacy</a>
+    </div>
+    <div class="foot-order" id="receipt"></div>
+  </footer>
+</main>
+
+<script>
+  // Fetch the access token + order details for this Stripe session, then
+  // reveal the onboarding form pre-filled with the buyer's email and a
+  // suggested username. Falls back to "check your email" if the session is
+  // unknown or not yet paid (race conditions on the redirect). Also
+  // stashes the PDF download URL to localStorage so /full/account/ can
+  // surface it post-signup without us needing a Convex-side backfill.
+  (function () {
+    const params = new URLSearchParams(location.search);
+    const status = document.getElementById("status");
+    const receipt = document.getElementById("receipt");
+    const headline = document.getElementById("headline");
+    const subheadline = document.getElementById("subheadline");
+
+    // session_id sourcing · primary is the Stripe redirect querystring,
+    // fallback is a localStorage stash we set on every paid load below.
+    // The stash catches the case where the buyer refreshes the page
+    // and the browser drops the querystring, or comes back via a
+    // bookmark without the query. Without the stash, every refresh
+    // would dump the buyer to the email-recovery fallback even though
+    // we already verified their session 5 seconds ago.
+    var SESSION_KEY = "hb:last_session_id:v1";
+    var sessionId = params.get("session_id");
+    if (!sessionId) {
+      try { sessionId = localStorage.getItem(SESSION_KEY); } catch (e) {}
+    }
+
+    if (!sessionId) {
+      // Genuinely no session_id anywhere · the buyer truly needs to
+      // get back to their receipt email to recover the link. Brand
+      // new buyers have no account yet, so a Sign-in CTA would be
+      // misleading (we offer it as small secondary text for the case
+      // where the buyer is actually a returning user who lost their
+      // /full/ cookie).
+      subheadline.textContent = "Apri il link nella mail di conferma per completare la configurazione.";
+      var emailFallback = document.getElementById("emailFallback");
+      if (emailFallback) emailFallback.hidden = false;
+      return;
+    }
+
+    // Onboarding form refs (added 2026-05-07: every paying customer should
+    // end up with a Convex account so favorites/visited/swipes sync across
+    // devices, replacing the manual `scripts/create-user.mjs` step). The
+    // card stays hidden until the GET below confirms paid:true.
+    const onboardCard     = document.getElementById("onboardCard");
+    const onboardForm     = document.getElementById("onboardForm");
+    const onboardEmail    = document.getElementById("onboardEmail");
+    const onboardUsername = document.getElementById("onboardUsername");
+    const onboardPassword = document.getElementById("onboardPassword");
+    const onboardError    = document.getElementById("onboardError");
+    const onboardLogin    = document.getElementById("onboardLogin");
+
+    /* AllVisits purchased-beacon · pulled into a named function so
+       the lint regex doesn't confuse this inner fetch's body fields
+       with the outer /api/checkout/session GET above. Dedup'd by
+       payment_intent via its own localStorage key. */
+    function fireAllVisitsPurchase(data, sourcePage) {
+      if (!data || !data.payment_intent) return;
+      var allKey = "hb:allvisits_purchase_fired:" + data.payment_intent;
+      var allAlreadyFired = false;
+      try { allAlreadyFired = localStorage.getItem(allKey) === "1"; } catch (e) {}
+      if (allAlreadyFired) return;
+      var visitorId = "";
+      try { visitorId = localStorage.getItem("hb:visitor_id") || ""; } catch (e) {}
+      var heroVariant2 = "";
+      try { heroVariant2 = localStorage.getItem("hb:hero_variant") || ""; } catch (e) {}
+      var source2 = "";
+      try { source2 = localStorage.getItem("hb:last_source:v1") || ""; } catch (e) {}
+      var theme2 = "";
+      try { theme2 = localStorage.getItem("hb:last_theme:v1") || ""; } catch (e) {}
+      var affRef2 = "";
+      try {
+        var s2 = localStorage.getItem("hb:r");
+        if (s2) {
+          var o2 = JSON.parse(s2);
+          if (o2 && o2.slug && o2.exp && o2.exp > Date.now()) affRef2 = o2.slug;
+        }
+      } catch (e) {}
+      try {
+        fetch("/api/visit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            event: "purchased",
+            page: "guide",
+            source_page: sourcePage,
+            visitor_id: visitorId,
+            hero_variant: heroVariant2,
+            source: source2,
+            theme: theme2,
+            affiliate_ref: affRef2,
+            product: "swiss-hidden-gems",
+            paid_at: new Date().toISOString(),
+          }),
+          keepalive: true,
+        }).then(function () {
+          try { localStorage.setItem(allKey, "1"); } catch (e) {}
+        }).catch(function () {});
+      } catch (e) {}
+    }
+
+    fetch("/api/checkout/session?session_id=" + encodeURIComponent(sessionId))
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data || data.paid !== true) {
+          // Session unknown / not-yet-paid race condition. Could be
+          // a stale localStorage stash that no longer maps to a paid
+          // session · clear it so the next load doesn't re-try the
+          // same dead session. The buyer's path forward is the
+          // receipt-email link with a fresh session_id.
+          try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
+          subheadline.textContent = "Apri il link nella mail di conferma per completare la configurazione.";
+          var emailFallback = document.getElementById("emailFallback");
+          if (emailFallback) emailFallback.hidden = false;
+          return;
+        }
+
+        // Stash the verified-paid session_id so a refresh or bookmark
+        // without the querystring still lands the buyer back here on
+        // the working form, not the email fallback. Only stash AFTER
+        // we confirmed paid · we don't want to cache failed sessions.
+        try { localStorage.setItem(SESSION_KEY, sessionId); } catch (e) {}
+
+        // Personalise the headline if Stripe captured a first name.
+        if (data.first_name) {
+          headline.textContent = "Benvenuto, " + data.first_name + ".";
+        }
+
+        // Reveal + pre-fill the onboarding form. Username = <stem><3 digits>
+        // where the stem is firstName-lowercased, falling back to the email
+        // local-part. The server re-rolls the suffix on collision -- this
+        // pre-fill is just to give the buyer something nice to keep or edit.
+        if (data.email) {
+          onboardEmail.value = data.email;
+          var seedSrc = (data.first_name || data.email.split("@")[0] || "").toLowerCase();
+          var stem = seedSrc.replace(/[^a-z]/g, "").slice(0, 12) || "hiker";
+          var rand = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
+          onboardUsername.value = stem + rand;
+          onboardLogin.href = "/login/?email=" + encodeURIComponent(data.email);
+          onboardCard.hidden = false;
+        }
+
+        // Stash the per-customer PDF download URL so the webapp can
+        // surface it post-signup in /full/account/. The URL is a
+        // session-scoped HMAC-signed redirect that 302s to the Vercel
+        // Blob the PDF lives in; valid for 7 days from issuance.
+        // Stashing here rather than at form-submit-time means the URL
+        // is available even if the buyer creates the account, hits the
+        // back button, and returns -- the localStorage write survives
+        // navigation. We don't gate this on the form being submitted;
+        // any time a paid buyer hits this URL with a valid session,
+        // they get the stash.
+        if (data.download_url) {
+          try { localStorage.setItem("hb:guide_pdf_url:v1", data.download_url); } catch (e) {}
+        }
+
+        const amount = (typeof data.amount_total === "number")
+          ? (data.amount_total / 100).toFixed(2) + " " + (data.currency || "")
+          : "";
+        if (amount) status.textContent = "Ricevuta: " + amount + " · inviata anche alla tua email.";
+
+        if (data.order_id) {
+          receipt.textContent = "Ordine " + data.order_id;
+        }
+
+        // Client-side Purchase pixel · MUST use the same eventID as the
+        // CAPI Purchase event fired by api/checkout/webhook.js (which
+        // sets event_id = payment_intent_id). /map5/ was added after
+        // the 2026-05-15 dedup fix and missed the same wiring;
+        // backfilled 2026-05-20. Without matching IDs Meta counts the
+        // pixel + CAPI as separate events (3.3x inflation observed in
+        // Events Manager on 2026-05-20). The localStorage guard survives across tabs and refreshes — buyers re-opening the Stripe receipt link in a new tab was re-firing Purchase with the same payment_intent (2026-05-24).
+        if (window.fbq && typeof data.amount_total === "number" && data.payment_intent) {
+          var purchaseKey = "hb:purchase_fired:" + data.payment_intent;
+          var alreadyFired = false;
+          try { alreadyFired = localStorage.getItem(purchaseKey) === "1"; } catch (e) {}
+          if (!alreadyFired) {
+            try {
+              // Advanced Matching · re-init the pixel with the buyer's
+              // email + first name so Meta can match this Purchase to
+              // a Facebook account directly (boosts pixel-side EMQ).
+              // Meta auto-hashes plain-text PII when it doesn't already
+              // look like a 64-char hex string, so we pass raw values.
+              var amData = {};
+              if (typeof data.email === "string" && data.email) {
+                amData.em = data.email;
+                // external_id mirrors what api/checkout/webhook.js sends as
+                // user_data.external_id (defaults to the hashed email).
+                // Passing the same value here = a second dedup signal that
+                // Meta can match between pixel + CAPI when fbc/fbp are weak.
+                amData.external_id = data.email;
+              }
+              if (typeof data.first_name === "string" && data.first_name) amData.fn = data.first_name;
+              if (Object.keys(amData).length) {
+                try { fbq("init", "1658000685240569", amData); } catch (e) {}
+              }
+              fbq("track", "Purchase", {
+                value: Number((data.amount_total / 100).toFixed(2)),
+                currency: data.currency || "CHF",
+              }, { eventID: data.payment_intent });
+              try { localStorage.setItem(purchaseKey, "1"); } catch (e) {}
+            } catch (e) {}
+          }
+        }
+
+        /* Vercel Analytics purchase event · see /map9/success/ for rationale. */
+        if (data.payment_intent && typeof window.va === "function") {
+          var vaKey = "hb:vercel_purchase_fired:" + data.payment_intent;
+          var vaAlreadyFired = false;
+          try { vaAlreadyFired = localStorage.getItem(vaKey) === "1"; } catch (e) {}
+          if (!vaAlreadyFired) {
+            var heroVariant = "";
+            try { heroVariant = localStorage.getItem("hb:hero_variant") || ""; } catch (e) {}
+            var trafficSource = "";
+            try { trafficSource = localStorage.getItem("hb:last_source:v1") || ""; } catch (e) {}
+            var theme = "";
+            try { theme = localStorage.getItem("hb:last_theme:v1") || ""; } catch (e) {}
+            var affiliateRef = "";
+            try {
+              var __r = localStorage.getItem("hb:r");
+              if (__r) {
+                var __ro = JSON.parse(__r);
+                if (__ro && __ro.slug && __ro.exp && __ro.exp > Date.now()) affiliateRef = __ro.slug;
+              }
+            } catch (e) {}
+            var purchaseProps = {
+              name: "purchase",
+              source_page: "it_gems",
+              hero_variant: heroVariant,
+              source: trafficSource,
+              theme: theme,
+            };
+            if (affiliateRef) purchaseProps.affiliate_ref = affiliateRef;
+            try {
+              window.va("event", purchaseProps);
+              try { localStorage.setItem(vaKey, "1"); } catch (e) {}
+            } catch (e) {}
+          }
+        }
+        /* AllVisits sheet · purchased event_type beacon. Joinable to
+           visit beacons by visitor_id. MUST stay OUTSIDE the Vercel
+           Analytics block above · earlier nesting (PR #99 initial
+           wire-up) meant iOS webviews / ad-blocked clients where
+           window.va isn't loaded never sent the purchase to AllVisits
+           even though Stripe confirmed paid · AND any buyer who
+           re-opened the success page (bookmark, receipt email link)
+           hit the !vaAlreadyFired guard and silently skipped too.
+           The function's own localStorage dedup (hb:allvisits_purchase_
+           fired:<payment_intent>) handles re-open safety on this path.
+           Function hoist above is for the lint regex that scans
+           fetch sites · separate concern from gating. */
+        if (data.payment_intent) fireAllVisitsPurchase(data, "it_gems");
+      })
+      .catch(() => {
+        subheadline.textContent = "Non riusciamo a contattare il server. Apri il link nella mail di conferma per completare la configurazione.";
+        var emailFallback = document.getElementById("emailFallback");
+        if (emailFallback) emailFallback.hidden = false;
+      });
+
+    // Onboarding form submit. POST { sessionId, password, username } back to
+    // /api/checkout/session. The lambda re-verifies the Stripe session is
+    // paid before talking to Convex, so this can't be tricked by editing
+    // the request body. On success: hb_full_auth cookie is set by the
+    // response, sessionToken goes into localStorage, redirect to /full/.
+    if (onboardForm) {
+      onboardForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        onboardError.hidden = true;
+        var submitBtn = onboardForm.querySelector(".onboard-submit");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Creazione account...";
+
+        // Instagram handle · optional. Normalise · strip leading "@",
+        // any whitespace, and lowercase the rest. Empty string when the
+        // buyer skipped the field; the API treats falsy as "no update".
+        var igRaw = (document.getElementById("onboardInstagram") || {}).value || "";
+        var igHandle = String(igRaw).trim().replace(/^@+/, "").toLowerCase();
+
+        try {
+          var res = await fetch("/api/checkout/session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              sessionId: sessionId,
+              username:  onboardUsername.value.trim().toLowerCase(),
+              password:  onboardPassword.value,
+              instagram_handle: igHandle,
+            }),
+          });
+          var json = await res.json().catch(function () { return {}; });
+
+          // Returning customer: idempotent re-submit, the second-attempt
+          // credentials were NOT applied (the original account still owns
+          // the email). Show that inline -- silently redirecting to /login
+          // makes buyers think "the new password I just typed should work"
+          // and then login fails for reasons they can't see.
+          if (json && json.existing) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Crea account e apri l'app";
+            onboardError.hidden = false;
+            var existingUsername = (json.username || "").trim();
+            var loginHref = "/login/?email=" + encodeURIComponent(onboardEmail.value);
+            // innerHTML over textContent because we want a clickable link;
+            // both inputs are server-controlled / known-safe (username comes
+            // from Convex, email from the email-typed input).
+            onboardError.innerHTML = "Esiste già un account per questa email"
+              + (existingUsername ? " (username <strong>" + existingUsername + "</strong>)" : "")
+              + ". Accedi con la password che hai impostato la prima volta, o rispondi alla mail di conferma se l'hai dimenticata. "
+              + "<a href=\"" + loginHref + "\" style=\"color:#0071e3;text-decoration:none;font-weight:500;\">Accedi &rarr;</a>";
+            // Also point the existing "Sign in →" footer link at /login
+            // with the email pre-filled, in case the buyer scrolls past
+            // the error to use that link instead.
+            onboardLogin.href = loginHref;
+            return;
+          }
+
+          if (!res.ok || !json.ok) {
+            throw new Error((json && json.error) || "create_failed");
+          }
+
+          // Same key + format /login/ writes (raw token string, NOT JSON).
+          // social.js reads localStorage[hb:session:v1] as the raw token on
+          // /full/ paint and subscribes to auth:currentUser with it.
+          if (json.sessionToken) {
+            try { localStorage.setItem("hb:session:v1", json.sessionToken); } catch (e) {}
+          }
+
+          // hb_full_auth cookie is already set by the response. Off we go.
+          window.location.href = json.redirect || "/full/";
+        } catch (err) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Crea account e apri l'app";
+          onboardError.hidden = false;
+          var msg = (err && err.message) || "";
+          onboardError.textContent =
+            (msg.indexOf("password_too_short") >= 0)
+              ? "La password deve avere almeno 8 caratteri."
+            : (msg.indexOf("Username") >= 0 || msg.indexOf("username") >= 0)
+              ? "Quell'username non ha funzionato. Provane un altro (lettere minuscole, numeri, punti)."
+            : (msg.indexOf("session_not_paid") >= 0 || msg.indexOf("session_not_found") >= 0)
+              ? "La tua sessione d'acquisto è scaduta. Apri la mail di conferma e clicca 'Apri la Swiss Gems App' per riprovare."
+              : "Non è stato possibile creare l'account. Riprova o rispondi alla mail di conferma.";
+        }
+      });
+    }
+  })();
+</script>
+</body>
+</html>
