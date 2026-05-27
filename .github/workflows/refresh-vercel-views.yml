@@ -41,12 +41,30 @@ jobs:
           APPS_SCRIPT_SECRET: ${{ secrets.APPS_SCRIPT_SECRET }}
         run: |
           python3 <<'PY'
-          import json, os, sys
+          import json, os, sys, time
           import urllib.request, urllib.error
           from datetime import datetime, timedelta, timezone
 
           VERCEL_PROJECT_ID = "prj_EFoTeUOZ2rej58RZwOG91UVgRpqJ"
           VERCEL_TEAM_ID = "team_alYbeJUJDGocxwQs3LFFaqqf"
+
+          def with_retry(fn, label, attempts=3, base_delay=4):
+              """Retry on HTTPError 5xx / 429 / URLError. Exit codes:
+                 1 = Vercel API failure, 2 = Apps Script failure."""
+              last = None
+              for i in range(attempts):
+                  try:
+                      return fn()
+                  except urllib.error.HTTPError as e:
+                      last = e
+                      if e.code < 500 and e.code != 429:
+                          raise  # non-retriable client error, fail fast
+                  except urllib.error.URLError as e:
+                      last = e
+                  print(f"{label} attempt {i+1}/{attempts} failed: {last}", file=sys.stderr)
+                  if i < attempts - 1:
+                      time.sleep(base_delay * (2 ** i))
+              raise last
 
           token = os.environ["VERCEL_TOKEN"]
           apps_url = os.environ["APPS_SCRIPT_URL"]
@@ -60,25 +78,39 @@ jobs:
               f"?projectId={VERCEL_PROJECT_ID}&teamId={VERCEL_TEAM_ID}"
               f"&from={frm}&to={to}&type=path&limit=200"
           )
-          req = urllib.request.Request(vercel_url, headers={"Authorization": f"Bearer {token}"})
-          with urllib.request.urlopen(req, timeout=30) as r:
-              data = json.loads(r.read())
+
+          def fetch_vercel():
+              req = urllib.request.Request(vercel_url, headers={"Authorization": f"Bearer {token}"})
+              with urllib.request.urlopen(req, timeout=30) as r:
+                  return json.loads(r.read())
+
+          try:
+              data = with_retry(fetch_vercel, "Vercel API")
+          except Exception as e:
+              print(f"Vercel API failed after retries: {e}", file=sys.stderr)
+              sys.exit(1)
           rows = data.get("data") or []
           pages = {row["key"]: int(row.get("devices") or 0) for row in rows}
+          if len(pages) >= 200:
+              print("::warning::Hit Vercel limit=200, some paths may be missing", file=sys.stderr)
           print(f"Fetched {len(pages)} paths from Vercel", file=sys.stderr)
 
           body = {"secret": apps_secret, "action": "pull_vercel_views", "pages": pages}
-          req = urllib.request.Request(
-              apps_url,
-              data=json.dumps(body).encode(),
-              method="POST",
-              headers={"Content-Type": "application/json"},
-          )
-          try:
+
+          def push_apps():
+              req = urllib.request.Request(
+                  apps_url,
+                  data=json.dumps(body).encode(),
+                  method="POST",
+                  headers={"Content-Type": "application/json"},
+              )
               with urllib.request.urlopen(req, timeout=60) as r:
-                  result = json.loads(r.read())
-          except urllib.error.HTTPError as e:
-              print(f"Apps Script HTTP {e.code}: {e.read(800).decode(errors='replace')}", file=sys.stderr)
+                  return json.loads(r.read())
+
+          try:
+              result = with_retry(push_apps, "Apps Script")
+          except Exception as e:
+              print(f"Apps Script failed after retries: {e}", file=sys.stderr)
               sys.exit(2)
 
           print(json.dumps(result, ensure_ascii=False))
