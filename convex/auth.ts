@@ -116,8 +116,11 @@ function newSessionToken(): string {
 }
 
 // ── Admin gate (matches spots.ts) ─────────────────────────────────────────
-
-async function requireAdmin(provided: string): Promise<void> {
+//
+// Exported so sibling Convex modules (e.g. referrals.ts) can gate their
+// own admin mutations against the same ADMIN_TOKEN without duplicating
+// the constant-time compare.
+export async function requireAdmin(provided: string): Promise<void> {
   const expected = process.env.ADMIN_TOKEN;
   if (!expected) throw new Error("ADMIN_TOKEN not configured on this deployment");
   // Constant-time compare via SHA-256 of both sides (lengths match).
@@ -425,6 +428,34 @@ export const adminSetAffiliate = mutation({
     if (!user) throw new Error(`No user with username: ${norm}`);
     await ctx.db.patch(user._id, { isAffiliate: isAffiliate || undefined });
     return { username: norm, isAffiliate };
+  },
+});
+
+// One-shot backfill: set isAffiliate=true on every user that doesn't
+// already have it. Runs alongside the 2026-05-27 change that flips
+// createPaidUser to set isAffiliate=true by default — without this, the
+// 100s of buyers that already exist would stay locked out of
+// /full/affiliate/. Idempotent: re-running only patches rows still
+// missing the flag.
+//
+// Run order per workflow rules:
+//   1. CONVEX_DEPLOYMENT=dev:unique-goose-988 npx convex run \
+//        auth:adminBackfillAllUsersAffiliate '{"adminToken":"..."}'
+//   2. Verify on Vercel preview that buyers see /full/affiliate/.
+//   3. Same command against dev:whimsical-sparrow-336 (prod).
+export const adminBackfillAllUsersAffiliate = mutation({
+  args: { adminToken: v.string() },
+  handler: async (ctx, { adminToken }) => {
+    await requireAdmin(adminToken);
+    const users = await ctx.db.query("users").collect();
+    let touched = 0;
+    for (const u of users) {
+      if (!u.isAffiliate) {
+        await ctx.db.patch(u._id, { isAffiliate: true });
+        touched++;
+      }
+    }
+    return { totalUsers: users.length, touched };
   },
 });
 
@@ -819,6 +850,12 @@ export const createPaidUser = mutation({
       handle,
       instagramHandle: trimmedIg || undefined,
       whopLicenseKey:  paymentIntentId,  // re-purpose: stripe payment_intent_id
+      // Every paid buyer is an affiliate by default since 2026-05-27 — the
+      // program is now open to everyone, not just curated influencers. The
+      // dashboard at /full/affiliate/ becomes visible immediately on
+      // first login. Backfill for users created before this change is via
+      // auth:adminBackfillAllUsersAffiliate (run once per Convex deployment).
+      isAffiliate:     true,
       createdAt:       now,
       lastSeenAt:      now,
     });
