@@ -577,6 +577,13 @@ fbq('track', 'PageView');
           <span class="onboard-hint">Lowercase letters, numbers, dots. Change later.</span>
         </label>
         <label class="onboard-field">
+          <span class="onboard-label">Instagram Handle <span class="onboard-optional">(optional)</span></span>
+          <input id="onboardInstagram" class="onboard-input" type="text"
+                 autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                 maxlength="40" placeholder="@your.handle" />
+          <span class="onboard-hint">So Leon sees your messages in case you need support.</span>
+        </label>
+        <label class="onboard-field">
           <span class="onboard-label">Password</span>
           <input id="onboardPassword" class="onboard-input" type="password"
                  minlength="8" autocomplete="new-password" required />
@@ -807,6 +814,12 @@ fbq('track', 'PageView');
         submitBtn.disabled = true;
         submitBtn.textContent = "Creating account...";
 
+        // Instagram handle · optional. Normalise · strip leading "@",
+        // any whitespace, and lowercase the rest. Empty string when the
+        // buyer skipped the field; the API treats falsy as "no update".
+        var igRaw = (document.getElementById("onboardInstagram") || {}).value || "";
+        var igHandle = String(igRaw).trim().replace(/^@+/, "").toLowerCase();
+
         try {
           var res = await fetch("/api/checkout/session", {
             method: "POST",
@@ -815,6 +828,7 @@ fbq('track', 'PageView');
               sessionId: sessionId,
               username:  onboardUsername.value.trim().toLowerCase(),
               password:  onboardPassword.value,
+              instagram_handle: igHandle,
             }),
           });
           var json = await res.json().catch(function () { return {}; });
