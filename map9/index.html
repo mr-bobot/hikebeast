@@ -1806,9 +1806,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3,5 6,8 9,5"/></svg>
       </button>
       <ul class="navbar-lang-menu" id="lang-menu" role="listbox" hidden>
-        <li role="option"><a href="/de/map9/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">🇩🇪 DE</a></li>
-        <li role="option"><a href="/fr/map9/" hreflang="fr" onclick="try{localStorage.setItem('hb_lang','fr')}catch(e){}" aria-label="Version française">🇫🇷 FR</a></li>
-        <li role="option"><a href="/it/map9/" hreflang="it" onclick="try{localStorage.setItem('hb_lang','it')}catch(e){}" aria-label="Versione italiana">🇮🇹 IT</a></li>
+        <li role="option"><a href="/de/map9/" data-forward-params hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">🇩🇪 DE</a></li>
+        <li role="option"><a href="/fr/map9/" data-forward-params hreflang="fr" onclick="try{localStorage.setItem('hb_lang','fr')}catch(e){}" aria-label="Version française">🇫🇷 FR</a></li>
+        <li role="option"><a href="/it/map9/" data-forward-params hreflang="it" onclick="try{localStorage.setItem('hb_lang','it')}catch(e){}" aria-label="Versione italiana">🇮🇹 IT</a></li>
       </ul>
     </div>
   </header>
@@ -2226,7 +2226,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <div class="px trust-row">
       <span>🔒 Secured by Stripe</span>
       <span class="sep"></span>
-      <a href="/terms.html"><span>↩ 30-day refund</span></a>
+      <a href="/terms.html" data-forward-params><span>↩ 30-day refund</span></a>
       <span class="sep"></span>
       <span>🇨🇭 Made in Switzerland</span>
     </div>
@@ -2234,7 +2234,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <!-- Footer -->
     <footer class="footer px">
       <div>© Hikebeast</div>
-      <div><a href="/terms.html">Terms</a> · <a href="/imprint.html">Imprint</a> · <a href="/privacy.html">Privacy</a></div>
+      <div><a href="/terms.html" data-forward-params>Terms</a> · <a href="/imprint.html" data-forward-params>Imprint</a> · <a href="/privacy.html" data-forward-params>Privacy</a></div>
     </footer>
     </div><!-- /.page-main -->
 
@@ -2263,7 +2263,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <a href="#get-the-map" class="buy-cta">Get the guide</a>
           <div class="buy-foot">
             <span>Apple Pay · TWINT · Card</span>
-            <a href="/terms.html#refunds">↩ 30-day refund</a>
+            <a href="/terms.html#refunds" data-forward-params>↩ 30-day refund</a>
           </div>
         </div>
       </div>
@@ -2387,7 +2387,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   // POST below. Slug is lowercased; the webhook will match it against
   // users.username (also lowercase) when the purchase completes.
   const REF_KEY = "hb:r";
-  const REF_TTL_MS = 60 * 24 * 60 * 60 * 1000;
+  const REF_TTL_MS = 7 * 24 * 60 * 60 * 1000;
   (function persistRefIfPresent() {
     const raw = (params.get("r") || "").trim().toLowerCase();
     if (!raw) return;
@@ -2406,6 +2406,27 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       return obj.slug;
     } catch { return ""; }
   }
+
+  /* Forward URL params on tagged off-page links · 2026-05-27.
+     Why: an Instagram visitor on /map9/?r=foo who clicks 🇩🇪 DE
+     jumps to /de/map9/ (no slug). If they then tap "Open in Safari"
+     from there, Safari loses the attribution. By patching the lang-
+     switcher hrefs to /de/map9/?r=foo upfront, the slug survives the
+     Safari handoff. Also applied to /terms.html etc. so a buyer who
+     opens Terms then switches browser keeps attribution.
+     Hash-aware (preserves /terms.html#refunds). Skips anchors that
+     already have a query string. */
+  (function forwardParamsOnTaggedLinks() {
+    if (!location.search) return;
+    document.querySelectorAll("a[data-forward-params]").forEach(function (a) {
+      const href = a.getAttribute("href") || "";
+      if (!href || href.indexOf("?") !== -1) return;
+      const hashIdx = href.indexOf("#");
+      const base = hashIdx === -1 ? href : href.slice(0, hashIdx);
+      const hash = hashIdx === -1 ? "" : href.slice(hashIdx);
+      a.setAttribute("href", base + location.search + hash);
+    });
+  })();
 
   // ---------- Carousel: dots + hover arrows ----------
   const carousel = document.getElementById("hero-carousel");

@@ -1895,7 +1895,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   // POST below. Slug is lowercased; the webhook will match it against
   // users.username (also lowercase) when the purchase completes.
   const REF_KEY = "hb:r";
-  const REF_TTL_MS = 60 * 24 * 60 * 60 * 1000;
+  const REF_TTL_MS = 7 * 24 * 60 * 60 * 1000;
   (function persistRefIfPresent() {
     const raw = (params.get("r") || "").trim().toLowerCase();
     if (!raw) return;

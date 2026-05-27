@@ -333,7 +333,12 @@ export const adminCreateUser = mutation({
       passwordPhc: phc,
       handle:      handle?.trim() || undefined,
       isAdmin:     isAdmin || undefined,
-      isAffiliate: isAffiliate || undefined,
+      // Default to affiliate-eligible (2026-05-27 · every /full/ user is
+      // an affiliate by default, including admin/test accounts created
+      // here, not just paid buyers from createPaidUser). Caller can
+      // explicitly pass `isAffiliate: false` to opt a special account
+      // out of the affiliate program.
+      isAffiliate: isAffiliate === false ? undefined : true,
       createdAt:   now,
       lastSeenAt:  now,
     });

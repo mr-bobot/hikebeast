@@ -518,20 +518,17 @@
           elSignedOut.hidden = false;
           return;
         }
-        // Eligibility gate: only isAffiliate=true users see the dashboard.
-        // Non-eligible users get a dedicated invite-only state.
-        if (!u.isAffiliate) {
-          elLoading.hidden = true;
-          elNotEligible.hidden = false;
-          return;
-        }
+        // Eligibility gate dropped 2026-05-27 · every signed-in /full/
+        // user is an affiliate by default. The `affNotEligible` state
+        // div + `elNotEligible` reference below are now unreachable
+        // and kept only for graceful degradation if listForCurrentUser
+        // ever returns a non-data shape (defence in depth · we still
+        // surface signed-out when the query throws).
         paintShareLinks(u.username);
         const data = await client.query('referrals:listForCurrentUser', { sessionToken: token });
-        // Server-side gate: also returns { eligible: false } for non-affiliates
-        // even though we already filtered on the client. Defence in depth.
-        if (!data || data.eligible === false) {
+        if (!data) {
           elLoading.hidden = true;
-          elNotEligible.hidden = false;
+          elSignedOut.hidden = false;
           return;
         }
         const rows = data.referrals || [];

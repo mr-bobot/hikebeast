@@ -216,18 +216,16 @@ export const adminBackfillProductKey = mutation({
 // user's username. Sorted newest-first. Returns aggregate totals so the
 // page can render headline numbers without a second round trip.
 //
-// Eligibility gate: only users with isAffiliate=true get data back.
-// We return a discriminated shape so the UI can paint a dedicated
-// "not eligible" state without ambiguity (vs. returning null which is
-// also used for "not signed in").
+// 2026-05-27 · eligibility gate dropped (was: only isAffiliate=true users
+// got data back). Every signed-in /full/ user is now an affiliate by
+// default, so the gate is a no-op; removed to simplify the contract.
+// Field `eligible: true` stays in the return shape for backward compat
+// with older client builds in the wild.
 export const listForCurrentUser = query({
   args: { sessionToken: v.optional(v.string()) },
   handler: async (ctx, { sessionToken }) => {
     const user = await userFromSession(ctx, sessionToken);
     if (!user) return null;
-    if (!user.isAffiliate) {
-      return { eligible: false as const, username: user.username };
-    }
     const rows = await ctx.db
       .query("referrals")
       .withIndex("by_refSlug", q => q.eq("refSlug", user.username))

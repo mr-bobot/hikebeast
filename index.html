@@ -3,6 +3,28 @@
 <head>
 <meta charset="utf-8" />
 <script>
+// Affiliate ref capture · 2026-05-27 · runs BEFORE the DE redirect
+// below so a German visitor landing on hikebeast.ch/?r=influencer
+// still gets the slug stashed in localStorage even though they're
+// about to be navigated to /de/. The DE redirect preserves
+// location.search, so /de/index.html's mirror of this block will
+// also fire and write the same value · idempotent.
+//
+// 7-day TTL matches the policy on /map9/ and other sales pages.
+// Same key/regex/shape as /map9/'s persistRefIfPresent so a buyer
+// who lands here first and then clicks through to /map9/ keeps the
+// same attribution stash.
+(function () {
+  try {
+    var raw = "";
+    try { raw = (new URLSearchParams(location.search).get("r") || "").trim().toLowerCase(); } catch (e) {}
+    if (!raw) return;
+    if (!/^[a-z0-9._-]{2,32}$/.test(raw)) return;
+    localStorage.setItem("hb:r", JSON.stringify({ slug: raw, exp: Date.now() + 7 * 24 * 60 * 60 * 1000 }));
+  } catch (e) {}
+})();
+</script>
+<script>
 // Auto-redirect to /de/ if browser is German. Runs before everything
 // so analytics fires on the destination only.
 (function () {
@@ -209,13 +231,33 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
   <h1 class="hero-title">Swiss Gems</h1>
 
-  <a class="hero-cta" href="/map9/" data-fbq-event="ViewContent" data-fbq-params='{"content_name":"Swiss Gems of Switzerland Map","content_category":"Map","value":27.00,"currency":"CHF"}'>
+  <a class="hero-cta" href="/map9/" data-forward-params data-fbq-event="ViewContent" data-fbq-params='{"content_name":"Swiss Gems of Switzerland Map","content_category":"Map","value":27.00,"currency":"CHF"}'>
     <span>Get the guide</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
   </a>
 </main>
 
 <script>
+  // Forward URL params on hero CTA · 2026-05-27. So that an affiliate
+  // who shares hikebeast.ch/?r=foo (instead of the dashboard-supplied
+  // hikebeast.ch/map9?r=foo) still gets attribution: their visitor
+  // clicks "Get the guide" and lands on /map9/?r=foo, which captures
+  // the slug. Same for utm_* params, fbclid, etc. · we forward
+  // location.search wholesale so /map9/ sees the same params it would
+  // have seen if the affiliate had shared the deeper link.
+  //
+  // Runs synchronously inline so the href is patched before the user
+  // can plausibly click; respects middle-click and "open in new tab"
+  // because we mutate the href itself rather than intercepting click.
+  (function () {
+    if (!location.search) return;
+    document.querySelectorAll('a[data-forward-params]').forEach(function (a) {
+      var href = a.getAttribute('href') || '';
+      if (!href || href.indexOf('?') !== -1) return;  // already has query, leave alone
+      a.setAttribute('href', href + location.search);
+    });
+  })();
+
   // Meta Pixel forwarding for the CTA click.
   document.querySelectorAll('[data-fbq-event]').forEach((el) => {
     el.addEventListener('click', () => {
