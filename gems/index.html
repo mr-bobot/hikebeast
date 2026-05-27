@@ -2215,13 +2215,19 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   // out of mountCheckout — backfilled 2026-05-20.
   function attachInitiateCheckoutSignal() {
     var container = document.getElementById("checkout");
-    if (!container) return;
+    var stickyBuy = document.getElementById("sticky-buy");
+    if (!container && !stickyBuy) return;
     var key = "hb:ic_fired";
     try { if (sessionStorage.getItem(key) === "1") return; } catch (e) {}
 
     function fire() {
-      container.removeEventListener("pointerdown", fire, true);
-      container.removeEventListener("focusin", fire, true);
+      if (container) {
+        container.removeEventListener("pointerdown", fire, true);
+        container.removeEventListener("focusin", fire, true);
+      }
+      if (stickyBuy) {
+        stickyBuy.removeEventListener("click", fire, true);
+      }
       try { sessionStorage.setItem(key, "1"); } catch (e) {}
       var icValue = typeof currentAmount === "number" ? currentAmount : 27;
       var icCurrency = (currentCurrency || "chf").toUpperCase();
@@ -2259,8 +2265,21 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         } catch (e) {}
       }
     }
-    container.addEventListener("pointerdown", fire, true);
-    container.addEventListener("focusin", fire, true);
+    if (container) {
+      container.addEventListener("pointerdown", fire, true);
+      container.addEventListener("focusin", fire, true);
+    }
+    if (stickyBuy) {
+      // Sticky mobile buy button click = clearest intent signal outside
+      // the iframe. Stripe Embedded Checkout is cross-origin sandboxed so
+      // pointerdown/focusin on #checkout above only catches taps on the
+      // wrapper, not inside the iframe (which is where real interaction
+      // happens). The sticky button is rendered by us, so we can listen
+      // freely. Capture phase fires this BEFORE the anchor scroll to
+      // #checkout. 2026-05-27 addition · before this, IC events landed
+      // at Meta in only 2 of 1340 landing-page-views (Events Manager).
+      stickyBuy.addEventListener("click", fire, true);
+    }
   }
 
   // Auto-mount checkout when the page is interactive
