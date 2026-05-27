@@ -1134,6 +1134,13 @@
       // Unfiltered raw spot for the chapter-page card filter, which needs
       // the full photos[] to know which baked slides to prune.
       rawGet(spotKey) { return byKey.get(spotKey) || null; },
+      // Unfiltered raw list · ignores PREVIEW_MODE and BY_HANDLES.
+      // Use for "universe of content" displays (e.g. chapter cards on
+      // /full/ should show the full N spots regardless of preview filter,
+      // since the count is a hint at how much is in the guide, not a
+      // count of what's visible in the current session). Always returns
+      // a fresh shallow copy so callers can safely mutate / sort.
+      rawAll() { return arr.slice(); },
       subscribe(fn) { subs.add(fn); return () => subs.delete(fn); },
       init,
     };

@@ -477,10 +477,17 @@
   const HOME_UPNEXT_LIMIT = 4;
   let homeUpNextExpanded = false;
   function buildUpNext() {
-    // Count spots per chapter so each card can show "N spots". Source of
-    // truth is SPOTS, which is rebuilt from the unified store on every
-    // Convex push, so this stays accurate across reactive updates.
-    const counts = SPOTS.reduce((acc, s) => {
+    // Count spots per chapter so each card can show "N spots".
+    // 2026-05-27 · counts come from spots.rawAll() rather than SPOTS so
+    // that PREVIEW_MODE doesn't shrink the chapter list to "1 spot /
+    // 0 spots" cards. The chapter cards are a teaser for the full guide
+    // (32 spots in Central, 30 in Valais, ...), not a filter-aware
+    // status display. Placeholders without real images are still
+    // excluded so the count matches what users would actually see if
+    // they clicked through.
+    const rawSpots = (window.HB?.spots?.rawAll() || SPOTS)
+      .filter(s => window.HB.hasRealImage(s));
+    const counts = rawSpots.reduce((acc, s) => {
       const id = s.chapter_id;
       if (id) acc[id] = (acc[id] || 0) + 1;
       return acc;
