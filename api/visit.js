@@ -4,6 +4,7 @@ import {
   buildUserData,
   clientIpFromHeaders,
   clientUserAgentFromHeaders,
+  sha256Hex,
 } from "../lib/capi.js";
 
 export const config = {
@@ -175,6 +176,20 @@ export default async function handler(req, res) {
     const safeCurrency = typeof currency === "string" && /^[A-Za-z]{3}$/.test(currency)
       ? currency.toUpperCase()
       : undefined;
+    // external_id · stable cross-session identifier for Meta to match
+    // this IC event back to the same person across sessions / devices.
+    // Priority: ManyChat subscriber_id (most stable, but only ~30% of
+    // traffic since direct-from-ad buyers don't have one), then
+    // visitor_id (client-generated UUID, sticky in localStorage,
+    // covers everyone). buildUserData expects a pre-hashed value here
+    // (the fallback inside the helper is the already-hashed email
+    // hash); we hash with sha256Hex to match. Events Manager prognosis
+    // 2026-05-27: External ID alone +15.14% additional conversions
+    // reported. We don't have email at IC time (buyer hasn't entered
+    // it in Stripe yet) so this is the highest-impact field we can
+    // add server-side without changing the landing-page POST shape.
+    const icExternalIdRaw = subscriber_id || safeVisitorId || "";
+    const icExternalId = icExternalIdRaw ? sha256Hex(icExternalIdRaw) : undefined;
     try {
       await fireCapi({
         eventName: "InitiateCheckout",
@@ -185,6 +200,7 @@ export default async function handler(req, res) {
           fbp: safeFbp || undefined,
           clientIp: clientIpFromHeaders(req.headers) || undefined,
           clientUserAgent: clientUserAgentFromHeaders(req.headers) || undefined,
+          externalId: icExternalId,
         }),
         customData: {
           value: safeValue,
