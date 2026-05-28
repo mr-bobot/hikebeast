@@ -490,17 +490,17 @@
     // only changes what new affiliates see in the dashboard's
     // copy-to-share field.
     //
-    // UTM tagging · every affiliate-issued URL carries
-    // utm_source=affiliate, utm_medium=referral, utm_campaign=<username>.
-    // Lets Vercel Analytics split affiliate traffic out of overall pageviews
-    // (filter on `utm_source=affiliate`) and slice per-affiliate
-    // (`utm_campaign=<name>`). The Sheet's own attribution still keys off
-    // ?r=<username> · these utm params are purely for analytics, no
-    // double-counting downstream.
+    // UTM tagging · every affiliate-issued URL carries utm_source=affiliate.
+    // That's the single signal the HB_SOURCE classifier on the landing
+    // page reads to set `source = "affiliate"` in the Sheet · the
+    // commission attribution still keys off ?r=<username>. Dropped
+    // utm_medium + utm_campaign 2026-05-28 because they were redundant:
+    // utm_medium=referral wasn't read anywhere downstream, and
+    // utm_campaign=<username> duplicated ?r=<username>. Vercel Analytics
+    // can already slice per-affiliate via the `affiliate_ref` event prop.
     function paintShareLinks(username) {
       const enc = encodeURIComponent(username);
-      const utm = 'utm_source=affiliate&utm_medium=referral&utm_campaign=' + enc;
-      const url = 'https://hikebeast.ch/swissmap?r=' + enc + '&' + utm;
+      const url = 'https://hikebeast.ch/swissmap?r=' + enc + '&utm_source=affiliate';
       elLinkEn.textContent = url; elLinkEn.dataset.url = url;
     }
 
