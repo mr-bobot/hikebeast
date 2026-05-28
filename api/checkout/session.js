@@ -549,6 +549,10 @@ export default async function handler(req, res) {
       //   - source_page=de_map9           → /de/map9/success
       //   - source_page=fr_map9           → /fr/map9/success
       //   - source_page=it_map9           → /it/map9/success
+      //   - source_page=swissmap          → /swissmap/success (2026-05-28)
+      //   - source_page=de_swissmap       → /de/swissmap/success (2026-05-28)
+      //   - source_page=fr_swissmap       → /fr/swissmap/success (2026-05-28)
+      //   - source_page=it_swissmap       → /it/swissmap/success (2026-05-28)
       //   - source_page=fr_gems           → /fr/map/success (2026-05-27)
       //   - source_page=it_gems           → /it/map/success (2026-05-27)
       //   - any other source_page · DE    → /de/map/success
@@ -556,17 +560,22 @@ export default async function handler(req, res) {
       //
       // The fall-through path mirrors the historical behaviour every
       // /map[3-8]/ + /themap/ checkout has used since the dawn of the
-      // funnel · they all redirect to /map/success/. /map9/ has its
-      // own per-locale success siblings; /gems/ + /de/gems/ ride the
-      // shared /map/success path. /fr/gems/ + /it/gems/ get their own
-      // success siblings under /fr/map/success + /it/map/success since
-      // no localized fallback existed before.
+      // funnel · they all redirect to /map/success/. /map9/ and the
+      // /swissmap/ mirror (channel-specific URL launched 2026-05-28)
+      // have their own per-locale success siblings; /gems/ + /de/gems/
+      // ride the shared /map/success path. /fr/gems/ + /it/gems/ get
+      // their own success siblings under /fr/map/success + /it/map/success
+      // since no localized fallback existed before.
       return_url: (function () {
         var path;
         if (sourcePage === "map9") path = "/map9/success";
         else if (sourcePage === "de_map9") path = "/de/map9/success";
         else if (sourcePage === "fr_map9") path = "/fr/map9/success";
         else if (sourcePage === "it_map9") path = "/it/map9/success";
+        else if (sourcePage === "swissmap") path = "/swissmap/success";
+        else if (sourcePage === "de_swissmap") path = "/de/swissmap/success";
+        else if (sourcePage === "fr_swissmap") path = "/fr/swissmap/success";
+        else if (sourcePage === "it_swissmap") path = "/it/swissmap/success";
         else if (sourcePage === "fr_gems") path = "/fr/map/success";
         else if (sourcePage === "it_gems") path = "/it/map/success";
         else path = locale === "de" ? "/de/map/success" : "/map/success";
