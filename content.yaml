@@ -823,6 +823,9 @@ spots:
   trip_facts:
     elevation_m: 434
     busyness: 4
+  hike_ids:
+  - fronalpstock-route-72
+  - fronalpstock-from-morschach-via-chaelen
 - id: fronalpstock
   chapter: central
   kicker: VIEWPOINTS
@@ -5199,6 +5202,9 @@ spots:
     operating: 'Reservation MANDATORY June to September via https://bivouac.nature-haute-savoie.fr (Aiguilles Rouges nature reserve regulation, prefectural order). Tents may be pitched
       only between 19:00 and 09:00, one night maximum, fixed quota of spots. Swimming in Lac Blanc and the Chéserys lakes is forbidden by prefectural order. La Flégère cable car: approx.
       EUR 23 return; combined La Flégère + L''Index pass approx. EUR 39.50.'
+  hike_ids:
+  - les_cheserys-tre-le-champ-to-lac-blanc
+  - les_cheserys-flegere-shortcut
 - id: mont_blanc
   chapter: beyond
   kicker: WESTERN EUROPE'S HIGHEST. WITH A TELE
@@ -5234,6 +5240,9 @@ spots:
   trip_facts:
     elevation_m: 2100
     busyness: 4
+  hike_ids:
+  - les_cheserys-tre-le-champ-to-lac-blanc
+  - les_cheserys-flegere-shortcut
 - id: glacier_des_bossons
   chapter: beyond
   kicker: MY FAVOURITE GLACIER OF THE RANGE
