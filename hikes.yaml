@@ -1796,8 +1796,8 @@ hikes:
   - https://www.outdooractive.com/en/route/winter-hiking/flims-laax/staderas-sportzentrum-caumasee-conn/43396654/
   start_maps_url: https://maps.app.goo.gl/u95QRUoQnMAFjZAx9
 - id: klontalersee-default
-  description_extra: Postbus 506 from Glarus along the Klöntalstrasse to Klöntal-Vorauen. Around-the-lake loop on a marked path, T1. Campsites at Güntlenau and Vorauen, boat rental,
-    and lakeshore swimming spots. Good base for harder routes up to the Glärnischhütte.
+  description_extra: Postbus 506 from Glarus along the Klöntalstrasse to Klöntal-Vorauen. Around-the-lake loop on a marked path, about 14 km, 3 hours walking, 160 m of ascent and 180 m of
+    descent, T1. Campsites at Güntlenau and Vorauen, boat rental, and lakeshore swimming spots. Good base for harder routes up to the Glärnischhütte.
   visits:
   - klontalersee
   sources:
@@ -1806,6 +1806,10 @@ hikes:
   name: Lakeshore loop on the marked path
   sac_grade: T1
   effort_label: Easy
+  duration_min: 180
+  gain_m: 160
+  descent_m: 180
+  distance_km: 14.0
   equipment_list: []
   start: Klöntal-Vorauen (Postbus 506 from Glarus)
   transit:
@@ -3893,15 +3897,16 @@ hikes:
   - tine_de_conflens
   sac_grade: T1
   effort_label: Easy
-  duration_min: 105
-  gain_m: 150
-  distance_km: 6.1
+  duration_min: 180
+  gain_m: 405
+  distance_km: 11.1
   equipment_list: []
   start: La Sarraz village (Château de La Sarraz parking)
   transit:
     train: La Sarraz (CFF, on the Lausanne-Vallorbe line)
-  description_extra: The signposted loop from La Sarraz drops through forest down to the waterfall, follows the gorge, and climbs back via fields. About 6 km, 1 h 45 walking, T1, family-friendly.
-    Park at the château or take the train (the station is a 10-minute walk from the trailhead). Path down to the waterfall stays wet for days after rain, bring grippy shoes.
+  description_extra: The official Swiss Hiking Federation loop from La Sarraz drops through forest down to the Tine de Conflens waterfall, follows the Nozon gorge past the Cascade
+    du Dard and continues to Romainmôtier before climbing back via Ferreyres. About 11 km, 3 hours walking, 405 m of cumulative gain, T1, family-friendly. Park at the château or
+    take the train (the station is a 10-minute walk from the trailhead). Path down to the waterfall stays wet for days after rain, bring grippy shoes.
   sources:
   - https://www.suisse-rando.ch/fr/propositions-de-randonnees/863/Des-lieux-charges-d-histoire-au-pied-du-Jura-VD
   - https://balades.ch/balade/autour-de-la-sarraz/1699
@@ -4515,7 +4520,7 @@ hikes:
   visits:
   - st_prex
   name: Train or drive to St-Prex
-  start: St-Prex village, Rue du Vieux-Collège
+  start: Public Parking, Chemin du Chauchy
   sac_grade: T1
   effort_label: Drive-up
   equipment_list: []
