@@ -366,7 +366,7 @@
       <div class="sec first">
         <p class="sec-label">Share link</p>
         <div class="share-controls">
-          <span class="share-url" id="linkEn">hikebeast.ch/map9?r=…</span>
+          <span class="share-url" id="linkEn">hikebeast.ch/swissmap?r=…</span>
           <button type="button" class="btn-copy" data-target="linkEn">Copy</button>
         </div>
       </div>
@@ -478,15 +478,17 @@
       return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
 
-    // Default affiliate landing · /map9/ since 2026-05-26 (was /map8/
-    // 2026-05-24 → /map/ before that). Switched to map9 because that's
-    // the active variant: 4 locales, hero A/B split-test, dark mode,
-    // Vercel-Analytics-tracked engagement events, and the only sales
-    // page wired to land buyers on the modern account-mandatory
-    // success page. Old /map/ + /map8/ URLs still serve the product
-    // and accept ?r= attribution, so existing affiliate links don't
-    // break · this only changes what new affiliates see in the
-    // dashboard's copy-to-share field.
+    // Default affiliate landing · /swissmap/ since 2026-05-28 (was
+    // /map9/ 2026-05-26 → /map8/ 2026-05-24 → /map/ before that).
+    // /swissmap/ is the channel-specific mirror of /map9/ launched
+    // for influencer + affiliate traffic. Identical product/UX/hero
+    // A/B/dark-mode/locales to /map9/ · only the source_page tag
+    // differs so affiliate traffic + buyers attribute separately in
+    // AllVisits without polluting the /map9/ A/B-test dataset. Old
+    // /map/ + /map[3-9]/ URLs still serve the product and accept
+    // ?r= attribution, so existing affiliate links don't break · this
+    // only changes what new affiliates see in the dashboard's
+    // copy-to-share field.
     //
     // UTM tagging · every affiliate-issued URL carries
     // utm_source=affiliate, utm_medium=referral, utm_campaign=<username>.
@@ -498,7 +500,7 @@
     function paintShareLinks(username) {
       const enc = encodeURIComponent(username);
       const utm = 'utm_source=affiliate&utm_medium=referral&utm_campaign=' + enc;
-      const url = 'https://hikebeast.ch/map9?r=' + enc + '&' + utm;
+      const url = 'https://hikebeast.ch/swissmap?r=' + enc + '&' + utm;
       elLinkEn.textContent = url; elLinkEn.dataset.url = url;
     }
 
