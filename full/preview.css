@@ -4316,6 +4316,11 @@ body.has-rail .topbar .hb-nav { display: none; }
     justify-content: flex-start;
     gap: 10px;
   }
+  /* When the action row directly follows the "How to get there" CTA,
+     drop its 12px margin so the bottom divider sits exactly one flex
+     gap (14px) below the CTA label — matching the CTA's 14px padding-top
+     above, so the label is centred AND the row stays compact. */
+  .hb-flip-cta-row + .sp-actions { margin-top: 0; }
   .slide-spot .sp-kicker,
   .slide-spot .sp-title { padding-right: 0; }
   /* Keep the kebab chip flush with the heart + tick instead of floating
@@ -5483,10 +5488,11 @@ body.has-rail .topbar .hb-nav { display: none; }
   margin-top: auto;
   /* Vertically centered between the two dividers. Above the text: this
      CTA's own border-top, sitting padding-top away. Below the text: the
-     .sp-actions border-top, which is reached via the .sp-body flex gap
-     (14px) + .sp-actions margin-top (12px) = 26px. So padding-top must
-     be 26px (with padding-bottom 0) for the label to sit dead centre. */
-  padding: 26px 0 0;
+     .sp-actions border-top, reached via the .sp-body flex gap (14px) +
+     .sp-actions margin-top. On mobile we zero that margin (see the
+     scoped rule below) so the row stays tight; padding-top then matches
+     the 14px flex gap for a centred, compact label. */
+  padding: 14px 0 0;
   border: 0;
   border-top: 1px solid var(--hairline);
   background: none;
