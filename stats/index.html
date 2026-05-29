@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Hikebeast · AllVisits stats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+<style>
+  :root {
+    color-scheme: dark light;
+    --bg: #0b0b0c;
+    --surface: #131316;
+    --surface-2: #1a1a1f;
+    --fg: #f5f5f7;
+    --muted: #8e8e95;
+    --hairline: rgba(255,255,255,0.08);
+    --accent: #0a84ff;
+    --good: #30d158;
+    --warn: #ff9f0a;
+    --bad: #ff453a;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f7;
+      --surface-2: #ebebef;
+      --fg: #1d1d1f;
+      --muted: #6e6e73;
+      --hairline: rgba(0,0,0,0.08);
+      --accent: #0071e3;
+    }
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  html,body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 24px 16px 96px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  h1 { font-size: 18px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+  h2 { font-size: 13px; font-weight: 600; margin: 0 0 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .stamp { font-size: 12px; color: var(--muted); }
+  .stamp button {
+    background: transparent;
+    border: 1px solid var(--hairline);
+    color: var(--fg);
+    font: inherit;
+    padding: 4px 12px;
+    margin-left: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .stamp button:hover { background: var(--surface); }
+  .totals {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .kpi-value { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .kpi-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  section {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 16px;
+    overflow: hidden;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+  th, td {
+    text-align: right;
+    padding: 6px 8px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  th { color: var(--muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; }
+  th:first-child, td:first-child { text-align: left; }
+  td.key { color: var(--fg); font-weight: 500; }
+  td.muted { color: var(--muted); }
+  tbody tr:last-child td { border-bottom: none; }
+  .pill {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .pill-good { background: rgba(48,209,88,0.12); color: var(--good); }
+  .pill-bad { background: rgba(255,69,58,0.12); color: var(--bad); }
+  .loading { text-align: center; color: var(--muted); padding: 80px 0; }
+  .err { color: var(--bad); padding: 16px; background: var(--surface); border-radius: 8px; }
+  footer { margin-top: 48px; font-size: 11px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Hikebeast · AllVisits stats</h1>
+  <div class="stamp">
+    <span id="stamp">loading…</span>
+    <button onclick="load()" type="button">Refresh</button>
+  </div>
+</header>
+
+<div id="content"><div class="loading">Loading from sheet…</div></div>
+
+<footer>
+  Live aggregation · no caching · queries the AllVisits sheet on every load.
+</footer>
+
+<script>
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEfTrFIeD8ohiVaEyI_aanwXrnKyosoAnbAhvpT3OHpNCNwcIqFHe1NwPUDxQRKNJwTw/exec';
+  const SECRET = '88ecfbce-f1ad-4649-9f9c-4f10f47e8619';
+
+  function fmtPct(n) {
+    if (!isFinite(n)) return '—';
+    return (n * 100).toFixed(2) + '%';
+  }
+  function fmtDur(s) {
+    if (!s || s < 0) return '—';
+    if (s < 60) return s + 's';
+    const m = Math.floor(s / 60);
+    const rs = s % 60;
+    return m + 'm' + (rs > 0 ? ' ' + rs + 's' : '');
+  }
+  function fmtInt(n) { return new Intl.NumberFormat('en-US').format(n || 0); }
+
+  function buildBreakdown(title, rows, keyLabel) {
+    if (!rows || !rows.length) return '';
+    const head = '<h2>' + title + '</h2><table><thead><tr>' +
+      '<th>' + keyLabel + '</th>' +
+      '<th>visits</th>' +
+      '<th>buyers</th>' +
+      '<th>buy rate</th>' +
+      '<th>engage</th>' +
+      '<th>avg time</th>' +
+      '</tr></thead><tbody>';
+    const body = rows.map(function (r) {
+      const buyRate = r.buy_rate || 0;
+      const buyClass = r.buyers > 0 ? 'pill pill-good' : '';
+      const engageRate = r.engagement_rate || 0;
+      return '<tr>' +
+        '<td class="key">' + escapeHtml(r.key) + '</td>' +
+        '<td>' + fmtInt(r.visits) + '</td>' +
+        '<td>' + (r.buyers > 0 ? '<span class="' + buyClass + '">' + fmtInt(r.buyers) + '</span>' : '<span class="muted">0</span>') + '</td>' +
+        '<td>' + (r.buyers > 0 ? fmtPct(buyRate) : '<span class="muted">—</span>') + '</td>' +
+        '<td>' + fmtPct(engageRate) + '</td>' +
+        '<td>' + fmtDur(r.avg_time_on_site_s) + '</td>' +
+        '</tr>';
+    }).join('');
+    return '<section>' + head + body + '</tbody></table></section>';
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  async function load() {
+    document.getElementById('stamp').textContent = 'loading…';
+    document.getElementById('content').innerHTML = '<div class="loading">Loading from sheet…</div>';
+    try {
+      const r = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'get_allvisits_stats', secret: SECRET }),
+      });
+      const data = await r.json();
+      if (!data.ok) throw new Error(data.error || 'Unknown error');
+      render(data);
+    } catch (e) {
+      document.getElementById('content').innerHTML = '<div class="err">Failed to load · ' + escapeHtml(e.message) + '</div>';
+      document.getElementById('stamp').textContent = 'failed';
+    }
+  }
+
+  function render(data) {
+    const t = data.totals || {};
+    const overallBuyRate = t.total_landed > 0 ? (t.total_buyers / t.total_landed) : 0;
+    const overallEngageRate = t.total_landed > 0 ? (t.total_engaged / t.total_landed) : 0;
+    // average time across all session_end events; compute weighted from breakdown sums
+    let totalTimeS = 0; let totalSE = 0;
+    (data.by_source_page || []).forEach(function (r) {
+      totalTimeS += (r.avg_time_on_site_s || 0) * (r.session_end || 0);
+      totalSE += (r.session_end || 0);
+    });
+    const avgTimeS = totalSE > 0 ? Math.round(totalTimeS / totalSE) : 0;
+
+    const kpis = [
+      { label: 'Total rows', value: fmtInt(t.total_rows), sub: '' },
+      { label: 'Unique visitors', value: fmtInt(t.unique_visitors), sub: '' },
+      { label: 'Buyers', value: fmtInt(t.total_buyers), sub: fmtInt(t.unique_buyers) + ' unique' },
+      { label: 'Buy rate', value: fmtPct(overallBuyRate), sub: 'buyers / landed' },
+      { label: 'Engagement', value: fmtPct(overallEngageRate), sub: 'engaged / landed' },
+      { label: 'Avg time on site', value: fmtDur(avgTimeS), sub: 'session_end weighted' },
+    ];
+
+    const totalsHtml = '<div class="totals">' + kpis.map(function (k) {
+      return '<div class="kpi">' +
+        '<div class="kpi-label">' + k.label + '</div>' +
+        '<div class="kpi-value">' + k.value + '</div>' +
+        '<div class="kpi-sub">' + k.sub + '</div>' +
+        '</div>';
+    }).join('') + '</div>';
+
+    const sections = [
+      buildBreakdown('Landing page', data.by_source_page || [], 'source_page'),
+      buildBreakdown('Source', data.by_source || [], 'source'),
+      buildBreakdown('Affiliate', data.by_affiliate || [], 'affiliate_ref'),
+      buildBreakdown('Theme', data.by_theme || [], 'theme'),
+      buildBreakdown('Hero variant', data.by_hero_variant || [], 'hero_variant'),
+      buildBreakdown('Country', data.by_country || [], 'ip_country'),
+      buildBreakdown('Day', data.by_day || [], 'date'),
+    ].join('');
+
+    document.getElementById('content').innerHTML = totalsHtml + '<div class="grid">' + sections + '</div>';
+    document.getElementById('stamp').textContent = 'refreshed ' + new Date(data.generated_at).toLocaleString();
+  }
+
+  load();
+</script>
+</body>
+</html>

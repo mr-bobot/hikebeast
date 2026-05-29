@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
 <title>Schweizer Karte🇨🇭 · Gems of Switzerland</title>
-<meta name="description" content="Die Schweizer Karte mit über 100 versteckten Spots. Genauer Standort, Wanderschwierigkeit und mehr." />
+<meta name="description" content="Swiss Gems · 141 versteckte Spots in der Schweiz zum Wandern und Wildcampen. GPS, Routen und Fotos zu jedem Spot." />
 <link rel="canonical" href="https://hikebeast.ch/de/map/" />
 <link rel="alternate" hreflang="en" href="https://hikebeast.ch/map/" />
 <link rel="alternate" hreflang="de" href="https://hikebeast.ch/de/map/" />
@@ -17,7 +17,7 @@
 <meta property="og:locale" content="de_CH" />
 <meta property="og:locale:alternate" content="en_US" />
 <meta property="og:title" content="Schweizer Karte🇨🇭 · Gems of Switzerland" />
-<meta property="og:description" content="Die ultimative Schweizer Karte." />
+<meta property="og:description" content="Swiss Gems · 141 versteckte Spots in der Schweiz zum Wandern und Wildcampen. Mit GPS, Routen und Fotos zu jedem Spot. In fünf Jahren von Leon Helg in den Schweizer Alpen handvermessen." />
 <meta property="og:url" content="https://hikebeast.ch/de/map4/" />
 <meta property="og:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 <meta property="og:image:width" content="1920" />
@@ -51,6 +51,11 @@ fbq('track', 'ViewContent', {
   currency: 'CHF'
 });
 </script>
+<!-- meta-cookies: capture ?fbclid= into _fbc cookie, expose
+     window.HBMeta.getCookies() for fbc + fbp pass-through. Loaded
+     after the Meta Pixel init so _fbp is set by the SDK before we
+     read it. Best-effort: failures are silent. -->
+<script src="/lib/meta-cookies.js"></script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 /></noscript>
@@ -104,7 +109,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.47;
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
-    padding: env(safe-area-inset-top) 0 calc(env(safe-area-inset-bottom) + 72px) 0;
+    padding: 0 0 calc(env(safe-area-inset-bottom) + 72px) 0;
   }
 
   /* === Navbar === */
@@ -113,10 +118,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     top: 0;
     z-index: 100;
     background: rgba(255,255,255,0.78);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    backdrop-filter: saturate(140%) blur(10px);
     border-bottom: 1px solid var(--hairline);
-    padding: 10px 22px;
+    padding: calc(10px + env(safe-area-inset-top)) 22px 10px 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -883,8 +888,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     z-index: 90;
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
     background: rgba(255,255,255,0.86);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    backdrop-filter: saturate(140%) blur(10px);
     border-top: 1px solid var(--hairline);
     transform: translateY(100%);
     transition: transform 220ms ease;
@@ -1313,19 +1318,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
-            <div class="review-avatar"><img src="/map3/img/avatars/alexis-dansereau.jpg" alt="" loading="lazy" /></div>
-            <div class="review-id">
-              <span class="review-name">Alexis</span>
-              <a class="review-handle" href="https://www.instagram.com/alexis.dansereau/" target="_blank" rel="noopener">@alexis.dansereau</a>
-            </div>
-            <div class="review-meta">
-              <span class="stars">★★★★★</span>
-            </div>
-          </div>
-          <p class="review-quote">"I was in Switzerland for 14 days and went to 20 places from the list. Best holiday I EVER had."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-head">
             <div class="review-avatar"><img src="/map3/img/avatars/simon_ys32.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Simon</span>
@@ -1482,7 +1474,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   // POST below. Slug is lowercased; the webhook will match it against
   // users.username (also lowercase) when the purchase completes.
   const REF_KEY = "hb:r";
-  const REF_TTL_MS = 60 * 24 * 60 * 60 * 1000;
+  const REF_TTL_MS = 7 * 24 * 60 * 60 * 1000;
   (function persistRefIfPresent() {
     const raw = (params.get("r") || "").trim().toLowerCase();
     if (!raw) return;
@@ -1608,6 +1600,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   let stripe = null;
   let checkout = null;
   let mountInFlight = false;
+  // Stripe Checkout Session id from /api/checkout/session response, used
+  // as the eventID for the InitiateCheckout pixel + CAPI dedup.
+  let currentSessionId = null;
 
   // Visual stand-in shown when STRIPE_SECRET_KEY isn't configured yet.
   // Mirrors the layout of Stripe's real embedded iframe so the page can be
@@ -1665,6 +1660,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           utm_medium: utmMedium,
           utm_campaign: utmCampaign,
           locale: "de",
+          fbc: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbc : "") || "",
+          fbp: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbp : "") || "",
           r: readStoredRef(),
           source_page: "de_map4",
         }),
@@ -1695,6 +1692,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       // bar all match what the Stripe iframe will charge.
       if (typeof data.currency === "string") {
         currentCurrency = data.currency.toLowerCase();
+      }
+      if (typeof data.session_id === "string") {
+        currentSessionId = data.session_id;
       }
       if (typeof data.amount === "number") {
         currentAmount = data.amount;
@@ -1737,24 +1737,71 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   // actual buyers.
   function attachInitiateCheckoutSignal() {
     var container = document.getElementById("checkout");
-    if (!container) return;
+    var stickyBuy = document.getElementById("sticky-buy");
+    if (!container && !stickyBuy) return;
     var key = "hb:ic_fired";
     try { if (sessionStorage.getItem(key) === "1") return; } catch (e) {}
 
     function fire() {
-      container.removeEventListener("pointerdown", fire, true);
-      container.removeEventListener("focusin", fire, true);
+      if (container) {
+        container.removeEventListener("pointerdown", fire, true);
+        container.removeEventListener("focusin", fire, true);
+      }
+      if (stickyBuy) {
+        stickyBuy.removeEventListener("click", fire, true);
+      }
       try { sessionStorage.setItem(key, "1"); } catch (e) {}
-      if (typeof fbq !== "function") return;
-      try {
-        fbq("track", "InitiateCheckout", {
-          value: typeof currentAmount === "number" ? currentAmount : 27,
-          currency: (currentCurrency || "chf").toUpperCase(),
-        });
-      } catch (e) {}
+      var icValue = typeof currentAmount === "number" ? currentAmount : 27;
+      var icCurrency = (currentCurrency || "chf").toUpperCase();
+      // Browser pixel · eventID = Stripe session id so the CAPI mirror
+      // (fired below via /api/visit beacon) dedupes against this.
+      if (typeof fbq === "function") {
+        try {
+          if (currentSessionId) {
+            fbq("track", "InitiateCheckout", { value: icValue, currency: icCurrency }, { eventID: currentSessionId });
+          } else {
+            fbq("track", "InitiateCheckout", { value: icValue, currency: icCurrency });
+          }
+        } catch (e) {}
+      }
+      // Server-side CAPI mirror · /api/visit forwards to Meta CAPI with
+      // event_id = session_id, matching the eventID above so Meta dedupes
+      // the pair into one InitiateCheckout event. Carries fbc/fbp from
+      // the buyer's browser so EMQ stays high.
+      if (currentSessionId) {
+        try {
+          var mc = (window.HBMeta && window.HBMeta.getCookies) ? window.HBMeta.getCookies() : { fbc: "", fbp: "" };
+          fetch("/api/visit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              event: "initiate_checkout",
+              session_id: currentSessionId,
+              value: icValue,
+              currency: icCurrency,
+              fbc: mc.fbc || "",
+              fbp: mc.fbp || "",
+            }),
+            keepalive: true,
+          }).catch(function () {});
+        } catch (e) {}
+      }
     }
-    container.addEventListener("pointerdown", fire, true);
-    container.addEventListener("focusin", fire, true);
+    if (container) {
+      container.addEventListener("pointerdown", fire, true);
+      container.addEventListener("focusin", fire, true);
+    }
+    if (stickyBuy) {
+      // Sticky mobile buy button click = clearest intent signal outside
+      // the iframe. Stripe Embedded Checkout is cross-origin sandboxed so
+      // pointerdown/focusin on #checkout above only catches taps on the
+      // wrapper, not inside the iframe (which is where real interaction
+      // happens). The sticky button is rendered by us, so we can listen
+      // freely. Capture phase fires this BEFORE the anchor scroll to
+      // #checkout. 2026-05-27 addition · before this, IC events landed
+      // at Meta in only 2 of 1340 landing-page-views (Events Manager).
+      stickyBuy.addEventListener("click", fire, true);
+    }
   }
 
   // Auto-mount checkout when the page is interactive

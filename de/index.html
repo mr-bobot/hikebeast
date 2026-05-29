@@ -2,6 +2,21 @@
 <html lang="de">
 <head>
 <meta charset="utf-8" />
+<script>
+// Affiliate ref capture · 2026-05-27 · mirrors the IIFE in /index.html.
+// Catches the case where a visitor lands directly on /de/?r=influencer
+// (rather than coming through the / → /de/ redirect, which already
+// preserves the slug). 7-day TTL matches /map9/.
+(function () {
+  try {
+    var raw = "";
+    try { raw = (new URLSearchParams(location.search).get("r") || "").trim().toLowerCase(); } catch (e) {}
+    if (!raw) return;
+    if (!/^[a-z0-9._-]{2,32}$/.test(raw)) return;
+    localStorage.setItem("hb:r", JSON.stringify({ slug: raw, exp: Date.now() + 7 * 24 * 60 * 60 * 1000 }));
+  } catch (e) {}
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
 <title>Swiss Gems · Hikebeast</title>
@@ -28,10 +43,12 @@
 <meta name="twitter:description" content="129 versteckte Schweizer Spots, gesammelt von Leon Helg." />
 <meta name="twitter:image" content="https://hikebeast.ch/themap/img/og.jpg" />
 
-<!-- Inter for the editorial title + button. Bold weights only. -->
+<!-- Inter for the editorial title + button. Bold weights only.
+     Non-blocking load · see index.html for rationale. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" /></noscript>
 
 <!-- Vercel Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -145,11 +162,19 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   .hero-cta:active { transform: translateY(0); }
   .hero-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-  .lang-switch {
+  /* Top-right pill row · login + lang switch. Subtle so they don't
+     compete with the title. Login is for returning buyers who already
+     have the guide. */
+  .topnav {
     position: absolute;
     top: clamp(16px, 3vh, 28px);
     right: clamp(16px, 4vw, 32px);
     z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topnav a {
     color: rgba(255,255,255,0.85);
     text-decoration: none;
     font-family: 'Inter', sans-serif;
@@ -164,22 +189,38 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     -webkit-tap-highlight-color: transparent;
     transition: background 150ms ease;
   }
-  .lang-switch:hover { background: rgba(0,0,0,0.32); }
+  .topnav a:hover { background: rgba(0,0,0,0.32); }
+  .topnav .login-link { letter-spacing: 0.04em; }
 </style>
 </head>
 <body>
 <main class="hero">
-  <a class="lang-switch" href="/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
+  <nav class="topnav" aria-label="Site">
+    <a class="login-link" href="/login/">Login</a>
+    <a class="lang-switch" href="/" hreflang="en" onclick="try{localStorage.setItem('hb_lang','en')}catch(e){}" aria-label="English version">EN</a>
+  </nav>
 
   <h1 class="hero-title">Swiss Gems</h1>
 
-  <a class="hero-cta" href="/de/map/" data-fbq-event="ViewContent" data-fbq-params='{"content_name":"Swiss Gems of Switzerland Map","content_category":"Map","value":27.00,"currency":"CHF"}'>
+  <a class="hero-cta" href="/de/map9/" data-forward-params data-fbq-event="ViewContent" data-fbq-params='{"content_name":"Swiss Gems of Switzerland Map","content_category":"Map","value":27.00,"currency":"CHF"}'>
     <span>Hol dir den Guide</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
   </a>
 </main>
 
 <script>
+  // Forward URL params on hero CTA · 2026-05-27 · same recipe as
+  // /index.html so /de/?r=foo → click "Hol dir den Guide" lands on
+  // /de/map9/?r=foo, where the slug gets captured into localStorage.
+  (function () {
+    if (!location.search) return;
+    document.querySelectorAll('a[data-forward-params]').forEach(function (a) {
+      var href = a.getAttribute('href') || '';
+      if (!href || href.indexOf('?') !== -1) return;
+      a.setAttribute('href', href + location.search);
+    });
+  })();
+
   document.querySelectorAll('[data-fbq-event]').forEach((el) => {
     el.addEventListener('click', () => {
       if (!window.fbq) return;

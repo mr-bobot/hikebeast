@@ -152,7 +152,7 @@ fbq('track', 'PageView');
   }
   .btn:active { transform: scale(0.98); }
   .btn-primary {
-    background: var(--fg);
+    background: var(--accent);
     color: #ffffff;
   }
   .btn-secondary {
@@ -567,6 +567,13 @@ fbq('track', 'PageView');
           <span class="onboard-hint">Kleinbuchstaben, Zahlen, Punkte. Lässt sich später ändern.</span>
         </label>
         <label class="onboard-field">
+          <span class="onboard-label">Instagram Handle <span class="onboard-optional">(optional)</span></span>
+          <input id="onboardInstagram" class="onboard-input" type="text"
+                 autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                 maxlength="40" placeholder="@dein.handle" />
+          <span class="onboard-hint">Damit Leon deine Nachrichten sieht, falls du Hilfe brauchst.</span>
+        </label>
+        <label class="onboard-field">
           <span class="onboard-label">Passwort</span>
           <input id="onboardPassword" class="onboard-input" type="password"
                  minlength="8" autocomplete="new-password" required />
@@ -743,18 +750,36 @@ fbq('track', 'PageView');
         // sets event_id = payment_intent_id). Without matching IDs Meta
         // counts pixel + CAPI as separate events — Events Manager on
         // 2026-05-15 showed 119 Purchase events for 54 buyers. The
-        // sessionStorage guard is defense-in-depth against tab refresh.
+        // localStorage guard survives across tabs and refreshes — buyers re-opening the Stripe receipt link in a new tab was re-firing Purchase with the same payment_intent (2026-05-24).
         if (window.fbq && typeof data.amount_total === "number" && data.payment_intent) {
           var purchaseKey = "hb:purchase_fired:" + data.payment_intent;
           var alreadyFired = false;
-          try { alreadyFired = sessionStorage.getItem(purchaseKey) === "1"; } catch (e) {}
+          try { alreadyFired = localStorage.getItem(purchaseKey) === "1"; } catch (e) {}
           if (!alreadyFired) {
             try {
+              // Advanced Matching · re-init the pixel with the buyer's
+              // email + first name so Meta can match this Purchase to
+              // a Facebook account directly (boosts pixel-side EMQ).
+              // Meta auto-hashes plain-text PII when it doesn't already
+              // look like a 64-char hex string, so we pass raw values.
+              var amData = {};
+              if (typeof data.email === "string" && data.email) {
+                amData.em = data.email;
+                // external_id mirrors what api/checkout/webhook.js sends as
+                // user_data.external_id (defaults to the hashed email).
+                // Passing the same value here = a second dedup signal that
+                // Meta can match between pixel + CAPI when fbc/fbp are weak.
+                amData.external_id = data.email;
+              }
+              if (typeof data.first_name === "string" && data.first_name) amData.fn = data.first_name;
+              if (Object.keys(amData).length) {
+                try { fbq("init", "1658000685240569", amData); } catch (e) {}
+              }
               fbq("track", "Purchase", {
                 value: Number((data.amount_total / 100).toFixed(2)),
                 currency: data.currency || "CHF",
               }, { eventID: data.payment_intent });
-              try { sessionStorage.setItem(purchaseKey, "1"); } catch (e) {}
+              try { localStorage.setItem(purchaseKey, "1"); } catch (e) {}
             } catch (e) {}
           }
         }
@@ -777,6 +802,12 @@ fbq('track', 'PageView');
         submitBtn.disabled = true;
         submitBtn.textContent = "Konto wird erstellt...";
 
+        // Instagram handle · optional. Normalise · strip leading "@",
+        // any whitespace, and lowercase the rest. Empty string when the
+        // buyer skipped the field; the API treats falsy as "no update".
+        var igRaw = (document.getElementById("onboardInstagram") || {}).value || "";
+        var igHandle = String(igRaw).trim().replace(/^@+/, "").toLowerCase();
+
         try {
           var res = await fetch("/api/checkout/session", {
             method: "POST",
@@ -785,6 +816,7 @@ fbq('track', 'PageView');
               sessionId: sessionId,
               username:  onboardUsername.value.trim().toLowerCase(),
               password:  onboardPassword.value,
+              instagram_handle: igHandle,
             }),
           });
           var json = await res.json().catch(function () { return {}; });

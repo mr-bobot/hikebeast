@@ -64,6 +64,122 @@
     return null;
   }
 
+  // --- Hidden URL filter: ?by=<handle>[,<handle>...] keeps only photos
+  // credited to one of those handles (case-insensitive, with or without
+  // leading "@"). Originally added to Explore for screen-record demos
+  // ("every Leon shot in the guide"); promoted here so every screen —
+  // spot detail, chapter scroll, map, saved, swipe, home rows — applies
+  // the same view. Spots with zero matching photos drop from listings;
+  // navigation links are rewritten in boot() so the filter sticks across
+  // page hops.
+  const BY_RAW = (() => {
+    try { return new URLSearchParams(location.search).get('by') || null; }
+    catch { return null; }
+  })();
+  const BY_HANDLES = (() => {
+    if (!BY_RAW) return null;
+    const h = BY_RAW.split(',')
+      .map(s => s.trim().toLowerCase().replace(/^@/, ''))
+      .filter(Boolean);
+    return h.length ? new Set(h) : null;
+  })();
+  // ── Preview mode (recording-safe view for affiliates) ───────────────
+  // Toggle persisted by /full/affiliate/materials/ to
+  // localStorage['hb:preview_mode:v1'] = '1'. When on, the webapp
+  // shows a redacted "demo" view so creators can record screen
+  // captures without exposing all paid spots / un-released photos.
+  //
+  // Rule set, per Leon (2026-05-26):
+  //   - chapter card list · only spots in PREVIEW_ALLOWED_SPOTS survive
+  //   - browse + swipe photos · keep only credit === '@leon.helg'
+  //     (single-creator hero so recordings look consistent)
+  //   - spot-detail photos · keep '@leon.helg', '@oliwear.j', and
+  //     Unsplash photographers (FirstName-LastName style credits ·
+  //     they read as "guest photography" rather than competing-creator
+  //     IG handles which we don't want visible in promo recordings)
+  //
+  // The filter composes with the existing ?by=<handle> URL filter ·
+  // both have to pass for a photo to be visible.
+  const PREVIEW_MODE = (() => {
+    try { return localStorage.getItem('hb:preview_mode:v1') === '1'; }
+    catch { return false; }
+  })();
+  // Curated list of recording-safe spot slugs. Leon populates this ·
+  // until then the set is empty, which means preview mode hides ALL
+  // chapter / browse / swipe content (safe default · keeps the
+  // pre-curation state unambiguously "nothing to record yet").
+  const PREVIEW_ALLOWED_SPOTS = new Set([
+    'tannhorn',
+    'augstmatthorn',
+    'fulberg',
+    'les_cheserys',
+    'viewpoint_beatenberg',
+    'riffelsee',
+    'schafler',
+    'falensee',
+    'saxer_lucke',
+    'bachalpsee',
+    'oeschinensee',
+    'seealpsee',
+    'hardergrat_trail',
+    'joriseen',
+    'limmernsee',
+    'triftbrucke',
+    'morteratsch_glacier',
+    'gelmersee',
+    'pic_de_jallouvre',
+    'batoni_wasserfallarena',
+  ]);
+  function previewSpotAllowed(slug) {
+    if (!PREVIEW_MODE) return true;
+    if (!slug) return false;
+    return PREVIEW_ALLOWED_SPOTS.has(String(slug));
+  }
+  function previewCreditMode() {
+    // 'strict' on browse / swipe (single-creator), 'lenient' on
+    // spot-detail (Leon + Oliver + Unsplash), 'off' elsewhere.
+    const p = location.pathname || '';
+    if (/\/(browse|swipe)\//.test(p)) return 'strict';
+    if (/\/spot\//.test(p))           return 'lenient';
+    return 'off';
+  }
+  function previewCreditAllowed(credit) {
+    if (!PREVIEW_MODE) return true;
+    const mode = previewCreditMode();
+    if (mode === 'off') return true;
+    if (!credit) return false;
+    const c = String(credit);
+    if (mode === 'strict') return c === '@leon.helg';
+    // 'lenient' · Leon, Oliver, or Unsplash. Unsplash credits are
+    // FirstName-LastName format · always start with a capital letter
+    // and never carry the @ prefix that IG handles do. zimydakid is
+    // lowercase + no @ → fails the capital check, correctly excluded.
+    if (c === '@leon.helg' || c === '@oliwear.j') return true;
+    return /^[A-Z]/.test(c);
+  }
+
+  function matchesByCredit(credit) {
+    // Preview mode tightens the photo filter further · runs first so
+    // we drop the credit before the ?by= filter even looks at it.
+    if (!previewCreditAllowed(credit)) return false;
+    if (!BY_HANDLES) return true;
+    if (!credit) return false;
+    return BY_HANDLES.has(String(credit).toLowerCase().replace(/^@/, ''));
+  }
+  // Append ?by=<raw> to a same-origin URL (preserving any existing
+  // query / hash). Returns the input unchanged when the filter isn't
+  // active or the URL is external/anchor/script.
+  function withBy(href) {
+    if (!BY_RAW || !href) return href;
+    if (/^(https?:|mailto:|tel:|data:|blob:|javascript:)/i.test(href)) return href;
+    if (href === '#' || href.startsWith('#')) return href;
+    if (/[?&]by=/.test(href)) return href;
+    const [base, hash] = href.split('#');
+    const sep = base.includes('?') ? '&' : '?';
+    const param = 'by=' + encodeURIComponent(BY_RAW);
+    return base + sep + param + (hash ? '#' + hash : '');
+  }
+
   // ── Shared Convex client ──────────────────────────────────────────────
   // One ConvexClient (= one websocket) shared by spots, session, favorites,
   // and swipes. Returns null if Convex isn't configured on the page.
@@ -969,9 +1085,62 @@
       }
     }
 
+    // When the hidden ?by= URL filter is active, project each spot down to
+    // photos credited to one of the handles. Spots with zero matching
+    // photos are dropped; the rest get their `image`/`imagePhotoId` cover
+    // swapped to the first matching photo so tile renderings on every
+    // listing page show the filtered set without per-page changes.
+    function viewSpot(spot) {
+      if (!spot) return null;
+      // Preview mode · drop spots whose slug isn't on Leon's curated
+      // recording-safe list. Anchor lives at spotKey's right half.
+      // EXCEPTIONS · show ALL spots on the discovery surfaces that
+      // affiliate recordings naturally pan across:
+      //   - /full/map/           full Switzerland with all pins
+      //   - /full/wildcamping/   complete wildcamping landscape
+      //   - /full/hidden-gems/   the "look at all these gems" grid
+      // The spot detail page is still reachable by direct URL (the
+      // spot card on those exempt pages clicks through), so we rely
+      // on the photo-credit filter there to keep the recording safe.
+      // Chapter / browse / swipe surfaces still respect the 20-spot
+      // allowlist · they're the curated narrative path for promos.
+      if (PREVIEW_MODE && !/\/full\/(map|wildcamping|hidden-gems)\//.test(location.pathname || '')) {
+        const anchor = (spot.spotKey || '').split('#')[1] || null;
+        if (!previewSpotAllowed(anchor)) return null;
+      }
+      if (!BY_HANDLES && !PREVIEW_MODE) return spot;
+      const photos = (spot.photos || []).filter(p => matchesByCredit(p.credit));
+      if (photos.length === 0) return null;
+      const primary = photos[0];
+      return {
+        ...spot,
+        photos,
+        image:        primary.src     || spot.image,
+        imagePhotoId: primary.photoId || spot.imagePhotoId,
+        imageWidth:   primary.width  != null ? primary.width  : null,
+        imageHeight: primary.height != null ? primary.height : null,
+      };
+    }
+
     return {
-      all() { return arr; },
-      get(spotKey) { return byKey.get(spotKey) || null; },
+      all() {
+        if (!BY_HANDLES && !PREVIEW_MODE) return arr;
+        return arr.map(viewSpot).filter(Boolean);
+      },
+      get(spotKey) {
+        const raw = byKey.get(spotKey) || null;
+        return viewSpot(raw);
+      },
+      // Unfiltered raw spot for the chapter-page card filter, which needs
+      // the full photos[] to know which baked slides to prune.
+      rawGet(spotKey) { return byKey.get(spotKey) || null; },
+      // Unfiltered raw list · ignores PREVIEW_MODE and BY_HANDLES.
+      // Use for "universe of content" displays (e.g. chapter cards on
+      // /full/ should show the full N spots regardless of preview filter,
+      // since the count is a hint at how much is in the guide, not a
+      // count of what's visible in the current session). Always returns
+      // a fresh shallow copy so callers can safely mutate / sort.
+      rawAll() { return arr.slice(); },
       subscribe(fn) { subs.add(fn); return () => subs.delete(fn); },
       init,
     };
@@ -1090,16 +1259,12 @@
 
     const here = location.pathname.replace(/index\.html$/, '');
     const cur = (suffix) => here.endsWith(suffix) ? ' is-current' : '';
-    const curCh = currentChapterId();
-
-    const renderChapter = (ch) => `
-      <a class="rail-chapter${curCh === ch.id ? ' is-current' : ''}" href="${REL}${ch.id}/" title="${ch.label}">
-        <span class="rail-chapter-thumb"><img src="${REL}img/${ch.cover}" alt="" /></span>
-        <span class="label">${ch.label}</span>
-      </a>
-    `;
-    const introItem = renderChapter(RAIL_INTRO_CHAPTER);
-    const chapterItems = RAIL_CHAPTERS.map(renderChapter).join('');
+    // currentChapterId() and the RAIL_CHAPTERS / RAIL_INTRO_CHAPTER
+    // constants are still referenced elsewhere in social.js (e.g. for
+    // chapter-aware kicker rewriting on spot pages), so keep them
+    // declared even though the rail / menu sheet no longer renders a
+    // Chapters section · the new "All Regions" entry in Collections
+    // (links to /full/regions/) replaces that surface. 2026-05-24.
 
     rail.innerHTML = `
       <a class="rail-brand" href="${REL}index.html" title="Gems of Switzerland home">
@@ -1142,15 +1307,17 @@
         <a class="rail-item${cur('/wildcamping/')}" href="${REL}wildcamping/">
           ${SVG_TENT}<span class="label">Wildcamping</span>
         </a>
-        <div class="rail-divider"></div>
-        <div class="rail-section-head"><span class="label">Chapters</span></div>
-        ${introItem}
-        <div class="rail-divider rail-divider-tight"></div>
-        ${chapterItems}
+        <a class="rail-item${cur('/regions/')}" href="${REL}regions/">
+          <svg viewBox="0 0 1000 642" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M574.2,2.2L577.3,9.6L573.5,10.5L570.8,9.0L554.5,13.9L550.3,26.3L539.8,35.2L542.8,41.1L539.8,45.0L548.5,50.3L552.7,50.3L554.6,53.9L555.2,51.5L559.5,53.4L566.5,52.8L566.5,47.8L569.0,49.3L569.5,46.4L574.2,44.8L578.5,47.0L582.0,44.7L583.8,44.7L584.6,46.9L589.3,49.9L587.8,55.1L583.5,55.3L585.2,52.5L584.0,50.6L581.9,53.7L582.2,58.6L583.7,62.9L577.8,68.9L574.2,67.5L576.6,63.1L570.4,58.6L564.7,56.8L562.7,61.4L555.0,63.8L551.5,67.5L553.0,72.4L557.9,71.3L559.1,73.2L546.3,77.7L537.5,75.1L535.7,78.4L521.8,76.6L515.3,70.2L515.9,65.0L511.8,63.4L509.1,64.6L507.6,62.8L502.9,63.8L500.5,65.9L498.0,60.7L494.8,61.3L490.3,66.5L486.0,69.5L482.9,69.2L481.2,72.4L474.1,72.9L472.3,79.4L469.6,81.1L465.2,78.8L459.6,81.7L454.2,83.2L449.5,81.5L441.8,81.2L439.4,85.2L432.2,84.3L429.7,80.0L431.6,77.2L425.7,70.8L419.8,71.3L417.2,73.6L414.1,72.1L410.4,71.1L409.2,76.8L405.3,81.1L396.1,84.8L388.1,86.4L382.8,89.3L377.1,87.9L375.6,84.8L372.6,82.8L370.0,79.9L370.5,79.0L373.4,80.3L376.7,78.4L379.8,78.8L380.7,76.9L381.3,78.5L382.2,76.3L381.0,75.3L380.1,72.7L378.4,72.1L381.0,68.9L383.4,67.2L380.7,68.0L378.9,70.1L372.7,68.4L366.9,74.8L363.7,74.4L363.2,71.8L360.2,70.7L359.2,75.4L355.4,74.6L353.1,76.3L353.4,78.5L344.4,84.9L342.6,85.0L340.0,87.5L341.2,90.3L343.2,90.2L344.8,88.5L347.2,89.5L347.5,91.1L345.8,94.8L344.4,93.8L341.6,94.6L340.2,92.7L340.5,94.6L342.5,96.6L343.0,100.4L337.7,105.3L334.4,105.7L326.1,100.2L323.2,105.6L327.4,106.1L331.3,108.3L328.8,111.8L325.1,112.9L324.9,114.4L322.8,117.2L319.2,120.2L311.8,121.0L304.1,118.5L298.0,119.2L295.3,120.8L292.9,120.5L284.9,125.3L282.3,119.4L274.0,120.2L268.2,117.8L272.6,103.3L275.4,102.5L274.9,101.5L267.6,103.0L259.2,98.5L255.9,101.0L251.3,101.1L247.8,103.3L244.8,101.2L235.9,98.0L227.5,101.5L228.1,108.3L230.8,111.0L231.3,114.0L229.1,116.0L224.7,116.4L222.2,120.8L217.7,120.8L217.4,129.5L212.0,130.0L211.8,134.9L205.8,139.4L204.3,146.1L205.9,146.5L208.5,145.2L214.8,145.8L226.0,144.3L231.1,142.6L233.6,140.5L238.1,141.7L238.7,142.9L241.9,144.3L241.9,147.9L244.4,149.7L242.8,152.2L243.1,152.9L240.7,155.2L238.2,154.7L232.4,156.4L234.2,158.8L232.5,163.3L229.3,165.4L225.0,164.9L224.9,166.6L218.0,167.7L220.2,174.0L219.6,179.9L221.1,181.7L218.3,184.1L218.0,185.6L215.0,187.1L214.2,188.9L204.4,195.7L203.1,200.2L196.0,205.2L200.1,207.1L190.3,216.1L173.7,225.4L175.0,229.2L173.3,230.8L170.3,230.7L165.7,234.0L166.4,235.3L163.1,238.2L168.8,243.6L163.7,248.4L161.1,248.0L154.8,252.2L152.5,258.9L145.4,262.7L142.4,262.4L135.0,266.3L121.9,270.8L120.2,268.0L111.3,278.5L106.0,283.0L112.5,294.0L112.2,308.0L108.0,314.2L107.9,319.2L105.7,320.7L106.8,324.5L111.9,328.1L110.4,332.3L106.9,336.4L98.2,340.8L96.5,343.2L97.1,344.1L92.3,346.8L92.9,348.2L90.3,349.1L84.5,353.9L73.0,359.5L70.1,362.2L69.5,364.4L57.8,374.6L35.1,395.5L45.4,406.0L43.9,408.0L44.3,408.9L42.8,411.6L41.3,410.8L36.0,417.2L32.4,426.3L27.0,431.6L27.5,435.4L29.5,437.6L29.8,438.9L27.6,442.4L25.3,447.3L25.9,447.8L32.9,449.7L34.2,452.9L36.0,454.0L35.8,452.6L43.9,460.1L46.0,459.5L46.7,461.1L48.3,463.4L46.1,466.5L45.8,468.5L44.3,469.9L41.8,472.4L41.2,473.8L39.9,476.9L38.2,479.5L37.5,480.9L37.2,484.5L37.6,484.9L36.9,486.6L36.3,486.7L33.5,489.7L33.8,491.8L35.9,493.7L35.0,494.3L37.2,496.2L38.3,500.4L34.9,504.2L33.0,504.6L30.2,502.0L26.9,503.6L25.1,502.7L21.4,506.6L18.2,504.8L14.6,506.9L11.3,510.2L9.0,509.7L9.4,512.0L6.3,511.7L4.4,514.3L4.9,515.9L3.0,517.9L9.2,521.3L9.7,522.6L8.3,526.4L7.3,525.5L6.2,528.7L3.1,534.8L3.5,536.9L1.6,538.4L1.6,539.8L5.2,538.7L7.3,536.8L7.3,535.2L9.7,534.9L14.4,535.5L17.3,536.3L18.7,538.0L20.6,535.7L21.2,536.0L22.4,532.6L27.6,533.4L30.5,532.6L31.2,532.7L32.9,535.0L38.6,535.8L40.3,536.1L42.4,534.0L43.6,534.0L45.2,532.2L52.3,527.8L52.1,523.6L54.1,522.2L56.5,519.6L59.4,517.3L62.6,514.9L64.8,515.4L64.8,514.8L65.8,515.3L67.8,513.3L72.1,512.1L75.6,509.1L79.0,502.8L78.5,500.4L79.1,498.8L77.3,499.5L75.9,498.6L75.9,496.3L73.6,499.1L73.7,499.5L71.7,500.1L70.0,501.6L68.2,500.3L68.3,499.4L65.7,496.9L64.2,493.5L63.5,492.4L63.5,490.7L66.4,488.0L65.4,484.1L59.3,481.0L66.5,465.5L84.6,451.7L104.5,447.7L125.4,434.8L161.0,435.3L191.6,443.8L187.2,456.9L188.4,459.3L185.1,463.3L181.0,464.0L180.4,466.9L184.1,475.0L186.0,474.2L187.4,478.3L189.6,478.2L193.7,483.1L193.7,484.6L197.6,488.1L199.2,487.3L201.4,491.1L199.9,493.9L199.0,499.4L195.5,502.4L193.7,506.1L191.3,507.0L191.5,510.2L187.5,515.7L189.5,523.2L185.0,529.3L184.8,532.0L186.5,537.5L188.3,537.7L190.3,539.5L195.5,538.8L198.2,540.1L208.7,541.3L205.2,550.7L206.7,556.6L204.1,559.2L203.4,564.4L206.5,567.8L208.5,566.0L212.0,564.1L214.2,560.5L216.7,560.3L216.8,563.4L218.9,564.9L219.8,564.6L223.0,571.6L227.7,579.0L232.1,581.3L235.5,588.2L233.3,590.3L235.2,594.0L239.0,595.8L238.8,601.2L240.5,606.1L244.0,609.9L245.2,614.1L248.1,616.5L249.9,619.3L252.0,622.4L253.9,625.9L258.5,625.8L261.0,622.4L265.4,620.2L267.4,623.1L272.3,626.7L274.5,625.1L274.8,621.6L278.5,616.9L282.9,616.5L286.7,615.9L287.7,617.5L294.2,606.7L301.0,607.8L301.9,610.9L306.6,608.4L309.2,610.6L315.2,614.2L319.3,609.9L321.8,609.9L328.5,603.7L332.0,602.3L335.3,602.0L334.4,597.1L340.4,593.7L344.3,594.6L349.9,594.9L349.5,588.8L351.4,585.7L358.2,585.6L359.7,590.5L368.2,590.8L373.0,590.6L375.7,589.1L380.1,595.5L386.0,595.8L386.1,603.5L390.4,605.7L393.5,604.1L395.6,600.4L401.5,602.7L407.3,608.0L411.8,604.9L419.9,606.7L422.1,607.2L423.9,604.6L422.2,601.8L422.1,598.0L423.3,597.4L423.7,593.5L424.0,589.6L427.5,588.8L431.0,582.0L447.3,582.2L451.2,577.8L453.4,576.7L453.4,571.6L458.3,566.9L455.7,557.9L458.1,548.4L467.2,547.2L474.7,545.2L475.9,539.1L483.0,537.5L483.6,528.8L486.6,523.8L484.1,517.4L480.6,508.4L477.7,507.2L474.6,501.4L468.1,497.8L472.9,492.7L477.9,486.6L481.2,484.1L486.0,486.3L496.4,483.1L499.8,474.5L508.8,469.8L508.5,465.4L510.9,463.3L513.8,464.3L519.7,459.2L519.8,453.8L518.8,452.0L514.1,451.0L517.9,444.7L521.5,445.0L530.9,435.8L534.9,436.7L547.2,432.1L552.9,438.8L550.6,442.3L551.5,446.9L553.0,448.2L552.1,452.0L554.1,454.3L552.3,456.9L553.9,465.6L552.4,467.5L552.3,475.0L547.5,478.8L545.8,484.3L544.6,484.6L550.3,496.2L547.6,500.3L552.4,502.7L554.1,507.3L558.8,508.2L563.8,510.4L567.5,511.0L569.3,518.3L572.5,520.4L575.2,523.0L577.2,529.3L578.8,529.6L582.8,531.4L580.8,535.2L585.5,539.2L585.3,541.7L592.9,541.8L596.1,545.5L597.7,546.2L599.2,545.9L601.3,548.7L607.5,549.3L609.3,545.5L613.9,542.3L617.3,548.8L621.0,549.6L625.9,550.5L628.0,549.1L638.0,558.0L638.5,562.6L636.2,564.9L634.2,564.9L633.5,567.8L631.2,573.9L627.1,574.4L622.9,583.9L631.1,584.8L635.7,586.8L644.2,595.2L647.4,594.5L647.1,602.4L650.1,608.1L652.9,609.0L654.0,616.5L656.3,623.0L657.9,623.8L653.9,627.9L651.4,635.4L660.2,632.1L664.3,635.0L668.5,633.7L669.7,638.7L677.2,638.7L679.2,630.5L682.5,620.8L687.1,617.3L690.1,613.0L688.0,613.0L686.7,609.8L682.1,606.4L679.4,604.9L675.1,604.3L674.5,600.6L673.0,598.9L674.2,597.1L673.9,594.6L668.3,590.6L669.4,586.6L673.0,587.6L672.4,585.0L676.2,583.3L674.4,574.7L672.4,570.3L674.5,564.9L686.7,560.0L689.8,553.7L686.3,543.0L696.6,537.5L700.6,531.4L705.0,529.1L705.6,526.1L710.0,526.8L713.8,523.5L712.9,518.4L715.1,514.2L718.6,512.5L718.7,507.6L722.1,506.4L724.5,506.7L725.7,495.1L727.6,491.6L732.6,486.1L733.5,481.1L736.2,476.5L735.6,469.5L732.0,465.3L731.1,458.6L732.0,447.9L724.8,442.1L725.1,437.9L731.1,434.2L732.3,422.1L751.9,418.1L751.9,423.6L760.4,431.5L764.0,422.4L771.6,418.8L770.7,446.4L773.1,452.5L771.9,459.5L779.7,465.9L789.4,482.3L793.3,484.4L802.6,486.9L809.0,489.0L818.6,485.7L826.2,487.8L830.4,479.0L828.9,477.1L829.8,471.3L833.7,468.6L840.7,473.2L854.6,465.3L862.4,463.7L868.7,459.8L874.8,464.0L876.0,461.0L879.9,459.8L882.0,463.7L889.6,469.2L886.0,478.7L889.9,480.5L889.0,488.7L902.2,494.8L903.2,503.0L899.5,508.8L905.3,511.9L910.7,508.5L923.1,506.7L928.8,499.7L924.0,486.9L913.1,475.6L914.0,466.5L919.5,464.6L918.9,459.5L925.8,456.7L925.5,447.9L917.9,443.4L909.2,447.0L898.9,438.5L901.6,429.1L899.5,417.5L901.9,413.6L898.9,407.5L908.6,398.7L909.2,396.0L912.8,392.4L912.2,387.2L914.9,386.3L930.9,380.9L937.9,382.7L942.4,377.2L947.2,385.1L943.9,391.8L944.2,398.1L949.3,396.3L953.3,399.0L956.0,404.5L962.9,404.5L965.6,406.9L968.3,402.1L976.8,406.6L982.5,404.8L990.4,410.0L995.2,404.2L997.0,384.2L988.0,376.6L979.5,377.5L974.4,360.9L978.3,354.8L981.3,350.9L978.3,345.2L987.1,338.8L983.4,326.7L988.9,322.8L993.4,306.7L994.0,290.5L998.8,280.3L985.6,274.3L980.7,267.0L971.1,262.2L964.4,265.2L960.8,273.7L960.2,283.9L943.9,282.7L940.3,301.4L912.5,309.8L908.3,304.4L901.0,302.0L893.8,295.4L877.5,287.5L861.8,282.1L865.4,263.4L863.0,256.8L860.0,252.6L846.7,251.4L826.2,244.2L812.9,240.6L808.1,243.6L803.9,240.6L803.0,240.3L802.2,241.1L800.4,241.8L798.3,243.1L797.0,243.0L794.5,243.7L793.4,244.5L792.8,244.5L792.2,243.9L791.9,241.7L791.0,240.5L790.0,240.0L788.9,239.2L787.0,239.9L783.9,240.8L783.2,241.8L780.9,242.0L780.2,241.8L779.9,242.9L778.8,241.9L778.3,242.1L777.0,244.4L776.2,243.2L776.3,242.1L775.6,242.3L775.1,242.8L775.1,243.4L774.9,243.5L773.9,239.5L778.6,236.4L783.6,232.6L784.6,227.4L781.9,214.5L780.2,212.0L778.3,207.8L777.1,201.8L778.0,196.8L780.2,192.3L780.5,189.4L781.9,186.6L784.7,181.8L786.9,175.8L786.8,173.2L794.2,162.1L802.6,154.9L807.5,144.1L816.5,140.5L819.6,135.8L814.7,126.8L814.9,115.4L806.9,113.0L803.9,109.3L802.4,112.1L794.4,101.8L794.0,98.1L791.3,87.6L784.5,88.4L769.1,69.3L727.2,48.2L708.6,49.9L705.0,46.4L699.9,47.0L693.2,43.0L675.9,40.2L661.4,47.6L647.5,51.8L643.3,49.1L641.2,41.7L637.6,40.8L638.2,36.6L640.8,36.3L640.3,37.5L642.9,37.1L642.5,34.0L637.3,33.7L636.6,31.7L631.2,31.4L631.7,29.6L627.9,27.5L628.9,25.6L627.7,23.1L626.0,24.5L626.4,26.4L623.4,26.6L619.8,29.8L619.8,32.8L625.3,34.3L626.2,36.0L628.7,37.3L626.6,37.8L625.0,43.3L610.5,37.1L612.1,30.3L608.3,27.4L607.4,24.0L609.4,20.4L613.9,19.9L608.1,14.7L603.6,16.5L602.2,16.3L600.7,7.9L594.3,3.4L592.7,9.3L589.5,16.2L586.4,9.9L586.7,3.0L576.6,2.5L574.2,2.2Z"/></svg><span class="label">All Regions</span>
+        </a>
       </div>
       <button type="button" class="rail-theme" data-hb-theme-toggle aria-label="Toggle dark mode">
         <span class="rail-theme-icon" data-hb-theme-icon>${SVG_MOON}</span><span class="label" data-hb-theme-label>Dark mode</span>
       </button>
+      <a class="rail-item rail-item-more${cur('/more/')}" href="${REL}more/">
+        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+        <span class="label">More</span>
+      </a>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="Toggle navigation labels">
         ${SVG_CHEVRONS}<span class="label">Collapse</span>
       </button>
@@ -1170,9 +1337,14 @@
     // data-hb-theme-toggle + child data-hb-theme-icon / -label spans.
     // Menu sheet markup gets appended later (below), so we bind handlers
     // via event delegation on <body> instead of direct addEventListener.
+    // Dark-by-default since 2026-05-24 · the inline bootstrap in every
+    // <head> defaults to dark when localStorage is unset (or anything
+    // other than 'light'). This reader must mirror that or the toggle
+    // button shows the wrong icon/label for fresh visitors (we'd render
+    // a moon "Dark mode" button on a page that's already in dark).
     function getTheme() {
-      try { return localStorage.getItem('hb-theme') === 'dark' ? 'dark' : 'light'; }
-      catch (_e) { return 'light'; }
+      try { return localStorage.getItem('hb-theme') === 'light' ? 'light' : 'dark'; }
+      catch (_e) { return 'dark'; }
     }
     function syncThemeBtns() {
       const t = getTheme();
@@ -1203,13 +1375,12 @@
     // picks up both buttons.
     syncThemeBtns();
 
-    // Account FAB lives top-right of the viewport, regardless of page,
-    // so it's reachable without scrolling the rail. paintAccount() below
-    // targets the [data-hb-account] slot on this fab.
-    const accountFab = document.createElement('div');
-    accountFab.className = 'hb-account-fab';
-    accountFab.dataset.hbAccount = '';
-    document.body.appendChild(accountFab);
+    // Top-right Account FAB removed 2026-05-27. The desktop entry point
+    // is now /full/more/ → Account row → /full/account/. Mobile still
+    // gets a direct slot inside the menu sheet via [data-hb-account]
+    // (see menu-sheet HTML below), so phone users keep their two-tap
+    // path. paintAccount() iterates all remaining [data-hb-account]
+    // slots so this is a pure removal · no other wiring needed.
 
     // Mobile bottom tab bar. Hidden above 700px via CSS. Replaces the
     // burger drawer as the primary mobile nav so people actually
@@ -1255,7 +1426,21 @@
     menuSheet.innerHTML = `
       <div class="menu-sheet-backdrop" data-close></div>
       <div class="menu-sheet-card">
-        <div class="menu-sheet-grabber" aria-hidden="true"></div>
+        <!-- Header strip · grabber (cosmetic) + a real Close button.
+             Leon called out 2026-05-24 that the grabber's swipe-down
+             affordance wasn't wired, so users tapping outside the sheet
+             was the only way to dismiss · added the X button as the
+             explicit close path and wired swipe-down to honour the
+             grabber's promise (handlers below the markup). -->
+        <div class="menu-sheet-header" data-hb-sheet-header>
+          <div class="menu-sheet-grabber" aria-hidden="true"></div>
+          <button type="button" class="menu-sheet-close" data-close aria-label="Close menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="6" y1="6" x2="18" y2="18"/>
+              <line x1="18" y1="6" x2="6" y2="18"/>
+            </svg>
+          </button>
+        </div>
         <button type="button" class="menu-row" data-hb-random data-close>
           <span class="menu-row-icon">${SVG_DICE}</span>
           <span class="menu-row-label">Surprise me</span>
@@ -1283,22 +1468,19 @@
           <span class="menu-row-icon">${SVG_TENT}</span>
           <span class="menu-row-label">Wildcamping</span>
         </a>
-        <div class="menu-section-head">Chapters</div>
-        <a class="menu-row${curCh === 'intro' ? ' is-current' : ''}" href="${REL}intro/" data-close>
-          <span class="menu-row-thumb"><img src="${REL}img/${RAIL_INTRO_CHAPTER.cover}" alt="" /></span>
-          <span class="menu-row-label">${RAIL_INTRO_CHAPTER.label}</span>
+        <a class="menu-row${cur('/regions/')}" href="${REL}regions/" data-close>
+          <span class="menu-row-icon"><svg viewBox="0 0 1000 642" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M574.2,2.2L577.3,9.6L573.5,10.5L570.8,9.0L554.5,13.9L550.3,26.3L539.8,35.2L542.8,41.1L539.8,45.0L548.5,50.3L552.7,50.3L554.6,53.9L555.2,51.5L559.5,53.4L566.5,52.8L566.5,47.8L569.0,49.3L569.5,46.4L574.2,44.8L578.5,47.0L582.0,44.7L583.8,44.7L584.6,46.9L589.3,49.9L587.8,55.1L583.5,55.3L585.2,52.5L584.0,50.6L581.9,53.7L582.2,58.6L583.7,62.9L577.8,68.9L574.2,67.5L576.6,63.1L570.4,58.6L564.7,56.8L562.7,61.4L555.0,63.8L551.5,67.5L553.0,72.4L557.9,71.3L559.1,73.2L546.3,77.7L537.5,75.1L535.7,78.4L521.8,76.6L515.3,70.2L515.9,65.0L511.8,63.4L509.1,64.6L507.6,62.8L502.9,63.8L500.5,65.9L498.0,60.7L494.8,61.3L490.3,66.5L486.0,69.5L482.9,69.2L481.2,72.4L474.1,72.9L472.3,79.4L469.6,81.1L465.2,78.8L459.6,81.7L454.2,83.2L449.5,81.5L441.8,81.2L439.4,85.2L432.2,84.3L429.7,80.0L431.6,77.2L425.7,70.8L419.8,71.3L417.2,73.6L414.1,72.1L410.4,71.1L409.2,76.8L405.3,81.1L396.1,84.8L388.1,86.4L382.8,89.3L377.1,87.9L375.6,84.8L372.6,82.8L370.0,79.9L370.5,79.0L373.4,80.3L376.7,78.4L379.8,78.8L380.7,76.9L381.3,78.5L382.2,76.3L381.0,75.3L380.1,72.7L378.4,72.1L381.0,68.9L383.4,67.2L380.7,68.0L378.9,70.1L372.7,68.4L366.9,74.8L363.7,74.4L363.2,71.8L360.2,70.7L359.2,75.4L355.4,74.6L353.1,76.3L353.4,78.5L344.4,84.9L342.6,85.0L340.0,87.5L341.2,90.3L343.2,90.2L344.8,88.5L347.2,89.5L347.5,91.1L345.8,94.8L344.4,93.8L341.6,94.6L340.2,92.7L340.5,94.6L342.5,96.6L343.0,100.4L337.7,105.3L334.4,105.7L326.1,100.2L323.2,105.6L327.4,106.1L331.3,108.3L328.8,111.8L325.1,112.9L324.9,114.4L322.8,117.2L319.2,120.2L311.8,121.0L304.1,118.5L298.0,119.2L295.3,120.8L292.9,120.5L284.9,125.3L282.3,119.4L274.0,120.2L268.2,117.8L272.6,103.3L275.4,102.5L274.9,101.5L267.6,103.0L259.2,98.5L255.9,101.0L251.3,101.1L247.8,103.3L244.8,101.2L235.9,98.0L227.5,101.5L228.1,108.3L230.8,111.0L231.3,114.0L229.1,116.0L224.7,116.4L222.2,120.8L217.7,120.8L217.4,129.5L212.0,130.0L211.8,134.9L205.8,139.4L204.3,146.1L205.9,146.5L208.5,145.2L214.8,145.8L226.0,144.3L231.1,142.6L233.6,140.5L238.1,141.7L238.7,142.9L241.9,144.3L241.9,147.9L244.4,149.7L242.8,152.2L243.1,152.9L240.7,155.2L238.2,154.7L232.4,156.4L234.2,158.8L232.5,163.3L229.3,165.4L225.0,164.9L224.9,166.6L218.0,167.7L220.2,174.0L219.6,179.9L221.1,181.7L218.3,184.1L218.0,185.6L215.0,187.1L214.2,188.9L204.4,195.7L203.1,200.2L196.0,205.2L200.1,207.1L190.3,216.1L173.7,225.4L175.0,229.2L173.3,230.8L170.3,230.7L165.7,234.0L166.4,235.3L163.1,238.2L168.8,243.6L163.7,248.4L161.1,248.0L154.8,252.2L152.5,258.9L145.4,262.7L142.4,262.4L135.0,266.3L121.9,270.8L120.2,268.0L111.3,278.5L106.0,283.0L112.5,294.0L112.2,308.0L108.0,314.2L107.9,319.2L105.7,320.7L106.8,324.5L111.9,328.1L110.4,332.3L106.9,336.4L98.2,340.8L96.5,343.2L97.1,344.1L92.3,346.8L92.9,348.2L90.3,349.1L84.5,353.9L73.0,359.5L70.1,362.2L69.5,364.4L57.8,374.6L35.1,395.5L45.4,406.0L43.9,408.0L44.3,408.9L42.8,411.6L41.3,410.8L36.0,417.2L32.4,426.3L27.0,431.6L27.5,435.4L29.5,437.6L29.8,438.9L27.6,442.4L25.3,447.3L25.9,447.8L32.9,449.7L34.2,452.9L36.0,454.0L35.8,452.6L43.9,460.1L46.0,459.5L46.7,461.1L48.3,463.4L46.1,466.5L45.8,468.5L44.3,469.9L41.8,472.4L41.2,473.8L39.9,476.9L38.2,479.5L37.5,480.9L37.2,484.5L37.6,484.9L36.9,486.6L36.3,486.7L33.5,489.7L33.8,491.8L35.9,493.7L35.0,494.3L37.2,496.2L38.3,500.4L34.9,504.2L33.0,504.6L30.2,502.0L26.9,503.6L25.1,502.7L21.4,506.6L18.2,504.8L14.6,506.9L11.3,510.2L9.0,509.7L9.4,512.0L6.3,511.7L4.4,514.3L4.9,515.9L3.0,517.9L9.2,521.3L9.7,522.6L8.3,526.4L7.3,525.5L6.2,528.7L3.1,534.8L3.5,536.9L1.6,538.4L1.6,539.8L5.2,538.7L7.3,536.8L7.3,535.2L9.7,534.9L14.4,535.5L17.3,536.3L18.7,538.0L20.6,535.7L21.2,536.0L22.4,532.6L27.6,533.4L30.5,532.6L31.2,532.7L32.9,535.0L38.6,535.8L40.3,536.1L42.4,534.0L43.6,534.0L45.2,532.2L52.3,527.8L52.1,523.6L54.1,522.2L56.5,519.6L59.4,517.3L62.6,514.9L64.8,515.4L64.8,514.8L65.8,515.3L67.8,513.3L72.1,512.1L75.6,509.1L79.0,502.8L78.5,500.4L79.1,498.8L77.3,499.5L75.9,498.6L75.9,496.3L73.6,499.1L73.7,499.5L71.7,500.1L70.0,501.6L68.2,500.3L68.3,499.4L65.7,496.9L64.2,493.5L63.5,492.4L63.5,490.7L66.4,488.0L65.4,484.1L59.3,481.0L66.5,465.5L84.6,451.7L104.5,447.7L125.4,434.8L161.0,435.3L191.6,443.8L187.2,456.9L188.4,459.3L185.1,463.3L181.0,464.0L180.4,466.9L184.1,475.0L186.0,474.2L187.4,478.3L189.6,478.2L193.7,483.1L193.7,484.6L197.6,488.1L199.2,487.3L201.4,491.1L199.9,493.9L199.0,499.4L195.5,502.4L193.7,506.1L191.3,507.0L191.5,510.2L187.5,515.7L189.5,523.2L185.0,529.3L184.8,532.0L186.5,537.5L188.3,537.7L190.3,539.5L195.5,538.8L198.2,540.1L208.7,541.3L205.2,550.7L206.7,556.6L204.1,559.2L203.4,564.4L206.5,567.8L208.5,566.0L212.0,564.1L214.2,560.5L216.7,560.3L216.8,563.4L218.9,564.9L219.8,564.6L223.0,571.6L227.7,579.0L232.1,581.3L235.5,588.2L233.3,590.3L235.2,594.0L239.0,595.8L238.8,601.2L240.5,606.1L244.0,609.9L245.2,614.1L248.1,616.5L249.9,619.3L252.0,622.4L253.9,625.9L258.5,625.8L261.0,622.4L265.4,620.2L267.4,623.1L272.3,626.7L274.5,625.1L274.8,621.6L278.5,616.9L282.9,616.5L286.7,615.9L287.7,617.5L294.2,606.7L301.0,607.8L301.9,610.9L306.6,608.4L309.2,610.6L315.2,614.2L319.3,609.9L321.8,609.9L328.5,603.7L332.0,602.3L335.3,602.0L334.4,597.1L340.4,593.7L344.3,594.6L349.9,594.9L349.5,588.8L351.4,585.7L358.2,585.6L359.7,590.5L368.2,590.8L373.0,590.6L375.7,589.1L380.1,595.5L386.0,595.8L386.1,603.5L390.4,605.7L393.5,604.1L395.6,600.4L401.5,602.7L407.3,608.0L411.8,604.9L419.9,606.7L422.1,607.2L423.9,604.6L422.2,601.8L422.1,598.0L423.3,597.4L423.7,593.5L424.0,589.6L427.5,588.8L431.0,582.0L447.3,582.2L451.2,577.8L453.4,576.7L453.4,571.6L458.3,566.9L455.7,557.9L458.1,548.4L467.2,547.2L474.7,545.2L475.9,539.1L483.0,537.5L483.6,528.8L486.6,523.8L484.1,517.4L480.6,508.4L477.7,507.2L474.6,501.4L468.1,497.8L472.9,492.7L477.9,486.6L481.2,484.1L486.0,486.3L496.4,483.1L499.8,474.5L508.8,469.8L508.5,465.4L510.9,463.3L513.8,464.3L519.7,459.2L519.8,453.8L518.8,452.0L514.1,451.0L517.9,444.7L521.5,445.0L530.9,435.8L534.9,436.7L547.2,432.1L552.9,438.8L550.6,442.3L551.5,446.9L553.0,448.2L552.1,452.0L554.1,454.3L552.3,456.9L553.9,465.6L552.4,467.5L552.3,475.0L547.5,478.8L545.8,484.3L544.6,484.6L550.3,496.2L547.6,500.3L552.4,502.7L554.1,507.3L558.8,508.2L563.8,510.4L567.5,511.0L569.3,518.3L572.5,520.4L575.2,523.0L577.2,529.3L578.8,529.6L582.8,531.4L580.8,535.2L585.5,539.2L585.3,541.7L592.9,541.8L596.1,545.5L597.7,546.2L599.2,545.9L601.3,548.7L607.5,549.3L609.3,545.5L613.9,542.3L617.3,548.8L621.0,549.6L625.9,550.5L628.0,549.1L638.0,558.0L638.5,562.6L636.2,564.9L634.2,564.9L633.5,567.8L631.2,573.9L627.1,574.4L622.9,583.9L631.1,584.8L635.7,586.8L644.2,595.2L647.4,594.5L647.1,602.4L650.1,608.1L652.9,609.0L654.0,616.5L656.3,623.0L657.9,623.8L653.9,627.9L651.4,635.4L660.2,632.1L664.3,635.0L668.5,633.7L669.7,638.7L677.2,638.7L679.2,630.5L682.5,620.8L687.1,617.3L690.1,613.0L688.0,613.0L686.7,609.8L682.1,606.4L679.4,604.9L675.1,604.3L674.5,600.6L673.0,598.9L674.2,597.1L673.9,594.6L668.3,590.6L669.4,586.6L673.0,587.6L672.4,585.0L676.2,583.3L674.4,574.7L672.4,570.3L674.5,564.9L686.7,560.0L689.8,553.7L686.3,543.0L696.6,537.5L700.6,531.4L705.0,529.1L705.6,526.1L710.0,526.8L713.8,523.5L712.9,518.4L715.1,514.2L718.6,512.5L718.7,507.6L722.1,506.4L724.5,506.7L725.7,495.1L727.6,491.6L732.6,486.1L733.5,481.1L736.2,476.5L735.6,469.5L732.0,465.3L731.1,458.6L732.0,447.9L724.8,442.1L725.1,437.9L731.1,434.2L732.3,422.1L751.9,418.1L751.9,423.6L760.4,431.5L764.0,422.4L771.6,418.8L770.7,446.4L773.1,452.5L771.9,459.5L779.7,465.9L789.4,482.3L793.3,484.4L802.6,486.9L809.0,489.0L818.6,485.7L826.2,487.8L830.4,479.0L828.9,477.1L829.8,471.3L833.7,468.6L840.7,473.2L854.6,465.3L862.4,463.7L868.7,459.8L874.8,464.0L876.0,461.0L879.9,459.8L882.0,463.7L889.6,469.2L886.0,478.7L889.9,480.5L889.0,488.7L902.2,494.8L903.2,503.0L899.5,508.8L905.3,511.9L910.7,508.5L923.1,506.7L928.8,499.7L924.0,486.9L913.1,475.6L914.0,466.5L919.5,464.6L918.9,459.5L925.8,456.7L925.5,447.9L917.9,443.4L909.2,447.0L898.9,438.5L901.6,429.1L899.5,417.5L901.9,413.6L898.9,407.5L908.6,398.7L909.2,396.0L912.8,392.4L912.2,387.2L914.9,386.3L930.9,380.9L937.9,382.7L942.4,377.2L947.2,385.1L943.9,391.8L944.2,398.1L949.3,396.3L953.3,399.0L956.0,404.5L962.9,404.5L965.6,406.9L968.3,402.1L976.8,406.6L982.5,404.8L990.4,410.0L995.2,404.2L997.0,384.2L988.0,376.6L979.5,377.5L974.4,360.9L978.3,354.8L981.3,350.9L978.3,345.2L987.1,338.8L983.4,326.7L988.9,322.8L993.4,306.7L994.0,290.5L998.8,280.3L985.6,274.3L980.7,267.0L971.1,262.2L964.4,265.2L960.8,273.7L960.2,283.9L943.9,282.7L940.3,301.4L912.5,309.8L908.3,304.4L901.0,302.0L893.8,295.4L877.5,287.5L861.8,282.1L865.4,263.4L863.0,256.8L860.0,252.6L846.7,251.4L826.2,244.2L812.9,240.6L808.1,243.6L803.9,240.6L803.0,240.3L802.2,241.1L800.4,241.8L798.3,243.1L797.0,243.0L794.5,243.7L793.4,244.5L792.8,244.5L792.2,243.9L791.9,241.7L791.0,240.5L790.0,240.0L788.9,239.2L787.0,239.9L783.9,240.8L783.2,241.8L780.9,242.0L780.2,241.8L779.9,242.9L778.8,241.9L778.3,242.1L777.0,244.4L776.2,243.2L776.3,242.1L775.6,242.3L775.1,242.8L775.1,243.4L774.9,243.5L773.9,239.5L778.6,236.4L783.6,232.6L784.6,227.4L781.9,214.5L780.2,212.0L778.3,207.8L777.1,201.8L778.0,196.8L780.2,192.3L780.5,189.4L781.9,186.6L784.7,181.8L786.9,175.8L786.8,173.2L794.2,162.1L802.6,154.9L807.5,144.1L816.5,140.5L819.6,135.8L814.7,126.8L814.9,115.4L806.9,113.0L803.9,109.3L802.4,112.1L794.4,101.8L794.0,98.1L791.3,87.6L784.5,88.4L769.1,69.3L727.2,48.2L708.6,49.9L705.0,46.4L699.9,47.0L693.2,43.0L675.9,40.2L661.4,47.6L647.5,51.8L643.3,49.1L641.2,41.7L637.6,40.8L638.2,36.6L640.8,36.3L640.3,37.5L642.9,37.1L642.5,34.0L637.3,33.7L636.6,31.7L631.2,31.4L631.7,29.6L627.9,27.5L628.9,25.6L627.7,23.1L626.0,24.5L626.4,26.4L623.4,26.6L619.8,29.8L619.8,32.8L625.3,34.3L626.2,36.0L628.7,37.3L626.6,37.8L625.0,43.3L610.5,37.1L612.1,30.3L608.3,27.4L607.4,24.0L609.4,20.4L613.9,19.9L608.1,14.7L603.6,16.5L602.2,16.3L600.7,7.9L594.3,3.4L592.7,9.3L589.5,16.2L586.4,9.9L586.7,3.0L576.6,2.5L574.2,2.2Z"/></svg></span>
+          <span class="menu-row-label">All Regions</span>
         </a>
-        ${RAIL_CHAPTERS.map(ch => `
-          <a class="menu-row${curCh === ch.id ? ' is-current' : ''}" href="${REL}${ch.id}/" data-close>
-            <span class="menu-row-thumb"><img src="${REL}img/${ch.cover}" alt="" /></span>
-            <span class="menu-row-label">${ch.label}</span>
-          </a>
-        `).join('')}
         <div class="menu-section-head">Settings</div>
         <button type="button" class="menu-row" data-hb-theme-toggle aria-label="Toggle dark mode">
           <span class="menu-row-icon" data-hb-theme-icon>${SVG_MOON}</span>
           <span class="menu-row-label" data-hb-theme-label>Dark mode</span>
         </button>
+        <a class="menu-row${cur('/more/')}" href="${REL}more/" data-close>
+          <span class="menu-row-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></span>
+          <span class="menu-row-label">More</span>
+        </a>
         <div class="menu-sheet-account" data-hb-account></div>
       </div>
     `;
@@ -1325,6 +1507,47 @@
       if (e.key === 'Escape' && menuSheet.classList.contains('is-open')) closeMenuSheet();
     });
 
+    // Swipe-down-to-close on the header strip. Honours the grabber bar's
+    // implicit promise (Leon 2026-05-24: "small bar on top of the menu
+    // indicates that you can swipe it down but you actually can't").
+    // Tracks only the header so internal menu rows stay clickable + a
+    // future scrollable menu body wouldn't fight the gesture. Drags the
+    // card along during the swipe for affordance feedback; commits to
+    // close at >80px or velocity >0.5 px/ms.
+    const sheetCard = menuSheet.querySelector('.menu-sheet-card');
+    const sheetHeader = menuSheet.querySelector('[data-hb-sheet-header]');
+    let dragStart = null;
+    let lastY = 0;
+    let lastT = 0;
+    sheetHeader.addEventListener('pointerdown', (e) => {
+      // Skip when the user is actually pressing the close button.
+      if (e.target.closest('[data-close]')) return;
+      dragStart = { y: e.clientY, t: e.timeStamp };
+      lastY = e.clientY;
+      lastT = e.timeStamp;
+      sheetCard.style.transition = 'none';
+      try { sheetHeader.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    sheetHeader.addEventListener('pointermove', (e) => {
+      if (!dragStart) return;
+      const dy = Math.max(0, e.clientY - dragStart.y);
+      sheetCard.style.transform = `translateY(${dy}px)`;
+      lastY = e.clientY;
+      lastT = e.timeStamp;
+    });
+    function endDrag(e) {
+      if (!dragStart) return;
+      const dy = lastY - dragStart.y;
+      const dt = Math.max(1, lastT - dragStart.t);
+      const velocity = dy / dt; // px/ms
+      sheetCard.style.transform = '';
+      sheetCard.style.transition = '';
+      dragStart = null;
+      if (dy > 80 || velocity > 0.5) closeMenuSheet();
+    }
+    sheetHeader.addEventListener('pointerup', endDrag);
+    sheetHeader.addEventListener('pointercancel', endDrag);
+
     // Backdrop for mobile drawer
     const backdrop = document.createElement('div');
     backdrop.className = 'rail-backdrop';
@@ -1350,26 +1573,10 @@
       });
       topbar.insertBefore(burger, topbar.firstChild);
 
-      // Universal Account icon. Goes into the topbar's right-side cluster
-      // so every /full/* page has a consistent entry to /full/account/.
-      // Most pages have a `.topbar-right` slot; the home page uses
-      // `.home-topbar-actions`. We append to whichever we find. (The
-      // inline copy on the home page is hidden via CSS so we don't
-      // double up — the inline copy was added before this universal
-      // injection existed.)
-      // Hidden on mobile (the menu sheet has its own "Account" row);
-      // shown only on desktop where there's no menu sheet to host it.
-      const rightSlot = topbar.querySelector('.topbar-right, .home-topbar-actions');
-      if (rightSlot && !rightSlot.querySelector('[data-hb-cog]')) {
-        const cog = document.createElement('a');
-        cog.className = 'rail-burger rail-cog';   // reuse burger button styling
-        cog.setAttribute('href', `${REL}account/`);
-        cog.setAttribute('aria-label', 'Account');
-        cog.setAttribute('title', 'Account');
-        cog.dataset.hbCog = '';
-        cog.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
-        rightSlot.appendChild(cog);
-      }
+      // Account entry · removed from the topbar 2026-05-26. The single
+      // canonical entry is now the [data-hb-account] slot in the rail
+      // between "More" and "Collapse", rendered by paintAccount(). One
+      // place on every page, never in the top bar.
     }
 
     // Toggle expand/collapse (desktop)
@@ -1558,8 +1765,23 @@
     if (t) { e.preventDefault(); openSignIn(); }
   });
 
+  // Count favorites / visited keys whose anchor is on the preview
+  // allowlist · matches what /full/saved/ + /full/visited/ actually
+  // render in preview mode. Used by the rail badges so the bubble
+  // number doesn't disagree with the page content. Falls back to the
+  // raw count when preview mode is off. 2026-05-27 per Leon.
+  function previewFilteredCount(list) {
+    if (!PREVIEW_MODE) return list.length;
+    let n = 0;
+    for (const key of list) {
+      const anchor = (key || '').split('#')[1];
+      if (anchor && previewSpotAllowed(anchor)) n++;
+    }
+    return n;
+  }
+
   function refreshFavCount() {
-    const n = favorites.count();
+    const n = previewFilteredCount(favorites.list());
     document.querySelectorAll('[data-hb-fav-count]').forEach(el => {
       if (n > 0) {
         el.textContent = String(n);
@@ -1578,7 +1800,7 @@
   // [data-hb-visited-count] painter (the menu sheet row's badge today;
   // future surfaces wire up automatically).
   function refreshVisitedCount() {
-    const n = visited.count();
+    const n = previewFilteredCount(visited.list());
     document.querySelectorAll('[data-hb-visited-count]').forEach(el => {
       if (n > 0) {
         el.textContent = String(n);
@@ -2660,6 +2882,105 @@
     });
   }
 
+  // When the hidden ?by= URL filter is active, prune the baked chapter
+  // Reader cards (.cl-card .cl-photos) down to slides credited to one of
+  // the handles. Cards with zero matching photos are hidden outright;
+  // surviving cards have their non-matching <img.hb-slide> + dot pairs
+  // removed, the counter + credit-pill rewritten, and (when only one
+  // slide remains) demoted to single-photo by dropping .hb-multi plus
+  // the arrows / dots / counter. Runs BEFORE wireBakedCarousels so the
+  // carousel handlers only see the surviving slides.
+  function applyByFilterToChapterCards() {
+    if (!BY_HANDLES && !PREVIEW_MODE) return;
+    const ch = currentChapterId();
+    if (!ch) return;
+    // Chapter pages ship the photo sidecar (HB_SPOT_IMAGES) but NOT the
+    // SPOTS sidecar, so the spots store's byKey is empty until Convex
+    // hydrates. Fall back to the photos sidecar so the filter resolves
+    // credits on the first synchronous paint.
+    const photosSidecar = W.HB_SPOT_IMAGES || {};
+    document.querySelectorAll('.cl-card[id]').forEach(card => {
+      // Preview mode · hide cards whose slug isn't on the curated list
+      // before bothering with photo-credit walking. Runs in addition to
+      // the BY_HANDLES per-photo filter below, so both have to pass.
+      if (PREVIEW_MODE && !previewSpotAllowed(card.id)) {
+        card.style.display = 'none';
+        return;
+      }
+      const key = `${ch}#${card.id}`;
+      const spot = W.HB.spots.rawGet(key);
+      const allPhotos = (spot && spot.photos && spot.photos.length)
+        ? spot.photos
+        : (photosSidecar[key] || []);
+      const matchIndices = allPhotos
+        .map((p, i) => (matchesByCredit(p.credit) ? i : -1))
+        .filter(i => i >= 0);
+      if (matchIndices.length === 0) {
+        card.style.display = 'none';
+        return;
+      }
+      const photosEl = card.querySelector('.cl-photos');
+      if (!photosEl) return;
+      const slides = Array.from(photosEl.querySelectorAll('img.hb-slide'));
+      const dotsEl = photosEl.querySelector('.hb-dots');
+      const dotEls = dotsEl ? Array.from(dotsEl.children) : [];
+      // Walk slides in original order, removing the ones whose photo
+      // credit doesn't match. Pair-removes each slide with its dot so the
+      // remaining indices stay aligned.
+      slides.forEach((slide, i) => {
+        const matches = matchesByCredit(allPhotos[i]?.credit);
+        if (!matches) {
+          slide.remove();
+          if (dotEls[i]) dotEls[i].remove();
+        }
+      });
+      const remainingSlides = Array.from(photosEl.querySelectorAll('img.hb-slide'));
+      remainingSlides.forEach((s, i) => {
+        s.classList.toggle('is-current', i === 0);
+        // First slide is now the visible one; promote eager-load so it
+        // paints without waiting for IntersectionObserver.
+        if (i === 0) s.loading = 'eager';
+      });
+      const remainingDots = dotsEl ? Array.from(dotsEl.children) : [];
+      remainingDots.forEach((d, i) => d.classList.toggle('is-on', i === 0));
+      const counter = photosEl.querySelector('.hb-counter');
+      if (counter) counter.textContent = `1 / ${remainingSlides.length}`;
+      const credit = photosEl.querySelector('.credit-pill');
+      if (credit) {
+        const c = allPhotos[matchIndices[0]]?.credit;
+        if (c) credit.textContent = `Photo · ${c}`;
+      }
+      // Only one surviving slide → drop the multi-image affordances so
+      // the card reads as a single photo (no counter, no arrows, no dots).
+      if (remainingSlides.length < 2) {
+        photosEl.classList.remove('hb-multi');
+        photosEl.querySelectorAll('.hb-arrow').forEach(b => b.remove());
+        if (dotsEl) dotsEl.remove();
+        if (counter) counter.remove();
+      }
+    });
+  }
+
+  // When the hidden ?by= URL filter is active, rewrite every internal
+  // <a href> and [data-href] on the page so navigating from one screen
+  // to the next carries the filter. Skips external schemes, hash-only
+  // anchors, and links that already have the param. Runs early in boot()
+  // so it lands BEFORE wireCardLinks captures data-href at wire-time.
+  function rewriteInternalLinksForByFilter(root) {
+    if (!BY_RAW) return;
+    const r = root || document;
+    r.querySelectorAll('a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      const next = withBy(href);
+      if (next !== href) a.setAttribute('href', next);
+    });
+    r.querySelectorAll('[data-href]').forEach(el => {
+      const href = el.getAttribute('data-href');
+      const next = withBy(href);
+      if (next !== href) el.setAttribute('data-href', next);
+    });
+  }
+
   // --- Wire pre-baked chapter Reader card carousels (.cl-card .cl-photos).
   // The chapter HTML ships every photo as a stacked <img class="hb-slide">
   // plus dots + counter + chevron arrows. We just attach the click / swipe /
@@ -3014,12 +3335,15 @@
     // without copy or photos), so keep them pointing at the chapter
     // scroll where they render as a small "extras" grid item.
     if (spot.kind === 'extras_entry') {
-      return `${pre}${(spot.href || '').replace(/^\.\.\//, '')}`;
+      return withBy(`${pre}${(spot.href || '').replace(/^\.\.\//, '')}`);
     }
     const anchor = (spot.href || '').split('#')[1] || '';
-    if (anchor) return `${pre}spot/${anchor}/`;
-    return `${pre}${(spot.href || '').replace(/^\.\.\//, '')}`;
+    if (anchor) return withBy(`${pre}spot/${anchor}/`);
+    return withBy(`${pre}${(spot.href || '').replace(/^\.\.\//, '')}`);
   };
+  W.HB.byActive = !!BY_HANDLES;
+  W.HB.withBy = withBy;
+  W.HB.matchesByCredit = matchesByCredit;
   W.HB.singularKicker = singularKicker;
   W.HB.propertiesOf = propertiesOf;
   W.HB.buildPropertyIndex = buildPropertyIndex;
@@ -3134,6 +3458,19 @@
 
   // --- Boot
   function boot() {
+    // Preview mode body classes · CSS in preview.css reads these to
+    // hide spot names on wildcamping + hidden-gems (Leon's directive
+    // 2026-05-27 · those two pages show all spots in preview mode
+    // but should not reveal individual spot titles in promo
+    // recordings). The base 'preview-mode' class is also handy as a
+    // hook for future preview-only styling tweaks.
+    if (PREVIEW_MODE) {
+      document.body.classList.add('preview-mode');
+      const p = location.pathname || '';
+      if (/\/full\/(wildcamping|hidden-gems)\//.test(p)) {
+        document.body.classList.add('preview-hide-spot-names');
+      }
+    }
     // Wipe any inline margin set on .viewer by an earlier social.js
     // revision that pinned the viewer via JS. CSS now handles centering;
     // stale inline values would otherwise beat the CSS rule until a hard
@@ -3150,7 +3487,16 @@
     visited._reattach();
     swipes._reattach();
     injectRail();
+    // Propagate the hidden ?by= filter through every <a href> and
+    // [data-href] on the page. Must run BEFORE wireCardLinks, which
+    // captures data-href at wire-time, and AFTER injectRail so the rail
+    // nav items are included.
+    rewriteInternalLinksForByFilter();
     wireBackButtons();
+    // Prune chapter Reader cards down to matching photos BEFORE
+    // wireBakedCarousels so the carousel handlers only see surviving
+    // slides. No-op on non-chapter pages.
+    applyByFilterToChapterCards();
     wireBakedCarousels();
     wireCardLinks();
     injectHearts();

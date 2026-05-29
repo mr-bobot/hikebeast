@@ -7,11 +7,31 @@
 // German. Runs before any tracking script so Meta Pixel + Vercel
 // Analytics fire on the destination URL only, not both. Manual override
 // via localStorage 'hb_lang' set by the navbar EN/DE pill click below.
+//
+// IMPORTANT — when adding a new map page, add its slug to the regex
+// alternation below. The simpler self-deriving form (`/de` + pathname)
+// is NOT IAB-compatible — empirically verified on Instagram's in-app
+// browser 2026-05-22, PR #78. The lint at scripts/lint-tracking-pipeline.mjs
+// enforces that every page's own slug is in its alternation.
 (function () {
   try {
-    if (localStorage.getItem('hb_lang') === 'en') return;
-    var lang = (navigator.language || '').toLowerCase();
-    if (!lang.startsWith('de')) return;
+    var pref = null;
+    try { pref = localStorage.getItem('hb_lang'); } catch (e) {}
+    if (pref === 'en') return;
+    // Wants-DE signals (any one triggers):
+    //   (a) explicit hb_lang='de' from a prior DE-pill click
+    //   (b) primary navigator.language starts with 'de'
+    //   (c) any entry in navigator.languages starts with 'de' — catches
+    //       Safari users whose iOS Preferred Languages has en-US first
+    //       but de-* second, where the primary-only check missed.
+    var wantsDE = pref === 'de';
+    if (!wantsDE && (navigator.language || '').toLowerCase().indexOf('de') === 0) wantsDE = true;
+    if (!wantsDE && navigator.languages) {
+      for (var i = 0; i < navigator.languages.length; i++) {
+        if ((navigator.languages[i] || '').toLowerCase().indexOf('de') === 0) { wantsDE = true; break; }
+      }
+    }
+    if (!wantsDE) return;
     var target = location.pathname.replace(/^\/(map5|map4|map3|themap|map)\b/, '/de/$1');
     if (target === location.pathname) return;
     location.replace(target + location.search + location.hash);
@@ -21,7 +41,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
 <title>Switzerland Map · 100+ Hidden Swiss Spots with GPS</title>
-<meta name="description" content="The Switzerland map with 100+ hidden gems. Exact GPS, hike difficulty and more." />
+<meta name="description" content="Swiss Gems · 141 hidden spots in Switzerland for hiking and wildcamping. GPS, routes, and photo info for every spot." />
 <link rel="canonical" href="https://hikebeast.ch/map/" />
 <link rel="alternate" hreflang="en" href="https://hikebeast.ch/map/" />
 <link rel="alternate" hreflang="de" href="https://hikebeast.ch/de/map/" />
@@ -32,7 +52,7 @@
 <meta property="og:site_name" content="Hikebeast" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Switzerland Map · 100+ Hidden Spots" />
-<meta property="og:description" content="The ultimate Swiss map." />
+<meta property="og:description" content="Swiss Gems · 141 hidden spots in Switzerland for hiking and wildcamping. Each spot contains GPS, routes, and photo infos. Hand-mapped by Leon Helg over five years of scouting the Swiss Alps." />
 <meta property="og:url" content="https://hikebeast.ch/map5/" />
 <meta property="og:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 <meta property="og:image:width" content="1920" />
@@ -66,6 +86,11 @@ fbq('track', 'ViewContent', {
   currency: 'CHF'
 });
 </script>
+<!-- meta-cookies: capture ?fbclid= into _fbc cookie, expose
+     window.HBMeta.getCookies() for fbc + fbp pass-through. Loaded
+     after the Meta Pixel init so _fbp is set by the SDK before we
+     read it. Best-effort: failures are silent. -->
+<script src="/lib/meta-cookies.js"></script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 /></noscript>
@@ -119,7 +144,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.47;
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
-    padding: env(safe-area-inset-top) 0 calc(env(safe-area-inset-bottom) + 72px) 0;
+    padding: 0 0 calc(env(safe-area-inset-bottom) + 72px) 0;
   }
 
   /* === Navbar === */
@@ -128,10 +153,10 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     top: 0;
     z-index: 100;
     background: rgba(255,255,255,0.78);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    backdrop-filter: saturate(140%) blur(10px);
     border-bottom: 1px solid var(--hairline);
-    padding: 10px 22px;
+    padding: calc(10px + env(safe-area-inset-top)) 22px 10px 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -556,7 +581,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     flex-direction: column;
     gap: 14px;
   }
-  /* Sticky navbar offset so the "Get the map" heading lands below it,
+  /* Sticky navbar offset so the "Get the guide" heading lands below it,
      not behind it, when the buy CTAs scroll the page here. */
   #get-the-map {
     scroll-margin-top: 70px;
@@ -984,8 +1009,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     z-index: 90;
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
     background: rgba(255,255,255,0.86);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    backdrop-filter: saturate(140%) blur(10px);
     border-top: 1px solid var(--hairline);
     transform: translateY(100%);
     transition: transform 220ms ease;
@@ -1114,7 +1139,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
 
     .collection-grid { border-radius: var(--radius-card); }
 
-    /* "Get the map" heading · sits above a centered checkout
+    /* "Get the guide" heading · sits above a centered checkout
        sub-column (max-width 460px). Left-aligned heading + centered
        widget reads disjointed, so we center the heading on desktop.
        (Marked with .section-head--centered in the HTML so we don't
@@ -1324,7 +1349,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       <img src="../images/avatar.jpg" alt="" />
       Hikebeast
     </a>
-    <a class="navbar-lang" href="/de/map5/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">DE</a>
+    <a class="navbar-lang" href="/de/map5/" hreflang="de" onclick="try{localStorage.setItem('hb_lang','de')}catch(e){}" aria-label="Deutsche Version">🇩🇪 DE</a>
   </header>
 
   <main>
@@ -1430,7 +1455,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           </div>
         </div>
         <div class="inside-card">
-          <div class="card-photo"><img src="/map3/img/inside/webapp.jpg" alt="iPhone showing the Hikebeast webapp browsing 141 spots" loading="lazy" decoding="async" /></div>
+          <div class="card-photo"><img src="/map3/img/inside/webapp_v2.jpg" alt="iPhone showing the Hikebeast webapp browsing 141 spots" loading="lazy" decoding="async" /></div>
           <div class="card-body">
             <h3>A Webapp</h3>
             <p>An exciting way to plan your perfect itinerary.</p>
@@ -1453,6 +1478,20 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         <h2>What people say</h2>
       </div>
       <div class="reviews-carousel">
+        <div class="review-card review-card--expandable">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/lazyset_up.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Antonin</span>
+              <a class="review-handle" href="https://www.instagram.com/lazyset_up/" target="_blank" rel="noopener">@lazyset_up</a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"Honestly, it's an amazing guide with so many incredible spots. I already know Switzerland pretty well, but I had no idea about some of these places. The information is super useful too and all the details, best timings, sunlight conditions, parking, access, everything. Really recommend it!!!<br><br>Thanks a lot for all the dedication you put into this guide bro!"</p>
+          <button type="button" class="review-more-btn" data-more="Read more" data-less="Show less">Read more</button>
+        </div>
         <div class="review-card">
           <div class="review-head">
             <div class="review-avatar"><img src="/map3/img/avatars/dimi_tt7.jpg" alt="" loading="lazy" /></div>
@@ -1466,20 +1505,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           </div>
           <p class="review-quote">"I saved so many locations for this summer."</p>
         </div>
-        <div class="review-card review-card--expandable">
-          <div class="review-head">
-            <div class="review-avatar"><img src="/map3/img/avatars/lazyset_up.jpg" alt="" loading="lazy" /></div>
-            <div class="review-id">
-              <span class="review-name">Antonin</span>
-              <a class="review-handle" href="https://www.instagram.com/lazyset_up/" target="_blank" rel="noopener">@lazyset_up</a>
-            </div>
-            <div class="review-meta">
-              <span class="stars">★★★★★</span>
-            </div>
-          </div>
-          <p class="review-quote">"Thanks a lot for all the dedication you put into this guide bro! Honestly, it's an amazing guide with so many incredible spots. I already know Switzerland pretty well, but I had no idea about some of these places. The information is super useful too and all the details, best timings, sunlight conditions, parking, access, everything. Really recommend it!!!"</p>
-          <button type="button" class="review-more-btn" data-more="Read more" data-less="Show less">Read more</button>
-        </div>
         <div class="review-card">
           <div class="review-head">
             <div class="review-avatar"><img src="/map3/img/avatars/emirhansyz.jpg" alt="" loading="lazy" /></div>
@@ -1492,19 +1517,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             </div>
           </div>
           <p class="review-quote">"Überblick mit der Minimap usw so gut."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-head">
-            <div class="review-avatar"><img src="/map3/img/avatars/alexis-dansereau.jpg" alt="" loading="lazy" /></div>
-            <div class="review-id">
-              <span class="review-name">Alexis</span>
-              <a class="review-handle" href="https://www.instagram.com/alexis.dansereau/" target="_blank" rel="noopener">@alexis.dansereau</a>
-            </div>
-            <div class="review-meta">
-              <span class="stars">★★★★★</span>
-            </div>
-          </div>
-          <p class="review-quote">"I was in Switzerland for 14 days and went to 20 places from the list. Best holiday I EVER had."</p>
         </div>
         <div class="review-card">
           <div class="review-head">
@@ -1646,7 +1658,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     <!-- Embedded Stripe Checkout -->
     <section class="px" id="get-the-map">
       <div class="section-head section-head--centered">
-        <h2>Get the map</h2>
+        <h2>Get the guide</h2>
       </div>
       <div class="guarantee-wrap">
         <span class="guarantee-pill">
@@ -1654,7 +1666,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <circle cx="10" cy="10" r="9" fill="#34c759"/>
             <path d="M5.8 10.4l2.8 2.8 5.6-5.6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Less than 0.02% of buyers use our 30-day money-back guarantee!
+          I'm proud to say that less than 0.02% of buyers have used our 30-day money-back guarantee!
         </span>
       </div>
       <div class="checkout-wrap">
@@ -1704,7 +1716,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           </div>
           <div class="buy-name">Swiss Gems 🇨🇭</div>
           <div class="buy-price">CHF 27</div>
-          <a href="#get-the-map" class="buy-cta">Get the map</a>
+          <a href="#get-the-map" class="buy-cta">Get the guide</a>
           <div class="buy-foot">
             <span>Apple Pay · TWINT · Card</span>
             <a href="/terms.html#refunds">↩ 30-day refund</a>
@@ -1759,7 +1771,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   // POST below. Slug is lowercased; the webhook will match it against
   // users.username (also lowercase) when the purchase completes.
   const REF_KEY = "hb:r";
-  const REF_TTL_MS = 60 * 24 * 60 * 60 * 1000;
+  const REF_TTL_MS = 7 * 24 * 60 * 60 * 1000;
   (function persistRefIfPresent() {
     const raw = (params.get("r") || "").trim().toLowerCase();
     if (!raw) return;
@@ -1837,7 +1849,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       } else {
         carousel.scrollTo({ left: carousel.scrollLeft + sw, behavior: "smooth" });
       }
-    }, 5000);
+    }, 3000);
 
     const stopAutoplay = () => {
       if (autoplayTimer) {
@@ -1908,6 +1920,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   let stripe = null;
   let checkout = null;
   let mountInFlight = false;
+  // Stripe Checkout Session id from /api/checkout/session response, used
+  // as the eventID for the InitiateCheckout pixel + CAPI dedup.
+  let currentSessionId = null;
 
   // Visual stand-in shown when STRIPE_SECRET_KEY isn't configured yet.
   // Mirrors the layout of Stripe's real embedded iframe so the page can be
@@ -1964,6 +1979,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           utm_source: utmSource,
           utm_medium: utmMedium,
           utm_campaign: utmCampaign,
+          fbc: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbc : "") || "",
+          fbp: (window.HBMeta && window.HBMeta.getCookies ? window.HBMeta.getCookies().fbp : "") || "",
           r: readStoredRef(),
           source_page: "map5",
           hero_variant: window.HB_HERO_VARIANT || "",
@@ -1996,6 +2013,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       if (typeof data.currency === "string") {
         currentCurrency = data.currency.toLowerCase();
       }
+      if (typeof data.session_id === "string") {
+        currentSessionId = data.session_id;
+      }
       if (typeof data.amount === "number") {
         currentAmount = data.amount;
       }
@@ -2020,14 +2040,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       container.innerHTML = "";
       container.classList.add("is-mounted");
       checkout.mount("#checkout");
-
-      // InitiateCheckout signal for Meta
-      if (typeof fbq === "function") {
-        fbq("track", "InitiateCheckout", {
-          value: 27.0,
-          currency: currentCurrency.toUpperCase(),
-        });
-      }
     } catch (err) {
       console.error("Checkout mount failed:", err);
       container.innerHTML =
@@ -2037,11 +2049,89 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     }
   }
 
+  // InitiateCheckout · fires ONCE per session when the buyer first
+  // interacts with the embedded checkout form (tap/click or focus
+  // into the Stripe iframe). /map5/ was added 2026-05-16 from an
+  // older template and missed the 2026-05-15 fix that moved this
+  // out of mountCheckout — backfilled 2026-05-20.
+  function attachInitiateCheckoutSignal() {
+    var container = document.getElementById("checkout");
+    var stickyBuy = document.getElementById("sticky-buy");
+    if (!container && !stickyBuy) return;
+    var key = "hb:ic_fired";
+    try { if (sessionStorage.getItem(key) === "1") return; } catch (e) {}
+
+    function fire() {
+      if (container) {
+        container.removeEventListener("pointerdown", fire, true);
+        container.removeEventListener("focusin", fire, true);
+      }
+      if (stickyBuy) {
+        stickyBuy.removeEventListener("click", fire, true);
+      }
+      try { sessionStorage.setItem(key, "1"); } catch (e) {}
+      var icValue = typeof currentAmount === "number" ? currentAmount : 27;
+      var icCurrency = (currentCurrency || "chf").toUpperCase();
+      // Browser pixel · eventID = Stripe session id so the CAPI mirror
+      // (fired below via /api/visit beacon) dedupes against this.
+      if (typeof fbq === "function") {
+        try {
+          if (currentSessionId) {
+            fbq("track", "InitiateCheckout", { value: icValue, currency: icCurrency }, { eventID: currentSessionId });
+          } else {
+            fbq("track", "InitiateCheckout", { value: icValue, currency: icCurrency });
+          }
+        } catch (e) {}
+      }
+      // Server-side CAPI mirror · /api/visit forwards to Meta CAPI with
+      // event_id = session_id, matching the eventID above so Meta dedupes
+      // the pair into one InitiateCheckout event. Carries fbc/fbp from
+      // the buyer's browser so EMQ stays high.
+      if (currentSessionId) {
+        try {
+          var mc = (window.HBMeta && window.HBMeta.getCookies) ? window.HBMeta.getCookies() : { fbc: "", fbp: "" };
+          fetch("/api/visit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              event: "initiate_checkout",
+              session_id: currentSessionId,
+              value: icValue,
+              currency: icCurrency,
+              fbc: mc.fbc || "",
+              fbp: mc.fbp || "",
+            }),
+            keepalive: true,
+          }).catch(function () {});
+        } catch (e) {}
+      }
+    }
+    if (container) {
+      container.addEventListener("pointerdown", fire, true);
+      container.addEventListener("focusin", fire, true);
+    }
+    if (stickyBuy) {
+      // Sticky mobile buy button click = clearest intent signal outside
+      // the iframe. Stripe Embedded Checkout is cross-origin sandboxed so
+      // pointerdown/focusin on #checkout above only catches taps on the
+      // wrapper, not inside the iframe (which is where real interaction
+      // happens). The sticky button is rendered by us, so we can listen
+      // freely. Capture phase fires this BEFORE the anchor scroll to
+      // #checkout. 2026-05-27 addition · before this, IC events landed
+      // at Meta in only 2 of 1340 landing-page-views (Events Manager).
+      stickyBuy.addEventListener("click", fire, true);
+    }
+  }
+
   // Auto-mount checkout when the page is interactive
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mountCheckout);
-  } else {
+  function bootCheckout() {
     mountCheckout();
+    attachInitiateCheckoutSignal();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootCheckout);
+  } else {
+    bootCheckout();
   }
 
   // ---------- Page-visit ping for the funnel sheet ----------
@@ -2058,6 +2148,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         utm_source: utmSource,
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
+        source_page: "map5",
         browser_language: navigator.language || "",
         hero_variant: window.HB_HERO_VARIANT || "",
         device_type: (function () {

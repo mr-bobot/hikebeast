@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
+<script>(function(){try{if(localStorage.getItem('hb-theme')!=='light'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
 <title>Affiliate · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../preview.css" />
+<link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <style>
   /* Affiliate dashboard · single centered card, login-style. The page
@@ -122,7 +122,11 @@
     font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
   }
   .brand-sub {
-    font-size: 12px; color: var(--muted); letter-spacing: 0;
+    /* 2026-05-27 · the 50% commission is the headline value prop of the
+       page. Was 12px/muted; bumped to 14px/600/brand-blue so it carries
+       weight under the title without becoming a separate badge block. */
+    font-size: 14px; font-weight: 600;
+    color: #0071e3; letter-spacing: 0;
   }
 
   /* Internal section · padding + a top hairline. First section after
@@ -174,10 +178,10 @@
   }
 
   /* Resources · single tile linking to the shared Drive folder of promo
-     material affiliates can use (photos, clips, copy templates). */
+     material affiliates can use (photos, clips, copy templates).
+     Icon added 2026-05-27 to match the /full/more/ row-link visual. */
   .resources-link {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px;
+    display: flex; align-items: center; gap: 12px;
     padding: 12px 14px;
     background: var(--paper);
     border: 1px solid var(--hairline);
@@ -191,7 +195,20 @@
     border-color: var(--hairline-strong);
     background: var(--surface-2);
   }
-  .resources-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .resources-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  :root[data-theme="dark"] .resources-icon {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .resources-text { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
   .resources-title { font-size: 14px; font-weight: 600; letter-spacing: -0.005em; }
   .resources-sub { font-size: 12px; color: var(--muted); }
   .resources-arrow { font-size: 16px; color: var(--muted); flex-shrink: 0; }
@@ -202,6 +219,60 @@
     line-height: 1.15;
   }
   .stat-value.is-empty { color: var(--muted); font-weight: 500; }
+
+  /* Info-icon button + popover · used on the Earned and Referrals
+     stat labels to explain what they count. Click/tap toggles the
+     tooltip; click outside dismisses. No hover-only path so touch
+     devices get the same affordance as desktop. */
+  .info-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px;
+    margin-left: 4px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 999px;
+    vertical-align: -2px;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .info-btn:hover, .info-btn:focus-visible { color: var(--fg); }
+  .info-btn:focus-visible { outline: 2px solid #0071e3; outline-offset: 2px; }
+  .info-btn svg { width: 12px; height: 12px; display: block; }
+
+  .info-tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    max-width: calc(100vw - 32px);
+    padding: 8px 12px;
+    background: var(--fg);
+    color: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 12px; font-weight: 400;
+    letter-spacing: 0; text-transform: none;
+    line-height: 1.4; text-align: center;
+    border-radius: 8px;
+    white-space: normal;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms ease;
+  }
+  .info-tooltip.is-visible { opacity: 1; }
+  .info-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--fg);
+  }
 
   /* Activity list. No external glass — the parent card is the surface. */
   .activity { margin: 0; padding: 0; list-style: none; }
@@ -293,29 +364,21 @@
       </div>
 
       <div class="sec first">
-        <p class="sec-label">English</p>
+        <p class="sec-label">Share link</p>
         <div class="share-controls">
-          <span class="share-url" id="linkEn">hikebeast.ch/map?r=…</span>
+          <span class="share-url" id="linkEn">hikebeast.ch/swissmap?r=…</span>
           <button type="button" class="btn-copy" data-target="linkEn">Copy</button>
-        </div>
-      </div>
-
-      <div class="sec">
-        <p class="sec-label">Deutsch</p>
-        <div class="share-controls">
-          <span class="share-url" id="linkDe">hikebeast.ch/de/map?r=…</span>
-          <button type="button" class="btn-copy" data-target="linkDe">Copy</button>
         </div>
       </div>
 
       <div class="sec">
         <div class="stats">
           <div>
-            <p class="sec-label">Total</p>
+            <p class="sec-label">Earned<button type="button" class="info-btn" data-tooltip="Paid + pending commission, summed per currency. Refunded sales are excluded." aria-label="What does Earned mean?"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none"/></svg></button></p>
             <p class="stat-value is-empty" id="statTotal">0</p>
           </div>
           <div>
-            <p class="sec-label">Referrals</p>
+            <p class="sec-label">Referrals<button type="button" class="info-btn" data-tooltip="Number of sales attributed to your link. Includes pending, paid, and refunded." aria-label="What does Referrals mean?"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none"/></svg></button></p>
             <p class="stat-value is-empty" id="statCount">0</p>
           </div>
         </div>
@@ -323,12 +386,18 @@
 
       <div class="sec">
         <p class="sec-label">Resources</p>
-        <a class="resources-link" href="https://drive.google.com/drive/folders/1oBZ1HWqt5P57ugwm3CZDxH2NS3IeahDZ?usp=share_link" target="_blank" rel="noopener">
-          <span class="resources-text">
-            <span class="resources-title">Promo material</span>
-            <span class="resources-sub">Photos, clips and ready-to-share copy</span>
+        <a class="resources-link" href="materials/">
+          <span class="resources-icon" aria-hidden="true">
+            <!-- Folder-stack icon · matches the Materials row on /full/more/. -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+            </svg>
           </span>
-          <span class="resources-arrow" aria-hidden="true">↗</span>
+          <span class="resources-text">
+            <span class="resources-title">Affiliate materials</span>
+            <span class="resources-sub">Spot cards, Earth animations, thumbnails, map overlays + preview-mode toggle</span>
+          </span>
+          <span class="resources-arrow" aria-hidden="true">→</span>
         </a>
       </div>
 
@@ -359,7 +428,6 @@
     const elNotEligible  = document.getElementById('affNotEligible');
     const elContent      = document.getElementById('affContent');
     const elLinkEn    = document.getElementById('linkEn');
-    const elLinkDe    = document.getElementById('linkDe');
     const elStatTotal = document.getElementById('statTotal');
     const elStatCount = document.getElementById('statCount');
     const elList      = document.getElementById('affList');
@@ -410,12 +478,30 @@
       return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
 
+    // Default affiliate landing · /swissmap/ since 2026-05-28 (was
+    // /map9/ 2026-05-26 → /map8/ 2026-05-24 → /map/ before that).
+    // /swissmap/ is the channel-specific mirror of /map9/ launched
+    // for influencer + affiliate traffic. Identical product/UX/hero
+    // A/B/dark-mode/locales to /map9/ · only the source_page tag
+    // differs so affiliate traffic + buyers attribute separately in
+    // AllVisits without polluting the /map9/ A/B-test dataset. Old
+    // /map/ + /map[3-9]/ URLs still serve the product and accept
+    // ?r= attribution, so existing affiliate links don't break · this
+    // only changes what new affiliates see in the dashboard's
+    // copy-to-share field.
+    //
+    // UTM tagging · every affiliate-issued URL carries utm_source=affiliate.
+    // That's the single signal the HB_SOURCE classifier on the landing
+    // page reads to set `source = "affiliate"` in the Sheet · the
+    // commission attribution still keys off ?r=<username>. Dropped
+    // utm_medium + utm_campaign 2026-05-28 because they were redundant:
+    // utm_medium=referral wasn't read anywhere downstream, and
+    // utm_campaign=<username> duplicated ?r=<username>. Vercel Analytics
+    // can already slice per-affiliate via the `affiliate_ref` event prop.
     function paintShareLinks(username) {
       const enc = encodeURIComponent(username);
-      const enUrl = 'https://hikebeast.ch/map?r=' + enc;
-      const deUrl = 'https://hikebeast.ch/de/map?r=' + enc;
-      elLinkEn.textContent = enUrl; elLinkEn.dataset.url = enUrl;
-      elLinkDe.textContent = deUrl; elLinkDe.dataset.url = deUrl;
+      const url = 'https://hikebeast.ch/swissmap?r=' + enc + '&utm_source=affiliate';
+      elLinkEn.textContent = url; elLinkEn.dataset.url = url;
     }
 
     // One handler for all `[data-target="<linkId>"]` Copy buttons. Reads
@@ -510,20 +596,17 @@
           elSignedOut.hidden = false;
           return;
         }
-        // Eligibility gate: only isAffiliate=true users see the dashboard.
-        // Non-eligible users get a dedicated invite-only state.
-        if (!u.isAffiliate) {
-          elLoading.hidden = true;
-          elNotEligible.hidden = false;
-          return;
-        }
+        // Eligibility gate dropped 2026-05-27 · every signed-in /full/
+        // user is an affiliate by default. The `affNotEligible` state
+        // div + `elNotEligible` reference below are now unreachable
+        // and kept only for graceful degradation if listForCurrentUser
+        // ever returns a non-data shape (defence in depth · we still
+        // surface signed-out when the query throws).
         paintShareLinks(u.username);
         const data = await client.query('referrals:listForCurrentUser', { sessionToken: token });
-        // Server-side gate: also returns { eligible: false } for non-affiliates
-        // even though we already filtered on the client. Defence in depth.
-        if (!data || data.eligible === false) {
+        if (!data) {
           elLoading.hidden = true;
-          elNotEligible.hidden = false;
+          elSignedOut.hidden = false;
           return;
         }
         const rows = data.referrals || [];
@@ -538,6 +621,39 @@
         elLoading.hidden = true;
         elSignedOut.hidden = false;
       });
+  })();
+
+  /* Tooltip behaviour · click/tap toggles, click anywhere else closes.
+     Same trigger on mouse and touch · no hover-only path so phone users
+     get the same affordance as desktop. The tooltip element is created
+     once per [data-tooltip] button and appended inside the button so
+     it inherits the button's position (relative). Stop-propagation on
+     the button click prevents the document-level click handler from
+     immediately re-closing the tooltip we just opened. */
+  (function setupTooltips() {
+    const tips = [];
+    document.querySelectorAll('[data-tooltip]').forEach(btn => {
+      const tip = document.createElement('span');
+      tip.className = 'info-tooltip';
+      tip.textContent = btn.getAttribute('data-tooltip');
+      btn.appendChild(tip);
+      tips.push(tip);
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const wasOpen = tip.classList.contains('is-visible');
+        tips.forEach(t => t.classList.remove('is-visible'));
+        if (!wasOpen) tip.classList.add('is-visible');
+      });
+    });
+    document.addEventListener('click', () => {
+      tips.forEach(t => t.classList.remove('is-visible'));
+    });
+    // Close on Escape so keyboard users (rare on this page but cheap to
+    // support) can dismiss without clicking back into nothing.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') tips.forEach(t => t.classList.remove('is-visible'));
+    });
   })();
 </script>
 </body>

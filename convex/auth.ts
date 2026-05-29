@@ -116,8 +116,11 @@ function newSessionToken(): string {
 }
 
 // ── Admin gate (matches spots.ts) ─────────────────────────────────────────
-
-async function requireAdmin(provided: string): Promise<void> {
+//
+// Exported so sibling Convex modules (e.g. referrals.ts) can gate their
+// own admin mutations against the same ADMIN_TOKEN without duplicating
+// the constant-time compare.
+export async function requireAdmin(provided: string): Promise<void> {
   const expected = process.env.ADMIN_TOKEN;
   if (!expected) throw new Error("ADMIN_TOKEN not configured on this deployment");
   // Constant-time compare via SHA-256 of both sides (lengths match).
@@ -330,7 +333,12 @@ export const adminCreateUser = mutation({
       passwordPhc: phc,
       handle:      handle?.trim() || undefined,
       isAdmin:     isAdmin || undefined,
-      isAffiliate: isAffiliate || undefined,
+      // Default to affiliate-eligible (2026-05-27 · every /full/ user is
+      // an affiliate by default, including admin/test accounts created
+      // here, not just paid buyers from createPaidUser). Caller can
+      // explicitly pass `isAffiliate: false` to opt a special account
+      // out of the affiliate program.
+      isAffiliate: isAffiliate === false ? undefined : true,
       createdAt:   now,
       lastSeenAt:  now,
     });
@@ -376,6 +384,36 @@ export const adminMintClaimLink = mutation({
   },
 });
 
+// Backfill an existing user's instagramHandle. Used by the one-shot
+// scripts/backfill-instagram-to-convex-stripe.mjs (2026-05-26) to
+// mirror ManyChat-sourced IG handles from the Signups sheet into
+// Convex + Stripe customer metadata. setIfEmpty semantics · won't
+// clobber a manually-set value (e.g. one a buyer typed into the
+// success-page form post-purchase). Admin-token gated.
+export const adminSetInstagramHandle = mutation({
+  args: {
+    email:           v.string(),
+    instagramHandle: v.string(),
+    adminToken:      v.string(),
+  },
+  handler: async (ctx, { email, instagramHandle, adminToken }) => {
+    await requireAdmin(adminToken);
+    const lower = email.trim().toLowerCase();
+    const handle = instagramHandle.trim().toLowerCase().replace(/^@+/, "");
+    if (!handle) return { ok: false, reason: "empty_handle" };
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_email", q => q.eq("email", lower))
+      .unique();
+    if (!user) return { ok: false, reason: "user_not_found", email: lower };
+    if (user.instagramHandle && user.instagramHandle.trim()) {
+      return { ok: true, skipped: "already_set", existing: user.instagramHandle };
+    }
+    await ctx.db.patch(user._id, { instagramHandle: handle });
+    return { ok: true, updated: true, username: user.username };
+  },
+});
+
 // Flip the affiliate flag on an existing user. Useful for promoting
 // someone to influencer / affiliate status after the fact, or revoking
 // it. Admin-token gated, same as adminCreateUser.
@@ -395,6 +433,34 @@ export const adminSetAffiliate = mutation({
     if (!user) throw new Error(`No user with username: ${norm}`);
     await ctx.db.patch(user._id, { isAffiliate: isAffiliate || undefined });
     return { username: norm, isAffiliate };
+  },
+});
+
+// One-shot backfill: set isAffiliate=true on every user that doesn't
+// already have it. Runs alongside the 2026-05-27 change that flips
+// createPaidUser to set isAffiliate=true by default — without this, the
+// 100s of buyers that already exist would stay locked out of
+// /full/affiliate/. Idempotent: re-running only patches rows still
+// missing the flag.
+//
+// Run order per workflow rules:
+//   1. CONVEX_DEPLOYMENT=dev:unique-goose-988 npx convex run \
+//        auth:adminBackfillAllUsersAffiliate '{"adminToken":"..."}'
+//   2. Verify on Vercel preview that buyers see /full/affiliate/.
+//   3. Same command against dev:whimsical-sparrow-336 (prod).
+export const adminBackfillAllUsersAffiliate = mutation({
+  args: { adminToken: v.string() },
+  handler: async (ctx, { adminToken }) => {
+    await requireAdmin(adminToken);
+    const users = await ctx.db.query("users").collect();
+    let touched = 0;
+    for (const u of users) {
+      if (!u.isAffiliate) {
+        await ctx.db.patch(u._id, { isAffiliate: true });
+        touched++;
+      }
+    }
+    return { totalUsers: users.length, touched };
   },
 });
 
@@ -720,8 +786,13 @@ export const createPaidUser = mutation({
     paymentIntentId:  v.string(),     // stored in users.whopLicenseKey for now
     username:         v.optional(v.string()),
     password:         v.string(),
+    // Optional · IG handle collected on the /map9/success/ onboarding
+    // form. Already normalized lambda-side (trim, strip leading @,
+    // lowercase, 40-char cap). Pass-through into users.instagramHandle.
+    // Missing or empty → field stays undefined.
+    instagramHandle:  v.optional(v.string()),
   },
-  handler: async (ctx, { email, firstName, paymentIntentId, username, password }) => {
+  handler: async (ctx, { email, firstName, paymentIntentId, username, password, instagramHandle }) => {
     if (password.length < 8) throw new Error("Password must be at least 8 characters");
 
     const lower = email.trim().toLowerCase();
@@ -776,14 +847,22 @@ export const createPaidUser = mutation({
     const now = Date.now();
     const handle = (firstName && firstName.trim()) ? firstName.trim().slice(0, 60) : candidate;
 
+    const trimmedIg = instagramHandle ? instagramHandle.trim() : "";
     const userId = await ctx.db.insert("users", {
-      username:       candidate,
-      email:          lower,
-      passwordPhc:    phc,
+      username:        candidate,
+      email:           lower,
+      passwordPhc:     phc,
       handle,
-      whopLicenseKey: paymentIntentId,   // re-purpose: stripe payment_intent_id
-      createdAt:      now,
-      lastSeenAt:     now,
+      instagramHandle: trimmedIg || undefined,
+      whopLicenseKey:  paymentIntentId,  // re-purpose: stripe payment_intent_id
+      // Every paid buyer is an affiliate by default since 2026-05-27 — the
+      // program is now open to everyone, not just curated influencers. The
+      // dashboard at /full/affiliate/ becomes visible immediately on
+      // first login. Backfill for users created before this change is via
+      // auth:adminBackfillAllUsersAffiliate (run once per Convex deployment).
+      isAffiliate:     true,
+      createdAt:       now,
+      lastSeenAt:      now,
     });
 
     const rawToken = newSessionToken();

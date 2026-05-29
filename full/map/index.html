@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
+<script>(function(){try{if(localStorage.getItem('hb-theme')!=='light'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
 <title>Map · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../preview.css" />
+<link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <link rel="stylesheet" href="../lib/leaflet/leaflet.css" />
 <style>
@@ -345,6 +345,16 @@
     box-shadow: var(--shadow-soft) !important;
   }
 
+  /* Popup body in dark mode · Leaflet's default
+     .leaflet-popup-content-wrapper background stays white in dark,
+     and .spot-popup h3 uses var(--fg) which flips to near-white ·
+     net result was white title on white card. Flip the wrapper to
+     --paper so it picks up the dark surface color, and bump the
+     box-shadow on dark for separation against the dark page. */
+  :root[data-theme="dark"] .leaflet-popup-content-wrapper {
+    background: var(--paper);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.30);
+  }
   /* Popup "Read" CTA: var(--fg) becomes near-white in dark, white
      text on white is invisible. Deep navy keeps the heavy-button feel. */
   :root[data-theme="dark"] .spot-popup .read { background: #003162; color: #fff; }
@@ -381,7 +391,7 @@
   }
 </style>
 </head>
-<body>
+<body class="markers-animating">
 
 <div class="topbar">
   <a class="brand" href="../index.html">
@@ -402,8 +412,8 @@
       <span class="fav-count" id="favToggleCount" hidden>0</span>
     </button>
   </div>
-  <label class="marker-mode-switch" title="Show photo cards instead of dots">
-    <span class="label">Cards</span>
+  <label class="marker-mode-switch" title="Show photos instead of dots">
+    <span class="label">Photos</span>
     <span class="switch">
       <input type="checkbox" id="markerModeToggle" />
       <span class="track" aria-hidden="true"></span>
@@ -417,19 +427,37 @@
 
 <script src="../lib/leaflet/leaflet.js"></script>
 <script src="spots-data.js"></script>
+<script src="../img/spot-images.js"></script>
 <script src="../lib/convex.js"></script>
 <script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
-<script src="../social.js"></script>
+<script src="../social.js?v=20260526a"></script>
 <script>
   // preferCanvas + smaller-touch-handler: Canvas vector renderer is
   // dramatically faster than SVG/DOM for many markers, esp. on mobile.
   const isMobile = window.matchMedia('(max-width: 700px)').matches;
   const map = L.map('map', {
     zoomControl: true, attributionControl: false,
-    minZoom: 7, maxZoom: 13,
+    // minZoom lowered from 7 → 6 on 2026-05-24 so the auto-fit below
+    // can actually fit Switzerland on a 375px-wide phone (full-country
+    // fit requires zoom ~6 on that viewport; 7 was clipping the east
+    // and west edges).
+    minZoom: 6, maxZoom: 13,
     preferCanvas: true,
     tap: false,           // skip Leaflet's tap-delay on touch devices
-  }).setView([46.82, 8.22], 8);
+  });
+
+  // Fit the Swiss bounding box. The +1 zoom bump that lived here from
+  // 2026-05-24 → 2026-05-26 made Switzerland fill the viewport tightly,
+  // but Leon (2026-05-26) now wants more breathing room around the
+  // country so neighbouring regions are visible in the default view
+  // (better discovery feel · also the canonical look in affiliate
+  // recordings). Larger padding pulls the fit-bounds zoom one notch
+  // out without touching minZoom · gives ~5° of border around CH on
+  // desktop, less on mobile (where padding is the same ratio of a
+  // smaller viewport).
+  // Bounds: SW corner (Geneva area) → NE corner (Graubünden tip).
+  const SWISS_BOUNDS = L.latLngBounds([45.82, 5.96], [47.81, 10.49]);
+  map.fitBounds(SWISS_BOUNDS, { padding: [60, 60] });
 
   // social.js injects the left rail AFTER page parse, which shifts the
   // body's padding-left and shrinks .map-shell width. Without this,
@@ -441,6 +469,25 @@
   if (shellEl && window.ResizeObserver) {
     new ResizeObserver(() => map.invalidateSize()).observe(shellEl);
   }
+
+  // Double-right-click → zoom out. Mirrors Leaflet's default double-left-
+  // click-to-zoom-in, gives mouse users a one-handed way to zoom out
+  // without reaching for the +/- buttons or scroll wheel. Two right-clicks
+  // within 400 ms trigger the zoom; the first one is a no-op (Leaflet
+  // suppresses the browser context menu when no menu is wired). On touch
+  // devices contextmenu fires on long-press and the 400ms window won't
+  // realistically trigger, so the gesture stays mouse-only without an
+  // explicit isMobile guard.
+  let __lastRightClickTs = 0;
+  map.on('contextmenu', () => {
+    const now = Date.now();
+    if (now - __lastRightClickTs < 400) {
+      map.zoomOut();
+      __lastRightClickTs = 0;
+    } else {
+      __lastRightClickTs = now;
+    }
+  });
 
   // Sourced through HB.spots. Sidecar-seeded synchronously so the initial
   // forEach has data even before Convex's WebSocket connects. The first
@@ -575,10 +622,35 @@
   }
   buildMarkers();
 
-  // Initial paint shows markers immediately — no entrance animation.
-  // The reveal cascade (playCardReveal below) only fires when the user
-  // flips the Dots ↔ Cards toggle. We used to play it on first load too,
-  // but the 1s delay + 2.5s cascade made the map feel slow to come up.
+  // Initial-load reveal: <body class="markers-animating"> in the HTML
+  // keeps every marker hidden from first paint — no flash-of-visible-
+  // then-hidden before the cascade starts. We then GATE the cascade
+  // behind Convex catch-up so it fires exactly once, on the final
+  // marker set. Earlier versions kicked the cascade from a poll as
+  // soon as sidecar markers were rendered; Convex catch-up a few
+  // hundred ms later then tore those markers down and forced a
+  // restart, which the user saw as the cascade reloading from zero
+  // halfway through.
+  //
+  // readyToReveal:        Convex (or the fallback timer) has settled
+  //                       on the canonical marker set; safe to play.
+  // initialRevealStarted: playCardReveal has been called; idempotent.
+  let readyToReveal = false;
+  let initialRevealStarted = false;
+  function tryInitialReveal() {
+    if (initialRevealStarted) return true;
+    if (!readyToReveal) return false;
+    if (!document.querySelectorAll('.spot-marker').length) return false;
+    initialRevealStarted = true;
+    playCardReveal();
+    return true;
+  }
+  // Poll picks up the marker DOM nodes after Leaflet paints them. The
+  // gate (readyToReveal) keeps this a no-op until Convex confirms.
+  const initialRevealPoll = setInterval(() => {
+    if (tryInitialReveal()) clearInterval(initialRevealPoll);
+  }, 80);
+  setTimeout(() => clearInterval(initialRevealPoll), 5000);
 
   // One-shot rebuild on the first Convex push so the missing spots (no
   // GPS or recently added) and derivative thumbnails appear without a
@@ -591,10 +663,23 @@
     SPOTS = window.HB.spots.all().filter(s => window.HB.hasRealImage(s));
     buildMarkers();
     if (typeof applyFavFilter === 'function') applyFavFilter();
-    // Markers replaced silently — body has no `markers-animating` class
-    // outside of a user-initiated toggle, so the new DOM nodes paint
-    // in place.
+    // Markers are now the final canonical set. Green-light the
+    // cascade and try to fire immediately (the poll catches it on
+    // the next tick if Leaflet hasn't painted yet).
+    readyToReveal = true;
+    requestAnimationFrame(tryInitialReveal);
   });
+
+  // Fallback: if Convex doesn't arrive within 1.5 s (offline, blocked,
+  // slow WebSocket), play the cascade on the sidecar markers so the
+  // map doesn't stay blank. Typical Convex round-trip is 200-500 ms,
+  // so this only fires for degraded networks.
+  setTimeout(() => {
+    if (!readyToReveal) {
+      readyToReveal = true;
+      tryInitialReveal();
+    }
+  }, 1500);
 
   // === Marker scale grows with zoom so spot thumbnails are legible up close
   // without crowding the low-zoom country view. Computed once per zoom and
@@ -674,7 +759,12 @@
   // an accelerating cadence (early cards spaced out, late cards land
   // in a flurry). Total card-to-last-card duration ≈ 2.5s; the
   // sqrt(i/N) curve gives the acceleration.
-  const REVEAL_DELAY_MS = 1000;
+  // How long markers stay fully hidden before the first one starts
+  // fading in. Was 1000 ms when only the toggle triggered the cascade
+  // (the pause separated "I clicked" from "stuff happens"). Now that
+  // initial load also runs the cascade, the user is already staring
+  // at a blank map waiting — shorten it so the first dot lands quickly.
+  const REVEAL_DELAY_MS = 200;
   const REVEAL_DURATION_MS = 2500;
   let revealCleanup = null;
   function playCardReveal() {
@@ -701,7 +791,14 @@
     timers.push(startTimer);
     revealCleanup = () => {
       timers.forEach(clearTimeout);
-      document.body.classList.remove('markers-animating');
+      // Intentionally NOT removing 'markers-animating' here. Cleanup
+      // only fires when playCardReveal is being called again (Convex
+      // catch-up restart or a toggle); that caller adds the class back
+      // immediately after, but the one-frame gap between remove and
+      // add was painting every marker for ~16 ms — read as "the
+      // cascade restarted from zero". The natural endTimer above is
+      // the only place that removes it; staying hidden across the
+      // restart is what we want.
       markers.forEach(m => m.classList.remove('is-revealed'));
     };
   }

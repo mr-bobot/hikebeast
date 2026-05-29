@@ -139,6 +139,12 @@ export default defineSchema({
     email:           v.optional(v.string()),        // optional, kept for later magic-link / Stripe match
     passwordPhc:     v.string(),                    // pbkdf2$iters$salt$hash
     handle:          v.optional(v.string()),        // display name, separate from username
+    // Instagram handle (lowercased, no leading @, ≤40 chars). Captured
+    // on the /map9/success/ onboarding form for non-ManyChat buyers
+    // (Linktree, ads, organic) so Leon's support pipeline can DM them
+    // back. Also written to the Signups sheet via attach_instagram +
+    // to Stripe customer metadata in the same lambda call. Added 2026-05-26.
+    instagramHandle: v.optional(v.string()),
     avatarStorageId: v.optional(v.id("_storage")),
     whopLicenseKey:  v.optional(v.string()),        // future: Stripe / Whop license linkage
     isAdmin:         v.optional(v.boolean()),
@@ -265,7 +271,25 @@ export default defineSchema({
     createdAt:             v.number(),
     paidAt:                v.optional(v.number()),
     payoutNote:            v.optional(v.string()),              // free-text, e.g. "Stripe transfer tr_..."
-  }).index("by_refSlug",       ["refSlug"])
-    .index("by_stripeSession", ["stripeSessionId"])
-    .index("by_paymentIntent", ["stripePaymentIntentId"]),
+    // Product identifier for the "one commission per buyer-product pair"
+    // rule. Today there's only one product ("hidden_gems") so this is
+    // effectively constant, but the index lets us scale to a second
+    // product (Full Guide, etc.) without a schema change. Optional for
+    // backward compat with rows written before 2026-05-26 — those are
+    // implicitly "hidden_gems" and backfilled by
+    // referrals:adminBackfillProductKey.
+    productKey:            v.optional(v.string()),
+    // Timestamp the row was flipped to "voided" by voidByPaymentIntent.
+    // Combined with `paidAt`, lets the monthly payout batch distinguish
+    // pre-payout voids (most refunds; paidAt is undefined → no clawback)
+    // from post-payout voids (paidAt set + voidedAt > lastPayout →
+    // clawback against next month's balance).
+    voidedAt:              v.optional(v.number()),
+  }).index("by_refSlug",            ["refSlug"])
+    .index("by_stripeSession",      ["stripeSessionId"])
+    .index("by_paymentIntent",      ["stripePaymentIntentId"])
+    // Enforces "one commission per buyer-product pair" in recordPurchase
+    // by letting us cheaply look up an existing non-voided row for the
+    // (buyerEmail, productKey) tuple before inserting a duplicate.
+    .index("by_buyerEmail_product", ["buyerEmail", "productKey"]),
 });

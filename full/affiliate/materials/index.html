@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<script>(function(){try{if(localStorage.getItem('hb-theme')!=='light'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
+<title>Affiliate materials · Gems of Switzerland · Hikebeast</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/jpeg" href="../../../images/favicon.jpg" />
+<link rel="apple-touch-icon" href="../../../images/favicon.jpg" />
+<link rel="manifest" href="../../../manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Hikebeast" />
+<meta name="mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" href="../../preview.css?v=20260526a" />
+<style>
+  /* Affiliate materials · single-card login-style layout (matches
+     /full/affiliate/, /full/account/, /full/more/). Four resource
+     rows that link to public-shareable Google Drive folders Leon
+     curates, plus a Preview-mode toggle that affiliates can flip
+     before doing a screen recording so they don't reveal the full
+     library of spots + photos to their audience. 2026-05-24. */
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--fg);
+    position: relative;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -120px;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(460px 420px at 18% 22%, rgba(0, 113, 227, 0.45) 0%, transparent 70%),
+      radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.38) 0%, transparent 72%),
+      radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.40) 0%, transparent 70%),
+      radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.55) 0%, transparent 75%);
+    filter: blur(70px) saturate(1.1);
+    opacity: 0.9;
+  }
+  :root[data-theme="dark"] body::before {
+    background:
+      radial-gradient(460px 420px at 18% 22%, rgba(10, 132, 255, 0.16) 0%, transparent 70%),
+      radial-gradient(420px 380px at 82% 28%, rgba(96, 165, 250, 0.12) 0%, transparent 72%),
+      radial-gradient(520px 480px at 50% 92%, rgba(56, 132, 220, 0.14) 0%, transparent 70%),
+      radial-gradient(380px 360px at 92% 78%, rgba(180, 210, 255, 0.10) 0%, transparent 75%);
+    opacity: 0.7;
+  }
+
+  .mat-page {
+    position: relative; z-index: 1;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 20px;
+  }
+  .card-wrap { margin: auto; width: 100%; max-width: 460px; }
+
+  .back {
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--fg);
+    font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    margin-bottom: 14px;
+    transition: border-color 150ms ease, transform 100ms ease;
+  }
+  .back:hover { border-color: var(--hairline-strong); }
+  .back:active { transform: scale(0.98); }
+
+  .legal-foot {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .legal-foot a { color: var(--muted); text-decoration: none; }
+  .legal-foot a:hover { color: var(--fg); }
+  .legal-foot .sep { margin: 0 6px; }
+  .legal-foot .copy { display: block; }
+
+  /* No outer glass card · 2026-05-24 Leon called the previous "box
+     within a box" (resource tiles inside a parent .card) cluttered.
+     The resource rows themselves are the cards now; everything else
+     (brand, section labels, footer) sits directly on the page wash. */
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 0 14px;
+  }
+  .brand img { width: 32px; height: 32px; border-radius: 999px; flex-shrink: 0; }
+  .brand b { font-size: 20px; font-weight: 600; letter-spacing: -0.015em; }
+
+  .sec {
+    padding: 18px 0 8px;
+  }
+  .sec.first { padding-top: 8px; }
+  .sec-label {
+    margin: 0 0 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Resource rows · whole-row tappable cards, two-line content +
+     subtle "↗" arrow signalling external-link. Stacked with a small
+     gap so each row reads as its own affordance, not a merged list. */
+  .res-rows { display: flex; flex-direction: column; gap: 10px; }
+  .res-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 150ms ease, transform 100ms ease;
+  }
+  .res-link:hover { border-color: var(--hairline-strong); }
+  .res-link:active { transform: scale(0.99); }
+  .res-link-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .res-link-body { flex: 1; min-width: 0; }
+  .res-link-title {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 2px 0 4px;
+  }
+  .res-link-sub {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  .res-link-arrow {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 18px;
+    margin-top: 6px;
+  }
+
+  /* Preview-mode toggle · iOS-style switch built from a hidden
+     checkbox + a styled label. State persists to
+     localStorage[hb:preview_mode:v1] · the actual content-filtering
+     behaviour (Explore by leon.helg, chapters narrowed to 21 spots,
+     etc.) is wired in a follow-up. Today this just stores the flag
+     so the wiring has somewhere to read from. */
+  .toggle-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+  }
+  .toggle-body { flex: 1; min-width: 0; }
+  .toggle-title {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 2px 0 4px;
+  }
+  .toggle-sub {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  .toggle-switch {
+    position: relative;
+    flex-shrink: 0;
+    width: 44px;
+    height: 26px;
+    border-radius: 999px;
+    background: rgba(120, 120, 128, 0.32);
+    transition: background 200ms ease;
+    cursor: pointer;
+    margin-top: 4px;
+  }
+  .toggle-switch::before {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 22px; height: 22px;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 200ms ease;
+  }
+  .toggle-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .toggle-checkbox:checked + .toggle-switch { background: var(--accent); }
+  .toggle-checkbox:checked + .toggle-switch::before { transform: translateX(18px); }
+  .toggle-checkbox:focus-visible + .toggle-switch {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<main class="mat-page">
+ <div class="card-wrap">
+  <a class="back" href="../">← Back</a>
+
+    <div class="brand">
+      <img src="/images/avatar.jpg" alt="" />
+      <b>Affiliate materials</b>
+    </div>
+
+    <div class="sec first">
+      <p class="sec-label">Promo assets</p>
+      <div class="res-rows">
+
+        <a class="res-link"
+           href="https://drive.google.com/drive/folders/1_F6voqPCnbS_XQ-9h_QAUtogJfr4rcSE?usp=sharing"
+           target="_blank" rel="noopener">
+          <span class="res-link-icon" aria-hidden="true">
+            <!-- Crop / picture-frame icon for "spot cards" (screenshots). -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+          </span>
+          <span class="res-link-body">
+            <span class="res-link-title">Spot Cards</span>
+            <span class="res-link-sub">"Screenshots" of spots you can use in videos.</span>
+          </span>
+          <span class="res-link-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="res-link"
+           href="https://drive.google.com/drive/folders/1dlYOkCFhND-UXTUk_1gMevV2qYhAlkTv?usp=sharing"
+           target="_blank" rel="noopener">
+          <span class="res-link-icon" aria-hidden="true">
+            <!-- Globe icon for Google Earth. -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></svg>
+          </span>
+          <span class="res-link-body">
+            <span class="res-link-title">Google Earth</span>
+            <span class="res-link-sub">Google Earth animations and the .kml file to create your own.</span>
+          </span>
+          <span class="res-link-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="res-link"
+           href="https://drive.google.com/drive/folders/1pD9Hc-gzcBdOce4tTF7aEiV0jec4k11Z?usp=sharing"
+           target="_blank" rel="noopener">
+          <span class="res-link-icon" aria-hidden="true">
+            <!-- Image-stack icon for thumbnails. -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M7 7V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-2"/></svg>
+          </span>
+          <span class="res-link-body">
+            <span class="res-link-title">Thumbnails</span>
+            <span class="res-link-sub">The pictures of the sales page that explain the guide.</span>
+          </span>
+          <span class="res-link-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="res-link"
+           href="https://drive.google.com/drive/folders/124eVazUXLYrv8tJs8_PBD4i474iEu9w9?usp=sharing"
+           target="_blank" rel="noopener">
+          <span class="res-link-icon" aria-hidden="true">
+            <!-- Map / overlay icon for map graphics. -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          </span>
+          <span class="res-link-body">
+            <span class="res-link-title">Map Graphics</span>
+            <span class="res-link-sub">Overlays of a Swiss Map to use in videos.</span>
+          </span>
+          <span class="res-link-arrow" aria-hidden="true">↗</span>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="sec">
+      <p class="sec-label">Recording mode</p>
+      <label class="toggle-row" for="previewToggle">
+        <span class="toggle-body">
+          <span class="toggle-title">Preview mode</span>
+          <span class="toggle-sub">If you want to do a screen recording of the App, turn this on first.</span>
+        </span>
+        <input class="toggle-checkbox" type="checkbox" id="previewToggle" />
+        <span class="toggle-switch" aria-hidden="true"></span>
+      </label>
+    </div>
+
+  <footer class="legal-foot">
+    <a href="../../../terms.html">Terms</a><span class="sep">·</span><a href="../../../imprint.html">Imprint</a><span class="sep">·</span><a href="../../../privacy.html">Privacy</a>
+    <span class="copy">© Hikebeast</span>
+  </footer>
+ </div>
+</main>
+
+<script>
+  // Preview-mode toggle persistence. Reads localStorage on load, syncs
+  // the checkbox; writes back on change. The flag is consumed by the
+  // /full/* filters (Explore by leon.helg credit, chapters narrowed
+  // to the recording-safe spot list, etc.) · those filters are wired
+  // in a follow-up commit. Today this just lets affiliates flip the
+  // state ahead of time so the wiring has something to read.
+  (function () {
+    const KEY = 'hb:preview_mode:v1';
+    const cb = document.getElementById('previewToggle');
+    try { cb.checked = localStorage.getItem(KEY) === '1'; } catch (_) {}
+    cb.addEventListener('change', () => {
+      try {
+        if (cb.checked) localStorage.setItem(KEY, '1');
+        else localStorage.removeItem(KEY);
+      } catch (_) {}
+    });
+  })();
+</script>
+
+<script src="../../lib/convex.js"></script>
+<script>window.HB_CONVEX_URL = "https://whimsical-sparrow-336.convex.cloud";</script>
+<script src="../../social.js?v=20260526a"></script>
+
+</body>
+</html>

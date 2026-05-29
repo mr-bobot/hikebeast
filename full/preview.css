@@ -3834,22 +3834,10 @@ body.has-rail .topbar .hb-nav { display: none; }
 }
 .rail-burger svg { width: 18px; height: 18px; }
 
-/* Settings cog injected into every /full/* topbar's right slot by
-   social.js. Re-uses .rail-burger's pill chrome (border, white bg,
-   round shape) but inverts visibility: shown only on desktop, hidden
-   on mobile. Mobile users reach /full/account/ via the menu sheet's
-   "Account settings" row instead. */
-.rail-cog {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: var(--muted);
-}
-.rail-cog:hover { color: var(--fg); }
-@media (max-width: 700px) {
-  .rail-cog { display: none !important; }
-}
+/* .rail-cog removed 2026-05-26 · the topbar account icon was killed
+   in favor of a single canonical account slot inside the rail
+   sidebar (between More and Collapse). The class itself was only
+   ever applied to a JS-injected anchor that no longer renders. */
 
 /* Mobile bottom tab bar — replaces the burger drawer as the primary
  * navigation on phones. Hidden above 700px (rail takes over on
@@ -4035,12 +4023,48 @@ body.has-rail .topbar .hb-nav { display: none; }
   .app-menu-sheet.is-open { pointer-events: auto; }
   .app-menu-sheet.is-open .menu-sheet-backdrop { opacity: 1; pointer-events: auto; }
   .app-menu-sheet.is-open .menu-sheet-card { transform: translateY(0); }
+  /* Header strip · grabber centred on top, close button pinned right.
+     The header is also the gesture target for swipe-down-to-close
+     (handler in social.js). 2026-05-24. */
+  .app-menu-sheet .menu-sheet-header {
+    position: relative;
+    height: 44px;
+    flex-shrink: 0;
+    touch-action: none;  /* let pointermove/end run cleanly */
+  }
   .app-menu-sheet .menu-sheet-grabber {
     width: 36px;
     height: 4px;
     border-radius: 999px;
     background: rgba(0, 0, 0, 0.18);
-    margin: 6px auto 12px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .app-menu-sheet .menu-sheet-close {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--fg);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .app-menu-sheet .menu-sheet-close svg { width: 18px; height: 18px; }
+  .app-menu-sheet .menu-sheet-close:active { transform: scale(0.94); }
+  :root[data-theme="dark"] .app-menu-sheet .menu-sheet-close {
+    background: rgba(255, 255, 255, 0.10);
+  }
+  :root[data-theme="dark"] .app-menu-sheet .menu-sheet-grabber {
+    background: rgba(255, 255, 255, 0.22);
   }
   .app-menu-sheet .menu-section-head {
     font-size: 11px;
@@ -4979,6 +5003,37 @@ body.has-rail .topbar .hb-nav { display: none; }
   font-size: 12px;
   color: var(--muted);
 }
+/* Region cards on /full/regions/ · vertical .hb-saved-tile carrier
+   with the dark-gradient + region-colour-glow + white SVG silhouette
+   inside the square .photo. Same recipe as .up-next-card.is-chapter
+   on the home rail, adapted for the 1:1 .hb-saved-tile geometry.
+   Drives the region tint via inline `--region-color`. 2026-05-27. */
+.hb-saved-tile.is-region .photo.cv-map {
+  background:
+    radial-gradient(70% 60% at 22% 18%, rgba(var(--region-color, 200,200,200), 0.55) 0%, rgba(var(--region-color, 200,200,200), 0) 65%),
+    radial-gradient(60% 55% at 92% 95%, rgba(var(--region-color, 200,200,200), 0.32) 0%, rgba(var(--region-color, 200,200,200), 0) 70%),
+    linear-gradient(135deg, #2a2a2d 0%, #1d1d1f 60%, #141416 100%);
+  display: grid;
+  place-items: center;
+}
+.hb-saved-tile.is-region .photo.cv-map::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+}
+.hb-saved-tile.is-region .photo.cv-map img {
+  /* Override the default `.hb-saved-tile .photo img { object-fit: cover }`
+     · we want the SVG centred and contained, not stretched. The hover
+     scale that .hb-saved-tile applies to spot photos also looks weird
+     on a flat silhouette so we suppress it. */
+  width: 78%; height: auto; max-height: 78%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
+  transition: none;
+}
+.hb-saved-tile.is-region:hover .photo.cv-map img { transform: none; }
 .hb-saved-tile .hb-fav {
   position: absolute;
   top: 10px;
@@ -5870,3 +5925,19 @@ body.has-rail .topbar .hb-nav { display: none; }
   letter-spacing: 0;
 }
 .hb-wc-chip.is-on .hb-wc-chip-count { color: rgba(255,255,255,0.7); }
+
+
+/* Preview mode · spot-name hiding on /full/wildcamping/ and
+   /full/hidden-gems/. social.js sets `preview-hide-spot-names` on
+   <body> when PREVIEW_MODE is on and the user is on one of those
+   two pages. Affiliates recording promo videos see all spots tiled
+   with their photos but the title text is blanked out · `visibility:
+   hidden` keeps the tile layout identical to non-preview mode so
+   the recording reads as "intentional clean cards" rather than
+   "missing data". The title= and alt= attributes on the tile <a>
+   and <img> still carry the spot name in source · acceptable since
+   they don't render visually unless explicitly hovered, and screen
+   recordings rarely surface tooltips. */
+body.preview-hide-spot-names .name {
+  visibility: hidden;
+}

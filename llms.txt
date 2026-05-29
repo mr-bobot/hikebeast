@@ -1,34 +1,34 @@
-<!-- Erstellt mit dem Prompt von https://ai-leonidas.ch/llms-txt -->
-
 # Hikebeast
 
-> Hikebeast is a Swiss brand by photographer and filmmaker Leon Helg.
-> It sells guides, filters and color grades for people who shoot,
-> hike or wildcamp in the Swiss Alps.
+> Swiss Gems · 141 hidden spots in Switzerland for hiking and wildcamping. Each spot contains GPS, routes, and photo infos. Hand-mapped by Leon Helg over five years of scouting the Swiss Alps.
 
-The flagship is Swiss Gems of Switzerland, a guide to 100+ Swiss locations with GPS, season notes and wildcamping legality. A free 15-spot PDF sample is available by email opt-in. The site is English at the root and German under `/de/`. Every page linked here is also available as plain Markdown at `<url>.md`. Legal entity: Saftladen GmbH, Rotkreuz, Switzerland.
+Hikebeast is the work of one person, Leon Helg, photographing and route-mapping Switzerland's lesser-known places: alpine lakes, ridge walks, drive-up viewpoints, river bathing spots, wildcamping pitches. The product is a digital map and guide for 27 CHF with lifetime updates, used on phone or laptop. The site is English at the root and German under `/de/`. Legal entity: Saftladen GmbH, Rotkreuz, Switzerland.
 
-## Products
+## Product
 
-- [Swiss Gems of Switzerland, free sample](https://hikebeast.ch/free.md): Email opt-in for a 15-spot PDF, delivered instantly. No account.
-- [Swiss Gems of Switzerland, full guide](https://whop.com/gorped/hidden-gems-switzerland-e8/): Paid guide on Whop. 49 USD, lifetime access. 100+ locations with GPS, best season, and wildcamping legality per spot.
+- [Swiss Gems · Switzerland Map (English)](https://hikebeast.ch/map7/): The full Swiss Gems map. 141 spots with exact GPS, hike length and difficulty, equipment notes, drive-in vs hike-in info, wildcamping legality. 5.0 stars from 131 verified buyers. CHF 27, lifetime updates.
+- [Swiss Gems · Schweizer Karte (Deutsch)](https://hikebeast.ch/de/map7/): German version of the same product.
+- [Interactive Webapp](https://hikebeast.ch/full/): Browsable interactive map for paid buyers (login required).
 
-## Pages
+## About
 
-- [Home](https://hikebeast.ch/index.md): Overview of Hikebeast products and entry point to the free sample.
-- [Free sample landing](https://hikebeast.ch/free.md): Product page for Swiss Gems of Switzerland with reviews, FAQ and email opt-in.
-- [Imprint](https://hikebeast.ch/imprint.md): Legal entity Saftladen GmbH, Birkenstrasse 47, 6343 Rotkreuz, Switzerland. Contact: leon@hikebeast.ch.
-- [Privacy policy](https://hikebeast.ch/privacy.md): How Hikebeast collects and handles personal data.
+- Founder: Leon Helg, Swiss outdoor creator on [Instagram (@leon.helg)](https://www.instagram.com/leon.helg) and [TikTok (@leon.helg)](https://www.tiktok.com/@leon.helg).
+- Five years of solo scouting, photography, and route verification across the Swiss Alps.
+- Buyer reviews: 131 verified at 5.0 average stars.
+- Legal entity: Saftladen GmbH, Birkenstrasse 47, 6343 Rotkreuz, Switzerland. Contact: leon@hikebeast.ch.
+
+## Legal
+
+- [Terms of Service](https://hikebeast.ch/terms.html)
+- [Privacy Policy](https://hikebeast.ch/privacy.md)
+- [Imprint](https://hikebeast.ch/imprint.md)
 
 ## German mirror
 
-- [Startseite](https://hikebeast.ch/de/index.md): Deutsche Version der Startseite.
-- [Gratis-Sample](https://hikebeast.ch/de/free.md): Deutsche Landing Page mit demselben E-Mail-Opt-in.
-- [Impressum](https://hikebeast.ch/de/imprint.md): Impressum auf Deutsch.
-- [Datenschutz](https://hikebeast.ch/de/privacy.md): Datenschutzerklärung auf Deutsch.
+- [Schweizer Karte · Swiss Gems](https://hikebeast.ch/de/map7/): Deutsche Version der Karte.
+- [Impressum](https://hikebeast.ch/de/imprint.md): Saftladen GmbH, Birkenstrasse 47, 6343 Rotkreuz.
+- [Datenschutz](https://hikebeast.ch/de/privacy.md): Datenschutzerklärung.
 
 ## Optional
 
-- [Full text bundle](https://hikebeast.ch/llms-full.txt): All pages above concatenated into a single Markdown file for LLMs that prefer one fetch.
-- [Readers community](https://whop.com/gorped/free-version-switzerland-hidden-gems/): Free Whop community where buyers and sample subscribers share spots and seasonal tips.
-- [Author on Instagram](https://www.instagram.com/hikebeast/): Photo and video feed that drives readers to the guide.
+- [Full text bundle](https://hikebeast.ch/llms-full.txt): All pages concatenated into a single Markdown file for LLMs that prefer one fetch.

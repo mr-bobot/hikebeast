@@ -96,19 +96,19 @@
     {
       "source": "/full/preview.css",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     },
     {
       "source": "/full/social.js",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     },
     {
       "source": "/full/preview.js",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     },
     {
@@ -422,8 +422,68 @@
       "permanent": true
     },
     {
+      "source": "/gems",
+      "destination": "/gems/",
+      "permanent": true
+    },
+    {
+      "source": "/de/gems",
+      "destination": "/de/gems/",
+      "permanent": true
+    },
+    {
+      "source": "/map8",
+      "destination": "/map8/",
+      "permanent": true
+    },
+    {
+      "source": "/de/map8",
+      "destination": "/de/map8/",
+      "permanent": true
+    },
+    {
       "source": "/friendsandfamily",
       "destination": "/friendsandfamily/",
+      "permanent": true
+    },
+    {
+      "source": "/free",
+      "destination": "/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/free/",
+      "destination": "/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/de/free",
+      "destination": "/de/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/de/free/",
+      "destination": "/de/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/sample",
+      "destination": "/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/sample/",
+      "destination": "/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/read",
+      "destination": "/map7/",
+      "permanent": true
+    },
+    {
+      "source": "/read/",
+      "destination": "/map7/",
       "permanent": true
     }
   ]

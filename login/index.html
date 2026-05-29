@@ -4,6 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
+<!-- Dark-by-default bootstrap · matches /full/* so logging in doesn't
+     flash light → dark. Reads localStorage['hb-theme']: 'light' opts
+     out, anything else (including unset) paints dark. Added 2026-05-24. -->
+<script>(function(){try{if(localStorage.getItem('hb-theme')!=='light'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
 <title>Log in · Gems of Switzerland · Hikebeast</title>
 
 <!-- Public, indexable on purpose: /full/ is noindex'd, so social scrapers

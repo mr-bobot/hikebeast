@@ -1666,7 +1666,7 @@ window.HB_SPOT_IMAGES = {
   "eastern#falensee": [
     {
       "src": "derivatives/falensee_p0/w1800.webp",
-      "credit": "@leon.helg"
+      "credit": "Bö Benkö"
     },
     {
       "src": "derivatives/falensee_p1/w1800.webp",
@@ -1778,16 +1778,6 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/valle_verzasca_p5/w1800.webp",
-      "credit": "zimydakid"
-    }
-  ],
-  "ticino#lavertezzo": [
-    {
-      "src": "derivatives/lavertezzo_p0/w1800.webp",
-      "credit": "@oliwear.j"
-    },
-    {
-      "src": "derivatives/lavertezzo_p1/w1800.webp",
       "credit": "zimydakid"
     }
   ],
@@ -2167,6 +2157,16 @@ window.HB_SPOT_IMAGES = {
     {
       "src": "derivatives/engadin_autumn_p3/w1800.webp",
       "credit": "@leon.helg"
+    }
+  ],
+  "ticino#lavertezzo": [
+    {
+      "src": "derivatives/lavertezzo_p0/w1800.webp",
+      "credit": "@oliwear.j"
+    },
+    {
+      "src": "derivatives/lavertezzo_p1/w1800.webp",
+      "credit": "zimydakid"
     }
   ]
 };

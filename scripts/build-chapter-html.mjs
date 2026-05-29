@@ -460,7 +460,7 @@ ${tiles}
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<script>(function(){try{if(localStorage.getItem('hb-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
+<script>(function(){try{if(localStorage.getItem('hb-theme')!=='light'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0b0d10');}}catch(e){}})();</script>
 <title>${escapeHtml(chapter.name)} · Gems of Switzerland · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
@@ -472,7 +472,7 @@ ${tiles}
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../preview.css" />
+<link rel="stylesheet" href="../preview.css?v=20260524a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body>
@@ -649,11 +649,11 @@ ${slides.join("\n\n")}
     });
   })();
 </script>
-<script src="../preview.js"></script>
+<script src="../preview.js?v=20260524a"></script>
 <script src="../img/spot-images.js"></script>
 <script src="../lib/convex.js"></script>
 <script>window.HB_CONVEX_URL = "${CONVEX_URL}";</script>
-<script src="../social.js"></script>
+<script src="../social.js?v=20260524a"></script>
 </body>
 </html>
 `;

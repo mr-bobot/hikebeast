@@ -28,6 +28,10 @@
 import Stripe from "stripe";
 import crypto from "node:crypto";
 import { issueToken } from "../../lib/access-token.js";
+import {
+  clientIpFromHeaders,
+  clientUserAgentFromHeaders,
+} from "../../lib/capi.js";
 
 // ── /full/ session cookie helpers ──────────────────────────────────────────
 // Mirrors api/login.js so that paid-buyer onboarding sets the same
@@ -202,6 +206,15 @@ async function handleOnboardingPost(req, res, stripe, body) {
   const sessionId = String(body.sessionId || "");
   const password  = String(body.password || "");
   const username  = typeof body.username === "string" ? body.username.trim().slice(0, 32) : "";
+  // Instagram handle · optional capture from the success-page form,
+  // 2026-05-24. Used for Leon's manual outreach when a buyer DMs IG
+  // for support · the handle is written to the Signups sheet's
+  // instagram_handle column (setIfEmpty) so existing ManyChat-sourced
+  // handles win on conflict. Empty string or missing field → no-op
+  // downstream. We normalise + length-cap here so the downstream call
+  // doesn't have to guard.
+  const igRaw     = typeof body.instagram_handle === "string" ? body.instagram_handle : "";
+  const igHandle  = igRaw.trim().toLowerCase().replace(/^@+/, "").slice(0, 40);
 
   if (!sessionId || !sessionId.startsWith("cs_")) {
     return res.status(400).json({ error: "invalid_session_id" });
@@ -251,6 +264,11 @@ async function handleOnboardingPost(req, res, stripe, body) {
       paymentIntentId: paymentIntent,
       username: username || undefined,
       password,
+      // IG handle fan-out · stored on the users row so the webapp can
+      // surface it on /full/account/ and so future support-ping flows
+      // can DM the buyer back. Empty string → field stays undefined
+      // on the Convex side (the mutation no-ops). 2026-05-26.
+      instagramHandle: igHandle || undefined,
     });
   } catch (err) {
     console.error("createPaidUser failed:", err?.message || err);
@@ -277,6 +295,82 @@ async function handleOnboardingPost(req, res, stripe, body) {
   if (!result?.sessionToken) {
     console.error("createPaidUser returned no sessionToken:", result);
     return res.status(500).json({ error: "create_failed" });
+  }
+
+  // Fire-and-forget IG-handle write to the Stripe customer's metadata.
+  // session.customer is the customer ID (set because we use
+  // customer_creation: "always" in the checkout-session create call).
+  // Writing to metadata.instagram_handle puts the handle next to the
+  // buyer's name/email in the Stripe dashboard, so manual support
+  // lookups stay all-in-one-place. Best-effort · we never block the
+  // success redirect on a Stripe update.
+  if (igHandle) {
+    const customerId = typeof session.customer === "string"
+      ? session.customer
+      : session.customer?.id;
+    if (customerId) {
+      stripe.customers.update(customerId, {
+        metadata: { instagram_handle: igHandle },
+      }).catch((err) => {
+        console.error("Stripe customer instagram_handle update failed:", err?.message || err);
+      });
+    }
+  }
+
+  // Debug logging · 2026-05-27 Leon flagged that 0/11 recent buyers
+  // have an instagram_handle in the sheet despite the form being
+  // wired correctly across all locales. Trying to distinguish:
+  //   (a) users genuinely skipping the optional field
+  //   (b) Apps Script attach_instagram returning row_not_found (race
+  //       with the Stripe webhook that writes the buyer row)
+  //   (c) attach_instagram fetch timing out / failing silently
+  // The single-line log is filterable from Vercel logs by "[ig]".
+  // Keep the prefix tight so we can grep it cleanly.
+  const igRawType = typeof body.instagram_handle;
+  console.log("[ig]", JSON.stringify({
+    email,
+    has_field: igRawType === "string",
+    raw_type: igRawType,
+    handle_len: igHandle.length,
+    will_attempt: !!igHandle,
+  }));
+
+  // Fire-and-forget IG-handle write to the Signups sheet. Best-effort ·
+  // we never block account creation on this. The Apps Script
+  // attach_instagram action does setIfEmpty so existing ManyChat-sourced
+  // handles win on conflict and idempotent re-tries (e.g. buyer
+  // re-opens the success page later, re-submits) are safe.
+  if (igHandle && process.env.SHEETS_WEBHOOK_URL && process.env.SHEETS_SECRET) {
+    try {
+      const igRes = await fetch(process.env.SHEETS_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "attach_instagram",
+          secret: process.env.SHEETS_SECRET,
+          email,
+          payment_intent: paymentIntent,
+          instagram_handle: igHandle,
+        }),
+        signal: AbortSignal.timeout(5000),
+      });
+      // Read the Apps Script response · we used to fire-and-forget but
+      // that hid the row_not_found / setIfEmpty no-op cases. Now we
+      // log the outcome so the [ig] traces tell the full story.
+      const igResult = await igRes.json().catch(() => null);
+      if (igResult && igResult.ok === false) {
+        console.error("[ig] attach_instagram returned error:", JSON.stringify(igResult));
+      } else {
+        console.log("[ig] attach_instagram OK:", JSON.stringify(igResult));
+      }
+    } catch (err) {
+      console.error("[ig] attach_instagram fetch failed:", err?.message || err);
+      // Don't fail the account creation · the buyer can still log in
+      // and Leon can see their email match in the Sheet without the
+      // IG handle. Worst case Leon has to ask "what's your IG?" in
+      // the support DM, which is the same situation as before this
+      // field existed.
+    }
   }
 
   // Set the same cookie /api/login sets so middleware lets us into /full/.
@@ -376,6 +470,19 @@ export default async function handler(req, res) {
   const heroVariantRaw = typeof body.hero_variant === "string" ? body.hero_variant.trim() : "";
   const heroVariant = /^[a-z0-9_]{1,8}$/i.test(heroVariantRaw) ? heroVariantRaw : "";
 
+  // ── Meta CAPI identity signals ──────────────────────────────────────────
+  // Captured here so they flow through Stripe metadata to the webhook,
+  // which fires the Purchase CAPI event with matching event_id. fbc/fbp
+  // come from the buyer's browser cookies (set by /lib/meta-cookies.js
+  // + Meta's own pixel SDK respectively). client_ip + user_agent come
+  // from this request's headers — Vercel-set, trustworthy enough.
+  //
+  // Truncated to fit Stripe metadata limits (500 chars per value).
+  const fbc = typeof body.fbc === "string" ? body.fbc.slice(0, 200) : "";
+  const fbp = typeof body.fbp === "string" ? body.fbp.slice(0, 100) : "";
+  const clientIp = clientIpFromHeaders(req.headers);
+  const clientUa = clientUserAgentFromHeaders(req.headers);
+
   const origin = (req.headers.origin && /^https?:\/\//.test(req.headers.origin))
     ? req.headers.origin
     : "https://hikebeast.ch";
@@ -415,6 +522,13 @@ export default async function handler(req, res) {
         // v12 split-test bucket ID. Joined to the Sheet's `hero_variant`
         // column by the webhook for per-variant conversion tracking.
         hero_variant: heroVariant,
+        // Meta CAPI identity signals · forwarded to the webhook so the
+        // Purchase event can include fbc/fbp/ip/ua. Stripe metadata caps
+        // values at 500 chars, already truncated above.
+        fbc,
+        fbp,
+        client_ip: clientIp,
+        client_ua: clientUa,
       },
       // Forwarded into the underlying PaymentIntent so the webhook can join
       // the same identifiers without re-hydrating the session object.
@@ -428,13 +542,56 @@ export default async function handler(req, res) {
       },
       // After payment, Stripe loads the return URL inside the embedded
       // iframe; we read ?session_id= there to fetch the completed session
-      // and render the success state. German buyers (locale === "de")
-      // get redirected to /de/map/success/ so the post-purchase page
-      // matches the language they checked out in.
-      return_url: locale === "de"
-        ? `${origin}/de/map/success?session_id={CHECKOUT_SESSION_ID}`
-        : `${origin}/map/success?session_id={CHECKOUT_SESSION_ID}`,
+      // and render the success state.
+      //
+      // Routing per source_page (since 2026-05-26 · /map9/ launch):
+      //   - source_page=map9              → /map9/success
+      //   - source_page=de_map9           → /de/map9/success
+      //   - source_page=fr_map9           → /fr/map9/success
+      //   - source_page=it_map9           → /it/map9/success
+      //   - source_page=swissmap          → /swissmap/success (2026-05-28)
+      //   - source_page=de_swissmap       → /de/swissmap/success (2026-05-28)
+      //   - source_page=fr_swissmap       → /fr/swissmap/success (2026-05-28)
+      //   - source_page=it_swissmap       → /it/swissmap/success (2026-05-28)
+      //   - source_page=fr_gems           → /fr/map/success (2026-05-27)
+      //   - source_page=it_gems           → /it/map/success (2026-05-27)
+      //   - any other source_page · DE    → /de/map/success
+      //   - any other source_page · else  → /map/success
+      //
+      // The fall-through path mirrors the historical behaviour every
+      // /map[3-8]/ + /themap/ checkout has used since the dawn of the
+      // funnel · they all redirect to /map/success/. /map9/ and the
+      // /swissmap/ mirror (channel-specific URL launched 2026-05-28)
+      // have their own per-locale success siblings; /gems/ + /de/gems/
+      // ride the shared /map/success path. /fr/gems/ + /it/gems/ get
+      // their own success siblings under /fr/map/success + /it/map/success
+      // since no localized fallback existed before.
+      return_url: (function () {
+        var path;
+        if (sourcePage === "map9") path = "/map9/success";
+        else if (sourcePage === "de_map9") path = "/de/map9/success";
+        else if (sourcePage === "fr_map9") path = "/fr/map9/success";
+        else if (sourcePage === "it_map9") path = "/it/map9/success";
+        else if (sourcePage === "swissmap") path = "/swissmap/success";
+        else if (sourcePage === "de_swissmap") path = "/de/swissmap/success";
+        else if (sourcePage === "fr_swissmap") path = "/fr/swissmap/success";
+        else if (sourcePage === "it_swissmap") path = "/it/swissmap/success";
+        else if (sourcePage === "fr_gems") path = "/fr/map/success";
+        else if (sourcePage === "it_gems") path = "/it/map/success";
+        else path = locale === "de" ? "/de/map/success" : "/map/success";
+        return `${origin}${path}?session_id={CHECKOUT_SESSION_ID}`;
+      })(),
     });
+
+    // NOTE on CAPI InitiateCheckout: we do NOT fire here. Meta wants
+    // server events to mirror pixel events, and the pixel only fires
+    // on real user interaction (pointerdown/focusin on #checkout,
+    // see attachInitiateCheckoutSignal in the landing pages). Firing
+    // CAPI on session-create would inflate the IC count to ~page
+    // views again. The browser fires a beacon to /api/visit with
+    // event="initiate_checkout" when the user actually engages, and
+    // /api/visit fires the CAPI event with event_id = session.id —
+    // same event_id the browser passes to fbq, so Meta dedupes.
 
     res.setHeader("Cache-Control", "no-store");
     return res.status(200).json({
