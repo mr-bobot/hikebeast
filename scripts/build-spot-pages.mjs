@@ -573,7 +573,17 @@ function renderBackOverview(spot) {
     ${arrivalSection}
     ${renderRoutesList(spot)}
     ${renderWildcampingNote(spot)}
+    ${renderBetaNotice()}
   </div>`;
+}
+
+// Beta disclaimer shown on every spot's "How to get there" planning panel.
+// Surfaces an email so users can report wrong stats / coords / sources.
+function renderBetaNotice() {
+  return `<p class="hb-beta-notice">
+    Beta — the route data is still being verified. Spotted something wrong?
+    <a href="mailto:leon@hikebeast.ch?subject=Hikebeast%20route%20feedback">leon@hikebeast.ch</a>
+  </p>`;
 }
 
 function renderRouteDetailView(spot) {
@@ -627,6 +637,7 @@ function renderRouteDetailView(spot) {
       <p class="hb-sources-h">Sources</p>
       <ul class="hb-sources-list" data-rd-sources-list></ul>
     </div>
+    ${renderBetaNotice()}
   </div>`;
 }
 

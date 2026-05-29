@@ -5774,6 +5774,25 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-source-item a:hover { text-decoration: underline; }
 .hb-source-item.hb-source-text { color: var(--soft); font-style: italic; }
 
+/* === Beta notice on the back of every spot's planning + route detail view === */
+.hb-beta-notice {
+  margin-top: 16px;
+  padding: 10px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  background: var(--surface-2, var(--surface));
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+  letter-spacing: -0.005em;
+}
+.hb-beta-notice a {
+  color: var(--accent);
+  text-decoration: none;
+  word-break: break-all;
+}
+.hb-beta-notice a:hover { text-decoration: underline; }
+
 /* === Shuffle button in the browse search row === */
 .hb-search-row {
   display: flex;
