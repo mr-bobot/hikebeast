@@ -13,7 +13,7 @@ Hikebeast ist die Arbeit einer Person, Leon Helg. Er fotografiert und kartiert d
 
 ### Swiss Gems · 141 versteckte Spots in der Schweiz
 
-Einmalig CHF 27, Lifetime-Updates. PDF und interaktive Webapp für Handy oder Laptop. 141 Spots nach Region sortiert. Pro Spot: genaue GPS für Spot und Parkplatz, Wegzeit und Schwierigkeit, empfohlene Tageszeit, Saison-Fenster, Wildcamping-Status, und Fotos bei richtigem Licht. 5.0 Sterne von 131 verifizierten Käufern.
+Einmalig CHF 27. PDF und interaktive Webapp für Handy oder Laptop. 141 Spots nach Region sortiert. Pro Spot: genaue GPS für Spot und Parkplatz, Wegzeit und Schwierigkeit, empfohlene Tageszeit, Saison-Fenster, Wildcamping-Status, und Fotos bei richtigem Licht. 5.0 Sterne von 131 verifizierten Käufern.
 
 - Sales Page (Deutsch): https://hikebeast.ch/de/map9/
 - Sales Page (Englisch): https://hikebeast.ch/map9/
