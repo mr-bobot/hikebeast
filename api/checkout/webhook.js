@@ -558,6 +558,43 @@ async function handleSessionCompleted({ stripe, event }) {
     console.error("Resend purchase email threw:", err?.message || err);
   }
 
+  // 1.5 Add the buyer to the Resend audience (broadcast / newsletter list).
+  // Fire-and-forget · mirrors createResendContact in api/sample.js and the
+  // admin_add_resend_contact path in api/login.js (same shape that the
+  // 2026-05-13 backfill used to load the initial 273 contacts).
+  //
+  // This webhook historically only SENT the guide email and never added
+  // buyers to the audience — the only live add-path was the free-sample
+  // flow (api/sample.js), which the current purchase funnel bypasses. So
+  // after the one-time 2026-05-13 backfill the list froze: every new buyer
+  // got their email but never landed in the audience. Wiring the add here
+  // closes that gap (2026-05-29).
+  //
+  // contacts.create is idempotent · a duplicate returns an "already exists"
+  // error we swallow. Errors are logged, never thrown, so a Resend hiccup
+  // can't fail the webhook or block the Sheet/ManyChat side effects below.
+  try {
+    const audienceId = process.env.RESEND_SEGMENT_ID;
+    if (audienceId && email) {
+      const resendContacts = new Resend(process.env.RESEND_API_KEY);
+      const { error: contactError } = await resendContacts.contacts.create({
+        audienceId,
+        email,
+        firstName: firstName || undefined,
+        unsubscribed: false,
+      });
+      if (contactError) {
+        const msg = String(contactError.message || "");
+        const isDupe = /already exists|already in/i.test(msg);
+        if (!isDupe) console.error("Resend audience add error:", contactError.name, msg);
+      }
+    } else if (!audienceId) {
+      console.warn("RESEND_SEGMENT_ID not set — skipping audience add");
+    }
+  } catch (err) {
+    console.error("Resend audience add threw:", err?.message || err);
+  }
+
   // 2. Schedule the slow side effects (Sheet log + ManyChat IG lookup +
   // ManyChat tag writes + affiliate referral row + affiliate "you earned"
   // email) via the Convex action `webhookHandlers:scheduleWebhookSideEffects`.
