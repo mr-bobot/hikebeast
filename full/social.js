@@ -11,14 +11,16 @@
  */
 (function () {
   // Defensive theme reapply. The <head> bootstrap in every page is
-  // SUPPOSED to set data-theme="dark" before paint when localStorage
-  // says dark. On the spot detail pages something keeps slipping
-  // through (Safari bfcache restore, blocked inline script, etc.) —
-  // pages render light despite localStorage being dark. social.js is
-  // the last script that's guaranteed to re-run on every fresh nav,
-  // so it gets a belt-and-suspenders apply here.
+  // SUPPOSED to set data-theme="dark" before paint when the user has
+  // not explicitly chosen light mode (default is now dark, per the
+  // dark-default rollout). On some pages — notably the spot detail
+  // pages until 2026-05-25 — the bootstrap was missing entirely, so
+  // the page rendered light and only flipped to dark after this
+  // script ran. Fixed in build-spot-pages.mjs by adding the head
+  // bootstrap, but keeping this belt-and-suspenders for bfcache
+  // restores and pages we haven't touched yet.
   try {
-    if (localStorage.getItem('hb-theme') === 'dark'
+    if (localStorage.getItem('hb-theme') !== 'light'
         && document.documentElement.getAttribute('data-theme') !== 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
       const tc = document.querySelector('meta[name="theme-color"]');
