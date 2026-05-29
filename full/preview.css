@@ -5476,10 +5476,9 @@ body.has-rail .topbar .hb-nav { display: none; }
   gap: 10px;
   width: 100%;
   margin-top: auto;
-  padding: 14px 0;
+  padding: 14px 0 0;
   border: 0;
   border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
   background: none;
   color: var(--accent);
   font-family: inherit;
@@ -5524,75 +5523,80 @@ body.has-rail .topbar .hb-nav { display: none; }
     display: block;
   }
   .hb-flip-card .slide-spot,
-  .hb-flip-card .slide-spot-back,
-  .hb-flip-card.is-flipped .slide-spot,
-  .hb-flip-card.is-flipped .slide-spot-back {
+  .hb-flip-card.is-flipped .slide-spot {
     opacity: 1 !important;
     pointer-events: auto !important;
     visibility: visible !important;
     transition: none !important;
   }
+  /* The planning panel is HIDDEN by default on mobile. It used to sit
+     in-flow below the photo card (the "dropdown" feel Leon disliked,
+     and it doubled the hairline under the "How to get there" CTA).
+     Now it only appears when the user taps "How to get there", which
+     sets body.hb-planning-active and promotes it to a full page. */
   .hb-flip-card .slide-spot-back {
-    margin-top: 14px;
-    border-radius: var(--radius-card);
-    /* Mobile: route-detail and overview don't share a grid cell — they
-       swap by display:none / display:flex driven by data-view. */
-    display: block;
+    display: none;
+    margin: 0;
   }
   .hb-flip-back-view {
     transform: none !important;
     transition: none;
   }
-  /* Default state: overview visible, route-detail hidden. JS toggles
-     data-view="route-detail" on .slide-spot-back when a route is tapped,
-     which swaps which view is shown. Previously route-detail was
-     unconditionally display:none on mobile — tapping a route hid the
-     overview but the route-detail never appeared, leaving the panel
-     blank (Leon's iPhone screenshot 2026-05-20). */
+  /* route-detail and overview swap by display, driven by data-view. */
   .hb-flip-back-view-route { display: none; }
   .slide-spot-back[data-view="route-detail"] .hb-flip-back-view-overview { display: none; }
   .slide-spot-back[data-view="route-detail"] .hb-flip-back-view-route { display: flex; }
-  /* The "Back to photo" button is irrelevant on mobile in the default
-     scroll-in-flow state. But when the user actively opens planning mode
-     (body.hb-planning-active), we promote the planning panel to a
-     full-page view and the back button becomes the page back. */
+  /* "Back to photo" only shows inside the full-page planning view. */
   body:not(.hb-planning-active) [data-action="flip-front"] { display: none !important; }
 
   /* === Planning panel as a separate page (mobile) ============== */
   body.hb-planning-active .hb-flip-card .slide-spot { display: none !important; }
   body.hb-planning-active .hb-flip-card .slide-spot-back {
+    display: block;
     position: fixed;
     inset: 0;
     margin: 0;
     border-radius: 0;
     background: var(--surface);
     overflow-y: auto;
-    z-index: 60;
+    /* Above the bottom tab bar (z-index 70) so the page truly takes
+       over; the tab bar itself is hidden below for a clean screen. */
+    z-index: 80;
+    /* Bottom breathing room so the last route card clears the home
+       indicator / any residual chrome. */
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
     /* Slide-in from the right, like iOS navigation push */
     animation: hb-planning-slide-in 0.24s cubic-bezier(0.22, 0.61, 0.36, 1);
     -webkit-overflow-scrolling: touch;
+  }
+  body.hb-planning-active .hb-flip-back-view {
+    padding-top: 8px;
   }
   body.hb-planning-active .hb-back-topbar {
     position: sticky;
     top: 0;
     background: var(--surface);
-    padding: 12px 0;
-    margin-top: -22px;
+    padding: 14px 0 12px;
     margin-bottom: 4px;
     z-index: 2;
     border-bottom: 1px solid var(--hairline);
   }
-  body.hb-planning-active .hb-back-flip-back {
+  body.hb-planning-active .hb-back-flip-back,
+  body.hb-planning-active .hb-back-route-btn {
     font-size: 15px;
     padding: 9px 14px 9px 10px;
     background: transparent;
     border: 0;
     color: var(--accent);
   }
-  body.hb-planning-active .hb-back-flip-back svg { width: 16px; height: 16px; }
-  /* While the planning page is up, hide the global page chrome so it
-     feels like a dedicated screen, not an overlay. */
-  body.hb-planning-active .hb-rail { display: none !important; }
+  body.hb-planning-active .hb-back-flip-back svg,
+  body.hb-planning-active .hb-back-route-btn svg { width: 16px; height: 16px; }
+  /* While the planning page is up, hide ALL global chrome (rail + bottom
+     tab bar) so it reads as a dedicated screen, not an overlay with the
+     content scrolling behind the tab bar. The "Back to photo" button +
+     browser back are the way out. */
+  body.hb-planning-active .app-rail,
+  body.hb-planning-active .app-tabbar { display: none !important; }
 }
 
 @keyframes hb-planning-slide-in {
