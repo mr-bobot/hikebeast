@@ -13,7 +13,7 @@ Hikebeast is the work of one person, Leon Helg, photographing and route-mapping 
 
 ### Swiss Gems · 141 Hidden Spots in Switzerland
 
-CHF 27 one-time. PDF plus interactive web app for phone or laptop. 141 spots organised by region. Per spot: exact GPS for the spot and the parking, walking time and difficulty, recommended light, season window, wildcamping legal status, and photos from the spot at the right light. 5.0 stars from 131 verified buyers.
+CHF 27 one-time. PDF plus interactive web app for phone or laptop. 141 spots organised by region. Per spot: exact GPS for the spot and the parking, walking time and difficulty, recommended light, season window, wildcamping legal status, and photos from the spot at the right light. 5.0 stars from 267 verified buyers.
 
 - Sales page (English): https://hikebeast.ch/map9/
 - Sales page (German): https://hikebeast.ch/de/map9/
