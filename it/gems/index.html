@@ -1604,17 +1604,42 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
 </style>
 <script>
-  /* === /it/gems/ · A/B split test surface, 2026-05-24.
-     Re-runs the hero-image experiment from /map5/. ONLY the first
-     /gems/ keeps the winning hero fixed (variant 04, IT localization)
-     · no A/B testing here per Leon. Same image object shape as the
-     /map9/ A/B picker so document.write's `.img` accessor works
-     unchanged. */
+  /* === /it/gems/ · A/B split test surface · 5 hero variants.
+     gems is the Facebook-ads channel · runs the same 5-variant hero
+     A/B test as /map9/ + /swissmap/ (Leon enabled 2026-05-29 · was
+     pinned to v04 before). Sticky per-visitor via localStorage
+     'hb:hero_variant'; ?hv=01..05 force-overrides for QA. */
   window.HB_HERO_VARIANTS = {
-    '04': { img: '/map3/img/v14/hero/hero4_IT.jpg' }
+    '01': { img: '/map3/img/v14/hero/hero1_IT.jpg' },
+    '02': { img: '/map3/img/v14/hero/hero2.jpg' },
+    '03': { img: '/map3/img/v14/hero/hero3.jpg' },
+    '04': { img: '/map3/img/v14/hero/hero4_IT.jpg' },
+    '05': { img: '/map3/img/v14/hero/hero5.jpg' },
   };
   (function () {
-    window.HB_HERO_VARIANT = '04';
+    var keys = Object.keys(window.HB_HERO_VARIANTS);
+    var qs;
+    try { qs = new URLSearchParams(location.search); } catch (e) { qs = null; }
+    var sid = qs ? (qs.get('s') || '') : '';
+    var override = qs ? (qs.get('hv') || '') : '';
+    if (override && window.HB_HERO_VARIANTS[override]) {
+      window.HB_HERO_VARIANT = override;
+      return;
+    }
+    var stored = null;
+    try { stored = localStorage.getItem('hb:hero_variant'); } catch (e) {}
+    function pick() {
+      if (stored && window.HB_HERO_VARIANTS[stored]) return stored;
+      if (sid) {
+        var h = 0;
+        for (var i = 0; i < sid.length; i++) h = ((h * 31) + sid.charCodeAt(i)) | 0;
+        return keys[Math.abs(h) % keys.length];
+      }
+      return keys[Math.floor(Math.random() * keys.length)];
+    }
+    var v = pick();
+    try { localStorage.setItem('hb:hero_variant', v); } catch (e) {}
+    window.HB_HERO_VARIANT = v;
   })();
 </script>
 </head>
