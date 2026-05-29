@@ -1072,13 +1072,6 @@ ${renderSpotCard(spot)}
   </div>
 </div>
 
-<footer class="legal">
-  <a href="../../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../../terms.html">Terms</a><span class="sep">·</span>
-  © Hikebeast
-</footer>
-
 <script src="../../preview.js"></script>
 <script src="../../img/spot-images.js"></script>
 <script src="../../lib/convex.js"></script>

@@ -1230,6 +1230,12 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 @media (max-width: 759px) {
   body[data-page="spot-detail"] {
     padding-top: 0;
+    /* The spot card (.slide) is var(--paper); the page body defaults to
+       var(--bg), a darker shade. On mobile the card runs edge-to-edge,
+       so the lighter card sitting on the darker body showed a two-tone
+       seam below the card. Match the body to the card so it reads as one
+       continuous surface. */
+    background: var(--paper);
   }
   /* Notch-area fill: a fixed strip across the top, behind everything
    * else, that paints the safe-area-top black. The photo (which is
@@ -5472,11 +5478,13 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-flip-cta-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-between;
   width: 100%;
   margin-top: auto;
-  padding: 14px 0 0;
+  /* Vertically centered between the two dividers: the CTA's own
+     border-top above, and the .sp-actions border-top below (which
+     sits 12px down via its margin-top). 15px top ≈ 3px + 12px below. */
+  padding: 15px 0 3px;
   border: 0;
   border-top: 1px solid var(--hairline);
   background: none;
@@ -5486,7 +5494,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   font-weight: 500;
   letter-spacing: -0.005em;
   cursor: pointer;
-  text-align: center;
+  text-align: left;
   transition: opacity 0.15s ease;
 }
 .hb-flip-cta-row:hover { opacity: 0.78; }
