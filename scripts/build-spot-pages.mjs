@@ -381,8 +381,19 @@ function renderLinksRow(spot) {
   const gmaps = spot.maps_url
     ? `<a class="hb-link-pill" href="${escapeHtml(spot.maps_url)}" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-gmaps"/></svg></span>Google Maps</a>`
     : "";
-  const apple = spot.maps_url
-    ? `<a class="hb-link-pill" href="${escapeHtml(spot.maps_url.replace("google.com/maps", "maps.apple.com"))}" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-applemaps"/></svg></span>Apple Maps</a>`
+  // Apple Maps needs a proper maps.apple.com URL. A simple string-replace on
+  // the Google URL produces invalid hosts (www.maps.apple.com/place/...).
+  // Build it from the lat/lon we already extract for SwissTopo.
+  let appleUrl = null;
+  if (spot.maps_url) {
+    const ll = extractLatLon(spot.maps_url);
+    if (ll) {
+      const label = encodeURIComponent(spot.title || "");
+      appleUrl = `https://maps.apple.com/?ll=${ll.lat},${ll.lon}&q=${label}`;
+    }
+  }
+  const apple = appleUrl
+    ? `<a class="hb-link-pill" href="${escapeHtml(appleUrl)}" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-applemaps"/></svg></span>Apple Maps</a>`
     : "";
   // SwissTopo: deeplink that actually centers on the spot. Parse lat/lon
   // out of the maps_url, convert to CH1903+ (LV95), build a map.geo.admin.ch
@@ -568,12 +579,12 @@ function renderBackOverview(spot) {
       <button type="button" class="hb-back-flip-back" data-action="flip-front">${ARROW_LEFT_SVG}Back to photo</button>
       <p class="hb-back-title">Planning · <b>${escapeHtml(spot.title)}</b></p>
     </div>
+    ${renderBetaNotice()}
     ${renderLinksRow(spot)}
     ${renderOverviewStatsBar(spot)}
     ${arrivalSection}
     ${renderRoutesList(spot)}
     ${renderWildcampingNote(spot)}
-    ${renderBetaNotice()}
   </div>`;
 }
 
@@ -581,7 +592,7 @@ function renderBackOverview(spot) {
 // Surfaces an email so users can report wrong stats / coords / sources.
 function renderBetaNotice() {
   return `<p class="hb-beta-notice">
-    Beta — the route data is still being verified. Spotted something wrong?
+    Beta version. The route data is still being verified. Spotted something wrong?
     <a href="mailto:leon@hikebeast.ch?subject=Hikebeast%20route%20feedback">leon@hikebeast.ch</a>
   </p>`;
 }
@@ -600,6 +611,7 @@ function renderRouteDetailView(spot) {
       <button type="button" class="hb-back-route-btn" data-action="flip-overview">${ARROW_LEFT_SVG}Routes</button>
       <p class="hb-back-title">Approach to <b>${escapeHtml(spot.title)}</b></p>
     </div>
+    ${renderBetaNotice()}
     <div class="hb-rd-head">
       <p class="hb-rd-kicker">Route</p>
       <h3 class="hb-rd-name"><span data-rd-name>—</span></h3>
@@ -637,7 +649,6 @@ function renderRouteDetailView(spot) {
       <p class="hb-sources-h">Sources</p>
       <ul class="hb-sources-list" data-rd-sources-list></ul>
     </div>
-    ${renderBetaNotice()}
   </div>`;
 }
 
@@ -962,17 +973,47 @@ function flipScriptFor(spot) {
 
   const isMobile = () => window.matchMedia('(max-width: 820px)').matches;
 
+  // Page-like navigation: when the user opens the planning panel, push a
+  // history entry so the browser's back button (and a swipe-back gesture)
+  // returns to the photo side. body.hb-planning-active drives the CSS that
+  // makes the back panel cover the viewport like a separate page.
+  function openPlanning(opts) {
+    card.classList.add('is-flipped');
+    document.body.classList.add('hb-planning-active');
+    window.scrollTo({ top: 0, behavior: opts && opts.smooth ? 'smooth' : 'instant' });
+    if (opts && opts.push !== false) {
+      try { history.pushState({ hbPlanning: true }, '', '?view=plan'); } catch (e) {}
+    }
+  }
+  function closePlanning(opts) {
+    card.classList.remove('is-flipped');
+    document.body.classList.remove('hb-planning-active');
+    back.dataset.view = 'overview';
+    if (opts && opts.pop) {
+      // popstate already removed our entry, no-op
+    } else {
+      try {
+        if (history.state && history.state.hbPlanning) history.back();
+      } catch (e) {}
+    }
+  }
+
+  // Restore state on direct ?view=plan landings (refresh, deeplink)
+  if (new URLSearchParams(location.search).get('view') === 'plan') {
+    openPlanning({ push: false });
+  }
+
+  window.addEventListener('popstate', () => {
+    const wantsPlan = new URLSearchParams(location.search).get('view') === 'plan';
+    if (wantsPlan) openPlanning({ push: false });
+    else closePlanning({ pop: true });
+  });
+
   document.addEventListener('click', (e) => {
     const flipBack = e.target.closest('[data-action="flip-back"]');
-    if (flipBack) {
-      card.classList.add('is-flipped');
-      // On mobile the flip is CSS-disabled; the planning panel sits below
-      // the spot card in normal flow. Scroll it into view as a hint.
-      if (isMobile()) back.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      return;
-    }
+    if (flipBack) { openPlanning({ smooth: true }); return; }
     const flipFront = e.target.closest('[data-action="flip-front"]');
-    if (flipFront) { card.classList.remove('is-flipped'); return; }
+    if (flipFront) { closePlanning(); return; }
     const flipOverview = e.target.closest('[data-action="flip-overview"]');
     if (flipOverview) { back.dataset.view = 'overview'; return; }
     const routeRow = e.target.closest('.hb-route-row');
@@ -982,7 +1023,7 @@ function flipScriptFor(spot) {
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
     if (back.dataset.view === 'route-detail') back.dataset.view = 'overview';
-    else card.classList.remove('is-flipped');
+    else closePlanning();
   });
 })();
 </script>`;

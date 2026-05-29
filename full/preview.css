@@ -5472,12 +5472,14 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-flip-cta-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
   width: 100%;
   margin-top: auto;
-  padding: 14px 0 0;
+  padding: 14px 0;
   border: 0;
   border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
   background: none;
   color: var(--accent);
   font-family: inherit;
@@ -5485,7 +5487,7 @@ body.has-rail .topbar .hb-nav { display: none; }
   font-weight: 500;
   letter-spacing: -0.005em;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
   transition: opacity 0.15s ease;
 }
 .hb-flip-cta-row:hover { opacity: 0.78; }
@@ -5550,12 +5552,56 @@ body.has-rail .topbar .hb-nav { display: none; }
   .hb-flip-back-view-route { display: none; }
   .slide-spot-back[data-view="route-detail"] .hb-flip-back-view-overview { display: none; }
   .slide-spot-back[data-view="route-detail"] .hb-flip-back-view-route { display: flex; }
-  /* The "Back to photo" button is irrelevant on mobile (no flip — the
-     panel sits below the photo in flow). The "Routes" back button stays
-     visible — it's how the user navigates from route-detail back to the
-     overview on mobile. */
-  [data-action="flip-front"] { display: none !important; }
+  /* The "Back to photo" button is irrelevant on mobile in the default
+     scroll-in-flow state. But when the user actively opens planning mode
+     (body.hb-planning-active), we promote the planning panel to a
+     full-page view and the back button becomes the page back. */
+  body:not(.hb-planning-active) [data-action="flip-front"] { display: none !important; }
+
+  /* === Planning panel as a separate page (mobile) ============== */
+  body.hb-planning-active .hb-flip-card .slide-spot { display: none !important; }
+  body.hb-planning-active .hb-flip-card .slide-spot-back {
+    position: fixed;
+    inset: 0;
+    margin: 0;
+    border-radius: 0;
+    background: var(--surface);
+    overflow-y: auto;
+    z-index: 60;
+    /* Slide-in from the right, like iOS navigation push */
+    animation: hb-planning-slide-in 0.24s cubic-bezier(0.22, 0.61, 0.36, 1);
+    -webkit-overflow-scrolling: touch;
+  }
+  body.hb-planning-active .hb-back-topbar {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    padding: 12px 0;
+    margin-top: -22px;
+    margin-bottom: 4px;
+    z-index: 2;
+    border-bottom: 1px solid var(--hairline);
+  }
+  body.hb-planning-active .hb-back-flip-back {
+    font-size: 15px;
+    padding: 9px 14px 9px 10px;
+    background: transparent;
+    border: 0;
+    color: var(--accent);
+  }
+  body.hb-planning-active .hb-back-flip-back svg { width: 16px; height: 16px; }
+  /* While the planning page is up, hide the global page chrome so it
+     feels like a dedicated screen, not an overlay. */
+  body.hb-planning-active .hb-rail { display: none !important; }
 }
+
+@keyframes hb-planning-slide-in {
+  from { transform: translateX(8%); opacity: 0; }
+  to   { transform: translateX(0);  opacity: 1; }
+}
+
+/* On desktop, hb-planning-active still pushes history state for back-button
+   parity, but the visual stays as the flip card (no full-screen takeover). */
 
 /* Topbar */
 .hb-back-topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
