@@ -8,7 +8,7 @@ window.HB_SPOT_IMAGES = {
   "central#engstligen_falls": [
     {
       "src": "derivatives/engstligen_falls_p0/w1800.webp",
-      "credit": "Anthony Gomez"
+      "credit": "anthony_gomez"
     },
     {
       "src": "derivatives/engstligen_falls_p1/w1800.webp",
@@ -62,7 +62,7 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/rosenlaui_public_waterfall_p1/w1800.webp",
-      "credit": "Jkphotos"
+      "credit": "jkphotos"
     }
   ],
   "central#rosenlauifall": [
@@ -88,7 +88,7 @@ window.HB_SPOT_IMAGES = {
   "central#gelmersee": [
     {
       "src": "derivatives/gelmersee_p0/w1800.webp",
-      "credit": "Dario Brönnimann"
+      "credit": "dario_bronnimann"
     },
     {
       "src": "derivatives/gelmersee_p1/w1800.webp",
@@ -120,7 +120,7 @@ window.HB_SPOT_IMAGES = {
   "central#aare_gorge": [
     {
       "src": "derivatives/aare_gorge_p0/w1800.webp",
-      "credit": "Thiva"
+      "credit": "thiva"
     },
     {
       "src": "derivatives/aare_gorge_p1/w1800.webp",
@@ -200,15 +200,15 @@ window.HB_SPOT_IMAGES = {
   "central#augstmatthorn": [
     {
       "src": "derivatives/augstmatthorn_p0/w1800.webp",
-      "credit": "Cédric Streit"
+      "credit": "cedric_streit"
     },
     {
       "src": "derivatives/augstmatthorn_p1/w1800.webp",
-      "credit": "Gian Porsius"
+      "credit": "gian_porsius"
     },
     {
       "src": "derivatives/augstmatthorn_p2/w1800.webp",
-      "credit": "Jana Leu"
+      "credit": "jana_leu"
     },
     {
       "src": "derivatives/augstmatthorn_p3/w1800.webp",
@@ -222,7 +222,7 @@ window.HB_SPOT_IMAGES = {
   "central#lake_lucerne": [
     {
       "src": "derivatives/lake_lucerne_p0/w1800.webp",
-      "credit": "Daniel Cox"
+      "credit": "daniel_cox"
     },
     {
       "src": "derivatives/lake_lucerne_p1/w1800.webp",
@@ -294,7 +294,7 @@ window.HB_SPOT_IMAGES = {
   "central#schrattenfluh": [
     {
       "src": "derivatives/schrattenfluh_p0/w1800.webp",
-      "credit": "Cyprien Da Silva"
+      "credit": "cyprien_da_silva"
     },
     {
       "src": "derivatives/schrattenfluh_p1/w1800.webp",
@@ -354,7 +354,7 @@ window.HB_SPOT_IMAGES = {
   "central#bachalpsee": [
     {
       "src": "derivatives/bachalpsee_p0/w1800.webp",
-      "credit": "Rowell Heria"
+      "credit": "rowell_heria"
     },
     {
       "src": "derivatives/bachalpsee_p1/w1800.webp",
@@ -368,7 +368,7 @@ window.HB_SPOT_IMAGES = {
   "central#grindelwald": [
     {
       "src": "derivatives/grindelwald_p0/w1800.webp",
-      "credit": "Anna Hu"
+      "credit": "anna_hu"
     },
     {
       "src": "derivatives/grindelwald_p1/w1800.webp",
@@ -386,7 +386,7 @@ window.HB_SPOT_IMAGES = {
   "central#iseltwald": [
     {
       "src": "derivatives/iseltwald_p0/w1800.webp",
-      "credit": "Yasintha Perera"
+      "credit": "yasintha_perera"
     },
     {
       "src": "derivatives/iseltwald_p1/w1800.webp",
@@ -404,7 +404,7 @@ window.HB_SPOT_IMAGES = {
   "central#viewpoint_beatenberg": [
     {
       "src": "derivatives/viewpoint_beatenberg_p0/w1800.webp",
-      "credit": "Jairph"
+      "credit": "jairph"
     },
     {
       "src": "derivatives/viewpoint_beatenberg_p1/w1800.webp",
@@ -422,23 +422,23 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/oeschinensee_p2/w1800.webp",
-      "credit": "Peter Elijah"
+      "credit": "peter_elijah"
     },
     {
       "src": "derivatives/oeschinensee_p3/w1800.webp",
-      "credit": "Dennis H."
+      "credit": "dennis_h"
     },
     {
       "src": "derivatives/oeschinensee_p4/w1800.webp",
-      "credit": "Pascal Debrunner"
+      "credit": "pascal_debrunner"
     },
     {
       "src": "derivatives/oeschinensee_p5/w1800.webp",
-      "credit": "Manca Cadez"
+      "credit": "manca_cadez"
     },
     {
       "src": "derivatives/oeschinensee_p6/w1800.webp",
-      "credit": "Gabriel Cirelli"
+      "credit": "gabriel_cirelli"
     },
     {
       "src": "derivatives/oeschinensee_p7/w1800.webp",
@@ -452,7 +452,7 @@ window.HB_SPOT_IMAGES = {
   "central#piz_gloria": [
     {
       "src": "derivatives/piz_gloria_p0/w1800.webp",
-      "credit": "Anthony Gomez"
+      "credit": "anthony_gomez"
     },
     {
       "src": "derivatives/piz_gloria_p1/w1800.webp",
@@ -470,7 +470,7 @@ window.HB_SPOT_IMAGES = {
   "central#lauterbrunnen": [
     {
       "src": "derivatives/lauterbrunnen_p0/w1800.webp",
-      "credit": "Omid Visuals"
+      "credit": "omid_visuals"
     },
     {
       "src": "derivatives/lauterbrunnen_p1/w1800.webp",
@@ -504,11 +504,11 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/riffelsee_p3/w1800.webp",
-      "credit": "Lukáš Konvica"
+      "credit": "lukas_konvica"
     },
     {
       "src": "derivatives/riffelsee_p4/w1800.webp",
-      "credit": "Ilia Bronskyi"
+      "credit": "ilia_bronskyi"
     },
     {
       "src": "derivatives/riffelsee_p5/w1800.webp",
@@ -542,7 +542,7 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/zermatt_village_p2/w1800.webp",
-      "credit": "Daniel Cox"
+      "credit": "daniel_cox"
     }
   ],
   "valais#riffelalp": [
@@ -562,7 +562,7 @@ window.HB_SPOT_IMAGES = {
   "valais#gorner_glacier": [
     {
       "src": "derivatives/gorner_glacier_p0/w1800.webp",
-      "credit": "Thomas Lipke"
+      "credit": "thomas_lipke"
     },
     {
       "src": "derivatives/gorner_glacier_p1/w1800.webp",
@@ -602,7 +602,7 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/aletsch_glacier_p4/w1800.webp",
-      "credit": "Louise Pipet"
+      "credit": "louise_pipet"
     },
     {
       "src": "derivatives/aletsch_glacier_p5/w1800.webp",
@@ -742,7 +742,7 @@ window.HB_SPOT_IMAGES = {
   "valais#goms_bridge": [
     {
       "src": "derivatives/goms_bridge_p0/w1800.webp",
-      "credit": "Adrien Olichon"
+      "credit": "adrien_olichon"
     },
     {
       "src": "derivatives/goms_bridge_p1/w1800.webp",
@@ -876,7 +876,7 @@ window.HB_SPOT_IMAGES = {
   "valais#crans_montana": [
     {
       "src": "derivatives/crans_montana_p0/w1800.webp",
-      "credit": "Artiom Vallat"
+      "credit": "artiom_vallat"
     },
     {
       "src": "derivatives/crans_montana_p1/w1800.webp",
@@ -1060,7 +1060,7 @@ window.HB_SPOT_IMAGES = {
   "western#dent_de_jaman": [
     {
       "src": "derivatives/dent_de_jaman_p0/w1800.webp",
-      "credit": "Xavier von Erlach"
+      "credit": "xavier_von_erlach"
     },
     {
       "src": "derivatives/dent_de_jaman_p1/w1800.webp",
@@ -1112,7 +1112,7 @@ window.HB_SPOT_IMAGES = {
   "western#creux_du_van": [
     {
       "src": "derivatives/creux_du_van_p0/w1800.webp",
-      "credit": "Daniel R."
+      "credit": "daniel_r"
     },
     {
       "src": "derivatives/creux_du_van_p1/w1800.webp",
@@ -1234,7 +1234,7 @@ window.HB_SPOT_IMAGES = {
   "western#lavaux_vineyards": [
     {
       "src": "derivatives/lavaux_vineyards_p0/w1800.webp",
-      "credit": "Razvan Sassu"
+      "credit": "razvan_sassu"
     },
     {
       "src": "derivatives/lavaux_vineyards_p1/w1800.webp",
@@ -1306,11 +1306,11 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/seealpsee_p2/w1800.webp",
-      "credit": "Ilia Bronskyi"
+      "credit": "ilia_bronskyi"
     },
     {
       "src": "derivatives/seealpsee_p3/w1800.webp",
-      "credit": "Simon Spring"
+      "credit": "simon_spring"
     },
     {
       "src": "derivatives/seealpsee_p4/w1800.webp",
@@ -1328,7 +1328,7 @@ window.HB_SPOT_IMAGES = {
   "eastern#ascher": [
     {
       "src": "derivatives/ascher_p0/w1800.webp",
-      "credit": "Ilia Bronskyi"
+      "credit": "ilia_bronskyi"
     },
     {
       "src": "derivatives/ascher_p1/w1800.webp",
@@ -1542,7 +1542,7 @@ window.HB_SPOT_IMAGES = {
   "eastern#ruinaulta": [
     {
       "src": "derivatives/ruinaulta_p0/w1800.webp",
-      "credit": "Jan Huber"
+      "credit": "jan_huber"
     },
     {
       "src": "derivatives/ruinaulta_p1/w1800.webp",
@@ -1578,7 +1578,7 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/klontalersee_p2/w1800.webp",
-      "credit": "Gabriel Herter"
+      "credit": "gabriel_herter"
     },
     {
       "src": "derivatives/klontalersee_p3/w1800.webp",
@@ -1596,11 +1596,11 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/stoos_kapelle_p1/w1800.webp",
-      "credit": "Max Bürgi"
+      "credit": "max_burgi"
     },
     {
       "src": "derivatives/stoos_kapelle_p2/w1800.webp",
-      "credit": "Claudio Schwarz"
+      "credit": "claudio_schwarz"
     },
     {
       "src": "derivatives/stoos_kapelle_p3/w1800.webp",
@@ -1622,11 +1622,11 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/pizol_p1/w1800.webp",
-      "credit": "Boris Baldinger"
+      "credit": "boris_baldinger"
     },
     {
       "src": "derivatives/pizol_p2/w1800.webp",
-      "credit": "Vasyl Dizhak"
+      "credit": "vasyl_dizhak"
     },
     {
       "src": "derivatives/pizol_p3/w1800.webp",
@@ -1674,11 +1674,11 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/falensee_p2/w1800.webp",
-      "credit": "Bö Benkö"
+      "credit": "bo_benko"
     },
     {
       "src": "derivatives/falensee_p3/w1800.webp",
-      "credit": "Ilia Bronskyi"
+      "credit": "ilia_bronskyi"
     }
   ],
   "eastern#morteratsch_glacier": [
@@ -1744,7 +1744,7 @@ window.HB_SPOT_IMAGES = {
   "ticino#ponte_dei_salti": [
     {
       "src": "derivatives/ponte_dei_salti_p0/w1800.webp",
-      "credit": "Claudio Schwarz"
+      "credit": "claudio_schwarz"
     },
     {
       "src": "derivatives/ponte_dei_salti_p1/w1800.webp",
@@ -1758,7 +1758,7 @@ window.HB_SPOT_IMAGES = {
   "ticino#valle_verzasca": [
     {
       "src": "derivatives/valle_verzasca_p0/w1800.webp",
-      "credit": "Artiom Vallat"
+      "credit": "artiom_vallat"
     },
     {
       "src": "derivatives/valle_verzasca_p1/w1800.webp",
@@ -1798,7 +1798,7 @@ window.HB_SPOT_IMAGES = {
   "beyond#mer_de_glace": [
     {
       "src": "derivatives/mer_de_glace_p0/w1800.webp",
-      "credit": "Simon Fitall"
+      "credit": "simon_fitall"
     },
     {
       "src": "derivatives/mer_de_glace_p1/w1800.webp",
@@ -1810,7 +1810,7 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/mer_de_glace_p3/w1800.webp",
-      "credit": "Martin Masson"
+      "credit": "martin_masson"
     },
     {
       "src": "derivatives/mer_de_glace_p4/w1800.webp",
@@ -1900,7 +1900,7 @@ window.HB_SPOT_IMAGES = {
   "beyond#mont_blanc": [
     {
       "src": "derivatives/mont_blanc_p0/w1800.webp",
-      "credit": "Andrea Caramello"
+      "credit": "andrea_caramello"
     },
     {
       "src": "derivatives/mont_blanc_p1/w1800.webp",
@@ -2008,7 +2008,7 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/maloja_pass_p1/w1800.webp",
-      "credit": "Johannes Hofmann"
+      "credit": "johannes_hofmann"
     },
     {
       "src": "derivatives/maloja_pass_p2/w1800.webp",
@@ -2050,25 +2050,25 @@ window.HB_SPOT_IMAGES = {
     },
     {
       "src": "derivatives/grappelensee_p1/w1800.webp",
-      "credit": "Ivan Louis"
+      "credit": "ivan_louis"
     },
     {
       "src": "derivatives/grappelensee_p2/w1800.webp",
-      "credit": "Janosch Diggelmann"
+      "credit": "janosch_diggelmann"
     }
   ],
   "central#mount_pilatus": [
     {
       "src": "derivatives/mount_pilatus_p0/w1800.webp",
-      "credit": "Emanuel Kionke"
+      "credit": "emanuel_kionke"
     },
     {
       "src": "derivatives/mount_pilatus_p1/w1800.webp",
-      "credit": "Razvan Sassu"
+      "credit": "razvan_sassu"
     },
     {
       "src": "derivatives/mount_pilatus_p2/w1800.webp",
-      "credit": "Emanuel Kionke"
+      "credit": "emanuel_kionke"
     }
   ],
   "central#wasserfall_finstersee": [
@@ -2098,7 +2098,7 @@ window.HB_SPOT_IMAGES = {
   "eastern#wildsee": [
     {
       "src": "derivatives/wildsee_p0/w1800.webp",
-      "credit": "Claudio Schwarz"
+      "credit": "claudio_schwarz"
     },
     {
       "src": "derivatives/wildsee_p1/w1800.webp",
@@ -2112,7 +2112,7 @@ window.HB_SPOT_IMAGES = {
   "eastern#julier_pass": [
     {
       "src": "derivatives/julier_pass_p0/w1800.webp",
-      "credit": "Sepp Rutz"
+      "credit": "sepp_rutz"
     },
     {
       "src": "derivatives/julier_pass_p1/w1800.webp",

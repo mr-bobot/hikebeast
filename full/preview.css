@@ -93,6 +93,20 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; color-scheme: li
   }
 }
 
+/* Users who've opted into "Reduce Motion" at the OS level (System
+ * Settings / iOS Accessibility) get a freeze on transitions + animations
+ * + smooth-scroll. The home hero carousel also stops auto-rotating; see
+ * the matching matchMedia check in full/index.html. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   min-height: 100dvh;
   color: var(--fg);
@@ -1216,6 +1230,12 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
 @media (max-width: 759px) {
   body[data-page="spot-detail"] {
     padding-top: 0;
+    /* The spot card (.slide) is var(--paper); the page body defaults to
+       var(--bg), a darker shade. On mobile the card runs edge-to-edge,
+       so the lighter card sitting on the darker body showed a two-tone
+       seam below the card. Match the body to the card so it reads as one
+       continuous surface. */
+    background: var(--paper);
   }
   /* Notch-area fill: a fixed strip across the top, behind everything
    * else, that paints the safe-area-top black. The photo (which is
@@ -1492,11 +1512,24 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   }
 }
 body[data-page="spot-detail"] .specs {
-  /* Specs flow right after the body — no auto-margin pushing them
-   * to the bottom of the (now correctly sized) card. A small extra
-   * margin (on top of the flex gap) gives the body text some breathing
-   * room before the REGION/ACCESS/EFFORT/BEST LIGHT grid. */
+  /* Mobile: specs flow right after the body (the card is content-height,
+   * so there's no free space to distribute anyway). A small extra margin
+   * on top of the flex gap gives the body some breathing room before the
+   * REGION/ACCESS/EFFORT/BEST LIGHT grid. */
   margin-top: 12px;
+  /* A little extra breathing room below the grid before the "How to get
+   * there" divider (adds to the flex gap). */
+  margin-bottom: 8px;
+}
+@media (min-width: 760px) {
+  /* Desktop: the card is taller than its content, so anchor the
+   * REGION/ACCESS/EFFORT/BEST LIGHT grid to the BOTTOM, grouped with the
+   * "How to get there" CTA, instead of leaving them stranded right under
+   * the body with a void beneath. margin-top:auto on .specs absorbs all
+   * the free space above it; the CTA then sits directly below (its own
+   * margin-top:auto zeroed) separated only by the flex gap + its divider. */
+  body[data-page="spot-detail"] .specs { margin-top: auto; }
+  body[data-page="spot-detail"] .hb-flip-cta-row { margin-top: 0; }
 }
 /* The detail-page topbar exists only for the burger + account FAB — it
  * has no brand label or crumb. Drop the bottom border and let it blend
@@ -2460,18 +2493,36 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 }
 .ms-item {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   gap: 12px;
   padding: 8px 12px;
   border-radius: 10px;
   background: var(--surface);
+  /* Clickable: each region links into its chapter page. */
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
+.ms-item:hover { background: var(--surface-2); }
+.ms-item:active { transform: scale(0.99); }
 .ms-item .ms-bar {
   flex-shrink: 0;
   width: 4px;
   border-radius: 2px;
   align-self: stretch;
 }
+.ms-item .ms-text { flex: 1 1 auto; }
+.ms-chev {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--soft);
+  display: grid;
+  place-items: center;
+}
+.ms-chev svg { width: 16px; height: 16px; }
+.ms-item:hover .ms-chev { color: var(--accent); }
 .ms-item .ms-text {
   display: flex;
   flex-direction: column;
@@ -4296,6 +4347,11 @@ body.has-rail .topbar .hb-nav { display: none; }
     justify-content: flex-start;
     gap: 10px;
   }
+  /* When the action row directly follows the "How to get there" CTA,
+     drop its 12px margin so the bottom divider sits exactly one flex
+     gap (14px) below the CTA label — matching the CTA's 14px padding-top
+     above, so the label is centred AND the row stays compact. */
+  .hb-flip-cta-row + .sp-actions { margin-top: 0; }
   .slide-spot .sp-kicker,
   .slide-spot .sp-title { padding-right: 0; }
   /* Keep the kebab chip flush with the heart + tick instead of floating
@@ -5388,6 +5444,495 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-signin-submit:hover { filter: brightness(0.94); }
 .hb-signin-submit:disabled { opacity: 0.6; cursor: default; filter: none; }
 
+/* ============================================================
+   PLANNING PANEL (trip-facts integration) — crossfade swap
+   ============================================================
+   Spots with trip_facts/routes/hut/cable_car in content.yaml
+   render their .slide-spot inside a wrapper that crossfades to
+   the planning panel when the user clicks "How to get there →".
+
+   History: this used to be a real 3D card flip (rotateY 180deg
+   with backface-visibility). Looked nice in isolation, but two
+   structural problems killed it:
+     1. Heart / Been-there / kebab pills injected by social.js
+        into the front's .sp-body bled through to the back on
+        some browsers (backface-visibility didn't fully isolate
+        the dynamically-appended absolute-positioned children).
+     2. The back was position:absolute inside the rotated parent,
+        so it was locked to the front's height. Long route lists
+        and the route-detail stats labels got cut off because
+        scroll-inside-fixed-height is undiscoverable.
+   Swapping to a crossfade where whichever face is active sits
+   in document flow (and therefore drives the wrapper's natural
+   height) fixes both: the back gets its own height, and the
+   front's children are simply opacity:0 + pointer-events:none.
+   All selectors prefixed .hb-flip- or scoped under .hb-flip-card
+   so non-planning pages are untouched.
+   ============================================================ */
+.hb-flip-shell {
+  position: relative;
+  border-radius: var(--radius-card);
+}
+.hb-flip-card {
+  position: relative;
+  display: grid;
+  /* Stack front + back in the same grid cell. The visible one
+     contributes its height; the other is the same width via the
+     grid (inset:0 not needed). */
+  grid-template-areas: "stack";
+}
+.hb-flip-card .slide-spot,
+.hb-flip-card .slide-spot-back {
+  grid-area: stack;
+  transition: opacity 0.35s ease;
+}
+/* Default: front is in flow (drives height), back is invisible. */
+.hb-flip-card .slide-spot-back {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+/* Flipped: back is in flow (drives height), front is invisible. */
+.hb-flip-card.is-flipped .slide-spot {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+.hb-flip-card.is-flipped .slide-spot-back {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Full-width "How to get there →" row at the bottom of .sp-body for
+   enriched spots. Replaces the small inline link. Hairline above, label
+   left, arrow on the far right. Mobile shows the same row but tapping
+   it scrolls the planning panel into view rather than flipping. */
+.hb-flip-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: auto;
+  /* Vertically centered between the two dividers. Above the text: this
+     CTA's own border-top, sitting padding-top away. Below the text: the
+     .sp-actions border-top, reached via the .sp-body flex gap (14px) +
+     .sp-actions margin-top. On mobile we zero that margin (see the
+     scoped rule below) so the row stays tight; padding-top then matches
+     the 14px flex gap for a centred, compact label. */
+  padding: 14px 0 0;
+  border: 0;
+  border-top: 1px solid var(--hairline);
+  background: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  text-align: left;
+  transition: opacity 0.15s ease;
+}
+.hb-flip-cta-row:hover { opacity: 0.78; }
+.hb-flip-cta-row:active { opacity: 0.6; }
+.hb-flip-cta-row svg {
+  width: 20px; height: 20px;
+  stroke: currentColor; fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* The back panel hosts two stacked sub-views (overview + route-detail)
+   that slide horizontally between each other. Stacking them via grid
+   so the active one drives height, no fixed-height scroll trap. */
+.slide-spot-back { display: grid; grid-template-areas: "stack"; }
+.hb-flip-back-view {
+  grid-area: stack;
+  padding: 22px 30px 28px;
+  display: flex; flex-direction: column; gap: 14px;
+  transition: transform 0.45s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.25s ease;
+}
+.hb-flip-back-view-route { transform: translateX(100%); opacity: 0; pointer-events: none; background: var(--surface); }
+.slide-spot-back[data-view="route-detail"] .hb-flip-back-view-overview { transform: translateX(-12%); opacity: 0; pointer-events: none; }
+.slide-spot-back[data-view="route-detail"] .hb-flip-back-view-route { transform: translateX(0); opacity: 1; pointer-events: auto; }
+
+/* ============================================================
+   MOBILE · planning panel sits below the spot card in natural
+   document flow. No crossfade, no "Back to photo" toggle —
+   both views always visible.
+   ============================================================ */
+@media (max-width: 820px) {
+  .hb-flip-shell { border-radius: 0; }
+  /* Stack vertically instead of grid-stacking on top of each other. */
+  .hb-flip-card {
+    display: block;
+  }
+  .hb-flip-card .slide-spot,
+  .hb-flip-card.is-flipped .slide-spot {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    visibility: visible !important;
+    transition: none !important;
+  }
+  /* The planning panel is HIDDEN by default on mobile. It used to sit
+     in-flow below the photo card (the "dropdown" feel Leon disliked,
+     and it doubled the hairline under the "How to get there" CTA).
+     Now it only appears when the user taps "How to get there", which
+     sets body.hb-planning-active and promotes it to a full page. */
+  .hb-flip-card .slide-spot-back {
+    display: none;
+    margin: 0;
+  }
+  .hb-flip-back-view {
+    transform: none !important;
+    transition: none;
+  }
+  /* route-detail and overview swap by display, driven by data-view. */
+  .hb-flip-back-view-route { display: none; }
+  .slide-spot-back[data-view="route-detail"] .hb-flip-back-view-overview { display: none; }
+  .slide-spot-back[data-view="route-detail"] .hb-flip-back-view-route { display: flex; }
+  /* "Back to photo" only shows inside the full-page planning view. */
+  body:not(.hb-planning-active) [data-action="flip-front"] { display: none !important; }
+
+  /* === Planning panel as a separate page (mobile) ============== */
+  body.hb-planning-active .hb-flip-card .slide-spot { display: none !important; }
+  body.hb-planning-active .hb-flip-card .slide-spot-back {
+    display: block;
+    position: fixed;
+    inset: 0;
+    margin: 0;
+    border-radius: 0;
+    background: var(--surface);
+    overflow-y: auto;
+    /* Above the bottom tab bar (z-index 70) so the page truly takes
+       over; the tab bar itself is hidden below for a clean screen. */
+    z-index: 80;
+    /* Bottom breathing room so the last route card clears the home
+       indicator / any residual chrome. */
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
+    /* Slide-in from the right, like iOS navigation push */
+    animation: hb-planning-slide-in 0.24s cubic-bezier(0.22, 0.61, 0.36, 1);
+    -webkit-overflow-scrolling: touch;
+  }
+  body.hb-planning-active .hb-flip-back-view {
+    padding-top: 8px;
+    /* Tighter side padding on the full-page planning view so the now
+       box-less route rows run closer to the screen edges. */
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  body.hb-planning-active .hb-back-topbar {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    padding: 14px 0 12px;
+    margin-bottom: 4px;
+    z-index: 2;
+    border-bottom: 1px solid var(--hairline);
+  }
+  body.hb-planning-active .hb-back-flip-back,
+  body.hb-planning-active .hb-back-route-btn {
+    font-size: 15px;
+    padding: 9px 14px 9px 10px;
+    background: transparent;
+    border: 0;
+    color: var(--accent);
+  }
+  body.hb-planning-active .hb-back-flip-back svg,
+  body.hb-planning-active .hb-back-route-btn svg { width: 16px; height: 16px; }
+  /* While the planning page is up, hide ALL global chrome (rail + bottom
+     tab bar) so it reads as a dedicated screen, not an overlay with the
+     content scrolling behind the tab bar. The "Back to photo" button +
+     browser back are the way out. */
+  body.hb-planning-active .app-rail,
+  body.hb-planning-active .app-tabbar { display: none !important; }
+}
+
+@keyframes hb-planning-slide-in {
+  from { transform: translateX(8%); opacity: 0; }
+  to   { transform: translateX(0);  opacity: 1; }
+}
+
+/* On desktop, hb-planning-active still pushes history state for back-button
+   parity, but the visual stays as the flip card (no full-screen takeover). */
+
+/* Topbar */
+.hb-back-topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.hb-back-flip-back, .hb-back-route-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--muted);
+  background: var(--paper);
+  padding: 7px 12px; border-radius: var(--radius-btn);
+  border: 1px solid var(--hairline-strong);
+  cursor: pointer; font-family: inherit;
+  transition: background 0.15s ease;
+}
+.hb-back-flip-back:hover, .hb-back-route-btn:hover { background: var(--surface-2); }
+.hb-back-flip-back svg, .hb-back-route-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.hb-back-title { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; margin: 0; }
+.hb-back-title b { color: var(--fg); font-weight: 600; letter-spacing: -0.005em; text-transform: none; font-size: 14px; }
+
+/* Paraphrased description block */
+.hb-spot-description {
+  font-size: 15px; line-height: 1.55; color: var(--fg);
+  margin: 0;
+  padding: 12px 16px;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+}
+
+/* Brand-icon link pills */
+.hb-links-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.hb-link-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 7px 16px 7px 7px;
+  border-radius: var(--radius-btn);
+  background: var(--paper); border: 1px solid var(--hairline-strong);
+  text-decoration: none; color: var(--fg);
+  font-size: 13.5px; font-weight: 500; letter-spacing: -0.005em;
+  cursor: pointer; font-family: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+.hb-link-pill:hover { background: var(--surface-2); border-color: var(--muted); }
+.hb-link-pill:active { transform: scale(0.98); }
+.hb-link-pill.is-flag { background: #fff7e6; border-color: #f6c453; color: #8a6300; }
+:root[data-theme="dark"] .hb-link-pill.is-flag { background: rgba(255, 159, 10, 0.10); border-color: rgba(255, 159, 10, 0.32); color: #ffd28a; }
+.hb-brand-icon { width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; flex: 0 0 28px; overflow: hidden; }
+.hb-brand-icon svg { width: 100%; height: 100%; display: block; }
+
+/* 5-cell stats dashboard */
+.hb-stats-bar { display: flex; background: var(--paper); border: 1px solid var(--hairline); border-radius: 14px; overflow: hidden; }
+.hb-stats-bar > .hb-stats-cell { flex: 1 1 0; }
+/* Mobile: 5 cells in one row at iPhone width crams text to two lines
+   ("T1 ·" + "Easy", "+329" + "m"). Wrap to a 3+2 layout instead. The
+   3 hideable scenarios all behave correctly because the optional cells
+   (Elevation, Distance) sit at positions 4 + 5. Reported by Leon
+   2026-05-20 from an iPhone screenshot. */
+@media (max-width: 600px) {
+  .hb-stats-bar { flex-wrap: wrap; }
+  .hb-stats-bar > .hb-stats-cell {
+    flex: 1 1 33%;
+    min-width: 33%;
+  }
+  /* Cells 4 and 5 start a new row — give them a top border and
+     remove the left border on cell 4 (the first cell of row 2). */
+  .hb-stats-bar > .hb-stats-cell:nth-child(n+4) {
+    border-top: 1px solid var(--hairline);
+  }
+  .hb-stats-bar > .hb-stats-cell:nth-child(4) {
+    border-left: 0;
+  }
+}
+/* Overview bar (back of card): 3 cells, left-aligned, doesn't need to
+   span full width. Each cell stays the same physical width as a cell in
+   the 5-cell route bar (60% of the full bar). On narrow viewports the bar
+   falls back to full width so cells don't crush. */
+.hb-stats-bar--compact { grid-template-columns: repeat(3, 1fr); width: 60%; max-width: 600px; margin-left: 0; margin-right: auto; }
+@media (max-width: 700px) { .hb-stats-bar--compact { width: 100%; max-width: none; } }
+/* Compact variant for the Cable car / Mountain hut info cards on the route
+   detail. Cap width but left-align so the card lines up under its
+   "Mountain hut" / "Cable car" section header (the same alignment pattern
+   the overview stats bar uses on the same panel). Centering looked
+   floating and disconnected from the label hugging the left edge. */
+.hb-detail-card--compact { max-width: 600px; margin-left: 0; margin-right: auto; }
+@media (max-width: 700px) { .hb-detail-card--compact { max-width: none; } }
+.hb-stats-cell { padding: 14px 8px 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; border-left: 1px solid var(--hairline); text-align: center; min-width: 0; }
+.hb-stats-cell:first-child { border-left: 0; }
+/* Hide entire cell when its data is missing — "lieber keine box, als
+   falsche Infos" (Leon, 2026-05-18). The grid collapses to whatever
+   cells have data. Only the trailing Elevation/Distance cells are
+   hideable, so the leftmost visible cell is always :first-child and
+   the existing border-left rule still does the right thing. */
+.hb-stats-cell.is-empty { display: none; }
+.hb-stats-cell .icon { width: 22px; height: 22px; color: var(--muted); display: inline-flex; align-items: center; justify-content: center; }
+.hb-stats-cell .icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.hb-stats-cell .value { font-size: 15.5px; font-weight: 600; color: var(--fg); letter-spacing: -0.005em; display: inline-flex; align-items: baseline; gap: 3px; }
+.hb-stats-cell .value .unit { font-size: 12px; font-weight: 400; color: var(--muted); }
+.hb-stats-cell .value .missing { color: var(--soft); font-weight: 400; font-style: italic; font-size: 13px; }
+.hb-stats-cell .label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); }
+.hb-busy { display: inline-flex; gap: 3px; align-items: center; }
+.hb-busy span { width: 6px; height: 6px; border-radius: 50%; background: var(--hairline-strong); }
+.hb-busy span.on { background: var(--muted); }
+.hb-chips-caption { font-size: 10.5px; color: var(--soft); letter-spacing: 0.04em; margin: -6px 0 0 4px; display: flex; align-items: center; gap: 5px; }
+.hb-chips-caption::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--success); }
+
+/* Routes section */
+.hb-section-h { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 4px 0 6px 4px; }
+.hb-routes-list { display: flex; flex-direction: column; border: 1px solid var(--hairline); border-radius: 14px; overflow: hidden; background: var(--paper); }
+.hb-route-row { display: grid; grid-template-columns: 110px 1fr auto; gap: 16px; align-items: center; padding: 14px 16px; background: var(--paper); border: 0; border-top: 1px solid var(--hairline); cursor: pointer; text-align: left; font-family: inherit; transition: background 0.15s ease; width: 100%; }
+.hb-route-thumb {
+  width: 110px; min-width: 110px; max-width: 110px;
+  height: 82px;
+  border-radius: 10px; overflow: hidden;
+  background: linear-gradient(135deg, #d8d6cf 0%, #c2bcae 100%);
+  flex: 0 0 110px;
+}
+.hb-route-thumb img {
+  width: 110px; height: 82px;
+  max-width: 110px;
+  object-fit: cover; display: block;
+}
+.hb-route-row:first-child { border-top: 0; }
+.hb-route-row:hover { background: var(--surface-2); }
+.hb-route-meta { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.hb-route-name { font-size: 16px; font-weight: 500; color: var(--fg); letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hb-route-badge { font-size: 10px; font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase; color: white; background: var(--success); padding: 2px 7px; border-radius: var(--radius-btn); }
+.hb-route-stats { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.hb-route-stat { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--muted); letter-spacing: -0.005em; }
+.hb-route-stat svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.hb-route-stat .v { color: var(--fg); font-weight: 500; }
+.hb-route-operating { font-size: 11.5px; color: var(--soft); letter-spacing: -0.005em; }
+.hb-route-chev { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
+.hb-route-chev svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.hb-route-row:hover .hb-route-chev { color: var(--accent); }
+
+/* Mobile: routes are NOT a boxed card. Full-width rows split by hairline
+   separators so the text column gets the whole screen width instead of
+   being squeezed inside a bordered box. Desktop keeps the box. */
+@media (max-width: 759px) {
+  .hb-routes-list {
+    border: 0;
+    border-radius: 0;
+    background: none;
+    overflow: visible;
+  }
+  .hb-route-row {
+    background: none;
+    padding: 16px 0;
+    grid-template-columns: 96px 1fr auto;
+    gap: 13px;
+  }
+  .hb-route-row:hover { background: none; }
+  /* Keep a separator above the first row too, dividing it from the
+     "Routes" heading, since there's no longer a box edge to do that. */
+  .hb-route-row:first-child { border-top: 1px solid var(--hairline); }
+  .hb-route-thumb,
+  .hb-route-thumb img {
+    width: 96px; min-width: 96px; max-width: 96px;
+    height: 72px;
+    flex-basis: 96px;
+  }
+  .hb-route-chev { width: 22px; height: 22px; }
+}
+
+/* Hut + Cable car cards */
+.hb-detail-card { background: var(--paper); border: 1px solid var(--hairline); border-radius: 14px; padding: 14px 18px; }
+.hb-detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 18px; }
+@media (max-width: 700px) { .hb-detail-grid { grid-template-columns: 1fr; } }
+/* When the grid has exactly 3 cells, the last one would otherwise sit
+   alone in column 1 with an empty column 2 to its right. Span it across
+   the full width so it reads as a clean "header / pair / footer" layout.
+   Used by:
+   - Equipment / Start / Transit (Transit spans, fits multi-line transit
+     chains like "Train: X / Bus: Y" without the awkward empty slot)
+   - Cable car after we removed the Cost field: Name / Open / Website
+     (Website spans, looks cleaner).
+   The 4-cell hut card (Name / Cost / Open / Website) is unaffected
+   because the 3rd cell is not the last child. */
+.hb-detail-grid > div:nth-child(3):last-child { grid-column: 1 / -1; }
+.hb-detail-grid > div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.hb-detail-grid .lbl { font-size: 10.5px; font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase; color: var(--soft); }
+.hb-detail-grid .val { font-size: 14.5px; color: var(--fg); line-height: 1.35; }
+.hb-detail-grid .val.missing { color: var(--soft); font-style: italic; font-size: 13.5px; }
+.hb-detail-grid a.val { color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; width: fit-content; }
+.hb-detail-grid a.val:hover { text-decoration: underline; }
+.hb-detail-grid a.val svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.hb-wildcamping-note {
+  font-size: 14px; line-height: 1.5; color: var(--fg);
+  margin: 0;
+  padding: 12px 16px;
+  background: #fffaf2;
+  border: 1px solid #f3d590;
+  border-radius: 12px;
+}
+.hb-wildcamping-note::before {
+  content: "Wild camping";
+  display: block;
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #8a6300;
+  margin-bottom: 4px;
+}
+/* Dark mode: amber surface needs to be darker + less saturated so it
+   reads as "warning note" instead of a glowing yellow on dark bg. */
+:root[data-theme="dark"] .hb-wildcamping-note {
+  background: rgba(255, 159, 10, 0.10);
+  border-color: rgba(255, 159, 10, 0.32);
+}
+:root[data-theme="dark"] .hb-wildcamping-note::before {
+  color: #ffd28a;
+}
+
+/* Route detail sub-view */
+.hb-rd-head { display: flex; flex-direction: column; gap: 2px; padding: 6px 4px 4px; }
+.hb-rd-kicker { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.hb-rd-name { font-family: "SF Pro Display", -apple-system, system-ui, sans-serif; font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin: 0; color: var(--fg); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+
+/* === Access section · drive-up / transit instructions when no hike === */
+.hb-access-card {
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex; flex-direction: column;
+  gap: 12px;
+}
+.hb-access-block {
+  display: flex; flex-direction: column;
+  gap: 4px;
+}
+.hb-access-block + .hb-access-block {
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline);
+}
+.hb-access-mode {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  margin: 0;
+  display: flex; align-items: center; gap: 7px;
+}
+.hb-access-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+.hb-access-body {
+  display: flex; flex-direction: column;
+  gap: 4px;
+}
+.hb-access-body p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--fg);
+  letter-spacing: -0.005em;
+}
+.hb-access-detail {
+  color: var(--soft);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-right: 6px;
+}
+
+/* Paragraph-form "how to get there" lead. Sits at the top of the section,
+   above any structured arrival blocks. Holds the whole section on its own
+   for hike-only spots without an `arrival` object. Tuned to read well at
+   both 1 line ("Paid entry") and 2-3 sentences. */
+.hb-access-summary {
+  margin: 0 0 12px 0;
+  padding: 13px 16px;
+  background: rgba(0, 0, 0, 0.025);
+  border-radius: 12px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--fg);
+}
+.hb-access-summary + .hb-access-card { margin-top: 0; }
 /* === Hike sources block in the route detail sub-view === */
 .hb-route-sources {
   margin-top: 14px;
@@ -5413,6 +5958,25 @@ body.has-rail .topbar .hb-nav { display: none; }
 }
 .hb-source-item a:hover { text-decoration: underline; }
 .hb-source-item.hb-source-text { color: var(--soft); font-style: italic; }
+
+/* === Beta notice on the back of every spot's planning + route detail view === */
+.hb-beta-notice {
+  margin-top: 16px;
+  padding: 10px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  background: var(--surface-2, var(--surface));
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+  letter-spacing: -0.005em;
+}
+.hb-beta-notice a {
+  color: var(--accent);
+  text-decoration: none;
+  word-break: break-all;
+}
+.hb-beta-notice a:hover { text-decoration: underline; }
 
 /* === Shuffle button in the browse search row === */
 .hb-search-row {

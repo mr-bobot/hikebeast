@@ -1,0 +1,246 @@
+cable_cars:
+- id: triftbahn-cable-car
+  name: Triftbahn
+  operator: Trift Brücke AG
+  description: Nessental valley station to Underi Trift, must be booked in advance
+  open_raw: June 1 - Oct 11
+  website: https://www.grimselwelt.ch/en/railways/triftbahn/
+- id: brienz-rothorn-bahn
+  name: Brienz Rothorn Bahn
+  operator: Brienz Rothorn Bahn AG
+  description: Steam cog railway from Brienz village up to the summit at 2,244 m
+  open_raw: Early June to late October
+  website: https://brienz-rothorn-bahn.ch/en/
+- id: stoosbahn
+  name: Stoosbahn
+  operator: Stoosbahnen AG
+  description: Funicular from Schwyz-Schlattli up to Stoos, the steepest funicular in the world
+  info_url: https://stoos-muotatal.ch/webcams/
+  open_raw: Year-round, brief maintenance closures in spring and autumn
+  website: https://www.stoos.ch/en/
+- id: oeschinensee-bergbahn
+  name: Bergbahnen Oeschinensee
+  operator: Bergbahnen Oeschinensee AG
+  description: Gondola from Kandersteg up to the Oeschinensee station
+  open_raw: Mid-May to early November
+  website: https://www.oeschinensee.ch/en/
+- id: schilthornbahn
+  name: Schilthornbahn
+  operator: Schilthornbahn AG
+  description: 'Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn'
+  open_raw: Year-round, brief maintenance closures in May and October
+  website: https://schilthorn.ch/en/
+- id: gornergrat-bahn
+  name: Gornergrat Bahn
+  operator: Matterhorn Gotthard Bahn
+  description: Rack railway from Zermatt up to Gornergrat at 3,089 m
+  open_raw: Year-round, reduced winter schedule
+  website: https://www.gornergrat.ch/en/
+- id: grimentz-bendolla
+  name: Grimentz-Bendolla Gondola
+  operator: Télé Anniviers
+  description: Gondola from Grimentz village up to the Bendolla station at 2,141 m
+  open_raw: Mid-June to mid-October
+  website: https://www.telegrimentzzinal.ch/
+- id: spielboden-laengfluh
+  name: Spielboden + Längfluh
+  operator: Saastal Bergbahnen
+  description: Gondola from Saas Fee to Spielboden (2,452 m), aerial cableway continues to Längfluh (2,870 m)
+  open_raw: Mid-June to mid-October
+  website: https://www.saas-fee.ch/en/
+- id: alpin-express
+  name: Alpin Express
+  operator: Saastal Bergbahnen
+  description: Gondola from Saas Fee to Felskinn at 2,989 m
+  open_raw: Mid-July to end of October
+  website: https://www.saas-fee.ch/en/
+- id: sanetsch-cable-car
+  name: Sanetsch Cable Car
+  operator: Sanetsch SA
+  description: Cable car from Gsteig-Sanetsch via the Sanetsch dam
+  open_raw: Mid-June to mid-October
+  website: https://www.seilbahnsanetsch.ch/en/home-1.html
+- id: plaine-morte-cable-car
+  name: Pointe de la Plaine Morte
+  operator: CMA Bergbahnen
+  description: Gondola from Crans-Montana up to the Plaine Morte glacier plateau at 2,927 m
+  open_raw: Late June to early September
+  website: https://www.mycma.ch/
+- id: moleson-funiculaire
+  name: Funiculaire Moléson
+  operator: Société des Téléphériques Moléson
+  description: Moléson-Village to Plan Francey, then aerial cable car to the summit
+  open_raw: Early April to early November
+  website: https://www.moleson.ch/en/
+- id: staubern-luftseilbahn
+  name: Luftseilbahn Staubern
+  operator: Bergstation Staubern AG
+  description: Cable car from Frümsen up to Gasthaus Staubern
+  open_raw: May - October
+  info_url: https://www.staubern.ch/
+  website: https://www.staubern.ch/bergbahn/
+- id: tierfehd-cable-car
+  name: Kraftwerke-Linth-Limmern Cable Car
+  operator: Kraftwerke Linth-Limmern AG
+  description: Cable car from Tierfehd up to Kalktrittli, then 4 km tunnel to the dam
+  open_raw: Mid-June to October
+  website: https://www.kraftwerkelinthlimmern.ch/
+- id: flumserberg-maschgenkamm
+  name: Flumserberg Tannenboden-Maschgenkamm
+  operator: Bergbahnen Flumserberg
+  description: Gondola from Flumserberg-Tannenboden up to Maschgenkamm at 2,020 m
+  open_raw: Late May to late October
+  website: https://www.flumserberg.ch/en/
+- id: montenvers-railway
+  name: Chemin de fer du Montenvers
+  operator: Compagnie du Mont-Blanc
+  description: Rack railway from Chamonix Montenvers station up to the Mer de Glace at 1,913 m
+  open_raw: Early May to early November
+  website: https://montenversmerdeglace.montblancnaturalresort.com/en
+- id: flegere-cable-car
+  name: Téléphérique de la Flégère
+  operator: Compagnie du Mont-Blanc
+  description: Cable car from Les Praz, Chamonix up to La Flégère
+  open_raw: Late June to mid-September (summer)
+  website: https://www.montblancnaturalresort.com/en/
+- id: glacier-bossons-chairlift
+  name: Télésiège du Glacier des Bossons
+  operator: Mont-Blanc Natural Resort
+  description: Chairlift from Chamonix valley up to the Chalet des Bossons at 1,410 m
+  open_raw: Mid-June to mid-September
+  website: https://www.montblancnaturalresort.com/en/
+- id: gelmerbahn-funicular
+  name: Gelmerbahn
+  operator: Grimselwelt / KWO
+  description: Open funicular from the Grimsel pass road up to Gelmersee, 106 percent gradient on the steepest section
+  open_raw: Mid-June to mid-October
+  website: https://grimselwelt.ch/bahnen/gelmerbahn/
+- id: firstbahn
+  name: Grindelwald - First
+  operator: Jungfraubahnen
+  description: Gondola from Grindelwald village up to First at 2,168 m
+  open_raw: Early April to late October, with revision break late October to late November
+  website: https://www.jungfrau.ch/en-gb/grindelwaldfirst/
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.66056,8.05361&z=16
+- id: engstligenalp-cable-car
+  name: Unter dem Birg - Engstligenalp
+  operator: Bergbahnen Engstligenalp AG
+  description: Cable car from Unter dem Birg above Adelboden up to the Engstligenalp plateau
+  open_raw: Mid-June to mid-October
+  website: https://engstligenalp.ch/
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.44941,7.56532&z=16
+- id: harderbahn
+  operator: Jungfraubahnen
+  description: Funicular from Interlaken Ost up to Harder Kulm at 1,322 m
+  open_raw: Early April to late November
+  website: https://www.harder-kulm.com/
+  name: Harderbahn
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.69822,7.85504&z=16
+- id: marbachegg-gondola
+  operator: Sportbahnen Marbachegg
+  description: Gondola from Marbach village up to Marbachegg in the UNESCO Entlebuch Biosphere
+  open_raw: Late May to mid-October
+  website: https://www.marbachegg.ch/
+  name: Gondelbahn Marbachegg
+- id: eggishorn-cable-car
+  operator: Aletsch Bahnen
+  description: Two-stage cable car from Fiesch via Fiescheralp up to Eggishorn at 2,927 m
+  open_raw: Early June to late October
+  website: https://www.aletscharena.ch/en/
+  name: Luftseilbahn Fiesch-Eggishorn
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.43139,8.09417&z=16
+- id: bettmerhorn-cable-car
+  operator: Aletsch Bahnen
+  description: Cable car from Bettmeralp up to the Bettmerhorn ridge at 2,647 m
+  open_raw: Early June to late October
+  website: https://www.aletscharena.ch/en/
+  name: Luftseilbahn Bettmeralp-Bettmerhorn
+- id: ebenalp-luftseilbahn
+  operator: Luftseilbahn Wasserauen-Ebenalp AG
+  description: Cable car from Wasserauen up to Ebenalp at 1,640 m, gateway to the Alpstein
+  open_raw: Year-round, with revision closures in April and November to December
+  website: https://www.ebenalp.ch/
+  name: Luftseilbahn Wasserauen-Ebenalp
+  top_station_maps_url: https://www.google.com/maps/place/?q=47.28417,9.41083&z=16
+- id: pizol-bergbahnen
+  operator: Pizolbahnen AG
+  description: Gondola and chairlift chain from Wangs up to Pizolhütte, start of the 5-Seen-Wanderung
+  open_raw: Late June to mid-October
+  website: https://pizol.com/
+  name: Pizolbahnen
+- id: hoher-kasten-bahn
+  operator: Hoher Kasten Drehrestaurant und Seilbahn AG
+  description: Cable car from Brülisau up to the Hoher Kasten summit at 1,795 m
+  open_raw: Year-round, daily operation
+  website: https://www.hoherkasten.ch/
+  name: Luftseilbahn Brülisau-Hoher Kasten
+  top_station_maps_url: https://www.google.com/maps/place/?q=47.28356,9.48539&z=16
+- id: niederrickenbach-cable-car
+  operator: Luftseilbahn Dallenwil-Niederrickenbach AG
+  description: Cable car from Dallenwil up to the mountain hamlet of Niederrickenbach at 1,156 m
+  open_raw: Year-round, with revision break in April
+  website: https://maria-rickenbach.ch/dallenwil-niederrickenbach/
+  name: Luftseilbahn Dallenwil-Niederrickenbach
+- id: haldigrat-chairlift
+  operator: Haldigrat AG
+  description: Small chairlift from Niederrickenbach up to the Haldigrat ridge around 1,940 m
+  open_raw: Mid-June to early November daily, weekends only in winter
+  website: https://www.haldigrat.ch/
+  name: Sesselbahn Haldigrat
+- id: monte-carasso-mornera-cable-car
+  operator: Funivia Monte Carasso-Mornera
+  description: Two-stage cable car from Monte Carasso via Curzútt up to Mornera at 1,400 m
+  open_raw: Year-round, daily 06:30 to 21:30
+  website: https://www.mornera.ch/
+  name: Funivia Monte Carasso-Mornera
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.20779,8.97982&z=16
+- id: niederbauen-emmetten-cable-car
+  name: Luftseilbahn Emmetten-Niederbauen
+  operator: Luftseilbahn Emmetten-Niederbauen AG
+  description: Small cable car from Emmetten up to Niederbauen Chulm at 1,587 m on the ridge above Lake Lucerne
+  open_raw: Mid-May to late October
+  website: https://www.niederbauen.ch/
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.94641,8.53472&z=16
+- id: jaun-gastlosen-express
+  name: Gastlosen-Express
+  operator: Jaun-Gastlosen Bergbahnen AG
+  description: 4-seater chairlift from Jaun village up to Musersbergli at 1,540 m, gateway to the Gastlosen hiking circuit
+  open_raw: Year-round (summer + winter operations)
+  website: https://www.jaun-bergbahnen.ch/
+- id: zinal-sorebois-cable-car
+  name: Télécabine Zinal-Sorebois
+  operator: Remontées Mécaniques Grimentz-Zinal SA
+  description: Gondola from Zinal village up to Sorebois at ~2,440 m, gateway to high-alpine traverses in the Val d'Anniviers
+  open_raw: Late June to mid-October, plus winter season
+  website: https://www.telegrimentzzinal.ch/
+- id: fluelen-eggberge-cable-car
+  name: Luftseilbahn Flüelen-Eggberge
+  operator: Luftseilbahn Flüelen-Eggberge AG
+  description: 15-passenger aerial cable car from Flüelen on Lake Uri up to Eggberge at 1,447 m, endpoint of the Schächentaler Höhenweg
+  website: https://www.eggberge.ch/
+- id: saas-grund-kreuzboden-cable-car
+  name: Gondelbahn Saas Grund-Kreuzboden
+  operator: Bergbahnen Hohsaas AG
+  description: 8-passenger gondola from Saas-Grund village up to Kreuzboden at ~2,400 m, base for Hohsaas summit and the Höhenweg
+  website: https://www.saas-fee.ch/en/services-informationen/prices-timetables-cable-cars/timetables-cable-cars
+- id: pilatusbahn-cogwheel
+  name: Pilatusbahn
+  operator: Pilatus-Bahnen AG
+  description: World's steepest cogwheel railway, from Alpnachstad up to Pilatus Kulm at 2,073 m, 48% max gradient
+  open_raw: Mid-May to mid-November (weather dependent)
+  website: https://www.pilatus.ch/en/discover/cogwheel-railway
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.95556,8.27694&z=16
+- id: pilatus-kriens-gondola
+  name: Panorama-Gondelbahn + Dragon Ride (Kriens-Fräkmüntegg-Pilatus Kulm)
+  operator: Pilatus-Bahnen AG
+  description: 'Two-stage aerial ride: panorama gondola from Kriens via Krienseregg to Fräkmüntegg (1,416 m), then the Dragon Ride aerial cableway up to Pilatus Kulm at 2,073 m'
+  open_raw: Year-round, brief maintenance breaks
+  website: https://www.pilatus.ch/en/discover/panorama-gondolas
+  top_station_maps_url: https://www.google.com/maps/place/?q=46.95556,8.27694&z=16
+- id: kaisereggbahnen
+  name: Kaisereggbahnen Riggisalp
+  operator: Kaisereggbahnen Schwarzsee AG
+  description: Chairlift from Schwarzsee Gypsera up to Riggisalp at about 1,491 m, gateway to the Schwarzsee Höhenweg and Kaiseregg summit area
+  open_raw: Late May to late October (summer), plus winter ski season
+  website: https://kaisereggbahnen-schwarzsee.ch/
+  top_station_maps_url: https://maps.app.goo.gl/6x95UM4qh5yfTpzU7
