@@ -561,8 +561,8 @@ export default async function handler(req, res) {
       //   - source_page=it_swissmap       → /it/swissmap/success (2026-05-28)
       //   - source_page=gems              → /gems/success (2026-05-30)
       //   - source_page=de_gems           → /de/gems/success (2026-05-30)
-      //   - source_page=fr_gems           → /fr/map/success (2026-05-27)
-      //   - source_page=it_gems           → /it/map/success (2026-05-27)
+      //   - source_page=fr_gems           → /fr/gems/success (2026-05-30)
+      //   - source_page=it_gems           → /it/gems/success (2026-05-30)
       //   - any other source_page · DE    → /de/map/success
       //   - any other source_page · else  → /map/success
       //
@@ -576,8 +576,10 @@ export default async function handler(req, res) {
       // before that they rode the shared legacy /map/success, which
       // (a) still showed the dead Google-Drive delivery UI and (b) mixed
       // gems buyers with the deprecated /map[3-8]/ + /themap/ traffic that
-      // still falls through to /map/success. /fr/gems/ + /it/gems/ keep
-      // their existing modern siblings at /fr/map/success + /it/map/success.
+      // still falls through to /map/success. /fr/gems/ + /it/gems/ got
+      // their own dedicated pages /fr/gems/success + /it/gems/success on
+      // 2026-05-30 too (the old /fr/map/success + /it/map/success stay live
+      // for past-receipt links).
       return_url: (function () {
         var path;
         if (sourcePage === "map9") path = "/map9/success";
@@ -588,8 +590,8 @@ export default async function handler(req, res) {
         else if (sourcePage === "de_swissmap") path = "/de/swissmap/success";
         else if (sourcePage === "fr_swissmap") path = "/fr/swissmap/success";
         else if (sourcePage === "it_swissmap") path = "/it/swissmap/success";
-        else if (sourcePage === "fr_gems") path = "/fr/map/success";
-        else if (sourcePage === "it_gems") path = "/it/map/success";
+        else if (sourcePage === "fr_gems") path = "/fr/gems/success";
+        else if (sourcePage === "it_gems") path = "/it/gems/success";
         else if (sourcePage === "gems") path = "/gems/success";
         else if (sourcePage === "de_gems") path = "/de/gems/success";
         else path = locale === "de" ? "/de/map/success" : "/map/success";
