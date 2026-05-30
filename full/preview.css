@@ -5587,6 +5587,10 @@ body.has-rail .topbar .hb-nav { display: none; }
   }
   body.hb-planning-active .hb-flip-back-view {
     padding-top: 8px;
+    /* Tighter side padding on the full-page planning view so the now
+       box-less route rows run closer to the screen edges. */
+    padding-left: 18px;
+    padding-right: 18px;
   }
   body.hb-planning-active .hb-back-topbar {
     position: sticky;
@@ -5753,6 +5757,35 @@ body.has-rail .topbar .hb-nav { display: none; }
 .hb-route-chev { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
 .hb-route-chev svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .hb-route-row:hover .hb-route-chev { color: var(--accent); }
+
+/* Mobile: routes are NOT a boxed card. Full-width rows split by hairline
+   separators so the text column gets the whole screen width instead of
+   being squeezed inside a bordered box. Desktop keeps the box. */
+@media (max-width: 759px) {
+  .hb-routes-list {
+    border: 0;
+    border-radius: 0;
+    background: none;
+    overflow: visible;
+  }
+  .hb-route-row {
+    background: none;
+    padding: 16px 0;
+    grid-template-columns: 96px 1fr auto;
+    gap: 13px;
+  }
+  .hb-route-row:hover { background: none; }
+  /* Keep a separator above the first row too, dividing it from the
+     "Routes" heading, since there's no longer a box edge to do that. */
+  .hb-route-row:first-child { border-top: 1px solid var(--hairline); }
+  .hb-route-thumb,
+  .hb-route-thumb img {
+    width: 96px; min-width: 96px; max-width: 96px;
+    height: 72px;
+    flex-basis: 96px;
+  }
+  .hb-route-chev { width: 22px; height: 22px; }
+}
 
 /* Hut + Cable car cards */
 .hb-detail-card { background: var(--paper); border: 1px solid var(--hairline); border-radius: 14px; padding: 14px 18px; }

@@ -434,7 +434,6 @@ function routeRow(spot, route, idx) {
   if (route.sac_grade) stats.push(`<span class="hb-route-stat">${ICON_DIFF}<span class="v">${escapeHtml(route.sac_grade)}${route.effort_label ? " · " + escapeHtml(route.effort_label) : ""}</span></span>`);
   if (route.gain_m) stats.push(`<span class="hb-route-stat">${ICON_GAIN}<span class="v">${route.gain_m} m gain</span></span>`);
 
-  const badge = route.quickest ? `<span class="hb-route-badge">Quickest</span>` : "";
   // Prefer the hike's curated `name` (perspective-independent, set when two
   // hikes for the same spot share a trailhead label or when "Hike from X"
   // reads awkwardly because the spot itself IS X). Fall back to the
@@ -464,7 +463,7 @@ function routeRow(spot, route, idx) {
   return `<button type="button" class="hb-route-row" data-route-idx="${idx}">
     ${thumb}
     <div class="hb-route-meta">
-      <div class="hb-route-name">${name} ${badge}</div>
+      <div class="hb-route-name">${name}</div>
       <div class="hb-route-stats">${stats.join("")}</div>
       ${openingHtml}
     </div>
@@ -771,16 +770,6 @@ function flipScriptFor(spot) {
     if (!r) return;
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
-    const badgeHost = back.querySelector('.hb-rd-name');
-    let badge = badgeHost.querySelector('.hb-route-badge');
-    if (r.quickest) {
-      if (!badge) {
-        badge = document.createElement('span');
-        badge.className = 'hb-route-badge';
-        badge.textContent = 'Quickest';
-        badgeHost.appendChild(badge);
-      }
-    } else if (badge) badge.remove();
 
     // Per-route description sits at the top, just under the title.
     const descEl = back.querySelector('[data-rd-description]');

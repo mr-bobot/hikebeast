@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1780076619535" />
+<link rel="stylesheet" href="../../preview.css?v=1780130503716" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -120,7 +120,7 @@
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/cascata_di_foroglio_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Village walk from Foroglio parking <span class="hb-route-badge">Quickest</span></div>
+      <div class="hb-route-name">Village walk from Foroglio parking</div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">5 min</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span></div>
       
     </div>
@@ -128,7 +128,7 @@
   </button><button type="button" class="hb-route-row" data-route-idx="1">
     <div class="hb-route-thumb"><img src="../../img/derivatives/cascata_di_foroglio_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
-      <div class="hb-route-name">Hike from Bignasco (Postbus stop) </div>
+      <div class="hb-route-name">Hike from Bignasco (Postbus stop)</div>
       <div class="hb-route-stats"><span class="hb-route-stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="v">2h 20</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg><span class="v">T1 · Easy</span></span><span class="hb-route-stat"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg><span class="v">230 m gain</span></span></div>
       
     </div>
@@ -272,16 +272,6 @@
     if (!r) return;
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
-    const badgeHost = back.querySelector('.hb-rd-name');
-    let badge = badgeHost.querySelector('.hb-route-badge');
-    if (r.quickest) {
-      if (!badge) {
-        badge = document.createElement('span');
-        badge.className = 'hb-route-badge';
-        badge.textContent = 'Quickest';
-        badgeHost.appendChild(badge);
-      }
-    } else if (badge) badge.remove();
 
     // Per-route description sits at the top, just under the title.
     const descEl = back.querySelector('[data-rd-description]');
