@@ -1990,10 +1990,17 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           vid.preload = "none";
           vid.controls = true;
           vid.playsInline = true;
-          vid.poster = "/map3/img/about/leon.jpg";
           vid.src = "/de/gems/swissgems_intro_de_v2.mov";
+          vid.poster = vid.src.replace(/\.mov$/i, ".jpg");
           wrap.appendChild(vid);
           body.parentNode.insertBefore(wrap, body.nextSibling);
+          var gettingHead = document.createElement("div");
+          gettingHead.className = "px section-head about-getting-head";
+          gettingHead.style.marginTop = "32px";
+          var gettingH2 = document.createElement("h2");
+          gettingH2.textContent = "Das bekommst du";
+          gettingHead.appendChild(gettingH2);
+          body.parentNode.insertBefore(gettingHead, wrap.nextSibling);
           vid.addEventListener("play", function () {
             if (window.hbTrack) window.hbTrack("about_video_played");
           }, { once: true });
