@@ -228,7 +228,16 @@ export default async function handler(req, res) {
   // to match against. Apps Script handleVisit either appends a fresh
   // row (subscriber_id case) or no-ops (anonymous beacon). Direct/
   // Linktree/ad traffic skips this entirely and lives in AllVisits.
-  if (url && (subscriber_id || token || safeEvent)) {
+  // 2026-05-30 (Fix C): dropped `|| safeEvent` from the gate. Anonymous
+  // engagement beacons (engaged / session_end / initiate_checkout /
+  // purchased with no subscriber_id/token) were firing this call only to
+  // no-op inside handleVisit, but the non-match-only ones (purchased,
+  // initiate_checkout) still ACQUIRED the single Apps Script ScriptLock,
+  // contending with the real `purchase` webhook write. Under FB-ad bursts
+  // that lock contention dropped ~2.7% of buyers from Signups (86 "Lock
+  // timeout" rows in the _errors tab, confirmed 2026-05-30). Removing the
+  // no-op calls frees lock capacity for the writes that matter.
+  if (url && (subscriber_id || token)) {
     tasks.push(
       fetch(url, {
         method: "POST",
