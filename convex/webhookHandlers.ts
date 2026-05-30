@@ -124,7 +124,7 @@ export const processWebhookSideEffects = internalAction({
     // purchase write then fails with a FAST 15s "Lock timeout" (the
     // script's own waitLock), not a hang. That is retryable — by the next
     // attempt the lock has usually drained. postToAppsScript now retries
-    // up to 2x with backoff (added 2026-05-30, after 86 lock-timeout rows
+    // up to 2x (added 2026-05-30, after 86 lock-timeout rows
     // in the _errors tab dropped ~2.7% of buyers from the Signups sheet;
     // the old "no retry" note assumed a 60s hang, which is the wrong
     // failure mode). Stripe stays the source of truth; a still-failed row
@@ -275,8 +275,8 @@ async function manychatPost(path: string, body: Record<string, unknown>): Promis
 // Retries on a transient "Lock timeout" from the single Apps Script
 // ScriptLock. Two important details about the failure mode (confirmed
 // 2026-05-30 from the _errors tab): (1) the lock-timeout is a FAST ~15s
-// waitLock failure, not a 60s hang, so the next attempt (after a short
-// backoff, once the lock drains) usually succeeds; (2) Apps Script
+// waitLock failure, not a 60s hang, so the next attempt (once the
+// lock drains) usually succeeds; (2) Apps Script
 // returns that error as HTTP 200 with an `ok:false` / "Lock timeout"
 // body, so checking only r.ok silently treats a drop as success — we
 // must inspect the body. An unreadable body (e.g. the Drive redirect
