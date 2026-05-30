@@ -553,6 +553,8 @@ export default async function handler(req, res) {
       //   - source_page=de_swissmap       → /de/swissmap/success (2026-05-28)
       //   - source_page=fr_swissmap       → /fr/swissmap/success (2026-05-28)
       //   - source_page=it_swissmap       → /it/swissmap/success (2026-05-28)
+      //   - source_page=gems              → /gems/success (2026-05-30)
+      //   - source_page=de_gems           → /de/gems/success (2026-05-30)
       //   - source_page=fr_gems           → /fr/map/success (2026-05-27)
       //   - source_page=it_gems           → /it/map/success (2026-05-27)
       //   - any other source_page · DE    → /de/map/success
@@ -562,10 +564,14 @@ export default async function handler(req, res) {
       // /map[3-8]/ + /themap/ checkout has used since the dawn of the
       // funnel · they all redirect to /map/success/. /map9/ and the
       // /swissmap/ mirror (channel-specific URL launched 2026-05-28)
-      // have their own per-locale success siblings; /gems/ + /de/gems/
-      // ride the shared /map/success path. /fr/gems/ + /it/gems/ get
-      // their own success siblings under /fr/map/success + /it/map/success
-      // since no localized fallback existed before.
+      // have their own per-locale success siblings. /gems/ + /de/gems/
+      // got their own dedicated modern success pages on 2026-05-30
+      // (/gems/success + /de/gems/success, cloned from /map9/success) ·
+      // before that they rode the shared legacy /map/success, which
+      // (a) still showed the dead Google-Drive delivery UI and (b) mixed
+      // gems buyers with the deprecated /map[3-8]/ + /themap/ traffic that
+      // still falls through to /map/success. /fr/gems/ + /it/gems/ keep
+      // their existing modern siblings at /fr/map/success + /it/map/success.
       return_url: (function () {
         var path;
         if (sourcePage === "map9") path = "/map9/success";
@@ -578,6 +584,8 @@ export default async function handler(req, res) {
         else if (sourcePage === "it_swissmap") path = "/it/swissmap/success";
         else if (sourcePage === "fr_gems") path = "/fr/map/success";
         else if (sourcePage === "it_gems") path = "/it/map/success";
+        else if (sourcePage === "gems") path = "/gems/success";
+        else if (sourcePage === "de_gems") path = "/de/gems/success";
         else path = locale === "de" ? "/de/map/success" : "/map/success";
         return `${origin}${path}?session_id={CHECKOUT_SESSION_ID}`;
       })(),
