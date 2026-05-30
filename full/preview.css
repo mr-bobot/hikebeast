@@ -1512,11 +1512,21 @@ footer.legal .sep { margin: 0 6px; color: var(--soft); }
   }
 }
 body[data-page="spot-detail"] .specs {
-  /* Specs flow right after the body — no auto-margin pushing them
-   * to the bottom of the (now correctly sized) card. A small extra
-   * margin (on top of the flex gap) gives the body text some breathing
-   * room before the REGION/ACCESS/EFFORT/BEST LIGHT grid. */
+  /* Mobile: specs flow right after the body (the card is content-height,
+   * so there's no free space to distribute anyway). A small extra margin
+   * on top of the flex gap gives the body some breathing room before the
+   * REGION/ACCESS/EFFORT/BEST LIGHT grid. */
   margin-top: 12px;
+}
+@media (min-width: 760px) {
+  /* Desktop: the card is taller than its content, so anchor the
+   * REGION/ACCESS/EFFORT/BEST LIGHT grid to the BOTTOM, grouped with the
+   * "How to get there" CTA, instead of leaving them stranded right under
+   * the body with a void beneath. margin-top:auto on .specs absorbs all
+   * the free space above it; the CTA then sits directly below (its own
+   * margin-top:auto zeroed) separated only by the flex gap + its divider. */
+  body[data-page="spot-detail"] .specs { margin-top: auto; }
+  body[data-page="spot-detail"] .hb-flip-cta-row { margin-top: 0; }
 }
 /* The detail-page topbar exists only for the burger + account FAB — it
  * has no brand label or crumb. Drop the bottom border and let it blend
