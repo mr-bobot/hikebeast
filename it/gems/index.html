@@ -726,14 +726,21 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     flex-wrap: wrap;
   }
   .about-social {
-    width: 30px;
     height: 30px;
+    padding: 0 10px;
     border-radius: 8px;
-    display: inline-grid;
-    place-items: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
     flex: 0 0 auto;
     -webkit-tap-highlight-color: transparent;
     transition: transform 120ms ease;
+  }
+  .about-social-count {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.01em;
   }
   .about-social:active { transform: scale(0.94); }
   .about-social svg { width: 17px; height: 17px; fill: #fff; }
@@ -1080,6 +1087,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     gap: 2px;
     min-width: 0;
   }
+  .review-verified { width: 14px; height: 14px; margin-left: 4px; vertical-align: -2px; flex: 0 0 auto; }
   .review-name {
     font-size: 14px;
     font-weight: 600;
@@ -1095,6 +1103,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     line-height: 1.2;
   }
   .review-handle:hover { text-decoration: underline; }
+  .review-followers { color: var(--muted); font-weight: 400; }
   .review-meta {
     display: flex;
     gap: 10px;
@@ -1599,6 +1608,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     .dots span { background: rgba(255, 255, 255, 0.25); }
     .about-social--tt { background: #ffffff; }
     .about-social--tt svg { fill: #000000; }
+    .about-social--tt .about-social-count { color: #000000; }
     .about-photo { border: 1px solid rgba(255, 255, 255, 0.10); }
     .checkout-mock { border-color: rgba(255, 255, 255, 0.10); }
   }
@@ -1792,8 +1802,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <div class="review-head">
             <div class="review-avatar"><img src="/map3/img/avatars/lazyset_up.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
-              <span class="review-name">Antonin</span>
-              <a class="review-handle" href="https://www.instagram.com/lazyset_up/" target="_blank" rel="noopener">@lazyset_up</a>
+              <span class="review-name">Antonin<svg class="review-verified" viewBox="0 0 48 48" aria-label="Verified" role="img"><polygon fill="#0095F6" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"/><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"/></svg></span>
+              <a class="review-handle" href="https://www.instagram.com/lazyset_up/" target="_blank" rel="noopener">@lazyset_up <span class="review-followers">· 608K</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1806,8 +1816,8 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           <div class="review-head">
             <div class="review-avatar"><img src="/map3/img/avatars/dimi_tt7.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
-              <span class="review-name">Dimi</span>
-              <a class="review-handle" href="https://www.instagram.com/dimi_tt7" target="_blank" rel="noopener">@dimi_tt7</a>
+              <span class="review-name">Dimi<svg class="review-verified" viewBox="0 0 48 48" aria-label="Verified" role="img"><polygon fill="#0095F6" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"/><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"/></svg></span>
+              <a class="review-handle" href="https://www.instagram.com/dimi_tt7" target="_blank" rel="noopener">@dimi_tt7 <span class="review-followers">· 87K</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1817,10 +1827,36 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
         <div class="review-card">
           <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/pereganya_mike.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Mike<svg class="review-verified" viewBox="0 0 48 48" aria-label="Verified" role="img"><polygon fill="#0095F6" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"/><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"/></svg></span>
+              <a class="review-handle" href="https://www.instagram.com/pereganya_mike" target="_blank" rel="noopener">@pereganya_mike <span class="review-followers">· 512K</span></a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"best wildcamping spots in the swiss alps"</p>
+        </div>
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar"><img src="/map3/img/avatars/melbroggini.jpg" alt="" loading="lazy" /></div>
+            <div class="review-id">
+              <span class="review-name">Mel<svg class="review-verified" viewBox="0 0 48 48" aria-label="Verified" role="img"><polygon fill="#0095F6" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"/><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"/></svg></span>
+              <a class="review-handle" href="https://www.instagram.com/melbroggini" target="_blank" rel="noopener">@melbroggini <span class="review-followers">· 77K</span></a>
+            </div>
+            <div class="review-meta">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-quote">"Dude that's sick! The UX is very clear and simple"</p>
+        </div>
+        <div class="review-card">
+          <div class="review-head">
             <div class="review-avatar"><img src="/map3/img/avatars/emirhansyz.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
-              <span class="review-name">Emirhan</span>
-              <a class="review-handle" href="https://www.instagram.com/emirhansyz" target="_blank" rel="noopener">@emirhansyz</a>
+              <span class="review-name">Emirhan<svg class="review-verified" viewBox="0 0 48 48" aria-label="Verified" role="img"><polygon fill="#0095F6" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"/><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"/></svg></span>
+              <a class="review-handle" href="https://www.instagram.com/emirhansyz" target="_blank" rel="noopener">@emirhansyz <span class="review-followers">· 5.2K</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1833,7 +1869,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <div class="review-avatar"><img src="/map3/img/avatars/simon_ys32.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Simon</span>
-              <a class="review-handle" href="https://www.instagram.com/simon_ys32/" target="_blank" rel="noopener">@simon_ys32</a>
+              <a class="review-handle" href="https://www.instagram.com/simon_ys32/" target="_blank" rel="noopener">@simon_ys32 <span class="review-followers">· 58</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1846,7 +1882,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <div class="review-avatar"><img src="/map3/img/avatars/andres-soltermann.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Andrés</span>
-              <a class="review-handle" href="https://www.instagram.com/andres.soltermann/" target="_blank" rel="noopener">@andres.soltermann</a>
+              <a class="review-handle" href="https://www.instagram.com/andres.soltermann/" target="_blank" rel="noopener">@andres.soltermann <span class="review-followers">· 4.9K</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1859,7 +1895,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <div class="review-avatar"><img src="/map3/img/avatars/oliwear_j.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Oli</span>
-              <a class="review-handle" href="https://www.instagram.com/oliwear.j/" target="_blank" rel="noopener">@oliwear.j</a>
+              <a class="review-handle" href="https://www.instagram.com/oliwear.j/" target="_blank" rel="noopener">@oliwear.j <span class="review-followers">· 4.3K</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1872,7 +1908,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <div class="review-avatar"><img src="/map3/img/avatars/clins_james.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">James</span>
-              <a class="review-handle" href="https://www.instagram.com/clins_james" target="_blank" rel="noopener">@clins_james</a>
+              <a class="review-handle" href="https://www.instagram.com/clins_james" target="_blank" rel="noopener">@clins_james <span class="review-followers">· 354</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1885,7 +1921,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <div class="review-avatar"><img src="/map3/img/avatars/patrick_machler.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Patrick</span>
-              <a class="review-handle" href="https://www.instagram.com/patrick.machler" target="_blank" rel="noopener">@patrick.machler</a>
+              <a class="review-handle" href="https://www.instagram.com/patrick.machler" target="_blank" rel="noopener">@patrick.machler <span class="review-followers">· 221</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1898,7 +1934,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <div class="review-avatar"><img src="/map3/img/avatars/dirk_thewanderer.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Dirk</span>
-              <a class="review-handle" href="https://www.instagram.com/dirk.thewanderer/" target="_blank" rel="noopener">@dirk.thewanderer</a>
+              <a class="review-handle" href="https://www.instagram.com/dirk.thewanderer/" target="_blank" rel="noopener">@dirk.thewanderer <span class="review-followers">· 399</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1911,7 +1947,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <div class="review-avatar"><img src="/map3/img/avatars/jay_kuja.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Jay</span>
-              <a class="review-handle" href="https://www.instagram.com/jay.kuja" target="_blank" rel="noopener">@jay.kuja</a>
+              <a class="review-handle" href="https://www.instagram.com/jay.kuja" target="_blank" rel="noopener">@jay.kuja <span class="review-followers">· 246</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1924,7 +1960,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <div class="review-avatar"><img src="/map3/img/avatars/q_baroudeur.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Q</span>
-              <a class="review-handle" href="https://www.instagram.com/q_baroudeur/" target="_blank" rel="noopener">@q_baroudeur</a>
+              <a class="review-handle" href="https://www.instagram.com/q_baroudeur/" target="_blank" rel="noopener">@q_baroudeur <span class="review-followers">· 367</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1937,7 +1973,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <div class="review-avatar"><img src="/map3/img/avatars/mohamed_ahmed_abdel_aziz.jpg" alt="" loading="lazy" /></div>
             <div class="review-id">
               <span class="review-name">Mohamed</span>
-              <a class="review-handle" href="https://www.instagram.com/mohamed_ahmed_abdel_aziz" target="_blank" rel="noopener">@mohamed_ahmed_abdel_aziz</a>
+              <a class="review-handle" href="https://www.instagram.com/mohamed_ahmed_abdel_aziz" target="_blank" rel="noopener">@mohamed_ahmed_abdel_aziz <span class="review-followers">· 266</span></a>
             </div>
             <div class="review-meta">
               <span class="stars">★★★★★</span>
@@ -1964,65 +2000,44 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         <div class="about-text">
           <p>Sono Leon. Come fotografo svizzero, ho passato molte estati a esplorare le Alpi. Questa mappa è la scorciatoia che avrei voluto avere quando ho iniziato.</p>
           <div class="about-actions">
-            <button type="button" class="about-video-btn" id="about-video-btn" data-src="/gems/swissgems_intro_en_v1.mov" data-poster="/map3/img/about/leon.jpg">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
-            <span>Guarda</span>
-            <span class="about-video-btn-sep" aria-hidden="true">·</span>
-            <span>0:56</span>
-          </button>
             <a class="about-social about-social--ig" href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg><span class="about-social-count">52k</span>
             </a>
             <a class="about-social about-social--tt" href="https://www.tiktok.com/@leon.helg" target="_blank" rel="noopener" aria-label="TikTok">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.8 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.8 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/></svg><span class="about-social-count">130k</span>
             </a>
           </div>
         </div>
       </div>
       <script>
-        // Video element is created on click only. No <video src> in the
-        // initial HTML so the browser never fires metadata or range
-        // requests for the .mov on pageload.
-        //
-        // Fullscreen:
-        //   iOS Safari · no playsInline = play() auto-opens native
-        //     fullscreen player.
-        //   Desktop · requestFullscreen() from the user-gesture click
-        //     handler opens browser fullscreen.
+        // About-me video · shown inline by default (poster + native
+        // controls). preload="none" so the .mov is not fetched until the
+        // user hits play · keeps pageload free of metadata/range requests.
+        // Fires about_video_played once on first play (was a Watch-button
+        // tap before · 2026-05-29).
         (function () {
-          var btn = document.getElementById("about-video-btn");
-          if (!btn) return;
-          btn.addEventListener("click", function () {
+          var body = document.querySelector(".about-body");
+          if (!body) return;
+          var wrap = document.createElement("div");
+          wrap.className = "px about-video-wrap";
+          var vid = document.createElement("video");
+          vid.className = "about-video";
+          vid.preload = "none";
+          vid.controls = true;
+          vid.playsInline = true;
+          vid.src = "/gems/swissgems_intro_en_v1.mov";
+          vid.poster = vid.src.replace(/\.mov$/i, ".jpg");
+          wrap.appendChild(vid);
+          body.parentNode.insertBefore(wrap, body.nextSibling);
+          var gettingHead = document.createElement("div");
+          gettingHead.className = "px section-head about-getting-head";
+          gettingHead.style.marginTop = "32px";
+          var gettingH2 = document.createElement("h2");
+          gettingH2.textContent = "Cosa ricevi";
+          gettingHead.appendChild(gettingH2);
+          body.parentNode.insertBefore(gettingHead, wrap.nextSibling);
+          vid.addEventListener("play", function () {
             if (window.hbTrack) window.hbTrack("about_video_played");
-            var vid = document.createElement("video");
-            vid.className = "about-video";
-            vid.src = btn.dataset.src;
-            vid.poster = btn.dataset.poster;
-            vid.controls = true;
-
-            // Insert as sibling AFTER the .about-body (photo + text + actions)
-            // so the player gets full padded width, not the narrow column
-            // next to the portrait photo.
-            var body = btn.closest(".about-body");
-            var wrap = document.createElement("div");
-            wrap.className = "px about-video-wrap";
-            wrap.appendChild(vid);
-            body.parentNode.insertBefore(wrap, body.nextSibling);
-            btn.style.display = "none";
-
-            // Try fullscreen. iOS Safari standalone honors this; the
-            // in-app browsers (Instagram, WhatsApp, Facebook) silently
-            // refuse — the inline player above is the fallback.
-            var req = vid.requestFullscreen
-                   || vid.webkitRequestFullscreen
-                   || vid.webkitEnterFullscreen;
-            if (req) {
-              try {
-                var p = req.call(vid);
-                if (p && p.catch) p.catch(function () {});
-              } catch (e) {}
-            }
-            vid.play().catch(function () {});
           }, { once: true });
         })();
       </script>
