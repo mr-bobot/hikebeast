@@ -1517,6 +1517,9 @@ body[data-page="spot-detail"] .specs {
    * on top of the flex gap gives the body some breathing room before the
    * REGION/ACCESS/EFFORT/BEST LIGHT grid. */
   margin-top: 12px;
+  /* A little extra breathing room below the grid before the "How to get
+   * there" divider (adds to the flex gap). */
+  margin-bottom: 8px;
 }
 @media (min-width: 760px) {
   /* Desktop: the card is taller than its content, so anchor the
