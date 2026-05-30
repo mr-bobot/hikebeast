@@ -1862,12 +1862,6 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         <div class="about-text">
           <p>Ich bin Leon. Als Schweizer Fotograf war ich viele Sommer in den Alpen unterwegs auf der Suche nach den schönsten Locations.</p>
           <div class="about-actions">
-            <button type="button" class="about-video-btn" id="about-video-btn" data-src="/de/gems/swissgems_intro_de_v2.mov" data-poster="/map3/img/about/leon.jpg">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
-            <span>Ansehen</span>
-            <span class="about-video-btn-sep" aria-hidden="true">·</span>
-            <span>0:56</span>
-          </button>
             <a class="about-social about-social--ig" href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener" aria-label="Instagram">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             </a>
@@ -1878,48 +1872,27 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
         </div>
       </div>
       <script>
-        // Video-Element wird erst beim Klick erzeugt. Kein <video src> im
-        // initial-HTML = keine Möglichkeit für Safari/Chrome irgendwelche
-        // Metadata- oder Range-Requests beim Pageload abzusetzen.
-        //
-        // Fullscreen-Verhalten:
-        //   iOS Safari · ohne `playsinline` öffnet `play()` automatisch
-        //     den nativen iOS Vollbild-Player.
-        //   Desktop · `requestFullscreen()` direkt aus dem click handler
-        //     öffnet Browser-Fullscreen (im user-gesture-context erlaubt).
+        // About-me video · shown inline by default (poster + native
+        // controls). preload="none" so the .mov is not fetched until the
+        // user hits play · keeps pageload free of metadata/range requests.
+        // Fires about_video_played once on first play (was a Watch-button
+        // tap before · 2026-05-29).
         (function () {
-          var btn = document.getElementById("about-video-btn");
-          if (!btn) return;
-          btn.addEventListener("click", function () {
-            var vid = document.createElement("video");
-            vid.className = "about-video";
-            vid.src = btn.dataset.src;
-            vid.poster = btn.dataset.poster;
-            vid.controls = true;
-
-            // Insert as sibling AFTER the .about-body (photo + text + actions)
-            // so the player gets full padded width, not the narrow column
-            // next to the portrait photo.
-            var body = btn.closest(".about-body");
-            var wrap = document.createElement("div");
-            wrap.className = "px about-video-wrap";
-            wrap.appendChild(vid);
-            body.parentNode.insertBefore(wrap, body.nextSibling);
-            btn.style.display = "none";
-
-            // Try fullscreen. iOS Safari standalone honors this; the
-            // in-app browsers (Instagram, WhatsApp, Facebook) silently
-            // refuse — the inline player above is the fallback.
-            var req = vid.requestFullscreen
-                   || vid.webkitRequestFullscreen
-                   || vid.webkitEnterFullscreen;
-            if (req) {
-              try {
-                var p = req.call(vid);
-                if (p && p.catch) p.catch(function () {});
-              } catch (e) {}
-            }
-            vid.play().catch(function () {});
+          var body = document.querySelector(".about-body");
+          if (!body) return;
+          var wrap = document.createElement("div");
+          wrap.className = "px about-video-wrap";
+          var vid = document.createElement("video");
+          vid.className = "about-video";
+          vid.preload = "none";
+          vid.controls = true;
+          vid.playsInline = true;
+          vid.poster = "/map3/img/about/leon.jpg";
+          vid.src = "/de/gems/swissgems_intro_de_v2.mov";
+          wrap.appendChild(vid);
+          body.parentNode.insertBefore(wrap, body.nextSibling);
+          vid.addEventListener("play", function () {
+            if (window.hbTrack) window.hbTrack("about_video_played");
           }, { once: true });
         })();
       </script>
