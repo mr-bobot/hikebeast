@@ -120,10 +120,15 @@ export const processWebhookSideEffects = internalAction({
     }
 
     // ── 2. Apps Script Sheet log ────────────────────────────────────────
-    // Apps Script can take 30-80s. We let it have up to 60s here (Convex
-    // action default timeout is 5min, so we're not even close). No retry
-    // — if Apps Script is hung for 60s, a retry won't help and the row
-    // can be backfilled from Stripe truth via the get_snapshot endpoint.
+    // The single Apps Script ScriptLock contends under FB-ad bursts; the
+    // purchase write then fails with a FAST 15s "Lock timeout" (the
+    // script's own waitLock), not a hang. That is retryable — by the next
+    // attempt the lock has usually drained. postToAppsScript now retries
+    // up to 2x (added 2026-05-30, after 86 lock-timeout rows
+    // in the _errors tab dropped ~2.7% of buyers from the Signups sheet;
+    // the old "no retry" note assumed a 60s hang, which is the wrong
+    // failure mode). Stripe stays the source of truth; a still-failed row
+    // can be backfilled from a Stripe export.
     try {
       await postToAppsScript({
         action:           "purchase",
@@ -266,24 +271,43 @@ async function manychatPost(path: string, body: Record<string, unknown>): Promis
   });
 }
 
-// Mirror of api/checkout/webhook.js#logPurchase, ported to fetch. ONE
-// attempt with a 60s timeout — Apps Script v11 has been observed at 80+
-// seconds for individual writes (lock contention). One attempt is fine
-// because: (a) Stripe is the source of truth, (b) any missing row can
-// be backfilled from the get_snapshot endpoint, (c) retrying a hung
-// Apps Script call would just stack two hangs.
-async function postToAppsScript(payload: Record<string, unknown>): Promise<void> {
+// Mirror of api/checkout/webhook.js#logPurchase, ported to fetch.
+// Retries on a transient "Lock timeout" from the single Apps Script
+// ScriptLock. Two important details about the failure mode (confirmed
+// 2026-05-30 from the _errors tab): (1) the lock-timeout is a FAST ~15s
+// waitLock failure, not a 60s hang, so the next attempt (once the
+// lock drains) usually succeeds; (2) Apps Script
+// returns that error as HTTP 200 with an `ok:false` / "Lock timeout"
+// body, so checking only r.ok silently treats a drop as success — we
+// must inspect the body. An unreadable body (e.g. the Drive redirect
+// page) is treated as delivered, matching the prior behaviour. No
+// explicit backoff between attempts: each retry's own fetch hits the
+// Apps Script waitLock(15s), which naturally spaces the attempts while
+// the lock drains (and avoids depending on setTimeout in the Convex
+// default runtime).
+async function postToAppsScript(payload: Record<string, unknown>, retries = 2): Promise<void> {
   const url = process.env.SHEETS_WEBHOOK_URL;
   if (!url) return;
-  const r = await fetch(url, {
-    method:  "POST",
-    headers: { "Content-Type": "application/json" },
-    body:    JSON.stringify(payload),
-    signal:  AbortSignal.timeout(60_000),
-  });
-  if (!r.ok) {
-    throw new Error(`Apps Script HTTP ${r.status}`);
+  let lastErr: unknown;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const r = await fetch(url, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify(payload),
+        signal:  AbortSignal.timeout(45_000),
+      });
+      if (!r.ok) { lastErr = new Error(`Apps Script HTTP ${r.status}`); continue; }
+      const text = await r.text().catch(() => "");
+      if (/lock timeout|exklusivbearbeitung|timed out|"ok"\s*:\s*false/i.test(text)) {
+        lastErr = new Error("Apps Script lock timeout"); continue;
+      }
+      return; // ok:true, or an unreadable body we treat as delivered
+    } catch (err) {
+      lastErr = err; // fetch abort / network error — retry
+    }
   }
+  throw lastErr ?? new Error("Apps Script write failed after retries");
 }
 
 // Affiliate "you earned X" email. Template is duplicated from

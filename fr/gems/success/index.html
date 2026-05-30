@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="de">
+<html lang="fr">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<title>Willkommen · Hikebeast</title>
+<title>Bienvenue · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
 
@@ -377,11 +377,7 @@ fbq('track', 'PageView');
   .onboard-submit {
     margin-top: 4px;
   }
-  /* Loading state during the ~5 s round-trip between form submit and
-     the /full/?login=<token> redirect. The browser disables the button
-     (in the submit handler below) and the text changes to "Creating
-     account…" · we add a left-to-right shimmer streak so the visual
-     feedback isn't just static text. */
+  /* Loading state shimmer · see /map9/success/index.html for rationale. */
   .onboard-submit:disabled {
     position: relative;
     overflow: hidden;
@@ -477,8 +473,8 @@ fbq('track', 'PageView');
         <polyline points="5,12 10,17 19,7" />
       </svg>
     </div>
-    <h1 id="headline">Willkommen.</h1>
-    <p class="action-sub" id="subheadline">Noch ein Schritt, bevor du den Guide öffnen kannst.</p>
+    <h1 id="headline">Bienvenue.</h1>
+    <p class="action-sub" id="subheadline">Une dernière étape avant d'accéder au guide.</p>
 
     <!-- Onboarding card · revealed once the GET /api/checkout/session
          response confirms the session is paid. Expanded-by-default
@@ -488,7 +484,7 @@ fbq('track', 'PageView');
          The form is inline so they never leave this page. -->
     <div class="onboard" id="onboardCard" hidden>
       <p class="onboard-header">
-        <span>Konto erstellen</span>
+        <span>Crée un compte</span>
       </p>
       <form id="onboardForm" class="onboard-form" novalidate>
         <label class="onboard-field">
@@ -496,30 +492,30 @@ fbq('track', 'PageView');
           <input id="onboardEmail" class="onboard-input" type="email" disabled aria-readonly="true" autocomplete="email" />
         </label>
         <label class="onboard-field">
-          <span class="onboard-label">Benutzername</span>
+          <span class="onboard-label">Nom d'utilisateur</span>
           <input id="onboardUsername" class="onboard-input" type="text"
                  autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false"
                  pattern="[a-z0-9._\-]{2,32}" required />
         </label>
         <label class="onboard-field">
-          <span class="onboard-label">Instagram Handle <span class="onboard-optional">(optional)</span></span>
+          <span class="onboard-label">Instagram Handle <span class="onboard-optional">(facultatif)</span></span>
           <input id="onboardInstagram" class="onboard-input" type="text"
                  autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
-                 maxlength="40" placeholder="@dein.handle" />
-          <span class="onboard-hint">Damit Leon deine Nachrichten sieht, falls du Hilfe brauchst.</span>
+                 maxlength="40" placeholder="@ton.compte" />
+          <span class="onboard-hint">Pour que Leon voie tes messages si tu as besoin d'aide.</span>
         </label>
         <label class="onboard-field">
-          <span class="onboard-label">Passwort</span>
+          <span class="onboard-label">Mot de passe</span>
           <input id="onboardPassword" class="onboard-input" type="password"
                  minlength="8" autocomplete="new-password" required />
-          <span class="onboard-hint">Mindestens 8 Zeichen.</span>
+          <span class="onboard-hint">Au moins 8 caractères.</span>
         </label>
         <button type="submit" class="btn btn-primary onboard-submit">
-          Konto erstellen &amp; App öffnen
+          Créer le compte et ouvrir l'app
         </button>
         <p class="onboard-error" id="onboardError" hidden></p>
         <p class="onboard-existing">
-          Schon ein Konto? <a href="/login/" id="onboardLogin">Anmelden &rarr;</a>
+          Déjà inscrit ? <a href="/login/" id="onboardLogin">Se connecter &rarr;</a>
         </p>
       </form>
     </div>
@@ -535,23 +531,23 @@ fbq('track', 'PageView');
          auth cookie. -->
     <div class="email-fallback" id="emailFallback" hidden>
       <p class="email-fallback-body">
-        Deine Bestätigungs-E-Mail hat einen "Swiss Gems App öffnen" Button. Tipp drauf, um mit dem richtigen Link zurückzukommen.
+        Ton email de confirmation contient un bouton "Ouvrir l'app Swiss Gems". Clique dessus pour revenir ici avec le bon lien.
       </p>
       <p class="email-fallback-signin">
-        Schon ein Konto? <a href="/login/">Anmelden &rarr;</a>
+        Tu as déjà un compte ? <a href="/login/">Se connecter &rarr;</a>
       </p>
     </div>
 
-    <p class="status" id="status">Quittung auch an deine E-Mail gesendet.</p>
+    <p class="status" id="status">Une copie de la confirmation est aussi dans ton email.</p>
   </section>
 
   <!-- Personal note: face + signature. The connection moment. -->
   <section class="note">
     <div class="note-avatar"><img src="/images/avatar.jpg" alt="" /></div>
     <div class="note-body">
-      <p><strong>Hey, hier ist Leon.</strong></p>
-      <p>Die 100+ Spots in diesem Guide waren 5 Jahre Arbeit. Jetzt gehören sie dir.</p>
-      <p>Wenn du eine Frage hast oder mir ein Foto von deinem Trip schicken willst: antworte einfach auf die Bestätigungs-E-Mail oder schreib mir auf Instagram <a href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener">@leon.helg</a>.</p>
+      <p><strong>Hey, c'est Leon.</strong></p>
+      <p>Les 100+ spots de ce guide m'ont pris 5 ans à rassembler. Maintenant, ils sont à toi.</p>
+      <p>Si tu as une question ou que tu veux m'envoyer une photo de ton trip : réponds simplement à l'email de confirmation ou écris-moi sur Instagram <a href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener">@leon.helg</a>.</p>
     </div>
   </section>
 
@@ -567,7 +563,7 @@ fbq('track', 'PageView');
   <footer class="foot">
     <div>© Hikebeast</div>
     <div>
-      <a href="/terms.html">AGB</a><span class="foot-sep"></span><a href="/imprint.html">Impressum</a><span class="foot-sep"></span><a href="/privacy.html">Datenschutz</a>
+      <a href="/terms.html">Conditions générales</a><span class="foot-sep"></span><a href="/imprint.html">Mentions légales</a><span class="foot-sep"></span><a href="/privacy.html">Confidentialité</a>
     </div>
     <div class="foot-order" id="receipt"></div>
   </footer>
@@ -607,7 +603,7 @@ fbq('track', 'PageView');
       // misleading (we offer it as small secondary text for the case
       // where the buyer is actually a returning user who lost their
       // /full/ cookie).
-      subheadline.textContent = "Öffne den Link in deiner Bestätigungs-E-Mail, um die Einrichtung abzuschließen.";
+      subheadline.textContent = "Ouvre le lien dans ton email de confirmation pour finir la configuration.";
       var emailFallback = document.getElementById("emailFallback");
       if (emailFallback) emailFallback.hidden = false;
       return;
@@ -684,7 +680,7 @@ fbq('track', 'PageView');
           // same dead session. The buyer's path forward is the
           // receipt-email link with a fresh session_id.
           try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
-          subheadline.textContent = "Öffne den Link in deiner Bestätigungs-E-Mail, um die Einrichtung abzuschließen.";
+          subheadline.textContent = "Ouvre le lien dans ton email de confirmation pour finir la configuration.";
           var emailFallback = document.getElementById("emailFallback");
           if (emailFallback) emailFallback.hidden = false;
           return;
@@ -698,7 +694,7 @@ fbq('track', 'PageView');
 
         // Personalise the headline if Stripe captured a first name.
         if (data.first_name) {
-          headline.textContent = "You're in, " + data.first_name + ".";
+          headline.textContent = "Bienvenue, " + data.first_name + ".";
         }
 
         // Reveal + pre-fill the onboarding form. Username = <stem><3 digits>
@@ -732,10 +728,10 @@ fbq('track', 'PageView');
         const amount = (typeof data.amount_total === "number")
           ? (data.amount_total / 100).toFixed(2) + " " + (data.currency || "")
           : "";
-        if (amount) status.textContent = "Receipt: " + amount + " · also sent to your email.";
+        if (amount) status.textContent = "Reçu : " + amount + " · aussi envoyé dans ton email.";
 
         if (data.order_id) {
-          receipt.textContent = "Order " + data.order_id;
+          receipt.textContent = "Commande " + data.order_id;
         }
 
         // Client-side Purchase pixel · MUST use the same eventID as the
@@ -800,7 +796,7 @@ fbq('track', 'PageView');
             } catch (e) {}
             var purchaseProps = {
               name: "purchase",
-              source_page: data.source_page || "de_map",
+              source_page: "fr_gems",
               hero_variant: heroVariant,
               source: trafficSource,
               theme: theme,
@@ -824,10 +820,10 @@ fbq('track', 'PageView');
            fired:<payment_intent>) handles re-open safety on this path.
            Function hoist above is for the lint regex that scans
            fetch sites · separate concern from gating. */
-        if (data.payment_intent) fireAllVisitsPurchase(data, data.source_page || "de_map");
+        if (data.payment_intent) fireAllVisitsPurchase(data, "fr_gems");
       })
       .catch(() => {
-        subheadline.textContent = "Server nicht erreichbar. Öffne den Link in deiner Bestätigungs-E-Mail, um die Einrichtung abzuschließen.";
+        subheadline.textContent = "Impossible de joindre le serveur. Ouvre le lien dans ton email de confirmation pour finir la configuration.";
         var emailFallback = document.getElementById("emailFallback");
         if (emailFallback) emailFallback.hidden = false;
       });
@@ -843,7 +839,7 @@ fbq('track', 'PageView');
         onboardError.hidden = true;
         var submitBtn = onboardForm.querySelector(".onboard-submit");
         submitBtn.disabled = true;
-        submitBtn.textContent = "Konto wird erstellt...";
+        submitBtn.textContent = "Création du compte...";
 
         // Instagram handle · optional. Normalise · strip leading "@",
         // any whitespace, and lowercase the rest. Empty string when the
@@ -871,17 +867,17 @@ fbq('track', 'PageView');
           // and then login fails for reasons they can't see.
           if (json && json.existing) {
             submitBtn.disabled = false;
-            submitBtn.textContent = "Create account & open app";
+            submitBtn.textContent = "Créer le compte et ouvrir l'app";
             onboardError.hidden = false;
             var existingUsername = (json.username || "").trim();
             var loginHref = "/login/?email=" + encodeURIComponent(onboardEmail.value);
             // innerHTML over textContent because we want a clickable link;
             // both inputs are server-controlled / known-safe (username comes
             // from Convex, email from the email-typed input).
-            onboardError.innerHTML = "Für diese E-Mail existiert bereits ein Konto"
-              + (existingUsername ? " (Benutzername <strong>" + existingUsername + "</strong>)" : "")
-              + ". Melde dich mit dem Passwort an, das du beim ersten Mal gesetzt hast, oder antworte auf die Bestätigungs-E-Mail, falls du es vergessen hast. "
-              + "<a href=\"" + loginHref + "\" style=\"color:#0071e3;text-decoration:none;font-weight:500;\">Anmelden &rarr;</a>";
+            onboardError.innerHTML = "Un compte existe déjà pour cet email"
+              + (existingUsername ? " (nom d'utilisateur <strong>" + existingUsername + "</strong>)" : "")
+              + ". Connecte-toi avec le mot de passe que tu as choisi la première fois, ou réponds à l'email de confirmation si tu l'as oublié. "
+              + "<a href=\"" + loginHref + "\" style=\"color:#0071e3;text-decoration:none;font-weight:500;\">Se connecter &rarr;</a>";
             // Also point the existing "Sign in →" footer link at /login
             // with the email pre-filled, in case the buyer scrolls past
             // the error to use that link instead.
@@ -904,17 +900,17 @@ fbq('track', 'PageView');
           window.location.href = json.redirect || "/full/";
         } catch (err) {
           submitBtn.disabled = false;
-          submitBtn.textContent = "Create account & open app";
+          submitBtn.textContent = "Créer le compte et ouvrir l'app";
           onboardError.hidden = false;
           var msg = (err && err.message) || "";
           onboardError.textContent =
             (msg.indexOf("password_too_short") >= 0)
-              ? "Password must be at least 8 characters."
+              ? "Le mot de passe doit faire au moins 8 caractères."
             : (msg.indexOf("Username") >= 0 || msg.indexOf("username") >= 0)
-              ? "That username didn't work. Try a different one (lowercase letters, numbers, dots)."
+              ? "Ce nom d'utilisateur n'a pas fonctionné. Essaie-en un autre (lettres minuscules, chiffres, points)."
             : (msg.indexOf("session_not_paid") >= 0 || msg.indexOf("session_not_found") >= 0)
-              ? "Your purchase session expired. Open the receipt email and click 'Open the Swiss Gems App' to retry."
-              : "Couldn't create the account. Try again or reply to the receipt email.";
+              ? "Ta session d'achat a expiré. Ouvre l'email de confirmation et clique 'Ouvrir l'app Swiss Gems' pour réessayer."
+              : "Impossible de créer le compte. Réessaie ou réponds à l'email de confirmation.";
         }
       });
     }

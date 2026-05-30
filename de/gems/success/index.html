@@ -800,7 +800,7 @@ fbq('track', 'PageView');
             } catch (e) {}
             var purchaseProps = {
               name: "purchase",
-              source_page: data.source_page || "de_map",
+              source_page: "de_gems",
               hero_variant: heroVariant,
               source: trafficSource,
               theme: theme,
@@ -824,7 +824,7 @@ fbq('track', 'PageView');
            fired:<payment_intent>) handles re-open safety on this path.
            Function hoist above is for the lint regex that scans
            fetch sites · separate concern from gating. */
-        if (data.payment_intent) fireAllVisitsPurchase(data, data.source_page || "de_map");
+        if (data.payment_intent) fireAllVisitsPurchase(data, "de_gems");
       })
       .catch(() => {
         subheadline.textContent = "Server nicht erreichbar. Öffne den Link in deiner Bestätigungs-E-Mail, um die Einrichtung abzuschließen.";

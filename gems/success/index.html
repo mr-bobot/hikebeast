@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<title>Willkommen · Hikebeast</title>
+<title>You're in · Hikebeast</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
-<link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+<link rel="icon" type="image/jpeg" href="../../images/favicon.jpg" />
 
 <!-- Meta Pixel: client-side Purchase. Webhook fires the same event with
      event_id = payment_intent_id for dedup. -->
@@ -461,7 +461,7 @@ fbq('track', 'PageView');
   <!-- Hero · cream photo of three polaroids. No text overlay; copy lives
        in the action card below. -->
   <section class="hero">
-    <img src="/images/thanks-hero-transparent.png" alt="" />
+    <img src="../../images/thanks-hero-transparent.png" alt="" />
   </section>
 
   <!-- Action card · celebration (tick + heading) and the ONLY path
@@ -477,8 +477,8 @@ fbq('track', 'PageView');
         <polyline points="5,12 10,17 19,7" />
       </svg>
     </div>
-    <h1 id="headline">Willkommen.</h1>
-    <p class="action-sub" id="subheadline">Noch ein Schritt, bevor du den Guide öffnen kannst.</p>
+    <h1 id="headline">You're in.</h1>
+    <p class="action-sub" id="subheadline">One last step before you can access the guide.</p>
 
     <!-- Onboarding card · revealed once the GET /api/checkout/session
          response confirms the session is paid. Expanded-by-default
@@ -488,7 +488,7 @@ fbq('track', 'PageView');
          The form is inline so they never leave this page. -->
     <div class="onboard" id="onboardCard" hidden>
       <p class="onboard-header">
-        <span>Konto erstellen</span>
+        <span>Create an Account</span>
       </p>
       <form id="onboardForm" class="onboard-form" novalidate>
         <label class="onboard-field">
@@ -496,7 +496,7 @@ fbq('track', 'PageView');
           <input id="onboardEmail" class="onboard-input" type="email" disabled aria-readonly="true" autocomplete="email" />
         </label>
         <label class="onboard-field">
-          <span class="onboard-label">Benutzername</span>
+          <span class="onboard-label">Username</span>
           <input id="onboardUsername" class="onboard-input" type="text"
                  autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false"
                  pattern="[a-z0-9._\-]{2,32}" required />
@@ -505,21 +505,21 @@ fbq('track', 'PageView');
           <span class="onboard-label">Instagram Handle <span class="onboard-optional">(optional)</span></span>
           <input id="onboardInstagram" class="onboard-input" type="text"
                  autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
-                 maxlength="40" placeholder="@dein.handle" />
-          <span class="onboard-hint">Damit Leon deine Nachrichten sieht, falls du Hilfe brauchst.</span>
+                 maxlength="40" placeholder="@your.handle" />
+          <span class="onboard-hint">So Leon sees your messages in case you need support.</span>
         </label>
         <label class="onboard-field">
-          <span class="onboard-label">Passwort</span>
+          <span class="onboard-label">Password</span>
           <input id="onboardPassword" class="onboard-input" type="password"
                  minlength="8" autocomplete="new-password" required />
-          <span class="onboard-hint">Mindestens 8 Zeichen.</span>
+          <span class="onboard-hint">At least 8 characters.</span>
         </label>
         <button type="submit" class="btn btn-primary onboard-submit">
-          Konto erstellen &amp; App öffnen
+          Create account &amp; open app
         </button>
         <p class="onboard-error" id="onboardError" hidden></p>
         <p class="onboard-existing">
-          Schon ein Konto? <a href="/login/" id="onboardLogin">Anmelden &rarr;</a>
+          Already set up? <a href="/login/" id="onboardLogin">Sign in &rarr;</a>
         </p>
       </form>
     </div>
@@ -535,23 +535,23 @@ fbq('track', 'PageView');
          auth cookie. -->
     <div class="email-fallback" id="emailFallback" hidden>
       <p class="email-fallback-body">
-        Deine Bestätigungs-E-Mail hat einen "Swiss Gems App öffnen" Button. Tipp drauf, um mit dem richtigen Link zurückzukommen.
+        Your receipt email has a "Open the Swiss Gems App" button. Tap that to come back here with the right link.
       </p>
       <p class="email-fallback-signin">
-        Schon ein Konto? <a href="/login/">Anmelden &rarr;</a>
+        Already have an account? <a href="/login/">Sign in &rarr;</a>
       </p>
     </div>
 
-    <p class="status" id="status">Quittung auch an deine E-Mail gesendet.</p>
+    <p class="status" id="status">Receipt also sent to your email.</p>
   </section>
 
   <!-- Personal note: face + signature. The connection moment. -->
   <section class="note">
-    <div class="note-avatar"><img src="/images/avatar.jpg" alt="" /></div>
+    <div class="note-avatar"><img src="../../images/avatar.jpg" alt="" /></div>
     <div class="note-body">
-      <p><strong>Hey, hier ist Leon.</strong></p>
-      <p>Die 100+ Spots in diesem Guide waren 5 Jahre Arbeit. Jetzt gehören sie dir.</p>
-      <p>Wenn du eine Frage hast oder mir ein Foto von deinem Trip schicken willst: antworte einfach auf die Bestätigungs-E-Mail oder schreib mir auf Instagram <a href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener">@leon.helg</a>.</p>
+      <p><strong>Hey, Leon here.</strong></p>
+      <p>The 100+ spots in this guide took me 5 years to put together. Now they're yours.</p>
+      <p>If you have a question or want to send me a photo from your trip: just hit reply on the receipt email or hit me up on Instagram at <a href="https://www.instagram.com/leon.helg" target="_blank" rel="noopener">@leon.helg</a>.</p>
     </div>
   </section>
 
@@ -567,7 +567,7 @@ fbq('track', 'PageView');
   <footer class="foot">
     <div>© Hikebeast</div>
     <div>
-      <a href="/terms.html">AGB</a><span class="foot-sep"></span><a href="/imprint.html">Impressum</a><span class="foot-sep"></span><a href="/privacy.html">Datenschutz</a>
+      <a href="../../terms.html">Terms</a><span class="foot-sep"></span><a href="../../imprint.html">Imprint</a><span class="foot-sep"></span><a href="../../privacy.html">Privacy</a>
     </div>
     <div class="foot-order" id="receipt"></div>
   </footer>
@@ -607,7 +607,7 @@ fbq('track', 'PageView');
       // misleading (we offer it as small secondary text for the case
       // where the buyer is actually a returning user who lost their
       // /full/ cookie).
-      subheadline.textContent = "Öffne den Link in deiner Bestätigungs-E-Mail, um die Einrichtung abzuschließen.";
+      subheadline.textContent = "Open the link in your receipt email to finish setup.";
       var emailFallback = document.getElementById("emailFallback");
       if (emailFallback) emailFallback.hidden = false;
       return;
@@ -684,7 +684,7 @@ fbq('track', 'PageView');
           // same dead session. The buyer's path forward is the
           // receipt-email link with a fresh session_id.
           try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
-          subheadline.textContent = "Öffne den Link in deiner Bestätigungs-E-Mail, um die Einrichtung abzuschließen.";
+          subheadline.textContent = "Open the link in your receipt email to finish setup.";
           var emailFallback = document.getElementById("emailFallback");
           if (emailFallback) emailFallback.hidden = false;
           return;
@@ -778,7 +778,14 @@ fbq('track', 'PageView');
           }
         }
 
-        /* Vercel Analytics purchase event · see /map9/success/ for rationale. */
+        /* Vercel Analytics purchase event · independent of the Meta
+           pixel block above, dedup'd by payment_intent so the same
+           buyer re-opening the success page (Stripe receipt link,
+           bookmark, refresh) doesn't double-count. Reads stashed
+           source + hero_variant from localStorage that the landing
+           page wrote on its visit. This is the numerator for the
+           per-variant buy_rate dashboard query · finally lets us
+           compute a real conversion rate for non-ManyChat traffic. */
         if (data.payment_intent && typeof window.va === "function") {
           var vaKey = "hb:vercel_purchase_fired:" + data.payment_intent;
           var vaAlreadyFired = false;
@@ -800,7 +807,7 @@ fbq('track', 'PageView');
             } catch (e) {}
             var purchaseProps = {
               name: "purchase",
-              source_page: data.source_page || "de_map",
+              source_page: "gems",
               hero_variant: heroVariant,
               source: trafficSource,
               theme: theme,
@@ -824,10 +831,10 @@ fbq('track', 'PageView');
            fired:<payment_intent>) handles re-open safety on this path.
            Function hoist above is for the lint regex that scans
            fetch sites · separate concern from gating. */
-        if (data.payment_intent) fireAllVisitsPurchase(data, data.source_page || "de_map");
+        if (data.payment_intent) fireAllVisitsPurchase(data, "gems");
       })
       .catch(() => {
-        subheadline.textContent = "Server nicht erreichbar. Öffne den Link in deiner Bestätigungs-E-Mail, um die Einrichtung abzuschließen.";
+        subheadline.textContent = "Couldn't reach the server. Open the link in your receipt email to finish setup.";
         var emailFallback = document.getElementById("emailFallback");
         if (emailFallback) emailFallback.hidden = false;
       });
@@ -843,7 +850,7 @@ fbq('track', 'PageView');
         onboardError.hidden = true;
         var submitBtn = onboardForm.querySelector(".onboard-submit");
         submitBtn.disabled = true;
-        submitBtn.textContent = "Konto wird erstellt...";
+        submitBtn.textContent = "Creating account...";
 
         // Instagram handle · optional. Normalise · strip leading "@",
         // any whitespace, and lowercase the rest. Empty string when the
@@ -878,10 +885,10 @@ fbq('track', 'PageView');
             // innerHTML over textContent because we want a clickable link;
             // both inputs are server-controlled / known-safe (username comes
             // from Convex, email from the email-typed input).
-            onboardError.innerHTML = "Für diese E-Mail existiert bereits ein Konto"
-              + (existingUsername ? " (Benutzername <strong>" + existingUsername + "</strong>)" : "")
-              + ". Melde dich mit dem Passwort an, das du beim ersten Mal gesetzt hast, oder antworte auf die Bestätigungs-E-Mail, falls du es vergessen hast. "
-              + "<a href=\"" + loginHref + "\" style=\"color:#0071e3;text-decoration:none;font-weight:500;\">Anmelden &rarr;</a>";
+            onboardError.innerHTML = "An account already exists for this email"
+              + (existingUsername ? " (username <strong>" + existingUsername + "</strong>)" : "")
+              + ". Sign in with the password you set the first time, or reply to the receipt email if you've forgotten it. "
+              + "<a href=\"" + loginHref + "\" style=\"color:#0071e3;text-decoration:none;font-weight:500;\">Sign in &rarr;</a>";
             // Also point the existing "Sign in →" footer link at /login
             // with the email pre-filled, in case the buyer scrolls past
             // the error to use that link instead.
