@@ -23,7 +23,7 @@ Einmalig CHF 27. PDF und interaktive Webapp für Handy oder Laptop. 141 Spots na
 
 ### Wildcampen in der Schweiz
 
-Es gibt kein einheitliches Bundesgesetz. Der Schweizer Alpen-Club (SAC) toleriert ein einzelnes Biwak oberhalb der Waldgrenze, mit Einverständnis des Grundeigentümers und mindestens 50 Meter Abstand von Gewässern. Verboten im Schweizerischen Nationalpark, in den 43 Eidgenössischen Jagdbanngebieten, in Wildruhezonen und in kantonalen Naturschutzgebieten. Diese Schutzgebiete können auf jeder Höhe gelten, ober- wie unterhalb der Waldgrenze. Kantons- und Gemeinderegeln variieren zusätzlich. Der Swiss Gems Guide zeigt den aktuellen Status pro Spot.
+Es gibt kein einheitliches Bundesgesetz. Der Schweizer Alpen-Club (SAC) toleriert ein einzelnes Biwak oberhalb der Waldgrenze, mit Einverständnis des Grundeigentümers und mindestens 50 Meter Abstand von Gewässern. Verboten im Schweizerischen Nationalpark, in den 43 Eidgenössischen Jagdbanngebieten, in Wildruhezonen und in kantonalen Naturschutzgebieten; diese Schutzgebiete können auf jeder Höhe liegen. Unterhalb der Waldgrenze schränken zusätzlich kantonale und kommunale Regeln zum Wildcampen das weiter ein. Der Swiss Gems Guide zeigt den aktuellen Status pro Spot.
 
 ### Beste Zeit für die Schweizer Alpen
 
