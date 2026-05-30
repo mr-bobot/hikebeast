@@ -121,8 +121,8 @@
 <script>
   /* Tracking infrastructure · ported from /map9/ 2026-05-27 so /gems/
      visits land in AllVisits properly (visitor_id + classified source +
-     affiliate_ref). Dark mode intentionally NOT ported · /gems/ stays
-     light-only per Leon's preference.
+     affiliate_ref). Dark mode added 2026-05-31 · /gems/ now honors prefers-color-scheme
+     (same @media dark block as /map9/).
      Same hbTrack pipeline · dedups by event name per page load, forwards
      to Vercel Analytics with source_page + source + theme + affiliate_ref. */
   window.HB_SOURCE_PAGE = "gems";
@@ -167,10 +167,15 @@
       }
     } catch (e) {}
   })();
-  /* /gems/ is light-only · hardcode theme so the dashboard can still
-     slice events by theme without surfacing a misleading "unknown". */
-  window.HB_THEME = "light";
-  try { localStorage.setItem("hb:last_theme:v1", "light"); } catch (e) {}
+  /* Color scheme · derived once at page load via prefers-color-scheme.
+     /gems/ supports dark mode via the @media block in <style> (no toggle,
+     purely system-driven). Stashed for the success page + dashboard slice. */
+  window.HB_THEME = (function () {
+    try {
+      return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+    } catch (e) { return "unknown"; }
+  })();
+  try { localStorage.setItem("hb:last_theme:v1", window.HB_THEME); } catch (e) {}
   window.hbAffiliateRef = function () {
     try {
       var s = localStorage.getItem("hb:r");
@@ -1605,6 +1610,53 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     /* Inside cards · keep 3-col but tighten gap so cards don't crash
        into the sidebar at narrower 1024-1199 viewports. */
     .inside { gap: 12px; }
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --surface: #1c1c1e;
+      --fg: #f5f5f7;
+      --muted: #98989d;
+      --hairline: rgba(255, 255, 255, 0.12);
+    }
+    .navbar {
+      background: rgba(0, 0, 0, 0.72);
+      border-bottom-color: rgba(255, 255, 255, 0.10);
+    }
+    .sticky-buy {
+      background: rgba(20, 20, 20, 0.86);
+      border-top-color: rgba(255, 255, 255, 0.10);
+    }
+    .carousel-arrow {
+      background: rgba(40, 40, 42, 0.86);
+      color: var(--fg);
+    }
+    .carousel-arrow:hover { background: #2c2c2e; }
+    .carousel-arrow:active { background: #1c1c1e; }
+    /* .product-card and .emotion-shot deliberately excluded · they
+       have no light-mode bg and adding one shows as a gray block. */
+    .inside-card,
+    .review-card,
+    .creator-note,
+    .checkout-mock,
+    .buy-card,
+    .collection-grid {
+      background: #1c1c1e;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    .about-body p { color: var(--fg); }
+    .buy-thumb { background: #2c2c2e; }
+    .guarantee-pill {
+      background: #1c1c1e;
+      color: var(--fg);
+    }
+    .review-meta { border-top-color: rgba(255, 255, 255, 0.10); }
+    .dots span { background: rgba(255, 255, 255, 0.25); }
+    .about-social--tt { background: #ffffff; }
+    .about-social--tt svg { fill: #000000; }
+    .about-social--tt .about-social-count { color: #000000; }
+    .about-photo { border: 1px solid rgba(255, 255, 255, 0.10); }
+    .checkout-mock { border-color: rgba(255, 255, 255, 0.10); }
   }
 </style>
 <script>
