@@ -386,11 +386,15 @@ def render_map_summary(p):
         ch = chapters_by_id.get(ch_id)
         if not ch: continue
         rgb = ','.join(str(int(c * 255)) for c in ch['color'])
+        # Each region is a link into its chapter page. The intro page lives
+        # at /full/intro/, the chapter at /full/<id>/, so the href is ../<id>/.
         items.append(
-            f'<div class="ms-item">'
+            f'<a class="ms-item" href="../{esc(ch_id)}/">'
             f'<span class="ms-bar" style="background:rgb({rgb});"></span>'
             f'<div class="ms-text"><b>{esc(ch["name"])}</b>'
-            f'<span>{esc(ch.get("description",""))}</span></div></div>')
+            f'<span>{esc(ch.get("description",""))}</span></div>'
+            f'<span class="ms-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>'
+            f'</a>')
     items_html = '\n          '.join(items)
     return f'''<section class="slide slide-preface no-photo" id="{p.get("id","")}">
   <div class="pf-body">

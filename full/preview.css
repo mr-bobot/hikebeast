@@ -2490,18 +2490,36 @@ body[data-chapter-view="grid"]   .chapter-grid-inner { display: grid; grid-templ
 }
 .ms-item {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   gap: 12px;
   padding: 8px 12px;
   border-radius: 10px;
   background: var(--surface);
+  /* Clickable: each region links into its chapter page. */
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
+.ms-item:hover { background: var(--surface-2); }
+.ms-item:active { transform: scale(0.99); }
 .ms-item .ms-bar {
   flex-shrink: 0;
   width: 4px;
   border-radius: 2px;
   align-self: stretch;
 }
+.ms-item .ms-text { flex: 1 1 auto; }
+.ms-chev {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--soft);
+  display: grid;
+  place-items: center;
+}
+.ms-chev svg { width: 16px; height: 16px; }
+.ms-item:hover .ms-chev { color: var(--accent); }
 .ms-item .ms-text {
   display: flex;
   flex-direction: column;
