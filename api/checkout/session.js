@@ -179,6 +179,12 @@ async function handleGetSession(req, res, stripe) {
   return res.status(200).json({
     paid: true,
     first_name: firstName,
+    // source_page from Stripe metadata (stamped at checkout). Lets the
+    // shared /map/success + /de/map/success fire their AllVisits purchased
+    // beacon with the buyer's TRUE funnel (map / map3-8 / themap) instead
+    // of a hardcoded bucket. Dedicated success pages (gems, map9, swissmap)
+    // ignore this and hardcode their own source_page.
+    source_page: session.metadata?.source_page || "",
     email,
     amount_total: session.amount_total,
     currency: (session.currency || "").toUpperCase(),
