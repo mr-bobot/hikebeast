@@ -23,11 +23,11 @@ CHF 27 one-time. PDF plus interactive web app for phone or laptop. 141 spots org
 
 ### Wildcamping in Switzerland
 
-There is no uniform federal law. The Swiss Alpine Club (SAC) considers single-night bivouacking above the treeline acceptable with landowner consent and at least 50 metres from water bodies. Forbidden in the Swiss National Park, the 43 federal hunting reserves (Eidgenössische Jagdbanngebiete), Wildruhezonen, and cantonal nature reserves. Below the treeline rules vary by canton and municipality. The Swiss Gems guide marks each spot with its current legal status.
+There is no uniform federal law. The Swiss Alpine Club (SAC) considers single-night bivouacking above the treeline acceptable with landowner consent and at least 50 metres from water bodies. Forbidden in the Swiss National Park, the 43 federal hunting reserves (Eidgenössische Jagdbanngebiete), Wildruhezonen, and cantonal nature reserves. These protected areas can apply at any altitude, above or below the treeline. Cantonal and municipal rules vary further. The Swiss Gems guide marks each spot with its current legal status.
 
 ### Best time to hike the Swiss Alps
 
-Late July through mid-September for high-alpine routes above 2000 metres. June for waterfalls and lower valleys. Late September to mid-October for autumn larch colour in the Engadin and Val Bregaglia.
+Early June through mid-September is the main hiking season. Lower valleys and waterfalls peak in June. High-alpine routes above 2000 metres are typically snow-free from mid-July. Late September to mid-October for autumn larch colour in the Engadin and Val Bregaglia.
 
 ### Drone photography in Switzerland
 
