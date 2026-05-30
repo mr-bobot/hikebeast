@@ -521,6 +521,30 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     box-shadow: 0 4px 16px rgba(0,0,0,0.18);
   }
 
+  /* FOOTNOTES + SOURCES */
+  sup.fn { font-size: 0.65em; vertical-align: super; line-height: 0; }
+  sup.fn a { color: var(--accent); text-decoration: none; padding: 0 1px 0 2px; font-weight: 500; }
+  sup.fn a:hover { text-decoration: underline; }
+  .sources-section {
+    padding: 56px 0 64px;
+    border-top: 1px solid var(--hairline);
+    background: var(--bg);
+    font-size: 14px; color: var(--muted);
+    letter-spacing: -0.005em;
+  }
+  .sources-section h2 {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--fg);
+    margin: 0 0 18px;
+  }
+  .sources-section ol { padding-left: 26px; margin: 0; }
+  .sources-section li { padding: 6px 0; line-height: 1.55; }
+  .sources-section li a { color: var(--accent); }
+  .sources-section li a:hover { color: var(--accent-hover); }
+  .sources-section li a.backref { color: var(--dim); margin-left: 6px; text-decoration: none; font-weight: 500; }
+  .sources-section li a.backref:hover { color: var(--accent); }
+  .sources-section li:target { background: rgba(0,113,227,0.06); padding: 6px 10px; border-radius: 6px; margin-left: -10px; }
+
   /* FOOTER */
   footer {
     padding: 48px 0 64px;
@@ -725,7 +749,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </summary>
           <div class="answer">
-            There is no uniform federal law. The Swiss Alpine Club (SAC) considers single-night bivouacking above the treeline acceptable with the consent of the landowner and at least 50 metres from water bodies. It is forbidden in the Swiss National Park, in the 43 federal hunting reserves (<i>Eidgenössische Jagdbanngebiete</i>), in Wildruhezonen, and in cantonal nature reserves. These protected areas can apply at any altitude. Below the treeline, wildcamping is typically further restricted by cantonal and municipal rules. The Swiss Gems guide marks each of the 141 spots with current legal status. Always verify the spot-specific status before you camp.
+            There is no uniform federal law. The Swiss Alpine Club considers a single-night bivouac above the treeline unproblematic when no conflicting regulations apply and the camp is considerate of the environment<sup class="fn"><a href="#fn1" id="fn1-ref">1</a></sup>. SAC further recommends keeping at least 50 metres from water sources for sanitation. On private land, landowner consent is generally required under Swiss civil law. Wildcamping is forbidden in the Swiss National Park<sup class="fn"><a href="#fn2" id="fn2-ref">2</a></sup>, in the 43 federal hunting reserves (<i>Eidgenössische Jagdbanngebiete</i>)<sup class="fn"><a href="#fn3" id="fn3-ref">3</a></sup>, in Wildruhezonen during the protected season, and in cantonal nature reserves. These protected areas can apply at any altitude. Below the treeline, wildcamping is typically further restricted by cantonal and municipal rules. The Swiss Gems guide marks each of the 141 spots with current legal status. Always verify the spot-specific status before you camp.
           </div>
         </details>
 
@@ -752,7 +776,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </summary>
           <div class="answer">
-            Early June through mid-September is the main hiking season. Lower valleys and waterfalls peak in June. High-alpine routes above 2000 metres are typically snow-free from mid-July, when alpine huts open and lakes thaw. Late September to mid-October for autumn larch colour in the Engadin and Val Bregaglia. The guide lists the best window per spot.
+            The Swiss Alps hiking season runs from early June to mid-October. Lower valleys, lakes, and waterfalls peak in early June with the snowmelt. Most SAC mountain huts open in mid-June and stay staffed until mid-October<sup class="fn"><a href="#fn4" id="fn4-ref">4</a></sup>. High-alpine routes above roughly 2,400 metres are typically snow-free from mid-July. Autumn larch colour in the Engadin and Val Bregaglia runs from late September to mid-October, with peak intensity in the second and third week of October<sup class="fn"><a href="#fn5" id="fn5-ref">5</a></sup>. The guide lists the best window per spot.
           </div>
         </details>
 
@@ -791,6 +815,19 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     </div>
   </section>
 
+  <section class="sources-section" id="sources" aria-label="Sources">
+    <div class="shell">
+      <h2>Sources</h2>
+      <ol class="source-list">
+        <li id="fn1">Swiss Alpine Club, "Camping and bivouacking in the Alps". <a href="https://www.sac-cas.ch/en/environment/mountaineering-and-the-environment/camping-and-bivouacking/" target="_blank" rel="noopener">sac-cas.ch</a>. <a href="#fn1-ref" class="backref" aria-label="Back to text">↩</a></li>
+        <li id="fn2">Swiss National Park, 170.3 km² in canton Graubünden. <a href="https://www.nationalpark.ch/en/about/" target="_blank" rel="noopener">nationalpark.ch</a>. <a href="#fn2-ref" class="backref" aria-label="Back to text">↩</a></li>
+        <li id="fn3">Federal Office for the Environment (BAFU), 43 federal hunting reserves (Eidgenössische Jagdbanngebiete). <a href="https://www.bafu.admin.ch/de/jagdbanngebiete" target="_blank" rel="noopener">bafu.admin.ch</a>. <a href="#fn3-ref" class="backref" aria-label="Back to text">↩</a></li>
+        <li id="fn4">Swiss Alpine Club, hut directory and opening schedule. <a href="https://www.sac-cas.ch/en/huts/" target="_blank" rel="noopener">sac-cas.ch</a>. <a href="#fn4-ref" class="backref" aria-label="Back to text">↩</a></li>
+        <li id="fn5">Graubünden Tourism, Larch Tracker. <a href="https://www.graubuenden.ch/en/larch-tracker" target="_blank" rel="noopener">graubuenden.ch</a>. <a href="#fn5-ref" class="backref" aria-label="Back to text">↩</a></li>
+      </ol>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -817,9 +854,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   "@type": "FAQPage",
   "mainEntity": [
     { "@type": "Question", "name": "What's in the Hikebeast Swiss Gems guide?", "acceptedAnswer": { "@type": "Answer", "text": "141 spots in the Swiss Alps with exact GPS, walking time and difficulty, recommended light, wildcamping legal status, and route notes. Delivered as a PDF plus an interactive web app for phone or laptop." } },
-    { "@type": "Question", "name": "Is wildcamping legal in Switzerland?", "acceptedAnswer": { "@type": "Answer", "text": "There is no uniform federal law. The Swiss Alpine Club considers single-night bivouacking above the treeline acceptable with landowner consent and at least 50 metres from water bodies. Wildcamping is forbidden in the Swiss National Park, in the 43 federal hunting reserves, in Wildruhezonen, and in cantonal nature reserves. These protected areas can apply at any altitude. Below the treeline, wildcamping is typically further restricted by cantonal and municipal rules. The Hikebeast Swiss Gems guide marks each spot with its current legal status." } },
+    { "@type": "Question", "name": "Is wildcamping legal in Switzerland?", "acceptedAnswer": { "@type": "Answer", "text": "There is no uniform federal law. The Swiss Alpine Club considers a single-night bivouac above the treeline unproblematic when no conflicting regulations apply and the camp is considerate. SAC recommends at least 50 metres from water sources for sanitation. On private land, landowner consent is generally required under Swiss civil law. Wildcamping is forbidden in the Swiss National Park, in the 43 federal hunting reserves, in Wildruhezonen during the protected season, and in cantonal nature reserves. These protected areas can apply at any altitude. Below the treeline, wildcamping is typically further restricted by cantonal and municipal rules. The Hikebeast Swiss Gems guide marks each spot with its current legal status." } },
     { "@type": "Question", "name": "How are the spots picked for the Hikebeast guide?", "acceptedAnswer": { "@type": "Answer", "text": "Five years of solo scouting by Leon Helg. A spot is included only after personal verification, photographic value, and a realistic route for average fitness. Most are 30 to 90 minutes from parking. About a third are wildcamping-compatible." } },
-    { "@type": "Question", "name": "What is the best month to hike the Swiss Alps?", "acceptedAnswer": { "@type": "Answer", "text": "Early June through mid-September is the main hiking season in the Swiss Alps. Lower valleys and waterfalls peak in June. High-alpine routes above 2000 metres are typically snow-free from mid-July, when alpine huts open and lakes thaw. Late September to mid-October for autumn larch colour in the Engadin and Val Bregaglia." } },
+    { "@type": "Question", "name": "What is the best month to hike the Swiss Alps?", "acceptedAnswer": { "@type": "Answer", "text": "The Swiss Alps hiking season runs from early June to mid-October. Lower valleys, lakes and waterfalls peak in early June with the snowmelt. Most SAC mountain huts open in mid-June and stay staffed until mid-October. High-alpine routes above roughly 2,400 metres are typically snow-free from mid-July. Autumn larch colour in the Engadin and Val Bregaglia runs from late September to mid-October, with peak intensity in the second and third week of October." } },
     { "@type": "Question", "name": "What does the Hikebeast Swiss Gems guide cost?", "acceptedAnswer": { "@type": "Answer", "text": "One-time payment of CHF 27 (also payable in EUR or USD). No subscription, no upsells." } },
     { "@type": "Question", "name": "Who is Leon Helg?", "acceptedAnswer": { "@type": "Answer", "text": "Leon Helg is a Swiss outdoor photographer and filmmaker. He has lived in Switzerland for 26 years and spent the last five mapping Swiss Alps spots that do not appear on standard tourist maps. He publishes as @leon.helg on Instagram and TikTok. Hikebeast operates under Saftladen GmbH, Rotkreuz, Switzerland." } }
   ]

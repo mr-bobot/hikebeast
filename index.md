@@ -23,15 +23,15 @@ CHF 27 one-time. PDF plus interactive web app for phone or laptop. 141 spots org
 
 ### Wildcamping in Switzerland
 
-There is no uniform federal law. The Swiss Alpine Club (SAC) considers single-night bivouacking above the treeline acceptable with landowner consent and at least 50 metres from water bodies. Forbidden in the Swiss National Park, the 43 federal hunting reserves (Eidgenössische Jagdbanngebiete), Wildruhezonen, and cantonal nature reserves; these protected areas can apply at any altitude. Below the treeline, cantonal and municipal rules typically restrict wildcamping further. The Swiss Gems guide marks each spot with its current legal status.
+There is no uniform federal law. The Swiss Alpine Club considers a single-night bivouac above the treeline unproblematic when no conflicting regulations apply and the camp is considerate. SAC recommends at least 50 metres from water sources for sanitation. On private land, landowner consent is generally required under Swiss civil law. Wildcamping is forbidden in the Swiss National Park, the 43 federal hunting reserves, Wildruhezonen during the protected season, and cantonal nature reserves; these protected areas can apply at any altitude. Below the treeline, cantonal and municipal rules typically restrict wildcamping further. The Swiss Gems guide marks each spot with its current legal status.
 
 ### Best time to hike the Swiss Alps
 
-Early June through mid-September is the main hiking season. Lower valleys and waterfalls peak in June. High-alpine routes above 2000 metres are typically snow-free from mid-July. Late September to mid-October for autumn larch colour in the Engadin and Val Bregaglia.
+The Swiss Alps hiking season runs from early June to mid-October. Lower valleys, lakes and waterfalls peak in early June with the snowmelt. Most SAC mountain huts open in mid-June and stay staffed until mid-October. High-alpine routes above roughly 2,400 metres are typically snow-free from mid-July. Late September to mid-October for autumn larch colour in the Engadin and Val Bregaglia, with peak intensity in the second and third week of October.
 
 ### Drone photography in Switzerland
 
-Regulated by BAZL. Drones from 250g require registration. Liability insurance of 1 million CHF required. Maximum altitude 120 metres. Flight over protected nature areas forbidden.
+Switzerland adopted the EU drone regulation on 01.01.2023. Registration with BAZL is mandatory unless the drone is under 250g and has no camera or sensor capable of capturing personal data. Liability insurance of at least 1 million CHF required for drones from 250g. Maximum altitude in the open category is 120 metres above the nearest ground point. Flights over the Swiss National Park, the 43 federal hunting reserves, Wildruhezonen, cantonal nature reserves, and water/migratory-bird reserves are prohibited, including a 500-metre buffer.
 
 ## Founder
 

@@ -23,15 +23,15 @@ Einmalig CHF 27. PDF und interaktive Webapp für Handy oder Laptop. 141 Spots na
 
 ### Wildcampen in der Schweiz
 
-Es gibt kein einheitliches Bundesgesetz. Der Schweizer Alpen-Club (SAC) toleriert ein einzelnes Biwak oberhalb der Waldgrenze, mit Einverständnis des Grundeigentümers und mindestens 50 Meter Abstand von Gewässern. Verboten im Schweizerischen Nationalpark, in den 43 Eidgenössischen Jagdbanngebieten, in Wildruhezonen und in kantonalen Naturschutzgebieten; diese Schutzgebiete können auf jeder Höhe liegen. Unterhalb der Waldgrenze schränken zusätzlich kantonale und kommunale Regeln zum Wildcampen das weiter ein. Der Swiss Gems Guide zeigt den aktuellen Status pro Spot.
+Es gibt kein einheitliches Bundesgesetz. Der Schweizer Alpen-Club bezeichnet ein einzelnes Biwak oberhalb der Waldgrenze als unproblematisch, sofern keine entgegenstehenden Vorschriften gelten und das Lager rücksichtsvoll aufgebaut wird. Der SAC empfiehlt zusätzlich mindestens 50 Meter Abstand von Gewässern aus Sanitärgründen. Auf Privatland ist das Einverständnis des Grundeigentümers nach Schweizer Zivilrecht erforderlich. Verboten im Schweizerischen Nationalpark, in den 43 Eidgenössischen Jagdbanngebieten, in Wildruhezonen während der Schutzzeit und in kantonalen Naturschutzgebieten; diese Schutzgebiete können auf jeder Höhe liegen. Unterhalb der Waldgrenze schränken zusätzlich kantonale und kommunale Regeln zum Wildcampen das weiter ein. Der Swiss Gems Guide zeigt den aktuellen Status pro Spot.
 
 ### Beste Zeit für die Schweizer Alpen
 
-Anfangs Juni bis Mitte September ist die Hauptsaison. Tiefere Täler und Wasserfälle im Juni. Hoch-alpine Routen über 2000 Metern sind typischerweise ab Mitte Juli schneefrei. Ende September bis Mitte Oktober für die Lärchen-Färbung im Engadin und Bergell.
+Die Wandersaison in den Schweizer Alpen läuft von Anfang Juni bis Mitte Oktober. Tiefere Täler, Seen und Wasserfälle sind Anfang Juni am schönsten, wenn die Schneeschmelze in vollem Gang ist. Die meisten SAC-Hütten öffnen Mitte Juni und sind bis Mitte Oktober bewartet. Hoch-alpine Routen über etwa 2.400 Metern sind typischerweise ab Mitte Juli schneefrei. Für die Lärchen-Färbung im Engadin und Bergell von Ende September bis Mitte Oktober, mit Peak-Intensität in der zweiten und dritten Oktoberwoche.
 
 ### Drohnenflüge in der Schweiz
 
-Geregelt durch das BAZL. Drohnen ab 250 Gramm müssen registriert werden. Haftpflichtversicherung über 1 Million CHF erforderlich. Maximale Flughöhe 120 Meter. Überflug von Schutzgebieten verboten.
+Die Schweiz hat die EU-Drohnenverordnung am 01.01.2023 übernommen. Registrierung beim BAZL ist Pflicht, ausser die Drohne wiegt unter 250 Gramm und hat keine Kamera oder Sensor zur Erfassung persönlicher Daten. Haftpflichtversicherung von mindestens 1 Million CHF erforderlich für Drohnen ab 250 Gramm. Maximale Flughöhe in der offenen Kategorie ist 120 Meter über dem nächstgelegenen Bodenpunkt. Überflüge des Schweizerischen Nationalparks, der 43 Eidgenössischen Jagdbanngebiete, Wildruhezonen, kantonaler Naturschutzgebiete und Wasser-/Zugvogelreservate sind verboten, inklusive 500-Meter-Pufferzone.
 
 ## Gründer
 
