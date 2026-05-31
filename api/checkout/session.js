@@ -559,6 +559,10 @@ export default async function handler(req, res) {
       //   - source_page=de_swissmap       → /de/swissmap/success (2026-05-28)
       //   - source_page=fr_swissmap       → /fr/swissmap/success (2026-05-28)
       //   - source_page=it_swissmap       → /it/swissmap/success (2026-05-28)
+      //   - source_page=map10             → /map10/success (2026-05-31 · map9 successor, hero A/B 01/02/04)
+      //   - source_page=de_map10          → /de/map10/success (2026-05-31)
+      //   - source_page=fr_map10          → /fr/map10/success (2026-05-31)
+      //   - source_page=it_map10          → /it/map10/success (2026-05-31)
       //   - source_page=gems              → /gems/success (2026-05-30)
       //   - source_page=de_gems           → /de/gems/success (2026-05-30)
       //   - source_page=fr_gems           → /fr/gems/success (2026-05-30)
@@ -590,6 +594,10 @@ export default async function handler(req, res) {
         else if (sourcePage === "de_swissmap") path = "/de/swissmap/success";
         else if (sourcePage === "fr_swissmap") path = "/fr/swissmap/success";
         else if (sourcePage === "it_swissmap") path = "/it/swissmap/success";
+        else if (sourcePage === "map10") path = "/map10/success";
+        else if (sourcePage === "de_map10") path = "/de/map10/success";
+        else if (sourcePage === "fr_map10") path = "/fr/map10/success";
+        else if (sourcePage === "it_map10") path = "/it/map10/success";
         else if (sourcePage === "fr_gems") path = "/fr/gems/success";
         else if (sourcePage === "it_gems") path = "/it/gems/success";
         else if (sourcePage === "gems") path = "/gems/success";
