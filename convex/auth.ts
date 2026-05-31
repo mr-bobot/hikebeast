@@ -172,7 +172,13 @@ export async function userFromSession(
   if (!session) return null;
   if (session.expiresAt < Date.now()) return null;
   const user = await ctx.db.get(session.userId);
-  return user ?? null;
+  if (!user) return null;
+  // Deactivated accounts: treat any live session as logged-out so a
+  // deactivation takes effect immediately, even for someone already
+  // signed in on another device. (adminDeactivateUser also revokes
+  // sessions, but this is the defense-in-depth backstop.)
+  if (user.deactivatedAt) return null;
+  return user;
 }
 
 export async function requireUser(
@@ -218,6 +224,12 @@ export const signIn = mutation({
       ?? "pbkdf2$600000$AAAAAAAAAAAAAAAAAAAAAA==$AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
     const ok = await verifyPassword(password, phc);
     if (!user || !ok) throw new Error("Invalid username or password");
+
+    // Deactivated account. Checked only AFTER a correct password so we
+    // don't leak deactivation status to wrong-password / enumeration
+    // attempts. The marker string is what api/login.js keys off to show
+    // the "contact leon@" message instead of "wrong password".
+    if (user.deactivatedAt) throw new Error("ACCOUNT_DEACTIVATED");
 
     const now = Date.now();
     const rawToken = newSessionToken();
@@ -470,6 +482,88 @@ export const adminListUsers = query({
     await requireAdmin(adminToken);
     const rows = await ctx.db.query("users").collect();
     return rows.map(toPublic);
+  },
+});
+
+// ── Account deactivation (soft-disable) + hard delete ─────────────────────
+// adminDeactivateUser flips the deactivatedAt marker and revokes every
+// session. signIn then rejects with ACCOUNT_DEACTIVATED (api/login.js maps
+// that to the "contact leon@" message) and userFromSession returns null, so
+// the account is locked out immediately and everywhere. The row + all
+// per-user data stay intact, so it's fully reversible via adminReactivateUser.
+// Prefer this over adminDeleteUser unless the record really must be gone.
+export const adminDeactivateUser = mutation({
+  args: {
+    usernameOrEmail: v.string(),
+    reason:          v.optional(v.string()),
+    adminToken:      v.string(),
+  },
+  handler: async (ctx, { usernameOrEmail, reason, adminToken }) => {
+    await requireAdmin(adminToken);
+    const user = await findByLogin(ctx, usernameOrEmail);
+    if (!user) throw new Error(`No user: ${usernameOrEmail}`);
+    await ctx.db.patch(user._id, {
+      deactivatedAt: Date.now(),
+      ...(reason ? { deactivatedReason: reason } : {}),
+    });
+    const sessions = await ctx.db
+      .query("sessions")
+      .withIndex("by_user", q => q.eq("userId", user._id))
+      .collect();
+    for (const s of sessions) await ctx.db.delete(s._id);
+    return { ok: true as const, username: user.username, sessionsRevoked: sessions.length };
+  },
+});
+
+// Reverse of the above. The user's password is untouched by deactivation,
+// so clearing the marker lets them log in again as before.
+export const adminReactivateUser = mutation({
+  args: { usernameOrEmail: v.string(), adminToken: v.string() },
+  handler: async (ctx, { usernameOrEmail, adminToken }) => {
+    await requireAdmin(adminToken);
+    const user = await findByLogin(ctx, usernameOrEmail);
+    if (!user) throw new Error(`No user: ${usernameOrEmail}`);
+    await ctx.db.patch(user._id, { deactivatedAt: undefined, deactivatedReason: undefined });
+    return { ok: true as const, username: user.username };
+  },
+});
+
+// Hard delete. Removes the user row plus every piece of per-user data that
+// references it. Irreversible. Affiliate referral rows are keyed by slug /
+// Stripe id (not userId) and are payout/accounting records, so they're left
+// in place on purpose.
+export const adminDeleteUser = mutation({
+  args: { usernameOrEmail: v.string(), adminToken: v.string() },
+  handler: async (ctx, { usernameOrEmail, adminToken }) => {
+    await requireAdmin(adminToken);
+    const user = await findByLogin(ctx, usernameOrEmail);
+    if (!user) throw new Error(`No user: ${usernameOrEmail}`);
+
+    const sessions = await ctx.db.query("sessions").withIndex("by_user", q => q.eq("userId", user._id)).collect();
+    for (const r of sessions) await ctx.db.delete(r._id);
+    const links = await ctx.db.query("magicLinks").withIndex("by_user", q => q.eq("userId", user._id)).collect();
+    for (const r of links) await ctx.db.delete(r._id);
+    const favs = await ctx.db.query("favorites").withIndex("by_user", q => q.eq("userId", user._id)).collect();
+    for (const r of favs) await ctx.db.delete(r._id);
+    const vis = await ctx.db.query("visited").withIndex("by_user", q => q.eq("userId", user._id)).collect();
+    for (const r of vis) await ctx.db.delete(r._id);
+    const swipes = await ctx.db.query("swipeDecisions").withIndex("by_user", q => q.eq("userId", user._id)).collect();
+    for (const r of swipes) await ctx.db.delete(r._id);
+    const subs = await ctx.db.query("photoSubmissions").withIndex("by_submitter", q => q.eq("submitterUserId", user._id)).collect();
+    for (const r of subs) await ctx.db.delete(r._id);
+
+    if (user.avatarStorageId) {
+      try { await ctx.storage.delete(user.avatarStorageId); } catch {}
+    }
+    await ctx.db.delete(user._id);
+    return {
+      ok: true as const,
+      deletedUser: user.username,
+      related: {
+        sessions: sessions.length, magicLinks: links.length, favorites: favs.length,
+        visited: vis.length, swipeDecisions: swipes.length, photoSubmissions: subs.length,
+      },
+    };
   },
 });
 

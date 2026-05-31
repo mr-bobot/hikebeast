@@ -515,7 +515,19 @@ export default async function handler(req, res) {
         usernameOrEmail: username,
         password,
       });
-    } catch {
+    } catch (err) {
+      // Deactivated account: signIn throws ACCOUNT_DEACTIVATED *after* a
+      // correct password, so this only fires for the real owner. Surface a
+      // distinct 403 so the login page shows the "contact leon@" message
+      // instead of the generic wrong-password line.
+      if (String(err?.message || '').includes('ACCOUNT_DEACTIVATED')) {
+        res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+        res.setHeader('Cache-Control', 'no-store');
+        return res.status(403).json({
+          error: 'account_deactivated',
+          message: 'Your account has been deactivated, please contact leon@hikebeast.ch',
+        });
+      }
       await new Promise(r => setTimeout(r, 350));
       res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
       return res.status(401).json({ error: 'invalid_credentials' });

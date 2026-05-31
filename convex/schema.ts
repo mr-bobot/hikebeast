@@ -153,6 +153,12 @@ export default defineSchema({
     // Flipped on by adminCreateUser({ isAffiliate: true }) for influencers,
     // or after the fact by adminSetAffiliate. Default false (undefined).
     isAffiliate:     v.optional(v.boolean()),
+    // Soft-disable. When set, signIn rejects with ACCOUNT_DEACTIVATED and
+    // userFromSession returns null (so live sessions die too). The row and
+    // all data stay intact, so it's reversible via adminReactivateUser.
+    // Presence = deactivated; the number is when it happened (ms epoch).
+    deactivatedAt:     v.optional(v.number()),
+    deactivatedReason: v.optional(v.string()),   // free-text, admin-only (e.g. "refunded 2026-05-31")
     createdAt:       v.number(),
     lastSeenAt:      v.number(),
   }).index("by_username", ["username"])
