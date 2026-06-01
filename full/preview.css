@@ -6054,7 +6054,11 @@ body.has-rail .topbar .hb-nav { display: none; }
   color: var(--muted);
   letter-spacing: 0;
 }
-.hb-wc-chip.is-on .hb-wc-chip-count { color: rgba(255,255,255,0.7); }
+/* Count on the selected chip: must track the chip's own text colour
+   (var(--paper)) at reduced opacity, NOT a hardcoded white — in dark
+   mode the selected chip is light-bg/dark-text, so white-on-white made
+   the number invisible. */
+.hb-wc-chip.is-on .hb-wc-chip-count { color: var(--paper); opacity: 0.7; }
 
 
 /* Preview mode · spot-name hiding on /full/wildcamping/ and
@@ -6069,5 +6073,16 @@ body.has-rail .topbar .hb-nav { display: none; }
    they don't render visually unless explicitly hovered, and screen
    recordings rarely surface tooltips. */
 body.preview-hide-spot-names .name {
-  visibility: hidden;
+  /* display:none (not visibility:hidden) so the tile collapses cleanly
+     instead of leaving an empty reserved line where the name was. */
+  display: none;
 }
+
+/* === Preview mode (affiliate recording view) · global redactions === */
+/* Hide the "Beta version. The route data is still being verified..."
+   notice on spot planning panels — affiliates recording promos
+   shouldn't surface the beta disclaimer. */
+body.preview-mode .hb-beta-notice { display: none; }
+/* Hide the per-filter spot counts on the wildcamping chips so a
+   recording doesn't reveal how many spots are in each collection. */
+body.preview-mode .hb-wc-chip-count { display: none; }
