@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
@@ -23,34 +25,34 @@
 
 <div class="topbar">
   <a class="brand" href="../index.html">
-    <span>Browse</span>
+    <span data-i18n="title.browse">Browse</span>
   </a>
-  <span class="crumb"><b id="visibleCount">0</b> photos</span>
+  <span class="crumb"><b id="visibleCount">0</b> <span data-i18n="browse.photos_unit">photos</span></span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
 <main class="hb-page">
 
   <header class="hb-hero">
-    <p class="kicker">Browse</p>
-    <h1>All spots, one wall.</h1>
-    <p>Search, filter by region, save what you like.</p>
+    <p class="kicker" data-i18n="title.browse">Browse</p>
+    <h1 data-i18n="browse.h1">All spots, one wall.</h1>
+    <p data-i18n="browse.sub">Search, filter by region, save what you like.</p>
   </header>
 
   <div class="hb-filters">
     <div class="hb-search-row">
       <label class="hb-search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
-        <input id="q" type="search" placeholder="Search spots, regions, themes…" autocomplete="off" />
-        <button type="button" class="clear" id="clearQ" aria-label="Clear search">
+        <input id="q" type="search" placeholder="Search spots, regions, themes…" autocomplete="off" data-i18n-attr="placeholder:common.search_placeholder" />
+        <button type="button" class="clear" id="clearQ" aria-label="Clear search" data-i18n-attr="aria-label:browse.clear_search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </label>
-      <button type="button" class="hb-shuffle-btn" id="shuffleBtn" aria-label="Shuffle the wall">
+      <button type="button" class="hb-shuffle-btn" id="shuffleBtn" aria-label="Shuffle the wall" data-i18n-attr="aria-label:browse.shuffle_aria">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-        <span>Shuffle</span>
+        <span data-i18n="browse.shuffle">Shuffle</span>
       </button>
     </div>
     <div class="hb-chips" id="chips" data-axis="region"></div>
@@ -60,16 +62,16 @@
   <div id="grid" class="hb-grid"></div>
   <div id="empty" class="hb-empty" hidden>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
-    <h2>No spots match.</h2>
-    <p>Try a shorter search or pick a different region.</p>
+    <h2 data-i18n="browse.empty_h2">No spots match.</h2>
+    <p data-i18n="browse.empty_body">Try a shorter search or pick a different region.</p>
   </div>
 
 </main>
 
 <footer class="legal">
-  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  <a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 
@@ -277,7 +279,7 @@
       a.innerHTML = `
         <span class="hb-tile-todo-fill" style="background-color: rgb(${spot.color || '120,120,120'});"></span>
         <span class="hb-tile-name">${esc(spot.title)}</span>
-        <span class="hb-tile-todo-tag">Needs photo</span>
+        <span class="hb-tile-todo-tag">${t('browse.needs_photo')}</span>
       `;
       return a;
     }
@@ -643,7 +645,7 @@
     trigger.setAttribute('aria-haspopup', 'dialog');
     trigger.innerHTML = `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-      <span>Filter</span>
+      <span>${t('browse.filter')}</span>
       <span class="hb-filter-badge" data-filter-badge hidden>0</span>
     `;
     filtersBlock.insertBefore(trigger, chipsRegion);
@@ -653,23 +655,23 @@
     sheet.className = 'hb-filter-sheet';
     sheet.setAttribute('role', 'dialog');
     sheet.setAttribute('aria-modal', 'true');
-    sheet.setAttribute('aria-label', 'Filter spots');
+    sheet.setAttribute('aria-label', t('browse.filter_aria'));
     sheet.innerHTML = `
       <div class="hb-filter-sheet-backdrop" data-close></div>
       <div class="hb-filter-sheet-card">
         <div class="hb-filter-sheet-grabber" aria-hidden="true"></div>
         <div class="hb-filter-sheet-head">
-          <h3>Filter</h3>
-          <button type="button" class="hb-filter-clear" data-clear>Clear</button>
+          <h3>${t('browse.filter')}</h3>
+          <button type="button" class="hb-filter-clear" data-clear>${t('browse.clear')}</button>
         </div>
         <div class="hb-filter-sheet-body">
-          <p class="hb-filter-section-label">Region</p>
+          <p class="hb-filter-section-label">${t('spec.region')}</p>
           <div class="hb-filter-sheet-row" data-slot="region"></div>
-          <p class="hb-filter-section-label">Type</p>
+          <p class="hb-filter-section-label">${t('browse.type')}</p>
           <div class="hb-filter-sheet-row" data-slot="property"></div>
         </div>
         <div class="hb-filter-sheet-foot">
-          <button type="button" class="hb-filter-apply" data-close>Show results</button>
+          <button type="button" class="hb-filter-apply" data-close>${t('browse.show_results')}</button>
         </div>
       </div>
     `;

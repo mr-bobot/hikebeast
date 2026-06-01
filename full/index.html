@@ -20,6 +20,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="lib/i18n-strings.js"></script>
+<script src="lib/i18n.js"></script>
 <link rel="stylesheet" href="preview.css?v=20260526a" />
 <!-- Convex's wss handshake is the second slowest thing on first paint after
      the hero image; preconnect lets the browser get DNS + TCP + TLS out of
@@ -38,7 +40,7 @@
 
 <header class="home-topbar">
   <label class="home-search">
-    <input id="homeSearch" type="search" placeholder="Search spots, regions, themes…" autocomplete="off" />
+    <input id="homeSearch" type="search" placeholder="Search spots, regions, themes…" autocomplete="off" data-i18n-attr="placeholder:common.search_placeholder" />
     <svg class="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
   </label>
   <div class="home-topbar-actions">
@@ -51,7 +53,7 @@
 
 <main class="home-v2">
 
-  <h1 class="page-title">Home</h1>
+  <h1 class="page-title" data-i18n="title.home">Home</h1>
 
   <section class="home-feature">
     <article class="feature-card" id="featureCard">
@@ -66,7 +68,7 @@
           <span class="play-icon">
             <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6 4 20 12 6 20 6 4"/></svg>
           </span>
-          <span>Open spot</span>
+          <span data-i18n="action.open_spot">Open spot</span>
         </a>
       </div>
       <div class="feature-photo">
@@ -82,16 +84,16 @@
 
   <section class="home-row">
     <div class="row-head">
-      <h2>For you</h2>
+      <h2 data-i18n="label.for_you">For you</h2>
     </div>
     <div class="row-cards" id="rowForYou"></div>
   </section>
 
   <section class="home-row">
     <div class="row-head">
-      <h2>Famous spots that deliver</h2>
+      <h2 data-i18n="home.famous_heading">Famous spots that deliver</h2>
       <a class="see-all" href="famous-gems/">
-        <span>See all</span>
+        <span data-i18n="action.see_all">See all</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
     </div>
@@ -100,9 +102,9 @@
 
   <section class="home-row">
     <div class="row-head">
-      <h2>Hidden gems · Leon's picks</h2>
+      <h2 data-i18n="home.hidden_heading">Hidden gems · Leon's picks</h2>
       <a class="see-all" href="hidden-gems/">
-        <span>See all</span>
+        <span data-i18n="action.see_all">See all</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
     </div>
@@ -112,9 +114,9 @@
 </main>
 
 <footer class="legal">
-  <a href="../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../terms.html">Terms</a><span class="sep">·</span>
+  <a href="../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span>
+  <a href="../privacy.html" data-i18n="footer.privacy">Privacy</a><span class="sep">·</span>
+  <a href="../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 

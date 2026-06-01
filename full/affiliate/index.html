@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <style>
@@ -340,17 +342,17 @@
 
 <main class="aff-page">
  <div class="card-wrap">
-  <a class="back" href="../">← Back</a>
+  <a class="back" href="../">← <span data-i18n="action.back">Back</span></a>
   <div class="card">
-    <div id="affLoading" class="state">Loading…</div>
+    <div id="affLoading" class="state" data-i18n="account.loading">Loading…</div>
 
     <div id="affSignedOut" class="state" hidden>
-      Sign in to see your affiliate dashboard.<br>
-      <a href="/login/">Sign in →</a>
+      <span data-i18n="affiliate.signedout_msg">Sign in to see your affiliate dashboard.</span><br>
+      <a href="/login/"><span data-i18n="account.sign_in">Sign in</span> →</a>
     </div>
 
     <div id="affNotEligible" class="state" hidden>
-      The affiliate program is invite-only.<br>
+      <span data-i18n="affiliate.not_eligible">The affiliate program is invite-only.</span><br>
       <a href="mailto:leon@hikebeast.ch">leon@hikebeast.ch</a>
     </div>
 
@@ -358,34 +360,34 @@
       <div class="brand">
         <img src="/images/avatar.jpg" alt="" />
         <span class="brand-text">
-          <b>Hikebeast · Affiliate</b>
-          <span class="brand-sub">50% per sale</span>
+          <b>Hikebeast · <span data-i18n="title.affiliate">Affiliate</span></b>
+          <span class="brand-sub" data-i18n="affiliate.commission">50% per sale</span>
         </span>
       </div>
 
       <div class="sec first">
-        <p class="sec-label">Share link</p>
+        <p class="sec-label" data-i18n="affiliate.share_link">Share link</p>
         <div class="share-controls">
           <span class="share-url" id="linkEn">hikebeast.ch/swissmap?r=…</span>
-          <button type="button" class="btn-copy" data-target="linkEn">Copy</button>
+          <button type="button" class="btn-copy" data-target="linkEn" data-i18n="affiliate.copy">Copy</button>
         </div>
       </div>
 
       <div class="sec">
         <div class="stats">
           <div>
-            <p class="sec-label">Earned<button type="button" class="info-btn" data-tooltip="Paid + pending commission, summed per currency. Refunded sales are excluded." aria-label="What does Earned mean?"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none"/></svg></button></p>
+            <p class="sec-label"><span data-i18n="affiliate.earned">Earned</span><button type="button" class="info-btn" data-tooltip="Paid + pending commission, summed per currency. Refunded sales are excluded." aria-label="What does Earned mean?" data-i18n-attr="data-tooltip:affiliate.earned_tip;aria-label:affiliate.earned_aria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none"/></svg></button></p>
             <p class="stat-value is-empty" id="statTotal">0</p>
           </div>
           <div>
-            <p class="sec-label">Referrals<button type="button" class="info-btn" data-tooltip="Number of sales attributed to your link. Includes pending, paid, and refunded." aria-label="What does Referrals mean?"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none"/></svg></button></p>
+            <p class="sec-label"><span data-i18n="affiliate.referrals">Referrals</span><button type="button" class="info-btn" data-tooltip="Number of sales attributed to your link. Includes pending, paid, and refunded." aria-label="What does Referrals mean?" data-i18n-attr="data-tooltip:affiliate.referrals_tip;aria-label:affiliate.referrals_aria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none"/></svg></button></p>
             <p class="stat-value is-empty" id="statCount">0</p>
           </div>
         </div>
       </div>
 
       <div class="sec">
-        <p class="sec-label">Resources</p>
+        <p class="sec-label" data-i18n="affiliate.resources">Resources</p>
         <a class="resources-link" href="materials/">
           <span class="resources-icon" aria-hidden="true">
             <!-- Folder-stack icon · matches the Materials row on /full/more/. -->
@@ -394,22 +396,22 @@
             </svg>
           </span>
           <span class="resources-text">
-            <span class="resources-title">Affiliate materials</span>
-            <span class="resources-sub">Spot cards, Earth animations, thumbnails, map overlays + preview-mode toggle</span>
+            <span class="resources-title" data-i18n="more.aff_mat_title">Affiliate materials</span>
+            <span class="resources-sub" data-i18n="affiliate.materials_sub">Spot cards, Earth animations, thumbnails, map overlays + preview-mode toggle</span>
           </span>
           <span class="resources-arrow" aria-hidden="true">→</span>
         </a>
       </div>
 
       <div class="sec last">
-        <p class="sec-label">Activity</p>
+        <p class="sec-label" data-i18n="affiliate.activity">Activity</p>
         <ul class="activity" id="affList" hidden></ul>
-        <p class="empty" id="affEmpty">No referrals yet.</p>
+        <p class="empty" id="affEmpty" data-i18n="affiliate.no_referrals">No referrals yet.</p>
       </div>
     </div>
   </div>
   <footer class="legal-foot">
-    <a href="../../terms.html">Terms</a><span class="sep">·</span><a href="../../imprint.html">Imprint</a><span class="sep">·</span><a href="../../privacy.html">Privacy</a>
+    <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span><a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span><a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a>
     <span class="copy">© Hikebeast</span>
   </footer>
  </div>
@@ -569,7 +571,7 @@
           buyerCell = esc(r.buyerEmail);
           buyerStyle = ' is-email';
         } else {
-          buyerCell = '<span class="is-anon">Direct buyer</span>';
+          buyerCell = '<span class="is-anon">' + window.t('affiliate.direct_buyer') + '</span>';
         }
         const hasId = !!(r.buyerIg || r.buyerEmail);
         const liClass = status === 'voided' ? ' class="is-voided"' : '';

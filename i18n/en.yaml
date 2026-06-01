@@ -69,6 +69,10 @@ action:
   back: Back
   overview: Overview
   how_to_get_there: How to get there
+  browse_spots: Browse spots
+  log_in: Log in
+  read: Read
+  save: Save
 
 view:
   reader: Reader
@@ -131,3 +135,143 @@ planning:
 
 beta:
   notice: Beta version. The route data is still being verified. Spotted something wrong?
+
+title:
+  home: Home
+  browse: Browse
+  swipe: Swipe
+  map: Map
+  saved: Saved
+  visited: Been there
+  more: More
+  all_regions: All Regions
+  whats_new: What's new
+  account: Account
+  affiliate: Affiliate
+  front_matter: Front matter
+
+common:
+  search_placeholder: Search spots, regions, themes…
+
+saved:
+  crumb: saved
+  kicker: Your favorites
+  empty_title: Nothing saved yet.
+  empty_subtitle: Tap the heart on any spot to bookmark it.
+  empty_h2: No favorites yet.
+  empty_body: Browse the guide and tap the heart on any spot to save it here.
+  remove_aria: Remove from favorites
+  list_subtitle: Grouped by region. Tap a card to open the full entry.
+  count_title:
+    one: 1 spot saved.
+    other: "{n} spots saved."
+
+visited:
+  crumb: visited
+  kicker: Your travel log
+  empty_title: Mark spots you've been to.
+  empty_subtitle: Tap the kebab on any spot, then "Been there". This pile is private to your account.
+  empty_h2: No spots checked off yet.
+  empty_body: Open any spot's kebab menu and tap "Been there" to add it here.
+  gate_title: Sign in to track visits.
+  gate_body: The "Been there" pile follows your Hikebeast account so it works across phones and browsers.
+  gate_subtitle: The "Been there" pile is private to your account and syncs across devices.
+  list_subtitle: Grouped by region. Tap a card to revisit the entry. Synced to your account.
+  remove_aria: Remove from Been there
+  count_title:
+    one: 1 spot visited.
+    other: "{n} spots visited."
+
+regions:
+  crumb: regions
+  kicker: Browse by region
+
+swipe:
+  left: left
+  of: of
+  saved: saved
+  no_title: No · skip (drag left)
+  save_title: Save · add to liked (drag right)
+  stamp_save: Save
+  stamp_nope: Nope
+  empty_all: You've been through them all.
+  empty_none: No spots to swipe.
+  empty_hint: Your saves will show up here once you start hearting cards.
+  view_saves: View saves
+  browse_all: Browse all
+
+map:
+  view: Map view
+  fav_title: Show only favorites
+  photos: Photos
+  photos_title: Show photos instead of dots
+
+more:
+  guide_label: Your guide
+  updates_label: Updates
+  pdf_title: Download the PDF
+  pdf_sub: Opens the guide in Google Drive
+  maps_title: Open list in Google Maps
+  maps_sub: All pins smoothly integrated in Google Maps
+  earth_title: Use in Google Earth
+  earth_sub: Download the .kml file to use it in Google Earth
+  whatsnew_sub: Recent shipped + what's being worked on
+  aff_dash_title: Affiliate dashboard
+  aff_dash_sub: Your link and your referrals
+  aff_mat_title: Affiliate materials
+  aff_mat_sub: Marketing material that helps you create content.
+  account_sub: Avatar, username, email, password, sign out
+
+whatsnew:
+  kicker: Recent + upcoming updates
+  intro: Quick log of what just shipped and what we're working on right now.
+  working_on: Working on now
+  shipped: Recently shipped
+
+account:
+  loading: Loading…
+  signedout_msg: Sign in to manage your account.
+  sign_in: Sign in
+  upload_photo: Upload photo
+  remove: Remove
+  username: Username
+  email: Email
+  log_out: Log out
+
+affiliate:
+  commission: 50% per sale
+  signedout_msg: Sign in to see your affiliate dashboard.
+  not_eligible: The affiliate program is invite-only.
+  share_link: Share link
+  copy: Copy
+  earned: Earned
+  earned_tip: Paid + pending commission, summed per currency. Refunded sales are excluded.
+  earned_aria: What does Earned mean?
+  referrals: Referrals
+  referrals_tip: Number of sales attributed to your link. Includes pending, paid, and refunded.
+  referrals_aria: What does Referrals mean?
+  resources: Resources
+  materials_sub: Spot cards, Earth animations, thumbnails, map overlays + preview-mode toggle
+  activity: Activity
+  no_referrals: No referrals yet.
+  direct_buyer: Direct buyer
+
+browse:
+  photos_unit: photos
+  h1: All spots, one wall.
+  sub: Search, filter by region, save what you like.
+  clear_search: Clear search
+  shuffle: Shuffle
+  shuffle_aria: Shuffle the wall
+  empty_h2: No spots match.
+  empty_body: Try a shorter search or pick a different region.
+  filter: Filter
+  filter_aria: Filter spots
+  clear: Clear
+  type: Type
+  show_results: Show results
+  needs_photo: Needs photo
+
+home:
+  famous_heading: Famous spots that deliver
+  hidden_heading: Hidden gems · Leon's picks

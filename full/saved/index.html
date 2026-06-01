@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
@@ -23,18 +25,18 @@
 
 <div class="topbar">
   <a class="brand" href="../index.html">
-    <span>Saved</span>
+    <span data-i18n="title.saved">Saved</span>
   </a>
-  <span class="crumb"><b id="savedCount">0</b> saved</span>
+  <span class="crumb"><b id="savedCount">0</b> <span data-i18n="saved.crumb">saved</span></span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
 <main class="hb-page">
 
   <header class="hb-hero">
-    <p class="kicker">Your favorites</p>
+    <p class="kicker" data-i18n="saved.kicker">Your favorites</p>
     <h1 id="title">Nothing saved yet.</h1>
     <p id="subtitle">Tap the heart on any spot to bookmark it.</p>
   </header>
@@ -43,17 +45,17 @@
 
   <div id="empty" class="hb-empty" hidden>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-    <h2>No favorites yet.</h2>
-    <p>Browse the guide and tap the heart on any spot to save it here.</p>
-    <a href="../browse/">Browse spots</a>
+    <h2 data-i18n="saved.empty_h2">No favorites yet.</h2>
+    <p data-i18n="saved.empty_body">Browse the guide and tap the heart on any spot to save it here.</p>
+    <a href="../browse/" data-i18n="action.browse_spots">Browse spots</a>
   </div>
 
 </main>
 
 <footer class="legal">
-  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  <a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 
@@ -112,7 +114,7 @@
       btn.type = 'button';
       btn.className = 'hb-fav is-on';
       btn.setAttribute('data-hb-fav', k);
-      btn.setAttribute('aria-label', 'Remove from favorites');
+      btn.setAttribute('aria-label', t('saved.remove_aria'));
       btn.innerHTML = window.HB.icons.heartFill;
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -146,15 +148,15 @@
       content.innerHTML = '';
       content.hidden = true;
       empty.hidden = false;
-      title.textContent = 'Nothing saved yet.';
-      subtitle.textContent = 'Tap the heart on any spot to bookmark it.';
+      title.textContent = t('saved.empty_title');
+      subtitle.textContent = t('saved.empty_subtitle');
       return;
     }
 
     empty.hidden = true;
     content.hidden = false;
-    title.textContent = saved.length === 1 ? '1 spot saved.' : `${saved.length} spots saved.`;
-    subtitle.textContent = 'Grouped by region. Tap a card to open the full entry.';
+    title.textContent = t.plural('saved.count_title', saved.length);
+    subtitle.textContent = t('saved.list_subtitle');
 
     // Group by chapter, in LEGEND order.
     const byChapter = new Map();
@@ -172,7 +174,7 @@
       wrap.className = 'hb-group';
       const head = document.createElement('div');
       head.className = 'hb-group-head';
-      head.innerHTML = `<h2>${esc(c.name)}</h2><span class="meta">${list.length} spot${list.length === 1 ? '' : 's'}</span>`;
+      head.innerHTML = `<h2>${esc(c.name)}</h2><span class="meta">${list.length} ${t.plural('count.spots_bare', list.length)}</span>`;
       wrap.appendChild(head);
       const grid = document.createElement('div');
       grid.className = 'hb-saved-grid';

@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <style>
@@ -315,26 +317,26 @@
 
 <div class="topbar">
   <a class="brand" href="../index.html">
-    <span>Swipe</span>
+    <span data-i18n="title.swipe">Swipe</span>
   </a>
-  <span class="crumb"><b id="leftCount">0</b> left</span>
+  <span class="crumb"><b id="leftCount">0</b> <span data-i18n="swipe.left">left</span></span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
 <main class="swipe-shell">
   <div class="swipe-progress">
-    <b id="seenCount">0</b>&nbsp;of&nbsp;<b id="totalCount">0</b>&nbsp;·&nbsp;<b id="savedCount">0</b>&nbsp;saved
+    <b id="seenCount">0</b>&nbsp;<span data-i18n="swipe.of">of</span>&nbsp;<b id="totalCount">0</b>&nbsp;·&nbsp;<b id="savedCount">0</b>&nbsp;<span data-i18n="swipe.saved">saved</span>
   </div>
 
   <div class="deck" id="deck"></div>
 
   <div class="actions">
-    <button type="button" class="act-btn no" id="noBtn" title="No · skip (drag left)">
+    <button type="button" class="act-btn no" id="noBtn" title="No · skip (drag left)" data-i18n-attr="title:swipe.no_title">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <button type="button" class="act-btn save" id="saveBtn" title="Save · add to liked (drag right)">
+    <button type="button" class="act-btn save" id="saveBtn" title="Save · add to liked (drag right)" data-i18n-attr="title:swipe.save_title">
       <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
     </button>
     <a class="act-btn tertiary" id="openLink" href="#" title="Open the full entry">
@@ -460,8 +462,8 @@
     });
     const srcsetAttr = attrs.srcset ? ` srcset="${esc(attrs.srcset)}" sizes="${esc(attrs.sizes)}"` : '';
     c.innerHTML = `
-      <div class="stamp save">Save</div>
-      <div class="stamp no">Nope</div>
+      <div class="stamp save">${window.t('swipe.stamp_save')}</div>
+      <div class="stamp no">${window.t('swipe.stamp_nope')}</div>
       <div class="photo">
         <!-- Sharp photo (w1800 default; browser swaps via srcset on bigger
              screens). Deck holds 3 cards so bandwidth is negligible. -->
@@ -498,11 +500,11 @@
     deck.innerHTML = `
       <div class="empty">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <h2>${seenAll ? "You've been through them all." : 'No spots to swipe.'}</h2>
-        <p>${savedNow ? `${savedNow} saved.` : 'Your saves will show up here once you start hearting cards.'}</p>
+        <h2>${seenAll ? window.t('swipe.empty_all') : window.t('swipe.empty_none')}</h2>
+        <p>${savedNow ? `${savedNow} ${window.t('swipe.saved')}.` : window.t('swipe.empty_hint')}</p>
         <div class="actions-row">
-          <a href="../saved/">View saves</a>
-          <a class="ghost" href="../browse/">Browse all</a>
+          <a href="../saved/">${window.t('swipe.view_saves')}</a>
+          <a class="ghost" href="../browse/">${window.t('swipe.browse_all')}</a>
         </div>
       </div>
     `;

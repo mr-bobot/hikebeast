@@ -67,6 +67,10 @@ action:
   back: Zurück
   overview: Übersicht
   how_to_get_there: Anfahrt
+  browse_spots: Spots ansehen
+  log_in: Anmelden
+  read: Lesen
+  save: Speichern
 
 view:
   reader: Lesen
@@ -129,3 +133,143 @@ planning:
 
 beta:
   notice: Beta-Version. Die Routendaten werden noch geprüft. Etwas falsch entdeckt?
+
+title:
+  home: Start
+  browse: Entdecken
+  swipe: Swipe
+  map: Karte
+  saved: Gemerkt
+  visited: Besucht
+  more: Mehr
+  all_regions: Alle Regionen
+  whats_new: Neu
+  account: Konto
+  affiliate: Affiliate
+  front_matter: Einleitung
+
+common:
+  search_placeholder: Spots, Regionen, Themen suchen…
+
+saved:
+  crumb: gemerkt
+  kicker: Deine Favoriten
+  empty_title: Noch nichts gemerkt.
+  empty_subtitle: Tippe bei einem Spot aufs Herz, um ihn zu merken.
+  empty_h2: Noch keine Favoriten.
+  empty_body: Stöbere durch den Guide und tippe bei einem Spot aufs Herz, um ihn hier zu speichern.
+  remove_aria: Aus Favoriten entfernen
+  list_subtitle: Nach Region gruppiert. Tippe auf eine Karte, um den ganzen Eintrag zu öffnen.
+  count_title:
+    one: 1 Spot gemerkt.
+    other: "{n} Spots gemerkt."
+
+visited:
+  crumb: besucht
+  kicker: Dein Reisetagebuch
+  empty_title: Markiere Spots, an denen du warst.
+  empty_subtitle: Tippe beim Spot auf das Dreipunkt-Menü und dann auf "Besucht". Diese Liste ist privat.
+  empty_h2: Noch nichts abgehakt.
+  empty_body: Öffne bei einem Spot das Dreipunkt-Menü und tippe auf "Besucht", um ihn hinzuzufügen.
+  gate_title: Melde dich an, um Besuche zu speichern.
+  gate_body: Die Besucht-Liste hängt an deinem Hikebeast-Konto und funktioniert über Geräte hinweg.
+  gate_subtitle: Die Besucht-Liste ist privat und wird über deine Geräte synchronisiert.
+  list_subtitle: Nach Region gruppiert. Tippe auf eine Karte, um den Eintrag erneut zu öffnen. Mit deinem Konto synchronisiert.
+  remove_aria: Aus Besucht entfernen
+  count_title:
+    one: 1 Spot besucht.
+    other: "{n} Spots besucht."
+
+regions:
+  crumb: Regionen
+  kicker: Nach Region
+
+swipe:
+  left: übrig
+  of: von
+  saved: gespeichert
+  no_title: Nein · überspringen (nach links ziehen)
+  save_title: Speichern · zu Favoriten (nach rechts ziehen)
+  stamp_save: Speichern
+  stamp_nope: Nö
+  empty_all: Du hast alle durch.
+  empty_none: Keine Spots zum Swipen.
+  empty_hint: Deine gespeicherten Spots erscheinen hier, sobald du Karten likest.
+  view_saves: Favoriten ansehen
+  browse_all: Alle ansehen
+
+map:
+  view: Kartenansicht
+  fav_title: Nur Favoriten zeigen
+  photos: Fotos
+  photos_title: Fotos statt Punkte zeigen
+
+more:
+  guide_label: Dein Guide
+  updates_label: Updates
+  pdf_title: PDF herunterladen
+  pdf_sub: Öffnet den Guide in Google Drive
+  maps_title: Liste in Google Maps öffnen
+  maps_sub: Alle Pins direkt in Google Maps integriert
+  earth_title: In Google Earth nutzen
+  earth_sub: Lade die .kml-Datei für Google Earth herunter
+  whatsnew_sub: Was zuletzt kam und woran wir arbeiten
+  aff_dash_title: Affiliate-Dashboard
+  aff_dash_sub: Dein Link und deine Vermittlungen
+  aff_mat_title: Affiliate-Material
+  aff_mat_sub: Material, das dir beim Content hilft.
+  account_sub: Avatar, Benutzername, E-Mail, Passwort, Abmelden
+
+whatsnew:
+  kicker: Aktuelle + kommende Updates
+  intro: Kurzer Überblick, was gerade live ging und woran wir gerade arbeiten.
+  working_on: In Arbeit
+  shipped: Kürzlich veröffentlicht
+
+account:
+  loading: Lädt…
+  signedout_msg: Melde dich an, um dein Konto zu verwalten.
+  sign_in: Anmelden
+  upload_photo: Foto hochladen
+  remove: Entfernen
+  username: Benutzername
+  email: E-Mail
+  log_out: Abmelden
+
+affiliate:
+  commission: 50% pro Verkauf
+  signedout_msg: Melde dich an, um dein Affiliate-Dashboard zu sehen.
+  not_eligible: Das Affiliate-Programm ist nur auf Einladung.
+  share_link: Link teilen
+  copy: Kopieren
+  earned: Verdient
+  earned_tip: Bezahlte + ausstehende Provision, pro Währung summiert. Erstattete Verkäufe sind ausgenommen.
+  earned_aria: Was bedeutet Verdient?
+  referrals: Vermittlungen
+  referrals_tip: Anzahl der über deinen Link zugeordneten Verkäufe. Inkl. ausstehend, bezahlt und erstattet.
+  referrals_aria: Was bedeutet Vermittlungen?
+  resources: Ressourcen
+  materials_sub: Spot-Cards, Earth-Animationen, Thumbnails, Karten-Overlays + Vorschaumodus
+  activity: Aktivität
+  no_referrals: Noch keine Vermittlungen.
+  direct_buyer: Direktkäufer
+
+browse:
+  photos_unit: Fotos
+  h1: Alle Spots, eine Wand.
+  sub: Suchen, nach Region filtern, merken was dir gefällt.
+  clear_search: Suche löschen
+  shuffle: Mischen
+  shuffle_aria: Wand mischen
+  empty_h2: Keine Treffer.
+  empty_body: Probier eine kürzere Suche oder eine andere Region.
+  filter: Filter
+  filter_aria: Spots filtern
+  clear: Zurücksetzen
+  type: Typ
+  show_results: Ergebnisse anzeigen
+  needs_photo: Foto fehlt
+
+home:
+  famous_heading: Bekannte Spots, die sich lohnen
+  hidden_heading: Hidden Gems · Leons Favoriten

@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
@@ -23,18 +25,18 @@
 
 <div class="topbar">
   <a class="brand" href="../index.html">
-    <span>Been there</span>
+    <span data-i18n="title.visited">Been there</span>
   </a>
-  <span class="crumb"><b id="visitedCount">0</b> visited</span>
+  <span class="crumb"><b id="visitedCount">0</b> <span data-i18n="visited.crumb">visited</span></span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
 <main class="hb-page">
 
   <header class="hb-hero">
-    <p class="kicker">Your travel log</p>
+    <p class="kicker" data-i18n="visited.kicker">Your travel log</p>
     <h1 id="title">Mark spots you've been to.</h1>
     <p id="subtitle">Tap the kebab on any spot, then "Been there". This pile is private to your account.</p>
   </header>
@@ -44,26 +46,26 @@
   <!-- Empty state when signed in but nothing visited yet -->
   <div id="empty" class="hb-empty" hidden>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 10"/></svg>
-    <h2>No spots checked off yet.</h2>
-    <p>Open any spot's kebab menu and tap "Been there" to add it here.</p>
-    <a href="../browse/">Browse spots</a>
+    <h2 data-i18n="visited.empty_h2">No spots checked off yet.</h2>
+    <p data-i18n="visited.empty_body">Open any spot's kebab menu and tap "Been there" to add it here.</p>
+    <a href="../browse/" data-i18n="action.browse_spots">Browse spots</a>
   </div>
 
   <!-- Sign-in gate: shown when no session is attached. The "Been there"
        collection is paid-only, so we never render an anonymous fallback. -->
   <div id="signInGate" class="hb-empty" hidden>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v.01"/><path d="M12 14a4 4 0 1 0-3.5-6"/><circle cx="12" cy="12" r="9"/></svg>
-    <h2>Sign in to track visits.</h2>
-    <p>The "Been there" pile follows your Hikebeast account so it works across phones and browsers.</p>
-    <button type="button" data-hb-open-signin>Log in</button>
+    <h2 data-i18n="visited.gate_title">Sign in to track visits.</h2>
+    <p data-i18n="visited.gate_body">The "Been there" pile follows your Hikebeast account so it works across phones and browsers.</p>
+    <button type="button" data-hb-open-signin data-i18n="action.log_in">Log in</button>
   </div>
 
 </main>
 
 <footer class="legal">
-  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  <a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 
@@ -124,8 +126,8 @@
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'hb-visited-badge is-on';
-      btn.setAttribute('aria-label', 'Remove from Been there');
-      btn.title = 'Remove from Been there';
+      btn.setAttribute('aria-label', t('visited.remove_aria'));
+      btn.title = t('visited.remove_aria');
       btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 10"/></svg>';
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -154,8 +156,8 @@
       empty.hidden = true;
       gate.hidden = false;
       counter.textContent = '0';
-      title.textContent  = 'Sign in to track visits.';
-      subtitle.textContent = 'The "Been there" pile is private to your account and syncs across devices.';
+      title.textContent  = t('visited.gate_title');
+      subtitle.textContent = t('visited.gate_subtitle');
       return;
     }
 
@@ -170,15 +172,15 @@
       content.innerHTML = '';
       content.hidden = true;
       empty.hidden = false;
-      title.textContent = 'Mark spots you’ve been to.';
-      subtitle.textContent = 'Tap the kebab on any spot, then "Been there". This pile is private to your account.';
+      title.textContent = t('visited.empty_title');
+      subtitle.textContent = t('visited.empty_subtitle');
       return;
     }
 
     empty.hidden = true;
     content.hidden = false;
-    title.textContent = visited.length === 1 ? '1 spot visited.' : `${visited.length} spots visited.`;
-    subtitle.textContent = 'Grouped by region. Tap a card to revisit the entry. Synced to your account.';
+    title.textContent = t.plural('visited.count_title', visited.length);
+    subtitle.textContent = t('visited.list_subtitle');
 
     // Group by chapter, in LEGEND order.
     const byChapter = new Map();
@@ -196,7 +198,7 @@
       wrap.className = 'hb-group';
       const head = document.createElement('div');
       head.className = 'hb-group-head';
-      head.innerHTML = `<h2>${esc(c.name)}</h2><span class="meta">${list.length} spot${list.length === 1 ? '' : 's'}</span>`;
+      head.innerHTML = `<h2>${esc(c.name)}</h2><span class="meta">${list.length} ${t.plural('count.spots_bare', list.length)}</span>`;
       wrap.appendChild(head);
       const grid = document.createElement('div');
       grid.className = 'hb-saved-grid';

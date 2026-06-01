@@ -67,6 +67,10 @@ action:
   back: Retour
   overview: Aperçu
   how_to_get_there: Y aller
+  browse_spots: Voir les spots
+  log_in: Se connecter
+  read: Lire
+  save: Enregistrer
 
 view:
   reader: Lecture
@@ -129,3 +133,143 @@ planning:
 
 beta:
   notice: Version bêta. Les données d'itinéraire sont encore en cours de vérification. Vous avez repéré une erreur ?
+
+title:
+  home: Accueil
+  browse: Explorer
+  swipe: Swipe
+  map: Carte
+  saved: Enregistrés
+  visited: Visités
+  more: Plus
+  all_regions: Toutes les régions
+  whats_new: Nouveautés
+  account: Compte
+  affiliate: Affiliation
+  front_matter: Introduction
+
+common:
+  search_placeholder: Rechercher spots, régions, thèmes…
+
+saved:
+  crumb: enregistrés
+  kicker: Tes favoris
+  empty_title: Rien d'enregistré pour l'instant.
+  empty_subtitle: Touche le cœur sur un spot pour l'ajouter.
+  empty_h2: Pas encore de favoris.
+  empty_body: Parcours le guide et touche le cœur sur un spot pour l'enregistrer ici.
+  remove_aria: Retirer des favoris
+  list_subtitle: Regroupés par région. Touche une carte pour ouvrir la fiche complète.
+  count_title:
+    one: 1 spot enregistré.
+    other: "{n} spots enregistrés."
+
+visited:
+  crumb: visités
+  kicker: Ton carnet de voyage
+  empty_title: Marque les spots où tu es allé.
+  empty_subtitle: Touche le menu d'un spot, puis "Visité". Cette liste est privée.
+  empty_h2: Rien de coché pour l'instant.
+  empty_body: Ouvre le menu d'un spot et touche "Visité" pour l'ajouter ici.
+  gate_title: Connecte-toi pour suivre tes visites.
+  gate_body: La liste Visités est liée à ton compte Hikebeast et fonctionne sur tous tes appareils.
+  gate_subtitle: La liste Visités est privée et se synchronise sur tous tes appareils.
+  list_subtitle: Regroupés par région. Touche une carte pour rouvrir la fiche. Synchronisé avec ton compte.
+  remove_aria: Retirer de Visités
+  count_title:
+    one: 1 spot visité.
+    other: "{n} spots visités."
+
+regions:
+  crumb: régions
+  kicker: Par région
+
+swipe:
+  left: restants
+  of: sur
+  saved: enregistrés
+  no_title: Non · passer (glisser à gauche)
+  save_title: Enregistrer · ajouter aux favoris (glisser à droite)
+  stamp_save: Garder
+  stamp_nope: Non
+  empty_all: Tu les as tous vus.
+  empty_none: Aucun spot à swiper.
+  empty_hint: Tes favoris apparaîtront ici dès que tu aimes des cartes.
+  view_saves: Voir les favoris
+  browse_all: Tout voir
+
+map:
+  view: Vue carte
+  fav_title: Afficher seulement les favoris
+  photos: Photos
+  photos_title: Afficher les photos au lieu des points
+
+more:
+  guide_label: Ton guide
+  updates_label: Nouveautés
+  pdf_title: Télécharger le PDF
+  pdf_sub: Ouvre le guide dans Google Drive
+  maps_title: Ouvrir la liste dans Google Maps
+  maps_sub: Tous les points intégrés dans Google Maps
+  earth_title: Utiliser dans Google Earth
+  earth_sub: Télécharge le fichier .kml pour Google Earth
+  whatsnew_sub: Ce qui vient de sortir et ce sur quoi on travaille
+  aff_dash_title: Tableau de bord d'affiliation
+  aff_dash_sub: Ton lien et tes parrainages
+  aff_mat_title: Supports d'affiliation
+  aff_mat_sub: Du matériel pour t'aider à créer du contenu.
+  account_sub: Avatar, nom d'utilisateur, e-mail, mot de passe, déconnexion
+
+whatsnew:
+  kicker: Mises à jour récentes + à venir
+  intro: Petit journal de ce qui vient de sortir et de ce sur quoi on travaille.
+  working_on: En cours
+  shipped: Récemment publié
+
+account:
+  loading: Chargement…
+  signedout_msg: Connecte-toi pour gérer ton compte.
+  sign_in: Se connecter
+  upload_photo: Importer une photo
+  remove: Supprimer
+  username: Nom d'utilisateur
+  email: E-mail
+  log_out: Se déconnecter
+
+affiliate:
+  commission: 50% par vente
+  signedout_msg: Connecte-toi pour voir ton tableau de bord d'affiliation.
+  not_eligible: Le programme d'affiliation est sur invitation.
+  share_link: Partager le lien
+  copy: Copier
+  earned: Gagné
+  earned_tip: Commission payée + en attente, cumulée par devise. Les ventes remboursées sont exclues.
+  earned_aria: Que signifie Gagné ?
+  referrals: Parrainages
+  referrals_tip: Nombre de ventes attribuées à ton lien. Inclut en attente, payé et remboursé.
+  referrals_aria: Que signifie Parrainages ?
+  resources: Ressources
+  materials_sub: Spot cards, animations Earth, miniatures, calques de carte + mode aperçu
+  activity: Activité
+  no_referrals: Pas encore de parrainages.
+  direct_buyer: Acheteur direct
+
+browse:
+  photos_unit: photos
+  h1: Tous les spots, un seul mur.
+  sub: Cherche, filtre par région, garde ce qui te plaît.
+  clear_search: Effacer la recherche
+  shuffle: Mélanger
+  shuffle_aria: Mélanger le mur
+  empty_h2: Aucun résultat.
+  empty_body: Essaie une recherche plus courte ou une autre région.
+  filter: Filtrer
+  filter_aria: Filtrer les spots
+  clear: Réinitialiser
+  type: Type
+  show_results: Afficher les résultats
+  needs_photo: Photo manquante
+
+home:
+  famous_heading: Des spots connus qui valent le coup
+  hidden_heading: Hidden Gems · la sélection de Leon

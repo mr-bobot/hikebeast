@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <link rel="stylesheet" href="../lib/leaflet/leaflet.css" />
@@ -395,25 +397,25 @@
 
 <div class="topbar">
   <a class="brand" href="../index.html">
-    <span>Map</span>
+    <span data-i18n="title.map">Map</span>
   </a>
-  <span class="crumb">Map view</span>
+  <span class="crumb" data-i18n="map.view">Map view</span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
 <div class="map-shell">
   <div id="map"></div>
   <div class="map-controls">
-    <button type="button" class="fav-toggle" id="favToggle" aria-pressed="false" title="Show only favorites">
+    <button type="button" class="fav-toggle" id="favToggle" aria-pressed="false" title="Show only favorites" data-i18n-attr="title:map.fav_title">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      <span>Saved</span>
+      <span data-i18n="title.saved">Saved</span>
       <span class="fav-count" id="favToggleCount" hidden>0</span>
     </button>
   </div>
-  <label class="marker-mode-switch" title="Show photos instead of dots">
-    <span class="label">Photos</span>
+  <label class="marker-mode-switch" title="Show photos instead of dots" data-i18n-attr="title:map.photos_title">
+    <span class="label" data-i18n="map.photos">Photos</span>
     <span class="switch">
       <input type="checkbox" id="markerModeToggle" />
       <span class="track" aria-hidden="true"></span>
@@ -605,7 +607,7 @@
               <p class="kicker">${esc(s.kicker || '')}</p>
               <h3>${esc(s.title)}</h3>
               <p class="meta">${esc(s.chapter_id.charAt(0).toUpperCase() + s.chapter_id.slice(1))} Switzerland</p>
-              <a class="read" href="${esc(window.HB.spotDetailHref(s, '../'))}">Read</a>
+              <a class="read" href="${esc(window.HB.spotDetailHref(s, '../'))}">${window.t('action.read')}</a>
             </div>
           </div>
       `, { maxWidth: 240, minWidth: 240 });

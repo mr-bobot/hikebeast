@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <style>
@@ -33,19 +35,19 @@
 
 <div class="topbar">
   <a class="brand" href="../index.html">
-    <span>All Regions</span>
+    <span data-i18n="title.all_regions">All Regions</span>
   </a>
-  <span class="crumb"><b>7</b> regions</span>
+  <span class="crumb"><b>7</b> <span data-i18n="regions.crumb">regions</span></span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
 <main class="hb-page">
 
   <header class="hb-hero">
-    <p class="kicker">Browse by region</p>
-    <h1>All Regions</h1>
+    <p class="kicker" data-i18n="regions.kicker">Browse by region</p>
+    <h1 data-i18n="title.all_regions">All Regions</h1>
     <p>Pick a region and dive in. Each one has its own character · alpine drama in Central, vineyards + glaciers in Valais, the soft greens of Fribourg, raw ridges in Eastern.</p>
   </header>
 
@@ -135,9 +137,9 @@
 </main>
 
 <footer class="legal">
-  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  <a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 

@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <style>
@@ -69,19 +71,19 @@
 
 <div class="topbar">
   <a class="brand" href="../index.html">
-    <span>What's new</span>
+    <span data-i18n="title.whats_new">What's new</span>
   </a>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
 <main class="hb-page wn-page">
 
   <header class="hb-hero">
-    <p class="kicker">Recent + upcoming updates</p>
-    <h1>What's new</h1>
-    <p>Quick log of what just shipped and what we're working on right now.</p>
+    <p class="kicker" data-i18n="whatsnew.kicker">Recent + upcoming updates</p>
+    <h1 data-i18n="title.whats_new">What's new</h1>
+    <p data-i18n="whatsnew.intro">Quick log of what just shipped and what we're working on right now.</p>
   </header>
 
   <!-- ===========================================================
@@ -90,7 +92,7 @@
        with today's date.
   =========================================================== -->
   <section class="wn-group">
-    <h2 class="wn-h2">Working on now</h2>
+    <h2 class="wn-h2" data-i18n="whatsnew.working_on">Working on now</h2>
     <ul class="wn-list">
       <li class="wn-item">
         <div class="wn-item-head">
@@ -119,7 +121,7 @@
          </li>
   =========================================================== -->
   <section class="wn-group">
-    <h2 class="wn-h2">Recently shipped</h2>
+    <h2 class="wn-h2" data-i18n="whatsnew.shipped">Recently shipped</h2>
     <ul class="wn-list">
       <li class="wn-item">
         <div class="wn-item-head">
@@ -232,9 +234,9 @@
 </main>
 
 <footer class="legal">
-  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  <a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 

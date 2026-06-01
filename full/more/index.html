@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260526a" />
 <style>
   /* More · holds utilities that don't fit the main /full/ nav (PDF
@@ -160,11 +162,11 @@
 
 <main class="more-page">
  <div class="card-wrap">
-  <a class="back" href="../">← Back</a>
+  <a class="back" href="../">← <span data-i18n="action.back">Back</span></a>
   <div class="card">
     <div class="brand">
       <img src="/images/avatar.jpg" alt="" />
-      <b>Hikebeast · More</b>
+      <b>Hikebeast · <span data-i18n="title.more">More</span></b>
     </div>
 
     <!-- Your guide ────────────────────────────────────────────────
@@ -176,7 +178,7 @@
          middleware, so anyone reading view-source here has already
          paid. -->
     <div class="sec first">
-      <p class="sec-label">Your guide</p>
+      <p class="sec-label" data-i18n="more.guide_label">Your guide</p>
 
       <a class="row-link"
          href="https://drive.google.com/drive/folders/182_BdFNwF9jptpp9ax7G8sHNYb01nCa0?usp=share_link"
@@ -194,8 +196,8 @@
           </svg>
         </span>
         <span class="row-link-body">
-          <span class="row-link-title">Download the PDF</span>
-          <span class="row-link-sub">Opens the guide in Google Drive</span>
+          <span class="row-link-title" data-i18n="more.pdf_title">Download the PDF</span>
+          <span class="row-link-sub" data-i18n="more.pdf_sub">Opens the guide in Google Drive</span>
         </span>
         <span class="row-link-chev">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -213,8 +215,8 @@
           <img src="../assets/google-maps-icon.svg" alt="" width="22" height="22" />
         </span>
         <span class="row-link-body">
-          <span class="row-link-title">Open list in Google Maps</span>
-          <span class="row-link-sub">All pins smoothly integrated in Google Maps</span>
+          <span class="row-link-title" data-i18n="more.maps_title">Open list in Google Maps</span>
+          <span class="row-link-sub" data-i18n="more.maps_sub">All pins smoothly integrated in Google Maps</span>
         </span>
         <span class="row-link-chev">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -230,8 +232,8 @@
           <img src="../assets/google-earth-icon.svg" alt="" width="22" height="22" />
         </span>
         <span class="row-link-body">
-          <span class="row-link-title">Use in Google Earth</span>
-          <span class="row-link-sub">Download the .kml file to use it in Google Earth</span>
+          <span class="row-link-title" data-i18n="more.earth_title">Use in Google Earth</span>
+          <span class="row-link-sub" data-i18n="more.earth_sub">Download the .kml file to use it in Google Earth</span>
         </span>
         <span class="row-link-chev">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -260,8 +262,8 @@
           </svg>
         </span>
         <span class="row-link-body">
-          <span class="row-link-title">What's new</span>
-          <span class="row-link-sub">Recent shipped + what's being worked on</span>
+          <span class="row-link-title" data-i18n="title.whats_new">What's new</span>
+          <span class="row-link-sub" data-i18n="more.whatsnew_sub">Recent shipped + what's being worked on</span>
         </span>
         <span class="row-link-chev">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -277,7 +279,7 @@
          middleware.js already gates /full/* on hb_full_auth, and every
          user past that point has isAffiliate=true by default. -->
     <div class="sec" id="affiliateSection">
-      <p class="sec-label">Affiliate</p>
+      <p class="sec-label" data-i18n="title.affiliate">Affiliate</p>
       <a class="row-link" href="../affiliate/">
         <span class="row-link-icon" aria-hidden="true">
           <!-- Share-nodes icon · three circles connected by lines. -->
@@ -288,8 +290,8 @@
           </svg>
         </span>
         <span class="row-link-body">
-          <span class="row-link-title">Affiliate dashboard</span>
-          <span class="row-link-sub">Your link and your referrals</span>
+          <span class="row-link-title" data-i18n="more.aff_dash_title">Affiliate dashboard</span>
+          <span class="row-link-sub" data-i18n="more.aff_dash_sub">Your link and your referrals</span>
         </span>
         <span class="row-link-chev">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -304,8 +306,8 @@
           </svg>
         </span>
         <span class="row-link-body">
-          <span class="row-link-title">Affiliate materials</span>
-          <span class="row-link-sub">Marketing material that helps you create content.</span>
+          <span class="row-link-title" data-i18n="more.aff_mat_title">Affiliate materials</span>
+          <span class="row-link-sub" data-i18n="more.aff_mat_sub">Marketing material that helps you create content.</span>
         </span>
         <span class="row-link-chev">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -320,7 +322,7 @@
          flow lives. Mobile menu-sheet still has direct account access
          to avoid an extra tap on phones. -->
     <div class="sec">
-      <p class="sec-label">Account</p>
+      <p class="sec-label" data-i18n="title.account">Account</p>
       <a class="row-link" href="../account/">
         <span class="row-link-icon" aria-hidden="true">
           <!-- Person-in-circle silhouette · stroke style matches the
@@ -331,8 +333,8 @@
           </svg>
         </span>
         <span class="row-link-body">
-          <span class="row-link-title">Account</span>
-          <span class="row-link-sub">Avatar, username, email, password, sign out</span>
+          <span class="row-link-title" data-i18n="title.account">Account</span>
+          <span class="row-link-sub" data-i18n="more.account_sub">Avatar, username, email, password, sign out</span>
         </span>
         <span class="row-link-chev">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -341,7 +343,7 @@
     </div>
   </div>
   <footer class="legal-foot">
-    <a href="../../terms.html">Terms</a><span class="sep">·</span><a href="../../imprint.html">Imprint</a><span class="sep">·</span><a href="../../privacy.html">Privacy</a>
+    <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span><a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span><a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a>
     <span class="copy">© Hikebeast</span>
   </footer>
  </div>

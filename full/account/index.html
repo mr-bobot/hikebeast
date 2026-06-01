@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260526a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 <style>
@@ -244,19 +246,19 @@
 
 <main class="acc-page">
  <div class="card-wrap">
-  <a class="back" href="../">← Back</a>
+  <a class="back" href="../">← <span data-i18n="action.back">Back</span></a>
   <div class="card">
-    <div id="accLoading" class="state">Loading…</div>
+    <div id="accLoading" class="state" data-i18n="account.loading">Loading…</div>
 
     <div id="accSignedOut" class="state" hidden>
-      Sign in to manage your account.<br>
-      <a href="/login/">Sign in →</a>
+      <span data-i18n="account.signedout_msg">Sign in to manage your account.</span><br>
+      <a href="/login/"><span data-i18n="account.sign_in">Sign in</span> →</a>
     </div>
 
     <div id="accContent" hidden>
       <div class="brand">
         <img src="/images/avatar.jpg" alt="" />
-        <b>Hikebeast · Account</b>
+        <b>Hikebeast · <span data-i18n="title.account">Account</span></b>
       </div>
 
       <!-- Avatar ──────────────────────────────────────────────────────── -->
@@ -267,8 +269,8 @@
           </div>
           <div class="avatar-controls">
             <input type="file" id="avatarFile" accept="image/jpeg,image/png,image/webp" hidden />
-            <button type="button" class="btn btn-ghost" id="avatarUploadBtn">Upload photo</button>
-            <button type="button" id="avatarClearBtn" class="btn-link" hidden>Remove</button>
+            <button type="button" class="btn btn-ghost" id="avatarUploadBtn" data-i18n="account.upload_photo">Upload photo</button>
+            <button type="button" id="avatarClearBtn" class="btn-link" hidden data-i18n="account.remove">Remove</button>
           </div>
         </div>
         <p class="msg" id="avatarMsg" hidden></p>
@@ -276,13 +278,13 @@
 
       <!-- Username ────────────────────────────────────────────────────── -->
       <div class="sec">
-        <p class="sec-label">Username <span class="current" id="curUsername"></span></p>
+        <p class="sec-label"><span data-i18n="account.username">Username</span> <span class="current" id="curUsername"></span></p>
         <form id="usernameForm" novalidate>
           <div class="row">
             <input id="usernameInput" class="input" type="text"
                    autocomplete="off" autocapitalize="off" spellcheck="false"
                    pattern="[a-z0-9._\-]{2,32}" required />
-            <button type="submit" class="btn">Save</button>
+            <button type="submit" class="btn" data-i18n="action.save">Save</button>
           </div>
           <p class="msg" id="usernameMsg" hidden></p>
         </form>
@@ -290,12 +292,12 @@
 
       <!-- Email ───────────────────────────────────────────────────────── -->
       <div class="sec">
-        <p class="sec-label">Email <span class="current" id="curEmail"></span></p>
+        <p class="sec-label"><span data-i18n="account.email">Email</span> <span class="current" id="curEmail"></span></p>
         <form id="emailForm" novalidate>
           <div class="row">
             <input id="emailInput" class="input" type="email"
                    autocomplete="email" autocapitalize="off" spellcheck="false" required />
-            <button type="submit" class="btn">Save</button>
+            <button type="submit" class="btn" data-i18n="action.save">Save</button>
           </div>
           <p class="msg" id="emailMsg" hidden></p>
         </form>
@@ -310,12 +312,12 @@
 
       <!-- Log out — destructive action at the bottom. -->
       <div class="sec last">
-        <button type="button" id="signoutBtn" class="btn btn-ghost" style="width:100%;">Log out</button>
+        <button type="button" id="signoutBtn" class="btn btn-ghost" style="width:100%;" data-i18n="account.log_out">Log out</button>
       </div>
     </div>
   </div>
   <footer class="legal-foot">
-    <a href="../../terms.html">Terms</a><span class="sep">·</span><a href="../../imprint.html">Imprint</a><span class="sep">·</span><a href="../../privacy.html">Privacy</a>
+    <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span><a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span><a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a>
     <span class="copy">© Hikebeast</span>
   </footer>
  </div>
