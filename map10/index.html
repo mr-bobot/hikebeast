@@ -829,6 +829,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     flex-wrap: wrap;
   }
   .about-social {
+    text-decoration: none;
     height: 30px;
     padding: 0 10px;
     border-radius: 8px;
@@ -1158,12 +1159,12 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding: 4px 22px;
+    padding: 16px 22px 36px;
     scrollbar-width: none;
   }
   .showcase-carousel::-webkit-scrollbar { display: none; }
   .showcase-item {
-    flex: 0 0 calc(100% - 60px);
+    flex: 0 0 calc(100% - 36px);
     scroll-snap-align: center;
     display: flex;
     flex-direction: column;
@@ -1176,6 +1177,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     border-radius: var(--radius-card);
     background: #f5f5f7;
     display: block;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
   }
   .showcase-cap {
     margin: 0;
@@ -2218,7 +2220,11 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           var gettingH2 = document.createElement("h2");
           gettingH2.textContent = "What you are getting";
           gettingHead.appendChild(gettingH2);
-          body.parentNode.insertBefore(gettingHead, wrap.nextSibling);
+          // "What you are getting" + gallery go after the reviews section
+          // (social proof), not after About-me.
+          var reviewsSection = document.querySelector("section.reviews");
+          var ggAnchor = reviewsSection || wrap;
+          ggAnchor.parentNode.insertBefore(gettingHead, ggAnchor.nextSibling);
           // Showcase · subtitle (into the section-head) + swipeable
           // device-mockup gallery, right after the title.
           var gettingSub = document.createElement("p");
@@ -2253,16 +2259,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </script>
     </section>
 
-    <!-- Emotional shot · personal photo between About-me and the checkout
-         as a final visual pause before the buy. -->
-    <section class="px emotion-shot" aria-hidden="true">
-      <img src="/map3/img/about/riffelsee.jpg" alt="" loading="lazy" decoding="async" width="1400" height="933" />
-    </section>
-
     <!-- Embedded Stripe Checkout -->
     <section class="px" id="get-the-map">
       <div class="section-head section-head--centered">
         <h2>Get the guide</h2>
+      </div>
+      <!-- Emotional shot · moved under the Get-the-guide heading as the
+           final visual before the buy box. -->
+      <div class="emotion-shot" aria-hidden="true">
+        <img src="/map3/img/about/riffelsee.jpg" alt="" loading="lazy" decoding="async" width="1400" height="933" />
       </div>
       <div class="guarantee-wrap">
         <span class="guarantee-pill">
