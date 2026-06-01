@@ -1,0 +1,131 @@
+# Hikebeast /full · UI string catalog — Deutsch.
+# FIRST DRAFT — needs a brand-voice pass (natural German, no em-dashes, no slop).
+# Brand terms (Hidden Gems, Famous Gems, Wildcamping) left in English on purpose
+# pending Leon's call. Keys must match en.yaml exactly (build-i18n enforces it).
+
+nav:
+  home: Start
+  explore: Entdecken
+  map: Karte
+  swipe: Swipe
+  random: Zufall
+  liked: Favoriten
+  been_there: Besucht
+  collections: Sammlungen
+  hidden_gems: Hidden Gems
+  famous_gems: Famous Gems
+  wildcamping: Wildcamping
+  all_regions: Alle Regionen
+  more: Mehr
+  menu: Menü
+  collapse: Einklappen
+
+a11y:
+  primary_nav: Hauptnavigation
+  open_nav: Navigation öffnen
+  toggle_nav_labels: Navigationsbeschriftungen umschalten
+  menu: Menü
+  close_menu: Menü schließen
+  toggle_theme: Dunkelmodus umschalten
+  back_to_chapter: Zurück zum Kapitel
+
+theme:
+  dark: Dunkelmodus
+  light: Hellmodus
+
+menu:
+  surprise_me: Überrasch mich
+  settings: Einstellungen
+
+lang:
+  label: Sprache
+  en: English
+  de: Deutsch
+  fr: Français
+
+spec:
+  region: Region
+  access: Anreise
+  effort: Aufwand
+  best_light: Bestes Licht
+
+stat:
+  altitude: Höhe
+  accessibility: Erreichbarkeit
+  crowdedness: Andrang
+  difficulty: Schwierigkeit
+  duration: Dauer
+  elevation_change: Höhenmeter
+  distance: Distanz
+  drive_up: Anfahrt
+
+action:
+  open_in_maps: In Maps öffnen
+  open_full_map: Ganze Karte öffnen
+  open_spot: Spot öffnen
+  see_all: Alle ansehen
+  back: Zurück
+  overview: Übersicht
+  how_to_get_there: Anfahrt
+
+view:
+  reader: Lesen
+  grid: Raster
+
+label:
+  region: Region
+  on_the_map: Auf der Karte
+  featured: Empfohlen
+  for_you: Für dich
+  photo: Foto
+  intro: Intro
+  front_matter: Einleitung
+
+count:
+  spots_bare:
+    one: Spot
+    other: Spots
+  spots_in_region:
+    one: "{n} Spot in dieser Region"
+    other: "{n} Spots in dieser Region"
+
+footer:
+  imprint: Impressum
+  privacy: Datenschutz
+  terms: AGB
+
+section:
+  routes: Routen
+  sources: Quellen
+  mountain_hut: Berghütte
+  cable_car: Seilbahn
+
+access:
+  parking: Parken
+  walk_to_spot: Fußweg zum Spot
+  walk_from_stop: Fußweg ab Haltestelle
+  by_car: Mit dem Auto
+  by_train_bus: Mit Zug + Bus
+  by_boat: Mit dem Schiff
+  when_to_go: Beste Zeit
+  hours_season: Zeiten / Saison
+
+route:
+  kicker: Route
+  approach_to: Zustieg zu
+  back_to_photo: Zurück zum Foto
+  equipment: Ausrüstung
+  start: Start
+  transit: Anreise
+
+detail:
+  name: Name
+  cost: Kosten
+  open: Geöffnet
+  website: Website
+
+planning:
+  title: Planung
+
+beta:
+  notice: Beta-Version. Die Routendaten werden noch geprüft. Etwas falsch entdeckt?

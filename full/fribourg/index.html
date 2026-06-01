@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260524a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
@@ -24,17 +26,17 @@
   <a class="brand" href="../index.html">
     <span>Fribourg</span>
   </a>
-  <span class="crumb"><b>8</b> spots</span>
+  <span class="crumb"><b>8</b> <span data-i18n-plural="count.spots_bare" data-n="8">spots</span></span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
 <div class="app">
 
   <aside class="sidebar" aria-label="Chapters">
-  <a class="sb-home" href="../index.html" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>
-  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl">Intro</span></a>
+  <a class="sb-home" href="../index.html" title="Home" data-i18n-attr="title:nav.home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>
+  <a class="sb-thumb" href="../intro/index.html" title="Front matter" data-i18n-attr="title:label.front_matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl" data-i18n="label.intro">Intro</span></a>
   <a class="sb-thumb" href="../eastern/index.html" title="Eastern Switzerland"><img src="../img/chapters/eastern/w400.webp" alt="" /><span class="lbl">Eastern</span></a>
   <a class="sb-thumb" href="../central/index.html" title="Central Switzerland"><img src="../img/chapters/central/w400.webp" alt="" /><span class="lbl">Central</span></a>
   <a class="sb-thumb" href="../valais/index.html" title="Valais"><img src="../img/chapters/valais/w400.webp" alt="" /><span class="lbl">Valais</span></a>
@@ -51,7 +53,7 @@
     <img src="../img/region-fribourg.svg" alt="Fribourg on the Swiss map" fetchpriority="high" decoding="async" />
   </div>
   <div class="cv-content">
-    <p class="cv-kicker">Region</p>
+    <p class="cv-kicker" data-i18n="label.region">Region</p>
     <h1>Fribourg</h1>
     <p class="cv-deck">Cheese country, jagged pre-alps, and a handful of lakes that should be more famous than they are. The canton that looks like the cover of every Swiss guidebook. And still has corners all to yourself.</p>
   </div>
@@ -59,10 +61,10 @@
 
     <section class="chapter-views" aria-label="Fribourg spots">
       <div class="chapter-views-head">
-        <p class="chapter-views-meta">8 spots</p>
+        <p class="chapter-views-meta">8 <span data-i18n-plural="count.spots_bare" data-n="8">spots</span></p>
         <div class="chapter-view-toggle" role="tablist" aria-label="Chapter view">
-          <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span>Reader</span></button>
-          <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Grid</span></button>
+          <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span data-i18n="view.reader">Reader</span></button>
+          <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span data-i18n="view.grid">Grid</span></button>
         </div>
       </div>
       <div class="chapter-list">
@@ -72,7 +74,7 @@
         <img class="hb-slide" src="../img/derivatives/gastlosen_p1/w1000.webp" srcset="../img/derivatives/gastlosen_p1/w400.webp 400w, ../img/derivatives/gastlosen_p1/w1000.webp 1000w, ../img/derivatives/gastlosen_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/gastlosen_p2/w1000.webp" srcset="../img/derivatives/gastlosen_p2/w400.webp 400w, ../img/derivatives/gastlosen_p2/w1000.webp 1000w, ../img/derivatives/gastlosen_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · frdm</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · frdm</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -82,12 +84,12 @@
         <h2 class="cl-title">Gastlosen</h2>
         <p class="cl-subhead">A jagged limestone ridge on the Fribourg-Bern border. Best when an inversion rolls in and the peaks float above the fog.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Gruyère, Fribourg</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + half-day hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise with inversion</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Gruyère, Fribourg</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + half-day hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise with inversion</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Gastlosen/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ef608c34c253f:0xd3cebdc12fa45b76!8m2!3d46.5822!4d7.28208!16s%2Fm%2F0rpg9m7" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Gastlosen/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ef608c34c253f:0xd3cebdc12fa45b76!8m2!3d46.5822!4d7.28208!16s%2Fm%2F0rpg9m7" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="ritzli_alp" data-href="../spot/ritzli_alp/" tabindex="0" role="link" aria-label="Ritzli-Alp">
@@ -95,7 +97,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/ritzli_alp_p0/w1000.webp" srcset="../img/derivatives/ritzli_alp_p0/w400.webp 400w, ../img/derivatives/ritzli_alp_p0/w1000.webp 1000w, ../img/derivatives/ritzli_alp_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Ritzli-Alp" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/ritzli_alp_p1/w1000.webp" srcset="../img/derivatives/ritzli_alp_p1/w400.webp 400w, ../img/derivatives/ritzli_alp_p1/w1000.webp 1000w, ../img/derivatives/ritzli_alp_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · @ritzli</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @ritzli</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -105,12 +107,12 @@
         <h2 class="cl-title">Ritzli-Alp</h2>
         <p class="cl-subhead">A mountain restaurant on the way back from Gastlosen, with a direct line of sight on the ridge at blue hour.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Gruyère, Fribourg</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Hike or drive</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunset into blue hour</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Gruyère, Fribourg</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Hike or drive</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunset into blue hour</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Ritzli+Alp/@45.1662212,2.7371613,7z/data=!3m1!5s0x478e5f297051167b:0xcf8dc4fee4431c02!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5f297044c507:0xc94cdffdd5313e7a!8m2!3d46.6295236!4d7.2828498!16s%2Fg%2F1td2yck1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Ritzli+Alp/@45.1662212,2.7371613,7z/data=!3m1!5s0x478e5f297051167b:0xcf8dc4fee4431c02!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5f297044c507:0xc94cdffdd5313e7a!8m2!3d46.6295236!4d7.2828498!16s%2Fg%2F1td2yck1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="la_tine_canyon" data-href="../spot/la_tine_canyon/" tabindex="0" role="link" aria-label="La Tine Canyon">
@@ -123,12 +125,12 @@
         <h2 class="cl-title">La Tine Canyon</h2>
         <p class="cl-subhead">A narrow slot canyon near Montbovon, marketed out of Château-d&#x27;Œx. Beautiful water, real risk. This one needs a local before you come back solo.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Pays-d&#x27;Enhaut, Fribourg</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + canyon access</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Technical. Use a guide</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Anytime in shade</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Pays-d&#x27;Enhaut, Fribourg</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + canyon access</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Technical. Use a guide</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Anytime in shade</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/1669+Montbovon/@46.4880077,7.0028709,10080m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478e8e4fff86dfeb:0x7f1aab823b11e665!8m2!3d46.4879565!4d7.0439846!16s%2Fg%2F120lw7t5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/1669+Montbovon/@46.4880077,7.0028709,10080m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478e8e4fff86dfeb:0x7f1aab823b11e665!8m2!3d46.4879565!4d7.0439846!16s%2Fg%2F120lw7t5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="dent_de_broc" data-href="../spot/dent_de_broc/" tabindex="0" role="link" aria-label="Dent de Broc">
@@ -138,7 +140,7 @@
         <img class="hb-slide" src="../img/derivatives/dent_de_broc_p2/w1000.webp" srcset="../img/derivatives/dent_de_broc_p2/w400.webp 400w, ../img/derivatives/dent_de_broc_p2/w1000.webp 1000w, ../img/derivatives/dent_de_broc_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/dent_de_broc_p3/w1000.webp" srcset="../img/derivatives/dent_de_broc_p3/w400.webp 400w, ../img/derivatives/dent_de_broc_p3/w1000.webp 1000w, ../img/derivatives/dent_de_broc_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · @danielborloz</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @danielborloz</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -148,12 +150,12 @@
         <h2 class="cl-title">Dent de Broc</h2>
         <p class="cl-subhead">Seen from the Moléson road, the Dent lines up just above a meadow. A compressed, minimalist frame if you have the reach.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Gruyère, Fribourg</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive. Roadside stop</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">None</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise or sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Gruyère, Fribourg</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive. Roadside stop</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">None</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise or sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Dent+de+Broc/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8a68b17bfb5f:0x54cb7fef51106fb8!8m2!3d46.5885728!4d7.1277314!16s%2Fm%2F0kmv4z5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Dent+de+Broc/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8a68b17bfb5f:0x54cb7fef51106fb8!8m2!3d46.5885728!4d7.1277314!16s%2Fm%2F0kmv4z5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="schwarzsee" data-href="../spot/schwarzsee/" tabindex="0" role="link" aria-label="Schwarzsee">
@@ -163,7 +165,7 @@
         <img class="hb-slide" src="../img/derivatives/schwarzsee_p2/w1000.webp" srcset="../img/derivatives/schwarzsee_p2/w400.webp 400w, ../img/derivatives/schwarzsee_p2/w1000.webp 1000w, ../img/derivatives/schwarzsee_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/schwarzsee_p3/w1000.webp" srcset="../img/derivatives/schwarzsee_p3/w400.webp 400w, ../img/derivatives/schwarzsee_p3/w1000.webp 1000w, ../img/derivatives/schwarzsee_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · @noberson</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @noberson</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -173,12 +175,12 @@
         <h2 class="cl-title">Schwarzsee</h2>
         <p class="cl-subhead">A small alpine lake ringed by limestone peaks. Looks like a calendar cover when the sun catches it right.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Sense district</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive to lake</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise or sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Sense district</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive to lake</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise or sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Schwarzsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5ea475c88195:0xbbdcb38663da2f0a!8m2!3d46.6659091!4d7.2807275!16s%2Fm%2F02831lc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Schwarzsee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5ea475c88195:0xbbdcb38663da2f0a!8m2!3d46.6659091!4d7.2807275!16s%2Fm%2F02831lc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="dent_de_lys" data-href="../spot/dent_de_lys/" tabindex="0" role="link" aria-label="Dent de Lys">
@@ -188,7 +190,7 @@
         <img class="hb-slide" src="../img/derivatives/dent_de_lys_p2/w1000.webp" srcset="../img/derivatives/dent_de_lys_p2/w400.webp 400w, ../img/derivatives/dent_de_lys_p2/w1000.webp 1000w, ../img/derivatives/dent_de_lys_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/dent_de_lys_p3/w1000.webp" srcset="../img/derivatives/dent_de_lys_p3/w400.webp 400w, ../img/derivatives/dent_de_lys_p3/w1000.webp 1000w, ../img/derivatives/dent_de_lys_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · @patrick.janser</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @patrick.janser</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -198,12 +200,12 @@
         <h2 class="cl-title">Dent de Lys</h2>
         <p class="cl-subhead">A near-perfect pyramid peak you can hike up from Les Paccots. The ridge is steeper than it looks from the valley.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Veveyse, Fribourg</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Hike from Les Paccots</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate. Exposed finish</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise or sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Veveyse, Fribourg</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Hike from Les Paccots</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate. Exposed finish</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise or sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Dent+de+Lys/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8f6ce5f3ca9f:0x4c821141beee248f!8m2!3d46.5076557!4d7.0029886!16s%2Fm%2F04gnbgc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Dent+de+Lys/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8f6ce5f3ca9f:0x4c821141beee248f!8m2!3d46.5076557!4d7.0029886!16s%2Fm%2F04gnbgc" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="moleson" data-href="../spot/moleson/" tabindex="0" role="link" aria-label="Moléson">
@@ -213,7 +215,7 @@
         <img class="hb-slide" src="../img/derivatives/moleson_p2/w1000.webp" srcset="../img/derivatives/moleson_p2/w400.webp 400w, ../img/derivatives/moleson_p2/w1000.webp 1000w, ../img/derivatives/moleson_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/moleson_p3/w1000.webp" srcset="../img/derivatives/moleson_p3/w400.webp 400w, ../img/derivatives/moleson_p3/w1000.webp 1000w, ../img/derivatives/moleson_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · @markhebertphoto</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @markhebertphoto</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -223,12 +225,12 @@
         <h2 class="cl-title">Moléson</h2>
         <p class="cl-subhead">Take the cable car up and you&#x27;re a few minutes from ridge walks that feel far more remote than they actually are.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Gruyère, Fribourg</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car + short walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise, sunset, or cloudy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Gruyère, Fribourg</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car + short walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise, sunset, or cloudy</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Mol%C3%A9son/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e88c0e8a4ac17:0x5d0474d4b36c0767!8m2!3d46.5487879!4d7.0171018!16s%2Fm%2F04cykhw" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Mol%C3%A9son/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e88c0e8a4ac17:0x5d0474d4b36c0767!8m2!3d46.5487879!4d7.0171018!16s%2Fm%2F04cykhw" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="teysachaux" data-href="../spot/teysachaux/" tabindex="0" role="link" aria-label="Teysachaux">
@@ -238,7 +240,7 @@
         <img class="hb-slide" src="../img/derivatives/teysachaux_p2/w1000.webp" srcset="../img/derivatives/teysachaux_p2/w400.webp 400w, ../img/derivatives/teysachaux_p2/w1000.webp 1000w, ../img/derivatives/teysachaux_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/teysachaux_p3/w1000.webp" srcset="../img/derivatives/teysachaux_p3/w400.webp 400w, ../img/derivatives/teysachaux_p3/w1000.webp 1000w, ../img/derivatives/teysachaux_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · @o_fargnoli</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @o_fargnoli</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -248,12 +250,12 @@
         <h2 class="cl-title">Teysachaux</h2>
         <p class="cl-subhead">Another Fribourg pyramid. Link it to Moléson along the ridge for a full-day traverse, or park near the base and hike up.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Veveyse, Fribourg</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Ridge traverse or direct hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate to hard</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise or sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Veveyse, Fribourg</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Ridge traverse or direct hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate to hard</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise or sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Teysachaux/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8f532d477db9:0x408922a3b47b674f!8m2!3d46.5340397!4d6.9963444!16s%2Fm%2F0kfxz5y" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Teysachaux/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e8f532d477db9:0x408922a3b47b674f!8m2!3d46.5340397!4d6.9963444!16s%2Fm%2F0kfxz5y" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
       </div>
@@ -337,9 +339,9 @@
 </div>
 
 <footer class="legal">
-  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  <a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 

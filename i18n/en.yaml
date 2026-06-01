@@ -1,0 +1,133 @@
+# Hikebeast /full · UI string catalog — English (canonical source of truth).
+#
+# Keys are referenced as dotted paths: t('nav.home'), data-i18n="spec.region".
+# de.yaml and fr.yaml MUST mirror this key set exactly — scripts/build-i18n.mjs
+# fails the build on any drift. This catalog covers UI *chrome* only; editorial
+# spot/route content is translated separately (Phase 2: content.<lang>.yaml).
+
+nav:
+  home: Home
+  explore: Explore
+  map: Map
+  swipe: Swipe
+  random: Random
+  liked: Liked
+  been_there: Been there
+  collections: Collections
+  hidden_gems: Hidden Gems
+  famous_gems: Famous Gems
+  wildcamping: Wildcamping
+  all_regions: All Regions
+  more: More
+  menu: Menu
+  collapse: Collapse
+
+a11y:
+  primary_nav: Primary navigation
+  open_nav: Open navigation
+  toggle_nav_labels: Toggle navigation labels
+  menu: Menu
+  close_menu: Close menu
+  toggle_theme: Toggle dark mode
+  back_to_chapter: Back to chapter
+
+theme:
+  dark: Dark mode
+  light: Light mode
+
+menu:
+  surprise_me: Surprise me
+  settings: Settings
+
+lang:
+  label: Language
+  en: English
+  de: Deutsch
+  fr: Français
+
+spec:
+  region: Region
+  access: Access
+  effort: Effort
+  best_light: Best light
+
+stat:
+  altitude: Altitude
+  accessibility: Accessibility
+  crowdedness: Crowdedness
+  difficulty: Difficulty
+  duration: Duration
+  elevation_change: Elevation change
+  distance: Distance
+  drive_up: Drive-up
+
+action:
+  open_in_maps: Open in Maps
+  open_full_map: Open the full map
+  open_spot: Open spot
+  see_all: See all
+  back: Back
+  overview: Overview
+  how_to_get_there: How to get there
+
+view:
+  reader: Reader
+  grid: Grid
+
+label:
+  region: Region
+  on_the_map: On the map
+  featured: Featured
+  for_you: For you
+  photo: Photo
+  intro: Intro
+  front_matter: Front matter
+
+count:
+  spots_bare:
+    one: spot
+    other: spots
+  spots_in_region:
+    one: "{n} spot in this region"
+    other: "{n} spots in this region"
+
+footer:
+  imprint: Imprint
+  privacy: Privacy
+  terms: Terms
+
+section:
+  routes: Routes
+  sources: Sources
+  mountain_hut: Mountain hut
+  cable_car: Cable car
+
+access:
+  parking: Parking
+  walk_to_spot: Walk to spot
+  walk_from_stop: Walk from stop
+  by_car: By car
+  by_train_bus: By train + bus
+  by_boat: By boat
+  when_to_go: When to go
+  hours_season: Hours / season
+
+route:
+  kicker: Route
+  approach_to: Approach to
+  back_to_photo: Back to photo
+  equipment: Equipment
+  start: Start
+  transit: Transit
+
+detail:
+  name: Name
+  cost: Cost
+  open: Open
+  website: Website
+
+planning:
+  title: Planning
+
+beta:
+  notice: Beta version. The route data is still being verified. Spotted something wrong?

@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260524a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
@@ -24,17 +26,17 @@
   <a class="brand" href="../index.html">
     <span>Ticino</span>
   </a>
-  <span class="crumb"><b>7</b> spots</span>
+  <span class="crumb"><b>7</b> <span data-i18n-plural="count.spots_bare" data-n="7">spots</span></span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
 <div class="app">
 
   <aside class="sidebar" aria-label="Chapters">
-  <a class="sb-home" href="../index.html" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>
-  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl">Intro</span></a>
+  <a class="sb-home" href="../index.html" title="Home" data-i18n-attr="title:nav.home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>
+  <a class="sb-thumb" href="../intro/index.html" title="Front matter" data-i18n-attr="title:label.front_matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl" data-i18n="label.intro">Intro</span></a>
   <a class="sb-thumb" href="../eastern/index.html" title="Eastern Switzerland"><img src="../img/chapters/eastern/w400.webp" alt="" /><span class="lbl">Eastern</span></a>
   <a class="sb-thumb" href="../central/index.html" title="Central Switzerland"><img src="../img/chapters/central/w400.webp" alt="" /><span class="lbl">Central</span></a>
   <a class="sb-thumb" href="../valais/index.html" title="Valais"><img src="../img/chapters/valais/w400.webp" alt="" /><span class="lbl">Valais</span></a>
@@ -51,7 +53,7 @@
     <img src="../img/region-ticino.svg" alt="Ticino on the Swiss map" fetchpriority="high" decoding="async" />
   </div>
   <div class="cv-content">
-    <p class="cv-kicker">Region</p>
+    <p class="cv-kicker" data-i18n="label.region">Region</p>
     <h1>Ticino</h1>
     <p class="cv-deck">The south side of the Alps. Stone villages, turquoise rivers, and a whole valley built around cold water and dry sunshine. A short chapter, because this book focuses on the north. But a vital one.</p>
   </div>
@@ -59,10 +61,10 @@
 
     <section class="chapter-views" aria-label="Ticino spots">
       <div class="chapter-views-head">
-        <p class="chapter-views-meta">7 spots</p>
+        <p class="chapter-views-meta">7 <span data-i18n-plural="count.spots_bare" data-n="7">spots</span></p>
         <div class="chapter-view-toggle" role="tablist" aria-label="Chapter view">
-          <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span>Reader</span></button>
-          <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Grid</span></button>
+          <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span data-i18n="view.reader">Reader</span></button>
+          <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span data-i18n="view.grid">Grid</span></button>
         </div>
       </div>
       <div class="chapter-list">
@@ -71,7 +73,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/cascata_la_froda_p0/w1000.webp" srcset="../img/derivatives/cascata_la_froda_p0/w400.webp 400w, ../img/derivatives/cascata_la_froda_p0/w1000.webp 1000w, ../img/derivatives/cascata_la_froda_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Cascata La Froda" loading="eager" fetchpriority="high" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/cascata_la_froda_p1/w1000.webp" srcset="../img/derivatives/cascata_la_froda_p1/w400.webp 400w, ../img/derivatives/cascata_la_froda_p1/w1000.webp 1000w, ../img/derivatives/cascata_la_froda_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · @kalapascal</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @kalapascal</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -81,12 +83,12 @@
         <h2 class="cl-title">Cascata La Froda</h2>
         <p class="cl-subhead">A tall waterfall above Sonogno with a plunge pool cold enough to wake the dead. Jumping in is half the experience.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Valle Verzasca</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + short hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Cloudy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Valle Verzasca</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + short hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Cloudy</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/La+Froda/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785a53b3c4e5d95:0xde6fa4bc75c89a0f!8m2!3d46.3469!4d8.77085!16s%2Fg%2F1tfvrtq7" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/La+Froda/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785a53b3c4e5d95:0xde6fa4bc75c89a0f!8m2!3d46.3469!4d8.77085!16s%2Fg%2F1tfvrtq7" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="ponte_dei_salti" data-href="../spot/ponte_dei_salti/" tabindex="0" role="link" aria-label="Ponte dei Salti">
@@ -95,7 +97,7 @@
         <img class="hb-slide" src="../img/derivatives/ponte_dei_salti_p1/w1000.webp" srcset="../img/derivatives/ponte_dei_salti_p1/w400.webp 400w, ../img/derivatives/ponte_dei_salti_p1/w1000.webp 1000w, ../img/derivatives/ponte_dei_salti_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/ponte_dei_salti_p2/w1000.webp" srcset="../img/derivatives/ponte_dei_salti_p2/w400.webp 400w, ../img/derivatives/ponte_dei_salti_p2/w1000.webp 1000w, ../img/derivatives/ponte_dei_salti_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · claudio_schwarz</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · claudio_schwarz</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -105,12 +107,12 @@
         <h2 class="cl-title">Ponte dei Salti</h2>
         <p class="cl-subhead">The double-arched stone bridge in Lavertezzo. Around fifteen metres up, cold river underneath. Send it if you&#x27;re up for it.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Valle Verzasca</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Park in Lavertezzo</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Any time</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Valle Verzasca</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Park in Lavertezzo</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Any time</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Ponte+dei+Salti+(17.+Jahrhundert)/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b131b37ac893:0xb8b55f11feae7d93!8m2!3d46.2600705!4d8.8359918!16s%2Fg%2F121_43f8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Ponte+dei+Salti+(17.+Jahrhundert)/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b131b37ac893:0xb8b55f11feae7d93!8m2!3d46.2600705!4d8.8359918!16s%2Fg%2F121_43f8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="valle_verzasca" data-href="../spot/valle_verzasca/" tabindex="0" role="link" aria-label="Valle Verzasca">
@@ -122,7 +124,7 @@
         <img class="hb-slide" src="../img/derivatives/valle_verzasca_p4/w1000.webp" srcset="../img/derivatives/valle_verzasca_p4/w400.webp 400w, ../img/derivatives/valle_verzasca_p4/w1000.webp 1000w, ../img/derivatives/valle_verzasca_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/valle_verzasca_p5/w1000.webp" srcset="../img/derivatives/valle_verzasca_p5/w400.webp 400w, ../img/derivatives/valle_verzasca_p5/w1000.webp 1000w, ../img/derivatives/valle_verzasca_p5/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 6</span>
-        <span class="credit-pill hb-credit">Photo · artiom_vallat</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · artiom_vallat</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -132,12 +134,12 @@
         <h2 class="cl-title">Valle Verzasca</h2>
         <p class="cl-subhead">Turquoise river, bleached-white boulders, all the way up the valley. Pick any pull-off and you&#x27;ll find something.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Valle Verzasca</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive the valley</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Variable</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Any time</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Valle Verzasca</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive the valley</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Variable</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Any time</span></div>
         </div>
-      <a class="cl-maps" href="https://maps.app.goo.gl/PF49vNJacNYkbuZx5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://maps.app.goo.gl/PF49vNJacNYkbuZx5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="lavertezzo" data-href="../spot/lavertezzo/" tabindex="0" role="link" aria-label="Lavertezzo">
@@ -150,12 +152,12 @@
         <h2 class="cl-title">Lavertezzo</h2>
         <p class="cl-subhead">The stone village by the bridge. Narrow lanes, old slate roofs, and the river running through the whole scene.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Valle Verzasca</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Park and walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">None</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Late afternoon</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Valle Verzasca</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Park and walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">None</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Late afternoon</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Ponte+dei+Salti+(17.+Jahrhundert)/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b131b37ac893:0xb8b55f11feae7d93!8m2!3d46.2600705!4d8.8359918!16s%2Fg%2F121_43f8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Ponte+dei+Salti+(17.+Jahrhundert)/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b131b37ac893:0xb8b55f11feae7d93!8m2!3d46.2600705!4d8.8359918!16s%2Fg%2F121_43f8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="ponte_brolla" data-href="../spot/ponte_brolla/" tabindex="0" role="link" aria-label="Ponte Brolla">
@@ -164,7 +166,7 @@
         <img class="hb-slide" src="../img/derivatives/ponte_brolla_p1/w1000.webp" srcset="../img/derivatives/ponte_brolla_p1/w400.webp 400w, ../img/derivatives/ponte_brolla_p1/w1000.webp 1000w, ../img/derivatives/ponte_brolla_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/ponte_brolla_p2/w1000.webp" srcset="../img/derivatives/ponte_brolla_p2/w400.webp 400w, ../img/derivatives/ponte_brolla_p2/w1000.webp 1000w, ../img/derivatives/ponte_brolla_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · @locarnesetv</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @locarnesetv</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -174,30 +176,30 @@
         <h2 class="cl-title">Ponte Brolla</h2>
         <p class="cl-subhead">A cliff jumping spot on the Maggia, just below where the Melezza joins. Crystal water and pure adrenaline.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Locarnese, Ticino</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Daytime</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Locarnese, Ticino</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Daytime</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Ponte+Brolla,+6652+Locarno/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b80184d77ff9:0x8085ee1850e504a9!8m2!3d46.1853!4d8.75278!16s%2Fg%2F120jqlmp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Ponte+Brolla,+6652+Locarno/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b80184d77ff9:0x8085ee1850e504a9!8m2!3d46.1853!4d8.75278!16s%2Fg%2F120jqlmp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="cascata_di_foroglio" data-href="../spot/cascata_di_foroglio/" tabindex="0" role="link" aria-label="Cascata di Foroglio">
       <div class="cl-photos">
         <img src="../img/derivatives/cascata_di_foroglio_p0/w1000.webp" srcset="../img/derivatives/cascata_di_foroglio_p0/w400.webp 400w, ../img/derivatives/cascata_di_foroglio_p0/w1000.webp 1000w, ../img/derivatives/cascata_di_foroglio_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Cascata di Foroglio" loading="lazy" />
-        <span class="credit-pill">Photo · kuno_schweizer</span>
+        <span class="credit-pill"><span data-i18n="label.photo">Photo</span> · kuno_schweizer</span>
       </div>
       <div class="cl-body">
         <p class="cl-kicker">WATERFALLS</p>
         <h2 class="cl-title">Cascata di Foroglio</h2>
         <p class="cl-subhead">A waterfall dropping straight into Val Bavona, the side valley off Valle Maggia at Cavergno.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Val Bavona, Ticino</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + 10 min walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">May to June</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Val Bavona, Ticino</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + 10 min walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">May to June</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Foroglio+Wasserfall/@46.3126581,2.6026627,7z/data=!4m9!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m4!1s0x4785999344465ff1:0x1557b60aa4c642b!8m2!3d46.371303!4d8.5453161" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Foroglio+Wasserfall/@46.3126581,2.6026627,7z/data=!4m9!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m4!1s0x4785999344465ff1:0x1557b60aa4c642b!8m2!3d46.371303!4d8.5453161" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="ponte_tibetano" data-href="../spot/ponte_tibetano/" tabindex="0" role="link" aria-label="Ponte Tibetano">
@@ -207,7 +209,7 @@
         <img class="hb-slide" src="../img/derivatives/ponte_tibetano_p2/w1000.webp" srcset="../img/derivatives/ponte_tibetano_p2/w400.webp 400w, ../img/derivatives/ponte_tibetano_p2/w1000.webp 1000w, ../img/derivatives/ponte_tibetano_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/ponte_tibetano_p3/w1000.webp" srcset="../img/derivatives/ponte_tibetano_p3/w400.webp 400w, ../img/derivatives/ponte_tibetano_p3/w1000.webp 1000w, ../img/derivatives/ponte_tibetano_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · @oliwear.j</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @oliwear.j</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -217,12 +219,12 @@
         <h2 class="cl-title">Ponte Tibetano</h2>
         <p class="cl-subhead">A 270m Tibetan-style footbridge above Curzútt, near Bellinzona. Long, narrow, and a different kind of leading-line shot.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Bellinzona, Ticino</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Funicular Monte Carasso to Mornera + 20 min walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Morning before crowds</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Bellinzona, Ticino</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Funicular Monte Carasso to Mornera + 20 min walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Morning before crowds</span></div>
         </div>
-      <a class="cl-maps" href="https://maps.app.goo.gl/PkCiA47rbgdSdsed6" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://maps.app.goo.gl/PkCiA47rbgdSdsed6" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
       </div>
@@ -297,9 +299,9 @@
 </div>
 
 <footer class="legal">
-  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  <a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 

@@ -3,6 +3,32 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
+/* i18n FOUC guard — full/lib/i18n.js adds .hb-i18n-pending to <html> when the
+   active language is not the baked-in English, then removes it after applying
+   translations on DOMContentLoaded. Hides only the nodes that will be swapped,
+   so DE/FR users never see an English flash and EN users see nothing hidden. */
+html.hb-i18n-pending [data-i18n],
+html.hb-i18n-pending [data-i18n-plural] { visibility: hidden; }
+
+/* Language switcher — segmented EN/DE/FR control in the rail (desktop, shown
+   only when the rail is expanded) and the mobile menu sheet's Settings row. */
+.rail-lang { display: flex; gap: 4px; padding: 8px 12px 4px; }
+.app-rail:not(.is-expanded) .rail-lang { display: none; }
+.rail-lang-btn,
+.menu-lang-btn {
+  flex: 1 1 0; padding: 5px 0; font-weight: 600; font-size: 12px; letter-spacing: .02em;
+  color: var(--muted); background: transparent; cursor: pointer;
+  border: 1px solid var(--hairline-strong); border-radius: 8px;
+}
+.rail-lang-btn:hover,
+.menu-lang-btn:hover { color: var(--fg); }
+.rail-lang-btn.is-active,
+.menu-lang-btn.is-active { color: #fff; background: var(--cta-bg); border-color: var(--cta-bg); }
+.menu-row-lang { display: flex; align-items: center; gap: 12px; }
+.menu-row-lang .menu-row-label { flex: 1 1 auto; }
+.menu-lang-seg { display: inline-flex; gap: 6px; flex: 0 0 auto; }
+.menu-lang-btn { flex: 0 0 auto; padding: 6px 12px; }
+
 :root {
   --bg: #ffffff;
   --paper: #ffffff;

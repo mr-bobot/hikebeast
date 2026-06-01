@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260524a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
@@ -24,17 +26,17 @@
   <a class="brand" href="../index.html">
     <span>Central Switzerland</span>
   </a>
-  <span class="crumb"><b>32</b> spots</span>
+  <span class="crumb"><b>32</b> <span data-i18n-plural="count.spots_bare" data-n="32">spots</span></span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
 <div class="app">
 
   <aside class="sidebar" aria-label="Chapters">
-  <a class="sb-home" href="../index.html" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>
-  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl">Intro</span></a>
+  <a class="sb-home" href="../index.html" title="Home" data-i18n-attr="title:nav.home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>
+  <a class="sb-thumb" href="../intro/index.html" title="Front matter" data-i18n-attr="title:label.front_matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl" data-i18n="label.intro">Intro</span></a>
   <a class="sb-thumb" href="../eastern/index.html" title="Eastern Switzerland"><img src="../img/chapters/eastern/w400.webp" alt="" /><span class="lbl">Eastern</span></a>
   <a class="sb-thumb is-current" href="../central/index.html" title="Central Switzerland"><img src="../img/chapters/central/w400.webp" alt="" /><span class="lbl">Central</span></a>
   <a class="sb-thumb" href="../valais/index.html" title="Valais"><img src="../img/chapters/valais/w400.webp" alt="" /><span class="lbl">Valais</span></a>
@@ -51,7 +53,7 @@
     <img src="../img/region-central.svg" alt="Central Switzerland on the Swiss map" fetchpriority="high" decoding="async" />
   </div>
   <div class="cv-content">
-    <p class="cv-kicker">Region</p>
+    <p class="cv-kicker" data-i18n="label.region">Region</p>
     <h1>Central Switzerland</h1>
     <p class="cv-deck">Waterfalls, glacier lakes and iron bridges strung across gorges so deep they hum. The heart of this guide. Twelve spots from Adelboden to the Grimsel Pass.</p>
   </div>
@@ -59,10 +61,10 @@
 
     <section class="chapter-views" aria-label="Central Switzerland spots">
       <div class="chapter-views-head">
-        <p class="chapter-views-meta">32 spots</p>
+        <p class="chapter-views-meta">32 <span data-i18n-plural="count.spots_bare" data-n="32">spots</span></p>
         <div class="chapter-view-toggle" role="tablist" aria-label="Chapter view">
-          <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span>Reader</span></button>
-          <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Grid</span></button>
+          <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span data-i18n="view.reader">Reader</span></button>
+          <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span data-i18n="view.grid">Grid</span></button>
         </div>
       </div>
       <div class="chapter-list">
@@ -73,7 +75,7 @@
         <img class="hb-slide" src="../img/derivatives/engstligen_falls_p2/w1000.webp" srcset="../img/derivatives/engstligen_falls_p2/w400.webp 400w, ../img/derivatives/engstligen_falls_p2/w1000.webp 1000w, ../img/derivatives/engstligen_falls_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/engstligen_falls_p3/w1000.webp" srcset="../img/derivatives/engstligen_falls_p3/w400.webp 400w, ../img/derivatives/engstligen_falls_p3/w1000.webp 1000w, ../img/derivatives/engstligen_falls_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · anthony_gomez</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · anthony_gomez</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -83,12 +85,12 @@
         <h2 class="cl-title">Engstligen Falls</h2>
         <p class="cl-subhead">Two-tier falls off the Engstligenalp plateau above Adelboden. Overcast weather is actually the flex here.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Adelboden, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car + short walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">When cloudy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Adelboden, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car + short walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">When cloudy</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Engstligenf%C3%A4lle+Adelboden/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f0223cdd45025:0x8dd2572eba113b9e!8m2!3d46.4539395!4d7.5607365!16zL20vMGZfZDM5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Engstligenf%C3%A4lle+Adelboden/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f0223cdd45025:0x8dd2572eba113b9e!8m2!3d46.4539395!4d7.5607365!16zL20vMGZfZDM5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="oltschibachfall" data-href="../spot/oltschibachfall/" tabindex="0" role="link" aria-label="Oltschibachfall">
@@ -97,7 +99,7 @@
         <img class="hb-slide" src="../img/derivatives/oltschibachfall_p1/w1000.webp" srcset="../img/derivatives/oltschibachfall_p1/w400.webp 400w, ../img/derivatives/oltschibachfall_p1/w1000.webp 1000w, ../img/derivatives/oltschibachfall_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/oltschibachfall_p2/w1000.webp" srcset="../img/derivatives/oltschibachfall_p2/w400.webp 400w, ../img/derivatives/oltschibachfall_p2/w1000.webp 1000w, ../img/derivatives/oltschibachfall_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · @oliwear.j</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @oliwear.j</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -107,12 +109,12 @@
         <h2 class="cl-title">Oltschibachfall</h2>
         <p class="cl-subhead">One of the tallest waterfalls in the canton, dropping in tiers down the cliff. Best admired from the viewpoint trail, not the base.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Brienz, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Hike from Unterbach</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Late afternoon</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Brienz, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Hike from Unterbach</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Late afternoon</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Oltschibachfall/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9055579d6091:0xb55ba99851925c8f!8m2!3d46.7312!4d8.11416!16s%2Fg%2F1thvrltt" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Oltschibachfall/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9055579d6091:0xb55ba99851925c8f!8m2!3d46.7312!4d8.11416!16s%2Fg%2F1thvrltt" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="rosenlaui" data-href="../spot/rosenlaui/" tabindex="0" role="link" aria-label="Rosenlaui">
@@ -122,7 +124,7 @@
         <img class="hb-slide" src="../img/derivatives/rosenlaui_p2/w1000.webp" srcset="../img/derivatives/rosenlaui_p2/w400.webp 400w, ../img/derivatives/rosenlaui_p2/w1000.webp 1000w, ../img/derivatives/rosenlaui_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/rosenlaui_p3/w1000.webp" srcset="../img/derivatives/rosenlaui_p3/w400.webp 400w, ../img/derivatives/rosenlaui_p3/w1000.webp 1000w, ../img/derivatives/rosenlaui_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · Simon Spring</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · Simon Spring</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -132,12 +134,12 @@
         <h2 class="cl-title">Rosenlaui</h2>
         <p class="cl-subhead">Tucked into the Reichenbach valley, where the Wetterhorn feels unreal in the late afternoon light.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Meiringen, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Postbus + walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Afternoon</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Meiringen, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Postbus + walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Afternoon</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Rosenlaui,+3860+Schattenhalb/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f854e2f14adf3:0x75e02d334586fdf8!8m2!3d46.6795746!4d8.1548593!16s%2Fg%2F1tmqq876" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Rosenlaui,+3860+Schattenhalb/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f854e2f14adf3:0x75e02d334586fdf8!8m2!3d46.6795746!4d8.1548593!16s%2Fg%2F1tmqq876" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="rosenlaui_public_waterfall" data-href="../spot/rosenlaui_public_waterfall/" tabindex="0" role="link" aria-label="Rosenlaui Gorge">
@@ -145,7 +147,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/rosenlaui_public_waterfall_p0/w1000.webp" srcset="../img/derivatives/rosenlaui_public_waterfall_p0/w400.webp 400w, ../img/derivatives/rosenlaui_public_waterfall_p0/w1000.webp 1000w, ../img/derivatives/rosenlaui_public_waterfall_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Rosenlaui Gorge" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/rosenlaui_public_waterfall_p1/w1000.webp" srcset="../img/derivatives/rosenlaui_public_waterfall_p1/w400.webp 400w, ../img/derivatives/rosenlaui_public_waterfall_p1/w1000.webp 1000w, ../img/derivatives/rosenlaui_public_waterfall_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · @leon.helg</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @leon.helg</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -155,12 +157,12 @@
         <h2 class="cl-title">Rosenlaui Gorge</h2>
         <p class="cl-subhead">A gorge carved into the mountain next to the hotel. Paid entry, but the light is worth it.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Rosenlaui, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Walk from Rosenlaui hotel</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Morning</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Rosenlaui, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Walk from Rosenlaui hotel</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Morning</span></div>
         </div>
-      <a class="cl-maps" href="https://maps.app.goo.gl/MPQm7Tq1dB1L9UWg8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://maps.app.goo.gl/MPQm7Tq1dB1L9UWg8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="rosenlauifall" data-href="../spot/rosenlauifall/" tabindex="0" role="link" aria-label="Rosenlauifall">
@@ -168,7 +170,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/rosenlauifall_p0/w1000.webp" srcset="../img/derivatives/rosenlauifall_p0/w400.webp 400w, ../img/derivatives/rosenlauifall_p0/w1000.webp 1000w, ../img/derivatives/rosenlauifall_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Rosenlauifall" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/rosenlauifall_p1/w1000.webp" srcset="../img/derivatives/rosenlauifall_p1/w400.webp 400w, ../img/derivatives/rosenlauifall_p1/w1000.webp 1000w, ../img/derivatives/rosenlauifall_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · @leon.helg</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @leon.helg</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -178,12 +180,12 @@
         <h2 class="cl-title">Rosenlauifall</h2>
         <p class="cl-subhead">A waterfall hidden behind Hotel Rosenlaui, fed by the Rychenbach. Almost empty most mornings.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Rosenlaui, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Walk through hotel grounds</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Any time</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Rosenlaui, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Walk through hotel grounds</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Any time</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Rosenlauifall/@46.6800759,8.1509677,19z/data=!4m6!3m5!1s0x478f850073872f1b:0xbe35c42d5d9ba951!8m2!3d46.6800759!4d8.1509677!16s%2Fg%2F11w1k78rm3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Rosenlauifall/@46.6800759,8.1509677,19z/data=!4m6!3m5!1s0x478f850073872f1b:0xbe35c42d5d9ba951!8m2!3d46.6800759!4d8.1509677!16s%2Fg%2F11w1k78rm3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="triftbrucke" data-href="../spot/triftbrucke/" tabindex="0" role="link" aria-label="Triftbrücke">
@@ -191,7 +193,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/triftbrucke_p0/w1000.webp" srcset="../img/derivatives/triftbrucke_p0/w400.webp 400w, ../img/derivatives/triftbrucke_p0/w1000.webp 1000w, ../img/derivatives/triftbrucke_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Triftbrücke" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/triftbrucke_p1/w1000.webp" srcset="../img/derivatives/triftbrucke_p1/w400.webp 400w, ../img/derivatives/triftbrucke_p1/w1000.webp 1000w, ../img/derivatives/triftbrucke_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · @petartravel</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @petartravel</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -201,30 +203,30 @@
         <h2 class="cl-title">Triftbrücke</h2>
         <p class="cl-subhead">One of the most dramatic suspension bridges in the Alps. 170 m long, strung across a glacier lake.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Gadmen, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car + 2 hour hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate. Steep</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">After sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Gadmen, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car + 2 hour hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate. Steep</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">After sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Triftbr%C3%BCcke/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478562bdf0ac9de3:0xf78db3a090c436b4!8m2!3d46.6941706!4d8.357416!16s%2Fm%2F0660mz0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Triftbr%C3%BCcke/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478562bdf0ac9de3:0xf78db3a090c436b4!8m2!3d46.6941706!4d8.357416!16s%2Fm%2F0660mz0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="triftsee" data-href="../spot/triftsee/" tabindex="0" role="link" aria-label="Triftsee">
       <div class="cl-photos">
         <img src="../img/derivatives/triftsee_p0/w1000.webp" srcset="../img/derivatives/triftsee_p0/w400.webp 400w, ../img/derivatives/triftsee_p0/w1000.webp 1000w, ../img/derivatives/triftsee_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Triftsee" loading="lazy" />
-        <span class="credit-pill">Photo · @steffi_inswiss</span>
+        <span class="credit-pill"><span data-i18n="label.photo">Photo</span> · @steffi_inswiss</span>
       </div>
       <div class="cl-body">
         <p class="cl-kicker">GLACIER LAKES</p>
         <h2 class="cl-title">Triftsee</h2>
         <p class="cl-subhead">The turquoise lake behind the bridge. Same hike, different light, the place where I would actually spend the night.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Gadmen, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car + 2 hour hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunset or sunrise</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Gadmen, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car + 2 hour hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunset or sunrise</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Triftsee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478562bec5770e75:0x5d5bfb0e9684139!8m2!3d46.6904!4d8.3591!16s%2Fm%2F04yd9sm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Triftsee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478562bec5770e75:0x5d5bfb0e9684139!8m2!3d46.6904!4d8.3591!16s%2Fm%2F04yd9sm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="gelmersee" data-href="../spot/gelmersee/" tabindex="0" role="link" aria-label="Gelmersee">
@@ -234,7 +236,7 @@
         <img class="hb-slide" src="../img/derivatives/gelmersee_p2/w1000.webp" srcset="../img/derivatives/gelmersee_p2/w400.webp 400w, ../img/derivatives/gelmersee_p2/w1000.webp 1000w, ../img/derivatives/gelmersee_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/gelmersee_p3/w1000.webp" srcset="../img/derivatives/gelmersee_p3/w400.webp 400w, ../img/derivatives/gelmersee_p3/w1000.webp 1000w, ../img/derivatives/gelmersee_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · dario_bronnimann</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · dario_bronnimann</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -244,30 +246,30 @@
         <h2 class="cl-title">Gelmersee</h2>
         <p class="cl-subhead">Easy to reach, and the funicular that gets you there is one of the steepest in the world. A photo spot in itself.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Haslital, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Funicular (summer only)</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Morning</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Haslital, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Funicular (summer only)</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Morning</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Gelmersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47857df2744e7e09:0xeb6bf0e43466b46f!8m2!3d46.615792!4d8.3302012!16s%2Fm%2F02qw9z3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Gelmersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47857df2744e7e09:0xeb6bf0e43466b46f!8m2!3d46.615792!4d8.3302012!16s%2Fm%2F02qw9z3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="gelmerbahn" data-href="../spot/gelmerbahn/" tabindex="0" role="link" aria-label="Gelmerbahn">
       <div class="cl-photos">
         <img src="../img/derivatives/gelmerbahn_p0/w1000.webp" srcset="../img/derivatives/gelmerbahn_p0/w400.webp 400w, ../img/derivatives/gelmerbahn_p0/w1000.webp 1000w, ../img/derivatives/gelmerbahn_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Gelmerbahn" loading="lazy" />
-        <span class="credit-pill">Photo · simon_infanger</span>
+        <span class="credit-pill"><span data-i18n="label.photo">Photo</span> · simon_infanger</span>
       </div>
       <div class="cl-body">
         <p class="cl-kicker">CABLE CARS</p>
         <h2 class="cl-title">Gelmerbahn</h2>
         <p class="cl-subhead">The ride up. Cinematic enough to go viral on its own. 106% gradient at the steepest section.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Haslital, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Funicular from base</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Any time</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Haslital, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Funicular from base</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Any time</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Gelmerbahn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f875bae1b82fb:0xece15aab211b8f11!8m2!3d46.6136385!4d8.3085363!16s%2Fm%2F0nbtnrh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Gelmerbahn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f875bae1b82fb:0xece15aab211b8f11!8m2!3d46.6136385!4d8.3085363!16s%2Fm%2F0nbtnrh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="guttannen_valley" data-href="../spot/guttannen_valley/" tabindex="0" role="link" aria-label="Guttannen Valley">
@@ -276,7 +278,7 @@
         <img class="hb-slide" src="../img/derivatives/guttannen_valley_p1/w1000.webp" srcset="../img/derivatives/guttannen_valley_p1/w400.webp 400w, ../img/derivatives/guttannen_valley_p1/w1000.webp 1000w, ../img/derivatives/guttannen_valley_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/guttannen_valley_p2/w1000.webp" srcset="../img/derivatives/guttannen_valley_p2/w400.webp 400w, ../img/derivatives/guttannen_valley_p2/w1000.webp 1000w, ../img/derivatives/guttannen_valley_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · @shaunaxbst</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @shaunaxbst</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -286,12 +288,12 @@
         <h2 class="cl-title">Guttannen Valley</h2>
         <p class="cl-subhead">Quiet, scenic, easy to park in for the night. A sleeper base camp for the Grimsel and Gelmer runs.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Innertkirchen, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">By car</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Any time</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Innertkirchen, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">By car</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Any time</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/3864+Guttannen/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f866862eefd51:0x6187a636359a2900!8m2!3d46.6552082!4d8.2892297!16zL20vMGRqY2wx" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/3864+Guttannen/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f866862eefd51:0x6187a636359a2900!8m2!3d46.6552082!4d8.2892297!16zL20vMGRqY2wx" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="aare_gorge" data-href="../spot/aare_gorge/" tabindex="0" role="link" aria-label="Aare Gorge">
@@ -302,7 +304,7 @@
         <img class="hb-slide" src="../img/derivatives/aare_gorge_p3/w1000.webp" srcset="../img/derivatives/aare_gorge_p3/w400.webp 400w, ../img/derivatives/aare_gorge_p3/w1000.webp 1000w, ../img/derivatives/aare_gorge_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/aare_gorge_p4/w1000.webp" srcset="../img/derivatives/aare_gorge_p4/w400.webp 400w, ../img/derivatives/aare_gorge_p4/w1000.webp 1000w, ../img/derivatives/aare_gorge_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 5</span>
-        <span class="credit-pill hb-credit">Photo · thiva</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · thiva</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -312,12 +314,12 @@
         <h2 class="cl-title">Aare Gorge</h2>
         <p class="cl-subhead">Aareschlucht. One of the most impressive canyons in Switzerland. A narrow bridge runs right along the gorge wall.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Meiringen, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Paid entry</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">When cloudy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Meiringen, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Paid entry</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">When cloudy</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Aareschlucht/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f8f018625b21f:0x6bc0f90b56e9ba0e!8m2!3d46.7192366!4d8.2122009!16s%2Fm%2F0h3xs_f" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Aareschlucht/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f8f018625b21f:0x6bc0f90b56e9ba0e!8m2!3d46.7192366!4d8.2122009!16s%2Fm%2F0h3xs_f" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="brienzer_rothorn" data-href="../spot/brienzer_rothorn/" tabindex="0" role="link" aria-label="Brienzer Rothorn">
@@ -326,7 +328,7 @@
         <img class="hb-slide" src="../img/derivatives/brienzer_rothorn_p1/w1000.webp" srcset="../img/derivatives/brienzer_rothorn_p1/w400.webp 400w, ../img/derivatives/brienzer_rothorn_p1/w1000.webp 1000w, ../img/derivatives/brienzer_rothorn_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/brienzer_rothorn_p2/w1000.webp" srcset="../img/derivatives/brienzer_rothorn_p2/w400.webp 400w, ../img/derivatives/brienzer_rothorn_p2/w1000.webp 1000w, ../img/derivatives/brienzer_rothorn_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · @oliwear.j</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @oliwear.j</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -336,12 +338,12 @@
         <h2 class="cl-title">Brienzer Rothorn</h2>
         <p class="cl-subhead">The peak above Brienz. Cable car to the top, and a camp lake below the summit that almost nobody photographs right.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Brienz, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cog railway or cable car</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy to summit</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Evening, still wind</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Brienz, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cog railway or cable car</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy to summit</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Evening, still wind</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Brienzer+Rothorn/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9430780b2d07:0x617f3f41f172a596!8m2!3d46.7871!4d8.04701!16zL20vMDJfZGhs" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Brienzer+Rothorn/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9430780b2d07:0x617f3f41f172a596!8m2!3d46.7871!4d8.04701!16zL20vMDJfZGhs" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="hardergrat_trail" data-href="../spot/hardergrat_trail/" tabindex="0" role="link" aria-label="Hardergrat Trail">
@@ -353,7 +355,7 @@
         <img class="hb-slide" src="../img/derivatives/hardergrat_trail_p4/w1000.webp" srcset="../img/derivatives/hardergrat_trail_p4/w400.webp 400w, ../img/derivatives/hardergrat_trail_p4/w1000.webp 1000w, ../img/derivatives/hardergrat_trail_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/hardergrat_trail_p5/w1000.webp" srcset="../img/derivatives/hardergrat_trail_p5/w400.webp 400w, ../img/derivatives/hardergrat_trail_p5/w1000.webp 1000w, ../img/derivatives/hardergrat_trail_p5/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 6</span>
-        <span class="credit-pill hb-credit">Photo · @leon.helg</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @leon.helg</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -363,12 +365,12 @@
         <h2 class="cl-title">Hardergrat Trail</h2>
         <p class="cl-subhead">The big one. Twelve hours along a knife-edge ridge from Brienzer Rothorn to Harder Kulm, no water the whole way.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Brienz, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car + full day hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Hard. No water</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">All day</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Brienz, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car + full day hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Hard. No water</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">All day</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Hardergrat/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd87929ceb03:0x23146e2f469c639f!8m2!3d46.7239488!4d7.9028922!16s%2Fg%2F11j_vg0hyr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Hardergrat/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd87929ceb03:0x23146e2f469c639f!8m2!3d46.7239488!4d7.9028922!16s%2Fg%2F11j_vg0hyr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="tannhorn" data-href="../spot/tannhorn/" tabindex="0" role="link" aria-label="Tannhorn">
@@ -378,7 +380,7 @@
         <img class="hb-slide" src="../img/derivatives/tannhorn_p2/w1000.webp" srcset="../img/derivatives/tannhorn_p2/w400.webp 400w, ../img/derivatives/tannhorn_p2/w1000.webp 1000w, ../img/derivatives/tannhorn_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/tannhorn_p3/w1000.webp" srcset="../img/derivatives/tannhorn_p3/w400.webp 400w, ../img/derivatives/tannhorn_p3/w1000.webp 1000w, ../img/derivatives/tannhorn_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · @leon.helg</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @leon.helg</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -388,12 +390,12 @@
         <h2 class="cl-title">Tannhorn</h2>
         <p class="cl-subhead">The highlight of the Hardergrat. A perfect grass ridge that peaks at sunset.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Brienz, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car to Rothorn + 2-3h hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Hard - exposed T5</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Brienz, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car to Rothorn + 2-3h hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Hard - exposed T5</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Tannhorn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9602003ceea9:0x1f8630dd4a63d1d5!8m2!3d46.7749358!4d7.984555!16s%2Fm%2F04n0h0d" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Tannhorn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9602003ceea9:0x1f8630dd4a63d1d5!8m2!3d46.7749358!4d7.984555!16s%2Fm%2F04n0h0d" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="augstmatthorn" data-href="../spot/augstmatthorn/" tabindex="0" role="link" aria-label="Augstmatthorn">
@@ -404,7 +406,7 @@
         <img class="hb-slide" src="../img/derivatives/augstmatthorn_p3/w1000.webp" srcset="../img/derivatives/augstmatthorn_p3/w400.webp 400w, ../img/derivatives/augstmatthorn_p3/w1000.webp 1000w, ../img/derivatives/augstmatthorn_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/augstmatthorn_p4/w1000.webp" srcset="../img/derivatives/augstmatthorn_p4/w400.webp 400w, ../img/derivatives/augstmatthorn_p4/w1000.webp 1000w, ../img/derivatives/augstmatthorn_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 5</span>
-        <span class="credit-pill hb-credit">Photo · cedric_streit</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · cedric_streit</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -414,12 +416,12 @@
         <h2 class="cl-title">Augstmatthorn</h2>
         <p class="cl-subhead">Ridge view over Brienzersee. Same trail as the Hardergrat, but you can sneak in from the back.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Habkern, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">2h hike from Lombachalp</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Anytime</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Habkern, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">2h hike from Lombachalp</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Anytime</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Augstmatthorn/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd01d3aab78b:0x80ca6ccdfe2dbfad!8m2!3d46.7422263!4d7.9286089!16s%2Fm%2F04mym9q" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Augstmatthorn/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd01d3aab78b:0x80ca6ccdfe2dbfad!8m2!3d46.7422263!4d7.9286089!16s%2Fm%2F04mym9q" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="lake_lucerne" data-href="../spot/lake_lucerne/" tabindex="0" role="link" aria-label="Lake Lucerne">
@@ -428,7 +430,7 @@
         <img class="hb-slide" src="../img/derivatives/lake_lucerne_p1/w1000.webp" srcset="../img/derivatives/lake_lucerne_p1/w400.webp 400w, ../img/derivatives/lake_lucerne_p1/w1000.webp 1000w, ../img/derivatives/lake_lucerne_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/lake_lucerne_p2/w1000.webp" srcset="../img/derivatives/lake_lucerne_p2/w400.webp 400w, ../img/derivatives/lake_lucerne_p2/w1000.webp 1000w, ../img/derivatives/lake_lucerne_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · daniel_cox</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · daniel_cox</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -438,12 +440,12 @@
         <h2 class="cl-title">Lake Lucerne</h2>
         <p class="cl-subhead">Vierwaldstättersee. The lake that runs through half of Central Switzerland, with fingers that disappear between the cliffs.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Train, boat, or cable car</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Winter sunrise</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Train, boat, or cable car</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Winter sunrise</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Vierwaldst%C3%A4ttersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47855823936105cf:0xa60b34b5c10b1570!8m2!3d47.0136401!4d8.4371598!16zL20vMDFka2M1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Vierwaldst%C3%A4ttersee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47855823936105cf:0xa60b34b5c10b1570!8m2!3d47.0136401!4d8.4371598!16zL20vMDFka2M1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="fronalpstock" data-href="../spot/fronalpstock/" tabindex="0" role="link" aria-label="Fronalpstock">
@@ -452,7 +454,7 @@
         <img class="hb-slide" src="../img/derivatives/fronalpstock_p1/w1000.webp" srcset="../img/derivatives/fronalpstock_p1/w400.webp 400w, ../img/derivatives/fronalpstock_p1/w1000.webp 1000w, ../img/derivatives/fronalpstock_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/fronalpstock_p2/w1000.webp" srcset="../img/derivatives/fronalpstock_p2/w400.webp 400w, ../img/derivatives/fronalpstock_p2/w1000.webp 1000w, ../img/derivatives/fronalpstock_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · @leon.helg</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @leon.helg</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -462,12 +464,12 @@
         <h2 class="cl-title">Fronalpstock</h2>
         <p class="cl-subhead">Lake Lucerne laid out below, sunset turning the whole basin pink. Cable car and chairlift up from Morschach, a short walk to the bench.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Morschach, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car + ridge hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Morschach, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car + ridge hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Fronalpstock/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47854ff532352c5f:0xc8fa9f26d0331387!8m2!3d46.9682209!4d8.6372684!16s%2Fm%2F04ldsrd" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Fronalpstock/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47854ff532352c5f:0xc8fa9f26d0331387!8m2!3d46.9682209!4d8.6372684!16s%2Fm%2F04ldsrd" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="fulberg" data-href="../spot/fulberg/" tabindex="0" role="link" aria-label="Fulberg">
@@ -480,7 +482,7 @@
         <img class="hb-slide" src="../img/derivatives/fulberg_p5/w1000.webp" srcset="../img/derivatives/fulberg_p5/w400.webp 400w, ../img/derivatives/fulberg_p5/w1000.webp 1000w, ../img/derivatives/fulberg_p5/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/fulberg_p6/w1000.webp" srcset="../img/derivatives/fulberg_p6/w400.webp 400w, ../img/derivatives/fulberg_p6/w1000.webp 1000w, ../img/derivatives/fulberg_p6/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 7</span>
-        <span class="credit-pill hb-credit">Photo · @leon.helg</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @leon.helg</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -490,12 +492,12 @@
         <h2 class="cl-title">Fulberg</h2>
         <p class="cl-subhead">A ridge hike above Lake Uri that almost nobody does. Wide open, quiet, and the photo pays for the climb.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Emmetten, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car + ridge hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Late afternoon or sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Emmetten, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car + ridge hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Late afternoon or sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Fulberg/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47855a4cd1cac605:0x503f5c18f857fe20!8m2!3d46.9352224!4d8.5397221!16s%2Fg%2F11cjgjd5nh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Fulberg/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x47855a4cd1cac605:0x503f5c18f857fe20!8m2!3d46.9352224!4d8.5397221!16s%2Fg%2F11cjgjd5nh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="iffigfalle" data-href="../spot/iffigfalle/" tabindex="0" role="link" aria-label="Iffigfalle">
@@ -504,7 +506,7 @@
         <img class="hb-slide" src="../img/derivatives/iffigfalle_p1/w1000.webp" srcset="../img/derivatives/iffigfalle_p1/w400.webp 400w, ../img/derivatives/iffigfalle_p1/w1000.webp 1000w, ../img/derivatives/iffigfalle_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/iffigfalle_p2/w1000.webp" srcset="../img/derivatives/iffigfalle_p2/w400.webp 400w, ../img/derivatives/iffigfalle_p2/w1000.webp 1000w, ../img/derivatives/iffigfalle_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · @fototaeschli</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @fototaeschli</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -514,12 +516,12 @@
         <h2 class="cl-title">Iffigfalle</h2>
         <p class="cl-subhead">Above Lenk, best in May and June when snowmelt pushes the falls into their fullest.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Lenk, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + 30-min walk (longer routes from Adelboden / Lenk)</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">May to June</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Lenk, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + 30-min walk (longer routes from Adelboden / Lenk)</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">May to June</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Iffigf%C3%A4lle/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee33f74c09235:0xaedf674a739c34dd!8m2!3d46.4118!4d7.44306!16s%2Fg%2F121_hshp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Iffigf%C3%A4lle/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee33f74c09235:0xaedf674a739c34dd!8m2!3d46.4118!4d7.44306!16s%2Fg%2F121_hshp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="schrattenfluh" data-href="../spot/schrattenfluh/" tabindex="0" role="link" aria-label="Schrattenfluh">
@@ -535,7 +537,7 @@
         <img class="hb-slide" src="../img/derivatives/schrattenfluh_p8/w1000.webp" srcset="../img/derivatives/schrattenfluh_p8/w400.webp 400w, ../img/derivatives/schrattenfluh_p8/w1000.webp 1000w, ../img/derivatives/schrattenfluh_p8/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/schrattenfluh_p9/w1000.webp" srcset="../img/derivatives/schrattenfluh_p9/w400.webp 400w, ../img/derivatives/schrattenfluh_p9/w1000.webp 1000w, ../img/derivatives/schrattenfluh_p9/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 10</span>
-        <span class="credit-pill hb-credit">Photo · cyprien_da_silva</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · cyprien_da_silva</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -545,12 +547,12 @@
         <h2 class="cl-title">Schrattenfluh</h2>
         <p class="cl-subhead">A dramatic ridge hike from Marbachegg cable car, overnight at Heftihütte.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Entlebuch, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car + 3 hour hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Entlebuch, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car + 3 hour hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Schrattenfluh/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbfec06cad435:0x110b561e70bae1e2!8m2!3d46.8433333!4d7.9855556!16s%2Fm%2F04n29_0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Schrattenfluh/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbfec06cad435:0x110b561e70bae1e2!8m2!3d46.8433333!4d7.9855556!16s%2Fm%2F04n29_0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="heftihutte" data-href="../spot/heftihutte/" tabindex="0" role="link" aria-label="Heftihütte">
@@ -560,7 +562,7 @@
         <img class="hb-slide" src="../img/derivatives/heftihutte_p2/w1000.webp" srcset="../img/derivatives/heftihutte_p2/w400.webp 400w, ../img/derivatives/heftihutte_p2/w1000.webp 1000w, ../img/derivatives/heftihutte_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/heftihutte_p3/w1000.webp" srcset="../img/derivatives/heftihutte_p3/w400.webp 400w, ../img/derivatives/heftihutte_p3/w1000.webp 1000w, ../img/derivatives/heftihutte_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · zimydakid</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · zimydakid</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -570,12 +572,12 @@
         <h2 class="cl-title">Heftihütte</h2>
         <p class="cl-subhead">Mountain hut high on the Schrattenfluh ridgeline. Sunrise from the door is the reason to book a bunk.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Schrattenfluh</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car + long hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Hard</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Schrattenfluh</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car + long hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Hard</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Heftih%C3%BCtte/@46.8509453,7.9789854,17z/data=!4m14!1m7!3m6!1s0x478fbf8cd722398b:0x640a45c07373fa0c!2sHeftih%C3%BCtte!8m2!3d46.8509417!4d7.9815603!16s%2Fg%2F1tx1s30b!3m5!1s0x478fbf8cd722398b:0x640a45c07373fa0c!8m2!3d46.8509417!4d7.9815603!16s%2Fg%2F1tx1s30b" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Heftih%C3%BCtte/@46.8509453,7.9789854,17z/data=!4m14!1m7!3m6!1s0x478fbf8cd722398b:0x640a45c07373fa0c!2sHeftih%C3%BCtte!8m2!3d46.8509417!4d7.9815603!16s%2Fg%2F1tx1s30b!3m5!1s0x478fbf8cd722398b:0x640a45c07373fa0c!8m2!3d46.8509417!4d7.9815603!16s%2Fg%2F1tx1s30b" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="bachalpsee" data-href="../spot/bachalpsee/" tabindex="0" role="link" aria-label="Bachalpsee">
@@ -584,7 +586,7 @@
         <img class="hb-slide" src="../img/derivatives/bachalpsee_p1/w1000.webp" srcset="../img/derivatives/bachalpsee_p1/w400.webp 400w, ../img/derivatives/bachalpsee_p1/w1000.webp 1000w, ../img/derivatives/bachalpsee_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/bachalpsee_p2/w1000.webp" srcset="../img/derivatives/bachalpsee_p2/w400.webp 400w, ../img/derivatives/bachalpsee_p2/w1000.webp 1000w, ../img/derivatives/bachalpsee_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · rowell_heria</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · rowell_heria</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -594,12 +596,12 @@
         <h2 class="cl-title">Bachalpsee</h2>
         <p class="cl-subhead">Mountain lake above Grindelwald with a clean reflection of the Schreckhorn. Cable car plus a 50 to 60 minute walk.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Grindelwald, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Firstbahn cable car + 50-60 min hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Anytime, mornings for reflection</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Grindelwald, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Firstbahn cable car + 50-60 min hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Anytime, mornings for reflection</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Bachalpsee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f99a2dab57f55:0x2fe44c469bb38461!8m2!3d46.669444!4d8.023333!16s%2Fm%2F027xf5b" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Bachalpsee/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f99a2dab57f55:0x2fe44c469bb38461!8m2!3d46.669444!4d8.023333!16s%2Fm%2F027xf5b" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="grindelwald" data-href="../spot/grindelwald/" tabindex="0" role="link" aria-label="Grindelwald">
@@ -609,7 +611,7 @@
         <img class="hb-slide" src="../img/derivatives/grindelwald_p2/w1000.webp" srcset="../img/derivatives/grindelwald_p2/w400.webp 400w, ../img/derivatives/grindelwald_p2/w1000.webp 1000w, ../img/derivatives/grindelwald_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/grindelwald_p3/w1000.webp" srcset="../img/derivatives/grindelwald_p3/w400.webp 400w, ../img/derivatives/grindelwald_p3/w1000.webp 1000w, ../img/derivatives/grindelwald_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · anna_hu</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · anna_hu</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -619,12 +621,12 @@
         <h2 class="cl-title">Grindelwald</h2>
         <p class="cl-subhead">The village at the foot of the Eiger. Easy by car, and the spring meadows under the north face do most of the work.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Grindelwald, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive or train</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Spring, sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Grindelwald, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive or train</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Spring, sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Grindelwald/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9eab18c79217:0xbfaa5c0f42972f65!8m2!3d46.624164!4d8.0413962!16zL20vMDJ3bHA3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Grindelwald/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f9eab18c79217:0xbfaa5c0f42972f65!8m2!3d46.624164!4d8.0413962!16zL20vMDJ3bHA3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="iseltwald" data-href="../spot/iseltwald/" tabindex="0" role="link" aria-label="Iseltwald">
@@ -634,7 +636,7 @@
         <img class="hb-slide" src="../img/derivatives/iseltwald_p2/w1000.webp" srcset="../img/derivatives/iseltwald_p2/w400.webp 400w, ../img/derivatives/iseltwald_p2/w1000.webp 1000w, ../img/derivatives/iseltwald_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/iseltwald_p3/w1000.webp" srcset="../img/derivatives/iseltwald_p3/w400.webp 400w, ../img/derivatives/iseltwald_p3/w1000.webp 1000w, ../img/derivatives/iseltwald_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · yasintha_perera</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · yasintha_perera</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -644,12 +646,12 @@
         <h2 class="cl-title">Iseltwald</h2>
         <p class="cl-subhead">The Crash Landing on You pier on the south shore of Brienzersee. Famous, crowded, but the village around it is the real reason to come.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Brienzersee, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive or boat from Interlaken</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Anytime</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Brienzersee, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive or boat from Interlaken</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Anytime</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/3807+Iseltwald/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd541724c75b:0xdafefc9fa4a5f96a!8m2!3d46.7115858!4d7.9642999!16zL20vMDMwaDZz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/3807+Iseltwald/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fbd541724c75b:0xdafefc9fa4a5f96a!8m2!3d46.7115858!4d7.9642999!16zL20vMDMwaDZz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="viewpoint_beatenberg" data-href="../spot/viewpoint_beatenberg/" tabindex="0" role="link" aria-label="Viewpoint Beatenberg">
@@ -657,7 +659,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/viewpoint_beatenberg_p0/w1000.webp" srcset="../img/derivatives/viewpoint_beatenberg_p0/w400.webp 400w, ../img/derivatives/viewpoint_beatenberg_p0/w1000.webp 1000w, ../img/derivatives/viewpoint_beatenberg_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Viewpoint Beatenberg" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/viewpoint_beatenberg_p1/w1000.webp" srcset="../img/derivatives/viewpoint_beatenberg_p1/w400.webp 400w, ../img/derivatives/viewpoint_beatenberg_p1/w1000.webp 1000w, ../img/derivatives/viewpoint_beatenberg_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · jairph</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · jairph</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -667,12 +669,12 @@
         <h2 class="cl-title">Viewpoint Beatenberg</h2>
         <p class="cl-subhead">A viewpoint above Beatenberg looking down on the road that threads the cliffs of Lake Thun. Wait for a boat or the right car to come through.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Beatenberg, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive to viewpoint</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Calm, clear, or rainy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Beatenberg, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive to viewpoint</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Calm, clear, or rainy</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Aussichtspunkt+Beatenberg/@46.6856162,7.7879934,16z/data=!4m6!3m5!1s0x478fa531263af7f1:0x367113202ab7c1b!8m2!3d46.6856162!4d7.7879934!16s%2Fg%2F11f62f_5v5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Aussichtspunkt+Beatenberg/@46.6856162,7.7879934,16z/data=!4m6!3m5!1s0x478fa531263af7f1:0x367113202ab7c1b!8m2!3d46.6856162!4d7.7879934!16s%2Fg%2F11f62f_5v5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="oeschinensee" data-href="../spot/oeschinensee/" tabindex="0" role="link" aria-label="Oeschinensee">
@@ -687,7 +689,7 @@
         <img class="hb-slide" src="../img/derivatives/oeschinensee_p7/w1000.webp" srcset="../img/derivatives/oeschinensee_p7/w400.webp 400w, ../img/derivatives/oeschinensee_p7/w1000.webp 1000w, ../img/derivatives/oeschinensee_p7/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/oeschinensee_p8/w1000.webp" srcset="../img/derivatives/oeschinensee_p8/w400.webp 400w, ../img/derivatives/oeschinensee_p8/w1000.webp 1000w, ../img/derivatives/oeschinensee_p8/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 9</span>
-        <span class="credit-pill hb-credit">Photo · @leon.helg</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @leon.helg</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -697,12 +699,12 @@
         <h2 class="cl-title">Oeschinensee</h2>
         <p class="cl-subhead">The famous turquoise lake above Kandersteg. Not a hidden gem anymore, but if you walk past the platform it gets quiet fast.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Kandersteg, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Gondola + 20 min walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Anytime, clear sky for the colour</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Kandersteg, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Gondola + 20 min walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Anytime, clear sky for the colour</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Oeschinensee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f08a670704edd:0x30815e0b3a5ce4ee!8m2!3d46.4989089!4d7.7291063!16s%2Fm%2F02q4rtm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Oeschinensee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478f08a670704edd:0x30815e0b3a5ce4ee!8m2!3d46.4989089!4d7.7291063!16s%2Fm%2F02q4rtm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="piz_gloria" data-href="../spot/piz_gloria/" tabindex="0" role="link" aria-label="Piz Gloria">
@@ -712,7 +714,7 @@
         <img class="hb-slide" src="../img/derivatives/piz_gloria_p2/w1000.webp" srcset="../img/derivatives/piz_gloria_p2/w400.webp 400w, ../img/derivatives/piz_gloria_p2/w1000.webp 1000w, ../img/derivatives/piz_gloria_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/piz_gloria_p3/w1000.webp" srcset="../img/derivatives/piz_gloria_p3/w400.webp 400w, ../img/derivatives/piz_gloria_p3/w1000.webp 1000w, ../img/derivatives/piz_gloria_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · anthony_gomez</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · anthony_gomez</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -722,12 +724,12 @@
         <h2 class="cl-title">Piz Gloria</h2>
         <p class="cl-subhead">The Schilthorn summit station, cable car straight to a 360 degree view of the Bernese Alps. The Eiger, Mönch and Jungfrau line up across the valley.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Mürren, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car from Stechelberg via Mürren</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Mürren, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car from Stechelberg via Mürren</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Schilthorn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fa0aa046345b1:0xe0ac87e82a107f2!8m2!3d46.5574809!4d7.8352793!16zL20vMDMxMnk2" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Schilthorn/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fa0aa046345b1:0xe0ac87e82a107f2!8m2!3d46.5574809!4d7.8352793!16zL20vMDMxMnk2" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="lauterbrunnen" data-href="../spot/lauterbrunnen/" tabindex="0" role="link" aria-label="Lauterbrunnen">
@@ -738,7 +740,7 @@
         <img class="hb-slide" src="../img/derivatives/lauterbrunnen_p3/w1000.webp" srcset="../img/derivatives/lauterbrunnen_p3/w400.webp 400w, ../img/derivatives/lauterbrunnen_p3/w1000.webp 1000w, ../img/derivatives/lauterbrunnen_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/lauterbrunnen_p4/w1000.webp" srcset="../img/derivatives/lauterbrunnen_p4/w400.webp 400w, ../img/derivatives/lauterbrunnen_p4/w1000.webp 1000w, ../img/derivatives/lauterbrunnen_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 5</span>
-        <span class="credit-pill hb-credit">Photo · omid_visuals</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · omid_visuals</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -748,12 +750,12 @@
         <h2 class="cl-title">Lauterbrunnen</h2>
         <p class="cl-subhead">The valley everyone knows. Cliffs, waterfalls, the Staubbach falling 300 metres straight off the wall. Yes, it is still worth the visit.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Lauterbrunnen Valley, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Train or drive</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Anytime, golden hour for the falls</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Lauterbrunnen Valley, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Train or drive</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Anytime, golden hour for the falls</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Lauterbrunnen/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fa0073b1165c7:0x5392dbb55902c31!8m2!3d46.5935058!4d7.9090981!16zL20vMDFxamwz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Lauterbrunnen/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478fa0073b1165c7:0x5392dbb55902c31!8m2!3d46.5935058!4d7.9090981!16zL20vMDFxamwz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="brisen" data-href="../spot/brisen/" tabindex="0" role="link" aria-label="Brisen">
@@ -761,7 +763,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/brisen_p0/w1000.webp" srcset="../img/derivatives/brisen_p0/w400.webp 400w, ../img/derivatives/brisen_p0/w1000.webp 1000w, ../img/derivatives/brisen_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Brisen" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/brisen_p1/w1000.webp" srcset="../img/derivatives/brisen_p1/w400.webp 400w, ../img/derivatives/brisen_p1/w1000.webp 1000w, ../img/derivatives/brisen_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · @oliwear.j</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @oliwear.j</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -771,12 +773,12 @@
         <h2 class="cl-title">Brisen</h2>
         <p class="cl-subhead">A 2,400m ridge above Engelberg with views across the Bernese Oberland. Less famous than the Hardergrat, same kind of view.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Engelberg, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car + 2h ridge walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Cloudy or breaking light</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Engelberg, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car + 2h ridge walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Cloudy or breaking light</span></div>
         </div>
-      <a class="cl-maps" href="https://maps.app.goo.gl/koVZkZUHBqN9T7rw7" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://maps.app.goo.gl/koVZkZUHBqN9T7rw7" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="engstlensee" data-href="../spot/engstlensee/" tabindex="0" role="link" aria-label="Engstlensee">
@@ -786,7 +788,7 @@
         <img class="hb-slide" src="../img/derivatives/engstlensee_p2/w1000.webp" srcset="../img/derivatives/engstlensee_p2/w400.webp 400w, ../img/derivatives/engstlensee_p2/w1000.webp 1000w, ../img/derivatives/engstlensee_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/engstlensee_p3/w1000.webp" srcset="../img/derivatives/engstlensee_p3/w400.webp 400w, ../img/derivatives/engstlensee_p3/w1000.webp 1000w, ../img/derivatives/engstlensee_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · @oliwear.j</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @oliwear.j</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -796,12 +798,12 @@
         <h2 class="cl-title">Engstlensee</h2>
         <p class="cl-subhead">An alpine lake on the Engstlenalp plateau between Innertkirchen and Engelberg. Quiet enough most days that you can hear the wind on the water.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Innertkirchen, Bernese Oberland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Postbus or drive to Engstlenalp</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Late summer for the gentians</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Innertkirchen, Bernese Oberland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Postbus or drive to Engstlenalp</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Late summer for the gentians</span></div>
         </div>
-      <a class="cl-maps" href="https://maps.app.goo.gl/cHFf2Xag4jrtEowH6" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://maps.app.goo.gl/cHFf2Xag4jrtEowH6" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="mount_pilatus" data-href="../spot/mount_pilatus/" tabindex="0" role="link" aria-label="Mount Pilatus">
@@ -810,7 +812,7 @@
         <img class="hb-slide" src="../img/derivatives/mount_pilatus_p1/w1000.webp" srcset="../img/derivatives/mount_pilatus_p1/w400.webp 400w, ../img/derivatives/mount_pilatus_p1/w1000.webp 1000w, ../img/derivatives/mount_pilatus_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/mount_pilatus_p2/w1000.webp" srcset="../img/derivatives/mount_pilatus_p2/w400.webp 400w, ../img/derivatives/mount_pilatus_p2/w1000.webp 1000w, ../img/derivatives/mount_pilatus_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · emanuel_kionke</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · emanuel_kionke</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -820,12 +822,12 @@
         <h2 class="cl-title">Mount Pilatus</h2>
         <p class="cl-subhead">360 view above Lake Lucerne. Cable car or cog railway to the top. Crowded but the view earns it.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Lucerne, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Cable car (Kriens) or cog railway (Alpnachstad)</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">None</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise or sunset for the cog railway</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Lucerne, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Cable car (Kriens) or cog railway (Alpnachstad)</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">None</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise or sunset for the cog railway</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Mount+Pilatus/@46.9795,8.2548,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.9795!4d8.2548" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Mount+Pilatus/@46.9795,8.2548,17z/data=!3m1!4b1!4m4!3m3!8m2!3d46.9795!4d8.2548" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="wasserfall_finstersee" data-href="../spot/wasserfall_finstersee/" tabindex="0" role="link" aria-label="Wasserfall Finstersee">
@@ -834,7 +836,7 @@
         <img class="hb-slide" src="../img/derivatives/wasserfall_finstersee_p1/w1000.webp" srcset="../img/derivatives/wasserfall_finstersee_p1/w400.webp 400w, ../img/derivatives/wasserfall_finstersee_p1/w1000.webp 1000w, ../img/derivatives/wasserfall_finstersee_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/wasserfall_finstersee_p2/w1000.webp" srcset="../img/derivatives/wasserfall_finstersee_p2/w400.webp 400w, ../img/derivatives/wasserfall_finstersee_p2/w1000.webp 1000w, ../img/derivatives/wasserfall_finstersee_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · @daniel_staub_photo</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @daniel_staub_photo</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -844,12 +846,12 @@
         <h2 class="cl-title">Wasserfall Finstersee</h2>
         <p class="cl-subhead">Hidden waterfall in the Zug hinterland. Short walk in. Best after rain when it actually runs.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Menzingen, Central Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Short walk from parking</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">After heavy rain</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Menzingen, Central Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Short walk from parking</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">After heavy rain</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Wasserfall+Finstersee/@47.1641014,8.6355808,17z/data=!3m1!4b1!4m6!3m5!1s0x479aad0c46e30ca3:0xdbf376ce0d1d5094!8m2!3d47.1641014!4d8.6355808" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Wasserfall+Finstersee/@47.1641014,8.6355808,17z/data=!3m1!4b1!4m6!3m5!1s0x479aad0c46e30ca3:0xdbf376ce0d1d5094!8m2!3d47.1641014!4d8.6355808" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
       </div>
@@ -1162,9 +1164,9 @@
 </div>
 
 <footer class="legal">
-  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  <a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 

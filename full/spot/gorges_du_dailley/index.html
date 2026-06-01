@@ -16,7 +16,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="../../preview.css?v=1780131224682" />
+<script src="../../lib/i18n-strings.js"></script>
+<script src="../../lib/i18n.js"></script>
+<link rel="stylesheet" href="../../preview.css?v=1780298900419" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -62,13 +64,13 @@
 <div class="app">
   <div class="viewer" id="viewer">
 
-    <a class="pill hb-back app-back" data-chapter="valais" data-spot="gorges_du_dailley" href="../../valais/" title="Back to chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>Back</span></a>
+    <a class="pill hb-back app-back" data-chapter="valais" data-spot="gorges_du_dailley" href="../../valais/" title="Back to chapter" data-i18n-attr="title:a11y.back_to_chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span data-i18n="action.back">Back</span></a>
 
 <div class="hb-flip-shell"><div class="hb-flip-card" data-hb-flip-card>
     <section class="slide slide-spot" id="gorges_du_dailley">
   <div class="sp-photo">
     <img src="../../img/derivatives/gorges_du_dailley_p0/w1000.webp" srcset="../../img/derivatives/gorges_du_dailley_p0/w400.webp 400w, ../../img/derivatives/gorges_du_dailley_p0/w1000.webp 1000w, ../../img/derivatives/gorges_du_dailley_p0/w1800.webp 1800w, ../../img/derivatives/gorges_du_dailley_p0/w2800.webp 2800w" sizes="(min-width: 768px) 800px, 100vw" alt="Gorges du Dailley" fetchpriority="high" decoding="async" />
-    <span class="credit-pill">Photo · @hebergements_les_rochers</span>
+    <span class="credit-pill"><span data-i18n="label.photo">Photo</span> · @hebergements_les_rochers</span>
   </div>
   <div class="sp-body">
     <p class="sp-kicker">NARROWER, OLDER, LESS KNOWN</p>
@@ -79,22 +81,22 @@
       <p>Best shot mid-morning when the light filters down through the canopy. In heavy rain seasons the spray gets intense, so protect the camera. The return route loops back through larch forest that turns gold in October.</p>
     </div>
     <div class="specs">
-      <div class="spec"><span class="lbl">Region</span><span class="val">Salvan</span></div>
-      <div class="spec"><span class="lbl">Access</span><span class="val">Drive + walk</span></div>
-      <div class="spec"><span class="lbl">Effort</span><span class="val">Easy</span></div>
-      <div class="spec"><span class="lbl">Best light</span><span class="val">Mid-morning</span></div>
+      <div class="spec"><span class="lbl" data-i18n="spec.region">Region</span><span class="val">Salvan</span></div>
+      <div class="spec"><span class="lbl" data-i18n="spec.access">Access</span><span class="val">Drive + walk</span></div>
+      <div class="spec"><span class="lbl" data-i18n="spec.effort">Effort</span><span class="val">Easy</span></div>
+      <div class="spec"><span class="lbl" data-i18n="spec.best_light">Best light</span><span class="val">Mid-morning</span></div>
     </div>
-          <button type="button" class="hb-flip-cta-row" data-action="flip-back">How to get there <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button type="button" class="hb-flip-cta-row" data-action="flip-back"><span data-i18n="action.how_to_get_there">How to get there</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
   </div>
 </section>
 <section class="slide-spot-back" data-view="overview" data-spot-id="gorges_du_dailley">
     <div class="hb-flip-back-view hb-flip-back-view-overview">
     <div class="hb-back-topbar">
-      <button type="button" class="hb-back-flip-back" data-action="flip-front"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to photo</button>
-      <p class="hb-back-title">Planning · <b>Gorges du Dailley</b></p>
+      <button type="button" class="hb-back-flip-back" data-action="flip-front"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span data-i18n="route.back_to_photo">Back to photo</span></button>
+      <p class="hb-back-title"><span data-i18n="planning.title">Planning</span> · <b>Gorges du Dailley</b></p>
     </div>
     <p class="hb-beta-notice">
-    Beta version. The route data is still being verified. Spotted something wrong?
+    <span data-i18n="beta.notice">Beta version. The route data is still being verified. Spotted something wrong?</span>
     <a href="mailto:leon@hikebeast.ch?subject=Hikebeast%20route%20feedback">leon@hikebeast.ch</a>
   </p>
     <div class="hb-links-row"><a class="hb-link-pill" href="https://www.google.com/maps/place/Gorges+du+Dailley/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478eb7caa3e0d4dd:0xc63621c20a4a71d3!8m2!3d46.1392092!4d7.0185055!16s%2Fg%2F11bwpydx4l" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-gmaps"/></svg></span>Google Maps</a><a class="hb-link-pill" href="https://map.geo.admin.ch/?lang=en&zoom=10&crosshair=marker&E=2567533&N=1109834" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-swisstopo"/></svg></span>SwissTopo</a><a class="hb-link-pill" href="https://maps.apple.com/?ll=46.1392092,7.0185055&amp;q=Gorges%20du%20Dailley" target="_blank" rel="noopener"><span class="hb-brand-icon"><svg><use href="#brand-applemaps"/></svg></span>Apple Maps</a></div>
@@ -102,21 +104,21 @@
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 20l5-9 4 6 3-4 6 7"/></svg></span>
     <span class="value">1,066<span class="unit">m</span></span>
-    <span class="label">Altitude</span>
+    <span class="label" data-i18n="stat.altitude">Altitude</span>
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
     <span class="value">T2<span class="unit">· Moderate</span></span>
-    <span class="label">Accessibility</span>
+    <span class="label" data-i18n="stat.accessibility">Accessibility</span>
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M14 19c0-2 2-3 4-3s3 1 3 3"/></svg></span>
     <span class="value"><span class="hb-busy"><span class="on"></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span></span></span>
-    <span class="label">Crowdedness</span>
+    <span class="label" data-i18n="stat.crowdedness">Crowdedness</span>
   </div>
   </div>
     
-    <p class="hb-section-h">Routes</p>
+    <p class="hb-section-h" data-i18n="section.routes">Routes</p>
   <div class="hb-routes-list"><button type="button" class="hb-route-row" data-route-idx="0">
     <div class="hb-route-thumb"><img src="../../img/derivatives/gorges_du_dailley_p0/w1800.webp" alt="" loading="lazy" /></div>
     <div class="hb-route-meta">
@@ -130,15 +132,15 @@
   </div>
     <div class="hb-flip-back-view hb-flip-back-view-route">
     <div class="hb-back-topbar">
-      <button type="button" class="hb-back-route-btn" data-action="flip-overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Routes</button>
-      <p class="hb-back-title">Approach to <b>Gorges du Dailley</b></p>
+      <button type="button" class="hb-back-route-btn" data-action="flip-overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span data-i18n="section.routes">Routes</span></button>
+      <p class="hb-back-title"><span data-i18n="route.approach_to">Approach to</span> <b>Gorges du Dailley</b></p>
     </div>
     <p class="hb-beta-notice">
-    Beta version. The route data is still being verified. Spotted something wrong?
+    <span data-i18n="beta.notice">Beta version. The route data is still being verified. Spotted something wrong?</span>
     <a href="mailto:leon@hikebeast.ch?subject=Hikebeast%20route%20feedback">leon@hikebeast.ch</a>
   </p>
     <div class="hb-rd-head">
-      <p class="hb-rd-kicker">Route</p>
+      <p class="hb-rd-kicker" data-i18n="route.kicker">Route</p>
       <h3 class="hb-rd-name"><span data-rd-name>—</span></h3>
     </div>
     <p class="hb-spot-description" data-rd-description hidden></p>
@@ -146,58 +148,58 @@
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 20l5-9 4 6 3-4 6 7"/></svg></span>
     <span class="value">1,066<span class="unit">m</span></span>
-    <span class="label">Altitude</span>
+    <span class="label" data-i18n="stat.altitude">Altitude</span>
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20l8-14 8 14"/><path d="M9 14h6"/></svg></span>
     <span class="value"><span data-rd-sac>T2</span><span class="unit"><span data-rd-sac-sep>·</span> <span data-rd-sac-label>Moderate</span></span></span>
-    <span class="label">Difficulty</span>
+    <span class="label" data-i18n="stat.difficulty">Difficulty</span>
   </div>
     <div class="hb-stats-cell">
     <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
     <span class="value"><span data-rd-dur>2h 30</span><span class="unit" data-rd-dur-unit></span></span>
-    <span class="label">Duration</span>
+    <span class="label" data-i18n="stat.duration">Duration</span>
   </div>
     <div class="hb-stats-cell" data-stat-cell="elev">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 18l7-9 4 5 7-9"/><path d="M14 5h7v7"/></svg></span>
     <span class="value"><span data-rd-elev-change>+380<span class="unit">m</span></span></span>
-    <span class="label">Elevation change</span>
+    <span class="label" data-i18n="stat.elevation_change">Elevation change</span>
   </div>
     <div class="hb-stats-cell" data-stat-cell="dist">
     <span class="icon"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M6 14h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L6 14z"/><path d="M16 9c-1.5 0-2.5 2-2 4.5.4 2 1.4 3 2.4 3s2-1 2-3-1-4.4-2.4-4.5z"/><path d="M14 19h4l-.5 2.5c-.2 1.4-1.5 2-2.4 1.5-.9-.5-1.4-1.7-1.1-2.7L14 19z"/></svg></span>
     <span class="value"><span data-rd-dist>5.5</span><span class="unit">km</span></span>
-    <span class="label">Distance</span>
+    <span class="label" data-i18n="stat.distance">Distance</span>
   </div>
   </div>
     <div class="hb-detail-card"><div class="hb-detail-grid">
-      <div><span class="lbl">Equipment</span><span class="val" data-rd-equipment>—</span></div>
-      <div><span class="lbl">Start</span><span class="val" data-rd-start>—</span></div>
-      <div><span class="lbl">Transit</span><span class="val" data-rd-transit>—</span></div>
+      <div><span class="lbl" data-i18n="route.equipment">Equipment</span><span class="val" data-rd-equipment>—</span></div>
+      <div><span class="lbl" data-i18n="route.start">Start</span><span class="val" data-rd-start>—</span></div>
+      <div><span class="lbl" data-i18n="route.transit">Transit</span><span class="val" data-rd-transit>—</span></div>
     </div></div>
 
     <div data-rd-hut hidden>
-      <p class="hb-section-h">Mountain hut</p>
+      <p class="hb-section-h" data-i18n="section.mountain_hut">Mountain hut</p>
       <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
-        <div><span class="lbl">Name</span><span class="val" data-rd-hut-name>—</span></div>
-        <div><span class="lbl">Cost</span><span class="val" data-rd-hut-cost>—</span></div>
-        <div><span class="lbl">Open</span><span class="val" data-rd-hut-open>—</span></div>
-        <div><span class="lbl">Website</span><span class="val" data-rd-hut-website>—</span></div>
+        <div><span class="lbl" data-i18n="detail.name">Name</span><span class="val" data-rd-hut-name>—</span></div>
+        <div><span class="lbl" data-i18n="detail.cost">Cost</span><span class="val" data-rd-hut-cost>—</span></div>
+        <div><span class="lbl" data-i18n="detail.open">Open</span><span class="val" data-rd-hut-open>—</span></div>
+        <div><span class="lbl" data-i18n="detail.website">Website</span><span class="val" data-rd-hut-website>—</span></div>
       </div></div>
     </div>
 
     <div data-rd-cable hidden>
-      <p class="hb-section-h">Cable car</p>
+      <p class="hb-section-h" data-i18n="section.cable_car">Cable car</p>
       <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
-        <div><span class="lbl">Name</span><span class="val" data-rd-cable-line>—</span></div>
-        <div><span class="lbl">Open</span><span class="val" data-rd-cable-open>—</span></div>
-        <div><span class="lbl">Website</span><span class="val" data-rd-cable-info>—</span></div>
+        <div><span class="lbl" data-i18n="detail.name">Name</span><span class="val" data-rd-cable-line>—</span></div>
+        <div><span class="lbl" data-i18n="detail.open">Open</span><span class="val" data-rd-cable-open>—</span></div>
+        <div><span class="lbl" data-i18n="detail.website">Website</span><span class="val" data-rd-cable-info>—</span></div>
       </div></div>
     </div>
 
     <div class="hb-links-row" data-rd-actions></div>
 
     <div class="hb-route-sources" data-rd-sources hidden>
-      <p class="hb-sources-h">Sources</p>
+      <p class="hb-sources-h" data-i18n="section.sources">Sources</p>
       <ul class="hb-sources-list" data-rd-sources-list></ul>
     </div>
   </div>

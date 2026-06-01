@@ -1,0 +1,131 @@
+# Hikebeast /full · UI string catalog — Français.
+# FIRST DRAFT — needs a brand-voice pass. Brand terms (Hidden Gems, Famous Gems,
+# Wildcamping) left in English on purpose pending Leon's call. Keys must match
+# en.yaml exactly (build-i18n enforces it).
+
+nav:
+  home: Accueil
+  explore: Explorer
+  map: Carte
+  swipe: Swipe
+  random: Au hasard
+  liked: Favoris
+  been_there: Visités
+  collections: Collections
+  hidden_gems: Hidden Gems
+  famous_gems: Famous Gems
+  wildcamping: Wildcamping
+  all_regions: Toutes les régions
+  more: Plus
+  menu: Menu
+  collapse: Réduire
+
+a11y:
+  primary_nav: Navigation principale
+  open_nav: Ouvrir la navigation
+  toggle_nav_labels: Afficher les libellés de navigation
+  menu: Menu
+  close_menu: Fermer le menu
+  toggle_theme: Basculer le mode sombre
+  back_to_chapter: Retour au chapitre
+
+theme:
+  dark: Mode sombre
+  light: Mode clair
+
+menu:
+  surprise_me: Surprends-moi
+  settings: Réglages
+
+lang:
+  label: Langue
+  en: English
+  de: Deutsch
+  fr: Français
+
+spec:
+  region: Région
+  access: Accès
+  effort: Effort
+  best_light: Meilleure lumière
+
+stat:
+  altitude: Altitude
+  accessibility: Accessibilité
+  crowdedness: Affluence
+  difficulty: Difficulté
+  duration: Durée
+  elevation_change: Dénivelé
+  distance: Distance
+  drive_up: En voiture
+
+action:
+  open_in_maps: Ouvrir dans Maps
+  open_full_map: Ouvrir la carte complète
+  open_spot: Ouvrir le spot
+  see_all: Tout voir
+  back: Retour
+  overview: Aperçu
+  how_to_get_there: Y aller
+
+view:
+  reader: Lecture
+  grid: Grille
+
+label:
+  region: Région
+  on_the_map: Sur la carte
+  featured: À la une
+  for_you: Pour vous
+  photo: Photo
+  intro: Intro
+  front_matter: Introduction
+
+count:
+  spots_bare:
+    one: spot
+    other: spots
+  spots_in_region:
+    one: "{n} spot dans cette région"
+    other: "{n} spots dans cette région"
+
+footer:
+  imprint: Mentions légales
+  privacy: Confidentialité
+  terms: Conditions
+
+section:
+  routes: Itinéraires
+  sources: Sources
+  mountain_hut: Cabane
+  cable_car: Téléphérique
+
+access:
+  parking: Parking
+  walk_to_spot: Marche jusqu'au spot
+  walk_from_stop: Marche depuis l'arrêt
+  by_car: En voiture
+  by_train_bus: En train + bus
+  by_boat: En bateau
+  when_to_go: Quand y aller
+  hours_season: Horaires / saison
+
+route:
+  kicker: Itinéraire
+  approach_to: Accès à
+  back_to_photo: Retour à la photo
+  equipment: Équipement
+  start: Départ
+  transit: Transports
+
+detail:
+  name: Nom
+  cost: Coût
+  open: Ouvert
+  website: Site web
+
+planning:
+  title: Planification
+
+beta:
+  notice: Version bêta. Les données d'itinéraire sont encore en cours de vérification. Vous avez repéré une erreur ?

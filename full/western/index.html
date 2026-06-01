@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260524a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
@@ -24,17 +26,17 @@
   <a class="brand" href="../index.html">
     <span>Western Switzerland</span>
   </a>
-  <span class="crumb"><b>15</b> spots</span>
+  <span class="crumb"><b>15</b> <span data-i18n-plural="count.spots_bare" data-n="15">spots</span></span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
 <div class="app">
 
   <aside class="sidebar" aria-label="Chapters">
-  <a class="sb-home" href="../index.html" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>
-  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl">Intro</span></a>
+  <a class="sb-home" href="../index.html" title="Home" data-i18n-attr="title:nav.home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>
+  <a class="sb-thumb" href="../intro/index.html" title="Front matter" data-i18n-attr="title:label.front_matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl" data-i18n="label.intro">Intro</span></a>
   <a class="sb-thumb" href="../eastern/index.html" title="Eastern Switzerland"><img src="../img/chapters/eastern/w400.webp" alt="" /><span class="lbl">Eastern</span></a>
   <a class="sb-thumb" href="../central/index.html" title="Central Switzerland"><img src="../img/chapters/central/w400.webp" alt="" /><span class="lbl">Central</span></a>
   <a class="sb-thumb" href="../valais/index.html" title="Valais"><img src="../img/chapters/valais/w400.webp" alt="" /><span class="lbl">Valais</span></a>
@@ -51,7 +53,7 @@
     <img src="../img/region-western.svg" alt="Western Switzerland on the Swiss map" fetchpriority="high" decoding="async" />
   </div>
   <div class="cv-content">
-    <p class="cv-kicker">Region</p>
+    <p class="cv-kicker" data-i18n="label.region">Region</p>
     <h1>Western Switzerland</h1>
     <p class="cv-deck">The Léman arc, the Jura, and a slice of the Chablais. Vineyards down low, limestone cliffs up high, and a lake at the middle of everything. The most underrated quarter of the country for photographers.</p>
   </div>
@@ -59,10 +61,10 @@
 
     <section class="chapter-views" aria-label="Western Switzerland spots">
       <div class="chapter-views-head">
-        <p class="chapter-views-meta">15 spots</p>
+        <p class="chapter-views-meta">15 <span data-i18n-plural="count.spots_bare" data-n="15">spots</span></p>
         <div class="chapter-view-toggle" role="tablist" aria-label="Chapter view">
-          <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span>Reader</span></button>
-          <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Grid</span></button>
+          <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span data-i18n="view.reader">Reader</span></button>
+          <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span data-i18n="view.grid">Grid</span></button>
         </div>
       </div>
       <div class="chapter-list">
@@ -74,7 +76,7 @@
         <img class="hb-slide" src="../img/derivatives/cap_au_moine_p3/w1000.webp" srcset="../img/derivatives/cap_au_moine_p3/w400.webp 400w, ../img/derivatives/cap_au_moine_p3/w1000.webp 1000w, ../img/derivatives/cap_au_moine_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/cap_au_moine_p4/w1000.webp" srcset="../img/derivatives/cap_au_moine_p4/w400.webp 400w, ../img/derivatives/cap_au_moine_p4/w1000.webp 1000w, ../img/derivatives/cap_au_moine_p4/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 5</span>
-        <span class="credit-pill hb-credit">Photo · @danslafosse.medias</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @danslafosse.medias</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -84,12 +86,12 @@
         <h2 class="cl-title">Cap au Moine</h2>
         <p class="cl-subhead">A knife-edge ridge you reach from Col de Jaman. The view down to Lac Léman is one of the most dramatic in the whole country.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Riviera vaudoise</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + ~1h ascent (round trip ~2h 45)</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate. Exposed</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise or sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Riviera vaudoise</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + ~1h ascent (round trip ~2h 45)</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate. Exposed</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise or sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://maps.app.goo.gl/M69D6oka7K86BfTi8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://maps.app.goo.gl/M69D6oka7K86BfTi8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="dent_de_jaman" data-href="../spot/dent_de_jaman/" tabindex="0" role="link" aria-label="Dent de Jaman">
@@ -99,7 +101,7 @@
         <img class="hb-slide" src="../img/derivatives/dent_de_jaman_p2/w1000.webp" srcset="../img/derivatives/dent_de_jaman_p2/w400.webp 400w, ../img/derivatives/dent_de_jaman_p2/w1000.webp 1000w, ../img/derivatives/dent_de_jaman_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/dent_de_jaman_p3/w1000.webp" srcset="../img/derivatives/dent_de_jaman_p3/w400.webp 400w, ../img/derivatives/dent_de_jaman_p3/w1000.webp 1000w, ../img/derivatives/dent_de_jaman_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · xavier_von_erlach</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · xavier_von_erlach</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -109,12 +111,12 @@
         <h2 class="cl-title">Dent de Jaman</h2>
         <p class="cl-subhead">A small, sharp summit above Col de Jaman with an outsize view of Léman and the French Alps.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Riviera vaudoise</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Riviera vaudoise</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Dent+de+Jaman/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e900ef472dc75:0xa9ea15a1ea677bef!8m2!3d46.445!4d6.9748!16s%2Fm%2F04q2b_b" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Dent+de+Jaman/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e900ef472dc75:0xa9ea15a1ea677bef!8m2!3d46.445!4d6.9748!16s%2Fm%2F04q2b_b" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="gorges_du_chauderon" data-href="../spot/gorges_du_chauderon/" tabindex="0" role="link" aria-label="Gorges du Chauderon">
@@ -133,12 +135,12 @@
         <h2 class="cl-title">Gorges du Chauderon</h2>
         <p class="cl-subhead">A waterfall hidden in the canyon, invisible from the footpath. You&#x27;ll need a drone. And patience for the weather.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Montreux, Vaud</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Canyon trail + drone</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Cloudy spring days</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Montreux, Vaud</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Canyon trail + drone</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Cloudy spring days</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Gorges+du+Chauderon/@46.4367906,6.9229226,485m/data=!3m1!1e3!4m6!3m5!1s0x478e9bd02ed88279:0x5a702a06efcffa74!8m2!3d46.4368563!4d6.9250077!16s%2Fg%2F11f652tll2" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Gorges+du+Chauderon/@46.4367906,6.9229226,485m/data=!3m1!1e3!4m6!3m5!1s0x478e9bd02ed88279:0x5a702a06efcffa74!8m2!3d46.4368563!4d6.9250077!16s%2Fg%2F11f652tll2" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="pisse_chevre" data-href="../spot/pisse_chevre/" tabindex="0" role="link" aria-label="Pisse-Chèvre">
@@ -146,7 +148,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/pisse_chevre_p0/w1000.webp" srcset="../img/derivatives/pisse_chevre_p0/w400.webp 400w, ../img/derivatives/pisse_chevre_p0/w1000.webp 1000w, ../img/derivatives/pisse_chevre_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Pisse-Chèvre" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/pisse_chevre_p1/w1000.webp" srcset="../img/derivatives/pisse_chevre_p1/w400.webp 400w, ../img/derivatives/pisse_chevre_p1/w1000.webp 1000w, ../img/derivatives/pisse_chevre_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · @samsurinwelch</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @samsurinwelch</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -156,12 +158,12 @@
         <h2 class="cl-title">Pisse-Chèvre</h2>
         <p class="cl-subhead">A tall waterfall above the Rhône valley. Great when the snowmelt is running hard or after spring rain.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Lavey-Morcles, Vaud</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + drone</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Cloudy with high water</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Lavey-Morcles, Vaud</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + drone</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Cloudy with high water</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Pissechevre/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478eb91116b7f2b1:0xaf936736e1645bd7!8m2!3d46.198!4d7.02769!16s%2Fg%2F1tdw2cpw" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Pissechevre/@45.1662212,2.7371613,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478eb91116b7f2b1:0xaf936736e1645bd7!8m2!3d46.198!4d7.02769!16s%2Fg%2F1tdw2cpw" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="route_de_morcles" data-href="../spot/route_de_morcles/" tabindex="0" role="link" aria-label="Route de Morcles">
@@ -179,12 +181,12 @@
         <h2 class="cl-title">Route de Morcles</h2>
         <p class="cl-subhead">Shot along the same road as Pisse-Chèvre, heading toward the village of Morcles. A quiet mountain road with cinema corners.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Lavey-Morcles, Vaud</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive. Roadside</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">None</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Cloudy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Lavey-Morcles, Vaud</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive. Roadside</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">None</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Cloudy</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/46%C2%B011&#x27;55.8%22N+7%C2%B001&#x27;52.3%22E/@46.1985069,7.0222498,2175m/data=!3m1!1e3!4m4!3m3!8m2!3d46.19882!4d7.031182" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/46%C2%B011&#x27;55.8%22N+7%C2%B001&#x27;52.3%22E/@46.1985069,7.0222498,2175m/data=!3m1!1e3!4m4!3m3!8m2!3d46.19882!4d7.031182" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="creux_du_van" data-href="../spot/creux_du_van/" tabindex="0" role="link" aria-label="Creux du Van">
@@ -199,7 +201,7 @@
         <img class="hb-slide" src="../img/derivatives/creux_du_van_p7/w1000.webp" srcset="../img/derivatives/creux_du_van_p7/w400.webp 400w, ../img/derivatives/creux_du_van_p7/w1000.webp 1000w, ../img/derivatives/creux_du_van_p7/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/creux_du_van_p8/w1000.webp" srcset="../img/derivatives/creux_du_van_p8/w400.webp 400w, ../img/derivatives/creux_du_van_p8/w1000.webp 1000w, ../img/derivatives/creux_du_van_p8/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 9</span>
-        <span class="credit-pill hb-credit">Photo · daniel_r</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · daniel_r</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -209,12 +211,12 @@
         <h2 class="cl-title">Creux du Van</h2>
         <p class="cl-subhead">A natural amphitheatre of vertical cliffs 150m tall. Feels nothing like the rest of Switzerland.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Jura, Neuchâtel</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive to Le Soliat + walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise or cloudy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Jura, Neuchâtel</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive to Le Soliat + walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise or cloudy</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Creux+du+Van/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478de7f8240bcb23:0xc04d997cfd4ad4a8!8m2!3d46.9309929!4d6.7234511!16s%2Fm%2F08097wh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Creux+du+Van/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478de7f8240bcb23:0xc04d997cfd4ad4a8!8m2!3d46.9309929!4d6.7234511!16s%2Fm%2F08097wh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="tine_de_conflens" data-href="../spot/tine_de_conflens/" tabindex="0" role="link" aria-label="Tine de Conflens">
@@ -222,7 +224,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/tine_de_conflens_p0/w1000.webp" srcset="../img/derivatives/tine_de_conflens_p0/w400.webp 400w, ../img/derivatives/tine_de_conflens_p0/w1000.webp 1000w, ../img/derivatives/tine_de_conflens_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Tine de Conflens" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/tine_de_conflens_p1/w1000.webp" srcset="../img/derivatives/tine_de_conflens_p1/w400.webp 400w, ../img/derivatives/tine_de_conflens_p1/w1000.webp 1000w, ../img/derivatives/tine_de_conflens_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · @christofs70</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @christofs70</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -232,12 +234,12 @@
         <h2 class="cl-title">Tine de Conflens</h2>
         <p class="cl-subhead">A short hike to a rarely photographed waterfall. Perfect for a quick morning when you don&#x27;t want crowds.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Vaud. La Sarraz area</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + short hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Cloudy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Vaud. La Sarraz area</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + short hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Cloudy</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/La+Tine+de+Conflens/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478dcb0a9141171b:0xcf6c1e11b5285bf5!8m2!3d46.6557956!4d6.4939321!16s%2Fg%2F11jp59nc8b" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/La+Tine+de+Conflens/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478dcb0a9141171b:0xcf6c1e11b5285bf5!8m2!3d46.6557956!4d6.4939321!16s%2Fg%2F11jp59nc8b" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="lac_de_taney" data-href="../spot/lac_de_taney/" tabindex="0" role="link" aria-label="Lac de Taney">
@@ -247,7 +249,7 @@
         <img class="hb-slide" src="../img/derivatives/lac_de_taney_p2/w1000.webp" srcset="../img/derivatives/lac_de_taney_p2/w400.webp 400w, ../img/derivatives/lac_de_taney_p2/w1000.webp 1000w, ../img/derivatives/lac_de_taney_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/lac_de_taney_p3/w1000.webp" srcset="../img/derivatives/lac_de_taney_p3/w400.webp 400w, ../img/derivatives/lac_de_taney_p3/w1000.webp 1000w, ../img/derivatives/lac_de_taney_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · @alpenliebe_official</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @alpenliebe_official</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -257,12 +259,12 @@
         <h2 class="cl-title">Lac de Taney</h2>
         <p class="cl-subhead">A small lake tucked into a bowl above the eastern end of Lake Geneva. Classic Swiss postcard if the light plays along.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Chablais valaisan, Valais</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise or cloudy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Chablais valaisan, Valais</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise or cloudy</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Lac+de+Taney/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e9f2f53a97df1:0xfc94563b4beb1b95!8m2!3d46.3460125!4d6.8432074!16s%2Fm%2F03ch2nm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Lac+de+Taney/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e9f2f53a97df1:0xfc94563b4beb1b95!8m2!3d46.3460125!4d6.8432074!16s%2Fm%2F03ch2nm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="grammont" data-href="../spot/grammont/" tabindex="0" role="link" aria-label="Grammont">
@@ -271,7 +273,7 @@
         <img class="hb-slide" src="../img/derivatives/grammont_p1/w1000.webp" srcset="../img/derivatives/grammont_p1/w400.webp 400w, ../img/derivatives/grammont_p1/w1000.webp 1000w, ../img/derivatives/grammont_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/grammont_p2/w1000.webp" srcset="../img/derivatives/grammont_p2/w400.webp 400w, ../img/derivatives/grammont_p2/w1000.webp 1000w, ../img/derivatives/grammont_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · @andresduranco</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @andresduranco</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -281,12 +283,12 @@
         <h2 class="cl-title">Grammont</h2>
         <p class="cl-subhead">Keep hiking past Lac de Taney and you reach Le Grammont. A summit with a direct view down onto Léman.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Chablais valaisan, Valais</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Hike from Lac de Taney</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Moderate</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Chablais valaisan, Valais</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Hike from Lac de Taney</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Moderate</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Grammont/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e9efc6b1bf905:0x45d95daebdda9493!8m2!3d46.357488!4d6.8211393!16s%2Fm%2F04cywpb" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Grammont/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e9efc6b1bf905:0x45d95daebdda9493!8m2!3d46.357488!4d6.8211393!16s%2Fm%2F04cywpb" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="st_prex" data-href="../spot/st_prex/" tabindex="0" role="link" aria-label="St-Prex">
@@ -295,7 +297,7 @@
         <img class="hb-slide" src="../img/derivatives/st_prex_p1/w1000.webp" srcset="../img/derivatives/st_prex_p1/w400.webp 400w, ../img/derivatives/st_prex_p1/w1000.webp 1000w, ../img/derivatives/st_prex_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/st_prex_p2/w1000.webp" srcset="../img/derivatives/st_prex_p2/w400.webp 400w, ../img/derivatives/st_prex_p2/w1000.webp 1000w, ../img/derivatives/st_prex_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 3</span>
-        <span class="credit-pill hb-credit">Photo · @oliwvair1</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @oliwvair1</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -305,12 +307,12 @@
         <h2 class="cl-title">St-Prex</h2>
         <p class="cl-subhead">A pebble shoreline on the north side of Léman with a wooden jumping platform. A short train from Lausanne.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">La Côte, Vaud</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Train from Lausanne</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Summer afternoon</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">La Côte, Vaud</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Train from Lausanne</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Summer afternoon</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/?q=46.47843,6.45643&amp;z=15" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/?q=46.47843,6.45643&amp;z=15" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="marchairuz" data-href="../spot/marchairuz/" tabindex="0" role="link" aria-label="Marchairuz">
@@ -320,7 +322,7 @@
         <img class="hb-slide" src="../img/derivatives/marchairuz_p2/w1000.webp" srcset="../img/derivatives/marchairuz_p2/w400.webp 400w, ../img/derivatives/marchairuz_p2/w1000.webp 1000w, ../img/derivatives/marchairuz_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/marchairuz_p3/w1000.webp" srcset="../img/derivatives/marchairuz_p3/w400.webp 400w, ../img/derivatives/marchairuz_p3/w1000.webp 1000w, ../img/derivatives/marchairuz_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · @jenniferesseiva</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @jenniferesseiva</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -330,12 +332,12 @@
         <h2 class="cl-title">Marchairuz</h2>
         <p class="cl-subhead">A pass in the Jura that turns into a pine-covered snow scene after a good storm. Nothing dramatic. Just perfect.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Jura vaudois</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive. Pass road</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">None</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">After fresh snow</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Jura vaudois</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive. Pass road</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">None</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">After fresh snow</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/?q=46.55274,6.25024&amp;z=15" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/?q=46.55274,6.25024&amp;z=15" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="geltenschuss" data-href="../spot/geltenschuss/" tabindex="0" role="link" aria-label="Geltenschuss">
@@ -343,7 +345,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/geltenschuss_p0/w1000.webp" srcset="../img/derivatives/geltenschuss_p0/w400.webp 400w, ../img/derivatives/geltenschuss_p0/w1000.webp 1000w, ../img/derivatives/geltenschuss_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Geltenschuss" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/geltenschuss_p1/w1000.webp" srcset="../img/derivatives/geltenschuss_p1/w400.webp 400w, ../img/derivatives/geltenschuss_p1/w1000.webp 1000w, ../img/derivatives/geltenschuss_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · @davidbirri</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @davidbirri</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -353,12 +355,12 @@
         <h2 class="cl-title">Geltenschuss</h2>
         <p class="cl-subhead">A tall waterfall near Gstaad. The hike in is long, but the water in early summer makes it worth it.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Saanenland, Bern</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Long day hike</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Hard</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Early summer</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Saanenland, Bern</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Long day hike</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Hard</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Early summer</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Geltenschuss/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee5ea4096575f:0xa97284d4668fea6!8m2!3d46.3738!4d7.33776!16s%2Fg%2F1w454jjh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Geltenschuss/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478ee5ea4096575f:0xa97284d4668fea6!8m2!3d46.3738!4d7.33776!16s%2Fg%2F1w454jjh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="lavaux_vineyards" data-href="../spot/lavaux_vineyards/" tabindex="0" role="link" aria-label="Lavaux Vineyards">
@@ -366,7 +368,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/lavaux_vineyards_p0/w1000.webp" srcset="../img/derivatives/lavaux_vineyards_p0/w400.webp 400w, ../img/derivatives/lavaux_vineyards_p0/w1000.webp 1000w, ../img/derivatives/lavaux_vineyards_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Lavaux Vineyards" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/lavaux_vineyards_p1/w1000.webp" srcset="../img/derivatives/lavaux_vineyards_p1/w400.webp 400w, ../img/derivatives/lavaux_vineyards_p1/w1000.webp 1000w, ../img/derivatives/lavaux_vineyards_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · razvan_sassu</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · razvan_sassu</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -376,12 +378,12 @@
         <h2 class="cl-title">Lavaux Vineyards</h2>
         <p class="cl-subhead">UNESCO terraced vineyards cascading down to Lake Leman.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Lavaux, Western Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive or train</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy to moderate</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Golden hour, autumn best</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Lavaux, Western Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive or train</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy to moderate</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Golden hour, autumn best</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/Lavaux-Oron/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478c33d447645687:0x96990902d3a94b53!8m2!3d46.5100372!4d6.7531955!16s%2Fm%2F04f4h85" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/Lavaux-Oron/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478c33d447645687:0x96990902d3a94b53!8m2!3d46.5100372!4d6.7531955!16s%2Fm%2F04f4h85" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="etang_de_la_gruere" data-href="../spot/etang_de_la_gruere/" tabindex="0" role="link" aria-label="Etang de la Gruere">
@@ -391,7 +393,7 @@
         <img class="hb-slide" src="../img/derivatives/etang_de_la_gruere_p2/w1000.webp" srcset="../img/derivatives/etang_de_la_gruere_p2/w400.webp 400w, ../img/derivatives/etang_de_la_gruere_p2/w1000.webp 1000w, ../img/derivatives/etang_de_la_gruere_p2/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/etang_de_la_gruere_p3/w1000.webp" srcset="../img/derivatives/etang_de_la_gruere_p3/w400.webp 400w, ../img/derivatives/etang_de_la_gruere_p3/w1000.webp 1000w, ../img/derivatives/etang_de_la_gruere_p3/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 4</span>
-        <span class="credit-pill hb-credit">Photo · @claude_gurzeler</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @claude_gurzeler</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -401,12 +403,12 @@
         <h2 class="cl-title">Etang de la Gruere</h2>
         <p class="cl-subhead">A reflective bog lake in the Jura, stunning at both sunrise and sunset.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Saignelegier, Western Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + 10 min walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Sunrise and sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Saignelegier, Western Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + 10 min walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Sunrise and sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/%C3%89tang+de+la+Gru%C3%A8re/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4791fe18a3a8ca21:0x9c6b383c82b9fe9b!8m2!3d47.2385175!4d7.0463746!16s%2Fm%2F028871f" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/%C3%89tang+de+la+Gru%C3%A8re/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4791fe18a3a8ca21:0x9c6b383c82b9fe9b!8m2!3d47.2385175!4d7.0463746!16s%2Fm%2F028871f" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
     <article class="cl-card" id="le_doubs" data-href="../spot/le_doubs/" tabindex="0" role="link" aria-label="Le Doubs">
@@ -414,7 +416,7 @@
         <img class="hb-slide is-current" src="../img/derivatives/le_doubs_p0/w1000.webp" srcset="../img/derivatives/le_doubs_p0/w400.webp 400w, ../img/derivatives/le_doubs_p0/w1000.webp 1000w, ../img/derivatives/le_doubs_p0/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="Le Doubs" loading="lazy" draggable="false" />
         <img class="hb-slide" src="../img/derivatives/le_doubs_p1/w1000.webp" srcset="../img/derivatives/le_doubs_p1/w400.webp 400w, ../img/derivatives/le_doubs_p1/w1000.webp 1000w, ../img/derivatives/le_doubs_p1/w1800.webp 1800w" sizes="(min-width: 900px) 600px, 90vw" alt="" loading="lazy" draggable="false" />
         <span class="hb-counter">1 / 2</span>
-        <span class="credit-pill hb-credit">Photo · @jura3lacs</span>
+        <span class="credit-pill hb-credit"><span data-i18n="label.photo">Photo</span> · @jura3lacs</span>
         <div class="hb-dots" aria-hidden="true"><span class="is-on"></span><span class=""></span></div>
         <button type="button" class="hb-arrow hb-arrow-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button type="button" class="hb-arrow hb-arrow-next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
@@ -424,12 +426,12 @@
         <h2 class="cl-title">Le Doubs</h2>
         <p class="cl-subhead">A cliff-top view of the Doubs river canyon, above the village of Les Brenets.</p>
         <div class="cl-specs">
-        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">Les Brenets, Western Switzerland</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">Drive + short walk</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">Easy</span></div>
-        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">Overcast or sunset</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">Les Brenets, Western Switzerland</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">Drive + short walk</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">Easy</span></div>
+        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">Overcast or sunset</span></div>
         </div>
-      <a class="cl-maps" href="https://www.google.com/maps/place/47%C2%B005&#x27;31.0%22N+6%C2%B045&#x27;04.4%22E/@47.091939,6.7486421,17z/data=!3m1!4b1!4m4!3m3!8m2!3d47.091939!4d6.751217" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Open in Maps</span></a>
+      <a class="cl-maps" href="https://www.google.com/maps/place/47%C2%B005&#x27;31.0%22N+6%C2%B045&#x27;04.4%22E/@47.091939,6.7486421,17z/data=!3m1!4b1!4m4!3m3!8m2!3d47.091939!4d6.751217" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="action.open_in_maps">Open in Maps</span></a>
       </div>
     </article>
       </div>
@@ -589,9 +591,9 @@
 </div>
 
 <footer class="legal">
-  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  <a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 

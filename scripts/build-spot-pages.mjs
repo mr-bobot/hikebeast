@@ -240,7 +240,7 @@ function statCell(label, valueHtml, iconSvg, opts) {
   return `<div ${attrs}>
     <span class="icon">${iconSvg}</span>
     <span class="value">${valueHtml || ""}</span>
-    <span class="label">${label}</span>
+    <span class="label"${opts?.i18n ? ` data-i18n="${opts.i18n}"` : ""}>${label}</span>
   </div>`;
 }
 
@@ -269,13 +269,13 @@ function renderOverviewStatsBar(spot) {
       access = `${escapeHtml(easiest.sac_grade)}${label ? `<span class="unit">· ${escapeHtml(label)}</span>` : ""}`;
     }
   } else if (hasAccessData(spot)) {
-    access = `Drive-up`;
+    access = `<span data-i18n="stat.drive_up">Drive-up</span>`;
   }
 
   return `<div class="hb-stats-bar hb-stats-bar--compact">
-    ${statCell("Altitude", alt, ICON_ELEV)}
-    ${statCell("Accessibility", access, ICON_DIFF)}
-    ${statCell("Crowdedness", busyDotsHtml(tf.busyness), ICON_BUSY)}
+    ${statCell("Altitude", alt, ICON_ELEV, { i18n: "stat.altitude" })}
+    ${statCell("Accessibility", access, ICON_DIFF, { i18n: "stat.accessibility" })}
+    ${statCell("Crowdedness", busyDotsHtml(tf.busyness), ICON_BUSY, { i18n: "stat.crowdedness" })}
   </div>`;
 }
 
@@ -324,11 +324,11 @@ function renderRouteStatsBar(spot, route) {
   const distEmpty = r.distance_km ? "" : "is-empty";
 
   return `<div class="hb-stats-bar">
-    ${statCell("Altitude", alt, ICON_ELEV)}
-    ${statCell("Difficulty", sac, ICON_DIFF)}
-    ${statCell("Duration", time, ICON_TIME)}
-    ${statCell("Elevation change", elev, ICON_GAIN, { hideKey: "elev", empty: !elevChange })}
-    ${statCell("Distance", dist, ICON_DIST, { hideKey: "dist", empty: !r.distance_km })}
+    ${statCell("Altitude", alt, ICON_ELEV, { i18n: "stat.altitude" })}
+    ${statCell("Difficulty", sac, ICON_DIFF, { i18n: "stat.difficulty" })}
+    ${statCell("Duration", time, ICON_TIME, { i18n: "stat.duration" })}
+    ${statCell("Elevation change", elev, ICON_GAIN, { hideKey: "elev", empty: !elevChange, i18n: "stat.elevation_change" })}
+    ${statCell("Distance", dist, ICON_DIST, { hideKey: "dist", empty: !r.distance_km, i18n: "stat.distance" })}
   </div>`;
 }
 
@@ -474,7 +474,7 @@ function routeRow(spot, route, idx) {
 function renderRoutesList(spot) {
   if (!spot.routes || !spot.routes.length) return "";
   const rows = spot.routes.map((r, i) => routeRow(spot, r, i)).join("");
-  return `<p class="hb-section-h">Routes</p>
+  return `<p class="hb-section-h" data-i18n="section.routes">Routes</p>
   <div class="hb-routes-list">${rows}</div>`;
 }
 
@@ -508,10 +508,10 @@ function renderAccessSection(spot) {
     const car = a.by_car;
     const lines = [];
     if (car.directions) lines.push(escapeHtml(car.directions));
-    if (car.parking) lines.push(`<span class="hb-access-detail">Parking</span> ${escapeHtml(car.parking)}`);
-    if (car.walk_to_spot_min) lines.push(`<span class="hb-access-detail">Walk to spot</span> ${car.walk_to_spot_min} min`);
+    if (car.parking) lines.push(`<span class="hb-access-detail" data-i18n="access.parking">Parking</span> ${escapeHtml(car.parking)}`);
+    if (car.walk_to_spot_min) lines.push(`<span class="hb-access-detail" data-i18n="access.walk_to_spot">Walk to spot</span> ${car.walk_to_spot_min} min`);
     blocks.push(`<div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚗</span>By car</p>
+      <p class="hb-access-mode"><span class="hb-access-icon">🚗</span><span data-i18n="access.by_car">By car</span></p>
       <div class="hb-access-body">${lines.map(l => `<p>${l}</p>`).join("")}</div>
     </div>`);
   }
@@ -521,10 +521,10 @@ function renderAccessSection(spot) {
     if (typeof tb === "string") lines.push(escapeHtml(tb));
     else {
       if (tb.route) lines.push(escapeHtml(tb.route));
-      if (tb.walk_from_stop_min) lines.push(`<span class="hb-access-detail">Walk from stop</span> ${tb.walk_from_stop_min} min`);
+      if (tb.walk_from_stop_min) lines.push(`<span class="hb-access-detail" data-i18n="access.walk_from_stop">Walk from stop</span> ${tb.walk_from_stop_min} min`);
     }
     blocks.push(`<div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🚆</span>By train + bus</p>
+      <p class="hb-access-mode"><span class="hb-access-icon">🚆</span><span data-i18n="access.by_train_bus">By train + bus</span></p>
       <div class="hb-access-body">${lines.map(l => `<p>${l}</p>`).join("")}</div>
     </div>`);
   }
@@ -534,22 +534,22 @@ function renderAccessSection(spot) {
     if (typeof bo === "string") lines.push(escapeHtml(bo));
     else {
       if (bo.route) lines.push(escapeHtml(bo.route));
-      if (bo.walk_from_stop_min) lines.push(`<span class="hb-access-detail">Walk from stop</span> ${bo.walk_from_stop_min} min`);
+      if (bo.walk_from_stop_min) lines.push(`<span class="hb-access-detail" data-i18n="access.walk_from_stop">Walk from stop</span> ${bo.walk_from_stop_min} min`);
     }
     blocks.push(`<div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">⛴</span>By boat</p>
+      <p class="hb-access-mode"><span class="hb-access-icon">⛴</span><span data-i18n="access.by_boat">By boat</span></p>
       <div class="hb-access-body">${lines.map(l => `<p>${l}</p>`).join("")}</div>
     </div>`);
   }
   if (a.best_time) {
     blocks.push(`<div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">🕒</span>When to go</p>
+      <p class="hb-access-mode"><span class="hb-access-icon">🕒</span><span data-i18n="access.when_to_go">When to go</span></p>
       <div class="hb-access-body"><p>${escapeHtml(a.best_time)}</p></div>
     </div>`);
   }
   if (a.operating) {
     blocks.push(`<div class="hb-access-block">
-      <p class="hb-access-mode"><span class="hb-access-icon">📅</span>Hours / season</p>
+      <p class="hb-access-mode"><span class="hb-access-icon">📅</span><span data-i18n="access.hours_season">Hours / season</span></p>
       <div class="hb-access-body"><p>${escapeHtml(a.operating)}</p></div>
     </div>`);
   }
@@ -575,8 +575,8 @@ function renderBackOverview(spot) {
   const arrivalSection = !hasHikes ? renderAccessSection(spot) : "";
   return `<div class="hb-flip-back-view hb-flip-back-view-overview">
     <div class="hb-back-topbar">
-      <button type="button" class="hb-back-flip-back" data-action="flip-front">${ARROW_LEFT_SVG}Back to photo</button>
-      <p class="hb-back-title">Planning · <b>${escapeHtml(spot.title)}</b></p>
+      <button type="button" class="hb-back-flip-back" data-action="flip-front">${ARROW_LEFT_SVG}<span data-i18n="route.back_to_photo">Back to photo</span></button>
+      <p class="hb-back-title"><span data-i18n="planning.title">Planning</span> · <b>${escapeHtml(spot.title)}</b></p>
     </div>
     ${renderBetaNotice()}
     ${renderLinksRow(spot)}
@@ -591,7 +591,7 @@ function renderBackOverview(spot) {
 // Surfaces an email so users can report wrong stats / coords / sources.
 function renderBetaNotice() {
   return `<p class="hb-beta-notice">
-    Beta version. The route data is still being verified. Spotted something wrong?
+    <span data-i18n="beta.notice">Beta version. The route data is still being verified. Spotted something wrong?</span>
     <a href="mailto:leon@hikebeast.ch?subject=Hikebeast%20route%20feedback">leon@hikebeast.ch</a>
   </p>`;
 }
@@ -607,45 +607,45 @@ function renderRouteDetailView(spot) {
   // route via the data-rd-* hooks.
   return `<div class="hb-flip-back-view hb-flip-back-view-route">
     <div class="hb-back-topbar">
-      <button type="button" class="hb-back-route-btn" data-action="flip-overview">${ARROW_LEFT_SVG}Routes</button>
-      <p class="hb-back-title">Approach to <b>${escapeHtml(spot.title)}</b></p>
+      <button type="button" class="hb-back-route-btn" data-action="flip-overview">${ARROW_LEFT_SVG}<span data-i18n="section.routes">Routes</span></button>
+      <p class="hb-back-title"><span data-i18n="route.approach_to">Approach to</span> <b>${escapeHtml(spot.title)}</b></p>
     </div>
     ${renderBetaNotice()}
     <div class="hb-rd-head">
-      <p class="hb-rd-kicker">Route</p>
+      <p class="hb-rd-kicker" data-i18n="route.kicker">Route</p>
       <h3 class="hb-rd-name"><span data-rd-name>—</span></h3>
     </div>
     <p class="hb-spot-description" data-rd-description hidden></p>
     ${renderRouteStatsBar(spot)}
     <div class="hb-detail-card"><div class="hb-detail-grid">
-      <div><span class="lbl">Equipment</span><span class="val" data-rd-equipment>—</span></div>
-      <div><span class="lbl">Start</span><span class="val" data-rd-start>—</span></div>
-      <div><span class="lbl">Transit</span><span class="val" data-rd-transit>—</span></div>
+      <div><span class="lbl" data-i18n="route.equipment">Equipment</span><span class="val" data-rd-equipment>—</span></div>
+      <div><span class="lbl" data-i18n="route.start">Start</span><span class="val" data-rd-start>—</span></div>
+      <div><span class="lbl" data-i18n="route.transit">Transit</span><span class="val" data-rd-transit>—</span></div>
     </div></div>
 
     <div data-rd-hut hidden>
-      <p class="hb-section-h">Mountain hut</p>
+      <p class="hb-section-h" data-i18n="section.mountain_hut">Mountain hut</p>
       <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
-        <div><span class="lbl">Name</span><span class="val" data-rd-hut-name>—</span></div>
-        <div><span class="lbl">Cost</span><span class="val" data-rd-hut-cost>—</span></div>
-        <div><span class="lbl">Open</span><span class="val" data-rd-hut-open>—</span></div>
-        <div><span class="lbl">Website</span><span class="val" data-rd-hut-website>—</span></div>
+        <div><span class="lbl" data-i18n="detail.name">Name</span><span class="val" data-rd-hut-name>—</span></div>
+        <div><span class="lbl" data-i18n="detail.cost">Cost</span><span class="val" data-rd-hut-cost>—</span></div>
+        <div><span class="lbl" data-i18n="detail.open">Open</span><span class="val" data-rd-hut-open>—</span></div>
+        <div><span class="lbl" data-i18n="detail.website">Website</span><span class="val" data-rd-hut-website>—</span></div>
       </div></div>
     </div>
 
     <div data-rd-cable hidden>
-      <p class="hb-section-h">Cable car</p>
+      <p class="hb-section-h" data-i18n="section.cable_car">Cable car</p>
       <div class="hb-detail-card hb-detail-card--compact"><div class="hb-detail-grid">
-        <div><span class="lbl">Name</span><span class="val" data-rd-cable-line>—</span></div>
-        <div><span class="lbl">Open</span><span class="val" data-rd-cable-open>—</span></div>
-        <div><span class="lbl">Website</span><span class="val" data-rd-cable-info>—</span></div>
+        <div><span class="lbl" data-i18n="detail.name">Name</span><span class="val" data-rd-cable-line>—</span></div>
+        <div><span class="lbl" data-i18n="detail.open">Open</span><span class="val" data-rd-cable-open>—</span></div>
+        <div><span class="lbl" data-i18n="detail.website">Website</span><span class="val" data-rd-cable-info>—</span></div>
       </div></div>
     </div>
 
     <div class="hb-links-row" data-rd-actions></div>
 
     <div class="hb-route-sources" data-rd-sources hidden>
-      <p class="hb-sources-h">Sources</p>
+      <p class="hb-sources-h" data-i18n="section.sources">Sources</p>
       <ul class="hb-sources-list" data-rd-sources-list></ul>
     </div>
   </div>`;
@@ -663,26 +663,26 @@ function renderBackSide(spot) {
 function renderSpotCard(spot) {
   const credit = renderCredit(spot.image_credit);
   const creditPill = credit
-    ? `<span class="credit-pill">Photo · ${escapeHtml(credit)}</span>`
+    ? `<span class="credit-pill"><span data-i18n="label.photo">Photo</span> · ${escapeHtml(credit)}</span>`
     : "";
 
   const bodyParas = (spot.body || []).map(p => `      <p>${escapeHtml(p)}</p>`).join("\n");
 
   const specs = [];
-  if (spot.region) specs.push(`      <div class="spec"><span class="lbl">Region</span><span class="val">${escapeHtml(spot.region)}</span></div>`);
-  if (spot.access) specs.push(`      <div class="spec"><span class="lbl">Access</span><span class="val">${escapeHtml(spot.access)}</span></div>`);
-  if (spot.effort) specs.push(`      <div class="spec"><span class="lbl">Effort</span><span class="val">${escapeHtml(spot.effort)}</span></div>`);
-  if (spot.best_light) specs.push(`      <div class="spec"><span class="lbl">Best light</span><span class="val">${escapeHtml(spot.best_light)}</span></div>`);
+  if (spot.region) specs.push(`      <div class="spec"><span class="lbl" data-i18n="spec.region">Region</span><span class="val">${escapeHtml(spot.region)}</span></div>`);
+  if (spot.access) specs.push(`      <div class="spec"><span class="lbl" data-i18n="spec.access">Access</span><span class="val">${escapeHtml(spot.access)}</span></div>`);
+  if (spot.effort) specs.push(`      <div class="spec"><span class="lbl" data-i18n="spec.effort">Effort</span><span class="val">${escapeHtml(spot.effort)}</span></div>`);
+  if (spot.best_light) specs.push(`      <div class="spec"><span class="lbl" data-i18n="spec.best_light">Best light</span><span class="val">${escapeHtml(spot.best_light)}</span></div>`);
 
   // When a spot has planning data, the bottom row becomes the full-width
   // "How to get there →" CTA that flips to the planning panel. On mobile
   // it scrolls the panel into view instead. When a spot has no planning
   // data, fall back to the production .sp-foot with "Open in Maps".
   const mapsLink = (!hasPlanningData(spot) && spot.maps_url)
-    ? `      <a class="locked" href="${escapeHtml(spot.maps_url)}" target="_blank" rel="noopener" style="color:var(--accent);font-weight:500;">${MAPS_PIN_SVG}Open in Maps</a>`
+    ? `      <a class="locked" href="${escapeHtml(spot.maps_url)}" target="_blank" rel="noopener" style="color:var(--accent);font-weight:500;">${MAPS_PIN_SVG}<span data-i18n="action.open_in_maps">Open in Maps</span></a>`
     : "";
   const flipCta = hasPlanningData(spot)
-    ? `      <button type="button" class="hb-flip-cta-row" data-action="flip-back">How to get there ${ARROW_RIGHT_SVG}</button>`
+    ? `      <button type="button" class="hb-flip-cta-row" data-action="flip-back"><span data-i18n="action.how_to_get_there">How to get there</span> ${ARROW_RIGHT_SVG}</button>`
     : "";
 
   const front = `    <section class="slide slide-spot" id="${escapeHtml(spot.id)}">
@@ -1042,6 +1042,8 @@ function renderSpotPage(spot) {
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../../lib/i18n-strings.js"></script>
+<script src="../../lib/i18n.js"></script>
 <link rel="stylesheet" href="../../preview.css?v=${Date.now()}" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
@@ -1054,7 +1056,7 @@ ${hasPlanningData(spot) ? BRAND_SPRITES : ""}
 <div class="app">
   <div class="viewer" id="viewer">
 
-    <a class="pill hb-back app-back" data-chapter="${escapeHtml(spot.chapter)}" data-spot="${escapeHtml(spot.id)}" href="../../${escapeHtml(spot.chapter)}/" title="Back to chapter">${ARROW_LEFT_SVG}<span>Back</span></a>
+    <a class="pill hb-back app-back" data-chapter="${escapeHtml(spot.chapter)}" data-spot="${escapeHtml(spot.id)}" href="../../${escapeHtml(spot.chapter)}/" title="Back to chapter" data-i18n-attr="title:a11y.back_to_chapter">${ARROW_LEFT_SVG}<span data-i18n="action.back">Back</span></a>
 
 ${renderSpotCard(spot)}
 

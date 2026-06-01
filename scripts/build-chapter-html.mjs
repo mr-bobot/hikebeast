@@ -160,10 +160,10 @@ function colorTriple(rgbFloats) {
 function renderSidebar(currentChapter) {
   const items = [];
   items.push(
-    `  <a class="sb-home" href="../index.html" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>`,
+    `  <a class="sb-home" href="../index.html" title="Home" data-i18n-attr="title:nav.home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg></a>`,
   );
   items.push(
-    `  <a class="sb-thumb" href="../intro/index.html" title="Front matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl">Intro</span></a>`,
+    `  <a class="sb-thumb" href="../intro/index.html" title="Front matter" data-i18n-attr="title:label.front_matter"><img src="../img/front_matter/page_05-w192.webp" srcset="../img/front_matter/page_05-w192.webp 192w, ../img/front_matter/page_05-w480.webp 480w" sizes="96px" alt="" /><span class="lbl" data-i18n="label.intro">Intro</span></a>`,
   );
   for (const chap of content.chapters) {
     const isCur = chap.id === currentChapter ? " is-current" : "";
@@ -184,7 +184,7 @@ function renderCover(chapter) {
     return `    <section class="slide slide-cover" id="cover">
   <img class="cv-img" src="${chapterCoverSrc(chapter.id)}" srcset="${chapterCoverSrcset(chapter.id)}" sizes="100vw" alt="" fetchpriority="high" decoding="async" />
   <div class="cv-content">
-    <p class="cv-kicker">Region</p>
+    <p class="cv-kicker" data-i18n="label.region">Region</p>
     <h1>${escapeHtml(chapter.name)}</h1>
     <p class="cv-deck">${escapeHtml(chapter.intro)}</p>
   </div>
@@ -195,7 +195,7 @@ function renderCover(chapter) {
     <img src="../img/region-${chapter.id}.svg" alt="${escapeHtml(chapter.name)} on the Swiss map" fetchpriority="high" decoding="async" />
   </div>
   <div class="cv-content">
-    <p class="cv-kicker">Region</p>
+    <p class="cv-kicker" data-i18n="label.region">Region</p>
     <h1>${escapeHtml(chapter.name)}</h1>
     <p class="cv-deck">${escapeHtml(chapter.intro)}</p>
   </div>
@@ -343,7 +343,7 @@ function renderSpotEbookCard(spot, spotIdx) {
   const files = spotPhotoFiles(spot.id);
   const count = Math.max(1, files.length);
   const credit = renderCredit(spot.image_credit);
-  const creditText = credit ? `Photo · ${escapeHtml(credit)}` : "";
+  const creditText = credit ? `<span data-i18n="label.photo">Photo</span> · ${escapeHtml(credit)}` : "";
 
   let photosBlock;
   if (count <= 1) {
@@ -380,13 +380,13 @@ ${slides}
   }
 
   const specs = [];
-  if (spot.region) specs.push(`        <div class="cl-spec"><span class="cl-lbl">Region</span><span class="cl-val">${escapeHtml(spot.region)}</span></div>`);
-  if (spot.access) specs.push(`        <div class="cl-spec"><span class="cl-lbl">Access</span><span class="cl-val">${escapeHtml(spot.access)}</span></div>`);
-  if (spot.effort) specs.push(`        <div class="cl-spec"><span class="cl-lbl">Effort</span><span class="cl-val">${escapeHtml(spot.effort)}</span></div>`);
-  if (spot.best_light) specs.push(`        <div class="cl-spec"><span class="cl-lbl">Best light</span><span class="cl-val">${escapeHtml(spot.best_light)}</span></div>`);
+  if (spot.region) specs.push(`        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.region">Region</span><span class="cl-val">${escapeHtml(spot.region)}</span></div>`);
+  if (spot.access) specs.push(`        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.access">Access</span><span class="cl-val">${escapeHtml(spot.access)}</span></div>`);
+  if (spot.effort) specs.push(`        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.effort">Effort</span><span class="cl-val">${escapeHtml(spot.effort)}</span></div>`);
+  if (spot.best_light) specs.push(`        <div class="cl-spec"><span class="cl-lbl" data-i18n="spec.best_light">Best light</span><span class="cl-val">${escapeHtml(spot.best_light)}</span></div>`);
 
   const mapsCta = spot.maps_url
-    ? `      <a class="cl-maps" href="${escapeHtml(spot.maps_url)}" target="_blank" rel="noopener">${MAPS_PIN_SVG}<span>Open in Maps</span></a>`
+    ? `      <a class="cl-maps" href="${escapeHtml(spot.maps_url)}" target="_blank" rel="noopener">${MAPS_PIN_SVG}<span data-i18n="action.open_in_maps">Open in Maps</span></a>`
     : "";
 
   return `    <article class="cl-card" id="${escapeHtml(spot.id)}" data-href="${escapeHtml(href)}" tabindex="0" role="link" aria-label="${escapeHtml(spot.title)}">
@@ -432,10 +432,10 @@ function renderChapter(chapter) {
 
   slides.push(`    <section class="chapter-views" aria-label="${escapeHtml(chapter.name)} spots">
       <div class="chapter-views-head">
-        <p class="chapter-views-meta">${spotCount} ${spotCount === 1 ? "spot" : "spots"}</p>
+        <p class="chapter-views-meta">${spotCount} <span data-i18n-plural="count.spots_bare" data-n="${spotCount}">${spotCount === 1 ? "spot" : "spots"}</span></p>
         <div class="chapter-view-toggle" role="tablist" aria-label="Chapter view">
-          <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span>Reader</span></button>
-          <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Grid</span></button>
+          <button type="button" class="ch-view-btn" data-view="reader" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg><span data-i18n="view.reader">Reader</span></button>
+          <button type="button" class="ch-view-btn" data-view="grid" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span data-i18n="view.grid">Grid</span></button>
         </div>
       </div>
       <div class="chapter-list">
@@ -472,6 +472,8 @@ ${tiles}
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Hikebeast" />
 <meta name="mobile-web-app-capable" content="yes" />
+<script src="../lib/i18n-strings.js"></script>
+<script src="../lib/i18n.js"></script>
 <link rel="stylesheet" href="../preview.css?v=20260524a" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
@@ -480,9 +482,9 @@ ${tiles}
   <a class="brand" href="../index.html">
     <span>${escapeHtml(chapter.name)}</span>
   </a>
-  <span class="crumb"><b>${spotCount}</b> ${spotCount === 1 ? "spot" : "spots"}</span>
+  <span class="crumb"><b>${spotCount}</b> <span data-i18n-plural="count.spots_bare" data-n="${spotCount}">${spotCount === 1 ? "spot" : "spots"}</span></span>
   <div class="topbar-right">
-    <a class="pill" href="../index.html">Overview</a>
+    <a class="pill" href="../index.html" data-i18n="action.overview">Overview</a>
   </div>
 </div>
 
@@ -498,9 +500,9 @@ ${slides.join("\n\n")}
 </div>
 
 <footer class="legal">
-  <a href="../../imprint.html">Imprint</a><span class="sep">·</span>
-  <a href="../../privacy.html">Privacy</a><span class="sep">·</span>
-  <a href="../../terms.html">Terms</a><span class="sep">·</span>
+  <a href="../../imprint.html" data-i18n="footer.imprint">Imprint</a><span class="sep">·</span>
+  <a href="../../privacy.html" data-i18n="footer.privacy">Privacy</a><span class="sep">·</span>
+  <a href="../../terms.html" data-i18n="footer.terms">Terms</a><span class="sep">·</span>
   © Hikebeast
 </footer>
 
