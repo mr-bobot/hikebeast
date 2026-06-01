@@ -1042,6 +1042,41 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
   }
   .reviews-more-btn:hover { background: var(--surface); }
   .reviews-carousel::-webkit-scrollbar { display: none; }
+  /* About · product-showcase gallery · swipeable device mockups under the
+     "What you are getting" title. Mirrors the reviews-carousel peek-scroll:
+     one mockup per view, snap-centre, light-grey caption below. */
+  .showcase-carousel {
+    display: flex;
+    align-items: start;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 22px;
+    scrollbar-width: none;
+  }
+  .showcase-carousel::-webkit-scrollbar { display: none; }
+  .showcase-item {
+    flex: 0 0 calc(100% - 60px);
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .showcase-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3200 / 2160;
+    border-radius: var(--radius-card);
+    background: #f5f5f7;
+    display: block;
+  }
+  .showcase-cap {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.4;
+  }
   /* White card with hairline so reviews read as distinct from the
      surface-grey "What's inside" cards above. */
   .review-card {
@@ -2042,6 +2077,33 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
           gettingH2.textContent = "Cosa ricevi";
           gettingHead.appendChild(gettingH2);
           body.parentNode.insertBefore(gettingHead, wrap.nextSibling);
+          // Showcase · subtitle (into the section-head) + swipeable
+          // device-mockup gallery, right after the title.
+          var gettingSub = document.createElement("p");
+          gettingSub.textContent = "Un sito per ispirarti e pianificare le tue gite";
+          gettingHead.appendChild(gettingSub);
+          var SHOWCASE = [
+            { img: "/map3/img/showcase/map.jpg", cap: "La mappa con tutti gli spot" },
+            { img: "/map3/img/showcase/explore.jpg", cap: "Centinaia di immagini per ispirarti" },
+            { img: "/map3/img/showcase/tannhorn.jpg", cap: "Informazioni importanti per ogni spot" },
+            { img: "/map3/img/showcase/collections.jpg", cap: "Collezioni selezionate" },
+            { img: "/map3/img/showcase/grid.jpg", cap: "E molto altro..." }
+          ];
+          var showcase = document.createElement("div");
+          showcase.className = "showcase-carousel";
+          SHOWCASE.forEach(function (s) {
+            var item = document.createElement("div");
+            item.className = "showcase-item";
+            var im = document.createElement("img");
+            im.src = s.img; im.alt = ""; im.loading = "lazy"; im.decoding = "async";
+            im.width = 3200; im.height = 2160;
+            var cap = document.createElement("p");
+            cap.className = "showcase-cap";
+            cap.textContent = s.cap;
+            item.appendChild(im); item.appendChild(cap);
+            showcase.appendChild(item);
+          });
+          gettingHead.parentNode.insertBefore(showcase, gettingHead.nextSibling);
           vid.addEventListener("play", function () {
             if (window.hbTrack) window.hbTrack("about_video_played");
           }, { once: true });
