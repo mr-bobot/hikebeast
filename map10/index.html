@@ -92,8 +92,8 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>Switzerland Map · 141 Hidden Spots with GPS</title>
-<meta name="description" content="141 hidden spots across Switzerland, with exact coordinates and how to get there. Where to hike and where to sleep. Your guide to the best summer in Switzerland." />
+<title>Switzerland Map</title>
+<meta name="description" content="The best of Switzerland. Over 141 hidden spots with exact coordinates, how to get there and camping info." />
 <link rel="canonical" href="https://hikebeast.ch/map/" />
 <link rel="alternate" hreflang="en" href="https://hikebeast.ch/map/" />
 <link rel="alternate" hreflang="de" href="https://hikebeast.ch/de/map/" />
@@ -103,16 +103,16 @@
 <meta property="og:type" content="product" />
 <meta property="og:site_name" content="Hikebeast" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:title" content="Switzerland Map · 141 hidden spots for your best summer" />
-<meta property="og:description" content="141 hidden spots across Switzerland · exact coordinates, how to get there, and where you can sleep for the night. Your guide to the best summer in Switzerland." />
+<meta property="og:title" content="Switzerland Map" />
+<meta property="og:description" content="The best of Switzerland. Over 141 hidden spots with exact coordinates, how to get there and camping info." />
 <meta property="og:url" content="https://hikebeast.ch/map10/" />
 <meta property="og:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 <meta property="og:image:width" content="1920" />
 <meta property="og:image:height" content="987" />
 <meta property="og:image:alt" content="Switzerland Map · 100+ Hidden Spots" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Switzerland Map · 141 hidden spots for your best summer" />
-<meta name="twitter:description" content="141 hidden spots, exact coordinates, your best summer in Switzerland." />
+<meta name="twitter:title" content="Switzerland Map" />
+<meta name="twitter:description" content="The best of Switzerland. Over 141 hidden spots with exact coordinates, how to get there and camping info." />
 <meta name="twitter:image" content="https://hikebeast.ch/map3/img/og.jpg" />
 
 <!-- Vercel Analytics -->
@@ -715,6 +715,9 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
      rounded corners, sits in the .px content rhythm. */
   .emotion-shot {
     margin-top: 18px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
   }
   .emotion-shot img {
     width: 100%;
@@ -722,6 +725,22 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
     border-radius: 14px;
     display: block;
   }
+  .emotion-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 48px 18px 16px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.80) 0%, rgba(0, 0, 0, 0.5) 38%, rgba(0, 0, 0, 0) 100%);
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .emotion-overlay svg { width: 18px; height: 18px; flex: 0 0 auto; margin-top: 2px; }
   #get-the-map { margin-top: 18px; }
 
   /* === Collection grid · full-bleed photo grid above the 6 cards === */
@@ -2021,7 +2040,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
               <span class="stars">★★★★★</span>
             </div>
           </div>
-          <p class="review-quote">"best wildcamping spots in the swiss alps"</p>
+          <p class="review-quote">"so many good wildcamping spots in the swiss alps!!"</p>
         </div>
         <div class="review-card">
           <div class="review-head">
@@ -2060,7 +2079,7 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
               <span class="stars">★★★★★</span>
             </div>
           </div>
-          <p class="review-quote">"hatte den besten wildcamping ausflug meines lebens!!"</p>
+          <p class="review-quote">"hatte den besten wildcamping ausflug ever!! danke"</p>
         </div>
         <div class="review-card">
           <div class="review-head">
@@ -2266,17 +2285,15 @@ src="https://www.facebook.com/tr?id=1658000685240569&ev=PageView&noscript=1"
       </div>
       <!-- Emotional shot · moved under the Get-the-guide heading as the
            final visual before the buy box. -->
-      <div class="emotion-shot" aria-hidden="true">
+      <div class="emotion-shot">
         <img src="/map3/img/about/riffelsee.jpg" alt="" loading="lazy" decoding="async" width="1400" height="933" />
-      </div>
-      <div class="guarantee-wrap">
-        <span class="guarantee-pill">
+        <div class="emotion-overlay">
           <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <circle cx="10" cy="10" r="9" fill="#34c759"/>
             <path d="M5.8 10.4l2.8 2.8 5.6-5.6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          I'm proud to say that less than 0.02% of buyers have used our 30-day money-back guarantee!
-        </span>
+          <span>I'm proud to say that less than 0.2% of buyers have used our 30-day money-back guarantee!</span>
+        </div>
       </div>
       <div class="checkout-wrap">
         <div id="checkout">
