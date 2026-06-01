@@ -290,7 +290,9 @@
           window.location.replace(data.next || '/full/');
           return;
         }
-        if (res.status === 503) {
+        if (res.status === 403 && data.error === 'account_deactivated') {
+          showError(data.message || 'Your account has been deactivated, please contact leon@hikebeast.ch');
+        } else if (res.status === 503) {
           showError('Login is not configured yet. Try again in a minute.');
         } else {
           showError('Wrong username or password.');
