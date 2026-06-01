@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392615" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223441" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -237,6 +237,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"aletsch_glacier-eggishorn-circular","name":"Eggishorn circular trail","start":"Eggishorn top station","transit":{"train":"Fiesch + Eggishorn cable car"},"duration_min":60,"gain_m":30,"sac_grade":"T1","effort_label":"Easy","description_extra":"Short loop from the top of the Eggishorn cable car (Fiesch plus two cable cars). Twenty minutes to the main summit. The full circular adds another 40 minutes with stop-offs at the lounges built into the rock. Wide gravel paths throughout, no exposure.","visits":["aletsch_glacier"],"sources":["https://www.myswitzerland.com/en-us/experiences/eggishorn-viewpoint-look-out-over-the-great-aletsch-glacier/","https://www.myswitzerland.com/en-us/experiences/eggishorn-circular-trail/"],"quickest_for":["aletsch_glacier"],"cable_car_ids":["eggishorn-cable-car"],"start_maps_url":"https://www.google.com/maps/place/?q=46.43139,8.09417&z=16","distance_km":0.5,"cable_cars":[{"id":"eggishorn-cable-car","operator":"Aletsch Bahnen","description":"Two-stage cable car from Fiesch via Fiescheralp up to Eggishorn at 2,927 m","open_raw":"Early June to late October","website":"https://www.aletscharena.ch/en/","name":"Luftseilbahn Fiesch-Eggishorn","top_station_maps_url":"https://www.google.com/maps/place/?q=46.43139,8.09417&z=16"}],"cable_car":{"id":"eggishorn-cable-car","operator":"Aletsch Bahnen","description":"Two-stage cable car from Fiesch via Fiescheralp up to Eggishorn at 2,927 m","open_raw":"Early June to late October","website":"https://www.aletscharena.ch/en/","name":"Luftseilbahn Fiesch-Eggishorn","top_station_maps_url":"https://www.google.com/maps/place/?q=46.43139,8.09417&z=16"},"quickest":true},{"id":"aletsch_glacier-bettmerhorn-eggishorn-ridge","name":"Bettmerhorn → Eggishorn ridge traverse","start":"Bettmerhorn top station","transit":{"train":"Betten + Bettmeralp cable car + Bettmerhorn lift"},"duration_min":100,"sac_grade":"T3","effort_label":"Moderate, light scrambling","description_extra":"Ridge traverse between Bettmerhorn and Eggishorn. Access by cable car from Betten (Bettmeralp, then the Bettmerhorn lift). The route involves light scrambling on rock blocks, and exposed sections are well secured. T3, about 1h 40, with 110 m of descent. Descend via the Eggishorn cable car to Fiesch.","visits":["aletsch_glacier"],"sources":["https://www.komoot.com/tour/743194913","https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/bettmerhorn-166/mountain-hiking/traverse-eggishorn-bettmerhorn-4255/"],"cable_car_ids":["bettmerhorn-cable-car","eggishorn-cable-car"],"start_maps_url":"https://www.google.com/maps/place/?q=46.41158,8.07558&z=16","distance_km":3.8,"descent_m":110,"gain_m":250,"equipment_list":["Sturdy hiking shoes"],"cable_cars":[{"id":"bettmerhorn-cable-car","operator":"Aletsch Bahnen","description":"Cable car from Bettmeralp up to the Bettmerhorn ridge at 2,647 m","open_raw":"Early June to late October","website":"https://www.aletscharena.ch/en/","name":"Luftseilbahn Bettmeralp-Bettmerhorn"},{"id":"eggishorn-cable-car","operator":"Aletsch Bahnen","description":"Two-stage cable car from Fiesch via Fiescheralp up to Eggishorn at 2,927 m","open_raw":"Early June to late October","website":"https://www.aletscharena.ch/en/","name":"Luftseilbahn Fiesch-Eggishorn","top_station_maps_url":"https://www.google.com/maps/place/?q=46.43139,8.09417&z=16"}],"cable_car":{"id":"bettmerhorn-cable-car","operator":"Aletsch Bahnen","description":"Cable car from Bettmeralp up to the Bettmerhorn ridge at 2,647 m","open_raw":"Early June to late October","website":"https://www.aletscharena.ch/en/","name":"Luftseilbahn Bettmeralp-Bettmerhorn"},"quickest":false},{"id":"aletsch_glacier-aletsch-panoramaweg","name":"Aletsch Panoramaweg","start":"Bettmerhorn","transit":{"train":"Betten + cable car"},"duration_min":240,"gain_m":400,"sac_grade":"T2","effort_label":"Moderate","description_extra":"From the Bettmerhorn cable car top station the trail traverses east on a wide mountain path with occasional carved stone steps, the ice in view the whole way. Roughly four hours, T2, ending at Fiescheralp where the cable car descends to Fiesch. Surefootedness needed in places. The Panoramaweg can also be picked up at Moosfluh (Riederalp) for the full Moosfluh → Fiescheralp variant.","visits":["aletsch_glacier"],"sources":["https://www.myswitzerland.com/en-us/experiences/route/aletsch-panoramaweg-the-swiss-glacier-trail/"],"cable_car_ids":["bettmerhorn-cable-car"],"start_maps_url":"https://www.google.com/maps/place/?q=46.41,8.07667&z=16","distance_km":12,"equipment_list":["Sturdy hiking shoes"],"cable_cars":[{"id":"bettmerhorn-cable-car","operator":"Aletsch Bahnen","description":"Cable car from Bettmeralp up to the Bettmerhorn ridge at 2,647 m","open_raw":"Early June to late October","website":"https://www.aletscharena.ch/en/","name":"Luftseilbahn Bettmeralp-Bettmerhorn"}],"cable_car":{"id":"bettmerhorn-cable-car","operator":"Aletsch Bahnen","description":"Cable car from Bettmeralp up to the Bettmerhorn ridge at 2,647 m","open_raw":"Early June to late October","website":"https://www.aletscharena.ch/en/","name":"Luftseilbahn Bettmeralp-Bettmerhorn"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -278,8 +279,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -467,6 +473,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

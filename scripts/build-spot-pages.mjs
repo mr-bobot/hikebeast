@@ -725,6 +725,7 @@ function flipScriptFor(spot) {
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = ${routesJson};
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -766,8 +767,13 @@ function flipScriptFor(spot) {
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -955,6 +961,23 @@ function flipScriptFor(spot) {
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

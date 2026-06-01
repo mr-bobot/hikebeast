@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392634" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223458" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"brisen-route-via-haldigrat","sac_grade":"T3","effort_label":"Difficult","duration_min":135,"gain_m":460,"start":"Niederrickenbach (cable car upper station)","transit":{"train":"Dallenwil (S-Bahn from Lucerne)","cable_car":"Niederrickenbach cable car (Dallenwil to Niederrickenbach), then Haldigrat chairlift"},"visits":["brisen"],"description_extra":"Take the S-Bahn to Dallenwil, ride the small cable car up to Niederrickenbach, then walk roughly 30 minutes to the base of the Haldigrat chairlift. The chairlift drops you onto the western Haldigrat ridge at around 1,940 m, the easiest way up the mountain. From there it is a 2-hour ridge walk east to the Brisen summit at 2,404 m, T3 with exposed sections. Counting the chairlift access you gain about 460 m. Descend the way you came, or continue down to Niederrickenbach via the Brisenhaus, roughly 4.5 hours total.","sources":["https://wegwandern.ch/wanderung/haldigrat-niederrickenbach-brisen-brisenhaus-klewenalp-wandern/","https://www.schweizmobil.ch/en/hiking-in-switzerland/services/places/ort-0144.html"],"quickest_for":["brisen"],"equipment_list":["Sturdy hiking shoes"],"cable_car_ids":["niederrickenbach-cable-car","haldigrat-chairlift"],"start_maps_url":"https://www.google.com/maps/place/?q=46.89403,8.42869&z=16","distance_km":4.5,"cable_cars":[{"id":"niederrickenbach-cable-car","operator":"Luftseilbahn Dallenwil-Niederrickenbach AG","description":"Cable car from Dallenwil up to the mountain hamlet of Niederrickenbach at 1,156 m","open_raw":"Year-round, with revision break in April","website":"https://maria-rickenbach.ch/dallenwil-niederrickenbach/","name":"Luftseilbahn Dallenwil-Niederrickenbach"},{"id":"haldigrat-chairlift","operator":"Haldigrat AG","description":"Small chairlift from Niederrickenbach up to the Haldigrat ridge around 1,940 m","open_raw":"Mid-June to early November daily, weekends only in winter","website":"https://www.haldigrat.ch/","name":"Sesselbahn Haldigrat"}],"cable_car":{"id":"niederrickenbach-cable-car","operator":"Luftseilbahn Dallenwil-Niederrickenbach AG","description":"Cable car from Dallenwil up to the mountain hamlet of Niederrickenbach at 1,156 m","open_raw":"Year-round, with revision break in April","website":"https://maria-rickenbach.ch/dallenwil-niederrickenbach/","name":"Luftseilbahn Dallenwil-Niederrickenbach"},"quickest":true},{"id":"brisen-from-niederrickenbach-direct","visits":["brisen"],"sac_grade":"T3","effort_label":"Demanding","duration_min":360,"gain_m":1250,"distance_km":6.5,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Niederrickenbach (top station of the Dallenwil cable car)","transit":{"train":"Dallenwil","cable_car":"Niederrickenbach Bergbahn (small cable car) up to Niederrickenbach"},"description_extra":"Walk-up approach instead of riding the Haldigrat chairlift. From Niederrickenbach at 1,154 m, follow the wide, signposted SAC trail east via Steinrüti and Ahorn to Brändlisboden, then climb via Morschfeld to the Brisenhaus SAC hut at 1,753 m, T2 with 610 m of gain. From the hut continue up over the Steinalper Jochli, then on the steep mountain trail (T3 from the Peterslücke onward, exposed sections) to the Brisen summit at 2,404 m. Roughly 6 hours up, descend the same way for a long day. Brisenhaus has a terrace and food in season.","sources":["https://www.brisenhaus.ch/zustieg","https://www.myswitzerland.com/en-ch/experiences/route/brisen/"],"cable_car_ids":["niederrickenbach-cable-car"],"start_maps_url":"https://www.google.com/maps/place/?q=46.92969,8.42697&z=16","cable_cars":[{"id":"niederrickenbach-cable-car","operator":"Luftseilbahn Dallenwil-Niederrickenbach AG","description":"Cable car from Dallenwil up to the mountain hamlet of Niederrickenbach at 1,156 m","open_raw":"Year-round, with revision break in April","website":"https://maria-rickenbach.ch/dallenwil-niederrickenbach/","name":"Luftseilbahn Dallenwil-Niederrickenbach"}],"cable_car":{"id":"niederrickenbach-cable-car","operator":"Luftseilbahn Dallenwil-Niederrickenbach AG","description":"Cable car from Dallenwil up to the mountain hamlet of Niederrickenbach at 1,156 m","open_raw":"Year-round, with revision break in April","website":"https://maria-rickenbach.ch/dallenwil-niederrickenbach/","name":"Luftseilbahn Dallenwil-Niederrickenbach"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

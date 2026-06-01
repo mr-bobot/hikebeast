@@ -1,0 +1,317 @@
+[
+  {
+    "id": "aletsch_glacier-eggishorn-circular",
+    "name": "Boucle de l'Eggishorn",
+    "description_extra": "Boucle courte depuis le sommet du téléphérique de l'Eggishorn (Fiesch plus deux téléphériques). Vingt minutes jusqu'au sommet principal. La boucle complète ajoute 40 minutes avec des arrêts aux salons aménagés dans la roche. Larges chemins de gravier sur tout le parcours, sans exposition.",
+    "effort_label": "Facile",
+    "start": "Station supérieure de l'Eggishorn",
+    "transit": {
+      "train": "Fiesch + téléphérique de l'Eggishorn"
+    }
+  },
+  {
+    "id": "aletsch_glacier-bettmerhorn-eggishorn-ridge",
+    "name": "Traversée de crête Bettmerhorn → Eggishorn",
+    "description_extra": "Traversée de crête entre le Bettmerhorn et l'Eggishorn. Accès par téléphérique depuis Betten (Bettmeralp, puis la remontée du Bettmerhorn). L'itinéraire comporte de l'escalade facile sur des blocs rocheux, et les sections exposées sont bien sécurisées. T3, environ 1h 40, avec 110 m de descente. Descends par le téléphérique de l'Eggishorn jusqu'à Fiesch.",
+    "effort_label": "Modéré, escalade facile",
+    "start": "Station supérieure du Bettmerhorn",
+    "transit": {
+      "train": "Betten + téléphérique de Bettmeralp + remontée du Bettmerhorn"
+    }
+  },
+  {
+    "id": "aletsch_glacier-aletsch-panoramaweg",
+    "name": "Aletsch Panoramaweg",
+    "description_extra": "Depuis la station supérieure du téléphérique du Bettmerhorn, le sentier traverse vers l'est sur un large chemin de montagne avec quelques marches taillées dans la pierre, la glace en vue tout du long. Environ quatre heures, T2, jusqu'à Fiescheralp d'où le téléphérique descend vers Fiesch. Le pied sûr est requis par endroits. Le Panoramaweg peut aussi être pris à Moosfluh (Riederalp) pour la variante complète Moosfluh → Fiescheralp.",
+    "effort_label": "Modéré",
+    "start": "Bettmerhorn",
+    "transit": {
+      "train": "Betten + téléphérique"
+    }
+  },
+  {
+    "id": "arolla_ice_cave-arolla-glacier-trail",
+    "name": "Sentier du glacier d'Arolla (boucle de 14 km)",
+    "description_extra": "Boucle d'environ 14 km depuis le village d'Arolla (2 050 m). Monte de 870 m en passant par les points de vue du Bas Glacier d'Arolla et du Haut Glacier d'Arolla, contourne sous le Pigne d'Arolla, puis revient. Environ sept heures, T2. Reste à l'écart de la glace elle-même, les deux bras sont crevassés.",
+    "effort_label": "Longue journée",
+    "start": "Arolla, Magine (parking près du départ)",
+    "transit": {
+      "bus": "Car postal depuis Sion via Évolène jusqu'à Arolla"
+    }
+  },
+  {
+    "id": "cabane_becs_de_bosson-from-bendolla",
+    "name": "Depuis Bendolla (sommet de la télécabine de Grimentz)",
+    "description_extra": "Approche classique par la télécabine Grimentz-Bendolla. Depuis Bendolla (2 130 m), le sentier se dirige vers le Lac de Lona, montant à travers l'alpage et contournant la crête de la Pointe de Lona jusqu'à un vallon suspendu avec le petit lac de Lona. De là, il monte au col du Pas de Lona, puis 40 dernières minutes sur une section assez raide jusqu'à la cabane à 2 985 m. Environ 2 heures 45 au total, 855 m de dénivelé, T2. Les pentes sont orientées au sud et déneigées assez tôt en été.",
+    "effort_label": "Modéré",
+    "start": "Bendolla",
+    "transit": {
+      "train": "Sierre (CFF) + bus jusqu'à Grimentz + télécabine jusqu'à Bendolla"
+    }
+  },
+  {
+    "id": "moiry_glacier-bus-to-moiry-barrage",
+    "name": "Bus jusqu'au barrage de Moiry + marche jusqu'à la cabane",
+    "description_extra": "Car postal depuis Grimentz jusqu'à l'arrêt Moiry, barrage. Traverse le barrage vers la rive ouest du réservoir, puis environ une heure de marche plate au bord du lac jusqu'au fond de la vallée. De là, un sentier bien tracé grimpe l'ancienne moraine latérale du glacier de Moiry jusqu'à la Cabane de Moiry à 2 825 m, avec un câble à une courte marche raide. Environ 2,5 heures au total depuis le barrage, 580 m de dénivelé, T3. Pour gagner une heure, prends le car postal jusqu'à l'arrêt Moiry glacier à l'extrémité du réservoir.",
+    "effort_label": "Exigeant",
+    "start": "Lac de Moiry / barrage de Moiry",
+    "transit": {
+      "bus": "Car postal depuis Grimentz jusqu'à Moiry, barrage"
+    }
+  },
+  {
+    "id": "moiry_glacier-from-grimentz-on-foot",
+    "name": "Depuis Grimentz à pied",
+    "description_extra": "Approche complète à pied depuis Grimentz (1 586 m) jusqu'à la Cabane de Moiry à 2 824 m. Environ 13,2 km, 5 h 30, près de 1 280 m de dénivelé. Le sentier traverse bois et prairies, puis suit le fond de la vallée le long du réservoir de Moiry avant de grimper l'ancienne moraine latérale jusqu'à la cabane. La dernière section est raide avec des à-pic près du bord de la moraine. T2 sur tout le parcours. Le bus jusqu'au barrage de Moiry retranche environ une heure à la journée si tu ne veux pas tout faire à pied.",
+    "effort_label": "Longue journée",
+    "start": "Village de Grimentz"
+  },
+  {
+    "id": "ferpecle_glacier-easy-glacier-trail",
+    "name": "Barrage de Ferpècle → pied du glacier",
+    "description_extra": "Marche facile (faisable aussi à vélo) depuis le Barrage de Ferpècle jusqu'au pied du glacier du Mont Miné, accessible en car postal depuis Sion via Évolène et Les Haudères. Environ 1,3 km, 30 minutes, avec près de 70 m de dénivelé sur un sentier forestier. T1, adapté aux familles. Bon échauffement ou à combiner avec l'itinéraire plus raide de Bricola plus haut.",
+    "effort_label": "Facile",
+    "start": "Barrage de Ferpècle",
+    "transit": {
+      "bus": "Car postal depuis Sion via Évolène jusqu'à Les Haudères + Ferpècle"
+    }
+  },
+  {
+    "id": "ferpecle_glacier-les-salays-to-bricola",
+    "name": "Les Salays → Bricola",
+    "description_extra": "Montée de deux heures et demie depuis Les Salays, dans le petit hameau de Ferpècle, jusqu'à Bricola à 2 416 m. Environ 4,8 km aller et 650 m de dénivelé, raide par endroits. T3. Le chemin fait partie de la longue approche de la Cabane de la Dent Blanche et est aussi emprunté par les alpinistes qui visent la voie normale de la Dent Blanche. La végétation cède la place aux éboulis et à la roche au-dessus de 2 000 m.",
+    "effort_label": "Modéré, sentier raviné",
+    "start": "Les Salays (Ferpècle)",
+    "transit": {
+      "bus": "Car postal jusqu'à Les Haudères + Ferpècle"
+    }
+  },
+  {
+    "id": "spielboden-laengfluh-glacier-trail",
+    "name": "Längfluh → Spielboden → Saas-Fee",
+    "description_extra": "Descente de deux heures et quart depuis la station supérieure de Längfluh (2 869 m) jusqu'au village de Saas-Fee (1 783 m) via Spielboden. 6,4 km, environ 1 120 m de descente, T2. Le chemin passe sous le Dom et le glacier de Fee jusqu'au Skibrücke, puis descend en lacets jusqu'à Spielboden à 2 452 m et continue à travers la forêt de mélèzes jusqu'au village. Arrête-toi à Spielboden pour les marmottes apprivoisées.",
+    "effort_label": "Descente modérée",
+    "start": "Station supérieure du téléphérique de Längfluh",
+    "transit": {
+      "train": "Brigue + car postal jusqu'à Saas-Fee + téléphérique de Spielboden + Längfluh"
+    }
+  },
+  {
+    "id": "barrhorn-from-turtmannhuette",
+    "name": "Depuis la Turtmannhütte par le Schöllijoch",
+    "description_extra": "Journée d'ascension vers l'Üssers Barrhorn à 3 610 m depuis la Turtmannhütte à 2 519 m, accessible par une longue approche dans la vallée de Turtmann depuis Gruben. La plupart des groupes passent une nuit à la cabane avant le jour du sommet. Le sentier monte éboulis et roche en passant le Schöllijoch et le long des grandes pentes jusqu'au sommet. Environ six heures aller-retour et près de 1 100 m de dénivelé. Le CAS le cote T5 : pas d'escalade technique, mais haute altitude et longue journée, et les conditions varient selon la saison.",
+    "effort_label": "Expert",
+    "start": "Turtmannhütte",
+    "transit": {
+      "train": "Viège (CFF) + bus + longue approche jusqu'à la Turtmannhütte"
+    }
+  },
+  {
+    "id": "saas_fee_glacier-glacier-trail-felskinn",
+    "name": "Glacier Trail par la Britanniahütte",
+    "description_extra": "Marche d'approche vers la cabane Britannia à 3 030 m, sur le bord du Hohlaubgletscher dans la vallée de Saas. Depuis Felskinn (sommet de l'Alpin Express depuis Saas-Fee), la ligne standard du CAS suit le sentier blanc-rouge balisé jusqu'à l'Egginerjoch puis jusqu'à la cabane, T3, environ 1 h 15 avec 550 m de dénivelé cumulé (environ 30 min de plus si tu pars de Morenia / pylône 4 pour éviter le Chessjengletscher ; cette variante de Morenia a été nouvellement balisée en 2022 et est l'option estivale la plus sûre). La cabane est ouverte de mi-juin à mi-septembre. La continuation originale du Glacier Trail vers Mattmark à travers le glacier d'Allalin était historiquement T4 avec risque de crevasses et est actuellement FERMÉE côté Felskinn à cause des éboulis qui recouvrent le chemin ; ne t'engage pas sur les glaciers sans guide de montagne, et vérifie l'état actuel avant d'y aller.",
+    "effort_label": "Alpin, pied sûr requis",
+    "start": "Station supérieure de Felskinn",
+    "transit": {
+      "train": "Brigue + car postal jusqu'à Saas-Fee + téléphérique Alpin Express jusqu'à Felskinn"
+    }
+  },
+  {
+    "id": "lac_de_derborence-default",
+    "name": "Boucle au bord du lac depuis la route",
+    "description_extra": "Accès en voiture depuis Aven par l'étroite route de la vallée de la Lizerne, puis une courte marche jusqu'au lac à 1 449 m. Boucle facile au bord du lac sur terrain T1. Le Refuge du Lac Derborence au bord du lac propose chambres et restauration.",
+    "effort_label": "Facile",
+    "start": "Parking du Lac de Derborence",
+    "transit": {
+      "car": "Accès en voiture depuis Aven par l'étroite route de la vallée de la Lizerne"
+    }
+  },
+  {
+    "id": "la_fouly-tmb-arnuva-la-fouly",
+    "name": "Tour du Mont Blanc · Arnuva → Grand Col Ferret → La Fouly",
+    "description_extra": "Étape du Tour du Mont Blanc depuis Arnuva, dans le Val Ferret italien, par le Grand Col Ferret à 2 536 m puis descente dans le Val Ferret suisse jusqu'à La Fouly. Environ 14,5 km, 5h 30, 865 m de montée et un peu plus de 1 000 m de descente. T2. Chemin bien entretenu pour l'essentiel, montant un large col herbeux puis une longue descente passant le Rifugio Elena (tôt) et l'alpage de la Peule (tard). Emporte de quoi déjeuner, car aucun des deux arrêts n'est bien placé pour un repas.",
+    "effort_label": "Longue journée",
+    "start": "Arnuva (Val Ferret italien)",
+    "transit": {
+      "bus": "Bus depuis Courmayeur jusqu'à Arnuva"
+    }
+  },
+  {
+    "id": "sanetschpass-from-gsteig-on-foot",
+    "name": "Depuis Gsteig à pied",
+    "description_extra": "Montée depuis Gsteig bei Gstaad (1 184 m, car postal depuis Gstaad) jusqu'au Sanetschpass à 2 252 m, à la frontière Berne-Valais. Environ trois heures et près de 1 000 m de dénivelé sur l'ancienne route du col et les sentiers de bergers. T2 sur tout le parcours. Beaucoup de randonneurs évitent la montée en prenant le téléphérique côté valaisan. Depuis le sommet, continue jusqu'à l'Hôtel du Sanetsch et au Lac de Sanetsch côté sud.",
+    "effort_label": "Modéré",
+    "start": "Gsteig bei Gstaad",
+    "transit": {
+      "bus": "Car postal jusqu'à Gsteig"
+    }
+  },
+  {
+    "id": "sanetschpass-cable-car-shortcut",
+    "name": "Téléphérique du Sanetsch + marche jusqu'au lac",
+    "description_extra": "Raccourci par téléphérique jusqu'au col du Sanetsch. Depuis Gsteig, marche environ 25 minutes jusqu'à la station de la vallée du Sanetsch, puis monte en télécabine jusqu'au col à 2 252 m. Le temps de marche jusqu'au lac depuis la station supérieure est de 10 à 15 minutes sur un large chemin de gravier. La boucle autour du réservoir du Sanetschsee est une marche facile au bord du lac, environ une heure. L'Hôtel du Sanetsch est le seul hébergement là-haut et une halte déjeuner appréciée.",
+    "effort_label": "Facile",
+    "start": "Station de la vallée du téléphérique de Gsteig",
+    "transit": {
+      "bus": "Car postal jusqu'à Gsteig + 25 min de marche jusqu'au téléphérique"
+    }
+  },
+  {
+    "id": "nax_via_ferrata-belvedere-via-ferrata",
+    "name": "Via ferrata du Belvédère",
+    "description_extra": "La via ferrata du Belvédère au-dessus de Nax, dans le Val d'Hérens. Départ à un lacet de la Route de Nax, à environ 1 000 m dans la forêt sous le village ; le car postal depuis Sion passe toutes les heures. Environ deux heures d'escalade, 220 m de dénivelé, cotée parmi les via ferratas les plus faciles du Valais mais matériel obligatoire : baudrier avec longe de via ferrata, casque, gants.",
+    "effort_label": "1 à 2 heures d'escalade",
+    "start": "Parking de la via ferrata du Belvédère (au-dessus de Nax)",
+    "transit": {
+      "bus": "Car postal depuis Sion jusqu'à Nax"
+    }
+  },
+  {
+    "id": "crans_montana-bisse-du-ro",
+    "name": "Bisse du Ro",
+    "description_extra": "Traversée de trois heures le long d'un bisse historique (canal d'irrigation valaisan) taillé dans le flanc sud au-dessus de Crans-Montana. T2. Comme beaucoup de bisses valaisans, il comporte des passages en falaise vertigineux, et l'itinéraire avertit que certains passages sont déconseillés aux personnes sujettes au vertige. Des chenaux de mélèze et des passerelles longent la ligne où le chemin d'entretien était autrefois raide et non protégé. La marche offre des vues plongeantes sur la vallée du Rhône en contrebas.",
+    "effort_label": "Modéré, exposition par endroits",
+    "start": "Centre de Crans-Montana",
+    "transit": {
+      "bus": "Car postal jusqu'à Crans-Montana"
+    }
+  },
+  {
+    "id": "crans_montana-plaine-morte-glacier",
+    "name": "Plateau glaciaire de la Plaine Morte",
+    "description_extra": "Marche de deux heures sur le plateau glaciaire à 2 927 m. Accessible par téléphérique depuis Crans-Montana (funiculaire et chaîne de télécabines jusqu'à la station supérieure de la Plaine-Morte). Le plateau lui-même est surtout neige et glace plates en été, avec des tracés balisés pour les randonneurs. T2 une fois en haut. Le glacier de la Plaine Morte recule vite et l'itinéraire change d'année en année.",
+    "effort_label": "Modéré, haute altitude",
+    "start": "Sommet du téléphérique de la Pointe de la Plaine Morte",
+    "transit": {
+      "train": "Sierre + funiculaire + plusieurs remontées"
+    }
+  },
+  {
+    "id": "salanfe_lake-from-van-d-en-haut",
+    "name": "Depuis Van d'En Haut",
+    "description_extra": "Montée raide de 2,5 heures depuis le camping de Van d'En Haut (1 393 m) jusqu'au réservoir du Lac de Salanfe à 1 909 m. Environ 516 m de dénivelé, T2. Démarre au bout de la route publique dans le Vallon de Van et monte à travers la haute vallée jusqu'au barrage. L'Auberge de Salanfe au barrage sert à manger et propose des chambres.",
+    "effort_label": "Modéré, approche raide",
+    "start": "Camping de Van d'En Haut",
+    "transit": {
+      "train": "Salvan (Mont-Blanc Express) + voiture/marche"
+    }
+  },
+  {
+    "id": "pointe_du_tsate-from-la-forclaz",
+    "name": "Depuis La Forclaz via le Lac du Tsaté",
+    "description_extra": "Journée d'ascension de cinq heures depuis La Forclaz (car postal depuis Évolène) au-dessus du Val d'Hérens. Le sentier monte à travers l'alpage jusqu'au Lac du Tsaté, puis grimpe des pentes couvertes d'éboulis jusqu'au sommet à 3 078 m. 1 200 m de dénivelé cumulé, T3. La section supérieure a un terrain instable ; pied sûr indispensable.",
+    "effort_label": "Longue journée, peu balisée",
+    "start": "La Forclaz (Évolène)",
+    "transit": {
+      "bus": "Car postal jusqu'à La Forclaz"
+    }
+  },
+  {
+    "id": "gastlosen-gastlosen-circular",
+    "name": "Boucle des Gastlosen (Jaun → Chalet du Soldat → Jaun)",
+    "description_extra": "Boucle autour de la chaîne calcaire des Gastlosen depuis Jaun, Dorf. L'itinéraire couvre environ 14,4 km en 6h 25 et près de 975 m de dénivelé cumulé, montant par le col du Wols Ort, passant sous la crête jusqu'au Chalet du Soldat, puis redescendant vers Jaun. T2. Le Chalet du Soldat à 1 752 m est un restaurant d'alpage en activité l'été.",
+    "effort_label": "Longue journée",
+    "start": "Jaun, Dorf",
+    "transit": {
+      "bus": "Car postal jusqu'à Jaun, Dorf"
+    }
+  },
+  {
+    "id": "dent_de_broc-from-broc",
+    "name": "Broc → Dent de Broc → Gruyères (traversée)",
+    "description_extra": "Depuis la station TPF de Broc-Fabrique, le sentier monte à travers alpage et forêt jusqu'au Col des Combes (1 668 m), puis suit la crête jusqu'à la croix sommitale à 1 829 m. T4 sur la section supérieure. Traversée aller par le sommet et descente vers Gruyères : environ 4 heures de montée et 2h 30 de descente, avec 1 240 m de dénivelé positif et près de 1 200 m de descente. Pied sûr et tête froide requis : pas un itinéraire pour tout le monde dans le groupe si quelqu'un hésite.",
+    "effort_label": "Crête sommitale exposée",
+    "start": "Broc (station TPF)",
+    "transit": {
+      "train": "Broc-Fabrique (TPF)"
+    }
+  },
+  {
+    "id": "moleson-plan-francey-summit",
+    "name": "Plan-Francey au sommet et retour",
+    "description_extra": "Aller-retour de deux heures depuis la station intermédiaire du funiculaire du Moléson à Plan-Francey (1 517 m). Le funiculaire épargne la première partie depuis Moléson-sur-Gruyères, laissant environ 600 m de dénivelé jusqu'au sommet à 2 002 m. Le sentier monte le flanc nord-ouest sur un chemin balisé, T2.",
+    "effort_label": "Modéré",
+    "start": "Station intermédiaire de Plan-Francey",
+    "transit": {
+      "train": "Gruyères (TPF) + bus + funiculaire jusqu'à Plan-Francey"
+    }
+  },
+  {
+    "id": "teysachaux-les-paccots-to-moleson",
+    "name": "Les Paccots → Téysachaux → Moléson",
+    "description_extra": "Traversée de crête depuis Les Paccots par le Téysachaux (1 909 m) jusqu'au Moléson (2 002 m). La montée depuis Les Paccots se fait sur des chemins de prairie herbeuse. La dernière partie avant la croix sommitale du Téysachaux est assez exposée, et la crête entre le Téysachaux et le Moléson est raide, herbeuse et rocheuse, cotée T3. Depuis le Moléson, descends par le funiculaire de Plan-Francey ou continue jusqu'à Bulle.",
+    "effort_label": "Crête exposée",
+    "start": "Les Paccots",
+    "transit": {
+      "train": "Châtel-St-Denis (TPF) + bus jusqu'à Les Paccots"
+    }
+  },
+  {
+    "id": "cap_au_moine-from-allieres",
+    "name": "Allières → Cape au Moine",
+    "description_extra": "Montée directe depuis la gare d'Allières (ligne MOB, 1 006 m) jusqu'à la Cape au Moine à 1 941 m. Environ 4 km aller et 940 m de dénivelé cumulé, autour de 2 h 15 de marche. T4 avec un court passage d'escalade exposé sur la crête sommitale : étroit, glissant par temps humide, sans protection. Retour par le même sentier.",
+    "effort_label": "Modéré, brève exposition",
+    "start": "Allières",
+    "transit": {
+      "train": "Allières (MOB)"
+    }
+  },
+  {
+    "id": "dent_de_jaman-route-87",
+    "name": "Montée directe depuis la gare de Jaman",
+    "description_extra": "Prends le train MOB depuis Montreux ou Les Avants jusqu'à la gare de Jaman, puis une courte montée jusqu'au sommet à 1 875 m (environ 30 minutes, près de 140 m de dénivelé), T2. Des alternatives plus longues partent des Avants ou du Col de Jaman. L'approche finale est la partie la plus raide de la journée.",
+    "effort_label": "Modéré",
+    "start": "Gare de Jaman",
+    "transit": {
+      "train": "Jaman"
+    }
+  },
+  {
+    "id": "creux_du_van-noiraigue-14-bends",
+    "name": "Sentier des 14 contours (depuis Noiraigue)",
+    "description_extra": "Le Sentier des 14 contours, le chemin des quatorze virages, est l'approche classique depuis la gare de Noiraigue jusqu'à l'amphithéâtre rocheux. La première heure est une montée régulière en forêt, puis le chemin se rétrécit et se raidit avec les quatorze lacets qui donnent son nom à l'itinéraire. Environ 725 m de dénivelé positif, bien balisé. Sortie au Soliat. Chaussures solides requises, certaines sections peuvent être boueuses après la pluie.",
+    "effort_label": "Modéré, montée raide",
+    "start": "Gare de Noiraigue",
+    "transit": {
+      "train": "Noiraigue (RER fribourgeois)"
+    }
+  },
+  {
+    "id": "lac_de_taney-route-50",
+    "description_extra": "Depuis Le Flon (en voiture ou en car postal), le sentier monte à travers la forêt et par le Col de Tanay jusqu'au lac en environ 1 heure, 374 m de dénivelé, T1. Pas de camping au bord du lac (protection fédérale du paysage). Continue encore 1,5 heure jusqu'au Grammont pour une journée complète.",
+    "effort_label": "Facile",
+    "start": "Parking du Flon",
+    "transit": {
+      "bus": "Le Flon, village"
+    }
+  },
+  {
+    "id": "grammont-route-154",
+    "description_extra": "Approche depuis Miex ou Tannay au-dessus de Vouvry, monte en voiture jusqu'au parking du Flon de Tanay à 1 049 m, puis 4 à 5 heures de montée via le Lac de Tanay et le Col des Crosses jusqu'au sommet à 2 172 m. Environ 12,6 km et 1 125 m de dénivelé, aucune difficulté technique ; sentier de montagne T2 avec une section exposée près du sommet au-dessus du col, et une montée finale qui peut être glissante par temps humide.",
+    "effort_label": "Intermédiaire",
+    "start": "Parking du Flon",
+    "transit": {
+      "bus": "Le Flon, village"
+    }
+  },
+  {
+    "id": "marchairuz-mollendruz-mont-tendre-marchairuz",
+    "name": "Col du Mollendruz → Mont Tendre → Col du Marchairuz",
+    "description_extra": "Marche de crête classique du Jura. Environ 4,5 heures depuis le Col du Mollendruz par le Mont Tendre à 1 679 m, le plus haut sommet du Jura suisse, puis une descente douce jusqu'au Col du Marchairuz. Près de 500 m de dénivelé cumulé, T2, marche de crête facile pour l'essentiel. L'itinéraire traverse les pâturages et chalets de montagne du Parc naturel du Jura vaudois, avec des murs en pierres sèches tout du long. Le car postal dessert les deux cols.",
+    "effort_label": "Longue crête facile",
+    "start": "Col du Mollendruz",
+    "transit": {
+      "bus": "Car postal jusqu'au Col du Mollendruz"
+    }
+  },
+  {
+    "id": "geltenschuss-lauenensee-geltenhuette",
+    "name": "Lauenensee → Geltenhütte → Lauenensee",
+    "description_extra": "Boucle de six heures depuis Lauenen via le Lauenensee et la Geltenhütte du CAS. Le sentier de montagne longe le bord de l'eau à travers prairies et jeune forêt le long du Louwibach, puis monte en lacets une rampe rocheuse en passant la cascade du Gälteschutz. Près de 750 m de dénivelé cumulé, T2. La cabane se trouve à 2 002 m. La variante de descente par le Chüetungel emprunte des pentes orientées à l'ouest avec une échelle fixe au pas exposé du Gältetrittli.",
+    "effort_label": "Modéré, marches exposées",
+    "start": "Lauenensee",
+    "transit": {
+      "bus": "Car postal jusqu'à Lauenen + marche jusqu'au lac"
+    }
+  }
+]

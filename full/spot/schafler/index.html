@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392626" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223451" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"schafler-route-42","sac_grade":"T2","effort_label":"Easy","duration_min":50,"gain_m":280,"start":"Ebenalp top station (cable car from Wasserauen)","transit":{"train":"Wasserauen"},"description_extra":"Approach via the Ebenalp cable car from Wasserauen, then about 30 to 40 minutes along the ridge to the inn. T2: the ridge is narrow in places with some exposure. The Schäfler has a restaurant terrace and overnight rooms (double rooms and bunk-bed cabins). Winter closure runs until the end of May.","visits":["schafler"],"sources":["https://www.alpstein.ch/de/wandern/wanderung/ebenalp-schaefler.html"],"quickest_for":["schafler"],"equipment_list":["Sturdy hiking shoes"],"hut_ids":["berggasthaus-schafler"],"cable_car_ids":["ebenalp-luftseilbahn"],"start_maps_url":"https://www.google.com/maps/place/?q=47.29024,9.40417&z=16","distance_km":2.3,"cable_cars":[{"id":"ebenalp-luftseilbahn","operator":"Luftseilbahn Wasserauen-Ebenalp AG","description":"Cable car from Wasserauen up to Ebenalp at 1,640 m, gateway to the Alpstein","open_raw":"Year-round, with revision closures in April and November to December","website":"https://www.ebenalp.ch/","name":"Luftseilbahn Wasserauen-Ebenalp","top_station_maps_url":"https://www.google.com/maps/place/?q=47.28417,9.41083&z=16"}],"cable_car":{"id":"ebenalp-luftseilbahn","operator":"Luftseilbahn Wasserauen-Ebenalp AG","description":"Cable car from Wasserauen up to Ebenalp at 1,640 m, gateway to the Alpstein","open_raw":"Year-round, with revision closures in April and November to December","website":"https://www.ebenalp.ch/","name":"Luftseilbahn Wasserauen-Ebenalp","top_station_maps_url":"https://www.google.com/maps/place/?q=47.28417,9.41083&z=16"},"huts":[{"id":"berggasthaus-schafler","name":"Berggasthaus Schäfler","description":"Cliff-edge guesthouse on the Ebenalp ridge","cost_chf_raw":"From 48 CHF","open_raw":"May 24 - Mid Oct","website":"https://www.schaefler.ch/geniessen/"}],"hut":{"id":"berggasthaus-schafler","name":"Berggasthaus Schäfler","description":"Cliff-edge guesthouse on the Ebenalp ridge","cost_chf_raw":"From 48 CHF","open_raw":"May 24 - Mid Oct","website":"https://www.schaefler.ch/geniessen/"},"quickest":true},{"id":"schafler-from-wasserauen-via-bommen","visits":["schafler"],"sac_grade":"T2","effort_label":"Demanding","duration_min":180,"gain_m":1057,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Wasserauen station","transit":{"train":"Appenzell, then Appenzeller Bahn to Wasserauen"},"description_extra":"Foot ascent without using the Ebenalp cable car. From Wasserauen the path climbs through forest to Alp Bommen, then changes to a rough gravel track that doubles as a ski slope in winter, continuing through Gartenalp to the Berggasthaus Schäfler at 1,925 m. About 3 hours from the valley, roughly 1,057 m of cumulative gain, T2. Return by cable car from Ebenalp or by descending to the Seealpsee.","sources":["https://www.gipfelbuch.ch/routen/21771","https://www.appenzell.ch/en/summer/hiking/hiking-tour-suggestions.html?tx_wstourismus_tourismus%5Btour%5D=571"],"hut_ids":["berggasthaus-schafler"],"start_maps_url":"https://www.google.com/maps/place/?q=47.28581,9.42856&z=16","distance_km":7.5,"huts":[{"id":"berggasthaus-schafler","name":"Berggasthaus Schäfler","description":"Cliff-edge guesthouse on the Ebenalp ridge","cost_chf_raw":"From 48 CHF","open_raw":"May 24 - Mid Oct","website":"https://www.schaefler.ch/geniessen/"}],"hut":{"id":"berggasthaus-schafler","name":"Berggasthaus Schäfler","description":"Cliff-edge guesthouse on the Ebenalp ridge","cost_chf_raw":"From 48 CHF","open_raw":"May 24 - Mid Oct","website":"https://www.schaefler.ch/geniessen/"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

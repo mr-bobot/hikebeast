@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392624" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223449" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"lac_de_taney-route-50","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":374,"start":"Parking du Flon","transit":{"bus":"Le Flon, village"},"visits":["lac_de_taney"],"description_extra":"From Le Flon (drive or postbus), the trail climbs through forest and over the Col de Tanay to the lake in about 1 hour, 374 m of gain, T1. No camping at the lakeshore (federal landscape protection). Continue another 1.5 hours up to Le Grammont for a full day.","sources":["https://www.valais.ch/en/explore/activities/hiking/hikes/chemin-du-lac-de-taney"],"quickest_for":["lac_de_taney"],"equipment_list":[],"start_maps_url":"https://maps.app.goo.gl/JNYuYgWpRCrmPhbu6","distance_km":4.5,"descent_m":75,"quickest":true},{"id":"lac_de_taney-from-st-gingolph-via-col-de-la-croix","visits":["lac_de_taney"],"sac_grade":"T2","effort_label":"Demanding","duration_min":400,"gain_m":1380,"equipment_list":["Sturdy hiking boots","Poles"],"start":"St-Gingolph, on Lake Geneva","transit":{"train":"Direct train to St-Gingolph from Geneva or Lausanne"},"description_extra":"Long approach from lake level rather than from the road head at Le Flon. From St-Gingolph the path climbs through southern-facing forest via La Croix-des-Dames and Le Freney to Novel at 960 m, continues to L'Au de Morge and the Col de la Croix at 1,755 m, then drops to Lac de Taney at 1,408 m and out via Miex Le Flon. About 6 hours 40 minutes on the marked T2 line, 1,380 m of ascent and 1,170 m of descent. Overnight options at Novel or the lake make this a two-day option.","sources":["https://www.wandersite.ch/Tageswanderung/633_Wallis.html","https://schweizmobil.ch/fr/suisse-a-pied/itineraire-6/etape-43"],"start_maps_url":"https://www.google.com/maps/place/?q=46.39217,6.80589&z=16","distance_km":17.5,"descent_m":1170,"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

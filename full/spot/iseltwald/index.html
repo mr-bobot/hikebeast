@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392612" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223438" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"iseltwald-default","description_extra":"Drive in, or take the summer steamship from Interlaken (April to October), or Postbus 103 from Interlaken Ost. Two parking lots sit above the village; cars cannot enter, so you walk down a few minutes to the lakefront and pier. The famous pier (Crash Landing on You filming location) charges a CHF 5 entrance fee. T1.","visits":["iseltwald"],"sources":["https://www.iseltwald.ch/tourismus/30046"],"name":"Pier walk from village parking","sac_grade":"T1","effort_label":"Easy","duration_min":5,"gain_m":0,"distance_km":0.3,"equipment_list":[],"start":"Iseltwald village, lakefront parking","transit":{"bus":"Postbus 103 from Interlaken Ost to Iseltwald","boat":"Lake Brienz steamship from Interlaken or Brienz (April to October)"},"quickest_for":["iseltwald"],"start_maps_url":"https://maps.app.goo.gl/Dmfr6mUsmuhjB3Z8A","quickest":true},{"id":"iseltwald-from-boenigen-uferweg","visits":["iseltwald"],"sac_grade":"T1","effort_label":"Easy","duration_min":125,"gain_m":320,"distance_km":7,"equipment_list":[],"start":"Bönigen boat station, east of Interlaken","transit":{"train":"Interlaken Ost","bus":"Bus 104 from Interlaken Ost to Bönigen, See (or 10 minutes on foot)"},"description_extra":"Lakeside walk-in along the north shore of Lake Brienz, the first stage of the federal Brienzersee Drei Wasserfälleweg route 360. From Bönigen the path follows the shore for about 1 km, then turns into the forest and climbs gently to the Eschwanden waterfall, continues along a cliff face on the pilgrim path, and drops to Iseltwald at the Fura. About 7 km, 2 hours 5 minutes, T1. Combine with the onward Iseltwald to Giessbach section for a longer day.","sources":["https://schweizmobil.ch/de/wanderland/route-360/etappe-1","https://www.brienzersee.ch/reiseziele/brienzersee/boenigen-iseltwald","https://www.myswitzerland.com/en-us/experiences/route/brienzersee-drei-wasserfaelleweg-360_01/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.68933,7.89803&z=16","descent_m":320,"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

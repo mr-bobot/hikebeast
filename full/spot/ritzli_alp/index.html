@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392621" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223447" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"ritzli_alp-drive-up","visits":["ritzli_alp"],"name":"Drive up to Ritzli Alp","start":"Restaurant Ritzli Alp parking","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"bus":"Bulle + PostBus toward Jaun, Dorf. From Jaun, walk up the Euschelspass trail to Ritzli Alp (about 1h25, T1)."},"description_extra":"From Jaun follow the Euschelsstrasse mountain road 5 km up toward the Euschels pass. Ritzli Alp sits at 1,516 m and is signposted. Free parking at the restaurant. Open daily June to mid-September, weekends in shoulder season. Mountain road closes with snow.","sources":["https://fribourg.ch/en/schwarzsee/alpine-restaurants/ritzli-alp/","https://www.postauto.ch/en/timetables"],"quickest_for":["ritzli_alp"],"start_maps_url":"https://www.google.com/maps/place/Ritzli+Alp/@45.1662212,2.7371613,7z/data=!3m1!5s0x478e5f297051167b:0xcf8dc4fee4431c02!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x478e5f297044c507:0xc94cdffdd5313e7a!8m2!3d46.6295236!4d7.2828498!16s%2Fg%2F1td2yck1","quickest":true},{"id":"ritzli_alp-from-jaun","visits":["ritzli_alp"],"name":"Up the Euschels valley from Jaun","start":"Jaun, Dorf (PostBus stop in Jaun village)","start_maps_url":"https://www.google.com/maps/place/?q=46.61039,7.28818&z=16","sac_grade":"T1","effort_label":"Easy","duration_min":165,"gain_m":500,"distance_km":7.5,"equipment_list":["Sturdy walking shoes","1 L water (fountains in Jaun, not on the trail)","Sun protection (open meadows above the village)"],"transit":{"bus":"Bulle (SBB) + PostBus 260 toward Jaun, Dorf"},"description_extra":"Walking route from Jaun village (about 1,020 m) up the Euschels valley to Ritzli Alp at 1,509 m. Roughly 7.5 km and 500 m of gain on a marked T1 path, about 2h 45 to 3 h up at a relaxed pace. The trail leaves Jaun past the village waterfall and cemetery, climbs through alpine meadows, then follows the Euschelsstrasse toward the Euschels pass before reaching the alp restaurant on its sunny terrace. Ritzli Alp opens daily from May through October with reduced weekend hours in shoulder season, and sits directly under the Gastlosen ridge — the wall lights up at sunset and the terrace stays warm into blue hour. Descend the same way (faster, around 1h 30) or continue over the pass to Schwarzsee on the Alpenpanoramaweg.","sources":["https://www.outdooractive.com/de/route/wanderung/jaun-ritzli-alp/802756162/","https://www.outdooractive.com/de/hut/freiburger-alpen/ritzli-alp/59991054/","https://www.outdooractive.com/de/route/wanderung/naturpark-gantrisch/alpenpanoramaweg-etappe-20-schweizmobil-3-/802764294/"],"quickest_for":["ritzli_alp"],"quickest":true}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

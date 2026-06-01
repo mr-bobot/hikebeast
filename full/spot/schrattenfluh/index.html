@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392611" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223436" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -237,6 +237,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"schrattenfluh-schratteflue-crossing","name":"Schratteflue crossing (advanced)","start":"Hirsegg parking (Marbachegg side)","duration_min":465,"sac_grade":"T5","effort_label":"Expert","description_extra":"Start at the Hirsegg parking on the Marbachegg side. The full Schrattenfluh ridge runs about 6 km with four prominent peaks: Schibegütsch, Hängst, Hächle, and Strick. T5 with II scrambling. About 16 km and 7 h 45 in total, with ~1,050 m of cumulative climb and the same descent; the two end peaks (Hächle and Strick) are the more demanding sections. The plateau holds one of the largest karst fields in Switzerland with deep potholes off the marked line, so staying on the trail matters. Sure-footedness, a head for heights, and good visibility required.","visits":["schrattenfluh"],"sources":["https://www.outdooractive.com/en/route/mountain-hike/district-entlebuch/schratteflue-crossing-for-advanced-hikers/801971278/"],"quickest_for":["schrattenfluh"],"equipment_list":["Sturdy hiking boots","Poles","Helmet (rockfall sections)","Gloves (limestone karst)"],"cable_car_ids":[],"start_maps_url":"https://maps.app.goo.gl/vcBFopqwf8okoKEz5","distance_km":16.1,"gain_m":1050,"descent_m":1050,"quickest":true},{"id":"schrattenfluh-from-hirsegg","visits":["schrattenfluh"],"sac_grade":"T4","effort_label":"Demanding","duration_min":395,"gain_m":1195,"distance_km":17.96,"equipment_list":["Sturdy hiking boots","Poles","Gloves (limestone karst)"],"start":"Hirsegg (bus stop)","transit":{"train":"Lucerne to Schüpfheim","bus":"Schüpfheim bus 214 to Sörenberg, Hirsegg"},"description_extra":"Approach the ridge from the Hirsegg postbus stop on the north flank rather than from Sörenberg village or Bumbach. The trail climbs through Alp Schlund onto the karst plateau and over the main summits, then descends past Rossweid and back to Sörenberg. 17.96 km, about 6 h 37, 1,195 m of cumulative gain on a route the local tourism office grades difficult, T4 to T5 on the technical sections of the ridge. The plateau holds deep karst potholes off the marked line, so staying on the trail matters in fog or snow.","sources":["https://www.soerenberg.ch/en/tour/hirsegg-schrattenfluh-rossweid-soerenberg","https://www.biosphaere.ch/en/tour/hirsegg-schrattenfluh-rossweid-soerenberg"],"start_maps_url":"https://www.google.com/maps/place/?q=46.83878,8.01238&z=16","name":"Hirsegg → Schibegütsch → Sörenberg (biosphere tour)","descent_m":1112,"quickest":false},{"id":"schrattenfluh-from-marbachegg-cable-car","visits":["schrattenfluh"],"name":"Cable car to Marbachegg, traverse toward the Schrattenfluh ridge","start":"Marbachegg gondola top station","start_maps_url":"https://www.google.com/maps/place/?q=46.8352,7.9064&z=16","sac_grade":"T2","effort_label":"Moderate","duration_min":280,"gain_m":610,"distance_km":14.6,"equipment_list":["Sturdy hiking boots","Poles","Gloves (limestone karst)"],"transit":{"train":"Lucerne to Wolhusen, then S7 to Marbach LU","bus":"Postbus to Marbach, Talstation Marbachegg","cable_car":"Marbachegg gondola from Marbach village"},"description_extra":"From Marbach village take the Marbachegg gondola (late May to mid-October) up to the panoramic top station at 1,484 m. From there a loop trail runs east via Alp Imbrig (1,460 m) along the foot of the Schrattenfluh, with the karst cliffs of Schibegütsch and Hängst rising above. The route stays below the ridge, topping out around 1,520 m. About 14.6 km and 610 m of cumulative gain, 4 to 5 hours, T2 on well-marked paths with a few steeper limestone sections. The plateau holds deep potholes off the trail, so visibility matters. Strong hikers continue from the gondola top up the steep marked trail to the Hängst summit at 2,092 m (Schrattenfluh's high point), adding 700 m of gain and another 2 hours each way, T3 on rocky karst with no clear path in the upper section; the standard Hängst summit approach, however, is from the Hirsegg / Alp Schlund side to the south.","sources":["https://www.komoot.com/smarttour/21332540","https://www.luzern.com/de/tour/marbachegg-kemmeriboden"],"cable_car_ids":["marbachegg-gondola"],"cable_cars":[{"id":"marbachegg-gondola","operator":"Sportbahnen Marbachegg","description":"Gondola from Marbach village up to Marbachegg in the UNESCO Entlebuch Biosphere","open_raw":"Late May to mid-October","website":"https://www.marbachegg.ch/","name":"Gondelbahn Marbachegg"}],"cable_car":{"id":"marbachegg-gondola","operator":"Sportbahnen Marbachegg","description":"Gondola from Marbach village up to Marbachegg in the UNESCO Entlebuch Biosphere","open_raw":"Late May to mid-October","website":"https://www.marbachegg.ch/","name":"Gondelbahn Marbachegg"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -278,8 +279,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -467,6 +473,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

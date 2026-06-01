@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392634" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223458" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"dent_doche-from-bernex","name":"From Bernex via Fétiuère","start":"Fétiuère parking (above Bernex)","transit":{"bus":"From Évian, drive to Fétiuère"},"duration_min":195,"gain_m":940,"sac_grade":"T3","effort_label":"Moderate, brief chain sections","description_extra":"Three-and-a-quarter-hour climb from the Fétiuère parking above Bernex (1,206 m) up to the Refuge de la Dent d'Oche and on to the summit at 2,221 m. About 940 m of gain. Short rock sections near the refuge have chains; the final stretch to the summit traverses unsecured cliff sections. T3. The refuge serves food and has beds.","visits":["dent_doche"],"sources":["https://www.komoot.com/smarttour/1504936"],"quickest_for":["dent_doche"],"hut_ids":["refuge-dent-oche"],"start_maps_url":"https://www.google.com/maps/place/?q=46.3462,6.70783&z=16","distance_km":5.5,"equipment_list":["Sturdy hiking shoes"],"huts":[{"id":"refuge-dent-oche","name":"Refuge de la Dent d'Oche","description":"Refuge below the summit, French Alps, food and beds","open_raw":"Early June to late September","cost_chf_raw":"From 58 € half-board","website":"https://refugeladentdoche.ffcam.fr/"}],"hut":{"id":"refuge-dent-oche","name":"Refuge de la Dent d'Oche","description":"Refuge below the summit, French Alps, food and beds","open_raw":"Early June to late September","cost_chf_raw":"From 58 € half-board","website":"https://refugeladentdoche.ffcam.fr/"},"quickest":true},{"id":"dent_doche-from-la-planche","visits":["dent_doche"],"sac_grade":"T3","effort_label":"Demanding","duration_min":270,"gain_m":1100,"equipment_list":["Sturdy hiking boots","Poles"],"start":"La Planche parking (above Novel, Haute-Savoie)","transit":{"car":"Drive from Saint-Gingolph or Évian via Novel to the La Planche parking. No regular bus."},"description_extra":"East-side approach over the Col de Rebollion instead of the standard west ridge from Bernex. From La Planche the trail climbs through forest to the Chalet de Trépertuis pasture, then traverses below the high cliffs of the Dent d'Oche to the Col de Trépertuis and skirts the north face via the Col de Rebollion before joining the refuge approach for the final summit pitch at 2,221 m. T3 with some unsecured cliff sections near the top, the same as the standard route. Combines well with a traverse, ascending from La Planche and descending to Bernex.","sources":["https://www.visorando.com/en/walk-dent-d-oche/","https://www.altituderando.com/spip.php?article2375"],"start_maps_url":"https://maps.app.goo.gl/MaG3Dyj8oht85Udx6","distance_km":5.7,"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

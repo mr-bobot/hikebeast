@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392606" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223430" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"rosenlaui_public_waterfall-route-99","start":"Parkplatz Gletscherschlucht","transit":{"bus":"Rosenlaui, Gletscherschlucht"},"description_extra":"Park at the Parkplatz Gletscherschlucht (postbus stop Rosenlaui, Gletscherschlucht) and walk a few minutes from beside the toilet block. T1.","visits":["rosenlaui_public_waterfall"],"name":"Drive-in from the Grosse Scheidegg road","sac_grade":"T1","effort_label":"Easy","duration_min":5,"gain_m":0,"distance_km":0.2,"equipment_list":[],"quickest_for":["rosenlaui_public_waterfall"],"start_maps_url":"https://www.google.com/maps/place/?q=46.6787,8.1554&z=16","sources":["https://en.rosenlauischlucht.ch/en/Ferien/Informationen"],"quickest":true},{"id":"rosenlaui_public_waterfall-from-grindelwald-via-grosse-scheidegg","visits":["rosenlaui_public_waterfall"],"sac_grade":"T2","effort_label":"Moderate","duration_min":210,"gain_m":160,"distance_km":12.55,"equipment_list":["Sturdy hiking shoes"],"start":"First top station (above Grindelwald)","start_maps_url":"https://maps.app.goo.gl/txPQnNimv9QKBYxM8","transit":{"train":"Interlaken Ost to Grindelwald"},"cable_car_ids":["firstbahn"],"description_extra":"Approach Rosenlaui from the Grindelwald side over the Grosse Scheidegg pass instead of from the Meiringen road. ViaBerna stage 16 leaves the First cable car top station, traces a balcony path under the Schreckhorn and Wetterhorn to the Grosse Scheidegg at 1,962 m, then descends through Alp Alpiglen and Schwarzwaldalp to Hotel Rosenlaui and the public waterfall viewpoint at 1,328 m. About 12.5 km, 3 h 30, with the cable car saving the climb to First. Postbus continues from Rosenlaui down to Meiringen.","sources":["https://www.thunersee.ch/en/experiences/tour/viaberna-stage-16-first-rosenlaui","https://www.viaberna.ch/en/stages/first-rosenlaui"],"descent_m":1000,"cable_cars":[{"id":"firstbahn","name":"Grindelwald - First","operator":"Jungfraubahnen","description":"Gondola from Grindelwald village up to First at 2,168 m","open_raw":"Early April to late October, with revision break late October to late November","website":"https://www.jungfrau.ch/en-gb/grindelwaldfirst/","top_station_maps_url":"https://www.google.com/maps/place/?q=46.66056,8.05361&z=16"}],"cable_car":{"id":"firstbahn","name":"Grindelwald - First","operator":"Jungfraubahnen","description":"Gondola from Grindelwald village up to First at 2,168 m","open_raw":"Early April to late October, with revision break late October to late November","website":"https://www.jungfrau.ch/en-gb/grindelwaldfirst/","top_station_maps_url":"https://www.google.com/maps/place/?q=46.66056,8.05361&z=16"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

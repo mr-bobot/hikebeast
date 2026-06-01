@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392622" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223448" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"dent_de_jaman-route-87","duration_min":30,"gain_m":141,"start":"Jaman Train Station","transit":{"train":"Jaman"},"description_extra":"Take the MOB train from Montreux or Les Avants to Jaman station, then a short climb to the summit at 1,875 m (around 30 minutes, roughly 140 m of gain), T2. Longer alternatives start from Les Avants or Col de Jaman. The final approach is the steepest part of the day.","visits":["dent_de_jaman"],"sources":["https://www.outdooractive.com/en/search/?q=dent-de-jaman-from-col-de-jaman"],"quickest_for":["dent_de_jaman"],"equipment_list":["Sturdy hiking shoes"],"name":"Direct ascent from Jaman station","sac_grade":"T2","effort_label":"Moderate","start_maps_url":"https://www.google.com/maps/place/?q=46.44134,6.9768&z=16","distance_km":0.7,"quickest":true},{"id":"dent_de_jaman-from-les-avants","visits":["dent_de_jaman"],"sac_grade":"T3","effort_label":"Moderate","duration_min":165,"gain_m":907,"distance_km":5.3,"equipment_list":["Sturdy hiking boots"],"start":"Les Avants train station","transit":{"train":"Montreux, then MOB to Les Avants"},"description_extra":"Foot ascent without using the Rochers de Naye rack railway. From Les Avants at 968 m, the path climbs through pasture to the Col de Jaman at 1,512 m, where the Cabane de Jaman sits in the meadows. From the col, the final 360 m up the north flank reaches the summit at 1,875 m on an exposed T3 section with chain-secured passages. About 2 hours 45 minutes one way, around 907 m of cumulative gain. The col itself is on the Vaud-Fribourg boundary and connects Montreux to Montbovon.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/dent-de-jaman-959/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.45381,6.94332&z=16","quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

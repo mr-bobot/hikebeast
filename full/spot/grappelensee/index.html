@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392635" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223460" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"grappelensee-route-from-laui","sac_grade":"T1","effort_label":"Easy","duration_min":50,"gain_m":250,"start":"Laui parking area, above Unterwasser","transit":{"train":"Unterwasser (SOB line from Wattwil), then ~20 min drive or taxi up to Laui"},"visits":["grappelensee"],"description_extra":"Drive or taxi up from Unterwasser to the Laui parking, the closest you can get to the lake by car. From there it is roughly 3.25 km and 250 m of climbing on a clear path through pasture and patches of woodland, about 50 minutes one way. The lake sits at 1,307 m. For the long version, start at the Iltios cable car parking in Unterwasser and do the full loop via the Thur waterfalls and Chüeboden, around 12 km and 525 m of climbing.","sources":["https://reisememo.ch/schweiz/graeppelensee-wanderung-toggenburg","https://www.switzerland-highlights.com/en/graeppelensee-idyllic/","https://map.geo.admin.ch/?topic=ech&lang=en&zoom=10&E=2737900&N=1230150&layers=ch.swisstopo.zeitreihen,ch.bfs.gebaeude_wohnungs_register,ch.bav.haltestellen-oev,ch.swisstopo.swisstlm3d-wanderwege"],"quickest_for":["grappelensee"],"equipment_list":[],"start_maps_url":"https://www.google.com/maps/place/?q=47.217,9.31561&z=16","distance_km":3.2,"quickest":true},{"id":"grappelensee-from-alt-st-johann","visits":["grappelensee"],"sac_grade":"T2","effort_label":"Moderate","duration_min":240,"gain_m":565,"distance_km":11.4,"equipment_list":["Sturdy hiking shoes"],"start":"Alt St. Johann village","transit":{"train":"Nesslau-Neu St. Johann (Toggenburg line, end of line)","bus":"PostBus from Nesslau-Neu St. Johann to Alt St. Johann"},"description_extra":"North-side approach instead of climbing up from Unterwasser. From Alt St. Johann at about 890 m, the trail climbs through forest and the Schwandernrot area, contouring at the foot of the Mittelberg at 1,483 m before dropping to the Gräppelensee at 1,307 m. About 4 to 4.5 hours for the loop, around 565 m of cumulative gain, T2, partly paved. Loop back via Halden and Berg keeps the route varied.","sources":["https://toggenburg.swiss/de/","https://www.schweizmobil.ch/en/hiking"],"start_maps_url":"https://www.google.com/maps/place/?q=47.1931,9.28126&z=16","quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

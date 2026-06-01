@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392627" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223452" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"saxer_lucke-route-71","sac_grade":"T1","effort_label":"Easy","duration_min":60,"gain_m":157,"start":"Staubern top station (cable car from Frümsen)","description_extra":"From Brülisau, take the cable car to Staubern (1,830 m), then 1 hour on the ridge trail to the gap, T1, with about 157 m of cumulative gain. Berggasthaus Staubern is a working alpine restaurant. Combine with a descent through Fälensee for a longer day.","visits":["saxer_lucke"],"sources":["https://schweizmobil.ch/en/tour/2146129216","https://swissfamilyfun.com/saxer-lucke-hike/"],"quickest_for":["saxer_lucke"],"equipment_list":[],"cable_car_ids":["staubern-luftseilbahn"],"hut_ids":["berggasthaus-staubern"],"start_maps_url":"https://maps.app.goo.gl/Bxh4r8E2k5vkCciE6","distance_km":3,"transit":{"bus":"Frümsen, Talstation Stauberen"},"cable_cars":[{"id":"staubern-luftseilbahn","name":"Luftseilbahn Staubern","operator":"Bergstation Staubern AG","description":"Cable car from Frümsen up to Gasthaus Staubern","open_raw":"May - October","info_url":"https://www.staubern.ch/","website":"https://www.staubern.ch/bergbahn/"}],"cable_car":{"id":"staubern-luftseilbahn","name":"Luftseilbahn Staubern","operator":"Bergstation Staubern AG","description":"Cable car from Frümsen up to Gasthaus Staubern","open_raw":"May - October","info_url":"https://www.staubern.ch/","website":"https://www.staubern.ch/bergbahn/"},"huts":[{"id":"berggasthaus-staubern","name":"Berggasthaus Staubern","description":"Privately run guesthouse at the Staubern cable car top station","cost_chf_raw":"From 45 CHF","open_raw":"May - October","website":"https://www.staubern.ch/"}],"hut":{"id":"berggasthaus-staubern","name":"Berggasthaus Staubern","description":"Privately run guesthouse at the Staubern cable car top station","cost_chf_raw":"From 45 CHF","open_raw":"May - October","website":"https://www.staubern.ch/"},"quickest":true},{"id":"saxer_lucke-from-brulisau-via-bollenwees","visits":["saxer_lucke"],"sac_grade":"T2","effort_label":"Moderate","duration_min":270,"gain_m":800,"equipment_list":["Sturdy hiking shoes"],"start":"Brülisau","transit":{"bus":"Appenzell, then Postbus to Brülisau"},"description_extra":"Bottom-up approach via the valley and Fälensee, no cable car. From Brülisau at 922 m, the trail climbs through forest to Plattenbödeli, drops gently to the Sämtisersee, then continues north past Furgglen to the Bollenwees inn at the north end of the Fälensee at 1,471 m. From Bollenwees a steep zigzag climbs about 270 m up the southwest flank to the Saxer Lücke notch at 1,694 m. About 4 hours up, T2 with the steep final pitch. Around 770 to 800 m of cumulative gain. Loop back over Hoher Kasten and the ridge to Brülisau for a 6 to 7 hour day, or descend the same way.","sources":["https://theportuguesetraveler.com/switzerland/saxer-lucke-and-falensee-hike-from-brulisau/","https://www.bollenwees.ch/aktivitaeten/wandern.html"],"hut_ids":["berggasthaus-bollenwees"],"start_maps_url":"https://www.google.com/maps/place/?q=47.29645,9.4568&z=16","distance_km":14.4,"cable_car_ids":["hoher-kasten-bahn"],"cable_cars":[{"id":"hoher-kasten-bahn","operator":"Hoher Kasten Drehrestaurant und Seilbahn AG","description":"Cable car from Brülisau up to the Hoher Kasten summit at 1,795 m","open_raw":"Year-round, daily operation","website":"https://www.hoherkasten.ch/","name":"Luftseilbahn Brülisau-Hoher Kasten","top_station_maps_url":"https://www.google.com/maps/place/?q=47.28356,9.48539&z=16"}],"cable_car":{"id":"hoher-kasten-bahn","operator":"Hoher Kasten Drehrestaurant und Seilbahn AG","description":"Cable car from Brülisau up to the Hoher Kasten summit at 1,795 m","open_raw":"Year-round, daily operation","website":"https://www.hoherkasten.ch/","name":"Luftseilbahn Brülisau-Hoher Kasten","top_station_maps_url":"https://www.google.com/maps/place/?q=47.28356,9.48539&z=16"},"huts":[{"id":"berggasthaus-bollenwees","name":"Berggasthaus Bollenwees","description":"Lakeside guesthouse on Falensee, dorm beds and meals","cost_chf_raw":"From 45 CHF","open_raw":"May - October","website":"https://www.bollenwees.ch/home.html"}],"hut":{"id":"berggasthaus-bollenwees","name":"Berggasthaus Bollenwees","description":"Lakeside guesthouse on Falensee, dorm beds and meals","cost_chf_raw":"From 45 CHF","open_raw":"May - October","website":"https://www.bollenwees.ch/home.html"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

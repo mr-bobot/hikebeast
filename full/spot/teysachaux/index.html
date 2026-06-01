@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392622" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223448" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"teysachaux-les-paccots-to-moleson","name":"Les Paccots → Téysachaux → Moléson","start":"Les Paccots","transit":{"train":"Châtel-St-Denis (TPF) + bus to Les Paccots"},"duration_min":255,"gain_m":1130,"sac_grade":"T3","effort_label":"Exposed ridge","description_extra":"Ridge traverse from Les Paccots over Téysachaux (1,909 m) to Le Moléson (2,002 m). The ascent from Les Paccots is on grassy meadow paths. The last stretch before the Téysachaux summit cross is fairly exposed, and the ridge between Téysachaux and Le Moléson is steep, grassy and rocky, graded T3. From Moléson, descend by the Plan-Francey funicular or onward to Bulle.","visits":["teysachaux"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/teysachaux-1963/mountain-hiking/les-paccots-teysachaux-le-moleson-bulle-1617/"],"quickest_for":["teysachaux"],"cable_car_ids":["moleson-funiculaire"],"start_maps_url":"https://www.google.com/maps/place/?q=46.52222,6.94806&z=16","distance_km":10.8,"equipment_list":["Sturdy hiking shoes"],"cable_cars":[{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","website":"https://www.moleson.ch/en/"}],"cable_car":{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","website":"https://www.moleson.ch/en/"},"quickest":true},{"id":"teysachaux-loop-from-plan-francey","visits":["teysachaux"],"sac_grade":"T3","effort_label":"Demanding","duration_min":300,"gain_m":700,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Plan-Francey mid-station","transit":{"train":"Bulle to Gruyères","bus":"Gruyères postbus to Moléson-sur-Gruyères","cable_car":"Plan-Francey funicular"},"description_extra":"Loop from the Moléson funicular mid-station rather than walking the linear ridge from Les Paccots. From Plan-Francey the route climbs west via Gros-Plané, Le Villard-Dessus and Tremetta to the south-west ridge of Téysachaux, which becomes rocky and exposed in its final section before the summit cross at 1,909 m. From the top, follow the crest east to Le Moléson at 2,002 m and return to Plan-Francey on the cable car or the marked descent. About 5 h, roughly 700 m of cumulative gain, T3 mostly with an exposed grass-and-rock crux on the summit ridge.","sources":["https://www.moleson.ch/en/rando/tour-de-moleson-2/"],"cable_car_ids":["moleson-funiculaire"],"start_maps_url":"https://www.google.com/maps/place/?q=46.55582,7.02387&z=16","distance_km":12.4,"cable_cars":[{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","website":"https://www.moleson.ch/en/"}],"cable_car":{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","website":"https://www.moleson.ch/en/"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392630" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223455" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -230,6 +230,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"falensee-route-69","sac_grade":"T2","effort_label":"Easy","start":"Brülisau","visits":["falensee"],"description_extra":"From the Brülisau cable car to Hoher Kasten, traverse the Saxer Lücke ridge and drop down to the lake at 1,446 m. Berggasthaus Bollenwees at the north end of the lake has dorm beds and food. Return via the Sämtisersee valley to Brülisau, plan a full day. T2 throughout.","sources":["https://www.off-the-trail.de/saxer-luecke/","https://mountainmoments.de/atemberaubende-wanderung-zur-saxer-luecke-und-zum-faehlensee/"],"quickest_for":["falensee"],"equipment_list":["Sturdy hiking shoes"],"hut_ids":["berggasthaus-bollenwees"],"cable_car_ids":["hoher-kasten-bahn"],"start_maps_url":"https://www.google.com/maps/place/?q=47.29645,9.4568&z=16","name":"From Brülisau via Hoher Kasten cable car (Saxer Lücke loop)","cable_cars":[{"id":"hoher-kasten-bahn","operator":"Hoher Kasten Drehrestaurant und Seilbahn AG","description":"Cable car from Brülisau up to the Hoher Kasten summit at 1,795 m","open_raw":"Year-round, daily operation","website":"https://www.hoherkasten.ch/","name":"Luftseilbahn Brülisau-Hoher Kasten","top_station_maps_url":"https://www.google.com/maps/place/?q=47.28356,9.48539&z=16"}],"cable_car":{"id":"hoher-kasten-bahn","operator":"Hoher Kasten Drehrestaurant und Seilbahn AG","description":"Cable car from Brülisau up to the Hoher Kasten summit at 1,795 m","open_raw":"Year-round, daily operation","website":"https://www.hoherkasten.ch/","name":"Luftseilbahn Brülisau-Hoher Kasten","top_station_maps_url":"https://www.google.com/maps/place/?q=47.28356,9.48539&z=16"},"huts":[{"id":"berggasthaus-bollenwees","name":"Berggasthaus Bollenwees","description":"Lakeside guesthouse on Falensee, dorm beds and meals","cost_chf_raw":"From 45 CHF","open_raw":"May - October","website":"https://www.bollenwees.ch/home.html"}],"hut":{"id":"berggasthaus-bollenwees","name":"Berggasthaus Bollenwees","description":"Lakeside guesthouse on Falensee, dorm beds and meals","cost_chf_raw":"From 45 CHF","open_raw":"May - October","website":"https://www.bollenwees.ch/home.html"},"quickest":true},{"id":"falensee-from-brulisau-via-samtisersee","visits":["falensee"],"sac_grade":"T2","effort_label":"Moderate","duration_min":135,"gain_m":600,"equipment_list":["Sturdy hiking shoes"],"start":"Brülisau","transit":{"bus":"Appenzell, then Postbus to Brülisau"},"description_extra":"Valley-floor approach without the Hoher Kasten cable car. From Brülisau at 922 m, the trail climbs through forest along the Brüelbach to Plattenbödeli (1,279 m), drops gently to the Sämtisersee, then follows the valley north past Furgglen to the Bollenwees inn at the north end of the Fälensee at 1,471 m. About 2 h 15 up, 1 h 45 back, T2 throughout, around 600 m of cumulative gain. Berggasthaus Plattenbödeli and Berggasthaus Bollenwees both serve food. Can be extended over Saxer Lücke for a loop.","sources":["https://www.schweizersee.ch/wanderung-bruelisau-saemtisersee-faehlensee/","https://www.bollenwees.ch/aktivitaeten/wandern.html"],"hut_ids":["berggasthaus-bollenwees"],"start_maps_url":"https://www.google.com/maps/place/?q=47.29645,9.4568&z=16","distance_km":8,"name":"Valley walk from Brülisau via Sämtisersee","huts":[{"id":"berggasthaus-bollenwees","name":"Berggasthaus Bollenwees","description":"Lakeside guesthouse on Falensee, dorm beds and meals","cost_chf_raw":"From 45 CHF","open_raw":"May - October","website":"https://www.bollenwees.ch/home.html"}],"hut":{"id":"berggasthaus-bollenwees","name":"Berggasthaus Bollenwees","description":"Lakeside guesthouse on Falensee, dorm beds and meals","cost_chf_raw":"From 45 CHF","open_raw":"May - October","website":"https://www.bollenwees.ch/home.html"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -271,8 +272,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -460,6 +466,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

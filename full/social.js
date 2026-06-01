@@ -2547,6 +2547,12 @@
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => { if (data) { HB_CONTENT = data; applyContentI18n(); } })
       .catch(() => {});
+    // Translated hike route prose: the per-page inline route script merges
+    // window.HB_HIKES_TR[id] and re-renders when this event fires.
+    fetch(REL + 'i18n/hikes.' + lang + '.json', { credentials: 'same-origin' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => { if (data) { W.HB_HIKES_TR = data; W.dispatchEvent(new CustomEvent('hb:hikes-i18n')); } })
+      .catch(() => {});
   }
 
   // Verdict → display label + colour. Wording is deliberately advisory,

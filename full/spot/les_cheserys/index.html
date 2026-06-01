@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392633" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223457" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -230,6 +230,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"les_cheserys-tre-le-champ-to-lac-blanc","name":"Tré-le-Champ → Cheserys → Lac Blanc","start":"Tré-le-Champ (Argentière)","transit":{"train":"Argentière (Mont-Blanc Express) + short walk"},"duration_min":320,"gain_m":820,"sac_grade":"T3","effort_label":"Steep, ladder sections","description_extra":"Climb from Tré-le-Champ (above Argentière) into the Aiguilles Rouges nature reserve. The trail ascends through forest, then quickly above the treeline, crosses fixed ladders, and reaches the Grand Balcon Sud. Continues past the Cheserys lakes to the Refuge du Lac Blanc at 2,352 m. T3, sustained exposure on the ladder section, head for heights required. Descend by cable car from La Flégère.","visits":["les_cheserys","camping_in_cheserys","mont_blanc"],"sources":["https://www.komoot.com/smarttour/1592713"],"equipment_list":["Sturdy hiking shoes"],"start_maps_url":"https://www.google.com/maps/place/?q=45.99563,6.92917&z=16","distance_km":10.4,"cable_car_ids":["flegere-cable-car"],"cable_cars":[{"id":"flegere-cable-car","name":"Téléphérique de la Flégère","operator":"Compagnie du Mont-Blanc","description":"Cable car from Les Praz, Chamonix up to La Flégère","open_raw":"Late June to mid-September (summer)","website":"https://www.montblancnaturalresort.com/en/"}],"cable_car":{"id":"flegere-cable-car","name":"Téléphérique de la Flégère","operator":"Compagnie du Mont-Blanc","description":"Cable car from Les Praz, Chamonix up to La Flégère","open_raw":"Late June to mid-September (summer)","website":"https://www.montblancnaturalresort.com/en/"},"quickest":false},{"id":"les_cheserys-flegere-shortcut","name":"Flégère cable car shortcut","start":"La Flégère cable-car top station","transit":{"train":"Les Praz de Chamonix + Flégère cable car"},"duration_min":110,"gain_m":300,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Two-hour climb from the top of the La Flégère cable car up to the Refuge du Lac Blanc and the lakes. About 300 m of gain, T2 throughout. Avoids the ladder section on the Tré-le-Champ approach. The Flégère cable car runs from Les Praz mid-June through September.","visits":["les_cheserys","camping_in_cheserys","mont_blanc"],"sources":[],"quickest_for":["les_cheserys"],"cable_car_ids":["flegere-cable-car"],"start_maps_url":"https://www.google.com/maps/place/?q=45.964,6.888&z=16","distance_km":8,"equipment_list":["Sturdy hiking shoes"],"cable_cars":[{"id":"flegere-cable-car","name":"Téléphérique de la Flégère","operator":"Compagnie du Mont-Blanc","description":"Cable car from Les Praz, Chamonix up to La Flégère","open_raw":"Late June to mid-September (summer)","website":"https://www.montblancnaturalresort.com/en/"}],"cable_car":{"id":"flegere-cable-car","name":"Téléphérique de la Flégère","operator":"Compagnie du Mont-Blanc","description":"Cable car from Les Praz, Chamonix up to La Flégère","open_raw":"Late June to mid-September (summer)","website":"https://www.montblancnaturalresort.com/en/"},"quickest":true}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -271,8 +272,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -460,6 +466,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

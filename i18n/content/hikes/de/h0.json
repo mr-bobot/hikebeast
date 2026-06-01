@@ -1,0 +1,314 @@
+[
+  {
+    "id": "engstligen_falls-lower-viewpoint",
+    "name": "Wanderung zum unteren Aussichtspunkt ab Unter dem Birg",
+    "description_extra": "Parkiere bei Unter dem Birg oder nimm das Postauto ab Adelboden, dann folge dem markierten Fussweg etwa 30 Minuten zum unteren Aussichtspunkt der Fälle. T1, familienfreundlich. Im oberen Teil ein paar felsige Abschnitte mit losem Geröll.",
+    "effort_label": "Leicht",
+    "start": "Adelboden, Unter dem Birg (Postauto-Haltestelle)",
+    "transit": {
+      "bus": "Postauto Adelboden bis Unter dem Birg"
+    }
+  },
+  {
+    "id": "oltschibachfall-from-meiringen",
+    "name": "Zufahrt / Zustieg über Unterbach",
+    "description_extra": "Parkiere beim Parkplatz Oltschibachfall in Unterbach (oder nimm das Postauto bis Unterbach BE, Flugplatz) und geh etwa 15 Minuten auf einem Fussweg durch den Wald bis zum Fuss des 140 m hohen Falls. T1. Am stärksten bei der Schneeschmelze im Frühling.",
+    "effort_label": "Leicht",
+    "start": "Parkplatz Oltschibachfall (Unterbach BE)",
+    "transit": {
+      "train": "Brünig-Linie bis Brienzwiler, dann Postauto bis Unterbach BE, Flugplatz"
+    }
+  },
+  {
+    "id": "rosenlaui-route-99",
+    "name": "Zufahrt über die Grosse-Scheidegg-Strasse",
+    "description_extra": "Fahr von Meiringen über die Grosse-Scheidegg-Strasse hinein oder nimm das Postauto bis Rosenlaui, Gletscherschlucht (Mai bis Oktober). Die Rosenlaui-Gletscherschlucht erreichst du über einen kurzen Fussweg ab dem Parkplatz. T1. Kombiniere sie mit dem umliegenden Reichenbachtal für einen halben Tag.",
+    "effort_label": "Leicht",
+    "start": "Parkplatz Gletscherschlucht",
+    "transit": {
+      "bus": "Rosenlaui, Gletscherschlucht"
+    }
+  },
+  {
+    "id": "rosenlaui_public_waterfall-route-99",
+    "name": "Zufahrt über die Grosse-Scheidegg-Strasse",
+    "description_extra": "Parkiere beim Parkplatz Gletscherschlucht (Postauto-Haltestelle Rosenlaui, Gletscherschlucht) und geh ein paar Minuten ab dem WC-Häuschen los. T1.",
+    "effort_label": "Leicht",
+    "start": "Parkplatz Gletscherschlucht",
+    "transit": {
+      "bus": "Rosenlaui, Gletscherschlucht"
+    }
+  },
+  {
+    "id": "rosenlauifall-route-99",
+    "name": "Zufahrt über die Grosse-Scheidegg-Strasse",
+    "description_extra": "Ein fünfminütiger Weg ab dem Parkplatz Gletscherschlucht führt zum unteren Aussichtspunkt. T1. Erreichbar mit dem Postauto bis Rosenlaui, Gletscherschlucht.",
+    "effort_label": "Leicht",
+    "start": "Parkplatz Gletscherschlucht",
+    "transit": {
+      "bus": "Rosenlaui, Gletscherschlucht"
+    }
+  },
+  {
+    "id": "triftbrucke-route-40",
+    "description_extra": "Von der Bergstation Underi Trift etwa 1 h 30 auf einem T2-Bergweg mit rund 400 m Aufstieg bis zur Hängebrücke (170 m lang, 100 m über dem Fluss). Geh über die Brücke hinaus weiter zur Windegghütte für eine Übernachtung (Juni bis Mitte Oktober).",
+    "effort_label": "Leicht",
+    "start": "Underi Trift (Bergstation Triftbahn)",
+    "transit": {
+      "train": "Meiringen",
+      "bus": "Postauto 161 bis Nessental, Triftbahn",
+      "cable_car": "KWO-Triftbahn-Seilbahn"
+    }
+  },
+  {
+    "id": "triftsee-route-40",
+    "description_extra": "Von der Bergstation Underi Trift etwa 1 h 40 auf demselben Weg wie zur Trift-Hängebrücke, T2 mit rund 400 m Aufstieg. Der See liegt etwa 10 Min hinter der Brücke. Zelten ist nicht erlaubt.",
+    "effort_label": "Leicht",
+    "start": "Underi Trift (Bergstation Triftbahn)",
+    "transit": {
+      "train": "Meiringen",
+      "bus": "Postauto 161 bis Nessental, Triftbahn",
+      "cable_car": "KWO-Triftbahn-Seilbahn"
+    }
+  },
+  {
+    "id": "gelmersee-default",
+    "name": "Uferrundgang ab der Bergstation der Standseilbahn",
+    "description_extra": "Erreichbar mit der Gelmerbahn-Standseilbahn ab dem Tal. Die Standseilbahn fährt etwa von Juni bis Oktober. Von der Bergstation umrundet ein markierter Uferweg den Stausee auf 1'850 m, etwa 2 Stunden, rund 170 m kumulierter Auf- und Abstieg. Der Weg am Nordufer ist in den Fels gehauen, mit ausgesetzten Abschnitten, bewertet als T3, Trittsicherheit und Schwindelfreiheit nötig. Die Gelmerhütte SAC liegt am hinteren Ende des Sees für alle, die weitergehen.",
+    "effort_label": "Mittel",
+    "start": "Bergstation Gelmersee (Gelmerbahn ab der Grimselstrasse)",
+    "transit": {
+      "bus": "Postauto ab Meiringen Richtung Grimsel Hospiz, Haltestelle Handegg, Kunzentännlein",
+      "cable_car": "Gelmerbahn-Standseilbahn hinauf zum Stausee"
+    }
+  },
+  {
+    "id": "brienzer_rothorn-cog-railway",
+    "name": "Zahnradbahn ab Brienz",
+    "description_extra": "Dampf-Zahnradbahn ab Brienz auf Seehöhe hinauf zum Rothorn auf 2'350 m. Etwa 60 Minuten pro Richtung auf einer 7,6 km langen Strecke mit maximal 25 Prozent Steigung, in Betrieb von Juni bis Oktober. Die meisten Fahrten verkehren noch mit Dampfloks im Originaldesign. Vom Gipfel aus leichte Wanderungen dem Grat entlang.",
+    "effort_label": "Zahnradbahn-Fahrt",
+    "start": "Bahnhof Brienz",
+    "transit": {
+      "train": "Brienz (BLS)"
+    }
+  },
+  {
+    "id": "brienzer_rothorn-brienz-via-planalp",
+    "name": "Aufstieg zu Fuss ab Brienz über Planalp",
+    "description_extra": "Fünfstündiger Aufstieg zu Fuss vom Bahnhof Brienz zum Rothorn-Grat auf 2'350 m. Rund 1'750 m Höhendifferenz über 9,8 km, T2. Die Route über den Milibach ist seit dem Murgang vom August 2024 gesperrt, daher folgt der Weg jetzt dem Trachtbach über Gäldried nach Planalp auf 1'344 m, dann nochmals gut zwei Stunden über Alpwiesen hinauf zum Grat. Die Zahnradbahn fährt ab Planalp oder Rothorn wieder hinunter, Juni bis Oktober.",
+    "effort_label": "Viel Höhenmeter",
+    "start": "Bahnhof Brienz",
+    "transit": {
+      "train": "Brienz (BLS)"
+    }
+  },
+  {
+    "id": "hardergrat_trail-rothorn-to-harder-kulm",
+    "name": "Komplette Brienzergrat-Überschreitung: Brienzer Rothorn bis Harder Kulm",
+    "description_extra": "Etwa 25 km von der Gipfelstation Brienzer Rothorn westwärts dem Brienzergrat entlang bis Harder Kulm oberhalb von Interlaken. SAC-Bewertung T5 (sehr schwierig): ein messerscharfer Grasgrat mit steilen Abbrüchen auf beiden Seiten, sehr wenig Sicherungen und die Tannhorn-Passage in der Mitte als anspruchsvollster Abschnitt. Die meisten gehen die Überschreitung in eine Richtung, mit Start an der Zahnradbahn-Gipfelstation und Abstieg über die Harderbahn-Standseilbahn am Interlakner Ende. Rund 1'400 m kumulierter Aufstieg gegen 2'400 m Abstieg, 9 bis 12 Stunden Gehzeit. Trittsicherheit, Schwindelfreiheit und echte Alpinerfahrung nötig. Bei nassem oder windigem Wetter weglassen. Trailrunner machen es an einem Tag, viele Wandernde teilen es mit einem Biwak beim Augstmatthorn oder Tannhorn.",
+    "effort_label": "Profi",
+    "start": "Gipfelstation Brienzer Rothorn (oben an der Brienz Rothorn Bahn)",
+    "transit": {
+      "train": "Brienz BLS",
+      "cable_car": "Brienz Rothorn Bahn (Zahnradbahn, Juni bis Oktober)"
+    }
+  },
+  {
+    "id": "tannhorn-brienzergrat-segment",
+    "name": "Brienzergrat-Abschnitt: Rothorn über Tannhorn nach Planalp",
+    "description_extra": "Sechsstündiger Gratabschnitt vom Brienzer Rothorn (oben an der Brienzer Zahnradbahn) dem Brienzergrat entlang zum Tannhorn und hinunter nach Planalp. Rund 600 m kumulierter Aufstieg gegen 1'600 m Abstieg. Das SAC-Portal führt diesen Abschnitt als T5 minus und beschreibt das Tannhorn als über ausgesetzte Grasgrate gequert, als anspruchsvollste Passage des ganzen Brienzergrats. Mit der Zahnradbahn ab Planalp hinunter.",
+    "effort_label": "Profi",
+    "start": "Gipfel Brienzer Rothorn (oben an der Brienzer Zahnradbahn)",
+    "transit": {
+      "train": "Brienz BLS + Rothorn Bahn"
+    }
+  },
+  {
+    "id": "augstmatthorn-route-85",
+    "name": "Kurzer Aufstieg ab Lombachalp",
+    "description_extra": "Zustieg ab Lombachalp (mit dem Auto oder Postauto ab Habkern). Etwa 1 h 40 hinauf, 580 m Aufstieg, T3-Bergweg zum Augstmatthorn auf 2'137 m.",
+    "effort_label": "Mittel",
+    "start": "Lombachalp",
+    "transit": {
+      "train": "Interlaken West",
+      "bus": "Postauto 105 ab Interlaken West bis Habkern, dann im Sommer Ruftaxi oder 2 Stunden zu Fuss bis Lombachalp"
+    }
+  },
+  {
+    "id": "fronalpstock-route-72",
+    "description_extra": "Standardzustieg: Standseilbahn von Schwyz nach Stoos, dann die Klingenstock-Seilbahn hinauf zum Grat. Der Weg zwischen Klingenstock und Fronalpstock dauert etwa 2 Stunden auf Gras- und Kieswegen, mit rund 470 m kumuliertem Aufstieg und 740 m Abstieg auf dem welligen Grat. T2 mit kurzen ausgesetzten Abschnitten. Die meisten gehen über die Fronalpstockbahn-Sesselbahn wieder hinunter nach Stoos und mit der Standseilbahn nach Schwyz. Ausgewiesener Zeltplatz auf dem Gipfel, kleine Gebühr im Hotel Fronalpstock zu bezahlen.",
+    "effort_label": "Leicht",
+    "start": "Schwyz, Stoosbahn"
+  },
+  {
+    "id": "iffigfalle-lenk-to-iffigenalp",
+    "name": "Lenk → Iffigfall → Iffigenalp",
+    "description_extra": "Gut markierter Weg vom Bahnhof Lenk über Murersrohr, Lenkerseeli, Teufebode, Under der Flue und Brunnersgüetli hinauf zum Iffigfall und weiter zur Iffigenalp auf 1'584 m. Etwa 2 h 30 zum Wasserfall und 2 h 50 zur Iffigenalp, 575 m Aufstieg über 8,8 km, T2. Der Weg folgt die ganze Zeit dem Iffigbach. Im Sommer fährt das Postauto zur Iffigenalp ab Lenk und überspringt den unteren Teil, falls du beim Wasserfall starten willst. Geh weiter zum Iffigsee auf 2'065 m für einen ganzen Tag.",
+    "effort_label": "Mittel",
+    "start": "Bahnhof Lenk",
+    "transit": {
+      "train": "Lenk im Simmental (BLS)"
+    }
+  },
+  {
+    "id": "schrattenfluh-schratteflue-crossing",
+    "name": "Schratteflue-Überschreitung (anspruchsvoll)",
+    "description_extra": "Start beim Parkplatz Hirsegg auf der Marbachegg-Seite. Der ganze Schrattenfluh-Grat verläuft über etwa 6 km mit vier markanten Gipfeln: Schibegütsch, Hängst, Hächle und Strick. T5 mit Kletterstellen II. Insgesamt etwa 16 km und 7 h 45, mit rund 1'050 m kumuliertem Aufstieg und gleich viel Abstieg; die beiden Endgipfel (Hächle und Strick) sind die anspruchsvolleren Abschnitte. Das Plateau ist eines der grössten Karstfelder der Schweiz mit tiefen Schächten abseits der markierten Linie, daher ist es wichtig, auf dem Weg zu bleiben. Trittsicherheit, Schwindelfreiheit und gute Sicht nötig.",
+    "effort_label": "Profi",
+    "start": "Parkplatz Hirsegg (Marbachegg-Seite)"
+  },
+  {
+    "id": "heftihutte-from-hirsegg",
+    "name": "Ab der Bushaltestelle Hirsegg",
+    "description_extra": "Standardzustieg ab der Bushaltestelle Hirsegg. Der Weg steigt über Kaiserschwand, Bodenhütten und Heftiboden zur Hütte auf 1'904 m. Etwa 2 h 30 und 830 m Aufstieg, T2. Die Hütte ist im Sommer mit Abendessen und Frühstück bewirtet; den Rest des Jahres ein teilweiser Notunterstand. Bargeld mitnehmen.",
+    "effort_label": "Mittel",
+    "start": "Hirsegg (Bushaltestelle)",
+    "transit": {
+      "bus": "Postauto bis Hirsegg"
+    }
+  },
+  {
+    "id": "heftihutte-from-fluehli",
+    "name": "Ab Flühli LU",
+    "description_extra": "Längerer Zustieg über Flühli (Bus ab Schüpfheim). Etwa 3 h 30 Bergweg mit Blick über das Entlebuch. Das SAC-Portal bewertet die Route ab Flühli mit T3, 3 h 30 und rund 1'050 m Aufstieg. Der Gratabschnitt weiter oben ist das landschaftliche Highlight mit der Schrattenfluh auf der anderen Talseite. Die Hütte liegt auf 1'904 m.",
+    "effort_label": "Mittel",
+    "start": "Flühli",
+    "transit": {
+      "bus": "Postauto bis Flühli"
+    }
+  },
+  {
+    "id": "bachalpsee-route-38",
+    "description_extra": "Standard-Bachalpsee-Tag ab der Bergstation der First-Gondelbahn. Breiter Kiesweg führt nach Ostnordost und steigt allmählich durch die Alpweide. Etwa eine Stunde pro Richtung bei T1, fast keine Ausgesetztheit. Ein kleinerer zweiter See liegt ein paar Minuten hinter dem ersten.",
+    "effort_label": "Leicht",
+    "start": "Berggasthaus First",
+    "transit": {
+      "train": "Grindelwald"
+    }
+  },
+  {
+    "id": "bachalpsee-bussalp-alternative",
+    "name": "Ab Bussalp",
+    "description_extra": "Ruhigerer Zustieg als über die Firstbahn-Seite. Fahr mit dem Auto oder nimm den Bus 122 ab Grindelwald zum Parkplatz Bussalp, dann steig auf dem Wiesenweg zum See. Etwa 1 h 40 und 470 m Aufstieg auf Graswegen. T2.",
+    "effort_label": "Mittel",
+    "start": "Parkplatz Bussalp",
+    "transit": {
+      "bus": "Bus 122 ab Grindelwald"
+    }
+  },
+  {
+    "id": "iseltwald-default",
+    "name": "Spaziergang zum Steg ab dem Dorfparkplatz",
+    "description_extra": "Fahr mit dem Auto hin, nimm im Sommer das Dampfschiff ab Interlaken (April bis Oktober) oder das Postauto 103 ab Interlaken Ost. Zwei Parkplätze liegen oberhalb des Dorfes; Autos dürfen nicht hinein, daher gehst du ein paar Minuten hinunter zum Seeufer und zum Steg. Der berühmte Steg (Drehort von Crash Landing on You) kostet CHF 5 Eintritt. T1.",
+    "effort_label": "Leicht",
+    "start": "Dorf Iseltwald, Parkplatz am Seeufer",
+    "transit": {
+      "bus": "Postauto 103 ab Interlaken Ost bis Iseltwald",
+      "boat": "Brienzersee-Dampfschiff ab Interlaken oder Brienz (April bis Oktober)"
+    }
+  },
+  {
+    "id": "oeschinensee-kandersteg-foot",
+    "name": "Ab Kandersteg zu Fuss",
+    "description_extra": "Zustieg zu Fuss ab Kandersteg, ohne die Gondelbahn. Der Weg folgt dem Öschibach ostwärts durch den Wald und steigt über eine Stunde stetig rund 400 m hinauf zum See auf 1'578 m. T1, durchgehend signalisiert, breit genug für Gegenverkehr.",
+    "effort_label": "Leicht",
+    "start": "Bahnhof Kandersteg",
+    "transit": {
+      "train": "Kandersteg (SBB)"
+    }
+  },
+  {
+    "id": "oeschinensee-cable-car",
+    "name": "Gondelbahn ab Kandersteg + kurzer Spaziergang",
+    "description_extra": "Schnellster Weg hinauf. Die Gondelbahn der Bergbahnen Oeschinensee ab Kandersteg braucht 8 Minuten bis zur Bergstation auf 1'578 m. Von dort sind es etwa 25 Minuten auf einem gut ausgebauten, kinderwagentauglichen Weg hinunter zum See (oder 35 Minuten über den Panoramaweg Läger). Tickets buchst du am besten online mit Zeitfenster. Saisonaler Betrieb; aktuelle Zeiten auf der Seite des Betreibers prüfen. SBB Halbtax, GA und Swiss Travel Pass gibt es zum halben Preis.",
+    "effort_label": "Trivial",
+    "start": "Talstation der Gondelbahn Kandersteg",
+    "transit": {
+      "train": "Kandersteg (SBB), dann 10 Min zu Fuss oder mit dem Shuttle zu den Bergbahnen"
+    }
+  },
+  {
+    "id": "oeschinensee-hohturli-extension",
+    "name": "Weiter zur Hohtürli + Griesalp",
+    "description_extra": "Echter Bergtag ab dem See. Der Weg steigt aus dem Kessel Richtung Blüemlisalphütte und über die Hohtürli auf 2'779 m, dann hinunter auf der Südseite zur Griesalp im Kiental. Insgesamt etwa sechs Stunden. Die Schlüsselstelle ist der steile Abschnitt oberhalb von Underbärgli durch ein Felsband, wo es darauf ankommt mit Ketten gesichert, aber mit echter Ausgesetztheit. Trittsicherheit und Schwindelfreiheit nötig. T3.",
+    "effort_label": "Ganzer Tag, anspruchsvoll",
+    "start": "Oeschinensee"
+  },
+  {
+    "id": "piz_gloria-cable-car-to-summit",
+    "name": "Seilbahn (Stechelberg → Schilthorn)",
+    "description_extra": "Schilthornbahn-Seilbahn ab Stechelberg hinauf zum 2'970 m hohen Gipfel, in Etappen über Gimmelwald, Mürren und Birg.",
+    "effort_label": "Seilbahn-Fahrt",
+    "start": "Seilbahn Stechelberg",
+    "transit": {
+      "train": "Lauterbrunnen (BLS) + Bus bis Stechelberg"
+    }
+  },
+  {
+    "id": "piz_gloria-gimmelwald-on-foot",
+    "name": "Ab Gimmelwald zu Fuss",
+    "description_extra": "Aufstieg zu Fuss ab Gimmelwald (erreichbar mit der Seilbahn ab Stechelberg) hinauf zum Schilthorn-Gipfel auf 2'970 m. Für eine fitte Person etwa fünf Stunden und 1'600 m Aufstieg. T3. Der Weg steigt stetig, quert unter der Seilbahnlinie durch und führt über Mürren und Birg. Die meisten gehen in eine Richtung zu Fuss und fahren in die andere mit der Seilbahn. Nimm Schichten mit; der Gipfel ist regelmässig windig und deutlich kühler als das Tal.",
+    "effort_label": "Lang, viel Höhenmeter",
+    "start": "Gimmelwald",
+    "transit": {
+      "train": "Lauterbrunnen + Seilbahn Stechelberg-Gimmelwald"
+    }
+  },
+  {
+    "id": "riffelsee-default",
+    "name": "Kurzer Spaziergang ab der Station Rotenboden",
+    "description_extra": "Erreichbar ab der Station Rotenboden (2'815 m) an der Gornergratbahn ab Zermatt, dann ein kurzer Spaziergang hinunter (die Station liegt etwa 58 m über dem See). T1, etwa 10 Minuten auf einem leichten Weg. Das Kulmhotel Gornergrat und das Riffelhaus 1853 sind zu Fuss dem Grat entlang erreichbar.",
+    "effort_label": "Leicht",
+    "start": "Station Rotenboden (Gornergratbahn ab Zermatt)",
+    "transit": {
+      "train": "Zermatt, dann Gornergratbahn bis Rotenboden"
+    }
+  },
+  {
+    "id": "riffelalp-easy-round-trip",
+    "name": "Kurze Riffelalp-Runde über Grünsee",
+    "description_extra": "Leichte 90-minütige Drei-Kilometer-Runde ab der Station Riffelalp an der Gornergratbahn. Der Weg führt ostwärts Richtung Grünsee durch Arven- und Lärchenwald. Nach Alpwiesen führt der Weg über die Gleise der historischen Riffelalp-Tram zurück zur Riffelalp, die höchste Tram Europas. T1, familienfreundlich. Mit der Gornergratbahn ab derselben Station zurück nach Zermatt.",
+    "effort_label": "Leicht",
+    "start": "Bahnhof Riffelalp (Haltestelle Gornergrat Bahn)",
+    "transit": {
+      "train": "Zermatt + Gornergrat Bahn bis Riffelalp"
+    }
+  },
+  {
+    "id": "riffelalp-findeln-loop",
+    "name": "Riffelalp nach Findeln über Sunnegga",
+    "description_extra": "Runde von der Riffelalp durch Arven- und Lärchenwald am Grünsee vorbei, dann weiter nach Findeln und zurück mit der Sunnegga-Standseilbahn. Etwa vier Stunden, rund 180 m Aufstieg auf dem Rückweg und rund 750 m Abstieg. T2. Das Gebiet Findeln hat im Dorf mehrere Restaurants. Die Wanderung geht in beide Richtungen.",
+    "effort_label": "Mittel",
+    "start": "Bahnhof Riffelalp (Haltestelle Gornergrat Bahn)",
+    "transit": {
+      "train": "Zermatt + Gornergrat Bahn bis Riffelalp"
+    }
+  },
+  {
+    "id": "gorner_glacier-gornergrat-railway",
+    "name": "Gornergratbahn + Sunshine Trail",
+    "description_extra": "Die Gornergrat-Zahnradbahn steigt von Zermatt zum Gornergrat-Grat auf 3'135 m und überwindet fast 1'500 m. Vom Gipfel folgt der Weg den Gleisen in etwa einer Stunde hinunter nach Riffelberg, T1.",
+    "effort_label": "Leicht",
+    "start": "Bahnhof Zermatt",
+    "transit": {
+      "train": "Zermatt (Matterhorn Gotthard Bahn) + Gornergrat Bahn"
+    }
+  },
+  {
+    "id": "gorner_glacier-path-of-silence",
+    "name": "Path of Silence nach Riffelalp",
+    "description_extra": "Path of Silence vom Gornergrat (3'089 m) hinunter zur Riffelalp auf etwa 2'200 m, eine reine Abstiegsroute von etwa 3 h 15 über 887 m Abstieg. Der Weg führt am Grünsee vorbei und weiter durch den alten Arvenwald. T2. Mit der Gornergratbahn ab Zermatt hinauf und zu Fuss hinunter. Die Mountain Lodge Ze Seewjinu am See ist eine Möglichkeit zur Einkehr.",
+    "effort_label": "Mittel, Abstieg",
+    "start": "Bergstation Gornergrat",
+    "transit": {
+      "train": "Zermatt + Gornergrat Bahn"
+    }
+  },
+  {
+    "id": "gorner_glacier-descent-via-riffelsee",
+    "name": "Gornergrat nach Zermatt über Riffelsee",
+    "description_extra": "Dreistündiger Abstieg vom Gornergrat am Riffelsee vorbei hinunter nach Zermatt, etwa 1'475 m Abstieg über 12,6 km mit rund 75 m kleinem Zwischenaufstieg. Der Weg führt weiter durch Alpweiden und das Gebiet Riffelalp, bevor er zurück nach Zermatt abfällt. T2.",
+    "effort_label": "Mittel, langer Abstieg",
+    "start": "Bergstation Gornergrat"
+  }
+]

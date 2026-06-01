@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392624" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223450" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"grammont-route-154","sac_grade":"T2","effort_label":"Mid","duration_min":300,"gain_m":1125,"start":"Parking du Flon","transit":{"bus":"Le Flon, village"},"visits":["grammont"],"description_extra":"Approach from Miex or Tannay above Vouvry, drive to the Flon de Tanay parking at 1,049 m, then 4 to 5 hours up via Lac de Tanay and Col des Crosses to the summit at 2,172 m. About 12.6 km and 1,125 m of vertical, no technical difficulties; T2 mountain trail with one exposed section near the top above the col, and a final climb that can be slippery when wet.","sources":["https://www.schweizmobil.ch/en/wandern/grammont","https://www.altituderando.com/Le-Grammont-2172m-par-le-Col-et-le-Lac-de-Taney","https://www.visorando.com/en/walk-le-grammont/"],"equipment_list":["Sturdy hiking shoes"],"start_maps_url":"https://www.google.com/maps/place/?q=46.33749,6.85606&z=16","distance_km":12.6,"quickest":false},{"id":"grammont-from-novel-via-col-des-crosses","visits":["grammont"],"sac_grade":"T4","effort_label":"Demanding","duration_min":180,"gain_m":1200,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Novel (France, near St-Gingolph)","transit":{"car":"From St-Gingolph or Bouveret via Novel"},"description_extra":"Approach from the French side and the Col des Crosses rather than from the Vouvry / Le Flon parking. The route climbs from the village of Novel (about 960 m) past L'Au de Morge and the Col de la Croix, then north along the Verraux flank to the Col des Crosses at 1,991 m, on the SE ridge of Grammont. SAC grades the SE ridge route T4 with 1,200 m of gain in 2 h 45 to 3 h from the col area.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/col-des-crosses-2546/mountain-hiking/"],"quickest_for":["grammont"],"start_maps_url":"https://www.google.com/maps/place/?q=46.36878,6.78856&z=16","distance_km":9.3,"quickest":true}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

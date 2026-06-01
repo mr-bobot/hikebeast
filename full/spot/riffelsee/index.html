@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392614" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223440" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -230,6 +230,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"riffelsee-default","description_extra":"Reached from Rotenboden station (2,815 m) on the Gornergrat railway from Zermatt, then a short walk down (the station sits about 58 m above the lake). T1, about 10 minutes on an easy path. The Kulmhotel Gornergrat and Riffelhaus 1853 are walking distance along the ridge.","visits":["riffelsee"],"sources":["https://www.alltrails.com/trail/switzerland/valais/riffelsee-via-rotenboden","https://www.gornergrat.ch/en/stories/riffelsee-lake-trail-from-rotenboden-to-riffelberg"],"name":"Short walk from Rotenboden station","sac_grade":"T1","effort_label":"Easy","duration_min":10,"gain_m":0,"descent_m":58,"distance_km":0.5,"equipment_list":[],"start":"Rotenboden station (Gornergratbahn from Zermatt)","transit":{"train":"Zermatt, then Gornergratbahn to Rotenboden"},"quickest_for":["riffelsee"],"start_maps_url":"https://www.google.com/maps/place/?q=45.9844,7.7653&z=16","cable_car_ids":["gornergrat-bahn"],"cable_cars":[{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","website":"https://www.gornergrat.ch/en/"}],"cable_car":{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","website":"https://www.gornergrat.ch/en/"},"quickest":true},{"id":"riffelsee-from-riffelalp","visits":["riffelsee"],"sac_grade":"T2","effort_label":"Moderate","duration_min":120,"gain_m":590,"distance_km":4.1,"equipment_list":["Sturdy hiking shoes"],"start":"Riffelalp station","transit":{"train":"Zermatt, then Gornergratbahn to Riffelalp"},"description_extra":"Lower-station approach. From Riffelalp at 2,211 m, follow the marked Wanderweg up through the alpine pasture toward Riffelberg, then continue past Riffelberg on the Riffelseeweg (trail #21) to the lake at 2,757 m. About 1.5 to 2 hours up, 590 m of net gain over 4.1 km, T2 on a well-marked path with switchbacks through pasture and some steeper rocky sections near the top. The standard short hop is from Rotenboden, 60 m above the lake; this longer walk-up from Riffelalp gains the full ridge in early morning light. Return via Rotenboden and the Gornergratbahn for a one-way day.","sources":["https://www.journeyera.com/riffelsee-lake-hike-zermatt/","https://thephotohikes.com/the-gornergrat-and-riffelsee-hike-in-zermatt/","https://swissfamilyfun.com/zermatt-riffelsee/"],"cable_car_ids":["gornergrat-bahn"],"start_maps_url":"https://www.google.com/maps/place/?q=46.00198,7.75094&z=16","cable_cars":[{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","website":"https://www.gornergrat.ch/en/"}],"cable_car":{"id":"gornergrat-bahn","name":"Gornergrat Bahn","operator":"Matterhorn Gotthard Bahn","description":"Rack railway from Zermatt up to Gornergrat at 3,089 m","open_raw":"Year-round, reduced winter schedule","website":"https://www.gornergrat.ch/en/"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -271,8 +272,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -460,6 +466,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

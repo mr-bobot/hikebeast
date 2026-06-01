@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392633" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223457" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -221,6 +221,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"aiguille_du_grepon-drive-up","visits":["aiguille_du_grepon"],"name":"Montenvers train from Chamonix","start":"Chamonix Montenvers train station","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"train":"Chamonix Sud + Montenvers rack railway to Mer de Glace upper station"},"description_extra":"Same access as Mer de Glace. Take the Montenvers rack train from central Chamonix (about 20 min one way). The Aiguille du Grépon is visible from the upper station and along the Mer de Glace moraine trail. Train operates seasonally (roughly late May to early November), with reduced winter service depending on the year.","sources":["https://www.montenverstrain.com/en/opening-hours-and-prices/","https://montenversmerdeglace.montblancnaturalresort.com/en"],"quickest_for":["aiguille_du_grepon"],"start_maps_url":"https://www.google.com/maps/place/?q=45.9228,6.8753&z=16","cable_car_ids":["montenvers-railway"],"cable_cars":[{"id":"montenvers-railway","name":"Chemin de fer du Montenvers","operator":"Compagnie du Mont-Blanc","description":"Rack railway from Chamonix Montenvers station up to the Mer de Glace at 1,913 m","open_raw":"Early May to early November","website":"https://montenversmerdeglace.montblancnaturalresort.com/en"}],"cable_car":{"id":"montenvers-railway","name":"Chemin de fer du Montenvers","operator":"Compagnie du Mont-Blanc","description":"Rack railway from Chamonix Montenvers station up to the Mer de Glace at 1,913 m","open_raw":"Early May to early November","website":"https://montenversmerdeglace.montblancnaturalresort.com/en"},"quickest":true}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -262,8 +263,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -451,6 +457,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

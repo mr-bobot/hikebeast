@@ -1,0 +1,335 @@
+[
+  {
+    "id": "rosenlaui-from-grindelwald-first-via-grosse-scheidegg",
+    "description_extra": "Etappe 16 der nationalen Weitwanderroute ViaBerna, die Rosenlaui von Grindelwald aus erreicht statt von Meiringen. Der Weg quert die Alpweiden ab First, steigt sanft zur Passhöhe Grosse Scheidegg auf 1'962 m und fällt dann rund 700 m durch die Schwarzwaldalp und entlang der Reichenbach zum Hotel Rosenlaui und zur Gletscherschlucht ab. Etwa 11,7 km in 3 Stunden 50 Minuten, T2.",
+    "effort_label": "Mittel",
+    "start": "Bergstation First",
+    "transit": {
+      "train": "Grindelwald"
+    }
+  },
+  {
+    "id": "schafler-from-wasserauen-via-bommen",
+    "description_extra": "Aufstieg zu Fuss ohne die Seilbahn auf die Ebenalp. Von Wasserauen steigt der Weg durch den Wald zur Alp Bommen, wechselt dann auf einen groben Schotterweg, der im Winter zugleich als Skipiste dient, und führt durch die Gartenalp weiter zum Berggasthaus Schäfler auf 1'925 m. Etwa 3 Stunden ab dem Tal, rund 1'057 m Höhengewinn, T2. Rückweg mit der Seilbahn ab Ebenalp oder zu Fuss hinunter zum Seealpsee.",
+    "effort_label": "Schwer",
+    "start": "Bahnhof Wasserauen",
+    "transit": {
+      "train": "Appenzell, dann Appenzeller Bahn bis Wasserauen"
+    }
+  },
+  {
+    "id": "triftsee-from-underi-trift-via-windegghuette",
+    "name": "Höher gelegener Aussichtspunkt über die Windegghütte",
+    "description_extra": "Höher gelegener Aussichtspunkt am Triftsee über die Windegghütte statt nur über die Hängebrücke. Von der Bergstation Underi Trift (erreichbar mit der KWO Triftbahn, Postauto 161 ab Meiringen) fällt der markierte Weg zum Wehr ab, quert den Triftbach und steigt rund 280 m zur Abzweigung Bössli Stein. Nimm die rechte Abzweigung auf dem ursprünglichen Hüttenweg, der steil zur Windegghütte auf 1'887 m an der Westseite des Tals ansteigt. Der Blick von der Hütte über den See und den Triftgletscher ist offener als der Blick von der Brücke. Für die Weiterführung geht es denselben Weg zurück und über die Trift-Hängebrücke. Rund 8,5 km und 780 m Höhengewinn hin und zurück, T3 an den steilen Abschnitten.",
+    "effort_label": "Schwer",
+    "start": "Underi Trift (Bergstation Triftbahn)",
+    "transit": {
+      "train": "Meiringen",
+      "bus": "Postauto 161 bis Triftbahn",
+      "cable_car": "KWO Triftbahn"
+    }
+  },
+  {
+    "id": "valle_verzasca-lavertezzo-to-brione",
+    "description_extra": "Unterer Abschnitt des Sentiero Verzasca, von Lavertezzo das Tal hinauf nach Brione statt der Etappe Sonogno bis Lavertezzo. Der Weg folgt dem Fluss Verzasca am Talboden vorbei an Kunstinstallationen und Wasserfällen, mit mehreren Badestellen auf glattem Granit. Etwa 6,4 km, 2 h 30, T1. Der Bus 321 fährt zurück nach Lavertezzo. Der gesamte Sentiero Verzasca ist die nationale Route 74, 35 km in zwei Etappen.",
+    "effort_label": "Leicht",
+    "start": "Lavertezzo (Ponte dei Salti)",
+    "transit": {
+      "bus": "Locarno, dann Postauto 321 bis Lavertezzo, Paese"
+    }
+  },
+  {
+    "id": "engstligen_falls-side-trail-to-plateau",
+    "name": "Seitenweg zur Engstligenalp",
+    "description_extra": "Steiler Seitenweg die Felswand neben den Fällen hinauf, die Alternative zu Fuss zur Fahrt mit der Engstligenbahn hinauf zur Hochebene auf 1'964 m. Etwa 1 h 30 ab Unter dem Birg, rund 580 m Höhengewinn, T2. Die Kehren geben beim Aufstieg nahe Blicke auf die oberen Abschnitte des Falls frei. Der Weg Engstligenfälle I ist saisonal wegen Steinschlag und Eis gesperrt (gesperrt Okt 2025 bis Jun 2026), prüfe daher vor dem Start die Seite des Betreibers. Von der Hochebene geht es mit der Seilbahn hinunter oder weiter auf der Hochebene.",
+    "effort_label": "Mittel",
+    "start": "Adelboden, Unter dem Birg (Postauto-Haltestelle)",
+    "transit": {
+      "bus": "Postauto Adelboden bis Unter dem Birg"
+    }
+  },
+  {
+    "id": "mount_pilatus-alpnachstad-aemsigen-kulm",
+    "description_extra": "Der Fussweg verlässt Alpnachstad, steigt durch den Wald zur Mittelstation Ämsigen der Zahnradbahn und führt dann auf dem Pilatus Blumenpfad vorbei an Alpwiesen und Felsbändern zum Pilatus Kulm auf 2'106 m. Vom Pilatus Kulm führt ein markierter Weg rund 1,3 km südöstlich zum Tomlishorn auf 2'128 m, dem höchsten Punkt des Massivs. Der Betreiber pilatus.ch stuft die Route als mittel ein und gibt etwa 4,5 Stunden Gehzeit an. Viele Wandernde fahren nach dem Gipfel mit der Zahnradbahn oder Seilbahn hinunter.",
+    "effort_label": "Schwer",
+    "start": "Bahnhof Alpnachstad",
+    "transit": {
+      "train": "Zentralbahn von Luzern bis Alpnachstad (etwa 17 Min.)",
+      "cable_car": "Pilatusbahn Zahnradbahn von Alpnachstad bis Pilatus Kulm (für den Abstieg oder als alternativer Aufstieg)",
+      "car": "Kostenpflichtige Parkplätze bei der Talstation Alpnachstad"
+    }
+  },
+  {
+    "id": "mount_pilatus-fraekmuentegg-tomlishorn",
+    "description_extra": "Die meisten Besucher erreichen den Pilatus Kulm mit der Zahnradbahn (ab Alpnachstad) oder der Seilbahn (ab Kriens über Fräkmüntegg und die Dragon Ride Luftseilbahn) und gehen die kurze Gipfelrunde. Das Oberhaupt erreicht man über einen Treppenweg direkt oberhalb der Station, der Esel liegt ein paar Minuten östlich. Vom Pilatus Kulm führt ein markierter Höhenweg rund 1,3 km zum Tomlishorn auf 2'128 m, dem höchsten Punkt. T2.",
+    "effort_label": "Mittel",
+    "start": "Bergstation Pilatus Kulm",
+    "transit": {
+      "cable_car": "Von Kriens mit der Gondel bis Fräkmüntegg, dann die Dragon Ride Luftseilbahn bis Pilatus Kulm; oder Zahnradbahn ab Alpnachstad",
+      "car": "Mit dem Auto zu den Talstationen Kriens oder Alpnachstad"
+    }
+  },
+  {
+    "id": "wasserfall_finstersee-village-walk",
+    "description_extra": "Vom Dorf aus markiert ein kleiner Holzwegweiser den Beginn des Wegs. Ein Kehrenweg führt durch den Wald hinunter und erreicht den Wasserfall in etwa zehn Minuten.",
+    "effort_label": "Leicht",
+    "start": "Dorf Finstersee (Parkplatz bei der Kirche)",
+    "transit": {
+      "bus": "Postauto nach Finstersee über Menzingen",
+      "car": "Parkplatz bei der Kirche oder an der Strasse oberhalb des Wasserfalls"
+    }
+  },
+  {
+    "id": "lac_bleu-la-gouille-direct",
+    "description_extra": "Der Weg verlässt La Gouille und steigt stetig durch Lärchen- und Alpenrosenbestände zum kleinen türkisen Bergsee Lac Bleu auf 2'090 m. 1,6 km einfach (3,26 km hin und zurück), 314 m Aufstieg, 45 Minuten hinauf und etwa gleich lang hinunter, T2. Eine markierte Verlängerung verbindet den See über Pramousse mit Arolla zu einer längeren Runde von rund 4 Stunden (getrennt von der direkten Route oben).",
+    "effort_label": "Leicht",
+    "start": "Bushaltestelle La Gouille, Val d'Hérens",
+    "transit": {
+      "bus": "Postauto 381 von Sion bis La Gouille (Weiler zwischen Les Haudères und Arolla)",
+      "car": "Parkplätze am Strassenrand bei La Gouille an der Strasse nach Arolla"
+    }
+  },
+  {
+    "id": "wildsee-pizol-5-seen-wanderung",
+    "description_extra": "Die klassische 5-Seen-Wanderung führt von der Pizolhütte über eine hochalpine Querung vorbei an Wildsee, Schottensee, Schwarzsee, Baschalvasee und Wangsersee. Die offizielle Route von pizol.com gibt 11,4 km, 4 h 30 Gehzeit, 553 m Aufstieg und 911 m Abstieg an, mit drei anstrengenden Anstiegen und Abstiegen zwischen den Karen. T2. Zelten und Biwakieren sind entlang der markierten Abschnitte verboten, es drohen Bussen.",
+    "effort_label": "Schwer",
+    "start": "Pizolhütte oberhalb von Wangs",
+    "transit": {
+      "train": "Bad Ragaz oder Sargans, dann Bus zur Talstation Wangs",
+      "cable_car": "Gondel Wangs bis Furt, dann Sessellift Furt bis Gaffia; kurzer Fussweg zur Pizolhütte am Start. Letzte Talfahrt ab Furt um 17:30 im Sommer"
+    }
+  },
+  {
+    "id": "refuge_du_lac_blanc-flegere",
+    "description_extra": "Von der Bergstation La Flégère (1'877 m) quert der Weg die Combe de la Chavanne und steigt vorbei an Chalets et Lac de la Flégère (2'027 m), bevor er über felsige Stufen mit Metallleitern zum Lac Blanc auf 2'352 m quert. Die Hütte liegt am Seeufer. Das Office du Tourisme gibt rund 3,5 km einfach bis zur Hütte an, 1 h 30 Aufstieg zu Fuss und 500 m Aufstieg (der Weg fällt auf dem Rückweg dann dieselben 500 m ab). T2. Hunde sind im Naturschutzgebiet Aiguilles Rouges verboten, und Baden im Lac Blanc und in den Lacs des Chéserys ist untersagt. Das Refuge du Lac Blanc ist von Anfang Juni bis Anfang Oktober geöffnet, Reservierungen telefonisch ab 1. Juni.",
+    "effort_label": "Mittel",
+    "start": "Bergstation der Seilbahn La Flégère",
+    "transit": {
+      "train": "Mont-Blanc Express bis Les Praz de Chamonix",
+      "cable_car": "Gondel La Flégère von Les Praz de Chamonix zur Bergstation",
+      "car": "Parkplatz bei der Talstation La Flégère in Les Praz"
+    }
+  },
+  {
+    "id": "lac_de_peyre-colombiere",
+    "description_extra": "Vom Col de la Colombière führt der Weg am Bar-Restaurant vorbei und nordwärts auf einem Weideweg zum Chalet de la Colombière auf 1'746 m. Von dort erreichen abwechselnde Flachstücke und Anstiege den Lac de Peyre auf 2'108 m. Randos-MontBlanc gibt 550 m Aufstieg bis zum See an, mit einer möglichen Verlängerung zum Col de Balafrasse (2'246 m), die rund weitere 170 m Aufstieg hinzufügt. T2. Die Route kann bis in den späten Juni schneebedeckt bleiben.",
+    "effort_label": "Mittel",
+    "start": "Parkplatz Col de la Colombière, Le Reposoir",
+    "transit": {
+      "car": "Über den Col de la Colombière (D4) von Le Grand-Bornand oder Le Reposoir, grosser kostenloser Parkplatz am Pass",
+      "bus": "Saisonaler Shuttle von Le Grand-Bornand zum Col de la Colombière im Sommer"
+    }
+  },
+  {
+    "id": "lago_di_saoseo-sfazu-val-da-camp",
+    "description_extra": "Die offizielle Route von Graubünden Ferien ist eine 15 km lange Rundtour durch das Val da Camp ab Sfazù, eingestuft als T2 mit 657 m Aufstieg und 662 m Abstieg und einer angegebenen Gehzeit von 7 Stunden. Der Weg folgt der Talstrasse hinauf zur Alp Camp, dann einem reinen Fussweg zum Lagh da Saoseo auf 2'028 m und weiter zum Lagh da Viola auf 2'159 m, bevor er über das Rifugio Saoseo zurückführt. Ein kleiner Bus verkürzt die Distanz für Wandernde, die nur zu den Seen wollen. Privater Motorverkehr ist im Val da Camp verboten.",
+    "effort_label": "Schwer",
+    "start": "Bushaltestelle Sfazù an der Berninapassstrasse",
+    "transit": {
+      "train": "Bernina Express oder Regionalzug bis Poschiavo",
+      "bus": "Postauto Richtung Berninapass bis Sfazù; PubliCar-Shuttle von Sfazù das Tal hinauf zur Alp Camp (Mai bis Mitte Oktober, Reservierung erforderlich)",
+      "car": "Parkplätze am Strassenrand bei Sfazù. Privater Motorverkehr ist im Val da Camp verboten"
+    }
+  },
+  {
+    "id": "silsersee-chaste-peninsula",
+    "description_extra": "Eine kurze Runde ab Sils Maria führt hinaus auf die Halbinsel Chastè, eine bewaldete Landzunge, die in den See hineinragt. Die markierte Runde ist etwa 4,2 km lang mit rund einer Stunde Gehzeit und geringem Aufstieg. Der Weg bleibt nahe am Ufer durch Lärchen und Arven.",
+    "effort_label": "Leicht",
+    "start": "Dorfzentrum Sils Maria",
+    "transit": {
+      "bus": "Postauto 4 von St. Moritz bis Sils Maria",
+      "boat": "Haltestelle Segl-Maria bei Chastè im Sommer",
+      "car": "Öffentliche Parkplätze in Sils Maria"
+    }
+  },
+  {
+    "id": "fulberg-from-niederbauen-cable-car",
+    "name": "Niederbauen zum Fulberg-Grat",
+    "description_extra": "Von der Bergstation der Seilbahn Niederbauen folge dem markierten Gratweg nach Ostsüdost. Etwa 75 Minuten stetiger Aufstieg entlang des Grats Richtung Faulberg auf 1'795 m, T2 ohne technische Abschnitte, aber auf dem offenen Grat dem Wetter ausgesetzt. Die Route ist Teil der längeren Gratverbindung Richtung Brisen. Steige denselben Weg ab oder gehe weiter entlang des Grats.",
+    "effort_label": "Schwer",
+    "start": "Bergstation der Seilbahn Niederbauen Chulm",
+    "transit": {
+      "train": "Beckenried (dann Bus 543 nach Emmetten)",
+      "cable_car": "Luftseilbahn Emmetten-Niederbauen bis Niederbauen Chulm"
+    }
+  },
+  {
+    "id": "zermatt_huts-from-zermatt-toward-furi",
+    "name": "Von Zermatt Richtung Furi durch die Walser Weiler",
+    "description_extra": "Gehe ans Südende von Zermatt vorbei an Winkelmatten und nimm den markierten Fussweg auf, der entlang des Zmuttbachs zur Seilbahnstation Furi ansteigt. Der Weg führt durch Walser Weiler und Arvenwald hinauf nach Furi auf 1'867 m. Etwa 1 h 15 einfach, 290 m Höhengewinn, durchgehend T1. Die Restaurants dort oben schliessen über den Winter. Nimm die Gondel von Furi wieder hinunter, das schont die Knie.",
+    "effort_label": "Leicht",
+    "start": "Bahnhof Zermatt",
+    "transit": {
+      "train": "Zermatt (MGB, Matterhorn Gotthard Bahn ab Visp)"
+    }
+  },
+  {
+    "id": "tine_de_conflens-from-la-sarraz",
+    "name": "Rundtour ab La Sarraz durch die Nozon-Schlucht",
+    "description_extra": "Die offizielle Rundtour des Schweizer Wanderwege-Verbands ab La Sarraz fällt durch den Wald hinunter zum Wasserfall Tine de Conflens, folgt der Nozon-Schlucht vorbei an der Cascade du Dard und führt weiter nach Romainmôtier, bevor sie über Ferreyres wieder hinaufsteigt. Etwa 11 km, 3 Stunden Gehzeit, 405 m Höhengewinn, T1, familienfreundlich. Parke beim Schloss oder nimm den Zug (der Bahnhof ist 10 Gehminuten vom Ausgangspunkt entfernt). Der Weg hinunter zum Wasserfall bleibt nach Regen tagelang nass, nimm Schuhe mit gutem Grip mit.",
+    "effort_label": "Leicht",
+    "start": "Dorf La Sarraz (Parkplatz Château de La Sarraz)",
+    "transit": {
+      "train": "La Sarraz (SBB, an der Linie Lausanne-Vallorbe)"
+    }
+  },
+  {
+    "id": "etang_de_la_gruere-pond-loop",
+    "name": "Rundtour um den Weiher ab La Theurre",
+    "description_extra": "Die Runde um das Wasser ist 2,6 km auf einem flachen Bohlen- und Schotterweg, etwa 35 bis 45 Minuten, T1, familienfreundlich. Parke bei La Theurre auf der Nordseite (kostenpflichtig) oder nimm das Postauto 32 ab dem Bahnhof Saignelégier, drei Minuten von der Bushaltestelle. Das ganze Moor ist ein national geschütztes Gebiet, bleibe daher auf dem markierten Weg, kein Baden und keine Drohnen.",
+    "effort_label": "Leicht",
+    "start": "Parkplatz La Theurre (Nordseite des Weihers)",
+    "transit": {
+      "train": "Saignelégier (Linie Chaux-de-Fonds-Glovelier)",
+      "bus": "Postauto 32 von Saignelégier Richtung Tramelan, Haltestelle La Theurre"
+    }
+  },
+  {
+    "id": "gorges_du_dailley-from-salvan",
+    "name": "Salvan nach Van d'en Bas durch die Schlucht",
+    "description_extra": "Der Weg folgt dem Wildbach Salanfe von Les Granges hinauf durch die Dailley-Schlucht. Der Weg ist mit Stegen, Galerien und rund 600 Stufen ausgestattet, die in den Fels gehauen oder gebohrt sind, erstmals 1895 gebaut und seither saniert. Der Weg erreicht seinen höchsten Punkt nahe Van d'en Bas und führt über den Lärchenwald wieder hinunter. Rund 5,5 km hin und zurück, 380 m Höhengewinn, 2 h bis 2 h 30, T2. Die Schlucht ist nur von Juni bis Oktober geöffnet, Wintereis sperrt die Treppen. In der Hochwassersaison ist die Gischt stark, halte die Kamera abgedeckt.",
+    "effort_label": "Mittel",
+    "start": "Weiler Les Granges oberhalb von Salvan",
+    "transit": {
+      "train": "Bahnhof Salvan (Mont-Blanc Express ab Martigny), dann 15 Gehminuten hinauf zum Ausgangspunkt Les Granges"
+    }
+  },
+  {
+    "id": "schwarzsee-fr-lake-loop-from-gypsera",
+    "name": "Seerundtour ab Gypsera",
+    "description_extra": "4 km lange Runde um den See auf einer Mischung aus Wiese, Uferweg, sanften Anstiegen und Waldabschnitten. Etwa 1 h 15 Gehzeit, nur 50 m Höhengewinn, T1, familienfreundlich. Der See liegt auf 1'046 m. Kostenpflichtige Parkplätze bei Gypsera. Wintervariante möglich, wenn das Eis dick genug ist.",
+    "effort_label": "Leicht",
+    "start": "Schwarzsee, Gypsera",
+    "transit": {
+      "train": "Fribourg (SBB)",
+      "bus": "TPF-Bus 123 Fribourg–Schwarzsee, Haltestelle Gypsera"
+    }
+  },
+  {
+    "id": "schwarzsee-fr-hohenweg-from-riggisalp",
+    "name": "Höhenweg-Querung: Riggisalp zum Schwyberg",
+    "description_extra": "Von der Bergstation Riggisalp (1'491 m) quert der Schwarzsee Höhenweg ostwärts durch die Alpweiden entlang der Bezirksgrenze von Sense und Greyerz und verbindet die Gemeinden Jaun, Charmey, Cerniat, Plasselb und Plaffeien, bevor er am Schwyberg endet. Etwa 18 km, 6 h 20 Gehzeit, 853 m Höhengewinn gegenüber 1'291 m Abstieg. Mittlere Schwierigkeit.",
+    "effort_label": "Mittel",
+    "start": "Riggisalp (Bergstation der Kaisereggbahnen ab Gypsera)",
+    "transit": {
+      "train": "Fribourg (SBB)",
+      "bus": "TPF-Bus 123 Fribourg–Schwarzsee, Haltestelle Gypsera",
+      "cable_car": "Sessellift Kaisereggbahnen Gypsera bis Riggisalp"
+    }
+  },
+  {
+    "id": "klausenpass-drive-up",
+    "name": "Mit dem Auto hinauf",
+    "description_extra": "Der Klausenpass liegt auf 1'948 m an der Grenze von Glarus und Uri, direkt erreichbar mit dem Auto oder dem Postauto über die Klausenpassstrasse. Strasse etwa von Juni bis Oktober offen (im Rest des Jahres durch Schnee gesperrt). Das Postauto ab Flüelen oder Linthal hält an der Klausenpasshöhe. Parke auf dem Parkplatz des Hotels Klausenpasshöhe oder an einer der Ausweichstellen am Strassenrand entlang des Passes. Keine Wanderung nötig, um den Spot selbst zu erreichen.",
+    "effort_label": "Keine Wanderung",
+    "start": "Parkplatz Klausenpass",
+    "transit": {
+      "bus": "Postauto Klausenpass-Linie (Flüelen–Klausenpass–Linthal), fährt Juni–Oktober"
+    }
+  },
+  {
+    "id": "gelmerbahn-drive-up",
+    "name": "Mit dem Auto zur Talstation der Standseilbahn",
+    "description_extra": "Über die Grimselpassstrasse von Innertkirchen; die Talstation der Gelmerbahn ist bei Handegg ausgeschildert. Die Parkplätze sind begrenzt und kostenlos, der Betreiber empfiehlt dringend die Anreise mit dem Postauto 161 ab Meiringen. Buche die Standseilbahn vorab online, sie fährt von Anfang Juni bis Ende Oktober.",
+    "effort_label": "Mit dem Auto",
+    "start": "Talstation Gelmerbahn (Handegg)",
+    "transit": {
+      "bus": "Postauto 161 von Meiringen bis Handegg / Gelmerbahn (nur Sommer)",
+      "train": "Bahnhof Meiringen (Zentralbahn von Luzern / Interlaken), dann Postauto 161"
+    }
+  },
+  {
+    "id": "guttannen_valley-drive-up",
+    "name": "Mit dem Auto durch das Tal",
+    "description_extra": "Über die Grimselstrasse von Innertkirchen Richtung Handegg; Guttannen liegt auf halbem Weg. Die Parkplätze am Strassenrand sind kostenlos und es gibt entlang des Tals viele Ausweichstellen für Übernachtungen mit dem Camper. Die Strasse zum Dorf Guttannen bleibt das ganze Jahr offen; die Fortsetzung über den Grimselpass Richtung Wallis schliesst im Winter (etwa November bis Mai).",
+    "effort_label": "Mit dem Auto",
+    "start": "Dorf Guttannen (Grimselstrasse)",
+    "transit": {
+      "bus": "Postauto 161 Meiringen - Grimsel bis Guttannen, Dorf",
+      "train": "Meiringen (Zentralbahn) + Postauto 161"
+    }
+  },
+  {
+    "id": "aare_gorge-east-innertkirchen",
+    "name": "Mit dem Auto zum Ost-Eingang (Innertkirchen)",
+    "description_extra": "Kostenlose Parkplätze beim Eingang Innertkirchen (Ost). Zwei Gehminuten vom Parkplatz zum Steg. Steg von April bis Anfang November geöffnet, Eintritt rund 10 CHF. Der gesamte Schluchtweg in eine Richtung ist etwa 1,4 km / 45 Min. zwischen Ost- und West-Eingang.",
+    "effort_label": "Mit dem Auto",
+    "start": "Aareschlucht Ost-Eingang (Innertkirchen)",
+    "transit": {
+      "bus": "Meiringen + Postauto 161 bis Innertkirchen, Aareschlucht Ost",
+      "train": "Meiringen (Zentralbahn von Luzern / Interlaken)"
+    }
+  },
+  {
+    "id": "aare_gorge-west-meiringen",
+    "name": "Mit dem Auto zum West-Eingang (Meiringen)",
+    "description_extra": "Kostenlose Parkplätze beim Eingang Meiringen (West). Zwei Gehminuten vom Parkplatz zum Steg. Steg von April bis Anfang November geöffnet, Eintritt rund 10 CHF. Der gesamte Schluchtweg in eine Richtung ist etwa 1,4 km / 45 Min. zwischen Ost- und West-Eingang.",
+    "effort_label": "Mit dem Auto",
+    "start": "Aareschlucht West-Eingang (Meiringen)",
+    "transit": {
+      "bus": "Meiringen + Postauto 161 bis Aareschlucht, West Eingang",
+      "train": "Meiringen (Zentralbahn von Luzern / Interlaken)"
+    }
+  },
+  {
+    "id": "grindelwald-drive-up",
+    "name": "Mit dem Auto oder Zug nach Grindelwald",
+    "description_extra": "Mit dem Auto von Interlaken über Wilderswil und Zweilütschinen hinauf ins Dorf Grindelwald. Mehrere Dorfparkplätze, 5-10 CHF/Tag. Ganzjährig zugänglich; die klassischen Fotospots liegen einen kurzen Fussweg vom Dorf oder Bahnhof entfernt.",
+    "effort_label": "Mit dem Auto",
+    "start": "Dorf Grindelwald (BOB-Bahnhof)",
+    "transit": {
+      "train": "Interlaken Ost + Berner Oberland Bahn (BOB) bis Grindelwald (alle 30 Min.)"
+    }
+  },
+  {
+    "id": "viewpoint_beatenberg-drive-up",
+    "name": "Mit dem Auto zum Parkplatz St. Beatus-Höhlen",
+    "description_extra": "Mit dem Auto von Interlaken Richtung Beatenberg hinauf und auf dem ausgeschilderten Parkplatz beim Weg zu den St. Beatus-Höhlen parken. Gehe ein paar Minuten durch den Wald zum Geländer oberhalb des Thunersees. Ganzjährig mit dem Auto zugänglich.",
+    "effort_label": "Mit dem Auto",
+    "start": "Parkplatz St. Beatus-Höhlen (Beatenberg)",
+    "transit": {
+      "bus": "Interlaken West + Postauto 101 Richtung Beatenberg"
+    }
+  },
+  {
+    "id": "lauterbrunnen-drive-up",
+    "name": "Mit dem Auto oder Zug nach Lauterbrunnen",
+    "description_extra": "Mit dem Auto von Interlaken über Wilderswil. Parkhaus Lauterbrunnen (Gütli) nahe dem Bahnhof rund 17 CHF/24h, Parkplätze an der Strasse und ausserhalb günstiger. Ganzjährig mit dem Auto zugänglich; der Staubbachfall und die Aussichtspunkte im Dorf sind 5 Gehminuten von den Parkplätzen und dem Bahnhof entfernt.",
+    "effort_label": "Mit dem Auto",
+    "start": "Dorf Lauterbrunnen (BLS-Bahnhof)",
+    "transit": {
+      "train": "Interlaken Ost + BOB (Berner Oberland Bahn) bis Lauterbrunnen (alle 30 Min.)"
+    }
+  },
+  {
+    "id": "zermatt_village-drive-up",
+    "name": "Mit dem Zug nach Zermatt (parken in Täsch)",
+    "description_extra": "Zermatt ist autofrei. Parke im Parkhaus Matterhorn Terminal Täsch (rund 16 CHF/Tag) und nimm den 12-minütigen Shuttlezug nach Zermatt. Vom Bahnhof sind die Aussichtspunkte im Dorf 1-2 Gehminuten entfernt. Ganzjährig.",
+    "effort_label": "Mit dem Auto",
+    "start": "Bahnhof Zermatt (Matterhorn Gotthard Bahn)",
+    "transit": {
+      "train": "Visp (SBB) + Matterhorn Gotthard Bahn bis Zermatt. Ab Täsch (hier parken die Autos): 12-minütiger Shuttlezug nach Zermatt alle 20 Min."
+    }
+  },
+  {
+    "id": "ferpecle_river-drive-up",
+    "name": "Mit dem Auto ins Ferpècle-Tal",
+    "description_extra": "Mit dem Auto das Val d'Hérens von Sion über Les Haudères nach Ferpècle hinauf. Die Flussebenen breiten sich entlang des Talbodens auf dem Weg zur Staumauer aus; halte an den verzweigten Kiesabschnitten für die Aussicht zum Drohnenstart. Strasse ganzjährig offen, im Winter aber vereist.",
+    "effort_label": "Mit dem Auto",
+    "start": "Ende der Strasse ins Ferpècle-Tal (ab hier keine Weiterfahrt)",
+    "transit": {
+      "bus": "Postauto 381 von Sion bis Les Haudères, dann 384 bis Ferpècle (eingeschränkter Sommerbetrieb)"
+    }
+  },
+  {
+    "id": "saas_fee_glacier-drive-up",
+    "name": "Seilbahn + Metro Alpin zum Mittelallalin",
+    "description_extra": "Vom autofreien Dorf Saas Fee nimm die Seilbahn Alpin Express bis Felskinn (2'980 m), dann die unterirdische Standseilbahn Metro Alpin bis Mittelallalin (3'456 m). Die Terrasse blickt direkt auf den Gletscher und die Mischabel-Gipfel. Geöffnet in der Winter-Skisaison und im Sommer (etwa Juli bis Mitte Oktober).",
+    "effort_label": "Mit dem Auto",
+    "start": "Dorf Saas Fee (Talstation Alpin Express)",
+    "transit": {
+      "bus": "Brig + Postauto 511 bis Saas Fee",
+      "cable_car": "Alpin Express bis Felskinn, dann Standseilbahn Metro Alpin im Berginnern bis Mittelallalin (3'500 m)"
+    }
+  }
+]

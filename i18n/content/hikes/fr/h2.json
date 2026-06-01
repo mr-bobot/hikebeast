@@ -1,0 +1,311 @@
+[
+  {
+    "id": "lavaux_vineyards-terrasses-de-lavaux",
+    "name": "Terrasses de Lavaux (St-Saphorin → Lutry)",
+    "description_extra": "Marche linéaire le long des terrasses viticoles de Lavaux, classées à l'UNESCO, de St-Saphorin à Lutry. Environ 11 km en trois à quatre heures sur des chemins majoritairement pavés ou en escaliers à travers les vignes au-dessus du Léman. T1 techniquement, mais le cumul des marches finit par compter : environ 440 m de montée et 420 m de descente. L'itinéraire traverse Rivaz, Epesses, Cully et Villette, avec des caves à vin et des bistrots en chemin. Des trains relient les deux extrémités ; le raccourci du Lavaux Express dépanne sur les tronçons fatigants.",
+    "effort_label": "Facile",
+    "start": "Gare de St-Saphorin",
+    "transit": {
+      "train": "St-Saphorin (CFF/MOB)"
+    }
+  },
+  {
+    "id": "schafler-route-42",
+    "description_extra": "Accès par le téléphérique de l'Ebenalp depuis Wasserauen, puis environ 30 à 40 minutes le long de la crête jusqu'à l'auberge. T2 : la crête est étroite par endroits avec un peu d'exposition. Le Schäfler dispose d'une terrasse de restaurant et de chambres pour la nuit (chambres doubles et dortoirs avec lits superposés). La fermeture hivernale dure jusqu'à fin mai.",
+    "effort_label": "Facile",
+    "start": "Station supérieure de l'Ebenalp (téléphérique depuis Wasserauen)",
+    "transit": {
+      "train": "Wasserauen"
+    }
+  },
+  {
+    "id": "seealpsee-route-43",
+    "description_extra": "Accès depuis la gare de Wasserauen en environ 1h 30. Environ 280 m de dénivelé, T1. Le Berggasthaus Forelle sur la rive ouest est l'arrêt restauration habituel. Le camping à un emplacement désigné à l'extrémité supérieure du lac est généralement toléré moyennant une petite contribution versée au paysan. Souvent combiné avec l'Ebenalp ou le Schäfler en une journée en boucle.",
+    "effort_label": "Facile",
+    "start": "Gare de Wasserauen",
+    "transit": {
+      "train": "Wasserauen"
+    }
+  },
+  {
+    "id": "ascher-route-73",
+    "name": "Descente desservie par téléphérique depuis l'Ebenalp",
+    "description_extra": "Téléphérique de Wasserauen à l'Ebenalp, puis une marche de 15 minutes en descente à travers les grottes du Wildkirchli jusqu'à la maison d'hôtes à 1 454 m. Le téléphérique évite la montée depuis Wasserauen. Depuis l'Aescher tu peux continuer le long de la crête de l'Alpstein vers le Schäfler. La station de l'Ebenalp est ouverte tous les jours de fin mai à octobre.",
+    "effort_label": "Modéré",
+    "start": "Station supérieure de l'Ebenalp (téléphérique depuis Wasserauen)",
+    "transit": {
+      "train": "Wasserauen"
+    }
+  },
+  {
+    "id": "saxer_lucke-route-71",
+    "description_extra": "Depuis Brülisau, prends le téléphérique jusqu'à Staubern (1 830 m), puis 1 heure sur le sentier de crête jusqu'à la brèche, T1, avec environ 157 m de dénivelé cumulé. Le Berggasthaus Staubern est un restaurant d'alpage en activité. À combiner avec une descente par le Fälensee pour une journée plus longue.",
+    "effort_label": "Facile",
+    "start": "Station supérieure de Staubern (téléphérique depuis Frümsen)",
+    "transit": {
+      "bus": "Frümsen, Talstation Stauberen"
+    }
+  },
+  {
+    "id": "limmernsee-tierfehd-cable-car",
+    "name": "Téléphérique de Tierfehd + sentier de la Pantenbrücke",
+    "description_extra": "Accès facile d'une heure par le téléphérique industriel des Kraftwerke-Linth-Limmern depuis Tierfehd. Depuis la station supérieure de Chalktrittli (1 860 m), le chemin mène sur le haut plateau où le réservoir se trouve à 1 857 m. Marche essentiellement plate au bord du lac, T1. Le pont suspendu historique de la Pantenbrücke est une courte excursion depuis Tierfehd dans la vallée, avant ou après le téléphérique.",
+    "effort_label": "Facile",
+    "start": "Téléphérique de Tierfehd (Linthal)",
+    "transit": {
+      "train": "Linthal Braunwaldbahn (SBB) + téléphérique"
+    }
+  },
+  {
+    "id": "limmernsee-linthal-on-foot",
+    "name": "Depuis Linthal à pied",
+    "description_extra": "Accès à pied depuis la gare de Linthal (Braunwaldbahn) en remontant la vallée jusqu'à Tierfehd par le pont suspendu de la Pantenbrücke, environ 1h 30. Depuis Tierfehd tu peux prendre le téléphérique jusqu'au réservoir ou continuer à pied encore quatre heures à travers la vallée de la Sandalp.",
+    "effort_label": "Facile",
+    "start": "Gare de Linthal",
+    "transit": {
+      "train": "Linthal Braunwaldbahn (SBB)"
+    }
+  },
+  {
+    "id": "muttseehutte-from-tierfehd-cable-car",
+    "name": "Téléphérique de Tierfehd + accès par Chalchtrittli",
+    "description_extra": "Accès standard par le téléphérique industriel des Kraftwerke-Linth-Limmern depuis Tierfehd. Depuis la station supérieure de Chalktrittli (1 860 m), suis le sentier balisé à travers un terrain raide par Chalchtrittli et Muttenwändli jusqu'au haut plateau et la cabane à 2 501 m. Environ 2 h 30 et 730 m de dénivelé, T3. Cabane ouverte de mi-juin à mi-septembre.",
+    "effort_label": "Modéré",
+    "start": "Téléphérique de Tierfehd (Linthal)",
+    "transit": {
+      "train": "Linthal Braunwaldbahn (SBB) + téléphérique"
+    }
+  },
+  {
+    "id": "berschnerfall-route-44",
+    "description_extra": "Car postal ou voiture jusqu'à Berschis, Unterdorf, puis environ 40 minutes de montée jusqu'aux chutes à travers une forêt de feuillus. 200 m de dénivelé, T1. Le débit d'eau est maximal à la fin du printemps et au début de l'été.",
+    "effort_label": "Facile",
+    "start": "Berschis, Unterdorf",
+    "transit": {
+      "bus": "Berschis, Unterdorf"
+    }
+  },
+  {
+    "id": "klausenpass-urnerboden-to-altdorf",
+    "name": "Urnerboden → Klausenpass → Altdorf",
+    "description_extra": "Partie de la Route des Cols Alpins. Environ huit heures aller depuis Urnerboden (arrêt de bus) par le col du Klausen à 1 948 m puis descente du Schächental jusqu'à Altdorf. La montée depuis Urnerboden est régulière le long du Fätschbach, croisant plusieurs fois la route du col. Longue descente côté Uri avec la cascade du Stäubifall et des fermes d'alpage traditionnelles en chemin. T2 sur tout le parcours, bien balisé dans le cadre du réseau fédéral de chemins de grande randonnée de Suisse. La route du col ferme généralement d'octobre à mai.",
+    "effort_label": "Longue journée",
+    "start": "Village d'Urnerboden",
+    "transit": {
+      "bus": "Car postal jusqu'à Urnerboden"
+    }
+  },
+  {
+    "id": "barglistuber-route-14",
+    "name": "Marche en bord de route depuis le parking du Berglistüber",
+    "description_extra": "Gare-toi au Parkplatz Wasserfall Berglistüber ou prends le car postal jusqu'à Linthal, Bergli. Les chutes s'atteignent par une courte marche plate depuis la route. T1, accessible à tous. Le débit d'eau est maximal au printemps lors de la fonte des neiges.",
+    "effort_label": "Facile",
+    "start": "Parkplatz Wasserfall Berglistüber",
+    "transit": {
+      "bus": "Linthal, Bergli"
+    }
+  },
+  {
+    "id": "urnerboden-panorama-walk",
+    "name": "Marche panoramique autour de la vallée alpine",
+    "description_extra": "L'alpage d'Urnerboden est un fond de vallée plat accessible en voiture ou en car postal. Depuis le village, il y a plusieurs courtes marches à travers les pâturages et le long du Fätschbach, plus le Schächentaler Höhenweg fédéral qui grimpe au sud au-dessus de la vallée (itinéraire séparé). Pour une balade libre sur l'alpage, compte environ 1 à 2 heures. Les sentiers sont essentiellement plats, sur herbe et gravier. Accès par la route du col du Klausen (ouverte l'été seulement, le car postal dessert la vallée). À associer à un arrêt dans l'une des laiteries d'alpage en activité.",
+    "effort_label": "Facile",
+    "start": "Village d'Urnerboden",
+    "transit": {
+      "bus": "Car postal jusqu'à Urnerboden"
+    }
+  },
+  {
+    "id": "ice_lake_griesslisee-kloental-via-chaeseren",
+    "name": "Klöntal → Chäseren → Glärnischhütte",
+    "description_extra": "Montée depuis l'extrémité du Klöntalersee (Plätz, 852 m) par Käseren jusqu'à la Glärnischhütte à 1 990 m. Le CAS cote l'itinéraire T3 et donne 3 h 30 pour la montée avec environ 1 140 m de dénivelé. Le car postal de Glaris à Klöntal-Vorauen atteint le départ du sentier. Une cascade et un passage équipé de chaînes apparaissent sur l'approche finale. Le Griesslisee lui-même se situe au-dessus de la cabane et requiert davantage d'expérience alpine.",
+    "effort_label": "Modéré, raide",
+    "start": "Plätz (extrémité du Klöntalersee)",
+    "transit": {
+      "bus": "Car postal de Glaris à Klöntal-Vorauen"
+    }
+  },
+  {
+    "id": "gigerwaldsee-calfeisental-round",
+    "name": "Boucle du Calfeisental (Gigerwald → Sardona → Gigerwald)",
+    "description_extra": "Longue journée à l'intérieur de l'Arène tectonique Sardona, classée à l'UNESCO. Depuis le réservoir de Gigerwald, l'itinéraire couvre environ 19,3 km et 1 254 m de dénivelé cumulé en sept heures environ, sur l'approche la plus facile du Calfeisental. Il passe par le village walser de St. Martin à 1 340 m, puis grimpe jusqu'à l'Alp Sardona avant de revenir en boucle. T2. La route d'accès se rejoint depuis Sargans par Vättis. Une circulation alternée à sens unique s'applique par endroits, et l'itinéraire est fermé en hiver pour la protection de la faune.",
+    "effort_label": "Longue journée",
+    "start": "Réservoir de Gigerwald",
+    "transit": {
+      "train": "Sargans (SBB) + bus jusqu'à Vättis + car postal jusqu'à Gigerwald"
+    }
+  },
+  {
+    "id": "gigerwaldsee-st-martin-to-sardona",
+    "name": "St. Martin → Alp Sardona",
+    "description_extra": "Alternative plus courte depuis le village walser de St. Martin vers le haut Calfeisental. Suis la route d'accès à l'alpage dans la vallée, puis bifurque sur le sentier balisé à Stübliwald et grimpe jusqu'à Gamserälpli Untersäss et Obersäss. T2. Retour par le même chemin.",
+    "effort_label": "Modéré",
+    "start": "St. Martin (village walser)",
+    "transit": {
+      "train": "Sargans + car postal jusqu'à St. Martin"
+    }
+  },
+  {
+    "id": "ruinaulta-versam-circular",
+    "name": "Boucle de Versam à travers les gorges",
+    "description_extra": "Randonnée en boucle sur le bord des gorges du Rhin depuis la gare de Versam-Safien. L'itinéraire serpente surtout à travers une forêt de feuillus avec des plateformes panoramiques sur les falaises blanches et le Rhin vert laiteux. T2.",
+    "effort_label": "Modéré",
+    "start": "Gare de Versam",
+    "transit": {
+      "train": "Versam-Safien (RhB)"
+    }
+  },
+  {
+    "id": "ruinaulta-flims-out-and-back",
+    "name": "Depuis Flims Waldhaus",
+    "description_extra": "Environ une heure aller depuis Flims Waldhaus jusqu'aux gorges du Rhin, deux heures aller-retour. Le sentier descend à travers la forêt en passant par le Caumasee jusqu'à Conn et la plateforme panoramique d'Il Spir, puis remonte. Globalement facile, T1, adapté aux familles.",
+    "effort_label": "Facile",
+    "start": "Flims Waldhaus",
+    "transit": {
+      "bus": "Car postal jusqu'à Flims Waldhaus"
+    }
+  },
+  {
+    "id": "crestasee-four-lakes-hike",
+    "name": "Senda quatter lags da Flem (Randonnée des Quatre Lacs)",
+    "description_extra": "Senda quatter lags da Flem de quatre heures (romanche pour Randonnée des Quatre Lacs) depuis Flims. La boucle passe par le Lag Prau Pulté, le Lag Prau Tuleritg, le Caumasee et le Crestasee, avec la plateforme panoramique d'Il Spir au-dessus des gorges du Rhin près de Conn. T1 sur tout le parcours, plat à légèrement vallonné à travers la forêt et le long des rives.",
+    "effort_label": "Facile",
+    "start": "Flims",
+    "transit": {
+      "train": "Chur (SBB) + car postal jusqu'à Flims"
+    }
+  },
+  {
+    "id": "crestasee-short-staderas-conn",
+    "name": "Staderas → Caumasee → Conn",
+    "description_extra": "Courte marche à travers la forêt de Flims, de Staderas au-delà du Caumasee jusqu'à la plateforme panoramique d'Il Spir au-dessus des gorges du Rhin. Environ 4,6 km et 75 minutes aller, avec une descente d'environ 180 m et quelques petites montées. T1, adapté aux familles, la majeure partie de l'itinéraire sous couvert d'arbres, ce qui en fait une option par temps de pluie. Le Restaurant Conn est sur le chemin (fermé hors saison). Le car postal ramène à Flims.",
+    "effort_label": "Facile",
+    "start": "Laax Staderas",
+    "transit": {
+      "train": "Chur + car postal jusqu'à Laax Staderas"
+    }
+  },
+  {
+    "id": "klontalersee-default",
+    "name": "Boucle au bord du lac sur le chemin balisé",
+    "description_extra": "Car postal 506 de Glaris le long de la Klöntalstrasse jusqu'à Klöntal-Vorauen. Boucle autour du lac sur un chemin balisé, environ 14 km, 3 heures de marche, 160 m de montée et 180 m de descente, T1. Campings à Güntlenau et Vorauen, location de bateaux et zones de baignade au bord du lac. Bonne base pour les itinéraires plus difficiles jusqu'à la Glärnischhütte.",
+    "effort_label": "Facile",
+    "start": "Klöntal-Vorauen (car postal 506 depuis Glaris)",
+    "transit": {
+      "bus": "Glaris, puis car postal 506 le long de la Klöntalstrasse jusqu'à Klöntal-Vorauen"
+    }
+  },
+  {
+    "id": "stoos_kapelle-route-35",
+    "name": "Marche jusqu'à la chapelle depuis le sommet du Stoosbahn",
+    "description_extra": "Rejoins Stoos par le funiculaire du Stoosbahn depuis Schwyz. Depuis la station supérieure de Stoos, la chapelle est à 2-3 minutes de marche. T1. À combiner avec la marche de crête jusqu'au Fronalpstock (téléphérique plus crête) pour une demi-journée.",
+    "effort_label": "Facile",
+    "start": "Schwyz, Stoosbahn",
+    "transit": {
+      "train": "Brunnen, puis bus jusqu'à Schwyz, Stoosbahn",
+      "cable_car": "Funiculaire du Stoosbahn (funiculaire le plus raide du monde)"
+    }
+  },
+  {
+    "id": "pizol-5-lakes-hike",
+    "name": "Randonnée des 5 Lacs (Pizolhütte → Wildsee → Schottensee → Schwarzsee → Baschalvasee → Gaffia)",
+    "description_extra": "L'itinéraire fait 11,4 km, environ 4 h 30, avec 553 m de montée et 911 m de descente nette. Il démarre à la station supérieure de la Pizolhütte (Sargans + bus jusqu'à Wangs + télécabine Pizolbahn + télésiège jusqu'à Gaffia) et passe par le Wangsersee, le Wildsee, le Schottensee, le Schwarzsee et le Baschalvasee avant de descendre jusqu'au télésiège de Gaffia. Balisage jaune bien marqué sur tout le parcours, T2 sous les pieds. Point culminant 2 507 m. Vérifie les horaires actuels de l'exploitant Pizolbahn pour le dernier télésiège vers le bas.",
+    "effort_label": "Modéré, bien balisé",
+    "start": "Pizolhütte au-dessus de Wangs",
+    "transit": {
+      "train": "Sargans (SBB) + bus jusqu'à Wangs + télécabine Pizolbahn + télésiège jusqu'à Gaffia"
+    }
+  },
+  {
+    "id": "joriseen-route-126",
+    "description_extra": "Accès depuis la route du Flüelapass (car postal de Davos à Wägerhus ou Flüela, Ospiz) par la Winterlücke ou la Jöriflüelafurgga jusqu'aux lacs à environ 2 500 m. Environ 5 h 20, 11 km, 780 m de dénivelé ; certains tronçons sont équipés de cordes. T3, idéal de juillet à août une fois les névés fondus.",
+    "effort_label": "Modéré à difficile",
+    "start": "Wägerhus (route du Flüelapass)",
+    "transit": {
+      "bus": "Flüela, Ospiz"
+    }
+  },
+  {
+    "id": "falensee-route-69",
+    "name": "Depuis Brülisau par le téléphérique du Hoher Kasten (boucle de la Saxer Lücke)",
+    "description_extra": "Depuis le téléphérique de Brülisau jusqu'au Hoher Kasten, traverse la crête de la Saxer Lücke et descends jusqu'au lac à 1 446 m. Le Berggasthaus Bollenwees à l'extrémité nord du lac propose des lits en dortoir et de la nourriture. Retour par la vallée du Sämtisersee jusqu'à Brülisau, prévois une journée entière. T2 sur tout le parcours.",
+    "effort_label": "Facile",
+    "start": "Brülisau"
+  },
+  {
+    "id": "batoni_wasserfallarena-route-125",
+    "description_extra": "Gare-toi à Weisstannen ou prends le car postal depuis Mels, puis environ 1 h 40 de montée dans la vallée du Gufelbach jusqu'à l'arène. T2 sur tout le parcours, environ 530 m de dénivelé aller, 4,2 km. Trois grandes chutes : Piltschinabach (81 m), Sässbach (86 m), Muttenbach (45 m).",
+    "effort_label": "Facile",
+    "start": "Weisstannen",
+    "transit": {
+      "bus": "Weisstannen, Oberdorf"
+    }
+  },
+  {
+    "id": "morteratsch_glacier-aussichtsweg-glacier-trail",
+    "name": "Sentier thématique du glacier (Aussichtsweg)",
+    "description_extra": "Sentier thématique du glacier (Aussichtsweg) depuis la gare de Morteratsch vers la langue du glacier. Des stations d'information le long d'un bon chemin de terre expliquent à quel point la glace a reculé depuis 1850, avec les positions historiques marquées tout au long du sentier. Environ 50 minutes aller, T1, adapté aux familles. L'aller-retour avec les stations prend environ deux heures. L'accès direct à la glace est interdit depuis mai 2024 en raison du risque de chutes de pierres ; le sentier jusqu'à la langue est officiellement fermé, des panneaux jaunes mènent à des points de vue le long de la moraine.",
+    "effort_label": "Facile",
+    "start": "Gare de Morteratsch",
+    "transit": {
+      "train": "Morteratsch (RhB)"
+    }
+  },
+  {
+    "id": "morteratsch_glacier-short-glacier-tongue",
+    "name": "Courte marche jusqu'à la langue du glacier",
+    "description_extra": "Marche d'une demi-heure sur une piste de terre plate depuis la gare de Morteratsch jusqu'à l'avant-pays du glacier. T1, accessible en poussette. À associer au sentier thématique de l'Aussichtsweg plus long pour comprendre le recul du glacier.",
+    "effort_label": "Très facile",
+    "start": "Gare de Morteratsch"
+  },
+  {
+    "id": "bovalhutte-from-morteratsch",
+    "name": "Depuis la gare de Morteratsch",
+    "description_extra": "Montée de deux heures depuis la gare de Morteratsch (1 896 m) sur la moraine latérale ouest du glacier de Morteratsch jusqu'à la Chamanna da Boval à 2 495 m. Le CAS décrit l'itinéraire comme un chemin panoramique sur glacier bien balisé à travers les mélèzes, puis le long de la moraine, avec plusieurs passages rocheux bien sécurisés et une pente finale jusqu'à la cabane. T2, environ 630 m de dénivelé.",
+    "effort_label": "Modéré",
+    "start": "Gare de Morteratsch",
+    "transit": {
+      "train": "Morteratsch (RhB)"
+    }
+  },
+  {
+    "id": "spitzmeilenhutte-from-maschgenkamm",
+    "name": "Depuis le téléphérique du Maschgenkamm",
+    "description_extra": "Accès depuis le sommet du téléphérique du Maschgenkamm (ligne Flumserberg Tannenboden). Depuis 2 008 m, l'itinéraire descend au-delà de la zone du Panüöl, puis traverse vers le sud-ouest par Plattis, P. 1836, Fursch, Obetweid et Schwarzegg jusqu'à la Spitzmeilenhütte à 2 087 m. Environ 2 heures, 350 m de dénivelé cumulé, T2.",
+    "effort_label": "Modéré",
+    "start": "Station supérieure du Maschgenkamm (Flumserberg)",
+    "transit": {
+      "train": "Unterterzen (SBB) + téléphériques du Flumserberg"
+    }
+  },
+  {
+    "id": "cascata_la_froda-from-sonogno-village",
+    "name": "Depuis Sonogno (courte marche jusqu'au pied)",
+    "description_extra": "Courte marche depuis Sonogno jusqu'au pied des chutes. Traverse le pont près du terrain de sport et suis le ruisseau Redorta sur la rive opposée, environ 15 à 20 minutes sur un chemin facile de gravier et de pierres, 1,3 km, environ 50 m de dénivelé, T1. Continue le long de la Costa della Valegia et reviens par Corte pour la boucle complète (environ 3,6 km, 80 m de dénivelé, 1 h aller-retour), ou pousse plus haut jusqu'au hameau de Cabanascia pour une boucle de 5,7 km (environ 2 heures). La courte marche jusqu'au pied des chutes est l'arrêt photo habituel.",
+    "effort_label": "Facile, courte marche",
+    "start": "Village de Sonogno",
+    "transit": {
+      "bus": "Car postal de Locarno via Tenero jusqu'à Sonogno"
+    }
+  },
+  {
+    "id": "valle_verzasca-sonogno-to-lavertezzo",
+    "name": "Sentiero Verzasca · Sonogno → Lavertezzo",
+    "description_extra": "Sentiero Verzasca, étape 1 de l'itinéraire de randonnée fédéral. De Sonogno (le dernier village, terminus de la ligne de car postal depuis Locarno) à Lavertezzo, environ 14 km, autour de 3 h 30 de marche. Le sentier suit la rivière en passant par des rustici, des chapelles et le pont médiéval du Ponte dei Salti à Lavertezzo. T1 sur tout le parcours. Prévois 5 à 6 heures si tu t'arrêtes pour les photos et les repas dans les grotti.",
+    "effort_label": "Facile, balade d'une journée",
+    "start": "Village de Sonogno",
+    "transit": {
+      "bus": "Car postal de Locarno via Tenero jusqu'à Sonogno"
+    }
+  },
+  {
+    "id": "cascata_di_foroglio-default",
+    "name": "Marche dans le village depuis le parking de Foroglio",
+    "description_extra": "Voiture ou car postal de Cevio jusqu'à Foroglio. La cascade est visible depuis la place du village : une courte marche de cinq minutes sur un chemin pavé t'amène au pied. T1, accessible à tous.",
+    "effort_label": "Facile",
+    "start": "Village de Foroglio (Val Bavona)",
+    "transit": {
+      "bus": "Car postal de Cevio vers le Val Bavona, ligne San Carlo"
+    }
+  }
+]

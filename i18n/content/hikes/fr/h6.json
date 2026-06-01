@@ -1,0 +1,316 @@
+[
+  {
+    "id": "randa_bridge-from-randa-village",
+    "name": "Montée depuis le village de Randa",
+    "description_extra": "Depuis le parking de l'église à Randa, vers 1 440 m, suis le sentier Hängebrücke balisé qui monte à travers la forêt jusqu'au pont suspendu Charles Kuonen vers 2 080 m sur l'Europaweg. Environ 640 m de dénivelé sur 4,3 km par un chemin balisé T2, le pied sûr est requis, pas d'exposition sur l'approche elle-même. La traversée du pont de 494 m prend environ 10 minutes. Pont ouvert en gros de fin mai / début juin jusqu'à mi-fin octobre, fermé en hiver et par grand vent. Retour par le même sentier, ou continue la boucle complète de l'Europaweg n° 69 (8,6 km, environ 4 h aller-retour, c'est la boucle OPTIONNELLE, l'aller-retour simple jusqu'au pont est l'itinéraire de 1h 45 / 4,3 km dans l'encadré).",
+    "effort_label": "Modéré",
+    "start": "Parkplatz Hängebrücke Randa (parking de l'église)",
+    "transit": {
+      "train": "Visp + Matterhorn Gotthard Bahn jusqu'à Randa, puis 5 min à pied jusqu'au parking de l'église"
+    }
+  },
+  {
+    "id": "lac_de_derborence-drive-up",
+    "name": "Accès au lac en voiture",
+    "description_extra": "Monte par l'étroite Route de Derborence depuis Conthey à travers Aven (18 km), en passant par des tunnels non éclairés et le long des gorges de la Lizerne. La route est goudronnée mais très étroite avec peu de places de croisement. Parking gratuit au bord du lac. Route ouverte de mai à octobre seulement.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking du Lac de Derborence, près du Refuge du Lac",
+    "transit": {
+      "bus": "Sion (SBB) + car postal 343 jusqu'à Derborence (service estival limité)"
+    }
+  },
+  {
+    "id": "sanetschpass-drive-up",
+    "name": "Montée depuis le côté Sion",
+    "description_extra": "Monte depuis Sion à travers Conthey jusqu'au col à 2 252 m. La route est goudronnée mais étroite ; parking au sommet près du restaurant et du réservoir. Ouvert en gros de fin mai à octobre. Depuis le parking, marche à plat jusqu'au barrage et au téléphérique.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking du Sanetschpass (sommet de la route à péage depuis Conthey)",
+    "transit": {
+      "bus": "Sion (SBB) + car postal 343 en direction de Derborence ; pas de service direct jusqu'au sommet du col, voiture ou taxi"
+    }
+  },
+  {
+    "id": "gorges_du_durnand-drive-up",
+    "name": "Accès aux Valettes en voiture",
+    "description_extra": "Depuis Martigny, prends la sortie d'autoroute Martigny-Croix, suis les indications pour Grand-St-Bernard, puis tourne à droite vers Les Valettes (Bovernier) après environ 2 km. Parking gratuit à l'entrée des gorges / restaurant sur place. Entrée payante pour la passerelle (9 CHF adulte), ouvert tous les jours du 1er mai au 31 octobre. Environ 1h aller-retour sur la passerelle.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking des Gorges du Durnand, Les Valettes (Bovernier)",
+    "transit": {
+      "bus": "Martigny + bus jusqu'à Les Valettes, Gorges du Durnand",
+      "train": "Ligne Martigny-Orsières (TMR/RegionAlps) jusqu'à Bovernier, puis 20 min de montée à pied"
+    }
+  },
+  {
+    "id": "crans_montana-drive-up",
+    "name": "Voiture ou funiculaire jusqu'à Crans-Montana",
+    "description_extra": "Monte depuis Sierre par la route de montagne sinueuse jusqu'à Crans-Montana. Plusieurs parkings payants dans le village. Le funiculaire depuis Sierre circule toutes les 30 min. Depuis le centre, les téléphériques d'été (Cry d'Er, Bella Lui, Plaine Morte) montent vers les hauteurs ; les points de vue du village sont eux-mêmes accessibles à pied.",
+    "effort_label": "Accès en voiture",
+    "start": "Centre du village de Crans-Montana",
+    "transit": {
+      "train": "Sierre (SBB) + funiculaire SMC (Sierre-Montana-Crans) jusqu'à Crans-Montana, puis bus local jusqu'au centre"
+    }
+  },
+  {
+    "id": "tseuzier_lake-drive-up",
+    "name": "Montée jusqu'au barrage",
+    "description_extra": "Monte par la route du Rawyl depuis Ayent / Anzère. Stationne au Barrage de Tseuzier (places gratuites au bord de la route au barrage). La vue sur le lac est depuis le barrage lui-même, 1 min à pied. Route ouverte de mi-mai à octobre.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking du Barrage de Tseuzier",
+    "transit": {
+      "bus": "Sion (SBB) + car postal jusqu'à Ayent / Anzère, puis pas de service direct, voiture recommandée"
+    }
+  },
+  {
+    "id": "la_tzoumaz-drive-up",
+    "name": "Accès à La Tzoumaz en voiture",
+    "description_extra": "Monte depuis Riddes (vallée du Rhône) par la route sinueuse jusqu'à La Tzoumaz. Parking du village gratuit hors saison de ski. Depuis le village, monte vers la limite des arbres pour les photos de pins givrés, n'importe quelle direction fait l'affaire.",
+    "effort_label": "Accès en voiture",
+    "start": "Village de La Tzoumaz",
+    "transit": {
+      "bus": "Riddes (SBB) + car postal 393 jusqu'à La Tzoumaz",
+      "train": "Riddes sur la ligne principale Brig-Lausanne"
+    }
+  },
+  {
+    "id": "ritzli_alp-drive-up",
+    "name": "Montée jusqu'à Ritzli Alp",
+    "description_extra": "Depuis Jaun, suis la route de montagne Euschelsstrasse sur 5 km vers le col d'Euschels. Ritzli Alp se trouve à 1 516 m et est indiqué. Parking gratuit au restaurant. Ouvert tous les jours de juin à mi-septembre, le week-end en intersaison. La route de montagne ferme avec la neige.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking du Restaurant Ritzli Alp",
+    "transit": {
+      "bus": "Bulle + car postal en direction de Jaun, Dorf. Depuis Jaun, monte par le sentier de l'Euschelspass jusqu'à Ritzli Alp (environ 1h25, T1)."
+    }
+  },
+  {
+    "id": "la_tine_canyon-drive-up",
+    "name": "Voiture ou train jusqu'au hameau de La Tine",
+    "description_extra": "Depuis Bulle (FR), dirige-toi vers le sud sur la H189 en direction de Château-d'Oex via Montbovon, puis bifurque vers le hameau de La Tine. Accès à pied sur terrain public depuis le hameau pour les points de vue sur les gorges depuis le haut. La descente du canyon elle-même nécessite une sortie canyoning guidée avec un prestataire local.",
+    "effort_label": "Accès en voiture",
+    "start": "Hameau de La Tine (Rossinière)",
+    "transit": {
+      "train": "Train régional MOB GoldenPass (ligne Montreux-Zweisimmen) jusqu'à la gare de La Tine, qui se trouve dans le hameau juste au-dessus des gorges de la Sarine"
+    }
+  },
+  {
+    "id": "dent_de_broc-drive-up",
+    "name": "Arrêt au bord de la route en direction du Moléson",
+    "description_extra": "En montant vers le Moléson depuis la région de Broc, arrête-toi au bord de la route (vers 46.554424, 7.032846). Le sommet ressort parfaitement au-dessus de la prairie au premier plan sous cet angle. Parking gratuit au bord de la route ; toute l'année.",
+    "effort_label": "Accès en voiture",
+    "start": "Aire de stationnement au bord de la route sous le Moléson, près de Broc",
+    "transit": {
+      "bus": "Bulle + bus TPF 260 jusqu'à Moléson-Village ; Broc est sur la ligne de train régional (TPF S60)"
+    }
+  },
+  {
+    "id": "schwarzsee-drive-up",
+    "name": "Accès à Gypsera en voiture",
+    "description_extra": "Monte depuis Fribourg via Plaffeien jusqu'à Schwarzsee. Stationne à Gypsera à l'extrémité sud du lac (parkings payants). Le lac est juste là. Accès toute l'année ; les téléphériques vers la Kaiseregg circulent été et hiver.",
+    "effort_label": "Accès en voiture",
+    "start": "Schwarzsee, Parking Gypsera",
+    "transit": {
+      "bus": "Fribourg + bus TPF 123 jusqu'à Schwarzsee, Gypsera (toute l'année)"
+    }
+  },
+  {
+    "id": "moleson-drive-up",
+    "name": "Téléphérique jusqu'au sommet du Moléson",
+    "description_extra": "Depuis Moléson-Village, prends la télécabine jusqu'à Plan-Francey puis le funiculaire sommital Vol-au-Vent. La terrasse t'offre le panorama ; marche 5 min le long de la crête pour échapper à la foule du café. Les remontées circulent en gros de début avril à début novembre et pendant la saison de ski.",
+    "effort_label": "Accès en voiture",
+    "start": "Moléson-Village (station de départ de la télécabine)",
+    "transit": {
+      "bus": "Bulle + bus TPF 260 jusqu'à Moléson-Village",
+      "cable_car": "Télécabine Moléson-Village jusqu'à Plan-Francey, puis funiculaire sommital du Moléson"
+    }
+  },
+  {
+    "id": "gorges_du_chauderon-drive-up",
+    "name": "Accès au Parking Donner en voiture",
+    "description_extra": "Monte depuis Montreux en direction de Glion / Les Avants et stationne au Parking Donner indiqué. Le sentier vers les gorges démarre à quelques minutes à pied du parking. Accès public gratuit ; vérifie auprès de Montreux Riviera Tourisme pour les fermetures.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking Donner (au-dessus de Montreux)",
+    "transit": {
+      "train": "Montreux SBB + train MOB ou bus local vers le haut, puis courte marche jusqu'au Parking Donner"
+    }
+  },
+  {
+    "id": "pisse_chevre-drive-up",
+    "name": "Arrêt au bord de la Route de Morcles",
+    "description_extra": "Depuis Lavey-les-Bains (au sud de Bex), prends l'étroite route de montagne qui monte en 29 lacets vers le village de Morcles. Petite aire de stationnement au bord de la route au pied de la cascade. Gratuit. Route fermée par la neige en hiver ; idéale de fin printemps à automne pour le débit.",
+    "effort_label": "Accès en voiture",
+    "start": "Aire de stationnement au bord de la Route de Morcles à la cascade"
+  },
+  {
+    "id": "route_de_morcles-drive-up",
+    "name": "Montée des lacets en voiture",
+    "description_extra": "Depuis Lavey-les-Bains (sortie A9 Saint-Maurice / Lavey), suis les indications pour Morcles. La route monte en 29 lacets numérotés sur environ 800 m sur le flanc sud de la vallée du Rhône. Aires de stationnement gratuites au bord de la route à plusieurs lacets. Normalement ouverte de mai à octobre ; fermée par la neige en hiver.",
+    "effort_label": "Accès en voiture",
+    "start": "Route de Morcles (au-dessus de Lavey-les-Bains)"
+  },
+  {
+    "id": "creux_du_van-drive-up",
+    "name": "Accès au Soliat en voiture",
+    "description_extra": "Monte depuis le côté Yverdon ou Neuchâtel via Couvet par la petite route jusqu'à la Ferme du Soliat. Parking gratuit au restaurant. Le bord est à 5 min à pied ; la chute est abrupte sans barrière à la plupart des endroits, alors reste en retrait. Idéal par les matins d'été clairs ou n'importe quel matin couvert pour la brume dans le cirque.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking de la Ferme du Soliat",
+    "transit": {
+      "bus": "Pas de service direct ; l'arrêt le plus proche est la gare de Noiraigue pour la randonnée du 'Sentier des 14 contours'"
+    }
+  },
+  {
+    "id": "tine_de_conflens-drive-up",
+    "name": "Accès au départ du sentier au bord de la route",
+    "description_extra": "Stationne au départ du sentier au bord de la route au-dessus de la Tine de Conflens (vers 46.654948, 6.492129). Courte marche en descente jusqu'à la cascade, bien pour les familles. Parking gratuit, accès gratuit.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking au bord de la route au-dessus des gorges du Nozon (près de La Sarraz)",
+    "transit": {
+      "train": "La Sarraz (rail régional) + 30 min à pied le long du chemin balisé"
+    }
+  },
+  {
+    "id": "st_prex-drive-up",
+    "name": "Train ou voiture jusqu'à St-Prex",
+    "description_extra": "Depuis Lausanne, prends l'A1 en direction de Genève, sortie Morges-Ouest, puis suis les indications pour St-Prex. La plateforme de baignade Bain des Dames / Plongeoir du Chauchy est indiquée depuis la Rue du Vieux-Collège du côté ouest de la vieille ville. Parking gratuit au bord de la route ; plus de capacité à proximité à la Plage du Chauchy. Eau d'été à 22-24 C en juillet-août.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking public, Chemin du Chauchy",
+    "transit": {
+      "train": "Lausanne CFF + train régional jusqu'à St-Prex, toutes les heures, 17 min"
+    }
+  },
+  {
+    "id": "marchairuz-drive-up",
+    "name": "Passage du Col du Marchairuz en voiture",
+    "description_extra": "Monte depuis Bière (côté Vaud) ou depuis St-Cergue / Le Brassus (côté Nyon) par le Col du Marchairuz à 1 447 m. Parking gratuit au bord de la route près de l'hôtel au col. Le point de vue en forêt (vers 46.564254, 6.239464) est à 2-3 min à pied de la route. Idéal le matin après une tempête de neige. Route généralement déneigée mais peut fermer brièvement en cas de forte neige.",
+    "effort_label": "Accès en voiture",
+    "start": "Col du Marchairuz (Hotel du Marchairuz)",
+    "transit": {
+      "bus": "St-Cergue + bus de montagne saisonnier TPN jusqu'au Col du Marchairuz (service limité)"
+    }
+  },
+  {
+    "id": "lavaux_vineyards-drive-up",
+    "name": "Train ou voiture jusqu'à un village de Lavaux",
+    "description_extra": "Stationne dans n'importe quel village de Lavaux ou prends le train régional le long du lac / la ligne du Train des Vignes. Depuis la gare, les chemins en terrasses entre les vignes sont à 2-5 min à pied. Les couleurs automnales des vignes culminent début à mi-octobre. Accès public gratuit.",
+    "effort_label": "Accès en voiture",
+    "start": "Gare de Cully, St-Saphorin ou Chexbres-Village",
+    "transit": {
+      "train": "Lausanne CFF + train régional (S6 / S7) jusqu'à Cully, Epesses, Rivaz, St-Saphorin ou Chexbres-Village"
+    }
+  },
+  {
+    "id": "le_doubs-drive-up",
+    "name": "Accès aux Roches de Moron en voiture",
+    "description_extra": "Depuis La Chaux-de-Fonds, roule jusqu'au Locle, puis suis les indications vers Les Planchettes et Les Roches de Moron. La route se termine au restaurant. Parking gratuit pour les clients, payant sinon. 5 min à pied jusqu'au bord de la falaise au-dessus des gorges du Doubs. Accès toute l'année.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking du Restaurant Les Roches de Moron",
+    "transit": {
+      "train": "Le Locle + ligne régionale jusqu'à Les Brenets, puis 45 min de montée par le sentier de la falaise jusqu'au point de vue"
+    }
+  },
+  {
+    "id": "gigerwaldsee-drive-up",
+    "name": "Accès au réservoir de Gigerwald en voiture",
+    "description_extra": "Depuis Vättis, monte par la route de montagne dans la vallée du Calfeisental jusqu'au bout au réservoir de Gigerwald (un petit péage s'applique généralement sur les tronçons privés/communaux). Parking gratuit au barrage. La vue sur le lac est juste depuis la route, avec le sentier vers le point de vue de la croix à 20 min de montée à pied. Route ouverte de mai à octobre.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking du réservoir de Gigerwald, au bout de la route du Calfeisental"
+  },
+  {
+    "id": "caumasee-drive-up",
+    "name": "Accès à Flims en voiture",
+    "description_extra": "Roule jusqu'à Flims Waldhaus. Stationne au parking dédié du Caumasee (environ 5 CHF/jour en saison). 5 min à pied jusqu'au lac depuis le parking. Le funiculaire jusqu'à la rive circule de mai à octobre ; le lac lui-même est accessible à pied toute l'année.",
+    "effort_label": "Accès en voiture",
+    "start": "Caumasee Parkplatz, Flims Waldhaus",
+    "transit": {
+      "bus": "Chur (SBB) + car postal 81 jusqu'à Flims Waldhaus"
+    }
+  },
+  {
+    "id": "crestasee-drive-up",
+    "name": "Accès au parking du Crestasee en voiture",
+    "description_extra": "Roule depuis Chur jusqu'à Trin/Mulin et stationne au petit parking près du Crestasee. 5-10 min à pied à travers la pinède jusqu'au lac. Ouvert toute l'année (le lac est un coin de baignade local en été ; plus calme au printemps et en automne).",
+    "effort_label": "Accès en voiture",
+    "start": "Parking du Crestasee (Trin Mulin)",
+    "transit": {
+      "bus": "Chur (SBB) + car postal 81 jusqu'à Trin, Mulin"
+    }
+  },
+  {
+    "id": "klontalersee-drive-up",
+    "name": "Parcours de la route le long de la rive",
+    "description_extra": "Roule depuis Glarus le long de la Klöntalerstrasse jusqu'au lac. Trois zones de stationnement payantes (Hotel Rhodannenberg, Güntlenau, Vorauen) via ParkingPay / easypark / TWINT / horodateurs ; le stationnement dans la rue est interdit. Pour un séjour plus long, Camping Vorauen et Camping Güntlenau au lac. Dès 2026, la route est fermée aux voitures le dernier dimanche de juin, juillet et août (TP/vélo/marche uniquement ces jours-là). Route ouverte toute l'année.",
+    "effort_label": "Accès en voiture",
+    "start": "Rive du Kloental (côté Glarus ou extrémité Vorauen)",
+    "transit": {
+      "bus": "Glarus (SBB) + car postal 506 jusqu'à Klöntal-Vorauen"
+    }
+  },
+  {
+    "id": "morteratsch_glacier-drive-up",
+    "name": "Train ou voiture jusqu'à la gare de Morteratsch",
+    "description_extra": "Prends la ligne UNESCO du Bernina Bahn jusqu'à la gare de Morteratsch (un arrêt au sud de Pontresina). Parking gratuit au bord de la route à côté de la gare pour les voitures. Depuis le quai, des panneaux jaunes mènent aux points de vue le long de la moraine ; le plus proche est à 10 min à pied. Accès toute l'année.",
+    "effort_label": "Accès en voiture",
+    "start": "Gare ferroviaire de Morteratsch",
+    "transit": {
+      "train": "Pontresina + Bernina Bahn (ligne RhB) jusqu'à Morteratsch (toutes les heures)"
+    }
+  },
+  {
+    "id": "ponte_dei_salti-drive-up",
+    "name": "Accès à Lavertezzo en voiture",
+    "description_extra": "Monte le Val Verzasca depuis Locarno. Parkings payants du village de Lavertezzo (environ CHF 10/jour en été, ou CHF 6 pour 3 heures). 3 min à pied du parking supérieur jusqu'au célèbre pont de pierre. Accès toute l'année. Dès 10 h, le parking est plein en été.",
+    "effort_label": "Accès en voiture",
+    "start": "Parking payant du village de Lavertezzo",
+    "transit": {
+      "bus": "Locarno FFS + car postal 321 jusqu'à Lavertezzo, Paese"
+    }
+  },
+  {
+    "id": "valle_verzasca-drive-up",
+    "name": "Parcours de la vallée en voiture",
+    "description_extra": "Monte la vallée depuis Tenero (environ 45 min de l'autostrada de Locarno à Lavertezzo, 1 h jusqu'à Sonogno en tête de vallée). Stationnement au bord de la route et piscines naturelles le long de la rivière. Accès toute l'année mais verglacé en hiver. Le courant de la rivière est sérieux, ne saute jamais dans une eau que tu n'as pas repérée.",
+    "effort_label": "Accès en voiture",
+    "start": "Route du Val Verzasca (Tenero à Sonogno)",
+    "transit": {
+      "bus": "Tenero (FFS) + car postal 321 sur toute la longueur de la vallée jusqu'à Sonogno"
+    }
+  },
+  {
+    "id": "lavertezzo-drive-up",
+    "name": "Accès au village de Lavertezzo en voiture",
+    "description_extra": "Monte le Val Verzasca depuis Locarno-Tenero (environ 45 min de l'autostrada). Deux parkings payants dans le village ; environ CHF 10/jour (ou CHF 6 pour 3 heures) pour le parking supérieur en été. 1-3 min à pied jusqu'aux ruelles et chapelles aux toits d'ardoise du village. Toute l'année.",
+    "effort_label": "Accès en voiture",
+    "start": "Village de Lavertezzo (parkings payants)",
+    "transit": {
+      "bus": "Locarno FFS + car postal 321 jusqu'à Lavertezzo, Paese"
+    }
+  },
+  {
+    "id": "ponte_brolla-drive-up",
+    "name": "Voiture ou train jusqu'à Ponte Brolla",
+    "description_extra": "Roule depuis Locarno en direction des Centovalli ; Ponte Brolla est le premier hameau après les gorges. Parking gratuit au bord de la route près du pont. 2 min de marche en descente jusqu'aux trous de baignade des gorges. Accès toute l'année ; eau chaude en été pour les sauts depuis les rochers.",
+    "effort_label": "Accès en voiture",
+    "start": "Pont de Ponte Brolla (au bord de la route)",
+    "transit": {
+      "train": "Locarno FFS + train des Centovalli jusqu'à Ponte Brolla (toutes les 30-60 min)"
+    }
+  },
+  {
+    "id": "les_drus-drive-up",
+    "name": "Train du Montenvers depuis Chamonix",
+    "description_extra": "Même accès que la Mer de Glace. Prends le train à crémaillère du Montenvers depuis le centre de Chamonix jusqu'à la station supérieure (environ 20 min aller simple). Les Drus sont visibles depuis le quai de la Mer de Glace et le long du sentier de la moraine. Le train circule de façon saisonnière (en gros de fin mai à début novembre), avec un service hivernal réduit selon l'année ; fermetures de plusieurs semaines pour révisions au printemps.",
+    "effort_label": "Accès en voiture",
+    "start": "Gare du train du Montenvers à Chamonix",
+    "transit": {
+      "train": "Chamonix Sud + chemin de fer à crémaillère du Montenvers jusqu'à la station supérieure de la Mer de Glace"
+    }
+  },
+  {
+    "id": "aiguille_du_grepon-drive-up",
+    "name": "Train du Montenvers depuis Chamonix",
+    "description_extra": "Même accès que la Mer de Glace. Prends le train à crémaillère du Montenvers depuis le centre de Chamonix (environ 20 min aller simple). L'Aiguille du Grépon est visible depuis la station supérieure et le long du sentier de la moraine de la Mer de Glace. Le train circule de façon saisonnière (en gros de fin mai à début novembre), avec un service hivernal réduit selon l'année.",
+    "effort_label": "Accès en voiture",
+    "start": "Gare du train du Montenvers à Chamonix",
+    "transit": {
+      "train": "Chamonix Sud + chemin de fer à crémaillère du Montenvers jusqu'à la station supérieure de la Mer de Glace"
+    }
+  }
+]

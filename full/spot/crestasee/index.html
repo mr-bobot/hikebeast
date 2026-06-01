@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392629" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223454" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -237,6 +237,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"crestasee-drive-up","visits":["crestasee"],"name":"Drive to Crestasee parking","start":"Crestasee parking (Trin Mulin)","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"bus":"Chur (SBB) + PostBus 81 to Trin, Mulin"},"description_extra":"Drive from Chur to Trin/Mulin and park at the small lot near Crestasee. 5-10 min walk through the pine forest to the lake. Open year-round (the lake is a local swim spot in summer; quieter in spring and autumn).","sources":["https://www.flimslaax.com/en/","https://www.postauto.ch/en/timetables"],"quickest_for":["crestasee"],"start_maps_url":"https://www.google.com/maps/place/Crestasee/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4784dca1c5bb3897:0xe974b259040ce2f0!8m2!3d46.8316413!4d9.3213848!16s%2Fm%2F03cp4l6","quickest":true},{"id":"crestasee-four-lakes-hike","name":"Senda quatter lags da Flem (Four Lakes Hike)","start":"Flims","transit":{"train":"Chur (SBB) + Postbus to Flims"},"duration_min":240,"sac_grade":"T1","effort_label":"Easy","description_extra":"Four-hour Senda quatter lags da Flem (Romansh for Four Lakes Hike) from Flims. The loop passes Lag Prau Pulté, Lag Prau Tuleritg, Caumasee, and Crestasee, with the Il Spir viewing platform above the Rhine gorge near Conn. T1 throughout, flat to gently rolling through forest and along lakeshores.","visits":["crestasee"],"sources":[],"start_maps_url":"https://www.google.com/maps/place/?q=46.833,9.283&z=16","distance_km":12.9,"quickest":false},{"id":"crestasee-short-staderas-conn","name":"Staderas → Caumasee → Conn","start":"Laax Staderas","transit":{"train":"Chur + Postbus to Laax Staderas"},"duration_min":75,"distance_km":4.6,"sac_grade":"T1","effort_label":"Easy","description_extra":"Short walk through the Flims forest, from Staderas past Caumasee to the Il Spir viewing platform over the Rhine Gorge. About 4.6 km and 75 minutes one way, descending around 180 m with minor ups. T1, family-friendly, most of the route under tree cover, so it works as a rainy-day option. Restaurant Conn is on the way (closed off-season). Postbus connects back to Flims.","visits":["crestasee"],"sources":["https://www.outdooractive.com/en/route/winter-hiking/flims-laax/staderas-sportzentrum-caumasee-conn/43396654/"],"start_maps_url":"https://maps.app.goo.gl/u95QRUoQnMAFjZAx9","quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -278,8 +279,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -467,6 +473,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

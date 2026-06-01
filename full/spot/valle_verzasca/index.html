@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392632" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223456" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -238,6 +238,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"valle_verzasca-drive-up","visits":["valle_verzasca"],"name":"Drive the valley","start":"Val Verzasca road (Tenero to Sonogno)","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"bus":"Tenero (FFS) + PostBus 321 the full length of the valley to Sonogno"},"description_extra":"Drive up the valley from Tenero (about 45 min from the Locarno autostrada to Lavertezzo, 1 h to Sonogno at the head). Roadside parking and natural swimming pools along the river. Year-round access but icy in winter. River current is serious, never jump into water you haven't scouted.","sources":["https://www.postauto.ch/en/leisure-offers/excursion-tips/valle-verzasca","https://www.postauto.ch/en/timetables"],"quickest_for":["valle_verzasca"],"start_maps_url":"https://www.google.com/maps/place/Verzaska+Valley/@46.3126581,2.6026627,7z/data=!4m10!1m3!11m2!2s4A_3J2iHSzu6zl1rtFMQPQ!3e3!3m5!1s0x4785b6d28e572447:0x60f583d58bb40b36!8m2!3d46.25!4d8.8333333!16s%2Fm%2F03c3mrg","quickest":true},{"id":"valle_verzasca-sonogno-to-lavertezzo","name":"Sentiero Verzasca · Sonogno → Lavertezzo","start":"Sonogno village","transit":{"bus":"Postbus from Locarno via Tenero to Sonogno"},"duration_min":210,"distance_km":14,"sac_grade":"T1","effort_label":"Easy, day-long stroll","description_extra":"Sentiero Verzasca, stage 1 of the federal hiking route. From Sonogno (the last village, end of the postbus line from Locarno) to Lavertezzo runs about 14 km, around 3 h 30 of walking. Trail follows the river past rustici, chapels, and the medieval Ponte dei Salti at Lavertezzo. T1 throughout. Plan 5 to 6 hours if you stop for photos and grotti meals.","visits":["valle_verzasca"],"sources":["https://www.myswitzerland.com/en-us/experiences/route/sentiero-verzasca/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.35031,8.78633&z=16","quickest":false},{"id":"valle_verzasca-lavertezzo-to-brione","visits":["valle_verzasca"],"sac_grade":"T1","effort_label":"Easy","duration_min":150,"gain_m":360,"distance_km":6.4,"equipment_list":[],"start":"Lavertezzo (Ponte dei Salti)","transit":{"bus":"Locarno, then PostBus 321 to Lavertezzo, Paese"},"description_extra":"Lower segment of the Sentiero Verzasca, from Lavertezzo up the valley to Brione rather than the Sonogno-to-Lavertezzo stage. The trail follows the Verzasca river past art installations and waterfalls in the floor of the valley, with several swimming spots on smooth granite. About 6.4 km, 2 h 30, T1. Bus 321 returns to Lavertezzo. The full Sentiero Verzasca is federal route 74, 35 km in two stages.","sources":["https://schweizmobil.ch/en/hiking-in-switzerland/route-74","https://www.bergfex.com/sommer/tessin/touren/fernwanderweg/2065768,sentiero-verzasca-svizzeramobile-74/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.26001,8.83592&z=16","quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -279,8 +280,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -468,6 +474,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

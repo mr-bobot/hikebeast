@@ -45,4 +45,17 @@ for (const lang of LANGS) {
   }
   writeFileSync(join(OUT, `content.${lang}.json`), JSON.stringify(bundle));
   console.log(`[build-content-i18n] ${lang}: ${Object.keys(bundle.spots).length} spots, ${Object.keys(bundle.chapters).length} chapters, ${Object.keys(bundle.frontMatter).length} front-matter -> full/i18n/content.${lang}.json`);
+
+  // Hikes bundle (route prose for the spot-detail "how to get there" panel),
+  // keyed by hike id, fetched by social.js and merged in the inline route script.
+  const hdir = join(SRC, "hikes", lang);
+  if (existsSync(hdir)) {
+    const hikes = {};
+    for (const file of readdirSync(hdir).filter((f) => f.endsWith(".json"))) {
+      const data = readJson(join(hdir, file));
+      if (Array.isArray(data)) for (const h of data) if (h && h.id) hikes[h.id] = h;
+    }
+    writeFileSync(join(OUT, `hikes.${lang}.json`), JSON.stringify(hikes));
+    console.log(`[build-content-i18n] ${lang}: ${Object.keys(hikes).length} hikes -> full/i18n/hikes.${lang}.json`);
+  }
 }

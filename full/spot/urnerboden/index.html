@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392628" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223453" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"urnerboden-panorama-walk","name":"Panorama walk around the alpine valley","start":"Urnerboden village","transit":{"bus":"Postbus to Urnerboden"},"sac_grade":"T1","effort_label":"Easy","description_extra":"Urnerboden alp is a flat valley floor accessible by car or PostBus. From the village there are several short walks across the pasture and along the Fätschbach, plus the federal Schächentaler Höhenweg climbing south above the valley (separate route). For an unstructured wander on the alp, allow ~1–2 hours. Trails are mostly flat on grass and gravel. Access via the Klausen Pass road (open summer only, PostBus serves the valley). Pair with a stop at one of the working alpine dairies.","visits":["urnerboden"],"sources":["https://en.wikipedia.org/wiki/Urnerboden"],"quickest_for":["urnerboden"],"start_maps_url":"https://www.google.com/maps/place/?q=46.89,8.90056&z=16","duration_min":90,"distance_km":5,"gain_m":50,"quickest":true},{"id":"urnerboden-clariden-hoehenweg","visits":["urnerboden"],"sac_grade":"T3","effort_label":"Demanding","duration_min":300,"gain_m":450,"distance_km":12.5,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Klausenpass (Uri side)","transit":{"bus":"Linthal or Flüelen, then Postbus over the Klausenpass road (summer only, mid-June to mid-September)"},"description_extra":"Ridge traverse high above the valley floor instead of the easy loop on the alp. The Clariden Höhenweg (Schweizmobil route 588) leaves the Klausenpass at 1,948 m, climbs onto the Clariden ridge, crosses the Gemsfairenboden plateau, and traverses to the Fisetengrat at 2,033 m before descending to Urnerboden village. The Hasentrittli section has a short steep rock pitch with chains for security. About 5 hours, T2 to T3, around 12 km. Returns via the small Urnerboden-Fisetengrat cable car or on foot down to the alp.","sources":["https://schweizmobil.ch/en/hiking-in-switzerland/route-588","https://wegwandern.ch/wanderung/fisetenpass-fisetengrat-urnerboden-gletscherseeli-klausenpass-clariden-hoehenweg-wandern-wanderung/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.86807,8.85471&z=16","descent_m":1050,"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

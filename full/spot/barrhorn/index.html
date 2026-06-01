@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392617" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223443" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"barrhorn-from-turtmannhuette","name":"From Turtmannhütte via Schöllijoch","start":"Turtmannhütte","transit":{"train":"Visp (SBB) + bus + long approach to Turtmannhütte"},"duration_min":360,"gain_m":1100,"sac_grade":"T5","effort_label":"Expert","description_extra":"Summit day to the Üssers Barrhorn at 3,610 m from the Turtmannhütte at 2,519 m, reached by a long approach up the Turtmann valley from Gruben. Most parties stay one night at the hut before the summit day. The trail climbs scree and rock past the Schöllijoch and up the long slopes to the top. About six hours round-trip and around 1,100 m of gain. SAC grades it T5: no technical climbing, but high altitude and a long day, and conditions vary seasonally.","visits":["barrhorn"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/uessers-barrhorn-145/mountain-hiking/"],"quickest_for":["barrhorn"],"equipment_list":["Sturdy mountaineering boots","Trekking poles"],"hut_ids":["turtmannhutte-sac"],"start_maps_url":"https://www.google.com/maps/place/?q=46.16013,7.69948&z=16","distance_km":9.3,"huts":[{"id":"turtmannhutte-sac","name":"Turtmannhütte SAC","description":"SAC hut at 2,519 m on the approach to Üssers Barrhorn","open_raw":"Second weekend of June to third weekend of September","cost_chf_raw":"From 82 CHF half-board","website":"https://turtmanntal.ch/turtmannhuette-sac/"}],"hut":{"id":"turtmannhutte-sac","name":"Turtmannhütte SAC","description":"SAC hut at 2,519 m on the approach to Üssers Barrhorn","open_raw":"Second weekend of June to third weekend of September","cost_chf_raw":"From 82 CHF half-board","website":"https://turtmanntal.ch/turtmannhuette-sac/"},"quickest":true},{"id":"barrhorn-from-st-niklaus-via-topalihuette","visits":["barrhorn"],"sac_grade":"T5","effort_label":"Expert","duration_min":735,"gain_m":2750,"equipment_list":["Sturdy hiking boots","Poles","Crampons","Helmet","Glacier rope","Harness"],"start":"St. Niklaus railway station","transit":{"train":"Visp to St. Niklaus (Matterhorn Gotthard Bahn)"},"description_extra":"Approach from the Mattertal side, opposite valley from the Turtmann hut route. Day one climbs from St. Niklaus through Schwiedernen and forested switchbacks to the Topalihütte at 2,674 m: per the official SAC route portal 1,600 m of gain, 4 to 5 hours, graded T2. Day two crosses the Schölligletscher (short and crevasse-poor in normal conditions) and a short ladder-and-cable section up the Schöllijoch before traversing to the Inneres and Üssers Barrhorn summits and descending to the Turtmannhütte: SAC documents this day-two traverse at 1,150 m of further ascent in 3 h 30 and 2,000 m of descent in 4 h 15, T5 above the hut. Combined hike: about 2,750 m of cumulative gain across the two days, 12 to 13 hours of walking, around 18 km, T5 overall. Not a one-day trip.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/uessers-barrhorn-145/mountain-hiking/","https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/topalihuette-sac-2147000271/mountain-hiking/from-st-niklaus-258/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.177,7.802&z=16","distance_km":18,"descent_m":2000,"hut_ids":["turtmannhutte-sac"],"huts":[{"id":"turtmannhutte-sac","name":"Turtmannhütte SAC","description":"SAC hut at 2,519 m on the approach to Üssers Barrhorn","open_raw":"Second weekend of June to third weekend of September","cost_chf_raw":"From 82 CHF half-board","website":"https://turtmanntal.ch/turtmannhuette-sac/"}],"hut":{"id":"turtmannhutte-sac","name":"Turtmannhütte SAC","description":"SAC hut at 2,519 m on the approach to Üssers Barrhorn","open_raw":"Second weekend of June to third weekend of September","cost_chf_raw":"From 82 CHF half-board","website":"https://turtmanntal.ch/turtmannhuette-sac/"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

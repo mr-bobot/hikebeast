@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392625" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223451" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -221,6 +221,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"etang_de_la_gruere-pond-loop","name":"Loop around the pond from La Theurre","visits":["etang_de_la_gruere"],"sac_grade":"T1","effort_label":"Easy","duration_min":45,"gain_m":20,"distance_km":2.8,"equipment_list":[],"start":"La Theurre parking (north side of the pond)","transit":{"train":"Saignelégier (Chaux-de-Fonds-Glovelier line)","bus":"PostBus 32 from Saignelégier toward Tramelan, stop La Theurre"},"description_extra":"The loop around the water is 2.6 km on a flat boardwalk-and-gravel path, about 35 to 45 minutes, T1, family-friendly. Park at La Theurre on the north side (paid) or take PostBus 32 from Saignelégier station, three minutes from the bus stop. The whole moor is a federally protected site, so stay on the marked path and no swimming or drones.","sources":["https://www.j3l.ch/en/P33241/destinations/nature-sites/etang-de-la-gruere","https://www.myswitzerland.com/en-ch/destinations/etang-de-la-gruere/"],"start_maps_url":"https://maps.app.goo.gl/4UFG8i1mAbxtLiYQ7","quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -262,8 +263,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -451,6 +457,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

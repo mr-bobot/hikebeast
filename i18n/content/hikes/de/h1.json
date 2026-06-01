@@ -1,0 +1,317 @@
+[
+  {
+    "id": "aletsch_glacier-eggishorn-circular",
+    "name": "Eggishorn Rundweg",
+    "description_extra": "Kurze Runde von der Bergstation der Eggishorn-Seilbahn (Fiesch plus zwei Seilbahnen). Zwanzig Minuten zum Hauptgipfel. Die ganze Runde dauert weitere 40 Minuten mit Zwischenhalten an den in den Fels gebauten Lounges. Durchgehend breite Kieswege, keine Ausgesetztheit.",
+    "effort_label": "Leicht",
+    "start": "Eggishorn Bergstation",
+    "transit": {
+      "train": "Fiesch + Eggishorn-Seilbahn"
+    }
+  },
+  {
+    "id": "aletsch_glacier-bettmerhorn-eggishorn-ridge",
+    "name": "Bettmerhorn → Eggishorn Gratüberschreitung",
+    "description_extra": "Gratüberschreitung zwischen Bettmerhorn und Eggishorn. Zugang per Seilbahn ab Betten (Bettmeralp, dann der Bettmerhorn-Lift). Die Route führt über leichte Kletterei an Felsblöcken, ausgesetzte Stellen sind gut gesichert. T3, etwa 1h 40, mit 110 m Abstieg. Abstieg über die Eggishorn-Seilbahn nach Fiesch.",
+    "effort_label": "Mittel, leichte Kletterei",
+    "start": "Bettmerhorn Bergstation",
+    "transit": {
+      "train": "Betten + Bettmeralp-Seilbahn + Bettmerhorn-Lift"
+    }
+  },
+  {
+    "id": "aletsch_glacier-aletsch-panoramaweg",
+    "name": "Aletsch Panoramaweg",
+    "description_extra": "Ab der Bergstation der Bettmerhorn-Seilbahn quert der Weg ostwärts auf einem breiten Bergpfad mit gelegentlichen in den Stein gehauenen Stufen, das Eis die ganze Zeit im Blick. Rund vier Stunden, T2, Ziel ist Fiescheralp, von wo die Seilbahn nach Fiesch hinunterfährt. Stellenweise ist Trittsicherheit nötig. Der Panoramaweg lässt sich auch bei Moosfluh (Riederalp) aufnehmen für die ganze Variante Moosfluh → Fiescheralp.",
+    "effort_label": "Mittel",
+    "start": "Bettmerhorn",
+    "transit": {
+      "train": "Betten + Seilbahn"
+    }
+  },
+  {
+    "id": "arolla_ice_cave-arolla-glacier-trail",
+    "name": "Arolla Gletscherweg (14 km Runde)",
+    "description_extra": "Rund 14 km lange Runde ab dem Dorf Arolla (2'050 m). Steigt 870 m an den Aussichtspunkten Bas Glacier d'Arolla und Haut Glacier d'Arolla vorbei, führt unterhalb der Pigne d'Arolla herum und zurück. Etwa sieben Stunden, T2. Bleib weg vom Eis selbst, beide Arme sind von Spalten durchzogen.",
+    "effort_label": "Langer Tag",
+    "start": "Arolla, Magine (Parkplatz nahe dem Ausgangspunkt)",
+    "transit": {
+      "bus": "Postauto ab Sion über Évolène nach Arolla"
+    }
+  },
+  {
+    "id": "cabane_becs_de_bosson-from-bendolla",
+    "name": "Ab Bendolla (Bergstation der Grimentz-Gondel)",
+    "description_extra": "Standardzustieg über die Gondelbahn Grimentz-Bendolla. Von Bendolla (2'130 m) führt der Weg Richtung Lac de Lona, steigt durch die Weide und umrundet den Grat der Pointe de Lona zu einem hohen Hängetal mit dem kleinen Lona-See. Von dort steigt er zum Pas de Lona hoch, dann die letzten 40 Minuten auf einem ziemlich steilen Abschnitt zur Hütte auf 2'985 m. Insgesamt etwa 2 Stunden 45 Minuten, 855 m Aufstieg, T2. Die Hänge sind nach Süden ausgerichtet und relativ früh im Sommer schneefrei.",
+    "effort_label": "Mittel",
+    "start": "Bendolla",
+    "transit": {
+      "train": "Sierre (SBB) + Bus nach Grimentz + Gondel nach Bendolla"
+    }
+  },
+  {
+    "id": "moiry_glacier-bus-to-moiry-barrage",
+    "name": "Bus zur Moiry-Staumauer + Wanderung zur Hütte",
+    "description_extra": "Postauto ab Grimentz bis zur Haltestelle Moiry, barrage. Über die Staumauer auf die Westseite des Stausees, dann etwa eine Stunde flaches Gehen dem Seeufer entlang bis zum Talschluss. Von dort steigt ein gut angelegter Weg die alte Seitenmoräne des Moiry-Gletschers hinauf zur Cabane de Moiry auf 2'825 m, mit einem Seil an einer kurzen steilen Stufe. Insgesamt etwa 2,5 Stunden ab der barrage, 580 m Aufstieg, T3. Um eine Stunde zu sparen, fährst du mit dem Postauto bis zur Haltestelle Moiry glacier am hinteren Ende des Stausees.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Lac de Moiry / Moiry-Staumauer",
+    "transit": {
+      "bus": "Postauto ab Grimentz nach Moiry, barrage"
+    }
+  },
+  {
+    "id": "moiry_glacier-from-grimentz-on-foot",
+    "name": "Ab Grimentz zu Fuss",
+    "description_extra": "Ganzer Zustieg zu Fuss von Grimentz (1'586 m) zur Cabane de Moiry auf 2'824 m. Etwa 13,2 km, 5 h 30, rund 1'280 m Aufstieg. Der Weg quert Wälder und Wiesen, folgt dann dem hinteren Talschluss dem Moiry-Stausee entlang, bevor er die alte Seitenmoräne zur Hütte hochsteigt. Der letzte Abschnitt ist steil mit Abbrüchen nahe der Moränenkante. Durchgehend T2. Der Bus zur Moiry barrage spart etwa eine Stunde, wenn du nicht die ganze Strecke laufen willst.",
+    "effort_label": "Langer Tag",
+    "start": "Dorf Grimentz"
+  },
+  {
+    "id": "ferpecle_glacier-easy-glacier-trail",
+    "name": "Barrage de Ferpècle → Gletscherfuss",
+    "description_extra": "Leichte Wanderung (auch mit dem Velo befahrbar) von der Barrage de Ferpècle zum Fuss des Mont-Miné-Gletschers, erreichbar per Postauto ab Sion über Évolène und Les Haudères. Etwa 1,3 km, 30 Minuten, mit rund 70 m Aufstieg auf einem bewaldeten Weg. T1, familienfreundlich. Gutes Aufwärmen oder in Kombination mit der steileren Bricola-Route weiter oben.",
+    "effort_label": "Leicht",
+    "start": "Barrage de Ferpècle",
+    "transit": {
+      "bus": "Postauto ab Sion über Évolène nach Les Haudères + Ferpècle"
+    }
+  },
+  {
+    "id": "ferpecle_glacier-les-salays-to-bricola",
+    "name": "Les Salays → Bricola",
+    "description_extra": "Zweieinhalbstündiger Aufstieg von Les Salays im kleinen Weiler Ferpècle hinauf nach Bricola auf 2'416 m. Etwa 4,8 km einfach und 650 m Höhenunterschied, stellenweise steil. T3. Der Weg ist Teil des langen Zustiegs zur Cabane de la Dent Blanche und wird auch von Bergsteigern auf dem Weg zur Normalroute der Dent Blanche benutzt. Oberhalb von 2'000 m geht die Vegetation in Geröll und Fels über.",
+    "effort_label": "Mittel, ausgewaschener Weg",
+    "start": "Les Salays (Ferpècle)",
+    "transit": {
+      "bus": "Postauto nach Les Haudères + Ferpècle"
+    }
+  },
+  {
+    "id": "spielboden-laengfluh-glacier-trail",
+    "name": "Längfluh → Spielboden → Saas-Fee",
+    "description_extra": "Zweieinviertelstündiger Abstieg von der Bergstation Längfluh (2'869 m) zurück ins Dorf Saas-Fee (1'783 m) über Spielboden. 6,4 km, etwa 1'120 m Abstieg, T2. Der Weg quert unterhalb des Doms und des Feegletschers zur Skibrücke, schlängelt sich dann hinunter nach Spielboden auf 2'452 m und führt weiter durch Lärchenwald ins Dorf. Halt bei Spielboden für die zahmen Murmeltiere.",
+    "effort_label": "Mittlerer Abstieg",
+    "start": "Längfluh Seilbahn-Bergstation",
+    "transit": {
+      "train": "Brig + Postauto nach Saas-Fee + Spielboden-Seilbahn + Längfluh"
+    }
+  },
+  {
+    "id": "barrhorn-from-turtmannhuette",
+    "name": "Ab Turtmannhütte über das Schöllijoch",
+    "description_extra": "Gipfeltag aufs Üssers Barrhorn auf 3'610 m von der Turtmannhütte auf 2'519 m, erreichbar über einen langen Zustieg durch das Turtmanntal ab Gruben. Die meisten Gruppen übernachten eine Nacht in der Hütte vor dem Gipfeltag. Der Weg steigt über Geröll und Fels am Schöllijoch vorbei und die langen Hänge hinauf zum Gipfel. Etwa sechs Stunden hin und zurück und rund 1'100 m Aufstieg. Der SAC stuft ihn als T5 ein: keine technische Kletterei, aber grosse Höhe und ein langer Tag, und die Bedingungen ändern sich je nach Saison.",
+    "effort_label": "Experten",
+    "start": "Turtmannhütte",
+    "transit": {
+      "train": "Visp (SBB) + Bus + langer Zustieg zur Turtmannhütte"
+    }
+  },
+  {
+    "id": "saas_fee_glacier-glacier-trail-felskinn",
+    "name": "Glacier Trail über die Britanniahütte",
+    "description_extra": "Zustieg zur Britanniahütte auf 3'030 m, am Rand des Hohlaubgletschers im Saastal. Von Felskinn (Bergstation des Alpin Express ab Saas-Fee) folgt die SAC-Standardroute dem markierten weiss-roten Weg zum Egginerjoch und weiter zur Hütte, T3, etwa 1 h 15 mit 550 m kumuliertem Aufstieg (etwa 30 Min länger, wenn du bei Morenia / Mast 4 startest, um den Chessjengletscher zu umgehen; diese Morenia-Variante wurde 2022 neu markiert und ist die sicherere Sommervariante). Die Hütte ist von Mitte Juni bis Mitte September geöffnet. Die ursprüngliche Fortsetzung des Glacier Trail weiter nach Mattmark über den Allalingletscher war früher T4 mit Spaltengefahr und ist derzeit auf der Felskinn-Seite GESPERRT, weil Geröll den Weg verschüttet hat; betritt die Gletscher nicht ohne Bergführer und prüfe den aktuellen Stand vor dem Aufbruch.",
+    "effort_label": "Alpin, Trittsicherheit nötig",
+    "start": "Felskinn Bergstation",
+    "transit": {
+      "train": "Brig + Postauto nach Saas-Fee + Alpin Express Seilbahn nach Felskinn"
+    }
+  },
+  {
+    "id": "lac_de_derborence-default",
+    "name": "Uferrunde ab der Strasse",
+    "description_extra": "Anfahrt ab Aven über die schmale Strasse durchs Lizerne-Tal, dann ein kurzer Spaziergang zum See auf 1'449 m. Leichte Uferrunde um den See auf T1-Gelände. Das Refuge du Lac Derborence am See hat Zimmer und Verpflegung.",
+    "effort_label": "Leicht",
+    "start": "Parkplatz Lac de Derborence",
+    "transit": {
+      "car": "Anfahrt ab Aven über die schmale Strasse durchs Lizerne-Tal"
+    }
+  },
+  {
+    "id": "la_fouly-tmb-arnuva-la-fouly",
+    "name": "Tour du Mont Blanc · Arnuva → Grand Col Ferret → La Fouly",
+    "description_extra": "Etappe der Tour du Mont Blanc von Arnuva im italienischen Val Ferret über den Grand Col Ferret auf 2'536 m und hinunter ins Schweizer Val Ferret nach La Fouly. Etwa 14,5 km, 5h 30, 865 m Aufstieg und gut 1'000 m Abstieg. T2. Meist gut unterhaltener Weg, der einen breiten Graspass hochsteigt und dann ein langer Abstieg am Rifugio Elena (früh) und am Alpbetrieb la Peule (spät) vorbei. Nimm Proviant mit, denn keiner der beiden Halte passt zeitlich gut für eine Mahlzeit.",
+    "effort_label": "Langer Tag",
+    "start": "Arnuva (italienisches Val Ferret)",
+    "transit": {
+      "bus": "Bus ab Courmayeur nach Arnuva"
+    }
+  },
+  {
+    "id": "sanetschpass-from-gsteig-on-foot",
+    "name": "Ab Gsteig zu Fuss",
+    "description_extra": "Aufstieg von Gsteig bei Gstaad (1'184 m, Postauto ab Gstaad) hinauf zum Sanetschpass auf 2'252 m an der Grenze Bern-Wallis. Etwa drei Stunden und rund 1'000 m Aufstieg auf der alten Passstrasse und Hirtenpfaden. Durchgehend T2. Viele Wandernde sparen sich den Aufstieg, indem sie stattdessen die Seilbahn von der Walliser Seite nehmen. Vom Pass geht es weiter zum Hôtel du Sanetsch und zum Lac de Sanetsch auf der Südseite.",
+    "effort_label": "Mittel",
+    "start": "Gsteig bei Gstaad",
+    "transit": {
+      "bus": "Postauto nach Gsteig"
+    }
+  },
+  {
+    "id": "sanetschpass-cable-car-shortcut",
+    "name": "Sanetsch-Seilbahn + Wanderung zum See",
+    "description_extra": "Abkürzung mit der Seilbahn zum Sanetschpass. Von Gsteig läufst du etwa 25 Minuten zur Talstation Sanetsch, dann fährst du mit der Gondel hoch zum Pass auf 2'252 m. Die Gehzeit zum See von der Bergstation beträgt 10 bis 15 Minuten auf einem breiten Kiesweg. Die Runde um den Sanetschsee ist leichtes Ufergehen, etwa eine Stunde. Das Hôtel du Sanetsch ist die einzige Unterkunft hier oben und ein beliebter Mittagshalt.",
+    "effort_label": "Leicht",
+    "start": "Gsteig Seilbahn-Talstation",
+    "transit": {
+      "bus": "Postauto nach Gsteig + 25 Min Fussweg zur Seilbahn"
+    }
+  },
+  {
+    "id": "nax_via_ferrata-belvedere-via-ferrata",
+    "name": "Klettersteig Belvédère",
+    "description_extra": "Der Klettersteig Belvédère oberhalb von Nax im Val d'Hérens. Einstieg an einer Haarnadelkurve an der Route de Nax, etwa 1'000 m im Wald unterhalb des Dorfes; das Postauto ab Sion fährt stündlich. Etwa zwei Stunden Klettern, 220 m Aufstieg, gilt als einer der leichteren Klettersteige im Wallis, aber Ausrüstung ist Pflicht: Gurt mit Klettersteigset, Helm, Handschuhe.",
+    "effort_label": "1-2 Stunden Klettern",
+    "start": "Parkplatz Klettersteig Belvédère (oberhalb von Nax)",
+    "transit": {
+      "bus": "Postauto ab Sion nach Nax"
+    }
+  },
+  {
+    "id": "crans_montana-bisse-du-ro",
+    "name": "Bisse du Ro",
+    "description_extra": "Dreistündige Querung entlang einer historischen Suone (Walliser Bewässerungskanal), die in die Südflanke oberhalb von Crans-Montana gehauen ist. T2. Wie viele Walliser Suonen umfasst sie schwindelerregende Felsquerungen, und die Route warnt, dass gewisse Passagen für Menschen mit Höhenangst nicht zu empfehlen sind. Lärchenrinnen und Stege verlaufen entlang der Linie, wo der Unterhaltsweg einst steil und ungesichert war. Die Wanderung bietet Blicke hinunter ins Rhonetal.",
+    "effort_label": "Mittel, etwas ausgesetzt",
+    "start": "Zentrum Crans-Montana",
+    "transit": {
+      "bus": "Postauto nach Crans-Montana"
+    }
+  },
+  {
+    "id": "crans_montana-plaine-morte-glacier",
+    "name": "Gletscherplateau Plaine Morte",
+    "description_extra": "Zweistündige Wanderung auf dem Gletscherplateau auf 2'927 m. Erreichbar per Seilbahn ab Crans-Montana (Standseilbahn und Gondelkette hoch zur Bergstation Plaine-Morte). Das Plateau selbst ist im Sommer meist flacher Schnee und flaches Eis, mit markierten Spuren für Wandernde. T2, sobald du oben bist. Der Plaine-Morte-Gletscher zieht sich schnell zurück und die Route ändert sich von Jahr zu Jahr.",
+    "effort_label": "Mittel, grosse Höhe",
+    "start": "Bergstation der Pointe de la Plaine Morte Seilbahn",
+    "transit": {
+      "train": "Sierre + Standseilbahn + mehrere Bahnen"
+    }
+  },
+  {
+    "id": "salanfe_lake-from-van-d-en-haut",
+    "name": "Ab Van d'En Haut",
+    "description_extra": "Steiler 2,5-stündiger Aufstieg vom Campingplatz Van d'En Haut (1'393 m) hinauf zum Stausee Lac de Salanfe auf 1'909 m. Etwa 516 m Aufstieg, T2. Beginnt am Ende der öffentlichen Strasse im Vallon de Van und steigt durch das obere Tal zur Staumauer. Die Auberge de Salanfe an der Staumauer bietet Verpflegung und hat Zimmer.",
+    "effort_label": "Mittel, steiler Zustieg",
+    "start": "Campingplatz Van d'En Haut",
+    "transit": {
+      "train": "Salvan (Mont-Blanc Express) + Anfahrt/Fussweg"
+    }
+  },
+  {
+    "id": "pointe_du_tsate-from-la-forclaz",
+    "name": "Ab La Forclaz über den Lac du Tsaté",
+    "description_extra": "Fünfstündiger Gipfeltag ab La Forclaz (Postauto ab Évolène) oberhalb des Val d'Hérens. Der Weg steigt durch die Weide zum Lac du Tsaté, dann über geröllbedeckte Hänge zum Gipfel auf 3'078 m. 1'200 m kumulierter Aufstieg, T3. Der obere Abschnitt hat loses Gelände; Trittsicherheit ist unerlässlich.",
+    "effort_label": "Langer Tag, spärlich markiert",
+    "start": "La Forclaz (Évolène)",
+    "transit": {
+      "bus": "Postauto nach La Forclaz"
+    }
+  },
+  {
+    "id": "gastlosen-gastlosen-circular",
+    "name": "Gastlosen Rundweg (Jaun → Chalet du Soldat → Jaun)",
+    "description_extra": "Runde um die Kalksteinkette der Gastlosen ab Jaun, Dorf. Die Route umfasst etwa 14,4 km in 6h 25 und rund 975 m kumulierten Aufstieg, steigt durch den Wols Ort hoch, führt unterhalb des Grats zum Chalet du Soldat und steigt dann zurück nach Jaun ab. T2. Das Chalet du Soldat auf 1'752 m ist im Sommer ein bewirtschaftetes Bergrestaurant.",
+    "effort_label": "Langer Tag",
+    "start": "Jaun, Dorf",
+    "transit": {
+      "bus": "Postauto nach Jaun, Dorf"
+    }
+  },
+  {
+    "id": "dent_de_broc-from-broc",
+    "name": "Broc → Dent de Broc → Gruyères (Überschreitung)",
+    "description_extra": "Von der Station Broc-Fabrique TPF steigt der Weg durch Weide und Wald zum Col des Combes (1'668 m), folgt dann dem Grat zum Gipfelkreuz auf 1'829 m. T4 im oberen Abschnitt. Einfache Überschreitung über den Gipfel und hinunter nach Gruyères: etwa 4 Stunden hoch und 2h 30 runter, mit 1'240 m Aufstieg und rund 1'200 m Abstieg. Trittsicherheit und Schwindelfreiheit nötig: keine Route für alle in der Gruppe, wenn jemand unsicher ist.",
+    "effort_label": "Ausgesetzter Gipfelgrat",
+    "start": "Broc (TPF-Station)",
+    "transit": {
+      "train": "Broc-Fabrique (TPF)"
+    }
+  },
+  {
+    "id": "moleson-plan-francey-summit",
+    "name": "Plan-Francey zum Gipfel und zurück",
+    "description_extra": "Zweistündige Tour hin und zurück ab der Mittelstation der Moléson-Standseilbahn bei Plan-Francey (1'517 m). Die Standseilbahn spart den ersten Abschnitt ab Moléson-sur-Gruyères, sodass etwa 600 m Aufstieg zum Gipfel auf 2'002 m bleiben. Der Weg steigt die Nordwestflanke auf einem markierten Pfad hoch, T2.",
+    "effort_label": "Mittel",
+    "start": "Plan-Francey Mittelstation",
+    "transit": {
+      "train": "Gruyères (TPF) + Bus + Standseilbahn nach Plan-Francey"
+    }
+  },
+  {
+    "id": "teysachaux-les-paccots-to-moleson",
+    "name": "Les Paccots → Téysachaux → Moléson",
+    "description_extra": "Gratüberschreitung von Les Paccots über den Téysachaux (1'909 m) zum Le Moléson (2'002 m). Der Aufstieg von Les Paccots verläuft auf grasigen Wiesenpfaden. Der letzte Abschnitt vor dem Gipfelkreuz des Téysachaux ist ziemlich ausgesetzt, und der Grat zwischen Téysachaux und Le Moléson ist steil, grasig und felsig, eingestuft als T3. Von Moléson steigst du mit der Plan-Francey-Standseilbahn ab oder weiter nach Bulle.",
+    "effort_label": "Ausgesetzter Grat",
+    "start": "Les Paccots",
+    "transit": {
+      "train": "Châtel-St-Denis (TPF) + Bus nach Les Paccots"
+    }
+  },
+  {
+    "id": "cap_au_moine-from-allieres",
+    "name": "Allières → Cape au Moine",
+    "description_extra": "Direkter Aufstieg von der Station Allières (MOB-Linie, 1'006 m) hinauf zum Cape au Moine auf 1'941 m. Etwa 4 km einfach und 940 m kumulierter Aufstieg, rund 2 h 15 Gehzeit. T4 mit einer kurzen ausgesetzten Kletterpassage am Gipfelgrat, schmal, bei Nässe rutschig, ungesichert. Rückweg über denselben Weg.",
+    "effort_label": "Mittel, kurz ausgesetzt",
+    "start": "Allières",
+    "transit": {
+      "train": "Allières (MOB)"
+    }
+  },
+  {
+    "id": "dent_de_jaman-route-87",
+    "name": "Direkter Aufstieg ab der Station Jaman",
+    "description_extra": "Nimm den MOB-Zug ab Montreux oder Les Avants zur Station Jaman, dann ein kurzer Aufstieg zum Gipfel auf 1'875 m (rund 30 Minuten, etwa 140 m Aufstieg), T2. Längere Varianten starten ab Les Avants oder Col de Jaman. Der letzte Zustieg ist der steilste Teil des Tages.",
+    "effort_label": "Mittel",
+    "start": "Bahnhof Jaman",
+    "transit": {
+      "train": "Jaman"
+    }
+  },
+  {
+    "id": "creux_du_van-noiraigue-14-bends",
+    "name": "Sentier des 14 contours (ab Noiraigue)",
+    "description_extra": "Der Sentier des 14 contours, der Weg der vierzehn Kehren, ist der klassische Zustieg von der Station Noiraigue zum Felsamphitheater. Die erste Stunde ist stetiger Aufstieg im Wald, dann wird der Weg schmaler und steiler mit den vierzehn Kehren, die der Route ihren Namen geben. Etwa 725 m Höhenunterschied, gut markiert. Oben angekommen bei Le Soliat. Feste Schuhe nötig, Abschnitte können nach Regen schlammig sein.",
+    "effort_label": "Mittel, steiler Aufstieg",
+    "start": "Bahnhof Noiraigue",
+    "transit": {
+      "train": "Noiraigue (RER fribourgeois)"
+    }
+  },
+  {
+    "id": "lac_de_taney-route-50",
+    "description_extra": "Von Le Flon (Anfahrt oder Postauto) steigt der Weg durch den Wald und über den Col de Tanay zum See in etwa 1 Stunde, 374 m Aufstieg, T1. Kein Campieren am Seeufer (eidgenössischer Landschaftsschutz). Weiter 1,5 Stunden hoch zum Le Grammont für einen ganzen Tag.",
+    "effort_label": "Leicht",
+    "start": "Parkplatz du Flon",
+    "transit": {
+      "bus": "Le Flon, village"
+    }
+  },
+  {
+    "id": "grammont-route-154",
+    "description_extra": "Zustieg ab Miex oder Tannay oberhalb von Vouvry, Anfahrt zum Parkplatz Flon de Tanay auf 1'049 m, dann 4 bis 5 Stunden hoch über Lac de Tanay und Col des Crosses zum Gipfel auf 2'172 m. Etwa 12,6 km und 1'125 m Höhenunterschied, keine technischen Schwierigkeiten; T2-Bergweg mit einem ausgesetzten Abschnitt nahe dem Gipfel oberhalb des Passes, und einem letzten Aufstieg, der bei Nässe rutschig sein kann.",
+    "effort_label": "Mittel",
+    "start": "Parkplatz du Flon",
+    "transit": {
+      "bus": "Le Flon, village"
+    }
+  },
+  {
+    "id": "marchairuz-mollendruz-mont-tendre-marchairuz",
+    "name": "Col du Mollendruz → Mont Tendre → Col du Marchairuz",
+    "description_extra": "Klassische Jura-Gratwanderung. Etwa 4,5 Stunden vom Col du Mollendruz über den Mont Tendre auf 1'679 m, den höchsten Gipfel des Schweizer Jura, dann ein sanfter Abstieg zum Col du Marchairuz. Rund 500 m kumulierter Aufstieg, T2, meist leichtes Gratgehen. Die Route quert die Weiden und Bergchalets des Naturparks Jura vaudois, durchgehend mit Trockensteinmauern. Das Postauto bedient beide Pässe.",
+    "effort_label": "Langer, leichter Grat",
+    "start": "Col du Mollendruz",
+    "transit": {
+      "bus": "Postauto zum Col du Mollendruz"
+    }
+  },
+  {
+    "id": "geltenschuss-lauenensee-geltenhuette",
+    "name": "Lauenensee → Geltenhütte → Lauenensee",
+    "description_extra": "Sechsstündige Runde ab Lauenen über den Lauenensee und die Geltenhütte SAC. Der Bergweg folgt dem Wasser durch Wiesen und jungen Wald dem Louwibach entlang, steigt dann in Kehren eine Felsrampe hoch am Wasserfall Gälteschutz vorbei. Etwa 750 m kumulierter Aufstieg, T2. Die Hütte liegt auf 2'002 m. Die Abstiegsvariante über Chüetungel nutzt westseitige Hänge mit einer fixen Leiter an der ausgesetzten Stufe Gältetrittli.",
+    "effort_label": "Mittel, ausgesetzte Stufen",
+    "start": "Lauenensee",
+    "transit": {
+      "bus": "Postauto nach Lauenen + Fussweg zum See"
+    }
+  }
+]

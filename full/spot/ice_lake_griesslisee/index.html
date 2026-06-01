@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392628" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223454" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"ice_lake_griesslisee-kloental-via-chaeseren","name":"Klöntal → Chäseren → Glärnischhütte","start":"Plätz (head of Klöntalersee)","transit":{"bus":"Postbus from Glarus to Klöntal-Vorauen"},"duration_min":210,"gain_m":1140,"sac_grade":"T3","effort_label":"Moderate, steep","description_extra":"Climb from the head of Klöntalersee (Plätz, 852 m) via Käseren up to the Glärnischhütte at 1,990 m. SAC grades the route T3 and gives 3 h 30 for the ascent with about 1,140 m of gain. Postbus from Glarus to Klöntal-Vorauen reaches the trailhead. A waterfall and a chain-assisted step appear on the final approach. Griesslisee itself lies above the hut and requires further alpine experience.","visits":["ice_lake_griesslisee"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/glaernischhuette-sac-2147000116/mountain-hiking/from-kloental-via-chaeseren-406/"],"hut_ids":["glarnischhutte-sac"],"start_maps_url":"https://www.google.com/maps/place/?q=47.02526,8.94039&z=16","equipment_list":["Sturdy hiking shoes"],"huts":[{"id":"glarnischhutte-sac","name":"Glärnischhütte SAC","description":"SAC hut on the slope below the Glärnisch","open_raw":"June to October","cost_chf_raw":"From 80 CHF half-board (SAC members), 95 CHF non-members","website":"https://www.glhuette.ch/"}],"hut":{"id":"glarnischhutte-sac","name":"Glärnischhütte SAC","description":"SAC hut on the slope below the Glärnisch","open_raw":"June to October","cost_chf_raw":"From 80 CHF half-board (SAC members), 95 CHF non-members","website":"https://www.glhuette.ch/"},"quickest":false},{"id":"ice_lake_griesslisee-from-klausenpass","visits":["ice_lake_griesslisee"],"sac_grade":"T2","effort_label":"Easy","duration_min":135,"gain_m":200,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Klausenpass (Uri side)","transit":{"bus":"Flüelen to Klausenpass (postbus, summer only), or Linthal to Klausenpass via bus 408"},"description_extra":"Approach the Griesslisee (Clariden ice lake) from the high Klausen pass road rather than from Klöntalersee. From the Klausenpass parking the route follows the Clariden-Höhenweg west and north past the Klausenhotel onto the moraine above the Clariden glacier, ending at the small lake. There is no marked trail across the final glacier-foreland; the SAC notes the line through rock and old moraine. About 2 h 15 round trip and roughly 200 m of cumulative gain on rocky terrain.","sources":["https://thephotohikes.com/the-klausenpass-griesslisee-hike/","https://swissfamilyfun.com/klausen-pass-clariden-hohenweg-hike/","https://switzerlandbylocals.com/en/lake-clariden-the-secret-glacial-lake-at-the-klausen-pass/"],"quickest_for":["ice_lake_griesslisee"],"start_maps_url":"https://www.google.com/maps/place/?q=46.86855,8.85589&z=16","distance_km":3.75,"quickest":true}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

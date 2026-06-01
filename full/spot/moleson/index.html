@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392622" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223448" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -237,6 +237,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"moleson-drive-up","visits":["moleson"],"name":"Cable car to Moléson summit","start":"Moléson-Village (gondola valley station)","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"bus":"Bulle + TPF bus 260 to Moléson-Village","cable_car":"Moléson-Village to Plan-Francey gondola, then Moléson summit funicular"},"description_extra":"From Moléson-Village, take the gondola to Plan-Francey then the Vol-au-Vent summit funicular. The terrace gives you the panorama; walk 5 min along the ridge to escape the café crowd. Lifts run roughly early April to early November and during the ski season.","sources":["https://www.moleson.ch/en/","https://www.moleson.ch/en/acces/"],"quickest_for":["moleson"],"start_maps_url":"https://maps.app.goo.gl/ggVDEAZvzKD5aw6ZA","cable_car_ids":["moleson-funiculaire"],"cable_cars":[{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","website":"https://www.moleson.ch/en/"}],"cable_car":{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","website":"https://www.moleson.ch/en/"},"quickest":true},{"id":"moleson-plan-francey-summit","name":"Plan-Francey to summit and back","start":"Plan-Francey mid-station","transit":{"train":"Gruyères (TPF) + bus + funicular to Plan-Francey"},"duration_min":120,"gain_m":600,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Two-hour up-and-back from the mid-station of the Moléson funicular at Plan-Francey (1,517 m). The funicular saves the first stretch from Moléson-sur-Gruyères, leaving about 600 m of gain to the summit at 2,002 m. Trail climbs the north-west flank on a marked path, T2.","visits":["moleson"],"sources":["https://www.myswitzerland.com/en-us/experiences/moleson-a-popular-destination-in-the-fribourg-pre-alps/"],"cable_car_ids":["moleson-funiculaire"],"start_maps_url":"https://www.google.com/maps/place/?q=46.55582,7.02387&z=16","distance_km":4.3,"equipment_list":["Sturdy hiking shoes"],"cable_cars":[{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","website":"https://www.moleson.ch/en/"}],"cable_car":{"id":"moleson-funiculaire","name":"Funiculaire Moléson","operator":"Société des Téléphériques Moléson","description":"Moléson-Village to Plan Francey, then aerial cable car to the summit","open_raw":"Early April to early November","website":"https://www.moleson.ch/en/"},"quickest":false},{"id":"moleson-from-moleson-village","visits":["moleson"],"sac_grade":"T2","effort_label":"Demanding","duration_min":180,"gain_m":990,"equipment_list":["Sturdy hiking shoes"],"start":"Moléson-Village","transit":{"train":"Bulle","bus":"Bulle Bus 263 to Moléson-Village"},"description_extra":"Foot ascent from the village without using the funicular to Plan-Francey. The track climbs through forest and pasture toward Plan-Francey at 1,520 m, then heads up the south flank to the summit at 2,002 m. About 3 hours of ascent, 990 m of cumulative gain, T2 on the SAC scale. Descent on foot via Plan-Francey or by funicular.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/le-moleson-7794/mountain-hiking/","https://www.moleson.ch/en/rando/sentier-botanique/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.56681,7.03725&z=16","quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -278,8 +279,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -467,6 +473,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

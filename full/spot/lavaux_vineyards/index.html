@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392625" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223451" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -237,6 +237,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"lavaux_vineyards-drive-up","visits":["lavaux_vineyards"],"name":"Train or drive to a Lavaux village","start":"Cully, St-Saphorin or Chexbres-Village station","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"train":"Lausanne CFF + regional train (S6 / S7) to Cully, Epesses, Rivaz, St-Saphorin or Chexbres-Village"},"description_extra":"Park in any Lavaux village or take the regional train along the lakeside / Train des Vignes line. From the station the terrace paths between the vines are 2-5 min walk. The autumn vine colour peaks early to mid-October. Free public access.","sources":["https://www.sbb.ch/en"],"quickest_for":["lavaux_vineyards"],"start_maps_url":"https://www.google.com/maps/place/?q=46.4887,6.7267&z=16","quickest":true},{"id":"lavaux_vineyards-terrasses-de-lavaux","name":"Terrasses de Lavaux (St-Saphorin → Lutry)","start":"St-Saphorin train station","transit":{"train":"St-Saphorin (CFF/MOB)"},"duration_min":195,"distance_km":11,"sac_grade":"T1","effort_label":"Easy","description_extra":"Linear walk along the UNESCO Lavaux vineyard terraces from St-Saphorin to Lutry. About 11 km in three to four hours on mostly paved or stepped paths through the vines above Lake Geneva. T1 technically, though the cumulative steps add up: roughly 440 m of climb and 420 m of descent. The route passes through Rivaz, Epesses, Cully, and Villette, with wine cellars and pubs along the way. Trains link both ends; the Lavaux Express shortcut helps tired sections.","visits":["lavaux_vineyards"],"sources":["https://www.myswitzerland.com/en-ch/experiences/route/lavaux-vineyard-terraces-the-swiss-wine-route/","https://schweizmobil.ch/en/hiking-in-switzerland/route-113"],"start_maps_url":"https://www.google.com/maps/place/?q=46.47259,6.79702&z=16","gain_m":440,"descent_m":420,"quickest":false},{"id":"lavaux_vineyards-from-chexbres-via-dezaley","visits":["lavaux_vineyards"],"sac_grade":"T1","effort_label":"Easy","duration_min":185,"gain_m":230,"distance_km":10.8,"equipment_list":[],"start":"Chexbres-Village train station","transit":{"train":"Lausanne to Chexbres-Village (S-Bahn, change at Puidoux)"},"description_extra":"Walk the upper Lavaux through the Dézaley terraces rather than the lakeside St-Saphorin to Lutry line. From Chexbres-Village a 10.8 km loop drops through the Dézaley grand cru above Epesses, follows balcony paths with views down to Lake Geneva, and climbs back to Chexbres. About 3 h, 230 m of cumulative ascent and descent, T1. The upper section above Rivaz and Epesses sees fewer day-trippers than the lakeshore path. Trains link Chexbres-Village to Lausanne and Vevey.","sources":["https://www.komoot.com/guide/55943/hiking-around-saint-saphorin-lavaux","https://www.myswitzerland.com/en-us/experiences/route/lavaux-vineyard-terraces-the-swiss-wine-route/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.48106,6.77855&z=16","quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -278,8 +279,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -467,6 +473,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

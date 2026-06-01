@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392629" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223454" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"ruinaulta-versam-circular","name":"Versam circular through the gorge","start":"Versam station","transit":{"train":"Versam-Safien (RhB)"},"sac_grade":"T2","effort_label":"Moderate","description_extra":"Circular hike on the rim of the Rhine gorge from Versam-Safien station. The route winds mostly through deciduous woodland with viewing platforms over the white cliffs and the milky-green Rhine. T2.","visits":["ruinaulta"],"sources":["https://www.2coinstravel.ch/wanderung-ruinaulta-rheinschlucht-caumasee/","https://trin-verkehrsverein.ch/wanderwege-in-der-rheinschlucht/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.80738,9.3103&z=16","equipment_list":["Sturdy hiking shoes"],"quickest":false},{"id":"ruinaulta-flims-out-and-back","name":"From Flims Waldhaus","start":"Flims Waldhaus","transit":{"bus":"Postbus to Flims Waldhaus"},"duration_min":60,"sac_grade":"T1","effort_label":"Easy","description_extra":"About one hour one-way from Flims Waldhaus down to the Rhine gorge, two hours round trip. Trail descends through forest past Caumasee to Conn and the Il Spir viewing platform, then climbs back. Mostly easy, T1, family-friendly.","visits":["ruinaulta"],"sources":["https://www.myswitzerland.com/en-us/experiences/ruinaulta-switzerlands-grand-canyon/"],"quickest_for":["ruinaulta"],"start_maps_url":"https://www.google.com/maps/place/?q=46.82572,9.2888&z=16","distance_km":3.7,"quickest":true}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

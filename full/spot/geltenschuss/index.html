@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392625" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223450" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"geltenschuss-lauenensee-geltenhuette","name":"Lauenensee → Geltenhütte → Lauenensee","start":"Lauenensee","transit":{"bus":"Postbus to Lauenen + walk to lake"},"duration_min":360,"gain_m":1100,"sac_grade":"T2","effort_label":"Moderate, exposed steps","description_extra":"Six-hour loop from Lauenen via Lauenensee and the Geltenhütte SAC. The mountain path traces the water's edge through meadows and young forest along the Louwibach, then climbs zigzags up a rock ramp past the Gälteschutz waterfall. About 750 m of cumulative gain, T2. The hut sits at 2,002 m. The variant descent via Chüetungel uses west-facing slopes with a fixed ladder at the exposed Gältetrittli step.","visits":["geltenschuss"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/geltenhuette-sac-2147000113/mountain-hiking/from-lauenen-louwenesee-geltenschuss-418/"],"hut_ids":["geltenhutte-sac"],"start_maps_url":"https://www.google.com/maps/place/?q=46.395,7.33222&z=16","distance_km":16.5,"descent_m":1100,"equipment_list":["Sturdy hiking shoes"],"huts":[{"id":"geltenhutte-sac","name":"Geltenhütte SAC","description":"SAC hut at 2,002 m in the Gelten valley","open_raw":"Mid-June to mid-October","cost_chf_raw":"From 79 CHF half-board (SAC members), 92 CHF non-members","website":"https://www.gelten.ch/"}],"hut":{"id":"geltenhutte-sac","name":"Geltenhütte SAC","description":"SAC hut at 2,002 m in the Gelten valley","open_raw":"Mid-June to mid-October","cost_chf_raw":"From 79 CHF half-board (SAC members), 92 CHF non-members","website":"https://www.gelten.ch/"},"quickest":false},{"id":"geltenschuss-from-iffigenalp-via-wildhornhuette","visits":["geltenschuss"],"sac_grade":"T3","effort_label":"Demanding","duration_min":360,"gain_m":1100,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Iffigenalp, road end above Lenk","transit":{"train":"Lenk im Simmental","bus":"Lenk PostBus to Iffigenalp"},"description_extra":"Reverse approach from the Lenk side over the Wildhornhütte, viewing the Geltenschuss from above rather than from below. From Iffigenalp at 1,584 m, the path climbs past Iffigsee and old moraines to the Wildhornhütte at 2,303 m, then descends along the north flank of Niesehorn via Stieretungel and Tungelpass (the direct route via Stigle is permanently closed for rockfall) to Alp Chüetungel. A short ladder at the Gältetrittli rock step and an exposed horizontal traverse with wire ropes lead to the Geltentrittli, then on to the Geltenhütte at 2,002 m above the Geltenschuss. About 6 hours of walking, 1,100 m of ascent and 750 m of descent, T3.","sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/geltenhuette-sac-2147000113/mountain-hiking/","https://www.tourduwildhorn.ch/index.php/de/die-routen/etappe-2"],"hut_ids":["geltenhutte-sac"],"quickest_for":["geltenschuss"],"start_maps_url":"https://www.google.com/maps/place/?q=46.39983,7.44147&z=16","distance_km":14.4,"descent_m":750,"huts":[{"id":"geltenhutte-sac","name":"Geltenhütte SAC","description":"SAC hut at 2,002 m in the Gelten valley","open_raw":"Mid-June to mid-October","cost_chf_raw":"From 79 CHF half-board (SAC members), 92 CHF non-members","website":"https://www.gelten.ch/"}],"hut":{"id":"geltenhutte-sac","name":"Geltenhütte SAC","description":"SAC hut at 2,002 m in the Gelten valley","open_raw":"Mid-June to mid-October","cost_chf_raw":"From 79 CHF half-board (SAC members), 92 CHF non-members","website":"https://www.gelten.ch/"},"quickest":true}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

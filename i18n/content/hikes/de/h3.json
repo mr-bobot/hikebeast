@@ -1,0 +1,298 @@
+[
+  {
+    "id": "mer_de_glace-montenvers-train",
+    "name": "Zahnradbahn Montenvers + Spaziergang zur Eishöhle",
+    "description_extra": "Touristische Anfahrt mit der historischen Chemin de fer du Montenvers, der Zahnradbahn von Chamonix nach Montenvers auf 1'913 m. 5,1 km Strecke, 871 m Höhenunterschied, etwa 20 Minuten mit der Zahnradbahn (die 60 Min im Infokasten sind der Fussabschnitt nach der Bahn). Von der Bergstation bringt dich eine Gondel weiter hinunter zu einer künstlichen Eishöhle, die in den Gletscher geschnitten ist. Die Höhle wird jedes Jahr neu gebaut, weil das Mer de Glace stetig zurückgeht. Der Rundweg inklusive Höhle dauert etwa eine Stunde zusätzlich. Geöffnet von Mitte Mai bis Oktober.",
+    "effort_label": "Touristenspaziergang",
+    "start": "Bahnstation Chamonix Montenvers"
+  },
+  {
+    "id": "mer_de_glace-chamonix-on-foot",
+    "name": "Von Chamonix zu Fuss",
+    "description_extra": "Bewaldeter Aufstieg von Chamonix hinauf nach Montenvers oberhalb des Mer de Glace. Die Route taucht bei Planards in den Wald ein und bleibt fast die ganze Strecke unter Baumbedeckung. T2, anhaltender Aufstieg. Um die Knie zu schonen, nimm die Zahnradbahn Montenvers wieder hinunter oder geh weiter hinüber Richtung Plan de l'Aiguille und fahr mit der Seilbahn Aiguille du Midi hinunter. Quellenüberprüfung steht noch aus.",
+    "effort_label": "Mittel, bewaldeter Aufstieg",
+    "start": "Ortschaft Chamonix"
+  },
+  {
+    "id": "les_cheserys-tre-le-champ-to-lac-blanc",
+    "name": "Tré-le-Champ → Cheserys → Lac Blanc",
+    "description_extra": "Aufstieg von Tré-le-Champ (oberhalb Argentière) ins Naturschutzgebiet Aiguilles Rouges. Der Weg steigt durch den Wald, dann schnell über die Baumgrenze, führt über fest installierte Leitern und erreicht den Grand Balcon Sud. Weiter geht es an den Cheserys-Seen vorbei zum Refuge du Lac Blanc auf 2'352 m. T3, anhaltende Exposition im Leiterabschnitt, Schwindelfreiheit erforderlich. Abstieg per Seilbahn von La Flégère.",
+    "effort_label": "Steil, Leiterabschnitte",
+    "start": "Tré-le-Champ (Argentière)",
+    "transit": {
+      "train": "Argentière (Mont-Blanc Express) + kurzer Fussweg"
+    }
+  },
+  {
+    "id": "les_cheserys-flegere-shortcut",
+    "name": "Abkürzung mit der Seilbahn Flégère",
+    "description_extra": "Zweistündiger Aufstieg von der Bergstation der Seilbahn La Flégère hinauf zum Refuge du Lac Blanc und den Seen. Etwa 300 m Höhengewinn, durchgehend T2. Vermeidet den Leiterabschnitt auf der Anfahrt über Tré-le-Champ. Die Seilbahn Flégère fährt von Mitte Juni bis September von Les Praz.",
+    "effort_label": "Mittel",
+    "start": "Bergstation der Seilbahn La Flégère",
+    "transit": {
+      "train": "Les Praz de Chamonix + Seilbahn Flégère"
+    }
+  },
+  {
+    "id": "glacier_des_bossons-chairlift-to-chalet",
+    "name": "Sessellift zum Chalet du Glacier",
+    "description_extra": "Sessellift von Les Bossons (Buslinie 2 Chamonix) hinauf zum Chalet du Glacier des Bossons. Spart etwa 300 m bewaldeten Aufstieg. Das Chalet hat ein Restaurant mit Blick hinunter auf den Gletscher und einen Lehrpfad, der die Gletschermerkmale erklärt. In der Saison von 8:30 bis 18:30 geöffnet.",
+    "effort_label": "Mühelos (Sessellift)",
+    "start": "Les Bossons (Bushaltestelle)",
+    "transit": {
+      "bus": "Buslinie 2 Chamonix bis Haltestelle Glacier des Bossons"
+    }
+  },
+  {
+    "id": "glacier_des_bossons-chalet-to-la-jonction",
+    "name": "Chalet → Chalet des Pyramides → La Jonction",
+    "description_extra": "Aufstieg vom Chalet du Glacier des Bossons hinauf nach La Jonction, dem Punkt, an dem sich die Gletscher Bossons und Taconnaz teilen. Etwa vier Stunden, rund 800 m Höhengewinn. Die Route ist ein stetiger Zickzackaufstieg durch den Wald zu steilen Wiesen, mit felsigen Abschnitten sowie Seilen und Metallstufen nahe dem oberen Ende. T2. Zu steil und ausgesetzt, um bei Regen zu gehen.",
+    "effort_label": "Mittel, steiler Zickzack",
+    "start": "Chalet du Glacier des Bossons"
+  },
+  {
+    "id": "pic_de_jallouvre-from-petit-bornand",
+    "name": "Von Le Petit-Bornand-les-Glières",
+    "description_extra": "Gipfeltag von fünf bis sechs Stunden. Vom Parkplatz Chalet de Cenise (1'617 m) oberhalb von Le Petit-Bornand-les-Glières steigt der Weg durch Weiden und felsiges oberes Gelände zum Pic de Jallouvre auf 2'408 m. Etwa 900 m Höhengewinn, T3, mit luftigen Passagen am Rasoir-Pass und der Cravate-Querung im letzten Abschnitt. Oft als Teil einer längeren Bornes-Durchquerung zwischen Le Grand-Bornand und Le Petit-Bornand begangen.",
+    "effort_label": "Langer Tag",
+    "start": "Le Petit-Bornand-les-Glières (Dorfparkplatz)"
+  },
+  {
+    "id": "dent_doche-from-bernex",
+    "name": "Von Bernex über Fétiuère",
+    "description_extra": "Aufstieg von dreieinviertel Stunden vom Parkplatz Fétiuère oberhalb von Bernex (1'206 m) hinauf zum Refuge de la Dent d'Oche und weiter zum Gipfel auf 2'221 m. Etwa 940 m Höhengewinn. Kurze Felsabschnitte nahe der Hütte sind mit Ketten gesichert; das letzte Stück zum Gipfel quert ungesicherte Felspartien. T3. Die Hütte serviert Essen und hat Betten.",
+    "effort_label": "Mittel, kurze Kettenabschnitte",
+    "start": "Parkplatz Fétiuère (oberhalb Bernex)",
+    "transit": {
+      "bus": "Von Évian mit dem Auto bis Fétiuère"
+    }
+  },
+  {
+    "id": "brisen-route-via-haldigrat",
+    "description_extra": "Nimm die S-Bahn nach Dallenwil, fahr mit der kleinen Seilbahn hinauf nach Niederrickenbach und geh dann rund 30 Minuten bis zur Talstation des Sessellifts Haldigrat. Der Sessellift bringt dich auf den westlichen Haldigrat-Grat auf etwa 1'940 m, der einfachste Weg auf den Berg. Von dort ist es eine zweistündige Gratwanderung ostwärts zum Gipfel des Brisen auf 2'404 m, T3 mit ausgesetzten Abschnitten. Mit dem Sessellift-Zugang gewinnst du etwa 460 m. Steig denselben Weg ab oder geh weiter hinunter nach Niederrickenbach über das Brisenhaus, insgesamt rund 4,5 Stunden.",
+    "effort_label": "Schwer",
+    "start": "Niederrickenbach (Bergstation Seilbahn)",
+    "transit": {
+      "train": "Dallenwil (S-Bahn ab Luzern)",
+      "cable_car": "Seilbahn Niederrickenbach (Dallenwil bis Niederrickenbach), dann Sessellift Haldigrat"
+    }
+  },
+  {
+    "id": "engstlensee-route-lakeshore-loop",
+    "description_extra": "Der See liegt auf etwa 1'850 m beim Jochpass, erreichbar über die Strasse oder mit dem PostAuto 161 von Innertkirchen hinauf zum Hotel Engstlenalp. Vom Hotelparkplatz führt ein Kiesweg in rund fünf Minuten hinunter ans Ufer. Die Uferrunde misst etwa 1,3 km auf der Westseite, das Ostufer ist schmaler und felsiger. Insgesamt geht man etwa eine Stunde mit vielleicht 50 m kumuliertem Auf und Ab, im Grunde flach. Der Wasserstand kann sich über die Saison verändern, da der See zugleich als Stausee für Wasserkraft dient. Boote können an der Hotelrezeption gemietet werden. Kombiniere ihn mit einem Aufstieg zum Jochpass für einen grösseren Tag.",
+    "effort_label": "Leicht",
+    "start": "Hotel Engstlenalp, Ende der Mautstrasse",
+    "transit": {
+      "bus": "Engstlenalp (Endstation PostAuto 161, nur im Sommer)",
+      "train": "Innertkirchen (dann PostAuto 161)"
+    }
+  },
+  {
+    "id": "grappelensee-route-from-laui",
+    "description_extra": "Fahr mit dem Auto oder Taxi von Unterwasser hinauf zum Parkplatz Laui, dem nächstgelegenen Punkt, den du mit dem Auto am See erreichst. Von dort sind es rund 3,25 km und 250 m Aufstieg auf einem klaren Weg durch Weiden und Waldstücke, etwa 50 Minuten pro Weg. Der See liegt auf 1'307 m. Für die lange Variante startest du am Parkplatz der Seilbahn Iltios in Unterwasser und machst die ganze Runde über die Thurwasserfälle und Chüeboden, rund 12 km und 525 m Aufstieg.",
+    "effort_label": "Leicht",
+    "start": "Parkplatz Laui, oberhalb Unterwasser",
+    "transit": {
+      "train": "Unterwasser (SOB-Linie ab Wattwil), dann ~20 Min Fahrt oder Taxi hinauf nach Laui"
+    }
+  },
+  {
+    "id": "ponte_tibetano-route-from-mornera",
+    "description_extra": "Nimm die Buslinie 2 von Bellinzona zur Haltestelle Monte Carasso, Funivia, und fahr dann mit der Seilbahn Monte Carasso–Curzútt–Mornera hinauf auf etwa 1'400 m. Von Mornera führt der Weg durch Kastanienwälder hinunter zur Brücke in rund 45 bis 60 Minuten; die Brücke ist auch etwa 45 bis 60 Minuten von Curzútt entfernt. Geh über die Mittelstation Curzútt zurück, statt wieder nach Mornera aufzusteigen. Autos erreichen die Brücke nicht; der Zugang erfolgt per Seilbahn oder mit einer 1 Std 30 Wanderung von Monte Carasso oder Sementina.",
+    "effort_label": "Mittel",
+    "start": "Bergstation Seilbahn Mornera",
+    "transit": {
+      "bus": "Bellinzona, Linie 2 bis Monte Carasso, Haltestelle Funivia",
+      "train": "Bellinzona (dann Bus 2)",
+      "cable_car": "Seilbahn Monte Carasso–Curzútt–Mornera, 8er-Kabine alle 15 Minuten"
+    }
+  },
+  {
+    "id": "zinal_glacier-route-petit-mountet",
+    "description_extra": "Park am Südende von Zinal, wo die Strasse beim Fluss endet, und folge dann den Schildern zur Cabane du Petit Mountet. Der Weg ist eine breite Kiespiste entlang der Westseite der Navisence, durch Lärchenwald und Weiden ansteigend. Rund 5 km und 500 m Aufstieg pro Weg, etwa 2 Stunden hinauf und 90 Minuten hinunter, insgesamt 3,5 Stunden hin und zurück. Die Hütte auf 2'142 m liegt auf einer alten Seitenmoräne mit Blick hinauf zur Gletscherzunge von Zinal. Durchgehend T2, keine Exposition. Auf der oberen Piste kann bis Anfang Juli Schnee liegen.",
+    "effort_label": "Mittel",
+    "start": "Dorf Zinal, Parkplatz am Südende nahe dem Fluss Navisence",
+    "transit": {
+      "bus": "Zinal, Poste (PostAuto 452 ab Sierre über Vissoie)",
+      "train": "Sierre / Siders (dann PostAuto)"
+    }
+  },
+  {
+    "id": "ascher-from-schwende-on-foot",
+    "description_extra": "Erreiche das Äscher zu Fuss von Schwende aus, statt die Seilbahn Wasserauen zu nehmen. Der markierte Weg führt durch Triebern und Alp Bommen hinauf zum Berggasthaus Äscher auf 1'455 m und zu den Wildkirchli-Höhlen und endet auf dem Ebenalp-Plateau. Etwa 4,35 km, 2 Std 30, 823 m Höhengewinn, T2. Von Ebenalp fährt die Seilbahn wieder hinunter nach Wasserauen.",
+    "effort_label": "Mittel",
+    "start": "Bahnstation Schwende (Appenzell)",
+    "transit": {
+      "train": "Appenzell bis Schwende (Appenzeller Bahnen Linie nach Wasserauen, eine Station früher aussteigen)"
+    }
+  },
+  {
+    "id": "barrhorn-from-st-niklaus-via-topalihuette",
+    "description_extra": "Anfahrt von der Mattertal-Seite, dem gegenüberliegenden Tal zur Route über die Turtmannhütte. Tag eins steigt von St. Niklaus durch Schwiedernen und bewaldete Kehren zur Topalihütte auf 2'674 m: laut offiziellem SAC-Routenportal 1'600 m Höhengewinn, 4 bis 5 Stunden, mit T2 bewertet. Tag zwei quert den Schölligletscher (im normalen Zustand kurz und spaltenarm) und einen kurzen Leiter-und-Seil-Abschnitt am Schöllijoch, bevor er zu den Gipfeln Inneres und Üssers Barrhorn quert und zur Turtmannhütte absteigt: der SAC dokumentiert diese Querung von Tag zwei mit 1'150 m weiterem Aufstieg in 3 Std 30 und 2'000 m Abstieg in 4 Std 15, T5 oberhalb der Hütte. Kombinierte Wanderung: etwa 2'750 m kumulierter Höhengewinn über die zwei Tage, 12 bis 13 Stunden Gehzeit, rund 18 km, gesamthaft T5. Keine Tagestour.",
+    "effort_label": "Experte",
+    "start": "Bahnstation St. Niklaus",
+    "transit": {
+      "train": "Visp bis St. Niklaus (Matterhorn Gotthard Bahn)"
+    }
+  },
+  {
+    "id": "cap_au_moine-from-les-avants-via-col-de-jaman",
+    "description_extra": "Anfahrt von der Genfersee-Seite statt von Allières. Von Les Avants steigt der Weg zum Col de Jaman, quert dann nordwärts entlang des Verraux-Grats zum Col de Pierra Perchia und weiter zum felsigen Gipfelgrat auf 1'941 m. Etwa 14 km und 1'090 m Aufstieg, sechs Stunden, mit T4 bewertet, mit einer kurzen ausgesetzten Kletterpassage über steilem Gras. Der Gipfelgrat zwischen Pierra Perchia und Cape au Moine ist die Schlüsselstelle: schmal, bei Nässe rutschig, ungesichert. Rückweg über Col de Soladier und Molard als Runde.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Bahnstation Les Avants",
+    "transit": {
+      "train": "Montreux bis Les Avants (MOB-Linie)"
+    }
+  },
+  {
+    "id": "creux_du_van-from-le-soliat",
+    "description_extra": "Anfahrt vom südlichen Felsrand oberhalb von Saint-Aubin und Couvet statt von Noiraigue unten. Die asphaltierte Strasse steigt zum Bauernrestaurant Ferme du Soliat auf 1'382 m, wenige Minuten vom Rand des Talkessels entfernt. Von dort folgt eine 4,5 km lange Runde der Trockenmauer entlang der 160 m hohen Felskante. Etwa 1 Std 25, nur 140 m kumulierter Höhengewinn, T1. Geeignet für Besucher, die den steilen Aufstieg von Noiraigue nicht schaffen.",
+    "effort_label": "Leicht",
+    "start": "Ferme du Soliat",
+    "transit": {
+      "car": "Ausfahrt St-Aubin-Sauges A5, dann über Montalchez und Provence zur Strasse zur Ferme du Soliat"
+    }
+  },
+  {
+    "id": "dent_de_lys-from-les-sciernes-dalbeuve",
+    "description_extra": "Anfahrt von der Intyamon-Seite (Osten) des Grats statt von Châtel-St-Denis / Les Paccots. Der Weg steigt vom Dorf an Prés d'Albeuve und der Alp Teraula d'Avau vorbei hinauf zum Col de Lys auf 1'779 m. Vom Pass führt der Südwestgrat über Lys Derrey zu einer steilen Schrofenstufe, wo etwa 50 m kettengesicherter Abstieg und Wiederaufstieg den Zugang zum ausgesetzten Schlussgrat und zum Gipfelkreuz auf 2'013 m ermöglichen. Der SAC bewertet die Route mit T4 und etwa 1'130 m Aufstieg in 4 Std 15.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Bahnstation Les Sciernes-d'Albeuve",
+    "transit": {
+      "train": "Bulle bis Montbovon, Umstieg auf die MOB-Linie, dann nach Les Sciernes-d'Albeuve"
+    }
+  },
+  {
+    "id": "engstligen_falls-from-above-via-cable-car",
+    "description_extra": "Betrachte die Fälle vom oberen Rand des Plateaus statt von unten. Von der Bergstation der Seilbahn führt ein markierter Rundweg an die Kante der Fälle und kehrt dann über Weiden zurück. Etwa 3 km, 1 Std 10, 256 m kumulierter Höhengewinn, vom Seilbahnbetreiber als mittel bewertet. Von der Bergstation ist auch der obere Wasserfall sichtbar, ohne den rollstuhlgängigen Teil des Plateaus zu verlassen. Die Wege Engstligenfälle II/III direkt durch die Felswand sind wegen Steinschlag saisonal gesperrt, daher ist die obere Plateaurunde die Alternative, wenn der untere Weg geschlossen ist.",
+    "effort_label": "Leicht",
+    "start": "Bergstation Engstligenalp",
+    "transit": {
+      "bus": "Postauto Adelboden bis Unter dem Birg"
+    }
+  },
+  {
+    "id": "gastlosen-from-musersbergli",
+    "description_extra": "Umrunde die Kette von der Bergstation des Sessellifts Jaun aus, statt bei Jaun, Dorf zu starten. Die SchweizMobil-Route 262 (Gastlosen Tour) verlässt Musersbergli auf 1'479 m, quert die Felswände und erreicht ihren höchsten Punkt bei Wolfsort auf 1'921 m, bevor sie durch Weiden zurück zum Start absteigt. 12 km, 5 Std, 696 m Höhengewinn und derselbe Verlust, als mittelschwer bewertet. Die Seilbahn spart den 700 m Aufstieg vom Talboden. Das Chalet du Soldat auf der Südseite ist die übliche Verpflegungsstelle.",
+    "effort_label": "Mittel",
+    "start": "Bergstation Musersbergli (Sessellift Jaun)",
+    "transit": {
+      "bus": "Postauto Bulle oder Boltigen bis Jaun",
+      "cable_car": "Sessellift Jaun bis Musersbergli"
+    }
+  },
+  {
+    "id": "grammont-from-novel-via-col-des-crosses",
+    "description_extra": "Anfahrt von der französischen Seite und dem Col des Crosses statt vom Parkplatz Vouvry / Le Flon. Die Route steigt vom Dorf Novel (etwa 960 m) an L'Au de Morge und dem Col de la Croix vorbei, dann nordwärts entlang der Verraux-Flanke zum Col des Crosses auf 1'991 m, am Südostgrat des Grammont. Der SAC bewertet die Route über den Südostgrat mit T4 und 1'200 m Höhengewinn in 2 Std 45 bis 3 Std vom Passbereich aus.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Novel (Frankreich, nahe St-Gingolph)",
+    "transit": {
+      "car": "Von St-Gingolph oder Bouveret über Novel"
+    }
+  },
+  {
+    "id": "ice_lake_griesslisee-from-klausenpass",
+    "description_extra": "Erreiche den Griesslisee (Clariden-Eissee) von der hohen Klausenpassstrasse aus statt vom Klöntalersee. Vom Parkplatz Klausenpass folgt die Route dem Clariden-Höhenweg west- und nordwärts am Klausenhotel vorbei auf die Moräne oberhalb des Claridengletschers und endet am kleinen See. Über das letzte Gletschervorfeld gibt es keinen markierten Weg; der SAC beschreibt die Linie durch Fels und alte Moräne. Etwa 2 Std 15 hin und zurück und rund 200 m kumulierter Höhengewinn in felsigem Gelände.",
+    "effort_label": "Leicht",
+    "start": "Klausenpass (Uri-Seite)",
+    "transit": {
+      "bus": "Flüelen bis Klausenpass (Postauto, nur im Sommer), oder Linthal bis Klausenpass mit Bus 408"
+    }
+  },
+  {
+    "id": "joriseen-from-klosters-via-berghaus-vereina",
+    "description_extra": "Erreiche die Jöriseen von der Seite Klosters / Prättigau statt von der Flüelapassstrasse. Vom Berghaus Vereina auf 1'943 m steigt der Weg das Jörital hinauf zur Winterlücke auf 2'785 m oder zur Jöriflüelafurgga auf 2'725 m und fällt dann ins Becken der Seen auf rund 2'500 m ab. 12,2 km, 4 Std 45, 805 m Höhengewinn und 1'076 m Abstieg, Bergweg T2 bis T3. Das Berghaus Vereina erreichst du von Klosters mit einer 12,6 km, 3 Std 30 langen Wanderung das Vereinatal hinauf oder mit dem Hüttenshuttle ab Klosters Platz.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Berghaus Vereina (Klosters-Seite)",
+    "transit": {
+      "train": "Klosters Platz, dann Shuttlebus Klosters-Vereina (Reservation per Telefon)"
+    }
+  },
+  {
+    "id": "la_fouly-tmb-champex-to-la-fouly",
+    "description_extra": "Erreiche La Fouly von der Champex-Seite über das Schweizer Val Ferret, die Gegenrichtung zur üblichen TMB-Etappe, die über den Grand Col Ferret aus Italien kommt. Etappe 7 des Tour du Mont Blanc steigt von Champex-Lac durch die Dörfer Issert und Praz-de-Fort dem Talboden entlang ab und steigt dann sanft das Val Ferret hinauf nach La Fouly. Etwa 15 km, 5 Std 30, 420 m Aufstieg und 565 m Abstieg. Meist Wald- und Wiesenweg durch traditionelle Walliser Weiler mit öffentlichen Brunnen für Wasser. Durchgehend T2, die kürzeste und einfachste Etappe des TMB.",
+    "effort_label": "Mittel",
+    "start": "Champex-Lac",
+    "transit": {
+      "train": "Martigny bis Orsières",
+      "bus": "Postauto Orsières bis Champex-Lac"
+    }
+  },
+  {
+    "id": "lavaux_vineyards-from-chexbres-via-dezaley",
+    "description_extra": "Wandere durch das obere Lavaux über die Terrassen des Dézaley statt die Uferlinie von St-Saphorin nach Lutry. Von Chexbres-Village fällt eine 10,8 km lange Runde durch den Grand Cru Dézaley oberhalb von Epesses ab, folgt Balkonwegen mit Blick hinunter auf den Genfersee und steigt wieder nach Chexbres auf. Etwa 3 Std, 230 m kumulierter Aufstieg und Abstieg, T1. Der obere Abschnitt über Rivaz und Epesses sieht weniger Tagesausflügler als der Uferweg. Züge verbinden Chexbres-Village mit Lausanne und Vevey.",
+    "effort_label": "Leicht",
+    "start": "Bahnstation Chexbres-Village",
+    "transit": {
+      "train": "Lausanne bis Chexbres-Village (S-Bahn, Umstieg in Puidoux)"
+    }
+  },
+  {
+    "id": "pic_de_jallouvre-from-col-de-la-colombiere",
+    "description_extra": "Anfahrt von der Seite Le Reposoir, dem gegenüberliegenden Tal zu Le Petit-Bornand. Die Runde steigt vom Col de la Colombière die Südflanke hinauf zum Col du Rasoir, einer schmalen Gratpassage, und quert dann unter der Felswand der Cravate zum Gipfel auf 2'408 m. Der Abstieg geht nordwärts am Col de Sosay vorbei zur Hütte Lac de Lessy und um den See, bevor es zurück zum Pass geht. Etwa 10,4 km, 1'200 m kumulierter Höhengewinn, 5 Std 30. Die Cravate-Passage setzt Wandernde Steinschlag aus und muss frei von Spätschnee sein, bevor der Gipfelgrat sicher ist.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Col de la Colombière (Frankreich)",
+    "transit": {
+      "car": "Cluses bis Le Grand-Bornand über die Strasse D4 zum Col de la Colombière (im Sommer offen)"
+    }
+  },
+  {
+    "id": "ponte_tibetano-from-sementina-on-foot",
+    "description_extra": "Erreiche die Brücke vom Tal aus zu Fuss statt von der Seilbahn Mornera. Von Sementina steigt ein steiler Bergweg durch Kastanienwälder und an der Kapelle San Defendente vorbei und gewinnt etwa 754 m, um das Deck der Brücke auf 696 m Höhe zu erreichen, 130 m über der Schlucht aufgehängt. Etwa 2,5 km Aufstieg auf der direkten Route, zwei bis drei Stunden pro Weg. Von der Brücke steigst du durch Curzútt ins Tal von Monte Carasso ab, um die Runde zu schliessen, oder gehst weiter hinunter nach Sementina. Die Route ist dem Regen ausgesetzt und kann unmittelbar nach Stürmen unsicher sein.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Dorf Sementina (Talboden)",
+    "transit": {
+      "bus": "Bellinzona bis Sementina (Lokalbus), oder Zug bis Bellinzona, dann zu Fuss"
+    }
+  },
+  {
+    "id": "rosenlaui_public_waterfall-from-grindelwald-via-grosse-scheidegg",
+    "description_extra": "Erreiche Rosenlaui von der Grindelwald-Seite über den Pass Grosse Scheidegg statt von der Meiringen-Strasse. ViaBerna Etappe 16 verlässt die Bergstation der Seilbahn First, folgt einem Balkonweg unter Schreckhorn und Wetterhorn zur Grosse Scheidegg auf 1'962 m und steigt dann durch Alp Alpiglen und Schwarzwaldalp zum Hotel Rosenlaui und zum öffentlichen Wasserfall-Aussichtspunkt auf 1'328 m ab. Etwa 12,5 km, 3 Std 30, wobei die Seilbahn den Aufstieg zu First spart. Das Postauto fährt von Rosenlaui weiter hinunter nach Meiringen.",
+    "effort_label": "Mittel",
+    "start": "Bergstation First (oberhalb Grindelwald)",
+    "transit": {
+      "train": "Interlaken Ost bis Grindelwald"
+    }
+  },
+  {
+    "id": "salanfe_lake-from-mex-via-col-du-jorat",
+    "description_extra": "Etappe 4 des Tour des Dents-du-Midi von Mex über den Col du Jorat auf 2'213 m hinunter zum Stausee Lac de Salanfe auf 1'909 m. Etwa 9,6 km, 4 Std 25, mit rund 1'100 m Aufstieg bis zum Pass, bevor es auf der anderen Seite 300 m absteigt. Der Weg quert Weiden entlang des Torrent de Saint-Barthélemy und wird dann über Geröll unterhalb des Passes schmal. Kein Wasser auf der Route, also genug mitnehmen. Die Auberge de Salanfe an der Staumauer serviert Essen und hat Zimmer.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Dorf Mex",
+    "transit": {
+      "bus": "St-Maurice bis Mex (Postauto)"
+    }
+  },
+  {
+    "id": "schrattenfluh-from-hirsegg",
+    "name": "Hirsegg → Schibegütsch → Sörenberg (Biosphären-Tour)",
+    "description_extra": "Erreiche den Grat von der Postauto-Haltestelle Hirsegg an der Nordflanke statt vom Dorf Sörenberg oder von Bumbach. Der Weg steigt durch die Alp Schlund auf das Karstplateau und über die Hauptgipfel und fällt dann an Rossweid vorbei zurück nach Sörenberg ab. 17,96 km, etwa 6 Std 37, 1'195 m kumulierter Höhengewinn auf einer Route, die das lokale Tourismusbüro als schwierig bewertet, T4 bis T5 auf den technischen Abschnitten des Grats. Das Plateau weist tiefe Karstlöcher abseits der markierten Linie auf, daher ist es bei Nebel oder Schnee wichtig, auf dem Weg zu bleiben.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Hirsegg (Bushaltestelle)",
+    "transit": {
+      "train": "Luzern bis Schüpfheim",
+      "bus": "Schüpfheim Bus 214 bis Sörenberg, Hirsegg"
+    }
+  },
+  {
+    "id": "spitzmeilenhutte-from-weisstannen",
+    "description_extra": "Anfahrt von Süden, das Weisstannental hinauf, statt von der Seilbahn Maschgenkamm einzusteigen. Die Obersiezsäss-Route folgt der Alpstrasse an Vorsiez vorbei und steigt dann zur Hütte auf 2'087 m. 15,6 km, 5 Std 30 bis 6 Std 30, etwa 1'300 m kumulierter Höhengewinn, T3. Dies ist Etappe 3 des Sardona-Welterbe-Wegs in umgekehrter Richtung und umgeht das Liftsystem Flumserberg vollständig. Die Madfurggl-Variante über den Oxni-Grat ist härter (T3+, 1'600 m Höhengewinn).",
+    "effort_label": "Anspruchsvoll",
+    "start": "Weisstannen",
+    "transit": {
+      "train": "Sargans bis Mels",
+      "bus": "Postauto Mels bis Weisstannen"
+    }
+  },
+  {
+    "id": "teysachaux-loop-from-plan-francey",
+    "description_extra": "Runde von der Mittelstation der Standseilbahn Moléson statt der linearen Gratwanderung von Les Paccots. Von Plan-Francey steigt die Route westwärts über Gros-Plané, Le Villard-Dessus und Tremetta zum Südwestgrat des Téysachaux, der in seinem letzten Abschnitt vor dem Gipfelkreuz auf 1'909 m felsig und ausgesetzt wird. Vom Gipfel folgst du dem Kamm ostwärts zum Le Moléson auf 2'002 m und kehrst mit der Seilbahn oder dem markierten Abstieg nach Plan-Francey zurück. Etwa 5 Std, rund 700 m kumulierter Höhengewinn, meist T3 mit einer ausgesetzten Gras-und-Fels-Schlüsselstelle am Gipfelgrat.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Mittelstation Plan-Francey",
+    "transit": {
+      "train": "Bulle bis Gruyères",
+      "bus": "Postauto Gruyères bis Moléson-sur-Gruyères",
+      "cable_car": "Standseilbahn Plan-Francey"
+    }
+  }
+]

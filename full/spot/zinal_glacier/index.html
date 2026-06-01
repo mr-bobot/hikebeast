@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392635" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223459" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"zinal_glacier-route-petit-mountet","sac_grade":"T2","effort_label":"Moderate","duration_min":120,"gain_m":500,"start":"Zinal village, south end parking near the Navisence river","transit":{"bus":"Zinal, Poste (PostAuto 452 from Sierre via Vissoie)","train":"Sierre / Siders (then PostAuto)"},"visits":["zinal_glacier"],"description_extra":"Park at the south end of Zinal where the road ends near the river, then follow signs for Cabane du Petit Mountet. The path is a wide gravel track along the west side of the Navisence, climbing through larch forest and pasture. Roughly 5 km and 500 m of climbing one way, about 2 hours up and 90 minutes down, total 3.5 hours round trip. The hut at 2,142 m sits on an old lateral moraine looking up at the Zinal glacier tongue. T2 throughout, no exposure. Snow can linger on the upper track into early July.","sources":["https://www.valais.ch/en/activities/natural-sites/glaciers/zinal-glacier","https://www.camptocamp.org/routes/53842/fr/cabane-du-petit-mountet-depuis-zinal"],"equipment_list":["Sturdy hiking shoes"],"start_maps_url":"https://maps.app.goo.gl/iFcJxr7tGeX8A7t89","distance_km":5,"quickest":false},{"id":"zinal_glacier-from-sorebois-cable-car","visits":["zinal_glacier"],"sac_grade":"T3","effort_label":"Demanding","duration_min":210,"gain_m":422,"distance_km":12.9,"equipment_list":["Sturdy hiking boots","Poles"],"start":"Sorebois top station","transit":{"bus":"Sierre to Zinal (postbus)","cable_car":"Sorebois cable car up from Zinal"},"description_extra":"High traverse from the top of the Sorebois cable car down to the Cabane du Petit Mountet and the Zinal glacier viewpoint, on the opposite side of the valley from the standard gravel-track approach. The path contours around the 2,500 m line for about 4 km with long views west across to the Couronne Imperiale, then descends across rockfall slopes and over a moraine to the hut at 2,142 m. 12.9 km in total, 422 m of cumulative gain and 1,167 m of descent, about 3 h 30. The traverse crosses several rockfall couloirs with chains placed for security on a few short steps.","sources":["https://www.petitmountet.ch/en/activities-and-places-of-interest/"],"quickest_for":["zinal_glacier"],"cable_car_ids":["zinal-sorebois-cable-car"],"start_maps_url":"https://www.google.com/maps/place/?q=46.14445,7.60369&z=16","descent_m":1167,"cable_cars":[{"id":"zinal-sorebois-cable-car","name":"Télécabine Zinal-Sorebois","operator":"Remontées Mécaniques Grimentz-Zinal SA","description":"Gondola from Zinal village up to Sorebois at ~2,440 m, gateway to high-alpine traverses in the Val d'Anniviers","open_raw":"Late June to mid-October, plus winter season","website":"https://www.telegrimentzzinal.ch/"}],"cable_car":{"id":"zinal-sorebois-cable-car","name":"Télécabine Zinal-Sorebois","operator":"Remontées Mécaniques Grimentz-Zinal SA","description":"Gondola from Zinal village up to Sorebois at ~2,440 m, gateway to high-alpine traverses in the Val d'Anniviers","open_raw":"Late June to mid-October, plus winter season","website":"https://www.telegrimentzzinal.ch/"},"quickest":true}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

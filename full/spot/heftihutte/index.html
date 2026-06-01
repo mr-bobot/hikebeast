@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392612" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223437" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"heftihutte-from-hirsegg","name":"From Hirsegg bus stop","start":"Hirsegg (bus stop)","transit":{"bus":"Postbus to Hirsegg"},"duration_min":150,"gain_m":830,"sac_grade":"T2","effort_label":"Moderate","description_extra":"Standard approach from the Hirsegg bus stop. Trail climbs via Kaiserschwand, Bodenhütten, Heftiboden to the hut at 1,904 m. About 2 h 30 and 830 m of gain, T2. The hut is open in summer with dinner and breakfast; partial emergency shelter the rest of the year. Bring cash.","visits":["heftihutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/"],"quickest_for":["heftihutte"],"hut_ids":["heftihuette"],"start_maps_url":"https://www.google.com/maps/place/?q=46.83878,8.01238&z=16","equipment_list":["Sturdy hiking shoes"],"huts":[{"id":"heftihuette","name":"Heftihütte","open_raw":"Year-round, self-service, key with hut warden","cost_chf_raw":"Self-service, contact SAC Emmental for rates","website":"https://www.sac-emmental.ch/huetten/heftihuette"}],"hut":{"id":"heftihuette","name":"Heftihütte","open_raw":"Year-round, self-service, key with hut warden","cost_chf_raw":"Self-service, contact SAC Emmental for rates","website":"https://www.sac-emmental.ch/huetten/heftihuette"},"quickest":true},{"id":"heftihutte-from-fluehli","name":"From Flühli LU","start":"Flühli","transit":{"bus":"Postbus to Flühli"},"duration_min":210,"sac_grade":"T3","effort_label":"Moderate","description_extra":"Longer approach via Flühli (bus from Schüpfheim). About 3 h 30 of mountain trail with views over the Entlebuch valley. SAC's portal grades the route from Flühli at T3, 3 h 30, and roughly 1,050 m of gain. The ridge section above is the scenic highlight with the Schrattenfluh across the valley. Hut sits at 1,904 m.","visits":["heftihutte"],"sources":["https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/heftihuette-2147000130/mountain-hiking/"],"start_maps_url":"https://www.google.com/maps/place/?q=46.883,8.017&z=16","distance_km":7,"gain_m":1050,"hut_ids":["heftihuette"],"equipment_list":["Sturdy hiking shoes"],"huts":[{"id":"heftihuette","name":"Heftihütte","open_raw":"Year-round, self-service, key with hut warden","cost_chf_raw":"Self-service, contact SAC Emmental for rates","website":"https://www.sac-emmental.ch/huetten/heftihuette"}],"hut":{"id":"heftihuette","name":"Heftihütte","open_raw":"Year-round, self-service, key with hut warden","cost_chf_raw":"Self-service, contact SAC Emmental for rates","website":"https://www.sac-emmental.ch/huetten/heftihuette"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

@@ -1,0 +1,214 @@
+[
+  {
+    "id": "engstlensee-drive-up",
+    "name": "Mit dem Auto oder Postauto nach Engstlenalp",
+    "description_extra": "Von Innertkirchen nimmst du die Gentalstrasse Richtung Sustenpass, dann die private Mautstrasse durchs Gental hoch nach Engstlenalp (CHF 8 bar am Schranken). Parkplatz am Strassenende neben dem Hotel Engstlenalp. 5 Min zu Fuss zum See. Mautstrasse etwa von Anfang Mai bis Mitte Oktober offen (schneeabhängig); Bus Alpin fährt saisonal im selben Zeitfenster mit wenigen Abfahrten pro Tag.",
+    "effort_label": "Auffahrt",
+    "start": "Parkplatz am Strassenende Engstlenalp (Hotel Engstlenalp)",
+    "transit": {
+      "bus": "Meiringen + Postauto bis Innertkirchen, dann Bus Alpin (früher PostAuto) Linie Engstlenalp bis Engstlenalp (Endstation). Wenige Abfahrten pro Tag, Fahrplan prüfen"
+    }
+  },
+  {
+    "id": "maloja_pass-drive-up",
+    "name": "Auffahrt zum Aussichtspunkt am Pass",
+    "description_extra": "Von St. Moritz folgst du der Strasse 27 südwestlich entlang der Engadiner Seen bis zur Passhöhe. Der Aussichtspunkt Belvedere liegt am Beginn der Kehren auf der Bergeller Seite. Parkplatz Maloja Orden gratis, etwa 20 Plätze, an Herbstwochenenden schnell voll. 5 Min zu Fuss zur Kante über den Serpentinen. Strasse ganzjährig offen.",
+    "effort_label": "Auffahrt",
+    "start": "Parkplatz Maloja Orden (Belvedere)",
+    "transit": {
+      "bus": "St. Moritz + Postauto 4 (Linie St. Moritz-Maloja-Chiavenna) bis Maloja Poschta"
+    }
+  },
+  {
+    "id": "julier_pass-drive-up",
+    "name": "Über den Julierpass fahren",
+    "description_extra": "Fahr zur Passhöhe des Julierpass (Hospiz, etwa 2'284 m) und parkier auf dem Passplatz. Fahr über den Pass auf der H3 zwischen Tiefencastel / Bivio auf der Surses-Seite und Silvaplana auf der Engadiner Seite. Mehrere kleine Buchten nahe der Passhöhe auf 2'284 m. Gratisparkplatz. Eine der wenigen hochalpinen Strassen der Schweiz, die im Winter offen bleibt; bei starkem Wetter können Schneeketten nötig sein.",
+    "effort_label": "Auffahrt",
+    "start": "Pass dal Guglia / Passhöhe Julierpass (Hospiz)",
+    "transit": {
+      "bus": "Postauto-Linie Julierpass (Chur - St. Moritz, via Tiefencastel / Bivio) fährt ganzjährig über den Pass; 5 mal täglich im Sommer (Jun-Okt), 2 mal täglich im Winter; hält beim Julier Hospiz auf der Passhöhe"
+    }
+  },
+  {
+    "id": "silsersee-drive-up",
+    "name": "Entlang der Engadiner Strasse fahren",
+    "description_extra": "Fahr entlang der Engadiner Strasse (H27) von St. Moritz oder über den Malojapass. Öffentliche Parkplätze bei Sils Maria, Sils Baselgia und Plaun da Lej, alle am Strassenrand gratis oder gebührenpflichtig. Uferweg ganzjährig offen; das Schiff über den See fährt von Ende Juni bis Ende September.",
+    "effort_label": "Auffahrt",
+    "start": "Seeparkplätze Sils Maria, Sils Baselgia oder Plaun da Lej",
+    "transit": {
+      "bus": "St. Moritz + Postauto 4 Richtung Maloja hält bei Sils Maria, Sils Baselgia, Plaun da Lej und Maloja Posta entlang des Seeufers",
+      "train": "St. Moritz (Albulalinie) + Postauto 4"
+    }
+  },
+  {
+    "id": "engadin_autumn-drive-up",
+    "name": "Durchs Engadiner Tal fahren",
+    "description_extra": "Fahr zwischen St. Moritz, Silvaplana, Sils-Maria und Maloja entlang der Engadiner Strasse für den Seegürtel und die Lärchenhänge. Die Strassen bleiben den Oktober über offen. Schönste Farben um die dritte Oktoberwoche; warmes Nachmittagslicht verstärkt das Gold. Mehrere Seeparkplätze, meist gratis.",
+    "effort_label": "Auffahrt",
+    "start": "Engadiner Strasse (H27) zwischen St. Moritz und Maloja",
+    "transit": {
+      "bus": "Postauto 4 deckt den Seegürtel von St. Moritz bis Maloja ab",
+      "train": "St. Moritz auf der Albulalinie; Pontresina und Celerina bedienen auch den Stazerwald"
+    }
+  },
+  {
+    "id": "mount_pilatus-cogwheel-from-alpnachstad",
+    "name": "Zahnradbahn ab Alpnachstad",
+    "description_extra": "Die steilste Zahnradbahn der Welt (48% maximale Steigung) klettert von Alpnachstad am Alpnachersee hoch zu Pilatus Kulm auf 2'132 m. Die 27-minütige Bergfahrt wurde 1889 eröffnet. Gebührenpflichtige Parkplätze in Alpnachstad; die Bahn fährt von Mitte Mai bis Mitte November (wetterabhängig). Die Zahnradbahn kommt an der Bergstation an; von dort führt der Balkonweg zum Tomlishorn (etwa 1,3 km) zum höchsten Punkt des Pilatus-Massivs.",
+    "effort_label": "Auffahrt",
+    "start": "Alpnachstad Pilatusbahn Talstation",
+    "transit": {
+      "train": "Alpnachstad (Zentralbahn ab Luzern)",
+      "bus": "Schiff über den Vierwaldstättersee von Luzern nach Alpnachstad"
+    }
+  },
+  {
+    "id": "mount_pilatus-cable-car-from-kriens",
+    "name": "Seilbahn ab Kriens",
+    "description_extra": "Zweistufige Luftfahrt ab Kriens: Panoramagondel via Krienseregg nach Fräkmüntegg (1'416 m), dann die Dragon Ride Luftseilbahn hoch zu Pilatus Kulm auf 2'132 m. Ganzjährig in Betrieb (kurze Wartungspausen). Gebührenpflichtiges Parkhaus an der Talstation Kriens.",
+    "effort_label": "Auffahrt",
+    "start": "Kriens Pilatusbahn Talstation",
+    "transit": {
+      "train": "Luzern + Bus 1 bis Kriens, Linde, dann kurzer Fussweg"
+    }
+  },
+  {
+    "id": "the_ice_cave-winter-approach",
+    "name": "Winterzustieg ab dem Dorf Zinal",
+    "description_extra": "Nur im Winter möglicher Zustieg über den Glacier de Zinal vom Parkplatz Plats de la Lée am Strassenende (etwa 1'675 m) zu den saisonalen Eishöhlen, die sich in der Gletscherzunge um 2'150 m bilden. Rund 11 km zu Fuss hin und zurück mit etwa 500 m kumuliertem Aufstieg, 4-5 Stunden total mit Schneeschuhen (etwa 4h 30 mit Pausen). Die Höhlen sind vergänglich und existieren nur etwa von Dezember bis März, und nur nach einer anhaltenden Kälteperiode. Sie brechen zusammen, sobald die Temperaturen steigen. Das Tourismusbüro des Val d'Anniviers ist deutlich: geh nicht allein, nie nach warmen Tagen oder Neuschnee, und der Zugang ohne Bergführer wird offiziell abgeraten wegen Spalten-, Lawinen- und Einsturzgefahr. Jedes Jahr sterben Menschen in alpinen Eishöhlen. Prüf das Lawinenbulletin (slf.ch), sag jemandem deinen Plan, kehr um, wenn sich etwas falsch anfühlt. Nimm für den eigentlichen Höhleneinstieg einen lokalen Bergführer. Eigenständige Besuche sind auf eigenes Risiko. Bewertet T4 / skitourenähnlich: keine technische Kletterei, aber die Folgen eines Fehlers sind tödlich.",
+    "effort_label": "Experte (nur Hochwinter)",
+    "start": "Parkplatz Plats de la Lée (Strassenende im Dorf Zinal)",
+    "transit": {
+      "bus": "Sierre (SBB) + Postauto 452 das Val d'Anniviers hoch bis Zinal, Endstation"
+    }
+  },
+  {
+    "id": "goms_bridge-from-fuergangen-station",
+    "name": "Kurzer flacher Spaziergang ab dem Bahnhof Fürgangen",
+    "description_extra": "Vom Bahnhof Fürgangen-Bellwald ist die Hängebrücke Fürgangen-Mühlebach (280 m lang, 92 m über der Rhone) zu Fuss knapp 10 Minuten entfernt über die Unterführung unter der Kantonsstrasse. Vom Dorfparkplatz Mühlebach auf der anderen Seite ist es ebenfalls ein kurzer flacher Spaziergang. Die Brücke ist 1,4 m breit, barrierefrei, ganzjährig offen. Durchgehend T1. Überquerung gratis.",
+    "effort_label": "Leicht",
+    "start": "Bahnhof Fürgangen-Bellwald (Matterhorn Gotthard Bahn)",
+    "transit": {
+      "train": "Brig + Matterhorn Gotthard Bahn bis Fürgangen-Bellwald (der Zug hält am Brückenzugang)"
+    }
+  },
+  {
+    "id": "goms_bridge-from-bellwald",
+    "name": "Vom Dorf Bellwald zur Brücke absteigen",
+    "description_extra": "Abstiegsvariante: fahr mit der Bellwaldbahn vom Bahnhof Fürgangen-Bellwald hoch ins Dorf Bellwald (1'560 m), dann zu Fuss durch den Wald hinunter zur Hängebrücke Fürgangen-Mühlebach auf 1'020 m. Etwa 4,5 km und 540 m Abstieg auf einem markierten Waldweg, rund 1h 30. T2 wegen des stetigen Gefälles. Überquer die Brücke, dann nimm den Zug ab Fürgangen zurück.",
+    "effort_label": "Mittel (Abstieg)",
+    "start": "Bellwald (Bergstation Bellwaldbahn)",
+    "transit": {
+      "cable_car": "Bellwaldbahn vom Bahnhof Fürgangen-Bellwald hoch ins Dorf Bellwald"
+    }
+  },
+  {
+    "id": "gorges_du_durnand-walkway-loop",
+    "name": "Eisenstege durch die Schlucht",
+    "description_extra": "Gebührenpflichtiger Rundweg über Stege durch eine enge Schlucht mit 14 Wasserfällen und 330 Stufen auf hängenden Holztreppen und Stegen, die in den Fels gebohrt sind. Etwa 200 m Höhengewinn auf dem Weg hoch, dann hinunter über einen Waldweg auf der anderen Seite. Rund 45-60 Min hin und zurück. Durchgehend T1, aber die Bretter werden vom Sprühwasser rutschig, gutes Schuhwerk zählt. Täglich offen vom 1. Mai bis 31. Oktober (bei gutem Wetter); prüf die offizielle Seite für aktuelle Öffnungszeiten und Eintrittspreise. Vom Bahnhof Bovernier ist der Eingang ein 20-minütiger Fussweg bergauf; vom Talparkplatz direkt am Eingang sind es nur 2 Minuten zum Ticketschalter.",
+    "effort_label": "Leicht (Eintritt kostenpflichtig)",
+    "start": "Eingang Gorges du Durnand, Les Valettes (Bovernier)",
+    "transit": {
+      "train": "Linie Martigny-Orsières (TMR/RegionAlps) bis Bahnhof Bovernier, dann 20 Min Fussweg bergauf nach Les Valettes"
+    }
+  },
+  {
+    "id": "ritzli_alp-from-jaun",
+    "name": "Das Euschelstal hoch ab Jaun",
+    "description_extra": "Wanderroute vom Dorf Jaun (etwa 1'020 m) das Euschelstal hoch zur Ritzli Alp auf 1'509 m. Rund 7,5 km und 500 m Aufstieg auf einem markierten T1-Weg, etwa 2h 45 bis 3 h hoch in gemütlichem Tempo. Der Weg verlässt Jaun am Dorfwasserfall und Friedhof vorbei, steigt durch Bergwiesen, folgt dann der Euschelsstrasse Richtung Euschelspass, bevor er das Alprestaurant auf seiner sonnigen Terrasse erreicht. Die Ritzli Alp ist von Mai bis Oktober täglich offen mit reduzierten Wochenend-Öffnungszeiten in der Nebensaison und liegt direkt unter dem Gastlosen-Grat. Die Wand leuchtet bei Sonnenuntergang auf und die Terrasse bleibt bis in die blaue Stunde warm. Steig denselben Weg ab (schneller, rund 1h 30) oder geh über den Pass weiter zum Schwarzsee auf dem Alpenpanoramaweg.",
+    "effort_label": "Leicht",
+    "start": "Jaun, Dorf (Postauto-Haltestelle im Dorf Jaun)",
+    "transit": {
+      "bus": "Bulle (SBB) + Postauto 260 Richtung Jaun, Dorf"
+    }
+  },
+  {
+    "id": "le_doubs-from-les-brenets",
+    "name": "Felsweg-Aufstieg ab dem Bahnhof Les Brenets",
+    "description_extra": "Einweg bergauf vom Bahnhof Les Brenets auf 820 m zum Aussichtspunkt Roches de Moron auf 1'076 m über dem Doubs-Canyon. Rund 4 bis 5 km auf dem markierten Wanderweg, etwa 250 m Aufstieg, 1 bis 1,5 Stunden hoch je nach Tempo, T2. Der Weg verlässt das Dorf Richtung Südwesten, quert den Abschnitt Sentier Pillichody oberhalb des Sees und endet beim Restaurant Les Roches de Moron mit Panorama über den Staudamm, den See und die Flussbiegung. Die veröffentlichten Quellen beschreiben ihn als eine Etappe der grösseren Runde Les Brenets - Saut du Doubs - Roches de Moron (~17 km, ~690 m Aufstieg, 5 h); du kannst auch die ganze Runde machen, wenn du den Tag hast. Weg ganzjährig offen; die Jura-Stimmung ist windiger und stimmungsvoller als die alpinen Spots, und bewölktes Wetter wie auch Sonnenuntergang passen beide dazu.",
+    "effort_label": "Mittel",
+    "start": "Bahnhof Les Brenets (TransN Regionallinie ab Le Locle)",
+    "transit": {
+      "train": "Le Locle (SBB) + TransN Regionallinie bis Les Brenets"
+    }
+  },
+  {
+    "id": "tannhorn-from-rothorn-segment",
+    "name": "Mit der Zahnradbahn aufs Rothorn, Grat hin und zurück zum Tannhorn",
+    "description_extra": "Kürzeste Variante, um das Tannhorn zu erreichen. Zahnradbahn hoch von Brienz zur Bergstation Rothorn Kulm (2'244 m), dann westlich entlang des Brienzergrats zum Tannhorn auf 2'221 m. Der SAC bewertet den ersten Teil Rothorn-Tannhorn der Brienzergrat-Überschreitung mit T5 minus und gibt 2 h 30 bis 3 h 30 Gehzeit für die Aufstiegsrichtung an (etwa 600 m kumulierter Aufstieg). Über ausgesetzte Grasgrate gequert, was der SAC die anspruchsvollste Passage des gesamten Brienzergrats nennt. Die kürzeste Tagesausflug-Variante ist, denselben Weg zurück zum Rothorn Kulm zu gehen und mit der Zahnradbahn hinunterzufahren, statt die volle T5-Überschreitung hinunter nach Planalp fortzusetzen. Trittsicherheit und Schwindelfreiheit nötig. Bei nassem oder windigem Wetter auslassen.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Bergstation Brienzer Rothorn Zahnradbahn (Rothorn Kulm)",
+    "transit": {
+      "train": "Brienz BLS",
+      "cable_car": "Brienz Rothorn Bahn (Zahnradbahn, Anfang Juni bis Ende Oktober)"
+    }
+  },
+  {
+    "id": "schrattenfluh-from-marbachegg-cable-car",
+    "name": "Seilbahn zur Marbachegg, Querung Richtung Schrattenfluh-Grat",
+    "description_extra": "Vom Dorf Marbach nimmst du die Gondelbahn Marbachegg (Ende Mai bis Mitte Oktober) hoch zur Panorama-Bergstation auf 1'484 m. Von dort führt ein Rundweg ostwärts via Alp Imbrig (1'460 m) entlang des Fusses der Schrattenfluh, mit den Karstfelsen von Schibegütsch und Hängst darüber. Die Route bleibt unter dem Grat und erreicht ihren höchsten Punkt um 1'520 m. Etwa 14,6 km und 610 m kumulierter Aufstieg, 4 bis 5 Stunden, T2 auf gut markierten Wegen mit ein paar steileren Kalksteinabschnitten. Die Hochebene hat tiefe Löcher abseits des Wegs, also zählt die Sicht. Starke Wanderer steigen von der Gondel-Bergstation den steilen markierten Weg weiter hoch zum Gipfel Hängst auf 2'092 m (höchster Punkt der Schrattenfluh), was 700 m Aufstieg und je weitere 2 Stunden bedeutet, T3 auf felsigem Karst ohne klaren Weg im oberen Abschnitt; der übliche Zustieg zum Gipfel Hängst geht jedoch von der Seite Hirsegg / Alp Schlund im Süden.",
+    "effort_label": "Mittel",
+    "start": "Bergstation Gondelbahn Marbachegg",
+    "transit": {
+      "train": "Luzern bis Wolhusen, dann S7 bis Marbach LU",
+      "bus": "Postauto bis Marbach, Talstation Marbachegg",
+      "cable_car": "Gondelbahn Marbachegg vom Dorf Marbach"
+    }
+  },
+  {
+    "id": "la_fouly-village-and-moraine-walk",
+    "name": "Dorfspaziergang zum Aussichtspunkt der A-Neuve-Moräne",
+    "description_extra": "Von der Postauto-Haltestelle und der Sessellift-Talstation im Dorf La Fouly querst du die Dranse de Ferret auf dem markierten Rundweg Charlotte la Marmotte und gehst südwärts durch den Campingplatz Glaciers auf die A-Neuve-Ebene gegenüber dem Gletscher. Etwa 2,4 km auf einem flachen bis leicht welligen T1-Weg, 65 m Aufstieg, 40 bis 45 Minuten hin und zurück. Im Bild sind Mont Dolent, der Tour Noir und der A-Neuve-Hängegletscher auf der anderen Talseite, am besten etwa 20 Minuten vor Sonnenuntergang im Alpenglühen fotografiert.",
+    "effort_label": "Leicht",
+    "start": "Dorfparkplatz La Fouly (Postauto-Haltestelle, bei der Sessellift-Talstation)",
+    "transit": {
+      "train": "Martigny bis Orsières (TMR / RegionAlps)",
+      "bus": "Orsières Postauto 113 bis La Fouly, Telesiege"
+    }
+  },
+  {
+    "id": "cap_au_moine-from-col-de-jaman",
+    "name": "Direkter Aufstieg ab Col de Jaman",
+    "description_extra": "Klassische kurze Variante. Vom Col de Jaman auf 1'510 m quert der Weg den Berghang nordostwärts etwa eine Stunde lang, steigt zum Col de Pierra Perchia auf 1'842 m und endet entlang eines schmalen Gras-und-Fels-Gipfelgrats zum Cape au Moine. Visorando verzeichnet 5,79 km hin und zurück mit etwa 460 m kumuliertem Aufstieg, rund 3 Stunden Gehzeit total. T4 auf dem Gipfelgrat, der ausgesetzt ist mit steilen Abbrüchen auf der Ostseite. Trittsicherheit und Schwindelfreiheit nötig, bei nassem oder windigem Wetter auslassen. Zurück denselben Weg.",
+    "effort_label": "Anspruchsvoll",
+    "start": "Parkplatz Col de Jaman (oberhalb Les Avants)",
+    "transit": {
+      "train": "MOB-Linie Montreux-Zweisimmen bis Les Avants, dann steiler Fussweg hoch zum Col de Jaman (etwa 1 h)",
+      "car": "Auffahrt von Les Avants zum Parkplatz Col de Jaman"
+    }
+  },
+  {
+    "id": "spielboden-from-saas-fee-village",
+    "name": "Aufstieg zu Fuss ab dem Dorf Saas-Fee",
+    "description_extra": "Aufstieg zu Fuss vom autofreien Dorf Saas-Fee (Busterminal auf 1'800 m) den ausgeschilderten Wanderweg hoch via Gletschersee und Gletschergrotte zum Spielboden auf 2'448 m. Etwa 5 km, 729 m kumulierter Aufstieg und 81 m Abstieg durch das Wiesen-und-Lärchen-Gelände unter dem Feegletscher. Der SAC bewertet ihn mit T2, bis zu 3 h Gehzeit. Am besten zwischen Juni und Oktober. Geh die Route zurück oder steig mit der Spielboden-Gondelbahn ab.",
+    "effort_label": "Mittel",
+    "start": "Saas-Fee Busterminal (Seilbahn-Talstation)",
+    "transit": {
+      "train": "Visp",
+      "bus": "Postauto 511 von Visp nach Saas-Fee (autofreies Dorf; parkier auf den Parkplätzen am Dorfeingang, etwa 16 CHF/Tag)"
+    }
+  },
+  {
+    "id": "spielboden-cable-car-from-saas-fee",
+    "name": "Seilbahn ab Saas-Fee",
+    "description_extra": "Vom autofreien Dorf Saas-Fee (1'800 m) nimmst du die Spielboden-Gondelbahn zur Mittelstation auf 2'448 m. Die Murmeltierwiese ist direkt bei der Station; geh 10 Min Richtung Wegkreuzung Hannig für das Allalinhorn im Hintergrund. Gondelbahn fährt von Ende Juni bis Mitte Oktober. Fahr eine Sektion höher weiter nach Längfluh (2'869 m) für den Gletscher-Aussichtspunkt, oder wander zurück ins Dorf.",
+    "effort_label": "Auffahrt",
+    "start": "Saas-Fee Busterminal (Spielboden-Gondelbahn Talstation)",
+    "transit": {
+      "train": "Visp",
+      "bus": "Postauto 511 von Visp nach Saas-Fee (autofreies Dorf; parkier auf den Parkplätzen am Dorfeingang, etwa 16 CHF/Tag)",
+      "cable_car": "Saas-Fee Spielboden-Gondelbahn fährt im Sommer durchgehend, Ende Juni bis Mitte Oktober"
+    }
+  },
+  {
+    "id": "wildsee-from-pizolhuette-cable-car",
+    "name": "Pizolhütte zum Wildsee über die Wildseelücke",
+    "description_extra": "Kurzer Aufstieg auf dem markierten Wanderweg von der Pizolhütte auf 2'227 m hoch zur Wildseelücke auf 2'493 m, dann ein paar Schritte hinunter ans türkise Wildsee-Ufer auf etwa 2'485 m. Wegwandern.ch gibt den Aufstieg mit \"ca. 1 Stunde\" an über 2,5 km Weg, mit dem Pizolgletscher und Gipfel, die vom Pass aus den Hintergrund dominieren. Kumuliert 298 m Aufstieg und 39 m Abstieg auf T2-Gelände. Der kürzeste Weg, um am Wildsee zu stehen, ohne sich auf die ganze 5-Seen-Wanderung festzulegen. Geh denselben Weg zurück zur Pizolhütte für den Rückweg.",
+    "effort_label": "Leicht bis mittel",
+    "start": "Pizolhütte",
+    "transit": {
+      "train": "Bad Ragaz oder Sargans, dann Bus zur Talstation Wangs",
+      "cable_car": "Gondelbahn Wangs nach Furt, dann Sessellift Furt nach Gaffia; kurzer Fussweg hinunter zur Pizolhütte am Start. Letzte Talfahrt ab Furt um 17:30 im Sommer"
+    }
+  }
+]

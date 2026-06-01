@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392634" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223458" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -230,6 +230,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"pic_de_jallouvre-from-petit-bornand","name":"From Le Petit-Bornand-les-Glières","start":"Le Petit-Bornand-les-Glières (village parking)","duration_min":300,"gain_m":900,"sac_grade":"T3","effort_label":"Long day","description_extra":"Five-to-six-hour summit day. From the Chalet de Cenise parking (1,617 m) above Le Petit-Bornand-les-Glières, the trail climbs through pastures and rocky upper terrain to the Pic de Jallouvre at 2,408 m. About 900 m of vertical gain, T3, with airy passages at the Rasoir Col and the Cravate traverse on the final section. Often done as part of a longer Bornes traverse between Le Grand-Bornand and Le Petit-Bornand.","visits":["pic_de_jallouvre"],"sources":["https://www.altituderando.com/Pic-de-Jallouvre-2408m-par-Cenise"],"start_maps_url":"https://maps.app.goo.gl/kgT6yZpNF6KDJZAKA","distance_km":9.8,"equipment_list":["Sturdy hiking shoes"],"quickest":false},{"id":"pic_de_jallouvre-from-col-de-la-colombiere","visits":["pic_de_jallouvre"],"sac_grade":"T4","effort_label":"Demanding","duration_min":330,"gain_m":1200,"distance_km":10.4,"equipment_list":["Sturdy hiking boots","Poles","Helmet (rockfall sections)"],"start":"Col de la Colombière (France)","transit":{"car":"Cluses to Le Grand-Bornand via the D4 road to Col de la Colombière (open in summer)"},"description_extra":"Approach from the Le Reposoir side, opposite valley from Le Petit-Bornand. The loop climbs from the Col de la Colombière up the south flank to the Col du Rasoir, a narrow ridge passage, then traverses under the rock face of the Cravate to the summit at 2,408 m. Descent goes north past the Col de Sosay to the Lac de Lessy refuge and around the lake before returning to the col. About 10.4 km, 1,200 m of cumulative gain, 5 h 30. The Cravate passage exposes hikers to rockfall and must be free of late snow before the summit ridge is safe.","sources":["https://www.altituderando.com/Pic-de-Jallouvre-2408m-en-boucle-par-le-col-de-la-Colombiere-et-le-Lac-de-Lessy","https://www.altituderando.com/Pic-de-Jallouvre-2408m-versant-Cenise-par-les-Aiguilles-Vertes"],"quickest_for":["pic_de_jallouvre"],"start_maps_url":"https://www.google.com/maps/place/?q=45.99224,6.47584&z=16","quickest":true}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -271,8 +272,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -460,6 +466,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

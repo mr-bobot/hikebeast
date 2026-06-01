@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392620" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223446" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"tseuzier_lake-drive-up","visits":["tseuzier_lake"],"name":"Drive up to the dam","start":"Barrage de Tseuzier parking","sac_grade":"T1","effort_label":"Drive-up","equipment_list":[],"transit":{"bus":"Sion (SBB) + PostBus to Ayent / Anzère, then no direct service, drive recommended"},"description_extra":"Drive up the Rawyl road from Ayent / Anzère. Park at the Barrage de Tseuzier (free roadside spots at the dam). Lake view is from the dam itself, 1-min walk. Road open mid-May to October.","sources":["https://www.swisstopo.admin.ch/"],"quickest_for":["tseuzier_lake"],"start_maps_url":"https://maps.app.goo.gl/ivhWPBBiuQUdUH3ZA","quickest":true},{"id":"tseuzier_lake-bisse-du-ro-from-crans-montana","visits":["tseuzier_lake"],"sac_grade":"T3","effort_label":"Demanding","duration_min":180,"gain_m":329,"distance_km":11.2,"equipment_list":["Sturdy hiking shoes"],"start":"Crans-Montana cable car station","transit":{"train":"Sierre, then Sierre-Crans-Montana funicular","bus":"Crans-Montana local bus"},"description_extra":"Reach Lac de Tseuzier on foot along the Bisse du Ro suonen path from Crans-Montana rather than driving up to the dam. 11.2 km traverse with 329 m of climb and 625 m of descent, about 3 h walking. The historic Bisse du Ro is cut into the cliff face with narrow wooden boardwalks and railings; the route requires a head for heights. End at the Rawil postbus stop at the dam, then bus or post back to Sion or Crans-Montana. Open roughly May to October.","sources":["https://travelita-blog.com/bisse-du-ro-abenteuerliche-suonenwanderung/","https://www.novo-monde.com/en/crans-montana-bisse-ro/"],"start_maps_url":"https://maps.app.goo.gl/jHTk7ptyTQghBo1P7","descent_m":625,"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

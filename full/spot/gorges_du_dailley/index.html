@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392619" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223445" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -221,6 +221,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"gorges_du_dailley-from-salvan","name":"Salvan to Van d'en Bas through the gorge","visits":["gorges_du_dailley"],"sac_grade":"T2","effort_label":"Moderate","duration_min":150,"gain_m":380,"distance_km":5.5,"equipment_list":["Grippy hiking shoes","Rain jacket for spray"],"start":"Les Granges hamlet above Salvan","transit":{"train":"Salvan station (Mont-Blanc Express from Martigny), then 15-minute walk up to Les Granges trailhead"},"description_extra":"The trail follows the Salanfe torrent from Les Granges up through the Dailley gorge. The path is fitted with footbridges, galleries and around 600 steps cut or bolted into the rock, first built in 1895 and renovated since. The trail tops out near Van d'en Bas and loops back down via the larch forest. About 5.5 km round trip, 380 m of gain, 2h to 2h 30, T2. The gorge is open June to October only; winter ice closes the staircases. Spray gets heavy in high-water season, keep the camera covered.","sources":["https://www.valleedutrient.ch/en/dailley-gorges-fp207","https://www.valais.ch/en/explore/activities/natural-sites/geological-sites/dailley-gorge"],"quickest_for":["gorges_du_dailley"],"start_maps_url":"https://www.google.com/maps/place/?q=46.12833,7.02206&z=16","quickest":true}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -262,8 +263,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -451,6 +457,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

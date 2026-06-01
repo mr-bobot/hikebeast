@@ -64,5 +64,32 @@ writeFileSync(join(OUT, "_front_matter.json"), JSON.stringify(fm, null, 2) + "\n
 const chapters = (content.chapters || []).map((c) => ({ id: c.id, name: c.name, intro: c.intro }));
 writeFileSync(join(OUT, "_chapters.json"), JSON.stringify(chapters, null, 2) + "\n");
 
+// Hikes (route prose for the spot-detail "how to get there" panel) -> chunked.
+const hikes = yaml.load(readFileSync(join(ROOT, "hikes.yaml"), "utf8")).hikes || [];
+const HIKE_OUT = join(OUT, "hikes");
+mkdirSync(HIKE_OUT, { recursive: true });
+function hikeFields(h) {
+  const o = { id: h.id };
+  if (h.name) o.name = h.name;
+  if (h.description_extra) o.description_extra = h.description_extra;
+  if (h.effort_label) o.effort_label = h.effort_label;
+  if (h.start) o.start = h.start;
+  if (h.transit && typeof h.transit === "object") {
+    const tr = {};
+    for (const [k, v] of Object.entries(h.transit)) if (typeof v === "string") tr[k] = v;
+    if (Object.keys(tr).length) o.transit = tr;
+  }
+  return o;
+}
+const HCHUNK = 32;
+let hiCount = 0, hcCount = 0;
+for (let i = 0; i < hikes.length; i += HCHUNK) {
+  const batch = hikes.slice(i, i + HCHUNK).map(hikeFields);
+  writeFileSync(join(HIKE_OUT, `h${hcCount}.json`), JSON.stringify(batch, null, 2) + "\n");
+  hiCount += batch.length;
+  hcCount++;
+}
+
 console.log(`[extract-i18n-source] ${n} spots across ${Object.keys(byChapter).length} chapters: ${chunks.join(", ")}`);
+console.log(`[extract-i18n-source] + ${hiCount} hikes in ${hcCount} chunks -> ${HIKE_OUT}`);
 console.log(`[extract-i18n-source] + _front_matter (${fm.length}) + _chapters (${chapters.length}) -> ${OUT}`);

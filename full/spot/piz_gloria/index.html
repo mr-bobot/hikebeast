@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392613" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223439" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"piz_gloria-cable-car-to-summit","name":"Cable car (Stechelberg → Schilthorn)","start":"Stechelberg cable car","transit":{"train":"Lauterbrunnen (BLS) + bus to Stechelberg"},"sac_grade":"T1","effort_label":"Cable car ride","description_extra":"Schilthornbahn cable car from Stechelberg up to the 2,970 m summit, in stages through Gimmelwald, Mürren, and Birg.","visits":["piz_gloria"],"sources":["https://www.myswitzerland.com/en-us/experiences/schilthorn-1/"],"quickest_for":["piz_gloria"],"cable_car_ids":["schilthornbahn"],"start_maps_url":"https://www.google.com/maps/place/?q=46.55545,7.90141&z=16","cable_cars":[{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"}],"cable_car":{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"},"quickest":true},{"id":"piz_gloria-gimmelwald-on-foot","name":"From Gimmelwald on foot","start":"Gimmelwald","transit":{"train":"Lauterbrunnen + Stechelberg-Gimmelwald cable car"},"duration_min":300,"gain_m":1600,"sac_grade":"T3","effort_label":"Long, big vertical","description_extra":"Foot ascent from Gimmelwald (reached by cable car from Stechelberg) up to the Schilthorn summit at 2,970 m. About five hours and 1,600 m of gain for a fit walker. T3. The trail climbs steadily, crossing below the cable car line and passing through Mürren and Birg. Most people walk one direction and ride the cable car the other. Bring layers; the summit is regularly windy and significantly cooler than the valley.","visits":["piz_gloria"],"sources":["https://www.alltrails.com/trail/switzerland/bern/gimmelwald-schilthorn"],"start_maps_url":"https://www.google.com/maps/place/?q=46.533,7.883&z=16","distance_km":8,"cable_car_ids":["schilthornbahn"],"equipment_list":["Sturdy hiking shoes"],"cable_cars":[{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"}],"cable_car":{"id":"schilthornbahn","name":"Schilthornbahn","operator":"Schilthornbahn AG","description":"Four-stage cable car: Stechelberg, Gimmelwald, Mürren, Birg, Schilthorn","open_raw":"Year-round, brief maintenance closures in May and October","website":"https://schilthorn.ch/en/"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

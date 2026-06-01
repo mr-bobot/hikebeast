@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392620" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223447" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -229,6 +229,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"gastlosen-gastlosen-circular","name":"Gastlosen circular (Jaun → Chalet du Soldat → Jaun)","start":"Jaun, Dorf","transit":{"bus":"PostBus to Jaun, Dorf"},"duration_min":360,"gain_m":975,"sac_grade":"T2","effort_label":"Long day","description_extra":"Loop around the Gastlosen limestone range from Jaun, Dorf. The route covers about 14.4 km in 6h 25 and roughly 975 m of cumulative gain, climbing through the Wols Ort col, passing under the ridge to the Chalet du Soldat, then descending back to Jaun. T2. The Chalet du Soldat at 1,752 m is a working alpine restaurant in summer.","visits":["gastlosen"],"sources":["https://www.outdooractive.com/en/mountaineering-routes/fribourg/mountaineering-in-fribourg/5884930/"],"hut_ids":["chalet-du-soldat"],"start_maps_url":"https://maps.app.goo.gl/NQLU3GDcCnHYtTvw8","distance_km":14.4,"equipment_list":["Sturdy hiking shoes"],"huts":[{"id":"chalet-du-soldat","name":"Chalet du Soldat","description":"Privately run alp restaurant + dorm in the Gastlosen ridge","open_raw":"June – October","cost_chf_raw":"38 CHF dorm only, plus 23 CHF half-board","website":"https://chaletdusoldat.ch/"}],"hut":{"id":"chalet-du-soldat","name":"Chalet du Soldat","description":"Privately run alp restaurant + dorm in the Gastlosen ridge","open_raw":"June – October","cost_chf_raw":"38 CHF dorm only, plus 23 CHF half-board","website":"https://chaletdusoldat.ch/"},"quickest":false},{"id":"gastlosen-from-musersbergli","visits":["gastlosen"],"sac_grade":"T2","effort_label":"Moderate","duration_min":300,"gain_m":696,"distance_km":12,"equipment_list":["Sturdy hiking shoes"],"start":"Musersbergli top station (Jaun chairlift)","transit":{"bus":"Bulle or Boltigen postbus to Jaun","cable_car":"Jaun chairlift to Musersbergli"},"description_extra":"Loop the range from the top of the Jaun chairlift rather than starting at Jaun, Dorf. SchweizMobil route 262 (Gastlosen Tour) leaves Musersbergli at 1,479 m, traverses the cliff faces and reaches its high point at Wolfsort, 1,921 m, before descending through pasture back to the start. 12 km, 5 h, 696 m of gain and the same loss, graded moderately difficult. The cable car saves the 700 m climb from the valley floor. The Chalet du Soldat on the south side is the standard food stop.","sources":["https://fribourg.ch/en/la-gruyere/hiking/the-gastlosen-tour-in-jaun/","https://schweizmobil.ch/en/hiking-in-switzerland/route-262"],"quickest_for":["gastlosen"],"cable_car_ids":["jaun-gastlosen-express"],"start_maps_url":"https://www.google.com/maps/place/?q=46.59578,7.28305&z=16","hut_ids":["chalet-du-soldat"],"cable_cars":[{"id":"jaun-gastlosen-express","name":"Gastlosen-Express","operator":"Jaun-Gastlosen Bergbahnen AG","description":"4-seater chairlift from Jaun village up to Musersbergli at 1,540 m, gateway to the Gastlosen hiking circuit","open_raw":"Year-round (summer + winter operations)","website":"https://www.jaun-bergbahnen.ch/"}],"cable_car":{"id":"jaun-gastlosen-express","name":"Gastlosen-Express","operator":"Jaun-Gastlosen Bergbahnen AG","description":"4-seater chairlift from Jaun village up to Musersbergli at 1,540 m, gateway to the Gastlosen hiking circuit","open_raw":"Year-round (summer + winter operations)","website":"https://www.jaun-bergbahnen.ch/"},"huts":[{"id":"chalet-du-soldat","name":"Chalet du Soldat","description":"Privately run alp restaurant + dorm in the Gastlosen ridge","open_raw":"June – October","cost_chf_raw":"38 CHF dorm only, plus 23 CHF half-board","website":"https://chaletdusoldat.ch/"}],"hut":{"id":"chalet-du-soldat","name":"Chalet du Soldat","description":"Privately run alp restaurant + dorm in the Gastlosen ridge","open_raw":"June – October","cost_chf_raw":"38 CHF dorm only, plus 23 CHF half-board","website":"https://chaletdusoldat.ch/"},"quickest":true}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -270,8 +271,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -459,6 +465,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any

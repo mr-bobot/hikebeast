@@ -18,7 +18,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <script src="../../lib/i18n-strings.js"></script>
 <script src="../../lib/i18n.js"></script>
-<link rel="stylesheet" href="../../preview.css?v=1780301392636" />
+<link rel="stylesheet" href="../../preview.css?v=1780308223460" />
 <link rel="preconnect" href="https://whimsical-sparrow-336.convex.cloud" crossorigin />
 </head>
 <body data-page="spot-detail">
@@ -228,6 +228,7 @@
   if (!card) return;
   const back = card.querySelector('.slide-spot-back');
   const ROUTES = [{"id":"wildsee-from-pizolhuette-cable-car","visits":["wildsee"],"name":"Pizolhütte to Wildsee via the Wildseelücke","start":"Pizolhütte","start_maps_url":"https://www.google.com/maps/place/?q=46.97923,9.41704&z=16","sac_grade":"T2","effort_label":"Easy-moderate","duration_min":60,"gain_m":298,"descent_m":39,"distance_km":2.55,"equipment_list":["Hiking boots","Rain layer","Sun protection"],"transit":{"train":"Bad Ragaz or Sargans, then bus to Wangs valley station","cable_car":"Wangs to Furt gondola, then Furt to Gaffia chairlift; short walk down to Pizolhütte at the start. Last descent from Furt at 17:30 in summer"},"description_extra":"Short ascent on the marked Wanderweg from Pizolhütte at 2,227 m up to the Wildseelücke pass at 2,493 m, then a few steps down to the turquoise Wildsee shore at around 2,485 m. Wegwandern.ch gives the ascent as \"ca. 1 Stunde\" (about 1 hour) over 2.5 km of trail, with the Pizol glacier and summit dominating the backdrop from the pass. Cumulative 298 m of gain and 39 m of descent on T2 terrain. The shortest way to stand at Wildsee without committing to the full 5-Seen-Wanderung. Reverse the same trail back to Pizolhütte for the return.","sources":["https://wegwandern.ch/wanderung/pizol-5-seen-wanderung/","https://pizol.com/en/hiking-trails/5-lakes-hiking/"],"cable_car_ids":["pizol-bergbahnen"],"quickest_for":["wildsee"],"cable_cars":[{"id":"pizol-bergbahnen","operator":"Pizolbahnen AG","description":"Gondola and chairlift chain from Wangs up to Pizolhütte, start of the 5-Seen-Wanderung","open_raw":"Late June to mid-October","website":"https://pizol.com/","name":"Pizolbahnen"}],"cable_car":{"id":"pizol-bergbahnen","operator":"Pizolbahnen AG","description":"Gondola and chairlift chain from Wangs up to Pizolhütte, start of the 5-Seen-Wanderung","open_raw":"Late June to mid-October","website":"https://pizol.com/","name":"Pizolbahnen"},"quickest":true},{"id":"wildsee-pizol-5-seen-wanderung","visits":["wildsee"],"sac_grade":"T2","effort_label":"Demanding","duration_min":270,"gain_m":553,"descent_m":911,"distance_km":11.4,"equipment_list":["Hiking boots","Rain layer","Sun protection"],"start":"Pizolhütte above Wangs","transit":{"train":"Bad Ragaz or Sargans, then bus to Wangs valley station","cable_car":"Wangs to Furt gondola, then Furt to Gaffia chairlift; short walk to Pizolhütte at the start. Last descent from Furt at 17:30 in summer"},"description_extra":"The classic 5-Seen-Wanderung runs from Pizolhütte over a high-alpine traverse past Wildsee, Schottensee, Schwarzsee, Baschalvasee and Wangsersee. The official pizol.com route lists 11.4 km, 4 h 30 walking time, 553 m of ascent and 911 m of descent, with three strenuous climbs and drops between cirques. T2. Camping and bivouac are forbidden along the marked sections and fines apply.","sources":["https://pizol.com/en/wanderwege/5-seen-wanderung/","https://www.myswitzerland.com/en/experiences/route/5-seen-wanderung-1/"],"cable_car_ids":["pizol-bergbahnen"],"start_maps_url":"https://www.google.com/maps/place/?q=46.97923,9.41704&z=16","cable_cars":[{"id":"pizol-bergbahnen","operator":"Pizolbahnen AG","description":"Gondola and chairlift chain from Wangs up to Pizolhütte, start of the 5-Seen-Wanderung","open_raw":"Late June to mid-October","website":"https://pizol.com/","name":"Pizolbahnen"}],"cable_car":{"id":"pizol-bergbahnen","operator":"Pizolbahnen AG","description":"Gondola and chairlift chain from Wangs up to Pizolhütte, start of the 5-Seen-Wanderung","open_raw":"Late June to mid-October","website":"https://pizol.com/","name":"Pizolbahnen"},"quickest":false}];
+  let CURRENT_IDX = 0;
 
   // Brand sprite definitions for the route-detail action row
   const SPRITE = {
@@ -269,8 +270,13 @@
   function escAttr(s) { return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;'); }
 
   function showRoute(i) {
-    const r = ROUTES[i];
+    let r = ROUTES[i];
     if (!r) return;
+    CURRENT_IDX = i;
+    // Non-English: merge the translated route prose (name, description_extra,
+    // effort_label, start, transit) over the English route. social.js loads
+    // window.HB_HIKES_TR + dispatches 'hb:hikes-i18n' when the bundle arrives.
+    if (window.HB_HIKES_TR && r.id && window.HB_HIKES_TR[r.id]) r = Object.assign({}, r, window.HB_HIKES_TR[r.id]);
 
     setText('[data-rd-name]', r.name || (r.start ? ('Hike from ' + r.start) : ('Route ' + (i + 1))));
 
@@ -458,6 +464,23 @@
 
     back.dataset.view = 'route-detail';
   }
+
+  // Hike i18n: when social.js loads the translated route bundle (non-English),
+  // overlay the route-row names and re-render the open detail.
+  function applyHikeI18n() {
+    const tr = window.HB_HIKES_TR;
+    if (!tr) return;
+    card.querySelectorAll('.hb-route-row[data-route-idx]').forEach(function (row) {
+      const r = ROUTES[+row.getAttribute('data-route-idx')];
+      if (r && r.id && tr[r.id] && tr[r.id].name) {
+        const nm = row.querySelector('.hb-route-name');
+        if (nm) nm.textContent = tr[r.id].name;
+      }
+    });
+    if (back.dataset.view === 'route-detail') showRoute(CURRENT_IDX);
+  }
+  window.addEventListener('hb:hikes-i18n', applyHikeI18n);
+  applyHikeI18n();
 
   // The card keeps the front's natural height through the flip. The back's
   // content is vertically centred (see .hb-flip-back-view CSS) so any
