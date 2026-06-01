@@ -23,7 +23,7 @@ const ROOT = resolve(__dirname, "..");
 const SRC = join(ROOT, "i18n", "content");
 const OUT = join(ROOT, "full", "i18n");
 mkdirSync(OUT, { recursive: true });
-const LANGS = ["de", "fr"];
+const LANGS = ["de", "fr", "it"];
 
 function readJson(p) { try { return JSON.parse(readFileSync(p, "utf8")); } catch { return null; } }
 

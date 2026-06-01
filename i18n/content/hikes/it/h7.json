@@ -1,0 +1,214 @@
+[
+  {
+    "id": "engstlensee-drive-up",
+    "name": "In auto o autopostale fino a Engstlenalp",
+    "description_extra": "Da Innertkirchen prendi la Gentalstrasse verso il Sustenpass, poi la strada a pedaggio privata attraverso il Gental fino a Engstlenalp (CHF 8 in contanti al cancello). Parcheggio a fine strada accanto all'Hotel Engstlenalp. 5 min a piedi fino al lago. Strada a pedaggio aperta più o meno da inizio maggio a metà ottobre (dipende dalla neve); il servizio Bus Alpin è stagionale nello stesso periodo, con poche corse al giorno.",
+    "effort_label": "In auto",
+    "start": "Parcheggio a fine strada di Engstlenalp (Hotel Engstlenalp)",
+    "transit": {
+      "bus": "Meiringen + autopostale fino a Innertkirchen, poi il servizio Bus Alpin (ex PostAuto) per Engstlenalp (capolinea). Poche corse al giorno, controlla gli orari"
+    }
+  },
+  {
+    "id": "maloja_pass-drive-up",
+    "name": "In auto fino al punto panoramico del passo",
+    "description_extra": "Da St. Moritz segui la strada 27 verso sud-ovest lungo i laghi dell'Engadina fino in cima al passo. Il punto panoramico Belvedere si trova all'inizio dei tornanti sul versante della Bregaglia. Il parcheggio Maloja Orden è gratuito, circa 20 posti, si riempie in fretta nei weekend d'autunno. 5 min a piedi fino al ciglio che domina i tornanti. Strada aperta tutto l'anno.",
+    "effort_label": "In auto",
+    "start": "Parcheggio Maloja Orden (Belvedere)",
+    "transit": {
+      "bus": "St. Moritz + autopostale 4 (linea St. Moritz-Maloja-Chiavenna) fino a Maloja Poschta"
+    }
+  },
+  {
+    "id": "julier_pass-drive-up",
+    "name": "In auto sul passo del Giulia",
+    "description_extra": "Sali in auto fino alla cima del Julierpass (Hospiz, circa 2.284 m) e parcheggia nello spiazzo del passo. Si attraversa il passo sulla H3 tra Tiefencastel / Bivio sul versante Surses e Silvaplana sul versante engadinese. Diverse piccole piazzole vicino alla cima a 2.284 m. Parcheggio gratuito. Una delle poche strade d'alta quota in Svizzera tenute aperte d'inverno; con il maltempo possono servire le catene.",
+    "effort_label": "In auto",
+    "start": "Pass dal Guglia / cima del Julierpass (Hospiz)",
+    "transit": {
+      "bus": "La linea autopostale del passo del Giulia (Chur - St. Moritz, via Tiefencastel / Bivio) attraversa il passo tutto l'anno; 5 corse al giorno in estate (giu-ott), 2 al giorno in inverno; ferma al Julier Hospiz in cima"
+    }
+  },
+  {
+    "id": "silsersee-drive-up",
+    "name": "In auto lungo la strada dell'Engadina",
+    "description_extra": "Percorri in auto la strada dell'Engadina (H27) da St. Moritz o passando dal Maloja. Parcheggi pubblici a Sils Maria, Sils Baselgia e Plaun da Lej, tutti lungo la strada, gratuiti o a pagamento. Il sentiero lungo la riva è aperto tutto l'anno; il battello che attraversa il lago va da fine giugno a fine settembre.",
+    "effort_label": "In auto",
+    "start": "Parcheggi sul lago a Sils Maria, Sils Baselgia o Plaun da Lej",
+    "transit": {
+      "bus": "St. Moritz + autopostale 4 verso Maloja, ferma a Sils Maria, Sils Baselgia, Plaun da Lej e Maloja Posta lungo la riva del lago",
+      "train": "St. Moritz (linea dell'Albula) + autopostale 4"
+    }
+  },
+  {
+    "id": "engadin_autumn-drive-up",
+    "name": "In auto nella valle dell'Engadina",
+    "description_extra": "Guida tra St. Moritz, Silvaplana, Sils-Maria e Maloja lungo la strada dell'Engadina per la fascia dei laghi e i pendii di larici. Le strade restano aperte per tutto ottobre. Colori al massimo intorno alla terza settimana di ottobre; la luce calda del pomeriggio fa risaltare l'oro. Diversi parcheggi sul lago, in gran parte gratuiti.",
+    "effort_label": "In auto",
+    "start": "Strada dell'Engadina (H27) tra St. Moritz e Maloja",
+    "transit": {
+      "bus": "L'autopostale 4 copre la fascia dei laghi da St. Moritz a Maloja",
+      "train": "St. Moritz sulla linea dell'Albula; anche Pontresina e Celerina servono lo Stazerwald"
+    }
+  },
+  {
+    "id": "mount_pilatus-cogwheel-from-alpnachstad",
+    "name": "Cremagliera da Alpnachstad",
+    "description_extra": "La cremagliera più ripida del mondo (48% di pendenza massima) sale da Alpnachstad, sul lago di Alpnach, fino a Pilatus Kulm a 2.132 m. La salita di 27 minuti fu inaugurata per la prima volta nel 1889. Parcheggio a pagamento ad Alpnachstad; la ferrovia funziona da metà maggio a metà novembre (dipende dal meteo). La cremagliera arriva alla stazione di vetta; da lì il sentiero a balcone verso il Tomlishorn (circa 1,3 km) porta al punto più alto del massiccio del Pilatus.",
+    "effort_label": "In auto",
+    "start": "Stazione a valle della Pilatusbahn ad Alpnachstad",
+    "transit": {
+      "train": "Alpnachstad (Zentralbahn da Lucerna)",
+      "bus": "Battello sul lago dei Quattro Cantoni da Lucerna ad Alpnachstad"
+    }
+  },
+  {
+    "id": "mount_pilatus-cable-car-from-kriens",
+    "name": "Funivia da Kriens",
+    "description_extra": "Salita aerea in due tratte da Kriens: cabina panoramica via Krienseregg fino a Fräkmüntegg (1.416 m), poi la funivia Dragon Ride fino a Pilatus Kulm a 2.132 m. Funziona tutto l'anno (brevi pause per manutenzione). Autosilo a pagamento alla stazione a valle di Kriens.",
+    "effort_label": "In auto",
+    "start": "Stazione a valle della Pilatusbahn a Kriens",
+    "transit": {
+      "train": "Lucerna + bus 1 fino a Kriens, Linde, poi breve tratto a piedi"
+    }
+  },
+  {
+    "id": "the_ice_cave-winter-approach",
+    "name": "Avvicinamento invernale dal paese di Zinal",
+    "description_extra": "Avvicinamento solo invernale lungo il Glacier de Zinal dal parcheggio di Plats de la Lée a fine strada (circa 1.675 m) fino alle grotte di ghiaccio stagionali che si formano nella lingua del ghiacciaio intorno ai 2.150 m. Circa 11 km andata e ritorno a piedi con circa 500 m di dislivello complessivo, 4-5 ore in totale con le racchette da neve (circa 4h 30 con le soste). Le grotte sono effimere ed esistono solo da circa dicembre a marzo, e solo dopo un periodo di freddo prolungato: crollano appena le temperature salgono. L'ufficio turistico della Val d'Anniviers è chiaro: non andare da solo, mai dopo giornate calde o nevicate fresche, e l'accesso senza guida è ufficialmente sconsigliato per il pericolo di crepacci, valanghe e crolli. Ogni anno c'è chi muore nelle grotte di ghiaccio alpine. Controlla il bollettino valanghe (slf.ch), di' a qualcuno cosa hai in programma, torna indietro se qualcosa non ti convince. Per entrare davvero nella grotta affidati a una guida alpina locale: le visite in autonomia sono a tuo rischio. Valutata T4 / equivalente a uno scialpinismo: niente arrampicata tecnica, ma sbagliare qui può costare la vita.",
+    "effort_label": "Esperti (solo pieno inverno)",
+    "start": "Parcheggio di Plats de la Lée (fine strada nel paese di Zinal)",
+    "transit": {
+      "bus": "Sierre (SBB) + autopostale 452 su per la Val d'Anniviers fino a Zinal, capolinea"
+    }
+  },
+  {
+    "id": "goms_bridge-from-fuergangen-station",
+    "name": "Breve camminata in piano dalla stazione di Fürgangen",
+    "description_extra": "Dalla stazione di Fürgangen-Bellwald il Hängebrücke Fürgangen-Mühlebach (lungo 280 m, 92 m sopra il Rodano) è a poco meno di 10 minuti a piedi passando dal sottopasso sotto la strada cantonale. Anche dal parcheggio del paese di Mühlebach, dall'altra parte, è una breve camminata in piano. Il ponte è largo 1,4 m, senza barriere, aperto tutto l'anno. T1 per tutto il percorso. Attraversamento gratuito.",
+    "effort_label": "Facile",
+    "start": "Stazione di Fürgangen-Bellwald (Matterhorn Gotthard Bahn)",
+    "transit": {
+      "train": "Brig + Matterhorn Gotthard Bahn fino a Fürgangen-Bellwald (il treno ferma all'imbocco del ponte)"
+    }
+  },
+  {
+    "id": "goms_bridge-from-bellwald",
+    "name": "Discesa dal paese di Bellwald al ponte",
+    "description_extra": "Variante in discesa: prendi la Bellwaldbahn dalla stazione di Fürgangen-Bellwald fino al paese di Bellwald (1.560 m), poi scendi a piedi attraverso il bosco fino al Hängebrücke Fürgangen-Mühlebach a 1.020 m. Circa 4,5 km e 540 m di discesa su un sentiero segnato nel bosco, circa 1h 30. T2 per la pendenza costante. Attraversa il ponte, poi riprendi il treno da Fürgangen.",
+    "effort_label": "Moderato (discesa)",
+    "start": "Bellwald (stazione a monte della Bellwaldbahn)",
+    "transit": {
+      "cable_car": "Bellwaldbahn dalla stazione di Fürgangen-Bellwald fino al paese di Bellwald"
+    }
+  },
+  {
+    "id": "gorges_du_durnand-walkway-loop",
+    "name": "Passerelle di ferro attraverso la gola",
+    "description_extra": "Giro a pagamento su passerelle attraverso una gola stretta con 14 cascate e 330 gradini su scale di legno sospese e camminamenti fissati nella roccia. Circa 200 m di dislivello in salita, poi giù per un sentiero nel bosco dall'altro lato: in tutto circa 45-60 min. T1 per tutto il percorso, ma le assi diventano scivolose per gli spruzzi, servono scarpe con buona aderenza. Aperto tutti i giorni dal 1° maggio al 31 ottobre (meteo permettendo); controlla il sito ufficiale per orari di apertura e prezzi dei biglietti aggiornati. Dalla stazione di Bovernier l'ingresso è a 20 min di salita a piedi; dal parcheggio in valle, proprio all'ingresso, sono solo 2 minuti fino alla biglietteria.",
+    "effort_label": "Facile (ingresso a pagamento)",
+    "start": "Ingresso delle Gorges du Durnand, Les Valettes (Bovernier)",
+    "transit": {
+      "train": "Linea Martigny-Orsières (TMR/RegionAlps) fino alla stazione di Bovernier, poi 20 min a piedi in salita fino a Les Valettes"
+    }
+  },
+  {
+    "id": "ritzli_alp-from-jaun",
+    "name": "Su per la valle dell'Euschels da Jaun",
+    "description_extra": "Percorso a piedi dal paese di Jaun (circa 1.020 m) su per la valle dell'Euschels fino alla Ritzli Alp a 1.509 m. Circa 7,5 km e 500 m di dislivello su un sentiero segnato T1, circa 2h 45 - 3 h in salita a passo tranquillo. Il sentiero lascia Jaun passando dalla cascata del paese e dal cimitero, sale tra i prati alpini, poi segue la Euschelsstrasse verso il passo dell'Euschels prima di arrivare al ristorante d'alpe con la sua terrazza al sole. La Ritzli Alp è aperta tutti i giorni da maggio a ottobre, con orari ridotti nel weekend in bassa stagione, e si trova proprio sotto la cresta delle Gastlosen: la parete si accende al tramonto e la terrazza resta calda fino all'ora blu. Scendi per la stessa via (più veloce, circa 1h 30) oppure prosegui oltre il passo fino a Schwarzsee sull'Alpenpanoramaweg.",
+    "effort_label": "Facile",
+    "start": "Jaun, Dorf (fermata autopostale nel paese di Jaun)",
+    "transit": {
+      "bus": "Bulle (SBB) + autopostale 260 verso Jaun, Dorf"
+    }
+  },
+  {
+    "id": "le_doubs-from-les-brenets",
+    "name": "Salita sul sentiero a strapiombo dalla stazione di Les Brenets",
+    "description_extra": "Solo andata in salita dalla stazione di Les Brenets a 820 m fino al punto panoramico delle Roches de Moron a 1.076 m sopra il canyon del Doubs. Circa 4-5 km sul Wanderweg segnato, circa 250 m di dislivello, 1-1,5 ore in salita a seconda del passo, T2. Il sentiero lascia il paese in direzione sud-ovest, attraversa il tratto del Sentier Pillichody sopra il lago e finisce al Restaurant Les Roches de Moron, con vista sulla diga, sul lago e sull'ansa del fiume. Le fonti pubblicate lo descrivono come un tratto del giro più ampio Les Brenets - Saut du Doubs - Roches de Moron (~17 km, ~690 m di dislivello, 5 h); se hai la giornata puoi fare anche il circuito completo. Sentiero aperto tutto l'anno; l'atmosfera del Giura è più ventosa e cupa rispetto ai posti alpini e gli si addicono sia il cielo coperto sia il tramonto.",
+    "effort_label": "Moderato",
+    "start": "Stazione di Les Brenets (linea regionale TransN da Le Locle)",
+    "transit": {
+      "train": "Le Locle (SBB) + linea regionale TransN fino a Les Brenets"
+    }
+  },
+  {
+    "id": "tannhorn-from-rothorn-segment",
+    "name": "Cremagliera fino al Rothorn, andata e ritorno in cresta fino al Tannhorn",
+    "description_extra": "La variante più corta per raggiungere il Tannhorn. Cremagliera da Brienz fino alla stazione di vetta di Rothorn Kulm (2.244 m), poi verso ovest lungo il Brienzergrat fino al Tannhorn a 2.221 m. Il CAS valuta il primo tratto Rothorn-Tannhorn della traversata del Brienzergrat T5 meno e indica 2h 30 - 3h 30 di cammino in salita (circa 600 m di dislivello complessivo). Si percorre su creste erbose esposte, che il CAS definisce il passaggio più impegnativo di tutto il Brienzergrat. La gita più corta in giornata prevede di tornare per la stessa via fino a Rothorn Kulm e scendere con la cremagliera, invece di proseguire l'intera traversata T5 giù fino a Planalp. Servono piede fermo e assenza di vertigini. Da evitare con pioggia o vento.",
+    "effort_label": "Impegnativo",
+    "start": "Stazione di vetta della cremagliera Brienzer Rothorn (Rothorn Kulm)",
+    "transit": {
+      "train": "Brienz BLS",
+      "cable_car": "Brienz Rothorn Bahn (cremagliera, da inizio giugno a fine ottobre)"
+    }
+  },
+  {
+    "id": "schrattenfluh-from-marbachegg-cable-car",
+    "name": "Funivia per Marbachegg, traversata verso la cresta dello Schrattenfluh",
+    "description_extra": "Dal paese di Marbach prendi la cabinovia di Marbachegg (da fine maggio a metà ottobre) fino alla stazione panoramica a monte a 1.484 m. Da lì un sentiero ad anello corre verso est passando per l'Alp Imbrig (1.460 m) lungo i piedi dello Schrattenfluh, con le pareti carsiche dello Schibegütsch e dell'Hängst che si alzano sopra. Il percorso resta sotto la cresta, toccando il punto più alto intorno ai 1.520 m. Circa 14,6 km e 610 m di dislivello complessivo, 4-5 ore, T2 su sentieri ben segnati con alcuni tratti calcarei più ripidi. L'altopiano nasconde doline profonde fuori dal sentiero, quindi la visibilità conta. Gli escursionisti allenati proseguono dalla stazione a monte su per il ripido sentiero segnato fino alla vetta dell'Hängst a 2.092 m (il punto più alto dello Schrattenfluh), aggiungendo 700 m di dislivello e altre 2 ore per tratta, T3 su roccia carsica con nessun sentiero chiaro nella parte alta; l'avvicinamento standard alla vetta dell'Hängst, però, è dal lato Hirsegg / Alp Schlund a sud.",
+    "effort_label": "Moderato",
+    "start": "Stazione a monte della cabinovia di Marbachegg",
+    "transit": {
+      "train": "Lucerna fino a Wolhusen, poi S7 fino a Marbach LU",
+      "bus": "Autopostale fino a Marbach, Talstation Marbachegg",
+      "cable_car": "Cabinovia di Marbachegg dal paese di Marbach"
+    }
+  },
+  {
+    "id": "la_fouly-village-and-moraine-walk",
+    "name": "Passeggiata dal paese al punto panoramico sulla morena dell'A Neuve",
+    "description_extra": "Dalla fermata dell'autopostale e dalla partenza della seggiovia nel paese di La Fouly, attraversa la Dranse de Ferret sul giro segnato Charlotte la Marmotte e cammina verso sud attraverso il campeggio Glaciers fino all'altopiano dell'A Neuve, di fronte al ghiacciaio. Circa 2,4 km su un sentiero T1 da pianeggiante a leggermente ondulato, 65 m di dislivello, 40-45 minuti andata e ritorno. L'inquadratura è il Mont Dolent, il Tour Noir e il ghiacciaio pensile dell'A Neuve dall'altra parte della valle, da fotografare meglio circa 20 minuti prima del tramonto, nella finestra dell'alpenglow.",
+    "effort_label": "Facile",
+    "start": "Parcheggio del paese di La Fouly (fermata autopostale, vicino alla partenza della seggiovia)",
+    "transit": {
+      "train": "Martigny fino a Orsières (TMR / RegionAlps)",
+      "bus": "Autopostale 113 da Orsières fino a La Fouly, Telesiege"
+    }
+  },
+  {
+    "id": "cap_au_moine-from-col-de-jaman",
+    "name": "Salita diretta dal Col de Jaman",
+    "description_extra": "La classica variante corta. Dal Col de Jaman a 1.510 m il sentiero traversa il fianco della montagna verso nord-est per circa un'ora, sale al Col de Pierra Perchia a 1.842 m e finisce lungo una stretta cresta sommitale di erba e roccia fino al Cape au Moine. Visorando registra 5,79 km andata e ritorno con circa 460 m di dislivello complessivo, circa 3 ore di cammino in totale. T4 sulla cresta sommitale, esposta con salti ripidi sul lato est: servono piede fermo e assenza di vertigini, da evitare con pioggia o vento. Si torna per la stessa via.",
+    "effort_label": "Impegnativo",
+    "start": "Parcheggio del Col de Jaman (sopra Les Avants)",
+    "transit": {
+      "train": "Linea MOB Montreux-Zweisimmen fino a Les Avants, poi salita ripida a piedi fino al Col de Jaman (circa 1 h)",
+      "car": "Sali in auto da Les Avants fino al parcheggio del Col de Jaman"
+    }
+  },
+  {
+    "id": "spielboden-from-saas-fee-village",
+    "name": "Salita a piedi dal paese di Saas-Fee",
+    "description_extra": "Salita a piedi dal paese senz'auto di Saas-Fee (Busterminal a 1.800 m) su per il Wanderweg segnalato, passando per Gletschersee e Gletschergrotte, fino a Spielboden a 2.448 m. Circa 5 km, 729 m di dislivello in salita e 81 m in discesa sul terreno di prati e larici sotto il ghiacciaio del Fee. Il CAS lo valuta T2, fino a 3 h di cammino. Periodo migliore tra giugno e ottobre. Torna per la stessa via oppure scendi con la cabinovia di Spielboden.",
+    "effort_label": "Moderato",
+    "start": "Busterminal di Saas-Fee (stazione a valle della funivia)",
+    "transit": {
+      "train": "Visp",
+      "bus": "Autopostale 511 da Visp a Saas-Fee (paese senz'auto; parcheggia nei posteggi all'ingresso del paese, circa 16 CHF/giorno)"
+    }
+  },
+  {
+    "id": "spielboden-cable-car-from-saas-fee",
+    "name": "Funivia da Saas-Fee",
+    "description_extra": "Dal paese senz'auto di Saas-Fee (1.800 m) prendi la cabinovia di Spielboden fino alla stazione intermedia a 2.448 m. Il prato delle marmotte è proprio alla stazione; cammina 10 min verso l'incrocio del sentiero Hannig per avere l'Allalinhorn sullo sfondo. La cabinovia funziona da fine giugno a metà ottobre. Prosegui di un tratto più in alto fino a Längfluh (2.869 m) per il punto panoramico sul ghiacciaio, oppure torna a piedi giù al paese.",
+    "effort_label": "In auto",
+    "start": "Busterminal di Saas-Fee (stazione a valle della cabinovia di Spielboden)",
+    "transit": {
+      "train": "Visp",
+      "bus": "Autopostale 511 da Visp a Saas-Fee (paese senz'auto; parcheggia nei posteggi all'ingresso del paese, circa 16 CHF/giorno)",
+      "cable_car": "La cabinovia di Spielboden a Saas-Fee funziona in continuazione d'estate, da fine giugno a metà ottobre"
+    }
+  },
+  {
+    "id": "wildsee-from-pizolhuette-cable-car",
+    "name": "Dalla Pizolhütte al Wildsee passando per la Wildseelücke",
+    "description_extra": "Breve salita sul Wanderweg segnato dalla Pizolhütte a 2.227 m fino al passo Wildseelücke a 2.493 m, poi pochi passi giù fino alla riva turchese del Wildsee, intorno ai 2.485 m. Wegwandern.ch indica la salita come \"ca. 1 Stunde\" (circa 1 ora) su 2,5 km di sentiero, con il ghiacciaio e la vetta del Pizol a dominare lo sfondo dal passo. In totale 298 m di dislivello in salita e 39 m in discesa su terreno T2. Il modo più breve per arrivare al Wildsee senza impegnarsi nell'intera 5-Seen-Wanderung. Torna per lo stesso sentiero fino alla Pizolhütte.",
+    "effort_label": "Facile-moderato",
+    "start": "Pizolhütte",
+    "transit": {
+      "train": "Bad Ragaz o Sargans, poi bus fino alla stazione a valle di Wangs",
+      "cable_car": "Cabinovia Wangs-Furt, poi seggiovia Furt-Gaffia; breve discesa a piedi fino alla Pizolhütte all'inizio. Ultima discesa da Furt alle 17:30 in estate"
+    }
+  }
+]

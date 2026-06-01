@@ -20,7 +20,7 @@
 (function () {
   'use strict';
 
-  var SUPPORTED = ['en', 'de', 'fr'];
+  var SUPPORTED = ['en', 'de', 'fr', 'it'];
   var DEFAULT = 'en';
   var KEY = 'hb_lang';
   var DICTS = window.HB_I18N || { en: {}, de: {}, fr: {} };
@@ -43,6 +43,7 @@
       var l = (langs[i] || '').toLowerCase();
       if (l.indexOf('de') === 0) return 'de';
       if (l.indexOf('fr') === 0) return 'fr';
+      if (l.indexOf('it') === 0) return 'it';
       if (l.indexOf('en') === 0) return 'en';
     }
     return DEFAULT;

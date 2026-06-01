@@ -20,7 +20,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const I18N = join(ROOT, "i18n");
 const OUT = join(ROOT, "full", "lib", "i18n-strings.js");
-const LANGS = ["en", "de", "fr"];
+const LANGS = ["en", "de", "fr", "it"];
 
 // Flatten nested yaml maps into dotted keys: { nav: { home: "Home" } } ->
 // { "nav.home": "Home" }. Leaf values are coerced to strings.

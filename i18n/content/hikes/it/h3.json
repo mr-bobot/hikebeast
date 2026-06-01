@@ -1,0 +1,298 @@
+[
+  {
+    "id": "mer_de_glace-montenvers-train",
+    "name": "Trenino a cremagliera del Montenvers + camminata alla grotta di ghiaccio",
+    "description_extra": "Accesso turistico con la storica ferrovia a cremagliera Chemin de fer du Montenvers da Chamonix fino a Montenvers a 1.913 m. 5,1 km di binari, 871 m di dislivello, circa 20 minuti sulla cremagliera (i 60 min nel riquadro sono il tratto a piedi dopo il treno). Dalla stazione in cima una cabinovia scende ancora più in basso fino a una grotta di ghiaccio artificiale scavata nel ghiacciaio. La grotta viene rifatta ogni anno perché il Mer de Glace si ritira costantemente. Il giro a piedi con la grotta aggiunge circa un'ora. Aperta da metà maggio a ottobre.",
+    "effort_label": "Camminata turistica",
+    "start": "Stazione del trenino di Chamonix Montenvers"
+  },
+  {
+    "id": "mer_de_glace-chamonix-on-foot",
+    "name": "Da Chamonix a piedi",
+    "description_extra": "Salita nel bosco da Chamonix fino a Montenvers, sopra il Mer de Glace. Il percorso si infila nel bosco a Planards e resta sotto la copertura della foresta per quasi tutto il tragitto. T2, salita costante. Per salvare le ginocchia, scendi con la cremagliera del Montenvers, oppure prosegui verso Plan de l'Aiguille e scendi con la funivia dell'Aiguille du Midi. Verifica della fonte in corso.",
+    "effort_label": "Moderato, salita nel bosco",
+    "start": "Centro di Chamonix"
+  },
+  {
+    "id": "les_cheserys-tre-le-champ-to-lac-blanc",
+    "name": "Tré-le-Champ → Cheserys → Lac Blanc",
+    "description_extra": "Salita da Tré-le-Champ (sopra Argentière) nella riserva naturale delle Aiguilles Rouges. Il sentiero sale nel bosco, poi rapidamente sopra il limite degli alberi, attraversa scale fisse e raggiunge il Grand Balcon Sud. Prosegue oltre i laghi di Cheserys fino al Refuge du Lac Blanc a 2.352 m. T3, esposizione continua nel tratto delle scale, serve testa per l'altezza. Si scende con la funivia da La Flégère.",
+    "effort_label": "Ripido, tratti con scale",
+    "start": "Tré-le-Champ (Argentière)",
+    "transit": {
+      "train": "Argentière (Mont-Blanc Express) + breve camminata"
+    }
+  },
+  {
+    "id": "les_cheserys-flegere-shortcut",
+    "name": "Scorciatoia con la funivia di Flégère",
+    "description_extra": "Salita di due ore dalla stazione a monte della funivia di La Flégère fino al Refuge du Lac Blanc e ai laghi. Circa 300 m di dislivello, T2 per tutto il tragitto. Evita il tratto con le scale dell'avvicinamento da Tré-le-Champ. La funivia di Flégère parte da Les Praz da metà giugno fino a settembre.",
+    "effort_label": "Moderato",
+    "start": "Stazione a monte della funivia di La Flégère",
+    "transit": {
+      "train": "Les Praz de Chamonix + funivia di Flégère"
+    }
+  },
+  {
+    "id": "glacier_des_bossons-chairlift-to-chalet",
+    "name": "Seggiovia fino allo Chalet du Glacier",
+    "description_extra": "Seggiovia da Les Bossons (linea bus 2 di Chamonix) fino allo Chalet du Glacier des Bossons. Salta circa 300 metri di salita nel bosco. Lo chalet ha un ristorante con vista sul ghiacciaio e un percorso didattico che spiega le caratteristiche del ghiacciaio. Aperto dalle 8:30 alle 18:30 in stagione.",
+    "effort_label": "Banale (seggiovia)",
+    "start": "Les Bossons (fermata bus)",
+    "transit": {
+      "bus": "Linea bus 2 di Chamonix fino alla fermata Glacier des Bossons"
+    }
+  },
+  {
+    "id": "glacier_des_bossons-chalet-to-la-jonction",
+    "name": "Chalet → Chalet des Pyramides → La Jonction",
+    "description_extra": "Salita dallo Chalet du Glacier des Bossons fino a La Jonction, il punto dove i ghiacciai di Bossons e Taconnaz si dividono. Circa quattro ore, intorno agli 800 m di dislivello. Il percorso è una salita a zig-zag costante nel bosco fino a pascoli ripidi, con tratti rocciosi e cavi e gradini metallici verso la cima. T2. Troppo ripido ed esposto per farlo con la pioggia.",
+    "effort_label": "Moderato, zigzag ripido",
+    "start": "Chalet du Glacier des Bossons"
+  },
+  {
+    "id": "pic_de_jallouvre-from-petit-bornand",
+    "name": "Da Le Petit-Bornand-les-Glières",
+    "description_extra": "Giornata di vetta da cinque a sei ore. Dal parcheggio dello Chalet de Cenise (1.617 m) sopra Le Petit-Bornand-les-Glières, il sentiero sale tra i pascoli e il terreno roccioso più in alto fino al Pic de Jallouvre a 2.408 m. Circa 900 m di dislivello, T3, con passaggi aerei al Rasoir Col e la traversata della Cravate nel tratto finale. Spesso si fa come parte di una traversata più lunga delle Bornes tra Le Grand-Bornand e Le Petit-Bornand.",
+    "effort_label": "Giornata lunga",
+    "start": "Le Petit-Bornand-les-Glières (parcheggio del paese)"
+  },
+  {
+    "id": "dent_doche-from-bernex",
+    "name": "Da Bernex via Fétiuère",
+    "description_extra": "Salita di tre ore e un quarto dal parcheggio di Fétiuère sopra Bernex (1.206 m) fino al Refuge de la Dent d'Oche e poi alla cima a 2.221 m. Circa 940 m di dislivello. Brevi tratti di roccia vicino al rifugio hanno catene; l'ultimo pezzo verso la cima attraversa tratti di parete non attrezzati. T3. Il rifugio serve da mangiare e ha posti letto.",
+    "effort_label": "Moderato, brevi tratti con catene",
+    "start": "Parcheggio di Fétiuère (sopra Bernex)",
+    "transit": {
+      "bus": "Da Évian, in auto fino a Fétiuère"
+    }
+  },
+  {
+    "id": "brisen-route-via-haldigrat",
+    "description_extra": "Prendi la S-Bahn fino a Dallenwil, sali con la piccola funivia fino a Niederrickenbach, poi cammina circa 30 minuti fino alla base della seggiovia di Haldigrat. La seggiovia ti lascia sulla cresta occidentale di Haldigrat a circa 1.940 m, il modo più facile per salire la montagna. Da lì sono 2 ore di camminata in cresta verso est fino alla cima del Brisen a 2.404 m, T3 con tratti esposti. Contando l'accesso con la seggiovia guadagni circa 460 m. Si scende per la stessa via, oppure si prosegue giù verso Niederrickenbach passando dal Brisenhaus, circa 4,5 ore in totale.",
+    "effort_label": "Difficile",
+    "start": "Niederrickenbach (stazione a monte della funivia)",
+    "transit": {
+      "train": "Dallenwil (S-Bahn da Lucerna)",
+      "cable_car": "Funivia di Niederrickenbach (da Dallenwil a Niederrickenbach), poi seggiovia di Haldigrat"
+    }
+  },
+  {
+    "id": "engstlensee-route-lakeshore-loop",
+    "description_extra": "Il lago si trova a circa 1.850 m vicino al Joch Pass, raggiungibile in auto o con l'autopostale 161 da Innertkirchen fino all'Hotel Engstlenalp. Dal parcheggio dell'hotel, un sentiero sterrato scende fino alla riva in circa cinque minuti. Il giro della riva è di circa 1,3 km sul lato occidentale, mentre la riva orientale è più stretta e rocciosa. La camminata totale è di circa un'ora con forse 50 m di saliscendi complessivo, praticamente in piano. Il livello dell'acqua può cambiare nel corso della stagione perché il lago funziona anche da bacino idroelettrico. Le barche si possono noleggiare alla reception dell'hotel. Da abbinare a una salita al Joch Pass per una giornata più lunga.",
+    "effort_label": "Facile",
+    "start": "Hotel Engstlenalp, fine della strada a pedaggio",
+    "transit": {
+      "bus": "Engstlenalp (capolinea autopostale 161, solo in estate)",
+      "train": "Innertkirchen (poi autopostale 161)"
+    }
+  },
+  {
+    "id": "grappelensee-route-from-laui",
+    "description_extra": "Sali in auto o in taxi da Unterwasser fino al parcheggio di Laui, il punto più vicino al lago raggiungibile in auto. Da lì sono circa 3,25 km e 250 m di salita su un sentiero ben tracciato tra pascoli e tratti di bosco, circa 50 minuti per tratta. Il lago si trova a 1.307 m. Per la versione lunga, parti dal parcheggio della funivia di Iltios a Unterwasser e fai il giro completo passando dalle cascate della Thur e da Chüeboden, circa 12 km e 525 m di salita.",
+    "effort_label": "Facile",
+    "start": "Parcheggio di Laui, sopra Unterwasser",
+    "transit": {
+      "train": "Unterwasser (linea SOB da Wattwil), poi ~20 min in auto o taxi su fino a Laui"
+    }
+  },
+  {
+    "id": "ponte_tibetano-route-from-mornera",
+    "description_extra": "Prendi la linea bus 2 da Bellinzona fino alla fermata della funivia di Monte Carasso, poi sali con la funivia Monte Carasso - Curzútt - Mornera fino a circa 1.400 m. Da Mornera, il sentiero scende tra i boschi di castagni fino al ponte in circa 45-60 minuti; il ponte è anche a circa 45-60 minuti da Curzútt. Torna indietro passando dalla stazione intermedia di Curzútt invece di risalire fino a Mornera. Le auto non raggiungono il ponte; l'accesso è in funivia o con una camminata di 1h 30 da Monte Carasso o Sementina.",
+    "effort_label": "Moderato",
+    "start": "Stazione a monte della funivia di Mornera",
+    "transit": {
+      "bus": "Bellinzona, linea 2 fino a Monte Carasso, fermata Funivia",
+      "train": "Bellinzona (poi bus 2)",
+      "cable_car": "Funivia Monte Carasso - Curzútt - Mornera, cabina da 8 persone ogni 15 minuti"
+    }
+  },
+  {
+    "id": "zinal_glacier-route-petit-mountet",
+    "description_extra": "Parcheggia all'estremità sud di Zinal dove finisce la strada vicino al fiume, poi segui le indicazioni per la Cabane du Petit Mountet. Il sentiero è un'ampia pista sterrata lungo il lato ovest della Navisence, che sale tra boschi di larici e pascoli. Circa 5 km e 500 m di salita per tratta, circa 2 ore in salita e 90 minuti in discesa, 3,5 ore in totale tra andata e ritorno. La capanna a 2.142 m sorge su una vecchia morena laterale rivolta verso la lingua del ghiacciaio di Zinal. T2 per tutto il tragitto, senza esposizione. La neve può resistere sul tratto alto fino a inizio luglio.",
+    "effort_label": "Moderato",
+    "start": "Paese di Zinal, parcheggio all'estremità sud vicino al fiume Navisence",
+    "transit": {
+      "bus": "Zinal, Poste (autopostale 452 da Sierre via Vissoie)",
+      "train": "Sierre / Siders (poi autopostale)"
+    }
+  },
+  {
+    "id": "ascher-from-schwende-on-foot",
+    "description_extra": "Raggiungi l'Äscher a piedi da Schwende invece di usare la funivia di Wasserauen. Il sentiero segnalato passa per Triebern e Alp Bommen fino al Berggasthaus Äscher a 1.455 m e alle grotte del Wildkirchli, e finisce sull'altopiano dell'Ebenalp. Circa 4,35 km, 2 h 30, 823 m di dislivello, T2. Dall'Ebenalp, la funivia scende di nuovo fino a Wasserauen.",
+    "effort_label": "Moderato",
+    "start": "Stazione ferroviaria di Schwende (Appenzello)",
+    "transit": {
+      "train": "Da Appenzell a Schwende (linea Appenzeller Bahnen verso Wasserauen, scendi una fermata prima)"
+    }
+  },
+  {
+    "id": "barrhorn-from-st-niklaus-via-topalihuette",
+    "description_extra": "Avvicinamento dal lato della Mattertal, la valle opposta rispetto al percorso della capanna Turtmann. Il primo giorno sale da St. Niklaus passando per Schwiedernen e i tornanti nel bosco fino alla Topalihütte a 2.674 m: secondo il portale ufficiale dei percorsi del CAS sono 1.600 m di dislivello, 4-5 ore, valutato T2. Il secondo giorno attraversa lo Schölligletscher (breve e con pochi crepacci in condizioni normali) e un breve tratto con scala e cavo su per lo Schöllijoch prima di traversare verso le cime dell'Inneres e dell'Üssers Barrhorn e scendere alla Turtmannhütte: il CAS documenta questa traversata del secondo giorno con 1.150 m di ulteriore salita in 3 h 30 e 2.000 m di discesa in 4 h 15, T5 sopra la capanna. Escursione completa: circa 2.750 m di dislivello complessivo nei due giorni, 12-13 ore di cammino, circa 18 km, T5 nel complesso. Non è una gita di un giorno.",
+    "effort_label": "Per esperti",
+    "start": "Stazione ferroviaria di St. Niklaus",
+    "transit": {
+      "train": "Da Visp a St. Niklaus (Matterhorn Gotthard Bahn)"
+    }
+  },
+  {
+    "id": "cap_au_moine-from-les-avants-via-col-de-jaman",
+    "description_extra": "Avvicinamento dal lato del Lago di Ginevra invece che da Allières. Da Les Avants il sentiero sale al Col de Jaman, poi traversa verso nord lungo la cresta del Verraux fino al Col de Pierra Perchia e su fino alla cresta rocciosa di cima a 1.941 m. Circa 14 km e 1.090 m di salita, sei ore, valutato T4 con un breve passaggio di arrampicata esposto sopra l'erba ripida. La cresta di cima tra Pierra Perchia e Cape au Moine è il punto chiave: stretta, scivolosa quando è bagnata, senza protezioni. Ritorno via Col de Soladier e Molard per chiudere il giro.",
+    "effort_label": "Impegnativo",
+    "start": "Stazione ferroviaria di Les Avants",
+    "transit": {
+      "train": "Da Montreux a Les Avants (linea MOB)"
+    }
+  },
+  {
+    "id": "creux_du_van-from-le-soliat",
+    "description_extra": "Avvicinamento dal bordo sud sopra Saint-Aubin e Couvet invece che da Noiraigue, più in basso. La strada asfaltata sale fino alla Ferme du Soliat, fattoria-ristorante a 1.382 m, a pochi minuti dal bordo del circo. Da lì un giro di 4,5 km segue il muro a secco lungo il bordo della parete alta 160 m. Circa 1 h 25, solo 140 m di dislivello complessivo, T1. Adatto a chi non può fare la salita ripida da Noiraigue.",
+    "effort_label": "Facile",
+    "start": "Ferme du Soliat",
+    "transit": {
+      "car": "Uscita A5 di St-Aubin-Sauges, poi via Montalchez e Provence fino alla strada della Ferme du Soliat"
+    }
+  },
+  {
+    "id": "dent_de_lys-from-les-sciernes-dalbeuve",
+    "description_extra": "Avvicinamento dal lato dell'Intyamon (est) della cresta invece che da Châtel-St-Denis / Les Paccots. Il sentiero sale dal paese passando per Prés d'Albeuve e l'alpe Teraula d'Avau fino al Col de Lys a 1.779 m. Dal colle, la cresta sud-ovest sopra Lys Derrey porta a un gradino ripido di schrofen dove circa 50 m di discesa e risalita assicurate con catena danno accesso alla cresta finale esposta e alla croce di vetta a 2.013 m. Il CAS valuta il percorso T4 con circa 1.130 m di salita in 4 h 15.",
+    "effort_label": "Impegnativo",
+    "start": "Stazione ferroviaria di Les Sciernes-d'Albeuve",
+    "transit": {
+      "train": "Da Bulle a Montbovon, cambio sulla linea MOB, poi fino a Les Sciernes-d'Albeuve"
+    }
+  },
+  {
+    "id": "engstligen_falls-from-above-via-cable-car",
+    "description_extra": "Guarda le cascate dal bordo superiore dell'altopiano invece che dal basso. Dalla stazione a monte della funivia un sentiero circolare segnalato scende fino al ciglio delle cascate, poi torna indietro attraverso i pascoli. Circa 3 km, 1 h 10, 256 m di dislivello complessivo, valutato medio dal gestore della funivia. Dalla stazione a monte, la cascata superiore è visibile anche senza lasciare la parte dell'altopiano accessibile in carrozzina. I sentieri Engstligenfälle II/III, che passano direttamente per la parete, sono chiusi a tratti per caduta sassi, quindi il giro dell'altopiano superiore è l'alternativa quando il sentiero più in basso è chiuso.",
+    "effort_label": "Facile",
+    "start": "Stazione a monte di Engstligenalp",
+    "transit": {
+      "bus": "Autopostale Adelboden fino a Unter dem Birg"
+    }
+  },
+  {
+    "id": "gastlosen-from-musersbergli",
+    "description_extra": "Fai il giro della catena dalla cima della seggiovia di Jaun invece di partire da Jaun, Dorf. Il percorso 262 di SchweizMobil (Gastlosen Tour) parte da Musersbergli a 1.479 m, traversa le pareti rocciose e raggiunge il suo punto più alto a Wolfsort, 1.921 m, prima di scendere tra i pascoli fino al punto di partenza. 12 km, 5 h, 696 m di dislivello in salita e altrettanti in discesa, valutato moderatamente difficile. La funivia risparmia i 700 m di salita dal fondovalle. Lo Chalet du Soldat sul lato sud è la classica sosta per mangiare.",
+    "effort_label": "Moderato",
+    "start": "Stazione a monte di Musersbergli (seggiovia di Jaun)",
+    "transit": {
+      "bus": "Autopostale da Bulle o Boltigen fino a Jaun",
+      "cable_car": "Seggiovia di Jaun fino a Musersbergli"
+    }
+  },
+  {
+    "id": "grammont-from-novel-via-col-des-crosses",
+    "description_extra": "Avvicinamento dal lato francese e dal Col des Crosses invece che dal parcheggio di Vouvry / Le Flon. Il percorso sale dal paese di Novel (circa 960 m) passando per L'Au de Morge e il Col de la Croix, poi verso nord lungo il fianco del Verraux fino al Col des Crosses a 1.991 m, sulla cresta SE del Grammont. Il CAS valuta il percorso della cresta SE T4 con 1.200 m di dislivello in 2 h 45 - 3 h dalla zona del colle.",
+    "effort_label": "Impegnativo",
+    "start": "Novel (Francia, vicino a St-Gingolph)",
+    "transit": {
+      "car": "Da St-Gingolph o Bouveret via Novel"
+    }
+  },
+  {
+    "id": "ice_lake_griesslisee-from-klausenpass",
+    "description_extra": "Avvicinamento al Griesslisee (lago di ghiaccio del Clariden) dalla strada alta del Klausenpass invece che dal Klöntalersee. Dal parcheggio del Klausenpass il percorso segue il Clariden-Höhenweg verso ovest e nord oltre il Klausenhotel fino sulla morena sopra il ghiacciaio del Clariden, e finisce al piccolo lago. Non c'è un sentiero segnalato per attraversare l'ultimo avanterreno del ghiacciaio; il CAS indica la linea tra roccia e morena vecchia. Circa 2 h 15 tra andata e ritorno e circa 200 m di dislivello complessivo su terreno roccioso.",
+    "effort_label": "Facile",
+    "start": "Klausenpass (lato Uri)",
+    "transit": {
+      "bus": "Da Flüelen al Klausenpass (autopostale, solo in estate), oppure da Linthal al Klausenpass con il bus 408"
+    }
+  },
+  {
+    "id": "joriseen-from-klosters-via-berghaus-vereina",
+    "description_extra": "Avvicinamento ai Jöriseen dal lato di Klosters / Prättigau invece che dalla strada del Flüelapass. Dal Berghaus Vereina a 1.943 m, il sentiero sale per il Jörital fino alla Winterlücke a 2.785 m o alla Jöriflüelafurgga a 2.725 m, poi scende nella conca dei laghi a circa 2.500 m. 12,2 km, 4 h 45, 805 m di dislivello in salita e 1.076 m in discesa, sentiero di montagna da T2 a T3. Il Berghaus Vereina si raggiunge da Klosters con una camminata di 12,6 km e 3 h 30 su per la Vereinatal o con la navetta della capanna da Klosters Platz.",
+    "effort_label": "Impegnativo",
+    "start": "Berghaus Vereina (lato Klosters)",
+    "transit": {
+      "train": "Klosters Platz, poi navetta Klosters-Vereina (prenotazione telefonica)"
+    }
+  },
+  {
+    "id": "la_fouly-tmb-champex-to-la-fouly",
+    "description_extra": "Raggiungi La Fouly dal lato di Champex per la Val Ferret svizzera, in direzione opposta rispetto alla tappa classica del TMB che arriva dall'Italia per il Grand Col Ferret. La tappa 7 del Tour du Mont Blanc scende da Champex-Lac attraverso i paesi di Issert e Praz-de-Fort lungo il fondovalle, poi sale dolcemente su per la Val Ferret fino a La Fouly. Circa 15 km, 5 h 30, 420 m di salita e 565 m di discesa. Quasi tutto sentiero tra bosco e prati attraverso i tradizionali villaggi vallesani con fontane pubbliche per l'acqua. T2 per tutto il tragitto, la tappa più breve e facile del TMB.",
+    "effort_label": "Moderato",
+    "start": "Champex-Lac",
+    "transit": {
+      "train": "Da Martigny a Orsières",
+      "bus": "Autopostale da Orsières a Champex-Lac"
+    }
+  },
+  {
+    "id": "lavaux_vineyards-from-chexbres-via-dezaley",
+    "description_extra": "Cammina nel Lavaux alto tra i terrazzamenti del Dézaley invece di seguire la linea lungolago da St-Saphorin a Lutry. Da Chexbres-Village un giro di 10,8 km scende per il grand cru del Dézaley sopra Epesses, segue sentieri panoramici con vista sul Lago di Ginevra e risale fino a Chexbres. Circa 3 h, 230 m di dislivello complessivo in salita e in discesa, T1. Il tratto alto sopra Rivaz e Epesses vede meno gente in gita rispetto al sentiero lungolago. I treni collegano Chexbres-Village a Losanna e Vevey.",
+    "effort_label": "Facile",
+    "start": "Stazione ferroviaria di Chexbres-Village",
+    "transit": {
+      "train": "Da Losanna a Chexbres-Village (S-Bahn, cambio a Puidoux)"
+    }
+  },
+  {
+    "id": "pic_de_jallouvre-from-col-de-la-colombiere",
+    "description_extra": "Avvicinamento dal lato di Le Reposoir, la valle opposta rispetto a Le Petit-Bornand. Il giro sale dal Col de la Colombière su per il fianco sud fino al Col du Rasoir, un passaggio di cresta stretto, poi traversa sotto la parete rocciosa della Cravate fino alla cima a 2.408 m. La discesa va verso nord oltre il Col de Sosay fino al rifugio del Lac de Lessy e intorno al lago prima di tornare al colle. Circa 10,4 km, 1.200 m di dislivello complessivo, 5 h 30. Il passaggio della Cravate espone gli escursionisti alla caduta sassi e deve essere libero da neve tardiva prima che la cresta di cima sia sicura.",
+    "effort_label": "Impegnativo",
+    "start": "Col de la Colombière (Francia)",
+    "transit": {
+      "car": "Da Cluses a Le Grand-Bornand per la strada D4 fino al Col de la Colombière (aperta in estate)"
+    }
+  },
+  {
+    "id": "ponte_tibetano-from-sementina-on-foot",
+    "description_extra": "Raggiungi il ponte dal fondovalle a piedi invece che dalla funivia di Mornera. Da Sementina un ripido sentiero di montagna sale tra i boschi di castagni e oltre la cappella di San Defendente, guadagnando circa 754 m fino alla passerella del ponte a 696 m di quota, sospesa 130 m sopra la gola. Circa 2,5 km di salita sul percorso diretto, due o tre ore per tratta. Dal ponte, scendi per Curzútt fino alla valle di Monte Carasso per chiudere il giro, oppure torna giù a Sementina. Il percorso è esposto alla pioggia e può essere pericoloso subito dopo i temporali.",
+    "effort_label": "Impegnativo",
+    "start": "Paese di Sementina (fondovalle)",
+    "transit": {
+      "bus": "Da Bellinzona a Sementina (bus locale), oppure treno fino a Bellinzona e poi a piedi"
+    }
+  },
+  {
+    "id": "rosenlaui_public_waterfall-from-grindelwald-via-grosse-scheidegg",
+    "description_extra": "Raggiungi Rosenlaui dal lato di Grindelwald passando per il passo della Grosse Scheidegg invece che dalla strada di Meiringen. La tappa 16 di ViaBerna parte dalla stazione a monte della funivia del First, segue un sentiero panoramico sotto lo Schreckhorn e il Wetterhorn fino alla Grosse Scheidegg a 1.962 m, poi scende per Alp Alpiglen e Schwarzwaldalp fino all'Hotel Rosenlaui e al punto panoramico della cascata pubblica a 1.328 m. Circa 12,5 km, 3 h 30, con la funivia che risparmia la salita al First. L'autopostale prosegue da Rosenlaui giù fino a Meiringen.",
+    "effort_label": "Moderato",
+    "start": "Stazione a monte del First (sopra Grindelwald)",
+    "transit": {
+      "train": "Da Interlaken Ost a Grindelwald"
+    }
+  },
+  {
+    "id": "salanfe_lake-from-mex-via-col-du-jorat",
+    "description_extra": "Tappa 4 del Tour des Dents-du-Midi da Mex per il Col du Jorat a 2.213 m giù fino al bacino del Lac de Salanfe a 1.909 m. Circa 9,6 km, 4 h 25, con circa 1.100 m di salita fino al colle prima di scendere 300 m sull'altro lato. Il sentiero attraversa i pascoli lungo il Torrent de Saint-Barthélemy, poi si restringe nel ghiaione sotto il colle. Niente acqua lungo il percorso, quindi portane abbastanza. L'Auberge de Salanfe alla diga serve da mangiare e ha camere.",
+    "effort_label": "Impegnativo",
+    "start": "Paese di Mex",
+    "transit": {
+      "bus": "Da St-Maurice a Mex (autopostale)"
+    }
+  },
+  {
+    "id": "schrattenfluh-from-hirsegg",
+    "name": "Hirsegg → Schibegütsch → Sörenberg (giro della biosfera)",
+    "description_extra": "Avvicinamento alla cresta dalla fermata dell'autopostale di Hirsegg sul fianco nord invece che dal paese di Sörenberg o da Bumbach. Il sentiero sale per Alp Schlund sull'altopiano carsico e oltre le cime principali, poi scende oltre Rossweid e torna a Sörenberg. 17,96 km, circa 6 h 37, 1.195 m di dislivello complessivo su un percorso che l'ufficio turistico locale valuta difficile, da T4 a T5 nei tratti tecnici della cresta. L'altopiano nasconde profonde doline carsiche fuori dal tracciato, quindi restare sul sentiero conta con nebbia o neve.",
+    "effort_label": "Impegnativo",
+    "start": "Hirsegg (fermata bus)",
+    "transit": {
+      "train": "Da Lucerna a Schüpfheim",
+      "bus": "Bus 214 da Schüpfheim a Sörenberg, Hirsegg"
+    }
+  },
+  {
+    "id": "spitzmeilenhutte-from-weisstannen",
+    "description_extra": "Avvicinamento da sud, salendo per la Weisstannental invece di scendere dalla funivia del Maschgenkamm. Il percorso dell'Obersiezsäss segue la strada dell'alpe oltre Vorsiez, poi sale alla capanna a 2.087 m. 15,6 km, da 5 h 30 a 6 h 30, circa 1.300 m di dislivello complessivo, T3. Questa è la tappa 3 del Sardona-Welterbe-Weg al contrario ed evita del tutto gli impianti del Flumserberg. La variante del Madfurggl per la cresta dell'Oxni è più dura (T3+, 1.600 m di dislivello).",
+    "effort_label": "Impegnativo",
+    "start": "Weisstannen",
+    "transit": {
+      "train": "Da Sargans a Mels",
+      "bus": "Autopostale da Mels a Weisstannen"
+    }
+  },
+  {
+    "id": "teysachaux-loop-from-plan-francey",
+    "description_extra": "Fai il giro dalla stazione intermedia della funicolare del Moléson invece di percorrere la cresta lineare da Les Paccots. Da Plan-Francey il percorso sale verso ovest passando per Gros-Plané, Le Villard-Dessus e Tremetta fino alla cresta sud-ovest del Téysachaux, che diventa rocciosa ed esposta nel tratto finale prima della croce di vetta a 1.909 m. Dalla cima, segui il crinale verso est fino a Le Moléson a 2.002 m e torna a Plan-Francey con la funivia o per la discesa segnalata. Circa 5 h, intorno ai 700 m di dislivello complessivo, T3 per lo più con un punto chiave esposto su erba e roccia sulla cresta di cima.",
+    "effort_label": "Impegnativo",
+    "start": "Stazione intermedia di Plan-Francey",
+    "transit": {
+      "train": "Da Bulle a Gruyères",
+      "bus": "Autopostale da Gruyères a Moléson-sur-Gruyères",
+      "cable_car": "Funicolare di Plan-Francey"
+    }
+  }
+]

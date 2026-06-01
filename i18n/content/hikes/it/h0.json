@@ -1,0 +1,314 @@
+[
+  {
+    "id": "engstligen_falls-lower-viewpoint",
+    "name": "Camminata al punto panoramico basso da Unter dem Birg",
+    "description_extra": "Parcheggia a Unter dem Birg, oppure prendi l'autopostale da Adelboden, poi segui il sentiero segnalato per circa 30 minuti fino al punto panoramico basso delle cascate. T1, adatto alle famiglie. Alcuni tratti rocciosi e con pietrisco nella parte alta.",
+    "effort_label": "Facile",
+    "start": "Adelboden, Unter dem Birg (fermata autopostale)",
+    "transit": {
+      "bus": "Autopostale Adelboden fino a Unter dem Birg"
+    }
+  },
+  {
+    "id": "oltschibachfall-from-meiringen",
+    "name": "Accesso in auto / da Unterbach",
+    "description_extra": "Parcheggia al Parkplatz Oltschibachfall a Unterbach (oppure prendi l'autopostale fino a Unterbach BE, Flugplatz) e cammina circa 15 minuti su un sentiero nel bosco fino alla base della cascata di 140 m. T1. Più forte in primavera con lo scioglimento della neve.",
+    "effort_label": "Facile",
+    "start": "Parkplatz Oltschibachfall (Unterbach BE)",
+    "transit": {
+      "train": "Linea del Brünig fino a Brienzwiler, poi autopostale fino a Unterbach BE, Flugplatz"
+    }
+  },
+  {
+    "id": "rosenlaui-route-99",
+    "name": "Accesso in auto dalla strada della Grosse Scheidegg",
+    "description_extra": "Arriva in auto da Meiringen lungo la strada della Grosse Scheidegg, oppure con l'autopostale fino a Rosenlaui, Gletscherschlucht (da maggio a ottobre). Alla gola del ghiacciaio di Rosenlaui si accede con un breve sentiero dal parcheggio. T1. Abbinala alla vicina valle del Reichenbach per mezza giornata.",
+    "effort_label": "Facile",
+    "start": "Parkplatz Gletscherschlucht",
+    "transit": {
+      "bus": "Rosenlaui, Gletscherschlucht"
+    }
+  },
+  {
+    "id": "rosenlaui_public_waterfall-route-99",
+    "name": "Accesso in auto dalla strada della Grosse Scheidegg",
+    "description_extra": "Parcheggia al Parkplatz Gletscherschlucht (fermata autopostale Rosenlaui, Gletscherschlucht) e cammina pochi minuti partendo dal blocco dei bagni. T1.",
+    "effort_label": "Facile",
+    "start": "Parkplatz Gletscherschlucht",
+    "transit": {
+      "bus": "Rosenlaui, Gletscherschlucht"
+    }
+  },
+  {
+    "id": "rosenlauifall-route-99",
+    "name": "Accesso in auto dalla strada della Grosse Scheidegg",
+    "description_extra": "Un sentiero di cinque minuti dal parcheggio della Gletscherschlucht raggiunge il punto panoramico basso. T1. Si arriva con l'autopostale fino a Rosenlaui, Gletscherschlucht.",
+    "effort_label": "Facile",
+    "start": "Parkplatz Gletscherschlucht",
+    "transit": {
+      "bus": "Rosenlaui, Gletscherschlucht"
+    }
+  },
+  {
+    "id": "triftbrucke-route-40",
+    "description_extra": "Dalla stazione a monte di Underi Trift, circa 1 h 30 su un sentiero di montagna T2 con circa 400 m di dislivello fino al ponte sospeso (lungo 170 m, 100 m sopra il fiume). Continua oltre il ponte fino alla Windegghütte per pernottare (da giugno a metà ottobre).",
+    "effort_label": "Facile",
+    "start": "Underi Trift (stazione a monte della Triftbahn)",
+    "transit": {
+      "train": "Meiringen",
+      "bus": "Autopostale 161 fino a Nessental, Triftbahn",
+      "cable_car": "Funivia KWO Triftbahn"
+    }
+  },
+  {
+    "id": "triftsee-route-40",
+    "description_extra": "Dalla stazione a monte di Underi Trift, circa 1 h 40 sullo stesso sentiero del ponte sospeso Triftbrücke, T2 con circa 400 m di dislivello. Il lago si trova circa 10 minuti oltre il ponte. Campeggio non consentito.",
+    "effort_label": "Facile",
+    "start": "Underi Trift (stazione a monte della Triftbahn)",
+    "transit": {
+      "train": "Meiringen",
+      "bus": "Autopostale 161 fino a Nessental, Triftbahn",
+      "cable_car": "Funivia KWO Triftbahn"
+    }
+  },
+  {
+    "id": "gelmersee-default",
+    "name": "Giro del lago dalla cima della funicolare",
+    "description_extra": "Si raggiunge con la funicolare Gelmerbahn dalla valle. La funicolare è in funzione all'incirca da giugno a ottobre. Dalla stazione a monte, un giro segnalato lungo la riva costeggia il bacino a 1.850 m, circa 2 ore, con circa 170 m di salita e discesa complessive. Il sentiero sulla riva nord è intagliato nella parete rocciosa con tratti esposti, classificato T3: servono passo sicuro e assenza di vertigini. La Gelmerhütte SAC si trova all'estremità opposta del lago per chi prosegue.",
+    "effort_label": "Moderato",
+    "start": "Stazione a monte di Gelmersee (Gelmerbahn dalla strada del Grimsel)",
+    "transit": {
+      "bus": "Autopostale da Meiringen verso Grimsel Hospiz, fermata Handegg, Kunzentännlein",
+      "cable_car": "Funicolare Gelmerbahn fino al bacino"
+    }
+  },
+  {
+    "id": "brienzer_rothorn-cog-railway",
+    "name": "Ferrovia a cremagliera da Brienz",
+    "description_extra": "Ferrovia a cremagliera a vapore da Brienz, a livello del lago, fino al Rothorn a 2.350 m. Circa 60 minuti per tratta su una linea di 7,6 km con pendenza massima del 25 percento, in funzione da giugno a ottobre. La maggior parte delle corse usa ancora locomotive a vapore di progettazione originale. Dalla cima, facili camminate lungo la cresta.",
+    "effort_label": "Corsa in ferrovia a cremagliera",
+    "start": "Stazione di Brienz",
+    "transit": {
+      "train": "Brienz (BLS)"
+    }
+  },
+  {
+    "id": "brienzer_rothorn-brienz-via-planalp",
+    "name": "Salita a piedi da Brienz via Planalp",
+    "description_extra": "Salita a piedi di cinque ore dalla stazione di Brienz fino alla cresta del Rothorn a 2.350 m. Circa 1.750 m di dislivello su 9,8 km, T2. Il percorso lungo il Milibach è chiuso dalla colata detritica dell'agosto 2024, quindi ora il sentiero segue il Trachtbach via Gäldried fino a Planalp a 1.344 m, poi sale ancora due ore abbondanti tra i prati alpini fino alla cresta. La ferrovia a cremagliera riporta a valle da Planalp o Rothorn, da giugno a ottobre.",
+    "effort_label": "Grande dislivello",
+    "start": "Stazione di Brienz",
+    "transit": {
+      "train": "Brienz (BLS)"
+    }
+  },
+  {
+    "id": "hardergrat_trail-rothorn-to-harder-kulm",
+    "name": "Traversata completa del Brienzergrat: dal Brienzer Rothorn all'Harder Kulm",
+    "description_extra": "Circa 25 km dalla stazione di vetta del Brienzer Rothorn verso ovest lungo il Brienzergrat fino all'Harder Kulm sopra Interlaken. Classificazione SAC T5 (sehr schwierig): una cresta erbosa affilata con forti precipizi su entrambi i lati, pochissime protezioni fisse e il passaggio del Tannhorn al centro come tratto più impegnativo. Quasi tutti fanno la traversata in un'unica direzione partendo dalla vetta della ferrovia a cremagliera e scendendo con la funicolare Harderbahn dal lato di Interlaken. Circa 1.400 m di salita complessiva contro 2.400 m di discesa, da 9 a 12 ore di cammino. Servono passo sicuro, assenza di vertigini e vera esperienza alpina. Da evitare con tempo umido o ventoso. I trail runner la fanno in giornata; molti escursionisti la dividono con un bivacco vicino all'Augstmatthorn o al Tannhorn.",
+    "effort_label": "Esperto",
+    "start": "Stazione di vetta del Brienzer Rothorn (cima della ferrovia a cremagliera Brienz Rothorn Bahn)",
+    "transit": {
+      "train": "Brienz BLS",
+      "cable_car": "Brienz Rothorn Bahn (ferrovia a cremagliera, da giugno a ottobre)"
+    }
+  },
+  {
+    "id": "tannhorn-brienzergrat-segment",
+    "name": "Tratto del Brienzergrat: dal Rothorn al Tannhorn a Planalp",
+    "description_extra": "Tratto di cresta di sei ore dal Brienzer Rothorn (cima della ferrovia a cremagliera di Brienz) lungo il Brienzergrat fino al Tannhorn e giù a Planalp. Circa 600 m di salita complessiva contro 1.600 m di discesa. Il portale del SAC indica questo tratto come T5 meno e descrive il Tannhorn come attraversato su creste erbose esposte, il passaggio più impegnativo di tutto il Brienzergrat. Scendi con la ferrovia a cremagliera da Planalp.",
+    "effort_label": "Esperto",
+    "start": "Vetta del Brienzer Rothorn (cima della ferrovia a cremagliera di Brienz)",
+    "transit": {
+      "train": "Brienz BLS + Rothorn Bahn"
+    }
+  },
+  {
+    "id": "augstmatthorn-route-85",
+    "name": "Breve salita da Lombachalp",
+    "description_extra": "Accesso da Lombachalp (in auto o con l'autopostale da Habkern). Circa 1 h 40 in salita, 580 m di dislivello, sentiero di montagna T3 fino all'Augstmatthorn a 2.137 m.",
+    "effort_label": "Medio",
+    "start": "Lombachalp",
+    "transit": {
+      "train": "Interlaken West",
+      "bus": "Autopostale 105 da Interlaken West fino a Habkern, poi Ruftaxi estivo o 2 ore a piedi fino a Lombachalp"
+    }
+  },
+  {
+    "id": "fronalpstock-route-72",
+    "description_extra": "Accesso standard: funicolare da Schwyz fino a Stoos, poi la cabinovia Klingenstock fino alla cresta. La camminata tra Klingenstock e Fronalpstock dura circa 2 ore su sentieri di erba e ghiaia, con circa 470 m di salita complessiva e 740 m di discesa sulla cresta ondulata. T2 con brevi tratti esposti. Quasi tutti tornano giù con la seggiovia Fronalpstockbahn fino a Stoos e la funicolare fino a Schwyz. Area di campeggio designata in vetta con una piccola tariffa da pagare al Fronalpstock Hotel.",
+    "effort_label": "Facile",
+    "start": "Schwyz, Stoosbahn"
+  },
+  {
+    "id": "iffigfalle-lenk-to-iffigenalp",
+    "name": "Lenk → Iffigfall → Iffigenalp",
+    "description_extra": "Sentiero ben segnalato dalla stazione di Lenk via Murersrohr, Lenkerseeli, Teufebode, Under der Flue e Brunnersgüetli fino alla cascata Iffigfall e poi a Iffigenalp a 1.584 m. Circa 2 h 30 fino alla cascata e 2 h 50 fino a Iffigenalp, 575 m di dislivello su 8,8 km, T2. Il sentiero segue il torrente Iffigbach per tutto il tragitto. In estate l'autopostale per Iffigenalp parte da Lenk e salta il tratto basso se vuoi iniziare dalla cascata. Continua fino all'Iffigsee a 2.065 m per una giornata intera.",
+    "effort_label": "Moderato",
+    "start": "Stazione di Lenk",
+    "transit": {
+      "train": "Lenk im Simmental (BLS)"
+    }
+  },
+  {
+    "id": "schrattenfluh-schratteflue-crossing",
+    "name": "Traversata della Schratteflue (avanzata)",
+    "description_extra": "Parti dal parcheggio di Hirsegg sul versante di Marbachegg. La cresta completa della Schrattenfluh corre per circa 6 km con quattro cime prominenti: Schibegütsch, Hängst, Hächle e Strick. T5 con arrampicata di grado II. Circa 16 km e 7 h 45 in totale, con circa 1.050 m di salita complessiva e altrettanta discesa; le due cime alle estremità (Hächle e Strick) sono i tratti più impegnativi. L'altopiano ospita uno dei più grandi campi carsici della Svizzera, con profonde doline fuori dal tracciato segnalato, quindi è importante restare sul sentiero. Servono passo sicuro, assenza di vertigini e buona visibilità.",
+    "effort_label": "Esperto",
+    "start": "Parcheggio di Hirsegg (versante Marbachegg)"
+  },
+  {
+    "id": "heftihutte-from-hirsegg",
+    "name": "Dalla fermata del bus di Hirsegg",
+    "description_extra": "Accesso standard dalla fermata del bus di Hirsegg. Il sentiero sale via Kaiserschwand, Bodenhütten, Heftiboden fino al rifugio a 1.904 m. Circa 2 h 30 e 830 m di dislivello, T2. Il rifugio è aperto in estate con cena e colazione; rifugio invernale parziale per il resto dell'anno. Porta contanti.",
+    "effort_label": "Moderato",
+    "start": "Hirsegg (fermata del bus)",
+    "transit": {
+      "bus": "Autopostale fino a Hirsegg"
+    }
+  },
+  {
+    "id": "heftihutte-from-fluehli",
+    "name": "Da Flühli LU",
+    "description_extra": "Accesso più lungo via Flühli (bus da Schüpfheim). Circa 3 h 30 di sentiero di montagna con vista sulla valle dell'Entlebuch. Il portale del SAC classifica il percorso da Flühli come T3, 3 h 30 e circa 1.050 m di dislivello. Il tratto di cresta in alto è il punto più panoramico, con la Schrattenfluh dall'altra parte della valle. Il rifugio si trova a 1.904 m.",
+    "effort_label": "Moderato",
+    "start": "Flühli",
+    "transit": {
+      "bus": "Autopostale fino a Flühli"
+    }
+  },
+  {
+    "id": "bachalpsee-route-38",
+    "description_extra": "Classica giornata al Bachalpsee dalla stazione a monte della cabinovia First. Un ampio sentiero di ghiaia va verso est-nordest, salendo gradualmente tra i pascoli alpini. Circa un'ora per tratta a T1, quasi senza esposizione. Un secondo lago più piccolo si trova pochi minuti oltre quello principale.",
+    "effort_label": "Facile",
+    "start": "Berggasthaus First",
+    "transit": {
+      "train": "Grindelwald"
+    }
+  },
+  {
+    "id": "bachalpsee-bussalp-alternative",
+    "name": "Da Bussalp",
+    "description_extra": "Accesso più tranquillo rispetto al lato della Firstbahn. Arriva in auto o prendi il bus 122 da Grindelwald fino al parcheggio di Bussalp, poi sali il sentiero tra i prati fino al lago. Circa 1 h 40 e 470 m di dislivello su sentieri erbosi. T2.",
+    "effort_label": "Moderato",
+    "start": "Parcheggio di Bussalp",
+    "transit": {
+      "bus": "Bus 122 da Grindelwald"
+    }
+  },
+  {
+    "id": "iseltwald-default",
+    "name": "Camminata al pontile dal parcheggio del paese",
+    "description_extra": "Arriva in auto, oppure prendi il battello estivo da Interlaken (da aprile a ottobre), o l'autopostale 103 da Interlaken Ost. Due parcheggi si trovano sopra il paese; le auto non possono entrare, quindi scendi a piedi pochi minuti fino alla riva del lago e al pontile. Il famoso pontile (location di Crash Landing on You) ha un ingresso a pagamento di CHF 5. T1.",
+    "effort_label": "Facile",
+    "start": "Paese di Iseltwald, parcheggio sul lago",
+    "transit": {
+      "bus": "Autopostale 103 da Interlaken Ost fino a Iseltwald",
+      "boat": "Battello del lago di Brienz da Interlaken o Brienz (da aprile a ottobre)"
+    }
+  },
+  {
+    "id": "oeschinensee-kandersteg-foot",
+    "name": "Da Kandersteg a piedi",
+    "description_extra": "Accesso a piedi da Kandersteg, senza la cabinovia. Il sentiero segue l'Öschibach verso est nel bosco, salendo costantemente circa 400 m in un'ora fino al lago a 1.578 m. T1, segnalato per tutto il percorso, abbastanza largo per il passaggio in entrambi i sensi.",
+    "effort_label": "Facile",
+    "start": "Stazione di Kandersteg",
+    "transit": {
+      "train": "Kandersteg (SBB)"
+    }
+  },
+  {
+    "id": "oeschinensee-cable-car",
+    "name": "Cabinovia da Kandersteg + breve camminata",
+    "description_extra": "Il modo più rapido per arrivare. La cabinovia Bergbahnen Oeschinensee da Kandersteg impiega 8 minuti fino alla stazione di montagna a 1.578 m. Da lì sono circa 25 minuti su un sentiero ben tenuto e adatto ai passeggini fino al lago (o 35 minuti via il percorso panoramico Läger). Conviene prenotare i biglietti online con fascia oraria. Funziona a stagione; controlla il sito del gestore per gli orari aggiornati. Chi ha l'abbonamento metà-prezzo SBB, l'AG o lo Swiss Travel Pass paga metà prezzo.",
+    "effort_label": "Banale",
+    "start": "Stazione a valle della cabinovia di Kandersteg",
+    "transit": {
+      "train": "Kandersteg (SBB), poi 10 min a piedi o navetta fino alle Bergbahnen"
+    }
+  },
+  {
+    "id": "oeschinensee-hohturli-extension",
+    "name": "Proseguimento verso Hohtürli + Griesalp",
+    "description_extra": "Vera giornata di montagna dal lago. Il sentiero esce dalla conca verso il rifugio Blüemlisalp e supera l'Hohtürli a 2.779 m, poi scende sul versante sud fino a Griesalp nella valle del Kien. Circa sei ore in totale. Il punto chiave è il tratto ripido sopra Underbärgli attraverso una fascia rocciosa, attrezzato con cavi dove serve ma con esposizione reale. Servono passo sicuro e assenza di vertigini. T3.",
+    "effort_label": "Giornata intera, impegnativa",
+    "start": "Oeschinensee"
+  },
+  {
+    "id": "piz_gloria-cable-car-to-summit",
+    "name": "Cabinovia (Stechelberg → Schilthorn)",
+    "description_extra": "Cabinovia Schilthornbahn da Stechelberg fino alla cima a 2.970 m, a tappe attraverso Gimmelwald, Mürren e Birg.",
+    "effort_label": "Corsa in cabinovia",
+    "start": "Cabinovia di Stechelberg",
+    "transit": {
+      "train": "Lauterbrunnen (BLS) + bus fino a Stechelberg"
+    }
+  },
+  {
+    "id": "piz_gloria-gimmelwald-on-foot",
+    "name": "Da Gimmelwald a piedi",
+    "description_extra": "Salita a piedi da Gimmelwald (raggiungibile in cabinovia da Stechelberg) fino alla cima dello Schilthorn a 2.970 m. Circa cinque ore e 1.600 m di dislivello per un escursionista allenato. T3. Il sentiero sale costantemente, passando sotto la linea della cabinovia e attraversando Mürren e Birg. Quasi tutti salgono a piedi e scendono in cabinovia, o viceversa. Porta vestiti a strati; la cima è spesso ventosa e molto più fredda della valle.",
+    "effort_label": "Lunga, grande dislivello",
+    "start": "Gimmelwald",
+    "transit": {
+      "train": "Lauterbrunnen + cabinovia Stechelberg-Gimmelwald"
+    }
+  },
+  {
+    "id": "riffelsee-default",
+    "name": "Breve camminata dalla stazione di Rotenboden",
+    "description_extra": "Si raggiunge dalla stazione di Rotenboden (2.815 m) sulla ferrovia del Gornergrat da Zermatt, poi una breve camminata in discesa (la stazione si trova circa 58 m sopra il lago). T1, circa 10 minuti su un sentiero facile. Il Kulmhotel Gornergrat e il Riffelhaus 1853 sono a distanza di cammino lungo la cresta.",
+    "effort_label": "Facile",
+    "start": "Stazione di Rotenboden (Gornergratbahn da Zermatt)",
+    "transit": {
+      "train": "Zermatt, poi Gornergratbahn fino a Rotenboden"
+    }
+  },
+  {
+    "id": "riffelalp-easy-round-trip",
+    "name": "Breve giro di Riffelalp via Grünsee",
+    "description_extra": "Facile giro di tre chilometri e 90 minuti dalla stazione di Riffelalp sulla ferrovia del Gornergrat. Il sentiero va verso est in direzione del Grünsee attraverso boschi di cembro e larice. Dopo i prati alpini il sentiero torna a Riffelalp seguendo i binari dello storico tram di Riffelalp, il tram più alto d'Europa. T1, adatto alle famiglie. Ritorno a Zermatt con la ferrovia del Gornergrat dalla stessa stazione.",
+    "effort_label": "Facile",
+    "start": "Riffelalp Bahnhof (fermata Gornergrat Bahn)",
+    "transit": {
+      "train": "Zermatt + Gornergrat Bahn fino a Riffelalp"
+    }
+  },
+  {
+    "id": "riffelalp-findeln-loop",
+    "name": "Da Riffelalp a Findeln via Sunnegga",
+    "description_extra": "Giro da Riffelalp attraverso boschi di cembro e larice oltre il Grünsee, poi fino a Findeln e ritorno con la funicolare Sunnegga. Circa quattro ore, con circa 180 m di salita sul tratto di ritorno e circa 750 m di discesa. T2. La zona di Findeln ha diversi ristoranti nel villaggio. La camminata funziona in entrambe le direzioni.",
+    "effort_label": "Moderato",
+    "start": "Riffelalp Bahnhof (fermata Gornergrat Bahn)",
+    "transit": {
+      "train": "Zermatt + Gornergrat Bahn fino a Riffelalp"
+    }
+  },
+  {
+    "id": "gorner_glacier-gornergrat-railway",
+    "name": "Ferrovia del Gornergrat + Sunshine Trail",
+    "description_extra": "La ferrovia a cremagliera del Gornergrat sale da Zermatt fino alla cresta del Gornergrat a 3.135 m, con quasi 1.500 m di dislivello. Dalla cima, il sentiero segue i binari in discesa fino a Riffelberg in circa un'ora, T1.",
+    "effort_label": "Facile",
+    "start": "Stazione di Zermatt",
+    "transit": {
+      "train": "Zermatt (Matterhorn Gotthard Bahn) + Gornergrat Bahn"
+    }
+  },
+  {
+    "id": "gorner_glacier-path-of-silence",
+    "name": "Path of Silence fino a Riffelalp",
+    "description_extra": "Il Path of Silence dal Gornergrat (3.089 m) giù fino a Riffelalp a circa 2.200 m, un percorso esclusivamente in discesa di circa 3 h 15 con 887 m di dislivello negativo. Il sentiero passa il Grünsee e prosegue attraverso il vecchio bosco di cembri. T2. Sali con la ferrovia del Gornergrat da Zermatt e scendi a piedi. Il Mountain Lodge Ze Seewjinu sul lago è un punto di ristoro.",
+    "effort_label": "Moderato, in discesa",
+    "start": "Stazione a monte del Gornergrat",
+    "transit": {
+      "train": "Zermatt + Gornergrat Bahn"
+    }
+  },
+  {
+    "id": "gorner_glacier-descent-via-riffelsee",
+    "name": "Dal Gornergrat a Zermatt via Riffelsee",
+    "description_extra": "Discesa di tre ore dal Gornergrat oltre il Riffelsee fino a Zermatt, circa 1.475 m di dislivello negativo su 12,6 km con un piccolo dislivello intermedio di circa 75 m. Il sentiero prosegue tra i pascoli alpini e la zona di Riffelalp prima di tornare a Zermatt. T2.",
+    "effort_label": "Moderato, lunga discesa",
+    "start": "Stazione a monte del Gornergrat"
+  }
+]

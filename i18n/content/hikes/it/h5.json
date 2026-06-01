@@ -1,0 +1,335 @@
+[
+  {
+    "id": "rosenlaui-from-grindelwald-first-via-grosse-scheidegg",
+    "description_extra": "Tappa 16 del percorso nazionale a lunga distanza ViaBerna, per raggiungere Rosenlaui da Grindelwald invece che da Meiringen. Il sentiero attraversa i pascoli alpini partendo da First, sale dolcemente fino al passo Grosse Scheidegg a 1.962 m, poi scende circa 700 m passando per Schwarzwaldalp e lungo il fiume Reichenbach fino all'Hotel Rosenlaui e alla gola del ghiacciaio. Circa 11,7 km in 3 ore e 50 minuti, T2.",
+    "effort_label": "Moderato",
+    "start": "Stazione a monte di First",
+    "transit": {
+      "train": "Grindelwald"
+    }
+  },
+  {
+    "id": "schafler-from-wasserauen-via-bommen",
+    "description_extra": "Salita a piedi senza usare la funivia dell'Ebenalp. Da Wasserauen il sentiero sale nel bosco fino all'Alp Bommen, poi diventa una sterrata sconnessa che d'inverno fa anche da pista da sci, e continua attraverso Gartenalp fino al Berggasthaus Schäfler a 1.925 m. Circa 3 ore dalla valle, all'incirca 1.057 m di dislivello complessivo, T2. Ritorno in funivia dall'Ebenalp o scendendo verso il Seealpsee.",
+    "effort_label": "Impegnativo",
+    "start": "Stazione di Wasserauen",
+    "transit": {
+      "train": "Appenzell, poi Appenzeller Bahn fino a Wasserauen"
+    }
+  },
+  {
+    "id": "triftsee-from-underi-trift-via-windegghuette",
+    "name": "Punto panoramico più alto passando dalla Windegghütte",
+    "description_extra": "Punto panoramico più alto sul Triftsee passando dalla Windegghütte invece di attraversare soltanto il ponte sospeso. Dalla stazione a monte di Underi Trift (raggiungibile con la funivia KWO Triftbahn, autopostale 161 da Meiringen), il sentiero segnalato scende fino allo sbarramento, attraversa il torrente Trift e sale circa 280 m fino al bivio di Bössli Stein. Prendi il sentiero di destra, quello originale per la capanna, che sale ripido fino alla Windegghütte a 1.887 m sul lato ovest della valle. Dalla capanna la vista sul lago e sul ghiacciaio del Trift è più aperta di quella dal ponte. Per proseguire, torna indietro e attraversa il ponte sospeso del Trift. Circa 8,5 km e 780 m di dislivello complessivo andata e ritorno, T3 nei tratti ripidi.",
+    "effort_label": "Impegnativo",
+    "start": "Underi Trift (stazione a monte della Triftbahn)",
+    "transit": {
+      "train": "Meiringen",
+      "bus": "Autopostale 161 fino alla Triftbahn",
+      "cable_car": "Funivia KWO Triftbahn"
+    }
+  },
+  {
+    "id": "valle_verzasca-lavertezzo-to-brione",
+    "description_extra": "Tratto inferiore del Sentiero Verzasca, da Lavertezzo su per la valle fino a Brione invece della tappa da Sonogno a Lavertezzo. Il sentiero segue il fiume Verzasca passando accanto a installazioni artistiche e cascate sul fondovalle, con diversi punti per fare il bagno sul granito liscio. Circa 6,4 km, 2 h 30, T1. Il bus 321 riporta a Lavertezzo. Il Sentiero Verzasca completo è il percorso nazionale 74, 35 km in due tappe.",
+    "effort_label": "Facile",
+    "start": "Lavertezzo (Ponte dei Salti)",
+    "transit": {
+      "bus": "Locarno, poi autopostale 321 fino a Lavertezzo, Paese"
+    }
+  },
+  {
+    "id": "engstligen_falls-side-trail-to-plateau",
+    "name": "Sentiero laterale verso l'altopiano dell'Engstligenalp",
+    "description_extra": "Ripido sentiero laterale su per la parete accanto alle cascate stesse, l'alternativa a piedi alla funivia Engstligenbahn che sale all'altopiano a 1.964 m. Circa 1 h 30 da Unter dem Birg, all'incirca 580 m di dislivello, T2. I tornanti regalano viste ravvicinate sui tratti alti della cascata mentre sali. Il sentiero Engstligenfälle I è chiuso stagionalmente per caduta sassi e ghiaccio (chiuso da ottobre 2025 a giugno 2026), quindi controlla il sito del gestore prima di partire. Dall'altopiano scendi in funivia o prosegui con la camminata sull'altopiano.",
+    "effort_label": "Moderato",
+    "start": "Adelboden, Unter dem Birg (fermata autopostale)",
+    "transit": {
+      "bus": "Autopostale Adelboden fino a Unter dem Birg"
+    }
+  },
+  {
+    "id": "mount_pilatus-alpnachstad-aemsigen-kulm",
+    "description_extra": "Il sentiero parte da Alpnachstad, sale nel bosco fino alla stazione intermedia di Ämsigen della ferrovia a cremagliera, poi prosegue sul Pilatus Blumenpfad passando tra prati alpini e fasce rocciose fino al Pilatus Kulm a 2.106 m. Dal Pilatus Kulm un sentiero segnalato porta circa 1,3 km a sudest fino al Tomlishorn a 2.128 m, il punto più alto del massiccio. Il gestore pilatus.ch classifica il percorso come medio e indica circa 4,5 ore di cammino. Molti escursionisti scendono in cremagliera o in funivia dopo aver raggiunto la cima.",
+    "effort_label": "Impegnativo",
+    "start": "Stazione di Alpnachstad",
+    "transit": {
+      "train": "Zentralbahn da Lucerna ad Alpnachstad (circa 17 min)",
+      "cable_car": "Ferrovia a cremagliera Pilatusbahn da Alpnachstad al Pilatus Kulm (per la discesa o come salita alternativa)",
+      "car": "Parcheggio a pagamento alla stazione a valle di Alpnachstad"
+    }
+  },
+  {
+    "id": "mount_pilatus-fraekmuentegg-tomlishorn",
+    "description_extra": "La maggior parte dei visitatori arriva al Pilatus Kulm in cremagliera (da Alpnachstad) o in funivia (da Kriens passando per Fräkmüntegg e la funivia Dragon Ride) e percorre il breve giro della cima. L'Oberhaupt si raggiunge con un sentiero a gradini proprio sopra la stazione; l'Esel si trova qualche minuto a est. Dal Pilatus Kulm un sentiero panoramico segnalato corre per circa 1,3 km fino al Tomlishorn a 2.128 m, il punto più alto. T2.",
+    "effort_label": "Moderato",
+    "start": "Stazione a monte del Pilatus Kulm",
+    "transit": {
+      "cable_car": "Da Kriens in cabinovia fino a Fräkmüntegg, poi la funivia Dragon Ride fino al Pilatus Kulm; oppure la cremagliera da Alpnachstad",
+      "car": "In auto fino alle stazioni a valle di Kriens o Alpnachstad"
+    }
+  },
+  {
+    "id": "wasserfall_finstersee-village-walk",
+    "description_extra": "Dal paese un piccolo cartello di legno segna l'inizio del sentiero. Un sentiero a tornanti scende nel bosco e arriva alla cascata in circa dieci minuti.",
+    "effort_label": "Facile",
+    "start": "Paese di Finstersee (parcheggio vicino alla chiesa)",
+    "transit": {
+      "bus": "Autopostale per Finstersee passando da Menzingen",
+      "car": "Parcheggio alla chiesa o sulla strada sopra la cascata"
+    }
+  },
+  {
+    "id": "lac_bleu-la-gouille-direct",
+    "description_extra": "Il sentiero parte da La Gouille e sale con costanza tra larici e rododendri fino al piccolo specchio d'acqua turchese del Lac Bleu a 2.090 m. 1,6 km a tratta (3,26 km andata e ritorno), 314 m di dislivello, 45 minuti in salita e all'incirca lo stesso in discesa, T2. Un'estensione segnalata collega il lago ad Arolla passando per Pramousse, per un giro più lungo di circa 4 ore (a parte rispetto al percorso diretto qui sopra).",
+    "effort_label": "Facile",
+    "start": "Fermata del bus di La Gouille, Val d'Hérens",
+    "transit": {
+      "bus": "Autopostale 381 da Sion a La Gouille (frazione tra Les Haudères e Arolla)",
+      "car": "Parcheggio lungo la strada a La Gouille sulla via per Arolla"
+    }
+  },
+  {
+    "id": "wildsee-pizol-5-seen-wanderung",
+    "description_extra": "La classica 5-Seen-Wanderung parte dalla Pizolhütte e attraversa un percorso d'alta quota passando accanto a Wildsee, Schottensee, Schwarzsee, Baschalvasee e Wangsersee. Il percorso ufficiale di pizol.com indica 11,4 km, 4 h 30 di cammino, 553 m di dislivello in salita e 911 m in discesa, con tre salite e discese faticose tra un circo glaciale e l'altro. T2. Campeggio e bivacco sono vietati lungo i tratti segnalati e sono previste multe.",
+    "effort_label": "Impegnativo",
+    "start": "Pizolhütte sopra Wangs",
+    "transit": {
+      "train": "Bad Ragaz o Sargans, poi bus fino alla stazione a valle di Wangs",
+      "cable_car": "Cabinovia Wangs-Furt, poi seggiovia Furt-Gaffia; breve camminata fino alla Pizolhütte all'inizio. Ultima discesa da Furt alle 17:30 in estate"
+    }
+  },
+  {
+    "id": "refuge_du_lac_blanc-flegere",
+    "description_extra": "Dalla stazione a monte di La Flégère (1.877 m) il sentiero attraversa la Combe de la Chavanne e sale passando per Chalets et Lac de la Flégère (2.027 m), poi percorre gradoni rocciosi con scale metalliche fino al Lac Blanc a 2.352 m. Il rifugio è sulla riva del lago. L'ufficio del turismo indica circa 3,5 km a tratta fino al rifugio, 1 h 30 di salita e 500 m di dislivello (il sentiero ridiscende poi gli stessi 500 m al ritorno). T2. I cani sono vietati all'interno della Riserva Naturale delle Aiguilles Rouges ed è vietato fare il bagno nel Lac Blanc e nei Lacs des Chéserys. Il Refuge du Lac Blanc è aperto da inizio giugno a inizio ottobre; prenotazioni telefoniche dal 1 giugno.",
+    "effort_label": "Moderato",
+    "start": "Stazione a monte della funivia di La Flégère",
+    "transit": {
+      "train": "Mont-Blanc Express fino a Les Praz de Chamonix",
+      "cable_car": "Cabinovia La Flégère da Les Praz de Chamonix alla stazione a monte",
+      "car": "Parcheggio alla stazione a valle di La Flégère a Les Praz"
+    }
+  },
+  {
+    "id": "lac_de_peyre-colombiere",
+    "description_extra": "Dal Col de la Colombière il sentiero passa accanto al bar-ristorante e prosegue verso nord su una sterrata tra i pascoli fino al Chalet de la Colombière a 1.746 m. Da lì, alternando tratti pianeggianti e salite, si raggiunge il Lac de Peyre a 2.108 m. Randos-MontBlanc indica 550 m di dislivello per il lago, con una possibile estensione fino al Col de Balafrasse (2.246 m) che aggiunge all'incirca altri 170 m di salita. T2. Il percorso può restare innevato fino a fine giugno.",
+    "effort_label": "Moderato",
+    "start": "Parcheggio del Col de la Colombière, Le Reposoir",
+    "transit": {
+      "car": "In auto sul Col de la Colombière (D4) da Le Grand-Bornand o Le Reposoir, ampio parcheggio gratuito al colle",
+      "bus": "Navetta stagionale da Le Grand-Bornand al Col de la Colombière in estate"
+    }
+  },
+  {
+    "id": "lago_di_saoseo-sfazu-val-da-camp",
+    "description_extra": "Il percorso ufficiale di Graubünden Ferien è un anello di 15 km attraverso la Val da Camp partendo da Sfazù, classificato T2 con 657 m di dislivello in salita e 662 m in discesa e un tempo di cammino indicato di 7 ore. Il sentiero segue la strada di valle fino all'Alp Camp, poi un sentiero solo a piedi fino al Lagh da Saoseo a 2.028 m, e prosegue fino al Lagh da Viola a 2.159 m prima di tornare verso il Rifugio Saoseo. Un piccolo bus riduce la distanza per chi vuole raggiungere solo i laghi. Il traffico privato a motore è vietato in Val da Camp.",
+    "effort_label": "Impegnativo",
+    "start": "Fermata del bus di Sfazù sulla strada del Passo del Bernina",
+    "transit": {
+      "train": "Bernina Express o treno regionale fino a Poschiavo",
+      "bus": "Autopostale verso il Passo del Bernina fino a Sfazù; navetta PubliCar da Sfazù su per la valle fino all'Alp Camp (da maggio a metà ottobre, prenotazione obbligatoria)",
+      "car": "Parcheggio lungo la strada a Sfazù. Il traffico privato a motore è vietato in Val da Camp"
+    }
+  },
+  {
+    "id": "silsersee-chaste-peninsula",
+    "description_extra": "Un breve giro da Sils Maria si spinge sulla penisola di Chastè, un promontorio boscoso che entra nel lago. L'anello segnalato è di circa 4,2 km, all'incirca un'ora di cammino e poco dislivello. Il sentiero resta vicino alla riva tra larici e cembri.",
+    "effort_label": "Facile",
+    "start": "Centro del paese di Sils Maria",
+    "transit": {
+      "bus": "Autopostale 4 da St. Moritz a Sils Maria",
+      "boat": "Fermata Segl-Maria a Chastè in estate",
+      "car": "Parcheggio pubblico a Sils Maria"
+    }
+  },
+  {
+    "id": "fulberg-from-niederbauen-cable-car",
+    "name": "Dal Niederbauen alla cresta del Fulberg",
+    "description_extra": "Dalla cima della funivia del Niederbauen, segui il sentiero di cresta segnalato verso est-sudest. Circa 75 minuti di salita costante lungo la cresta verso il Faulberg a 1.795 m, T2 senza tratti tecnici ma esposto alle intemperie sulla cresta aperta. Il percorso fa parte del collegamento di cresta più lungo verso il Brisen. Scendi per la stessa via o prosegui lungo la cresta.",
+    "effort_label": "Impegnativo",
+    "start": "Stazione a monte della funivia di Niederbauen Chulm",
+    "transit": {
+      "train": "Beckenried (poi bus 543 fino a Emmetten)",
+      "cable_car": "Funivia Emmetten-Niederbauen fino a Niederbauen Chulm"
+    }
+  },
+  {
+    "id": "zermatt_huts-from-zermatt-toward-furi",
+    "name": "Su da Zermatt verso Furi attraverso le frazioni Walser",
+    "description_extra": "Cammina fino all'estremità sud di Zermatt oltre Winkelmatten e prendi il sentiero segnalato che sale lungo lo Zmuttbach verso la stazione della funivia di Furi. Il sentiero attraversa frazioni Walser e boschi di cembri salendo fino a Furi a 1.867 m. Circa 1 h 15 a tratta, 290 m di dislivello, T1 per tutto il percorso. I ristoranti lassù chiudono d'inverno. Prendi la cabinovia per scendere da Furi e risparmiare le ginocchia.",
+    "effort_label": "Facile",
+    "start": "Stazione ferroviaria di Zermatt",
+    "transit": {
+      "train": "Zermatt (MGB, Matterhorn Gotthard Bahn da Visp)"
+    }
+  },
+  {
+    "id": "tine_de_conflens-from-la-sarraz",
+    "name": "Anello da La Sarraz passando per la gola del Nozon",
+    "description_extra": "L'anello ufficiale della Federazione Svizzera di Escursionismo da La Sarraz scende nel bosco fino alla cascata della Tine de Conflens, segue la gola del Nozon passando accanto alla Cascade du Dard e prosegue fino a Romainmôtier prima di risalire passando per Ferreyres. Circa 11 km, 3 ore di cammino, 405 m di dislivello complessivo, T1, adatto alle famiglie. Parcheggia al castello o prendi il treno (la stazione è a 10 minuti a piedi dall'inizio del sentiero). Il sentiero che scende alla cascata resta bagnato per giorni dopo la pioggia, porta scarpe che tengono bene.",
+    "effort_label": "Facile",
+    "start": "Paese di La Sarraz (parcheggio del Château de La Sarraz)",
+    "transit": {
+      "train": "La Sarraz (FFS, sulla linea Losanna-Vallorbe)"
+    }
+  },
+  {
+    "id": "etang_de_la_gruere-pond-loop",
+    "name": "Anello attorno allo stagno da La Theurre",
+    "description_extra": "L'anello attorno all'acqua è di 2,6 km su un sentiero pianeggiante in passerella e ghiaia, circa 35-45 minuti, T1, adatto alle famiglie. Parcheggia a La Theurre sul lato nord (a pagamento) o prendi l'autopostale 32 dalla stazione di Saignelégier, a tre minuti dalla fermata del bus. Tutta la torbiera è un sito protetto a livello federale, quindi resta sul sentiero segnalato e niente bagni né droni.",
+    "effort_label": "Facile",
+    "start": "Parcheggio di La Theurre (lato nord dello stagno)",
+    "transit": {
+      "train": "Saignelégier (linea Chaux-de-Fonds-Glovelier)",
+      "bus": "Autopostale 32 da Saignelégier verso Tramelan, fermata La Theurre"
+    }
+  },
+  {
+    "id": "gorges_du_dailley-from-salvan",
+    "name": "Da Salvan a Van d'en Bas attraverso la gola",
+    "description_extra": "Il sentiero segue il torrente Salanfe da Les Granges su per la gola del Dailley. Il sentiero è attrezzato con passerelle, gallerie e circa 600 gradini scavati o fissati nella roccia, costruiti la prima volta nel 1895 e da allora rinnovati. Il sentiero arriva in alto vicino a Van d'en Bas e torna giù passando per il bosco di larici. Circa 5,5 km andata e ritorno, 380 m di dislivello, da 2 h a 2 h 30, T2. La gola è aperta solo da giugno a ottobre; d'inverno il ghiaccio chiude le scale. Gli spruzzi sono forti nella stagione delle acque alte, tieni la macchina fotografica al riparo.",
+    "effort_label": "Moderato",
+    "start": "Frazione di Les Granges sopra Salvan",
+    "transit": {
+      "train": "Stazione di Salvan (Mont-Blanc Express da Martigny), poi 15 minuti a piedi su fino all'inizio del sentiero a Les Granges"
+    }
+  },
+  {
+    "id": "schwarzsee-fr-lake-loop-from-gypsera",
+    "name": "Anello del lago da Gypsera",
+    "description_extra": "Anello di 4 km attorno al lago su un misto di prati, sentiero lungolago, dolci salite e tratti nel bosco. Circa 1 h 15 di cammino, solo 50 m di dislivello complessivo, T1, adatto alle famiglie. Il lago si trova a 1.046 m. Parcheggio a pagamento a Gypsera. Variante invernale possibile quando il ghiaccio è abbastanza spesso.",
+    "effort_label": "Facile",
+    "start": "Schwarzsee, Gypsera",
+    "transit": {
+      "train": "Friburgo (FFS)",
+      "bus": "Bus TPF 123 Friburgo-Schwarzsee, fermata Gypsera"
+    }
+  },
+  {
+    "id": "schwarzsee-fr-hohenweg-from-riggisalp",
+    "name": "Traversata Höhenweg: da Riggisalp allo Schwyberg",
+    "description_extra": "Dalla stazione a monte di Riggisalp (1.491 m), lo Schwarzsee Höhenweg attraversa verso est i pascoli alpini lungo il confine tra i distretti della Sense e della Gruyère, collegando i comuni di Jaun, Charmey, Cerniat, Plasselb e Plaffeien prima di terminare allo Schwyberg. Circa 18 km, 6 h 20 di cammino, 853 m di dislivello complessivo in salita contro 1.291 m in discesa. Difficoltà moderata.",
+    "effort_label": "Moderato",
+    "start": "Riggisalp (cima delle Kaisereggbahnen da Gypsera)",
+    "transit": {
+      "train": "Friburgo (FFS)",
+      "bus": "Bus TPF 123 Friburgo-Schwarzsee, fermata Gypsera",
+      "cable_car": "Seggiovia Kaisereggbahnen da Gypsera a Riggisalp"
+    }
+  },
+  {
+    "id": "klausenpass-drive-up",
+    "name": "In auto",
+    "description_extra": "Il Klausenpass si trova a 1.948 m sul confine tra Glarona e Uri, raggiungibile direttamente in auto o in autopostale sulla strada del Passo del Klausen. Strada aperta all'incirca da giugno a ottobre (chiusa dalla neve il resto dell'anno). L'autopostale da Flüelen o Linthal ferma a Klausenpasshöhe. Parcheggia nel piazzale dell'Hotel Klausenpasshöhe o in una delle piazzole lungo il passo. Per raggiungere il posto in sé non serve nessuna escursione.",
+    "effort_label": "Nessuna escursione",
+    "start": "Parcheggio del Klausenpass",
+    "transit": {
+      "bus": "Linea autopostale del Klausenpass (Flüelen-Klausenpass-Linthal), in funzione da giugno a ottobre"
+    }
+  },
+  {
+    "id": "gelmerbahn-drive-up",
+    "name": "In auto fino alla base della funicolare",
+    "description_extra": "In auto sulla strada del Passo del Grimsel da Innertkirchen; la stazione a valle della Gelmerbahn è segnalata a Handegg. Il parcheggio è limitato e gratuito, il gestore consiglia caldamente di arrivare con l'autopostale 161 da Meiringen. Prenota la funicolare online in anticipo, in funzione da inizio giugno a fine ottobre.",
+    "effort_label": "In auto",
+    "start": "Stazione a valle della Gelmerbahn (Handegg)",
+    "transit": {
+      "bus": "Autopostale 161 da Meiringen a Handegg / Gelmerbahn (solo in estate)",
+      "train": "Stazione di Meiringen (Zentralbahn da Lucerna / Interlaken) poi autopostale 161"
+    }
+  },
+  {
+    "id": "guttannen_valley-drive-up",
+    "name": "In auto attraverso la valle",
+    "description_extra": "In auto sulla Grimselstrasse da Innertkirchen verso Handegg; Guttannen è a metà strada. Il parcheggio lungo la strada è gratuito e ci sono molte piazzole lungo la valle per pernottare in camper. La strada per il paese di Guttannen resta aperta tutto l'anno; il proseguimento del Passo del Grimsel verso il Vallese chiude d'inverno (all'incirca da novembre a maggio).",
+    "effort_label": "In auto",
+    "start": "Paese di Guttannen (Grimselstrasse)",
+    "transit": {
+      "bus": "Autopostale 161 Meiringen - Grimsel fino a Guttannen, Dorf",
+      "train": "Meiringen (Zentralbahn) + autopostale 161"
+    }
+  },
+  {
+    "id": "aare_gorge-east-innertkirchen",
+    "name": "In auto fino all'ingresso est (Innertkirchen)",
+    "description_extra": "Parcheggio gratuito all'ingresso est di Innertkirchen. Due minuti a piedi dal parcheggio alla passerella. Passerella aperta da aprile a inizio novembre, ingresso intorno ai 10 CHF. La gola completa a tratta è di circa 1,4 km / 45 min tra l'ingresso est e quello ovest.",
+    "effort_label": "In auto",
+    "start": "Ingresso est dell'Aareschlucht (Innertkirchen)",
+    "transit": {
+      "bus": "Meiringen + autopostale 161 fino a Innertkirchen, Aareschlucht Ost",
+      "train": "Meiringen (Zentralbahn da Lucerna / Interlaken)"
+    }
+  },
+  {
+    "id": "aare_gorge-west-meiringen",
+    "name": "In auto fino all'ingresso ovest (Meiringen)",
+    "description_extra": "Parcheggio gratuito all'ingresso ovest di Meiringen. Due minuti a piedi dal parcheggio alla passerella. Passerella aperta da aprile a inizio novembre, ingresso intorno ai 10 CHF. La gola completa a tratta è di circa 1,4 km / 45 min tra l'ingresso est e quello ovest.",
+    "effort_label": "In auto",
+    "start": "Ingresso ovest dell'Aareschlucht (Meiringen)",
+    "transit": {
+      "bus": "Meiringen + autopostale 161 fino a Aareschlucht, West Eingang",
+      "train": "Meiringen (Zentralbahn da Lucerna / Interlaken)"
+    }
+  },
+  {
+    "id": "grindelwald-drive-up",
+    "name": "In auto o in treno fino a Grindelwald",
+    "description_extra": "In auto da Interlaken passando per Wilderswil e Zweilütschinen su fino al paese di Grindelwald. Diversi parcheggi in paese, 5-10 CHF/giorno. Accesso tutto l'anno; i classici punti foto sono a breve distanza a piedi dal paese o dalla stazione.",
+    "effort_label": "In auto",
+    "start": "Paese di Grindelwald (stazione BOB)",
+    "transit": {
+      "train": "Interlaken Ost + Berner Oberland Bahn (BOB) fino a Grindelwald (ogni 30 min)"
+    }
+  },
+  {
+    "id": "viewpoint_beatenberg-drive-up",
+    "name": "In auto fino al parcheggio delle St. Beatus Höhlen",
+    "description_extra": "In auto su da Interlaken verso Beatenberg e parcheggia nel piazzale segnalato vicino al sentiero delle St. Beatus Höhlen. Cammina qualche minuto nel bosco fino alla ringhiera sopra il Lago di Thun. Accesso in auto tutto l'anno.",
+    "effort_label": "In auto",
+    "start": "Parcheggio St. Beatus Höhlen (Beatenberg)",
+    "transit": {
+      "bus": "Interlaken West + autopostale 101 verso Beatenberg"
+    }
+  },
+  {
+    "id": "lauterbrunnen-drive-up",
+    "name": "In auto o in treno fino a Lauterbrunnen",
+    "description_extra": "In auto da Interlaken passando per Wilderswil. Parcheggio multipiano di Lauterbrunnen (Gütli) vicino alla stazione intorno ai 17 CHF/24h, i posti su strada e quelli più esterni costano meno. Accesso in auto tutto l'anno; le cascate Staubbach e i punti panoramici del paese sono a 5 min a piedi dai parcheggi e dalla stazione.",
+    "effort_label": "In auto",
+    "start": "Paese di Lauterbrunnen (stazione BLS)",
+    "transit": {
+      "train": "Interlaken Ost + BOB (Berner Oberland Bahn) fino a Lauterbrunnen (ogni 30 min)"
+    }
+  },
+  {
+    "id": "zermatt_village-drive-up",
+    "name": "In treno fino a Zermatt (parcheggia a Taesch)",
+    "description_extra": "Zermatt è senza auto. Parcheggia nel garage del Matterhorn Terminal Taesch (intorno ai 16 CHF/giorno) e prendi il treno navetta di 12 minuti per Zermatt. Dalla stazione i punti panoramici del paese sono a 1-2 min a piedi. Tutto l'anno.",
+    "effort_label": "In auto",
+    "start": "Stazione di Zermatt (Matterhorn Gotthard Bahn)",
+    "transit": {
+      "train": "Visp (FFS) + Matterhorn Gotthard Bahn fino a Zermatt. Da Taesch (qui parcheggiano le auto): treno navetta di 12 min per Zermatt ogni 20 min."
+    }
+  },
+  {
+    "id": "ferpecle_river-drive-up",
+    "name": "In auto nella valle di Ferpècle",
+    "description_extra": "In auto su per la Val d'Hérens da Sion passando per Les Haudères fino a Ferpècle. Le distese del fiume si allargano lungo il fondovalle avvicinandosi alla diga; fermati nei tratti di ghiaia intrecciata per la vista da cui far partire il drone. Strada aperta tutto l'anno ma ghiacciata d'inverno.",
+    "effort_label": "In auto",
+    "start": "Fine della strada nella valle di Ferpècle (oltre non si guida più)",
+    "transit": {
+      "bus": "Autopostale 381 da Sion a Les Haudères, poi il 384 fino a Ferpècle (servizio estivo limitato)"
+    }
+  },
+  {
+    "id": "saas_fee_glacier-drive-up",
+    "name": "Funivia + Metro Alpin fino a Mittelallalin",
+    "description_extra": "Dal paese senza auto di Saas Fee, prendi la funivia Alpin Express fino a Felskinn (2.980 m), poi la funicolare sotterranea Metro Alpin fino a Mittelallalin (3.456 m). La terrazza guarda dritto sul ghiacciaio e sulle cime del Mischabel. Aperto durante la stagione sciistica invernale e in estate (all'incirca da luglio a metà ottobre).",
+    "effort_label": "In auto",
+    "start": "Paese di Saas Fee (stazione a valle dell'Alpin Express)",
+    "transit": {
+      "bus": "Brig + autopostale 511 fino a Saas Fee",
+      "cable_car": "Alpin Express fino a Felskinn, poi la funicolare Metro Alpin dentro la montagna fino a Mittelallalin (3.500 m)"
+    }
+  }
+]

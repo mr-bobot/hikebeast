@@ -1333,6 +1333,7 @@
         <button type="button" class="rail-lang-btn" data-hb-lang="en"><span class="flag">🇬🇧</span><span>EN</span></button>
         <button type="button" class="rail-lang-btn" data-hb-lang="de"><span class="flag">🇩🇪</span><span>DE</span></button>
         <button type="button" class="rail-lang-btn" data-hb-lang="fr"><span class="flag">🇫🇷</span><span>FR</span></button>
+        <button type="button" class="rail-lang-btn" data-hb-lang="it"><span class="flag">🇮🇹</span><span>IT</span></button>
       </div>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="${W.t('a11y.toggle_nav_labels')}">
         ${SVG_CHEVRONS}<span class="label">${W.t('nav.collapse')}</span>
@@ -1500,6 +1501,7 @@
             <button type="button" class="menu-lang-btn" data-hb-lang="en"><span class="flag">🇬🇧</span><span>EN</span></button>
             <button type="button" class="menu-lang-btn" data-hb-lang="de"><span class="flag">🇩🇪</span><span>DE</span></button>
             <button type="button" class="menu-lang-btn" data-hb-lang="fr"><span class="flag">🇫🇷</span><span>FR</span></button>
+            <button type="button" class="menu-lang-btn" data-hb-lang="it"><span class="flag">🇮🇹</span><span>IT</span></button>
           </span>
         </div>
         <a class="menu-row${cur('/more/')}" href="${REL}more/" data-close>

@@ -1,0 +1,275 @@
+# Hikebeast /full · UI string catalog — Italiano.
+# FIRST DRAFT — needs a brand-voice pass (italiano naturale, no em-dash, no slop).
+# Brand terms (Hidden Gems, Famous Gems, Wildcamping) left in English on purpose
+# pending Leon's call. Keys must match en.yaml exactly (build-i18n enforces it).
+
+nav:
+  home: Home
+  explore: Esplora
+  map: Mappa
+  swipe: Swipe
+  random: Casuale
+  liked: Preferiti
+  been_there: Già visto
+  collections: Raccolte
+  hidden_gems: Hidden Gems
+  famous_gems: Famous Gems
+  wildcamping: Wildcamping
+  all_regions: Tutte le regioni
+  more: Altro
+  menu: Menu
+  collapse: Riduci
+
+a11y:
+  primary_nav: Navigazione principale
+  open_nav: Apri la navigazione
+  toggle_nav_labels: Mostra o nascondi le etichette di navigazione
+  menu: Menu
+  close_menu: Chiudi il menu
+  toggle_theme: Attiva o disattiva la modalità scura
+  back_to_chapter: Torna al capitolo
+
+theme:
+  dark: Modalità scura
+  light: Modalità chiara
+
+menu:
+  surprise_me: Sorprendimi
+  settings: Impostazioni
+
+lang:
+  label: Lingua
+  en: English
+  de: Deutsch
+  fr: Français
+
+spec:
+  region: Regione
+  access: Come arrivare
+  effort: Fatica
+  best_light: Luce migliore
+
+stat:
+  altitude: Altitudine
+  accessibility: Accessibilità
+  crowdedness: Affollamento
+  difficulty: Difficoltà
+  duration: Durata
+  elevation_change: Dislivello
+  distance: Distanza
+  drive_up: In auto
+
+action:
+  open_in_maps: Apri in Maps
+  open_full_map: Apri la mappa intera
+  open_spot: Apri lo spot
+  see_all: Vedi tutto
+  back: Indietro
+  overview: Panoramica
+  how_to_get_there: Come arrivare
+  browse_spots: Sfoglia gli spot
+  log_in: Accedi
+  read: Leggi
+  save: Salva
+
+view:
+  reader: Lettura
+  grid: Griglia
+
+label:
+  region: Regione
+  on_the_map: Sulla mappa
+  featured: In evidenza
+  for_you: Per te
+  photo: Foto
+  intro: Intro
+  front_matter: Introduzione
+
+count:
+  spots_bare:
+    one: spot
+    other: spot
+  spots_in_region:
+    one: "{n} spot in questa regione"
+    other: "{n} spot in questa regione"
+
+footer:
+  imprint: Note legali
+  privacy: Privacy
+  terms: Termini
+
+section:
+  routes: Percorsi
+  sources: Fonti
+  mountain_hut: Rifugio
+  cable_car: Funivia
+
+access:
+  parking: Parcheggio
+  walk_to_spot: A piedi fino allo spot
+  walk_from_stop: A piedi dalla fermata
+  by_car: In auto
+  by_train_bus: In treno + bus
+  by_boat: In battello
+  when_to_go: Quando andare
+  hours_season: Orari / stagione
+
+route:
+  kicker: Percorso
+  approach_to: Avvicinamento a
+  back_to_photo: Torna alla foto
+  equipment: Attrezzatura
+  start: Partenza
+  transit: Trasporti
+
+detail:
+  name: Nome
+  cost: Costo
+  open: Aperto
+  website: Sito web
+
+planning:
+  title: Pianificazione
+
+beta:
+  notice: Versione beta. I dati dei percorsi sono ancora in verifica. Hai notato qualcosa di sbagliato?
+
+title:
+  home: Home
+  browse: Esplora
+  swipe: Swipe
+  map: Mappa
+  saved: Salvati
+  visited: Già visto
+  more: Altro
+  all_regions: Tutte le regioni
+  whats_new: Novità
+  account: Account
+  affiliate: Affiliate
+  front_matter: Introduzione
+
+common:
+  search_placeholder: Cerca spot, regioni, temi…
+
+saved:
+  crumb: salvati
+  kicker: I tuoi preferiti
+  empty_title: Ancora niente salvato.
+  empty_subtitle: Tocca il cuore su uno spot per salvarlo.
+  empty_h2: Ancora nessun preferito.
+  empty_body: Sfoglia la guida e tocca il cuore su uno spot per salvarlo qui.
+  remove_aria: Rimuovi dai preferiti
+  list_subtitle: Raggruppati per regione. Tocca una scheda per aprire l'intera voce.
+  count_title:
+    one: 1 spot salvato.
+    other: "{n} spot salvati."
+
+visited:
+  crumb: visitati
+  kicker: Il tuo diario di viaggio
+  empty_title: Segna gli spot in cui sei stato.
+  empty_subtitle: Tocca i tre puntini su uno spot, poi "Già visto". Questa lista è privata, legata al tuo account.
+  empty_h2: Ancora niente spuntato.
+  empty_body: Apri il menu a tre puntini di uno spot e tocca "Già visto" per aggiungerlo qui.
+  gate_title: Accedi per tenere traccia dei posti visti.
+  gate_body: La lista "Già visto" è legata al tuo account Hikebeast, così la ritrovi su ogni telefono e browser.
+  gate_subtitle: La lista "Già visto" è privata e si sincronizza su tutti i tuoi dispositivi.
+  list_subtitle: Raggruppati per regione. Tocca una scheda per rivedere la voce. Sincronizzato con il tuo account.
+  remove_aria: Rimuovi da Già visto
+  count_title:
+    one: 1 spot visitato.
+    other: "{n} spot visitati."
+
+regions:
+  crumb: regioni
+  kicker: Sfoglia per regione
+
+swipe:
+  left: rimasti
+  of: di
+  saved: salvati
+  no_title: No · salta (trascina a sinistra)
+  save_title: Salva · aggiungi ai preferiti (trascina a destra)
+  stamp_save: Salva
+  stamp_nope: No
+  empty_all: Li hai visti tutti.
+  empty_none: Nessuno spot da swipare.
+  empty_hint: I tuoi salvati appariranno qui quando inizi a mettere cuori sulle schede.
+  view_saves: Vedi i salvati
+  browse_all: Sfoglia tutto
+
+map:
+  view: Vista mappa
+  fav_title: Mostra solo i preferiti
+  photos: Foto
+  photos_title: Mostra le foto invece dei punti
+
+more:
+  guide_label: La tua guida
+  updates_label: Aggiornamenti
+  pdf_title: Scarica il PDF
+  pdf_sub: Apre la guida in Google Drive
+  maps_title: Apri la lista in Google Maps
+  maps_sub: Tutti i pin integrati direttamente in Google Maps
+  earth_title: Usa in Google Earth
+  earth_sub: Scarica il file .kml per usarlo in Google Earth
+  whatsnew_sub: Cosa è appena uscito e a cosa stiamo lavorando
+  aff_dash_title: Dashboard affiliati
+  aff_dash_sub: Il tuo link e le tue segnalazioni
+  aff_mat_title: Materiali per affiliati
+  aff_mat_sub: Materiale di marketing che ti aiuta a creare contenuti.
+  account_sub: Avatar, nome utente, email, password, esci
+
+whatsnew:
+  kicker: Aggiornamenti recenti + in arrivo
+  intro: Riepilogo veloce di cosa è appena uscito e di cosa stiamo lavorando adesso.
+  working_on: In lavorazione adesso
+  shipped: Usciti di recente
+
+account:
+  loading: Caricamento…
+  signedout_msg: Accedi per gestire il tuo account.
+  sign_in: Accedi
+  upload_photo: Carica una foto
+  remove: Rimuovi
+  username: Nome utente
+  email: Email
+  log_out: Esci
+
+affiliate:
+  commission: 50% per vendita
+  signedout_msg: Accedi per vedere la tua dashboard affiliati.
+  not_eligible: Il programma affiliati è solo su invito.
+  share_link: Condividi il link
+  copy: Copia
+  earned: Guadagnato
+  earned_tip: Commissioni pagate + in sospeso, sommate per valuta. Le vendite rimborsate sono escluse.
+  earned_aria: Cosa significa Guadagnato?
+  referrals: Segnalazioni
+  referrals_tip: Numero di vendite attribuite al tuo link. Incluse quelle in sospeso, pagate e rimborsate.
+  referrals_aria: Cosa significa Segnalazioni?
+  resources: Risorse
+  materials_sub: Schede spot, animazioni Earth, thumbnail, overlay per la mappa + modalità anteprima
+  activity: Attività
+  no_referrals: Ancora nessuna segnalazione.
+  direct_buyer: Acquisto diretto
+
+browse:
+  photos_unit: foto
+  h1: Tutti gli spot, un'unica parete.
+  sub: Cerca, filtra per regione, salva quello che ti piace.
+  clear_search: Cancella la ricerca
+  shuffle: Mescola
+  shuffle_aria: Mescola la parete
+  empty_h2: Nessuno spot corrisponde.
+  empty_body: Prova una ricerca più breve o scegli un'altra regione.
+  filter: Filtra
+  filter_aria: Filtra gli spot
+  clear: Cancella
+  type: Tipo
+  show_results: Mostra i risultati
+  needs_photo: Manca la foto
+
+home:
+  famous_heading: Spot famosi che valgono la pena
+  hidden_heading: Hidden Gems · le scelte di Leon
