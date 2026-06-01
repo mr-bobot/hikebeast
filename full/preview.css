@@ -19,7 +19,10 @@ html.hb-i18n-pending [data-i18n-plural] { visibility: hidden; }
   flex: 1 1 0; padding: 5px 0; font-weight: 600; font-size: 12px; letter-spacing: .02em;
   color: var(--muted); background: transparent; cursor: pointer;
   border: 1px solid var(--hairline-strong); border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px;
 }
+.rail-lang-btn .flag,
+.menu-lang-btn .flag { font-size: 14px; line-height: 1; }
 .rail-lang-btn:hover,
 .menu-lang-btn:hover { color: var(--fg); }
 .rail-lang-btn.is-active,

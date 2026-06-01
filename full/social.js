@@ -1325,15 +1325,15 @@
       <button type="button" class="rail-theme" data-hb-theme-toggle aria-label="${W.t('a11y.toggle_theme')}">
         <span class="rail-theme-icon" data-hb-theme-icon>${SVG_MOON}</span><span class="label" data-hb-theme-label>Dark mode</span>
       </button>
-      <div class="rail-lang" role="group" aria-label="${W.t('lang.label')}">
-        <button type="button" class="rail-lang-btn" data-hb-lang="en">EN</button>
-        <button type="button" class="rail-lang-btn" data-hb-lang="de">DE</button>
-        <button type="button" class="rail-lang-btn" data-hb-lang="fr">FR</button>
-      </div>
       <a class="rail-item rail-item-more${cur('/more/')}" href="${REL}more/">
         <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
         <span class="label">${W.t('nav.more')}</span>
       </a>
+      <div class="rail-lang" role="group" aria-label="${W.t('lang.label')}">
+        <button type="button" class="rail-lang-btn" data-hb-lang="en"><span class="flag">🇬🇧</span><span>EN</span></button>
+        <button type="button" class="rail-lang-btn" data-hb-lang="de"><span class="flag">🇩🇪</span><span>DE</span></button>
+        <button type="button" class="rail-lang-btn" data-hb-lang="fr"><span class="flag">🇫🇷</span><span>FR</span></button>
+      </div>
       <button type="button" class="rail-toggle" data-hb-rail-toggle aria-label="${W.t('a11y.toggle_nav_labels')}">
         ${SVG_CHEVRONS}<span class="label">${W.t('nav.collapse')}</span>
       </button>
@@ -1497,9 +1497,9 @@
           <span class="menu-row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/></svg></span>
           <span class="menu-row-label">${W.t('lang.label')}</span>
           <span class="menu-lang-seg" role="group" aria-label="${W.t('lang.label')}">
-            <button type="button" class="menu-lang-btn" data-hb-lang="en">EN</button>
-            <button type="button" class="menu-lang-btn" data-hb-lang="de">DE</button>
-            <button type="button" class="menu-lang-btn" data-hb-lang="fr">FR</button>
+            <button type="button" class="menu-lang-btn" data-hb-lang="en"><span class="flag">🇬🇧</span><span>EN</span></button>
+            <button type="button" class="menu-lang-btn" data-hb-lang="de"><span class="flag">🇩🇪</span><span>DE</span></button>
+            <button type="button" class="menu-lang-btn" data-hb-lang="fr"><span class="flag">🇫🇷</span><span>FR</span></button>
           </span>
         </div>
         <a class="menu-row${cur('/more/')}" href="${REL}more/" data-close>
@@ -2428,6 +2428,17 @@
     if (slide.dataset.hbEditorialKey === fingerprint) return;
     slide.dataset.hbEditorialKey = fingerprint;
 
+    // Non-English: the translated content overlay (applyContentI18n) owns
+    // deck/body/specs. Keep only the maps_url fresh here, then bail so we
+    // don't clobber the translation with the English DB values.
+    if (((W.hbI18n && W.hbI18n.lang) || 'en') !== 'en') {
+      if (spot.maps_url) {
+        const ml = slide.querySelector('.sp-foot a.locked, .sp-foot a[href*="maps"]');
+        if (ml && ml.getAttribute('href') !== spot.maps_url) ml.setAttribute('href', spot.maps_url);
+      }
+      return;
+    }
+
     // Deck (subtitle under the title)
     if (spot.deck) {
       const deckEl = slide.querySelector('.sp-deck');
@@ -2471,6 +2482,71 @@
         mapsLink.setAttribute('href', spot.maps_url);
       }
     }
+  }
+
+  // ── Phase-2 content i18n overlay ───────────────────────────────────────
+  // When the active language is not English, overlay translated spot/chapter
+  // prose (a fetched per-language bundle) onto the statically-baked English
+  // HTML. English keeps the baked text — no fetch, no flash. Spec LABELS stay
+  // localized via the static data-i18n; here we only swap the sibling VALUE.
+  // Bundle: full/i18n/content.<lang>.json, built by build-content-i18n.mjs.
+  let HB_CONTENT = null;
+
+  function setTxt(el, v) { if (el && v != null && v !== '') el.textContent = v; }
+
+  function overlaySpecRow(row, specs) {
+    const lbl = row.querySelector('[data-i18n^="spec."]');
+    const val = row.querySelector('.cl-val, .val');
+    if (!lbl || !val || !specs) return;
+    const key = (lbl.getAttribute('data-i18n') || '').split('.')[1];
+    if (key && specs[key] != null) val.textContent = specs[key];
+  }
+
+  function overlaySpotEl(el, tr) {
+    setTxt(el.querySelector('.cl-kicker, .sp-kicker'), tr.kicker);
+    setTxt(el.querySelector('.cl-title, .sp-title'), tr.title);
+    setTxt(el.querySelector('.cl-subhead'), tr.subheadline || tr.deck);
+    setTxt(el.querySelector('.sp-deck'), tr.deck);
+    if (Array.isArray(tr.body) && tr.body.length) {
+      const bodyEl = el.querySelector('.sp-body .body');
+      if (bodyEl) {
+        bodyEl.textContent = '';
+        tr.body.forEach((p) => { const para = document.createElement('p'); para.textContent = p; bodyEl.appendChild(para); });
+      }
+    }
+    if (tr.specs) el.querySelectorAll('.cl-spec, .spec').forEach((row) => overlaySpecRow(row, tr.specs));
+  }
+
+  function applyContentI18n() {
+    if (!HB_CONTENT) return;
+    const trSpots = HB_CONTENT.spots || {};
+    document.querySelectorAll('.cl-card[id], .slide-spot[id]').forEach((el) => {
+      const tr = trSpots[el.id];
+      if (tr) overlaySpotEl(el, tr);
+    });
+    const chId = currentChapterId();
+    const chTr = chId && HB_CONTENT.chapters ? HB_CONTENT.chapters[chId] : null;
+    if (chTr) {
+      setTxt(document.querySelector('.slide-cover .cv-deck'), chTr.intro);
+      setTxt(document.querySelector('.slide-cover h1'), chTr.name);
+    }
+    const fm = HB_CONTENT.frontMatter || {};
+    Object.keys(fm).forEach((id) => {
+      const sec = document.getElementById(id);
+      if (!sec) return;
+      setTxt(sec.querySelector('.sp-kicker'), fm[id].kicker);
+      setTxt(sec.querySelector('.sp-title'), fm[id].title);
+      setTxt(sec.querySelector('.sp-deck'), fm[id].deck);
+    });
+  }
+
+  function loadContentI18n() {
+    const lang = (W.hbI18n && W.hbI18n.lang) || 'en';
+    if (lang === 'en') return;
+    fetch(REL + 'i18n/content.' + lang + '.json', { credentials: 'same-origin' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => { if (data) { HB_CONTENT = data; applyContentI18n(); } })
+      .catch(() => {});
   }
 
   // Verdict → display label + colour. Wording is deliberately advisory,
@@ -3572,6 +3648,7 @@
     // if server data drifted. Only one subscription per page; pages
     // listening via HB.spots.subscribe re-render on update.
     spots.init();
+    loadContentI18n();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);

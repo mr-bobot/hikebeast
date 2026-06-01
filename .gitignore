@@ -31,3 +31,8 @@ convex/_generated/
 /myphotos
 .env.staging
 node_modules
+
+# i18n content-translation source chunks are derived from content.yaml by
+# scripts/extract-i18n-source.mjs (regenerable). The de/fr overlays under
+# i18n/content/<lang>/ and the built full/i18n/content.*.json ARE tracked.
+/i18n/content/_source/
